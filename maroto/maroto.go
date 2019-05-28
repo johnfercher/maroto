@@ -259,8 +259,6 @@ func (m *maroto) QrCode(code string) {
 	}
 
 	barcode.Barcode(m.fpdf, key, actualWidthPerCol*m.rowColCount, 0, qrSide, qrSide, false)
-
-	return
 }
 
 func (m *maroto) createColSpace(actualWidthPerCol float64) {
