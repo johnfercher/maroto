@@ -20,7 +20,7 @@ func main() {
 
 		m.Col("Barcode", func() {
 			id := "123456789"
-			m.Barcode(id, 30, 9, 5)
+			_ = m.Barcode(id, 30, 9, 5)
 			m.Text(id, font.Arial, font.Bold, 8, 17, enums.CenterH)
 		})
 	})
@@ -61,9 +61,9 @@ func main() {
 
 	m.Line()
 
-	//\m.RowTableList("Packages", header, contents)
+	m.RowTableList("Packages", header, contents)
 
-	m.Row("Signature", 15, func() {
+	m.Row("Signature", 50, func() {
 		m.Col("Carrier", func() {
 			m.Sign("Transportadora", font.Arial, font.Bold, 8)
 		})
