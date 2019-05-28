@@ -80,6 +80,8 @@ func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
 	maroto.font.SetSize(16)
 	maroto.debugMode = false
 
+	maroto.fpdf.AddPage()
+
 	return maroto
 }
 
@@ -154,12 +156,14 @@ func (m *maroto) Line() {
 }
 
 func (m *maroto) Row(label string, height float64, closure func()) {
-	m.fpdf.Ln(m.rowHeight)
 	m.rowHeight = height
 	m.rowColCount = 0
 
-	if m.fpdf.PageCount() == 0 {
-		m.fpdf.AddPage()
+	_, pageHeight := m.fpdf.GetPageSize()
+	_, top, _, bottom := m.fpdf.GetMargins()
+
+	if m.offsetY > pageHeight-bottom-top-m.rowHeight {
+		m.offsetY = 0
 	}
 
 	closure()
@@ -170,6 +174,7 @@ func (m *maroto) Row(label string, height float64, closure func()) {
 
 	m.colsClosures = nil
 	m.offsetY += m.rowHeight
+	m.fpdf.Ln(m.rowHeight)
 }
 
 func (m *maroto) Col(label string, closure func()) {
@@ -243,7 +248,9 @@ func (m *maroto) Barcode(code string, width float64, height float64, marginTop f
 
 	left, top, _, _ := m.fpdf.GetMargins()
 
-	barcode.Barcode(m.fpdf, barcode.Register(bcode), actualWidthPerCol*m.rowColCount+((actualWidthPerCol-width)/2)+left, marginTop+top, width, height, false)
+	sumOffsetY := marginTop + top + m.offsetY
+
+	barcode.Barcode(m.fpdf, barcode.Register(bcode), actualWidthPerCol*m.rowColCount+((actualWidthPerCol-width)/2)+left, sumOffsetY, width, height, false)
 	return
 }
 
