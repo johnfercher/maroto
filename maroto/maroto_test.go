@@ -26,7 +26,7 @@ func Pdf() {
 
 		m.Col("Barcode", func() {
 			id := "123456789"
-			m.Barcode(id, 30, 9, 5)
+			_ = m.Barcode(id, 30, 9, 5)
 			m.Text(id, font.Arial, font.Bold, 8, 17, enums.CenterH)
 		})
 	})
