@@ -1,6 +1,7 @@
 package maroto
 
 import (
+	"fmt"
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/qr"
 	"github.com/johnfercher/maroto/enums"
@@ -80,6 +81,8 @@ func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
 	maroto.font.SetSize(16)
 	maroto.debugMode = false
 
+	maroto.fpdf.AddPage()
+
 	return maroto
 }
 
@@ -123,6 +126,7 @@ func (m *maroto) RowTableList(label string, header []string, contents [][]string
 	contentMarginTop := 2.0
 
 	for _, content := range contents {
+		fmt.Println(content)
 		m.Row("", contentHeight, func() {
 			for j, c := range content {
 				cs := c
@@ -158,8 +162,16 @@ func (m *maroto) Row(label string, height float64, closure func()) {
 	m.rowHeight = height
 	m.rowColCount = 0
 
-	if m.fpdf.PageCount() == 0 {
+	_, pageHeight := m.fpdf.GetPageSize()
+	_, top, _, _ := m.fpdf.GetMargins()
+
+	fmt.Println(m.offsetY)
+	fmt.Println(pageHeight + top)
+
+	if m.offsetY > top+pageHeight {
+		fmt.Println("break")
 		m.fpdf.AddPage()
+		m.offsetY = 0
 	}
 
 	closure()

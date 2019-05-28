@@ -1,20 +1,14 @@
-package maroto_test
+package main
 
 import (
 	"github.com/johnfercher/maroto/enums"
 	"github.com/johnfercher/maroto/font"
 	"github.com/johnfercher/maroto/maroto"
-	"testing"
 )
 
-func BenchmarkMaroto(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Pdf()
-	}
-}
-
-func Pdf() {
+func main() {
 	m := maroto.NewMaroto(enums.Vertical, enums.A4)
+	m.SetDebugMode(true)
 	header, contents := getContents()
 
 	m.Row("MeliBarcode", 20, func() {
@@ -26,7 +20,7 @@ func Pdf() {
 
 		m.Col("Barcode", func() {
 			id := "123456789"
-			_ = m.Barcode(id, 30, 9, 5)
+			m.Barcode(id, 30, 9, 5)
 			m.Text(id, font.Arial, font.Bold, 8, 17, enums.CenterH)
 		})
 	})
@@ -67,7 +61,7 @@ func Pdf() {
 
 	m.Line()
 
-	m.RowTableList("Packages", header, contents)
+	//\m.RowTableList("Packages", header, contents)
 
 	m.Row("Signature", 15, func() {
 		m.Col("Carrier", func() {
@@ -94,39 +88,6 @@ func getContents() ([]string, [][]string) {
 	header := []string{"Envio", "Venda", "Comprador", "Motivo"}
 
 	contents := [][]string{
-		{"678445", "678543", "Thanos", "Produto queimado"},
-		{"489423", "579894", "Peter Parker", "Compra cancelada"},
-		{"679076", "272747", "Thor", "Produto errado"},
-		{"854364", "996634", "Nebula", "Fraude"},
-		{"679095", "768690", "Steve Rogers", "Venda cancelada"},
-		{"234512", "356469", "Tony Stark", "Produto errado"},
-		{"123451", "996755", "Steve Strange", "Produto errado"},
-		{"675523", "352364", "Star Lord", "Compra cancelada"},
-		{"787894", "693595", "Gamora", "Fraude"},
-		{"908907", "967867", "Scott Lang", "Compra cancelada"},
-		{"876453", "797934", "Hank Pyn", "Produto errado"},
-		{"678445", "678543", "Thanos", "Produto queimado"},
-		{"489423", "579894", "Peter Parker", "Compra cancelada"},
-		{"679076", "272747", "Thor", "Produto errado"},
-		{"854364", "996634", "Nebula", "Fraude"},
-		{"679095", "768690", "Steve Rogers", "Venda cancelada"},
-		{"234512", "356469", "Tony Stark", "Produto errado"},
-		{"123451", "996755", "Steve Strange", "Produto errado"},
-		{"675523", "352364", "Star Lord", "Compra cancelada"},
-		{"787894", "693595", "Gamora", "Fraude"},
-		{"908907", "967867", "Scott Lang", "Compra cancelada"},
-		{"876453", "797934", "Hank Pyn", "Produto errado"},
-		{"678445", "678543", "Thanos", "Produto queimado"},
-		{"489423", "579894", "Peter Parker", "Compra cancelada"},
-		{"679076", "272747", "Thor", "Produto errado"},
-		{"854364", "996634", "Nebula", "Fraude"},
-		{"679095", "768690", "Steve Rogers", "Venda cancelada"},
-		{"234512", "356469", "Tony Stark", "Produto errado"},
-		{"123451", "996755", "Steve Strange", "Produto errado"},
-		{"675523", "352364", "Star Lord", "Compra cancelada"},
-		{"787894", "693595", "Gamora", "Fraude"},
-		{"908907", "967867", "Scott Lang", "Compra cancelada"},
-		{"876453", "797934", "Hank Pyn", "Produto errado"},
 		{"678445", "678543", "Thanos", "Produto queimado"},
 		{"489423", "579894", "Peter Parker", "Compra cancelada"},
 		{"679076", "272747", "Thor", "Produto errado"},
