@@ -8,7 +8,7 @@ import (
 
 func main() {
 	m := maroto.NewMaroto(enums.Vertical, enums.A4)
-	m.SetDebugMode(true)
+	//m.SetDebugMode(true)
 	header, contents := getContents()
 
 	m.Row("MeliBarcode", 20, func() {
