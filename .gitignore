@@ -13,3 +13,6 @@
 
 # JetBrains
 .idea
+
+# PDFs
+*.pdf
