@@ -32,7 +32,7 @@ type Maroto interface {
 
 	// File System
 	OutputFileAndClose(filePathName string) error
-	Output(buffer *bytes.Buffer) error
+	Output() (bytes.Buffer, error)
 }
 
 type maroto struct {
@@ -48,9 +48,10 @@ type maroto struct {
 	debugMode    bool
 }
 
-func (m *maroto) Output(buffer *bytes.Buffer) (err error) {
-	err = m.fpdf.Output(buffer)
-	return
+func (m *maroto) Output() (bytes.Buffer, error) {
+	var buffer bytes.Buffer
+	err := m.fpdf.Output(&buffer)
+	return buffer, err
 }
 
 func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
