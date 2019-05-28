@@ -1,7 +1,6 @@
 package maroto
 
 import (
-	"fmt"
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/qr"
 	"github.com/johnfercher/maroto/enums"
@@ -126,7 +125,6 @@ func (m *maroto) RowTableList(label string, header []string, contents [][]string
 	contentMarginTop := 2.0
 
 	for _, content := range contents {
-		fmt.Println(content)
 		m.Row("", contentHeight, func() {
 			for j, c := range content {
 				cs := c
