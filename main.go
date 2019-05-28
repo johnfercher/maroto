@@ -1,20 +1,14 @@
-package maroto_test
+package main
 
 import (
 	"github.com/johnfercher/maroto/enums"
 	"github.com/johnfercher/maroto/font"
 	"github.com/johnfercher/maroto/maroto"
-	"testing"
 )
 
-func BenchmarkMaroto(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Pdf()
-	}
-}
-
-func Pdf() {
+func main() {
 	m := maroto.NewMaroto(enums.Vertical, enums.A4)
+	//m.SetDebugMode(true)
 	header, contents := getContents()
 
 	m.Row("MeliBarcode", 20, func() {
@@ -69,7 +63,7 @@ func Pdf() {
 
 	m.RowTableList("Packages", header, contents)
 
-	m.Row("Signature", 15, func() {
+	m.Row("Signature", 50, func() {
 		m.Col("Carrier", func() {
 			m.Sign("Transportadora", font.Arial, font.Bold, 8)
 		})
