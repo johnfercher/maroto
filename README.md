@@ -4,6 +4,10 @@ A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](h
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
 
 ## Example
+
+#### Result
+![Image of Yaktocat](assets/images/result.png)
+
 #### Code
 ```go
 func main() {
@@ -83,6 +87,3 @@ func main() {
 	m.OutputFileAndClose("maroto.pdf")
 }
 ```
-
-#### Result
-![Image of Yaktocat](assets/images/result.png)
