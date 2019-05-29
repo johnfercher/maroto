@@ -97,11 +97,6 @@ func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
 
 	return maroto
 }
-func (m *maroto) Output() (bytes.Buffer, error) {
-	var buffer bytes.Buffer
-	err := m.fpdf.Output(&buffer)
-	return buffer, err
-}
 
 func (m *maroto) Sign(label string, fontFamily font.Family, fontStyle font.Style, fontSize float64) {
 	qtdCols := float64(len(m.colsClosures))
