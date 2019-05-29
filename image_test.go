@@ -1,30 +1,31 @@
-package image
+package maroto_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/mocks"
+	"github.com/johnfercher/maroto"
+	"github.com/johnfercher/maroto/internal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"testing"
 )
 
 func TestNewImage(t *testing.T) {
-	image := NewImage(&mocks.Pdf{}, &mocks.Math{})
+	image := maroto.NewImage(&internal.Pdf{}, &internal.Math{})
 
 	assert.NotNil(t, image)
-	assert.Equal(t, fmt.Sprintf("%T", image), "*image.image")
+	assert.Equal(t, fmt.Sprintf("%T", image), "*maroto.image")
 }
 
 func TestImage_AddFromPath(t *testing.T) {
 	// ARRANGE
-	_pdf := &mocks.Pdf{}
+	_pdf := &internal.Pdf{}
 	_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 	_pdf.On("ImageOptions", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 
-	_math := &mocks.Math{}
+	_math := &internal.Math{}
 	_math.On("GetWidthPerCol", mock.Anything).Return(100.0)
 
-	image := NewImage(_pdf, _math)
+	image := maroto.NewImage(_pdf, _math)
 
 	// Act
 	image.AddFromPath("AnyPath", 10.0, 1.0, 4.0)

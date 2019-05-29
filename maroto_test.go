@@ -1,19 +1,23 @@
-package main
+package maroto_test
 
 import (
-	"github.com/johnfercher/maroto/enums"
-	"github.com/johnfercher/maroto/font"
-	"github.com/johnfercher/maroto/maroto"
+	"github.com/johnfercher/maroto"
+	"testing"
 )
 
-func main() {
-	m := maroto.NewMaroto(enums.Vertical, enums.A4)
-	//m.SetDebugMode(true)
+func BenchmarkMaroto(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Pdf()
+	}
+}
+
+func Pdf() {
+	m := maroto.NewMaroto(maroto.Vertical, maroto.A4)
 	header, contents := getContents()
 
 	m.Row("MeliBarcode", 20, func() {
 		m.Col("Logo", func() {
-			m.Image("assets/images/marvel.jpg", 4)
+			m.Image("assets/images/mercado_livre.png", 4)
 		})
 
 		m.ColSpaces(2)
@@ -21,7 +25,7 @@ func main() {
 		m.Col("Barcode", func() {
 			id := "123456789"
 			_ = m.Barcode(id, 30, 9, 5)
-			m.Text(id, font.Arial, font.Bold, 8, 17, enums.CenterH)
+			m.Text(id, maroto.Arial, maroto.Bold, 8, 17, maroto.CenterH)
 		})
 	})
 
@@ -29,20 +33,20 @@ func main() {
 
 	m.Row("Destiny", 12, func() {
 		m.Col("Logo", func() {
-			m.Image("assets/images/marvel.jpg", 1)
+			m.Image("assets/images/mercado_livre.png", 1)
 		})
 
 		m.ColSpace()
 
 		m.Col("Packages", func() {
-			m.Text("Vendedor: The Collector", font.Arial, font.Normal, 9, 5, enums.Left)
-			m.Text("Endereco: Nowhere", font.Arial, font.Normal, 9, 9, enums.Left)
+			m.Text("Vendedor: The Collector", maroto.Arial, maroto.Normal, 9, 5, maroto.Left)
+			m.Text("Endereco: Nowhere", maroto.Arial, maroto.Normal, 9, 9, maroto.Left)
 		})
 
 		m.ColSpace()
 
 		m.Col("Route", func() {
-			m.Text("ROUTE.XDA.6", font.Arial, font.Bold, 15, 7.5, enums.Left)
+			m.Text("ROUTE.XDA.6", maroto.Arial, maroto.Bold, 15, 7.5, maroto.Left)
 		})
 	})
 
@@ -52,8 +56,8 @@ func main() {
 		m.ColSpaces(2)
 
 		m.Col("Packages", func() {
-			m.Text("24", font.Arial, font.Bold, 20, 10.5, enums.CenterH)
-			m.Text("Pacotes Devolvidos", font.Arial, font.Normal, 12, 16, enums.CenterH)
+			m.Text("24", maroto.Arial, maroto.Bold, 20, 10.5, maroto.CenterH)
+			m.Text("Pacotes Devolvidos", maroto.Arial, maroto.Normal, 12, 16, maroto.CenterH)
 		})
 
 		m.ColSpaces(2)
@@ -63,25 +67,25 @@ func main() {
 
 	m.RowTableList("Packages", header, contents)
 
-	m.Row("Signature", 50, func() {
+	m.Row("Signature", 15, func() {
 		m.Col("Carrier", func() {
-			m.Sign("Transportadora", font.Arial, font.Bold, 8)
+			m.Sign("Transportadora", maroto.Arial, maroto.Bold, 8)
 		})
 
 		m.ColSpace()
 
 		m.Col("LogisticOperator", func() {
-			m.Sign("Operador Logistico", font.Arial, font.Bold, 8)
+			m.Sign("Operador Logistico", maroto.Arial, maroto.Bold, 8)
 		})
 
 		m.ColSpace()
 
 		m.Col("Seller", func() {
-			m.Sign("Vendedor", font.Arial, font.Bold, 8)
+			m.Sign("Vendedor", maroto.Arial, maroto.Bold, 8)
 		})
 	})
 
-	m.OutputFileAndClose("maroto.pdf")
+	m.OutputFileAndClose("pdf")
 }
 
 func getContents() ([]string, [][]string) {

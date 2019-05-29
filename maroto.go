@@ -4,12 +4,6 @@ import (
 	"bytes"
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/qr"
-	"github.com/johnfercher/maroto/enums"
-	"github.com/johnfercher/maroto/font"
-	"github.com/johnfercher/maroto/image"
-	"github.com/johnfercher/maroto/math"
-	"github.com/johnfercher/maroto/sign"
-	"github.com/johnfercher/maroto/text"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/jung-kurt/gofpdf/contrib/barcode"
 )
@@ -24,11 +18,11 @@ type Maroto interface {
 	// Features
 	RowTableList(label string, header []string, contents [][]string)
 	SetDebugMode(on bool)
-	Text(text string, fontFamily font.Family, fontStyle font.Style, fontSize float64, marginTop float64, align enums.HorizontalAlign)
+	Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align HorizontalAlign)
 	Image(filePathName string, marginTop float64)
 	Barcode(code string, width float64, height float64, marginTop float64) error
 	QrCode(code string)
-	Sign(label string, fontFamily font.Family, fontStyle font.Style, fontSize float64)
+	Sign(label string, fontFamily Family, fontStyle Style, fontSize float64)
 	Line()
 
 	// File System
@@ -38,11 +32,11 @@ type Maroto interface {
 
 type maroto struct {
 	fpdf         gofpdf.Pdf
-	math         math.Math
-	font         font.Font
-	text         text.Text
-	sign         sign.Sign
-	image        image.Image
+	math         Math
+	font         Font
+	text         Text
+	sign         Sign
+	image        Image
 	offsetY      float64
 	rowHeight    float64
 	rowColCount  float64
@@ -56,28 +50,28 @@ func (m *maroto) Output() (bytes.Buffer, error) {
 	return buffer, err
 }
 
-func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
+func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
 	fpdfOrientation := "P"
 	fpdfPageSize := "A4"
 
-	if orientation == enums.Vertical {
+	if orientation == Vertical {
 		fpdfOrientation = "P"
 	}
 
-	if pageSize == enums.A4 {
+	if pageSize == A4 {
 		fpdfPageSize = "A4"
 	}
 
 	fpdf := gofpdf.New(fpdfOrientation, "mm", fpdfPageSize, "")
 	fpdf.SetMargins(10, 10, 10)
 
-	_math := math.NewMath(fpdf)
-	_font := font.NewFont(fpdf, 16, font.Arial, font.Bold)
-	_text := text.NewText(fpdf, _math, _font)
+	_math := NewMath(fpdf)
+	_font := NewFont(fpdf, 16, Arial, Bold)
+	_text := NewText(fpdf, _math, _font)
 
-	_sign := sign.NewSign(fpdf, _math, _text)
+	_sign := NewSign(fpdf, _math, _text)
 
-	_image := image.NewImage(fpdf, _math)
+	_image := NewImage(fpdf, _math)
 
 	maroto := &maroto{
 		fpdf:  fpdf,
@@ -88,8 +82,8 @@ func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
 		image: _image,
 	}
 
-	maroto.font.SetFamily(font.Arial)
-	maroto.font.SetStyle(font.Bold)
+	maroto.font.SetFamily(Arial)
+	maroto.font.SetStyle(Bold)
 	maroto.font.SetSize(16)
 	maroto.debugMode = false
 
@@ -98,7 +92,7 @@ func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
 	return maroto
 }
 
-func (m *maroto) Sign(label string, fontFamily font.Family, fontStyle font.Style, fontSize float64) {
+func (m *maroto) Sign(label string, fontFamily Family, fontStyle Style, fontSize float64) {
 	qtdCols := float64(len(m.colsClosures))
 	sumOfYOffsets := m.offsetY + m.rowHeight
 
@@ -125,7 +119,7 @@ func (m *maroto) RowTableList(label string, header []string, contents [][]string
 
 				sumOyYOffesets := headerMarginTop + m.offsetY + 2.5
 
-				m.text.Add(reason, font.Arial, font.Bold, 10, sumOyYOffesets, enums.Left, float64(is), qtdCols)
+				m.text.Add(reason, Arial, Bold, 10, sumOyYOffesets, Left, float64(is), qtdCols)
 			})
 		}
 	})
@@ -146,7 +140,7 @@ func (m *maroto) RowTableList(label string, header []string, contents [][]string
 				sumOyYOffesets := contentMarginTop + m.offsetY + 2.0
 
 				m.Col("", func() {
-					m.text.Add(cs, font.Arial, font.Normal, 10, sumOyYOffesets, enums.Left, float64(js), hs)
+					m.text.Add(cs, Arial, Normal, 10, sumOyYOffesets, Left, float64(js), hs)
 				})
 			}
 		})
@@ -218,7 +212,7 @@ func (m *maroto) ColSpaces(qtd int) {
 	}
 }
 
-func (m *maroto) Text(text string, fontFamily font.Family, fontStyle font.Style, fontSize float64, marginTop float64, align enums.HorizontalAlign) {
+func (m *maroto) Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align HorizontalAlign) {
 	if marginTop > m.rowHeight {
 		marginTop = m.rowHeight
 	}

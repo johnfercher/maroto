@@ -1,7 +1,6 @@
-package image
+package maroto
 
 import (
-	"github.com/johnfercher/maroto/math"
 	"github.com/jung-kurt/gofpdf"
 )
 
@@ -12,10 +11,10 @@ type Image interface {
 
 type image struct {
 	pdf  gofpdf.Pdf
-	math math.Math
+	math Math
 }
 
-func NewImage(pdf gofpdf.Pdf, math math.Math) Image {
+func NewImage(pdf gofpdf.Pdf, math Math) Image {
 	return &image{
 		pdf,
 		math,

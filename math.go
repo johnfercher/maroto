@@ -1,4 +1,4 @@
-package math
+package maroto
 
 import "github.com/jung-kurt/gofpdf"
 
