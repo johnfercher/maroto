@@ -50,12 +50,6 @@ type maroto struct {
 	debugMode    bool
 }
 
-func (m *maroto) Output() (bytes.Buffer, error) {
-	var buffer bytes.Buffer
-	err := m.fpdf.Output(&buffer)
-	return buffer, err
-}
-
 func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
 	fpdfOrientation := "P"
 	fpdfPageSize := "A4"
