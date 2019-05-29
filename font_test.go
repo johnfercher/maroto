@@ -3,14 +3,14 @@ package maroto_test
 import (
 	"fmt"
 	"github.com/johnfercher/maroto"
-	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"testing"
 )
 
 func TestNewFont(t *testing.T) {
-	_font := maroto.NewFont(&internal.Pdf{}, 10, maroto.Arial, maroto.Bold)
+	_font := maroto.NewFont(&mocks.Pdf{}, 10, maroto.Arial, maroto.Bold)
 
 	assert.NotNil(t, _font)
 	assert.Equal(t, fmt.Sprintf("%T", _font), "*maroto.font")
@@ -23,19 +23,19 @@ func TestFont_GetSetFamily(t *testing.T) {
 	cases := []struct {
 		name        string
 		family      maroto.Family
-		pdf         func() *internal.Pdf
-		assertCalls func(t *testing.T, pdf *internal.Pdf)
+		pdf         func() *mocks.Pdf
+		assertCalls func(t *testing.T, pdf *mocks.Pdf)
 		assertFont  func(t *testing.T, family maroto.Family)
 	}{
 		{
 			"maroto.Arial",
 			maroto.Arial,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "arial", "B", 10.0)
 			},
@@ -46,12 +46,12 @@ func TestFont_GetSetFamily(t *testing.T) {
 		{
 			"maroto.Helvetica",
 			maroto.Helvetica,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "helvetica", "B", 10.0)
 			},
@@ -62,12 +62,12 @@ func TestFont_GetSetFamily(t *testing.T) {
 		{
 			"maroto.Symbol",
 			maroto.Symbol,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "symbol", "B", 10.0)
 			},
@@ -78,12 +78,12 @@ func TestFont_GetSetFamily(t *testing.T) {
 		{
 			"maroto.ZapBats",
 			maroto.ZapBats,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "zapfdingbats", "B", 10.0)
 			},
@@ -94,12 +94,12 @@ func TestFont_GetSetFamily(t *testing.T) {
 		{
 			"maroto.Courier",
 			maroto.Courier,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "courier", "B", 10.0)
 			},
@@ -127,19 +127,19 @@ func TestFont_GetSetStyle(t *testing.T) {
 	cases := []struct {
 		name        string
 		style       maroto.Style
-		pdf         func() *internal.Pdf
-		assertCalls func(t *testing.T, pdf *internal.Pdf)
+		pdf         func() *mocks.Pdf
+		assertCalls func(t *testing.T, pdf *mocks.Pdf)
 		assertStyle func(t *testing.T, style maroto.Style)
 	}{
 		{
 			"maroto.Normal",
 			maroto.Normal,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFontStyle", mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFontStyle", 1)
 				pdf.AssertCalled(t, "SetFontStyle", "")
 			},
@@ -150,12 +150,12 @@ func TestFont_GetSetStyle(t *testing.T) {
 		{
 			"maroto.Bold",
 			maroto.Bold,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFontStyle", mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFontStyle", 1)
 				pdf.AssertCalled(t, "SetFontStyle", "B")
 			},
@@ -166,12 +166,12 @@ func TestFont_GetSetStyle(t *testing.T) {
 		{
 			"maroto.Italic",
 			maroto.Italic,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFontStyle", mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFontStyle", 1)
 				pdf.AssertCalled(t, "SetFontStyle", "I")
 			},
@@ -182,12 +182,12 @@ func TestFont_GetSetStyle(t *testing.T) {
 		{
 			"maroto.BoldItalic",
 			maroto.BoldItalic,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFontStyle", mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFontStyle", 1)
 				pdf.AssertCalled(t, "SetFontStyle", "BI")
 			},
@@ -213,7 +213,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 
 func TestFont_GetSetSize(t *testing.T) {
 	// Arrange
-	pdf := &internal.Pdf{}
+	pdf := &mocks.Pdf{}
 	pdf.On("SetFontSize", mock.Anything)
 	font := maroto.NewFont(pdf, 10, maroto.Arial, maroto.Bold)
 
@@ -232,8 +232,8 @@ func TestFont_GetSetFont(t *testing.T) {
 		family      maroto.Family
 		style       maroto.Style
 		size        float64
-		pdf         func() *internal.Pdf
-		assertCalls func(t *testing.T, pdf *internal.Pdf)
+		pdf         func() *mocks.Pdf
+		assertCalls func(t *testing.T, pdf *mocks.Pdf)
 		assertFont  func(t *testing.T, family maroto.Family, style maroto.Style, size float64)
 	}{
 		{
@@ -241,12 +241,12 @@ func TestFont_GetSetFont(t *testing.T) {
 			maroto.Arial,
 			maroto.Normal,
 			16.0,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "arial", "", 16.0)
 			},
@@ -261,12 +261,12 @@ func TestFont_GetSetFont(t *testing.T) {
 			maroto.Helvetica,
 			maroto.Bold,
 			13,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "helvetica", "B", 13.0)
 			},
@@ -281,12 +281,12 @@ func TestFont_GetSetFont(t *testing.T) {
 			maroto.Symbol,
 			maroto.Italic,
 			10,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "symbol", "I", 10.0)
 			},
@@ -301,12 +301,12 @@ func TestFont_GetSetFont(t *testing.T) {
 			maroto.ZapBats,
 			maroto.BoldItalic,
 			5,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "zapfdingbats", "BI", 5.0)
 			},
@@ -321,12 +321,12 @@ func TestFont_GetSetFont(t *testing.T) {
 			maroto.Courier,
 			maroto.Normal,
 			12,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "SetFont", 1)
 				pdf.AssertCalled(t, "SetFont", "courier", "", 12.0)
 			},
@@ -383,7 +383,7 @@ func TestFont_GetStyleString(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		_font := maroto.NewFont(&internal.Pdf{}, 16.0, maroto.Arial, maroto.Bold)
+		_font := maroto.NewFont(&mocks.Pdf{}, 16.0, maroto.Arial, maroto.Bold)
 
 		// Act
 		styleString := _font.GetStyleString(c.style)
@@ -428,7 +428,7 @@ func TestFont_GetFamilyString(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		_font := maroto.NewFont(&internal.Pdf{}, 16.0, maroto.Arial, maroto.Bold)
+		_font := maroto.NewFont(&mocks.Pdf{}, 16.0, maroto.Arial, maroto.Bold)
 
 		// Act
 		familyString := _font.GetFamilyString(c.family)

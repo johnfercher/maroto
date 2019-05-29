@@ -3,13 +3,13 @@ package maroto_test
 import (
 	"fmt"
 	"github.com/johnfercher/maroto"
-	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/mocks"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewMath(t *testing.T) {
-	math := maroto.NewMath(&internal.Pdf{})
+	math := maroto.NewMath(&mocks.Pdf{})
 
 	assert.NotNil(t, math)
 	assert.Equal(t, fmt.Sprintf("%T", math), "*maroto.math")
@@ -19,20 +19,20 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 	cases := []struct {
 		name        string
 		qtdCols     float64
-		pdf         func() *internal.Pdf
-		assertCalls func(t *testing.T, pdf *internal.Pdf)
+		pdf         func() *mocks.Pdf
+		assertCalls func(t *testing.T, pdf *mocks.Pdf)
 		assertWidth func(t *testing.T, width float64)
 	}{
 		{
 			"1 col, margins 10 10",
 			1,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("GetPageSize").Return(210.0, 0.0)
 				pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
@@ -43,13 +43,13 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 		{
 			"2 col, margins 10 10",
 			2,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("GetPageSize").Return(210.0, 0.0)
 				pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
@@ -60,13 +60,13 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 		{
 			"4 col, margins 10 10",
 			4,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("GetPageSize").Return(210.0, 0.0)
 				pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
@@ -77,13 +77,13 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 		{
 			"1 col, margins 20 20",
 			1,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("GetPageSize").Return(210.0, 0.0)
 				pdf.On("GetMargins").Return(20.0, 20.0, 20.0, 20.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
@@ -94,13 +94,13 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 		{
 			"2 col, margins 20 20",
 			2,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("GetPageSize").Return(210.0, 0.0)
 				pdf.On("GetMargins").Return(20.0, 20.0, 20.0, 20.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
@@ -111,13 +111,13 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 		{
 			"4 col, margins 20 20",
 			4,
-			func() *internal.Pdf {
-				pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
 				pdf.On("GetPageSize").Return(210.0, 0.0)
 				pdf.On("GetMargins").Return(20.0, 20.0, 20.0, 20.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *internal.Pdf) {
+			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},

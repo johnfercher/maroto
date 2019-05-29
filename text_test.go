@@ -3,14 +3,14 @@ package maroto_test
 import (
 	"fmt"
 	"github.com/johnfercher/maroto"
-	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"testing"
 )
 
 func TestNewText(t *testing.T) {
-	text := maroto.NewText(&internal.Pdf{}, &internal.Math{}, &internal.Font{})
+	text := maroto.NewText(&mocks.Pdf{}, &mocks.Math{}, &mocks.Font{})
 
 	assert.NotNil(t, text)
 	assert.Equal(t, fmt.Sprintf("%T", text), "*maroto.text")
@@ -20,34 +20,34 @@ func TestText_Add(t *testing.T) {
 	cases := []struct {
 		name       string
 		align      maroto.HorizontalAlign
-		pdf        func() *internal.Pdf
-		math       func() *internal.Math
-		font       func() *internal.Font
-		assertPdf  func(t *testing.T, pdf *internal.Pdf)
-		assertMath func(t *testing.T, math *internal.Math)
-		assertFont func(t *testing.T, font *internal.Font)
+		pdf        func() *mocks.Pdf
+		math       func() *mocks.Math
+		font       func() *mocks.Font
+		assertPdf  func(t *testing.T, pdf *mocks.Pdf)
+		assertMath func(t *testing.T, math *mocks.Math)
+		assertFont func(t *testing.T, font *mocks.Font)
 	}{
 		{
 			"Left Align",
 			maroto.Left,
-			func() *internal.Pdf {
-				_pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				_pdf := &mocks.Pdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
 				return _pdf
 			},
-			func() *internal.Math {
-				_math := &internal.Math{}
+			func() *mocks.Math {
+				_math := &mocks.Math{}
 				_math.On("GetWidthPerCol", mock.Anything).Return(123.0)
 				return _math
 			},
-			func() *internal.Font {
-				_font := &internal.Font{}
+			func() *mocks.Font {
+				_font := &mocks.Font{}
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return _font
 			},
-			func(t *testing.T, _pdf *internal.Pdf) {
+			func(t *testing.T, _pdf *mocks.Pdf) {
 				_pdf.AssertNotCalled(t, "GetStringWidth")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
@@ -55,11 +55,11 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
 				_pdf.AssertCalled(t, "Text", 133.0, 15.0, "Text")
 			},
-			func(t *testing.T, _math *internal.Math) {
+			func(t *testing.T, _math *mocks.Math) {
 				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
 				_math.AssertCalled(t, "GetWidthPerCol", 15.0)
 			},
-			func(t *testing.T, _font *internal.Font) {
+			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", maroto.Arial, maroto.BoldItalic, 16.0)
 			},
@@ -67,24 +67,24 @@ func TestText_Add(t *testing.T) {
 		{
 			"Center Align",
 			maroto.CenterH,
-			func() *internal.Pdf {
-				_pdf := &internal.Pdf{}
+			func() *mocks.Pdf {
+				_pdf := &mocks.Pdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
 				return _pdf
 			},
-			func() *internal.Math {
-				_math := &internal.Math{}
+			func() *mocks.Math {
+				_math := &mocks.Math{}
 				_math.On("GetWidthPerCol", mock.Anything).Return(123.0)
 				return _math
 			},
-			func() *internal.Font {
-				_font := &internal.Font{}
+			func() *mocks.Font {
+				_font := &mocks.Font{}
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return _font
 			},
-			func(t *testing.T, _pdf *internal.Pdf) {
+			func(t *testing.T, _pdf *mocks.Pdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
 				_pdf.AssertCalled(t, "GetStringWidth", "Text")
 
@@ -93,11 +93,11 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
 				_pdf.AssertCalled(t, "Text", 188.5, 15.0, "Text")
 			},
-			func(t *testing.T, _math *internal.Math) {
+			func(t *testing.T, _math *mocks.Math) {
 				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
 				_math.AssertCalled(t, "GetWidthPerCol", 15.0)
 			},
-			func(t *testing.T, _font *internal.Font) {
+			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", maroto.Arial, maroto.BoldItalic, 16.0)
 			},
