@@ -1,6 +1,7 @@
 package maroto
 
 import (
+	"bytes"
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/qr"
 	"github.com/johnfercher/maroto/enums"
@@ -31,6 +32,7 @@ type Maroto interface {
 
 	// File System
 	OutputFileAndClose(filePathName string) error
+	Output() (bytes.Buffer, error)
 }
 
 type maroto struct {
@@ -44,6 +46,12 @@ type maroto struct {
 	rowColCount  float64
 	colsClosures []func()
 	debugMode    bool
+}
+
+func (m *maroto) Output() (bytes.Buffer, error) {
+	var buffer bytes.Buffer
+	err := m.fpdf.Output(&buffer)
+	return buffer, err
 }
 
 func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
