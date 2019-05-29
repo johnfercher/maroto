@@ -13,7 +13,7 @@ func main() {
 
 	m.Row("MeliBarcode", 20, func() {
 		m.Col("Logo", func() {
-			m.Image("assets/images/mercado_livre.png", 4)
+			m.Image("assets/images/marvel.jpg", 4)
 		})
 
 		m.ColSpaces(2)
@@ -29,7 +29,7 @@ func main() {
 
 	m.Row("Destiny", 12, func() {
 		m.Col("Logo", func() {
-			m.Image("assets/images/mercado_livre.png", 1)
+			m.Image("assets/images/marvel.jpg", 1)
 		})
 
 		m.ColSpace()
