@@ -1,17 +1,18 @@
-package math
+package maroto_test
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto"
 	"github.com/johnfercher/maroto/mocks"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewMath(t *testing.T) {
-	math := NewMath(&mocks.Pdf{})
+	math := maroto.NewMath(&mocks.Pdf{})
 
 	assert.NotNil(t, math)
-	assert.Equal(t, fmt.Sprintf("%T", math), "*math.math")
+	assert.Equal(t, fmt.Sprintf("%T", math), "*maroto.math")
 }
 
 func TestMath_GetWidthPerCol(t *testing.T) {
@@ -129,7 +130,7 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		pdf := c.pdf()
-		math := NewMath(pdf)
+		math := maroto.NewMath(pdf)
 
 		// Act
 		width := math.GetWidthPerCol(c.qtdCols)
