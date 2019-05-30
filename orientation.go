@@ -1,4 +1,4 @@
-package enums
+package maroto
 
 type Orientation int
 
