@@ -1,12 +1,15 @@
 package maroto
 
 import (
+	"bytes"
+	"encoding/base64"
+	"github.com/google/uuid"
 	"github.com/jung-kurt/gofpdf"
 )
 
 type Image interface {
-	AddFromPath(path string, marginTop float64, indexCol float64, qtdCol float64, colHeight float64)
-	AddFromBase64(base64 string, x, y, width, height float64)
+	AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64)
+	AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, extension Extension)
 }
 
 type image struct {
@@ -21,32 +24,31 @@ func NewImage(pdf gofpdf.Pdf, math Math) Image {
 	}
 }
 
-func (i *image) AddFromPath(path string, marginTop float64, indexCol float64, qtdCol float64, colHeight float64) {
-	widthPerCol := i.math.GetWidthPerCol(qtdCol)
-
-	left, top, _, _ := i.pdf.GetMargins()
-
+func (i *image) AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64) {
 	info := i.pdf.RegisterImageOptions(path, gofpdf.ImageOptions{
 		ReadDpi:   false,
 		ImageType: "",
 	})
 
-	height := info.Height()
-	width := info.Width()
+	x, y, w, h := i.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol)
 
-	proportion := height / width
-
-	heightForWidth := widthPerCol * proportion
-
-	if heightForWidth > colHeight {
-		widthForColHeight := colHeight / proportion
-		widthCorrection := (widthPerCol - widthForColHeight) / 2.0
-		i.pdf.ImageOptions(path, widthPerCol*indexCol+left+widthCorrection, marginTop+top, widthForColHeight, 0, false, gofpdf.ImageOptions{}, 0, "")
-	} else {
-		i.pdf.ImageOptions(path, widthPerCol*indexCol+left, marginTop+top, widthPerCol, 0, false, gofpdf.ImageOptions{}, 0, "")
-	}
+	i.pdf.ImageOptions(path, x, y+marginTop, w, h, false, gofpdf.ImageOptions{}, 0, "")
 }
 
-func (image) AddFromBase64(base64 string, x, y, width, height float64) {
-	panic("implement me")
+func (i *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, extension Extension) {
+	imageId, _ := uuid.NewRandom()
+
+	ss, _ := base64.StdEncoding.DecodeString(b64)
+
+	info := i.pdf.RegisterImageOptionsReader(
+		imageId.String(),
+		gofpdf.ImageOptions{
+			ReadDpi:   false,
+			ImageType: GetExtensionString(extension),
+		},
+		bytes.NewReader(ss),
+	)
+
+	x, y, w, h := i.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol)
+	i.pdf.Image(imageId.String(), x, y+marginTop, w, h, false, "", 0, "")
 }
