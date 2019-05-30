@@ -26,8 +26,10 @@ func (i *image) AddFromPath(path string, marginTop float64, indexCol float64, qt
 
 	left, top, _, _ := i.pdf.GetMargins()
 
-	i.pdf.RegisterImage(path, "")
-	info := i.pdf.GetImageInfo(path)
+	info := i.pdf.RegisterImageOptions(path, gofpdf.ImageOptions{
+		ReadDpi:   false,
+		ImageType: "",
+	})
 
 	height := info.Height()
 	width := info.Width()
