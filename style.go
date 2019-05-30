@@ -1,4 +1,4 @@
-package font
+package maroto
 
 type Style int
 
