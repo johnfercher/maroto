@@ -28,7 +28,7 @@ func TestImage_AddFromPath(t *testing.T) {
 	image := maroto.NewImage(_pdf, _math)
 
 	// Act
-	image.AddFromPath("AnyPath", 10.0, 1.0, 4.0)
+	image.AddFromPath("AnyPath", 10.0, 1.0, 4.0, 5.0)
 
 	// Assert
 	_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)

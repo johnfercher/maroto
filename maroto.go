@@ -226,7 +226,7 @@ func (m *maroto) Image(filePathName string, marginTop float64) {
 	qtdCols := float64(len(m.colsClosures))
 	sumOfyOffsets := m.offsetY + marginTop
 
-	m.image.AddFromPath(filePathName, sumOfyOffsets, m.rowColCount, qtdCols)
+	m.image.AddFromPath(filePathName, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight)
 }
 func (m *maroto) OutputFileAndClose(filePathName string) (err error) {
 	err = m.fpdf.OutputFileAndClose(filePathName)
