@@ -5,7 +5,7 @@ import (
 )
 
 type Text interface {
-	Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align HorizontalAlign, actualCol float64, qtdCols float64)
+	Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align, actualCol float64, qtdCols float64)
 }
 
 type text struct {
@@ -22,7 +22,7 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) Text {
 	}
 }
 
-func (m *text) Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align HorizontalAlign, actualCol float64, qtdCols float64) {
+func (m *text) Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align, actualCol float64, qtdCols float64) {
 	actualWidthPerCol := m.math.GetWidthPerCol(qtdCols)
 
 	m.font.SetFont(fontFamily, fontStyle, fontSize)

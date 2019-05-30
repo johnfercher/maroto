@@ -1,4 +1,4 @@
-# Maroto [![Travis](https://img.shields.io/badge/coverage-12.6%25-red.svg)][travis]
+# Maroto [![Travis](https://img.shields.io/badge/coverage-35.4%25-red.svg)][travis]
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
@@ -8,18 +8,23 @@ A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](h
 #### Result
 Here is the [pdf](assets/pdf/maroto.pdf) generated.
 
-![result](assets/images/result.png)
+![result](assets/images/result.jpg)
 
 #### Code
 ```go
 func main() {
 	m := maroto.NewMaroto(maroto.Vertical, maroto.A4)
 	//m.SetDebugMode(true)
+
+	byteSlices := getByteSlice()
+
+	base64 := base64.StdEncoding.EncodeToString(byteSlices)
+
 	header, contents := getContents()
 
 	m.Row("Barcode", 20, func() {
 		m.Col("Logo", func() {
-			m.Image("assets/images/marvel.jpg", 0)
+			m.Base64Image(base64, 0, maroto.Png)
 		})
 
 		m.ColSpaces(2)
@@ -27,7 +32,7 @@ func main() {
 		m.Col("Barcode", func() {
 			id := "123456789"
 			_ = m.Barcode(id, 30, 9, 5)
-			m.Text(id, maroto.Arial, maroto.Bold, 8, 17, maroto.CenterH)
+			m.Text(id, maroto.Arial, maroto.Bold, 8, 17, maroto.Center)
 		})
 	})
 
@@ -35,20 +40,20 @@ func main() {
 
 	m.Row("Logo", 12, func() {
 		m.Col("Logo", func() {
-			m.Image("assets/images/shape.jpg", 0)
+			m.FileImage("assets/images/gopher1.jpg", 0)
 		})
 
 		m.ColSpace()
 
 		m.Col("Definition", func() {
-			m.Text("Definition: Random", maroto.Arial, maroto.Normal, 9, 5, maroto.Left)
-			m.Text("Type: Shocks", maroto.Arial, maroto.Normal, 9, 9, maroto.Left)
+			m.Text("PDFGenerator: Maroto", maroto.Arial, maroto.Normal, 9, 5, maroto.Left)
+			m.Text("Type: Easy & Fast", maroto.Arial, maroto.Normal, 9, 9, maroto.Left)
 		})
 
 		m.ColSpace()
 
 		m.Col("Speed", func() {
-			m.Text("FAST", maroto.Arial, maroto.Bold, 15, 7.5, maroto.CenterH)
+			m.Text("GPL3", maroto.Arial, maroto.Bold, 15, 7.5, maroto.Center)
 		})
 	})
 
@@ -58,8 +63,8 @@ func main() {
 		m.ColSpaces(2)
 
 		m.Col("Packages", func() {
-			m.Text("SUPCODE", maroto.Arial, maroto.Bold, 20, 10.5, maroto.CenterH)
-			m.Text("1q2w3e4r", maroto.Arial, maroto.Normal, 12, 16, maroto.CenterH)
+			m.Text("Grid System", maroto.Arial, maroto.Bold, 20, 10.5, maroto.Center)
+			m.Text("Bootstrap Like", maroto.Arial, maroto.Normal, 12, 16, maroto.Center)
 		})
 
 		m.ColSpaces(2)
@@ -69,21 +74,21 @@ func main() {
 
 	m.RowTableList("List", header, contents)
 
-	m.Row("Signature", 50, func() {
+	m.Row("Signature", 30, func() {
 		m.Col("Nick", func() {
-			m.Sign("Nick Fury", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Nick Fury", maroto.Arial, maroto.Bold, 8)
 		})
 
 		m.ColSpace()
 
 		m.Col("Thanos", func() {
-			m.Sign("Thanos", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Thanos", maroto.Arial, maroto.Bold, 8)
 		})
 
 		m.ColSpace()
 
 		m.Col("Collector", func() {
-			m.Sign("Collector", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Collector", maroto.Arial, maroto.Bold, 8)
 		})
 	})
 

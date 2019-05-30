@@ -13,8 +13,6 @@ type Font interface {
 	GetStyle() Style
 	GetSize() float64
 	GetFont() (Family, Style, float64)
-	GetStyleString(style Style) string
-	GetFamilyString(font Family) string
 }
 
 type font struct {
@@ -51,15 +49,15 @@ func (f *font) GetFont() (Family, Style, float64) {
 
 func (f *font) SetFamily(family Family) {
 	f.family = family
-	familyString := f.GetFamilyString(f.family)
-	styleString := f.GetStyleString(f.style)
+	familyString := GetFamilyString(f.family)
+	styleString := GetStyleString(f.style)
 
 	f.pdf.SetFont(familyString, styleString, f.size)
 }
 
 func (f *font) SetStyle(style Style) {
 	f.style = style
-	styleString := f.GetStyleString(f.style)
+	styleString := GetStyleString(f.style)
 
 	f.pdf.SetFontStyle(styleString)
 }
@@ -74,36 +72,8 @@ func (f *font) SetFont(family Family, style Style, size float64) {
 	f.style = style
 	f.size = size
 
-	familyString := f.GetFamilyString(f.family)
-	styleString := f.GetStyleString(f.style)
+	familyString := GetFamilyString(f.family)
+	styleString := GetStyleString(f.style)
 
 	f.pdf.SetFont(familyString, styleString, f.size)
-}
-
-func (f *font) GetFamilyString(font Family) string {
-	switch font {
-	case Courier:
-		return "courier"
-	case Helvetica:
-		return "helvetica"
-	case Symbol:
-		return "symbol"
-	case ZapBats:
-		return "zapfdingbats"
-	default:
-		return "arial"
-	}
-}
-
-func (f *font) GetStyleString(style Style) string {
-	switch style {
-	case Italic:
-		return "I"
-	case Bold:
-		return "B"
-	case BoldItalic:
-		return "BI"
-	default:
-		return ""
-	}
 }

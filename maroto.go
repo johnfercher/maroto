@@ -18,11 +18,12 @@ type Maroto interface {
 	// Features
 	RowTableList(label string, header []string, contents [][]string)
 	SetDebugMode(on bool)
-	Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align HorizontalAlign)
-	Image(filePathName string, marginTop float64)
+	Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align)
+	FileImage(filePathName string, marginTop float64)
+	Base64Image(base64 string, marginTop float64, extension Extension)
 	Barcode(code string, width float64, height float64, marginTop float64) error
 	QrCode(code string)
-	Sign(label string, fontFamily Family, fontStyle Style, fontSize float64)
+	Signature(label string, fontFamily Family, fontStyle Style, fontSize float64)
 	Line()
 
 	// File System
@@ -35,19 +36,13 @@ type maroto struct {
 	math         Math
 	font         Font
 	text         Text
-	sign         Sign
+	signature    Signature
 	image        Image
 	offsetY      float64
 	rowHeight    float64
 	rowColCount  float64
 	colsClosures []func()
 	debugMode    bool
-}
-
-func (m *maroto) Output() (bytes.Buffer, error) {
-	var buffer bytes.Buffer
-	err := m.fpdf.Output(&buffer)
-	return buffer, err
 }
 
 func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
@@ -69,17 +64,17 @@ func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
 	_font := NewFont(fpdf, 16, Arial, Bold)
 	_text := NewText(fpdf, _math, _font)
 
-	_sign := NewSign(fpdf, _math, _text)
+	_sign := NewSignature(fpdf, _math, _text)
 
 	_image := NewImage(fpdf, _math)
 
 	maroto := &maroto{
-		fpdf:  fpdf,
-		math:  _math,
-		font:  _font,
-		text:  _text,
-		sign:  _sign,
-		image: _image,
+		fpdf:      fpdf,
+		math:      _math,
+		font:      _font,
+		text:      _text,
+		signature: _sign,
+		image:     _image,
 	}
 
 	maroto.font.SetFamily(Arial)
@@ -92,11 +87,11 @@ func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
 	return maroto
 }
 
-func (m *maroto) Sign(label string, fontFamily Family, fontStyle Style, fontSize float64) {
+func (m *maroto) Signature(label string, fontFamily Family, fontStyle Style, fontSize float64) {
 	qtdCols := float64(len(m.colsClosures))
 	sumOfYOffsets := m.offsetY + m.rowHeight
 
-	m.sign.Sign(label, fontFamily, fontStyle, fontSize, qtdCols, sumOfYOffsets, m.rowColCount)
+	m.signature.AddSpaceFor(label, fontFamily, fontStyle, fontSize, qtdCols, sumOfYOffsets, m.rowColCount)
 }
 
 func (m *maroto) RowTableList(label string, header []string, contents [][]string) {
@@ -212,7 +207,7 @@ func (m *maroto) ColSpaces(qtd int) {
 	}
 }
 
-func (m *maroto) Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align HorizontalAlign) {
+func (m *maroto) Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align) {
 	if marginTop > m.rowHeight {
 		marginTop = m.rowHeight
 	}
@@ -222,15 +217,29 @@ func (m *maroto) Text(text string, fontFamily Family, fontStyle Style, fontSize 
 	m.text.Add(text, fontFamily, fontStyle, fontSize, sumOfYOffsets, align, m.rowColCount, float64(len(m.colsClosures)))
 }
 
-func (m *maroto) Image(filePathName string, marginTop float64) {
+func (m *maroto) FileImage(filePathName string, marginTop float64) {
 	qtdCols := float64(len(m.colsClosures))
 	sumOfyOffsets := m.offsetY + marginTop
 
-	m.image.AddFromPath(filePathName, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight)
+	m.image.AddFromFile(filePathName, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight)
 }
+
+func (m *maroto) Base64Image(base64 string, marginTop float64, extension Extension) {
+	qtdCols := float64(len(m.colsClosures))
+	sumOfyOffsets := m.offsetY + marginTop
+
+	m.image.AddFromBase64(base64, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, extension)
+}
+
 func (m *maroto) OutputFileAndClose(filePathName string) (err error) {
 	err = m.fpdf.OutputFileAndClose(filePathName)
 	return
+}
+
+func (m *maroto) Output() (bytes.Buffer, error) {
+	var buffer bytes.Buffer
+	err := m.fpdf.Output(&buffer)
+	return buffer, err
 }
 
 func (m *maroto) Barcode(code string, width float64, height float64, marginTop float64) (err error) {

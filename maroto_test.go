@@ -17,7 +17,7 @@ func Pdf() {
 
 	m.Row("MeliBarcode", 20, func() {
 		m.Col("Logo", func() {
-			m.Image("assets/images/mercado_livre.png", 4)
+			m.FileImage("assets/images/mercado_livre.png", 4)
 		})
 
 		m.ColSpaces(2)
@@ -25,7 +25,7 @@ func Pdf() {
 		m.Col("Barcode", func() {
 			id := "123456789"
 			_ = m.Barcode(id, 30, 9, 5)
-			m.Text(id, maroto.Arial, maroto.Bold, 8, 17, maroto.CenterH)
+			m.Text(id, maroto.Arial, maroto.Bold, 8, 17, maroto.Center)
 		})
 	})
 
@@ -33,7 +33,7 @@ func Pdf() {
 
 	m.Row("Destiny", 12, func() {
 		m.Col("Logo", func() {
-			m.Image("assets/images/mercado_livre.png", 1)
+			m.FileImage("assets/images/mercado_livre.png", 1)
 		})
 
 		m.ColSpace()
@@ -56,8 +56,8 @@ func Pdf() {
 		m.ColSpaces(2)
 
 		m.Col("Packages", func() {
-			m.Text("24", maroto.Arial, maroto.Bold, 20, 10.5, maroto.CenterH)
-			m.Text("Pacotes Devolvidos", maroto.Arial, maroto.Normal, 12, 16, maroto.CenterH)
+			m.Text("24", maroto.Arial, maroto.Bold, 20, 10.5, maroto.Center)
+			m.Text("Pacotes Devolvidos", maroto.Arial, maroto.Normal, 12, 16, maroto.Center)
 		})
 
 		m.ColSpaces(2)
@@ -69,19 +69,19 @@ func Pdf() {
 
 	m.Row("Signature", 15, func() {
 		m.Col("Carrier", func() {
-			m.Sign("Transportadora", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Transportadora", maroto.Arial, maroto.Bold, 8)
 		})
 
 		m.ColSpace()
 
 		m.Col("LogisticOperator", func() {
-			m.Sign("Operador Logistico", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Operador Logistico", maroto.Arial, maroto.Bold, 8)
 		})
 
 		m.ColSpace()
 
 		m.Col("Seller", func() {
-			m.Sign("Vendedor", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Vendedor", maroto.Arial, maroto.Bold, 8)
 		})
 	})
 
