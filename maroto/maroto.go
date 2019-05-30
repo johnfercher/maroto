@@ -1,10 +1,12 @@
 package maroto
 
 import (
+	"bytes"
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/qr"
 	"github.com/johnfercher/maroto/enums"
 	"github.com/johnfercher/maroto/font"
+	"github.com/johnfercher/maroto/image"
 	"github.com/johnfercher/maroto/math"
 	"github.com/johnfercher/maroto/sign"
 	"github.com/johnfercher/maroto/text"
@@ -31,6 +33,7 @@ type Maroto interface {
 
 	// File System
 	OutputFileAndClose(filePathName string) error
+	Output() (bytes.Buffer, error)
 }
 
 type maroto struct {
@@ -39,11 +42,18 @@ type maroto struct {
 	font         font.Font
 	text         text.Text
 	sign         sign.Sign
+	image        image.Image
 	offsetY      float64
 	rowHeight    float64
 	rowColCount  float64
 	colsClosures []func()
 	debugMode    bool
+}
+
+func (m *maroto) Output() (bytes.Buffer, error) {
+	var buffer bytes.Buffer
+	err := m.fpdf.Output(&buffer)
+	return buffer, err
 }
 
 func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
@@ -67,12 +77,15 @@ func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
 
 	_sign := sign.NewSign(fpdf, _math, _text)
 
+	_image := image.NewImage(fpdf, _math)
+
 	maroto := &maroto{
-		fpdf: fpdf,
-		math: _math,
-		font: _font,
-		text: _text,
-		sign: _sign,
+		fpdf:  fpdf,
+		math:  _math,
+		font:  _font,
+		text:  _text,
+		sign:  _sign,
+		image: _image,
 	}
 
 	maroto.font.SetFamily(font.Arial)
@@ -83,6 +96,11 @@ func NewMaroto(orientation enums.Orientation, pageSize enums.PageSize) Maroto {
 	maroto.fpdf.AddPage()
 
 	return maroto
+}
+func (m *maroto) Output() (bytes.Buffer, error) {
+	var buffer bytes.Buffer
+	err := m.fpdf.Output(&buffer)
+	return buffer, err
 }
 
 func (m *maroto) Sign(label string, fontFamily font.Family, fontStyle font.Style, fontSize float64) {
@@ -216,14 +234,11 @@ func (m *maroto) Text(text string, fontFamily font.Family, fontStyle font.Style,
 }
 
 func (m *maroto) Image(filePathName string, marginTop float64) {
-	var opt gofpdf.ImageOptions
-	actualWidthPerCol := m.math.GetWidthPerCol(float64(len(m.colsClosures)))
+	qtdCols := float64(len(m.colsClosures))
+	sumOfyOffsets := m.offsetY + marginTop
 
-	left, top, _, _ := m.fpdf.GetMargins()
-
-	m.fpdf.ImageOptions(filePathName, actualWidthPerCol*m.rowColCount+left, m.offsetY+marginTop+top, actualWidthPerCol, 0, false, opt, 0, "")
+	m.image.AddFromPath(filePathName, sumOfyOffsets, m.rowColCount, qtdCols)
 }
-
 func (m *maroto) OutputFileAndClose(filePathName string) (err error) {
 	err = m.fpdf.OutputFileAndClose(filePathName)
 	return
