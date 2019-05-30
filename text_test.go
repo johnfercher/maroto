@@ -1,9 +1,8 @@
-package text
+package maroto_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/enums"
-	"github.com/johnfercher/maroto/font"
+	"github.com/johnfercher/maroto"
 	"github.com/johnfercher/maroto/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -11,16 +10,16 @@ import (
 )
 
 func TestNewText(t *testing.T) {
-	text := NewText(&mocks.Pdf{}, &mocks.Math{}, &mocks.Font{})
+	text := maroto.NewText(&mocks.Pdf{}, &mocks.Math{}, &mocks.Font{})
 
 	assert.NotNil(t, text)
-	assert.Equal(t, fmt.Sprintf("%T", text), "*text.text")
+	assert.Equal(t, fmt.Sprintf("%T", text), "*maroto.text")
 }
 
 func TestText_Add(t *testing.T) {
 	cases := []struct {
 		name       string
-		align      enums.HorizontalAlign
+		align      maroto.HorizontalAlign
 		pdf        func() *mocks.Pdf
 		math       func() *mocks.Math
 		font       func() *mocks.Font
@@ -30,7 +29,7 @@ func TestText_Add(t *testing.T) {
 	}{
 		{
 			"Left Align",
-			enums.Left,
+			maroto.Left,
 			func() *mocks.Pdf {
 				_pdf := &mocks.Pdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
@@ -62,12 +61,12 @@ func TestText_Add(t *testing.T) {
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
-				_font.AssertCalled(t, "SetFont", font.Arial, font.BoldItalic, 16.0)
+				_font.AssertCalled(t, "SetFont", maroto.Arial, maroto.BoldItalic, 16.0)
 			},
 		},
 		{
 			"Center Align",
-			enums.CenterH,
+			maroto.CenterH,
 			func() *mocks.Pdf {
 				_pdf := &mocks.Pdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
@@ -100,7 +99,7 @@ func TestText_Add(t *testing.T) {
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
-				_font.AssertCalled(t, "SetFont", font.Arial, font.BoldItalic, 16.0)
+				_font.AssertCalled(t, "SetFont", maroto.Arial, maroto.BoldItalic, 16.0)
 			},
 		},
 	}
@@ -111,10 +110,10 @@ func TestText_Add(t *testing.T) {
 		_math := c.math()
 		_font := c.font()
 
-		text := NewText(_pdf, _math, _font)
+		text := maroto.NewText(_pdf, _math, _font)
 
 		// Act
-		text.Add("Text", font.Arial, font.BoldItalic, 16.0, 5.0, c.align, 1, 15.0)
+		text.Add("Text", maroto.Arial, maroto.BoldItalic, 16.0, 5.0, c.align, 1, 15.0)
 
 		// Assert
 		c.assertPdf(t, _pdf)

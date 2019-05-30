@@ -1,4 +1,4 @@
-package font
+package maroto
 
 import (
 	"github.com/jung-kurt/gofpdf"
