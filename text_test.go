@@ -19,7 +19,7 @@ func TestNewText(t *testing.T) {
 func TestText_Add(t *testing.T) {
 	cases := []struct {
 		name       string
-		align      maroto.HorizontalAlign
+		align      maroto.Align
 		pdf        func() *mocks.Pdf
 		math       func() *mocks.Math
 		font       func() *mocks.Font
@@ -66,7 +66,7 @@ func TestText_Add(t *testing.T) {
 		},
 		{
 			"Center Align",
-			maroto.CenterH,
+			maroto.Center,
 			func() *mocks.Pdf {
 				_pdf := &mocks.Pdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
