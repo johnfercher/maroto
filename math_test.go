@@ -140,3 +140,71 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 		c.assertCalls(t, pdf)
 	}
 }
+
+func TestMath_GetRectCenterColProperties(t *testing.T) {
+	cases := []struct {
+		name           string
+		width          float64
+		height         float64
+		pdf            func() *mocks.Pdf
+		assertPdfCalls func(t *testing.T, pdf *mocks.Pdf)
+		assertResult   func(t *testing.T, x, y, w, h float64)
+	}{
+		{
+			"When image has width greater than height",
+			300,
+			200,
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
+				pdf.On("GetPageSize").Return(201.0, 301.0)
+				return pdf
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
+			},
+			func(t *testing.T, x, y, w, h float64) {
+				assert.Equal(t, x, 82.4)
+				assert.Equal(t, y, 11.0)
+				assert.Equal(t, w, 35.2)
+				assert.Equal(t, h, 0.0)
+			},
+		},
+		{
+			"When image has height greater than width",
+			200,
+			300,
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
+				pdf.On("GetPageSize").Return(211.0, 233.0)
+				return pdf
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
+			},
+			func(t *testing.T, x, y, w, h float64) {
+				assert.InDelta(t, x, 96.1, 0.1)
+				assert.Equal(t, y, 12.0)
+				assert.InDelta(t, w, 16.6, 0.1)
+				assert.Equal(t, h, 0.0)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := c.pdf()
+
+		math := maroto.NewMath(pdf)
+
+		// Act
+		x, y, w, h := math.GetRectCenterColProperties(c.width, c.height, 5, 25.0, 2)
+
+		// Assert
+		c.assertPdfCalls(t, pdf)
+		c.assertResult(t, x, y, w, h)
+	}
+}
