@@ -40,8 +40,8 @@ func (_m *Maroto) ColSpaces(qtd int) {
 	_m.Called(qtd)
 }
 
-// Image provides a mock function with given fields: filePathName, marginTop
-func (_m *Maroto) Image(filePathName string, marginTop float64) {
+// FileImage provides a mock function with given fields: filePathName, marginTop
+func (_m *Maroto) FileImage(filePathName string, marginTop float64) {
 	_m.Called(filePathName, marginTop)
 }
 
@@ -105,12 +105,12 @@ func (_m *Maroto) SetDebugMode(on bool) {
 	_m.Called(on)
 }
 
-// Sign provides a mock function with given fields: label, fontFamily, fontStyle, fontSize
+// sign provides a mock function with given fields: label, fontFamily, fontStyle, fontSize
 func (_m *Maroto) Sign(label string, fontFamily maroto.Family, fontStyle maroto.Style, fontSize float64) {
 	_m.Called(label, fontFamily, fontStyle, fontSize)
 }
 
-// Text provides a mock function with given fields: text, fontFamily, fontStyle, fontSize, marginTop, align
-func (_m *Maroto) Text(text string, fontFamily maroto.Family, fontStyle maroto.Style, fontSize float64, marginTop float64, align maroto.HorizontalAlign) {
+// text provides a mock function with given fields: text, fontFamily, fontStyle, fontSize, marginTop, align
+func (_m *Maroto) Text(text string, fontFamily maroto.Family, fontStyle maroto.Style, fontSize float64, marginTop float64, align maroto.Align) {
 	_m.Called(text, fontFamily, fontStyle, fontSize, marginTop, align)
 }
