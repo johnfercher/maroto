@@ -22,14 +22,18 @@ func main() {
 
 	header, contents := getContents()
 
-	m.Row("Barcode", 20, func() {
+	m.Row("Codes", 20, func() {
 		m.Col("Logo", func() {
 			m.Base64Image(base64, maroto.Png, &maroto.RectProp{
 				Percent: 45,
 			})
 		})
 
-		m.ColSpaces(2)
+		m.ColSpace()
+
+		m.Col("Link", func() {
+			m.QrCode("https://github.com/johnfercher/maroto")
+		})
 
 		m.Col("Barcode", func() {
 			id := "123456789"
