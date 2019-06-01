@@ -1,12 +1,5 @@
 package maroto
 
-// Represents position properties
-type PositionProp struct {
-	Left   float64
-	Top    float64
-	Center float64
-}
-
 // Represents rectangle properties
 type RectProp struct {
 	Left    float64

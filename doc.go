@@ -2,7 +2,8 @@
 Package Maroto provide a simple way to generate PDF documents.
 Maroto is inspired in Bootstrap and uses gofpdf. Simple and Fast
 
-Features & Components
+
+Features and Components
 
 -   Grid system with rows and columns
 
@@ -41,7 +42,11 @@ The following Go code generates a simple PDF file.
 
     m.Row("MyRow", 10, func() {
 		m.Col("MyCol", func() {
-			m.Text("MyText", maroto.Arial, maroto.Bold, 15, 7.5, maroto.Center)
+			m.Text("MyText", 9, &maroto.FontProp{
+				Size: 18,
+				Style: maroto.Bold,
+				Align: maroto.Center,
+			})
 		})
 	})
 
