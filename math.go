@@ -1,13 +1,13 @@
 package maroto
 
 import (
-	"fmt"
 	"github.com/jung-kurt/gofpdf"
 )
 
 type Math interface {
 	GetWidthPerCol(qtdCols float64) float64
-	GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64) (x float64, y float64, w float64, h float64)
+	GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, percent float64) (x float64, y float64, w float64, h float64)
+	GetCenterCorrection(outerSize, innerSize float64) float64
 }
 
 type math struct {
@@ -26,29 +26,41 @@ func (m *math) GetWidthPerCol(qtdCols float64) float64 {
 	return (width - right - left) / qtdCols
 }
 
-func (m *math) GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64) (x float64, y float64, w float64, h float64) {
+func (m *math) GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, percent float64) (x float64, y float64, w float64, h float64) {
+	percent = percent / 100.0
 	width, _ := m.pdf.GetPageSize()
 	left, top, right, _ := m.pdf.GetMargins()
-	widthPerCol := (width - right - left) / qtdCols
+	widthPerCol := ((width - right - left) / qtdCols)
 
 	proportion := imageHeight / imageWidth
 
-	heightForWidth := widthPerCol * proportion
+	newImageHeight := widthPerCol * proportion * percent
+	newImageWidth := widthPerCol * percent
 
-	fmt.Println(heightForWidth)
-	if heightForWidth > colHeight {
-		widthForColHeight := colHeight / proportion
-		widthCorrection := (widthPerCol - widthForColHeight) / 2.0
-		x = widthPerCol*indexCol + left + widthCorrection
-		y = top
-		w = widthForColHeight
-		h = 0
+	if newImageHeight > colHeight {
+		newImageWidth := colHeight / proportion * percent
+		newImageHeight := newImageWidth * proportion
+
+		widthCorrection := m.GetCenterCorrection(widthPerCol, newImageWidth)
+		heightCorrection := m.GetCenterCorrection(colHeight, newImageHeight)
+
+		x = (widthPerCol * indexCol) + left + widthCorrection
+		y = top + heightCorrection
+		w = newImageWidth
+		h = newImageHeight
 	} else {
-		x = widthPerCol*indexCol + left
-		y = top
-		w = widthPerCol
-		h = 0
+		widthCorrection := m.GetCenterCorrection(widthPerCol, newImageWidth)
+		heightCorrection := m.GetCenterCorrection(colHeight, newImageHeight)
+
+		x = (widthPerCol * indexCol) + left + widthCorrection
+		y = top + heightCorrection
+		w = newImageWidth
+		h = newImageHeight
 	}
 
 	return
+}
+
+func (m *math) GetCenterCorrection(outerSize, innerSize float64) float64 {
+	return (outerSize - innerSize) / 2.0
 }

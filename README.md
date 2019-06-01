@@ -1,4 +1,4 @@
-# Maroto [![Travis](https://img.shields.io/badge/coverage-35.4%25-red.svg)][travis]
+# Maroto [![Travis](https://img.shields.io/badge/coverage-47.7%25-orange.svg)][travis]
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
@@ -16,7 +16,7 @@ func main() {
 	m := maroto.NewMaroto(maroto.Vertical, maroto.A4)
 	//m.SetDebugMode(true)
 
-	byteSlices := getByteSlice()
+	byteSlices, _ := ioutil.ReadFile("assets/images/gopher2.png")
 
 	base64 := base64.StdEncoding.EncodeToString(byteSlices)
 
@@ -24,7 +24,9 @@ func main() {
 
 	m.Row("Barcode", 20, func() {
 		m.Col("Logo", func() {
-			m.Base64Image(base64, 0, maroto.Png)
+			m.Base64Image(base64, maroto.Png, &maroto.RectProp{
+				Percent: 45,
+			})
 		})
 
 		m.ColSpaces(2)
@@ -40,7 +42,7 @@ func main() {
 
 	m.Row("Logo", 12, func() {
 		m.Col("Logo", func() {
-			m.FileImage("assets/images/gopher1.jpg", 0)
+			m.FileImage("assets/images/gopher1.jpg", nil)
 		})
 
 		m.ColSpace()
