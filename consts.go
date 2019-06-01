@@ -1,54 +1,85 @@
 package maroto
 
+// Representation of a family font
 type Family string
 
 const (
-	Arial     Family = "arial"
+	// Represents an arial font
+	Arial Family = "arial"
+	// Represents a helvetica font
 	Helvetica Family = "helvetica"
-	Symbol    Family = "symbol"
-	ZapBats   Family = "zapfdingbats"
-	Courier   Family = "courier"
+	// Represents a symbol font
+	Symbol Family = "symbol"
+	// Represents a zapfdingbats font
+	ZapBats Family = "zapfdingbats"
+	// Represents a courier font
+	Courier Family = "courier"
 )
 
-type Align int
+// Representation of a column align
+type Align string
 
 const (
-	Left   Align = 0
-	Right  Align = 1
-	Center Align = 2
-	Top    Align = 3
-	Bottom Align = 4
+	// Represents a left align
+	Left Align = "L"
+	// Represents a right align
+	Right Align = "R"
+	// Represents a center align
+	Center Align = "C"
+	// Represents a top align
+	Top Align = "T"
+	// Represents a bottom align
+	Bottom Align = "B"
+	// Represents a middle align
+	Middle Align = "M"
 )
 
+// Representation of a page orientation
 type Orientation string
 
 const (
-	Portrait  Orientation = "P"
+	// Represents the portrait orientation.
+	Portrait Orientation = "P"
+	// Represents the landscape orientation.
 	Landscape Orientation = "L"
 )
 
+// Representation of an page size
 type PageSize string
 
 const (
-	A3     PageSize = "A3"
-	A4     PageSize = "A4"
-	A5     PageSize = "A5"
+	// Represents DIN/ISO A3 page size
+	A3 PageSize = "A3"
+	// Represents DIN/ISO A4 page size
+	A4 PageSize = "A4"
+	// Represents DIN/ISO A5 page size
+	A5 PageSize = "A5"
+	// Represents US Letter page size
 	Letter PageSize = "Letter"
-	Legal  PageSize = "Legal"
+	// Represents US Legal page size
+	Legal PageSize = "Legal"
 )
 
+// Representation of a style font
 type Style string
 
 const (
-	Normal     Style = ""
-	Bold       Style = "B"
-	Italic     Style = "I"
+	// Represents a normal style
+	Normal Style = ""
+	// Represents a bold style
+	Bold Style = "B"
+	// Represents a italic style
+	Italic Style = "I"
+	// Represents a bold and italic style
 	BoldItalic Style = "BI"
 )
 
+// Representation of a image extension
 type Extension string
 
 const (
+	// Represents a jpg extension
 	Jpg Extension = "jpg"
+	// Represents a png extension
 	Png Extension = "png"
 )
