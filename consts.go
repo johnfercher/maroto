@@ -1,86 +1,85 @@
 package maroto
 
-type Family int
+// Representation of a family font
+type Family string
 
 const (
-	Arial     Family = 0
-	Helvetica Family = 1
-	Symbol    Family = 2
-	ZapBats   Family = 3
-	Courier   Family = 4
+	// Represents an arial font
+	Arial Family = "arial"
+	// Represents a helvetica font
+	Helvetica Family = "helvetica"
+	// Represents a symbol font
+	Symbol Family = "symbol"
+	// Represents a zapfdingbats font
+	ZapBats Family = "zapfdingbats"
+	// Represents a courier font
+	Courier Family = "courier"
 )
 
-func GetFamilyString(font Family) string {
-	switch font {
-	case Courier:
-		return "courier"
-	case Helvetica:
-		return "helvetica"
-	case Symbol:
-		return "symbol"
-	case ZapBats:
-		return "zapfdingbats"
-	default:
-		return "arial"
-	}
-}
-
-type Align int
+// Representation of a column align
+type Align string
 
 const (
-	Left   Align = 0
-	Right  Align = 1
-	Center Align = 2
-	Top    Align = 3
-	Bottom Align = 4
+	// Represents a left align
+	Left Align = "L"
+	// Represents a right align
+	Right Align = "R"
+	// Represents a center align
+	Center Align = "C"
+	// Represents a top align
+	Top Align = "T"
+	// Represents a bottom align
+	Bottom Align = "B"
+	// Represents a middle align
+	Middle Align = "M"
 )
 
-type Orientation int
+// Representation of a page orientation
+type Orientation string
 
 const (
-	Vertical Orientation = 0
+	// Represents the portrait orientation.
+	Portrait Orientation = "P"
+	// Represents the landscape orientation.
+	Landscape Orientation = "L"
 )
 
-type PageSize int
+// Representation of an page size
+type PageSize string
 
 const (
-	A4 PageSize = 0
+	// Represents DIN/ISO A3 page size
+	A3 PageSize = "A3"
+	// Represents DIN/ISO A4 page size
+	A4 PageSize = "A4"
+	// Represents DIN/ISO A5 page size
+	A5 PageSize = "A5"
+	// Represents US Letter page size
+	Letter PageSize = "Letter"
+	// Represents US Legal page size
+	Legal PageSize = "Legal"
 )
 
-type Style int
+// Representation of a style font
+type Style string
 
 const (
-	Normal     Style = 0
-	Bold       Style = 1
-	Italic     Style = 2
-	BoldItalic Style = 3
+	// Represents a normal style
+	Normal Style = ""
+	// Represents a bold style
+	Bold Style = "B"
+	// Represents a italic style
+	Italic Style = "I"
+	// Represents a bold and italic style
+	BoldItalic Style = "BI"
 )
 
-func GetStyleString(style Style) string {
-	switch style {
-	case Italic:
-		return "I"
-	case Bold:
-		return "B"
-	case BoldItalic:
-		return "BI"
-	default:
-		return ""
-	}
-}
-
-type Extension int
+// Representation of a image extension
+type Extension string
 
 const (
-	Jpg Extension = 0
-	Png Extension = 1
+	// Represents a jpg extension
+	Jpg Extension = "jpg"
+	// Represents a png extension
+	Png Extension = "png"
 )
-
-func GetExtensionString(extension Extension) string {
-	switch extension {
-	case Png:
-		return "png"
-	default:
-		return "jpg"
-	}
-}
