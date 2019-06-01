@@ -4,6 +4,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
+// Abstraction of useful calcs used in Maroto
 type Math interface {
 	GetWidthPerCol(qtdCols float64) float64
 	GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, percent float64) (x float64, y float64, w float64, h float64)
@@ -14,6 +15,7 @@ type math struct {
 	pdf gofpdf.Pdf
 }
 
+// Create a math instance with useful calcs used in Maroto
 func NewMath(pdf gofpdf.Pdf) Math {
 	return &math{
 		pdf,

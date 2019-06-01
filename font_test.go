@@ -28,7 +28,7 @@ func TestFont_GetSetFamily(t *testing.T) {
 		assertFont  func(t *testing.T, family maroto.Family)
 	}{
 		{
-			"maroto.Arial",
+			"PdfMaroto.Arial",
 			maroto.Arial,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -44,7 +44,7 @@ func TestFont_GetSetFamily(t *testing.T) {
 			},
 		},
 		{
-			"maroto.Helvetica",
+			"PdfMaroto.Helvetica",
 			maroto.Helvetica,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -60,7 +60,7 @@ func TestFont_GetSetFamily(t *testing.T) {
 			},
 		},
 		{
-			"maroto.Symbol",
+			"PdfMaroto.Symbol",
 			maroto.Symbol,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -76,7 +76,7 @@ func TestFont_GetSetFamily(t *testing.T) {
 			},
 		},
 		{
-			"maroto.ZapBats",
+			"PdfMaroto.ZapBats",
 			maroto.ZapBats,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -92,7 +92,7 @@ func TestFont_GetSetFamily(t *testing.T) {
 			},
 		},
 		{
-			"maroto.Courier",
+			"PdfMaroto.Courier",
 			maroto.Courier,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -132,7 +132,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 		assertStyle func(t *testing.T, style maroto.Style)
 	}{
 		{
-			"maroto.Normal",
+			"PdfMaroto.Normal",
 			maroto.Normal,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -148,7 +148,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 			},
 		},
 		{
-			"maroto.Bold",
+			"PdfMaroto.Bold",
 			maroto.Bold,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -164,7 +164,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 			},
 		},
 		{
-			"maroto.Italic",
+			"PdfMaroto.Italic",
 			maroto.Italic,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -180,7 +180,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 			},
 		},
 		{
-			"maroto.BoldItalic",
+			"PdfMaroto.BoldItalic",
 			maroto.BoldItalic,
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -237,7 +237,7 @@ func TestFont_GetSetFont(t *testing.T) {
 		assertFont  func(t *testing.T, family maroto.Family, style maroto.Style, size float64)
 	}{
 		{
-			"maroto.Arial, maroto.Normal, 16",
+			"PdfMaroto.Arial, PdfMaroto.Normal, 16",
 			maroto.Arial,
 			maroto.Normal,
 			16.0,
@@ -257,7 +257,7 @@ func TestFont_GetSetFont(t *testing.T) {
 			},
 		},
 		{
-			"maroto.Helvetica, maroto.Bold, 13",
+			"PdfMaroto.Helvetica, PdfMaroto.Bold, 13",
 			maroto.Helvetica,
 			maroto.Bold,
 			13,
@@ -277,7 +277,7 @@ func TestFont_GetSetFont(t *testing.T) {
 			},
 		},
 		{
-			"maroto.Symbol, maroto.Italic, 10",
+			"PdfMaroto.Symbol, PdfMaroto.Italic, 10",
 			maroto.Symbol,
 			maroto.Italic,
 			10,
@@ -297,7 +297,7 @@ func TestFont_GetSetFont(t *testing.T) {
 			},
 		},
 		{
-			"maroto.ZapBats, maroto.BoldItalic, 5",
+			"PdfMaroto.ZapBats, PdfMaroto.BoldItalic, 5",
 			maroto.ZapBats,
 			maroto.BoldItalic,
 			5,
@@ -317,7 +317,7 @@ func TestFont_GetSetFont(t *testing.T) {
 			},
 		},
 		{
-			"maroto.Courier, maroto.Normal, 12",
+			"PdfMaroto.Courier, PdfMaroto.Normal, 12",
 			maroto.Courier,
 			maroto.Normal,
 			12,
