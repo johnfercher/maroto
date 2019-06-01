@@ -30,17 +30,17 @@ func TestImage_AddFromFile(t *testing.T) {
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
 				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(widthGreaterThanHeightImageInfo())
-				pdf.On("ImageOptions", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "ImageOptions", 1)
-				pdf.AssertCalled(t, "ImageOptions", "AnyPath", 100, 30, 33, 0)
+				pdf.AssertNumberOfCalls(t, "Image", 1)
+				pdf.AssertCalled(t, "Image", "AnyPath", 100, 30, 33, 0)
 
 				pdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
 				pdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
@@ -50,7 +50,7 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			func(t *testing.T, math *mocks.Math) {
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 98, 63, 4, 5, 1)
+				math.AssertCalled(t, "GetRectCenterColProperties", 98, 63, 4, 5, 1, 100)
 			},
 		},
 		{
@@ -58,17 +58,17 @@ func TestImage_AddFromFile(t *testing.T) {
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
 				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(heightGreaterThanWidthImageInfo())
-				pdf.On("ImageOptions", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "ImageOptions", 1)
-				pdf.AssertCalled(t, "ImageOptions", "AnyPath", 100, 30, 33, 0)
+				pdf.AssertNumberOfCalls(t, "Image", 1)
+				pdf.AssertCalled(t, "Image", "AnyPath", 100, 30, 33, 0)
 
 				pdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
 				pdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
@@ -78,7 +78,7 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			func(t *testing.T, math *mocks.Math) {
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 206, 282, 4, 5, 1)
+				math.AssertCalled(t, "GetRectCenterColProperties", 206, 282, 4, 5, 1, 100)
 			},
 		},
 	}
@@ -91,7 +91,7 @@ func TestImage_AddFromFile(t *testing.T) {
 		image := maroto.NewImage(pdf, math)
 
 		// Act
-		image.AddFromFile("AnyPath", 10.0, 1.0, 4.0, 5.0)
+		image.AddFromFile("AnyPath", 10.0, 1.0, 4.0, 5.0, 100.0)
 
 		// Assert
 		c.assertPdfCalls(t, pdf)

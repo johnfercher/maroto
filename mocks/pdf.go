@@ -767,7 +767,7 @@ func (_m *Pdf) HTMLBasicNew() gofpdf.HTMLBasicType {
 
 // FileImage provides a mock function with given fields: imageNameStr, x, y, w, h, flow, tp, link, linkStr
 func (_m *Pdf) Image(imageNameStr string, x float64, y float64, w float64, h float64, flow bool, tp string, link int, linkStr string) {
-	_m.Called(imageNameStr, x, y, w, h, flow, tp, link, linkStr)
+	_m.Called(imageNameStr, int(x), int(y), int(w), int(h))
 }
 
 // ImageOptions provides a mock function with given fields: imageNameStr, x, y, w, h, flow, options, link, linkStr
