@@ -1,29 +1,14 @@
 package maroto
 
-type Family int
+type Family string
 
 const (
-	Arial     Family = 0
-	Helvetica Family = 1
-	Symbol    Family = 2
-	ZapBats   Family = 3
-	Courier   Family = 4
+	Arial     Family = "arial"
+	Helvetica Family = "helvetica"
+	Symbol    Family = "symbol"
+	ZapBats   Family = "zapfdingbats"
+	Courier   Family = "courier"
 )
-
-func GetFamilyString(font Family) string {
-	switch font {
-	case Courier:
-		return "courier"
-	case Helvetica:
-		return "helvetica"
-	case Symbol:
-		return "symbol"
-	case ZapBats:
-		return "zapfdingbats"
-	default:
-		return "arial"
-	}
-}
 
 type Align int
 
@@ -35,52 +20,35 @@ const (
 	Bottom Align = 4
 )
 
-type Orientation int
+type Orientation string
 
 const (
-	Vertical Orientation = 0
+	Portrait  Orientation = "P"
+	Landscape Orientation = "L"
 )
 
-type PageSize int
+type PageSize string
 
 const (
-	A4 PageSize = 0
+	A3     PageSize = "A3"
+	A4     PageSize = "A4"
+	A5     PageSize = "A5"
+	Letter PageSize = "Letter"
+	Legal  PageSize = "Legal"
 )
 
-type Style int
+type Style string
 
 const (
-	Normal     Style = 0
-	Bold       Style = 1
-	Italic     Style = 2
-	BoldItalic Style = 3
+	Normal     Style = ""
+	Bold       Style = "B"
+	Italic     Style = "I"
+	BoldItalic Style = "BI"
 )
 
-func GetStyleString(style Style) string {
-	switch style {
-	case Italic:
-		return "I"
-	case Bold:
-		return "B"
-	case BoldItalic:
-		return "BI"
-	default:
-		return ""
-	}
-}
-
-type Extension int
+type Extension string
 
 const (
-	Jpg Extension = 0
-	Png Extension = 1
+	Jpg Extension = "jpg"
+	Png Extension = "png"
 )
-
-func GetExtensionString(extension Extension) string {
-	switch extension {
-	case Png:
-		return "png"
-	default:
-		return "jpg"
-	}
-}
