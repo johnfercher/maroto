@@ -1,4 +1,4 @@
-# Maroto [![Travis](https://img.shields.io/badge/coverage-47.7%25-orange.svg)][travis]
+# Maroto [![Travis](https://img.shields.io/badge/coverage-43.8%25-orange.svg)][travis]
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
@@ -13,7 +13,7 @@ Here is the [pdf](assets/pdf/maroto.pdf) generated.
 #### Code
 ```go
 func main() {
-	m := maroto.NewMaroto(maroto.Vertical, maroto.A4)
+	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	//m.SetDebugMode(true)
 
 	byteSlices, _ := ioutil.ReadFile("assets/images/gopher2.png")
@@ -34,7 +34,10 @@ func main() {
 		m.Col("Barcode", func() {
 			id := "123456789"
 			_ = m.Barcode(id, 30, 9, 5)
-			m.Text(id, maroto.Arial, maroto.Bold, 8, 17, maroto.Center)
+			m.Text(id, 17, &maroto.FontProp{
+				Size: 8,
+				Align: maroto.Center,
+			})
 		})
 	})
 
@@ -48,14 +51,17 @@ func main() {
 		m.ColSpace()
 
 		m.Col("Definition", func() {
-			m.Text("PDFGenerator: Maroto", maroto.Arial, maroto.Normal, 9, 5, maroto.Left)
-			m.Text("Type: Easy & Fast", maroto.Arial, maroto.Normal, 9, 9, maroto.Left)
+			m.Text("PDFGenerator: Maroto", 4, nil)
+			m.Text("Type: Easy & Fast", 9.5, nil)
 		})
 
 		m.ColSpace()
 
 		m.Col("Speed", func() {
-			m.Text("GPL3", maroto.Arial, maroto.Bold, 15, 7.5, maroto.Center)
+			m.Text("GPL3", 7.5, &maroto.FontProp{
+				Size: 16,
+				Style: maroto.Bold,
+			})
 		})
 	})
 
@@ -65,8 +71,15 @@ func main() {
 		m.ColSpaces(2)
 
 		m.Col("Packages", func() {
-			m.Text("Grid System", maroto.Arial, maroto.Bold, 20, 10.5, maroto.Center)
-			m.Text("Bootstrap Like", maroto.Arial, maroto.Normal, 12, 16, maroto.Center)
+			m.Text("Grid System", 9, &maroto.FontProp{
+				Size: 18,
+				Style: maroto.Bold,
+				Align: maroto.Center,
+			})
+			m.Text("Bootstrap Like", 16, &maroto.FontProp{
+				Size: 12,
+				Align: maroto.Center,
+			})
 		})
 
 		m.ColSpaces(2)
@@ -78,19 +91,19 @@ func main() {
 
 	m.Row("Signature", 30, func() {
 		m.Col("Nick", func() {
-			m.Signature("Nick Fury", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Nick Fury", nil)
 		})
 
 		m.ColSpace()
 
 		m.Col("Thanos", func() {
-			m.Signature("Thanos", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Thanos", nil)
 		})
 
 		m.ColSpace()
 
 		m.Col("Collector", func() {
-			m.Signature("Collector", maroto.Arial, maroto.Bold, 8)
+			m.Signature("Collector", nil)
 		})
 	})
 
