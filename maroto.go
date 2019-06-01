@@ -17,7 +17,7 @@ type Maroto interface {
 	ColSpaces(qtd int)
 
 	// Components
-	RowTableList(label string, header []string, contents [][]string)
+	RowTableList(label string, headers []string, contents [][]string)
 	SetDebugMode(on bool)
 	Text(text string, marginTop float64, fontProp *FontProp)
 	FileImage(filePathName string, rectProp *RectProp)
@@ -96,14 +96,18 @@ func (m *PdfMaroto) Signature(label string, signatureProp *SignatureProp) {
 	m.signature.AddSpaceFor(label, signatureProp.Family, signatureProp.Style, signatureProp.Size, qtdCols, sumOfYOffsets, m.rowColCount)
 }
 
-func (m *PdfMaroto) RowTableList(label string, header []string, contents [][]string) {
+// Create a table with multiple rows and columns.
+// Headers define the amount of columns from each row.
+// Headers have bold style, and localized at the top of table.
+// Contents are array of arrays. Each array is one line.
+func (m *PdfMaroto) RowTableList(label string, headers []string, contents [][]string) {
 	headerHeight := 7.0
 
 	m.Row("", headerHeight, func() {
 		headerMarginTop := 2.0
-		qtdCols := float64(len(header))
+		qtdCols := float64(len(headers))
 
-		for i, h := range header {
+		for i, h := range headers {
 			hs := h
 			is := i
 
@@ -133,7 +137,7 @@ func (m *PdfMaroto) RowTableList(label string, header []string, contents [][]str
 			for j, c := range content {
 				cs := c
 				js := j
-				hs := float64(len(header))
+				hs := float64(len(headers))
 				sumOyYOffesets := contentMarginTop + m.offsetY + 2.0
 
 				m.Col("", func() {
@@ -321,7 +325,11 @@ func (m *PdfMaroto) QrCode(code string) {
 		qrSide = m.rowHeight
 	}
 
-	barcode.Barcode(m.fpdf, key, actualWidthPerCol*m.rowColCount, 0, qrSide, qrSide, false)
+	qrSide -= 5.0
+
+	left, top, _, _ := m.fpdf.GetMargins()
+
+	barcode.Barcode(m.fpdf, key, actualWidthPerCol*m.rowColCount+left, m.offsetY+top+2.5, qrSide, qrSide, false)
 }
 
 func (m *PdfMaroto) createColSpace(actualWidthPerCol float64) {
