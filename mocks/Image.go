@@ -14,7 +14,7 @@ func (_m *Image) AddFromBase64(base64 string, x float64, y float64, width float6
 	_m.Called(base64, x, y, width, height)
 }
 
-// AddFromFile provides a mock function with given fields: path, marginTop, indexCol, qtdCol
+// AddFromFileFullfill provides a mock function with given fields: path, marginTop, indexCol, qtdCol
 func (_m *Image) AddFromPath(path string, marginTop float64, indexCol float64, qtdCol float64) {
 	_m.Called(path, marginTop, indexCol, qtdCol)
 }
