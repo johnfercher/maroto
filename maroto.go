@@ -19,8 +19,8 @@ type Maroto interface {
 	RowTableList(label string, header []string, contents [][]string)
 	SetDebugMode(on bool)
 	Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align)
-	FileImage(filePathName string, marginTop float64)
-	Base64Image(base64 string, marginTop float64, extension Extension)
+	FileImage(filePathName string, rectProp *RectProp)
+	Base64Image(base64 string, extension Extension, rectProp *RectProp)
 	Barcode(code string, width float64, height float64, marginTop float64) error
 	QrCode(code string)
 	Signature(label string, fontFamily Family, fontStyle Style, fontSize float64)
@@ -60,21 +60,21 @@ func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
 	fpdf := gofpdf.New(fpdfOrientation, "mm", fpdfPageSize, "")
 	fpdf.SetMargins(10, 10, 10)
 
-	_math := NewMath(fpdf)
-	_font := NewFont(fpdf, 16, Arial, Bold)
-	_text := NewText(fpdf, _math, _font)
+	math := NewMath(fpdf)
+	font := NewFont(fpdf, 16, Arial, Bold)
+	text := NewText(fpdf, math, font)
 
-	_sign := NewSignature(fpdf, _math, _text)
+	signature := NewSignature(fpdf, math, text)
 
-	_image := NewImage(fpdf, _math)
+	image := NewImage(fpdf, math)
 
 	maroto := &maroto{
 		fpdf:      fpdf,
-		math:      _math,
-		font:      _font,
-		text:      _text,
-		signature: _sign,
-		image:     _image,
+		math:      math,
+		font:      font,
+		text:      text,
+		signature: signature,
+		image:     image,
 	}
 
 	maroto.font.SetFamily(Arial)
@@ -217,18 +217,37 @@ func (m *maroto) Text(text string, fontFamily Family, fontStyle Style, fontSize 
 	m.text.Add(text, fontFamily, fontStyle, fontSize, sumOfYOffsets, align, m.rowColCount, float64(len(m.colsClosures)))
 }
 
-func (m *maroto) FileImage(filePathName string, marginTop float64) {
-	qtdCols := float64(len(m.colsClosures))
-	sumOfyOffsets := m.offsetY + marginTop
+func (m *maroto) FileImage(filePathName string, rectProp *RectProp) {
+	if rectProp == nil {
+		rectProp = &RectProp{}
+	}
 
-	m.image.AddFromFile(filePathName, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight)
+	rectProp.MakeValid()
+
+	qtdCols := float64(len(m.colsClosures))
+
+	if rectProp.Center {
+		m.image.AddFromFile(filePathName, m.offsetY, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+	} else {
+		m.image.AddFromFile(filePathName, m.offsetY, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+	}
 }
 
-func (m *maroto) Base64Image(base64 string, marginTop float64, extension Extension) {
-	qtdCols := float64(len(m.colsClosures))
-	sumOfyOffsets := m.offsetY + marginTop
+func (m *maroto) Base64Image(base64 string, extension Extension, rectProp *RectProp) {
+	if rectProp == nil {
+		rectProp = &RectProp{}
+	}
 
-	m.image.AddFromBase64(base64, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, extension)
+	rectProp.MakeValid()
+
+	qtdCols := float64(len(m.colsClosures))
+	sumOfyOffsets := m.offsetY + rectProp.Top
+
+	if rectProp.Center {
+		m.image.AddFromBase64(base64, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent, extension)
+	} else {
+		m.image.AddFromBase64(base64, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent, extension)
+	}
 }
 
 func (m *maroto) OutputFileAndClose(filePathName string) (err error) {

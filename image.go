@@ -8,8 +8,8 @@ import (
 )
 
 type Image interface {
-	AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64)
-	AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, extension Extension)
+	AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64)
+	AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64, extension Extension)
 }
 
 type image struct {
@@ -24,18 +24,17 @@ func NewImage(pdf gofpdf.Pdf, math Math) Image {
 	}
 }
 
-func (i *image) AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64) {
+func (i *image) AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) {
 	info := i.pdf.RegisterImageOptions(path, gofpdf.ImageOptions{
 		ReadDpi:   false,
 		ImageType: "",
 	})
 
-	x, y, w, h := i.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol)
-
-	i.pdf.ImageOptions(path, x, y+marginTop, w, h, false, gofpdf.ImageOptions{}, 0, "")
+	x, y, w, h := i.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol, percent)
+	i.pdf.Image(path, x, y+marginTop, w, h, false, "", 0, "")
 }
 
-func (i *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, extension Extension) {
+func (i *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64, extension Extension) {
 	imageId, _ := uuid.NewRandom()
 
 	ss, _ := base64.StdEncoding.DecodeString(b64)
@@ -49,6 +48,6 @@ func (i *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, q
 		bytes.NewReader(ss),
 	)
 
-	x, y, w, h := i.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol)
+	x, y, w, h := i.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol, percent)
 	i.pdf.Image(imageId.String(), x, y+marginTop, w, h, false, "", 0, "")
 }
