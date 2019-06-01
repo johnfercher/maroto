@@ -49,17 +49,14 @@ func (f *font) GetFont() (Family, Style, float64) {
 
 func (f *font) SetFamily(family Family) {
 	f.family = family
-	familyString := GetFamilyString(f.family)
-	styleString := GetStyleString(f.style)
 
-	f.pdf.SetFont(familyString, styleString, f.size)
+	f.pdf.SetFont(string(f.family), string(f.style), f.size)
 }
 
 func (f *font) SetStyle(style Style) {
 	f.style = style
-	styleString := GetStyleString(f.style)
 
-	f.pdf.SetFontStyle(styleString)
+	f.pdf.SetFontStyle(string(f.style))
 }
 
 func (f *font) SetSize(size float64) {
@@ -72,8 +69,5 @@ func (f *font) SetFont(family Family, style Style, size float64) {
 	f.style = style
 	f.size = size
 
-	familyString := GetFamilyString(f.family)
-	styleString := GetStyleString(f.style)
-
-	f.pdf.SetFont(familyString, styleString, f.size)
+	f.pdf.SetFont(string(f.family), string(f.style), f.size)
 }

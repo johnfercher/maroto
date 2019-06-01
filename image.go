@@ -43,7 +43,7 @@ func (i *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, q
 		imageId.String(),
 		gofpdf.ImageOptions{
 			ReadDpi:   false,
-			ImageType: GetExtensionString(extension),
+			ImageType: string(extension),
 		},
 		bytes.NewReader(ss),
 	)

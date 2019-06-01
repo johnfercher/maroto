@@ -8,6 +8,7 @@ import (
 	"github.com/jung-kurt/gofpdf/contrib/barcode"
 )
 
+// Maroto is the principal abstraction to create a PDF document.
 type Maroto interface {
 	// Grid System
 	Row(label string, height float64, closure func())
@@ -15,7 +16,7 @@ type Maroto interface {
 	ColSpace()
 	ColSpaces(qtd int)
 
-	// Features
+	// Components
 	RowTableList(label string, header []string, contents [][]string)
 	SetDebugMode(on bool)
 	Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align)
@@ -31,7 +32,8 @@ type Maroto interface {
 	Output() (bytes.Buffer, error)
 }
 
-type maroto struct {
+// PdfMaroto is the principal structure which implements Maroto abstraction
+type PdfMaroto struct {
 	fpdf         gofpdf.Pdf
 	math         Math
 	font         Font
@@ -45,19 +47,10 @@ type maroto struct {
 	debugMode    bool
 }
 
+// Create a Maroto instance returning a pointer to PdfMaroto
+// Receive an Orientation and a PageSize.
 func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
-	fpdfOrientation := "P"
-	fpdfPageSize := "A4"
-
-	if orientation == Vertical {
-		fpdfOrientation = "P"
-	}
-
-	if pageSize == A4 {
-		fpdfPageSize = "A4"
-	}
-
-	fpdf := gofpdf.New(fpdfOrientation, "mm", fpdfPageSize, "")
+	fpdf := gofpdf.New(string(orientation), "mm", string(pageSize), "")
 	fpdf.SetMargins(10, 10, 10)
 
 	math := NewMath(fpdf)
@@ -68,7 +61,7 @@ func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
 
 	image := NewImage(fpdf, math)
 
-	maroto := &maroto{
+	maroto := &PdfMaroto{
 		fpdf:      fpdf,
 		math:      math,
 		font:      font,
@@ -87,14 +80,17 @@ func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
 	return maroto
 }
 
-func (m *maroto) Signature(label string, fontFamily Family, fontStyle Style, fontSize float64) {
+// Add a signature space with a label text inside a column.
+// Create a line with the width from a column
+// and add a text at the bottom of the line.
+func (m *PdfMaroto) Signature(label string, fontFamily Family, fontStyle Style, fontSize float64) {
 	qtdCols := float64(len(m.colsClosures))
 	sumOfYOffsets := m.offsetY + m.rowHeight
 
 	m.signature.AddSpaceFor(label, fontFamily, fontStyle, fontSize, qtdCols, sumOfYOffsets, m.rowColCount)
 }
 
-func (m *maroto) RowTableList(label string, header []string, contents [][]string) {
+func (m *PdfMaroto) RowTableList(label string, header []string, contents [][]string) {
 	headerHeight := 7.0
 
 	m.Row("", headerHeight, func() {
@@ -142,11 +138,15 @@ func (m *maroto) RowTableList(label string, header []string, contents [][]string
 	}
 }
 
-func (m *maroto) SetDebugMode(on bool) {
+// Enable debug mode.
+// Draw borders in all columns created.
+func (m *PdfMaroto) SetDebugMode(on bool) {
 	m.debugMode = on
 }
 
-func (m *maroto) Line() {
+// Draw a line from margin left to margin right
+// in the currently row.
+func (m *PdfMaroto) Line() {
 	m.Row("", 1, func() {
 		m.Col("", func() {
 			width, _ := m.fpdf.GetPageSize()
@@ -157,7 +157,8 @@ func (m *maroto) Line() {
 	})
 }
 
-func (m *maroto) Row(label string, height float64, closure func()) {
+// Add a row and enable add columns inside the row.
+func (m *PdfMaroto) Row(label string, height float64, closure func()) {
 	m.rowHeight = height
 	m.rowColCount = 0
 
@@ -179,7 +180,9 @@ func (m *maroto) Row(label string, height float64, closure func()) {
 	m.fpdf.Ln(m.rowHeight)
 }
 
-func (m *maroto) Col(label string, closure func()) {
+// Create a column inside a row and enable to add
+// components inside.
+func (m *PdfMaroto) Col(label string, closure func()) {
 	m.colsClosures = append(m.colsClosures, func() {
 		widthPerCol := m.math.GetWidthPerCol(float64(len(m.colsClosures)))
 		m.createColSpace(widthPerCol)
@@ -189,7 +192,8 @@ func (m *maroto) Col(label string, closure func()) {
 
 }
 
-func (m *maroto) ColSpace() {
+// Create an empty column inside a row.
+func (m *PdfMaroto) ColSpace() {
 	m.colsClosures = append(m.colsClosures, func() {
 		widthPerCol := m.math.GetWidthPerCol(float64(len(m.colsClosures)))
 		m.createColSpace(widthPerCol)
@@ -197,7 +201,8 @@ func (m *maroto) ColSpace() {
 	})
 }
 
-func (m *maroto) ColSpaces(qtd int) {
+// Create some empty columns.
+func (m *PdfMaroto) ColSpaces(qtd int) {
 	for i := 0; i < qtd; i++ {
 		m.colsClosures = append(m.colsClosures, func() {
 			widthPerCol := m.math.GetWidthPerCol(float64(len(m.colsClosures)))
@@ -207,7 +212,8 @@ func (m *maroto) ColSpaces(qtd int) {
 	}
 }
 
-func (m *maroto) Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align) {
+// Add a text inside a column.
+func (m *PdfMaroto) Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align) {
 	if marginTop > m.rowHeight {
 		marginTop = m.rowHeight
 	}
@@ -217,7 +223,9 @@ func (m *maroto) Text(text string, fontFamily Family, fontStyle Style, fontSize 
 	m.text.Add(text, fontFamily, fontStyle, fontSize, sumOfYOffsets, align, m.rowColCount, float64(len(m.colsClosures)))
 }
 
-func (m *maroto) FileImage(filePathName string, rectProp *RectProp) {
+// Add an image reading from disk inside a column.
+// Defining image properties.
+func (m *PdfMaroto) FileImage(filePathName string, rectProp *RectProp) {
 	if rectProp == nil {
 		rectProp = &RectProp{}
 	}
@@ -233,7 +241,9 @@ func (m *maroto) FileImage(filePathName string, rectProp *RectProp) {
 	}
 }
 
-func (m *maroto) Base64Image(base64 string, extension Extension, rectProp *RectProp) {
+// Add an image reading byte slices.
+// Defining image properties.
+func (m *PdfMaroto) Base64Image(base64 string, extension Extension, rectProp *RectProp) {
 	if rectProp == nil {
 		rectProp = &RectProp{}
 	}
@@ -250,18 +260,20 @@ func (m *maroto) Base64Image(base64 string, extension Extension, rectProp *RectP
 	}
 }
 
-func (m *maroto) OutputFileAndClose(filePathName string) (err error) {
+// Save pdf in disk.
+func (m *PdfMaroto) OutputFileAndClose(filePathName string) (err error) {
 	err = m.fpdf.OutputFileAndClose(filePathName)
 	return
 }
 
-func (m *maroto) Output() (bytes.Buffer, error) {
+// Get PDF in byte slices
+func (m *PdfMaroto) Output() (bytes.Buffer, error) {
 	var buffer bytes.Buffer
 	err := m.fpdf.Output(&buffer)
 	return buffer, err
 }
 
-func (m *maroto) Barcode(code string, width float64, height float64, marginTop float64) (err error) {
+func (m *PdfMaroto) Barcode(code string, width float64, height float64, marginTop float64) (err error) {
 	bcode, err := code128.Encode(code)
 
 	if err != nil {
@@ -286,7 +298,7 @@ func (m *maroto) Barcode(code string, width float64, height float64, marginTop f
 	return
 }
 
-func (m *maroto) QrCode(code string) {
+func (m *PdfMaroto) QrCode(code string) {
 	key := barcode.RegisterQR(m.fpdf, code, qr.H, qr.Unicode)
 
 	actualWidthPerCol := m.math.GetWidthPerCol(float64(len(m.colsClosures)))
@@ -300,7 +312,7 @@ func (m *maroto) QrCode(code string) {
 	barcode.Barcode(m.fpdf, key, actualWidthPerCol*m.rowColCount, 0, qrSide, qrSide, false)
 }
 
-func (m *maroto) createColSpace(actualWidthPerCol float64) {
+func (m *PdfMaroto) createColSpace(actualWidthPerCol float64) {
 	border := ""
 
 	if m.debugMode {

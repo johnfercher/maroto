@@ -8,8 +8,8 @@ import (
 )
 
 func TestNewMaroto(t *testing.T) {
-	m := maroto.NewMaroto(maroto.Vertical, maroto.A4)
+	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 
 	assert.NotNil(t, m)
-	assert.Equal(t, fmt.Sprintf("%T", m), "*maroto.maroto")
+	assert.Equal(t, fmt.Sprintf("%T", m), "*maroto.PdfMaroto")
 }
