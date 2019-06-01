@@ -19,12 +19,12 @@ type Maroto interface {
 	// Components
 	RowTableList(label string, header []string, contents [][]string)
 	SetDebugMode(on bool)
-	Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align)
+	Text(text string, marginTop float64, fontProp *FontProp)
 	FileImage(filePathName string, rectProp *RectProp)
 	Base64Image(base64 string, extension Extension, rectProp *RectProp)
 	Barcode(code string, width float64, height float64, marginTop float64) error
 	QrCode(code string)
-	Signature(label string, fontFamily Family, fontStyle Style, fontSize float64)
+	Signature(label string, signatureProp *SignatureProp)
 	Line()
 
 	// File System
@@ -83,11 +83,17 @@ func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
 // Add a signature space with a label text inside a column.
 // Create a line with the width from a column
 // and add a text at the bottom of the line.
-func (m *PdfMaroto) Signature(label string, fontFamily Family, fontStyle Style, fontSize float64) {
+func (m *PdfMaroto) Signature(label string, signatureProp *SignatureProp) {
+	if signatureProp == nil {
+		signatureProp = &SignatureProp{}
+	}
+
+	signatureProp.MakeValid()
+
 	qtdCols := float64(len(m.colsClosures))
 	sumOfYOffsets := m.offsetY + m.rowHeight
 
-	m.signature.AddSpaceFor(label, fontFamily, fontStyle, fontSize, qtdCols, sumOfYOffsets, m.rowColCount)
+	m.signature.AddSpaceFor(label, signatureProp.Family, signatureProp.Style, signatureProp.Size, qtdCols, sumOfYOffsets, m.rowColCount)
 }
 
 func (m *PdfMaroto) RowTableList(label string, header []string, contents [][]string) {
@@ -213,14 +219,20 @@ func (m *PdfMaroto) ColSpaces(qtd int) {
 }
 
 // Add a text inside a column.
-func (m *PdfMaroto) Text(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align) {
+func (m *PdfMaroto) Text(text string, marginTop float64, fontProp *FontProp) {
+	if fontProp == nil {
+		fontProp = &FontProp{}
+	}
+
+	fontProp.MakeValid()
+
 	if marginTop > m.rowHeight {
 		marginTop = m.rowHeight
 	}
 
 	sumOfYOffsets := marginTop + m.offsetY
 
-	m.text.Add(text, fontFamily, fontStyle, fontSize, sumOfYOffsets, align, m.rowColCount, float64(len(m.colsClosures)))
+	m.text.Add(text, fontProp.Family, fontProp.Style, fontProp.Size, sumOfYOffsets, fontProp.Align, m.rowColCount, float64(len(m.colsClosures)))
 }
 
 // Add an image reading from disk inside a column.

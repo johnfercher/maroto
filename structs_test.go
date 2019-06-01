@@ -67,3 +67,94 @@ func TestRectProp_MakeValid(t *testing.T) {
 		c.assertRect(t, c.rectProp)
 	}
 }
+
+func TestFontProp_MakeValid(t *testing.T) {
+	cases := []struct {
+		name           string
+		fontProp       *maroto.FontProp
+		assertFontProp func(t *testing.T, prop *maroto.FontProp)
+	}{
+		{
+			"When family is not defined, should define arial",
+			&maroto.FontProp{
+				Family: "",
+			},
+			func(t *testing.T, prop *maroto.FontProp) {
+				assert.Equal(t, prop.Family, maroto.Arial)
+			},
+		},
+		{
+			"When style is not defined, should define normal",
+			&maroto.FontProp{
+				Style: "",
+			},
+			func(t *testing.T, prop *maroto.FontProp) {
+				assert.Equal(t, prop.Style, maroto.Normal)
+			},
+		},
+		{
+			"When size is zero, should define 10.0",
+			&maroto.FontProp{
+				Size: 0.0,
+			},
+			func(t *testing.T, prop *maroto.FontProp) {
+				assert.Equal(t, prop.Size, 10.0)
+			},
+		},
+		{
+			"When align is not defined, should define Left",
+			&maroto.FontProp{
+				Align: "",
+			},
+			func(t *testing.T, prop *maroto.FontProp) {
+				assert.Equal(t, prop.Align, maroto.Left)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		c.fontProp.MakeValid()
+		c.assertFontProp(t, c.fontProp)
+	}
+}
+
+func TestSignatureProp_MakeValid(t *testing.T) {
+	cases := []struct {
+		name                string
+		signatureProp       *maroto.SignatureProp
+		assertSignatureProp func(t *testing.T, prop *maroto.SignatureProp)
+	}{
+		{
+			"When family is not defined, should define arial",
+			&maroto.SignatureProp{
+				Family: "",
+			},
+			func(t *testing.T, prop *maroto.SignatureProp) {
+				assert.Equal(t, prop.Family, maroto.Arial)
+			},
+		},
+		{
+			"When style is not defined, should define normal",
+			&maroto.SignatureProp{
+				Style: "",
+			},
+			func(t *testing.T, prop *maroto.SignatureProp) {
+				assert.Equal(t, prop.Style, maroto.Bold)
+			},
+		},
+		{
+			"When size is zero, should define 10.0",
+			&maroto.SignatureProp{
+				Size: 0.0,
+			},
+			func(t *testing.T, prop *maroto.SignatureProp) {
+				assert.Equal(t, prop.Size, 8.0)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		c.signatureProp.MakeValid()
+		c.assertSignatureProp(t, c.signatureProp)
+	}
+}
