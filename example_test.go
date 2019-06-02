@@ -82,6 +82,22 @@ func ExamplePdfMaroto_SetDebugMode() {
 	// Do more things and save...
 }
 
+// ExamplePdfMaroto_GetDebugMode demonstrates how to
+// obtain the actual debug mode value
+func ExamplePdfMaroto_GetDebugMode() {
+	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
+
+	// false
+	m.GetDebugMode()
+
+	m.SetDebugMode(true)
+
+	// true
+	m.GetDebugMode()
+
+	// Do more things and save...
+}
+
 // ExamplePdfMaroto_Text demonstrates how to add
 // a text inside a col. Passing nil on fontProp make the method
 // use: arial font, normal style, size 10.0 and align left.
