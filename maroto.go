@@ -16,9 +16,13 @@ type Maroto interface {
 	ColSpace()
 	ColSpaces(qtd int)
 
+	// Helpers
+	SetDebugMode(on bool)
+	GetDebugMode() bool
+	GetPageSize() (float64, float64)
+
 	// Components
 	RowTableList(label string, headers []string, contents [][]string)
-	SetDebugMode(on bool)
 	Text(text string, marginTop float64, fontProp *FontProp)
 	FileImage(filePathName string, rectProp *RectProp)
 	Base64Image(base64 string, extension Extension, rectProp *RectProp)
@@ -152,6 +156,16 @@ func (m *PdfMaroto) RowTableList(label string, headers []string, contents [][]st
 // Draw borders in all columns created.
 func (m *PdfMaroto) SetDebugMode(on bool) {
 	m.debugMode = on
+}
+
+// Get actual debug mode.
+func (m *PdfMaroto) GetDebugMode() bool {
+	return m.debugMode
+}
+
+// Get actual page size
+func (m *PdfMaroto) GetPageSize() (float64, float64) {
+	return m.fpdf.GetPageSize()
 }
 
 // Draw a line from margin left to margin right
