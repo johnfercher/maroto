@@ -1,4 +1,4 @@
-# Maroto [![Travis](https://img.shields.io/badge/coverage-43.8%25-orange.svg)][travis]
+# Maroto [![Travis](https://img.shields.io/badge/coverage-46.4%25-orange.svg)][travis]
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
@@ -8,7 +8,7 @@ A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](h
 #### Result
 Here is the [pdf](assets/pdf/maroto.pdf) generated.
 
-![result](assets/images/result.jpg)
+![result](assets/images/result.png)
 
 #### Code
 ```go
@@ -72,8 +72,6 @@ func main() {
 	m.Line()
 
 	m.Row("SubTitle", 22, func() {
-		m.ColSpaces(2)
-
 		m.Col("Packages", func() {
 			m.Text("Grid System", 9, &maroto.FontProp{
 				Size: 18,
@@ -85,8 +83,6 @@ func main() {
 				Align: maroto.Center,
 			})
 		})
-
-		m.ColSpaces(2)
 	})
 
 	m.Line()
@@ -98,13 +94,9 @@ func main() {
 			m.Signature("Nick Fury", nil)
 		})
 
-		m.ColSpace()
-
 		m.Col("Thanos", func() {
 			m.Signature("Thanos", nil)
 		})
-
-		m.ColSpace()
 
 		m.Col("Collector", func() {
 			m.Signature("Collector", nil)
