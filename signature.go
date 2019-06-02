@@ -25,7 +25,8 @@ func NewSignature(pdf gofpdf.Pdf, math Math, text Text) Signature {
 func (s *signature) AddSpaceFor(label string, fontFamily Family, fontStyle Style, fontSize float64, qtdCols float64, marginTop float64, actualCol float64) {
 	widthPerCol := s.math.GetWidthPerCol(qtdCols)
 	left, _, right, _ := s.pdf.GetMargins()
+	space := 4.0
 
-	s.pdf.Line((widthPerCol*actualCol)+left, marginTop+5.0, widthPerCol*(actualCol+1)+right, marginTop+5.0)
+	s.pdf.Line((widthPerCol*actualCol)+left+space, marginTop+5.0, widthPerCol*(actualCol+1)+right-space, marginTop+5.0)
 	s.text.Add(label, fontFamily, fontStyle, fontSize, marginTop, Center, actualCol, qtdCols)
 }
