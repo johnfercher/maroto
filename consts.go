@@ -1,18 +1,18 @@
 package maroto
 
-// Representation of a family font
+// Representation of a family Font
 type Family string
 
 const (
-	// Represents an arial font
+	// Represents an arial Font
 	Arial Family = "arial"
-	// Represents a helvetica font
+	// Represents a helvetica Font
 	Helvetica Family = "helvetica"
-	// Represents a symbol font
+	// Represents a symbol Font
 	Symbol Family = "symbol"
-	// Represents a zapfdingbats font
+	// Represents a zapfdingbats Font
 	ZapBats Family = "zapfdingbats"
-	// Represents a courier font
+	// Represents a courier Font
 	Courier Family = "courier"
 )
 
@@ -60,7 +60,7 @@ const (
 	Legal PageSize = "Legal"
 )
 
-// Representation of a style font
+// Representation of a style Font
 type Style string
 
 const (
@@ -74,7 +74,7 @@ const (
 	BoldItalic Style = "BI"
 )
 
-// Representation of a image extension
+// Representation of a Image extension
 type Extension string
 
 const (

@@ -17,7 +17,7 @@ Features and Components
 
 -   Qrcodes
 
--   Signature
+-   Signatures
 
 Maroto has only gofpdf dependency. All tests pass on Linux and Mac.
 
@@ -35,17 +35,18 @@ Later, to receive updates, run
 
 Quick Start
 
-The following Go code generates a simple PDF file.
+The following Go Code generates a simple PDF file.
 
 
     m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 
     m.Row("MyRow", 10, func() {
 		m.Col("MyCol", func() {
-			m.Text("MyText", 9, &maroto.FontProp{
+			m.Text("MyText", &maroto.TextProp{
 				Size: 18,
 				Style: maroto.Bold,
 				Align: maroto.Center,
+				Top: 9,
 			})
 		})
 	})
@@ -73,7 +74,7 @@ Maroto is released under the GPL3 License.
 
 Acknowledgments
 
-This package’s code and documentation are based on gofpdf.
+This package’s Code and documentation are based on gofpdf.
 
 
 Roadmap

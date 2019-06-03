@@ -68,46 +68,55 @@ func TestRectProp_MakeValid(t *testing.T) {
 	}
 }
 
-func TestFontProp_MakeValid(t *testing.T) {
+func TestTextProp_MakeValid(t *testing.T) {
 	cases := []struct {
 		name           string
-		fontProp       *maroto.FontProp
-		assertFontProp func(t *testing.T, prop *maroto.FontProp)
+		fontProp       *maroto.TextProp
+		assertFontProp func(t *testing.T, prop *maroto.TextProp)
 	}{
 		{
 			"When family is not defined, should define arial",
-			&maroto.FontProp{
+			&maroto.TextProp{
 				Family: "",
 			},
-			func(t *testing.T, prop *maroto.FontProp) {
+			func(t *testing.T, prop *maroto.TextProp) {
 				assert.Equal(t, prop.Family, maroto.Arial)
 			},
 		},
 		{
 			"When style is not defined, should define normal",
-			&maroto.FontProp{
+			&maroto.TextProp{
 				Style: "",
 			},
-			func(t *testing.T, prop *maroto.FontProp) {
+			func(t *testing.T, prop *maroto.TextProp) {
 				assert.Equal(t, prop.Style, maroto.Normal)
 			},
 		},
 		{
 			"When size is zero, should define 10.0",
-			&maroto.FontProp{
+			&maroto.TextProp{
 				Size: 0.0,
 			},
-			func(t *testing.T, prop *maroto.FontProp) {
+			func(t *testing.T, prop *maroto.TextProp) {
 				assert.Equal(t, prop.Size, 10.0)
 			},
 		},
 		{
 			"When align is not defined, should define Left",
-			&maroto.FontProp{
+			&maroto.TextProp{
 				Align: "",
 			},
-			func(t *testing.T, prop *maroto.FontProp) {
+			func(t *testing.T, prop *maroto.TextProp) {
 				assert.Equal(t, prop.Align, maroto.Left)
+			},
+		},
+		{
+			"When top is less than 0, should become 0",
+			&maroto.TextProp{
+				Top: -5.0,
+			},
+			func(t *testing.T, prop *maroto.TextProp) {
+				assert.Equal(t, prop.Top, 0.0)
 			},
 		},
 	}
