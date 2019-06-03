@@ -7,7 +7,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// Abstraction of image adding features used in Maroto
+// Abstraction of Image adding features used in Maroto
 type Image interface {
 	AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64)
 	AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64, extension Extension)
@@ -18,7 +18,7 @@ type image struct {
 	math Math
 }
 
-// Create an image adding used in Maroto
+// Create an Image adding used in Maroto
 func NewImage(pdf gofpdf.Pdf, math Math) Image {
 	return &image{
 		pdf,

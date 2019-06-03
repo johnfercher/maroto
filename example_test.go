@@ -58,7 +58,7 @@ func ExamplePdfMaroto_Col() {
 
 	m.Row("MyRow", rowHeight, func() {
 		m.Col("MyCol", func() {
-			// Add image, text, signature and etc...
+			// Add Image, Text, Signature, QrCode or Barcode...
 		})
 	})
 
@@ -99,8 +99,8 @@ func ExamplePdfMaroto_GetDebugMode() {
 }
 
 // ExamplePdfMaroto_Text demonstrates how to add
-// a text inside a col. Passing nil on fontProp make the method
-// use: arial font, normal style, size 10.0 and align left.
+// a Text inside a col. Passing nil on fontProp make the method
+// use: arial Font, normal style, size 10.0 and align left.
 // Not passing family, make method use arial.
 // Not passing style, make method use normal.
 // Not passing size, make method use 10.0.
@@ -108,15 +108,15 @@ func ExamplePdfMaroto_GetDebugMode() {
 func ExamplePdfMaroto_Text() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	rowHeight := 5.0
-	textMarginTop := 1.0
 
 	m.Row("MyRow", rowHeight, func() {
 		m.Col("MyCol", func() {
-			m.Text("TextContent", textMarginTop, &maroto.FontProp{
+			m.Text("TextContent", &maroto.TextProp{
 				Size:   12.0,
 				Style:  maroto.BoldItalic,
 				Family: maroto.Courier,
 				Align:  maroto.Center,
+				Top:    1.0,
 			})
 		})
 	})
@@ -125,8 +125,8 @@ func ExamplePdfMaroto_Text() {
 }
 
 // ExamplePdfMaroto_Signature demonstrates how to add
-// a signature space inside a col. Passing nil on signatureProp make the method
-// use: arial font, normal style and size 10.0.
+// a Signature space inside a col. Passing nil on signatureProp make the method
+// use: arial Font, normal style and size 10.0.
 // Not passing family, make method use arial.
 // Not passing style, make method use normal.
 // Not passing size, make method use 10.0.
@@ -166,14 +166,14 @@ func ExamplePdfMaroto_RowTableList() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_FileImage demonstrates how add a image
+// ExamplePdfMaroto_FileImage demonstrates how add a Image
 // reading from disk.
-// When rectProp is nil, method make image fullfill the context
-// cell, based on width and cell from image and cell.
+// When rectProp is nil, method make Image fullfill the context
+// cell, based on width and cell from Image and cell.
 // When center is true, left and top has no effect.
-// Percent represents the width/height of the image inside the cell:
-// Ex: 85, means that image will have width of 85% of column width.
-// When center is false, is possible to manually positioning the image
+// Percent represents the width/height of the Image inside the cell:
+// Ex: 85, means that Image will have width of 85% of column width.
+// When center is false, is possible to manually positioning the Image
 // with left and top.
 func ExamplePdfMaroto_FileImage() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
@@ -181,7 +181,7 @@ func ExamplePdfMaroto_FileImage() {
 
 	m.Row("MyRow", rowHeight, func() {
 		m.Col("MyCol", func() {
-			m.FileImage("path/image.jpg", &maroto.RectProp{
+			m.FileImage("path/Image.jpg", &maroto.RectProp{
 				Left:    5,
 				Top:     5,
 				Center:  true,
@@ -193,14 +193,14 @@ func ExamplePdfMaroto_FileImage() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_Base64Image demonstrates how add a image
+// ExamplePdfMaroto_Base64Image demonstrates how add a Image
 // reading a base64 string.
-// When rectProp is nil, method make image fullfill the context
-// cell, based on width and cell from image and cell.
+// When rectProp is nil, method make Image fullfill the context
+// cell, based on width and cell from Image and cell.
 // When center is true, left and top has no effect.
-// Percent represents the width/height of the image inside the cell:
-// Ex: 85, means that image will have width of 85% of column width.
-// When center is false, is possible to manually positioning the image
+// Percent represents the width/height of the Image inside the cell:
+// Ex: 85, means that Image will have width of 85% of column width.
+// When center is false, is possible to manually positioning the Image
 // with left and top.
 func ExamplePdfMaroto_Base64Image() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)

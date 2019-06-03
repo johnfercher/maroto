@@ -1,4 +1,4 @@
-# Maroto [![Travis](https://img.shields.io/badge/coverage-46.4%25-orange.svg)][travis]
+# Maroto [![Travis](https://img.shields.io/badge/coverage-62.4%25-yellow.svg)][travis]
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
@@ -14,7 +14,6 @@ Here is the [pdf](assets/pdf/maroto.pdf) generated.
 ```go
 func main() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
-	//m.SetDebugMode(true)
 
 	byteSlices, _ := ioutil.ReadFile("assets/images/gopher2.png")
 
@@ -25,22 +24,27 @@ func main() {
 	m.Row("Codes", 20, func() {
 		m.Col("Logo", func() {
 			m.Base64Image(base64, maroto.Png, &maroto.RectProp{
-				Percent: 45,
+				Percent: 85,
 			})
 		})
 
-		m.ColSpace()
+		m.ColSpaces(2)
 
 		m.Col("Link", func() {
-			m.QrCode("https://github.com/johnfercher/maroto")
+			m.QrCode("https://github.com/johnfercher/maroto", &maroto.RectProp{
+				Percent: 75,
+			})
 		})
 
 		m.Col("Barcode", func() {
 			id := "123456789"
-			_ = m.Barcode(id, 30, 9, 5)
-			m.Text(id, 17, &maroto.FontProp{
+			_ = m.Barcode(id, &maroto.RectProp{
+				Percent: 70,
+			})
+			m.Text(id, &maroto.TextProp{
 				Size: 8,
 				Align: maroto.Center,
+				Top: 17,
 			})
 		})
 	})
@@ -55,16 +59,21 @@ func main() {
 		m.ColSpace()
 
 		m.Col("Definition", func() {
-			m.Text("PDFGenerator: Maroto", 4, nil)
-			m.Text("Type: Easy & Fast", 9.5, nil)
+			m.Text("PDFGenerator: Maroto", &maroto.TextProp{
+				Top: 4,
+			})
+			m.Text("Type: Easy & Fast", &maroto.TextProp{
+				Top: 9.5,
+			})
 		})
 
 		m.ColSpace()
 
 		m.Col("Speed", func() {
-			m.Text("GPL3", 7.5, &maroto.FontProp{
+			m.Text("GPL3", &maroto.TextProp{
 				Size: 16,
 				Style: maroto.Bold,
+				Top: 7.5,
 			})
 		})
 	})
@@ -73,14 +82,16 @@ func main() {
 
 	m.Row("SubTitle", 22, func() {
 		m.Col("Packages", func() {
-			m.Text("Grid System", 9, &maroto.FontProp{
+			m.Text("Grid System", &maroto.TextProp{
 				Size: 18,
 				Style: maroto.Bold,
 				Align: maroto.Center,
+				Top: 9,
 			})
-			m.Text("Bootstrap Like", 16, &maroto.FontProp{
+			m.Text("Bootstrap Like", &maroto.TextProp{
 				Size: 12,
 				Align: maroto.Center,
+				Top: 16,
 			})
 		})
 	})
@@ -103,7 +114,7 @@ func main() {
 		})
 	})
 
-	m.OutputFileAndClose("maroto.pdf")
+	_ = m.OutputFileAndClose("maroto.pdf")
 }
 ```
 

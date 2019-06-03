@@ -1356,7 +1356,7 @@ func (_m *Pdf) String() string {
 	return r0
 }
 
-// Text provides a mock function with given fields: x, y, txtStr
+// TextHelper provides a mock function with given fields: x, y, txtStr
 func (_m *Pdf) Text(x float64, y float64, txtStr string) {
 	_m.Called(x, y, txtStr)
 }
