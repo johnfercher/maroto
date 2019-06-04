@@ -8,15 +8,16 @@ type RectProp struct {
 	Center  bool
 }
 
-// Represents font properties
-type FontProp struct {
+// Represents TextHelper properties
+type TextProp struct {
+	Top    float64
 	Family Family
 	Style  Style
 	Size   float64
 	Align  Align
 }
 
-// Represents signature properties
+// Represents Signature properties
 type SignatureProp struct {
 	Family Family
 	Style  Style
@@ -43,8 +44,8 @@ func (r *RectProp) MakeValid() {
 	}
 }
 
-// Make font properties valid
-func (f *FontProp) MakeValid() {
+// Make Text properties valid
+func (f *TextProp) MakeValid() {
 	if f.Family == "" {
 		f.Family = Arial
 	}
@@ -60,9 +61,13 @@ func (f *FontProp) MakeValid() {
 	if f.Size == 0.0 {
 		f.Size = 10.0
 	}
+
+	if f.Top < 0.0 {
+		f.Top = 0.0
+	}
 }
 
-// Make signature properties valid
+// Make Signature properties valid
 func (f *SignatureProp) MakeValid() {
 	if f.Family == "" {
 		f.Family = Arial

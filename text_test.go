@@ -53,7 +53,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
-				_pdf.AssertCalled(t, "Text", 133.0, 15.0, "Text")
+				_pdf.AssertCalled(t, "Text", 133.0, 15.0, "TextHelper")
 			},
 			func(t *testing.T, _math *mocks.Math) {
 				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
@@ -86,12 +86,12 @@ func TestText_Add(t *testing.T) {
 			},
 			func(t *testing.T, _pdf *mocks.Pdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
-				_pdf.AssertCalled(t, "GetStringWidth", "Text")
+				_pdf.AssertCalled(t, "GetStringWidth", "TextHelper")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
-				_pdf.AssertCalled(t, "Text", 188.5, 15.0, "Text")
+				_pdf.AssertCalled(t, "Text", 188.5, 15.0, "TextHelper")
 			},
 			func(t *testing.T, _math *mocks.Math) {
 				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
@@ -113,7 +113,7 @@ func TestText_Add(t *testing.T) {
 		text := maroto.NewText(_pdf, _math, _font)
 
 		// Act
-		text.Add("Text", maroto.Arial, maroto.BoldItalic, 16.0, 5.0, c.align, 1, 15.0)
+		text.Add("TextHelper", maroto.Arial, maroto.BoldItalic, 16.0, 5.0, c.align, 1, 15.0)
 
 		// Assert
 		c.assertPdf(t, _pdf)
