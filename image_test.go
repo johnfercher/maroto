@@ -26,7 +26,7 @@ func TestImage_AddFromFile(t *testing.T) {
 		assertMathCalls func(t *testing.T, pdf *mocks.Math)
 	}{
 		{
-			"When image has width greater than height",
+			"When Image has width greater than height",
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
 				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(widthGreaterThanHeightImageInfo())
@@ -54,7 +54,7 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 		},
 		{
-			"When image has height greater than width",
+			"When Image has height greater than width",
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
 				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(heightGreaterThanWidthImageInfo())

@@ -15,7 +15,7 @@ type math struct {
 	pdf gofpdf.Pdf
 }
 
-// Create a math instance with useful calcs used in Maroto
+// Create a Math instance with useful calcs used in Maroto
 func NewMath(pdf gofpdf.Pdf) Math {
 	return &math{
 		pdf,
