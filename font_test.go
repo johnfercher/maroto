@@ -10,13 +10,13 @@ import (
 )
 
 func TestNewFont(t *testing.T) {
-	_font := maroto.NewFont(&mocks.Pdf{}, 10, maroto.Arial, maroto.Bold)
+	font := maroto.NewFont(&mocks.Pdf{}, 10, maroto.Arial, maroto.Bold)
 
-	assert.NotNil(t, _font)
-	assert.Equal(t, fmt.Sprintf("%T", _font), "*maroto.font")
-	assert.Equal(t, _font.GetFamily(), maroto.Arial)
-	assert.Equal(t, _font.GetStyle(), maroto.Bold)
-	assert.Equal(t, _font.GetSize(), 10.0)
+	assert.NotNil(t, font)
+	assert.Equal(t, fmt.Sprintf("%T", font), "*maroto.font")
+	assert.Equal(t, font.GetFamily(), maroto.Arial)
+	assert.Equal(t, font.GetStyle(), maroto.Bold)
+	assert.Equal(t, font.GetSize(), 10.0)
 }
 
 func TestFont_GetSetFamily(t *testing.T) {

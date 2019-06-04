@@ -152,7 +152,7 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 		assertResult   func(t *testing.T, x, y, w, h float64)
 	}{
 		{
-			"When image has width greater than height",
+			"When Image has width greater than height",
 			300,
 			200,
 			100.0,
@@ -174,7 +174,7 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 			},
 		},
 		{
-			"When image has height greater than width",
+			"When Image has height greater than width",
 			200,
 			300,
 			100.0,
@@ -196,7 +196,7 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 			},
 		},
 		{
-			"When image has height greater than width, percent 45",
+			"When Image has height greater than width, percent 45",
 			200,
 			300,
 			45.0,

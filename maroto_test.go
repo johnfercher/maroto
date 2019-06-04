@@ -3,7 +3,9 @@ package maroto_test
 import (
 	"fmt"
 	"github.com/johnfercher/maroto"
+	"github.com/johnfercher/maroto/mocks"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 	"testing"
 )
 
@@ -153,4 +155,157 @@ func TestPdfMaroto_SetGetDebugMode(t *testing.T) {
 	m.SetDebugMode(true)
 
 	assert.True(t, m.GetDebugMode())
+}
+
+func TestPdfMaroto_Signature(t *testing.T) {
+	cases := []struct {
+		name            string
+		signature       func() *mocks.Signature
+		assertSignature func(t *testing.T, signature *mocks.Signature)
+		actSignature    func(m maroto.Maroto)
+	}{
+		{
+			"One signature inside one column, inside a row, without props",
+			func() *mocks.Signature {
+				signature := &mocks.Signature{}
+				signature.On("AddSpaceFor", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return signature
+			},
+			func(t *testing.T, signature *mocks.Signature) {
+				signature.AssertNumberOfCalls(t, "AddSpaceFor", 1)
+				signature.AssertCalled(t, "AddSpaceFor", "SignHelper", maroto.Arial, maroto.Bold, 8.0, 1.0, 40.0, 0.0)
+			},
+			func(m maroto.Maroto) {
+				m.Row("Row", 40, func() {
+					m.Col("Col", func() {
+						m.Signature("SignHelper", nil)
+					})
+				})
+			},
+		},
+		{
+			"Two different signatures inside one colum, inside one row",
+			func() *mocks.Signature {
+				signature := &mocks.Signature{}
+				signature.On("AddSpaceFor", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return signature
+			},
+			func(t *testing.T, signature *mocks.Signature) {
+				signature.AssertNumberOfCalls(t, "AddSpaceFor", 2)
+				signature.AssertCalled(t, "AddSpaceFor", "SignHelper", maroto.Arial, maroto.Bold, 8.0, 1.0, 40.0, 0.0)
+				signature.AssertCalled(t, "AddSpaceFor", "SignHelper2", maroto.Courier, maroto.BoldItalic, 9.5, 1.0, 40.0, 0.0)
+			},
+			func(m maroto.Maroto) {
+				m.Row("Row", 40, func() {
+					m.Col("Col", func() {
+						m.Signature("SignHelper", nil)
+						m.Signature("SignHelper2", &maroto.SignatureProp{
+							Family: maroto.Courier,
+							Style:  maroto.BoldItalic,
+							Size:   9.5,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Two different signatures with different columns, inside one row",
+			func() *mocks.Signature {
+				signature := &mocks.Signature{}
+				signature.On("AddSpaceFor", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return signature
+			},
+			func(t *testing.T, signature *mocks.Signature) {
+				signature.AssertNumberOfCalls(t, "AddSpaceFor", 2)
+				signature.AssertCalled(t, "AddSpaceFor", "SignHelper", maroto.Arial, maroto.Bold, 8.0, 2.0, 40.0, 0.0)
+				signature.AssertCalled(t, "AddSpaceFor", "SignHelper2", maroto.Courier, maroto.BoldItalic, 9.5, 2.0, 40.0, 1.0)
+			},
+			func(m maroto.Maroto) {
+				m.Row("Row", 40, func() {
+					m.Col("Col", func() {
+						m.Signature("SignHelper", nil)
+					})
+					m.Col("Col", func() {
+						m.Signature("SignHelper2", &maroto.SignatureProp{
+							Family: maroto.Courier,
+							Style:  maroto.BoldItalic,
+							Size:   9.5,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Two different signatures with different columns, inside one row",
+			func() *mocks.Signature {
+				signature := &mocks.Signature{}
+				signature.On("AddSpaceFor", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return signature
+			},
+			func(t *testing.T, signature *mocks.Signature) {
+				signature.AssertNumberOfCalls(t, "AddSpaceFor", 2)
+				signature.AssertCalled(t, "AddSpaceFor", "SignHelper", maroto.Arial, maroto.Bold, 8.0, 1.0, 40.0, 0.0)
+				signature.AssertCalled(t, "AddSpaceFor", "SignHelper2", maroto.Courier, maroto.BoldItalic, 9.5, 1.0, 80.0, 0.0)
+			},
+			func(m maroto.Maroto) {
+				m.Row("Row", 40, func() {
+					m.Col("Col", func() {
+						m.Signature("SignHelper", nil)
+					})
+				})
+				m.Row("Row", 40, func() {
+					m.Col("Col", func() {
+						m.Signature("SignHelper2", &maroto.SignatureProp{
+							Family: maroto.Courier,
+							Style:  maroto.BoldItalic,
+							Size:   9.5,
+						})
+					})
+				})
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		signature := c.signature()
+		pdf := basePdfTest()
+		math := baseMathTest()
+		m := newMarotoTest(pdf, math, nil, nil, signature, nil, nil)
+
+		// Act
+		c.actSignature(m)
+
+		// Assert
+		c.assertSignature(t, signature)
+	}
+}
+
+func newMarotoTest(fpdf *mocks.Pdf, math *mocks.Math, font *mocks.Font, text *mocks.Text, signature *mocks.Signature, image *mocks.Image, code *mocks.Code) maroto.Maroto {
+	m := &maroto.PdfMaroto{
+		Pdf:        fpdf,
+		Math:       math,
+		Font:       font,
+		TextHelper: text,
+		SignHelper: signature,
+		Image:      image,
+		Code:       code,
+	}
+
+	return m
+}
+
+func basePdfTest() *mocks.Pdf {
+	pdf := &mocks.Pdf{}
+	pdf.On("GetPageSize").Return(100.0, 100.0)
+	pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
+	pdf.On("CellFormat", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+	pdf.On("Ln", mock.Anything)
+	return pdf
+}
+
+func baseMathTest() *mocks.Math {
+	math := &mocks.Math{}
+	math.On("GetWidthPerCol", mock.Anything).Return(20.0)
+	return math
 }
