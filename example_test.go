@@ -161,7 +161,7 @@ func ExamplePdfMaroto_RowTableList() {
 	// 1 Row of header
 	// 2 Rows of contents
 	// Each row have 2 columns
-	m.RowTableList("RowTableList1", headers, contents)
+	m.RowTableList("RowTableList1", headers, contents, nil)
 
 	// Do more things and save...
 }
