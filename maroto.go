@@ -19,7 +19,7 @@ type Maroto interface {
 	GetPageSize() (float64, float64)
 
 	// Components
-	RowTableList(label string, headers []string, contents [][]string)
+	RowTableList(label string, headers []string, contents [][]string, tableListProp *TableListProp)
 	Text(text string, fontProp *TextProp)
 	FileImage(filePathName string, rectProp *RectProp)
 	Base64Image(base64 string, extension Extension, rectProp *RectProp)
@@ -105,10 +105,14 @@ func (m *PdfMaroto) Signature(label string, signatureProp *SignatureProp) {
 // Headers define the amount of columns from each row.
 // Headers have bold style, and localized at the top of table.
 // Contents are array of arrays. Each array is one line.
-func (m *PdfMaroto) RowTableList(label string, headers []string, contents [][]string) {
-	headerHeight := 7.0
+func (m *PdfMaroto) RowTableList(label string, headers []string, contents [][]string, tableListProp *TableListProp) {
+	if tableListProp == nil {
+		tableListProp = &TableListProp{}
+	}
 
-	m.Row("", headerHeight, func() {
+	tableListProp.MakeValid()
+
+	m.Row("", tableListProp.HHeight, func() {
 		headerMarginTop := 2.0
 		qtdCols := float64(len(headers))
 
@@ -125,20 +129,19 @@ func (m *PdfMaroto) RowTableList(label string, headers []string, contents [][]st
 
 				sumOyYOffesets := headerMarginTop + m.offsetY + 2.5
 
-				m.TextHelper.Add(reason, Arial, Bold, 10, sumOyYOffesets, Left, float64(is), qtdCols)
+				m.TextHelper.Add(reason, tableListProp.HFontFamily, tableListProp.HFontStyle, tableListProp.HFontSize, sumOyYOffesets, tableListProp.Align, float64(is), qtdCols)
 			})
 		}
 	})
 
-	m.Row("", 4.0, func() {
+	m.Row("", tableListProp.Space, func() {
 		m.ColSpace()
 	})
 
-	contentHeight := 5.0
 	contentMarginTop := 2.0
 
 	for _, content := range contents {
-		m.Row("", contentHeight, func() {
+		m.Row("", tableListProp.CHeight, func() {
 			for j, c := range content {
 				cs := c
 				js := j
@@ -146,7 +149,7 @@ func (m *PdfMaroto) RowTableList(label string, headers []string, contents [][]st
 				sumOyYOffesets := contentMarginTop + m.offsetY + 2.0
 
 				m.Col("", func() {
-					m.TextHelper.Add(cs, Arial, Normal, 10, sumOyYOffesets, Left, float64(js), hs)
+					m.TextHelper.Add(cs, tableListProp.CFontFamily, tableListProp.CFontStyle, tableListProp.CFontSize, sumOyYOffesets, tableListProp.Align, float64(js), hs)
 				})
 			}
 		})
@@ -214,7 +217,6 @@ func (m *PdfMaroto) Col(label string, closure func()) {
 		closure()
 		m.rowColCount++
 	})
-
 }
 
 // Create an empty column inside a row.
@@ -339,5 +341,5 @@ func (m *PdfMaroto) createColSpace(actualWidthPerCol float64) {
 		border = "1"
 	}
 
-	m.Pdf.CellFormat(actualWidthPerCol, m.rowHeight, "", border, 0, "C", false, 0, "")
+	m.Pdf.CellFormat(actualWidthPerCol, m.rowHeight, "", border, 0.0, "C", false, 0.0, "")
 }

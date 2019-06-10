@@ -107,7 +107,7 @@ func (_m *Pdf) Cell(w float64, h float64, txtStr string) {
 
 // CellFormat provides a mock function with given fields: w, h, txtStr, borderStr, ln, alignStr, fill, link, linkStr
 func (_m *Pdf) CellFormat(w float64, h float64, txtStr string, borderStr string, ln int, alignStr string, fill bool, link int, linkStr string) {
-	_m.Called(w, h, txtStr, borderStr, ln, alignStr, fill, link, linkStr)
+	_m.Called(int(w), int(h), txtStr, borderStr, ln, alignStr, fill, link, linkStr)
 }
 
 // Cellf provides a mock function with given fields: w, h, fmtStr, args
@@ -765,9 +765,9 @@ func (_m *Pdf) HTMLBasicNew() gofpdf.HTMLBasicType {
 	return r0
 }
 
-// FileImage provides a mock function with given fields: imageNameStr, x, y, w, h, flow, tp, link, linkStr
+// Image provides a mock function with given fields: imageNameStr, x, y, w, h, flow, tp, link, linkStr
 func (_m *Pdf) Image(imageNameStr string, x float64, y float64, w float64, h float64, flow bool, tp string, link int, linkStr string) {
-	_m.Called(imageNameStr, int(x), int(y), int(w), int(h))
+	_m.Called("", int(x), int(y), int(w), int(h))
 }
 
 // ImageOptions provides a mock function with given fields: imageNameStr, x, y, w, h, flow, options, link, linkStr
@@ -1038,7 +1038,7 @@ func (_m *Pdf) RegisterImageOptions(fileStr string, options gofpdf.ImageOptions)
 
 // RegisterImageOptionsReader provides a mock function with given fields: imgName, options, r
 func (_m *Pdf) RegisterImageOptionsReader(imgName string, options gofpdf.ImageOptions, r io.Reader) *gofpdf.ImageInfoType {
-	ret := _m.Called(imgName, options, r)
+	ret := _m.Called("", options, "")
 
 	var r0 *gofpdf.ImageInfoType
 	if rf, ok := ret.Get(0).(func(string, gofpdf.ImageOptions, io.Reader) *gofpdf.ImageInfoType); ok {
