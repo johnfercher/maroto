@@ -46,7 +46,7 @@ func TestCode_AddBar(t *testing.T) {
 				pdf.AssertCalled(t, "GetImageInfo", "barcode-Code 128AnyCode-1E+023E+01")
 
 				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "barcode-Code 128AnyCode-1E+023E+01", 100, 30, 33, 0)
+				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 			},
 			func(t *testing.T, math *mocks.Math) {
 				math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
@@ -134,7 +134,7 @@ func TestCode_AddQr(t *testing.T) {
 				pdf.AssertCalled(t, "GetImageInfo", "barcode-QR CodeAnyCode-1E+023E+01")
 
 				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "barcode-QR CodeAnyCode-1E+023E+01", 100, 30, 33, 0)
+				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 			},
 			func(t *testing.T, math *mocks.Math) {
 				math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)

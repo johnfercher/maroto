@@ -8,9 +8,9 @@ import (
 
 func TestRectProp_MakeValid(t *testing.T) {
 	cases := []struct {
-		name       string
-		rectProp   maroto.RectProp
-		assertRect func(t *testing.T, prop maroto.RectProp)
+		name     string
+		rectProp maroto.RectProp
+		assert   func(t *testing.T, prop maroto.RectProp)
 	}{
 		{
 			"When percent is less than zero, should become 100",
@@ -64,15 +64,15 @@ func TestRectProp_MakeValid(t *testing.T) {
 
 	for _, c := range cases {
 		c.rectProp.MakeValid()
-		c.assertRect(t, c.rectProp)
+		c.assert(t, c.rectProp)
 	}
 }
 
 func TestTextProp_MakeValid(t *testing.T) {
 	cases := []struct {
-		name           string
-		fontProp       *maroto.TextProp
-		assertFontProp func(t *testing.T, prop *maroto.TextProp)
+		name     string
+		fontProp *maroto.TextProp
+		assert   func(t *testing.T, prop *maroto.TextProp)
 	}{
 		{
 			"When family is not defined, should define arial",
@@ -123,15 +123,15 @@ func TestTextProp_MakeValid(t *testing.T) {
 
 	for _, c := range cases {
 		c.fontProp.MakeValid()
-		c.assertFontProp(t, c.fontProp)
+		c.assert(t, c.fontProp)
 	}
 }
 
 func TestSignatureProp_MakeValid(t *testing.T) {
 	cases := []struct {
-		name                string
-		signatureProp       *maroto.SignatureProp
-		assertSignatureProp func(t *testing.T, prop *maroto.SignatureProp)
+		name          string
+		signatureProp *maroto.SignatureProp
+		assert        func(t *testing.T, prop *maroto.SignatureProp)
 	}{
 		{
 			"When family is not defined, should define arial",
@@ -163,7 +163,117 @@ func TestSignatureProp_MakeValid(t *testing.T) {
 	}
 
 	for _, c := range cases {
+		// Act
 		c.signatureProp.MakeValid()
-		c.assertSignatureProp(t, c.signatureProp)
+
+		// Assert
+		c.assert(t, c.signatureProp)
+	}
+}
+
+func TestTableListProp_MakeValid(t *testing.T) {
+	cases := []struct {
+		name          string
+		tableListProp *maroto.TableListProp
+		assert        func(t *testing.T, m *maroto.TableListProp)
+	}{
+		{
+			"When HFontSize is 0.0",
+			&maroto.TableListProp{
+				HFontSize: 0.0,
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.HFontSize, 10.0)
+			},
+		},
+		{
+			"When HFontStyle is empty",
+			&maroto.TableListProp{
+				HFontStyle: "",
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.HFontStyle, maroto.Bold)
+			},
+		},
+		{
+			"When HFontFamily is empty",
+			&maroto.TableListProp{
+				HFontFamily: "",
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.HFontFamily, maroto.Arial)
+			},
+		},
+		{
+			"When HHeight is 0.0",
+			&maroto.TableListProp{
+				HHeight: 0.0,
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.HHeight, 7.0)
+			},
+		},
+		{
+			"When Align is empty",
+			&maroto.TableListProp{
+				Align: "",
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.Align, maroto.Left)
+			},
+		},
+		{
+			"When CFontSize is 0.0",
+			&maroto.TableListProp{
+				CFontSize: 0.0,
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.CFontSize, 10.0)
+			},
+		},
+		{
+			"When CFontStyle is empty",
+			&maroto.TableListProp{
+				CFontStyle: "",
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.CFontStyle, maroto.Normal)
+			},
+		},
+		{
+			"When CFontFamily is empty",
+			&maroto.TableListProp{
+				CFontFamily: "",
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.CFontFamily, maroto.Arial)
+			},
+		},
+		{
+			"When CHeight is 0.0",
+			&maroto.TableListProp{
+				CHeight: 0.0,
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.CHeight, 5.0)
+			},
+		},
+		{
+			"When Space is 0.0",
+			&maroto.TableListProp{
+				Space: 0.0,
+			},
+			func(t *testing.T, m *maroto.TableListProp) {
+				assert.Equal(t, m.Space, 4.0)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Act
+		c.tableListProp.MakeValid()
+
+		// Assert
+		c.assert(t, c.tableListProp)
 	}
 }

@@ -32,8 +32,7 @@ func (i *image) AddFromFile(path string, marginTop float64, indexCol float64, qt
 		ImageType: "",
 	})
 
-	x, y, w, h := i.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol, percent)
-	i.pdf.Image(path, x, y+marginTop, w, h, false, "", 0, "")
+	i.addImageToPdf(path, info, marginTop, qtdCols, colHeight, indexCol, percent)
 }
 
 func (i *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64, extension Extension) {
@@ -50,6 +49,10 @@ func (i *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, q
 		bytes.NewReader(ss),
 	)
 
+	i.addImageToPdf(imageId.String(), info, marginTop, qtdCols, colHeight, indexCol, percent)
+}
+
+func (i *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, marginTop, qtdCols, colHeight, indexCol, percent float64) {
 	x, y, w, h := i.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol, percent)
-	i.pdf.Image(imageId.String(), x, y+marginTop, w, h, false, "", 0, "")
+	i.pdf.Image(imageLabel, x, y+marginTop, w, h, false, "", 0, "")
 }
