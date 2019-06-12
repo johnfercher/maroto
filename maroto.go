@@ -263,6 +263,7 @@ func (m *PdfMaroto) FileImage(filePathName string, rectProp *RectProp) {
 
 	qtdCols := float64(len(m.colsClosures))
 
+	// TODO: Implements not centered
 	if rectProp.Center {
 		m.Image.AddFromFile(filePathName, m.offsetY, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
 	} else {
@@ -282,6 +283,7 @@ func (m *PdfMaroto) Base64Image(base64 string, extension Extension, rectProp *Re
 	qtdCols := float64(len(m.colsClosures))
 	sumOfyOffsets := m.offsetY + rectProp.Top
 
+	// TODO: Implements not centered
 	if rectProp.Center {
 		m.Image.AddFromBase64(base64, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent, extension)
 	} else {
@@ -312,7 +314,12 @@ func (m *PdfMaroto) Barcode(code string, rectProp *RectProp) (err error) {
 	qtdCols := float64(len(m.colsClosures))
 	sumOfyOffsets := m.offsetY + rectProp.Top
 
-	err = m.Code.AddBar(code, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+	// TODO: Implements not centered
+	if rectProp.Center {
+		err = m.Code.AddBar(code, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+	} else {
+		err = m.Code.AddBar(code, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+	}
 
 	return
 }
@@ -327,6 +334,7 @@ func (m *PdfMaroto) QrCode(code string, rectProp *RectProp) {
 	qtdCols := float64(len(m.colsClosures))
 	sumOfyOffsets := m.offsetY + rectProp.Top
 
+	// TODO: Implements not centered
 	if rectProp.Center {
 		m.Code.AddQr(code, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
 	} else {
