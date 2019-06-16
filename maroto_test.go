@@ -183,7 +183,7 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Signature("Signature", nil)
+						m.Signature("Signature1", nil)
 					})
 				})
 			},
@@ -203,8 +203,8 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Signature("Signature", nil)
-						m.Signature("Signature2", &maroto.SignatureProp{
+						m.Signature("Signature2", nil)
+						m.Signature("Signature3", &maroto.SignatureProp{
 							Family: maroto.Courier,
 							Style:  maroto.BoldItalic,
 							Size:   9.5,
@@ -228,10 +228,10 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Signature("Signature", nil)
+						m.Signature("Signature4", nil)
 					})
 					m.Col(func() {
-						m.Signature("Signature2", &maroto.SignatureProp{
+						m.Signature("Signature5", &maroto.SignatureProp{
 							Family: maroto.Courier,
 							Style:  maroto.BoldItalic,
 							Size:   9.5,
@@ -255,12 +255,12 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Signature("Signature", nil)
+						m.Signature("Signature6", nil)
 					})
 				})
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Signature("Signature2", &maroto.SignatureProp{
+						m.Signature("Signature7", &maroto.SignatureProp{
 							Family: maroto.Courier,
 							Style:  maroto.BoldItalic,
 							Size:   9.5,
@@ -307,7 +307,7 @@ func TestPdfMaroto_Text(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Text("Text", nil)
+						m.Text("Text1", nil)
 					})
 				})
 			},
@@ -327,8 +327,8 @@ func TestPdfMaroto_Text(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Text("Text", nil)
-						m.Text("Text2", &maroto.TextProp{
+						m.Text("Text2", nil)
+						m.Text("Text3", &maroto.TextProp{
 							Family: maroto.Courier,
 							Style:  maroto.BoldItalic,
 							Size:   9.5,
@@ -354,10 +354,10 @@ func TestPdfMaroto_Text(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Text("Text", nil)
+						m.Text("Text4", nil)
 					})
 					m.Col(func() {
-						m.Text("Text2", &maroto.TextProp{
+						m.Text("Text5", &maroto.TextProp{
 							Family: maroto.Helvetica,
 							Style:  maroto.Italic,
 							Size:   8.5,
@@ -383,12 +383,12 @@ func TestPdfMaroto_Text(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Text("Text", nil)
+						m.Text("Text6", nil)
 					})
 				})
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Text("Text2", &maroto.TextProp{
+						m.Text("Text7", &maroto.TextProp{
 							Family: maroto.Courier,
 							Style:  maroto.BoldItalic,
 							Size:   9.5,
@@ -411,7 +411,7 @@ func TestPdfMaroto_Text(t *testing.T) {
 			func(m maroto.Maroto) {
 				m.Row(40, func() {
 					m.Col(func() {
-						m.Text("Text", &maroto.TextProp{
+						m.Text("Text8", &maroto.TextProp{
 							Top: 50,
 						})
 					})
@@ -1290,136 +1290,6 @@ func TestPdfMaroto_OutputFileAndClose(t *testing.T) {
 		// Assert
 		c.assertPdfCalls(t, pdf)
 		c.assertError(t, err)
-	}
-}
-
-func TestPdfMaroto_FileImage(t *testing.T) {
-	cases := []struct {
-		name        string
-		image       func() *mocks.Image
-		act         func(m maroto.Maroto)
-		assertImage func(t *testing.T, image *mocks.Image)
-	}{
-		{
-			"One image in one col inside a row",
-			func() *mocks.Image {
-				image := &mocks.Image{}
-				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return image
-			},
-			func(m maroto.Maroto) {
-				m.Row("Row", 33, func() {
-					m.Col("Col", func() {
-						m.FileImage("image1.jpg", nil)
-					})
-				})
-			},
-			func(t *testing.T, image *mocks.Image) {
-				image.AssertNumberOfCalls(t, "AddFromFile", 1)
-				image.AssertCalled(t, "AddFromFile", "image1.jpg", 0.0, 0.0, 1.0, 33.0, 100.0)
-			},
-		},
-		{
-			"Twos images in one col inside a row",
-			func() *mocks.Image {
-				image := &mocks.Image{}
-				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return image
-			},
-			func(m maroto.Maroto) {
-				m.Row("Row", 33, func() {
-					m.Col("Col", func() {
-						m.FileImage("image2.jpg", nil)
-						m.FileImage("image3.jpg", &maroto.RectProp{
-							Percent: 50.0,
-							Center:  true,
-							Top:     5.0,
-						})
-					})
-				})
-			},
-			func(t *testing.T, image *mocks.Image) {
-				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "image2.jpg", 0.0, 0.0, 1.0, 33.0, 100.0)
-				image.AssertCalled(t, "AddFromFile", "image3.jpg", 0.0, 0.0, 1.0, 33.0, 50.0)
-			},
-		},
-		{
-			"Twos images in two cols inside a row",
-			func() *mocks.Image {
-				image := &mocks.Image{}
-				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return image
-			},
-			func(m maroto.Maroto) {
-				m.Row("Row", 33, func() {
-					m.Col("Col", func() {
-						m.FileImage("image4.jpg", &maroto.RectProp{
-							Center: false,
-							Left:   5.0,
-						})
-					})
-					m.Col("Col", func() {
-						m.FileImage("image5.jpg", &maroto.RectProp{
-							Percent: 77.0,
-							Center:  true,
-							Top:     6.0,
-						})
-					})
-				})
-			},
-			func(t *testing.T, image *mocks.Image) {
-				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "image4.jpg", 0.0, 0.0, 2.0, 33.0, 100.0)
-				image.AssertCalled(t, "AddFromFile", "image5.jpg", 0.0, 1.0, 2.0, 33.0, 77.0)
-			},
-		},
-		{
-			"Two images in two cols inside two rows",
-			func() *mocks.Image {
-				image := &mocks.Image{}
-				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return image
-			},
-			func(m maroto.Maroto) {
-				m.Row("Row", 33, func() {
-					m.Col("Col", func() {
-						m.FileImage("image6.jpg", &maroto.RectProp{
-							Center: false,
-							Left:   5.0,
-						})
-					})
-				})
-				m.Row("Row", 33, func() {
-					m.Col("Col", func() {
-						m.FileImage("image7.jpg", &maroto.RectProp{
-							Center: false,
-							Left:   5.0,
-						})
-					})
-				})
-			},
-			func(t *testing.T, image *mocks.Image) {
-				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "image6.jpg", 0.0, 0.0, 1.0, 33.0, 100.0)
-				image.AssertCalled(t, "AddFromFile", "image7.jpg", 33.0, 0.0, 1.0, 33.0, 100.0)
-			},
-		},
-	}
-
-	for _, c := range cases {
-		// Arrange
-		pdf := basePdfTest()
-		math := baseMathTest()
-		image := c.image()
-
-		m := newMarotoTest(pdf, math, nil, nil, nil, image, nil)
-
-		// Act
-		c.act(m)
-
-		// Assert
-		c.assertImage(t, image)
 	}
 }
 
