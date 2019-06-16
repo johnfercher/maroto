@@ -147,9 +147,9 @@ func ExamplePdfMaroto_Signature() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_RowTableList demonstrates how to add a table
+// ExamplePdfMaroto_TableList demonstrates how to add a table
 // with multiple rows and columns
-func ExamplePdfMaroto_RowTableList() {
+func ExamplePdfMaroto_TableList() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 
 	headers := []string{"Header1", "Header2"}
