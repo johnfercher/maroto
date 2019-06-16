@@ -95,7 +95,7 @@ func (_m *Maroto) Row(label string, height float64, closure func()) {
 	_m.Called(label, height, closure)
 }
 
-// RowTableList provides a mock function with given fields: label, header, contents
+// TableList provides a mock function with given fields: label, header, contents
 func (_m *Maroto) RowTableList(label string, header []string, contents [][]string) {
 	_m.Called(label, header, contents)
 }
