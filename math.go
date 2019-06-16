@@ -22,16 +22,16 @@ func NewMath(pdf gofpdf.Pdf) Math {
 	}
 }
 
-func (m *math) GetWidthPerCol(qtdCols float64) float64 {
-	width, _ := m.pdf.GetPageSize()
-	left, _, right, _ := m.pdf.GetMargins()
+func (self *math) GetWidthPerCol(qtdCols float64) float64 {
+	width, _ := self.pdf.GetPageSize()
+	left, _, right, _ := self.pdf.GetMargins()
 	return (width - right - left) / qtdCols
 }
 
-func (m *math) GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, percent float64) (x float64, y float64, w float64, h float64) {
+func (self *math) GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, percent float64) (x float64, y float64, w float64, h float64) {
 	percent = percent / 100.0
-	width, _ := m.pdf.GetPageSize()
-	left, top, right, _ := m.pdf.GetMargins()
+	width, _ := self.pdf.GetPageSize()
+	left, top, right, _ := self.pdf.GetMargins()
 	widthPerCol := ((width - right - left) / qtdCols)
 
 	proportion := imageHeight / imageWidth
@@ -43,16 +43,16 @@ func (m *math) GetRectCenterColProperties(imageWidth float64, imageHeight float6
 		newImageWidth := colHeight / proportion * percent
 		newImageHeight := newImageWidth * proportion
 
-		widthCorrection := m.GetCenterCorrection(widthPerCol, newImageWidth)
-		heightCorrection := m.GetCenterCorrection(colHeight, newImageHeight)
+		widthCorrection := self.GetCenterCorrection(widthPerCol, newImageWidth)
+		heightCorrection := self.GetCenterCorrection(colHeight, newImageHeight)
 
 		x = (widthPerCol * indexCol) + left + widthCorrection
 		y = top + heightCorrection
 		w = newImageWidth
 		h = newImageHeight
 	} else {
-		widthCorrection := m.GetCenterCorrection(widthPerCol, newImageWidth)
-		heightCorrection := m.GetCenterCorrection(colHeight, newImageHeight)
+		widthCorrection := self.GetCenterCorrection(widthPerCol, newImageWidth)
+		heightCorrection := self.GetCenterCorrection(colHeight, newImageHeight)
 
 		x = (widthPerCol * indexCol) + left + widthCorrection
 		y = top + heightCorrection
@@ -63,6 +63,6 @@ func (m *math) GetRectCenterColProperties(imageWidth float64, imageHeight float6
 	return
 }
 
-func (m *math) GetCenterCorrection(outerSize, innerSize float64) float64 {
+func (self *math) GetCenterCorrection(outerSize, innerSize float64) float64 {
 	return (outerSize - innerSize) / 2.0
 }

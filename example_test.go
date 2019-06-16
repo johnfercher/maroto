@@ -7,7 +7,7 @@ import "github.com/johnfercher/maroto"
 func ExamplePdfMaroto_Line() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 
-	m.Line()
+	m.Line(1.0)
 
 	// Do more things and save...
 }
@@ -17,7 +17,7 @@ func ExamplePdfMaroto_Row() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	rowHeight := 5.0
 
-	m.Row("MyRow", rowHeight, func() {
+	m.Row(rowHeight, func() {
 		// ... Add some columns
 	})
 
@@ -30,7 +30,7 @@ func ExamplePdfMaroto_ColSpace() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	rowHeight := 5.0
 
-	m.Row("MyRow", rowHeight, func() {
+	m.Row(rowHeight, func() {
 		m.ColSpace()
 	})
 
@@ -43,7 +43,7 @@ func ExamplePdfMaroto_ColSpaces() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	rowHeight := 5.0
 
-	m.Row("MyRow", rowHeight, func() {
+	m.Row(rowHeight, func() {
 		m.ColSpaces(2)
 	})
 
@@ -56,8 +56,8 @@ func ExamplePdfMaroto_Col() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	rowHeight := 5.0
 
-	m.Row("MyRow", rowHeight, func() {
-		m.Col("MyCol", func() {
+	m.Row(rowHeight, func() {
+		m.Col(func() {
 			// Add Image, Text, Signature, QrCode or Barcode...
 		})
 	})
@@ -109,8 +109,8 @@ func ExamplePdfMaroto_Text() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	rowHeight := 5.0
 
-	m.Row("MyRow", rowHeight, func() {
-		m.Col("MyCol", func() {
+	m.Row(rowHeight, func() {
+		m.Col(func() {
 			m.Text("TextContent", &maroto.TextProp{
 				Size:   12.0,
 				Style:  maroto.BoldItalic,
@@ -134,8 +134,8 @@ func ExamplePdfMaroto_Signature() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	rowHeight := 5.0
 
-	m.Row("MyRow", rowHeight, func() {
-		m.Col("MyCol", func() {
+	m.Row(rowHeight, func() {
+		m.Col(func() {
 			m.Signature("LabelForSignature", &maroto.SignatureProp{
 				Size:   12.0,
 				Style:  maroto.BoldItalic,
@@ -161,7 +161,7 @@ func ExamplePdfMaroto_RowTableList() {
 	// 1 Row of header
 	// 2 Rows of contents
 	// Each row have 2 columns
-	m.RowTableList("RowTableList1", headers, contents, nil)
+	m.TableList(headers, contents, nil)
 
 	// Do more things and save...
 }
@@ -179,8 +179,8 @@ func ExamplePdfMaroto_FileImage() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	rowHeight := 5.0
 
-	m.Row("MyRow", rowHeight, func() {
-		m.Col("MyCol", func() {
+	m.Row(rowHeight, func() {
+		m.Col(func() {
 			m.FileImage("path/Image.jpg", &maroto.RectProp{
 				Left:    5,
 				Top:     5,
@@ -207,8 +207,8 @@ func ExamplePdfMaroto_Base64Image() {
 	rowHeight := 5.0
 	base64String := "y7seWGHE923Sdgs..."
 
-	m.Row("MyRow", rowHeight, func() {
-		m.Col("MyCol", func() {
+	m.Row(rowHeight, func() {
+		m.Col(func() {
 			m.Base64Image(base64String, maroto.Png, &maroto.RectProp{
 				Left:    5,
 				Top:     5,
