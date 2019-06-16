@@ -5,8 +5,6 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-const tableListTag = "header"
-
 // Maroto is the principal abstraction to create a PDF document.
 type Maroto interface {
 	// Grid System
@@ -110,11 +108,11 @@ func (self *PdfMaroto) Signature(label string, prop *SignatureProp) {
 // Headers have bold style, and localized at the top of table.
 // Contents are array of arrays. Each array is one line.
 func (self *PdfMaroto) TableList(header []string, contents [][]string, prop *TableListProp) {
-	if header == nil || len(header) == 0 {
+	if len(header) == 0 {
 		return
 	}
 
-	if contents == nil || len(contents) == 0 {
+	if len(contents) == 0 {
 		return
 	}
 
