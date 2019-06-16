@@ -24,27 +24,27 @@ func NewCode(pdf gofpdf.Pdf, math Math) Code {
 	}
 }
 
-func (c *code) AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) {
-	key := barcode.RegisterQR(c.pdf, code, qr.H, qr.Unicode)
+func (self *code) AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) {
+	key := barcode.RegisterQR(self.pdf, code, qr.H, qr.Unicode)
 
-	actualWidthPerCol := c.math.GetWidthPerCol(qtdCols)
+	actualWidthPerCol := self.math.GetWidthPerCol(qtdCols)
 
-	x, y, w, h := c.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol, qtdCols, colHeight, indexCol, percent)
+	x, y, w, h := self.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol, qtdCols, colHeight, indexCol, percent)
 
-	barcode.Barcode(c.pdf, key, x, y+marginTop, w, h, false)
+	barcode.Barcode(self.pdf, key, x, y+marginTop, w, h, false)
 }
 
-func (c *code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) (err error) {
+func (self *code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) (err error) {
 	bcode, err := code128.Encode(code)
 
 	if err != nil {
 		return
 	}
 
-	actualWidthPerCol := c.math.GetWidthPerCol(qtdCols)
+	actualWidthPerCol := self.math.GetWidthPerCol(qtdCols)
 
-	x, y, w, h := c.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol*0.33, qtdCols, colHeight, indexCol, percent)
+	x, y, w, h := self.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol*0.33, qtdCols, colHeight, indexCol, percent)
 
-	barcode.Barcode(c.pdf, barcode.Register(bcode), x, y+marginTop, w, h, false)
+	barcode.Barcode(self.pdf, barcode.Register(bcode), x, y+marginTop, w, h, false)
 	return
 }
