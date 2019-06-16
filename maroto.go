@@ -8,8 +8,8 @@ import (
 // Maroto is the principal abstraction to create a PDF document.
 type Maroto interface {
 	// Grid System
-	Row(label string, height float64, closure func())
-	Col(label string, closure func())
+	Row(height float64, closure func())
+	Col(closure func())
 	ColSpace()
 	ColSpaces(qtd int)
 
@@ -18,15 +18,17 @@ type Maroto interface {
 	GetDebugMode() bool
 	GetPageSize() (float64, float64)
 
-	// Components
-	RowTableList(label string, headers []string, contents [][]string, tableListProp *TableListProp)
-	Text(text string, fontProp *TextProp)
-	FileImage(filePathName string, rectProp *RectProp)
-	Base64Image(base64 string, extension Extension, rectProp *RectProp)
-	Barcode(code string, rectProp *RectProp) error
-	QrCode(code string, rectProp *RectProp)
-	Signature(label string, signatureProp *SignatureProp)
-	Line()
+	// Outside Col/Row Components
+	TableList(header []string, contents [][]string, prop *TableListProp)
+	Line(spaceHeight float64)
+
+	// Inside Col/Row Components
+	Text(text string, prop *TextProp)
+	FileImage(filePathName string, prop *RectProp)
+	Base64Image(base64 string, extension Extension, prop *RectProp)
+	Barcode(code string, prop *RectProp) error
+	QrCode(code string, prop *RectProp)
+	Signature(label string, prop *SignatureProp)
 
 	// File System
 	OutputFileAndClose(filePathName string) error
@@ -88,68 +90,76 @@ func NewMaroto(orientation Orientation, pageSize PageSize) Maroto {
 // Add a Signature space with a label TextHelper inside a column.
 // Create a line with the width from a column
 // and add a Text at the bottom of the line.
-func (m *PdfMaroto) Signature(label string, signatureProp *SignatureProp) {
-	if signatureProp == nil {
-		signatureProp = &SignatureProp{}
+func (self *PdfMaroto) Signature(label string, prop *SignatureProp) {
+	if prop == nil {
+		prop = &SignatureProp{}
 	}
 
-	signatureProp.MakeValid()
+	prop.MakeValid()
 
-	qtdCols := float64(len(m.colsClosures))
-	sumOfYOffsets := m.offsetY + m.rowHeight
+	qtdCols := float64(len(self.colsClosures))
+	sumOfYOffsets := self.offsetY + self.rowHeight
 
-	m.SignHelper.AddSpaceFor(label, signatureProp.Family, signatureProp.Style, signatureProp.Size, qtdCols, sumOfYOffsets, m.rowColCount)
+	self.SignHelper.AddSpaceFor(label, prop.Family, prop.Style, prop.Size, qtdCols, sumOfYOffsets, self.rowColCount)
 }
 
 // Create a table with multiple rows and columns.
 // Headers define the amount of columns from each row.
 // Headers have bold style, and localized at the top of table.
 // Contents are array of arrays. Each array is one line.
-func (m *PdfMaroto) RowTableList(label string, headers []string, contents [][]string, tableListProp *TableListProp) {
-	if tableListProp == nil {
-		tableListProp = &TableListProp{}
+func (self *PdfMaroto) TableList(header []string, contents [][]string, prop *TableListProp) {
+	if len(header) == 0 {
+		return
 	}
 
-	tableListProp.MakeValid()
+	if len(contents) == 0 {
+		return
+	}
 
-	m.Row("", tableListProp.HHeight, func() {
+	if prop == nil {
+		prop = &TableListProp{}
+	}
+
+	prop.MakeValid()
+
+	self.Row(prop.HHeight, func() {
 		headerMarginTop := 2.0
-		qtdCols := float64(len(headers))
+		qtdCols := float64(len(header))
 
-		for i, h := range headers {
+		for i, h := range header {
 			hs := h
 			is := i
 
-			m.Col("", func() {
-				if headerMarginTop > m.rowHeight {
-					headerMarginTop = m.rowHeight
+			self.Col(func() {
+				if headerMarginTop > self.rowHeight {
+					headerMarginTop = self.rowHeight
 				}
 
 				reason := hs
 
-				sumOyYOffesets := headerMarginTop + m.offsetY + 2.5
+				sumOyYOffesets := headerMarginTop + self.offsetY + 2.5
 
-				m.TextHelper.Add(reason, tableListProp.HFontFamily, tableListProp.HFontStyle, tableListProp.HFontSize, sumOyYOffesets, tableListProp.Align, float64(is), qtdCols)
+				self.TextHelper.Add(reason, prop.HFontFamily, prop.HFontStyle, prop.HFontSize, sumOyYOffesets, prop.Align, float64(is), qtdCols)
 			})
 		}
 	})
 
-	m.Row("", tableListProp.Space, func() {
-		m.ColSpace()
+	self.Row(prop.Space, func() {
+		self.ColSpace()
 	})
 
 	contentMarginTop := 2.0
 
 	for _, content := range contents {
-		m.Row("", tableListProp.CHeight, func() {
+		self.Row(prop.CHeight, func() {
 			for j, c := range content {
 				cs := c
 				js := j
-				hs := float64(len(headers))
-				sumOyYOffesets := contentMarginTop + m.offsetY + 2.0
+				hs := float64(len(header))
+				sumOyYOffesets := contentMarginTop + self.offsetY + 2.0
 
-				m.Col("", func() {
-					m.TextHelper.Add(cs, tableListProp.CFontFamily, tableListProp.CFontStyle, tableListProp.CFontSize, sumOyYOffesets, tableListProp.Align, float64(js), hs)
+				self.Col(func() {
+					self.TextHelper.Add(cs, prop.CFontFamily, prop.CFontStyle, prop.CFontSize, sumOyYOffesets, prop.Align, float64(js), hs)
 				})
 			}
 		})
@@ -158,196 +168,193 @@ func (m *PdfMaroto) RowTableList(label string, headers []string, contents [][]st
 
 // Enable debug mode.
 // Draw borders in all columns created.
-func (m *PdfMaroto) SetDebugMode(on bool) {
-	m.DebugMode = on
+func (self *PdfMaroto) SetDebugMode(on bool) {
+	self.DebugMode = on
 }
 
 // Get actual debug mode.
-func (m *PdfMaroto) GetDebugMode() bool {
-	return m.DebugMode
+func (self *PdfMaroto) GetDebugMode() bool {
+	return self.DebugMode
 }
 
 // Get actual page size
-func (m *PdfMaroto) GetPageSize() (float64, float64) {
-	return m.Pdf.GetPageSize()
+func (self *PdfMaroto) GetPageSize() (float64, float64) {
+	return self.Pdf.GetPageSize()
 }
 
 // Draw a line from margin left to margin right
 // in the currently row.
-func (m *PdfMaroto) Line() {
-	m.Row("", 1, func() {
-		m.Col("", func() {
-			width, _ := m.Pdf.GetPageSize()
-			left, top, right, _ := m.Pdf.GetMargins()
+func (self *PdfMaroto) Line(spaceHeight float64) {
+	self.Row(spaceHeight, func() {
+		self.Col(func() {
+			width, _ := self.Pdf.GetPageSize()
+			left, top, right, _ := self.Pdf.GetMargins()
 
-			m.Pdf.Line(left, m.offsetY+top, width-right, m.offsetY+top)
+			self.Pdf.Line(left, self.offsetY+top+(spaceHeight/2.0), width-right, self.offsetY+top+(spaceHeight/2.0))
 		})
 	})
 }
 
 // Add a row and enable add columns inside the row.
-func (m *PdfMaroto) Row(label string, height float64, closure func()) {
-	m.rowHeight = height
-	m.rowColCount = 0
+func (self *PdfMaroto) Row(height float64, closure func()) {
+	self.rowHeight = height
+	self.rowColCount = 0
 
-	_, pageHeight := m.Pdf.GetPageSize()
-	_, top, _, bottom := m.Pdf.GetMargins()
+	_, pageHeight := self.Pdf.GetPageSize()
+	_, top, _, bottom := self.Pdf.GetMargins()
 
-	if m.offsetY > pageHeight-bottom-top-m.rowHeight {
-		m.offsetY = 0
+	if self.offsetY > pageHeight-bottom-top-self.rowHeight {
+		self.offsetY = 0
 	}
 
 	closure()
 
-	for _, colClosure := range m.colsClosures {
+	for _, colClosure := range self.colsClosures {
 		colClosure()
 	}
 
-	m.colsClosures = nil
-	m.offsetY += m.rowHeight
-	m.Pdf.Ln(m.rowHeight)
+	self.colsClosures = nil
+	self.offsetY += self.rowHeight
+	self.Pdf.Ln(self.rowHeight)
 }
 
 // Create a column inside a row and enable to add
 // components inside.
-func (m *PdfMaroto) Col(label string, closure func()) {
-	m.colsClosures = append(m.colsClosures, func() {
-		widthPerCol := m.Math.GetWidthPerCol(float64(len(m.colsClosures)))
-		m.createColSpace(widthPerCol)
+func (self *PdfMaroto) Col(closure func()) {
+	self.colsClosures = append(self.colsClosures, func() {
+		widthPerCol := self.Math.GetWidthPerCol(float64(len(self.colsClosures)))
+		self.createColSpace(widthPerCol)
 		closure()
-		m.rowColCount++
+		self.rowColCount++
 	})
 }
 
 // Create an empty column inside a row.
-func (m *PdfMaroto) ColSpace() {
-	m.colsClosures = append(m.colsClosures, func() {
-		widthPerCol := m.Math.GetWidthPerCol(float64(len(m.colsClosures)))
-		m.createColSpace(widthPerCol)
-		m.rowColCount++
+func (self *PdfMaroto) ColSpace() {
+	self.colsClosures = append(self.colsClosures, func() {
+		widthPerCol := self.Math.GetWidthPerCol(float64(len(self.colsClosures)))
+		self.createColSpace(widthPerCol)
+		self.rowColCount++
 	})
 }
 
 // Create some empty columns.
-func (m *PdfMaroto) ColSpaces(qtd int) {
+func (self *PdfMaroto) ColSpaces(qtd int) {
 	for i := 0; i < qtd; i++ {
-		m.ColSpace()
+		self.ColSpace()
 	}
 }
 
 // Add a Text inside a column.
-func (m *PdfMaroto) Text(text string, fontProp *TextProp) {
-	if fontProp == nil {
-		fontProp = &TextProp{}
+func (self *PdfMaroto) Text(text string, prop *TextProp) {
+	if prop == nil {
+		prop = &TextProp{}
 	}
 
-	fontProp.MakeValid()
+	prop.MakeValid()
 
-	if fontProp.Top > m.rowHeight {
-		fontProp.Top = m.rowHeight
+	if prop.Top > self.rowHeight {
+		prop.Top = self.rowHeight
 	}
 
-	sumOfYOffsets := fontProp.Top + m.offsetY
+	sumOfYOffsets := prop.Top + self.offsetY
 
-	m.TextHelper.Add(text, fontProp.Family, fontProp.Style, fontProp.Size, sumOfYOffsets, fontProp.Align, m.rowColCount, float64(len(m.colsClosures)))
+	self.TextHelper.Add(text, prop.Family, prop.Style, prop.Size, sumOfYOffsets, prop.Align, self.rowColCount, float64(len(self.colsClosures)))
 }
 
 // Add an Image reading from disk inside a column.
 // Defining Image properties.
-func (m *PdfMaroto) FileImage(filePathName string, rectProp *RectProp) {
-	if rectProp == nil {
-		rectProp = &RectProp{}
+func (self *PdfMaroto) FileImage(filePathName string, prop *RectProp) {
+	if prop == nil {
+		prop = &RectProp{}
 	}
 
-	rectProp.MakeValid()
+	prop.MakeValid()
 
-	qtdCols := float64(len(m.colsClosures))
+	qtdCols := float64(len(self.colsClosures))
+	sumOfyOffsets := self.offsetY + prop.Top
 
-	// TODO: Implements not centered
-	if rectProp.Center {
-		m.Image.AddFromFile(filePathName, m.offsetY, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+	if prop.Center {
+		self.Image.AddFromFile(filePathName, sumOfyOffsets, self.rowColCount, qtdCols, self.rowHeight, prop.Percent)
 	} else {
-		m.Image.AddFromFile(filePathName, m.offsetY, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+		self.Image.AddFromFile(filePathName, sumOfyOffsets, self.rowColCount, qtdCols, self.rowHeight, prop.Percent)
 	}
 }
 
 // Add an Image reading byte slices.
 // Defining Image properties.
-func (m *PdfMaroto) Base64Image(base64 string, extension Extension, rectProp *RectProp) {
-	if rectProp == nil {
-		rectProp = &RectProp{}
+func (self *PdfMaroto) Base64Image(base64 string, extension Extension, prop *RectProp) {
+	if prop == nil {
+		prop = &RectProp{}
 	}
 
-	rectProp.MakeValid()
+	prop.MakeValid()
 
-	qtdCols := float64(len(m.colsClosures))
-	sumOfyOffsets := m.offsetY + rectProp.Top
+	qtdCols := float64(len(self.colsClosures))
+	sumOfyOffsets := self.offsetY + prop.Top
 
-	// TODO: Implements not centered
-	if rectProp.Center {
-		m.Image.AddFromBase64(base64, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent, extension)
+	if prop.Center {
+		self.Image.AddFromBase64(base64, sumOfyOffsets, self.rowColCount, qtdCols, self.rowHeight, prop.Percent, extension)
 	} else {
-		m.Image.AddFromBase64(base64, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent, extension)
+		self.Image.AddFromBase64(base64, sumOfyOffsets, self.rowColCount, qtdCols, self.rowHeight, prop.Percent, extension)
 	}
 }
 
 // Save pdf in disk.
-func (m *PdfMaroto) OutputFileAndClose(filePathName string) (err error) {
-	err = m.Pdf.OutputFileAndClose(filePathName)
+func (self *PdfMaroto) OutputFileAndClose(filePathName string) (err error) {
+	err = self.Pdf.OutputFileAndClose(filePathName)
 	return
 }
 
 // Get PDF in byte slices
-func (m *PdfMaroto) Output() (bytes.Buffer, error) {
+func (self *PdfMaroto) Output() (bytes.Buffer, error) {
 	var buffer bytes.Buffer
-	err := m.Pdf.Output(&buffer)
+	err := self.Pdf.Output(&buffer)
 	return buffer, err
 }
 
-func (m *PdfMaroto) Barcode(code string, rectProp *RectProp) (err error) {
-	if rectProp == nil {
-		rectProp = &RectProp{}
+func (self *PdfMaroto) Barcode(code string, prop *RectProp) (err error) {
+	if prop == nil {
+		prop = &RectProp{}
 	}
 
-	rectProp.MakeValid()
+	prop.MakeValid()
 
-	qtdCols := float64(len(m.colsClosures))
-	sumOfyOffsets := m.offsetY + rectProp.Top
+	qtdCols := float64(len(self.colsClosures))
+	sumOfyOffsets := self.offsetY + prop.Top
 
-	// TODO: Implements not centered
-	if rectProp.Center {
-		err = m.Code.AddBar(code, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+	if prop.Center {
+		err = self.Code.AddBar(code, sumOfyOffsets, self.rowColCount, qtdCols, self.rowHeight, prop.Percent)
 	} else {
-		err = m.Code.AddBar(code, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+		err = self.Code.AddBar(code, sumOfyOffsets, self.rowColCount, qtdCols, self.rowHeight, prop.Percent)
 	}
 
 	return
 }
 
-func (m *PdfMaroto) QrCode(code string, rectProp *RectProp) {
-	if rectProp == nil {
-		rectProp = &RectProp{}
+func (self *PdfMaroto) QrCode(code string, prop *RectProp) {
+	if prop == nil {
+		prop = &RectProp{}
 	}
 
-	rectProp.MakeValid()
+	prop.MakeValid()
 
-	qtdCols := float64(len(m.colsClosures))
-	sumOfyOffsets := m.offsetY + rectProp.Top
+	qtdCols := float64(len(self.colsClosures))
+	sumOfyOffsets := self.offsetY + prop.Top
 
-	// TODO: Implements not centered
-	if rectProp.Center {
-		m.Code.AddQr(code, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+	if prop.Center {
+		self.Code.AddQr(code, sumOfyOffsets, self.rowColCount, qtdCols, self.rowHeight, prop.Percent)
 	} else {
-		m.Code.AddQr(code, sumOfyOffsets, m.rowColCount, qtdCols, m.rowHeight, rectProp.Percent)
+		self.Code.AddQr(code, sumOfyOffsets, self.rowColCount, qtdCols, self.rowHeight, prop.Percent)
 	}
 }
 
-func (m *PdfMaroto) createColSpace(actualWidthPerCol float64) {
+func (self *PdfMaroto) createColSpace(actualWidthPerCol float64) {
 	border := ""
 
-	if m.DebugMode {
+	if self.DebugMode {
 		border = "1"
 	}
 
-	m.Pdf.CellFormat(actualWidthPerCol, m.rowHeight, "", border, 0.0, "C", false, 0.0, "")
+	self.Pdf.CellFormat(actualWidthPerCol, self.rowHeight, "", border, 0.0, "C", false, 0.0, "")
 }

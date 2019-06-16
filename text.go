@@ -22,19 +22,19 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) Text {
 	}
 }
 
-func (m *text) Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align, actualCol float64, qtdCols float64) {
-	actualWidthPerCol := m.math.GetWidthPerCol(qtdCols)
+func (self *text) Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align, actualCol float64, qtdCols float64) {
+	actualWidthPerCol := self.math.GetWidthPerCol(qtdCols)
 
-	m.font.SetFont(fontFamily, fontStyle, fontSize)
+	self.font.SetFont(fontFamily, fontStyle, fontSize)
 
-	left, top, _, _ := m.pdf.GetMargins()
+	left, top, _, _ := self.pdf.GetMargins()
 
 	if align == Left {
-		m.pdf.Text(actualCol*actualWidthPerCol+left, marginTop+top, text)
+		self.pdf.Text(actualCol*actualWidthPerCol+left, marginTop+top, text)
 		return
 	}
 
-	stringWidth := m.pdf.GetStringWidth(text)
+	stringWidth := self.pdf.GetStringWidth(text)
 	dx := (actualWidthPerCol - stringWidth) / 2
-	m.pdf.Text(dx+actualCol*actualWidthPerCol+left, marginTop+top, text)
+	self.pdf.Text(dx+actualCol*actualWidthPerCol+left, marginTop+top, text)
 }
