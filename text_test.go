@@ -35,6 +35,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
+				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
 			func() *mocks.Math {
@@ -72,6 +73,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
+				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
 			func() *mocks.Math {
