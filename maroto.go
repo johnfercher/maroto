@@ -9,6 +9,7 @@ import (
 type Maroto interface {
 	// Grid System
 	Row(height float64, closure func())
+	RegisterHeader(closure func())
 	Col(closure func())
 	ColSpace()
 	ColSpaces(qtd int)
@@ -37,18 +38,24 @@ type Maroto interface {
 
 // PdfMaroto is the principal structure which implements Maroto abstraction
 type PdfMaroto struct {
-	Pdf          gofpdf.Pdf
-	Math         Math
-	Font         Font
-	TextHelper   Text
-	SignHelper   Signature
-	Image        Image
-	Code         Code
-	offsetY      float64
-	rowHeight    float64
-	rowColCount  float64
-	colsClosures []func()
-	DebugMode    bool
+	Pdf                       gofpdf.Pdf
+	Math                      Math
+	Font                      Font
+	TextHelper                Text
+	SignHelper                Signature
+	Image                     Image
+	Code                      Code
+	offsetY                   float64
+	rowHeight                 float64
+	rowColCount               float64
+	colsClosures              []func()
+	headerClosure             func()
+	headerFooterContextActive bool
+	DebugMode                 bool
+}
+
+func (self *PdfMaroto) RegisterHeader(closure func()) {
+	self.headerClosure = closure
 }
 
 // Create a Maroto instance returning a pointer to PdfMaroto
@@ -197,15 +204,23 @@ func (self *PdfMaroto) Line(spaceHeight float64) {
 
 // Add a row and enable add columns inside the row.
 func (self *PdfMaroto) Row(height float64, closure func()) {
-	self.rowHeight = height
-	self.rowColCount = 0
-
 	_, pageHeight := self.Pdf.GetPageSize()
 	_, top, _, bottom := self.Pdf.GetMargins()
 
-	if self.offsetY > pageHeight-bottom-top-self.rowHeight {
+	if self.offsetY+height > pageHeight-bottom-top {
 		self.offsetY = 0
 	}
+
+	if !self.headerFooterContextActive && self.headerClosure != nil {
+		if self.offsetY == 0 {
+			self.headerFooterContextActive = true
+			self.headerClosure()
+			self.headerFooterContextActive = false
+		}
+	}
+
+	self.rowHeight = height
+	self.rowColCount = 0
 
 	closure()
 

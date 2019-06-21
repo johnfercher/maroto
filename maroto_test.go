@@ -289,17 +289,11 @@ func TestPdfMaroto_Signature(t *testing.T) {
 func TestPdfMaroto_Text(t *testing.T) {
 	cases := []struct {
 		name   string
-		text   func() *mocks.Text
 		assert func(t *testing.T, signature *mocks.Text)
 		act    func(m maroto.Maroto)
 	}{
 		{
 			"One text inside one column, inside a row, without props",
-			func() *mocks.Text {
-				text := &mocks.Text{}
-				text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return text
-			},
 			func(t *testing.T, text *mocks.Text) {
 				text.AssertNumberOfCalls(t, "Add", 1)
 				text.AssertCalled(t, "Add", "Text1", maroto.Arial, maroto.Normal, 10.0, 0.0, maroto.Left, 0.0, 1.0)
@@ -314,11 +308,6 @@ func TestPdfMaroto_Text(t *testing.T) {
 		},
 		{
 			"Two different text inside one colum, inside one row",
-			func() *mocks.Text {
-				text := &mocks.Text{}
-				text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return text
-			},
 			func(t *testing.T, text *mocks.Text) {
 				text.AssertNumberOfCalls(t, "Add", 2)
 				text.AssertCalled(t, "Add", "Text2", maroto.Arial, maroto.Normal, 10.0, 0.0, maroto.Left, 0.0, 1.0)
@@ -341,11 +330,6 @@ func TestPdfMaroto_Text(t *testing.T) {
 		},
 		{
 			"Two different text with different columns, inside one row",
-			func() *mocks.Text {
-				text := &mocks.Text{}
-				text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return text
-			},
 			func(t *testing.T, text *mocks.Text) {
 				text.AssertNumberOfCalls(t, "Add", 2)
 				text.AssertCalled(t, "Add", "Text4", maroto.Arial, maroto.Normal, 10.0, 0.0, maroto.Left, 0.0, 2.0)
@@ -370,11 +354,6 @@ func TestPdfMaroto_Text(t *testing.T) {
 		},
 		{
 			"Two different text with different columns, inside one row",
-			func() *mocks.Text {
-				text := &mocks.Text{}
-				text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return text
-			},
 			func(t *testing.T, text *mocks.Text) {
 				text.AssertNumberOfCalls(t, "Add", 2)
 				text.AssertCalled(t, "Add", "Text6", maroto.Arial, maroto.Normal, 10.0, 0.0, maroto.Left, 0.0, 1.0)
@@ -399,11 +378,6 @@ func TestPdfMaroto_Text(t *testing.T) {
 		},
 		{
 			"When top is greater than row height",
-			func() *mocks.Text {
-				text := &mocks.Text{}
-				text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return text
-			},
 			func(t *testing.T, text *mocks.Text) {
 				text.AssertNumberOfCalls(t, "Add", 1)
 				text.AssertCalled(t, "Add", "Text8", maroto.Arial, maroto.Normal, 10.0, 40.0, maroto.Left, 0.0, 1.0)
@@ -422,7 +396,7 @@ func TestPdfMaroto_Text(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		text := c.text()
+		text := baseTextTest()
 		pdf := basePdfTest()
 		math := baseMathTest()
 		m := newMarotoTest(pdf, math, nil, text, nil, nil, nil)
@@ -1293,6 +1267,59 @@ func TestPdfMaroto_OutputFileAndClose(t *testing.T) {
 	}
 }
 
+func TestPdfMaroto_RegisterHeader(t *testing.T) {
+	cases := []struct {
+		name        string
+		headerCalls int
+		act         func(m maroto.Maroto)
+		assert      func(t *testing.T, headerCalls int)
+	}{
+		{
+			"Always execute header once",
+			0,
+			func(m maroto.Maroto) {
+				m.Row(20, func() {
+					m.ColSpace()
+				})
+			},
+			func(t *testing.T, headerCalls int) {
+				assert.Equal(t, headerCalls, 1)
+			},
+		},
+		{
+			"Execute twice when create a second page",
+			0,
+			func(m maroto.Maroto) {
+				header, contents := getContents()
+				m.TableList(header, contents, nil)
+			},
+			func(t *testing.T, headerCalls int) {
+				assert.Equal(t, headerCalls, 2)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := basePdfTest()
+		math := baseMathTest()
+		text := baseTextTest()
+		headerCalls := c.headerCalls
+
+		m := newMarotoTest(pdf, math, nil, text, nil, nil, nil)
+
+		m.RegisterHeader(func() {
+			headerCalls++
+		})
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, headerCalls)
+	}
+}
+
 func newMarotoTest(fpdf *mocks.Pdf, math *mocks.Math, font *mocks.Font, text *mocks.Text, signature *mocks.Signature, image *mocks.Image, code *mocks.Code) maroto.Maroto {
 	m := &maroto.PdfMaroto{
 		Pdf:        fpdf,
@@ -1320,4 +1347,25 @@ func baseMathTest() *mocks.Math {
 	math := &mocks.Math{}
 	math.On("GetWidthPerCol", mock.Anything).Return(20.0)
 	return math
+}
+
+func baseTextTest() *mocks.Text {
+	text := &mocks.Text{}
+	text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+	return text
+}
+
+func getContents() ([]string, [][]string) {
+	header := []string{"j = 0", "j = 1", "j = 2", "j = 4"}
+
+	contents := [][]string{}
+	for i := 0; i < 20; i++ {
+		content := []string{}
+		for j := 0; j < 4; j++ {
+			content = append(content, fmt.Sprintf("i = %d, j = %d", i, j))
+		}
+		contents = append(contents, content)
+	}
+
+	return header, contents
 }
