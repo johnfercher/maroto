@@ -7,6 +7,7 @@ import (
 	"github.com/jung-kurt/gofpdf/contrib/barcode"
 )
 
+// Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF
 type Code interface {
 	AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64)
 	AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) (err error)
@@ -17,6 +18,7 @@ type code struct {
 	math Math
 }
 
+// NewCode create a Code
 func NewCode(pdf gofpdf.Pdf, math Math) Code {
 	return &code{
 		pdf,
@@ -24,6 +26,7 @@ func NewCode(pdf gofpdf.Pdf, math Math) Code {
 	}
 }
 
+// AddQr create a QrCode inside a cell
 func (self *code) AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) {
 	key := barcode.RegisterQR(self.pdf, code, qr.H, qr.Unicode)
 
@@ -34,6 +37,7 @@ func (self *code) AddQr(code string, marginTop float64, indexCol float64, qtdCol
 	barcode.Barcode(self.pdf, key, x, y+marginTop, w, h, false)
 }
 
+// AddBar create a Barcode inside a cell
 func (self *code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) (err error) {
 	bcode, err := code128.Encode(code)
 

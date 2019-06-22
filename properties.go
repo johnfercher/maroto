@@ -1,6 +1,6 @@
 package maroto
 
-// Represents rectangle properties
+// RectProp represents properties from a rectangle (Image, QrCode or Barcode) inside a cell
 type RectProp struct {
 	Left    float64
 	Top     float64
@@ -8,7 +8,7 @@ type RectProp struct {
 	Center  bool
 }
 
-// Represents TextHelper properties
+// TextProp represents properties from a Text inside a cell
 type TextProp struct {
 	Top    float64
 	Family Family
@@ -17,14 +17,14 @@ type TextProp struct {
 	Align  Align
 }
 
-// Represents Signature properties
+// SignatureProp represents properties from a Signature inside a cell
 type SignatureProp struct {
 	Family Family
 	Style  Style
 	Size   float64
 }
 
-// Represents TableList Properties
+// TableListProp represents properties from a TableList
 type TableListProp struct {
 	HFontSize   float64
 	HFontFamily Family
@@ -38,7 +38,8 @@ type TableListProp struct {
 	CHeight     float64
 }
 
-// Make rectangle properties valid
+// MakeValid from RectProp means will make the properties from a rectangle reliable to fit inside a cell
+// and define default values for a rectangle
 func (r *RectProp) MakeValid() {
 	if r.Percent <= 0.0 || r.Percent > 100.0 {
 		r.Percent = 100.0
@@ -58,7 +59,7 @@ func (r *RectProp) MakeValid() {
 	}
 }
 
-// Make Text properties valid
+// MakeValid from TextProp define default values for a Text
 func (f *TextProp) MakeValid() {
 	if f.Family == "" {
 		f.Family = Arial
@@ -81,7 +82,7 @@ func (f *TextProp) MakeValid() {
 	}
 }
 
-// Make Signature properties valid
+// MakeValid from SignatureProp define default values for a Signature
 func (f *SignatureProp) MakeValid() {
 	if f.Family == "" {
 		f.Family = Arial
@@ -96,6 +97,7 @@ func (f *SignatureProp) MakeValid() {
 	}
 }
 
+// MakeValid from TableListProp define default values for a TableList
 func (t *TableListProp) MakeValid() {
 	if t.HFontSize == 0.0 {
 		t.HFontSize = 10.0

@@ -4,6 +4,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
+// Signature is the abstraction which deals of how to add a signature space inside PDF
 type Signature interface {
 	AddSpaceFor(label string, fontFamily Family, fontStyle Style, fontSize float64, qtdCols float64, marginTop float64, actualCol float64)
 }
@@ -14,6 +15,7 @@ type signature struct {
 	text Text
 }
 
+// NewSignature create a Signature
 func NewSignature(pdf gofpdf.Pdf, math Math, text Text) Signature {
 	return &signature{
 		pdf,
@@ -22,6 +24,7 @@ func NewSignature(pdf gofpdf.Pdf, math Math, text Text) Signature {
 	}
 }
 
+// AddSpaceFor create a space for a signature inside a cell
 func (self *signature) AddSpaceFor(label string, fontFamily Family, fontStyle Style, fontSize float64, qtdCols float64, marginTop float64, actualCol float64) {
 	widthPerCol := self.math.GetWidthPerCol(qtdCols)
 	left, _, right, _ := self.pdf.GetMargins()
