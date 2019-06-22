@@ -4,6 +4,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
+// Text is the abstraction which deals of how to add text inside PDF
 type Text interface {
 	Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align, actualCol float64, qtdCols float64)
 }
@@ -14,6 +15,7 @@ type text struct {
 	font Font
 }
 
+// NewText create a Text
 func NewText(pdf gofpdf.Pdf, math Math, font Font) Text {
 	return &text{
 		pdf,
@@ -22,6 +24,7 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) Text {
 	}
 }
 
+// Add a text inside a cell.
 func (self *text) Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align, actualCol float64, qtdCols float64) {
 	actualWidthPerCol := self.math.GetWidthPerCol(qtdCols)
 

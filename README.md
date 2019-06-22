@@ -1,7 +1,25 @@
-# Maroto [![Travis](https://img.shields.io/badge/coverage-95.5%25-brightgreen.svg)][travis]
+# Maroto [![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://godoc.org/github.com/johnfercher/maroto) [![Travis](https://travis-ci.com/johnfercher/maroto.svg?branch=master)][travis] [![Code Coverage](https://img.shields.io/badge/coverage-95.5%25-brightgreen.svg)][test] [![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
+
+You can write your PDFs like you are creating a site using Bootstrap. A Row may have many Cols, and a Col may have many components. 
+Besides that, pages will be added when content may extrapolate the useful area. You can define a header which will be added
+always when a new page appear, in this case, a header may have many rows, lines or tablelist. 
+
+## Installation
+
+* With `go get`:
+
+```bash
+go get -u github.com/johnfercher/maroto
+```
+
+* With `dep`:
+
+```bash
+dep ensure -add github.com/johnfercher/maroto
+```
 
 ## Features
 * Grid System
@@ -159,3 +177,4 @@ func main() {
 ```
 
 [travis]: https://travis-ci.com/johnfercher/maroto
+[test]: test.sh
