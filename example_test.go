@@ -168,7 +168,7 @@ func ExamplePdfMaroto_TableList() {
 
 // ExamplePdfMaroto_FileImage demonstrates how add a Image
 // reading from disk.
-// When rectProp is nil, method make Image fullfill the context
+// When rectProp is nil, method make Image fulfill the context
 // cell, based on width and cell from Image and cell.
 // When center is true, left and top has no effect.
 // Percent represents the width/height of the Image inside the cell:
