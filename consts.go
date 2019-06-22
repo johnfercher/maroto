@@ -1,85 +1,85 @@
 package maroto
 
-// Representation of a family Font
+// Family is a representation of a family Font
 type Family string
 
 const (
-	// Represents an arial Font
+	// Arial represents an arial Font
 	Arial Family = "arial"
-	// Represents a helvetica Font
+	// Helvetica represents a helvetica Font
 	Helvetica Family = "helvetica"
-	// Represents a symbol Font
+	// Symbol represents a symbol Font
 	Symbol Family = "symbol"
-	// Represents a zapfdingbats Font
+	// ZapBats represents a zapfdingbats Font
 	ZapBats Family = "zapfdingbats"
-	// Represents a courier Font
+	// Courier represents a courier Font
 	Courier Family = "courier"
 )
 
-// Representation of a column align
+// Align is arRepresentation of a column align
 type Align string
 
 const (
-	// Represents a left align
+	// Left represents a left horizontal align
 	Left Align = "L"
-	// Represents a right align
+	// Right represents a right horizontal align
 	Right Align = "R"
-	// Represents a center align
+	// Center represents a center horizontal and/or vertical align
 	Center Align = "C"
-	// Represents a top align
+	// Top represents a top vertical align
 	Top Align = "T"
-	// Represents a bottom align
+	// Bottom represents a bottom vertical align
 	Bottom Align = "B"
-	// Represents a middle align
+	// Middle represents a middle align (from gofpdf)
 	Middle Align = "M"
 )
 
-// Representation of a page orientation
+// Orientation is a representation of a page orientation
 type Orientation string
 
 const (
-	// Represents the portrait orientation.
+	// Portrait represents the portrait orientation.
 	Portrait Orientation = "P"
-	// Represents the landscape orientation.
+	// Landscape represents the landscape orientation.
 	Landscape Orientation = "L"
 )
 
-// Representation of an page size
+// PageSize is a representation of an page size
 type PageSize string
 
 const (
-	// Represents DIN/ISO A3 page size
+	// A3 represents DIN/ISO A3 page size
 	A3 PageSize = "A3"
-	// Represents DIN/ISO A4 page size
+	// A4 represents DIN/ISO A4 page size
 	A4 PageSize = "A4"
-	// Represents DIN/ISO A5 page size
+	// A5 represents DIN/ISO A5 page size
 	A5 PageSize = "A5"
-	// Represents US Letter page size
+	// Letter represents US Letter page size
 	Letter PageSize = "Letter"
-	// Represents US Legal page size
+	// Legal represents US Legal page size
 	Legal PageSize = "Legal"
 )
 
-// Representation of a style Font
+// Style is a representation of a style Font
 type Style string
 
 const (
-	// Represents a normal style
+	// Normal represents a normal style
 	Normal Style = ""
-	// Represents a bold style
+	// Bold represents a bold style
 	Bold Style = "B"
-	// Represents a italic style
+	// Italic represents a italic style
 	Italic Style = "I"
-	// Represents a bold and italic style
+	// BoldItalic represents a bold and italic style
 	BoldItalic Style = "BI"
 )
 
-// Representation of a Image extension
+// Extension is a representation of a Image extension
 type Extension string
 
 const (
-	// Represents a jpg extension
+	// Jpg represents a jpg extension
 	Jpg Extension = "jpg"
-	// Represents a png extension
+	// Png represents a png extension
 	Png Extension = "png"
 )

@@ -4,7 +4,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// Abstraction of Font configuration used in Maroto
+// Font is the abstraction which deals of how to set font configurations
 type Font interface {
 	SetFamily(family Family)
 	SetStyle(style Style)
@@ -23,7 +23,7 @@ type font struct {
 	style  Style
 }
 
-// Create a Font configurator used in Maroto
+// NewFont create a Font
 func NewFont(pdf gofpdf.Pdf, size float64, family Family, style Style) Font {
 	return &font{
 		pdf,
@@ -33,47 +33,47 @@ func NewFont(pdf gofpdf.Pdf, size float64, family Family, style Style) Font {
 	}
 }
 
-// Get the currently Font family configured
+// GetFamily return the currently Font family configured
 func (self *font) GetFamily() Family {
 	return self.family
 }
 
-// Get the currently Font style configured
+// GetStyle return the currently Font style configured
 func (self *font) GetStyle() Style {
 	return self.style
 }
 
-// Get the currently Font size configured
+// GetSize return the currently Font size configured
 func (self *font) GetSize() float64 {
 	return self.size
 }
 
-// Get all the currently Font properties configured
+// GetFont return all the currently Font properties configured
 func (self *font) GetFont() (Family, Style, float64) {
 	return self.family, self.style, self.size
 }
 
-// Set the Font family
+// SetFamily defines a new Font family
 func (self *font) SetFamily(family Family) {
 	self.family = family
 
 	self.pdf.SetFont(string(self.family), string(self.style), self.size)
 }
 
-// Set the Font style
+// SetStyle defines a new Font style
 func (self *font) SetStyle(style Style) {
 	self.style = style
 
 	self.pdf.SetFontStyle(string(self.style))
 }
 
-// Set the Font size
+// SetSize defines a new Font size
 func (self *font) SetSize(size float64) {
 	self.size = size
 	self.pdf.SetFontSize(self.size)
 }
 
-// Set all the Font properties
+// SetFont defines all new Font properties
 func (self *font) SetFont(family Family, style Style, size float64) {
 	self.family = family
 	self.style = style
