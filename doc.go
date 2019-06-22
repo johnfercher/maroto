@@ -1,5 +1,5 @@
 /*
-Package Maroto provide a simple way to generate PDF documents.
+Maroto is a package which provide a simple way to generate PDF documents.
 Maroto is inspired in Bootstrap and uses gofpdf. Simple and Fast
 
 
