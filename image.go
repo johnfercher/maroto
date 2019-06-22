@@ -7,7 +7,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// Abstraction of Image adding features used in Maroto
+// Font is the abstraction which deals of how to add images in a PDF
 type Image interface {
 	AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64)
 	AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64, extension Extension)
@@ -18,7 +18,7 @@ type image struct {
 	math Math
 }
 
-// Create an Image adding used in Maroto
+// NewImage create an Image
 func NewImage(pdf gofpdf.Pdf, math Math) Image {
 	return &image{
 		pdf,
@@ -26,6 +26,7 @@ func NewImage(pdf gofpdf.Pdf, math Math) Image {
 	}
 }
 
+// AddFromFile open an image from disk and add to PDF
 func (self *image) AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) {
 	info := self.pdf.RegisterImageOptions(path, gofpdf.ImageOptions{
 		ReadDpi:   false,
@@ -35,6 +36,7 @@ func (self *image) AddFromFile(path string, marginTop float64, indexCol float64,
 	self.addImageToPdf(path, info, marginTop, qtdCols, colHeight, indexCol, percent)
 }
 
+// AddFromBase64 use a base64 string to add to PDF
 func (self *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64, extension Extension) {
 	imageId, _ := uuid.NewRandom()
 
