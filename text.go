@@ -37,10 +37,16 @@ func (self *text) Add(text string, fontFamily Family, fontStyle Style, fontSize 
 		return
 	}
 
+	var modifier float64 = 2
+
+	if align == Right {
+		modifier = 1
+	}
+
 	translator := self.pdf.UnicodeTranslatorFromDescriptor("")
 
 	stringWidth := self.pdf.GetStringWidth(translator(text))
-	dx := (actualWidthPerCol - stringWidth) / 2
+	dx := (actualWidthPerCol - stringWidth) / modifier
 
 	self.pdf.Text(dx+actualCol*actualWidthPerCol+left, marginTop+top, translator(text))
 }
