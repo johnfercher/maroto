@@ -1,6 +1,14 @@
 ### Disclaimer
 Please, do not create a Pull Request directly to master branch, create to dev always.
 
+### Title
+Please follow the PR naming pattern.
+* For features: feature/name
+* For fixes: fix/name
+* For documentation: doc/name
+* For tests: tests/name
+* For config: config/name
+
 ### Description
 Please, describe how this PR will be useful. If it has any tricky technical detail, please explain too.
 
