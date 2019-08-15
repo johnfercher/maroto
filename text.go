@@ -28,12 +28,13 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) Text {
 func (self *text) Add(text string, fontFamily Family, fontStyle Style, fontSize float64, marginTop float64, align Align, actualCol float64, qtdCols float64) {
 	actualWidthPerCol := self.math.GetWidthPerCol(qtdCols)
 
+	translator := self.pdf.UnicodeTranslatorFromDescriptor("")
 	self.font.SetFont(fontFamily, fontStyle, fontSize)
 
 	left, top, _, _ := self.pdf.GetMargins()
 
 	if align == Left {
-		self.pdf.Text(actualCol*actualWidthPerCol+left, marginTop+top, text)
+		self.pdf.Text(actualCol*actualWidthPerCol+left, marginTop+top, translator(text))
 		return
 	}
 
@@ -42,8 +43,6 @@ func (self *text) Add(text string, fontFamily Family, fontStyle Style, fontSize 
 	if align == Right {
 		modifier = 1
 	}
-
-	translator := self.pdf.UnicodeTranslatorFromDescriptor("")
 
 	stringWidth := self.pdf.GetStringWidth(translator(text))
 	dx := (actualWidthPerCol - stringWidth) / modifier
