@@ -104,6 +104,45 @@ func TestText_Add(t *testing.T) {
 				_font.AssertCalled(t, "SetFont", maroto.Arial, maroto.BoldItalic, 16.0)
 			},
 		},
+		{
+			"Right Align",
+			maroto.Right,
+			func() *mocks.Pdf {
+				_pdf := &mocks.Pdf{}
+				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
+				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
+				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
+				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
+				return _pdf
+			},
+			func() *mocks.Math {
+				_math := &mocks.Math{}
+				_math.On("GetWidthPerCol", mock.Anything).Return(123.0)
+				return _math
+			},
+			func() *mocks.Font {
+				_font := &mocks.Font{}
+				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
+				return _font
+			},
+			func(t *testing.T, _pdf *mocks.Pdf) {
+				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
+				_pdf.AssertCalled(t, "GetStringWidth", "TextHelper")
+
+				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
+
+				_pdf.AssertNumberOfCalls(t, "Text", 1)
+				_pdf.AssertCalled(t, "Text", 244.0, 15.0, "TextHelper")
+			},
+			func(t *testing.T, _math *mocks.Math) {
+				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
+				_math.AssertCalled(t, "GetWidthPerCol", 15.0)
+			},
+			func(t *testing.T, _font *mocks.Font) {
+				_font.AssertNumberOfCalls(t, "SetFont", 1)
+				_font.AssertCalled(t, "SetFont", maroto.Arial, maroto.BoldItalic, 16.0)
+			},
+		},
 	}
 
 	for _, c := range cases {
