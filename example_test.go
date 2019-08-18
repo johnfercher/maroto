@@ -111,7 +111,7 @@ func ExamplePdfMaroto_Text() {
 
 	m.Row(rowHeight, func() {
 		m.Col(func() {
-			m.Text("TextContent", &maroto.TextProp{
+			m.Text("TextContent", maroto.TextProp{
 				Size:   12.0,
 				Style:  maroto.BoldItalic,
 				Family: maroto.Courier,
@@ -136,7 +136,7 @@ func ExamplePdfMaroto_Signature() {
 
 	m.Row(rowHeight, func() {
 		m.Col(func() {
-			m.Signature("LabelForSignature", &maroto.SignatureProp{
+			m.Signature("LabelForSignature", maroto.FontProp{
 				Size:   12.0,
 				Style:  maroto.BoldItalic,
 				Family: maroto.Courier,
@@ -161,14 +161,14 @@ func ExamplePdfMaroto_TableList() {
 	// 1 Row of header
 	// 2 Rows of contents
 	// Each row have 2 columns
-	m.TableList(headers, contents, nil)
+	m.TableList(headers, contents)
 
 	// Do more things and save...
 }
 
 // ExamplePdfMaroto_FileImage demonstrates how add a Image
 // reading from disk.
-// When rectProp is nil, method make Image fulfill the context
+// When barcodeProp is nil, method make Image fulfill the context
 // cell, based on width and cell from Image and cell.
 // When center is true, left and top has no effect.
 // Percent represents the width/height of the Image inside the cell:
@@ -181,7 +181,7 @@ func ExamplePdfMaroto_FileImage() {
 
 	m.Row(rowHeight, func() {
 		m.Col(func() {
-			m.FileImage("path/Image.jpg", &maroto.RectProp{
+			m.FileImage("path/Image.jpg", maroto.RectProp{
 				Left:    5,
 				Top:     5,
 				Center:  true,
@@ -195,7 +195,7 @@ func ExamplePdfMaroto_FileImage() {
 
 // ExamplePdfMaroto_Base64Image demonstrates how add a Image
 // reading a base64 string.
-// When rectProp is nil, method make Image fullfill the context
+// When barcodeProp is nil, method make Image fulfill the context
 // cell, based on width and cell from Image and cell.
 // When center is true, left and top has no effect.
 // Percent represents the width/height of the Image inside the cell:
@@ -209,7 +209,7 @@ func ExamplePdfMaroto_Base64Image() {
 
 	m.Row(rowHeight, func() {
 		m.Col(func() {
-			m.Base64Image(base64String, maroto.Png, &maroto.RectProp{
+			m.Base64Image(base64String, maroto.Png, maroto.RectProp{
 				Left:    5,
 				Top:     5,
 				Center:  true,
