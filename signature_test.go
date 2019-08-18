@@ -31,11 +31,11 @@ func TestSignature_AddSpaceFor(t *testing.T) {
 	signature := maroto.NewSignature(pdf, math, text)
 
 	// Act
-	signature.AddSpaceFor("label", maroto.Arial, maroto.Bold, 10.0, 5, 5, 2)
+	signature.AddSpaceFor("label", maroto.TextProp{Size: 10.0}, 5, 5, 2)
 
 	// Assert
 	pdf.AssertNumberOfCalls(t, "Line", 1)
 	pdf.AssertCalled(t, "Line", 114.0, 10.0, 156.0, 10.0)
 	text.AssertNumberOfCalls(t, "Add", 1)
-	text.AssertCalled(t, "Add", "label", maroto.Arial, maroto.Bold, 10.0, 5.0, maroto.Center, 2.0, 5.0)
+	text.AssertCalled(t, "Add", "label", maroto.TextProp{Size: 10.0}, 5.0, 2.0, 5.0)
 }

@@ -1054,7 +1054,7 @@ func (_m *Pdf) RegisterImageOptionsReader(imgName string, options gofpdf.ImageOp
 
 // RegisterImageReader provides a mock function with given fields: imgName, tp, r
 func (_m *Pdf) RegisterImageReader(imgName string, tp string, r io.Reader) *gofpdf.ImageInfoType {
-	ret := _m.Called(imgName, tp, r)
+	ret := _m.Called(imgName, tp)
 
 	var r0 *gofpdf.ImageInfoType
 	if rf, ok := ret.Get(0).(func(string, string, io.Reader) *gofpdf.ImageInfoType); ok {

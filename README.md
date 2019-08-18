@@ -1,4 +1,4 @@
-# Maroto [![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://godoc.org/github.com/johnfercher/maroto) [![Travis](https://travis-ci.com/johnfercher/maroto.svg?branch=master)][travis] [![Code Coverage](https://img.shields.io/badge/coverage-95.5%25-brightgreen.svg)][test] [![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
+# Maroto [![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://godoc.org/github.com/johnfercher/maroto) [![Travis](https://travis-ci.com/johnfercher/maroto.svg?branch=master)][travis] [![Code Coverage](https://img.shields.io/badge/coverage-96.5%25-brightgreen.svg)][test] [![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
@@ -29,7 +29,7 @@ dep ensure -add github.com/johnfercher/maroto
     * [ColSpaces](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.ColSpaces)
 
 * Components To Use Inside a Col
-    * [Text](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Text)
+    * [Text w/ automatic new lines](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Text)
     * [Signature](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Signature)
     * Image ([From file](https://godoc.org/github.com/johnfercher/maroto#example-PdfMaroto-FileImage) or [Base64](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Base64Image))
     * [QrCode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.QrCode)
@@ -52,12 +52,13 @@ dep ensure -add github.com/johnfercher/maroto
 * RegisterFooter
 * Increase Code Coverage
 * Create a custom mock with better assertions
-## Example
 
-#### Result
-Here is the [pdf](assets/pdf/maroto.pdf) generated.
+## Examples
+In the [PDFs](examples/internal/pdf) folder there are the PDFs generated
+using Maroto, and in the [examples](examples/internal) folder there are subfolders
+with the code to generate the PDFs.
 
-![result](assets/images/result.png)
+![result](examples/internal/assets/images/result.png)
 
 #### Code
 ```go
@@ -65,58 +66,58 @@ func main() {
 	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
 	//m.SetDebugMode(true)
 
-	byteSlices, _ := ioutil.ReadFile("assets/images/gopher2.png")
+	byteSlices, _ := ioutil.ReadFile("examples/internal/assets/images/biplane.jpg")
 
 	base64 := base64.StdEncoding.EncodeToString(byteSlices)
 
-	header, contents := getContents()
+	headerSmall, smallContent := getSmallContent()
+	headerMedium, mediumContent := getMediumContent()
 
 	m.RegisterHeader(func() {
 
-		// Image, Barcode and QrCode
 		m.Row(20, func() {
 			m.Col(func() {
-				m.Base64Image(base64, maroto.Png, &maroto.RectProp{
-					Percent: 85,
+				m.Base64Image(base64, maroto.Jpg, maroto.RectProp{
+					Percent: 70,
 				})
 			})
 
 			m.ColSpaces(2)
 
 			m.Col(func() {
-				m.QrCode("https://github.com/johnfercher/maroto", &maroto.RectProp{
+				m.QrCode("https://github.com/johnfercher/maroto", maroto.RectProp{
 					Percent: 75,
 				})
 			})
 
 			m.Col(func() {
-				id := "123456789"
-				_ = m.Barcode(id, &maroto.RectProp{
-					Percent: 70,
+				id := "https://github.com/johnfercher/maroto"
+				_ = m.Barcode(id, maroto.BarcodeProp{
+					Proportion: maroto.Proportion{50, 10},
+					Percent:    75,
 				})
-				m.Text(id, &maroto.TextProp{
-					Size:  8,
+				m.Text(id, maroto.TextProp{
+					Size:  7,
 					Align: maroto.Center,
-					Top:   17,
+					Top:   16,
 				})
 			})
 		})
 
 		m.Line(1.0)
 
-		// Image and Old License
 		m.Row(12, func() {
 			m.Col(func() {
-				m.FileImage("assets/images/gopher1.jpg", nil)
+				m.FileImage("examples/internal/assets/images/gopherbw.png")
 			})
 
 			m.ColSpace()
 
 			m.Col(func() {
-				m.Text("PDFGenerator: Maroto", &maroto.TextProp{
+				m.Text("Packages Report: Daily", maroto.TextProp{
 					Top: 4,
 				})
-				m.Text("Type: Easy & Fast", &maroto.TextProp{
+				m.Text("Type: Small, Medium", maroto.TextProp{
 					Top: 10,
 				})
 			})
@@ -124,26 +125,26 @@ func main() {
 			m.ColSpace()
 
 			m.Col(func() {
-				m.Text("GPL3", &maroto.TextProp{
-					Size:  16,
-					Style: maroto.Bold,
-					Top:   8,
+				m.Text("20/07/1994", maroto.TextProp{
+					Size:   10,
+					Style:  maroto.BoldItalic,
+					Top:    7.5,
+					Family: maroto.Helvetica,
 				})
 			})
 		})
 
 		m.Line(1.0)
 
-		// Features
 		m.Row(22, func() {
 			m.Col(func() {
-				m.Text("Grid System", &maroto.TextProp{
-					Size:  18,
+				m.Text(fmt.Sprintf("Small: %d, Medium %d", len(smallContent), len(mediumContent)), maroto.TextProp{
+					Size:  15,
 					Style: maroto.Bold,
 					Align: maroto.Center,
 					Top:   9,
 				})
-				m.Text("Bootstrap Like + Úñîçòdë", &maroto.TextProp{
+				m.Text("Brasil / São Paulo", maroto.TextProp{
 					Size:  12,
 					Align: maroto.Center,
 					Top:   17,
@@ -155,24 +156,39 @@ func main() {
 
 	})
 
-	m.TableList(header, contents, nil)
+	m.TableList(headerSmall, smallContent)
 
-	// Signatures
-	m.Row(30, func() {
+	m.TableList(headerMedium, mediumContent, maroto.TableListProp{
+		Align: maroto.Center,
+		HeaderProp: maroto.FontProp{
+			Family: maroto.Courier,
+			Style:  maroto.BoldItalic,
+		},
+		ContentProp: maroto.FontProp{
+			Family: maroto.Courier,
+			Style:  maroto.Italic,
+		},
+	})
+
+	m.Row(40, func() {
 		m.Col(func() {
-			m.Signature("Signature 1", nil)
+			m.Signature("Signature 1", maroto.FontProp{
+				Family: maroto.Courier,
+				Style:  maroto.BoldItalic,
+				Size:   9,
+			})
 		})
 
 		m.Col(func() {
-			m.Signature("Signature 2", nil)
+			m.Signature("Signature 2")
 		})
 
 		m.Col(func() {
-			m.Signature("Signature 3", nil)
+			m.Signature("Signature 3")
 		})
 	})
 
-	_ = m.OutputFileAndClose("maroto.pdf")
+	_ = m.OutputFileAndClose("examples/internal/pdfs/sample1.pdf")
 }
 ```
 

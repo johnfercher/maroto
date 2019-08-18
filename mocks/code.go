@@ -10,12 +10,12 @@ type Code struct {
 }
 
 // AddBar provides a mock function with given fields: code, marginTop, indexCol, qtdCols, colHeight, percent
-func (_m *Code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) error {
-	ret := _m.Called(code, marginTop, indexCol, qtdCols, colHeight, percent)
+func (_m *Code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, rectPercent float64, heightPercentFromWidth float64) error {
+	ret := _m.Called(code, marginTop, indexCol, qtdCols, colHeight, rectPercent)
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(string, float64, float64, float64, float64, float64) error); ok {
-		r0 = rf(code, marginTop, indexCol, qtdCols, colHeight, percent)
+		r0 = rf(code, marginTop, indexCol, qtdCols, colHeight, rectPercent)
 	} else {
 		r0 = ret.Error(0)
 	}
