@@ -53,7 +53,7 @@ func TestCode_AddBar(t *testing.T) {
 				math.AssertCalled(t, "GetWidthPerCol", 5.0)
 
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 50, 16, 5, 40, 2, 100)
+				math.AssertCalled(t, "GetRectCenterColProperties", 50, 0, 5, 40, 2, 100)
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
@@ -96,7 +96,7 @@ func TestCode_AddBar(t *testing.T) {
 		code := maroto.NewCode(pdf, math)
 
 		// Act
-		err := code.AddBar(c.code, 10, 2, 5, 40, 100)
+		err := code.AddBar(c.code, 10, 2, 5, 40, 100, 0)
 
 		// Assert
 		c.assertPdf(t, pdf)
