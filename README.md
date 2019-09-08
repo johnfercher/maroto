@@ -1,4 +1,5 @@
 # Maroto [![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://godoc.org/github.com/johnfercher/maroto) [![Travis](https://travis-ci.com/johnfercher/maroto.svg?branch=master)][travis] [![Code Coverage](https://img.shields.io/badge/coverage-96.5%25-brightgreen.svg)][test] [![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
+
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
@@ -22,34 +23,38 @@ dep ensure -add github.com/johnfercher/maroto
 ```
 
 ## Features
-* Grid System
-    * [Row](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Row)
-    * [Col](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Col)
-    * [ColSpace](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.ColSpace)
-    * [ColSpaces](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.ColSpaces)
 
-* Components To Use Inside a Col
-    * [Text w/ automatic new lines](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Text)
-    * [Signature](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Signature)
-    * Image ([From file](https://godoc.org/github.com/johnfercher/maroto#example-PdfMaroto-FileImage) or [Base64](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Base64Image))
-    * [QrCode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.QrCode)
-    * [Barcode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Barcode)   
+![result](examples/internal/assets/images/diagram.png)
+
+#### Grid System
+* [Row](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Row)
+* [Col](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Col)
+* [ColSpace](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.ColSpace)
+* [ColSpaces](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.ColSpaces)
+
+#### Components To Use Inside a Col
+* [Text w/ automatic new lines](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Text)
+* [Signature](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Signature)
+* Image ([From file](https://godoc.org/github.com/johnfercher/maroto#example-PdfMaroto-FileImage) or [Base64](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Base64Image))
+* [QrCode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.QrCode)
+* [Barcode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Barcode)   
     
-* Components To Use Outside a Row
-    * [TableList](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.TableList)
-    * [Line](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Line)
+#### Components To Use Outside a Row
+* [TableList](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.TableList)
+* [Line](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Line)
     
-* Components To Wrap Row, TableList and Line
-    * [RegisterHeader](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.RegisterHeader)
-    
+#### Components To Wrap Row, TableList and Line
+* [RegisterHeader](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.RegisterHeader)
+
+#### Others   
 * Properties: most of the components has properties which you can use to customize appearance and behavior.
 * [DebugMode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.SetDebugMode): Used to draw rectangles in every row and column
 * Automatic New Page: New pages are generated automatically when needed.
 * 100% Unicode
 * Save: You can [save on disk](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.OutputFileAndClose) or export to a [base64 string](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Output)
 
-**TODO**
-* RegisterFooter
+#### Roadmap
+* Create a RegisterFooter
 * Increase Code Coverage
 * Create a custom mock with better assertions
 
@@ -191,6 +196,10 @@ func main() {
 	_ = m.OutputFileAndClose("examples/internal/pdfs/sample1.pdf")
 }
 ```
+
+## Others
+
+* [Medium Article: Creating PDFs using Golang](https://medium.com/@johnathanfercher/creating-pdfs-using-golang-98b722e99d6d)
 
 [travis]: https://travis-ci.com/johnfercher/maroto
 [test]: test.sh
