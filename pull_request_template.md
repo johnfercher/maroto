@@ -17,5 +17,4 @@
 <!--  (check one with "x") -->
 
 - [ ] All methods associated with structs has ```func (self *struct) method() {}``` name style.
-- [ ] Executed ```test.sh``` and updated the [README.md](README.md) with new code coverage data.
 - [ ] Wrote unit tests for new/changed features.
