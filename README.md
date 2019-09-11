@@ -1,4 +1,9 @@
-# Maroto [![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://godoc.org/github.com/johnfercher/maroto) [![Travis](https://travis-ci.com/johnfercher/maroto.svg?branch=master)][travis] [![Code Coverage](https://img.shields.io/badge/coverage-96.5%25-brightgreen.svg)][test] [![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
+# Maroto 
+
+[![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://godoc.org/github.com/johnfercher/maroto)
+[![Travis](https://travis-ci.com/johnfercher/maroto.svg?branch=master)][travis] 
+[![Codecov](https://img.shields.io/codecov/c/github/johnfercher/maroto)](https://codecov.io/gh/johnfercher/maroto) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
 
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
@@ -24,7 +29,7 @@ dep ensure -add github.com/johnfercher/maroto
 
 ## Features
 
-![result](examples/internal/assets/images/diagram.png)
+![result](internal/assets/images/diagram.png)
 
 #### Grid System
 * [Row](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Row)
@@ -59,141 +64,100 @@ dep ensure -add github.com/johnfercher/maroto
 * Create a custom mock with better assertions
 
 ## Examples
-In the [PDFs](examples/internal/pdf) folder there are the PDFs generated
-using Maroto, and in the [examples](examples/internal) folder there are subfolders
+In the [PDFs](internal/examples/pdfs) folder there are the PDFs generated
+using Maroto, and in the [examples](internal/examples) folder there are subfolders
 with the code to generate the PDFs.
 
-![result](examples/internal/assets/images/result.png)
+![result](internal/assets/images/result.png)
 
 #### Code
 ```go
+package main
+
+import (
+	"github.com/johnfercher/maroto/pkg/consts"
+	"github.com/johnfercher/maroto/pkg/pdf"
+	"github.com/johnfercher/maroto/pkg/props"
+)
+
 func main() {
-	m := maroto.NewMaroto(maroto.Portrait, maroto.A4)
-	//m.SetDebugMode(true)
-
-	byteSlices, _ := ioutil.ReadFile("examples/internal/assets/images/biplane.jpg")
-
-	base64 := base64.StdEncoding.EncodeToString(byteSlices)
-
-	headerSmall, smallContent := getSmallContent()
-	headerMedium, mediumContent := getMediumContent()
-
-	m.RegisterHeader(func() {
-
-		m.Row(20, func() {
-			m.Col(func() {
-				m.Base64Image(base64, maroto.Jpg, maroto.RectProp{
-					Percent: 70,
-				})
-			})
-
-			m.ColSpaces(2)
-
-			m.Col(func() {
-				m.QrCode("https://github.com/johnfercher/maroto", maroto.RectProp{
-					Percent: 75,
-				})
-			})
-
-			m.Col(func() {
-				id := "https://github.com/johnfercher/maroto"
-				_ = m.Barcode(id, maroto.BarcodeProp{
-					Proportion: maroto.Proportion{50, 10},
-					Percent:    75,
-				})
-				m.Text(id, maroto.TextProp{
-					Size:  7,
-					Align: maroto.Center,
-					Top:   16,
-				})
-			})
-		})
-
-		m.Line(1.0)
-
-		m.Row(12, func() {
-			m.Col(func() {
-				m.FileImage("examples/internal/assets/images/gopherbw.png")
-			})
-
-			m.ColSpace()
-
-			m.Col(func() {
-				m.Text("Packages Report: Daily", maroto.TextProp{
-					Top: 4,
-				})
-				m.Text("Type: Small, Medium", maroto.TextProp{
-					Top: 10,
-				})
-			})
-
-			m.ColSpace()
-
-			m.Col(func() {
-				m.Text("20/07/1994", maroto.TextProp{
-					Size:   10,
-					Style:  maroto.BoldItalic,
-					Top:    7.5,
-					Family: maroto.Helvetica,
-				})
-			})
-		})
-
-		m.Line(1.0)
-
-		m.Row(22, func() {
-			m.Col(func() {
-				m.Text(fmt.Sprintf("Small: %d, Medium %d", len(smallContent), len(mediumContent)), maroto.TextProp{
-					Size:  15,
-					Style: maroto.Bold,
-					Align: maroto.Center,
-					Top:   9,
-				})
-				m.Text("Brasil / São Paulo", maroto.TextProp{
-					Size:  12,
-					Align: maroto.Center,
-					Top:   17,
-				})
-			})
-		})
-
-		m.Line(1.0)
-
-	})
-
-	m.TableList(headerSmall, smallContent)
-
-	m.TableList(headerMedium, mediumContent, maroto.TableListProp{
-		Align: maroto.Center,
-		HeaderProp: maroto.FontProp{
-			Family: maroto.Courier,
-			Style:  maroto.BoldItalic,
-		},
-		ContentProp: maroto.FontProp{
-			Family: maroto.Courier,
-			Style:  maroto.Italic,
-		},
-	})
+	m := pdf.NewMaroto(consts.Portrait, consts.Letter)
 
 	m.Row(40, func() {
 		m.Col(func() {
-			m.Signature("Signature 1", maroto.FontProp{
-				Family: maroto.Courier,
-				Style:  maroto.BoldItalic,
-				Size:   9,
+			m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
+				Left:    20,
+				Center:  false,
+				Percent: 80,
 			})
 		})
-
 		m.Col(func() {
-			m.Signature("Signature 2")
+			m.Text("Gopher International Shipping, Inc.", props.Text{
+				Top:         15,
+				Size:        20,
+				Extrapolate: true,
+			})
+			m.Text("1000 Shipping Gopher Golang TN 3691234 GopherLand (GL)", props.Text{
+				Size: 12,
+				Top:  21,
+			})
 		})
+		m.ColSpace()
+	})
 
+	m.Line(10)
+
+	m.Row(40, func() {
 		m.Col(func() {
-			m.Signature("Signature 3")
+			m.Text("João Sant'Ana 100 Main Street Stringfield TN 39021 United Stats (USA)", props.Text{
+				Size: 15,
+				Top:  14,
+			})
+		})
+		m.ColSpace()
+		m.Col(func() {
+			m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
+				Percent: 75,
+			})
 		})
 	})
 
-	_ = m.OutputFileAndClose("examples/internal/pdfs/sample1.pdf")
+	m.Line(10)
+
+	m.Row(100, func() {
+		m.Col(func() {
+			m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
+				Percent: 70,
+			})
+			m.Text("https://github.com/johnfercher/maroto", props.Text{
+				Size:  20,
+				Align: consts.Center,
+				Top:   80,
+			})
+		})
+	})
+
+	m.SetDebugMode(true)
+
+	m.Row(40, func() {
+		m.Col(func() {
+			m.Text("CODE: 123412351645231245564 DATE: 20-07-1994 20:20:33", props.Text{
+				Size: 15,
+				Top:  19,
+			})
+		})
+		m.Col(func() {
+			m.Text("CA", props.Text{
+				Top:   30,
+				Size:  85,
+				Align: consts.Center,
+			})
+		})
+	})
+
+	m.SetDebugMode(false)
+
+	m.OutputFileAndClose("internal/examples/internal/pdfs/zpl.pdf")
 }
 ```
 
