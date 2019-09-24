@@ -14,7 +14,10 @@
 <!-- If it has any issue related to this PR, please add a reference here. -->
 
 **Checklist**
-<!--  (check one with "x") -->
+<!-- (check one with "x") -->
 
-- [ ] All methods associated with structs has ```func (self *struct) method() {}``` name style.
-- [ ] Wrote unit tests for new/changed features.
+- [ ] All methods associated with structs has ```func (self *struct) method() {}``` name style. <!-- If applied -->
+- [ ] Wrote unit tests for new/changed features. <!-- If applied -->
+- [ ] Updated docs/doc.go <!-- If applied -->
+- [ ] Updated pkg/pdf/example_test.go <!-- If applied -->
+- [ ] Updated README.md <!-- If applied -->

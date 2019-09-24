@@ -6,19 +6,21 @@
 **I'm submitting a ...** 
 <!--  (check one with "x") -->
 - [ ] bug report
+- [ ] refactor proposal
+- [ ] documentation request
 - [ ] feature request
 
-**Current behavior:**
+**Current behavior:** <!-- If applied -->
 <!-- Describe how the bug manifests. -->
 
-**Expected behavior:**
+**Expected behavior:** <!-- If applied -->
 <!-- Describe what the behavior would be without the bug. -->
 
-**Steps to reproduce:**
+**Steps to reproduce:** <!-- If applied -->
 <!--  Please explain the steps required to duplicate the issue, especially if you are able to provide a sample application. -->
 
-**Related code:**
-```
+**Related code:** <!-- If applied -->
+```go
 insert short code snippets here
 ```
 

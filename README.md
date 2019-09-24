@@ -32,36 +32,35 @@ dep ensure -add github.com/johnfercher/maroto
 ![result](internal/assets/images/diagram.png)
 
 #### Grid System
-* [Row](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Row)
-* [Col](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Col)
-* [ColSpace](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.ColSpace)
-* [ColSpaces](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.ColSpaces)
+* [Row](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Row)
+* [Col](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Col)
+* [ColSpace](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-ColSpace)
+* [ColSpaces](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-ColSpaces)
 
 #### Components To Use Inside a Col
-* [Text w/ automatic new lines](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Text)
-* [Signature](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Signature)
-* Image ([From file](https://godoc.org/github.com/johnfercher/maroto#example-PdfMaroto-FileImage) or [Base64](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Base64Image))
-* [QrCode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.QrCode)
-* [Barcode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Barcode)   
+* [Text w/ automatic new lines](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Text)
+* [Signature](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Signature)
+* Image ([From file](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-FileImage) or [Base64](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Base64Image))
+* [QrCode](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.QrCode)
+* [Barcode](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.Barcode)   
     
 #### Components To Use Outside a Row
-* [TableList](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.TableList)
-* [Line](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Line)
+* [TableList](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-TableList)
+* [Line](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Line)
     
 #### Components To Wrap Row, TableList and Line
-* [RegisterHeader](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.RegisterHeader)
+* [RegisterHeader](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.RegisterHeader)
+* [RegisterFooter](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.RegisterFooter)
 
 #### Others   
-* Properties: most of the components has properties which you can use to customize appearance and behavior.
-* [DebugMode](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.SetDebugMode): Used to draw rectangles in every row and column
+* [Properties](https://godoc.org/github.com/johnfercher/maroto/pkg/props): most of the components has properties which you can use to customize appearance and behavior.
+* [SetBorder](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.SetDebugMode): Used to draw rectangles in every row and column
 * Automatic New Page: New pages are generated automatically when needed.
 * 100% Unicode
-* Save: You can [save on disk](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.OutputFileAndClose) or export to a [base64 string](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.Output)
+* Save: You can [save on disk](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-OutputFileAndClose) or export to a [base64 string](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Output)
 
 #### Roadmap
-* Create a RegisterFooter
-* Increase Code Coverage
-* Create a custom mock with better assertions
+* Updated in [Issues](https://github.com/johnfercher/maroto/issues)
 
 ## Examples
 In the [PDFs](internal/examples/pdfs) folder there are the PDFs generated
@@ -75,89 +74,161 @@ with the code to generate the PDFs.
 package main
 
 import (
+	"encoding/base64"
+	"fmt"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
+	"io/ioutil"
 )
 
 func main() {
-	m := pdf.NewMaroto(consts.Portrait, consts.Letter)
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	//m.SetBorder(true)
 
-	m.Row(40, func() {
-		m.Col(func() {
-			m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
-				Left:    20,
-				Center:  false,
-				Percent: 80,
+	byteSlices, _ := ioutil.ReadFile("internal/assets/images/biplane.jpg")
+
+	base64 := base64.StdEncoding.EncodeToString(byteSlices)
+
+	headerSmall, smallContent := getSmallContent()
+	headerMedium, mediumContent := getMediumContent()
+
+	m.RegisterHeader(func() {
+
+		m.Row(20, func() {
+			m.Col(func() {
+				m.Base64Image(base64, consts.Jpg, props.Rect{
+					Percent: 70,
+				})
+			})
+
+			m.ColSpaces(2)
+
+			m.Col(func() {
+				m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
+					Percent: 75,
+				})
+			})
+
+			m.Col(func() {
+				id := "https://github.com/johnfercher/maroto"
+				_ = m.Barcode(id, props.Barcode{
+					Proportion: props.Proportion{50, 10},
+					Percent:    75,
+				})
+				m.Text(id, props.Text{
+					Size:  7,
+					Align: consts.Center,
+					Top:   16,
+				})
 			})
 		})
-		m.Col(func() {
-			m.Text("Gopher International Shipping, Inc.", props.Text{
-				Top:         15,
-				Size:        20,
-				Extrapolate: true,
+
+		m.Line(1.0)
+
+		m.Row(12, func() {
+			m.Col(func() {
+				m.FileImage("internal/assets/images/gopherbw.png")
 			})
-			m.Text("1000 Shipping Gopher Golang TN 3691234 GopherLand (GL)", props.Text{
-				Size: 12,
-				Top:  21,
+
+			m.ColSpace()
+
+			m.Col(func() {
+				m.Text("Packages Report: Daily", props.Text{
+					Top: 4,
+				})
+				m.Text("Type: Small, Medium", props.Text{
+					Top: 10,
+				})
+			})
+
+			m.ColSpace()
+
+			m.Col(func() {
+				m.Text("20/07/1994", props.Text{
+					Size:   10,
+					Style:  consts.BoldItalic,
+					Top:    7.5,
+					Family: consts.Helvetica,
+				})
 			})
 		})
-		m.ColSpace()
+
+		m.Line(1.0)
+
+		m.Row(22, func() {
+			m.Col(func() {
+				m.Text(fmt.Sprintf("Small: %d, Medium %d", len(smallContent), len(mediumContent)), props.Text{
+					Size:  15,
+					Style: consts.Bold,
+					Align: consts.Center,
+					Top:   9,
+				})
+				m.Text("Brasil / São Paulo", props.Text{
+					Size:  12,
+					Align: consts.Center,
+					Top:   17,
+				})
+			})
+		})
+
+		m.Line(1.0)
+
 	})
 
-	m.Line(10)
-
-	m.Row(40, func() {
-		m.Col(func() {
-			m.Text("João Sant'Ana 100 Main Street Stringfield TN 39021 United Stats (USA)", props.Text{
-				Size: 15,
-				Top:  14,
+	m.RegisterFooter(func() {
+		m.Row(40, func() {
+			m.Col(func() {
+				m.Signature("Signature 1", props.Font{
+					Family: consts.Courier,
+					Style:  consts.BoldItalic,
+					Size:   9,
+				})
 			})
-		})
-		m.ColSpace()
-		m.Col(func() {
-			m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
-				Percent: 75,
-			})
-		})
-	})
 
-	m.Line(10)
-
-	m.Row(100, func() {
-		m.Col(func() {
-			m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
-				Percent: 70,
+			m.Col(func() {
+				m.Signature("Signature 2")
 			})
-			m.Text("https://github.com/johnfercher/maroto", props.Text{
-				Size:  20,
-				Align: consts.Center,
-				Top:   80,
+
+			m.Col(func() {
+				m.Signature("Signature 3")
 			})
 		})
 	})
 
-	m.SetDebugMode(true)
-
-	m.Row(40, func() {
+	m.Row(15, func() {
 		m.Col(func() {
-			m.Text("CODE: 123412351645231245564 DATE: 20-07-1994 20:20:33", props.Text{
-				Size: 15,
-				Top:  19,
-			})
-		})
-		m.Col(func() {
-			m.Text("CA", props.Text{
-				Top:   30,
-				Size:  85,
-				Align: consts.Center,
+			m.Text("Small Packages / 39u.", props.Text{
+				Top:   8,
+				Style: consts.Bold,
 			})
 		})
 	})
 
-	m.SetDebugMode(false)
+	m.TableList(headerSmall, smallContent)
 
-	m.OutputFileAndClose("internal/examples/internal/pdfs/zpl.pdf")
+	m.Row(15, func() {
+		m.Col(func() {
+			m.Text("Medium Packages / 22u.", props.Text{
+				Top:   8,
+				Style: consts.Bold,
+			})
+		})
+	})
+
+	m.TableList(headerMedium, mediumContent, props.TableList{
+		Align: consts.Center,
+		HeaderProp: props.Font{
+			Family: consts.Courier,
+			Style:  consts.BoldItalic,
+		},
+		ContentProp: props.Font{
+			Family: consts.Courier,
+			Style:  consts.Italic,
+		},
+	})
+
+	_ = m.OutputFileAndClose("internal/examples/pdfs/sample1.pdf")
 }
 ```
 
