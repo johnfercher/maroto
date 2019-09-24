@@ -157,11 +157,11 @@ func TestPdfMaroto_SetGetDebugMode(t *testing.T) {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
 	// Assert & Act
-	assert.False(t, m.GetDebugMode())
-	m.SetDebugMode(true)
+	assert.False(t, m.GetBorder())
+	m.SetBorder(true)
 
 	// Assert
-	assert.True(t, m.GetDebugMode())
+	assert.True(t, m.GetBorder())
 }
 
 func TestPdfMaroto_Signature(t *testing.T) {
@@ -1042,7 +1042,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 		{
 			"ColSpace with Debug",
 			func(m pdf.Maroto) {
-				m.SetDebugMode(true)
+				m.SetBorder(true)
 				m.Row(40.0, func() {
 					m.ColSpace()
 				})
@@ -1119,7 +1119,7 @@ func TestPdfMaroto_ColSpaces(t *testing.T) {
 		{
 			"ColSpaces with Debug",
 			func(m pdf.Maroto) {
-				m.SetDebugMode(true)
+				m.SetBorder(true)
 				m.Row(40.0, func() {
 					m.ColSpaces(2)
 				})

@@ -69,16 +69,16 @@ func ExamplePdfMaroto_Col() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_SetDebugMode demonstrates how to
-// define debug mode
-func ExamplePdfMaroto_SetDebugMode() {
+// ExamplePdfMaroto_SetBorder demonstrates how to
+// enable the draw of lines in every cell
+func ExamplePdfMaroto_SetBorder() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
-	m.SetDebugMode(true)
+	m.SetBorder(true)
 
 	// Add some Rows, Cols, Lines and etc...
 	// Here will be drawn borders in every cell
 
-	m.SetDebugMode(false)
+	m.SetBorder(false)
 
 	// Add some Rows, Cols, Lines and etc...
 	// Here will not be drawn borders
@@ -86,18 +86,18 @@ func ExamplePdfMaroto_SetDebugMode() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_GetDebugMode demonstrates how to
-// obtain the actual debug mode value
-func ExamplePdfMaroto_GetDebugMode() {
+// ExamplePdfMaroto_GetBorder demonstrates how to
+// obtain the actual status of borders
+func ExamplePdfMaroto_GetBorder() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
 	// false
-	m.GetDebugMode()
+	m.GetBorder()
 
-	m.SetDebugMode(true)
+	m.SetBorder(true)
 
 	// true
-	m.GetDebugMode()
+	m.GetBorder()
 
 	// Do more things and save...
 }

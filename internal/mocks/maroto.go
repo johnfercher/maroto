@@ -73,7 +73,7 @@ func (_m *Maroto) FileImage(filePathName string, prop ...props.Rect) {
 	_m.Called(_ca...)
 }
 
-// GetDebugMode provides a mock function with given fields:
+// GetBorder provides a mock function with given fields:
 func (_m *Maroto) GetDebugMode() bool {
 	ret := _m.Called()
 
@@ -170,7 +170,7 @@ func (_m *Maroto) Row(height float64, closure func()) {
 	_m.Called(height, closure)
 }
 
-// SetDebugMode provides a mock function with given fields: on
+// SetBorder provides a mock function with given fields: on
 func (_m *Maroto) SetDebugMode(on bool) {
 	_m.Called(on)
 }
