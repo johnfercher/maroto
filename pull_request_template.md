@@ -16,5 +16,5 @@
 **Checklist**
 <!--  (check one with "x") -->
 
-- [ ] All methods associated with structs has ```func (self *struct) method() {}``` name style.
+- [ ] All methods associated with structs has ```func (s *struct) method() {}``` name style.
 - [ ] Wrote unit tests for new/changed features.
