@@ -1275,9 +1275,8 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 		act    func(m pdf.Maroto)
 		assert func(t *testing.T, headerCalls int)
 	}{
-		/*{
+		{
 			"Always execute header once",
-			0,
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.ColSpace()
@@ -1286,7 +1285,7 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 			func(t *testing.T, headerCalls int) {
 				assert.Equal(t, headerCalls, 1)
 			},
-		},*/
+		},
 		{
 			"Execute twice when create a second page",
 			func(m pdf.Maroto) {
@@ -1297,9 +1296,8 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 				assert.Equal(t, headerCalls, 2)
 			},
 		},
-		/*{
+		{
 			"When header is empty",
-			0,
 			func(m pdf.Maroto) {
 				_, contents := getContents()
 				m.TableList([]string{}, contents)
@@ -1310,7 +1308,6 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 		},
 		{
 			"When content is empty",
-			0,
 			func(m pdf.Maroto) {
 				header, _ := getContents()
 				m.TableList(header, [][]string{})
@@ -1321,7 +1318,6 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 		},
 		{
 			"When has empty table list prop",
-			0,
 			func(m pdf.Maroto) {
 				header, contents := getContents()
 				m.TableList(header, contents, props.TableList{})
@@ -1329,7 +1325,7 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 			func(t *testing.T, headerCalls int) {
 				assert.Equal(t, headerCalls, 2)
 			},
-		},*/
+		},
 	}
 
 	for _, c := range cases {

@@ -2,7 +2,6 @@ package pdf
 
 import (
 	"bytes"
-	"fmt"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -118,9 +117,11 @@ func (self *PdfMaroto) RegisterHeader(closure func()) {
 // which will be added in every new page
 func (self *PdfMaroto) RegisterFooter(closure func()) {
 	self.footerClosure = closure
+
+	// calculation mode execute all row flow but
+	// only to calculate the sum of heights
 	self.calculationMode = true
 	closure()
-	fmt.Println(self.footerHeight)
 	self.calculationMode = false
 }
 
@@ -246,6 +247,7 @@ func (self *PdfMaroto) Line(spaceHeight float64) {
 
 // Row define a row and enable add columns inside the row.
 func (self *PdfMaroto) Row(height float64, closure func()) {
+	// Used to calculate the height of the footer
 	if self.calculationMode {
 		self.footerHeight += height
 		return
@@ -257,6 +259,12 @@ func (self *PdfMaroto) Row(height float64, closure func()) {
 	totalOffsetY := self.offsetY + height + self.footerHeight
 	maxOffsetPage := pageHeight - bottom - top
 
+	// Note: The headerFooterContextActive is needed to avoid recursive
+	// calls without end, because footerClosure and headerClosure actually
+	// have Row calls too.
+
+	// If the new cell to be added pass the useful space counting the
+	// height of the footer, add the footer
 	if totalOffsetY > maxOffsetPage {
 		if !self.headerFooterContextActive && self.footerClosure != nil {
 			self.headerFooterContextActive = true
@@ -266,6 +274,7 @@ func (self *PdfMaroto) Row(height float64, closure func()) {
 		self.offsetY = 0
 	}
 
+	// If is a new page, add the header
 	if !self.headerFooterContextActive && self.headerClosure != nil {
 		if self.offsetY == 0 {
 			self.headerFooterContextActive = true
@@ -277,8 +286,13 @@ func (self *PdfMaroto) Row(height float64, closure func()) {
 	self.rowHeight = height
 	self.rowColCount = 0
 
+	// This closure has only maroto.Cols, which are
+	// not executed firstly, they are added to colsClosures
+	// and this enable us to know how many cols will be added
+	// and calculate the width from the cells
 	closure()
 
+	// Execute the codes inside the Cols
 	for _, colClosure := range self.colsClosures {
 		colClosure()
 	}
@@ -450,8 +464,4 @@ func (self *PdfMaroto) drawLastFooter() {
 			self.headerFooterContextActive = false
 		}
 	}
-}
-
-func (self *PdfMaroto) footerHeightCalcRow(height float64) {
-	self.footerHeight += height
 }
