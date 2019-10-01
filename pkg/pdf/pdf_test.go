@@ -172,6 +172,26 @@ func TestPdfMaroto_Signature(t *testing.T) {
 		act       func(m pdf.Maroto)
 	}{
 		{
+			"Calculate mode",
+			func() *mocks.Signature {
+				signature := &mocks.Signature{}
+				signature.On("AddSpaceFor", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return signature
+			},
+			func(t *testing.T, signature *mocks.Signature) {
+				signature.AssertNotCalled(t, "AddSpaceFor")
+			},
+			func(m pdf.Maroto) {
+				m.RegisterFooter(func() {
+					m.Row(40, func() {
+						m.Col(func() {
+							m.Signature("Signature1")
+						})
+					})
+				})
+			},
+		},
+		{
 			"One signature inside one column, inside a row, without props",
 			func() *mocks.Signature {
 				signature := &mocks.Signature{}

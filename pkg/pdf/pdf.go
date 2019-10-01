@@ -24,7 +24,6 @@ type Maroto interface {
 	SetBorder(on bool)
 	GetBorder() bool
 	GetPageSize() (float64, float64)
-	GetCurrentLine() float64
 	GetCurrentPage() int
 
 	// Outside Col/Row Components
@@ -123,13 +122,6 @@ func (self *PdfMaroto) RegisterFooter(closure func()) {
 	self.calculationMode = true
 	closure()
 	self.calculationMode = false
-}
-
-// GetCurrentLine return the current line i.e
-// the current y offset given the origin in the
-// pdf page
-func (self *PdfMaroto) GetCurrentLine() float64 {
-	return self.offsetY
 }
 
 func (self *PdfMaroto) GetCurrentPage() int {
@@ -256,8 +248,8 @@ func (self *PdfMaroto) Row(height float64, closure func()) {
 	_, pageHeight := self.Pdf.GetPageSize()
 	_, top, _, bottom := self.Pdf.GetMargins()
 
-	totalOffsetY := self.offsetY + height + self.footerHeight
-	maxOffsetPage := pageHeight - bottom - top
+	totalOffsetY := int(self.offsetY + height + self.footerHeight)
+	maxOffsetPage := int(pageHeight - bottom - top)
 
 	// Note: The headerFooterContextActive is needed to avoid recursive
 	// calls without end, because footerClosure and headerClosure actually
@@ -266,12 +258,15 @@ func (self *PdfMaroto) Row(height float64, closure func()) {
 	// If the new cell to be added pass the useful space counting the
 	// height of the footer, add the footer
 	if totalOffsetY > maxOffsetPage {
-		if !self.headerFooterContextActive && self.footerClosure != nil {
-			self.headerFooterContextActive = true
-			self.footerClosure()
-			self.headerFooterContextActive = false
+		if !self.headerFooterContextActive {
+			if self.footerClosure != nil {
+				self.headerFooterContextActive = true
+				self.footerClosure()
+				self.headerFooterContextActive = false
+			}
+			self.offsetY = 0
+			self.pageIndex++
 		}
-		self.offsetY = 0
 	}
 
 	// If is a new page, add the header
