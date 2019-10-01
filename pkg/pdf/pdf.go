@@ -259,7 +259,7 @@ func (s *PdfMaroto) ColSpace() {
 	})
 }
 
-// ColSpace create some empty columns inside a row.
+// ColSpaces create some empty columns inside a row.
 func (s *PdfMaroto) ColSpaces(qtd int) {
 	for i := 0; i < qtd; i++ {
 		s.ColSpace()
