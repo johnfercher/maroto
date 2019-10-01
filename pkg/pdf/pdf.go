@@ -254,13 +254,16 @@ func (self *PdfMaroto) Row(height float64, closure func()) {
 	_, pageHeight := self.Pdf.GetPageSize()
 	_, top, _, bottom := self.Pdf.GetMargins()
 
-	if self.offsetY+height+self.footerHeight > pageHeight-bottom-top {
+	totalOffsetY := self.offsetY + height + self.footerHeight
+	maxOffsetPage := pageHeight - bottom - top
+
+	if totalOffsetY > maxOffsetPage {
 		if !self.headerFooterContextActive && self.footerClosure != nil {
 			self.headerFooterContextActive = true
 			self.footerClosure()
 			self.headerFooterContextActive = false
-			self.offsetY = 0
 		}
+		self.offsetY = 0
 	}
 
 	if !self.headerFooterContextActive && self.headerClosure != nil {
