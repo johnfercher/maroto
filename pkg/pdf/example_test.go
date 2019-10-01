@@ -250,3 +250,28 @@ func ExamplePdfMaroto_Output() {
 		return
 	}
 }
+
+// ExamplePdfMaroto_QrCode demonstrates how to add
+// a QR Code inside a Col. Passing nil on rectProps make
+// make the QR Code fill the context cell, depending on width
+// and height of the QR Code and the cell.
+// When center is true, left and top has no effect.
+// Percent represents the width/height of the QR Code inside the cell.
+// i.e. 80 means that the QR Code will take up 80% of Col's width
+// When center is false, positioning of the QR Code can be done through
+// left and top.
+func ExamplePdfMaroto_QrCode() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	rowHeight := 5.0
+
+	m.Row(rowHeight, func() {
+		m.Col(func() {
+			m.QrCode("https://godoc.org/github.com/johnfercher/maroto", props.Rect{
+				Left:    5,
+				Top:     5,
+				Center:  false,
+				Percent: 80,
+			})
+		})
+	})
+}
