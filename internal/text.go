@@ -28,18 +28,18 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) *text {
 }
 
 // Add a text inside a cell.
-func (self *text) Add(text string, textProp props.Text, marginTop float64, actualCol float64, qtdCols float64) {
-	actualWidthPerCol := self.math.GetWidthPerCol(qtdCols)
+func (s *text) Add(text string, textProp props.Text, marginTop float64, actualCol float64, qtdCols float64) {
+	actualWidthPerCol := s.math.GetWidthPerCol(qtdCols)
 
-	translator := self.pdf.UnicodeTranslatorFromDescriptor("")
-	self.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
+	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
+	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	textTranslated := translator(text)
-	stringWidth := self.pdf.GetStringWidth(textTranslated)
+	stringWidth := s.pdf.GetStringWidth(textTranslated)
 	words := strings.Split(textTranslated, " ")
 
 	if stringWidth < actualWidthPerCol || textProp.Extrapolate || len(words) == 1 {
-		self.addLine(textProp, actualCol, actualWidthPerCol, marginTop, stringWidth, textTranslated)
+		s.addLine(textProp, actualCol, actualWidthPerCol, marginTop, stringWidth, textTranslated)
 	} else {
 		currentlySize := 0.0
 		actualLine := 0
@@ -47,29 +47,29 @@ func (self *text) Add(text string, textProp props.Text, marginTop float64, actua
 		lines = append(lines, "")
 
 		for _, word := range words {
-			if self.pdf.GetStringWidth(word+" ")+currentlySize < actualWidthPerCol {
+			if s.pdf.GetStringWidth(word+" ")+currentlySize < actualWidthPerCol {
 				lines[actualLine] = lines[actualLine] + word + " "
-				currentlySize += self.pdf.GetStringWidth(word + " ")
+				currentlySize += s.pdf.GetStringWidth(word + " ")
 			} else {
 				lines = append(lines, "")
 				actualLine++
 				lines[actualLine] = lines[actualLine] + word + " "
-				currentlySize = self.pdf.GetStringWidth(word + " ")
+				currentlySize = s.pdf.GetStringWidth(word + " ")
 			}
 		}
 
 		for index, line := range lines {
-			lineWidth := self.pdf.GetStringWidth(line)
-			self.addLine(textProp, actualCol, actualWidthPerCol, marginTop+float64(index)*textProp.Size/2.0, lineWidth, line)
+			lineWidth := s.pdf.GetStringWidth(line)
+			s.addLine(textProp, actualCol, actualWidthPerCol, marginTop+float64(index)*textProp.Size/2.0, lineWidth, line)
 		}
 	}
 }
 
-func (self *text) addLine(textProp props.Text, actualCol, actualWidthPerCol, marginTop, stringWidth float64, textTranslated string) {
-	left, top, _, _ := self.pdf.GetMargins()
+func (s *text) addLine(textProp props.Text, actualCol, actualWidthPerCol, marginTop, stringWidth float64, textTranslated string) {
+	left, top, _, _ := s.pdf.GetMargins()
 
 	if textProp.Align == consts.Left {
-		self.pdf.Text(actualCol*actualWidthPerCol+left, marginTop+top, textTranslated)
+		s.pdf.Text(actualCol*actualWidthPerCol+left, marginTop+top, textTranslated)
 		return
 	}
 
@@ -81,5 +81,5 @@ func (self *text) addLine(textProp props.Text, actualCol, actualWidthPerCol, mar
 
 	dx := (actualWidthPerCol - stringWidth) / modifier
 
-	self.pdf.Text(dx+actualCol*actualWidthPerCol+left, marginTop+top, textTranslated)
+	s.pdf.Text(dx+actualCol*actualWidthPerCol+left, marginTop+top, textTranslated)
 }
