@@ -8,6 +8,7 @@
 - [ ] bug report
 - [ ] refactor proposal
 - [ ] documentation request
+- [ ] config proposal
 - [ ] feature request
 
 **Current behavior:** <!-- If applied -->
