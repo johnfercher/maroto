@@ -8,7 +8,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// Font is the abstraction which deals of how to add images in a PDF
+// Image is the abstraction which deals of how to add images in a PDF
 type Image interface {
 	AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64)
 	AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64, extension consts.Extension)
