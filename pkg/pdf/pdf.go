@@ -124,6 +124,9 @@ func (s *PdfMaroto) RegisterFooter(closure func()) {
 	s.calculationMode = false
 }
 
+// GetCurrentPage obtain the current page index
+// this can be used inside a RegisterFooter/RegisterHeader
+// to draw the current page, or to another purposes
 func (s *PdfMaroto) GetCurrentPage() int {
 	return s.pageIndex
 }
