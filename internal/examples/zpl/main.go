@@ -63,7 +63,7 @@ func main() {
 		})
 	})
 
-	m.SetDebugMode(true)
+	m.SetBorder(true)
 
 	m.Row(40, func() {
 		m.Col(func() {
@@ -81,7 +81,7 @@ func main() {
 		})
 	})
 
-	m.SetDebugMode(false)
+	m.SetBorder(false)
 
 	m.OutputFileAndClose("internal/examples/internal/pdfs/zpl.pdf")
 }

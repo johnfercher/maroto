@@ -11,7 +11,7 @@ import (
 
 func main() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
-	//m.SetDebugMode(true)
+	//m.SetBorder(true)
 
 	byteSlices, _ := ioutil.ReadFile("internal/assets/images/biplane.jpg")
 
@@ -103,7 +103,45 @@ func main() {
 
 	})
 
+	m.RegisterFooter(func() {
+		m.Row(40, func() {
+			m.Col(func() {
+				m.Signature("Signature 1", props.Font{
+					Family: consts.Courier,
+					Style:  consts.BoldItalic,
+					Size:   9,
+				})
+			})
+
+			m.Col(func() {
+				m.Signature("Signature 2")
+			})
+
+			m.Col(func() {
+				m.Signature("Signature 3")
+			})
+		})
+	})
+
+	m.Row(15, func() {
+		m.Col(func() {
+			m.Text("Small Packages / 39u.", props.Text{
+				Top:   8,
+				Style: consts.Bold,
+			})
+		})
+	})
+
 	m.TableList(headerSmall, smallContent)
+
+	m.Row(15, func() {
+		m.Col(func() {
+			m.Text("Medium Packages / 22u.", props.Text{
+				Top:   8,
+				Style: consts.Bold,
+			})
+		})
+	})
 
 	m.TableList(headerMedium, mediumContent, props.TableList{
 		Align: consts.Center,
@@ -115,24 +153,6 @@ func main() {
 			Family: consts.Courier,
 			Style:  consts.Italic,
 		},
-	})
-
-	m.Row(40, func() {
-		m.Col(func() {
-			m.Signature("Signature 1", props.Font{
-				Family: consts.Courier,
-				Style:  consts.BoldItalic,
-				Size:   9,
-			})
-		})
-
-		m.Col(func() {
-			m.Signature("Signature 2")
-		})
-
-		m.Col(func() {
-			m.Signature("Signature 3")
-		})
 	})
 
 	_ = m.OutputFileAndClose("internal/examples/pdfs/sample1.pdf")
@@ -206,11 +226,6 @@ func getMediumContent() ([]string, [][]string) {
 	contents = append(contents, []string{"Niterói", "Itapevi", "R$ 2,40"})
 	contents = append(contents, []string{"Jundiaí", "Florianópolis", "R$ 2,30"})
 	contents = append(contents, []string{"Natal", "Jundiaí", "R$ 1,10"})
-	contents = append(contents, []string{"Niterói", "Itapevi", "R$ 2,80"})
-	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "R$ 1,90"})
-	contents = append(contents, []string{"São Carlos", "Petrópolis", "R$ 2,30"})
-	contents = append(contents, []string{"Florianópolis", "Osasco", "R$ 2,10"})
-	contents = append(contents, []string{"Osasco", "São Paulo", "R$ 0,60"})
 
 	return header, contents
 }
