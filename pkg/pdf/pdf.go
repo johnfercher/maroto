@@ -12,15 +12,19 @@ import (
 type Maroto interface {
 	// Grid System
 	Row(height float64, closure func())
-	RegisterHeader(closure func())
 	Col(closure func())
 	ColSpace()
 	ColSpaces(qtd int)
 
+	// Registers
+	RegisterHeader(closure func())
+	RegisterFooter(closure func())
+
 	// Helpers
-	SetDebugMode(on bool)
-	GetDebugMode() bool
+	SetBorder(on bool)
+	GetBorder() bool
 	GetPageSize() (float64, float64)
+	GetCurrentPage() int
 
 	// Outside Col/Row Components
 	TableList(header []string, contents [][]string, prop ...props.TableList)
@@ -48,13 +52,19 @@ type PdfMaroto struct {
 	SignHelper                internal.Signature
 	Image                     internal.Image
 	Code                      internal.Code
+	pageIndex                 int
 	offsetY                   float64
 	rowHeight                 float64
 	rowColCount               float64
 	colsClosures              []func()
 	headerClosure             func()
+	footerClosure             func()
+	footerHeight              float64
 	headerFooterContextActive bool
+	calculationMode           bool
 	DebugMode                 bool
+	orientation               consts.Orientation
+	pageSize                  consts.PageSize
 }
 
 // NewMaroto create a Maroto instance returning a pointer to PdfMaroto
@@ -74,13 +84,16 @@ func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto 
 	code := internal.NewCode(fpdf, math)
 
 	maroto := &PdfMaroto{
-		Pdf:        fpdf,
-		Math:       math,
-		Font:       font,
-		TextHelper: text,
-		SignHelper: signature,
-		Image:      image,
-		Code:       code,
+		Pdf:             fpdf,
+		Math:            math,
+		Font:            font,
+		TextHelper:      text,
+		SignHelper:      signature,
+		Image:           image,
+		Code:            code,
+		pageSize:        pageSize,
+		orientation:     orientation,
+		calculationMode: false,
 	}
 
 	maroto.Font.SetFamily(consts.Arial)
@@ -97,6 +110,22 @@ func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto 
 // which will be added in every new page
 func (s *PdfMaroto) RegisterHeader(closure func()) {
 	s.headerClosure = closure
+}
+
+// RegisterFooter define a sequence of Rows, Lines ou TableLists
+// which will be added in every new page
+func (s *PdfMaroto) RegisterFooter(closure func()) {
+	s.footerClosure = closure
+
+	// calculation mode execute all row flow but
+	// only to calculate the sum of heights
+	s.calculationMode = true
+	closure()
+	s.calculationMode = false
+}
+
+func (s *PdfMaroto) GetCurrentPage() int {
+	return s.pageIndex
 }
 
 // Signature add a space for a signature inside a cell,
@@ -179,14 +208,14 @@ func (s *PdfMaroto) TableList(header []string, contents [][]string, prop ...prop
 	}
 }
 
-// SetDebugMode enable debug mode.
+// SetBorder enable the draw of lines in every cell.
 // Draw borders in all columns created.
-func (s *PdfMaroto) SetDebugMode(on bool) {
+func (s *PdfMaroto) SetBorder(on bool) {
 	s.DebugMode = on
 }
 
-// GetDebugMode return the actual debug mode.
-func (s *PdfMaroto) GetDebugMode() bool {
+// GetBorder return the actual border value.
+func (s *PdfMaroto) GetBorder() bool {
 	return s.DebugMode
 }
 
@@ -210,13 +239,37 @@ func (s *PdfMaroto) Line(spaceHeight float64) {
 
 // Row define a row and enable add columns inside the row.
 func (s *PdfMaroto) Row(height float64, closure func()) {
+	// Used to calculate the height of the footer
+	if s.calculationMode {
+		s.footerHeight += height
+		return
+	}
+
 	_, pageHeight := s.Pdf.GetPageSize()
 	_, top, _, bottom := s.Pdf.GetMargins()
 
-	if s.offsetY+height > pageHeight-bottom-top {
-		s.offsetY = 0
+	totalOffsetY := int(s.offsetY + height + s.footerHeight)
+	maxOffsetPage := int(pageHeight - bottom - top)
+
+	// Note: The headerFooterContextActive is needed to avoid recursive
+	// calls without end, because footerClosure and headerClosure actually
+	// have Row calls too.
+
+	// If the new cell to be added pass the useful space counting the
+	// height of the footer, add the footer
+	if totalOffsetY > maxOffsetPage {
+		if !s.headerFooterContextActive {
+			if s.footerClosure != nil {
+				s.headerFooterContextActive = true
+				s.footerClosure()
+				s.headerFooterContextActive = false
+			}
+			s.offsetY = 0
+			s.pageIndex++
+		}
 	}
 
+	// If is a new page, add the header
 	if !s.headerFooterContextActive && s.headerClosure != nil {
 		if s.offsetY == 0 {
 			s.headerFooterContextActive = true
@@ -228,8 +281,13 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 	s.rowHeight = height
 	s.rowColCount = 0
 
+	// This closure has only maroto.Cols, which are
+	// not executed firstly, they are added to colsClosures
+	// and this enable us to know how many cols will be added
+	// and calculate the width from the cells
 	closure()
 
+	// Execute the codes inside the Cols
 	for _, colClosure := range s.colsClosures {
 		colClosure()
 	}
@@ -326,12 +384,15 @@ func (s *PdfMaroto) Base64Image(base64 string, extension consts.Extension, prop 
 
 // OutputFileAndClose save pdf in disk.
 func (s *PdfMaroto) OutputFileAndClose(filePathName string) (err error) {
+	s.drawLastFooter()
 	err = s.Pdf.OutputFileAndClose(filePathName)
+
 	return
 }
 
 // Output extract PDF in byte slices
 func (s *PdfMaroto) Output() (bytes.Buffer, error) {
+	s.drawLastFooter()
 	var buffer bytes.Buffer
 	err := s.Pdf.Output(&buffer)
 	return buffer, err
@@ -385,4 +446,17 @@ func (s *PdfMaroto) createColSpace(actualWidthPerCol float64) {
 	}
 
 	s.Pdf.CellFormat(actualWidthPerCol, s.rowHeight, "", border, 0.0, "C", false, 0.0, "")
+}
+
+func (s *PdfMaroto) drawLastFooter() {
+	if s.footerClosure != nil {
+		_, pageHeight := s.Pdf.GetPageSize()
+		_, top, _, bottom := s.Pdf.GetMargins()
+
+		if s.offsetY+s.footerHeight < pageHeight-bottom-top {
+			s.headerFooterContextActive = true
+			s.footerClosure()
+			s.headerFooterContextActive = false
+		}
+	}
 }
