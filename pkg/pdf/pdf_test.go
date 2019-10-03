@@ -157,11 +157,11 @@ func TestPdfMaroto_SetGetDebugMode(t *testing.T) {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
 	// Assert & Act
-	assert.False(t, m.GetDebugMode())
-	m.SetDebugMode(true)
+	assert.False(t, m.GetBorder())
+	m.SetBorder(true)
 
 	// Assert
-	assert.True(t, m.GetDebugMode())
+	assert.True(t, m.GetBorder())
 }
 
 func TestPdfMaroto_Signature(t *testing.T) {
@@ -171,6 +171,26 @@ func TestPdfMaroto_Signature(t *testing.T) {
 		assert    func(t *testing.T, signature *mocks.Signature)
 		act       func(m pdf.Maroto)
 	}{
+		{
+			"Calculate mode",
+			func() *mocks.Signature {
+				signature := &mocks.Signature{}
+				signature.On("AddSpaceFor", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return signature
+			},
+			func(t *testing.T, signature *mocks.Signature) {
+				signature.AssertNotCalled(t, "AddSpaceFor")
+			},
+			func(m pdf.Maroto) {
+				m.RegisterFooter(func() {
+					m.Row(40, func() {
+						m.Col(func() {
+							m.Signature("Signature1")
+						})
+					})
+				})
+			},
+		},
 		{
 			"One signature inside one column, inside a row, without props",
 			func() *mocks.Signature {
@@ -1042,7 +1062,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 		{
 			"ColSpace with Debug",
 			func(m pdf.Maroto) {
-				m.SetDebugMode(true)
+				m.SetBorder(true)
 				m.Row(40.0, func() {
 					m.ColSpace()
 				})
@@ -1119,7 +1139,7 @@ func TestPdfMaroto_ColSpaces(t *testing.T) {
 		{
 			"ColSpaces with Debug",
 			func(m pdf.Maroto) {
-				m.SetDebugMode(true)
+				m.SetBorder(true)
 				m.Row(40.0, func() {
 					m.ColSpaces(2)
 				})
@@ -1148,11 +1168,13 @@ func TestPdfMaroto_ColSpaces(t *testing.T) {
 
 func TestPdfMaroto_Output(t *testing.T) {
 	cases := []struct {
-		name           string
-		pdf            func() *mocks.Pdf
-		assertPdfCalls func(t *testing.T, pdf *mocks.Pdf)
-		assertBytes    func(t *testing.T, bytes bytes.Buffer)
-		assertError    func(t *testing.T, err error)
+		name              string
+		pdf               func() *mocks.Pdf
+		hasFooter         bool
+		assertPdfCalls    func(t *testing.T, pdf *mocks.Pdf)
+		assertBytes       func(t *testing.T, bytes bytes.Buffer)
+		assertError       func(t *testing.T, err error)
+		assertFooterCalls func(t *testing.T, footerCalls int)
 	}{
 		{
 			"When Output returns an error",
@@ -1161,6 +1183,7 @@ func TestPdfMaroto_Output(t *testing.T) {
 				pdf.On("Output", mock.Anything).Return(errors.New("AnyError"))
 				return pdf
 			},
+			false,
 			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "Output", 1)
 			},
@@ -1170,6 +1193,9 @@ func TestPdfMaroto_Output(t *testing.T) {
 			func(t *testing.T, err error) {
 				assert.Equal(t, err.Error(), "AnyError")
 			},
+			func(t *testing.T, footerCalls int) {
+				assert.Zero(t, footerCalls)
+			},
 		},
 		{
 			"When Output not returns an error",
@@ -1178,6 +1204,7 @@ func TestPdfMaroto_Output(t *testing.T) {
 				pdf.On("Output", mock.Anything).Return(nil)
 				return pdf
 			},
+			false,
 			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "Output", 1)
 			},
@@ -1187,6 +1214,30 @@ func TestPdfMaroto_Output(t *testing.T) {
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
 			},
+			func(t *testing.T, footerCalls int) {
+				assert.Zero(t, footerCalls)
+			},
+		},
+		{
+			"When Output has footer",
+			func() *mocks.Pdf {
+				pdf := basePdfTest()
+				pdf.On("Output", mock.Anything).Return(nil)
+				return pdf
+			},
+			true,
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "Output", 1)
+			},
+			func(t *testing.T, bytes bytes.Buffer) {
+				assert.Nil(t, bytes.Bytes())
+			},
+			func(t *testing.T, err error) {
+				assert.Nil(t, err)
+			},
+			func(t *testing.T, footerCalls int) {
+				assert.NotZero(t, footerCalls)
+			},
 		},
 	}
 
@@ -1194,14 +1245,21 @@ func TestPdfMaroto_Output(t *testing.T) {
 		// Arrange
 		pdf := c.pdf()
 		math := baseMathTest()
-
 		m := newMarotoTest(pdf, math, nil, nil, nil, nil, nil)
+		footerCalls := 0
 
 		// Act
+		if c.hasFooter {
+			m.RegisterFooter(func() {
+				footerCalls++
+			})
+		}
+
 		bytes, err := m.Output()
 
 		// Assert
 		c.assertPdfCalls(t, pdf)
+		c.assertFooterCalls(t, footerCalls)
 		c.assertBytes(t, bytes)
 		c.assertError(t, err)
 	}
@@ -1269,92 +1327,6 @@ func TestPdfMaroto_OutputFileAndClose(t *testing.T) {
 	}
 }
 
-func TestPdfMaroto_RegisterHeader(t *testing.T) {
-	cases := []struct {
-		name        string
-		headerCalls int
-		act         func(m pdf.Maroto)
-		assert      func(t *testing.T, headerCalls int)
-	}{
-		{
-			"Always execute header once",
-			0,
-			func(m pdf.Maroto) {
-				m.Row(20, func() {
-					m.ColSpace()
-				})
-			},
-			func(t *testing.T, headerCalls int) {
-				assert.Equal(t, headerCalls, 1)
-			},
-		},
-		{
-			"Execute twice when create a second page",
-			0,
-			func(m pdf.Maroto) {
-				header, contents := getContents()
-				m.TableList(header, contents)
-			},
-			func(t *testing.T, headerCalls int) {
-				assert.Equal(t, headerCalls, 2)
-			},
-		},
-		{
-			"When header is empty",
-			0,
-			func(m pdf.Maroto) {
-				_, contents := getContents()
-				m.TableList([]string{}, contents)
-			},
-			func(t *testing.T, headerCalls int) {
-				assert.Equal(t, headerCalls, 0)
-			},
-		},
-		{
-			"When content is empty",
-			0,
-			func(m pdf.Maroto) {
-				header, _ := getContents()
-				m.TableList(header, [][]string{})
-			},
-			func(t *testing.T, headerCalls int) {
-				assert.Equal(t, headerCalls, 0)
-			},
-		},
-		{
-			"When has empty table list prop",
-			0,
-			func(m pdf.Maroto) {
-				header, contents := getContents()
-				m.TableList(header, contents, props.TableList{})
-			},
-			func(t *testing.T, headerCalls int) {
-				assert.Equal(t, headerCalls, 2)
-			},
-		},
-	}
-
-	for _, c := range cases {
-		// Arrange
-		pdf := basePdfTest()
-		math := baseMathTest()
-		text := baseTextTest()
-		headerCalls := c.headerCalls
-
-		m := newMarotoTest(pdf, math, nil, text, nil, nil, nil)
-
-		m.RegisterHeader(func() {
-			headerCalls++
-		})
-
-		// Act
-		c.act(m)
-
-		// Assert
-		c.assert(t, headerCalls)
-	}
-}
-
 func newMarotoTest(fpdf *mocks.Pdf, math *mocks.Math, font *mocks.Font, text *mocks.Text, signature *mocks.Signature, image *mocks.Image, code *mocks.Code) pdf.Maroto {
 	m := &pdf.PdfMaroto{
 		Pdf:        fpdf,
@@ -1403,4 +1375,176 @@ func getContents() ([]string, [][]string) {
 	}
 
 	return header, contents
+}
+
+func TestPdfMaroto_RegisterFooter(t *testing.T) {
+	cases := []struct {
+		name      string
+		act       func(m pdf.Maroto)
+		hasFooter bool
+		assert    func(t *testing.T, footerCalls int)
+	}{
+		{
+			"Always execute footer once",
+			func(m pdf.Maroto) {
+			},
+			true,
+			func(t *testing.T, footerCalls int) {
+				assert.Equal(t, footerCalls, 1)
+			},
+		},
+		{
+			"Execute twice when create a second page",
+			func(m pdf.Maroto) {
+				header, contents := getContents()
+				m.TableList(header, contents)
+			},
+			true,
+			func(t *testing.T, footerCalls int) {
+				assert.Equal(t, footerCalls, 2)
+			},
+		},
+		{
+			"When footer is nil, not execute",
+			func(m pdf.Maroto) {
+				header, contents := getContents()
+				m.TableList(header, contents)
+			},
+			false,
+			func(t *testing.T, footerCalls int) {
+				assert.Equal(t, footerCalls, 0)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := basePdfTest()
+		math := baseMathTest()
+		text := baseTextTest()
+		footerCalls := 0
+
+		m := newMarotoTest(pdf, math, nil, text, nil, nil, nil)
+
+		if c.hasFooter {
+			m.RegisterFooter(func() {
+				footerCalls++
+			})
+		}
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, footerCalls)
+	}
+}
+
+func TestPdfMaroto_RegisterHeader(t *testing.T) {
+	cases := []struct {
+		name       string
+		act        func(m pdf.Maroto)
+		hasClosure bool
+		assert     func(t *testing.T, headerCalls int)
+	}{
+		{
+			"Always execute header once when add something",
+			func(m pdf.Maroto) {
+				m.Row(20, func() {
+					m.ColSpace()
+				})
+			},
+			true,
+			func(t *testing.T, headerCalls int) {
+				assert.Equal(t, headerCalls, 1)
+			},
+		},
+		{
+			"Execute twice when create a second page",
+			func(m pdf.Maroto) {
+				header, contents := getContents()
+				m.TableList(header, contents)
+			},
+			true,
+			func(t *testing.T, headerCalls int) {
+				assert.Equal(t, headerCalls, 2)
+			},
+		},
+		{
+			"When header is nil not execute",
+			func(m pdf.Maroto) {
+				header, contents := getContents()
+				m.TableList(header, contents)
+			},
+			false,
+			func(t *testing.T, headerCalls int) {
+				assert.Equal(t, headerCalls, 0)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := basePdfTest()
+		math := baseMathTest()
+		text := baseTextTest()
+		headerCalls := 0
+
+		m := newMarotoTest(pdf, math, nil, text, nil, nil, nil)
+
+		if c.hasClosure {
+			m.RegisterHeader(func() {
+				headerCalls++
+			})
+		}
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, headerCalls)
+	}
+}
+
+func TestPdfMaroto_GetCurrentPage(t *testing.T) {
+	cases := []struct {
+		name   string
+		act    func(m pdf.Maroto)
+		assert func(t *testing.T, pageIndex int)
+	}{
+		{
+			"When create page index should be 1",
+			func(m pdf.Maroto) {
+			},
+			func(t *testing.T, pageIndex int) {
+				assert.Equal(t, pageIndex, 0)
+			},
+		},
+		{
+			"When has a secund page, page index should be 2",
+			func(m pdf.Maroto) {
+				header, contents := getContents()
+				m.TableList(header, contents)
+			},
+			func(t *testing.T, pageIndex int) {
+				assert.Equal(t, pageIndex, 1)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := basePdfTest()
+		math := baseMathTest()
+		text := baseTextTest()
+
+		m := newMarotoTest(pdf, math, nil, text, nil, nil, nil)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		pageIndex := m.GetCurrentPage()
+		c.assert(t, pageIndex)
+	}
 }
