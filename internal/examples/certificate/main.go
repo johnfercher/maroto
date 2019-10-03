@@ -8,7 +8,7 @@ import (
 
 func main() {
 	m := pdf.NewMaroto(consts.Landscape, consts.A4)
-	//m.SetDebugMode(true)
+	//m.SetBorder(true)
 
 	m.Row(20, func() {
 		m.Col(func() {
