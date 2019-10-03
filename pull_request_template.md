@@ -21,3 +21,4 @@
 - [ ] Updated docs/doc.go <!-- If applied -->
 - [ ] Updated pkg/pdf/example_test.go <!-- If applied -->
 - [ ] Updated README.md <!-- If applied -->
+- [ ] New public methods has comments upside them explaining what it does
