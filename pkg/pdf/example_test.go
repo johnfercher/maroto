@@ -197,9 +197,9 @@ func ExamplePdfMaroto_FileImage() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_Base64Image demonstrates how add an Image
+// ExamplePdfMaroto_Base64Image demonstrates how to add an Image
 // from a base64 string.
-// When barcodeProp is nil, the method makes the Image fulfill the context
+// When rect properties is nil, the method makes the Image fulfill the context
 // cell, based on width and height from Image and cell.
 // When center is true, left and top has no effect.
 // Percent represents the width/height of the Image inside the cell:
@@ -226,7 +226,7 @@ func ExamplePdfMaroto_Base64Image() {
 }
 
 // ExamplePdfMaroto_OutputFileAndClose demonstrates how to
-// save a PDF into disk.
+// save a PDF object into disk.
 func ExamplePdfMaroto_OutputFileAndClose() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
@@ -278,7 +278,7 @@ func ExamplePdfMaroto_QrCode() {
 
 // ExamplePdfMaroto_Barcode demonstrates how to place a barcode inside
 // a Col.
-// Passing nil on props parameter implies the Barcode fills it's
+// Passing nil on barcode props parameter implies the Barcode fills it's
 // context cell depending on it's size.
 // It's possible to define the barcode positioning through
 // the top and left parameters unless center parameter is true.
