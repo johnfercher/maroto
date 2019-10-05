@@ -238,3 +238,7 @@ func main() {
 
 [travis]: https://travis-ci.com/johnfercher/maroto
 [test]: test.sh
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/johnfercher/maroto.svg)](https://starchart.cc/johnfercher/maroto)
