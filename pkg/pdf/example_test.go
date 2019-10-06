@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
+	"time"
 )
 
 // ExamplePdfMaroto_Line demonstrates how to draw a line
@@ -299,4 +300,29 @@ func ExamplePdfMaroto_Barcode() {
 	})
 
 	// do more things...
+}
+
+// ExamplePdfMaroto_RegisterFooter demonstrates how to register footer.
+// For register footer in Maroto you need to call method RegisterFooter
+// that receives a closure.
+// In this closure you are free to set any components you want to compose
+// your footer.
+// In this example there is a signature and a text with right align.
+// It is important to remember that it is recommended to create Row's and
+// Col's if necessary.
+func ExamplePdfMaroto_RegisterFooter() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.RegisterFooter(func() {
+		m.Row(10, func() {
+			m.Col(func() {
+				m.Signature("lorem ipsum dolor")
+			})
+			m.Col(func() {
+				m.Text(time.Now().Format("02-January-2006"), props.Text{Align:consts.Right})
+			})
+		})
+	})
+
+	// Do more things or not and save...
 }
