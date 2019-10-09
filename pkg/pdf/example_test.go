@@ -319,7 +319,38 @@ func ExamplePdfMaroto_RegisterFooter() {
 				m.Signature("lorem ipsum dolor")
 			})
 			m.Col(func() {
-				m.Text(time.Now().Format("02-January-2006"), props.Text{Align:consts.Right})
+				m.Text(time.Now().Format("02-January-2006"), props.Text{Align: consts.Right})
+			})
+		})
+	})
+
+	// Do more things or not and save...
+}
+
+// ExamplePdfMaroto_RegisterHeader demonstrates how to register header.
+// For register header in Maroto you need to call method RegisterHeader
+// that receives a closure.
+// In this closure you are free to set any components you want to compose
+// your header.
+// In this example there is a two texts with different props and one image.
+// It is important to remember that it is recommended to create Row's and
+// Col's if necessary.
+// A tip is to register the header immediately after the Maroto
+// instantiation to make the code easier to read.
+func ExamplePdfMaroto_RegisterHeader() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.RegisterHeader(func() {
+		m.Row(10, func() {
+			m.Col(func() {
+				m.Text("lorem ipsum dolor", props.Text{Align: consts.Left})
+			})
+			m.Col(func() {
+				m.FileImage("internal/assets/images/frontpage.png")
+			})
+			m.Col(func() {
+				m.Text(time.Now().Format("02-January-2006"),
+					props.Text{Align: consts.Right})
 			})
 		})
 	})
