@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
+	"time"
 )
 
 // ExamplePdfMaroto_Line demonstrates how to draw a line
@@ -29,7 +30,7 @@ func ExamplePdfMaroto_Row() {
 }
 
 // ExamplePdfMaroto_ColSpace demonstrates how to add
-// a empty column inside a row.
+// an empty column inside a row.
 func ExamplePdfMaroto_ColSpace() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	rowHeight := 5.0
@@ -55,7 +56,7 @@ func ExamplePdfMaroto_ColSpaces() {
 }
 
 // ExamplePdfMaroto_Col demonstrates how to add
-// a useful column
+// an useful column
 func ExamplePdfMaroto_Col() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	rowHeight := 5.0
@@ -69,16 +70,16 @@ func ExamplePdfMaroto_Col() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_SetDebugMode demonstrates how to
-// define debug mode
-func ExamplePdfMaroto_SetDebugMode() {
+// ExamplePdfMaroto_SetBorder demonstrates how to
+// enable the line drawing in every cell
+func ExamplePdfMaroto_SetBorder() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
-	m.SetDebugMode(true)
+	m.SetBorder(true)
 
 	// Add some Rows, Cols, Lines and etc...
 	// Here will be drawn borders in every cell
 
-	m.SetDebugMode(false)
+	m.SetBorder(false)
 
 	// Add some Rows, Cols, Lines and etc...
 	// Here will not be drawn borders
@@ -86,29 +87,29 @@ func ExamplePdfMaroto_SetDebugMode() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_GetDebugMode demonstrates how to
-// obtain the actual debug mode value
-func ExamplePdfMaroto_GetDebugMode() {
+// ExamplePdfMaroto_GetBorder demonstrates how to
+// obtain the actual borders status
+func ExamplePdfMaroto_GetBorder() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
 	// false
-	m.GetDebugMode()
+	m.GetBorder()
 
-	m.SetDebugMode(true)
+	m.SetBorder(true)
 
 	// true
-	m.GetDebugMode()
+	m.GetBorder()
 
 	// Do more things and save...
 }
 
 // ExamplePdfMaroto_Text demonstrates how to add
-// a Text inside a col. Passing nil on fontProp make the method
+// a Text inside a col. Passing nil on fontProp makes the method
 // use: arial Font, normal style, size 10.0 and align left.
-// Not passing family, make method use arial.
-// Not passing style, make method use normal.
-// Not passing size, make method use 10.0.
-// Not passing align, make method use left.
+// Not passing family, makes the method use arial.
+// Not passing style, makes the method use normal.
+// Not passing size, makes the method use 10.0.
+// Not passing align, makes the method use left.
 func ExamplePdfMaroto_Text() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	rowHeight := 5.0
@@ -170,7 +171,7 @@ func ExamplePdfMaroto_TableList() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_FileImage demonstrates how add a Image
+// ExamplePdfMaroto_FileImage demonstrates how add an Image
 // reading from disk.
 // When barcodeProp is nil, method make Image fulfill the context
 // cell, based on width and cell from Image and cell.
@@ -197,10 +198,10 @@ func ExamplePdfMaroto_FileImage() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_Base64Image demonstrates how add a Image
-// reading a base64 string.
-// When barcodeProp is nil, method make Image fulfill the context
-// cell, based on width and cell from Image and cell.
+// ExamplePdfMaroto_Base64Image demonstrates how to add an Image
+// from a base64 string.
+// When rect properties is nil, the method makes the Image fulfill the context
+// cell, based on width and height from Image and cell.
 // When center is true, left and top has no effect.
 // Percent represents the width/height of the Image inside the cell:
 // Ex: 85, means that Image will have width of 85% of column width.
@@ -226,7 +227,7 @@ func ExamplePdfMaroto_Base64Image() {
 }
 
 // ExamplePdfMaroto_OutputFileAndClose demonstrates how to
-// save a PDF in disk.
+// save a PDF object into disk.
 func ExamplePdfMaroto_OutputFileAndClose() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
@@ -249,4 +250,110 @@ func ExamplePdfMaroto_Output() {
 	if err != nil {
 		return
 	}
+}
+
+// ExamplePdfMaroto_QrCode demonstrates how to add
+// a QR Code inside a Col. Passing nil on rectProps makes
+// the QR Code fills the context cell depending on width
+// and height of the QR Code and the cell.
+// When center is true, left and top has no effect.
+// Percent represents the width/height of the QR Code inside the cell.
+// i.e. 80 means that the QR Code will take up 80% of Col's width
+// When center is false, positioning of the QR Code can be done through
+// left and top.
+func ExamplePdfMaroto_QrCode() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	rowHeight := 5.0
+
+	m.Row(rowHeight, func() {
+		m.Col(func() {
+			m.QrCode("https://godoc.org/github.com/johnfercher/maroto", props.Rect{
+				Left:    5,
+				Top:     5,
+				Center:  false,
+				Percent: 80,
+			})
+		})
+	})
+}
+
+// ExamplePdfMaroto_Barcode demonstrates how to place a barcode inside
+// a Col.
+// Passing nil on barcode props parameter implies the Barcode fills it's
+// context cell depending on it's size.
+// It's possible to define the barcode positioning through
+// the top and left parameters unless center parameter is true.
+// In brief, when center parameter equals true, left and top parameters has no effect.
+// Percent parameter represents the Barcode's width/height inside the cell.
+// i.e. Percent: 75 means that the Barcode will take up 75% of Col's width
+func ExamplePdfMaroto_Barcode() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Do a lot of things on rows and columns...
+
+	m.Col(func() {
+		_ = m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
+			Percent:    75,
+			Proportion: props.Proportion{Width: 50, Height: 10},
+			Center:     true,
+		})
+	})
+
+	// do more things...
+}
+
+// ExamplePdfMaroto_RegisterFooter demonstrates how to register footer.
+// For register footer in Maroto you need to call method RegisterFooter
+// that receives a closure.
+// In this closure you are free to set any components you want to compose
+// your footer.
+// In this example there is a signature and a text with right align.
+// It is important to remember that it is recommended to create Row's and
+// Col's if necessary.
+func ExamplePdfMaroto_RegisterFooter() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.RegisterFooter(func() {
+		m.Row(10, func() {
+			m.Col(func() {
+				m.Signature("lorem ipsum dolor")
+			})
+			m.Col(func() {
+				m.Text(time.Now().Format("02-January-2006"), props.Text{Align: consts.Right})
+			})
+		})
+	})
+
+	// Do more things or not and save...
+}
+
+// ExamplePdfMaroto_RegisterHeader demonstrates how to register header.
+// For register header in Maroto you need to call method RegisterHeader
+// that receives a closure.
+// In this closure you are free to set any components you want to compose
+// your header.
+// In this example there is a two texts with different props and one image.
+// It is important to remember that it is recommended to create Row's and
+// Col's if necessary.
+// A tip is to register the header immediately after the Maroto
+// instantiation to make the code easier to read.
+func ExamplePdfMaroto_RegisterHeader() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.RegisterHeader(func() {
+		m.Row(10, func() {
+			m.Col(func() {
+				m.Text("lorem ipsum dolor", props.Text{Align: consts.Left})
+			})
+			m.Col(func() {
+				m.FileImage("internal/assets/images/frontpage.png")
+			})
+			m.Col(func() {
+				m.Text(time.Now().Format("02-January-2006"),
+					props.Text{Align: consts.Right})
+			})
+		})
+	})
+
+	// Do more things or not and save...
 }
