@@ -35,50 +35,50 @@ func NewFont(pdf gofpdf.Pdf, size float64, family consts.Family, style consts.St
 }
 
 // GetFamily return the currently Font family configured
-func (self *font) GetFamily() consts.Family {
-	return self.family
+func (s *font) GetFamily() consts.Family {
+	return s.family
 }
 
 // GetStyle return the currently Font style configured
-func (self *font) GetStyle() consts.Style {
-	return self.style
+func (s *font) GetStyle() consts.Style {
+	return s.style
 }
 
 // GetSize return the currently Font size configured
-func (self *font) GetSize() float64 {
-	return self.size
+func (s *font) GetSize() float64 {
+	return s.size
 }
 
 // GetFont return all the currently Font properties configured
-func (self *font) GetFont() (consts.Family, consts.Style, float64) {
-	return self.family, self.style, self.size
+func (s *font) GetFont() (consts.Family, consts.Style, float64) {
+	return s.family, s.style, s.size
 }
 
 // SetFamily defines a new Font family
-func (self *font) SetFamily(family consts.Family) {
-	self.family = family
+func (s *font) SetFamily(family consts.Family) {
+	s.family = family
 
-	self.pdf.SetFont(string(self.family), string(self.style), self.size)
+	s.pdf.SetFont(string(s.family), string(s.style), s.size)
 }
 
 // SetStyle defines a new Font style
-func (self *font) SetStyle(style consts.Style) {
-	self.style = style
+func (s *font) SetStyle(style consts.Style) {
+	s.style = style
 
-	self.pdf.SetFontStyle(string(self.style))
+	s.pdf.SetFontStyle(string(s.style))
 }
 
 // SetSize defines a new Font size
-func (self *font) SetSize(size float64) {
-	self.size = size
-	self.pdf.SetFontSize(self.size)
+func (s *font) SetSize(size float64) {
+	s.size = size
+	s.pdf.SetFontSize(s.size)
 }
 
 // SetFont defines all new Font properties
-func (self *font) SetFont(family consts.Family, style consts.Style, size float64) {
-	self.family = family
-	self.style = style
-	self.size = size
+func (s *font) SetFont(family consts.Family, style consts.Style, size float64) {
+	s.family = family
+	s.style = style
+	s.size = size
 
-	self.pdf.SetFont(string(self.family), string(self.style), self.size)
+	s.pdf.SetFont(string(s.family), string(s.style), s.size)
 }

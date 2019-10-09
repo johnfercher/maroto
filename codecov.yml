@@ -1,0 +1,12 @@
+coverage:
+  precision: 2
+  round: up
+  range: "70...100"
+
+ignore:
+  - ".idea"
+  - "internal/assets"
+  - "internal/examples"
+  - "internal/mocks"
+  - "docs"
+  - "vendor"
