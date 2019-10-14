@@ -6,6 +6,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/consts"
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -94,7 +95,7 @@ func TestImage_AddFromFile(t *testing.T) {
 		image := internal.NewImage(pdf, math)
 
 		// Act
-		image.AddFromFile("AnyPath", 10.0, 1.0, 4.0, 5.0, 100.0)
+		image.AddFromFile("AnyPath", 10.0, 1.0, 4.0, 5.0, props.Rect{Center: true, Percent: 100})
 
 		// Assert
 		c.assertPdfCalls(t, pdf)
@@ -179,7 +180,7 @@ func TestImage_AddFromBase64(t *testing.T) {
 		base64 := getBase64String()
 
 		// Act
-		image.AddFromBase64(base64, 10.0, 1.0, 4.0, 5.0, 100.0, consts.Jpg)
+		image.AddFromBase64(base64, 10.0, 1.0, 4.0, 5.0, props.Rect{Center: true, Percent: 100}, consts.Jpg)
 
 		// Assert
 		c.assertPdfCalls(t, pdf)
