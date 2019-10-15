@@ -2,7 +2,10 @@
 
 package mocks
 
-import "github.com/johnfercher/maroto/pkg/consts"
+import (
+	"github.com/johnfercher/maroto/pkg/consts"
+	"github.com/johnfercher/maroto/pkg/props"
+)
 
 import "github.com/stretchr/testify/mock"
 
@@ -12,11 +15,11 @@ type Image struct {
 }
 
 // AddFromBase64 provides a mock function with given fields: b64, marginTop, indexCol, qtdCols, colHeight, percent, extension
-func (_m *Image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64, extension consts.Extension) {
-	_m.Called(b64, marginTop, indexCol, qtdCols, colHeight, percent, extension)
+func (_m *Image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect, extension consts.Extension) {
+	_m.Called(b64, marginTop, indexCol, qtdCols, colHeight, prop.Percent, extension)
 }
 
 // AddFromFile provides a mock function with given fields: path, marginTop, indexCol, qtdCols, colHeight, percent
-func (_m *Image) AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, percent float64) {
-	_m.Called(path, marginTop, indexCol, qtdCols, colHeight, percent)
+func (_m *Image) AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect) {
+	_m.Called(path, marginTop, indexCol, qtdCols, colHeight, prop.Percent)
 }
