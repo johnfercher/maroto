@@ -40,7 +40,7 @@ func main() {
 			m.Col(func() {
 				id := "https://github.com/johnfercher/maroto"
 				_ = m.Barcode(id, props.Barcode{
-					Proportion: props.Proportion{50, 10},
+					Proportion: props.Proportion{Width: 50, Height: 10},
 					Percent:    75,
 				})
 				m.Text(id, props.Text{
