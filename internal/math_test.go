@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -227,6 +228,113 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 
 		// Act
 		x, y, w, h := math.GetRectCenterColProperties(c.width, c.height, 5, 25.0, 2, c.percent)
+
+		// Assert
+		c.assertPdfCalls(t, pdf)
+		c.assertResult(t, x, y, w, h)
+	}
+}
+
+func TestMath_GetRectNonCenterColProperties(t *testing.T) {
+	cases := []struct {
+		name           string
+		width          float64
+		height         float64
+		prop           props.Rect
+		pdf            func() *mocks.Pdf
+		assertPdfCalls func(t *testing.T, pdf *mocks.Pdf)
+		assertResult   func(t *testing.T, x, y, w, h float64)
+	}{
+		{
+			"When Image has width greater than height",
+			300,
+			200,
+			props.Rect{
+				Percent: 100,
+				Center:  false,
+				Left:    0,
+				Top:     0,
+			},
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
+				pdf.On("GetPageSize").Return(201.0, 301.0)
+				return pdf
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
+			},
+			func(t *testing.T, x, y, w, h float64) {
+				assert.InDelta(t, x, 12, 0.1)
+				assert.InDelta(t, y, 11, 0.1)
+				assert.InDelta(t, w, 35.2, 0.1)
+				assert.InDelta(t, h, 23.4, 0.1)
+			},
+		}, {
+			"When Image has height greater than width",
+			200,
+			300,
+			props.Rect{
+				Percent: 100,
+				Center:  false,
+				Left:    0,
+				Top:     0,
+			},
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
+				pdf.On("GetPageSize").Return(211.0, 233.0)
+				return pdf
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
+			},
+			func(t *testing.T, x, y, w, h float64) {
+				assert.InDelta(t, x, 15, 0.1)
+				assert.InDelta(t, y, 12, 0.1)
+				assert.InDelta(t, w, 16.6, 0.1)
+				assert.InDelta(t, h, 25.0, 0.1)
+			},
+		},
+		{
+			"When Image has height greater than width, percent 45",
+			200,
+			300,
+			props.Rect{
+				Percent: 45,
+				Center:  false,
+				Left:    0,
+				Top:     0,
+			},
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
+				pdf.On("GetPageSize").Return(211.0, 233.0)
+				return pdf
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
+			},
+			func(t *testing.T, x, y, w, h float64) {
+				assert.InDelta(t, x, 15, 0.1)
+				assert.InDelta(t, y, 12, 0.1)
+				assert.InDelta(t, w, 16.1, 0.1)
+				assert.InDelta(t, h, 24.1, 0.1)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := c.pdf()
+
+		math := internal.NewMath(pdf)
+
+		// Act
+		x, y, w, h := math.GetRectNonCenterColProperties(c.width, c.height, 5, 25.0, 2, c.prop)
 
 		// Assert
 		c.assertPdfCalls(t, pdf)

@@ -179,7 +179,7 @@ func ExamplePdfMaroto_TableList() {
 // Percent represents the width/height of the Image inside the cell:
 // Ex: 85, means that Image will have width of 85% of column width.
 // When center is false, is possible to manually positioning the Image
-// with left and top.
+// with left and top.AddFromBase64(string, float64, float64, float64, float64, float64, consts.Extension)
 func ExamplePdfMaroto_FileImage() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	rowHeight := 5.0
