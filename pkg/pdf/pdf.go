@@ -358,11 +358,7 @@ func (s *PdfMaroto) FileImage(filePathName string, prop ...props.Rect) {
 	qtdCols := float64(len(s.colsClosures))
 	sumOfyOffsets := s.offsetY + rectProp.Top
 
-	if rectProp.Center {
-		s.Image.AddFromFile(filePathName, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp.Percent)
-	} else {
-		s.Image.AddFromFile(filePathName, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp.Percent)
-	}
+	s.Image.AddFromFile(filePathName, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp)
 }
 
 // Base64Image add an Image reading byte slices inside a cell.
@@ -378,11 +374,7 @@ func (s *PdfMaroto) Base64Image(base64 string, extension consts.Extension, prop 
 	qtdCols := float64(len(s.colsClosures))
 	sumOfyOffsets := s.offsetY + rectProp.Top
 
-	if rectProp.Center {
-		s.Image.AddFromBase64(base64, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp.Percent, extension)
-	} else {
-		s.Image.AddFromBase64(base64, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp.Percent, extension)
-	}
+	s.Image.AddFromBase64(base64, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp, extension)
 }
 
 // OutputFileAndClose save pdf in disk.
