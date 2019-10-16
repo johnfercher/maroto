@@ -57,7 +57,7 @@ func (s *image) AddFromBase64(b64 string, marginTop float64, indexCol float64, q
 }
 
 func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, marginTop, qtdCols, colHeight, indexCol float64, prop props.Rect) {
-	var x,y,w,h float64
+	var x, y, w, h float64
 	if prop.Center {
 		x, y, w, h = s.math.GetRectCenterColProperties(info.Width(), info.Height(), qtdCols, colHeight, indexCol, prop.Percent)
 	} else {
