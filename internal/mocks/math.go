@@ -63,7 +63,7 @@ func (_m *Math) GetRectCenterColProperties(imageWidth float64, imageHeight float
 
 // GetRectNonCenterColProperties provides a mock function with given fields: imageWidth, imageHeight, qtdCols, colHeight, indexCol, prop
 func (_m *Math) GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, prop props.Rect) (float64, float64, float64, float64) {
-	ret := _m.Called(imageWidth, imageHeight, qtdCols, colHeight, indexCol, prop)
+	ret := _m.Called(int(imageWidth), int(imageHeight), int(qtdCols), int(colHeight), int(indexCol), prop)
 
 	var r0 float64
 	if rf, ok := ret.Get(0).(func(float64, float64, float64, float64, float64, props.Rect) float64); ok {
