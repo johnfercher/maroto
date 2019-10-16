@@ -112,7 +112,7 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			func(t *testing.T, math *mocks.Math) {
 				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectNonCenterColProperties", 661, 521, 4, 5, 1, 100)
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 661, 521, 4, 5, 1, props.Rect{Center: false, Percent: 100})
 			},
 			props.Rect{Center: false, Percent: 100},
 		},
