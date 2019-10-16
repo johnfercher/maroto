@@ -6,6 +6,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/consts"
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -27,6 +28,7 @@ func TestImage_AddFromFile(t *testing.T) {
 		math            func() *mocks.Math
 		assertPdfCalls  func(t *testing.T, pdf *mocks.Pdf)
 		assertMathCalls func(t *testing.T, pdf *mocks.Math)
+		props props.Rect
 	}{
 		/*{
 			"When Image has width greater than height",
@@ -83,6 +85,36 @@ func TestImage_AddFromFile(t *testing.T) {
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
 				math.AssertCalled(t, "GetRectCenterColProperties", 661, 521, 4, 5, 1, 100)
 			},
+			props.Rect{Center: true, Percent: 100},
+		},
+		{
+			"When Image must not be centered",
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(nonCenteredImageInfo())
+				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return pdf
+			},
+			func() *mocks.Math {
+				math := &mocks.Math{}
+				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				return math
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "Image", 1)
+				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+
+				pdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
+				pdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
+					ReadDpi:   false,
+					ImageType: "",
+				})
+			},
+			func(t *testing.T, math *mocks.Math) {
+				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 661, 521, 4, 5, 1, props.Rect{Center: false, Percent: 100})
+			},
+			props.Rect{Center: false, Percent: 100},
 		},
 	}
 
@@ -94,7 +126,7 @@ func TestImage_AddFromFile(t *testing.T) {
 		image := internal.NewImage(pdf, math)
 
 		// Act
-		image.AddFromFile("AnyPath", 10.0, 1.0, 4.0, 5.0, 100.0)
+		image.AddFromFile("AnyPath", 10.0, 1.0, 4.0, 5.0, c.props)
 
 		// Assert
 		c.assertPdfCalls(t, pdf)
@@ -179,7 +211,7 @@ func TestImage_AddFromBase64(t *testing.T) {
 		base64 := getBase64String()
 
 		// Act
-		image.AddFromBase64(base64, 10.0, 1.0, 4.0, 5.0, 100.0, consts.Jpg)
+		image.AddFromBase64(base64, 10.0, 1.0, 4.0, 5.0, props.Rect{Center: true, Percent: 100}, consts.Jpg)
 
 		// Assert
 		c.assertPdfCalls(t, pdf)
@@ -202,6 +234,17 @@ func widthGreaterThanHeightImageInfo() *gofpdf.ImageInfoType {
 	truePdf := gofpdf.New("P", "mm", "A4", "")
 
 	info := truePdf.RegisterImageOptions("assets/images/frontpage.png", gofpdf.ImageOptions{
+		ReadDpi:   false,
+		ImageType: "",
+	})
+
+	return info
+}
+
+func nonCenteredImageInfo() *gofpdf.ImageInfoType {
+	truePdf := gofpdf.New("P", "mm", "A4", "")
+
+	info := truePdf.RegisterImageOptions("assets/images/biplane.jpg", gofpdf.ImageOptions{
 		ReadDpi:   false,
 		ImageType: "",
 	})
