@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 )
 
@@ -8,6 +9,7 @@ import (
 type Math interface {
 	GetWidthPerCol(qtdCols float64) float64
 	GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, percent float64) (x float64, y float64, w float64, h float64)
+	GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, prop props.Rect) (x float64, y float64, w float64, h float64)
 	GetCenterCorrection(outerSize, innerSize float64) float64
 }
 
@@ -60,6 +62,35 @@ func (s *math) GetRectCenterColProperties(imageWidth float64, imageHeight float6
 
 		x = (widthPerCol * indexCol) + left + widthCorrection
 		y = top + heightCorrection
+		w = newImageWidth
+		h = newImageHeight
+	}
+
+	return
+}
+
+// GetRectNonCenterColProperties define Width, Height to and rectangle (QrCode, Barcode, Image) inside a cell
+func (s *math) GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, prop props.Rect) (x float64, y float64, w float64, h float64) {
+	percent := prop.Percent / 100.0
+	width, _ := s.pdf.GetPageSize()
+	left, top, right, _ := s.pdf.GetMargins()
+	widthPerCol := (width - right - left) / qtdCols
+
+	proportion := imageHeight / imageWidth
+
+	newImageHeight := widthPerCol * proportion * percent
+	newImageWidth := widthPerCol * percent
+
+	if newImageHeight > colHeight {
+		newImageWidth := colHeight / proportion * percent
+		newImageHeight := newImageWidth * proportion
+		x = prop.Left + left
+		y = prop.Top + top
+		w = newImageWidth
+		h = newImageHeight
+	} else {
+		x = prop.Left + left
+		y = prop.Top + top
 		w = newImageWidth
 		h = newImageHeight
 	}
