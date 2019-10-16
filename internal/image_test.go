@@ -28,7 +28,7 @@ func TestImage_AddFromFile(t *testing.T) {
 		math            func() *mocks.Math
 		assertPdfCalls  func(t *testing.T, pdf *mocks.Pdf)
 		assertMathCalls func(t *testing.T, pdf *mocks.Math)
-		props props.Rect
+		props           props.Rect
 	}{
 		/*{
 			"When Image has width greater than height",
