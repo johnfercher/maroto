@@ -715,7 +715,7 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddQr", 1)
-				code.AssertCalled(t, "AddQr", "Code1", 0.0, 0.0, 1.0, 20.0, 100.0)
+				code.AssertCalled(t, "AddQr", "Code1", 0.0, 0.0, 1.0, 20.0, props.Rect{Percent: 100, Center: false})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
@@ -734,8 +734,15 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddQr", 2)
-				code.AssertCalled(t, "AddQr", "Code2", 4.0, 0.0, 1.0, 20.0, 40.0)
-				code.AssertCalled(t, "AddQr", "Code3", 0.0, 0.0, 1.0, 20.0, 40.0)
+				code.AssertCalled(t, "AddQr", "Code2", 4.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    2.0,
+					Top:     4.0,
+					Percent: 40.0,
+				})
+				code.AssertCalled(t, "AddQr", "Code3", 0.0, 0.0, 1.0, 20.0, props.Rect{
+					Percent: 40.0,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
@@ -762,8 +769,15 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddQr", 2)
-				code.AssertCalled(t, "AddQr", "Code4", 4.5, 0.0, 2.0, 20.0, 55.0)
-				code.AssertCalled(t, "AddQr", "Code5", 0.0, 1.0, 2.0, 20.0, 53.0)
+				code.AssertCalled(t, "AddQr", "Code4", 4.5, 0.0, 2.0, 20.0, props.Rect{
+					Left:    4.0,
+					Top:     4.5,
+					Percent: 55.0,
+				})
+				code.AssertCalled(t, "AddQr", "Code5", 0.0, 1.0, 2.0, 20.0, props.Rect{
+					Percent: 53.0,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
@@ -792,8 +806,15 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddQr", 2)
-				code.AssertCalled(t, "AddQr", "Code6", 8.5, 0.0, 1.0, 20.0, 66.0)
-				code.AssertCalled(t, "AddQr", "Code7", 20.0, 0.0, 1.0, 20.0, 98.0)
+				code.AssertCalled(t, "AddQr", "Code6", 8.5, 0.0, 1.0, 20.0, props.Rect{
+					Left:    7.0,
+					Top:     8.5,
+					Percent: 66.0,
+				})
+				code.AssertCalled(t, "AddQr", "Code7", 20.0, 0.0, 1.0, 20.0, props.Rect{
+					Percent: 98.0,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
