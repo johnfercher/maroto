@@ -142,7 +142,31 @@ func TestBarcodeProp_MakeValid(t *testing.T) {
 				},
 			},
 			func(t *testing.T, prop props.Barcode) {
-				assert.Equal(t, prop.Proportion.Height, 0.33)
+				assert.Equal(t, prop.Proportion.Height, 0.20)
+			},
+		},
+		{
+			"When height is smaller than 10% of width",
+			props.Barcode{
+				Proportion: props.Proportion{
+					Width:  11,
+					Height: 1,
+				},
+			},
+			func(t *testing.T, prop props.Barcode) {
+				assert.Equal(t, prop.Proportion.Height, prop.Proportion.Width*0.10)
+			},
+		},
+		{
+			"When height is grather than 20% of width",
+			props.Barcode{
+				Proportion: props.Proportion{
+					Width:  5,
+					Height: 5,
+				},
+			},
+			func(t *testing.T, prop props.Barcode) {
+				assert.Equal(t, prop.Proportion.Height, prop.Proportion.Width*0.20)
 			},
 		},
 	}
