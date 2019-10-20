@@ -173,7 +173,7 @@ func ExamplePdfMaroto_TableList() {
 
 // ExamplePdfMaroto_FileImage demonstrates how add an Image
 // reading from disk.
-// When barcodeProp is nil, method make Image fulfill the context
+// When props.Rect is nil, method make Image fulfill the context
 // cell, based on width and cell from Image and cell.
 // When center is true, left and top has no effect.
 // Percent represents the width/height of the Image inside the cell:
@@ -286,6 +286,8 @@ func ExamplePdfMaroto_QrCode() {
 // In brief, when center parameter equals true, left and top parameters has no effect.
 // Percent parameter represents the Barcode's width/height inside the cell.
 // i.e. Percent: 75 means that the Barcode will take up 75% of Col's width
+// There is a constraint in the proportion defined, height cannot be greater than 20% of
+// the width, and height cannot be smaller than 10% of the width.
 func ExamplePdfMaroto_Barcode() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 

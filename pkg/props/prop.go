@@ -135,8 +135,10 @@ func (r *Barcode) MakeValid() {
 		r.Proportion.Height = 1
 	}
 
-	if r.Proportion.Height > r.Proportion.Width*0.33 {
-		r.Proportion.Height = r.Proportion.Width * 0.33
+	if r.Proportion.Height > r.Proportion.Width*0.20 {
+		r.Proportion.Height = r.Proportion.Width * 0.20
+	} else if r.Proportion.Height < r.Proportion.Width*0.10 {
+		r.Proportion.Height = r.Proportion.Width * 0.10
 	}
 }
 
