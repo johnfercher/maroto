@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
+	"os"
 )
 
 func main() {
@@ -12,7 +14,10 @@ func main() {
 
 	m.Row(20, func() {
 		m.Col(func() {
-			m.FileImage("internal/assets/images/frontpage.png")
+			_ = m.FileImage("internal/assets/images/frontpage.png", props.Rect{
+				Percent: 88,
+				Center:  true,
+			})
 		})
 		m.Col(func() {
 			m.Text("Golang Certificate", props.Text{
@@ -23,7 +28,10 @@ func main() {
 			})
 		})
 		m.Col(func() {
-			m.FileImage("internal/assets/images/frontpage.png")
+			_ = m.FileImage("internal/assets/images/frontpage.png", props.Rect{
+				Percent: 90,
+				Center:  true,
+			})
 		})
 	})
 
@@ -50,5 +58,9 @@ func main() {
 		})
 	})
 
-	m.OutputFileAndClose("internal/examples/pdfs/certificate.pdf")
+	err := m.OutputFileAndClose("internal/examples/pdfs/certificate.pdf")
+	if err != nil {
+		fmt.Println("Could not save PDF:", err)
+		os.Exit(1)
+	}
 }
