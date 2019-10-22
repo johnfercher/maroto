@@ -186,7 +186,7 @@ func ExamplePdfMaroto_FileImage() {
 
 	m.Row(rowHeight, func() {
 		m.Col(func() {
-			m.FileImage("path/Image.jpg", props.Rect{
+			_ = m.FileImage("path/Image.jpg", props.Rect{
 				Left:    5,
 				Top:     5,
 				Center:  true,
@@ -214,7 +214,7 @@ func ExamplePdfMaroto_Base64Image() {
 
 	m.Row(rowHeight, func() {
 		m.Col(func() {
-			m.Base64Image(base64String, consts.Png, props.Rect{
+			_ = m.Base64Image(base64String, consts.Png, props.Rect{
 				Left:    5,
 				Top:     5,
 				Center:  true,
@@ -348,7 +348,7 @@ func ExamplePdfMaroto_RegisterHeader() {
 				m.Text("lorem ipsum dolor", props.Text{Align: consts.Left})
 			})
 			m.Col(func() {
-				m.FileImage("internal/assets/images/frontpage.png")
+				_ = m.FileImage("internal/assets/images/frontpage.png")
 			})
 			m.Col(func() {
 				m.Text(time.Now().Format("02-January-2006"),
