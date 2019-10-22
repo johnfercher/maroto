@@ -84,12 +84,12 @@ func (s *math) GetRectNonCenterColProperties(imageWidth float64, imageHeight flo
 	if newImageHeight > colHeight {
 		newImageWidth := colHeight / proportion * percent
 		newImageHeight := newImageWidth * proportion
-		x = prop.Left + left
+		x = (widthPerCol * indexCol) + prop.Left + left
 		y = prop.Top + top
 		w = newImageWidth
 		h = newImageHeight
 	} else {
-		x = prop.Left + left
+		x = (widthPerCol * indexCol) + prop.Left + left
 		y = prop.Top + top
 		w = newImageWidth
 		h = newImageHeight
