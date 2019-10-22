@@ -55,12 +55,12 @@ func TestCode_AddBar(t *testing.T) {
 				math.AssertCalled(t, "GetWidthPerCol", 5.0)
 
 				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 0, 5, 40, 2, props.Rect{Percent: 100})
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 0, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
 			},
-			props.Barcode{Center: false, Percent: 100},
+			props.Barcode{Center: false, Left: 10, Top: 10, Proportion: props.Proportion{Width: 16, Height: 9}},
 		},
 		{
 			"When everything works and code centered",
@@ -211,9 +211,9 @@ func TestCode_AddQr(t *testing.T) {
 				math.AssertCalled(t, "GetWidthPerCol", 5.0)
 
 				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 50, 5, 40, 2, props.Rect{Center: false, Percent: 100})
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 50, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
 			},
-			props.Rect{Center: false, Percent: 100},
+			props.Rect{Center: false, Left: 10, Top: 10},
 		},
 	}
 
