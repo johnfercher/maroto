@@ -7,13 +7,18 @@ import (
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"io/ioutil"
+	"os"
 )
 
 func main() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	//m.SetBorder(true)
 
-	byteSlices, _ := ioutil.ReadFile("internal/assets/images/biplane.jpg")
+	byteSlices, err := ioutil.ReadFile("internal/assets/images/biplane.jpg")
+	if err != nil {
+		fmt.Println("Got error while opening file:", err)
+		os.Exit(1)
+	}
 
 	base64 := base64.StdEncoding.EncodeToString(byteSlices)
 
@@ -25,6 +30,7 @@ func main() {
 		m.Row(20, func() {
 			m.Col(func() {
 				m.Base64Image(base64, consts.Jpg, props.Rect{
+					Center:  true,
 					Percent: 70,
 				})
 			})
@@ -55,7 +61,9 @@ func main() {
 
 		m.Row(12, func() {
 			m.Col(func() {
-				m.FileImage("internal/assets/images/gopherbw.png")
+				_ = m.FileImage("internal/assets/images/goherbw.png", props.Rect{
+					Center: true,
+				})
 			})
 
 			m.ColSpace()
@@ -155,7 +163,11 @@ func main() {
 		},
 	})
 
-	_ = m.OutputFileAndClose("internal/examples/pdfs/sample1.pdf")
+	err = m.OutputFileAndClose("internal/examples/pdfs/sample1.pdf")
+	if err != nil {
+		fmt.Println("Could not save PDF:", err)
+		os.Exit(1)
+	}
 }
 
 func getSmallContent() ([]string, [][]string) {
