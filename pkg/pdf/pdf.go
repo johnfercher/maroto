@@ -32,8 +32,8 @@ type Maroto interface {
 
 	// Inside Col/Row Components
 	Text(text string, prop ...props.Text)
-	FileImage(filePathName string, prop ...props.Rect)
-	Base64Image(base64 string, extension consts.Extension, prop ...props.Rect)
+	FileImage(filePathName string, prop ...props.Rect) (err error)
+	Base64Image(base64 string, extension consts.Extension, prop ...props.Rect) (err error)
 	Barcode(code string, prop ...props.Barcode) error
 	QrCode(code string, prop ...props.Rect)
 	Signature(label string, prop ...props.Font)
@@ -347,7 +347,7 @@ func (s *PdfMaroto) Text(text string, prop ...props.Text) {
 
 // FileImage add an Image reading from disk inside a cell.
 // Defining Image properties.
-func (s *PdfMaroto) FileImage(filePathName string, prop ...props.Rect) {
+func (s *PdfMaroto) FileImage(filePathName string, prop ...props.Rect) error {
 	rectProp := props.Rect{}
 	if len(prop) > 0 {
 		rectProp = prop[0]
@@ -358,12 +358,12 @@ func (s *PdfMaroto) FileImage(filePathName string, prop ...props.Rect) {
 	qtdCols := float64(len(s.colsClosures))
 	sumOfyOffsets := s.offsetY + rectProp.Top
 
-	s.Image.AddFromFile(filePathName, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp)
+	return s.Image.AddFromFile(filePathName, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp)
 }
 
 // Base64Image add an Image reading byte slices inside a cell.
 // Defining Image properties.
-func (s *PdfMaroto) Base64Image(base64 string, extension consts.Extension, prop ...props.Rect) {
+func (s *PdfMaroto) Base64Image(base64 string, extension consts.Extension, prop ...props.Rect) error {
 	rectProp := props.Rect{}
 	if len(prop) > 0 {
 		rectProp = prop[0]
@@ -374,7 +374,7 @@ func (s *PdfMaroto) Base64Image(base64 string, extension consts.Extension, prop 
 	qtdCols := float64(len(s.colsClosures))
 	sumOfyOffsets := s.offsetY + rectProp.Top
 
-	s.Image.AddFromBase64(base64, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp, extension)
+	return s.Image.AddFromBase64(base64, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp, extension)
 }
 
 // OutputFileAndClose save pdf in disk.

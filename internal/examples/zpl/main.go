@@ -1,19 +1,21 @@
 package main
 
 import (
+	"fmt"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
+	"os"
 )
 
 func main() {
 	m := pdf.NewMaroto(consts.Portrait, consts.Letter)
+	//m.SetBorder(true)
 
 	m.Row(40, func() {
 		m.Col(func() {
-			m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
-				Left:    20,
-				Center:  false,
+			_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
+				Center:  true,
 				Percent: 80,
 			})
 		})
@@ -52,7 +54,7 @@ func main() {
 
 	m.Row(100, func() {
 		m.Col(func() {
-			m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
+			_ = m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
 				Percent: 70,
 			})
 			m.Text("https://github.com/johnfercher/maroto", props.Text{
@@ -83,5 +85,9 @@ func main() {
 
 	m.SetBorder(false)
 
-	m.OutputFileAndClose("internal/examples/internal/pdfs/zpl.pdf")
+	err := m.OutputFileAndClose("internal/examples/pdfs/zpl.pdf")
+	if err != nil {
+		fmt.Println("Could not save PDF:", err)
+		os.Exit(1)
+	}
 }
