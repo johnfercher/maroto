@@ -266,7 +266,7 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 12, 0.1)
+				assert.InDelta(t, x, 82.4, 0.1)
 				assert.InDelta(t, y, 11, 0.1)
 				assert.InDelta(t, w, 35.2, 0.1)
 				assert.InDelta(t, h, 23.4, 0.1)
@@ -292,7 +292,7 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 15, 0.1)
+				assert.InDelta(t, x, 86.6, 0.1)
 				assert.InDelta(t, y, 12, 0.1)
 				assert.InDelta(t, w, 16.6, 0.1)
 				assert.InDelta(t, h, 25.0, 0.1)
@@ -319,7 +319,7 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 15, 0.1)
+				assert.InDelta(t, x, 86.6, 0.1)
 				assert.InDelta(t, y, 12, 0.1)
 				assert.InDelta(t, w, 16.1, 0.1)
 				assert.InDelta(t, h, 24.1, 0.1)

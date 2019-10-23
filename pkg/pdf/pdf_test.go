@@ -443,17 +443,22 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			"One code inside a col inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromFile", 1)
-				image.AssertCalled(t, "AddFromFile", "Image1", 0.0, 0.0, 1.0, 20.0, 100.0)
+				image.AssertCalled(t, "AddFromFile", "Image1", 0.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    0,
+					Top:     0,
+					Percent: 100.0,
+					Center:  false,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						m.FileImage("Image1")
+						_ = m.FileImage("Image1")
 					})
 				})
 			},
@@ -462,23 +467,33 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			"Two images inside a col inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "Image2", 4.0, 0.0, 1.0, 20.0, 40.0)
-				image.AssertCalled(t, "AddFromFile", "Image3", 0.0, 0.0, 1.0, 20.0, 40.0)
+				image.AssertCalled(t, "AddFromFile", "Image2", 4.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    2,
+					Top:     4,
+					Percent: 40,
+					Center:  false,
+				})
+				image.AssertCalled(t, "AddFromFile", "Image3", 0.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    0,
+					Top:     0,
+					Percent: 40,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						m.FileImage("Image2", props.Rect{
+						_ = m.FileImage("Image2", props.Rect{
 							Left:    2.0,
 							Top:     4.0,
 							Percent: 40.0,
 						})
-						m.FileImage("Image3", props.Rect{
+						_ = m.FileImage("Image3", props.Rect{
 							Percent: 40.0,
 							Center:  true,
 						})
@@ -490,25 +505,35 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			"Two images inside two cols inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "Image4", 4.5, 0.0, 2.0, 20.0, 55.0)
-				image.AssertCalled(t, "AddFromFile", "Image5", 0.0, 1.0, 2.0, 20.0, 53.0)
+				image.AssertCalled(t, "AddFromFile", "Image4", 4.5, 0.0, 2.0, 20.0, props.Rect{
+					Left:    4,
+					Top:     4.5,
+					Percent: 55,
+					Center:  false,
+				})
+				image.AssertCalled(t, "AddFromFile", "Image5", 0.0, 1.0, 2.0, 20.0, props.Rect{
+					Left:    0,
+					Top:     0,
+					Percent: 53,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						m.FileImage("Image4", props.Rect{
+						_ = m.FileImage("Image4", props.Rect{
 							Left:    4.0,
 							Top:     4.5,
 							Percent: 55.0,
 						})
 					})
 					m.Col(func() {
-						m.FileImage("Image5", props.Rect{
+						_ = m.FileImage("Image5", props.Rect{
 							Percent: 53.0,
 							Center:  true,
 						})
@@ -520,18 +545,28 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			"Two images inside one col inside two rows",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				image.On("AddFromFile", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "Image6", 8.5, 0.0, 1.0, 20.0, 66.0)
-				image.AssertCalled(t, "AddFromFile", "Image7", 20.0, 0.0, 1.0, 20.0, 98.0)
+				image.AssertCalled(t, "AddFromFile", "Image6", 8.5, 0.0, 1.0, 20.0, props.Rect{
+					Left:    7,
+					Top:     8.5,
+					Percent: 66,
+					Center:  false,
+				})
+				image.AssertCalled(t, "AddFromFile", "Image7", 20.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    0,
+					Top:     0,
+					Percent: 98,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						m.FileImage("Image6", props.Rect{
+						_ = m.FileImage("Image6", props.Rect{
 							Left:    7.0,
 							Top:     8.5,
 							Percent: 66.0,
@@ -540,7 +575,7 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 				})
 				m.Row(20, func() {
 					m.Col(func() {
-						m.FileImage("Image7", props.Rect{
+						_ = m.FileImage("Image7", props.Rect{
 							Percent: 98.0,
 							Center:  true,
 						})
@@ -577,17 +612,22 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			"One code inside a col inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromBase64", 1)
-				image.AssertCalled(t, "AddFromBase64", "Image1", 0.0, 0.0, 1.0, 20.0, 100.0, consts.Jpg)
+				image.AssertCalled(t, "AddFromBase64", "Image1", 0.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    0,
+					Top:     0,
+					Percent: 100,
+					Center:  false,
+				}, consts.Jpg)
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						m.Base64Image("Image1", consts.Jpg)
+						_ = m.Base64Image("Image1", consts.Jpg)
 					})
 				})
 			},
@@ -596,23 +636,33 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			"Two images inside a col inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image2", 4.0, 0.0, 1.0, 20.0, 40.0, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image3", 0.0, 0.0, 1.0, 20.0, 40.0, consts.Jpg)
+				image.AssertCalled(t, "AddFromBase64", "Image2", 4.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    2,
+					Top:     4,
+					Percent: 40,
+					Center:  false,
+				}, consts.Png)
+				image.AssertCalled(t, "AddFromBase64", "Image3", 0.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    0,
+					Top:     0,
+					Percent: 40,
+					Center:  true,
+				}, consts.Jpg)
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						m.Base64Image("Image2", consts.Png, props.Rect{
+						_ = m.Base64Image("Image2", consts.Png, props.Rect{
 							Left:    2.0,
 							Top:     4.0,
 							Percent: 40.0,
 						})
-						m.Base64Image("Image3", consts.Jpg, props.Rect{
+						_ = m.Base64Image("Image3", consts.Jpg, props.Rect{
 							Percent: 40.0,
 							Center:  true,
 						})
@@ -624,25 +674,35 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			"Two images inside two cols inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image4", 4.5, 0.0, 2.0, 20.0, 55.0, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image5", 0.0, 1.0, 2.0, 20.0, 53.0, consts.Jpg)
+				image.AssertCalled(t, "AddFromBase64", "Image4", 4.5, 0.0, 2.0, 20.0, props.Rect{
+					Left:    4,
+					Top:     4.5,
+					Percent: 55,
+					Center:  false,
+				}, consts.Png)
+				image.AssertCalled(t, "AddFromBase64", "Image5", 0.0, 1.0, 2.0, 20.0, props.Rect{
+					Left:    0,
+					Top:     0,
+					Percent: 53,
+					Center:  true,
+				}, consts.Jpg)
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						m.Base64Image("Image4", consts.Png, props.Rect{
+						_ = m.Base64Image("Image4", consts.Png, props.Rect{
 							Left:    4.0,
 							Top:     4.5,
 							Percent: 55.0,
 						})
 					})
 					m.Col(func() {
-						m.Base64Image("Image5", consts.Jpg, props.Rect{
+						_ = m.Base64Image("Image5", consts.Jpg, props.Rect{
 							Percent: 53.0,
 							Center:  true,
 						})
@@ -654,18 +714,28 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			"Two images inside one col inside two rows",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image6", 8.5, 0.0, 1.0, 20.0, 66.0, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image7", 20.0, 0.0, 1.0, 20.0, 98.0, consts.Jpg)
+				image.AssertCalled(t, "AddFromBase64", "Image6", 8.5, 0.0, 1.0, 20.0, props.Rect{
+					Left:    7,
+					Top:     8.5,
+					Percent: 66,
+					Center:  false,
+				}, consts.Png)
+				image.AssertCalled(t, "AddFromBase64", "Image7", 20.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    0,
+					Top:     0,
+					Percent: 98,
+					Center:  true,
+				}, consts.Jpg)
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						m.Base64Image("Image6", consts.Png, props.Rect{
+						_ = m.Base64Image("Image6", consts.Png, props.Rect{
 							Left:    7.0,
 							Top:     8.5,
 							Percent: 66.0,
@@ -674,7 +744,7 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 				})
 				m.Row(20, func() {
 					m.Col(func() {
-						m.Base64Image("Image7", consts.Jpg, props.Rect{
+						_ = m.Base64Image("Image7", consts.Jpg, props.Rect{
 							Percent: 98.0,
 							Center:  true,
 						})
