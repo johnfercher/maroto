@@ -12,13 +12,13 @@ type Code struct {
 	mock.Mock
 }
 
-// AddBar provides a mock function with given fields: code, marginTop, indexCol, qtdCols, colHeight, prop, heightPercentFromWidth
-func (_m *Code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode, heightPercentFromWidth float64) error {
-	ret := _m.Called(code, marginTop, indexCol, qtdCols, colHeight, prop, heightPercentFromWidth)
+// AddBar provides a mock function with given fields: code, marginTop, indexCol, qtdCols, colHeight, prop
+func (_m *Code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode) error {
+	ret := _m.Called(code, marginTop, indexCol, qtdCols, colHeight, prop)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(string, float64, float64, float64, float64, props.Barcode, float64) error); ok {
-		r0 = rf(code, marginTop, indexCol, qtdCols, colHeight, prop, heightPercentFromWidth)
+	if rf, ok := ret.Get(0).(func(string, float64, float64, float64, float64, props.Barcode) error); ok {
+		r0 = rf(code, marginTop, indexCol, qtdCols, colHeight, prop)
 	} else {
 		r0 = ret.Error(0)
 	}

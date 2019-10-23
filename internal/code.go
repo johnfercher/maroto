@@ -11,7 +11,7 @@ import (
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF
 type Code interface {
 	AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect)
-	AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode, heightPercentFromWidth float64) (err error)
+	AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode) (err error)
 }
 
 type code struct {
@@ -44,7 +44,7 @@ func (s *code) AddQr(code string, marginTop float64, indexCol float64, qtdCols f
 }
 
 // AddBar create a Barcode inside a cell
-func (s *code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode, heightPercentFromWidth float64) (err error) {
+func (s *code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode) (err error) {
 	bcode, err := code128.Encode(code)
 
 	if err != nil {
@@ -52,7 +52,7 @@ func (s *code) AddBar(code string, marginTop float64, indexCol float64, qtdCols 
 	}
 
 	actualWidthPerCol := s.math.GetWidthPerCol(qtdCols)
-
+	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
 	var x, y, w, h float64
 	if prop.Center {
 		x, y, w, h = s.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol*heightPercentFromWidth, qtdCols, colHeight, indexCol, prop.Percent)

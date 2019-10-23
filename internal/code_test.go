@@ -56,7 +56,7 @@ func TestCode_AddBar(t *testing.T) {
 				math.AssertCalled(t, "GetWidthPerCol", 5.0)
 
 				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 0, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 28, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
@@ -90,12 +90,12 @@ func TestCode_AddBar(t *testing.T) {
 				math.AssertCalled(t, "GetWidthPerCol", 5.0)
 
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 50, 0, 5, 40, 2, 100)
+				math.AssertCalled(t, "GetRectCenterColProperties", 50, 50, 5, 40, 2, 100)
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
 			},
-			props.Barcode{Center: true, Percent: 100},
+			props.Barcode{Center: true, Percent: 100, Proportion: props.Proportion{Width: 1, Height: 1}},
 		},
 		{
 			"When cannot generate QrCode",
@@ -135,7 +135,7 @@ func TestCode_AddBar(t *testing.T) {
 		code := internal.NewCode(pdf, math)
 
 		// Act
-		err := code.AddBar(c.code, 10, 2, 5, 40, c.prop, 0)
+		err := code.AddBar(c.code, 10, 2, 5, 40, c.prop)
 
 		// Assert
 		c.assertPdf(t, pdf)
