@@ -925,7 +925,6 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 	}
 }
 
-
 func TestPdfMaroto_Barcode(t *testing.T) {
 	cases := []struct {
 		name   string
@@ -947,7 +946,7 @@ func TestPdfMaroto_Barcode(t *testing.T) {
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
-						_ = m.Barcode("Code1", props.Barcode{ Proportion: props.Proportion{Width: 1, Height: 0.2}})
+						_ = m.Barcode("Code1", props.Barcode{Proportion: props.Proportion{Width: 1, Height: 0.2}})
 					})
 				})
 			},
@@ -962,30 +961,30 @@ func TestPdfMaroto_Barcode(t *testing.T) {
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddBar", 2)
 				code.AssertCalled(t, "AddBar", "Code2", 4.0, 0.0, 1.0, 20.0, props.Barcode{
-					Left:    2.0,
-					Top:     4.0,
-					Percent: 40.0,
-					Proportion: props.Proportion{Width:1,Height:0.2},
+					Left:       2.0,
+					Top:        4.0,
+					Percent:    40.0,
+					Proportion: props.Proportion{Width: 1, Height: 0.2},
 				})
 				code.AssertCalled(t, "AddBar", "Code3", 0.0, 0.0, 1.0, 20.0, props.Barcode{
-					Percent: 40.0,
-					Center:  true,
-					Proportion: props.Proportion{Width:1,Height:0.2},
+					Percent:    40.0,
+					Center:     true,
+					Proportion: props.Proportion{Width: 1, Height: 0.2},
 				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
 					m.Col(func() {
 						_ = m.Barcode("Code2", props.Barcode{
-							Left:    2.0,
-							Top:     4.0,
-							Percent: 40.0,
-							Proportion: props.Proportion{Width:1,Height:0.2},
+							Left:       2.0,
+							Top:        4.0,
+							Percent:    40.0,
+							Proportion: props.Proportion{Width: 1, Height: 0.2},
 						})
 						_ = m.Barcode("Code3", props.Barcode{
-							Percent: 40.0,
-							Center:  true,
-							Proportion: props.Proportion{Width:1,Height:0.2},
+							Percent:    40.0,
+							Center:     true,
+							Proportion: props.Proportion{Width: 1, Height: 0.2},
 						})
 					})
 				})
