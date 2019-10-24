@@ -3,6 +3,8 @@ package pdf_test
 import (
 	"bytes"
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
@@ -10,7 +12,6 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"testing"
 )
 
 func TestNewPdf(t *testing.T) {
@@ -785,7 +786,7 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddQr", 1)
-				code.AssertCalled(t, "AddQr", "Code1", 0.0, 0.0, 1.0, 20.0, 100.0)
+				code.AssertCalled(t, "AddQr", "Code1", 0.0, 0.0, 1.0, 20.0, props.Rect{Percent: 100, Center: false})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
@@ -804,8 +805,15 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddQr", 2)
-				code.AssertCalled(t, "AddQr", "Code2", 4.0, 0.0, 1.0, 20.0, 40.0)
-				code.AssertCalled(t, "AddQr", "Code3", 0.0, 0.0, 1.0, 20.0, 40.0)
+				code.AssertCalled(t, "AddQr", "Code2", 4.0, 0.0, 1.0, 20.0, props.Rect{
+					Left:    2.0,
+					Top:     4.0,
+					Percent: 40.0,
+				})
+				code.AssertCalled(t, "AddQr", "Code3", 0.0, 0.0, 1.0, 20.0, props.Rect{
+					Percent: 40.0,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
@@ -832,8 +840,15 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddQr", 2)
-				code.AssertCalled(t, "AddQr", "Code4", 4.5, 0.0, 2.0, 20.0, 55.0)
-				code.AssertCalled(t, "AddQr", "Code5", 0.0, 1.0, 2.0, 20.0, 53.0)
+				code.AssertCalled(t, "AddQr", "Code4", 4.5, 0.0, 2.0, 20.0, props.Rect{
+					Left:    4.0,
+					Top:     4.5,
+					Percent: 55.0,
+				})
+				code.AssertCalled(t, "AddQr", "Code5", 0.0, 1.0, 2.0, 20.0, props.Rect{
+					Percent: 53.0,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
@@ -862,8 +877,15 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(t *testing.T, code *mocks.Code) {
 				code.AssertNumberOfCalls(t, "AddQr", 2)
-				code.AssertCalled(t, "AddQr", "Code6", 8.5, 0.0, 1.0, 20.0, 66.0)
-				code.AssertCalled(t, "AddQr", "Code7", 20.0, 0.0, 1.0, 20.0, 98.0)
+				code.AssertCalled(t, "AddQr", "Code6", 8.5, 0.0, 1.0, 20.0, props.Rect{
+					Left:    7.0,
+					Top:     8.5,
+					Percent: 66.0,
+				})
+				code.AssertCalled(t, "AddQr", "Code7", 20.0, 0.0, 1.0, 20.0, props.Rect{
+					Percent: 98.0,
+					Center:  true,
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
@@ -880,6 +902,89 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 						m.QrCode("Code7", props.Rect{
 							Percent: 98.0,
 							Center:  true,
+						})
+					})
+				})
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := basePdfTest()
+		math := baseMathTest()
+		code := c.code()
+
+		m := newMarotoTest(pdf, math, nil, nil, nil, nil, code)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, code)
+	}
+}
+
+func TestPdfMaroto_Barcode(t *testing.T) {
+	cases := []struct {
+		name   string
+		code   func() *mocks.Code
+		assert func(t *testing.T, image *mocks.Code)
+		act    func(m pdf.Maroto)
+	}{
+		{
+			"One code inside a col inside a row",
+			func() *mocks.Code {
+				code := &mocks.Code{}
+				code.On("AddBar", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
+				return code
+			},
+			func(t *testing.T, code *mocks.Code) {
+				code.AssertNumberOfCalls(t, "AddBar", 1)
+				code.AssertCalled(t, "AddBar", "Code1", 0.0, 0.0, 1.0, 20.0, props.Barcode{Percent: 100, Center: false, Proportion: props.Proportion{Width: 1, Height: 0.2}})
+			},
+			func(m pdf.Maroto) {
+				m.Row(20, func() {
+					m.Col(func() {
+						_ = m.Barcode("Code1", props.Barcode{Proportion: props.Proportion{Width: 1, Height: 0.2}})
+					})
+				})
+			},
+		},
+		{
+			"Two codes inside a col inside a row",
+			func() *mocks.Code {
+				code := &mocks.Code{}
+				code.On("AddBar", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
+				return code
+			},
+			func(t *testing.T, code *mocks.Code) {
+				code.AssertNumberOfCalls(t, "AddBar", 2)
+				code.AssertCalled(t, "AddBar", "Code2", 4.0, 0.0, 1.0, 20.0, props.Barcode{
+					Left:       2.0,
+					Top:        4.0,
+					Percent:    40.0,
+					Proportion: props.Proportion{Width: 1, Height: 0.2},
+				})
+				code.AssertCalled(t, "AddBar", "Code3", 0.0, 0.0, 1.0, 20.0, props.Barcode{
+					Percent:    40.0,
+					Center:     true,
+					Proportion: props.Proportion{Width: 1, Height: 0.2},
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(20, func() {
+					m.Col(func() {
+						_ = m.Barcode("Code2", props.Barcode{
+							Left:       2.0,
+							Top:        4.0,
+							Percent:    40.0,
+							Proportion: props.Proportion{Width: 1, Height: 0.2},
+						})
+						_ = m.Barcode("Code3", props.Barcode{
+							Percent:    40.0,
+							Center:     true,
+							Proportion: props.Proportion{Width: 1, Height: 0.2},
 						})
 					})
 				})
