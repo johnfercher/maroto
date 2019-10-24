@@ -2,11 +2,13 @@ package internal_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"testing"
 )
 
 func TestNewCode(t *testing.T) {
@@ -25,9 +27,44 @@ func TestCode_AddBar(t *testing.T) {
 		assertPdf   func(t *testing.T, pdf *mocks.Pdf)
 		assertMath  func(t *testing.T, math *mocks.Math)
 		assertError func(t *testing.T, err error)
+		prop        props.Barcode
 	}{
 		{
 			"When everything works",
+			"AnyCode",
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("GetImageInfo", mock.Anything).Return(widthGreaterThanHeightImageInfo())
+				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return pdf
+			},
+			func() *mocks.Math {
+				math := &mocks.Math{}
+				math.On("GetWidthPerCol", mock.Anything).Return(50.0)
+				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				return math
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "GetImageInfo", 1)
+				pdf.AssertCalled(t, "GetImageInfo", "barcode-Code 128AnyCode-1E+023E+01")
+
+				pdf.AssertNumberOfCalls(t, "Image", 1)
+				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			},
+			func(t *testing.T, math *mocks.Math) {
+				math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
+				math.AssertCalled(t, "GetWidthPerCol", 5.0)
+
+				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 28, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
+			},
+			func(t *testing.T, err error) {
+				assert.Nil(t, err)
+			},
+			props.Barcode{Center: false, Left: 10, Top: 10, Proportion: props.Proportion{Width: 16, Height: 9}},
+		},
+		{
+			"When everything works and code centered",
 			"AnyCode",
 			func() *mocks.Pdf {
 				pdf := &mocks.Pdf{}
@@ -53,11 +90,12 @@ func TestCode_AddBar(t *testing.T) {
 				math.AssertCalled(t, "GetWidthPerCol", 5.0)
 
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 50, 0, 5, 40, 2, 100)
+				math.AssertCalled(t, "GetRectCenterColProperties", 50, 50, 5, 40, 2, 100)
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
 			},
+			props.Barcode{Center: true, Percent: 100, Proportion: props.Proportion{Width: 1, Height: 1}},
 		},
 		{
 			"When cannot generate QrCode",
@@ -85,6 +123,7 @@ func TestCode_AddBar(t *testing.T) {
 			func(t *testing.T, err error) {
 				assert.NotNil(t, err)
 			},
+			props.Barcode{Center: true, Percent: 100},
 		},
 	}
 
@@ -96,7 +135,7 @@ func TestCode_AddBar(t *testing.T) {
 		code := internal.NewCode(pdf, math)
 
 		// Act
-		err := code.AddBar(c.code, 10, 2, 5, 40, 100, 0)
+		err := code.AddBar(c.code, 10, 2, 5, 40, c.prop)
 
 		// Assert
 		c.assertPdf(t, pdf)
@@ -113,6 +152,7 @@ func TestCode_AddQr(t *testing.T) {
 		math       func() *mocks.Math
 		assertPdf  func(t *testing.T, pdf *mocks.Pdf)
 		assertMath func(t *testing.T, math *mocks.Math)
+		prop       props.Rect
 	}{
 		{
 			"When everything works",
@@ -143,6 +183,38 @@ func TestCode_AddQr(t *testing.T) {
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
 				math.AssertCalled(t, "GetRectCenterColProperties", 50, 50, 5, 40, 2, 100)
 			},
+			props.Rect{Center: true, Percent: 100},
+		},
+		{
+			"When everything works not-centered",
+			"AnyCode",
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("GetImageInfo", mock.Anything).Return(widthGreaterThanHeightImageInfo())
+				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return pdf
+			},
+			func() *mocks.Math {
+				math := &mocks.Math{}
+				math.On("GetWidthPerCol", mock.Anything).Return(50.0)
+				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				return math
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "GetImageInfo", 1)
+				pdf.AssertCalled(t, "GetImageInfo", "barcode-QR CodeAnyCode-1E+023E+01")
+
+				pdf.AssertNumberOfCalls(t, "Image", 1)
+				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			},
+			func(t *testing.T, math *mocks.Math) {
+				math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
+				math.AssertCalled(t, "GetWidthPerCol", 5.0)
+
+				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 50, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
+			},
+			props.Rect{Center: false, Left: 10, Top: 10},
 		},
 	}
 
@@ -154,7 +226,7 @@ func TestCode_AddQr(t *testing.T) {
 		code := internal.NewCode(pdf, math)
 
 		// Act
-		code.AddQr(c.code, 10, 2, 5, 40, 100)
+		code.AddQr(c.code, 10, 2, 5, 40, c.prop)
 
 		// Assert
 		c.assertPdf(t, pdf)
