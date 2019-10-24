@@ -30,6 +30,7 @@ notifications:
 # Make sure golangci-lint is vendored.
 before_script:
   - go get -u golang.org/x/lint/golint
+  - go get github.com/google/uuid  
 
 # script always runs to completion (set +e). If we have linter issues AND a
 # failing test, we want to see both. Configure golangci-lint with a
