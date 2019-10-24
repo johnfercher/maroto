@@ -29,7 +29,7 @@ notifications:
 # build and immediately stop. It's sorta like having set -e enabled in bash.
 # Make sure golangci-lint is vendored.
 before_script:
-  - go get -u golang.org/x/lint/golint
+  - curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin v1.21.0
   - go get github.com/google/uuid  
   - go get -u github.com/stretchr/testify  
   - go get github.com/pkg/errors  
