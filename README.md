@@ -22,12 +22,6 @@ always when a new page appear, in this case, a header may have many rows, lines 
 go get -u github.com/johnfercher/maroto
 ```
 
-* With `dep`:
-
-```bash
-dep ensure -add github.com/johnfercher/maroto
-```
-
 ## Features
 
 ![result](internal/assets/images/diagram.png)
