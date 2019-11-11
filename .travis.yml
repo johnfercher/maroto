@@ -6,12 +6,12 @@ language: go
 # Force-enable Go modules. Also force go to use the code in vendor/
 # These will both be unnecessary when Go 1.13 lands.
 env:
-  - GO111MODULE=on
+  - GO111MODULE=auto
 
 # You don't need to test on very old versions of the Go compiler. It's the user's
 # responsibility to keep their compiler up to date.
 go:
-  - 1.12.x
+  - 1.13.3
 
 # Only clone the most recent commit.
 git:
@@ -29,7 +29,10 @@ notifications:
 # build and immediately stop. It's sorta like having set -e enabled in bash.
 # Make sure golangci-lint is vendored.
 before_script:
-  - go install github.com/golangci/golangci-lint/cmd/golangci-lint
+  - curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin v1.21.0
+  - go get github.com/google/uuid  
+  - go get -u github.com/stretchr/testify  
+  - go get github.com/pkg/errors  
 
 # script always runs to completion (set +e). If we have linter issues AND a
 # failing test, we want to see both. Configure golangci-lint with a
