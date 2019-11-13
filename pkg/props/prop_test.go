@@ -228,6 +228,15 @@ func TestText_MakeValid(t *testing.T) {
 				assert.Equal(t, prop.Top, 0.0)
 			},
 		},
+		{
+			"When vertical padding is less than 0",
+			&props.Text{
+				VerticalPadding: -5.0,
+			},
+			func(t *testing.T, prop *props.Text) {
+				assert.Equal(t, prop.VerticalPadding, 0.0)
+			},
+		},
 	}
 
 	for _, c := range cases {
@@ -335,15 +344,6 @@ func TestTableListProp_MakeValid(t *testing.T) {
 			},
 		},
 		{
-			"When HeaderHeight is 0.0",
-			&props.TableList{
-				HeaderHeight: 0.0,
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.HeaderHeight, 7.0)
-			},
-		},
-		{
 			"When Align is empty",
 			&props.TableList{
 				Align: "",
@@ -383,15 +383,6 @@ func TestTableListProp_MakeValid(t *testing.T) {
 			},
 			func(t *testing.T, m *props.TableList) {
 				assert.Equal(t, m.ContentProp.Family, consts.Arial)
-			},
-		},
-		{
-			"When ContentHeight is 0.0",
-			&props.TableList{
-				ContentHeight: 0.0,
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.ContentHeight, 5.0)
 			},
 		},
 		{

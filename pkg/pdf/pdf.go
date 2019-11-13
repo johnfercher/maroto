@@ -26,6 +26,7 @@ type Maroto interface {
 	GetBorder() bool
 	GetPageSize() (float64, float64)
 	GetCurrentPage() int
+	GetCurrentOffset() float64
 
 	// Outside Col/Row Components
 	TableList(header []string, contents [][]string, prop ...props.TableList)
@@ -53,6 +54,7 @@ type PdfMaroto struct {
 	SignHelper                internal.Signature
 	Image                     internal.Image
 	Code                      internal.Code
+	TableListHelper           internal.TableList
 	pageIndex                 int
 	offsetY                   float64
 	rowHeight                 float64
@@ -84,6 +86,8 @@ func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto 
 
 	code := internal.NewCode(fpdf, math)
 
+	tableList := internal.NewTableList(text, font)
+
 	maroto := &PdfMaroto{
 		Pdf:             fpdf,
 		Math:            math,
@@ -92,10 +96,13 @@ func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto 
 		SignHelper:      signature,
 		Image:           image,
 		Code:            code,
+		TableListHelper: tableList,
 		pageSize:        pageSize,
 		orientation:     orientation,
 		calculationMode: false,
 	}
+
+	maroto.TableListHelper.BindGrid(maroto)
 
 	maroto.Font.SetFamily(consts.Arial)
 	maroto.Font.SetStyle(consts.Bold)
@@ -132,6 +139,11 @@ func (s *PdfMaroto) GetCurrentPage() int {
 	return s.pageIndex
 }
 
+// GetCurrentOffset obtain the current offset in y axis
+func (s *PdfMaroto) GetCurrentOffset() float64 {
+	return s.offsetY
+}
+
 // Signature add a space for a signature inside a cell,
 // the space will have a line and a text below
 func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
@@ -145,7 +157,7 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 	qtdCols := float64(len(s.colsClosures))
 	sumOfYOffsets := s.offsetY + s.rowHeight
 
-	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0), qtdCols, sumOfYOffsets, s.rowColCount)
+	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0, false, 0), qtdCols, sumOfYOffsets, s.rowColCount)
 }
 
 // TableList create a table with multiple rows and columns.
@@ -153,63 +165,7 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 // Headers have bold style, and localized at the top of table.
 // Contents are array of arrays. Each array is one line.
 func (s *PdfMaroto) TableList(header []string, contents [][]string, prop ...props.TableList) {
-	if len(header) == 0 {
-		return
-	}
-
-	if len(contents) == 0 {
-		return
-	}
-
-	tableProp := props.TableList{}
-	if len(prop) > 0 {
-		tableProp = prop[0]
-	}
-
-	tableProp.MakeValid()
-
-	s.Row(tableProp.HeaderHeight, func() {
-		headerMarginTop := 2.0
-		qtdCols := float64(len(header))
-
-		for i, h := range header {
-			hs := h
-			is := i
-
-			s.Col(func() {
-				if headerMarginTop > s.rowHeight {
-					headerMarginTop = s.rowHeight
-				}
-
-				reason := hs
-
-				sumOyYOffesets := headerMarginTop + s.offsetY + 2.5
-
-				s.TextHelper.Add(reason, tableProp.HeaderProp.ToTextProp(tableProp.Align, 0.0), sumOyYOffesets, float64(is), qtdCols)
-			})
-		}
-	})
-
-	s.Row(tableProp.HeaderContentSpace, func() {
-		s.ColSpace()
-	})
-
-	contentMarginTop := 2.0
-
-	for _, content := range contents {
-		s.Row(tableProp.ContentHeight, func() {
-			for j, c := range content {
-				cs := c
-				js := j
-				hs := float64(len(header))
-				sumOyYOffesets := contentMarginTop + s.offsetY + 2.0
-
-				s.Col(func() {
-					s.TextHelper.Add(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, 0.0), sumOyYOffesets, float64(js), hs)
-				})
-			}
-		})
-	}
+	s.TableListHelper.Create(header, contents, prop...)
 }
 
 // SetBorder enable the draw of lines in every cell.

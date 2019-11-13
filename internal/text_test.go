@@ -18,6 +18,98 @@ func TestNewText(t *testing.T) {
 	assert.Equal(t, fmt.Sprintf("%T", text), "*internal.text")
 }
 
+func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
+	// Arrange
+	pdf := &mocks.Pdf{}
+	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
+		return text
+	})
+	pdf.On("GetStringWidth", mock.Anything).Return(8.0)
+
+	math := &mocks.Math{}
+	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
+
+	font := &mocks.Font{}
+	font.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
+
+	sut := internal.NewText(pdf, math, font)
+
+	// Act
+	lines := sut.GetLinesQuantity("AnyText With Spaces", props.Text{}, 2)
+
+	// Assert
+	assert.Equal(t, lines, 1)
+}
+
+func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
+	// Arrange
+	pdf := &mocks.Pdf{}
+	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
+		return text
+	})
+	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
+
+	math := &mocks.Math{}
+	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
+
+	font := &mocks.Font{}
+	font.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
+
+	sut := internal.NewText(pdf, math, font)
+
+	// Act
+	lines := sut.GetLinesQuantity("OneWord", props.Text{}, 2)
+
+	// Assert
+	assert.Equal(t, lines, 1)
+}
+
+func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
+	// Arrange
+	pdf := &mocks.Pdf{}
+	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
+		return text
+	})
+	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
+
+	math := &mocks.Math{}
+	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
+
+	font := &mocks.Font{}
+	font.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
+
+	sut := internal.NewText(pdf, math, font)
+
+	// Act
+	lines := sut.GetLinesQuantity("Many words", props.Text{Extrapolate: true}, 2)
+
+	// Assert
+	assert.Equal(t, lines, 1)
+}
+
+func TestText_GetLinesQuantity_WhenHasToBreakLines(t *testing.T) {
+	// Arrange
+	pdf := &mocks.Pdf{}
+	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
+		return text
+	})
+	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
+
+	math := &mocks.Math{}
+	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
+
+	font := &mocks.Font{}
+	font.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
+
+	sut := internal.NewText(pdf, math, font)
+
+	// Act
+	lines := sut.GetLinesQuantity("Many words", props.Text{}, 2)
+
+	// Assert
+	assert.Equal(t, lines, 3)
+}
+
 func TestText_Add(t *testing.T) {
 	cases := []struct {
 		name       string
@@ -49,6 +141,8 @@ func TestText_Add(t *testing.T) {
 			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
+				_font.On("GetScaleFactor").Return(1.0)
+				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return _font
 			},
@@ -88,6 +182,8 @@ func TestText_Add(t *testing.T) {
 			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
+				_font.On("GetScaleFactor").Return(1.0)
+				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return _font
 			},
@@ -128,6 +224,8 @@ func TestText_Add(t *testing.T) {
 			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
+				_font.On("GetScaleFactor").Return(1.0)
+				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return _font
 			},
@@ -168,6 +266,8 @@ func TestText_Add(t *testing.T) {
 			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
+				_font.On("GetScaleFactor").Return(1.0)
+				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return _font
 			},
@@ -209,6 +309,8 @@ func TestText_Add(t *testing.T) {
 			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
+				_font.On("GetScaleFactor").Return(1.0)
+				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
 				return _font
 			},
