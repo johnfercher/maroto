@@ -46,6 +46,7 @@ func main() {
 			m.Col(func() {
 				id := "https://github.com/johnfercher/maroto"
 				_ = m.Barcode(id, props.Barcode{
+					Center:     true,
 					Proportion: props.Proportion{Width: 50, Height: 10},
 					Percent:    75,
 				})
@@ -61,7 +62,7 @@ func main() {
 
 		m.Row(12, func() {
 			m.Col(func() {
-				_ = m.FileImage("internal/assets/images/goherbw.png", props.Rect{
+				_ = m.FileImage("internal/assets/images/gopherbw.png", props.Rect{
 					Center: true,
 				})
 			})
