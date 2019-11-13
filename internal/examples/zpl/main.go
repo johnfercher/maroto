@@ -6,9 +6,11 @@ import (
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"os"
+	"time"
 )
 
 func main() {
+	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.Letter)
 	//m.SetBorder(true)
 
@@ -92,4 +94,7 @@ func main() {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
 	}
+
+	end := time.Now()
+	fmt.Println(end.Sub(begin))
 }
