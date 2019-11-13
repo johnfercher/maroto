@@ -45,6 +45,7 @@ func main() {
 		m.ColSpace()
 		m.Col(func() {
 			m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
+				Center:  true,
 				Percent: 75,
 			})
 		})
@@ -55,6 +56,7 @@ func main() {
 	m.Row(100, func() {
 		m.Col(func() {
 			_ = m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
+				Center:  true,
 				Percent: 70,
 			})
 			m.Text("https://github.com/johnfercher/maroto", props.Text{
