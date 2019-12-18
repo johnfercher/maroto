@@ -26,6 +26,8 @@ type Maroto interface {
 	GetBorder() bool
 	GetPageSize() (float64, float64)
 	GetCurrentPage() int
+	SetPageMargins(left, top, right float64)
+	GetPageMargins() (float64, float64, float64, float64)
 
 	// Outside Col/Row Components
 	TableList(header []string, contents [][]string, prop ...props.TableList)
@@ -130,6 +132,16 @@ func (s *PdfMaroto) RegisterFooter(closure func()) {
 // to draw the current page, or to another purposes
 func (s *PdfMaroto) GetCurrentPage() int {
 	return s.pageIndex
+}
+
+// SetPageMargins overrides default margins (10,10,10)
+// the new page margin will affect all PDF pages
+func (s *PdfMaroto) SetPageMargins(left, top, right float64) {
+	s.Pdf.SetMargins(left, top, right)
+}
+
+func (s *PdfMaroto) GetPageMargins() (float64, float64, float64, float64) {
+	return s.Pdf.GetMargins()
 }
 
 // Signature add a space for a signature inside a cell,

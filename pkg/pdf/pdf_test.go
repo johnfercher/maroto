@@ -1516,6 +1516,13 @@ func newMarotoTest(fpdf *mocks.Pdf, math *mocks.Math, font *mocks.Font, text *mo
 	return m
 }
 
+func basePdfHelperTest(left, top, right float64) *mocks.Pdf {
+	pdf := &mocks.Pdf{}
+	pdf.On("SetMargins", mock.AnythingOfType("float64"), mock.AnythingOfType("float64"), mock.AnythingOfType("float64"))
+	pdf.On("GetMargins").Return(left, top, right, 0.0)
+	return pdf
+}
+
 func basePdfTest() *mocks.Pdf {
 	pdf := &mocks.Pdf{}
 	pdf.On("GetPageSize").Return(100.0, 100.0)
@@ -1721,5 +1728,39 @@ func TestPdfMaroto_GetCurrentPage(t *testing.T) {
 		// Assert
 		pageIndex := m.GetCurrentPage()
 		c.assert(t, pageIndex)
+	}
+}
+
+func TestPdfMaroto_SetPageMargins(t *testing.T) {
+	cases := []struct {
+		name   string
+		act    func(m pdf.Maroto)
+		assert func(t *testing.T, left, top, right float64)
+	}{
+		{
+			"Set page margins should override default",
+			func(m pdf.Maroto) {
+				m.SetPageMargins(12.3, 19.3, 0.0)
+			},
+			func(t *testing.T, left, top, right float64) {
+				assert.Equal(t, 12.3, left)
+				assert.Equal(t, 19.3, top)
+				assert.Equal(t, 0.0, right)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := basePdfHelperTest(12.3, 19.3, 0)
+
+		m := newMarotoTest(pdf, nil, nil, nil, nil, nil, nil)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		left, top, right, _ := m.GetPageMargins()
+		c.assert(t, left, top, right)
 	}
 }
