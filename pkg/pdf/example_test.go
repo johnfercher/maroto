@@ -359,3 +359,9 @@ func ExamplePdfMaroto_RegisterHeader() {
 
 	// Do more things or not and save...
 }
+
+// ExamplePdfMaroto_SetPageMargins demonstrates how to set custom page margins.
+func ExamplePdfMaroto_SetPageMargins() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m.SetPageMargins(10, 60, 10)
+}
