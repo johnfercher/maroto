@@ -152,7 +152,9 @@ func (s *PdfMaroto) SetPageMargins(left, top, right float64) {
 	s.Pdf.SetMargins(left, top, right)
 }
 
-func (s *PdfMaroto) GetPageMargins() (float64, float64, float64, float64) {
+// GetPageMargins returns the set page margins. Comes in order of Left, Top, Right, Bottom
+// Default page margins is left: 10, top: 10, right: 10
+func (s *PdfMaroto) GetPageMargins() (left float64, top float64, right float64, bottom float64) {
 	return s.Pdf.GetMargins()
 }
 
