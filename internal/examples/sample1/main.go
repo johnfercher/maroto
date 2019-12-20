@@ -8,9 +8,11 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"io/ioutil"
 	"os"
+	"time"
 )
 
 func main() {
+	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	//m.SetBorder(true)
 
@@ -46,6 +48,7 @@ func main() {
 			m.Col(func() {
 				id := "https://github.com/johnfercher/maroto"
 				_ = m.Barcode(id, props.Barcode{
+					Center:     true,
 					Proportion: props.Proportion{Width: 50, Height: 10},
 					Percent:    75,
 				})
@@ -61,7 +64,7 @@ func main() {
 
 		m.Row(12, func() {
 			m.Col(func() {
-				_ = m.FileImage("internal/assets/images/goherbw.png", props.Rect{
+				_ = m.FileImage("internal/assets/images/gopherbw.png", props.Rect{
 					Center: true,
 				})
 			})
@@ -168,6 +171,9 @@ func main() {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
 	}
+
+	end := time.Now()
+	fmt.Println(end.Sub(begin))
 }
 
 func getSmallContent() ([]string, [][]string) {
@@ -176,7 +182,7 @@ func getSmallContent() ([]string, [][]string) {
 	contents := [][]string{}
 	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "", "R$ 20,00"})
 	contents = append(contents, []string{"São Carlos", "Petrópolis", "", "R$ 25,00"})
-	contents = append(contents, []string{"Florianópolis", "Osasco", "", "R$ 20,00"})
+	contents = append(contents, []string{"São José do Vale do Rio Preto", "Osasco", "", "R$ 20,00"})
 	contents = append(contents, []string{"Osasco", "São Paulo", "", "R$ 5,00"})
 	contents = append(contents, []string{"Congonhas", "Fortaleza", "", "R$ 100,00"})
 	contents = append(contents, []string{"Natal", "Santo André", "", "R$ 200,00"})

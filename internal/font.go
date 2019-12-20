@@ -15,13 +15,15 @@ type Font interface {
 	GetStyle() consts.Style
 	GetSize() float64
 	GetFont() (consts.Family, consts.Style, float64)
+	GetScaleFactor() (scaleFactor float64)
 }
 
 type font struct {
-	pdf    gofpdf.Pdf
-	size   float64
-	family consts.Family
-	style  consts.Style
+	pdf         gofpdf.Pdf
+	size        float64
+	family      consts.Family
+	style       consts.Style
+	scaleFactor float64
 }
 
 // NewFont create a Font
@@ -31,6 +33,7 @@ func NewFont(pdf gofpdf.Pdf, size float64, family consts.Family, style consts.St
 		size,
 		family,
 		style,
+		72.0 / 25.4, // Value defined inside gofpdf constructor
 	}
 }
 
@@ -81,4 +84,9 @@ func (s *font) SetFont(family consts.Family, style consts.Style, size float64) {
 	s.size = size
 
 	s.pdf.SetFont(string(s.family), string(s.style), s.size)
+}
+
+// GetScaleFactor retrieve the scale factor defined in the instantiation of gofpdf
+func (s *font) GetScaleFactor() (scaleFactor float64) {
+	return s.scaleFactor
 }
