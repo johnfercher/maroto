@@ -69,161 +69,96 @@ with the code to generate the PDFs.
 package main
 
 import (
-	"encoding/base64"
 	"fmt"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"io/ioutil"
+	"os"
 )
 
 func main() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
-	//m.SetBorder(true)
+	m := pdf.NewMaroto(consts.Portrait, consts.Letter)
 
-	byteSlices, _ := ioutil.ReadFile("internal/assets/images/biplane.jpg")
-
-	base64 := base64.StdEncoding.EncodeToString(byteSlices)
-
-	headerSmall, smallContent := getSmallContent()
-	headerMedium, mediumContent := getMediumContent()
-
-	m.RegisterHeader(func() {
-
-		m.Row(20, func() {
-			m.Col(func() {
-				m.Base64Image(base64, consts.Jpg, props.Rect{
-					Percent: 70,
-				})
-			})
-
-			m.ColSpaces(2)
-
-			m.Col(func() {
-				m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
-					Percent: 75,
-				})
-			})
-
-			m.Col(func() {
-				id := "https://github.com/johnfercher/maroto"
-				_ = m.Barcode(id, props.Barcode{
-					Proportion: props.Proportion{50, 10},
-					Percent:    75,
-				})
-				m.Text(id, props.Text{
-					Size:  7,
-					Align: consts.Center,
-					Top:   16,
-				})
-			})
-		})
-
-		m.Line(1.0)
-
-		m.Row(12, func() {
-			m.Col(func() {
-				m.FileImage("internal/assets/images/gopherbw.png")
-			})
-
-			m.ColSpace()
-
-			m.Col(func() {
-				m.Text("Packages Report: Daily", props.Text{
-					Top: 4,
-				})
-				m.Text("Type: Small, Medium", props.Text{
-					Top: 10,
-				})
-			})
-
-			m.ColSpace()
-
-			m.Col(func() {
-				m.Text("20/07/1994", props.Text{
-					Size:   10,
-					Style:  consts.BoldItalic,
-					Top:    7.5,
-					Family: consts.Helvetica,
-				})
-			})
-		})
-
-		m.Line(1.0)
-
-		m.Row(22, func() {
-			m.Col(func() {
-				m.Text(fmt.Sprintf("Small: %d, Medium %d", len(smallContent), len(mediumContent)), props.Text{
-					Size:  15,
-					Style: consts.Bold,
-					Align: consts.Center,
-					Top:   9,
-				})
-				m.Text("Brasil / São Paulo", props.Text{
-					Size:  12,
-					Align: consts.Center,
-					Top:   17,
-				})
-			})
-		})
-
-		m.Line(1.0)
-
-	})
-
-	m.RegisterFooter(func() {
-		m.Row(40, func() {
-			m.Col(func() {
-				m.Signature("Signature 1", props.Font{
-					Family: consts.Courier,
-					Style:  consts.BoldItalic,
-					Size:   9,
-				})
-			})
-
-			m.Col(func() {
-				m.Signature("Signature 2")
-			})
-
-			m.Col(func() {
-				m.Signature("Signature 3")
-			})
-		})
-	})
-
-	m.Row(15, func() {
+	m.Row(40, func() {
 		m.Col(func() {
-			m.Text("Small Packages / 39u.", props.Text{
-				Top:   8,
-				Style: consts.Bold,
+			_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
+				Center:  true,
+				Percent: 80,
 			})
 		})
-	})
-
-	m.TableList(headerSmall, smallContent)
-
-	m.Row(15, func() {
 		m.Col(func() {
-			m.Text("Medium Packages / 22u.", props.Text{
-				Top:   8,
-				Style: consts.Bold,
+			m.Text("Gopher International Shipping, Inc.", props.Text{
+				Top:         15,
+				Size:        20,
+				Extrapolate: true,
+			})
+			m.Text("1000 Shipping Gopher Golang TN 3691234 GopherLand (GL)", props.Text{
+				Size: 12,
+				Top:  21,
+			})
+		})
+		m.ColSpace()
+	})
+
+	m.Line(10)
+
+	m.Row(40, func() {
+		m.Col(func() {
+			m.Text("João Sant'Ana 100 Main Street Stringfield TN 39021 United Stats (USA)", props.Text{
+				Size: 15,
+				Top:  14,
+			})
+		})
+		m.ColSpace()
+		m.Col(func() {
+			m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
+				Center:  true,
+				Percent: 75,
 			})
 		})
 	})
 
-	m.TableList(headerMedium, mediumContent, props.TableList{
-		Align: consts.Center,
-		HeaderProp: props.Font{
-			Family: consts.Courier,
-			Style:  consts.BoldItalic,
-		},
-		ContentProp: props.Font{
-			Family: consts.Courier,
-			Style:  consts.Italic,
-		},
+	m.Line(10)
+
+	m.Row(100, func() {
+		m.Col(func() {
+			_ = m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
+				Center:  true,
+				Percent: 70,
+			})
+			m.Text("https://github.com/johnfercher/maroto", props.Text{
+				Size:  20,
+				Align: consts.Center,
+				Top:   80,
+			})
+		})
 	})
 
-	_ = m.OutputFileAndClose("internal/examples/pdfs/sample1.pdf")
+	m.SetBorder(true)
+
+	m.Row(40, func() {
+		m.Col(func() {
+			m.Text("CODE: 123412351645231245564 DATE: 20-07-1994 20:20:33", props.Text{
+				Size: 15,
+				Top:  19,
+			})
+		})
+		m.Col(func() {
+			m.Text("CA", props.Text{
+				Top:   30,
+				Size:  85,
+				Align: consts.Center,
+			})
+		})
+	})
+
+	m.SetBorder(false)
+
+	err := m.OutputFileAndClose("internal/examples/pdfs/zpl.pdf")
+	if err != nil {
+		fmt.Println("Could not save PDF:", err)
+		os.Exit(1)
+	}
 }
 ```
 
