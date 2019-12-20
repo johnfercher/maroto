@@ -13,6 +13,9 @@ type MarotoGridPart interface {
 
 	// Helpers
 	GetCurrentOffset() float64
+
+	// Outside Col/Row Components
+	Line(spaceHeight float64)
 }
 
 // TableList is the abstraction to create a table with header and contents
@@ -109,6 +112,10 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 				})
 			}
 		})
+
+		if tableProp.Line {
+			s.pdf.Line(1.0)
+		}
 	}
 }
 
