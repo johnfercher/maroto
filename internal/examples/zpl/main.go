@@ -6,9 +6,11 @@ import (
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"os"
+	"time"
 )
 
 func main() {
+	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.Letter)
 	//m.SetBorder(true)
 
@@ -45,6 +47,7 @@ func main() {
 		m.ColSpace()
 		m.Col(func() {
 			m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
+				Center:  true,
 				Percent: 75,
 			})
 		})
@@ -55,6 +58,7 @@ func main() {
 	m.Row(100, func() {
 		m.Col(func() {
 			_ = m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
+				Center:  true,
 				Percent: 70,
 			})
 			m.Text("https://github.com/johnfercher/maroto", props.Text{
@@ -90,4 +94,7 @@ func main() {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
 	}
+
+	end := time.Now()
+	fmt.Println(end.Sub(begin))
 }
