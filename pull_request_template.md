@@ -21,5 +21,6 @@
 - [ ] Updated docs/doc.go <!-- If applied -->
 - [ ] Updated pkg/pdf/example_test.go <!-- If applied -->
 - [ ] Updated README.md <!-- If applied -->
+- [ ] Updated all examples inside internal/examples <!-- If applied -->
 - [ ] New public methods has comments upside them explaining what it does <!-- If applied -->
 - [ ] Executed `go fmt github.com/johnfercher/maroto/...` to format all files

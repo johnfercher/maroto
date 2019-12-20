@@ -353,3 +353,16 @@ func TestFont_GetSetFont(t *testing.T) {
 		c.assertFont(t, family, style, size)
 	}
 }
+
+func TestFont_GetScaleFactor(t *testing.T) {
+	// Arrange
+	pdf := &mocks.Pdf{}
+	pdf.On("GetFontSize").Return(1.0, 1.0)
+	sut := internal.NewFont(pdf, 0, consts.Arial, consts.Normal)
+
+	// Act
+	scalarFactor := sut.GetScaleFactor()
+
+	// Assert
+	assert.InDelta(t, scalarFactor, 2.83, 0.1)
+}
