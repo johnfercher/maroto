@@ -56,6 +56,8 @@ type Text struct {
 	// Extrapolate define if the text will automatically add a new line when
 	// text reach the right cell boundary
 	Extrapolate bool
+	// VerticalPadding define an additional space between lines
+	VerticalPadding float64
 }
 
 // Font represents properties from a text
@@ -70,13 +72,9 @@ type Font struct {
 
 // TableList represents properties from a TableList
 type TableList struct {
-	// HeaderHeight is the height of the cell with headers
-	HeaderHeight float64
 	// HeaderProp is the custom properties of the text inside
 	// the headers
 	HeaderProp Font
-	// ContentHeight is the height of the cells with contents
-	ContentHeight float64
 	// ContentProp is the custom properties of the text inside
 	// the contents
 	ContentProp Font
@@ -88,106 +86,112 @@ type TableList struct {
 
 // MakeValid from Rect means will make the properties from a rectangle reliable to fit inside a cell
 // and define default values for a rectangle
-func (r *Rect) MakeValid() {
-	if r.Percent <= 0.0 || r.Percent > 100.0 {
-		r.Percent = 100.0
+func (s *Rect) MakeValid() {
+	if s.Percent <= 0.0 || s.Percent > 100.0 {
+		s.Percent = 100.0
 	}
 
-	if r.Center {
-		r.Left = 0
-		r.Top = 0
+	if s.Center {
+		s.Left = 0
+		s.Top = 0
 	}
 
-	if r.Left < 0.0 {
-		r.Left = 0.0
+	if s.Left < 0.0 {
+		s.Left = 0.0
 	}
 
-	if r.Top < 0.0 {
-		r.Top = 0
+	if s.Top < 0.0 {
+		s.Top = 0
 	}
 }
 
 // MakeValid from Barcode means will make the properties from a barcode reliable to fit inside a cell
 // and define default values for a barcode
-func (r *Barcode) MakeValid() {
-	if r.Percent <= 0.0 || r.Percent > 100.0 {
-		r.Percent = 100.0
+func (s *Barcode) MakeValid() {
+	if s.Percent <= 0.0 || s.Percent > 100.0 {
+		s.Percent = 100.0
 	}
 
-	if r.Center {
-		r.Left = 0
-		r.Top = 0
+	if s.Center {
+		s.Left = 0
+		s.Top = 0
 	}
 
-	if r.Left < 0.0 {
-		r.Left = 0.0
+	if s.Left < 0.0 {
+		s.Left = 0.0
 	}
 
-	if r.Top < 0.0 {
-		r.Top = 0
+	if s.Top < 0.0 {
+		s.Top = 0
 	}
 
-	if r.Proportion.Width <= 0 {
-		r.Proportion.Width = 1
+	if s.Proportion.Width <= 0 {
+		s.Proportion.Width = 1
 	}
 
-	if r.Proportion.Height <= 0 {
-		r.Proportion.Height = 1
+	if s.Proportion.Height <= 0 {
+		s.Proportion.Height = 1
 	}
 
-	if r.Proportion.Height > r.Proportion.Width*0.20 {
-		r.Proportion.Height = r.Proportion.Width * 0.20
-	} else if r.Proportion.Height < r.Proportion.Width*0.10 {
-		r.Proportion.Height = r.Proportion.Width * 0.10
+	if s.Proportion.Height > s.Proportion.Width*0.20 {
+		s.Proportion.Height = s.Proportion.Width * 0.20
+	} else if s.Proportion.Height < s.Proportion.Width*0.10 {
+		s.Proportion.Height = s.Proportion.Width * 0.10
 	}
 }
 
 // MakeValid from Text define default values for a Text
-func (f *Text) MakeValid() {
-	if f.Family == "" {
-		f.Family = consts.Arial
+func (s *Text) MakeValid() {
+	if s.Family == "" {
+		s.Family = consts.Arial
 	}
 
-	if f.Style == "" {
-		f.Style = consts.Normal
+	if s.Style == "" {
+		s.Style = consts.Normal
 	}
 
-	if f.Align == "" {
-		f.Align = consts.Left
+	if s.Align == "" {
+		s.Align = consts.Left
 	}
 
-	if f.Size == 0.0 {
-		f.Size = 10.0
+	if s.Size == 0.0 {
+		s.Size = 10.0
 	}
 
-	if f.Top < 0.0 {
-		f.Top = 0.0
+	if s.Top < 0.0 {
+		s.Top = 0.0
+	}
+
+	if s.VerticalPadding < 0 {
+		s.VerticalPadding = 0
 	}
 }
 
 // MakeValid from Font define default values for a Signature
-func (f *Font) MakeValid() {
-	if f.Family == "" {
-		f.Family = consts.Arial
+func (s *Font) MakeValid() {
+	if s.Family == "" {
+		s.Family = consts.Arial
 	}
 
-	if f.Style == "" {
-		f.Style = consts.Bold
+	if s.Style == "" {
+		s.Style = consts.Bold
 	}
 
-	if f.Size == 0.0 {
-		f.Size = 8.0
+	if s.Size == 0.0 {
+		s.Size = 8.0
 	}
 }
 
 // ToTextProp from Font return a Text based on Font
-func (f *Font) ToTextProp(align consts.Align, top float64) Text {
+func (s *Font) ToTextProp(align consts.Align, top float64, extrapolate bool, verticalPadding float64) Text {
 	textProp := Text{
-		Family: f.Family,
-		Style:  f.Style,
-		Size:   f.Size,
-		Align:  align,
-		Top:    top,
+		Family:          s.Family,
+		Style:           s.Style,
+		Size:            s.Size,
+		Align:           align,
+		Top:             top,
+		Extrapolate:     extrapolate,
+		VerticalPadding: verticalPadding,
 	}
 
 	textProp.MakeValid()
@@ -196,44 +200,36 @@ func (f *Font) ToTextProp(align consts.Align, top float64) Text {
 }
 
 // MakeValid from TableList define default values for a TableList
-func (t *TableList) MakeValid() {
-	if t.HeaderProp.Size == 0.0 {
-		t.HeaderProp.Size = 10.0
+func (s *TableList) MakeValid() {
+	if s.HeaderProp.Size == 0.0 {
+		s.HeaderProp.Size = 10.0
 	}
 
-	if t.HeaderProp.Family == "" {
-		t.HeaderProp.Family = consts.Arial
+	if s.HeaderProp.Family == "" {
+		s.HeaderProp.Family = consts.Arial
 	}
 
-	if t.HeaderProp.Style == "" {
-		t.HeaderProp.Style = consts.Bold
+	if s.HeaderProp.Style == "" {
+		s.HeaderProp.Style = consts.Bold
 	}
 
-	if t.HeaderHeight == 0.0 {
-		t.HeaderHeight = 7.0
+	if s.Align == "" {
+		s.Align = consts.Left
 	}
 
-	if t.Align == "" {
-		t.Align = consts.Left
+	if s.ContentProp.Size == 0.0 {
+		s.ContentProp.Size = 10.0
 	}
 
-	if t.ContentProp.Size == 0.0 {
-		t.ContentProp.Size = 10.0
+	if s.ContentProp.Family == "" {
+		s.ContentProp.Family = consts.Arial
 	}
 
-	if t.ContentProp.Family == "" {
-		t.ContentProp.Family = consts.Arial
+	if s.ContentProp.Style == "" {
+		s.ContentProp.Style = consts.Normal
 	}
 
-	if t.ContentProp.Style == "" {
-		t.ContentProp.Style = consts.Normal
-	}
-
-	if t.ContentHeight == 0.0 {
-		t.ContentHeight = 5.0
-	}
-
-	if t.HeaderContentSpace == 0.0 {
-		t.HeaderContentSpace = 4.0
+	if s.HeaderContentSpace == 0.0 {
+		s.HeaderContentSpace = 4.0
 	}
 }
