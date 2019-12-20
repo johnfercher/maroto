@@ -143,7 +143,9 @@ func main() {
 		})
 	})
 
-	m.TableList(headerSmall, smallContent)
+	m.TableList(headerSmall, smallContent, props.TableList{
+		Line: true,
+	})
 
 	m.Row(15, func() {
 		m.Col(func() {

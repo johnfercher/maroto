@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/consts"
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"testing"
@@ -90,6 +91,42 @@ func TestTableList_Create_Happy(t *testing.T) {
 
 	marotoGrid := &mocks.Maroto{}
 	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
+	marotoGrid.On("Line", mock.Anything).Return(nil)
+
+	sut := internal.NewTableList(text, font)
+	sut.BindGrid(marotoGrid)
+
+	headers, contents := getContents()
+
+	// Act
+	sut.Create(headers, contents, props.TableList{
+		Line: true,
+	})
+
+	// Assert
+	text.AssertNotCalled(t, "GetLinesQuantity")
+	text.AssertNumberOfCalls(t, "GetLinesQuantity", 84)
+
+	font.AssertCalled(t, "GetFont")
+	font.AssertNumberOfCalls(t, "GetFont", 21)
+
+	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
+	marotoGrid.AssertNumberOfCalls(t, "Row", 22)
+	marotoGrid.AssertNumberOfCalls(t, "Line", 20)
+}
+
+func TestTableList_Create_Happy_Without_Line(t *testing.T) {
+	// Arrange
+	text := &mocks.Text{}
+	text.On("GetLinesQuantity", mock.Anything, mock.Anything, mock.Anything).Return(1)
+
+	font := &mocks.Font{}
+	font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
+	font.On("GetScaleFactor").Return(1.5)
+
+	marotoGrid := &mocks.Maroto{}
+	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
+	marotoGrid.On("Line", mock.Anything).Return(nil)
 
 	sut := internal.NewTableList(text, font)
 	sut.BindGrid(marotoGrid)
@@ -108,6 +145,28 @@ func TestTableList_Create_Happy(t *testing.T) {
 
 	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
 	marotoGrid.AssertNumberOfCalls(t, "Row", 22)
+	marotoGrid.AssertNumberOfCalls(t, "Line", 0)
+}
+
+func TestTableList_Create_WhenContentIsEmptyWithLine(t *testing.T) {
+	// Arrange
+	text := &mocks.Text{}
+	text.On("GetLinesQuantity", mock.Anything, mock.Anything, mock.Anything).Return(1)
+	sut := internal.NewTableList(text, nil)
+
+	marotoGrid := mocks.Maroto{}
+	marotoGrid.On("Line", mock.Anything).Return(nil)
+
+	headers, _ := getContents()
+
+	// Act
+	sut.Create(headers, [][]string{}, props.TableList{
+		Line: true,
+	})
+
+	// Assert
+	text.AssertNotCalled(t, "GetLinesQuantity")
+	marotoGrid.AssertNotCalled(t, "Line")
 }
 
 func getContents() ([]string, [][]string) {

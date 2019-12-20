@@ -166,7 +166,9 @@ func ExamplePdfMaroto_TableList() {
 	// 1 Row of header
 	// 2 Rows of contents
 	// Each row have 2 columns
-	m.TableList(headers, contents)
+	m.TableList(headers, contents, props.TableList{
+		Line: false,
+	})
 
 	// Do more things and save...
 }
