@@ -297,7 +297,7 @@ func TestPdfMaroto_Signature(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		signature := c.signature()
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		tableList := baseTableList()
 		m := newMarotoTest(pdf, math, nil, nil, signature, nil, nil, tableList)
@@ -421,7 +421,7 @@ func TestPdfMaroto_Text(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		text := baseTextTest()
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		tableList := baseTableList()
 		m := newMarotoTest(pdf, math, nil, text, nil, nil, nil, tableList)
@@ -589,7 +589,7 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		image := c.image()
 		tableList := baseTableList()
@@ -759,7 +759,7 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		image := c.image()
 		tableList := baseTableList()
@@ -915,7 +915,7 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		code := c.code()
 		tableList := baseTableList()
@@ -999,7 +999,7 @@ func TestPdfMaroto_Barcode(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		code := c.code()
 		tableList := baseTableList()
@@ -1116,7 +1116,7 @@ func TestPdfMaroto_Row(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		tableList := baseTableList()
 
@@ -1142,7 +1142,7 @@ func TestPdfMaroto_Line(t *testing.T) {
 		{
 			"One line",
 			func() *mocks.Pdf {
-				pdf := basePdfTest()
+				pdf := basePdfTest(10, 10, 10)
 				pdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
@@ -1160,7 +1160,7 @@ func TestPdfMaroto_Line(t *testing.T) {
 		{
 			"Two lines",
 			func() *mocks.Pdf {
-				pdf := basePdfTest()
+				pdf := basePdfTest(10, 10, 10)
 				pdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 				return pdf
 			},
@@ -1259,7 +1259,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		tableList := baseTableList()
 
@@ -1337,7 +1337,7 @@ func TestPdfMaroto_ColSpaces(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		tableList := baseTableList()
 
@@ -1364,7 +1364,7 @@ func TestPdfMaroto_Output(t *testing.T) {
 		{
 			"When Output returns an error",
 			func() *mocks.Pdf {
-				pdf := basePdfTest()
+				pdf := basePdfTest(10, 10, 10)
 				pdf.On("Output", mock.Anything).Return(errors.New("AnyError"))
 				return pdf
 			},
@@ -1385,7 +1385,7 @@ func TestPdfMaroto_Output(t *testing.T) {
 		{
 			"When Output not returns an error",
 			func() *mocks.Pdf {
-				pdf := basePdfTest()
+				pdf := basePdfTest(10, 10, 10)
 				pdf.On("Output", mock.Anything).Return(nil)
 				return pdf
 			},
@@ -1406,7 +1406,7 @@ func TestPdfMaroto_Output(t *testing.T) {
 		{
 			"When Output has footer",
 			func() *mocks.Pdf {
-				pdf := basePdfTest()
+				pdf := basePdfTest(10, 10, 10)
 				pdf.On("Output", mock.Anything).Return(nil)
 				return pdf
 			},
@@ -1463,7 +1463,7 @@ func TestPdfMaroto_OutputFileAndClose(t *testing.T) {
 		{
 			"When OutputFileAndClose returns an error",
 			func() *mocks.Pdf {
-				pdf := basePdfTest()
+				pdf := basePdfTest(10, 10, 10)
 				pdf.On("OutputFileAndClose", mock.Anything).Return(errors.New("AnyError"))
 				return pdf
 			},
@@ -1481,7 +1481,7 @@ func TestPdfMaroto_OutputFileAndClose(t *testing.T) {
 		{
 			"When OutputFileAndClose not returns an error",
 			func() *mocks.Pdf {
-				pdf := basePdfTest()
+				pdf := basePdfTest(10, 10, 10)
 				pdf.On("OutputFileAndClose", mock.Anything).Return(nil)
 				return pdf
 			},
@@ -1531,13 +1531,14 @@ func newMarotoTest(fpdf *mocks.Pdf, math *mocks.Math, font *mocks.Font, text *mo
 	return m
 }
 
-func basePdfTest() *mocks.Pdf {
+func basePdfTest(left, top, right float64) *mocks.Pdf {
 	pdf := &mocks.Pdf{}
 	pdf.On("GetPageSize").Return(100.0, 100.0)
-	pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
+	pdf.On("GetMargins").Return(left, top, right, 0.0)
 	pdf.On("CellFormat", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 	pdf.On("Ln", mock.Anything)
 	pdf.On("GetFontSize").Return(1.0, 1.0)
+	pdf.On("SetMargins", mock.AnythingOfType("float64"), mock.AnythingOfType("float64"), mock.AnythingOfType("float64"))
 	return pdf
 }
 
@@ -1639,7 +1640,7 @@ func TestPdfMaroto_RegisterFooter(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		text := baseTextTest()
 		font := baseFontTest()
@@ -1723,7 +1724,7 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		text := baseTextTest()
 		font := baseFontTest()
@@ -1791,7 +1792,7 @@ func TestPdfMaroto_GetCurrentPage(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := basePdfTest()
+		pdf := basePdfTest(10, 10, 10)
 		math := baseMathTest()
 		text := baseTextTest()
 		font := baseFontTest()
@@ -1810,7 +1811,7 @@ func TestPdfMaroto_GetCurrentPage(t *testing.T) {
 
 func TestPdfMaroto_GetCurrentPage_WhenCreateOffsetIsZero(t *testing.T) {
 	// Arrange
-	pdf := basePdfTest()
+	pdf := basePdfTest(10, 10, 10)
 	math := baseMathTest()
 	text := baseTextTest()
 	font := baseFontTest()
@@ -1827,7 +1828,7 @@ func TestPdfMaroto_GetCurrentPage_WhenCreateOffsetIsZero(t *testing.T) {
 
 func TestPdfMaroto_GetCurrentPage_WhenIsNotZero(t *testing.T) {
 	// Arrange
-	pdf := basePdfTest()
+	pdf := basePdfTest(10, 10, 10)
 	math := baseMathTest()
 	text := baseTextTest()
 	font := baseFontTest()
@@ -1846,4 +1847,38 @@ func TestPdfMaroto_GetCurrentPage_WhenIsNotZero(t *testing.T) {
 
 	// Assert
 	assert.Equal(t, offset, float64(20))
+}
+
+func TestPdfMaroto_SetPageMargins(t *testing.T) {
+	cases := []struct {
+		name   string
+		act    func(m pdf.Maroto)
+		assert func(t *testing.T, left, top, right float64)
+	}{
+		{
+			"Set page margins should override default",
+			func(m pdf.Maroto) {
+				m.SetPageMargins(12.3, 19.3, 0.0)
+			},
+			func(t *testing.T, left, top, right float64) {
+				assert.Equal(t, 12.3, left)
+				assert.Equal(t, 19.3, top)
+				assert.Equal(t, 0.0, right)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := basePdfTest(12.3, 19.3, 0)
+
+		m := newMarotoTest(pdf, nil, nil, nil, nil, nil, nil, nil)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		left, top, right, _ := m.GetPageMargins()
+		c.assert(t, left, top, right)
+	}
 }
