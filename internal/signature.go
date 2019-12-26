@@ -28,9 +28,9 @@ func NewSignature(pdf gofpdf.Pdf, math Math, text Text) *signature {
 // AddSpaceFor create a space for a signature inside a cell
 func (s *signature) AddSpaceFor(label string, textProp props.Text, qtdCols float64, marginTop float64, actualCol float64) {
 	widthPerCol := s.math.GetWidthPerCol(qtdCols)
-	left, _, right, _ := s.pdf.GetMargins()
+	left, _, _, _ := s.pdf.GetMargins()
 	space := 4.0
 
-	s.pdf.Line((widthPerCol*actualCol)+left+space, marginTop+5.0, widthPerCol*(actualCol+1)+right-space, marginTop+5.0)
+	s.pdf.Line((widthPerCol*actualCol)+left+space, marginTop+5.0, widthPerCol*(actualCol+1)+left-space, marginTop+5.0)
 	s.text.Add(label, textProp, marginTop, actualCol, qtdCols)
 }
