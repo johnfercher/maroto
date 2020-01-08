@@ -1,6 +1,9 @@
 package props
 
-import "github.com/johnfercher/maroto/pkg/consts"
+import (
+	"github.com/johnfercher/maroto/pkg/color"
+	"github.com/johnfercher/maroto/pkg/consts"
+)
 
 // Proportion represents a proportion from a rectangle, example: 16x9, 4x3...
 type Proportion struct {
@@ -80,13 +83,17 @@ type TableList struct {
 	ContentProp Font
 	// Align is the align of the text (header and content) inside the columns
 	Align consts.Align
+	// AlternatedBackground define the background color from even rows
+	// i.e rows with index (0, 2, 4, ..., N) will have background colorized,
+	// rows with index (1, 3, 5, ..., N) will not
+	AlternatedBackground *color.Color
 	// HeaderContentSpace is the space between the header and the contents
 	HeaderContentSpace float64
 	// Line adds a line after every content-row to separate rows. The line's spaceHeight is set to 1.0
 	Line bool
 }
 
-// MakeValid from Rect means will make the properties from a rectangle reliable to fit inside a cell
+// MakeValid from Rect will make the properties from a rectangle reliable to fit inside a cell
 // and define default values for a rectangle
 func (s *Rect) MakeValid() {
 	if s.Percent <= 0.0 || s.Percent > 100.0 {
@@ -107,7 +114,7 @@ func (s *Rect) MakeValid() {
 	}
 }
 
-// MakeValid from Barcode means will make the properties from a barcode reliable to fit inside a cell
+// MakeValid from Barcode will make the properties from a barcode reliable to fit inside a cell
 // and define default values for a barcode
 func (s *Barcode) MakeValid() {
 	if s.Percent <= 0.0 || s.Percent > 100.0 {

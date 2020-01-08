@@ -3,6 +3,7 @@ package pdf_test
 import (
 	"bytes"
 	"fmt"
+	"github.com/johnfercher/maroto/pkg/color"
 	"testing"
 
 	"github.com/johnfercher/maroto/internal/mocks"
@@ -1528,6 +1529,8 @@ func newMarotoTest(fpdf *mocks.Pdf, math *mocks.Math, font *mocks.Font, text *mo
 		TableListHelper: tableList,
 	}
 
+	m.SetBackgroundColor(color.NewWhite())
+
 	return m
 }
 
@@ -1539,6 +1542,7 @@ func basePdfTest(left, top, right float64) *mocks.Pdf {
 	pdf.On("Ln", mock.Anything)
 	pdf.On("GetFontSize").Return(1.0, 1.0)
 	pdf.On("SetMargins", mock.AnythingOfType("float64"), mock.AnythingOfType("float64"), mock.AnythingOfType("float64"))
+	pdf.On("SetFillColor", mock.Anything, mock.Anything, mock.Anything)
 	return pdf
 }
 
@@ -1881,4 +1885,18 @@ func TestPdfMaroto_SetPageMargins(t *testing.T) {
 		left, top, right, _ := m.GetPageMargins()
 		c.assert(t, left, top, right)
 	}
+}
+
+func TestPdfMaroto_SetBackgroundColor(t *testing.T) {
+	// Arrange
+	pdf := basePdfTest(12.3, 19.3, 0)
+	m := newMarotoTest(pdf, nil, nil, nil, nil, nil, nil, nil)
+	white := color.NewWhite()
+
+	// Act
+	m.SetBackgroundColor(white)
+
+	// Assert
+	pdf.AssertCalled(t, "SetFillColor", white.Red, white.Green, white.Blue)
+	pdf.AssertNumberOfCalls(t, "SetFillColor", 2)
 }

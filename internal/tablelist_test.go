@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/stretchr/testify/assert"
@@ -92,6 +93,7 @@ func TestTableList_Create_Happy(t *testing.T) {
 	marotoGrid := &mocks.Maroto{}
 	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
 	marotoGrid.On("Line", mock.Anything).Return(nil)
+	marotoGrid.On("SetBackgroundColor", mock.Anything).Return(nil)
 
 	sut := internal.NewTableList(text, font)
 	sut.BindGrid(marotoGrid)
@@ -113,6 +115,52 @@ func TestTableList_Create_Happy(t *testing.T) {
 	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
 	marotoGrid.AssertNumberOfCalls(t, "Row", 22)
 	marotoGrid.AssertNumberOfCalls(t, "Line", 20)
+	marotoGrid.AssertNotCalled(t, "SetBackgroundColor")
+}
+
+func TestTableList_Create_HappyWithBackgroundColor(t *testing.T) {
+	// Arrange
+	text := &mocks.Text{}
+	text.On("GetLinesQuantity", mock.Anything, mock.Anything, mock.Anything).Return(1)
+
+	font := &mocks.Font{}
+	font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
+	font.On("GetScaleFactor").Return(1.5)
+
+	marotoGrid := &mocks.Maroto{}
+	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
+	marotoGrid.On("Line", mock.Anything).Return(nil)
+	marotoGrid.On("SetBackgroundColor", mock.Anything).Return(nil)
+
+	sut := internal.NewTableList(text, font)
+	sut.BindGrid(marotoGrid)
+
+	headers, contents := getContents()
+	color := color.Color{
+		Red:   200,
+		Green: 200,
+		Blue:  200,
+	}
+
+	// Act
+	sut.Create(headers, contents, props.TableList{
+		AlternatedBackground: &color,
+	})
+
+	// Assert
+	text.AssertNotCalled(t, "GetLinesQuantity")
+	text.AssertNumberOfCalls(t, "GetLinesQuantity", 84)
+
+	font.AssertCalled(t, "GetFont")
+	font.AssertNumberOfCalls(t, "GetFont", 21)
+
+	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
+	marotoGrid.AssertNumberOfCalls(t, "Row", 22)
+
+	marotoGrid.AssertNotCalled(t, "Line")
+
+	marotoGrid.AssertCalled(t, "SetBackgroundColor", color)
+	marotoGrid.AssertNumberOfCalls(t, "SetBackgroundColor", 20)
 }
 
 func TestTableList_Create_Happy_Without_Line(t *testing.T) {
