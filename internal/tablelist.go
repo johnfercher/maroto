@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/props"
 )
 
@@ -12,6 +13,7 @@ type MarotoGridPart interface {
 	ColSpace()
 
 	// Helpers
+	SetBackgroundColor(color color.Color)
 	GetCurrentOffset() float64
 
 	// Outside Col/Row Components
@@ -55,6 +57,7 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 	}
 
 	tableProp := props.TableList{}
+
 	if len(prop) > 0 {
 		tableProp = prop[0]
 	}
@@ -96,9 +99,13 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 	contentMarginTop := 2.0
 
 	// Draw contents
-	for _, content := range contents {
+	for index, content := range contents {
 		contentTextProp := tableProp.ContentProp.ToTextProp(tableProp.Align, 0.0, false, 1.0)
 		contentHeight := s.calcLinesHeight(content, contentTextProp, qtdCols)
+
+		if tableProp.AlternatedBackground != nil && index%2 == 0 {
+			s.pdf.SetBackgroundColor(*tableProp.AlternatedBackground)
+		}
 
 		s.pdf.Row(contentHeight, func() {
 			for j, c := range content {
@@ -112,6 +119,10 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 				})
 			}
 		})
+
+		if tableProp.AlternatedBackground != nil && index%2 == 0 {
+			s.pdf.SetBackgroundColor(color.NewWhite())
+		}
 
 		if tableProp.Line {
 			s.pdf.Line(1.0)
