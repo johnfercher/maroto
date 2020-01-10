@@ -3,6 +3,7 @@
 package mocks
 
 import bytes "bytes"
+import color "github.com/johnfercher/maroto/pkg/color"
 import consts "github.com/johnfercher/maroto/pkg/consts"
 import mock "github.com/stretchr/testify/mock"
 
@@ -133,6 +134,41 @@ func (_m *Maroto) GetCurrentPage() int {
 	return r0
 }
 
+// GetPageMargins provides a mock function with given fields:
+func (_m *Maroto) GetPageMargins() (float64, float64, float64, float64) {
+	ret := _m.Called()
+
+	var r0 float64
+	if rf, ok := ret.Get(0).(func() float64); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(float64)
+	}
+
+	var r1 float64
+	if rf, ok := ret.Get(1).(func() float64); ok {
+		r1 = rf()
+	} else {
+		r1 = ret.Get(1).(float64)
+	}
+
+	var r2 float64
+	if rf, ok := ret.Get(2).(func() float64); ok {
+		r2 = rf()
+	} else {
+		r2 = ret.Get(2).(float64)
+	}
+
+	var r3 float64
+	if rf, ok := ret.Get(3).(func() float64); ok {
+		r3 = rf()
+	} else {
+		r3 = ret.Get(3).(float64)
+	}
+
+	return r0, r1, r2, r3
+}
+
 // GetPageSize provides a mock function with given fields:
 func (_m *Maroto) GetPageSize() (float64, float64) {
 	ret := _m.Called()
@@ -221,9 +257,19 @@ func (_m *Maroto) Row(height float64, closure func()) {
 	_m.Called(height, closure)
 }
 
+// SetBackgroundColor provides a mock function with given fields: _a0
+func (_m *Maroto) SetBackgroundColor(_a0 color.Color) {
+	_m.Called(_a0)
+}
+
 // SetBorder provides a mock function with given fields: on
 func (_m *Maroto) SetBorder(on bool) {
 	_m.Called(on)
+}
+
+// SetPageMargins provides a mock function with given fields: left, top, right
+func (_m *Maroto) SetPageMargins(left float64, top float64, right float64) {
+	_m.Called(left, top, right)
 }
 
 // Signature provides a mock function with given fields: label, prop

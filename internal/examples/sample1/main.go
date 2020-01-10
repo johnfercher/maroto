@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -28,7 +29,6 @@ func main() {
 	headerMedium, mediumContent := getMediumContent()
 
 	m.RegisterHeader(func() {
-
 		m.Row(20, func() {
 			m.Col(func() {
 				m.Base64Image(base64, consts.Jpg, props.Rect{
@@ -144,7 +144,11 @@ func main() {
 	})
 
 	m.TableList(headerSmall, smallContent, props.TableList{
-		Line: true,
+		AlternatedBackground: &color.Color{
+			Red:   200,
+			Green: 200,
+			Blue:  200,
+		},
 	})
 
 	m.Row(15, func() {
@@ -158,6 +162,7 @@ func main() {
 
 	m.TableList(headerMedium, mediumContent, props.TableList{
 		Align: consts.Center,
+		Line:  true,
 		HeaderProp: props.Font{
 			Family: consts.Courier,
 			Style:  consts.BoldItalic,
@@ -204,22 +209,6 @@ func getSmallContent() ([]string, [][]string) {
 	contents = append(contents, []string{"Natal", "Santo André", "", "R$ 198,00"})
 	contents = append(contents, []string{"Rio Grande do Norte", "Sorocaba", "", "R$ 42,00"})
 	contents = append(contents, []string{"Campinas", "Recife", "", "R$ 58,00"})
-	contents = append(contents, []string{"São Vicente", "Juiz de Fora", "", "R$ 39,00"})
-	contents = append(contents, []string{"Taubaté", "Rio de Janeiro", "", "R$ 77,00"})
-	contents = append(contents, []string{"Suzano", "Petrópolis", "", "R$ 64,00"})
-	contents = append(contents, []string{"Jundiaí", "Florianópolis", "", "R$ 20,00"})
-	contents = append(contents, []string{"Natal", "Jundiaí", "", "R$ 18,00"})
-	contents = append(contents, []string{"Niterói", "Itapevi", "", "R$ 24,00"})
-	contents = append(contents, []string{"Jundiaí", "Florianópolis", "", "R$ 23,00"})
-	contents = append(contents, []string{"Natal", "Jundiaí", "", "R$ 11,00"})
-	contents = append(contents, []string{"Niterói", "Itapevi", "", "R$ 28,00"})
-	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "", "R$ 19,00"})
-	contents = append(contents, []string{"São Carlos", "Petrópolis", "", "R$ 23,00"})
-	contents = append(contents, []string{"Florianópolis", "Osasco", "", "R$ 21,00"})
-	contents = append(contents, []string{"Osasco", "São Paulo", "", "R$ 6,00"})
-	contents = append(contents, []string{"Congonhas", "Fortaleza", "", "R$ 109,00"})
-	contents = append(contents, []string{"Natal", "Santo André", "", "R$ 244,00"})
-	contents = append(contents, []string{"São Carlos", "Petrópolis", "", "R$ 34,00"})
 	contents = append(contents, []string{"Florianópolis", "Osasco", "", "R$ 21,00"})
 
 	return header, contents
