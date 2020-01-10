@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"bytes"
+	"github.com/johnfercher/maroto/pkg/color"
 
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -23,6 +24,7 @@ type Maroto interface {
 
 	// Helpers
 	SetBorder(on bool)
+	SetBackgroundColor(color color.Color)
 	GetBorder() bool
 	GetPageSize() (float64, float64)
 	GetCurrentPage() int
@@ -61,13 +63,14 @@ type PdfMaroto struct {
 	offsetY                   float64
 	rowHeight                 float64
 	rowColCount               float64
+	backgroundColor           color.Color
 	colsClosures              []func()
 	headerClosure             func()
 	footerClosure             func()
 	footerHeight              float64
 	headerFooterContextActive bool
 	calculationMode           bool
-	DebugMode                 bool
+	debugMode                 bool
 	orientation               consts.Orientation
 	pageSize                  consts.PageSize
 }
@@ -102,6 +105,7 @@ func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto 
 		pageSize:        pageSize,
 		orientation:     orientation,
 		calculationMode: false,
+		backgroundColor: color.NewWhite(),
 	}
 
 	maroto.TableListHelper.BindGrid(maroto)
@@ -109,7 +113,7 @@ func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto 
 	maroto.Font.SetFamily(consts.Arial)
 	maroto.Font.SetStyle(consts.Bold)
 	maroto.Font.SetSize(16)
-	maroto.DebugMode = false
+	maroto.debugMode = false
 
 	maroto.Pdf.AddPage()
 
@@ -185,12 +189,19 @@ func (s *PdfMaroto) TableList(header []string, contents [][]string, prop ...prop
 // SetBorder enable the draw of lines in every cell.
 // Draw borders in all columns created.
 func (s *PdfMaroto) SetBorder(on bool) {
-	s.DebugMode = on
+	s.debugMode = on
+}
+
+// SetBackgroundColor define the background color of the PDF.
+// This method can be used to toggle background from rows
+func (s *PdfMaroto) SetBackgroundColor(color color.Color) {
+	s.backgroundColor = color
+	s.Pdf.SetFillColor(s.backgroundColor.Red, s.backgroundColor.Green, s.backgroundColor.Blue)
 }
 
 // GetBorder return the actual border value.
 func (s *PdfMaroto) GetBorder() bool {
-	return s.DebugMode
+	return s.debugMode
 }
 
 // GetPageSize return the actual page size
@@ -398,11 +409,11 @@ func (s *PdfMaroto) QrCode(code string, prop ...props.Rect) {
 func (s *PdfMaroto) createColSpace(actualWidthPerCol float64) {
 	border := ""
 
-	if s.DebugMode {
+	if s.debugMode {
 		border = "1"
 	}
 
-	s.Pdf.CellFormat(actualWidthPerCol, s.rowHeight, "", border, 0.0, "C", false, 0.0, "")
+	s.Pdf.CellFormat(actualWidthPerCol, s.rowHeight, "", border, 0.0, "C", !s.backgroundColor.IsWhite(), 0.0, "")
 }
 
 func (s *PdfMaroto) drawLastFooter() {
