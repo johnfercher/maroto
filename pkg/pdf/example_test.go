@@ -1,11 +1,23 @@
 package pdf_test
 
 import (
+	"fmt"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"time"
 )
+
+// ExampleNewMaroto demonstratos how to create maroto
+func ExampleNewMaroto() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Do things
+	m.GetPageMargins()
+
+	// Do more things and save...
+}
 
 // ExamplePdfMaroto_Line demonstrates how to draw a line
 // separator.
@@ -87,6 +99,36 @@ func ExamplePdfMaroto_SetBorder() {
 	// Do more things and save...
 }
 
+// ExamplePdfMaroto_SetBackgroundColor demonstrates how
+// to use the SetBackgroundColor method.
+func ExamplePdfMaroto_SetBackgroundColor() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.SetBackgroundColor(color.Color{
+		Red:   100,
+		Green: 20,
+		Blue:  30,
+	})
+
+	// This Row will be filled with the color
+	m.Row(20, func() {
+		m.Col(func() {
+			// Add components
+		})
+	})
+
+	m.SetBackgroundColor(color.NewWhite())
+
+	// This Row will not be filled with the color
+	m.Row(20, func() {
+		m.Col(func() {
+			// Add components
+		})
+	})
+
+	// Do more things and save...
+}
+
 // ExamplePdfMaroto_GetBorder demonstrates how to
 // obtain the actual borders status
 func ExamplePdfMaroto_GetBorder() {
@@ -117,11 +159,13 @@ func ExamplePdfMaroto_Text() {
 	m.Row(rowHeight, func() {
 		m.Col(func() {
 			m.Text("TextContent", props.Text{
-				Size:   12.0,
-				Style:  consts.BoldItalic,
-				Family: consts.Courier,
-				Align:  consts.Center,
-				Top:    1.0,
+				Size:            12.0,
+				Style:           consts.BoldItalic,
+				Family:          consts.Courier,
+				Align:           consts.Center,
+				Top:             1.0,
+				Extrapolate:     false,
+				VerticalPadding: 1.0,
 			})
 		})
 	})
@@ -167,7 +211,24 @@ func ExamplePdfMaroto_TableList() {
 	// 2 Rows of contents
 	// Each row have 2 columns
 	m.TableList(headers, contents, props.TableList{
-		Line: false,
+		HeaderProp: props.Font{
+			Family: consts.Arial,
+			Style:  consts.Bold,
+			Size:   11.0,
+		},
+		ContentProp: props.Font{
+			Family: consts.Courier,
+			Style:  consts.Normal,
+			Size:   10.0,
+		},
+		Align: consts.Center,
+		AlternatedBackground: &color.Color{
+			Red:   100,
+			Green: 20,
+			Blue:  255,
+		},
+		HeaderContentSpace: 10.0,
+		Line:               false,
 	})
 
 	// Do more things and save...
@@ -365,5 +426,70 @@ func ExamplePdfMaroto_RegisterHeader() {
 // ExamplePdfMaroto_SetPageMargins demonstrates how to set custom page margins.
 func ExamplePdfMaroto_SetPageMargins() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
 	m.SetPageMargins(10, 60, 10)
+
+	// Do more things or not and save...
+}
+
+// ExamplePdfMaroto_GetPageSize demonstrates how to obtain the current page size (width and height)
+func ExamplePdfMaroto_GetPageSize() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Get
+	width, height := m.GetPageSize()
+	fmt.Println(width)
+	fmt.Println(height)
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_GetCurrentPage demonstrates how to obtain the current page index
+func ExamplePdfMaroto_GetCurrentPage() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Index here will be 0
+	_ = m.GetCurrentPage()
+
+	// Add Rows, Cols and Components
+
+	// Index here will not be 0
+	_ = m.GetCurrentPage()
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_GetCurrentOffset demonstrates how to obtain the current write offset
+// i.e the height of cursor adding content in the pdf
+func ExamplePdfMaroto_GetCurrentOffset() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Offset here will be 0
+	_ = m.GetCurrentOffset()
+
+	// Add Rows, Cols and Components until maroto add a new page
+
+	// Offset here will not be 0
+	_ = m.GetCurrentOffset()
+
+	// Add Rows, Cols and Components to maroto add a new page
+
+	// Offset here will be 0
+	_ = m.GetCurrentOffset()
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_GetPageMargins demonstrates how to obtain the current page margins
+func ExamplePdfMaroto_GetPageMargins() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Get
+	left, top, right, bottom := m.GetPageMargins()
+	fmt.Println(left)
+	fmt.Println(top)
+	fmt.Println(right)
+	fmt.Println(bottom)
+
+	// Do more things and save...
 }
