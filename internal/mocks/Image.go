@@ -13,12 +13,12 @@ type Image struct {
 }
 
 // AddFromBase64 provides a mock function with given fields: b64, marginTop, indexCol, qtdCols, colHeight, prop, extension
-func (_m *Image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect, extension consts.Extension) error {
-	ret := _m.Called(b64, marginTop, indexCol, qtdCols, colHeight, prop, extension)
+func (_m *Image) AddFromBase64(b64 string, yColOffset float64, xColOffset float64, colWidth float64, colHeight float64, prop props.Rect, extension consts.Extension) error {
+	ret := _m.Called(b64, yColOffset, xColOffset, colWidth, colHeight, prop, extension)
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(string, float64, float64, float64, float64, props.Rect, consts.Extension) error); ok {
-		r0 = rf(b64, marginTop, indexCol, qtdCols, colHeight, prop, extension)
+		r0 = rf(b64, yColOffset, xColOffset, colWidth, colHeight, prop, extension)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -27,12 +27,12 @@ func (_m *Image) AddFromBase64(b64 string, marginTop float64, indexCol float64, 
 }
 
 // AddFromFile provides a mock function with given fields: path, marginTop, indexCol, qtdCols, colHeight, prop
-func (_m *Image) AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect) error {
-	ret := _m.Called(path, marginTop, indexCol, qtdCols, colHeight, prop)
+func (_m *Image) AddFromFile(path string, yColOffset float64, xColOffset float64, colWidth float64, colHeight float64, prop props.Rect) error {
+	ret := _m.Called(path, yColOffset, xColOffset, colWidth, colHeight, prop)
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(string, float64, float64, float64, float64, props.Rect) error); ok {
-		r0 = rf(path, marginTop, indexCol, qtdCols, colHeight, prop)
+		r0 = rf(path, yColOffset, xColOffset, colWidth, colHeight, prop)
 	} else {
 		r0 = ret.Error(0)
 	}

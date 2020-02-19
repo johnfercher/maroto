@@ -30,7 +30,7 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) *text {
 
 // Add a text inside a cell.
 func (s *text) Add(text string, textProp props.Text, marginTop float64, actualCol float64, qtdCols float64) {
-	actualWidthPerCol := s.math.GetWidthPerCol(qtdCols)
+	actualWidthPerCol := qtdCols
 
 	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)

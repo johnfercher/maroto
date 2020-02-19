@@ -15,13 +15,13 @@ func main() {
 	//m.SetBorder(true)
 
 	m.Row(40, func() {
-		m.Col(func() {
+		m.Col(4, func() {
 			_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
 				Center:  true,
 				Percent: 80,
 			})
 		})
-		m.Col(func() {
+		m.Col(4, func() {
 			m.Text("Gopher International Shipping, Inc.", props.Text{
 				Top:         15,
 				Size:        20,
@@ -32,20 +32,20 @@ func main() {
 				Top:  21,
 			})
 		})
-		m.ColSpace()
+		m.ColSpace(4)
 	})
 
 	m.Line(10)
 
 	m.Row(40, func() {
-		m.Col(func() {
+		m.Col(4, func() {
 			m.Text("João Sant'Ana 100 Main Street Stringfield TN 39021 United Stats (USA)", props.Text{
 				Size: 15,
 				Top:  14,
 			})
 		})
-		m.ColSpace()
-		m.Col(func() {
+		m.ColSpace(4)
+		m.Col(4, func() {
 			m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
 				Center:  true,
 				Percent: 75,
@@ -56,7 +56,7 @@ func main() {
 	m.Line(10)
 
 	m.Row(100, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			_ = m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
 				Center:  true,
 				Percent: 70,
@@ -72,13 +72,13 @@ func main() {
 	m.SetBorder(true)
 
 	m.Row(40, func() {
-		m.Col(func() {
+		m.Col(6, func() {
 			m.Text("CODE: 123412351645231245564 DATE: 20-07-1994 20:20:33", props.Text{
 				Size: 15,
 				Top:  19,
 			})
 		})
-		m.Col(func() {
+		m.Col(6, func() {
 			m.Text("CA", props.Text{
 				Top:   30,
 				Size:  85,
