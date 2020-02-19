@@ -1148,7 +1148,7 @@ func TestPdfMaroto_Line(t *testing.T) {
 				return pdf
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 2)
+				pdf.AssertNumberOfCalls(t, "GetMargins", 3)
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 2)
 
 				pdf.AssertNumberOfCalls(t, "Line", 1)
@@ -1166,7 +1166,7 @@ func TestPdfMaroto_Line(t *testing.T) {
 				return pdf
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 4)
+				pdf.AssertNumberOfCalls(t, "GetMargins", 6)
 				pdf.AssertNumberOfCalls(t, "GetPageSize", 4)
 
 				pdf.AssertNumberOfCalls(t, "Line", 2)

@@ -15,7 +15,7 @@ import (
 func main() {
 	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
-	//m.SetBorder(true)
+	m.SetPageMargins(10, 15, 10)
 
 	byteSlices, err := ioutil.ReadFile("internal/assets/images/biplane.jpg")
 	if err != nil {

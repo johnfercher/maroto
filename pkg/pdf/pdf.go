@@ -123,13 +123,23 @@ func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto 
 // RegisterHeader define a sequence of Rows, Lines ou TableLists
 // which will be added in every new page
 func (s *PdfMaroto) RegisterHeader(closure func()) {
-	s.headerClosure = closure
+	s.headerClosure = func() {
+		currentFillColor := s.backgroundColor
+		s.SetBackgroundColor(color.NewWhite())
+		closure()
+		s.SetBackgroundColor(currentFillColor)
+	}
 }
 
 // RegisterFooter define a sequence of Rows, Lines ou TableLists
 // which will be added in every new page
 func (s *PdfMaroto) RegisterFooter(closure func()) {
-	s.footerClosure = closure
+	s.footerClosure = func() {
+		currentFillColor := s.backgroundColor
+		s.SetBackgroundColor(color.NewWhite())
+		closure()
+		s.SetBackgroundColor(currentFillColor)
+	}
 
 	// calculation mode execute all row flow but
 	// only to calculate the sum of heights
@@ -413,7 +423,13 @@ func (s *PdfMaroto) createColSpace(actualWidthPerCol float64) {
 		border = "1"
 	}
 
-	s.Pdf.CellFormat(actualWidthPerCol, s.rowHeight, "", border, 0.0, "C", !s.backgroundColor.IsWhite(), 0.0, "")
+	left, top, _, _ := s.Pdf.GetMargins()
+
+	if !s.backgroundColor.IsWhite() {
+		s.Pdf.Rect(left+(s.rowColCount*actualWidthPerCol), s.offsetY+top, actualWidthPerCol, s.rowHeight, "F")
+	}
+
+	s.Pdf.CellFormat(actualWidthPerCol, s.rowHeight, "", border, 0.0, "C", false, 0.0, "")
 }
 
 func (s *PdfMaroto) drawLastFooter() {
