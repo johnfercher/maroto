@@ -186,7 +186,7 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			func(m pdf.Maroto) {
 				m.RegisterFooter(func() {
 					m.Row(40, func() {
-						m.Col(func() {
+						m.Col(12, func() {
 							m.Signature("Signature1")
 						})
 					})
@@ -206,7 +206,7 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(0, func() {
 						m.Signature("Signature1")
 					})
 				})
@@ -226,7 +226,7 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						m.Signature("Signature2")
 						m.Signature("Signature3", props.Font{
 							Family: consts.Courier,
@@ -251,10 +251,10 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(6, func() {
 						m.Signature("Signature4")
 					})
-					m.Col(func() {
+					m.Col(6, func() {
 						m.Signature("Signature5", props.Font{
 							Family: consts.Courier,
 							Style:  consts.BoldItalic,
@@ -278,12 +278,12 @@ func TestPdfMaroto_Signature(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(6, func() {
 						m.Signature("Signature6")
 					})
 				})
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(6, func() {
 						m.Signature("Signature7", props.Font{
 							Family: consts.Courier,
 							Style:  consts.BoldItalic,
@@ -325,7 +325,7 @@ func TestPdfMaroto_Text(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						m.Text("Text1")
 					})
 				})
@@ -340,7 +340,7 @@ func TestPdfMaroto_Text(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						m.Text("Text2")
 						m.Text("Text3", props.Text{
 							Family: consts.Courier,
@@ -362,10 +362,10 @@ func TestPdfMaroto_Text(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						m.Text("Text4")
 					})
-					m.Col(func() {
+					m.Col(12, func() {
 						m.Text("Text5", props.Text{
 							Family: consts.Helvetica,
 							Style:  consts.Italic,
@@ -386,12 +386,12 @@ func TestPdfMaroto_Text(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						m.Text("Text6")
 					})
 				})
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						m.Text("Text7", props.Text{
 							Family: consts.Courier,
 							Style:  consts.BoldItalic,
@@ -409,7 +409,7 @@ func TestPdfMaroto_Text(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(40, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						m.Text("Text8", props.Text{
 							Top: 50,
 						})
@@ -460,7 +460,7 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						_ = m.FileImage("Image1")
 					})
 				})
@@ -490,7 +490,7 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(0, func() {
 						_ = m.FileImage("Image2", props.Rect{
 							Left:    2.0,
 							Top:     4.0,
@@ -528,14 +528,14 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(0, func() {
 						_ = m.FileImage("Image4", props.Rect{
 							Left:    4.0,
 							Top:     4.5,
 							Percent: 55.0,
 						})
 					})
-					m.Col(func() {
+					m.Col(0, func() {
 						_ = m.FileImage("Image5", props.Rect{
 							Percent: 53.0,
 							Center:  true,
@@ -568,7 +568,7 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						_ = m.FileImage("Image6", props.Rect{
 							Left:    7.0,
 							Top:     8.5,
@@ -577,7 +577,7 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 					})
 				})
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						_ = m.FileImage("Image7", props.Rect{
 							Percent: 98.0,
 							Center:  true,
@@ -630,7 +630,7 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						_ = m.Base64Image("Image1", consts.Jpg)
 					})
 				})
@@ -660,7 +660,7 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(0, func() {
 						_ = m.Base64Image("Image2", consts.Png, props.Rect{
 							Left:    2.0,
 							Top:     4.0,
@@ -698,14 +698,14 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(6, func() {
 						_ = m.Base64Image("Image4", consts.Png, props.Rect{
 							Left:    4.0,
 							Top:     4.5,
 							Percent: 55.0,
 						})
 					})
-					m.Col(func() {
+					m.Col(6, func() {
 						_ = m.Base64Image("Image5", consts.Jpg, props.Rect{
 							Percent: 53.0,
 							Center:  true,
@@ -738,7 +738,7 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						_ = m.Base64Image("Image6", consts.Png, props.Rect{
 							Left:    7.0,
 							Top:     8.5,
@@ -747,7 +747,7 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 					})
 				})
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						_ = m.Base64Image("Image7", consts.Jpg, props.Rect{
 							Percent: 98.0,
 							Center:  true,
@@ -795,7 +795,7 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(0, func() {
 						m.QrCode("Code1")
 					})
 				})
@@ -822,7 +822,7 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(0, func() {
 						m.QrCode("Code2", props.Rect{
 							Left:    2.0,
 							Top:     4.0,
@@ -857,14 +857,14 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(6, func() {
 						m.QrCode("Code4", props.Rect{
 							Left:    4.0,
 							Top:     4.5,
 							Percent: 55.0,
 						})
 					})
-					m.Col(func() {
+					m.Col(6, func() {
 						m.QrCode("Code5", props.Rect{
 							Percent: 53.0,
 							Center:  true,
@@ -894,7 +894,7 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(0, func() {
 						m.QrCode("Code6", props.Rect{
 							Left:    7.0,
 							Top:     8.5,
@@ -903,7 +903,7 @@ func TestPdfMaroto_QrCode(t *testing.T) {
 					})
 				})
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						m.QrCode("Code7", props.Rect{
 							Percent: 98.0,
 							Center:  true,
@@ -951,7 +951,7 @@ func TestPdfMaroto_Barcode(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						_ = m.Barcode("Code1", props.Barcode{Proportion: props.Proportion{Width: 1, Height: 0.2}})
 					})
 				})
@@ -980,7 +980,7 @@ func TestPdfMaroto_Barcode(t *testing.T) {
 			},
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.Col(func() {
+					m.Col(12, func() {
 						_ = m.Barcode("Code2", props.Barcode{
 							Left:       2.0,
 							Top:        4.0,
@@ -1206,7 +1206,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 			"One ColSpace inside one Row",
 			func(m pdf.Maroto) {
 				m.Row(40.0, func() {
-					m.ColSpace()
+					m.ColSpace(0)
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
@@ -1218,8 +1218,8 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 			"Two ColSpace inside one Row",
 			func(m pdf.Maroto) {
 				m.Row(40.0, func() {
-					m.ColSpace()
-					m.ColSpace()
+					m.ColSpace(0)
+					m.ColSpace(0)
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
@@ -1231,10 +1231,10 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 			"Two ColSpace inside two Rows",
 			func(m pdf.Maroto) {
 				m.Row(40.0, func() {
-					m.ColSpace()
+					m.ColSpace(0)
 				})
 				m.Row(35.0, func() {
-					m.ColSpace()
+					m.ColSpace(0)
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
@@ -1248,7 +1248,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 			func(m pdf.Maroto) {
 				m.SetBorder(true)
 				m.Row(40.0, func() {
-					m.ColSpace()
+					m.ColSpace(0)
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
@@ -1608,7 +1608,7 @@ func TestPdfMaroto_RegisterFooter(t *testing.T) {
 				headers, contents := getContents()
 				m.Row(20, func() {
 					for _, header := range headers {
-						m.Col(func() {
+						m.Col(0, func() {
 							m.Text(header)
 						})
 					}
@@ -1617,7 +1617,7 @@ func TestPdfMaroto_RegisterFooter(t *testing.T) {
 				for _, content := range contents {
 					m.Row(20, func() {
 						for _, txt := range content {
-							m.Col(func() {
+							m.Col(12, func() {
 								m.Text(txt)
 							})
 						}
@@ -1678,7 +1678,7 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 			"Always execute header once when add something",
 			func(m pdf.Maroto) {
 				m.Row(20, func() {
-					m.ColSpace()
+					m.ColSpace(0)
 				})
 			},
 			true,
@@ -1692,7 +1692,7 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 				headers, contents := getContents()
 				m.Row(20, func() {
 					for _, header := range headers {
-						m.Col(func() {
+						m.Col(12, func() {
 							m.Text(header)
 						})
 					}
@@ -1701,7 +1701,7 @@ func TestPdfMaroto_RegisterHeader(t *testing.T) {
 				for _, content := range contents {
 					m.Row(20, func() {
 						for _, txt := range content {
-							m.Col(func() {
+							m.Col(12, func() {
 								m.Text(txt)
 							})
 						}
@@ -1772,7 +1772,7 @@ func TestPdfMaroto_GetCurrentPage(t *testing.T) {
 				headers, contents := getContents()
 				m.Row(20, func() {
 					for _, header := range headers {
-						m.Col(func() {
+						m.Col(uint(12/len(headers)), func() {
 							m.Text(header)
 						})
 					}
@@ -1781,7 +1781,7 @@ func TestPdfMaroto_GetCurrentPage(t *testing.T) {
 				for _, content := range contents {
 					m.Row(20, func() {
 						for _, txt := range content {
-							m.Col(func() {
+							m.Col(uint(12/len(contents)), func() {
 								m.Text(txt)
 							})
 						}
@@ -1841,7 +1841,7 @@ func TestPdfMaroto_GetCurrentPage_WhenIsNotZero(t *testing.T) {
 	m := newMarotoTest(pdf, math, font, text, nil, nil, nil, tableList)
 
 	m.Row(20, func() {
-		m.Col(func() {
+		m.Col(0, func() {
 			m.Text("test")
 		})
 	})
