@@ -9,8 +9,8 @@ import (
 type MarotoGridPart interface {
 	// Grid System
 	Row(height float64, closure func())
-	Col(closure func())
-	ColSpace()
+	Col(width uint, closure func())
+	ColSpace(width uint)
 
 	// Helpers
 	SetBackgroundColor(color color.Color)
@@ -77,7 +77,7 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 			hs := h
 			is := i
 
-			s.pdf.Col(func() {
+			s.pdf.Col(0, func() {
 				if headerMarginTop > headerHeight {
 					headerMarginTop = headerHeight
 				}
@@ -93,7 +93,7 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 
 	// Define space between header and contents
 	s.pdf.Row(tableProp.HeaderContentSpace, func() {
-		s.pdf.ColSpace()
+		s.pdf.ColSpace(0)
 	})
 
 	contentMarginTop := 2.0
@@ -114,7 +114,7 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 				hs := float64(len(header))
 				sumOyYOffesets := contentMarginTop + s.pdf.GetCurrentOffset() + 2.0
 
-				s.pdf.Col(func() {
+				s.pdf.Col(0, func() {
 					s.text.Add(cs, contentTextProp, sumOyYOffesets, float64(js), hs)
 				})
 			}

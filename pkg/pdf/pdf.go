@@ -14,8 +14,8 @@ import (
 type Maroto interface {
 	// Grid System
 	Row(height float64, closure func())
-	Col(closure func())
-	ColSpace()
+	Col(width uint, closure func())
+	ColSpace(uint)
 	ColSpaces(qtd int)
 
 	// Registers
@@ -62,7 +62,8 @@ type PdfMaroto struct {
 	pageIndex                 int
 	offsetY                   float64
 	rowHeight                 float64
-	rowColCount               float64
+	xColOffset                float64
+	colWidth                  float64
 	backgroundColor           color.Color
 	colsClosures              []func()
 	headerClosure             func()
@@ -175,7 +176,7 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 	qtdCols := float64(len(s.colsClosures))
 	sumOfYOffsets := s.offsetY + s.rowHeight
 
-	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0, false, 0), qtdCols, sumOfYOffsets, s.rowColCount)
+	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0, false, 0), qtdCols, sumOfYOffsets, s.xColOffset)
 }
 
 // TableList create a table with multiple rows and columns.
@@ -213,7 +214,7 @@ func (s *PdfMaroto) GetPageSize() (float64, float64) {
 // in the currently row.
 func (s *PdfMaroto) Line(spaceHeight float64) {
 	s.Row(spaceHeight, func() {
-		s.Col(func() {
+		s.Col(0, func() {
 			width, _ := s.Pdf.GetPageSize()
 			left, top, right, _ := s.Pdf.GetMargins()
 
@@ -264,7 +265,7 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 	}
 
 	s.rowHeight = height
-	s.rowColCount = 0
+	s.xColOffset = 0
 
 	// This closure has only maroto.Cols, which are
 	// not executed firstly, they are added to colsClosures
@@ -273,9 +274,9 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 	closure()
 
 	// Execute the codes inside the Cols
-	for _, colClosure := range s.colsClosures {
-		colClosure()
-	}
+	//for _, colClosure := range s.colsClosures {
+	//	colClosure()
+	//}
 
 	s.colsClosures = nil
 	s.offsetY += s.rowHeight
@@ -284,28 +285,36 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 
 // Col create a column inside a row and enable to add
 // components inside.
-func (s *PdfMaroto) Col(closure func()) {
-	s.colsClosures = append(s.colsClosures, func() {
-		widthPerCol := s.Math.GetWidthPerCol(float64(len(s.colsClosures)))
-		s.createColSpace(widthPerCol)
-		closure()
-		s.rowColCount++
-	})
+func (s *PdfMaroto) Col(width uint, closure func()) {
+	// Array will be executed only in the Row context
+	//s.colsClosures = append(s.colsClosures, func() {
+	if width == 0 {
+		width = 12
+	}
+
+	percent := float64(width) / float64(12)
+
+	widthPerCol := s.Math.GetWidthPerCol(percent)
+	s.colWidth = widthPerCol
+	s.createColSpace(widthPerCol)
+	closure()
+	s.xColOffset += s.colWidth
+	//})
 }
 
 // ColSpace create an empty column inside a row.
-func (s *PdfMaroto) ColSpace() {
+func (s *PdfMaroto) ColSpace(width uint) {
 	s.colsClosures = append(s.colsClosures, func() {
 		widthPerCol := s.Math.GetWidthPerCol(float64(len(s.colsClosures)))
 		s.createColSpace(widthPerCol)
-		s.rowColCount++
+		s.xColOffset++
 	})
 }
 
 // ColSpaces create some empty columns inside a row.
 func (s *PdfMaroto) ColSpaces(qtd int) {
 	for i := 0; i < qtd; i++ {
-		s.ColSpace()
+		s.ColSpace(0)
 	}
 }
 
@@ -322,9 +331,9 @@ func (s *PdfMaroto) Text(text string, prop ...props.Text) {
 		textProp.Top = s.rowHeight
 	}
 
-	sumOfYOffsets := textProp.Top + s.offsetY
+	yColOffset := textProp.Top + s.offsetY
 
-	s.TextHelper.Add(text, textProp, sumOfYOffsets, s.rowColCount, float64(len(s.colsClosures)))
+	s.TextHelper.Add(text, textProp, yColOffset, s.xColOffset, s.colWidth)
 }
 
 // FileImage add an Image reading from disk inside a cell.
@@ -337,10 +346,9 @@ func (s *PdfMaroto) FileImage(filePathName string, prop ...props.Rect) error {
 
 	rectProp.MakeValid()
 
-	qtdCols := float64(len(s.colsClosures))
 	sumOfyOffsets := s.offsetY + rectProp.Top
 
-	return s.Image.AddFromFile(filePathName, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp)
+	return s.Image.AddFromFile(filePathName, sumOfyOffsets, s.xColOffset, s.colWidth, s.rowHeight, rectProp)
 }
 
 // Base64Image add an Image reading byte slices inside a cell.
@@ -353,10 +361,9 @@ func (s *PdfMaroto) Base64Image(base64 string, extension consts.Extension, prop 
 
 	rectProp.MakeValid()
 
-	qtdCols := float64(len(s.colsClosures))
 	sumOfyOffsets := s.offsetY + rectProp.Top
 
-	return s.Image.AddFromBase64(base64, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp, extension)
+	return s.Image.AddFromBase64(base64, sumOfyOffsets, s.xColOffset, s.colWidth, s.rowHeight, rectProp, extension)
 }
 
 // OutputFileAndClose save pdf in disk.
@@ -387,7 +394,7 @@ func (s *PdfMaroto) Barcode(code string, prop ...props.Barcode) (err error) {
 	qtdCols := float64(len(s.colsClosures))
 	sumOfyOffsets := s.offsetY + barcodeProp.Top
 
-	err = s.Code.AddBar(code, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, barcodeProp)
+	err = s.Code.AddBar(code, sumOfyOffsets, s.xColOffset, qtdCols, s.rowHeight, barcodeProp)
 
 	return
 }
@@ -403,7 +410,7 @@ func (s *PdfMaroto) QrCode(code string, prop ...props.Rect) {
 
 	qtdCols := float64(len(s.colsClosures))
 	sumOfyOffsets := s.offsetY + rectProp.Top
-	s.Code.AddQr(code, sumOfyOffsets, s.rowColCount, qtdCols, s.rowHeight, rectProp)
+	s.Code.AddQr(code, sumOfyOffsets, s.xColOffset, qtdCols, s.rowHeight, rectProp)
 }
 
 func (s *PdfMaroto) createColSpace(actualWidthPerCol float64) {

@@ -15,13 +15,13 @@ func main() {
 	//m.SetBorder(true)
 
 	m.Row(20, func() {
-		m.Col(func() {
+		m.Col(4, func() {
 			_ = m.FileImage("internal/assets/images/frontpage.png", props.Rect{
 				Percent: 88,
 				Center:  true,
 			})
 		})
-		m.Col(func() {
+		m.Col(4, func() {
 			m.Text("Golang Certificate", props.Text{
 				Top:   12,
 				Align: consts.Center,
@@ -29,7 +29,7 @@ func main() {
 				Style: consts.BoldItalic,
 			})
 		})
-		m.Col(func() {
+		m.Col(4, func() {
 			_ = m.FileImage("internal/assets/images/frontpage.png", props.Rect{
 				Percent: 90,
 				Center:  true,
@@ -38,7 +38,7 @@ func main() {
 	})
 
 	m.Row(130, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			text := "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
 			m.Text(text, props.Text{
 				Size:            13,
@@ -50,13 +50,13 @@ func main() {
 	})
 
 	m.Row(25, func() {
-		m.Col(func() {
+		m.Col(4, func() {
 			m.Signature("Gopher Senior")
 		})
-		m.Col(func() {
+		m.Col(4, func() {
 			m.Signature("Gopheroid")
 		})
-		m.Col(func() {
+		m.Col(4, func() {
 			m.Signature("Sign Here")
 		})
 	})

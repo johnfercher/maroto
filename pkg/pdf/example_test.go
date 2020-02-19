@@ -48,7 +48,7 @@ func ExamplePdfMaroto_ColSpace() {
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
-		m.ColSpace()
+		m.ColSpace(0)
 	})
 
 	// Do more things and save...
@@ -74,7 +74,7 @@ func ExamplePdfMaroto_Col() {
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
-		m.Col(func() {
+		m.Col(0, func() {
 			// Add Image, Text, Signature, QrCode or Barcode...
 		})
 	})
@@ -112,7 +112,7 @@ func ExamplePdfMaroto_SetBackgroundColor() {
 
 	// This Row will be filled with the color
 	m.Row(20, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			// Add components
 		})
 	})
@@ -121,7 +121,7 @@ func ExamplePdfMaroto_SetBackgroundColor() {
 
 	// This Row will not be filled with the color
 	m.Row(20, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			// Add components
 		})
 	})
@@ -157,7 +157,7 @@ func ExamplePdfMaroto_Text() {
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.Text("TextContent", props.Text{
 				Size:            12.0,
 				Style:           consts.BoldItalic,
@@ -184,7 +184,7 @@ func ExamplePdfMaroto_Signature() {
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.Signature("LabelForSignature", props.Font{
 				Size:   12.0,
 				Style:  consts.BoldItalic,
@@ -248,7 +248,7 @@ func ExamplePdfMaroto_FileImage() {
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			_ = m.FileImage("path/Image.jpg", props.Rect{
 				Left:    5,
 				Top:     5,
@@ -276,7 +276,7 @@ func ExamplePdfMaroto_Base64Image() {
 	base64String := "y7seWGHE923Sdgs..."
 
 	m.Row(rowHeight, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			_ = m.Base64Image(base64String, consts.Png, props.Rect{
 				Left:    5,
 				Top:     5,
@@ -329,7 +329,7 @@ func ExamplePdfMaroto_QrCode() {
 	rowHeight := 5.0
 
 	m.Row(rowHeight, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.QrCode("https://godoc.org/github.com/johnfercher/maroto", props.Rect{
 				Left:    5,
 				Top:     5,
@@ -356,7 +356,7 @@ func ExamplePdfMaroto_Barcode() {
 
 	// Do a lot of things on rows and columns...
 
-	m.Col(func() {
+	m.Col(12, func() {
 		_ = m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
 			Percent:    75,
 			Proportion: props.Proportion{Width: 50, Height: 10},
@@ -380,10 +380,10 @@ func ExamplePdfMaroto_RegisterFooter() {
 
 	m.RegisterFooter(func() {
 		m.Row(10, func() {
-			m.Col(func() {
+			m.Col(6, func() {
 				m.Signature("lorem ipsum dolor")
 			})
-			m.Col(func() {
+			m.Col(6, func() {
 				m.Text(time.Now().Format("02-January-2006"), props.Text{Align: consts.Right})
 			})
 		})
@@ -407,13 +407,13 @@ func ExamplePdfMaroto_RegisterHeader() {
 
 	m.RegisterHeader(func() {
 		m.Row(10, func() {
-			m.Col(func() {
+			m.Col(3, func() {
 				m.Text("lorem ipsum dolor", props.Text{Align: consts.Left})
 			})
-			m.Col(func() {
+			m.Col(3, func() {
 				_ = m.FileImage("internal/assets/images/frontpage.png")
 			})
-			m.Col(func() {
+			m.Col(3, func() {
 				m.Text(time.Now().Format("02-January-2006"),
 					props.Text{Align: consts.Right})
 			})

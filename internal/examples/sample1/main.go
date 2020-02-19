@@ -30,22 +30,22 @@ func main() {
 
 	m.RegisterHeader(func() {
 		m.Row(20, func() {
-			m.Col(func() {
+			m.Col(3, func() {
 				m.Base64Image(base64, consts.Jpg, props.Rect{
 					Center:  true,
 					Percent: 70,
 				})
 			})
 
-			m.ColSpaces(2)
+			m.ColSpace(3)
 
-			m.Col(func() {
+			m.Col(3, func() {
 				m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
 					Percent: 75,
 				})
 			})
 
-			m.Col(func() {
+			m.Col(3, func() {
 				id := "https://github.com/johnfercher/maroto"
 				_ = m.Barcode(id, props.Barcode{
 					Center:     true,
@@ -63,15 +63,15 @@ func main() {
 		m.Line(1.0)
 
 		m.Row(12, func() {
-			m.Col(func() {
+			m.Col(0, func() {
 				_ = m.FileImage("internal/assets/images/gopherbw.png", props.Rect{
 					Center: true,
 				})
 			})
 
-			m.ColSpace()
+			m.ColSpace(0)
 
-			m.Col(func() {
+			m.Col(0, func() {
 				m.Text("Packages Report: Daily", props.Text{
 					Top: 4,
 				})
@@ -80,9 +80,9 @@ func main() {
 				})
 			})
 
-			m.ColSpace()
+			m.ColSpace(0)
 
-			m.Col(func() {
+			m.Col(0, func() {
 				m.Text("20/07/1994", props.Text{
 					Size:   10,
 					Style:  consts.BoldItalic,
@@ -95,7 +95,7 @@ func main() {
 		m.Line(1.0)
 
 		m.Row(22, func() {
-			m.Col(func() {
+			m.Col(0, func() {
 				m.Text(fmt.Sprintf("Small: %d, Medium %d", len(smallContent), len(mediumContent)), props.Text{
 					Size:  15,
 					Style: consts.Bold,
@@ -116,7 +116,7 @@ func main() {
 
 	m.RegisterFooter(func() {
 		m.Row(40, func() {
-			m.Col(func() {
+			m.Col(4, func() {
 				m.Signature("Signature 1", props.Font{
 					Family: consts.Courier,
 					Style:  consts.BoldItalic,
@@ -124,18 +124,18 @@ func main() {
 				})
 			})
 
-			m.Col(func() {
+			m.Col(4, func() {
 				m.Signature("Signature 2")
 			})
 
-			m.Col(func() {
+			m.Col(4, func() {
 				m.Signature("Signature 3")
 			})
 		})
 	})
 
 	m.Row(15, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.Text("Small Packages / 39u.", props.Text{
 				Top:   8,
 				Style: consts.Bold,
@@ -152,7 +152,7 @@ func main() {
 	})
 
 	m.Row(15, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.Text("Medium Packages / 22u.", props.Text{
 				Top:   8,
 				Style: consts.Bold,
