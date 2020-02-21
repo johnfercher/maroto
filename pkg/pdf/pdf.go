@@ -61,6 +61,7 @@ type PdfMaroto struct {
 	TableListHelper           internal.TableList
 	pageIndex                 int
 	offsetY                   float64
+	marginTop                 float64
 	rowHeight                 float64
 	rowColCount               float64
 	backgroundColor           color.Color
@@ -126,6 +127,42 @@ func (s *PdfMaroto) RegisterHeader(closure func()) {
 	s.headerClosure = closure
 }
 
+func (s *PdfMaroto) footer() {
+	backgroundColor := s.backgroundColor
+	s.SetBackgroundColor(color.NewWhite())
+
+	_, pageHeight := s.Pdf.GetPageSize()
+	_, top, _, bottom := s.Pdf.GetMargins()
+
+	totalOffsetY := int(s.offsetY + s.footerHeight)
+	maxOffsetPage := int(pageHeight - bottom - top)
+
+	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
+		s.ColSpace()
+	})
+
+	if s.footerClosure != nil {
+		s.footerClosure()
+	}
+
+	s.SetBackgroundColor(backgroundColor)
+}
+
+func (s *PdfMaroto) header() {
+	backgroundColor := s.backgroundColor
+	s.SetBackgroundColor(color.NewWhite())
+
+	s.Row(s.marginTop, func() {
+		s.ColSpace()
+	})
+
+	if s.headerClosure != nil {
+		s.headerClosure()
+	}
+
+	s.SetBackgroundColor(backgroundColor)
+}
+
 // RegisterFooter define a sequence of Rows, Lines ou TableLists
 // which will be added in every new page
 func (s *PdfMaroto) RegisterFooter(closure func()) {
@@ -153,7 +190,12 @@ func (s *PdfMaroto) GetCurrentOffset() float64 {
 // SetPageMargins overrides default margins (10,10,10)
 // the new page margin will affect all PDF pages
 func (s *PdfMaroto) SetPageMargins(left, top, right float64) {
-	s.Pdf.SetMargins(left, top, right)
+	if top <= 10 {
+		s.Pdf.SetMargins(left, top, right)
+	} else {
+		s.marginTop = top - 10
+		s.Pdf.SetMargins(left, 10, right)
+	}
 }
 
 // GetPageMargins returns the set page margins. Comes in order of Left, Top, Right, Bottom
@@ -244,21 +286,19 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 	// height of the footer, add the footer
 	if totalOffsetY > maxOffsetPage {
 		if !s.headerFooterContextActive {
-			if s.footerClosure != nil {
-				s.headerFooterContextActive = true
-				s.footerClosure()
-				s.headerFooterContextActive = false
-			}
+			s.headerFooterContextActive = true
+			s.footer()
+			s.headerFooterContextActive = false
 			s.offsetY = 0
 			s.pageIndex++
 		}
 	}
 
 	// If is a new page, add the header
-	if !s.headerFooterContextActive && s.headerClosure != nil {
+	if !s.headerFooterContextActive {
 		if s.offsetY == 0 {
 			s.headerFooterContextActive = true
-			s.headerClosure()
+			s.header()
 			s.headerFooterContextActive = false
 		}
 	}
