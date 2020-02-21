@@ -1033,9 +1033,9 @@ func TestPdfMaroto_Row(t *testing.T) {
 				assert.Equal(t, calledTimes, 1)
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-				pdf.AssertNumberOfCalls(t, "GetPageSize", 1)
-				pdf.AssertNumberOfCalls(t, "Ln", 1)
+				pdf.AssertNumberOfCalls(t, "GetMargins", 2)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 2)
+				pdf.AssertNumberOfCalls(t, "Ln", 2)
 				pdf.AssertCalled(t, "Ln", 30.0)
 			},
 		},
@@ -1053,9 +1053,9 @@ func TestPdfMaroto_Row(t *testing.T) {
 				assert.Equal(t, calledTimes, 2)
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 2)
-				pdf.AssertNumberOfCalls(t, "GetPageSize", 2)
-				pdf.AssertNumberOfCalls(t, "Ln", 2)
+				pdf.AssertNumberOfCalls(t, "GetMargins", 3)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 3)
+				pdf.AssertNumberOfCalls(t, "Ln", 3)
 
 				pdf.AssertCalled(t, "Ln", 30.0)
 				pdf.AssertCalled(t, "Ln", 40.0)
@@ -1078,9 +1078,9 @@ func TestPdfMaroto_Row(t *testing.T) {
 				assert.Equal(t, calledTimes, 3)
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 3)
-				pdf.AssertNumberOfCalls(t, "GetPageSize", 3)
-				pdf.AssertNumberOfCalls(t, "Ln", 3)
+				pdf.AssertNumberOfCalls(t, "GetMargins", 4)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 4)
+				pdf.AssertNumberOfCalls(t, "Ln", 4)
 
 				pdf.AssertCalled(t, "Ln", 30.0)
 				pdf.AssertCalled(t, "Ln", 40.0)
@@ -1104,9 +1104,9 @@ func TestPdfMaroto_Row(t *testing.T) {
 				assert.Equal(t, calledTimes, 3)
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 3)
-				pdf.AssertNumberOfCalls(t, "GetPageSize", 3)
-				pdf.AssertNumberOfCalls(t, "Ln", 3)
+				pdf.AssertNumberOfCalls(t, "GetMargins", 7)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 7)
+				pdf.AssertNumberOfCalls(t, "Ln", 6)
 
 				pdf.AssertCalled(t, "Ln", 50.0)
 				pdf.AssertCalled(t, "Ln", 40.0)
@@ -1148,8 +1148,8 @@ func TestPdfMaroto_Line(t *testing.T) {
 				return pdf
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 2)
-				pdf.AssertNumberOfCalls(t, "GetPageSize", 2)
+				pdf.AssertNumberOfCalls(t, "GetMargins", 3)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 3)
 
 				pdf.AssertNumberOfCalls(t, "Line", 1)
 				pdf.AssertCalled(t, "Line", 10.0, 10.5, 90.0, 10.5)
@@ -1166,8 +1166,8 @@ func TestPdfMaroto_Line(t *testing.T) {
 				return pdf
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 4)
-				pdf.AssertNumberOfCalls(t, "GetPageSize", 4)
+				pdf.AssertNumberOfCalls(t, "GetMargins", 5)
+				pdf.AssertNumberOfCalls(t, "GetPageSize", 5)
 
 				pdf.AssertNumberOfCalls(t, "Line", 2)
 				pdf.AssertCalled(t, "Line", 10.0, 11.0, 90.0, 11.0)
@@ -1210,7 +1210,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "CellFormat", 1)
+				pdf.AssertNumberOfCalls(t, "CellFormat", 2)
 				pdf.AssertCalled(t, "CellFormat", 20, 40, "", "", 0, "C", false, 0, "")
 			},
 		},
@@ -1223,7 +1223,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "CellFormat", 2)
+				pdf.AssertNumberOfCalls(t, "CellFormat", 3)
 				pdf.AssertCalled(t, "CellFormat", 20, 40, "", "", 0, "C", false, 0, "")
 			},
 		},
@@ -1238,7 +1238,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "CellFormat", 2)
+				pdf.AssertNumberOfCalls(t, "CellFormat", 3)
 				pdf.AssertCalled(t, "CellFormat", 20, 40, "", "", 0, "C", false, 0, "")
 				pdf.AssertCalled(t, "CellFormat", 20, 35, "", "", 0, "C", false, 0, "")
 			},
@@ -1252,7 +1252,7 @@ func TestPdfMaroto_ColSpace(t *testing.T) {
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "CellFormat", 1)
+				pdf.AssertNumberOfCalls(t, "CellFormat", 2)
 				pdf.AssertCalled(t, "CellFormat", 20, 40, "", "1", 0, "C", false, 0, "")
 			},
 		},
@@ -1288,7 +1288,7 @@ func TestPdfMaroto_ColSpaces(t *testing.T) {
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "CellFormat", 2)
+				pdf.AssertNumberOfCalls(t, "CellFormat", 3)
 				pdf.AssertCalled(t, "CellFormat", 20, 40, "", "", 0, "C", false, 0, "")
 			},
 		},
@@ -1301,7 +1301,7 @@ func TestPdfMaroto_ColSpaces(t *testing.T) {
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "CellFormat", 4)
+				pdf.AssertNumberOfCalls(t, "CellFormat", 5)
 				pdf.AssertCalled(t, "CellFormat", 20, 40, "", "", 0, "C", false, 0, "")
 			},
 		},
@@ -1316,7 +1316,7 @@ func TestPdfMaroto_ColSpaces(t *testing.T) {
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "CellFormat", 4)
+				pdf.AssertNumberOfCalls(t, "CellFormat", 5)
 				pdf.AssertCalled(t, "CellFormat", 20, 40, "", "", 0, "C", false, 0, "")
 				pdf.AssertCalled(t, "CellFormat", 20, 35, "", "", 0, "C", false, 0, "")
 			},
@@ -1330,7 +1330,7 @@ func TestPdfMaroto_ColSpaces(t *testing.T) {
 				})
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "CellFormat", 2)
+				pdf.AssertNumberOfCalls(t, "CellFormat", 3)
 				pdf.AssertCalled(t, "CellFormat", 20, 40, "", "1", 0, "C", false, 0, "")
 			},
 		},

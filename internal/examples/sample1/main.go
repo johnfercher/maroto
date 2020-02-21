@@ -15,6 +15,7 @@ import (
 func main() {
 	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m.SetPageMargins(10, 15, 10)
 	//m.SetBorder(true)
 
 	byteSlices, err := ioutil.ReadFile("internal/assets/images/biplane.jpg")
@@ -204,9 +205,6 @@ func getSmallContent() ([]string, [][]string) {
 	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "", "R$ 31,00"})
 	contents = append(contents, []string{"São Carlos", "Petrópolis", "", "R$ 42,00"})
 	contents = append(contents, []string{"Florianópolis", "Osasco", "", "R$ 19,00"})
-	contents = append(contents, []string{"Osasco", "São Paulo", "", "R$ 7,00"})
-	contents = append(contents, []string{"Congonhas", "Fortaleza", "", "R$ 113,00"})
-	contents = append(contents, []string{"Natal", "Santo André", "", "R$ 198,00"})
 	contents = append(contents, []string{"Rio Grande do Norte", "Sorocaba", "", "R$ 42,00"})
 	contents = append(contents, []string{"Campinas", "Recife", "", "R$ 58,00"})
 	contents = append(contents, []string{"Florianópolis", "Osasco", "", "R$ 21,00"})
