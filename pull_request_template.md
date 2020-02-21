@@ -1,5 +1,3 @@
-<!-- Please, do not create a Pull Request directly to master branch, create to dev always. -->
-
 <!-- Please follow the PR naming pattern. -->
 <!-- For features: feature/name -->
 <!-- For fixes: fix/name -->
