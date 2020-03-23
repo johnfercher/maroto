@@ -128,42 +128,6 @@ func (s *PdfMaroto) RegisterHeader(closure func()) {
 	s.headerClosure = closure
 }
 
-func (s *PdfMaroto) footer() {
-	backgroundColor := s.backgroundColor
-	s.SetBackgroundColor(color.NewWhite())
-
-	_, pageHeight := s.Pdf.GetPageSize()
-	_, top, _, bottom := s.Pdf.GetMargins()
-
-	totalOffsetY := int(s.offsetY + s.footerHeight)
-	maxOffsetPage := int(pageHeight - bottom - top)
-
-	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
-		s.ColSpace(12)
-	})
-
-	if s.footerClosure != nil {
-		s.footerClosure()
-	}
-
-	s.SetBackgroundColor(backgroundColor)
-}
-
-func (s *PdfMaroto) header() {
-	backgroundColor := s.backgroundColor
-	s.SetBackgroundColor(color.NewWhite())
-
-	s.Row(s.marginTop, func() {
-		s.ColSpace(12)
-	})
-
-	if s.headerClosure != nil {
-		s.headerClosure()
-	}
-
-	s.SetBackgroundColor(backgroundColor)
-}
-
 // RegisterFooter define a sequence of Rows, Lines ou TableLists
 // which will be added in every new page
 func (s *PdfMaroto) RegisterFooter(closure func()) {
@@ -406,6 +370,36 @@ func (s *PdfMaroto) Base64Image(base64 string, extension consts.Extension, prop 
 	return s.Image.AddFromBase64(base64, sumOfyOffsets, s.xColOffset, s.colWidth, s.rowHeight, rectProp, extension)
 }
 
+// Barcode create an barcode inside a cell.
+func (s *PdfMaroto) Barcode(code string, prop ...props.Barcode) (err error) {
+	barcodeProp := props.Barcode{}
+	if len(prop) > 0 {
+		barcodeProp = prop[0]
+	}
+
+	barcodeProp.MakeValid()
+
+	sumOfyOffsets := s.offsetY + barcodeProp.Top
+
+	err = s.Code.AddBar(code, sumOfyOffsets, s.xColOffset, s.colWidth, s.rowHeight, barcodeProp)
+
+	return
+}
+
+// QrCode create a qrcode inside a cell.
+func (s *PdfMaroto) QrCode(code string, prop ...props.Rect) {
+	rectProp := props.Rect{}
+	if len(prop) > 0 {
+		rectProp = prop[0]
+	}
+
+	rectProp.MakeValid()
+
+	yColOffset := s.offsetY + rectProp.Top
+
+	s.Code.AddQr(code, yColOffset, s.xColOffset, s.colWidth, s.rowHeight, rectProp)
+}
+
 // OutputFileAndClose save pdf in disk.
 func (s *PdfMaroto) OutputFileAndClose(filePathName string) (err error) {
 	s.drawLastFooter()
@@ -420,37 +414,6 @@ func (s *PdfMaroto) Output() (bytes.Buffer, error) {
 	var buffer bytes.Buffer
 	err := s.Pdf.Output(&buffer)
 	return buffer, err
-}
-
-// Barcode create an barcode inside a cell.
-func (s *PdfMaroto) Barcode(code string, prop ...props.Barcode) (err error) {
-	barcodeProp := props.Barcode{}
-	if len(prop) > 0 {
-		barcodeProp = prop[0]
-	}
-
-	barcodeProp.MakeValid()
-
-	qtdCols := float64(len(s.colsClosures))
-	sumOfyOffsets := s.offsetY + barcodeProp.Top
-
-	err = s.Code.AddBar(code, sumOfyOffsets, s.xColOffset, qtdCols, s.rowHeight, barcodeProp)
-
-	return
-}
-
-// QrCode create a qrcode inside a cell.
-func (s *PdfMaroto) QrCode(code string, prop ...props.Rect) {
-	rectProp := props.Rect{}
-	if len(prop) > 0 {
-		rectProp = prop[0]
-	}
-
-	rectProp.MakeValid()
-
-	qtdCols := float64(len(s.colsClosures))
-	sumOfyOffsets := s.offsetY + rectProp.Top
-	s.Code.AddQr(code, sumOfyOffsets, s.xColOffset, qtdCols, s.rowHeight, rectProp)
 }
 
 func (s *PdfMaroto) createColSpace(actualWidthPerCol float64) {
@@ -474,4 +437,40 @@ func (s *PdfMaroto) drawLastFooter() {
 			s.headerFooterContextActive = false
 		}
 	}
+}
+
+func (s *PdfMaroto) footer() {
+	backgroundColor := s.backgroundColor
+	s.SetBackgroundColor(color.NewWhite())
+
+	_, pageHeight := s.Pdf.GetPageSize()
+	_, top, _, bottom := s.Pdf.GetMargins()
+
+	totalOffsetY := int(s.offsetY + s.footerHeight)
+	maxOffsetPage := int(pageHeight - bottom - top)
+
+	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
+		s.ColSpace(12)
+	})
+
+	if s.footerClosure != nil {
+		s.footerClosure()
+	}
+
+	s.SetBackgroundColor(backgroundColor)
+}
+
+func (s *PdfMaroto) header() {
+	backgroundColor := s.backgroundColor
+	s.SetBackgroundColor(color.NewWhite())
+
+	s.Row(s.marginTop, func() {
+		s.ColSpace(12)
+	})
+
+	if s.headerClosure != nil {
+		s.headerClosure()
+	}
+
+	s.SetBackgroundColor(backgroundColor)
 }

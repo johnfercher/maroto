@@ -27,6 +27,6 @@ func (_m *Code) AddBar(code string, marginTop float64, indexCol float64, qtdCols
 }
 
 // AddQr provides a mock function with given fields: code, marginTop, indexCol, qtdCols, colHeight, prop
-func (_m *Code) AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect) {
-	_m.Called(code, marginTop, indexCol, qtdCols, colHeight, prop)
+func (_m *Code) AddQr(code string, yColOffset float64, xColOffset float64, qtdCols float64, colHeight float64, prop props.Rect) {
+	_m.Called(code, yColOffset, xColOffset, qtdCols, colHeight, prop)
 }

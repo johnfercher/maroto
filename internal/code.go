@@ -10,7 +10,7 @@ import (
 
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF
 type Code interface {
-	AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect)
+	AddQr(code string, yColOffset float64, xColOffset float64, colWidth float64, colHeight float64, prop props.Rect)
 	AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode) (err error)
 }
 
@@ -28,19 +28,17 @@ func NewCode(pdf gofpdf.Pdf, math Math) *code {
 }
 
 // AddQr create a QrCode inside a cell
-func (s *code) AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect) {
+func (s *code) AddQr(code string, yColOffset float64, xColOffset float64, colWidth float64, colHeight float64, prop props.Rect) {
 	key := barcode.RegisterQR(s.pdf, code, qr.H, qr.Unicode)
-
-	actualWidthPerCol := s.math.GetWidthPerCol(qtdCols)
 
 	var x, y, w, h float64
 	if prop.Center {
-		x, y, w, h = s.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol, qtdCols, colHeight, indexCol, prop.Percent)
+		x, y, w, h = s.math.GetRectCenterColProperties(colWidth, colWidth, colWidth, colHeight, xColOffset, prop.Percent)
 	} else {
-		x, y, w, h = s.math.GetRectNonCenterColProperties(actualWidthPerCol, actualWidthPerCol, qtdCols, colHeight, indexCol, prop)
+		x, y, w, h = s.math.GetRectNonCenterColProperties(colWidth, colWidth, colWidth, colHeight, xColOffset, prop)
 	}
 
-	barcode.Barcode(s.pdf, key, x, y+marginTop, w, h, false)
+	barcode.Barcode(s.pdf, key, x, y+yColOffset, w, h, false)
 }
 
 // AddBar create a Barcode inside a cell
