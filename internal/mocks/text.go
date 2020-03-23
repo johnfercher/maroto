@@ -16,12 +16,12 @@ func (_m *Text) Add(text string, textProp props.Text, yColOffset float64, xColOf
 }
 
 // GetLinesQuantity provides a mock function with given fields: text, fontFamily, qtdCols
-func (_m *Text) GetLinesQuantity(text string, fontFamily props.Text, qtdCols float64) int {
-	ret := _m.Called(text, fontFamily, qtdCols)
+func (_m *Text) GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int {
+	ret := _m.Called(text, fontFamily, colWidth)
 
 	var r0 int
 	if rf, ok := ret.Get(0).(func(string, props.Text, float64) int); ok {
-		r0 = rf(text, fontFamily, qtdCols)
+		r0 = rf(text, fontFamily, colWidth)
 	} else {
 		r0 = ret.Get(0).(int)
 	}

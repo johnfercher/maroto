@@ -2,6 +2,7 @@ package internal
 
 import (
 	"github.com/johnfercher/maroto/pkg/color"
+	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 )
 
@@ -15,9 +16,14 @@ type MarotoGridPart interface {
 	// Helpers
 	SetBackgroundColor(color color.Color)
 	GetCurrentOffset() float64
+	GetPageSize() (width float64, height float64)
+	GetPageMargins() (left float64, top float64, right float64, bottom float64)
 
 	// Outside Col/Row Components
 	Line(spaceHeight float64)
+
+	// Inside Col/Row Components
+	Text(text string, prop ...props.Text)
 }
 
 // TableList is the abstraction to create a table with header and contents
@@ -63,30 +69,23 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 	}
 
 	tableProp.MakeValid()
-
-	qtdCols := float64(len(header))
-
-	headerTextProp := tableProp.HeaderProp.ToTextProp(tableProp.Align, 0.0, false, 1.0)
-	headerHeight := s.calcLinesHeight(header, headerTextProp, qtdCols)
+	headerQtd := float64(len(header))
+	defaultHeaderWidth := 12.0 / headerQtd
+	headerHeight := s.calcLinesHeight(header, tableProp.HeaderProp, tableProp.Align)
 
 	// Draw header
-	s.pdf.Row(headerHeight, func() {
-		headerMarginTop := 2.0
-
+	s.pdf.Row(headerHeight+1, func() {
 		for i, h := range header {
 			hs := h
-			is := i
 
-			s.pdf.Col(0, func() {
-				if headerMarginTop > headerHeight {
-					headerMarginTop = headerHeight
-				}
+			gridWidth := uint(defaultHeaderWidth)
+			if len(tableProp.HeaderProp.GridSizes) == int(headerQtd) {
+				gridWidth = tableProp.HeaderProp.GridSizes[i]
+			}
 
+			s.pdf.Col(gridWidth, func() {
 				reason := hs
-
-				sumOyYOffesets := headerMarginTop + s.pdf.GetCurrentOffset() + 2.5
-
-				s.text.Add(reason, headerTextProp, sumOyYOffesets, float64(is), qtdCols)
+				s.pdf.Text(reason, tableProp.HeaderProp.ToTextProp(tableProp.Align, 0, false, 0.0))
 			})
 		}
 	})
@@ -96,26 +95,27 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 		s.pdf.ColSpace(0)
 	})
 
-	contentMarginTop := 2.0
-
 	// Draw contents
 	for index, content := range contents {
-		contentTextProp := tableProp.ContentProp.ToTextProp(tableProp.Align, 0.0, false, 1.0)
-		contentHeight := s.calcLinesHeight(content, contentTextProp, qtdCols)
+		contentQtd := float64(len(content))
+		defaultContentWidth := 12.0 / contentQtd
+		contentHeight := s.calcLinesHeight(content, tableProp.ContentProp, tableProp.Align)
 
 		if tableProp.AlternatedBackground != nil && index%2 == 0 {
 			s.pdf.SetBackgroundColor(*tableProp.AlternatedBackground)
 		}
 
-		s.pdf.Row(contentHeight, func() {
-			for j, c := range content {
+		s.pdf.Row(contentHeight+1, func() {
+			for i, c := range content {
 				cs := c
-				js := j
-				hs := float64(len(header))
-				sumOyYOffesets := contentMarginTop + s.pdf.GetCurrentOffset() + 2.0
 
-				s.pdf.Col(0, func() {
-					s.text.Add(cs, contentTextProp, sumOyYOffesets, float64(js), hs)
+				gridWidth := uint(defaultContentWidth)
+				if len(tableProp.ContentProp.GridSizes) == int(contentQtd) {
+					gridWidth = tableProp.ContentProp.GridSizes[i]
+				}
+
+				s.pdf.Col(gridWidth, func() {
+					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, 0, false, 0.0))
 				})
 			}
 		})
@@ -130,11 +130,20 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 	}
 }
 
-func (s *tableList) calcLinesHeight(textList []string, textProp props.Text, qtdCols float64) float64 {
+func (s *tableList) calcLinesHeight(textList []string, contentProp props.TableListContent, align consts.Align) float64 {
 	maxLines := 1.0
 
-	for _, text := range textList {
-		qtdLines := float64(s.text.GetLinesQuantity(text, textProp, qtdCols))
+	left, _, right, _ := s.pdf.GetPageMargins()
+	width, _ := s.pdf.GetPageSize()
+	usefulWidth := float64(width - left - right)
+
+	textProp := contentProp.ToTextProp(align, 0, false, 0.0)
+
+	for i, text := range textList {
+		gridSize := float64(contentProp.GridSizes[i])
+		percentSize := gridSize / 12.0
+		colWidth := usefulWidth * percentSize
+		qtdLines := float64(s.text.GetLinesQuantity(text, textProp, colWidth))
 		if qtdLines > maxLines {
 			maxLines = qtdLines
 		}
@@ -145,5 +154,5 @@ func (s *tableList) calcLinesHeight(textList []string, textProp props.Text, qtdC
 	// Font size corrected by the scale factor from "mm" inside gofpdf f.k
 	fontHeight := fontSize / s.font.GetScaleFactor()
 
-	return fontHeight*maxLines + 3.0
+	return fontHeight * maxLines
 }

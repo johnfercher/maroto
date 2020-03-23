@@ -10,7 +10,7 @@ import (
 // Text is the abstraction which deals of how to add text inside PDF
 type Text interface {
 	Add(text string, textProp props.Text, yColOffset float64, xColOffset float64, colWidth float64)
-	GetLinesQuantity(text string, fontFamily props.Text, qtdCols float64) int
+	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
 }
 
 type text struct {
@@ -32,6 +32,12 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) *text {
 func (s *text) Add(text string, textProp props.Text, yColOffset float64, xColOffset float64, colWidth float64) {
 	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
+
+	// duplicated
+	_, _, fontSize := s.font.GetFont()
+	fontHeight := fontSize / s.font.GetScaleFactor()
+
+	yColOffset += fontHeight
 
 	// Apply Unicode before calc spaces
 	unicodeText := translator(text)
@@ -58,9 +64,7 @@ func (s *text) Add(text string, textProp props.Text, yColOffset float64, xColOff
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell
-func (s *text) GetLinesQuantity(text string, textProp props.Text, qtdCols float64) int {
-	actualWidthPerCol := s.math.GetWidthPerCol(qtdCols)
-
+func (s *text) GetLinesQuantity(text string, textProp props.Text, colWidth float64) int {
 	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
@@ -71,15 +75,15 @@ func (s *text) GetLinesQuantity(text string, textProp props.Text, qtdCols float6
 	words := strings.Split(textTranslated, " ")
 
 	// If should add one line
-	if stringWidth < actualWidthPerCol || textProp.Extrapolate || len(words) == 1 {
+	if stringWidth < colWidth || textProp.Extrapolate || len(words) == 1 {
 		return 1
 	}
 
-	lines := s.getLines(words, actualWidthPerCol)
+	lines := s.getLines(words, colWidth)
 	return len(lines)
 }
 
-func (s *text) getLines(words []string, actualWidthPerCol float64) []string {
+func (s *text) getLines(words []string, colWidth float64) []string {
 	currentlySize := 0.0
 	actualLine := 0
 
@@ -87,7 +91,7 @@ func (s *text) getLines(words []string, actualWidthPerCol float64) []string {
 	lines = append(lines, "")
 
 	for _, word := range words {
-		if s.pdf.GetStringWidth(word+" ")+currentlySize < actualWidthPerCol {
+		if s.pdf.GetStringWidth(word+" ")+currentlySize < colWidth {
 			lines[actualLine] = lines[actualLine] + word + " "
 			currentlySize += s.pdf.GetStringWidth(word + " ")
 		} else {
