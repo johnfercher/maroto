@@ -11,8 +11,8 @@ type Text struct {
 }
 
 // Add provides a mock function with given fields: text, fontFamily, marginTop, actualCol, qtdCols
-func (_m *Text) Add(text string, fontFamily props.Text, marginTop float64, actualCol float64, qtdCols float64) {
-	_m.Called(text, fontFamily, marginTop, actualCol, qtdCols)
+func (_m *Text) Add(text string, textProp props.Text, yColOffset float64, xColOffset float64, colWidth float64) {
+	_m.Called(text, textProp, yColOffset, xColOffset, colWidth)
 }
 
 // GetLinesQuantity provides a mock function with given fields: text, fontFamily, qtdCols

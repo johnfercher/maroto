@@ -9,7 +9,7 @@ import (
 
 // Text is the abstraction which deals of how to add text inside PDF
 type Text interface {
-	Add(text string, fontFamily props.Text, marginTop float64, actualCol float64, qtdCols float64)
+	Add(text string, textProp props.Text, yColOffset float64, xColOffset float64, colWidth float64)
 	GetLinesQuantity(text string, fontFamily props.Text, qtdCols float64) int
 }
 
@@ -29,31 +29,29 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) *text {
 }
 
 // Add a text inside a cell.
-func (s *text) Add(text string, textProp props.Text, marginTop float64, actualCol float64, qtdCols float64) {
-	actualWidthPerCol := qtdCols
-
+func (s *text) Add(text string, textProp props.Text, yColOffset float64, xColOffset float64, colWidth float64) {
 	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
-	// Apply Unicode
-	textTranslated := translator(text)
+	// Apply Unicode before calc spaces
+	unicodeText := translator(text)
 
-	stringWidth := s.pdf.GetStringWidth(textTranslated)
-	words := strings.Split(textTranslated, " ")
+	stringWidth := s.pdf.GetStringWidth(unicodeText)
+	words := strings.Split(unicodeText, " ")
 	accumulateOffsetY := 0.0
 
 	// If should add one line
-	if stringWidth < actualWidthPerCol || textProp.Extrapolate || len(words) == 1 {
-		s.addLine(textProp, actualCol, actualWidthPerCol, marginTop, stringWidth, textTranslated)
+	if stringWidth < colWidth || textProp.Extrapolate || len(words) == 1 {
+		s.addLine(textProp, xColOffset, colWidth, yColOffset, stringWidth, unicodeText)
 	} else {
-		lines := s.getLines(words, actualWidthPerCol)
+		lines := s.getLines(words, colWidth)
 
 		for index, line := range lines {
 			lineWidth := s.pdf.GetStringWidth(line)
 			_, _, fontSize := s.font.GetFont()
 			textHeight := fontSize / s.font.GetScaleFactor()
 
-			s.addLine(textProp, actualCol, actualWidthPerCol, marginTop+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
+			s.addLine(textProp, xColOffset, colWidth, yColOffset+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
 			accumulateOffsetY += textProp.VerticalPadding
 		}
 	}
@@ -103,11 +101,11 @@ func (s *text) getLines(words []string, actualWidthPerCol float64) []string {
 	return lines
 }
 
-func (s *text) addLine(textProp props.Text, actualCol, actualWidthPerCol, marginTop, stringWidth float64, textTranslated string) {
+func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
 	left, top, _, _ := s.pdf.GetMargins()
 
 	if textProp.Align == consts.Left {
-		s.pdf.Text(actualCol*actualWidthPerCol+left, marginTop+top, textTranslated)
+		s.pdf.Text(xColOffset+left, yColOffset+top, text)
 		return
 	}
 
@@ -117,7 +115,7 @@ func (s *text) addLine(textProp props.Text, actualCol, actualWidthPerCol, margin
 		modifier = 1
 	}
 
-	dx := (actualWidthPerCol - stringWidth) / modifier
+	dx := (colWidth - textWidth) / modifier
 
-	s.pdf.Text(dx+actualCol*actualWidthPerCol+left, marginTop+top, textTranslated)
+	s.pdf.Text(dx+xColOffset+left, yColOffset+top, text)
 }

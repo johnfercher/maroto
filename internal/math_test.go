@@ -55,7 +55,7 @@ func TestMath_GetWidthPerCol(t *testing.T) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, width float64) {
-				assert.Equal(t, int(width), 95)
+				assert.Equal(t, int(width), 380)
 			},
 		},
 		{

@@ -15,14 +15,14 @@ func main() {
 
 	m.Row(40, func() {
 		m.Col(2, func() {
-			m.Text("Any Text")
+			m.Text("Any Text1")
 		})
-		/*m.Col(4, func() {
+		m.Col(4, func() {
 			m.Text("Any Text2")
 		})
 		m.Col(6, func() {
-			m.Text( "Any Text3")
-		})*/
+			m.Text("Any Text3")
+		})
 	})
 
 	err := m.OutputFileAndClose("internal/examples/pdfs/textgrid.pdf")
