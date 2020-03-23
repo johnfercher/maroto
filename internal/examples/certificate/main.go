@@ -23,7 +23,7 @@ func main() {
 		})
 		m.Col(4, func() {
 			m.Text("Golang Certificate", props.Text{
-				Top:   12,
+				Top:   6,
 				Align: consts.Center,
 				Size:  20,
 				Style: consts.BoldItalic,
@@ -43,7 +43,7 @@ func main() {
 			m.Text(text, props.Text{
 				Size:            13,
 				Align:           consts.Center,
-				Top:             60,
+				Top:             50,
 				VerticalPadding: 2.0,
 			})
 		})

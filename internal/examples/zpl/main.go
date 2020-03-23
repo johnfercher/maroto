@@ -23,13 +23,13 @@ func main() {
 		})
 		m.Col(4, func() {
 			m.Text("Gopher International Shipping, Inc.", props.Text{
-				Top:         15,
+				Top:         12,
 				Size:        20,
 				Extrapolate: true,
 			})
 			m.Text("1000 Shipping Gopher Golang TN 3691234 GopherLand (GL)", props.Text{
 				Size: 12,
-				Top:  21,
+				Top:  22,
 			})
 		})
 		m.ColSpace(4)
@@ -41,7 +41,7 @@ func main() {
 		m.Col(4, func() {
 			m.Text("João Sant'Ana 100 Main Street Stringfield TN 39021 United Stats (USA)", props.Text{
 				Size: 15,
-				Top:  14,
+				Top:  12,
 			})
 		})
 		m.ColSpace(4)
@@ -64,7 +64,7 @@ func main() {
 			m.Text("https://github.com/johnfercher/maroto", props.Text{
 				Size:  20,
 				Align: consts.Center,
-				Top:   80,
+				Top:   65,
 			})
 		})
 	})
@@ -75,12 +75,12 @@ func main() {
 		m.Col(6, func() {
 			m.Text("CODE: 123412351645231245564 DATE: 20-07-1994 20:20:33", props.Text{
 				Size: 15,
-				Top:  19,
+				Top:  14,
 			})
 		})
 		m.Col(6, func() {
 			m.Text("CA", props.Text{
-				Top:   30,
+				Top:   1,
 				Size:  85,
 				Align: consts.Center,
 			})

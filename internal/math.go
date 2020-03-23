@@ -7,7 +7,6 @@ import (
 
 // Math is the abstraction which deals with useful calc
 type Math interface {
-	GetWidthPerCol(percent float64) float64
 	GetRectCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64, xColOffset float64, percent float64) (x float64, y float64, w float64, h float64)
 	GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64, xColOffset float64, prop props.Rect) (x float64, y float64, w float64, h float64)
 	GetCenterCorrection(outerSize, innerSize float64) float64
@@ -22,14 +21,6 @@ func NewMath(pdf gofpdf.Pdf) *math {
 	return &math{
 		pdf,
 	}
-}
-
-// GetWidthPerCol return a width which a col will have
-// using margins and page size information
-func (s *math) GetWidthPerCol(percent float64) float64 {
-	width, _ := s.pdf.GetPageSize()
-	left, _, right, _ := s.pdf.GetMargins()
-	return (width - right - left) * percent
 }
 
 // GetRectCenterColProperties define Width, Height, X Offset and Y Offset

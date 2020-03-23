@@ -11,7 +11,7 @@ import (
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF
 type Code interface {
 	AddQr(code string, yColOffset float64, xColOffset float64, colWidth float64, colHeight float64, prop props.Rect)
-	AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode) (err error)
+	AddBar(code string, yColOffset float64, xColOffset float64, colWidth float64, colHeight float64, prop props.Barcode) (err error)
 }
 
 type code struct {
@@ -42,23 +42,22 @@ func (s *code) AddQr(code string, yColOffset float64, xColOffset float64, colWid
 }
 
 // AddBar create a Barcode inside a cell
-func (s *code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode) (err error) {
+func (s *code) AddBar(code string, yColOffset float64, xColOffset float64, colWidth float64, colHeight float64, prop props.Barcode) (err error) {
 	bcode, err := code128.Encode(code)
 
 	if err != nil {
 		return
 	}
 
-	actualWidthPerCol := s.math.GetWidthPerCol(qtdCols)
 	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
 	var x, y, w, h float64
 	if prop.Center {
-		x, y, w, h = s.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol*heightPercentFromWidth, qtdCols, colHeight, indexCol, prop.Percent)
+		x, y, w, h = s.math.GetRectCenterColProperties(colWidth, colWidth*heightPercentFromWidth, colWidth, colHeight, xColOffset, prop.Percent)
 	} else {
 		rectProps := props.Rect{Left: prop.Left, Top: prop.Top, Center: prop.Center, Percent: prop.Percent}
-		x, y, w, h = s.math.GetRectNonCenterColProperties(actualWidthPerCol, actualWidthPerCol*heightPercentFromWidth, qtdCols, colHeight, indexCol, rectProps)
+		x, y, w, h = s.math.GetRectNonCenterColProperties(colWidth, colWidth*heightPercentFromWidth, colWidth, colHeight, xColOffset, rectProps)
 	}
 
-	barcode.Barcode(s.pdf, barcode.Register(bcode), x, y+marginTop, w, h, false)
+	barcode.Barcode(s.pdf, barcode.Register(bcode), x, y+yColOffset, w, h, false)
 	return
 }

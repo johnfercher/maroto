@@ -68,9 +68,7 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 		tableProp = prop[0]
 	}
 
-	tableProp.MakeValid()
-	headerQtd := float64(len(header))
-	defaultHeaderWidth := 12.0 / headerQtd
+	tableProp.MakeValid(header, contents)
 	headerHeight := s.calcLinesHeight(header, tableProp.HeaderProp, tableProp.Align)
 
 	// Draw header
@@ -78,12 +76,7 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 		for i, h := range header {
 			hs := h
 
-			gridWidth := uint(defaultHeaderWidth)
-			if len(tableProp.HeaderProp.GridSizes) == int(headerQtd) {
-				gridWidth = tableProp.HeaderProp.GridSizes[i]
-			}
-
-			s.pdf.Col(gridWidth, func() {
+			s.pdf.Col(tableProp.HeaderProp.GridSizes[i], func() {
 				reason := hs
 				s.pdf.Text(reason, tableProp.HeaderProp.ToTextProp(tableProp.Align, 0, false, 0.0))
 			})
@@ -97,8 +90,6 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 
 	// Draw contents
 	for index, content := range contents {
-		contentQtd := float64(len(content))
-		defaultContentWidth := 12.0 / contentQtd
 		contentHeight := s.calcLinesHeight(content, tableProp.ContentProp, tableProp.Align)
 
 		if tableProp.AlternatedBackground != nil && index%2 == 0 {
@@ -109,12 +100,7 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 			for i, c := range content {
 				cs := c
 
-				gridWidth := uint(defaultContentWidth)
-				if len(tableProp.ContentProp.GridSizes) == int(contentQtd) {
-					gridWidth = tableProp.ContentProp.GridSizes[i]
-				}
-
-				s.pdf.Col(gridWidth, func() {
+				s.pdf.Col(tableProp.ContentProp.GridSizes[i], func() {
 					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, 0, false, 0.0))
 				})
 			}
@@ -141,7 +127,7 @@ func (s *tableList) calcLinesHeight(textList []string, contentProp props.TableLi
 
 	for i, text := range textList {
 		gridSize := float64(contentProp.GridSizes[i])
-		percentSize := gridSize / 12.0
+		percentSize := gridSize / consts.MaxGridSum
 		colWidth := usefulWidth * percentSize
 		qtdLines := float64(s.text.GetLinesQuantity(text, textProp, colWidth))
 		if qtdLines > maxLines {
