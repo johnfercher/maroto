@@ -33,14 +33,14 @@ func main() {
 
 	m.RegisterHeader(func() {
 		m.Row(20, func() {
-			m.Col(func() {
+			m.Col(3, func() {
 				_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
 					Center:  true,
 					Percent: 80,
 				})
 			})
-			m.ColSpaces(2)
-			m.Col(func() {
+			m.Col(6, func() {})
+			m.Col(3, func() {
 				m.Text("AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.", props.Text{
 					Top:         4,
 					Size:        8,
@@ -61,14 +61,11 @@ func main() {
 				})
 			})
 		})
-		m.Row(5, func() {
-			m.ColSpace()
-		})
 	})
 
 	m.RegisterFooter(func() {
 		m.Row(20, func() {
-			m.Col(func() {
+			m.Col(12, func() {
 				m.Text("Tel: 55 024 12345-1234", props.Text{
 					Top:   13,
 					Style: consts.BoldItalic,
@@ -86,7 +83,7 @@ func main() {
 	})
 
 	m.Row(10, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.Text("Invoice ABC123456789", props.Text{
 				Top:   6,
 				Style: consts.Bold,
@@ -97,7 +94,7 @@ func main() {
 
 	m.SetBackgroundColor(darkGrayColor)
 	m.Row(7, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.Text("Transactions", props.Text{
 				Top:   4.5,
 				Size:  9,
@@ -154,8 +151,8 @@ func main() {
 	})
 
 	m.Row(20, func() {
-		m.ColSpaces(2)
-		m.Col(func() {
+		m.Col(6, func() {})
+		m.Col(3, func() {
 			m.Text("Total:", props.Text{
 				Top:   5,
 				Style: consts.Bold,
@@ -163,7 +160,7 @@ func main() {
 				Align: consts.Right,
 			})
 		})
-		m.Col(func() {
+		m.Col(3, func() {
 			m.Text("R$ 2.567,00", props.Text{
 				Top:   5,
 				Style: consts.Bold,
@@ -174,7 +171,7 @@ func main() {
 	})
 
 	m.Row(15, func() {
-		m.Col(func() {
+		m.Col(6, func() {
 			_ = m.Barcode("5123.151231.512314.1251251.123215", props.Barcode{
 				Percent: 0,
 				Proportion: props.Proportion{
@@ -190,7 +187,7 @@ func main() {
 				Align:  consts.Center,
 			})
 		})
-		m.ColSpace()
+		m.Col(6, func() {})
 	})
 
 	err := m.OutputFileAndClose("internal/examples/pdfs/billing.pdf")
