@@ -26,11 +26,11 @@ type Maroto interface {
 	SetBorder(on bool)
 	SetBackgroundColor(color color.Color)
 	GetBorder() bool
-	GetPageSize() (float64, float64)
+	GetPageSize() (width float64, height float64)
 	GetCurrentPage() int
 	GetCurrentOffset() float64
 	SetPageMargins(left, top, right float64)
-	GetPageMargins() (float64, float64, float64, float64)
+	GetPageMargins() (left float64, top float64, right float64, bottom float64)
 
 	// Outside Col/Row Components
 	TableList(header []string, contents [][]string, prop ...props.TableList)
@@ -179,10 +179,9 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 
 	signProp.MakeValid()
 
-	qtdCols := float64(len(s.colsClosures))
-	sumOfYOffsets := s.offsetY + s.rowHeight
+	yColOffset := s.offsetY + s.rowHeight
 
-	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0, false, 0), qtdCols, sumOfYOffsets, s.xColOffset)
+	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0, false, 0), s.colWidth, yColOffset, s.xColOffset)
 }
 
 // TableList create a table with multiple rows and columns.
@@ -212,7 +211,7 @@ func (s *PdfMaroto) GetBorder() bool {
 }
 
 // GetPageSize return the actual page size
-func (s *PdfMaroto) GetPageSize() (float64, float64) {
+func (s *PdfMaroto) GetPageSize() (width float64, height float64) {
 	return s.Pdf.GetPageSize()
 }
 

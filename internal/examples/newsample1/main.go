@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -22,6 +23,8 @@ func main() {
 		fmt.Println("Got error while opening file:", err)
 		os.Exit(1)
 	}
+
+	headerSmall, smallContent := getSmallContent()
 
 	base64 := base64.StdEncoding.EncodeToString(byteSlices)
 
@@ -52,7 +55,7 @@ func main() {
 			m.Text(id, props.Text{
 				Size:  7,
 				Align: consts.Center,
-				Top:   16,
+				Top:   14,
 			})
 		})
 	})
@@ -68,11 +71,11 @@ func main() {
 
 		m.Col(6, func() {
 			m.Text("Packages Report: Daily", props.Text{
-				Top:   4,
+				Top:   1,
 				Align: consts.Center,
 			})
 			m.Text("Type: Small, Medium", props.Text{
-				Top:   10,
+				Top:   7,
 				Align: consts.Center,
 			})
 		})
@@ -81,7 +84,7 @@ func main() {
 			m.Text("20/07/1994", props.Text{
 				Size:   10,
 				Style:  consts.BoldItalic,
-				Top:    7.5,
+				Top:    4,
 				Family: consts.Helvetica,
 			})
 		})
@@ -95,17 +98,49 @@ func main() {
 				Size:  15,
 				Style: consts.Bold,
 				Align: consts.Center,
-				Top:   9,
+				Top:   4,
 			})
 			m.Text("Brasil / São Paulo", props.Text{
 				Size:  12,
 				Align: consts.Center,
-				Top:   17,
+				Top:   12,
 			})
 		})
 	})
 
 	m.Line(1.0)
+
+	m.TableList(headerSmall, smallContent, props.TableList{
+		ContentProp: props.TableListContent{
+			GridSizes: []uint{3, 6, 3},
+		},
+		HeaderProp: props.TableListContent{
+			GridSizes: []uint{3, 6, 3},
+		},
+		AlternatedBackground: &color.Color{
+			Red:   200,
+			Green: 200,
+			Blue:  200,
+		},
+	})
+
+	m.Row(40, func() {
+		m.Col(4, func() {
+			m.Signature("Signature 1", props.Font{
+				Family: consts.Courier,
+				Style:  consts.BoldItalic,
+				Size:   9,
+			})
+		})
+
+		m.Col(4, func() {
+			m.Signature("Signature 2")
+		})
+
+		m.Col(4, func() {
+			m.Signature("Signature 3")
+		})
+	})
 
 	err = m.OutputFileAndClose("internal/examples/pdfs/new_sample1.pdf")
 	if err != nil {
@@ -118,29 +153,29 @@ func main() {
 }
 
 func getSmallContent() ([]string, [][]string) {
-	header := []string{"Origin", "Destiny", "", "Cost"}
+	header := []string{"Origin", "Destiny", "Cost"}
 
 	contents := [][]string{}
-	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "", "R$ 20,00"})
-	contents = append(contents, []string{"São Carlos", "Petrópolis", "", "R$ 25,00"})
-	contents = append(contents, []string{"São José do Vale do Rio Preto", "Osasco", "", "R$ 20,00"})
-	contents = append(contents, []string{"Osasco", "São Paulo", "", "R$ 5,00"})
-	contents = append(contents, []string{"Congonhas", "Fortaleza", "", "R$ 100,00"})
-	contents = append(contents, []string{"Natal", "Santo André", "", "R$ 200,00"})
-	contents = append(contents, []string{"Rio Grande do Norte", "Sorocaba", "", "R$ 44,00"})
-	contents = append(contents, []string{"Campinas", "Recife", "", "R$ 56,00"})
-	contents = append(contents, []string{"São Vicente", "Juiz de Fora", "", "R$ 35,00"})
-	contents = append(contents, []string{"Taubaté", "Rio de Janeiro", "", "R$ 82,00"})
-	contents = append(contents, []string{"Suzano", "Petrópolis", "", "R$ 62,00"})
-	contents = append(contents, []string{"Jundiaí", "Florianópolis", "", "R$ 21,00"})
-	contents = append(contents, []string{"Natal", "Jundiaí", "", "R$ 12,00"})
-	contents = append(contents, []string{"Niterói", "Itapevi", "", "R$ 21,00"})
-	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "", "R$ 31,00"})
-	contents = append(contents, []string{"São Carlos", "Petrópolis", "", "R$ 42,00"})
-	contents = append(contents, []string{"Florianópolis", "Osasco", "", "R$ 19,00"})
-	contents = append(contents, []string{"Rio Grande do Norte", "Sorocaba", "", "R$ 42,00"})
-	contents = append(contents, []string{"Campinas", "Recife", "", "R$ 58,00"})
-	contents = append(contents, []string{"Florianópolis", "Osasco", "", "R$ 21,00"})
+	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "R$ 20,00"})
+	contents = append(contents, []string{"São Carlos", "Petrópolis", "R$ 25,00"})
+	contents = append(contents, []string{"São José do Vale do Rio Preto", "Osasco", "R$ 20,00"})
+	contents = append(contents, []string{"Osasco", "São Paulo", "R$ 5,00"})
+	contents = append(contents, []string{"Congonhas", "Fortaleza", "R$ 100,00"})
+	contents = append(contents, []string{"Natal", "Santo André", "R$ 200,00"})
+	contents = append(contents, []string{"Rio Grande do Norte", "Sorocaba", "R$ 44,00"})
+	contents = append(contents, []string{"Campinas", "Recife", "R$ 56,00"})
+	contents = append(contents, []string{"São Vicente", "Juiz de Fora", "R$ 35,00"})
+	contents = append(contents, []string{"Taubaté", "Rio de Janeiro", "R$ 82,00"})
+	contents = append(contents, []string{"Suzano", "Petrópolis", "R$ 62,00"})
+	contents = append(contents, []string{"Jundiaí", "Florianópolis", "R$ 21,00"})
+	contents = append(contents, []string{"Natal", "Jundiaí", "R$ 12,00"})
+	contents = append(contents, []string{"Niterói", "Itapevi", "R$ 21,00"})
+	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "R$ 31,00"})
+	contents = append(contents, []string{"São Carlos", "Petrópolis", "R$ 42,00"})
+	contents = append(contents, []string{"Florianópolis", "Osasco", "R$ 19,00"})
+	contents = append(contents, []string{"Rio Grande do Norte", "Sorocaba", "R$ 42,00"})
+	contents = append(contents, []string{"Campinas", "Recife", "R$ 58,00"})
+	contents = append(contents, []string{"Florianópolis", "Osasco", "R$ 21,00"})
 
 	return header, contents
 }

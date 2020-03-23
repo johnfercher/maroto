@@ -11,6 +11,6 @@ type Signature struct {
 }
 
 // AddSpaceFor provides a mock function with given fields: label, textProp, qtdCols, marginTop, actualCol
-func (_m *Signature) AddSpaceFor(label string, textProp props.Text, qtdCols float64, marginTop float64, actualCol float64) {
-	_m.Called(label, textProp, qtdCols, marginTop, actualCol)
+func (_m *Signature) AddSpaceFor(label string, textProp props.Text, colWidth float64, yColOffset float64, xColOffset float64) {
+	_m.Called(label, textProp, colWidth, yColOffset, xColOffset)
 }
