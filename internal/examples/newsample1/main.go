@@ -15,7 +15,7 @@ func main() {
 	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetPageMargins(10, 15, 10)
-	//m.SetBorder(true)
+	m.SetBorder(true)
 
 	byteSlices, err := ioutil.ReadFile("internal/assets/images/biplane.jpg")
 	if err != nil {
@@ -37,6 +37,7 @@ func main() {
 
 		m.Col(3, func() {
 			m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
+				Center:  true,
 				Percent: 75,
 			})
 		})
