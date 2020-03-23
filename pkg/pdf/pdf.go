@@ -15,8 +15,7 @@ type Maroto interface {
 	// Grid System
 	Row(height float64, closure func())
 	Col(width uint, closure func())
-	ColSpace(uint)
-	ColSpaces(qtd int)
+	ColSpace(gridSize uint)
 
 	// Registers
 	RegisterHeader(closure func())
@@ -155,12 +154,11 @@ func (s *PdfMaroto) GetCurrentOffset() float64 {
 // SetPageMargins overrides default margins (10,10,10)
 // the new page margin will affect all PDF pages
 func (s *PdfMaroto) SetPageMargins(left, top, right float64) {
-	if top <= 10 {
-		s.Pdf.SetMargins(left, top, right)
-	} else {
+	if top > 10 {
 		s.marginTop = top - 10
-		s.Pdf.SetMargins(left, 10, right)
 	}
+
+	s.Pdf.SetMargins(left, 10.0, right)
 }
 
 // GetPageMargins returns the set page margins. Comes in order of Left, Top, Right, Bottom
@@ -179,9 +177,7 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 
 	signProp.MakeValid()
 
-	yColOffset := s.offsetY + s.rowHeight
-
-	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0, false, 0), s.colWidth, yColOffset, s.xColOffset)
+	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0, false, 0), s.colWidth, s.offsetY, s.xColOffset, s.rowHeight)
 }
 
 // TableList create a table with multiple rows and columns.
@@ -289,36 +285,26 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 // Col create a column inside a row and enable to add
 // components inside.
 func (s *PdfMaroto) Col(width uint, closure func()) {
-	// Array will be executed only in the Row context
-	//s.colsClosures = append(s.colsClosures, func() {
 	if width == 0 {
 		width = 12
 	}
 
 	percent := float64(width) / float64(12)
 
-	widthPerCol := s.Math.GetWidthPerCol(percent)
+	pageWidth, _ := s.Pdf.GetPageSize()
+	left, _, right, _ := s.Pdf.GetMargins()
+	widthPerCol := (pageWidth - right - left) * percent
+
 	s.colWidth = widthPerCol
 	s.createColSpace(widthPerCol)
+
 	closure()
 	s.xColOffset += s.colWidth
-	//})
 }
 
 // ColSpace create an empty column inside a row.
-func (s *PdfMaroto) ColSpace(width uint) {
-	s.colsClosures = append(s.colsClosures, func() {
-		widthPerCol := s.Math.GetWidthPerCol(float64(len(s.colsClosures)))
-		s.createColSpace(widthPerCol)
-		s.xColOffset++
-	})
-}
-
-// ColSpaces create some empty columns inside a row.
-func (s *PdfMaroto) ColSpaces(qtd int) {
-	for i := 0; i < qtd; i++ {
-		s.ColSpace(0)
-	}
+func (s *PdfMaroto) ColSpace(gridSize uint) {
+	s.Col(gridSize, func() {})
 }
 
 // Text create a text inside a cell.

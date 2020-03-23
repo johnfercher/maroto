@@ -94,6 +94,8 @@ func TestTableList_Create_Happy(t *testing.T) {
 	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
 	marotoGrid.On("Line", mock.Anything).Return(nil)
 	marotoGrid.On("SetBackgroundColor", mock.Anything).Return(nil)
+	marotoGrid.On("GetPageMargins").Return(10.0, 10.0, 10.0, 10.0)
+	marotoGrid.On("GetPageSize").Return(200.0, 600.0)
 
 	sut := internal.NewTableList(text, font)
 	sut.BindGrid(marotoGrid)
@@ -131,6 +133,8 @@ func TestTableList_Create_HappyWithBackgroundColor(t *testing.T) {
 	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
 	marotoGrid.On("Line", mock.Anything).Return(nil)
 	marotoGrid.On("SetBackgroundColor", mock.Anything).Return(nil)
+	marotoGrid.On("GetPageMargins").Return(10.0, 10.0, 10.0, 10.0)
+	marotoGrid.On("GetPageSize").Return(200.0, 600.0)
 
 	sut := internal.NewTableList(text, font)
 	sut.BindGrid(marotoGrid)
@@ -175,6 +179,8 @@ func TestTableList_Create_Happy_Without_Line(t *testing.T) {
 	marotoGrid := &mocks.Maroto{}
 	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
 	marotoGrid.On("Line", mock.Anything).Return(nil)
+	marotoGrid.On("GetPageMargins").Return(10.0, 10.0, 10.0, 10.0)
+	marotoGrid.On("GetPageSize").Return(200.0, 600.0)
 
 	sut := internal.NewTableList(text, font)
 	sut.BindGrid(marotoGrid)

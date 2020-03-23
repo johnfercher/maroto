@@ -39,22 +39,23 @@ func main() {
 					Percent: 80,
 				})
 			})
-			m.Col(6, func() {})
+
+			m.ColSpace(6)
+
 			m.Col(3, func() {
 				m.Text("AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.", props.Text{
-					Top:         4,
 					Size:        8,
 					Align:       consts.Right,
 					Extrapolate: false,
 				})
 				m.Text("Tel: 55 024 12345-1234", props.Text{
-					Top:   16,
+					Top:   12,
 					Style: consts.BoldItalic,
 					Size:  8,
 					Align: consts.Right,
 				})
 				m.Text("www.mycompany.com", props.Text{
-					Top:   19,
+					Top:   15,
 					Style: consts.BoldItalic,
 					Size:  8,
 					Align: consts.Right,
@@ -85,7 +86,7 @@ func main() {
 	m.Row(10, func() {
 		m.Col(12, func() {
 			m.Text("Invoice ABC123456789", props.Text{
-				Top:   6,
+				Top:   3,
 				Style: consts.Bold,
 				Align: consts.Center,
 			})
@@ -93,17 +94,19 @@ func main() {
 	})
 
 	m.SetBackgroundColor(darkGrayColor)
+
 	m.Row(7, func() {
-		m.Col(12, func() {
+		m.Col(3, func() {
 			m.Text("Transactions", props.Text{
-				Top:   4.5,
+				Top:   1.5,
 				Size:  9,
 				Style: consts.Bold,
 				Align: consts.Center,
 			})
 		})
-		m.ColSpaces(3)
+		m.ColSpace(9)
 	})
+
 	m.SetBackgroundColor(whiteColor)
 
 	header := []string{"", "Product", "Quantity", "Price"}
@@ -138,11 +141,13 @@ func main() {
 	}
 
 	m.TableList(header, contents, props.TableList{
-		HeaderProp: props.Font{
-			Size: 9,
+		HeaderProp: props.TableListContent{
+			Size:      9,
+			GridSizes: []uint{3, 4, 2, 3},
 		},
-		ContentProp: props.Font{
-			Size: 8,
+		ContentProp: props.TableListContent{
+			Size:      8,
+			GridSizes: []uint{3, 4, 2, 3},
 		},
 		Align:                consts.Center,
 		AlternatedBackground: &grayColor,
@@ -151,8 +156,8 @@ func main() {
 	})
 
 	m.Row(20, func() {
-		m.Col(6, func() {})
-		m.Col(3, func() {
+		m.ColSpace(7)
+		m.Col(2, func() {
 			m.Text("Total:", props.Text{
 				Top:   5,
 				Style: consts.Bold,
@@ -187,7 +192,7 @@ func main() {
 				Align:  consts.Center,
 			})
 		})
-		m.Col(6, func() {})
+		m.ColSpace(6)
 	})
 
 	err := m.OutputFileAndClose("internal/examples/pdfs/billing.pdf")

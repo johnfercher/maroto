@@ -32,13 +32,13 @@ func TestSignature_AddSpaceFor_DefaultMargins(t *testing.T) {
 	signature := internal.NewSignature(pdf, math, text)
 
 	// Act
-	signature.AddSpaceFor("label", props.Text{Size: 10.0}, 5, 5, 2)
+	signature.AddSpaceFor("label", props.Text{Size: 10.0}, 5, 5, 2, 0)
 
 	// Assert
 	pdf.AssertNumberOfCalls(t, "Line", 1)
-	pdf.AssertCalled(t, "Line", 114.0, 10.0, 156.0, 10.0)
+	pdf.AssertCalled(t, "Line", 16.0, 15.0, 13.0, 15.0)
 	text.AssertNumberOfCalls(t, "Add", 1)
-	text.AssertCalled(t, "Add", "label", props.Text{Size: 10.0}, 5.0, 2.0, 5.0)
+	text.AssertCalled(t, "Add", "label", props.Text{Size: 10.0}, 7.0, 2.0, 5.0)
 }
 
 func TestSignature_AddSpaceFor_NotDefaultMargins(t *testing.T) {
@@ -56,11 +56,11 @@ func TestSignature_AddSpaceFor_NotDefaultMargins(t *testing.T) {
 	signature := internal.NewSignature(pdf, math, text)
 
 	// Act
-	signature.AddSpaceFor("label", props.Text{Size: 10.0}, 5, 5, 2)
+	signature.AddSpaceFor("label", props.Text{Size: 10.0}, 5, 5, 2, 0)
 
 	// Assert
 	pdf.AssertNumberOfCalls(t, "Line", 1)
-	pdf.AssertCalled(t, "Line", 124.0, 10.0, 166.0, 10.0)
+	pdf.AssertCalled(t, "Line", 26.0, 15.0, 23.0, 15.0)
 	text.AssertNumberOfCalls(t, "Add", 1)
-	text.AssertCalled(t, "Add", "label", props.Text{Size: 10.0}, 5.0, 2.0, 5.0)
+	text.AssertCalled(t, "Add", "label", props.Text{Size: 10.0}, 7.0, 2.0, 5.0)
 }

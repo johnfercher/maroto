@@ -298,22 +298,24 @@ func TestTableListProp_MakeValid(t *testing.T) {
 		{
 			"When HeaderProp/ContentProp is not defined",
 			&props.TableList{
-				HeaderProp:  props.Font{},
-				ContentProp: props.Font{},
+				HeaderProp:  props.TableListContent{},
+				ContentProp: props.TableListContent{},
 			},
 			func(t *testing.T, m *props.TableList) {
 				assert.Equal(t, m.HeaderProp.Size, 10.0)
 				assert.Equal(t, m.HeaderProp.Family, consts.Arial)
 				assert.Equal(t, m.HeaderProp.Style, consts.Bold)
+				assert.Equal(t, len(m.HeaderProp.GridSizes), 3)
 				assert.Equal(t, m.ContentProp.Size, 10.0)
 				assert.Equal(t, m.ContentProp.Family, consts.Arial)
 				assert.Equal(t, m.ContentProp.Style, consts.Normal)
+				assert.Equal(t, len(m.ContentProp.GridSizes), 3)
 			},
 		},
 		{
 			"When HeaderProp.Size is 0.0",
 			&props.TableList{
-				HeaderProp: props.Font{
+				HeaderProp: props.TableListContent{
 					Size: 0.0,
 				},
 			},
@@ -324,7 +326,7 @@ func TestTableListProp_MakeValid(t *testing.T) {
 		{
 			"When HeaderProp.Style is empty",
 			&props.TableList{
-				HeaderProp: props.Font{
+				HeaderProp: props.TableListContent{
 					Style: "",
 				},
 			},
@@ -335,7 +337,7 @@ func TestTableListProp_MakeValid(t *testing.T) {
 		{
 			"When HeaderProp.Family is empty",
 			&props.TableList{
-				HeaderProp: props.Font{
+				HeaderProp: props.TableListContent{
 					Family: "",
 				},
 			},
@@ -355,7 +357,7 @@ func TestTableListProp_MakeValid(t *testing.T) {
 		{
 			"When ContentProp.Size is 0.0",
 			&props.TableList{
-				ContentProp: props.Font{
+				ContentProp: props.TableListContent{
 					Size: 0.0,
 				},
 			},
@@ -366,7 +368,7 @@ func TestTableListProp_MakeValid(t *testing.T) {
 		{
 			"When ContentProp.Style is empty",
 			&props.TableList{
-				HeaderProp: props.Font{
+				HeaderProp: props.TableListContent{
 					Style: "",
 				},
 			},
@@ -377,7 +379,7 @@ func TestTableListProp_MakeValid(t *testing.T) {
 		{
 			"When ContentProp.Family is empty",
 			&props.TableList{
-				HeaderProp: props.Font{
+				HeaderProp: props.TableListContent{
 					Family: "",
 				},
 			},
@@ -398,7 +400,7 @@ func TestTableListProp_MakeValid(t *testing.T) {
 
 	for _, c := range cases {
 		// Act
-		c.tableListProp.MakeValid()
+		c.tableListProp.MakeValid([]string{"a", "b", "c"}, [][]string{{"a", "b", "c"}})
 
 		// Assert
 		c.assert(t, c.tableListProp)

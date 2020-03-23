@@ -54,19 +54,6 @@ func ExamplePdfMaroto_ColSpace() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_ColSpaces demonstrates how to add
-// some empty columns inside a row.
-func ExamplePdfMaroto_ColSpaces() {
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
-	rowHeight := 5.0
-
-	m.Row(rowHeight, func() {
-		m.ColSpaces(2)
-	})
-
-	// Do more things and save...
-}
-
 // ExamplePdfMaroto_Col demonstrates how to add
 // an useful column
 func ExamplePdfMaroto_Col() {
@@ -211,12 +198,12 @@ func ExamplePdfMaroto_TableList() {
 	// 2 Rows of contents
 	// Each row have 2 columns
 	m.TableList(headers, contents, props.TableList{
-		HeaderProp: props.Font{
+		HeaderProp: props.TableListContent{
 			Family: consts.Arial,
 			Style:  consts.Bold,
 			Size:   11.0,
 		},
-		ContentProp: props.Font{
+		ContentProp: props.TableListContent{
 			Family: consts.Courier,
 			Style:  consts.Normal,
 			Size:   10.0,
