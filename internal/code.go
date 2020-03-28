@@ -10,8 +10,8 @@ import (
 
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF
 type Code interface {
-	AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect)
-	AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode) (err error)
+	AddQr(code string, cell Cell, prop props.Rect)
+	AddBar(code string, cell Cell, prop props.Barcode) (err error)
 }
 
 type code struct {
@@ -28,39 +28,36 @@ func NewCode(pdf gofpdf.Pdf, math Math) *code {
 }
 
 // AddQr create a QrCode inside a cell
-func (s *code) AddQr(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect) {
+func (s *code) AddQr(code string, cell Cell, prop props.Rect) {
 	key := barcode.RegisterQR(s.pdf, code, qr.H, qr.Unicode)
-
-	actualWidthPerCol := s.math.GetWidthPerCol(qtdCols)
 
 	var x, y, w, h float64
 	if prop.Center {
-		x, y, w, h = s.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol, qtdCols, colHeight, indexCol, prop.Percent)
+		x, y, w, h = s.math.GetRectCenterColProperties(cell.Width, cell.Width, cell.Width, cell.Height, cell.X, prop.Percent)
 	} else {
-		x, y, w, h = s.math.GetRectNonCenterColProperties(actualWidthPerCol, actualWidthPerCol, qtdCols, colHeight, indexCol, prop)
+		x, y, w, h = s.math.GetRectNonCenterColProperties(cell.Width, cell.Width, cell.Width, cell.Height, cell.X, prop)
 	}
 
-	barcode.Barcode(s.pdf, key, x, y+marginTop, w, h, false)
+	barcode.Barcode(s.pdf, key, x, y+cell.Y, w, h, false)
 }
 
 // AddBar create a Barcode inside a cell
-func (s *code) AddBar(code string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Barcode) (err error) {
+func (s *code) AddBar(code string, cell Cell, prop props.Barcode) (err error) {
 	bcode, err := code128.Encode(code)
 
 	if err != nil {
 		return
 	}
 
-	actualWidthPerCol := s.math.GetWidthPerCol(qtdCols)
 	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
 	var x, y, w, h float64
 	if prop.Center {
-		x, y, w, h = s.math.GetRectCenterColProperties(actualWidthPerCol, actualWidthPerCol*heightPercentFromWidth, qtdCols, colHeight, indexCol, prop.Percent)
+		x, y, w, h = s.math.GetRectCenterColProperties(cell.Width, cell.Width*heightPercentFromWidth, cell.Width, cell.Height, cell.X, prop.Percent)
 	} else {
 		rectProps := props.Rect{Left: prop.Left, Top: prop.Top, Center: prop.Center, Percent: prop.Percent}
-		x, y, w, h = s.math.GetRectNonCenterColProperties(actualWidthPerCol, actualWidthPerCol*heightPercentFromWidth, qtdCols, colHeight, indexCol, rectProps)
+		x, y, w, h = s.math.GetRectNonCenterColProperties(cell.Width, cell.Width*heightPercentFromWidth, cell.Width, cell.Height, cell.X, rectProps)
 	}
 
-	barcode.Barcode(s.pdf, barcode.Register(bcode), x, y+marginTop, w, h, false)
+	barcode.Barcode(s.pdf, barcode.Register(bcode), x, y+cell.Y, w, h, false)
 	return
 }

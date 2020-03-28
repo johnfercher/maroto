@@ -1,5 +1,10 @@
 package consts
 
+const (
+	// MaxGridSum represents the max value from a cell grid width
+	MaxGridSum float64 = 12.0
+)
+
 // Family is a representation of a family Font
 type Family string
 

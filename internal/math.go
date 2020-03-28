@@ -7,9 +7,8 @@ import (
 
 // Math is the abstraction which deals with useful calc
 type Math interface {
-	GetWidthPerCol(qtdCols float64) float64
-	GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, percent float64) (x float64, y float64, w float64, h float64)
-	GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, prop props.Rect) (x float64, y float64, w float64, h float64)
+	GetRectCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64, xColOffset float64, percent float64) (x float64, y float64, w float64, h float64)
+	GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64, xColOffset float64, prop props.Rect) (x float64, y float64, w float64, h float64)
 	GetCenterCorrection(outerSize, innerSize float64) float64
 }
 
@@ -24,43 +23,34 @@ func NewMath(pdf gofpdf.Pdf) *math {
 	}
 }
 
-// GetWidthPerCol return a width which a col will have
-// using margins and page size information
-func (s *math) GetWidthPerCol(qtdCols float64) float64 {
-	width, _ := s.pdf.GetPageSize()
-	left, _, right, _ := s.pdf.GetMargins()
-	return (width - right - left) / qtdCols
-}
-
 // GetRectCenterColProperties define Width, Height, X Offset and Y Offset
 // to and rectangle (QrCode, Barcode, Image) be centralized inside a cell
-func (s *math) GetRectCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, percent float64) (x float64, y float64, w float64, h float64) {
+func (s *math) GetRectCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64, xColOffset float64, percent float64) (x float64, y float64, w float64, h float64) {
 	percent = percent / 100.0
-	width, _ := s.pdf.GetPageSize()
-	left, top, right, _ := s.pdf.GetMargins()
-	widthPerCol := (width - right - left) / qtdCols
+	left, top, _, _ := s.pdf.GetMargins()
 
-	proportion := imageHeight / imageWidth
+	imageProportion := imageHeight / imageWidth
+	celProportion := colHeight / colWidth
 
-	newImageHeight := widthPerCol * proportion * percent
-	newImageWidth := widthPerCol * percent
+	if imageProportion > celProportion {
+		newImageWidth := colHeight / imageProportion * percent
+		newImageHeight := newImageWidth * imageProportion
 
-	if newImageHeight > colHeight {
-		newImageWidth := colHeight / proportion * percent
-		newImageHeight := newImageWidth * proportion
-
-		widthCorrection := s.GetCenterCorrection(widthPerCol, newImageWidth)
+		widthCorrection := s.GetCenterCorrection(colWidth, newImageWidth)
 		heightCorrection := s.GetCenterCorrection(colHeight, newImageHeight)
 
-		x = (widthPerCol * indexCol) + left + widthCorrection
+		x = xColOffset + left + widthCorrection
 		y = top + heightCorrection
 		w = newImageWidth
 		h = newImageHeight
 	} else {
-		widthCorrection := s.GetCenterCorrection(widthPerCol, newImageWidth)
+		newImageWidth := colWidth * percent
+		newImageHeight := newImageWidth * imageProportion
+
+		widthCorrection := s.GetCenterCorrection(colWidth, newImageWidth)
 		heightCorrection := s.GetCenterCorrection(colHeight, newImageHeight)
 
-		x = (widthPerCol * indexCol) + left + widthCorrection
+		x = xColOffset + left + widthCorrection
 		y = top + heightCorrection
 		w = newImageWidth
 		h = newImageHeight
@@ -70,27 +60,27 @@ func (s *math) GetRectCenterColProperties(imageWidth float64, imageHeight float6
 }
 
 // GetRectNonCenterColProperties define Width, Height to and rectangle (QrCode, Barcode, Image) inside a cell
-func (s *math) GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, qtdCols float64, colHeight float64, indexCol float64, prop props.Rect) (x float64, y float64, w float64, h float64) {
+func (s *math) GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64, xColOffset float64, prop props.Rect) (x float64, y float64, w float64, h float64) {
 	percent := prop.Percent / 100.0
-	width, _ := s.pdf.GetPageSize()
-	left, top, right, _ := s.pdf.GetMargins()
-	widthPerCol := (width - right - left) / qtdCols
+	left, top, _, _ := s.pdf.GetMargins()
 
-	proportion := imageHeight / imageWidth
+	imageProportion := imageHeight / imageWidth
+	celProportion := colHeight / colWidth
 
-	newImageHeight := widthPerCol * proportion * percent
-	newImageWidth := widthPerCol * percent
+	if imageProportion > celProportion {
+		newImageWidth := colHeight / imageProportion * percent
+		newImageHeight := newImageWidth * imageProportion
 
-	if newImageHeight > colHeight {
-		newImageWidth := colHeight / proportion * percent
-		newImageHeight := newImageWidth * proportion
-		x = (widthPerCol * indexCol) + prop.Left + left
-		y = prop.Top + top
+		x = xColOffset + left + prop.Left
+		y = top
 		w = newImageWidth
 		h = newImageHeight
 	} else {
-		x = (widthPerCol * indexCol) + prop.Left + left
-		y = prop.Top + top
+		newImageWidth := colWidth * percent
+		newImageHeight := newImageWidth * imageProportion
+
+		x = xColOffset + left + prop.Left
+		y = top
 		w = newImageWidth
 		h = newImageHeight
 	}

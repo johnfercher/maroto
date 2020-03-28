@@ -66,99 +66,173 @@ with the code to generate the PDFs.
 
 #### Code
 ```go
+// Billing example
 package main
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"os"
+	"time"
 )
 
 func main() {
-	m := pdf.NewMaroto(consts.Portrait, consts.Letter)
+	begin := time.Now()
 
-	m.Row(40, func() {
-		m.Col(func() {
-			_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
-				Center:  true,
-				Percent: 80,
+	darkGrayColor := getDarkGrayColor()
+	grayColor := getGrayColor()
+	whiteColor := color.NewWhite()
+	header := getHeader()
+	contents := getContents()
+
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	m.SetPageMargins(10, 15, 10)
+	//m.SetBorder(true)
+
+	m.RegisterHeader(func() {
+		m.Row(20, func() {
+			m.Col(3, func() {
+				_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
+					Center:  true,
+					Percent: 80,
+				})
+			})
+
+			m.ColSpace(6)
+
+			m.Col(3, func() {
+				m.Text("AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.", props.Text{
+					Size:        8,
+					Align:       consts.Right,
+					Extrapolate: false,
+				})
+				m.Text("Tel: 55 024 12345-1234", props.Text{
+					Top:   12,
+					Style: consts.BoldItalic,
+					Size:  8,
+					Align: consts.Right,
+				})
+				m.Text("www.mycompany.com", props.Text{
+					Top:   15,
+					Style: consts.BoldItalic,
+					Size:  8,
+					Align: consts.Right,
+				})
 			})
 		})
-		m.Col(func() {
-			m.Text("Gopher International Shipping, Inc.", props.Text{
-				Top:         15,
-				Size:        20,
-				Extrapolate: true,
-			})
-			m.Text("1000 Shipping Gopher Golang TN 3691234 GopherLand (GL)", props.Text{
-				Size: 12,
-				Top:  21,
-			})
-		})
-		m.ColSpace()
 	})
 
-	m.Line(10)
-
-	m.Row(40, func() {
-		m.Col(func() {
-			m.Text("João Sant'Ana 100 Main Street Stringfield TN 39021 United Stats (USA)", props.Text{
-				Size: 15,
-				Top:  14,
-			})
-		})
-		m.ColSpace()
-		m.Col(func() {
-			m.QrCode("https://github.com/johnfercher/maroto", props.Rect{
-				Center:  true,
-				Percent: 75,
+	m.RegisterFooter(func() {
+		m.Row(20, func() {
+			m.Col(12, func() {
+				m.Text("Tel: 55 024 12345-1234", props.Text{
+					Top:   13,
+					Style: consts.BoldItalic,
+					Size:  8,
+					Align: consts.Left,
+				})
+				m.Text("www.mycompany.com", props.Text{
+					Top:   16,
+					Style: consts.BoldItalic,
+					Size:  8,
+					Align: consts.Left,
+				})
 			})
 		})
 	})
 
-	m.Line(10)
-
-	m.Row(100, func() {
-		m.Col(func() {
-			_ = m.Barcode("https://github.com/johnfercher/maroto", props.Barcode{
-				Center:  true,
-				Percent: 70,
-			})
-			m.Text("https://github.com/johnfercher/maroto", props.Text{
-				Size:  20,
+	m.Row(10, func() {
+		m.Col(12, func() {
+			m.Text("Invoice ABC123456789", props.Text{
+				Top:   3,
+				Style: consts.Bold,
 				Align: consts.Center,
-				Top:   80,
 			})
 		})
 	})
 
-	m.SetBorder(true)
+	m.SetBackgroundColor(darkGrayColor)
 
-	m.Row(40, func() {
-		m.Col(func() {
-			m.Text("CODE: 123412351645231245564 DATE: 20-07-1994 20:20:33", props.Text{
-				Size: 15,
-				Top:  19,
+	m.Row(7, func() {
+		m.Col(3, func() {
+			m.Text("Transactions", props.Text{
+				Top:   1.5,
+				Size:  9,
+				Style: consts.Bold,
+				Align: consts.Center,
 			})
 		})
-		m.Col(func() {
-			m.Text("CA", props.Text{
-				Top:   30,
-				Size:  85,
+		m.ColSpace(9)
+	})
+
+	m.SetBackgroundColor(whiteColor)
+
+	m.TableList(header, contents, props.TableList{
+		HeaderProp: props.TableListContent{
+			Size:      9,
+			GridSizes: []uint{3, 4, 2, 3},
+		},
+		ContentProp: props.TableListContent{
+			Size:      8,
+			GridSizes: []uint{3, 4, 2, 3},
+		},
+		Align:                consts.Center,
+		AlternatedBackground: &grayColor,
+		HeaderContentSpace:   1,
+		Line:                 false,
+	})
+
+	m.Row(20, func() {
+		m.ColSpace(7)
+		m.Col(2, func() {
+			m.Text("Total:", props.Text{
+				Top:   5,
+				Style: consts.Bold,
+				Size:  8,
+				Align: consts.Right,
+			})
+		})
+		m.Col(3, func() {
+			m.Text("R$ 2.567,00", props.Text{
+				Top:   5,
+				Style: consts.Bold,
+				Size:  8,
 				Align: consts.Center,
 			})
 		})
 	})
 
-	m.SetBorder(false)
+	m.Row(15, func() {
+		m.Col(6, func() {
+			_ = m.Barcode("5123.151231.512314.1251251.123215", props.Barcode{
+				Percent: 0,
+				Proportion: props.Proportion{
+					Width:  20,
+					Height: 2,
+				},
+			})
+			m.Text("5123.151231.512314.1251251.123215", props.Text{
+				Top:    12,
+				Family: "",
+				Style:  consts.Bold,
+				Size:   9,
+				Align:  consts.Center,
+			})
+		})
+		m.ColSpace(6)
+	})
 
-	err := m.OutputFileAndClose("internal/examples/pdfs/zpl.pdf")
+	err := m.OutputFileAndClose("internal/examples/pdfs/billing.pdf")
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
 	}
+
+	end := time.Now()
+	fmt.Println(end.Sub(begin))
 }
 ```
 

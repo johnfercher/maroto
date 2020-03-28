@@ -73,14 +73,29 @@ type Font struct {
 	Size float64
 }
 
+// TableListContent represents properties from a line (header/content) from a TableList
+type TableListContent struct {
+	// Family of the text, ex: consts.Arial, helvetica and etc
+	Family consts.Family
+	// Style of the text, ex: consts.Normal, bold and etc
+	Style consts.Style
+	// Size of the text
+	Size float64
+	// GridSizes is the custom properties of the size of the grid
+	// the sum of the values cannot be greater than 12, if this
+	// value is not provided the width of all columns will be the
+	// same
+	GridSizes []uint
+}
+
 // TableList represents properties from a TableList
 type TableList struct {
 	// HeaderProp is the custom properties of the text inside
 	// the headers
-	HeaderProp Font
+	HeaderProp TableListContent
 	// ContentProp is the custom properties of the text inside
 	// the contents
-	ContentProp Font
+	ContentProp TableListContent
 	// Align is the align of the text (header and content) inside the columns
 	Align consts.Align
 	// AlternatedBackground define the background color from even rows
@@ -208,8 +223,25 @@ func (s *Font) ToTextProp(align consts.Align, top float64, extrapolate bool, ver
 	return textProp
 }
 
+// ToTextProp from Font return a TableListContent based on Font
+func (s *TableListContent) ToTextProp(align consts.Align, top float64, extrapolate bool, verticalPadding float64) Text {
+	textProp := Text{
+		Family:          s.Family,
+		Style:           s.Style,
+		Size:            s.Size,
+		Align:           align,
+		Top:             top,
+		Extrapolate:     extrapolate,
+		VerticalPadding: verticalPadding,
+	}
+
+	textProp.MakeValid()
+
+	return textProp
+}
+
 // MakeValid from TableList define default values for a TableList
-func (s *TableList) MakeValid() {
+func (s *TableList) MakeValid(header []string, contents [][]string) {
 	if s.HeaderProp.Size == 0.0 {
 		s.HeaderProp.Size = 10.0
 	}
@@ -220,6 +252,15 @@ func (s *TableList) MakeValid() {
 
 	if s.HeaderProp.Style == "" {
 		s.HeaderProp.Style = consts.Bold
+	}
+
+	if len(s.HeaderProp.GridSizes) == 0 {
+		gridSize := uint(12.0 / len(header))
+		s.HeaderProp.GridSizes = []uint{}
+
+		for range header {
+			s.HeaderProp.GridSizes = append(s.HeaderProp.GridSizes, gridSize)
+		}
 	}
 
 	if s.Align == "" {
@@ -236,6 +277,15 @@ func (s *TableList) MakeValid() {
 
 	if s.ContentProp.Style == "" {
 		s.ContentProp.Style = consts.Normal
+	}
+
+	if len(s.ContentProp.GridSizes) == 0 {
+		gridSize := uint(12.0 / len(header))
+		s.ContentProp.GridSizes = []uint{}
+
+		for range header {
+			s.ContentProp.GridSizes = append(s.ContentProp.GridSizes, gridSize)
+		}
 	}
 
 	if s.HeaderContentSpace == 0.0 {

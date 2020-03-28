@@ -26,19 +26,16 @@ func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(8.0)
 
-	math := &mocks.Math{}
-	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
-
 	font := &mocks.Font{}
 	font.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
-	sut := internal.NewText(pdf, math, font)
+	sut := internal.NewText(pdf, nil, font)
 
 	// Act
 	lines := sut.GetLinesQuantity("AnyText With Spaces", props.Text{}, 2)
 
 	// Assert
-	assert.Equal(t, lines, 1)
+	assert.Equal(t, lines, 4)
 }
 
 func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
@@ -49,13 +46,10 @@ func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
 
-	math := &mocks.Math{}
-	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
-
 	font := &mocks.Font{}
 	font.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
-	sut := internal.NewText(pdf, math, font)
+	sut := internal.NewText(pdf, nil, font)
 
 	// Act
 	lines := sut.GetLinesQuantity("OneWord", props.Text{}, 2)
@@ -72,13 +66,10 @@ func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
 
-	math := &mocks.Math{}
-	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
-
 	font := &mocks.Font{}
 	font.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
-	sut := internal.NewText(pdf, math, font)
+	sut := internal.NewText(pdf, nil, font)
 
 	// Act
 	lines := sut.GetLinesQuantity("Many words", props.Text{Extrapolate: true}, 2)
@@ -116,10 +107,8 @@ func TestText_Add(t *testing.T) {
 		text       string
 		align      consts.Align
 		pdf        func() *mocks.Pdf
-		math       func() *mocks.Math
 		font       func() *mocks.Font
 		assertPdf  func(t *testing.T, pdf *mocks.Pdf)
-		assertMath func(t *testing.T, math *mocks.Math)
 		assertFont func(t *testing.T, font *mocks.Font)
 	}{
 		{
@@ -134,11 +123,6 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Math {
-				_math := &mocks.Math{}
-				_math.On("GetWidthPerCol", mock.Anything).Return(123.0)
-				return _math
-			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
 				_font.On("GetScaleFactor").Return(1.0)
@@ -152,11 +136,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
-				_pdf.AssertCalled(t, "Text", 133.0, 15.0, "TextHelper1")
-			},
-			func(t *testing.T, _math *mocks.Math) {
-				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				_math.AssertCalled(t, "GetWidthPerCol", 15.0)
+				_pdf.AssertCalled(t, "Text", 11.0, 16.0, "TextHelper1")
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
@@ -175,11 +155,6 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Math {
-				_math := &mocks.Math{}
-				_math.On("GetWidthPerCol", mock.Anything).Return(123.0)
-				return _math
-			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
 				_font.On("GetScaleFactor").Return(1.0)
@@ -194,11 +169,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
-				_pdf.AssertCalled(t, "Text", 188.5, 15.0, "TextHelper2")
-			},
-			func(t *testing.T, _math *mocks.Math) {
-				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				_math.AssertCalled(t, "GetWidthPerCol", 15.0)
+				_pdf.AssertCalled(t, "Text", 12.5, 16.0, "TextHelper2")
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
@@ -217,11 +188,6 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Math {
-				_math := &mocks.Math{}
-				_math.On("GetWidthPerCol", mock.Anything).Return(123.0)
-				return _math
-			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
 				_font.On("GetScaleFactor").Return(1.0)
@@ -236,11 +202,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
-				_pdf.AssertCalled(t, "Text", 244.0, 15.0, "TextHelper3")
-			},
-			func(t *testing.T, _math *mocks.Math) {
-				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				_math.AssertCalled(t, "GetWidthPerCol", 15.0)
+				_pdf.AssertCalled(t, "Text", 14.0, 16.0, "TextHelper3")
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
@@ -259,11 +221,6 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Math {
-				_math := &mocks.Math{}
-				_math.On("GetWidthPerCol", mock.Anything).Return(123.0)
-				return _math
-			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
 				_font.On("GetScaleFactor").Return(1.0)
@@ -278,11 +235,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
-				_pdf.AssertCalled(t, "Text", 244.0, 15.0, "TextHelper4")
-			},
-			func(t *testing.T, _math *mocks.Math) {
-				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				_math.AssertCalled(t, "GetWidthPerCol", 15.0)
+				_pdf.AssertCalled(t, "Text", 14.0, 16.0, "TextHelper4")
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
@@ -302,11 +255,6 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Math {
-				_math := &mocks.Math{}
-				_math.On("GetWidthPerCol", mock.Anything).Return(123.0)
-				return _math
-			},
 			func() *mocks.Font {
 				_font := &mocks.Font{}
 				_font.On("GetScaleFactor").Return(1.0)
@@ -315,16 +263,12 @@ func TestText_Add(t *testing.T) {
 				return _font
 			},
 			func(t *testing.T, _pdf *mocks.Pdf) {
-				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 199)
+				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 275)
 				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
 
-				_pdf.AssertNumberOfCalls(t, "GetMargins", 16)
+				_pdf.AssertNumberOfCalls(t, "GetMargins", 92)
 
-				_pdf.AssertNumberOfCalls(t, "Text", 16)
-			},
-			func(t *testing.T, _math *mocks.Math) {
-				_math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				_math.AssertCalled(t, "GetWidthPerCol", 15.0)
+				_pdf.AssertNumberOfCalls(t, "Text", 92)
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
@@ -336,17 +280,21 @@ func TestText_Add(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		_pdf := c.pdf()
-		_math := c.math()
 		_font := c.font()
 
-		text := internal.NewText(_pdf, _math, _font)
+		text := internal.NewText(_pdf, nil, _font)
+
+		cell := internal.Cell{
+			X:     1.0,
+			Y:     5.0,
+			Width: 15.0,
+		}
 
 		// Act
-		text.Add(c.text, props.Text{Family: consts.Arial, Style: consts.BoldItalic, Size: 16.0, Align: c.align}, 5.0, 1, 15.0)
+		text.Add(c.text, cell, props.Text{Family: consts.Arial, Style: consts.BoldItalic, Size: 16.0, Align: c.align})
 
 		// Assert
 		c.assertPdf(t, _pdf)
-		c.assertMath(t, _math)
 		c.assertFont(t, _font)
 	}
 }
