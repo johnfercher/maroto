@@ -31,7 +31,10 @@ func (s *signature) AddSpaceFor(label string, cell Cell, textProp props.Text) {
 	space := 4.0
 
 	lineCenterY := cell.Height / 1.33
+	cell.Y += lineCenterY
 
-	s.pdf.Line(cell.X+left+space, cell.Y+top+lineCenterY, cell.X+cell.Width+left-space, cell.Y+top+lineCenterY)
-	s.text.Add(label, textProp, cell.Y+lineCenterY+2.0, cell.X, cell.Width)
+	s.pdf.Line(cell.X+left+space, cell.Y+top, cell.X+cell.Width+left-space, cell.Y+top)
+
+	cell.Y += 2.0
+	s.text.Add(label, cell, textProp)
 }

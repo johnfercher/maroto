@@ -2,6 +2,7 @@
 
 package mocks
 
+import internal "github.com/johnfercher/maroto/internal"
 import mock "github.com/stretchr/testify/mock"
 import props "github.com/johnfercher/maroto/pkg/props"
 
@@ -10,12 +11,12 @@ type Text struct {
 	mock.Mock
 }
 
-// Add provides a mock function with given fields: text, fontFamily, marginTop, actualCol, qtdCols
-func (_m *Text) Add(text string, textProp props.Text, yColOffset float64, xColOffset float64, colWidth float64) {
-	_m.Called(text, textProp, yColOffset, xColOffset, colWidth)
+// Add provides a mock function with given fields: text, cell, textProp
+func (_m *Text) Add(text string, cell internal.Cell, textProp props.Text) {
+	_m.Called(text, cell, textProp)
 }
 
-// GetLinesQuantity provides a mock function with given fields: text, fontFamily, qtdCols
+// GetLinesQuantity provides a mock function with given fields: text, fontFamily, colWidth
 func (_m *Text) GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int {
 	ret := _m.Called(text, fontFamily, colWidth)
 

@@ -9,7 +9,7 @@ import (
 
 // Text is the abstraction which deals of how to add text inside PDF
 type Text interface {
-	Add(text string, textProp props.Text, yColOffset float64, xColOffset float64, colWidth float64)
+	Add(text string, cell Cell, textProp props.Text)
 	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
 }
 
@@ -29,7 +29,7 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) *text {
 }
 
 // Add a text inside a cell.
-func (s *text) Add(text string, textProp props.Text, yColOffset float64, xColOffset float64, colWidth float64) {
+func (s *text) Add(text string, cell Cell, textProp props.Text) {
 	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
@@ -37,7 +37,7 @@ func (s *text) Add(text string, textProp props.Text, yColOffset float64, xColOff
 	_, _, fontSize := s.font.GetFont()
 	fontHeight := fontSize / s.font.GetScaleFactor()
 
-	yColOffset += fontHeight
+	cell.Y += fontHeight
 
 	// Apply Unicode before calc spaces
 	unicodeText := translator(text)
@@ -47,17 +47,17 @@ func (s *text) Add(text string, textProp props.Text, yColOffset float64, xColOff
 	accumulateOffsetY := 0.0
 
 	// If should add one line
-	if stringWidth < colWidth || textProp.Extrapolate || len(words) == 1 {
-		s.addLine(textProp, xColOffset, colWidth, yColOffset, stringWidth, unicodeText)
+	if stringWidth < cell.Width || textProp.Extrapolate || len(words) == 1 {
+		s.addLine(textProp, cell.X, cell.Width, cell.Y, stringWidth, unicodeText)
 	} else {
-		lines := s.getLines(words, colWidth)
+		lines := s.getLines(words, cell.Width)
 
 		for index, line := range lines {
 			lineWidth := s.pdf.GetStringWidth(line)
 			_, _, fontSize := s.font.GetFont()
 			textHeight := fontSize / s.font.GetScaleFactor()
 
-			s.addLine(textProp, xColOffset, colWidth, yColOffset+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
+			s.addLine(textProp, cell.X, cell.Width, cell.Y+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
 			accumulateOffsetY += textProp.VerticalPadding
 		}
 	}

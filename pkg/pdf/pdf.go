@@ -327,9 +327,14 @@ func (s *PdfMaroto) Text(text string, prop ...props.Text) {
 		textProp.Top = s.rowHeight
 	}
 
-	yColOffset := s.offsetY + textProp.Top
+	cell := internal.Cell{
+		X:      s.xColOffset,
+		Y:      s.offsetY + textProp.Top,
+		Width:  s.colWidth,
+		Height: 0,
+	}
 
-	s.TextHelper.Add(text, textProp, yColOffset, s.xColOffset, s.colWidth)
+	s.TextHelper.Add(text, cell, textProp)
 }
 
 // FileImage add an Image reading from disk inside a cell.
