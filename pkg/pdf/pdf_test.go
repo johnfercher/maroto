@@ -1830,3 +1830,18 @@ func TestPdfMaroto_SetBackgroundColor(t *testing.T) {
 	pdf.AssertCalled(t, "SetFillColor", white.Red, white.Green, white.Blue)
 	pdf.AssertNumberOfCalls(t, "SetFillColor", 2)
 }
+
+func TestPdfMaroto_GetPageMargins(t *testing.T) {
+	// Arrange
+	pdf := basePdfTest(12.3, 19.3, 0)
+	m := newMarotoTest(pdf, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	left, top, right, bottom := m.GetPageMargins()
+
+	// Assert
+	assert.Equal(t, 12.3, left)
+	assert.Equal(t, 19.3, top)
+	assert.Equal(t, 0.0, right)
+	assert.Equal(t, 0.0, bottom)
+}
