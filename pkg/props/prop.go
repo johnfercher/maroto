@@ -73,6 +73,7 @@ type Font struct {
 	Size float64
 }
 
+// TableListContent represents properties from a line (header/content) from a TableList
 type TableListContent struct {
 	// Family of the text, ex: consts.Arial, helvetica and etc
 	Family consts.Family
