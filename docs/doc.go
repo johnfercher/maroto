@@ -42,7 +42,7 @@ The following Go Code generates a simple PDF file.
     m := pdf.NewMaroto(consts.Portrait, consts.Letter)
 
     m.Row(10, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.Text(props.Text{
 				Size: 18,
 				Style: consts.Bold,

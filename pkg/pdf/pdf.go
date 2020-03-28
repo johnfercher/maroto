@@ -21,16 +21,6 @@ type Maroto interface {
 	RegisterHeader(closure func())
 	RegisterFooter(closure func())
 
-	// Helpers
-	SetBorder(on bool)
-	SetBackgroundColor(color color.Color)
-	GetBorder() bool
-	GetPageSize() (width float64, height float64)
-	GetCurrentPage() int
-	GetCurrentOffset() float64
-	SetPageMargins(left, top, right float64)
-	GetPageMargins() (left float64, top float64, right float64, bottom float64)
-
 	// Outside Col/Row Components
 	TableList(header []string, contents [][]string, prop ...props.TableList)
 	Line(spaceHeight float64)
@@ -46,6 +36,16 @@ type Maroto interface {
 	// File System
 	OutputFileAndClose(filePathName string) error
 	Output() (bytes.Buffer, error)
+
+	// Helpers
+	SetBorder(on bool)
+	SetBackgroundColor(color color.Color)
+	GetBorder() bool
+	GetPageSize() (width float64, height float64)
+	GetCurrentPage() int
+	GetCurrentOffset() float64
+	SetPageMargins(left, top, right float64)
+	GetPageMargins() (left float64, top float64, right float64, bottom float64)
 }
 
 // PdfMaroto is the principal structure which implements Maroto abstraction
@@ -163,7 +163,10 @@ func (s *PdfMaroto) SetPageMargins(left, top, right float64) {
 // GetPageMargins returns the set page margins. Comes in order of Left, Top, Right, Bottom
 // Default page margins is left: 10, top: 10, right: 10
 func (s *PdfMaroto) GetPageMargins() (left float64, top float64, right float64, bottom float64) {
-	return s.Pdf.GetMargins()
+	left, top, right, bottom = s.Pdf.GetMargins()
+	top += s.marginTop
+
+	return
 }
 
 // Signature add a space for a signature inside a cell,

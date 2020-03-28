@@ -13,19 +13,11 @@ import (
 func main() {
 	begin := time.Now()
 
-	darkGrayColor := color.Color{
-		Red:   144,
-		Green: 144,
-		Blue:  144,
-	}
-
-	grayColor := color.Color{
-		Red:   200,
-		Green: 200,
-		Blue:  200,
-	}
-
+	darkGrayColor := getDarkGrayColor()
+	grayColor := getGrayColor()
 	whiteColor := color.NewWhite()
+	header := getHeader()
+	contents := getContents()
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetPageMargins(10, 15, 10)
@@ -109,37 +101,6 @@ func main() {
 
 	m.SetBackgroundColor(whiteColor)
 
-	header := []string{"", "Product", "Quantity", "Price"}
-	contents := [][]string{
-		{"", "Swamp", "12", "R$ 4,00"},
-		{"", "Sorin, A Planeswalker", "4", "R$ 90,00"},
-		{"", "Tassa", "4", "R$ 30,00"},
-		{"", "Skinrender", "4", "R$ 9,00"},
-		{"", "Island", "12", "R$ 4,00"},
-		{"", "Mountain", "12", "R$ 4,00"},
-		{"", "Plain", "12", "R$ 4,00"},
-		{"", "Black Lotus", "1", "R$ 1.000,00"},
-		{"", "Time Walk", "1", "R$ 1.000,00"},
-		{"", "Emberclave", "4", "R$ 44,00"},
-		{"", "Anax", "4", "R$ 32,00"},
-		{"", "Murderous Rider", "4", "R$ 22,00"},
-		{"", "Gray Merchant of Asphodel", "4", "R$ 2,00"},
-		{"", "Ajani's Pridemate", "4", "R$ 2,00"},
-		{"", "Renan, Chatuba", "4", "R$ 19,00"},
-		{"", "Tymarett", "4", "R$ 13,00"},
-		{"", "Doom Blade", "4", "R$ 5,00"},
-		{"", "Dark Lord", "3", "R$ 7,00"},
-		{"", "Memory of Thanatos", "3", "R$ 32,00"},
-		{"", "Poring", "4", "R$ 1,00"},
-		{"", "Deviling", "4", "R$ 99,00"},
-		{"", "Seiya", "4", "R$ 45,00"},
-		{"", "Harry Potter", "4", "R$ 62,00"},
-		{"", "Goku", "4", "R$ 77,00"},
-		{"", "Phreoni", "4", "R$ 22,00"},
-		{"", "Katheryn High Wizard", "4", "R$ 25,00"},
-		{"", "Lord Seyren", "4", "R$ 55,00"},
-	}
-
 	m.TableList(header, contents, props.TableList{
 		HeaderProp: props.TableListContent{
 			Size:      9,
@@ -203,4 +164,56 @@ func main() {
 
 	end := time.Now()
 	fmt.Println(end.Sub(begin))
+}
+
+func getHeader() []string {
+	return []string{"", "Product", "Quantity", "Price"}
+}
+
+func getContents() [][]string {
+	return [][]string{
+		{"", "Swamp", "12", "R$ 4,00"},
+		{"", "Sorin, A Planeswalker", "4", "R$ 90,00"},
+		{"", "Tassa", "4", "R$ 30,00"},
+		{"", "Skinrender", "4", "R$ 9,00"},
+		{"", "Island", "12", "R$ 4,00"},
+		{"", "Mountain", "12", "R$ 4,00"},
+		{"", "Plain", "12", "R$ 4,00"},
+		{"", "Black Lotus", "1", "R$ 1.000,00"},
+		{"", "Time Walk", "1", "R$ 1.000,00"},
+		{"", "Emberclave", "4", "R$ 44,00"},
+		{"", "Anax", "4", "R$ 32,00"},
+		{"", "Murderous Rider", "4", "R$ 22,00"},
+		{"", "Gray Merchant of Asphodel", "4", "R$ 2,00"},
+		{"", "Ajani's Pridemate", "4", "R$ 2,00"},
+		{"", "Renan, Chatuba", "4", "R$ 19,00"},
+		{"", "Tymarett", "4", "R$ 13,00"},
+		{"", "Doom Blade", "4", "R$ 5,00"},
+		{"", "Dark Lord", "3", "R$ 7,00"},
+		{"", "Memory of Thanatos", "3", "R$ 32,00"},
+		{"", "Poring", "4", "R$ 1,00"},
+		{"", "Deviling", "4", "R$ 99,00"},
+		{"", "Seiya", "4", "R$ 45,00"},
+		{"", "Harry Potter", "4", "R$ 62,00"},
+		{"", "Goku", "4", "R$ 77,00"},
+		{"", "Phreoni", "4", "R$ 22,00"},
+		{"", "Katheryn High Wizard", "4", "R$ 25,00"},
+		{"", "Lord Seyren", "4", "R$ 55,00"},
+	}
+}
+
+func getDarkGrayColor() color.Color {
+	return color.Color{
+		Red:   144,
+		Green: 144,
+		Blue:  144,
+	}
+}
+
+func getGrayColor() color.Color {
+	return color.Color{
+		Red:   200,
+		Green: 200,
+		Blue:  200,
+	}
 }
