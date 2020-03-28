@@ -177,7 +177,14 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 
 	signProp.MakeValid()
 
-	s.SignHelper.AddSpaceFor(label, signProp.ToTextProp(consts.Center, 0.0, false, 0), s.colWidth, s.offsetY, s.xColOffset, s.rowHeight)
+	cell := internal.Cell{
+		X:      s.xColOffset,
+		Y:      s.offsetY,
+		Width:  s.colWidth,
+		Height: s.rowHeight,
+	}
+
+	s.SignHelper.AddSpaceFor(label, cell, signProp.ToTextProp(consts.Center, 0.0, false, 0))
 }
 
 // TableList create a table with multiple rows and columns.
