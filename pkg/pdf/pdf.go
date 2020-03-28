@@ -364,9 +364,14 @@ func (s *PdfMaroto) Barcode(code string, prop ...props.Barcode) (err error) {
 
 	barcodeProp.MakeValid()
 
-	sumOfyOffsets := s.offsetY + barcodeProp.Top
+	cell := internal.Cell{
+		X:      s.xColOffset,
+		Y:      s.offsetY + barcodeProp.Top,
+		Width:  s.colWidth,
+		Height: s.rowHeight,
+	}
 
-	err = s.Code.AddBar(code, sumOfyOffsets, s.xColOffset, s.colWidth, s.rowHeight, barcodeProp)
+	err = s.Code.AddBar(code, cell, barcodeProp)
 
 	return
 }
@@ -380,9 +385,14 @@ func (s *PdfMaroto) QrCode(code string, prop ...props.Rect) {
 
 	rectProp.MakeValid()
 
-	yColOffset := s.offsetY + rectProp.Top
+	cell := internal.Cell{
+		X:      s.xColOffset,
+		Y:      s.offsetY + rectProp.Top,
+		Width:  s.colWidth,
+		Height: s.rowHeight,
+	}
 
-	s.Code.AddQr(code, yColOffset, s.xColOffset, s.colWidth, s.rowHeight, rectProp)
+	s.Code.AddQr(code, cell, rectProp)
 }
 
 // OutputFileAndClose save pdf in disk.
