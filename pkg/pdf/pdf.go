@@ -65,7 +65,6 @@ type PdfMaroto struct {
 	xColOffset                float64
 	colWidth                  float64
 	backgroundColor           color.Color
-	colsClosures              []func()
 	headerClosure             func()
 	footerClosure             func()
 	footerHeight              float64
@@ -273,18 +272,9 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 	s.rowHeight = height
 	s.xColOffset = 0
 
-	// This closure has only maroto.Cols, which are
-	// not executed firstly, they are added to colsClosures
-	// and this enable us to know how many cols will be added
-	// and calculate the width from the cells
+	// This closure has the Cols to be executed
 	closure()
 
-	// Execute the codes inside the Cols
-	//for _, colClosure := range s.colsClosures {
-	//	colClosure()
-	//}
-
-	s.colsClosures = nil
 	s.offsetY += s.rowHeight
 	s.Pdf.Ln(s.rowHeight)
 }
@@ -305,7 +295,9 @@ func (s *PdfMaroto) Col(width uint, closure func()) {
 	s.colWidth = widthPerCol
 	s.createColSpace(widthPerCol)
 
+	// This closure has the components to be executed
 	closure()
+
 	s.xColOffset += s.colWidth
 }
 
