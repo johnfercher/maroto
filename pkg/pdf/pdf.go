@@ -335,9 +335,14 @@ func (s *PdfMaroto) FileImage(filePathName string, prop ...props.Rect) error {
 
 	rectProp.MakeValid()
 
-	sumOfyOffsets := s.offsetY + rectProp.Top
+	cell := internal.Cell{
+		X:      s.xColOffset,
+		Y:      s.offsetY + rectProp.Top,
+		Width:  s.colWidth,
+		Height: s.rowHeight,
+	}
 
-	return s.Image.AddFromFile(filePathName, sumOfyOffsets, s.xColOffset, s.colWidth, s.rowHeight, rectProp)
+	return s.Image.AddFromFile(filePathName, cell, rectProp)
 }
 
 // Base64Image add an Image reading byte slices inside a cell.
@@ -350,9 +355,14 @@ func (s *PdfMaroto) Base64Image(base64 string, extension consts.Extension, prop 
 
 	rectProp.MakeValid()
 
-	sumOfyOffsets := s.offsetY + rectProp.Top
+	cell := internal.Cell{
+		X:      s.xColOffset,
+		Y:      s.offsetY + rectProp.Top,
+		Width:  s.colWidth,
+		Height: s.rowHeight,
+	}
 
-	return s.Image.AddFromBase64(base64, sumOfyOffsets, s.xColOffset, s.colWidth, s.rowHeight, rectProp, extension)
+	return s.Image.AddFromBase64(base64, cell, rectProp, extension)
 }
 
 // Barcode create an barcode inside a cell.

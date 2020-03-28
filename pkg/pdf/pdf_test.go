@@ -452,7 +452,7 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromFile", 1)
-				image.AssertCalled(t, "AddFromFile", "Image1", 0.0, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromFile", "Image1", internal.Cell{0.0, 0.0, 80.0, 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 100.0,
@@ -476,13 +476,13 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "Image2", 4.0, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromFile", "Image2", internal.Cell{0.0, 4.0, 80.0, 20.0}, props.Rect{
 					Left:    2,
 					Top:     4,
 					Percent: 40,
 					Center:  false,
 				})
-				image.AssertCalled(t, "AddFromFile", "Image3", 0.0, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromFile", "Image3", internal.Cell{0.0, 0.0, 80.0, 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 40,
@@ -514,13 +514,13 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "Image4", 4.5, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromFile", "Image4", internal.Cell{0.0, 4.5, 80.0, 20.0}, props.Rect{
 					Left:    4,
 					Top:     4.5,
 					Percent: 55,
 					Center:  false,
 				})
-				image.AssertCalled(t, "AddFromFile", "Image5", 0.0, 80.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromFile", "Image5", internal.Cell{80.0, 0.0, 80.0, 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 53,
@@ -554,13 +554,13 @@ func TestPdfMaroto_FileImage(t *testing.T) {
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromFile", 2)
-				image.AssertCalled(t, "AddFromFile", "Image6", 8.5, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromFile", "Image6", internal.Cell{0.0, 8.5, 80.0, 20.0}, props.Rect{
 					Left:    7,
 					Top:     8.5,
 					Percent: 66,
 					Center:  false,
 				})
-				image.AssertCalled(t, "AddFromFile", "Image7", 20.0, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromFile", "Image7", internal.Cell{0.0, 20.0, 80.0, 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 98,
@@ -622,7 +622,7 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromBase64", 1)
-				image.AssertCalled(t, "AddFromBase64", "Image1", 0.0, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromBase64", "Image1", internal.Cell{0.0, 0.0, 80.0, 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 100,
@@ -646,13 +646,13 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image2", 4.0, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromBase64", "Image2", internal.Cell{0.0, 4.0, 80.0, 20.0}, props.Rect{
 					Left:    2,
 					Top:     4,
 					Percent: 40,
 					Center:  false,
 				}, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image3", 0.0, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromBase64", "Image3", internal.Cell{0.0, 0.0, 80.0, 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 40,
@@ -684,13 +684,13 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image4", 4.5, 0.0, 40.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromBase64", "Image4", internal.Cell{0.0, 4.5, 40.0, 20.0}, props.Rect{
 					Left:    4,
 					Top:     4.5,
 					Percent: 55,
 					Center:  false,
 				}, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image5", 0.0, 40.0, 40.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromBase64", "Image5", internal.Cell{40.0, 0.0, 40.0, 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 53,
@@ -724,13 +724,13 @@ func TestPdfMaroto_Base64Image(t *testing.T) {
 			},
 			func(t *testing.T, image *mocks.Image) {
 				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image6", 8.5, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromBase64", "Image6", internal.Cell{0.0, 8.5, 80.0, 20.0}, props.Rect{
 					Left:    7,
 					Top:     8.5,
 					Percent: 66,
 					Center:  false,
 				}, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image7", 20.0, 0.0, 80.0, 20.0, props.Rect{
+				image.AssertCalled(t, "AddFromBase64", "Image7", internal.Cell{0.0, 20.0, 80.0, 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 98,
