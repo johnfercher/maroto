@@ -284,8 +284,14 @@ func TestText_Add(t *testing.T) {
 
 		text := internal.NewText(_pdf, nil, _font)
 
+		cell := internal.Cell{
+			X:     1.0,
+			Y:     5.0,
+			Width: 15.0,
+		}
+
 		// Act
-		text.Add(c.text, props.Text{Family: consts.Arial, Style: consts.BoldItalic, Size: 16.0, Align: c.align}, 5.0, 1, 15.0)
+		text.Add(c.text, cell, props.Text{Family: consts.Arial, Style: consts.BoldItalic, Size: 16.0, Align: c.align})
 
 		// Assert
 		c.assertPdf(t, _pdf)
