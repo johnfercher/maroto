@@ -13,19 +13,11 @@ import (
 func main() {
 	begin := time.Now()
 
-	darkGrayColor := color.Color{
-		Red:   144,
-		Green: 144,
-		Blue:  144,
-	}
-
-	grayColor := color.Color{
-		Red:   200,
-		Green: 200,
-		Blue:  200,
-	}
-
+	darkGrayColor := getDarkGrayColor()
+	grayColor := getGrayColor()
 	whiteColor := color.NewWhite()
+	header := getHeader()
+	contents := getContents()
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetPageMargins(10, 15, 10)
@@ -33,42 +25,40 @@ func main() {
 
 	m.RegisterHeader(func() {
 		m.Row(20, func() {
-			m.Col(func() {
+			m.Col(3, func() {
 				_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
 					Center:  true,
 					Percent: 80,
 				})
 			})
-			m.ColSpaces(2)
-			m.Col(func() {
+
+			m.ColSpace(6)
+
+			m.Col(3, func() {
 				m.Text("AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.", props.Text{
-					Top:         4,
 					Size:        8,
 					Align:       consts.Right,
 					Extrapolate: false,
 				})
 				m.Text("Tel: 55 024 12345-1234", props.Text{
-					Top:   16,
+					Top:   12,
 					Style: consts.BoldItalic,
 					Size:  8,
 					Align: consts.Right,
 				})
 				m.Text("www.mycompany.com", props.Text{
-					Top:   19,
+					Top:   15,
 					Style: consts.BoldItalic,
 					Size:  8,
 					Align: consts.Right,
 				})
 			})
 		})
-		m.Row(5, func() {
-			m.ColSpace()
-		})
 	})
 
 	m.RegisterFooter(func() {
 		m.Row(20, func() {
-			m.Col(func() {
+			m.Col(12, func() {
 				m.Text("Tel: 55 024 12345-1234", props.Text{
 					Top:   13,
 					Style: consts.BoldItalic,
@@ -86,9 +76,9 @@ func main() {
 	})
 
 	m.Row(10, func() {
-		m.Col(func() {
+		m.Col(12, func() {
 			m.Text("Invoice ABC123456789", props.Text{
-				Top:   6,
+				Top:   3,
 				Style: consts.Bold,
 				Align: consts.Center,
 			})
@@ -96,21 +86,92 @@ func main() {
 	})
 
 	m.SetBackgroundColor(darkGrayColor)
+
 	m.Row(7, func() {
-		m.Col(func() {
+		m.Col(3, func() {
 			m.Text("Transactions", props.Text{
-				Top:   4.5,
+				Top:   1.5,
 				Size:  9,
 				Style: consts.Bold,
 				Align: consts.Center,
 			})
 		})
-		m.ColSpaces(3)
+		m.ColSpace(9)
 	})
+
 	m.SetBackgroundColor(whiteColor)
 
-	header := []string{"", "Product", "Quantity", "Price"}
-	contents := [][]string{
+	m.TableList(header, contents, props.TableList{
+		HeaderProp: props.TableListContent{
+			Size:      9,
+			GridSizes: []uint{3, 4, 2, 3},
+		},
+		ContentProp: props.TableListContent{
+			Size:      8,
+			GridSizes: []uint{3, 4, 2, 3},
+		},
+		Align:                consts.Center,
+		AlternatedBackground: &grayColor,
+		HeaderContentSpace:   1,
+		Line:                 false,
+	})
+
+	m.Row(20, func() {
+		m.ColSpace(7)
+		m.Col(2, func() {
+			m.Text("Total:", props.Text{
+				Top:   5,
+				Style: consts.Bold,
+				Size:  8,
+				Align: consts.Right,
+			})
+		})
+		m.Col(3, func() {
+			m.Text("R$ 2.567,00", props.Text{
+				Top:   5,
+				Style: consts.Bold,
+				Size:  8,
+				Align: consts.Center,
+			})
+		})
+	})
+
+	m.Row(15, func() {
+		m.Col(6, func() {
+			_ = m.Barcode("5123.151231.512314.1251251.123215", props.Barcode{
+				Percent: 0,
+				Proportion: props.Proportion{
+					Width:  20,
+					Height: 2,
+				},
+			})
+			m.Text("5123.151231.512314.1251251.123215", props.Text{
+				Top:    12,
+				Family: "",
+				Style:  consts.Bold,
+				Size:   9,
+				Align:  consts.Center,
+			})
+		})
+		m.ColSpace(6)
+	})
+
+	err := m.OutputFileAndClose("internal/examples/pdfs/billing.pdf")
+	if err != nil {
+		fmt.Println("Could not save PDF:", err)
+		os.Exit(1)
+	}
+
+	end := time.Now()
+	fmt.Println(end.Sub(begin))
+}
+
+func getHeader() []string {
+	return []string{"", "Product", "Quantity", "Price"}
+}
+
+func getContents() [][]string {
+	return [][]string{
 		{"", "Swamp", "12", "R$ 4,00"},
 		{"", "Sorin, A Planeswalker", "4", "R$ 90,00"},
 		{"", "Tassa", "4", "R$ 30,00"},
@@ -139,66 +200,20 @@ func main() {
 		{"", "Katheryn High Wizard", "4", "R$ 25,00"},
 		{"", "Lord Seyren", "4", "R$ 55,00"},
 	}
+}
 
-	m.TableList(header, contents, props.TableList{
-		HeaderProp: props.Font{
-			Size: 9,
-		},
-		ContentProp: props.Font{
-			Size: 8,
-		},
-		Align:                consts.Center,
-		AlternatedBackground: &grayColor,
-		HeaderContentSpace:   1,
-		Line:                 false,
-	})
-
-	m.Row(20, func() {
-		m.ColSpaces(2)
-		m.Col(func() {
-			m.Text("Total:", props.Text{
-				Top:   5,
-				Style: consts.Bold,
-				Size:  8,
-				Align: consts.Right,
-			})
-		})
-		m.Col(func() {
-			m.Text("R$ 2.567,00", props.Text{
-				Top:   5,
-				Style: consts.Bold,
-				Size:  8,
-				Align: consts.Center,
-			})
-		})
-	})
-
-	m.Row(15, func() {
-		m.Col(func() {
-			_ = m.Barcode("5123.151231.512314.1251251.123215", props.Barcode{
-				Percent: 0,
-				Proportion: props.Proportion{
-					Width:  20,
-					Height: 2,
-				},
-			})
-			m.Text("5123.151231.512314.1251251.123215", props.Text{
-				Top:    12,
-				Family: "",
-				Style:  consts.Bold,
-				Size:   9,
-				Align:  consts.Center,
-			})
-		})
-		m.ColSpace()
-	})
-
-	err := m.OutputFileAndClose("internal/examples/pdfs/billing.pdf")
-	if err != nil {
-		fmt.Println("Could not save PDF:", err)
-		os.Exit(1)
+func getDarkGrayColor() color.Color {
+	return color.Color{
+		Red:   144,
+		Green: 144,
+		Blue:  144,
 	}
+}
 
-	end := time.Now()
-	fmt.Println(end.Sub(begin))
+func getGrayColor() color.Color {
+	return color.Color{
+		Red:   200,
+		Green: 200,
+		Blue:  200,
+	}
 }

@@ -40,23 +40,19 @@ func TestCode_AddBar(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "GetImageInfo", 1)
-				pdf.AssertCalled(t, "GetImageInfo", "barcode-Code 128AnyCode-1E+023E+01")
+				pdf.AssertCalled(t, "GetImageInfo", "barcode-Code 128AnyCode-1E+022.2E+01")
 
 				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+				pdf.AssertCalled(t, "Image", "", 100, 22, 33, 0)
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				math.AssertCalled(t, "GetWidthPerCol", 5.0)
-
 				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 28, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 5, 2, 5, 40, 10, props.Rect{Center: false, Left: 10, Top: 10})
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
@@ -74,23 +70,19 @@ func TestCode_AddBar(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, pdf *mocks.Pdf) {
 				pdf.AssertNumberOfCalls(t, "GetImageInfo", 1)
-				pdf.AssertCalled(t, "GetImageInfo", "barcode-Code 128AnyCode-1E+023E+01")
+				pdf.AssertCalled(t, "GetImageInfo", "barcode-Code 128AnyCode-1E+022.2E+01")
 
 				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+				pdf.AssertCalled(t, "Image", "", 100, 22, 33, 0)
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				math.AssertCalled(t, "GetWidthPerCol", 5.0)
-
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 50, 50, 5, 40, 2, 100)
+				math.AssertCalled(t, "GetRectCenterColProperties", 5, 5, 5, 40, 10, 100)
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
@@ -108,7 +100,6 @@ func TestCode_AddBar(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -117,7 +108,6 @@ func TestCode_AddBar(t *testing.T) {
 				pdf.AssertNotCalled(t, "Image")
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNotCalled(t, "GetWidthPerCol")
 				math.AssertNotCalled(t, "GetRectCenterColProperties")
 			},
 			func(t *testing.T, err error) {
@@ -133,9 +123,15 @@ func TestCode_AddBar(t *testing.T) {
 		math := c.math()
 
 		code := internal.NewCode(pdf, math)
+		cell := internal.Cell{
+			X:      10,
+			Y:      2,
+			Width:  5,
+			Height: 40,
+		}
 
 		// Act
-		err := code.AddBar(c.code, 10, 2, 5, 40, c.prop)
+		err := code.AddBar(c.code, cell, c.prop)
 
 		// Assert
 		c.assertPdf(t, pdf)
@@ -165,7 +161,6 @@ func TestCode_AddQr(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -177,11 +172,8 @@ func TestCode_AddQr(t *testing.T) {
 				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				math.AssertCalled(t, "GetWidthPerCol", 5.0)
-
 				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 50, 50, 5, 40, 2, 100)
+				math.AssertCalled(t, "GetRectCenterColProperties", 5, 5, 5, 40, 2, 100)
 			},
 			props.Rect{Center: true, Percent: 100},
 		},
@@ -196,7 +188,6 @@ func TestCode_AddQr(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -208,11 +199,8 @@ func TestCode_AddQr(t *testing.T) {
 				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetWidthPerCol", 1)
-				math.AssertCalled(t, "GetWidthPerCol", 5.0)
-
 				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectNonCenterColProperties", 50, 50, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 5, 5, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
 			},
 			props.Rect{Center: false, Left: 10, Top: 10},
 		},
@@ -224,9 +212,15 @@ func TestCode_AddQr(t *testing.T) {
 		math := c.math()
 
 		code := internal.NewCode(pdf, math)
+		cell := internal.Cell{
+			X:      2,
+			Y:      10,
+			Width:  5,
+			Height: 40,
+		}
 
 		// Act
-		code.AddQr(c.code, 10, 2, 5, 40, c.prop)
+		code.AddQr(c.code, cell, c.prop)
 
 		// Assert
 		c.assertPdf(t, pdf)

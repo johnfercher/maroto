@@ -3,7 +3,7 @@
 package mocks
 
 import consts "github.com/johnfercher/maroto/pkg/consts"
-
+import internal "github.com/johnfercher/maroto/internal"
 import mock "github.com/stretchr/testify/mock"
 import props "github.com/johnfercher/maroto/pkg/props"
 
@@ -12,13 +12,13 @@ type Image struct {
 	mock.Mock
 }
 
-// AddFromBase64 provides a mock function with given fields: b64, marginTop, indexCol, qtdCols, colHeight, prop, extension
-func (_m *Image) AddFromBase64(b64 string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect, extension consts.Extension) error {
-	ret := _m.Called(b64, marginTop, indexCol, qtdCols, colHeight, prop, extension)
+// AddFromBase64 provides a mock function with given fields: stringBase64, cell, prop, extension
+func (_m *Image) AddFromBase64(stringBase64 string, cell internal.Cell, prop props.Rect, extension consts.Extension) error {
+	ret := _m.Called(stringBase64, cell, prop, extension)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(string, float64, float64, float64, float64, props.Rect, consts.Extension) error); ok {
-		r0 = rf(b64, marginTop, indexCol, qtdCols, colHeight, prop, extension)
+	if rf, ok := ret.Get(0).(func(string, internal.Cell, props.Rect, consts.Extension) error); ok {
+		r0 = rf(stringBase64, cell, prop, extension)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -26,13 +26,13 @@ func (_m *Image) AddFromBase64(b64 string, marginTop float64, indexCol float64, 
 	return r0
 }
 
-// AddFromFile provides a mock function with given fields: path, marginTop, indexCol, qtdCols, colHeight, prop
-func (_m *Image) AddFromFile(path string, marginTop float64, indexCol float64, qtdCols float64, colHeight float64, prop props.Rect) error {
-	ret := _m.Called(path, marginTop, indexCol, qtdCols, colHeight, prop)
+// AddFromFile provides a mock function with given fields: path, cell, prop
+func (_m *Image) AddFromFile(path string, cell internal.Cell, prop props.Rect) error {
+	ret := _m.Called(path, cell, prop)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(string, float64, float64, float64, float64, props.Rect) error); ok {
-		r0 = rf(path, marginTop, indexCol, qtdCols, colHeight, prop)
+	if rf, ok := ret.Get(0).(func(string, internal.Cell, props.Rect) error); ok {
+		r0 = rf(path, cell, prop)
 	} else {
 		r0 = ret.Error(0)
 	}

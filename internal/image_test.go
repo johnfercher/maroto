@@ -165,9 +165,15 @@ func TestImage_AddFromFile(t *testing.T) {
 		math := c.math()
 
 		image := internal.NewImage(pdf, math)
+		cell := internal.Cell{
+			X:      1.0,
+			Y:      10.0,
+			Width:  4.0,
+			Height: 5.0,
+		}
 
 		// Act
-		err := image.AddFromFile("AnyPath", 10.0, 1.0, 4.0, 5.0, c.props)
+		err := image.AddFromFile("AnyPath", cell, c.props)
 
 		// Assert
 		c.assertPdfCalls(t, pdf)
@@ -287,9 +293,15 @@ func TestImage_AddFromBase64(t *testing.T) {
 
 		image := internal.NewImage(pdf, math)
 		base64 := getBase64String()
+		cell := internal.Cell{
+			X:      1.0,
+			Y:      10.0,
+			Width:  4.0,
+			Height: 5.0,
+		}
 
 		// Act
-		err := image.AddFromBase64(base64, 10.0, 1.0, 4.0, 5.0, props.Rect{Center: true, Percent: 100}, consts.Jpg)
+		err := image.AddFromBase64(base64, cell, props.Rect{Center: true, Percent: 100}, consts.Jpg)
 
 		// Assert
 		c.assertPdfCalls(t, pdf)
