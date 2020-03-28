@@ -32,7 +32,7 @@ func TestSignature_AddSpaceFor_DefaultMargins(t *testing.T) {
 	signature := internal.NewSignature(pdf, math, text)
 
 	// Act
-	signature.AddSpaceFor("label", props.Text{Size: 10.0}, 5, 5, 2, 0)
+	signature.AddSpaceFor("label", internal.Cell{5, 5, 2, 0}, props.Text{Size: 10.0})
 
 	// Assert
 	pdf.AssertNumberOfCalls(t, "Line", 1)
@@ -56,7 +56,7 @@ func TestSignature_AddSpaceFor_NotDefaultMargins(t *testing.T) {
 	signature := internal.NewSignature(pdf, math, text)
 
 	// Act
-	signature.AddSpaceFor("label", props.Text{Size: 10.0}, 5, 5, 2, 0)
+	signature.AddSpaceFor("label", internal.Cell{2, 5, 5, 0}, props.Text{Size: 10.0})
 
 	// Assert
 	pdf.AssertNumberOfCalls(t, "Line", 1)
