@@ -38,6 +38,7 @@ type Maroto interface {
 	Output() (bytes.Buffer, error)
 
 	// Helpers
+	AddPage()
 	SetBorder(on bool)
 	SetBackgroundColor(color color.Color)
 	GetBorder() bool
@@ -118,6 +119,19 @@ func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto 
 	maroto.Pdf.AddPage()
 
 	return maroto
+}
+
+// AddPage adds a new page in the PDF
+func (s *PdfMaroto) AddPage() {
+	_, pageHeight := s.Pdf.GetPageSize()
+	_, top, _, bottom := s.Pdf.GetMargins()
+
+	totalOffsetY := int(s.offsetY + s.footerHeight)
+	maxOffsetPage := int(pageHeight - bottom - top)
+
+	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
+		s.ColSpace(12)
+	})
 }
 
 // RegisterHeader define a sequence of Rows, Lines ou TableLists
@@ -435,7 +449,7 @@ func (s *PdfMaroto) createColSpace(actualWidthPerCol float64) {
 		border = "1"
 	}
 
-	s.Pdf.CellFormat(actualWidthPerCol, s.rowHeight, "", border, 0.0, "C", !s.backgroundColor.IsWhite(), 0.0, "")
+	s.Pdf.CellFormat(actualWidthPerCol, s.rowHeight, "", border, 0, "C", !s.backgroundColor.IsWhite(), 0, "")
 }
 
 func (s *PdfMaroto) drawLastFooter() {
