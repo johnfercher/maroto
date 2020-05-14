@@ -21,7 +21,6 @@ func main() {
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetPageMargins(10, 15, 10)
-	//m.SetBorder(true)
 
 	m.RegisterHeader(func() {
 		m.Row(20, func() {
