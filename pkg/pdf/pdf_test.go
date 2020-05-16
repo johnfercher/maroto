@@ -1845,3 +1845,17 @@ func TestPdfMaroto_GetPageMargins(t *testing.T) {
 	assert.Equal(t, 0.0, right)
 	assert.Equal(t, 0.0, bottom)
 }
+
+func TestPdfMaroto_AddPage(t *testing.T) {
+	// Arrange
+	pdf := basePdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(pdf, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.AddPage()
+
+	// Assert
+	pdf.AssertCalled(t, "CellFormat", 80, 0, "", "", 0, "C", false, 0, "")
+	pdf.AssertCalled(t, "SetFillColor", 255, 255, 255)
+	pdf.AssertCalled(t, "Ln", 90.0)
+}

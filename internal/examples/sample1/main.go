@@ -156,6 +156,8 @@ func main() {
 		},
 	})
 
+	m.AddPage()
+
 	m.Row(15, func() {
 		m.Col(12, func() {
 			m.Text(fmt.Sprintf("Medium Packages / %du.", len(mediumContent)), props.Text{
@@ -218,12 +220,6 @@ func getSmallContent() ([]string, [][]string) {
 	contents = append(contents, []string{"São Vicente", "Juiz de Fora", "R$ 35,00"})
 	contents = append(contents, []string{"Taubaté", "Rio de Janeiro", "R$ 82,00"})
 	contents = append(contents, []string{"Suzano", "Petrópolis", "R$ 62,00"})
-	contents = append(contents, []string{"Jundiaí", "Florianópolis", "R$ 21,00"})
-	contents = append(contents, []string{"Natal", "Jundiaí", "R$ 12,00"})
-	contents = append(contents, []string{"Niterói", "Itapevi", "R$ 21,00"})
-	contents = append(contents, []string{"São Paulo", "Rio de Janeiro", "R$ 31,00"})
-	contents = append(contents, []string{"São Carlos", "Petrópolis", "R$ 42,00"})
-	contents = append(contents, []string{"Florianópolis", "Osasco", "R$ 19,00"})
 
 	return header, contents
 }

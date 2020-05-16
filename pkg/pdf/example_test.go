@@ -20,6 +20,17 @@ func ExampleNewMaroto() {
 	// Do more things and save...
 }
 
+// ExamplePdfMaroto_AddPage how to force add a new page
+func ExamplePdfMaroto_AddPage() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Add rows, cols and components
+	m.AddPage()
+
+	// Add rows, col and components in a new page
+	// Do more things and save...
+}
+
 // ExamplePdfMaroto_Row demonstrates how to define a row.
 func ExamplePdfMaroto_Row() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
