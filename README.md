@@ -23,36 +23,37 @@ go get -u github.com/johnfercher/maroto
 ```
 
 ## Features
-
 ![result](internal/assets/images/diagram.png)
 
 #### Grid System
-* [Row](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Row)
-* [Col](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Col)
-* [ColSpace](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-ColSpace)
-* [ColSpaces](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-ColSpaces)
+* [Row](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Row)
+* [Col](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Col)
+* [ColSpace](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.ColSpace)
+* [AddPage](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.AddPage)
 
 #### Components To Use Inside a Col
-* [Text w/ automatic new lines](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Text)
-* [Signature](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Signature)
-* Image ([From file](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-FileImage) or [Base64](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Base64Image))
-* [QrCode](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.QrCode)
-* [Barcode](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.Barcode)   
+* [Text w/ automatic new lines](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Text)
+* [Signature](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Signature)
+* Image ([From file](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.FileImage) or [Base64](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Base64Image))
+* [QrCode](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.QrCode)
+* [Barcode](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Barcode)   
     
 #### Components To Use Outside a Row
-* [TableList](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-TableList)
-* [Line](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Line)
+* [TableList](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.TableList)
+* [Line](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Line)
     
 #### Components To Wrap Row, TableList and Line
-* [RegisterHeader](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.RegisterHeader)
-* [RegisterFooter](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.RegisterFooter)
+* [RegisterHeader](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.RegisterHeader)
+* [RegisterFooter](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.RegisterFooter)
 
 #### Others   
-* [Properties](https://godoc.org/github.com/johnfercher/maroto/pkg/props): most of the components has properties which you can use to customize appearance and behavior.
-* [SetBorder](https://godoc.org/github.com/johnfercher/maroto#PdfMaroto.SetDebugMode): Used to draw rectangles in every row and column
+* [Properties](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/props?tab=doc): most of the components has properties which you can use to customize appearance and behavior.
+* [SetBorder](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetBorder): Used to draw rectangles in every row and column
+* [SetBackgroundColor](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetBackgroundColor): Used to change the background color of one cell.
+* [SetPageMargins](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetPageMargins): Customize the page margins
 * Automatic New Page: New pages are generated automatically when needed.
 * 100% Unicode
-* Save: You can [save on disk](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-OutputFileAndClose) or export to a [base64 string](https://godoc.org/github.com/johnfercher/maroto/pkg/pdf#example-PdfMaroto-Output)
+* Save: You can [save on disk](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.OutputFileAndClose) or export to a [base64 string](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Output)
 
 #### Roadmap
 * Updated in [Issues](https://github.com/johnfercher/maroto/issues)
