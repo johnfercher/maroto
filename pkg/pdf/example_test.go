@@ -20,6 +20,16 @@ func ExampleNewMaroto() {
 	// Do more things and save...
 }
 
+// ExampleNewMaroto demonstrates how to create maroto with custom page size
+func ExampleNewMarotoCustomSize() {
+	m := pdf.NewMarotoCustomSize(consts.Landscape, "C6", "mm", 114.0, 162.0)
+
+	// Do things
+	m.GetPageMargins()
+
+	// Do more things and save...
+}
+
 // ExamplePdfMaroto_AddPage how to force add a new page
 func ExamplePdfMaroto_AddPage() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
