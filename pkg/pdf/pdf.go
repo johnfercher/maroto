@@ -78,6 +78,8 @@ type PdfMaroto struct {
 
 // NewMarotoCustomSize creates a Maroto instance returning a pointer to PdfMaroto
 // Receive an Orientation and a PageSize.
+// Use if custom page size is needed. Otherwise use NewMaroto() shorthand if using page sizes from consts.Pagesize.
+// If using custom width and height, pageSize is just a string value for the format and takes no effect.
 func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSize, unitStr string, width, height float64) Maroto {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: string(orientation),
@@ -132,7 +134,7 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 
 // NewMaroto create a Maroto instance returning a pointer to PdfMaroto
 // Receive an Orientation and a PageSize.
-// Uses NewMarotoCustomSize internally but is a better shorthand when using a preset page size from consts.PageSize
+// Shorthand when using a preset page size from consts.PageSize
 func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto {
 	return NewMarotoCustomSize(orientation, pageSize, "mm", 0, 0)
 }
