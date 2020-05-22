@@ -155,6 +155,88 @@ func TestNewPdf(t *testing.T) {
 
 }
 
+func TestNewCustomSizePdf(t *testing.T) {
+	cases := []struct {
+		name        string
+		orientation consts.Orientation
+		pageSize    consts.PageSize
+		unit        string
+		height      float64
+		width       float64
+		assert      func(t *testing.T, m pdf.Maroto)
+	}{
+		{
+			"When portrait and C6",
+			consts.Portrait,
+			"C6",
+			"mm",
+			162.0,
+			114.0,
+			func(t *testing.T, m pdf.Maroto) {
+				assert.NotNil(t, m)
+				assert.Equal(t, fmt.Sprintf("%T", m), "*pdf.PdfMaroto")
+				width, height := m.GetPageSize()
+				assert.InDelta(t, width, 114.0, 0.1)
+				assert.InDelta(t, height, 162.0, 0.1)
+			},
+		},
+		{
+			"When landscape and C6",
+			consts.Landscape,
+			"C6",
+			"mm",
+			162.0,
+			114.0,
+			func(t *testing.T, m pdf.Maroto) {
+				assert.NotNil(t, m)
+				assert.Equal(t, fmt.Sprintf("%T", m), "*pdf.PdfMaroto")
+				width, height := m.GetPageSize()
+				assert.InDelta(t, width, 162.0, 0.1)
+				assert.InDelta(t, height, 114.0, 0.1)
+			},
+		},
+		{
+			"When portrait and B3 and given in cm",
+			consts.Portrait,
+			"B3",
+			"cm",
+			50.0,
+			35.3,
+			func(t *testing.T, m pdf.Maroto) {
+				assert.NotNil(t, m)
+				assert.Equal(t, fmt.Sprintf("%T", m), "*pdf.PdfMaroto")
+				width, height := m.GetPageSize()
+				assert.InDelta(t, width, 35.3, 0.1)
+				assert.InDelta(t, height, 50.0, 0.1)
+			},
+		},
+		{
+			"When landdscape and B3 and given in cm",
+			consts.Landscape,
+			"B3",
+			"cm",
+			50.0,
+			35.3,
+			func(t *testing.T, m pdf.Maroto) {
+				assert.NotNil(t, m)
+				assert.Equal(t, fmt.Sprintf("%T", m), "*pdf.PdfMaroto")
+				width, height := m.GetPageSize()
+				assert.InDelta(t, width, 50.0, 0.1)
+				assert.InDelta(t, height, 35.3, 0.1)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Act
+		m := pdf.NewMarotoCustomSize(c.orientation, c.pageSize, c.unit, c.width, c.height)
+
+		// Assert
+		c.assert(t, m)
+	}
+
+}
+
 func TestPdfMaroto_SetGetDebugMode(t *testing.T) {
 	// Arrange
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
