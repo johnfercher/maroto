@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/Vale-sail/maroto/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 )
 

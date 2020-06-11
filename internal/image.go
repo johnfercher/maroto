@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"encoding/base64"
 	"errors"
+	"github.com/Vale-sail/maroto/pkg/consts"
+	"github.com/Vale-sail/maroto/pkg/props"
 	"github.com/google/uuid"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 )
 
