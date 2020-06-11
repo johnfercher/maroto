@@ -47,11 +47,13 @@ type Maroto interface {
 	GetCurrentOffset() float64
 	SetPageMargins(left, top, right float64)
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
+	AddUTF8Font(familyStr, styleStr, fileStr string)
+	SetProtection(actionFlag byte, userPassStr, ownerPassStr string)
 }
 
 // PdfMaroto is the principal structure which implements Maroto abstraction
 type PdfMaroto struct {
-	Pdf                       gofpdf.Pdf
+	Pdf                       *gofpdf.Fpdf
 	Math                      internal.Math
 	Font                      internal.Font
 	TextHelper                internal.Text
@@ -518,4 +520,11 @@ func (s *PdfMaroto) header() {
 	}
 
 	s.SetBackgroundColor(backgroundColor)
+}
+func (s *PdfMaroto) AddUTF8Font(familyStr, styleStr, fileStr string) {
+	s.Pdf.AddUTF8Font(familyStr, styleStr, fileStr)
+}
+
+func (s *PdfMaroto) SetProtection(actionFlag byte, userPassStr, ownerPassStr string) {
+	s.Pdf.SetProtection(actionFlag, userPassStr, ownerPassStr)
 }
