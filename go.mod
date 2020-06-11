@@ -10,4 +10,4 @@ require (
 	github.com/stretchr/testify v1.3.0
 )
 
-replace github.com/johnfercher/maroto v0.27.0 => github.com/Vale-sail/maroto v0.27.0
+replace github.com/johnfercher/maroto => github.com/Vale-sail/maroto v0.27.1-0.20200611085802-542011f80211
