@@ -427,6 +427,31 @@ func ExamplePdfMaroto_SetBorder() {
 	// Do more things and save...
 }
 
+// ExamplePdfMaroto_SetFirstPageNb demonstrates
+// how to use SetFirstPageNb method.
+func ExamplePdfMaroto_SetFirstPageNb() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Ths will set first page index to 1
+	m.SetFirstPageNb(1)
+}
+
+// ExamplePdfMaroto_SetAliasNbPages demonstrates
+// how to use SetAliasNbPages method.
+func ExamplePdfMaroto_SetAliasNbPages() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Ths will create placeholder "{nbs}" to use in texts for total count of pages
+	m.SetAliasNbPages("{nbs}")
+
+	// This will create a row with full width column and inside it a text that will display the total number of pages
+	m.Row(10, func() {
+		m.Col(12, func() {
+			m.Text("Total number of pages: {nbs}")
+		})
+	})
+}
+
 // ExamplePdfMaroto_SetBackgroundColor demonstrates how
 // to use the SetBackgroundColor method.
 func ExamplePdfMaroto_SetBackgroundColor() {
