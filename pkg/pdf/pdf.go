@@ -41,6 +41,8 @@ type Maroto interface {
 	AddPage()
 	SetBorder(on bool)
 	SetBackgroundColor(color color.Color)
+	SetAliasNbPages(alias string)
+	SetFirstPageNb(number int)
 	GetBorder() bool
 	GetPageSize() (width float64, height float64)
 	GetCurrentPage() int
@@ -74,6 +76,7 @@ type PdfMaroto struct {
 	debugMode                 bool
 	orientation               consts.Orientation
 	pageSize                  consts.PageSize
+	firstPageNb               int
 }
 
 // NewMarotoCustomSize creates a Maroto instance returning a pointer to PdfMaroto
@@ -175,7 +178,7 @@ func (s *PdfMaroto) RegisterFooter(closure func()) {
 // this can be used inside a RegisterFooter/RegisterHeader
 // to draw the current page, or to another purposes
 func (s *PdfMaroto) GetCurrentPage() int {
-	return s.pageIndex
+	return s.pageIndex + s.firstPageNb
 }
 
 // GetCurrentOffset obtain the current offset in y axis
@@ -241,6 +244,18 @@ func (s *PdfMaroto) SetBorder(on bool) {
 func (s *PdfMaroto) SetBackgroundColor(color color.Color) {
 	s.backgroundColor = color
 	s.Pdf.SetFillColor(s.backgroundColor.Red, s.backgroundColor.Green, s.backgroundColor.Blue)
+}
+
+// SetFirstPageNb define first page number
+// Default: 0
+func (s *PdfMaroto) SetFirstPageNb(number int) {
+	s.firstPageNb = number
+}
+
+// SetAliasNbPages Defines an alias for the total number of pages.
+// It will be substituted as the document is closed.
+func (s *PdfMaroto) SetAliasNbPages(alias string) {
+	s.Pdf.AliasNbPages(alias)
 }
 
 // GetBorder return the actual border value.
