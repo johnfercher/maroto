@@ -249,6 +249,30 @@ func TestPdfMaroto_SetGetDebugMode(t *testing.T) {
 	assert.True(t, m.GetBorder())
 }
 
+func TestPdfMaroto_SetFirstPageNb(t *testing.T) {
+	// Arrange
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Assert & Act
+	assert.Equal(t, 0, m.GetCurrentPage())
+	m.SetFirstPageNb(1)
+
+	// Assert
+	assert.Equal(t, 1, m.GetCurrentPage())
+}
+
+func TestPdfMaroto_SetAliasNbPages(t *testing.T) {
+	// Arrange
+	pdf := basePdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(pdf, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.SetAliasNbPages("{nbs}")
+
+	// Assert
+	pdf.AssertCalled(t, "AliasNbPages", "{nbs}")
+}
+
 func TestPdfMaroto_Signature(t *testing.T) {
 	cases := []struct {
 		name      string
@@ -1546,6 +1570,7 @@ func basePdfTest(left, top, right float64) *mocks.Pdf {
 	pdf.On("GetMargins").Return(left, top, right, 0.0)
 	pdf.On("CellFormat", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 	pdf.On("Ln", mock.Anything)
+	pdf.On("AliasNbPages", mock.Anything)
 	pdf.On("GetFontSize").Return(1.0, 1.0)
 	pdf.On("SetMargins", mock.AnythingOfType("float64"), mock.AnythingOfType("float64"), mock.AnythingOfType("float64"))
 	pdf.On("SetFillColor", mock.Anything, mock.Anything, mock.Anything)

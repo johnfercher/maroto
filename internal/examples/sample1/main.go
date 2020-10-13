@@ -9,6 +9,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"io/ioutil"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -27,12 +28,23 @@ func main() {
 	headerSmall, smallContent := getSmallContent()
 	headerMedium, mediumContent := getMediumContent()
 
-	base64 := base64.StdEncoding.EncodeToString(byteSlices)
+	base64image := base64.StdEncoding.EncodeToString(byteSlices)
+
+	m.SetAliasNbPages("{nb}")
+	m.SetFirstPageNb(1)
 
 	m.RegisterHeader(func() {
+		m.Row(10, func() {
+			m.Col(12, func() {
+				m.Text(strconv.Itoa(m.GetCurrentPage())+"/{nb}", props.Text{
+					Align: consts.Center,
+					Size:  8,
+				})
+			})
+		})
 		m.Row(20, func() {
 			m.Col(3, func() {
-				m.Base64Image(base64, consts.Jpg, props.Rect{
+				_ = m.Base64Image(base64image, consts.Jpg, props.Rect{
 					Center:  true,
 					Percent: 70,
 				})
