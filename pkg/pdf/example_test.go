@@ -227,6 +227,7 @@ func ExamplePdfMaroto_Text() {
 	// Not passing size, makes the method use 10.0.
 	// Not passing align, makes the method use left.
 	// Not passing extrapolate, makes the method use false.
+	// Not passing color, makes the method use the current color.
 	// Top cannot be less than 0.
 	// VerticalPadding cannot be less than 0.
 
@@ -243,6 +244,11 @@ func ExamplePdfMaroto_Text() {
 				Top:             1.0,
 				Extrapolate:     false,
 				VerticalPadding: 1.0,
+				Color: color.Color{
+					Red:   10,
+					Green: 20,
+					Blue:  30,
+				},
 			})
 		})
 	})
@@ -367,6 +373,7 @@ func ExamplePdfMaroto_Signature() {
 	// Not passing family, make method use arial.
 	// Not passing style, make method use normal.
 	// Not passing size, make method use 10.0.
+	// Not passing color, make method use the current color.
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	rowHeight := 5.0
@@ -377,6 +384,11 @@ func ExamplePdfMaroto_Signature() {
 				Size:   12.0,
 				Style:  consts.BoldItalic,
 				Family: consts.Courier,
+				Color: color.Color{
+					Red:   10,
+					Green: 20,
+					Blue:  30,
+				},
 			})
 		})
 	})
