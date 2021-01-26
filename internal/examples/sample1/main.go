@@ -34,14 +34,6 @@ func main() {
 	m.SetFirstPageNb(1)
 
 	m.RegisterHeader(func() {
-		m.Row(10, func() {
-			m.Col(12, func() {
-				m.Text(strconv.Itoa(m.GetCurrentPage())+"/{nb}", props.Text{
-					Align: consts.Center,
-					Size:  8,
-				})
-			})
-		})
 		m.Row(20, func() {
 			m.Col(3, func() {
 				_ = m.Base64Image(base64image, consts.Jpg, props.Rect{
@@ -113,6 +105,9 @@ func main() {
 					Style: consts.Bold,
 					Align: consts.Center,
 					Top:   4,
+					Color: color.Color{
+						Blue: 180,
+					},
 				})
 				m.Text("Brasil / São Paulo", props.Text{
 					Size:  12,
@@ -132,6 +127,9 @@ func main() {
 					Family: consts.Courier,
 					Style:  consts.BoldItalic,
 					Size:   9,
+					Color: color.Color{
+						Red: 200,
+					},
 				})
 			})
 
@@ -141,6 +139,14 @@ func main() {
 
 			m.Col(4, func() {
 				m.Signature("Signature 3")
+			})
+		})
+		m.Row(10, func() {
+			m.Col(12, func() {
+				m.Text(strconv.Itoa(m.GetCurrentPage())+"/{nb}", props.Text{
+					Align: consts.Right,
+					Size:  8,
+				})
 			})
 		})
 	})
