@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -18,6 +19,7 @@ func TestNewFont(t *testing.T) {
 	assert.Equal(t, font.GetFamily(), consts.Arial)
 	assert.Equal(t, font.GetStyle(), consts.Bold)
 	assert.Equal(t, font.GetSize(), 10.0)
+	assert.Equal(t, font.GetColor(), color.Color{Red: 0, Green: 0, Blue: 0})
 }
 
 func TestFont_GetSetFamily(t *testing.T) {
@@ -365,4 +367,65 @@ func TestFont_GetScaleFactor(t *testing.T) {
 
 	// Assert
 	assert.InDelta(t, scalarFactor, 2.83, 0.1)
+}
+
+func TestFont_GetSetColor(t *testing.T) {
+	cases := []struct {
+		name        string
+		fontColor   color.Color
+		pdf         func() *mocks.Pdf
+		assertCalls func(t *testing.T, pdf *mocks.Pdf)
+		assertFont  func(t *testing.T, fontColor color.Color)
+	}{
+		{
+			"Without custom color",
+			color.Color{Red: 0, Green: 0, Blue: 0},
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("SetTextColor", mock.Anything, mock.Anything, mock.Anything)
+				return pdf
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "SetTextColor", 1)
+				pdf.AssertCalled(t, "SetTextColor", 0, 0, 0)
+			},
+			func(t *testing.T, fontColor color.Color) {
+				assert.Equal(t, fontColor.Red, 0)
+				assert.Equal(t, fontColor.Green, 0)
+				assert.Equal(t, fontColor.Blue, 0)
+			},
+		},
+		{
+			"With custom color",
+			color.Color{Red: 20, Green: 20, Blue: 20},
+			func() *mocks.Pdf {
+				pdf := &mocks.Pdf{}
+				pdf.On("SetTextColor", mock.Anything, mock.Anything, mock.Anything)
+				return pdf
+			},
+			func(t *testing.T, pdf *mocks.Pdf) {
+				pdf.AssertNumberOfCalls(t, "SetTextColor", 1)
+				pdf.AssertCalled(t, "SetTextColor", 20, 20, 20)
+			},
+			func(t *testing.T, fontColor color.Color) {
+				assert.Equal(t, fontColor.Red, 20)
+				assert.Equal(t, fontColor.Green, 20)
+				assert.Equal(t, fontColor.Blue, 20)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		pdf := c.pdf()
+		font := internal.NewFont(pdf, 10, consts.Arial, consts.Bold)
+
+		// Act
+		font.SetColor(c.fontColor)
+		fontColor := font.GetColor()
+
+		// Assert
+		c.assertCalls(t, pdf)
+		c.assertFont(t, fontColor)
+	}
 }

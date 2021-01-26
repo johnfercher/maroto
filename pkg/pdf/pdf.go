@@ -208,7 +208,13 @@ func (s *PdfMaroto) GetPageMargins() (left float64, top float64, right float64, 
 // Signature add a space for a signature inside a cell,
 // the space will have a line and a text below
 func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
-	signProp := props.Font{}
+	signProp := props.Font{
+		Color: color.Color{
+			Red:   0,
+			Green: 0,
+			Blue:  0,
+		},
+	}
 	if len(prop) > 0 {
 		signProp = prop[0]
 	}
@@ -359,7 +365,14 @@ func (s *PdfMaroto) ColSpace(gridSize uint) {
 
 // Text create a text inside a cell.
 func (s *PdfMaroto) Text(text string, prop ...props.Text) {
-	textProp := props.Text{}
+	textProp := props.Text{
+		Color: color.Color{
+			Red:   0,
+			Green: 0,
+			Blue:  0,
+		},
+	}
+
 	if len(prop) > 0 {
 		textProp = prop[0]
 	}

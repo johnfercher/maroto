@@ -33,6 +33,9 @@ func (s *text) Add(text string, cell Cell, textProp props.Text) {
 	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
+	originalColor := s.font.GetColor()
+	s.font.SetColor(textProp.Color)
+
 	// duplicated
 	_, _, fontSize := s.font.GetFont()
 	fontHeight := fontSize / s.font.GetScaleFactor()
@@ -61,6 +64,8 @@ func (s *text) Add(text string, cell Cell, textProp props.Text) {
 			accumulateOffsetY += textProp.VerticalPadding
 		}
 	}
+
+	s.font.SetColor(originalColor)
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell
