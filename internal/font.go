@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/jung-kurt/gofpdf"
 )
@@ -16,6 +17,8 @@ type Font interface {
 	GetSize() float64
 	GetFont() (consts.Family, consts.Style, float64)
 	GetScaleFactor() (scaleFactor float64)
+	SetColor(color color.Color)
+	GetColor() color.Color
 }
 
 type font struct {
@@ -24,16 +27,18 @@ type font struct {
 	family      consts.Family
 	style       consts.Style
 	scaleFactor float64
+	fontColor   color.Color
 }
 
 // NewFont create a Font
 func NewFont(pdf gofpdf.Pdf, size float64, family consts.Family, style consts.Style) *font {
 	return &font{
-		pdf,
-		size,
-		family,
-		style,
-		72.0 / 25.4, // Value defined inside gofpdf constructor
+		pdf:         pdf,
+		size:        size,
+		family:      family,
+		style:       style,
+		scaleFactor: 72.0 / 25.4, // Value defined inside gofpdf constructor,
+		fontColor:   color.Color{Red: 0, Green: 0, Blue: 0},
 	}
 }
 
@@ -89,4 +94,13 @@ func (s *font) SetFont(family consts.Family, style consts.Style, size float64) {
 // GetScaleFactor retrieve the scale factor defined in the instantiation of gofpdf
 func (s *font) GetScaleFactor() (scaleFactor float64) {
 	return s.scaleFactor
+}
+
+func (s *font) SetColor(color color.Color) {
+	s.fontColor = color
+	s.pdf.SetTextColor(color.Red, color.Green, color.Blue)
+}
+
+func (s *font) GetColor() color.Color {
+	return s.fontColor
 }

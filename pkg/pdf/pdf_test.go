@@ -400,6 +400,27 @@ func TestPdfMaroto_Signature(t *testing.T) {
 				})
 			},
 		},
+		{
+			"Custom color signature",
+			func() *mocks.Signature {
+				signature := &mocks.Signature{}
+				signature.On("AddSpaceFor", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return signature
+			},
+			func(t *testing.T, signature *mocks.Signature) {
+				signature.AssertNumberOfCalls(t, "AddSpaceFor", 1)
+				signature.AssertCalled(t, "AddSpaceFor", "Signature1", internal.Cell{X: 0.0, Y: 0.0, Width: 80.0, Height: 40.0}, props.Text{Family: consts.Arial, Style: consts.Bold, Size: 8.0, Align: consts.Center, Color: color.Color{Red: 20, Green: 20, Blue: 20}})
+			},
+			func(m pdf.Maroto) {
+				m.Row(40, func() {
+					m.Col(0, func() {
+						m.Signature("Signature1", props.Font{
+							Color: color.Color{Red: 20, Green: 20, Blue: 20},
+						})
+					})
+				})
+			},
+		},
 	}
 
 	for _, c := range cases {
@@ -519,6 +540,26 @@ func TestPdfMaroto_Text(t *testing.T) {
 					m.Col(12, func() {
 						m.Text("Text8", props.Text{
 							Top: 50,
+						})
+					})
+				})
+			},
+		},
+		{
+			"custom color",
+			func(t *testing.T, text *mocks.Text) {
+				text.AssertNumberOfCalls(t, "Add", 1)
+				text.AssertCalled(t, "Add", "Text1", internal.Cell{X: 0.0, Y: 0.0, Width: 80.0, Height: 0.0}, props.Text{Family: consts.Arial, Style: consts.Normal, Align: consts.Left, Top: 0.0, Extrapolate: false, Size: 10.0, Color: color.Color{Red: 20, Green: 20, Blue: 20}})
+			},
+			func(m pdf.Maroto) {
+				m.Row(40, func() {
+					m.Col(12, func() {
+						m.Text("Text1", props.Text{
+							Color: color.Color{
+								Red:   20,
+								Green: 20,
+								Blue:  20,
+							},
 						})
 					})
 				})

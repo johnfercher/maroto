@@ -61,6 +61,8 @@ type Text struct {
 	Extrapolate bool
 	// VerticalPadding define an additional space between lines
 	VerticalPadding float64
+	// Color define the font color
+	Color color.Color
 }
 
 // Font represents properties from a text
@@ -71,6 +73,8 @@ type Font struct {
 	Style consts.Style
 	// Size of the text
 	Size float64
+	// Color define the font color
+	Color color.Color
 }
 
 // TableListContent represents properties from a line (header/content) from a TableList
@@ -216,6 +220,7 @@ func (s *Font) ToTextProp(align consts.Align, top float64, extrapolate bool, ver
 		Top:             top,
 		Extrapolate:     extrapolate,
 		VerticalPadding: verticalPadding,
+		Color:           s.Color,
 	}
 
 	textProp.MakeValid()

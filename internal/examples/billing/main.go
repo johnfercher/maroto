@@ -16,6 +16,8 @@ func main() {
 	darkGrayColor := getDarkGrayColor()
 	grayColor := getGrayColor()
 	whiteColor := color.NewWhite()
+	blueColor := getBlueColor()
+	redColor := getRedColor()
 	header := getHeader()
 	contents := getContents()
 
@@ -38,18 +40,21 @@ func main() {
 					Size:        8,
 					Align:       consts.Right,
 					Extrapolate: false,
+					Color:       redColor,
 				})
 				m.Text("Tel: 55 024 12345-1234", props.Text{
 					Top:   12,
 					Style: consts.BoldItalic,
 					Size:  8,
 					Align: consts.Right,
+					Color: blueColor,
 				})
 				m.Text("www.mycompany.com", props.Text{
 					Top:   15,
 					Style: consts.BoldItalic,
 					Size:  8,
 					Align: consts.Right,
+					Color: blueColor,
 				})
 			})
 		})
@@ -63,12 +68,14 @@ func main() {
 					Style: consts.BoldItalic,
 					Size:  8,
 					Align: consts.Left,
+					Color: blueColor,
 				})
 				m.Text("www.mycompany.com", props.Text{
 					Top:   16,
 					Style: consts.BoldItalic,
 					Size:  8,
 					Align: consts.Left,
+					Color: blueColor,
 				})
 			})
 		})
@@ -93,6 +100,7 @@ func main() {
 				Size:  9,
 				Style: consts.Bold,
 				Align: consts.Center,
+				Color: color.NewWhite(),
 			})
 		})
 		m.ColSpace(9)
@@ -203,9 +211,9 @@ func getContents() [][]string {
 
 func getDarkGrayColor() color.Color {
 	return color.Color{
-		Red:   144,
-		Green: 144,
-		Blue:  144,
+		Red:   55,
+		Green: 55,
+		Blue:  55,
 	}
 }
 
@@ -214,5 +222,21 @@ func getGrayColor() color.Color {
 		Red:   200,
 		Green: 200,
 		Blue:  200,
+	}
+}
+
+func getBlueColor() color.Color {
+	return color.Color{
+		Red:   10,
+		Green: 10,
+		Blue:  150,
+	}
+}
+
+func getRedColor() color.Color {
+	return color.Color{
+		Red:   150,
+		Green: 10,
+		Blue:  10,
 	}
 }
