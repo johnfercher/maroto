@@ -12,7 +12,7 @@ import (
 )
 
 func TestNewSignature(t *testing.T) {
-	signature := internal.NewSignature(&mocks.Pdf{}, &mocks.Math{}, &mocks.Text{})
+	signature := internal.NewSignature(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Text{})
 
 	assert.NotNil(t, signature)
 	assert.Equal(t, fmt.Sprintf("%T", signature), "*internal.signature")
@@ -20,7 +20,7 @@ func TestNewSignature(t *testing.T) {
 
 func TestSignature_AddSpaceFor_DefaultMargins(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Pdf{}
+	pdf := &mocks.Fpdf{}
 	pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 	pdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 
@@ -44,7 +44,7 @@ func TestSignature_AddSpaceFor_DefaultMargins(t *testing.T) {
 
 func TestSignature_AddSpaceFor_NotDefaultMargins(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Pdf{}
+	pdf := &mocks.Fpdf{}
 	pdf.On("GetMargins").Return(20.0, 10.0, 10.0, 10.0)
 	pdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 

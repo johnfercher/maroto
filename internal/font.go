@@ -1,37 +1,37 @@
 package internal
 
 import (
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/jung-kurt/gofpdf"
 )
 
 // Font is the abstraction which deals of how to set font configurations
 type Font interface {
-	SetFamily(family consts.Family)
+	SetFamily(family string)
 	SetStyle(style consts.Style)
 	SetSize(size float64)
-	SetFont(family consts.Family, style consts.Style, size float64)
-	GetFamily() consts.Family
+	SetFont(family string, style consts.Style, size float64)
+	GetFamily() string
 	GetStyle() consts.Style
 	GetSize() float64
-	GetFont() (consts.Family, consts.Style, float64)
+	GetFont() (string, consts.Style, float64)
 	GetScaleFactor() (scaleFactor float64)
 	SetColor(color color.Color)
 	GetColor() color.Color
 }
 
 type font struct {
-	pdf         gofpdf.Pdf
+	pdf         fpdf.Fpdf
 	size        float64
-	family      consts.Family
+	family      string
 	style       consts.Style
 	scaleFactor float64
 	fontColor   color.Color
 }
 
 // NewFont create a Font
-func NewFont(pdf gofpdf.Pdf, size float64, family consts.Family, style consts.Style) *font {
+func NewFont(pdf fpdf.Fpdf, size float64, family string, style consts.Style) *font {
 	return &font{
 		pdf:         pdf,
 		size:        size,
@@ -43,7 +43,7 @@ func NewFont(pdf gofpdf.Pdf, size float64, family consts.Family, style consts.St
 }
 
 // GetFamily return the currently Font family configured
-func (s *font) GetFamily() consts.Family {
+func (s *font) GetFamily() string {
 	return s.family
 }
 
@@ -58,12 +58,12 @@ func (s *font) GetSize() float64 {
 }
 
 // GetFont return all the currently Font properties configured
-func (s *font) GetFont() (consts.Family, consts.Style, float64) {
+func (s *font) GetFont() (string, consts.Style, float64) {
 	return s.family, s.style, s.size
 }
 
 // SetFamily defines a new Font family
-func (s *font) SetFamily(family consts.Family) {
+func (s *font) SetFamily(family string) {
 	s.family = family
 
 	s.pdf.SetFont(string(s.family), string(s.style), s.size)
@@ -83,7 +83,7 @@ func (s *font) SetSize(size float64) {
 }
 
 // SetFont defines all new Font properties
-func (s *font) SetFont(family consts.Family, style consts.Style, size float64) {
+func (s *font) SetFont(family string, style consts.Style, size float64) {
 	s.family = family
 	s.style = style
 	s.size = size

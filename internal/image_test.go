@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -15,7 +16,7 @@ import (
 )
 
 func TestNewImage(t *testing.T) {
-	image := internal.NewImage(&mocks.Pdf{}, &mocks.Math{})
+	image := internal.NewImage(&mocks.Fpdf{}, &mocks.Math{})
 
 	assert.NotNil(t, image)
 	assert.Equal(t, fmt.Sprintf("%T", image), "*internal.image")
@@ -24,31 +25,31 @@ func TestNewImage(t *testing.T) {
 func TestImage_AddFromFile(t *testing.T) {
 	cases := []struct {
 		name            string
-		pdf             func() *mocks.Pdf
+		Fpdf            func() *mocks.Fpdf
 		math            func() *mocks.Math
-		assertPdfCalls  func(t *testing.T, pdf *mocks.Pdf)
-		assertMathCalls func(t *testing.T, pdf *mocks.Math)
+		assertFpdfCalls func(t *testing.T, Fpdf *mocks.Fpdf)
+		assertMathCalls func(t *testing.T, Fpdf *mocks.Math)
 		assertErr       func(t *testing.T, err error)
 		props           props.Rect
 	}{
 		{
 			"When cannot load image",
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
-				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(nil)
-				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return pdf
+			func() *mocks.Fpdf {
+				Fpdf := &mocks.Fpdf{}
+				Fpdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(nil)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "Image", 0)
+			func(t *testing.T, Fpdf *mocks.Fpdf) {
+				Fpdf.AssertNumberOfCalls(t, "Image", 0)
 
-				pdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
-				pdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
+				Fpdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
+				Fpdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
 					ReadDpi:   false,
 					ImageType: "",
 				})
@@ -63,23 +64,23 @@ func TestImage_AddFromFile(t *testing.T) {
 		},
 		{
 			"When Image has width greater than height",
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
-				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(widthGreaterThanHeightImageInfo())
-				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return pdf
+			func() *mocks.Fpdf {
+				Fpdf := &mocks.Fpdf{}
+				Fpdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(widthGreaterThanHeightImageInfo())
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			func(t *testing.T, Fpdf *mocks.Fpdf) {
+				Fpdf.AssertNumberOfCalls(t, "Image", 1)
+				Fpdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 
-				pdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
-				pdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
+				Fpdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
+				Fpdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
 					ReadDpi:   false,
 					ImageType: "",
 				})
@@ -95,23 +96,23 @@ func TestImage_AddFromFile(t *testing.T) {
 		},
 		{
 			"When Image has height greater than width",
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
-				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(heightGreaterThanWidthImageInfo())
-				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return pdf
+			func() *mocks.Fpdf {
+				Fpdf := &mocks.Fpdf{}
+				Fpdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(heightGreaterThanWidthImageInfo())
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			func(t *testing.T, Fpdf *mocks.Fpdf) {
+				Fpdf.AssertNumberOfCalls(t, "Image", 1)
+				Fpdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 
-				pdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
-				pdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
+				Fpdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
+				Fpdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
 					ReadDpi:   false,
 					ImageType: "",
 				})
@@ -127,23 +128,23 @@ func TestImage_AddFromFile(t *testing.T) {
 		},
 		{
 			"When Image must not be centered",
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
-				pdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(nonCenteredImageInfo())
-				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return pdf
+			func() *mocks.Fpdf {
+				Fpdf := &mocks.Fpdf{}
+				Fpdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(nonCenteredImageInfo())
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
 				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			func(t *testing.T, Fpdf *mocks.Fpdf) {
+				Fpdf.AssertNumberOfCalls(t, "Image", 1)
+				Fpdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 
-				pdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
-				pdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
+				Fpdf.AssertNumberOfCalls(t, "RegisterImageOptions", 1)
+				Fpdf.AssertCalled(t, "RegisterImageOptions", "AnyPath", gofpdf.ImageOptions{
 					ReadDpi:   false,
 					ImageType: "",
 				})
@@ -161,10 +162,10 @@ func TestImage_AddFromFile(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := c.pdf()
+		Fpdf := c.Fpdf()
 		math := c.math()
 
-		image := internal.NewImage(pdf, math)
+		image := internal.NewImage(Fpdf, math)
 		cell := internal.Cell{
 			X:      1.0,
 			Y:      10.0,
@@ -176,7 +177,7 @@ func TestImage_AddFromFile(t *testing.T) {
 		err := image.AddFromFile("AnyPath", cell, c.props)
 
 		// Assert
-		c.assertPdfCalls(t, pdf)
+		c.assertFpdfCalls(t, Fpdf)
 		c.assertMathCalls(t, math)
 		c.assertErr(t, err)
 	}
@@ -185,29 +186,29 @@ func TestImage_AddFromFile(t *testing.T) {
 func TestImage_AddFromBase64(t *testing.T) {
 	cases := []struct {
 		name            string
-		pdf             func() *mocks.Pdf
+		Fpdf            func() *mocks.Fpdf
 		math            func() *mocks.Math
-		assertPdfCalls  func(t *testing.T, pdf *mocks.Pdf)
-		assertMathCalls func(t *testing.T, pdf *mocks.Math)
+		assertFpdfCalls func(t *testing.T, Fpdf *mocks.Fpdf)
+		assertMathCalls func(t *testing.T, Fpdf *mocks.Math)
 		assertErr       func(t *testing.T, err error)
 	}{
 		{
 			"When cannot RegisterImageOptionsReader",
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
-				pdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(nil)
-				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return pdf
+			func() *mocks.Fpdf {
+				Fpdf := &mocks.Fpdf{}
+				Fpdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(nil)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "Image", 0)
-				pdf.AssertNumberOfCalls(t, "RegisterImageOptionsReader", 1)
-				pdf.AssertCalled(t, "RegisterImageOptionsReader", "", gofpdf.ImageOptions{
+			func(t *testing.T, Fpdf *mocks.Fpdf) {
+				Fpdf.AssertNumberOfCalls(t, "Image", 0)
+				Fpdf.AssertNumberOfCalls(t, "RegisterImageOptionsReader", 1)
+				Fpdf.AssertCalled(t, "RegisterImageOptionsReader", "", gofpdf.ImageOptions{
 					ReadDpi:   false,
 					ImageType: string(consts.Jpg),
 				},
@@ -222,23 +223,23 @@ func TestImage_AddFromBase64(t *testing.T) {
 		},
 		{
 			"When ImageHelper has width greater than height",
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
-				pdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(widthGreaterThanHeightImageInfo())
-				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return pdf
+			func() *mocks.Fpdf {
+				Fpdf := &mocks.Fpdf{}
+				Fpdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(widthGreaterThanHeightImageInfo())
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			func(t *testing.T, Fpdf *mocks.Fpdf) {
+				Fpdf.AssertNumberOfCalls(t, "Image", 1)
+				Fpdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 
-				pdf.AssertNumberOfCalls(t, "RegisterImageOptionsReader", 1)
-				pdf.AssertCalled(t, "RegisterImageOptionsReader", "", gofpdf.ImageOptions{
+				Fpdf.AssertNumberOfCalls(t, "RegisterImageOptionsReader", 1)
+				Fpdf.AssertCalled(t, "RegisterImageOptionsReader", "", gofpdf.ImageOptions{
 					ReadDpi:   false,
 					ImageType: string(consts.Jpg),
 				},
@@ -254,23 +255,23 @@ func TestImage_AddFromBase64(t *testing.T) {
 		},
 		{
 			"When ImageHelper has height greater than width",
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
-				pdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(heightGreaterThanWidthImageInfo())
-				pdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
-				return pdf
+			func() *mocks.Fpdf {
+				Fpdf := &mocks.Fpdf{}
+				Fpdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(heightGreaterThanWidthImageInfo())
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
 				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
-				pdf.AssertNumberOfCalls(t, "Image", 1)
-				pdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			func(t *testing.T, Fpdf *mocks.Fpdf) {
+				Fpdf.AssertNumberOfCalls(t, "Image", 1)
+				Fpdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
 
-				pdf.AssertNumberOfCalls(t, "RegisterImageOptionsReader", 1)
-				pdf.AssertCalled(t, "RegisterImageOptionsReader", "", gofpdf.ImageOptions{
+				Fpdf.AssertNumberOfCalls(t, "RegisterImageOptionsReader", 1)
+				Fpdf.AssertCalled(t, "RegisterImageOptionsReader", "", gofpdf.ImageOptions{
 					ReadDpi:   false,
 					ImageType: string(consts.Jpg),
 				},
@@ -288,10 +289,10 @@ func TestImage_AddFromBase64(t *testing.T) {
 
 	for _, c := range cases {
 		// Arrange
-		pdf := c.pdf()
+		Fpdf := c.Fpdf()
 		math := c.math()
 
-		image := internal.NewImage(pdf, math)
+		image := internal.NewImage(Fpdf, math)
 		base64 := getBase64String()
 		cell := internal.Cell{
 			X:      1.0,
@@ -304,16 +305,16 @@ func TestImage_AddFromBase64(t *testing.T) {
 		err := image.AddFromBase64(base64, cell, props.Rect{Center: true, Percent: 100}, consts.Jpg)
 
 		// Assert
-		c.assertPdfCalls(t, pdf)
+		c.assertFpdfCalls(t, Fpdf)
 		c.assertMathCalls(t, math)
 		c.assertErr(t, err)
 	}
 }
 
 func heightGreaterThanWidthImageInfo() *gofpdf.ImageInfoType {
-	truePdf := gofpdf.New("P", "mm", "A4", "")
+	trueFpdf := gofpdf.New("P", "mm", "A4", "")
 
-	info := truePdf.RegisterImageOptions("assets/images/biplane.jpg", gofpdf.ImageOptions{
+	info := trueFpdf.RegisterImageOptions("assets/images/biplane.jpg", gofpdf.ImageOptions{
 		ReadDpi:   false,
 		ImageType: "",
 	})
@@ -322,9 +323,10 @@ func heightGreaterThanWidthImageInfo() *gofpdf.ImageInfoType {
 }
 
 func widthGreaterThanHeightImageInfo() *gofpdf.ImageInfoType {
-	truePdf := gofpdf.New("P", "mm", "A4", "")
+	trueFpdf := gofpdf.New("P", "mm", "A4", "")
+	wrapper := fpdf.NewWrapper(trueFpdf)
 
-	info := truePdf.RegisterImageOptions("assets/images/frontpage.png", gofpdf.ImageOptions{
+	info := wrapper.RegisterImageOptions("assets/images/frontpage.png", gofpdf.ImageOptions{
 		ReadDpi:   false,
 		ImageType: "",
 	})
@@ -333,9 +335,9 @@ func widthGreaterThanHeightImageInfo() *gofpdf.ImageInfoType {
 }
 
 func nonCenteredImageInfo() *gofpdf.ImageInfoType {
-	truePdf := gofpdf.New("P", "mm", "A4", "")
+	trueFpdf := gofpdf.New("P", "mm", "A4", "")
 
-	info := truePdf.RegisterImageOptions("assets/images/biplane.jpg", gofpdf.ImageOptions{
+	info := trueFpdf.RegisterImageOptions("assets/images/biplane.jpg", gofpdf.ImageOptions{
 		ReadDpi:   false,
 		ImageType: "",
 	})
