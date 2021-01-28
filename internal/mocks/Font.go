@@ -29,28 +29,28 @@ func (_m *Font) GetColor() color.Color {
 }
 
 // GetFamily provides a mock function with given fields:
-func (_m *Font) GetFamily() consts.Family {
+func (_m *Font) GetFamily() string {
 	ret := _m.Called()
 
-	var r0 consts.Family
-	if rf, ok := ret.Get(0).(func() consts.Family); ok {
+	var r0 string
+	if rf, ok := ret.Get(0).(func() string); ok {
 		r0 = rf()
 	} else {
-		r0 = ret.Get(0).(consts.Family)
+		r0 = ret.Get(0).(string)
 	}
 
 	return r0
 }
 
 // GetFont provides a mock function with given fields:
-func (_m *Font) GetFont() (consts.Family, consts.Style, float64) {
+func (_m *Font) GetFont() (string, consts.Style, float64) {
 	ret := _m.Called()
 
-	var r0 consts.Family
-	if rf, ok := ret.Get(0).(func() consts.Family); ok {
+	var r0 string
+	if rf, ok := ret.Get(0).(func() string); ok {
 		r0 = rf()
 	} else {
-		r0 = ret.Get(0).(consts.Family)
+		r0 = ret.Get(0).(string)
 	}
 
 	var r1 consts.Style
@@ -118,12 +118,12 @@ func (_m *Font) SetColor(_a0 color.Color) {
 }
 
 // SetFamily provides a mock function with given fields: family
-func (_m *Font) SetFamily(family consts.Family) {
+func (_m *Font) SetFamily(family string) {
 	_m.Called(family)
 }
 
 // SetFont provides a mock function with given fields: family, style, size
-func (_m *Font) SetFont(family consts.Family, style consts.Style, size float64) {
+func (_m *Font) SetFont(family string, style consts.Style, size float64) {
 	_m.Called(family, style, size)
 }
 

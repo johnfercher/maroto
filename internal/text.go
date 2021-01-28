@@ -1,9 +1,9 @@
 package internal
 
 import (
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 	"strings"
 )
 
@@ -14,13 +14,13 @@ type Text interface {
 }
 
 type text struct {
-	pdf  gofpdf.Pdf
+	pdf  fpdf.Fpdf
 	math Math
 	font Font
 }
 
 // NewText create a Text
-func NewText(pdf gofpdf.Pdf, math Math, font Font) *text {
+func NewText(pdf fpdf.Fpdf, math Math, font Font) *text {
 	return &text{
 		pdf,
 		math,
@@ -30,7 +30,7 @@ func NewText(pdf gofpdf.Pdf, math Math, font Font) *text {
 
 // Add a text inside a cell.
 func (s *text) Add(text string, cell Cell, textProp props.Text) {
-	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
+
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	originalColor := s.font.GetColor()
@@ -43,8 +43,7 @@ func (s *text) Add(text string, cell Cell, textProp props.Text) {
 	cell.Y += fontHeight
 
 	// Apply Unicode before calc spaces
-	unicodeText := translator(text)
-
+	unicodeText := s.textToUnicode(text, textProp)
 	stringWidth := s.pdf.GetStringWidth(unicodeText)
 	words := strings.Split(unicodeText, " ")
 	accumulateOffsetY := 0.0
@@ -127,4 +126,13 @@ func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, te
 	dx := (colWidth - textWidth) / modifier
 
 	s.pdf.Text(dx+xColOffset+left, yColOffset+top, text)
+}
+
+func (s *text) textToUnicode(txt string, props props.Text) string {
+	if props.Family == consts.Arial || props.Family == consts.Helvetica || props.Family == consts.Symbol || props.Family == consts.ZapBats || props.Family == consts.Courier {
+		translator := s.pdf.UnicodeTranslatorFromDescriptor("")
+		return translator(txt)
+	}
+
+	return txt
 }

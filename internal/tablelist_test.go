@@ -30,7 +30,7 @@ func TestTableList_Create_WhenHeaderIsNil(t *testing.T) {
 	_, contents := getContents()
 
 	// Act
-	sut.Create(nil, contents)
+	sut.Create(nil, contents, consts.Arial)
 
 	// Assert
 	text.AssertNotCalled(t, "GetLinesQuantity")
@@ -45,7 +45,7 @@ func TestTableList_Create_WhenHeaderIsEmpty(t *testing.T) {
 	_, contents := getContents()
 
 	// Act
-	sut.Create([]string{}, contents)
+	sut.Create([]string{}, contents, consts.Arial)
 
 	// Assert
 	text.AssertNotCalled(t, "GetLinesQuantity")
@@ -60,7 +60,7 @@ func TestTableList_Create_WhenContentIsNil(t *testing.T) {
 	headers, _ := getContents()
 
 	// Act
-	sut.Create(headers, nil)
+	sut.Create(headers, nil, consts.Arial)
 
 	// Assert
 	text.AssertNotCalled(t, "GetLinesQuantity")
@@ -75,7 +75,7 @@ func TestTableList_Create_WhenContentIsEmpty(t *testing.T) {
 	headers, _ := getContents()
 
 	// Act
-	sut.Create(headers, [][]string{})
+	sut.Create(headers, [][]string{}, consts.Arial)
 
 	// Assert
 	text.AssertNotCalled(t, "GetLinesQuantity")
@@ -103,7 +103,7 @@ func TestTableList_Create_Happy(t *testing.T) {
 	headers, contents := getContents()
 
 	// Act
-	sut.Create(headers, contents, props.TableList{
+	sut.Create(headers, contents, consts.Arial, props.TableList{
 		Line: true,
 	})
 
@@ -147,7 +147,7 @@ func TestTableList_Create_HappyWithBackgroundColor(t *testing.T) {
 	}
 
 	// Act
-	sut.Create(headers, contents, props.TableList{
+	sut.Create(headers, contents, consts.Arial, props.TableList{
 		AlternatedBackground: &color,
 	})
 
@@ -188,7 +188,7 @@ func TestTableList_Create_Happy_Without_Line(t *testing.T) {
 	headers, contents := getContents()
 
 	// Act
-	sut.Create(headers, contents)
+	sut.Create(headers, contents, consts.Arial)
 
 	// Assert
 	text.AssertNotCalled(t, "GetLinesQuantity")
@@ -214,7 +214,7 @@ func TestTableList_Create_WhenContentIsEmptyWithLine(t *testing.T) {
 	headers, _ := getContents()
 
 	// Act
-	sut.Create(headers, [][]string{}, props.TableList{
+	sut.Create(headers, [][]string{}, consts.Arial, props.TableList{
 		Line: true,
 	})
 

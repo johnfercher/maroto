@@ -1,8 +1,8 @@
 package internal
 
 import (
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 )
 
 // Math is the abstraction which deals with useful calc
@@ -13,11 +13,11 @@ type Math interface {
 }
 
 type math struct {
-	pdf gofpdf.Pdf
+	pdf fpdf.Fpdf
 }
 
 // NewMath create a Math
-func NewMath(pdf gofpdf.Pdf) *math {
+func NewMath(pdf fpdf.Fpdf) *math {
 	return &math{
 		pdf,
 	}

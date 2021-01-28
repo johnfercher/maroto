@@ -240,7 +240,7 @@ func TestText_MakeValid(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		c.fontProp.MakeValid()
+		c.fontProp.MakeValid(consts.Arial)
 		c.assert(t, c.fontProp)
 	}
 }
@@ -282,7 +282,7 @@ func TestFontProp_MakeValid(t *testing.T) {
 
 	for _, c := range cases {
 		// Act
-		c.signatureProp.MakeValid()
+		c.signatureProp.MakeValid(consts.Arial)
 
 		// Assert
 		c.assert(t, c.signatureProp)
@@ -400,7 +400,7 @@ func TestTableListProp_MakeValid(t *testing.T) {
 
 	for _, c := range cases {
 		// Act
-		c.tableListProp.MakeValid([]string{"a", "b", "c"}, [][]string{{"a", "b", "c"}})
+		c.tableListProp.MakeValid([]string{"a", "b", "c"}, consts.Arial)
 
 		// Assert
 		c.assert(t, c.tableListProp)

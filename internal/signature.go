@@ -1,8 +1,8 @@
 package internal
 
 import (
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 )
 
 // Signature is the abstraction which deals of how to add a signature space inside PDF
@@ -11,13 +11,13 @@ type Signature interface {
 }
 
 type signature struct {
-	pdf  gofpdf.Pdf
+	pdf  fpdf.Fpdf
 	math Math
 	text Text
 }
 
 // NewSignature create a Signature
-func NewSignature(pdf gofpdf.Pdf, math Math, text Text) *signature {
+func NewSignature(pdf fpdf.Fpdf, math Math, text Text) *signature {
 	return &signature{
 		pdf,
 		math,

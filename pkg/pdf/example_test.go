@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
+	"testing"
 	"time"
 )
 
@@ -578,6 +579,72 @@ func ExamplePdfMaroto_GetPageMargins() {
 	fmt.Println(top)
 	fmt.Println(right)
 	fmt.Println(bottom)
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_AddUTF8Font demonstrates how to add a custom utf8 font
+func ExamplePdfMaroto_AddUTF8Font() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Define font to all styles
+	m.AddUTF8Font("CustomArial", consts.Normal, "internal/assets/fonts/arial-unicode-ms.ttf")
+	m.AddUTF8Font("CustomArial", consts.Italic, "internal/assets/fonts/arial-unicode-ms.ttf")
+	m.AddUTF8Font("CustomArial", consts.Bold, "internal/assets/fonts/arial-unicode-ms.ttf")
+	m.AddUTF8Font("CustomArial", consts.BoldItalic, "internal/assets/fonts/arial-unicode-ms.ttf")
+
+	m.Row(10, func() {
+		m.Col(12, func() {
+			// Use style
+			m.Text("CustomUtf8Font", props.Text{
+				Family: "CustomArial",
+			})
+		})
+	})
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_AddUTF8Font demonstrates how to define a custom font to your pdf
+func TestPdfMaroto_SetDefaultFontFamily(t *testing.T) {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Default font family is Arial
+
+	// Change the default to Courier
+	m.SetDefaultFontFamily(consts.Courier)
+
+	m.Row(10, func() {
+		m.Col(12, func() {
+			// This will be in courier
+			m.Text("CustomUtf8Font")
+		})
+	})
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_AddUTF8Font demonstrates how to obtain the current default font family
+func ExamplePdfMaroto_GetDefaultFontFamily() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Will return Arial
+	_ = m.GetDefaultFontFamily()
+
+	// Change the default to Courier
+	m.SetDefaultFontFamily(consts.Courier)
+
+	// Will return Courier
+	_ = m.GetDefaultFontFamily()
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_SetProtection demonstrates how to define a protection to pdf
+func ExamplePdfMaroto_SetProtection() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.SetProtection(1, "userPassword", "ownerPassword")
 
 	// Do more things and save...
 }
