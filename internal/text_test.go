@@ -13,7 +13,7 @@ import (
 )
 
 func TestNewText(t *testing.T) {
-	text := internal.NewText(&mocks.Pdf{}, &mocks.Math{}, &mocks.Font{})
+	text := internal.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Font{})
 
 	assert.NotNil(t, text)
 	assert.Equal(t, fmt.Sprintf("%T", text), "*internal.text")
@@ -21,7 +21,7 @@ func TestNewText(t *testing.T) {
 
 func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Pdf{}
+	pdf := &mocks.Fpdf{}
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
 		return text
 	})
@@ -41,7 +41,7 @@ func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
 
 func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Pdf{}
+	pdf := &mocks.Fpdf{}
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
 		return text
 	})
@@ -61,7 +61,7 @@ func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
 
 func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Pdf{}
+	pdf := &mocks.Fpdf{}
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
 		return text
 	})
@@ -81,7 +81,7 @@ func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
 
 func TestText_GetLinesQuantity_WhenHasToBreakLines(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Pdf{}
+	pdf := &mocks.Fpdf{}
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
 		return text
 	})
@@ -107,20 +107,22 @@ func TestText_Add(t *testing.T) {
 		name       string
 		text       string
 		align      consts.Align
+		family     string
 		color      color.Color
-		pdf        func() *mocks.Pdf
+		pdf        func() *mocks.Fpdf
 		font       func() *mocks.Font
 		cell       func() *internal.Cell
-		assertPdf  func(t *testing.T, pdf *mocks.Pdf)
+		assertPdf  func(t *testing.T, pdf *mocks.Fpdf)
 		assertFont func(t *testing.T, font *mocks.Font)
 	}{
 		{
 			"Left Align",
 			"TextHelper1",
 			consts.Left,
+			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
-			func() *mocks.Pdf {
-				_pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -139,7 +141,7 @@ func TestText_Add(t *testing.T) {
 			func() *internal.Cell {
 				return nil
 			},
-			func(t *testing.T, _pdf *mocks.Pdf) {
+			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNotCalled(t, "GetStringWidth")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
@@ -156,12 +158,13 @@ func TestText_Add(t *testing.T) {
 			},
 		},
 		{
-			"Center Align",
-			"TextHelper2",
-			consts.Center,
+			"Custom Font",
+			"TextHelper1",
+			consts.Left,
+			"CustomFont",
 			color.Color{Red: 0, Green: 0, Blue: 0},
-			func() *mocks.Pdf {
-				_pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -180,7 +183,49 @@ func TestText_Add(t *testing.T) {
 			func() *internal.Cell {
 				return nil
 			},
-			func(t *testing.T, _pdf *mocks.Pdf) {
+			func(t *testing.T, _pdf *mocks.Fpdf) {
+				_pdf.AssertNotCalled(t, "GetStringWidth")
+
+				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
+
+				_pdf.AssertNumberOfCalls(t, "Text", 1)
+				_pdf.AssertCalled(t, "Text", 11.0, 16.0, "TextHelper1")
+			},
+			func(t *testing.T, _font *mocks.Font) {
+				_font.AssertNumberOfCalls(t, "SetFont", 1)
+				_font.AssertCalled(t, "SetFont", "CustomFont", consts.BoldItalic, 16.0)
+				_font.AssertNumberOfCalls(t, "GetColor", 1)
+				_font.AssertNumberOfCalls(t, "SetColor", 2)
+				_font.AssertCalled(t, "SetColor", color.Color{Red: 0, Green: 0, Blue: 0})
+			},
+		},
+		{
+			"Center Align",
+			"TextHelper2",
+			consts.Center,
+			consts.Arial,
+			color.Color{Red: 0, Green: 0, Blue: 0},
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
+				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
+				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
+				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
+				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
+				return _pdf
+			},
+			func() *mocks.Font {
+				_font := &mocks.Font{}
+				_font.On("GetScaleFactor").Return(1.0)
+				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
+				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
+				_font.On("GetColor").Return(color.Color{Red: 0, Green: 0, Blue: 0})
+				_font.On("SetColor", mock.Anything)
+				return _font
+			},
+			func() *internal.Cell {
+				return nil
+			},
+			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
 				_pdf.AssertCalled(t, "GetStringWidth", "TextHelper2")
 
@@ -201,9 +246,10 @@ func TestText_Add(t *testing.T) {
 			"Right Align",
 			"TextHelper3",
 			consts.Right,
+			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
-			func() *mocks.Pdf {
-				_pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -221,7 +267,7 @@ func TestText_Add(t *testing.T) {
 			}, func() *internal.Cell {
 				return nil
 			},
-			func(t *testing.T, _pdf *mocks.Pdf) {
+			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
 				_pdf.AssertCalled(t, "GetStringWidth", "TextHelper3")
 
@@ -242,9 +288,10 @@ func TestText_Add(t *testing.T) {
 			"Right Align",
 			"TextHelper4",
 			consts.Right,
+			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
-			func() *mocks.Pdf {
-				_pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -262,7 +309,7 @@ func TestText_Add(t *testing.T) {
 			}, func() *internal.Cell {
 				return nil
 			},
-			func(t *testing.T, _pdf *mocks.Pdf) {
+			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
 				_pdf.AssertCalled(t, "GetStringWidth", "TextHelper4")
 
@@ -283,9 +330,10 @@ func TestText_Add(t *testing.T) {
 			"Bigger than cell width",
 			"Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
 			consts.Center,
+			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
-			func() *mocks.Pdf {
-				_pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
 				_pdf.On("GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").Return(900.0)
 				_pdf.On("GetStringWidth", mock.Anything).Return(20.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
@@ -304,7 +352,7 @@ func TestText_Add(t *testing.T) {
 			}, func() *internal.Cell {
 				return nil
 			},
-			func(t *testing.T, _pdf *mocks.Pdf) {
+			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 275)
 				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
 
@@ -323,9 +371,10 @@ func TestText_Add(t *testing.T) {
 			"Customizable col width",
 			"Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
 			consts.Center,
+			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
-			func() *mocks.Pdf {
-				_pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
 				_pdf.On("GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").Return(900.0)
 				_pdf.On("GetStringWidth", mock.Anything).Return(20.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
@@ -349,7 +398,7 @@ func TestText_Add(t *testing.T) {
 					Width: 25.0,
 				}
 			},
-			func(t *testing.T, _pdf *mocks.Pdf) {
+			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 274)
 				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
 
@@ -369,9 +418,10 @@ func TestText_Add(t *testing.T) {
 			"Custom Font Color",
 			"CustomFontColor",
 			consts.Left,
+			consts.Arial,
 			color.Color{Red: 20, Green: 20, Blue: 20},
-			func() *mocks.Pdf {
-				_pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -390,7 +440,7 @@ func TestText_Add(t *testing.T) {
 			func() *internal.Cell {
 				return nil
 			},
-			func(t *testing.T, _pdf *mocks.Pdf) {
+			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNotCalled(t, "GetStringWidth")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
@@ -428,7 +478,7 @@ func TestText_Add(t *testing.T) {
 		}
 
 		// Act
-		text.Add(c.text, cell, props.Text{Family: consts.Arial, Style: consts.BoldItalic, Size: 16.0, Align: c.align, Color: c.color})
+		text.Add(c.text, cell, props.Text{Family: c.family, Style: consts.BoldItalic, Size: 16.0, Align: c.align, Color: c.color})
 
 		// Assert
 		c.assertPdf(t, _pdf)

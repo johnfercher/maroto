@@ -10,3 +10,4 @@ ignore:
   - "internal/mocks"
   - "docs"
   - "vendor"
+  - "internal/fpdf"

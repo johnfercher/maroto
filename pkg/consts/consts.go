@@ -5,20 +5,17 @@ const (
 	MaxGridSum float64 = 12.0
 )
 
-// Family is a representation of a family Font
-type Family string
-
 const (
 	// Arial represents an arial Font
-	Arial Family = "arial"
+	Arial string = "arial"
 	// Helvetica represents a helvetica Font
-	Helvetica Family = "helvetica"
+	Helvetica string = "helvetica"
 	// Symbol represents a symbol Font
-	Symbol Family = "symbol"
+	Symbol string = "symbol"
 	// ZapBats represents a zapfdingbats Font
-	ZapBats Family = "zapfdingbats"
+	ZapBats string = "zapfdingbats"
 	// Courier represents a courier Font
-	Courier Family = "courier"
+	Courier string = "courier"
 )
 
 // Align is arRepresentation of a column align

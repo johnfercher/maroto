@@ -49,7 +49,7 @@ type Text struct {
 	// Top is space between the upper cell limit to the barcode, if align is not center
 	Top float64
 	// Family of the text, ex: consts.Arial, helvetica and etc
-	Family consts.Family
+	Family string
 	// Style of the text, ex: consts.Normal, bold and etc
 	Style consts.Style
 	// Size of the text
@@ -68,7 +68,7 @@ type Text struct {
 // Font represents properties from a text
 type Font struct {
 	// Family of the text, ex: consts.Arial, helvetica and etc
-	Family consts.Family
+	Family string
 	// Style of the text, ex: consts.Normal, bold and etc
 	Style consts.Style
 	// Size of the text
@@ -80,7 +80,7 @@ type Font struct {
 // TableListContent represents properties from a line (header/content) from a TableList
 type TableListContent struct {
 	// Family of the text, ex: consts.Arial, helvetica and etc
-	Family consts.Family
+	Family string
 	// Style of the text, ex: consts.Normal, bold and etc
 	Style consts.Style
 	// Size of the text
@@ -169,9 +169,9 @@ func (s *Barcode) MakeValid() {
 }
 
 // MakeValid from Text define default values for a Text
-func (s *Text) MakeValid() {
+func (s *Text) MakeValid(defaultFamily string) {
 	if s.Family == "" {
-		s.Family = consts.Arial
+		s.Family = defaultFamily
 	}
 
 	if s.Style == "" {
@@ -196,9 +196,9 @@ func (s *Text) MakeValid() {
 }
 
 // MakeValid from Font define default values for a Signature
-func (s *Font) MakeValid() {
+func (s *Font) MakeValid(defaultFamily string) {
 	if s.Family == "" {
-		s.Family = consts.Arial
+		s.Family = defaultFamily
 	}
 
 	if s.Style == "" {
@@ -223,7 +223,7 @@ func (s *Font) ToTextProp(align consts.Align, top float64, extrapolate bool, ver
 		Color:           s.Color,
 	}
 
-	textProp.MakeValid()
+	textProp.MakeValid(s.Family)
 
 	return textProp
 }
@@ -240,19 +240,19 @@ func (s *TableListContent) ToTextProp(align consts.Align, top float64, extrapola
 		VerticalPadding: verticalPadding,
 	}
 
-	textProp.MakeValid()
+	textProp.MakeValid(s.Family)
 
 	return textProp
 }
 
 // MakeValid from TableList define default values for a TableList
-func (s *TableList) MakeValid(header []string, contents [][]string) {
+func (s *TableList) MakeValid(header []string, defaultFamily string) {
 	if s.HeaderProp.Size == 0.0 {
 		s.HeaderProp.Size = 10.0
 	}
 
 	if s.HeaderProp.Family == "" {
-		s.HeaderProp.Family = consts.Arial
+		s.HeaderProp.Family = defaultFamily
 	}
 
 	if s.HeaderProp.Style == "" {
@@ -277,7 +277,7 @@ func (s *TableList) MakeValid(header []string, contents [][]string) {
 	}
 
 	if s.ContentProp.Family == "" {
-		s.ContentProp.Family = consts.Arial
+		s.ContentProp.Family = defaultFamily
 	}
 
 	if s.ContentProp.Style == "" {

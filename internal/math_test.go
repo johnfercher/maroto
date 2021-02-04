@@ -10,7 +10,7 @@ import (
 )
 
 func TestNewMath(t *testing.T) {
-	math := internal.NewMath(&mocks.Pdf{})
+	math := internal.NewMath(&mocks.Fpdf{})
 
 	assert.NotNil(t, math)
 	assert.Equal(t, fmt.Sprintf("%T", math), "*internal.math")
@@ -22,8 +22,8 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 		width          float64
 		height         float64
 		percent        float64
-		pdf            func() *mocks.Pdf
-		assertPdfCalls func(t *testing.T, pdf *mocks.Pdf)
+		pdf            func() *mocks.Fpdf
+		assertPdfCalls func(t *testing.T, pdf *mocks.Fpdf)
 		assertResult   func(t *testing.T, x, y, w, h float64)
 	}{
 		{
@@ -31,12 +31,12 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 			20,
 			26,
 			100.0,
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				pdf := &mocks.Fpdf{}
 				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
+			func(t *testing.T, pdf *mocks.Fpdf) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
@@ -51,12 +51,12 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 			20,
 			26,
 			45.0,
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				pdf := &mocks.Fpdf{}
 				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
+			func(t *testing.T, pdf *mocks.Fpdf) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
@@ -71,12 +71,12 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 			26,
 			20,
 			100.0,
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				pdf := &mocks.Fpdf{}
 				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
+			func(t *testing.T, pdf *mocks.Fpdf) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
@@ -91,12 +91,12 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 			26,
 			20,
 			45.0,
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				pdf := &mocks.Fpdf{}
 				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
+			func(t *testing.T, pdf *mocks.Fpdf) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
@@ -129,8 +129,8 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 		width          float64
 		height         float64
 		prop           props.Rect
-		pdf            func() *mocks.Pdf
-		assertPdfCalls func(t *testing.T, pdf *mocks.Pdf)
+		pdf            func() *mocks.Fpdf
+		assertPdfCalls func(t *testing.T, pdf *mocks.Fpdf)
 		assertResult   func(t *testing.T, x, y, w, h float64)
 	}{
 		{
@@ -143,12 +143,12 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 				Left:    0,
 				Top:     0,
 			},
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				pdf := &mocks.Fpdf{}
 				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
+			func(t *testing.T, pdf *mocks.Fpdf) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
@@ -168,12 +168,12 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 				Left:    0,
 				Top:     0,
 			},
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				pdf := &mocks.Fpdf{}
 				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
+			func(t *testing.T, pdf *mocks.Fpdf) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
@@ -192,12 +192,12 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 				Left:    0,
 				Top:     0,
 			},
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				pdf := &mocks.Fpdf{}
 				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
+			func(t *testing.T, pdf *mocks.Fpdf) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
@@ -217,12 +217,12 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 				Left:    0,
 				Top:     0,
 			},
-			func() *mocks.Pdf {
-				pdf := &mocks.Pdf{}
+			func() *mocks.Fpdf {
+				pdf := &mocks.Fpdf{}
 				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
 				return pdf
 			},
-			func(t *testing.T, pdf *mocks.Pdf) {
+			func(t *testing.T, pdf *mocks.Fpdf) {
 				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
 			},
 			func(t *testing.T, x, y, w, h float64) {
@@ -251,7 +251,7 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 
 func TestMath_GetCenterCorrection(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Pdf{}
+	pdf := &mocks.Fpdf{}
 	math := internal.NewMath(pdf)
 
 	// Act

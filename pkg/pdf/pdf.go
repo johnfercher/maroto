@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"bytes"
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
 
 	"github.com/johnfercher/maroto/internal"
@@ -49,34 +50,50 @@ type Maroto interface {
 	GetCurrentOffset() float64
 	SetPageMargins(left, top, right float64)
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
+
+	// Fonts
+	AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string)
+	SetProtection(actionFlag byte, userPassStr, ownerPassStr string)
+	SetDefaultFontFamily(fontFamily string)
+	GetDefaultFontFamily() string
 }
 
 // PdfMaroto is the principal structure which implements Maroto abstraction
 type PdfMaroto struct {
-	Pdf                       gofpdf.Pdf
-	Math                      internal.Math
-	Font                      internal.Font
-	TextHelper                internal.Text
-	SignHelper                internal.Signature
-	Image                     internal.Image
-	Code                      internal.Code
-	TableListHelper           internal.TableList
+	// Gofpdf wrapper
+	Pdf fpdf.Fpdf
+
+	// Components
+	Math            internal.Math
+	Font            internal.Font
+	TextHelper      internal.Text
+	SignHelper      internal.Signature
+	Image           internal.Image
+	Code            internal.Code
+	TableListHelper internal.TableList
+
+	// Closures with Maroto Header and Footer logic
+	headerClosure func()
+	footerClosure func()
+
+	// Computed values
 	pageIndex                 int
 	offsetY                   float64
-	marginTop                 float64
 	rowHeight                 float64
+	firstPageNb               int
 	xColOffset                float64
 	colWidth                  float64
-	backgroundColor           color.Color
-	headerClosure             func()
-	footerClosure             func()
 	footerHeight              float64
 	headerFooterContextActive bool
-	calculationMode           bool
-	debugMode                 bool
-	orientation               consts.Orientation
-	pageSize                  consts.PageSize
-	firstPageNb               int
+
+	// Page configs
+	marginTop         float64
+	calculationMode   bool
+	backgroundColor   color.Color
+	debugMode         bool
+	orientation       consts.Orientation
+	pageSize          consts.PageSize
+	defaultFontFamily string
 }
 
 // NewMarotoCustomSize creates a Maroto instance returning a pointer to PdfMaroto
@@ -110,18 +127,19 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 	tableList := internal.NewTableList(text, font)
 
 	maroto := &PdfMaroto{
-		Pdf:             fpdf,
-		Math:            math,
-		Font:            font,
-		TextHelper:      text,
-		SignHelper:      signature,
-		Image:           image,
-		Code:            code,
-		TableListHelper: tableList,
-		pageSize:        pageSize,
-		orientation:     orientation,
-		calculationMode: false,
-		backgroundColor: color.NewWhite(),
+		Pdf:               fpdf,
+		Math:              math,
+		Font:              font,
+		TextHelper:        text,
+		SignHelper:        signature,
+		Image:             image,
+		Code:              code,
+		TableListHelper:   tableList,
+		pageSize:          pageSize,
+		orientation:       orientation,
+		calculationMode:   false,
+		backgroundColor:   color.NewWhite(),
+		defaultFontFamily: consts.Arial,
 	}
 
 	maroto.TableListHelper.BindGrid(maroto)
@@ -219,7 +237,7 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 		signProp = prop[0]
 	}
 
-	signProp.MakeValid()
+	signProp.MakeValid(s.defaultFontFamily)
 
 	cell := internal.Cell{
 		X:      s.xColOffset,
@@ -236,7 +254,7 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 // Headers have bold style, and localized at the top of table.
 // Contents are array of arrays. Each array is one line.
 func (s *PdfMaroto) TableList(header []string, contents [][]string, prop ...props.TableList) {
-	s.TableListHelper.Create(header, contents, prop...)
+	s.TableListHelper.Create(header, contents, s.defaultFontFamily, prop...)
 }
 
 // SetBorder enable the draw of lines in every cell.
@@ -377,7 +395,7 @@ func (s *PdfMaroto) Text(text string, prop ...props.Text) {
 		textProp = prop[0]
 	}
 
-	textProp.MakeValid()
+	textProp.MakeValid(s.defaultFontFamily)
 
 	if textProp.Top > s.rowHeight {
 		textProp.Top = s.rowHeight
@@ -487,6 +505,27 @@ func (s *PdfMaroto) Output() (bytes.Buffer, error) {
 	var buffer bytes.Buffer
 	err := s.Pdf.Output(&buffer)
 	return buffer, err
+}
+
+// AddUTF8Font add a custom utf8 font. familyStr is the name of the custom font registered in maroto.
+// styleStr is the style of the font and fileStr is the path to the .ttf file.
+func (s *PdfMaroto) AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string) {
+	s.Pdf.AddUTF8Font(familyStr, string(styleStr), fileStr)
+}
+
+// SetProtection define a password to open the pdf
+func (s *PdfMaroto) SetProtection(actionFlag byte, userPassStr, ownerPassStr string) {
+	s.Pdf.SetProtection(actionFlag, userPassStr, ownerPassStr)
+}
+
+// SetDefaultFontFamily allows you to customize the default font. By default Arial is the original value.
+func (s *PdfMaroto) SetDefaultFontFamily(fontFamily string) {
+	s.defaultFontFamily = fontFamily
+}
+
+// GetDefaultFontFamily allows you to get the current default font family
+func (s *PdfMaroto) GetDefaultFontFamily() string {
+	return s.defaultFontFamily
 }
 
 func (s *PdfMaroto) createColSpace(actualWidthPerCol float64) {

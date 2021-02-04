@@ -25,6 +25,10 @@ go get -u github.com/johnfercher/maroto
 ## Features
 ![result](internal/assets/images/diagram.png)
 
+#### Constructors
+* [New](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#NewMaroto)
+* [NewCustomSize](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#NewMarotoCustomSize)
+
 #### Grid System
 * [Row](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Row)
 * [Col](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Col)
@@ -46,17 +50,22 @@ go get -u github.com/johnfercher/maroto
 * [RegisterHeader](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.RegisterHeader)
 * [RegisterFooter](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.RegisterFooter)
 
-#### Others   
+#### Saving PDF
+* [Output](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.Output)
+* [OutputFileAndClose](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.OutputFileAndClose)
+
+#### Customizations   
 * [Properties](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/props?tab=doc): most of the components has properties which you can use to customize appearance and behavior.
 * [SetBorder](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetBorder): Used to draw rectangles in every row and column
 * [SetBackgroundColor](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetBackgroundColor): Used to change the background color of one cell.
 * [SetPageMargins](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetPageMargins): Customize the page margins
-* NewMarotoCustomSize(): Create Maroto with custom page dimensions
-* SetAliasNbPages: Set placeholder to use in texts for total count of pages
-* SetFirstPageNb: Set first number for page numbering
+* [SetAliasNbPages](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.SetAliasNbPages): Set placeholder to use in texts for total count of pages
+* [SetFirstPageNb](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.SetFirstPageNb): Set first number for page numbering
+* [AddUTF8Font](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.AddUTF8Font): Add a custom utf8 font
+* [SetProtection](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.SetProtection)
+* [SetDefaultFontFamily](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.SetProtection): Define a default font family, useful to use with a custom font.
 * Automatic New Page: New pages are generated automatically when needed.
 * 100% Unicode
-* Save: You can [save on disk](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.OutputFileAndClose) or export to a [base64 string](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.Output)
 
 #### Roadmap
 * Updated in [Issues](https://github.com/johnfercher/maroto/issues)
@@ -64,11 +73,17 @@ go get -u github.com/johnfercher/maroto
 ## Examples
 In the [PDFs](internal/examples/pdfs) folder there are the PDFs generated
 using Maroto, and in the [examples](internal/examples) folder there are subfolders
-with the code to generate the PDFs.
+with the code to generate the PDFs. There are examples of: [barcode](internal/examples/barcode),
+[billing](internal/examples/billing), [certificate](internal/examples/certificate), 
+[custom pdf size](internal/examples/customsize), [image inside grid](internal/examples/imagegrid),
+[qrcode inside grid](internal/examples/qrgrid), [sample with almost all features together](internal/examples/sample1), 
+[text inside grid](internal/examples/textgrid), [custom utf8 fonts](internal/examples/utfsample) and a
+[label zpl](internal/examples/zpl).
 
 ![result](internal/assets/images/result.png)
 
 #### Code
+> This is part of the example [billing](internal/examples/billing).
 ```go
 // Billing example
 package main
