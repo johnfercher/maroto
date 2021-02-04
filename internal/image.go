@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"github.com/google/uuid"
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/jung-kurt/gofpdf"
@@ -17,12 +18,12 @@ type Image interface {
 }
 
 type image struct {
-	pdf  gofpdf.Pdf
+	pdf  fpdf.Fpdf
 	math Math
 }
 
 // NewImage create an Image
-func NewImage(pdf gofpdf.Pdf, math Math) *image {
+func NewImage(pdf fpdf.Fpdf, math Math) *image {
 	return &image{
 		pdf,
 		math,

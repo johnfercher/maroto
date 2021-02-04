@@ -28,7 +28,7 @@ type MarotoGridPart interface {
 
 // TableList is the abstraction to create a table with header and contents
 type TableList interface {
-	Create(header []string, contents [][]string, prop ...props.TableList)
+	Create(header []string, contents [][]string, defaultFontFamily string, prop ...props.TableList)
 	BindGrid(part MarotoGridPart)
 }
 
@@ -53,7 +53,7 @@ func (s *tableList) BindGrid(pdf MarotoGridPart) {
 
 // Create create a header section with a list of strings and
 // create many rows with contents
-func (s *tableList) Create(header []string, contents [][]string, prop ...props.TableList) {
+func (s *tableList) Create(header []string, contents [][]string, defaultFontFamily string, prop ...props.TableList) {
 	if len(header) == 0 {
 		return
 	}
@@ -68,7 +68,7 @@ func (s *tableList) Create(header []string, contents [][]string, prop ...props.T
 		tableProp = prop[0]
 	}
 
-	tableProp.MakeValid(header, contents)
+	tableProp.MakeValid(header, defaultFontFamily)
 	headerHeight := s.calcLinesHeight(header, tableProp.HeaderProp, tableProp.Align)
 
 	// Draw header

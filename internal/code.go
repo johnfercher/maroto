@@ -3,8 +3,8 @@ package internal
 import (
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/qr"
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 	"github.com/jung-kurt/gofpdf/contrib/barcode"
 )
 
@@ -15,12 +15,12 @@ type Code interface {
 }
 
 type code struct {
-	pdf  gofpdf.Pdf
+	pdf  fpdf.Fpdf
 	math Math
 }
 
 // NewCode create a Code
-func NewCode(pdf gofpdf.Pdf, math Math) *code {
+func NewCode(pdf fpdf.Fpdf, math Math) *code {
 	return &code{
 		pdf,
 		math,
