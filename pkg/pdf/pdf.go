@@ -50,6 +50,7 @@ type Maroto interface {
 	GetCurrentOffset() float64
 	SetPageMargins(left, top, right float64)
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
+	GetPageCount() (count int)
 
 	// Fonts
 	AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string)
@@ -221,6 +222,11 @@ func (s *PdfMaroto) GetPageMargins() (left float64, top float64, right float64, 
 	top += s.marginTop
 
 	return
+}
+
+// GetPageCount returns the total number of pages on the pdf
+func (s *PdfMaroto) GetPageCount() (count int) {
+	return s.Pdf.PageCount()
 }
 
 // Signature add a space for a signature inside a cell,

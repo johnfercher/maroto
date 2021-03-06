@@ -648,3 +648,11 @@ func ExamplePdfMaroto_SetProtection() {
 
 	// Do more things and save...
 }
+
+// ExamplePdfMaroto_GetPageCount demonstrates how to get the total amount of pages on the pdf
+func ExamplePdfMaroto_GetPageCount() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.GetPageCount()
+	// Do more things and save...
+}

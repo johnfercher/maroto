@@ -3,9 +3,10 @@ package pdf_test
 import (
 	"bytes"
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
-	"testing"
 
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -1618,6 +1619,7 @@ func baseFpdfTest(left, top, right float64) *mocks.Fpdf {
 	Fpdf.On("SetFillColor", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("AddUTF8Font", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("SetProtection", mock.Anything, mock.Anything, mock.Anything)
+	Fpdf.On("PageCount").Return(1)
 	return Fpdf
 }
 
@@ -2046,4 +2048,17 @@ func TestPdfMaroto_SetGetDefaultFontFamily(t *testing.T) {
 
 	// Assert
 	assert.Equal(t, family, "family")
+}
+
+func TestPdfMaroto_GetPageCount(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10, 10, 10)
+
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	count := m.GetPageCount()
+
+	// Assert
+	assert.Equal(t, count, 1)
 }
