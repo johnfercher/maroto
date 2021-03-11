@@ -648,3 +648,12 @@ func ExamplePdfMaroto_SetProtection() {
 
 	// Do more things and save...
 }
+
+// ExamplePdfMaroto_SetCompression demonstrates how to disable compression
+func ExamplePdfMaroto_SetCompression() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.SetCompression(false)
+
+	// Do more things and save...
+}

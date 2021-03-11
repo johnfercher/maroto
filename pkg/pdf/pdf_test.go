@@ -1618,6 +1618,7 @@ func baseFpdfTest(left, top, right float64) *mocks.Fpdf {
 	Fpdf.On("SetFillColor", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("AddUTF8Font", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("SetProtection", mock.Anything, mock.Anything, mock.Anything)
+	Fpdf.On("SetCompression", mock.Anything)
 	return Fpdf
 }
 
@@ -2046,4 +2047,16 @@ func TestPdfMaroto_SetGetDefaultFontFamily(t *testing.T) {
 
 	// Assert
 	assert.Equal(t, family, "family")
+}
+
+func TestPdfMaroto_SetCompression(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.SetCompression(false)
+
+	// Assert
+	Fpdf.AssertCalled(t, "SetCompression", false)
 }
