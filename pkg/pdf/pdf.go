@@ -284,7 +284,8 @@ func (s *PdfMaroto) SetAliasNbPages(alias string) {
 	s.Pdf.AliasNbPages(alias)
 }
 
-// SetCompression allows to set/unset compression for a pdf
+// SetCompression allows to set/unset compression for a page
+// Compression is on by default.
 func (s *PdfMaroto) SetCompression(compress bool) {
 	s.Pdf.SetCompression(compress)
 }
