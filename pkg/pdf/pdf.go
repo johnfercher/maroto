@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"bytes"
+
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
 
@@ -50,6 +51,7 @@ type Maroto interface {
 	GetCurrentOffset() float64
 	SetPageMargins(left, top, right float64)
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
+	SetCompression(compress bool)
 
 	// Fonts
 	AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string)
@@ -280,6 +282,12 @@ func (s *PdfMaroto) SetFirstPageNb(number int) {
 // It will be substituted as the document is closed.
 func (s *PdfMaroto) SetAliasNbPages(alias string) {
 	s.Pdf.AliasNbPages(alias)
+}
+
+// SetCompression allows to set/unset compression for a page
+// Compression is on by default.
+func (s *PdfMaroto) SetCompression(compress bool) {
+	s.Pdf.SetCompression(compress)
 }
 
 // GetBorder return the actual border value.
