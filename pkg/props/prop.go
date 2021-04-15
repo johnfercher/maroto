@@ -110,6 +110,8 @@ type TableList struct {
 	HeaderContentSpace float64
 	// Line adds a line after every content-row to separate rows. The line's spaceHeight is set to 1.0
 	Line bool
+	// ShowHeaderOnNewPage is the header for new page
+	ShowHeaderOnNewPage bool
 }
 
 // MakeValid from Rect will make the properties from a rectangle reliable to fit inside a cell
