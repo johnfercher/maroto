@@ -2,6 +2,8 @@ package internal_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -9,7 +11,6 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"testing"
 )
 
 func TestNewTableList(t *testing.T) {
@@ -236,4 +237,35 @@ func getContents() ([]string, [][]string) {
 	}
 
 	return header, contents
+}
+
+func TestTableList_Happy_With_Header_On_New_Page(t *testing.T) {
+	text := &mocks.Text{}
+	text.On("GetLinesQuantity", mock.Anything, mock.Anything, mock.Anything).Return(1)
+
+	font := &mocks.Font{}
+	font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
+	font.On("GetScaleFactor").Return(1.5)
+
+	marotoGrid := &mocks.Maroto{}
+	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
+	marotoGrid.On("SetBackgroundColor", mock.Anything).Return(nil)
+	marotoGrid.On("GetPageMargins").Return(10.0, 10.0, 10.0, 10.0)
+	marotoGrid.On("GetPageSize").Return(200.0, 600.0)
+	marotoGrid.On("GetCurrentPage").Return(20)
+
+	sut := internal.NewTableList(text, font)
+	sut.BindGrid(marotoGrid)
+
+	headers, contents := getContents()
+
+	// Act
+	sut.Create(headers, contents, consts.Arial, props.TableList{
+		ShowHeaderOnNewPage: true,
+	})
+
+	// Assert
+	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
+	marotoGrid.AssertNumberOfCalls(t, "Row", 42)
+	marotoGrid.AssertNumberOfCalls(t, "GetCurrentPage", 21)
 }
