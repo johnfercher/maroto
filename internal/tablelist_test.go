@@ -252,8 +252,12 @@ func TestTableList_Happy_With_Header_On_New_Page(t *testing.T) {
 	marotoGrid.On("SetBackgroundColor", mock.Anything).Return(nil)
 	marotoGrid.On("GetPageMargins").Return(10.0, 10.0, 10.0, 10.0)
 	marotoGrid.On("GetPageSize").Return(200.0, 600.0)
-	marotoGrid.On("GetCurrentPage").Return(20)
-
+	// GetCurrent for initial config
+	marotoGrid.On("GetCurrentPage").Return(0).Once()
+	// First Check
+	marotoGrid.On("GetCurrentPage").Return(0).Once()
+	// New page
+	marotoGrid.On("GetCurrentPage").Return(1)
 	sut := internal.NewTableList(text, font)
 	sut.BindGrid(marotoGrid)
 
@@ -266,6 +270,6 @@ func TestTableList_Happy_With_Header_On_New_Page(t *testing.T) {
 
 	// Assert
 	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
-	marotoGrid.AssertNumberOfCalls(t, "Row", 42)
+	marotoGrid.AssertNumberOfCalls(t, "Row", 23)
 	marotoGrid.AssertNumberOfCalls(t, "GetCurrentPage", 21)
 }

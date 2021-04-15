@@ -95,18 +95,21 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 	// Draw contents
 	for index, content := range contents {
 		if tableProp.ShowHeaderOnNewPage {
-			// Draw header
-			s.pdf.Row(headerHeight+1, func() {
-				for i, h := range header {
-					hs := h
+			currentPage := s.pdf.GetCurrentPage()
+			if s.lastPageIndex != currentPage {
+				// Draw header
+				s.pdf.Row(headerHeight+1, func() {
+					for i, h := range header {
+						hs := h
 
-					s.pdf.Col(tableProp.HeaderProp.GridSizes[i], func() {
-						reason := hs
-						s.pdf.Text(reason, tableProp.HeaderProp.ToTextProp(tableProp.Align, 0, false, 0.0))
-					})
-				}
-			})
-			s.lastPageIndex = s.pdf.GetCurrentPage()
+						s.pdf.Col(tableProp.HeaderProp.GridSizes[i], func() {
+							reason := hs
+							s.pdf.Text(reason, tableProp.HeaderProp.ToTextProp(tableProp.Align, 0, false, 0.0))
+						})
+					}
+				})
+				s.lastPageIndex = currentPage
+			}
 		}
 
 		contentHeight := s.calcLinesHeight(content, tableProp.ContentProp, tableProp.Align)
