@@ -87,6 +87,7 @@ type PdfMaroto struct {
 	colWidth                  float64
 	footerHeight              float64
 	headerFooterContextActive bool
+	maxCols                   uint
 
 	// Page configs
 	marginTop         float64
@@ -142,6 +143,7 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 		calculationMode:   false,
 		backgroundColor:   color.NewWhite(),
 		defaultFontFamily: consts.Arial,
+		maxCols:           12,
 	}
 
 	maroto.TableListHelper.BindGrid(maroto)
@@ -172,7 +174,7 @@ func (s *PdfMaroto) AddPage() {
 	maxOffsetPage := int(pageHeight - bottom - top)
 
 	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
-		s.ColSpace(12)
+		s.ColSpace(s.maxCols)
 	})
 }
 
@@ -204,6 +206,11 @@ func (s *PdfMaroto) GetCurrentPage() int {
 // GetCurrentOffset obtain the current offset in y axis
 func (s *PdfMaroto) GetCurrentOffset() float64 {
 	return s.offsetY
+}
+
+// SetMaxColumns to change current maxCols value
+func (s *PdfMaroto) SetMaxColumns(n uint) {
+	s.maxCols = n
 }
 
 // SetPageMargins overrides default margins (10,10,10)
@@ -366,10 +373,10 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 // components inside.
 func (s *PdfMaroto) Col(width uint, closure func()) {
 	if width == 0 {
-		width = 12
+		width = s.maxCols
 	}
 
-	percent := float64(width) / float64(12)
+	percent := float64(width) / float64(s.maxCols)
 
 	pageWidth, _ := s.Pdf.GetPageSize()
 	left, _, right, _ := s.Pdf.GetMargins()
@@ -570,7 +577,7 @@ func (s *PdfMaroto) footer() {
 	maxOffsetPage := int(pageHeight - bottom - top)
 
 	s.Row(float64(maxOffsetPage-totalOffsetY), func() {
-		s.ColSpace(12)
+		s.ColSpace(s.maxCols)
 	})
 
 	if s.footerClosure != nil {
@@ -585,7 +592,7 @@ func (s *PdfMaroto) header() {
 	s.SetBackgroundColor(color.NewWhite())
 
 	s.Row(s.marginTop, func() {
-		s.ColSpace(12)
+		s.ColSpace(s.maxCols)
 	})
 
 	if s.headerClosure != nil {
