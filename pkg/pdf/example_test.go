@@ -3,12 +3,13 @@ package pdf_test
 import (
 	"encoding/base64"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"testing"
-	"time"
 )
 
 // ExampleNewMaroto demonstrates how to create maroto
@@ -592,6 +593,31 @@ func ExamplePdfMaroto_AddUTF8Font() {
 	m.AddUTF8Font("CustomArial", consts.Italic, "internal/assets/fonts/arial-unicode-ms.ttf")
 	m.AddUTF8Font("CustomArial", consts.Bold, "internal/assets/fonts/arial-unicode-ms.ttf")
 	m.AddUTF8Font("CustomArial", consts.BoldItalic, "internal/assets/fonts/arial-unicode-ms.ttf")
+
+	m.Row(10, func() {
+		m.Col(12, func() {
+			// Use style
+			m.Text("CustomUtf8Font", props.Text{
+				Family: "CustomArial",
+			})
+		})
+	})
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_SetFontLocation demonstrates how to add a custom utf8 font from custom location
+func ExamplePdfMaroto_SetFontLocation() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Define custom location. It might be an absolute path as well as a relative path
+	m.SetFontLocation("internal/assets/fonts/")
+
+	// Define font to all styles
+	m.AddUTF8Font("CustomArial", consts.Normal, "arial-unicode-ms.ttf")
+	m.AddUTF8Font("CustomArial", consts.Italic, "arial-unicode-ms.ttf")
+	m.AddUTF8Font("CustomArial", consts.Bold, "arial-unicode-ms.ttf")
+	m.AddUTF8Font("CustomArial", consts.BoldItalic, "arial-unicode-ms.ttf")
 
 	m.Row(10, func() {
 		m.Col(12, func() {
