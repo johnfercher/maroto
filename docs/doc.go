@@ -18,6 +18,8 @@ Features and Components
 
 -   Qrcodes
 
+-   DataMatrix codes
+
 -   Signatures
 
 Maroto has only gofpdf dependency. All tests pass on Linux and Mac.

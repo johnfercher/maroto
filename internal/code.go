@@ -28,6 +28,7 @@ func NewCode(pdf fpdf.Fpdf, math Math) *code {
 	}
 }
 
+// AddDataMatrix creates a DataMatrix code inside a cell
 func (s *code) AddDataMatrix(code string, cell Cell, prop props.Rect) {
 	key := barcode.RegisterDataMatrix(s.pdf, code)
 

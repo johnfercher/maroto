@@ -481,6 +481,8 @@ func (s *PdfMaroto) Barcode(code string, prop ...props.Barcode) (err error) {
 
 	return
 }
+
+// DataMatrixCode creates an datamatrix code inside a cell.
 func (s *PdfMaroto) DataMatrixCode(code string, prop ...props.Rect) {
 	rectProp := props.Rect{}
 	if len(prop) > 0 {
