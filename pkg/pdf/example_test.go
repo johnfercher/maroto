@@ -368,6 +368,32 @@ func ExamplePdfMaroto_QrCode() {
 	})
 }
 
+// ExamplePdfMaroto_DataMatrixCode demonstrates how to add
+// a DataMatrixCode inside a Col.
+func ExamplePdfMaroto_DataMatrixCode() {
+	// Passing nil on rectProps makes
+	// the DataMatrixCode fill the context cell.
+	// When center is true, left and top has no effect.
+	// Percent represents the width/height of the DataMatrixCode inside the cell.
+	// i.e. 80 means that the DataMatrixCode will take up 80% of Col's width
+	// When center is false, positioning of the DataMatrixCode can be done through
+	// left and top.
+
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	rowHeight := 5.0
+
+	m.Row(rowHeight, func() {
+		m.Col(12, func() {
+			m.DataMatrixCode("https://godoc.org/github.com/johnfercher/maroto", props.Rect{
+				Left:    5,
+				Top:     5,
+				Center:  false,
+				Percent: 80,
+			})
+		})
+	})
+}
+
 // ExamplePdfMaroto_Signature demonstrates how to add
 // a Signature space inside a col.
 func ExamplePdfMaroto_Signature() {

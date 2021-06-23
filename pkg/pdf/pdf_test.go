@@ -1164,6 +1164,162 @@ func TestFpdfMaroto_Barcode(t *testing.T) {
 	}
 }
 
+func TestFpdfMaroto_DataMatrixCode(t *testing.T) {
+	cases := []struct {
+		name   string
+		code   func() *mocks.Code
+		assert func(t *testing.T, image *mocks.Code)
+		act    func(m pdf.Maroto)
+	}{
+		{
+			"One code inside a col inside a row",
+			func() *mocks.Code {
+				code := &mocks.Code{}
+				code.On("AddDataMatrix", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return code
+			},
+			func(t *testing.T, code *mocks.Code) {
+				code.AssertNumberOfCalls(t, "AddDataMatrix", 1)
+				code.AssertCalled(t, "AddDataMatrix", "Code1", internal.Cell{X: 0.0, Y: 0.0, Width: 80.0, Height: 20.0}, props.Rect{Percent: 100, Center: false})
+			},
+			func(m pdf.Maroto) {
+				m.Row(20, func() {
+					m.Col(0, func() {
+						m.DataMatrixCode("Code1")
+					})
+				})
+			},
+		},
+		{
+			"Two codes inside a col inside a row",
+			func() *mocks.Code {
+				code := &mocks.Code{}
+				code.On("AddDataMatrix", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return code
+			},
+			func(t *testing.T, code *mocks.Code) {
+				code.AssertNumberOfCalls(t, "AddDataMatrix", 2)
+				code.AssertCalled(t, "AddDataMatrix", "Code2", internal.Cell{X: 0.0, Y: 4.0, Width: 80.0, Height: 20.0}, props.Rect{
+					Left:    2.0,
+					Top:     4.0,
+					Percent: 40.0,
+				})
+				code.AssertCalled(t, "AddDataMatrix", "Code3", internal.Cell{X: 0.0, Y: 0.0, Width: 80.0, Height: 20.0}, props.Rect{
+					Percent: 40.0,
+					Center:  true,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(20, func() {
+					m.Col(0, func() {
+						m.DataMatrixCode("Code2", props.Rect{
+							Left:    2.0,
+							Top:     4.0,
+							Percent: 40.0,
+						})
+						m.DataMatrixCode("Code3", props.Rect{
+							Percent: 40.0,
+							Center:  true,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Two codes inside two cols inside a row",
+			func() *mocks.Code {
+				code := &mocks.Code{}
+				code.On("AddDataMatrix", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return code
+			},
+			func(t *testing.T, code *mocks.Code) {
+				code.AssertNumberOfCalls(t, "AddDataMatrix", 2)
+				code.AssertCalled(t, "AddDataMatrix", "Code4", internal.Cell{X: 0.0, Y: 4.5, Width: 40.0, Height: 20.0}, props.Rect{
+					Left:    4.0,
+					Top:     4.5,
+					Percent: 55.0,
+				})
+				code.AssertCalled(t, "AddDataMatrix", "Code5", internal.Cell{X: 40.0, Y: 0.0, Width: 40.0, Height: 20.0}, props.Rect{
+					Percent: 53.0,
+					Center:  true,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(20, func() {
+					m.Col(6, func() {
+						m.DataMatrixCode("Code4", props.Rect{
+							Left:    4.0,
+							Top:     4.5,
+							Percent: 55.0,
+						})
+					})
+					m.Col(6, func() {
+						m.DataMatrixCode("Code5", props.Rect{
+							Percent: 53.0,
+							Center:  true,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Two codes inside one col inside two rows",
+			func() *mocks.Code {
+				code := &mocks.Code{}
+				code.On("AddDataMatrix", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return code
+			},
+			func(t *testing.T, code *mocks.Code) {
+				code.AssertNumberOfCalls(t, "AddDataMatrix", 2)
+				code.AssertCalled(t, "AddDataMatrix", "Code6", internal.Cell{X: 0.0, Y: 8.5, Width: 80.0, Height: 20.0}, props.Rect{
+					Left:    7.0,
+					Top:     8.5,
+					Percent: 66.0,
+				})
+				code.AssertCalled(t, "AddDataMatrix", "Code7", internal.Cell{X: 0.0, Y: 20.0, Width: 80.0, Height: 20.0}, props.Rect{
+					Percent: 98.0,
+					Center:  true,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(20, func() {
+					m.Col(0, func() {
+						m.DataMatrixCode("Code6", props.Rect{
+							Left:    7.0,
+							Top:     8.5,
+							Percent: 66.0,
+						})
+					})
+				})
+				m.Row(20, func() {
+					m.Col(12, func() {
+						m.DataMatrixCode("Code7", props.Rect{
+							Percent: 98.0,
+							Center:  true,
+						})
+					})
+				})
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		Fpdf := baseFpdfTest(10, 10, 10)
+		math := baseMathTest()
+		code := c.code()
+		tableList := baseTableList()
+
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, code, tableList)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, code)
+	}
+}
+
 func TestFpdfMaroto_Row(t *testing.T) {
 	cases := []struct {
 		name                 string

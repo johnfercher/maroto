@@ -12,6 +12,7 @@ import (
 type Code interface {
 	AddQr(code string, cell Cell, prop props.Rect)
 	AddBar(code string, cell Cell, prop props.Barcode) (err error)
+	AddDataMatrix(code string, cell Cell, prop props.Rect)
 }
 
 type code struct {
@@ -25,6 +26,19 @@ func NewCode(pdf fpdf.Fpdf, math Math) *code {
 		pdf,
 		math,
 	}
+}
+
+// AddDataMatrix creates a DataMatrix code inside a cell
+func (s *code) AddDataMatrix(code string, cell Cell, prop props.Rect) {
+	key := barcode.RegisterDataMatrix(s.pdf, code)
+
+	var x, y, w, h float64
+	if prop.Center {
+		x, y, w, h = s.math.GetRectCenterColProperties(cell.Width, cell.Width, cell.Width, cell.Height, cell.X, prop.Percent)
+	} else {
+		x, y, w, h = s.math.GetRectNonCenterColProperties(cell.Width, cell.Width, cell.Width, cell.Height, cell.X, prop)
+	}
+	barcode.Barcode(s.pdf, key, x, y+cell.Y, w, h, false)
 }
 
 // AddQr create a QrCode inside a cell
