@@ -33,6 +33,7 @@ type Maroto interface {
 	Base64Image(base64 string, extension consts.Extension, prop ...props.Rect) (err error)
 	Barcode(code string, prop ...props.Barcode) error
 	QrCode(code string, prop ...props.Rect)
+	DataMatrixCode(code string, prop ...props.Rect)
 	Signature(label string, prop ...props.Font)
 
 	// File System
@@ -479,6 +480,22 @@ func (s *PdfMaroto) Barcode(code string, prop ...props.Barcode) (err error) {
 	err = s.Code.AddBar(code, cell, barcodeProp)
 
 	return
+}
+func (s *PdfMaroto) DataMatrixCode(code string, prop ...props.Rect) {
+	rectProp := props.Rect{}
+	if len(prop) > 0 {
+		rectProp = prop[0]
+	}
+	rectProp.MakeValid()
+
+	cell := internal.Cell{
+		X:      s.xColOffset,
+		Y:      s.offsetY + rectProp.Top,
+		Width:  s.colWidth,
+		Height: s.rowHeight,
+	}
+
+	s.Code.AddDataMatrix(code, cell, rectProp)
 }
 
 // QrCode create a qrcode inside a cell.
