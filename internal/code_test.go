@@ -227,3 +227,91 @@ func TestCode_AddQr(t *testing.T) {
 		c.assertMath(t, math)
 	}
 }
+
+func TestCode_AddDataMatrix(t *testing.T) {
+	cases := []struct {
+		name       string
+		code       string
+		fpdf       func() *mocks.Fpdf
+		math       func() *mocks.Math
+		assertFpdf func(t *testing.T, fpdf *mocks.Fpdf)
+		assertMath func(t *testing.T, math *mocks.Math)
+		prop       props.Rect
+	}{
+		{
+			"When everything works",
+			"AnyCode",
+			func() *mocks.Fpdf {
+				fpdf := &mocks.Fpdf{}
+				fpdf.On("GetImageInfo", mock.Anything).Return(widthGreaterThanHeightImageInfo())
+				fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return fpdf
+			},
+			func() *mocks.Math {
+				math := &mocks.Math{}
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				return math
+			},
+			func(t *testing.T, fpdf *mocks.Fpdf) {
+				fpdf.AssertNumberOfCalls(t, "GetImageInfo", 1)
+				fpdf.AssertCalled(t, "GetImageInfo", "barcode-DataMatrixAnyCode-1E+023E+01")
+
+				fpdf.AssertNumberOfCalls(t, "Image", 1)
+				fpdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			},
+			func(t *testing.T, math *mocks.Math) {
+				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
+				math.AssertCalled(t, "GetRectCenterColProperties", 5, 5, 5, 40, 2, 100)
+			},
+			props.Rect{Center: true, Percent: 100},
+		},
+		{
+			"When everything works not-centered",
+			"AnyCode",
+			func() *mocks.Fpdf {
+				fpdf := &mocks.Fpdf{}
+				fpdf.On("GetImageInfo", mock.Anything).Return(widthGreaterThanHeightImageInfo())
+				fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return fpdf
+			},
+			func() *mocks.Math {
+				math := &mocks.Math{}
+				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				return math
+			},
+			func(t *testing.T, fpdf *mocks.Fpdf) {
+				fpdf.AssertNumberOfCalls(t, "GetImageInfo", 1)
+				fpdf.AssertCalled(t, "GetImageInfo", "barcode-DataMatrixAnyCode-1E+023E+01")
+
+				fpdf.AssertNumberOfCalls(t, "Image", 1)
+				fpdf.AssertCalled(t, "Image", "", 100, 30, 33, 0)
+			},
+			func(t *testing.T, math *mocks.Math) {
+				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
+				math.AssertCalled(t, "GetRectNonCenterColProperties", 5, 5, 5, 40, 2, props.Rect{Center: false, Left: 10, Top: 10})
+			},
+			props.Rect{Center: false, Left: 10, Top: 10},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		fpdf := c.fpdf()
+		math := c.math()
+
+		code := internal.NewCode(fpdf, math)
+		cell := internal.Cell{
+			X:      2,
+			Y:      10,
+			Width:  5,
+			Height: 40,
+		}
+
+		// Act
+		code.AddDataMatrix(c.code, cell, c.prop)
+
+		// Assert
+		c.assertFpdf(t, fpdf)
+		c.assertMath(t, math)
+	}
+}
