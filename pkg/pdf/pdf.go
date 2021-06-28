@@ -253,7 +253,9 @@ func (s *PdfMaroto) Signature(label string, prop ...props.Font) {
 	s.SignHelper.AddSpaceFor(label, cell, signProp.ToTextProp(consts.Center, 0.0, false, 0))
 }
 
-// TableList create a table with multiple rows and columns.
+// TableList create a table with multiple rows and columns,
+// so is not possible use this component inside a row or
+// inside a column.
 // Headers define the amount of columns from each row.
 // Headers have bold style, and localized at the top of table.
 // Contents are array of arrays. Each array is one line.
@@ -316,6 +318,7 @@ func (s *PdfMaroto) Line(spaceHeight float64) {
 }
 
 // Row define a row and enable add columns inside the row.
+// Maroto do not support recursive rows or rows inside columns.
 func (s *PdfMaroto) Row(height float64, closure func()) {
 	// Used to calculate the height of the footer
 	if s.calculationMode {
@@ -365,7 +368,8 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 }
 
 // Col create a column inside a row and enable to add
-// components inside.
+// components inside. Maroto do not support recursive
+// columns or rows inside columns.
 func (s *PdfMaroto) Col(width uint, closure func()) {
 	if width == 0 {
 		width = 12
