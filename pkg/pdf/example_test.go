@@ -48,8 +48,18 @@ func ExamplePdfMaroto_Row() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	rowHeight := 5.0
 
+	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
-		// ... Add some columns
+		m.Col(12, func() {
+			// Add a component
+		})
+	})
+
+	// Warning: There is no way to use a row inside a row or a row inside a col.
+	m.Row(rowHeight, func() {
+		m.Col(12, func() {
+			// Add another component
+		})
 	})
 
 	// Do more things and save...
@@ -62,6 +72,7 @@ func ExamplePdfMaroto_Col() {
 	rowHeight := 5.0
 
 	// Warning: The sum of all column gridSize cannot extrapolate 12
+	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(12, func() {
 			// Add Image, Text, Signature, QrCode or Barcode...
@@ -69,6 +80,7 @@ func ExamplePdfMaroto_Col() {
 	})
 
 	// Warning: The sum of all column gridSize cannot extrapolate 12
+	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(6, func() {
 			// Add Image, Text, Signature, QrCode or Barcode...
@@ -205,6 +217,13 @@ func ExamplePdfMaroto_TableList() {
 		},
 		HeaderContentSpace: 10.0,
 		Line:               false,
+	})
+
+	// TableList have to be used at same level as row
+	m.Row(10, func() {
+		m.Col(12, func() {
+			// Add a component
+		})
 	})
 
 	// Do more things and save...
