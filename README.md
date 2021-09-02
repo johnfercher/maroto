@@ -90,6 +90,15 @@ with the code to generate the PDFs. There are examples of: [barcode](internal/ex
 
 ![result](internal/assets/images/result.png)
 
+## Other Examples
+
+| Title | Media |
+|---|---|
+| [How to create PDFs with Go, Maroto & GoFakeIt](https://www.youtube.com/watch?v=jwOy4JgleTU) | Video |
+| [Creating a PDF with Go, Maroto & Gofakeit](https://divrhino.com/articles/create-pdf-document-with-go-maroto-gofakeit) | Article |
+| [divrhino/fruitful-pdf](https://github.com/divrhino/fruitful-pdf) | Repository |
+| [Creating PDFs using Golang](https://medium.com/@johnathanfercher/creating-pdfs-using-golang-98b722e99d6d) | Article |
+
 #### Code
 > This is part of the example [billing](internal/examples/billing).
 ```go
@@ -262,10 +271,6 @@ func main() {
 	fmt.Println(end.Sub(begin))
 }
 ```
-
-## Others
-
-* [Medium Article: Creating PDFs using Golang](https://medium.com/@johnathanfercher/creating-pdfs-using-golang-98b722e99d6d)
 
 [travis]: https://travis-ci.com/johnfercher/maroto
 [test]: test.sh
