@@ -57,6 +57,7 @@ type Maroto interface {
 
 	// Fonts
 	AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string)
+	AddUTF8FontFromReader(familyStr string, styleStr consts.Style, r io.Reader) (err error)
 	SetFontLocation(fontDirStr string)
 	SetProtection(actionFlag byte, userPassStr, ownerPassStr string)
 	SetDefaultFontFamily(fontFamily string)
