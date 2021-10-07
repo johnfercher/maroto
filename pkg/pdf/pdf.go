@@ -2,7 +2,6 @@ package pdf
 
 import (
 	"bytes"
-	"io"
 
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -57,7 +56,7 @@ type Maroto interface {
 
 	// Fonts
 	AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string)
-	AddUTF8FontFromReader(familyStr string, styleStr consts.Style, r io.Reader) (err error)
+	AddUTF8FontFromBytes(familyStr string, styleStr consts.Style, utf8Bytes []byte)
 	SetFontLocation(fontDirStr string)
 	SetProtection(actionFlag byte, userPassStr, ownerPassStr string)
 	SetDefaultFontFamily(fontFamily string)
@@ -547,19 +546,12 @@ func (s *PdfMaroto) AddUTF8Font(familyStr string, styleStr consts.Style, fileStr
 	s.Pdf.AddUTF8Font(familyStr, string(styleStr), fileStr)
 }
 
-// AddUTF8FontFromReader add a custom utf8 font from reader.
+// AddUTF8FontFromBytes add a custom utf8 font from bytes.
 // familyStr is the name of the custom font registered in maroto.
-// styleStr is the style of the font and r is the reader of the .ttf
-// file body.
-func (s *PdfMaroto) AddUTF8FontFromReader(familyStr string, styleStr consts.Style, r io.Reader) (err error) {
-	fontData, err := io.ReadAll(r)
-	if err != nil {
-		return err
-	}
-
-	s.Pdf.AddUTF8FontFromBytes(familyStr, string(styleStr), fontData)
-
-	return nil
+// styleStr is the style of the font and utf8Bytes is the bytes of the
+// .ttf file body.
+func (s *PdfMaroto) AddUTF8FontFromBytes(familyStr string, styleStr consts.Style, utf8Bytes []byte) {
+	s.Pdf.AddUTF8FontFromBytes(familyStr, string(styleStr), utf8Bytes)
 }
 
 // SetFontLocation allows you to change the fonts lookup location.  fontDirStr is an absolute path where the fonts should be located
