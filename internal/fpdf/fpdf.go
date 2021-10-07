@@ -1,9 +1,10 @@
 package fpdf
 
 import (
-	"github.com/jung-kurt/gofpdf"
 	"io"
 	"time"
+
+	"github.com/jung-kurt/gofpdf"
 )
 
 type Fpdf interface {
@@ -182,6 +183,7 @@ type Fpdf interface {
 	WriteLinkID(h float64, displayStr string, linkID int)
 	WriteLinkString(h float64, displayStr, targetStr string)
 	AddUTF8Font(familyStr, styleStr, fileStr string)
+	AddUTF8FontFromBytes(familyStr, styleStr string, utf8Bytes []byte)
 }
 
 type fpdf struct {
