@@ -17,7 +17,7 @@ func TestNewText(t *testing.T) {
 	text := internal.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Font{})
 
 	assert.NotNil(t, text)
-	assert.Equal(t, fmt.Sprintf("%T", text), "*internal.text")
+	assert.Equal(t, "*internal.text", fmt.Sprintf("%T", text))
 }
 
 func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
@@ -37,7 +37,7 @@ func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
 	lines := sut.GetLinesQuantity("AnyText With Spaces", props.Text{}, 2)
 
 	// Assert
-	assert.Equal(t, lines, 4)
+	assert.Equal(t, 3, lines)
 }
 
 func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
@@ -57,7 +57,7 @@ func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
 	lines := sut.GetLinesQuantity("OneWord", props.Text{}, 2)
 
 	// Assert
-	assert.Equal(t, lines, 1)
+	assert.Equal(t, 1, lines)
 }
 
 func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
@@ -77,7 +77,7 @@ func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
 	lines := sut.GetLinesQuantity("Many words", props.Text{Extrapolate: true}, 2)
 
 	// Assert
-	assert.Equal(t, lines, 1)
+	assert.Equal(t, 1, lines)
 }
 
 func TestText_GetLinesQuantity_WhenHasToBreakLines(t *testing.T) {
@@ -100,7 +100,7 @@ func TestText_GetLinesQuantity_WhenHasToBreakLines(t *testing.T) {
 	lines := sut.GetLinesQuantity("Many words", props.Text{}, 2)
 
 	// Assert
-	assert.Equal(t, lines, 3)
+	assert.Equal(t, 2, lines)
 }
 
 func TestText_Add(t *testing.T) {
@@ -228,7 +228,7 @@ func TestText_Add(t *testing.T) {
 				return nil
 			},
 			func(t *testing.T, _pdf *mocks.Fpdf) {
-				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
+				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 3)
 				_pdf.AssertCalled(t, "GetStringWidth", "TextHelper2")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
@@ -271,7 +271,7 @@ func TestText_Add(t *testing.T) {
 				return nil
 			},
 			func(t *testing.T, _pdf *mocks.Fpdf) {
-				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
+				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 3)
 				_pdf.AssertCalled(t, "GetStringWidth", "TextHelper3")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
@@ -314,7 +314,7 @@ func TestText_Add(t *testing.T) {
 				return nil
 			},
 			func(t *testing.T, _pdf *mocks.Fpdf) {
-				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
+				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 3)
 				_pdf.AssertCalled(t, "GetStringWidth", "TextHelper4")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 1)
@@ -367,7 +367,7 @@ func TestText_Add(t *testing.T) {
 				return nil
 			},
 			func(t *testing.T, _pdf *mocks.Fpdf) {
-				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 275)
+				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 184)
 				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the "+
 					"printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since "+
 					"the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "+
@@ -376,9 +376,9 @@ func TestText_Add(t *testing.T) {
 					"Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker "+
 					"including versions of Lorem Ipsum.")
 
-				_pdf.AssertNumberOfCalls(t, "GetMargins", 92)
+				_pdf.AssertNumberOfCalls(t, "GetMargins", 91)
 
-				_pdf.AssertNumberOfCalls(t, "Text", 92)
+				_pdf.AssertNumberOfCalls(t, "Text", 91)
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
@@ -429,7 +429,7 @@ func TestText_Add(t *testing.T) {
 				}
 			},
 			func(t *testing.T, _pdf *mocks.Fpdf) {
-				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 274)
+				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 185)
 				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the "+
 					"printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since "+
 					"the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "+
@@ -438,9 +438,9 @@ func TestText_Add(t *testing.T) {
 					"Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including "+
 					"versions of Lorem Ipsum.")
 
-				_pdf.AssertNumberOfCalls(t, "GetMargins", 91)
+				_pdf.AssertNumberOfCalls(t, "GetMargins", 92)
 
-				_pdf.AssertNumberOfCalls(t, "Text", 91)
+				_pdf.AssertNumberOfCalls(t, "Text", 92)
 			},
 			func(t *testing.T, _font *mocks.Font) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
@@ -491,6 +491,54 @@ func TestText_Add(t *testing.T) {
 				_font.AssertNumberOfCalls(t, "SetColor", 2)
 				_font.AssertCalled(t, "SetColor", color.Color{Red: 0, Green: 0, Blue: 0})
 				_font.AssertCalled(t, "SetColor", color.Color{Red: 20, Green: 20, Blue: 20})
+			},
+		},
+		{
+			"Newlines in content",
+			"First line\nSecond\nline",
+			consts.Left,
+			consts.Arial,
+			color.Color{Red: 0, Green: 0, Blue: 0},
+			func() *mocks.Fpdf {
+				_pdf := &mocks.Fpdf{}
+				_pdf.On("GetStringWidth", "First line", mock.Anything).Return(30.0)
+				_pdf.On("GetStringWidth", "Second line", mock.Anything).Return(30.0)
+				_pdf.On("GetStringWidth", mock.Anything).Return(10.0)
+				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
+				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
+				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
+				return _pdf
+			},
+			func() *mocks.Font {
+				_font := &mocks.Font{}
+				_font.On("GetScaleFactor").Return(1.0)
+				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
+				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
+				_font.On("GetColor").Return(color.Color{Red: 0, Green: 0, Blue: 0})
+				_font.On("SetColor", mock.Anything)
+				return _font
+			},
+			func() *internal.Cell {
+				return &internal.Cell{
+					X:     1.0,
+					Y:     5.0,
+					Width: 25.0,
+				}
+			},
+			func(t *testing.T, _pdf *mocks.Fpdf) {
+				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 10)
+				_pdf.AssertCalled(t, "GetStringWidth", "First line")
+				_pdf.AssertCalled(t, "GetStringWidth", "Second")
+				_pdf.AssertCalled(t, "GetStringWidth", "line")
+				_pdf.AssertNumberOfCalls(t, "GetMargins", 4)
+				_pdf.AssertNumberOfCalls(t, "Text", 4)
+			},
+			func(t *testing.T, _font *mocks.Font) {
+				_font.AssertNumberOfCalls(t, "SetFont", 1)
+				_font.AssertCalled(t, "SetFont", consts.Arial, consts.BoldItalic, 16.0)
+				_font.AssertNumberOfCalls(t, "GetColor", 1)
+				_font.AssertNumberOfCalls(t, "SetColor", 2)
+				_font.AssertCalled(t, "SetColor", color.Color{Red: 0, Green: 0, Blue: 0})
 			},
 		},
 	}
