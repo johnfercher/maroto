@@ -163,6 +163,7 @@ func main() {
 	m.TableList(headerSmall, smallContent, props.TableList{
 		ContentProp: props.TableListContent{
 			GridSizes: []uint{3, 6, 3},
+			Color:     color.Color{100, 0, 0},
 		},
 		HeaderProp: props.TableListContent{
 			GridSizes: []uint{3, 6, 3},
@@ -195,6 +196,7 @@ func main() {
 			GridSizes: []uint{5, 5, 2},
 			Family:    consts.Courier,
 			Style:     consts.BoldItalic,
+			Color:     color.Color{100, 0, 0},
 		},
 		Align: consts.Center,
 		Line:  true,
