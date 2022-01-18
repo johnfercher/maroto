@@ -26,3 +26,12 @@ func NewWhite() Color {
 		Blue:  255,
 	}
 }
+
+// NewBlack return a Color with all components (red, green and blue) as 0
+func NewBlack() Color {
+	return Color{
+		Red:   0,
+		Green: 0,
+		Blue:  0,
+	}
+}
