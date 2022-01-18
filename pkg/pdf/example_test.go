@@ -179,11 +179,13 @@ func ExamplePdfMaroto_TableList() {
 	// Not passing HeaderProp.Family, make the method use arial.
 	// Not passing HeaderProp.Style, make the method use bold.
 	// Not passing HeaderProp.GridSizes, make the method use an array with same length
+	// Not passing HeaderProp.Color, make the method use a black font
 	// of header array, the values will be perfectly divided to make all columns with the same size.
 	// Not passing Align, make the method to use left.
 	// Not passing ContentProp.Size, make the method use 10.
 	// Not passing ContentProp.Family, make the method use arial.
 	// Not passing ContentProp.Style, make the method use normal.
+	// Not passing ContentProp.Color, make the method use a black font
 	// Not passing Content.GridSizes, make the method use an array with same length
 	// of content array in the first line, the values will be perfectly divided to make all columns with the same size.
 	// Not passing HeaderContentSpace, will make the method use 4.
