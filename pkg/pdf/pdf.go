@@ -51,6 +51,9 @@ type Maroto interface {
 	GetCurrentPage() int
 	GetCurrentOffset() float64
 	SetPageMargins(left, top, right float64)
+	SetPageTopMargin(top float64)
+	SetPageLeftMargin(left float64)
+	SetPageRightMargin(right float64)
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
 	SetCompression(compress bool)
 
@@ -116,7 +119,7 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 		},
 		FontDirStr: "",
 	})
-	fpdf.SetMargins(10, 10, 10)
+	fpdf.SetMargins(DefaultMargin, DefaultMargin, DefaultMargin)
 
 	math := internal.NewMath(fpdf)
 	font := internal.NewFont(fpdf, 16, consts.Arial, consts.Bold)
@@ -211,11 +214,20 @@ func (s *PdfMaroto) GetCurrentOffset() float64 {
 // SetPageMargins overrides default margins (10,10,10)
 // the new page margin will affect all PDF pages
 func (s *PdfMaroto) SetPageMargins(left, top, right float64) {
-	if top > 10 {
-		s.marginTop = top - 10
-	}
+	s.marginTop = top - DefaultMargin
+	s.Pdf.SetMargins(left, DefaultMargin, right)
+}
+func (s *PdfMaroto) SetPageTopMargin(top float64) {
+	s.marginTop = top - DefaultMargin
+	s.Pdf.SetTopMargin(DefaultMargin)
+}
 
-	s.Pdf.SetMargins(left, 10.0, right)
+func (s *PdfMaroto) SetPageLeftMargin(left float64) {
+	s.Pdf.SetLeftMargin(left)
+}
+
+func (s *PdfMaroto) SetPageRightMargin(right float64) {
+	s.Pdf.SetRightMargin(right)
 }
 
 // GetPageMargins returns the set page margins. Comes in order of Left, Top, Right, Bottom
