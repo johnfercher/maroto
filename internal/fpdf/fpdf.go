@@ -1,11 +1,13 @@
 package fpdf
 
 import (
-	"github.com/jung-kurt/gofpdf"
 	"io"
 	"time"
+
+	"github.com/jung-kurt/gofpdf"
 )
 
+// Fpdf is an extension of gofpdf interface which can expose more useful methods.
 type Fpdf interface {
 	AddFont(familyStr, styleStr, fileStr string)
 	AddFontFromBytes(familyStr, styleStr string, jsonFileBytes, zFileBytes []byte)
@@ -188,6 +190,7 @@ type fpdf struct {
 	Gofpdf *gofpdf.Fpdf
 }
 
+// NewWrapper is the constructor of the wrapper based on gofpdf interface.
 func NewWrapper(pdf *gofpdf.Fpdf) *fpdf {
 	return &fpdf{
 		Gofpdf: pdf,

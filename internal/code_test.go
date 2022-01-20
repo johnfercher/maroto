@@ -40,7 +40,8 @@ func TestCode_AddBar(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, fpdf *mocks.Fpdf) {
@@ -70,7 +71,8 @@ func TestCode_AddBar(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, fpdf *mocks.Fpdf) {
@@ -100,7 +102,8 @@ func TestCode_AddBar(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, fpdf *mocks.Fpdf) {
@@ -140,6 +143,7 @@ func TestCode_AddBar(t *testing.T) {
 	}
 }
 
+// nolint:dupl // better this way
 func TestCode_AddQr(t *testing.T) {
 	cases := []struct {
 		name       string
@@ -161,7 +165,8 @@ func TestCode_AddQr(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, fpdf *mocks.Fpdf) {
@@ -188,7 +193,8 @@ func TestCode_AddQr(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, fpdf *mocks.Fpdf) {
@@ -228,6 +234,7 @@ func TestCode_AddQr(t *testing.T) {
 	}
 }
 
+// nolint:dupl // better this way
 func TestCode_AddDataMatrix(t *testing.T) {
 	cases := []struct {
 		name       string
@@ -249,7 +256,8 @@ func TestCode_AddDataMatrix(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, fpdf *mocks.Fpdf) {
@@ -276,7 +284,8 @@ func TestCode_AddDataMatrix(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, fpdf *mocks.Fpdf) {

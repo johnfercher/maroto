@@ -2,11 +2,12 @@ package internal_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewMath(t *testing.T) {
@@ -182,7 +183,8 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 				assert.InDelta(t, w, 8.6, 0.1)
 				assert.InDelta(t, h, 11.25, 0.1)
 			},
-		}, {
+		},
+		{
 			"When cel proportion is less than rectangle",
 			26,
 			20,

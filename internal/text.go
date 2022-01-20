@@ -1,13 +1,14 @@
 package internal
 
 import (
+	"strings"
+
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
-	"strings"
 )
 
-// Text is the abstraction which deals of how to add text inside PDF
+// Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
 	Add(text string, cell Cell, textProp props.Text)
 	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
@@ -19,7 +20,7 @@ type text struct {
 	font Font
 }
 
-// NewText create a Text
+// NewText create a Text.
 func NewText(pdf fpdf.Fpdf, math Math, font Font) *text {
 	return &text{
 		pdf,
@@ -30,7 +31,6 @@ func NewText(pdf fpdf.Fpdf, math Math, font Font) *text {
 
 // Add a text inside a cell.
 func (s *text) Add(text string, cell Cell, textProp props.Text) {
-
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	originalColor := s.font.GetColor()
@@ -67,18 +67,18 @@ func (s *text) Add(text string, cell Cell, textProp props.Text) {
 	s.font.SetColor(originalColor)
 }
 
-// GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell
+// GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
 func (s *text) GetLinesQuantity(text string, textProp props.Text, colWidth float64) int {
 	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
-	// Apply Unicode
+	// Apply Unicode.
 	textTranslated := translator(text)
 
 	stringWidth := s.pdf.GetStringWidth(textTranslated)
 	words := strings.Split(textTranslated, " ")
 
-	// If should add one line
+	// If should add one line.
 	if stringWidth < colWidth || textProp.Extrapolate || len(words) == 1 {
 		return 1
 	}
@@ -129,7 +129,11 @@ func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, te
 }
 
 func (s *text) textToUnicode(txt string, props props.Text) string {
-	if props.Family == consts.Arial || props.Family == consts.Helvetica || props.Family == consts.Symbol || props.Family == consts.ZapBats || props.Family == consts.Courier {
+	if props.Family == consts.Arial ||
+		props.Family == consts.Helvetica ||
+		props.Family == consts.Symbol ||
+		props.Family == consts.ZapBats ||
+		props.Family == consts.Courier {
 		translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 		return translator(txt)
 	}
