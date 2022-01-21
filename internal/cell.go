@@ -1,6 +1,6 @@
 package internal
 
-// Cell represents a cell inside the PDF
+// Cell represents a cell inside the PDF.
 type Cell struct {
 	X      float64
 	Y      float64
