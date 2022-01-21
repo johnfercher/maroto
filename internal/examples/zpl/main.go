@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"os"
-	"time"
 )
 
 func main() {
 	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.Letter)
-	//m.SetBorder(true)
+	// m.SetBorder(true)
 
 	m.Row(40, func() {
 		m.Col(4, func() {

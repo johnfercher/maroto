@@ -3,6 +3,9 @@ package internal_test
 import (
 	"encoding/base64"
 	"fmt"
+	"io/ioutil"
+	"testing"
+
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/internal/mocks"
@@ -11,8 +14,6 @@ import (
 	"github.com/jung-kurt/gofpdf"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"io/ioutil"
-	"testing"
 )
 
 func TestNewImage(t *testing.T) {
@@ -37,12 +38,14 @@ func TestImage_AddFromFile(t *testing.T) {
 			func() *mocks.Fpdf {
 				Fpdf := &mocks.Fpdf{}
 				Fpdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(nil)
-				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything)
 				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+					Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, Fpdf *mocks.Fpdf) {
@@ -62,17 +65,20 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			props.Rect{Center: true, Percent: 100},
 		},
+		// nolint:dupl // better this way
 		{
 			"When Image has width greater than height",
 			func() *mocks.Fpdf {
 				Fpdf := &mocks.Fpdf{}
 				Fpdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(widthGreaterThanHeightImageInfo())
-				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything)
 				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+					Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, Fpdf *mocks.Fpdf) {
@@ -94,17 +100,20 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			props.Rect{Center: true, Percent: 100},
 		},
+		// nolint:dupl // better this way
 		{
 			"When Image has height greater than width",
 			func() *mocks.Fpdf {
 				Fpdf := &mocks.Fpdf{}
 				Fpdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(heightGreaterThanWidthImageInfo())
-				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything)
 				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+					Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, Fpdf *mocks.Fpdf) {
@@ -131,12 +140,14 @@ func TestImage_AddFromFile(t *testing.T) {
 			func() *mocks.Fpdf {
 				Fpdf := &mocks.Fpdf{}
 				Fpdf.On("RegisterImageOptions", mock.Anything, mock.Anything).Return(nonCenteredImageInfo())
-				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything, mock.Anything)
 				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, Fpdf *mocks.Fpdf) {
@@ -197,12 +208,14 @@ func TestImage_AddFromBase64(t *testing.T) {
 			func() *mocks.Fpdf {
 				Fpdf := &mocks.Fpdf{}
 				Fpdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(nil)
-				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything, mock.Anything)
 				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, Fpdf *mocks.Fpdf) {
@@ -221,17 +234,20 @@ func TestImage_AddFromBase64(t *testing.T) {
 				assert.NotNil(t, err)
 			},
 		},
+		// nolint:dupl // better this way
 		{
 			"When ImageHelper has width greater than height",
 			func() *mocks.Fpdf {
 				Fpdf := &mocks.Fpdf{}
 				Fpdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(widthGreaterThanHeightImageInfo())
-				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything)
 				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+					Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, Fpdf *mocks.Fpdf) {
@@ -253,17 +269,20 @@ func TestImage_AddFromBase64(t *testing.T) {
 				assert.Nil(t, err)
 			},
 		},
+		// nolint:dupl // better this way
 		{
 			"When ImageHelper has height greater than width",
 			func() *mocks.Fpdf {
 				Fpdf := &mocks.Fpdf{}
 				Fpdf.On("RegisterImageOptionsReader", mock.Anything, mock.Anything, mock.Anything).Return(heightGreaterThanWidthImageInfo())
-				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				Fpdf.On("Image", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything, mock.Anything)
 				return Fpdf
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
+				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
 			func(t *testing.T, Fpdf *mocks.Fpdf) {
