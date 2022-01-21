@@ -222,7 +222,7 @@ func (s *PdfMaroto) GetCurrentOffset() float64 {
 // the new page margin will affect all PDF pages.
 func (s *PdfMaroto) SetPageMargins(left, top, right float64) {
 	s.marginTop = top - defaultTopMargin
-	s.Pdf.SetMargins(left, defaultTopMargin, right)
+	s.Pdf.SetMargins(defaultLeftMargin, defaultTopMargin, defaultRightMargin)
 }
 
 func (s *PdfMaroto) SetPageTopMargin(top float64) {
