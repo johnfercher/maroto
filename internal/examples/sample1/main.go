@@ -3,21 +3,22 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/pdf"
-	"github.com/johnfercher/maroto/pkg/props"
 	"io/ioutil"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/johnfercher/maroto/pkg/color"
+	"github.com/johnfercher/maroto/pkg/consts"
+	"github.com/johnfercher/maroto/pkg/pdf"
+	"github.com/johnfercher/maroto/pkg/props"
 )
 
 func main() {
 	begin := time.Now()
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetPageMargins(10, 15, 10)
-	//m.SetBorder(true)
+	// m.SetBorder(true)
 
 	byteSlices, err := ioutil.ReadFile("internal/assets/images/biplane.jpg")
 	if err != nil {

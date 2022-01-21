@@ -1,9 +1,6 @@
 <!-- Please follow the PR naming pattern. -->
 <!-- For features: feature/name -->
 <!-- For fixes: fix/name -->
-<!-- For documentation: doc/name -->
-<!-- For tests: tests/name -->
-<!-- For config: config/name -->
 
 **Description**
 <!-- Please, describe how this PR will be useful. If it has any tricky technical detail, please explain too. -->
@@ -21,4 +18,4 @@
 - [ ] Updated README.md <!-- If applied -->
 - [ ] Updated all examples inside internal/examples <!-- If applied -->
 - [ ] New public methods/structs/interfaces has comments upside them explaining they responsibilities <!-- If applied -->
-- [ ] Executed `go fmt github.com/johnfercher/maroto/...` to format all files
+- [ ] Executed `make dod` with none issues pointed out by `golangci-lint` and `goreportcard-cli`

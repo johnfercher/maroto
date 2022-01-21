@@ -2,6 +2,8 @@ package internal_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/mocks"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -9,7 +11,6 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"testing"
 )
 
 func TestNewText(t *testing.T) {
@@ -199,6 +200,7 @@ func TestText_Add(t *testing.T) {
 				_font.AssertCalled(t, "SetColor", color.Color{Red: 0, Green: 0, Blue: 0})
 			},
 		},
+		// nolint:dupl // better this way
 		{
 			"Center Align",
 			"TextHelper2",
@@ -242,6 +244,7 @@ func TestText_Add(t *testing.T) {
 				_font.AssertCalled(t, "SetColor", color.Color{Red: 0, Green: 0, Blue: 0})
 			},
 		},
+		// nolint:dupl // better this way
 		{
 			"Right Align",
 			"TextHelper3",
@@ -284,6 +287,7 @@ func TestText_Add(t *testing.T) {
 				_font.AssertCalled(t, "SetColor", color.Color{Red: 0, Green: 0, Blue: 0})
 			},
 		},
+		// nolint:dupl // better this way
 		{
 			"Right Align",
 			"TextHelper4",
@@ -328,13 +332,23 @@ func TestText_Add(t *testing.T) {
 		},
 		{
 			"Bigger than cell width",
-			"Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+			"Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's " +
+				"standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make " +
+				"a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, " +
+				"remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing " +
+				"Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions " +
+				"of Lorem Ipsum.",
 			consts.Center,
 			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
 				_pdf := &mocks.Fpdf{}
-				_pdf.On("GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").Return(900.0)
+				_pdf.On("GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting "+
+					"industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer "+
+					"took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, "+
+					"but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s "+
+					"with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing "+
+					"software like Aldus PageMaker including versions of Lorem Ipsum.").Return(900.0)
 				_pdf.On("GetStringWidth", mock.Anything).Return(20.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -354,7 +368,13 @@ func TestText_Add(t *testing.T) {
 			},
 			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 275)
-				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the "+
+					"printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since "+
+					"the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "+
+					"It has survived not only five centuries, but also the leap into electronic typesetting, remaining "+
+					"essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing "+
+					"Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker "+
+					"including versions of Lorem Ipsum.")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 92)
 
@@ -367,15 +387,25 @@ func TestText_Add(t *testing.T) {
 				_font.AssertNumberOfCalls(t, "SetColor", 2)
 				_font.AssertCalled(t, "SetColor", color.Color{Red: 0, Green: 0, Blue: 0})
 			},
-		}, {
+		},
+		{
 			"Customizable col width",
-			"Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+			"Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy" +
+				" text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. " +
+				"It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+				"It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently " +
+				"with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
 			consts.Center,
 			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
 				_pdf := &mocks.Fpdf{}
-				_pdf.On("GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").Return(900.0)
+				_pdf.On("GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry."+
+					" Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of"+
+					" type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic "+
+					"typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing "+
+					"Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").
+					Return(900.0)
 				_pdf.On("GetStringWidth", mock.Anything).Return(20.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -400,7 +430,13 @@ func TestText_Add(t *testing.T) {
 			},
 			func(t *testing.T, _pdf *mocks.Fpdf) {
 				_pdf.AssertNumberOfCalls(t, "GetStringWidth", 274)
-				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+				_pdf.AssertCalled(t, "GetStringWidth", "Lorem Ipsum is simply dummy textá of the "+
+					"printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since "+
+					"the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "+
+					"It has survived not only five centuries, but also the leap into electronic typesetting, remaining "+
+					"essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing "+
+					"Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including "+
+					"versions of Lorem Ipsum.")
 
 				_pdf.AssertNumberOfCalls(t, "GetMargins", 91)
 

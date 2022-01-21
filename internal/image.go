@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/base64"
 	"errors"
+
 	"github.com/google/uuid"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -11,7 +12,7 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// Image is the abstraction which deals of how to add images in a PDF
+// Image is the abstraction which deals of how to add images in a PDF.
 type Image interface {
 	AddFromFile(path string, cell Cell, prop props.Rect) (err error)
 	AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, extension consts.Extension) (err error)
@@ -22,7 +23,7 @@ type image struct {
 	math Math
 }
 
-// NewImage create an Image
+// NewImage create an Image.
 func NewImage(pdf fpdf.Fpdf, math Math) *image {
 	return &image{
 		pdf,
@@ -30,7 +31,7 @@ func NewImage(pdf fpdf.Fpdf, math Math) *image {
 	}
 }
 
-// AddFromFile open an image from disk and add to PDF
+// AddFromFile open an image from disk and add to PDF.
 func (s *image) AddFromFile(path string, cell Cell, prop props.Rect) error {
 	info := s.pdf.RegisterImageOptions(path, gofpdf.ImageOptions{
 		ReadDpi:   false,
@@ -38,21 +39,21 @@ func (s *image) AddFromFile(path string, cell Cell, prop props.Rect) error {
 	})
 
 	if info == nil {
-		return errors.New("Could not register image options, maybe path/name is wrong")
+		return errors.New("could not register image options, maybe path/name is wrong")
 	}
 
 	s.addImageToPdf(path, info, cell, prop)
 	return nil
 }
 
-// AddFromBase64 use a base64 string to add to PDF
+// AddFromBase64 use a base64 string to add to PDF.
 func (s *image) AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, extension consts.Extension) error {
-	imageId, _ := uuid.NewRandom()
+	imageID, _ := uuid.NewRandom()
 
 	ss, _ := base64.StdEncoding.DecodeString(stringBase64)
 
 	info := s.pdf.RegisterImageOptionsReader(
-		imageId.String(),
+		imageID.String(),
 		gofpdf.ImageOptions{
 			ReadDpi:   false,
 			ImageType: string(extension),
@@ -61,10 +62,10 @@ func (s *image) AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, e
 	)
 
 	if info == nil {
-		return errors.New("Could not register image options, maybe path/name is wrong")
+		return errors.New("could not register image options, maybe path/name is wrong")
 	}
 
-	s.addImageToPdf(imageId.String(), info, cell, prop)
+	s.addImageToPdf(imageID.String(), info, cell, prop)
 	return nil
 }
 
