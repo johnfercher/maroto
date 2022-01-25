@@ -2001,6 +2001,9 @@ func baseFpdfTest(left, top, right float64) *mocks.Fpdf {
 	Fpdf.On("SetFontLocation", mock.Anything)
 	Fpdf.On("SetProtection", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("SetCompression", mock.Anything)
+	Fpdf.On("SetTopMargin", mock.Anything)
+	Fpdf.On("SetLeftMargin", mock.Anything)
+	Fpdf.On("SetRightMargin", mock.Anything)
 	return Fpdf
 }
 
@@ -2315,24 +2318,19 @@ func TestFpdfMaroto_SetPageMargins(t *testing.T) {
 	cases := []struct {
 		name   string
 		act    func(m pdf.Maroto)
-		assert func(t *testing.T, m *mocks.Fpdf)
+		assert func(t *testing.T, m *mocks.Fpdf, maroto pdf.Maroto)
 	}{
 		{
-			"Set page margins should override default, top greater than 10",
+			"Set page margins should override default, except for top, which will be overrided in call of GetPageMargins",
 			func(m pdf.Maroto) {
 				m.SetPageMargins(12.3, 19.3, 0.0)
 			},
-			func(t *testing.T, m *mocks.Fpdf) {
+			func(t *testing.T, m *mocks.Fpdf, maroto pdf.Maroto) {
 				m.AssertCalled(t, "SetMargins", 12.3, 10.0, 0.0)
-			},
-		},
-		{
-			"Set page margins should override default, top less than 10",
-			func(m pdf.Maroto) {
-				m.SetPageMargins(12.3, 9.0, 0.0)
-			},
-			func(t *testing.T, m *mocks.Fpdf) {
-				m.AssertCalled(t, "SetMargins", 12.3, 10.0, 0.0)
+
+				_, top, _, _ := maroto.GetPageMargins()
+
+				assert.Equal(t, 19.3, top)
 			},
 		},
 	}
@@ -2347,7 +2345,103 @@ func TestFpdfMaroto_SetPageMargins(t *testing.T) {
 		c.act(m)
 
 		// Assert
-		c.assert(t, Fpdf)
+		c.assert(t, Fpdf, m)
+	}
+}
+
+func TestFpdfMaroto_SetPageTopMargin(t *testing.T) {
+	cases := []struct {
+		name   string
+		act    func(m pdf.Maroto)
+		assert func(t *testing.T, m *mocks.Fpdf, maroto pdf.Maroto)
+	}{
+		{
+			"Set page top margin should not override top value in fdpf call, but in get page margins of maroto pdf",
+			func(m pdf.Maroto) {
+				m.SetPageTopMargin(0.0)
+			},
+			func(t *testing.T, m *mocks.Fpdf, maroto pdf.Maroto) {
+				m.AssertCalled(t, "SetTopMargin", 10.0)
+				_, top, _, _ := maroto.GetPageMargins()
+
+				assert.Equal(t, 0.0, top)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		Fpdf := baseFpdfTest(12.3, 10, 0)
+
+		m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, Fpdf, m)
+	}
+}
+
+func TestFpdfMaroto_SetPageLeftMargin(t *testing.T) {
+	cases := []struct {
+		name   string
+		act    func(m pdf.Maroto)
+		assert func(t *testing.T, m *mocks.Fpdf, maroto pdf.Maroto)
+	}{
+		{
+			"Set page top margin should override left value in fdpf call",
+			func(m pdf.Maroto) {
+				m.SetPageLeftMargin(0.0)
+			},
+			func(t *testing.T, m *mocks.Fpdf, maroto pdf.Maroto) {
+				m.AssertCalled(t, "SetLeftMargin", 0.0)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		Fpdf := baseFpdfTest(12.3, 10, 0)
+
+		m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, Fpdf, m)
+	}
+}
+
+func TestFpdfMaroto_SetPageBottomMargin(t *testing.T) {
+	cases := []struct {
+		name   string
+		act    func(m pdf.Maroto)
+		assert func(t *testing.T, m *mocks.Fpdf, maroto pdf.Maroto)
+	}{
+		{
+			"Set page top margin should override right value in fdpf call",
+			func(m pdf.Maroto) {
+				m.SetPageRightMargin(0.0)
+			},
+			func(t *testing.T, m *mocks.Fpdf, maroto pdf.Maroto) {
+				m.AssertCalled(t, "SetRightMargin", 0.0)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		Fpdf := baseFpdfTest(12.3, 10, 0)
+
+		m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, Fpdf, m)
 	}
 }
 
