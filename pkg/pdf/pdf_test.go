@@ -2366,18 +2366,78 @@ func TestFpdfMaroto_SetBackgroundColor(t *testing.T) {
 }
 
 func TestFpdfMaroto_GetPageMargins(t *testing.T) {
-	// Arrange
-	Fpdf := baseFpdfTest(12.3, 19.3, 0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	cases := []struct {
+		name   string
+		values []float64
+		act    func(m pdf.Maroto)
+		assert func(t *testing.T, m pdf.Maroto)
+	}{
+		{
+			"Get page margins should have same as set when top greater than 10",
+			[]float64{12.3, 10.0, 0},
+			func(m pdf.Maroto) {
+				m.SetPageMargins(12.3, 19.3, 0)
+			},
+			func(t *testing.T, m pdf.Maroto) {
+				left, top, right, bottom := m.GetPageMargins()
 
-	// Act
-	left, top, right, bottom := m.GetPageMargins()
+				// Assert
+				assert.Equal(t, 12.3, left)
+				assert.Equal(t, 19.3, top)
+				assert.Equal(t, 0.0, right)
+				assert.Equal(t, 0.0, bottom)
+			},
+		},
+		{
+			"Get page margins should have same, except for top which should have (top-10) plus original top",
+			[]float64{12.3, 20.0, 0},
+			func(m pdf.Maroto) {
+				m.SetPageMargins(12.3, 19.3, 0)
+			},
+			func(t *testing.T, m pdf.Maroto) {
+				left, top, right, bottom := m.GetPageMargins()
 
-	// Assert
-	assert.Equal(t, 12.3, left)
-	assert.Equal(t, 19.3, top)
-	assert.Equal(t, 0.0, right)
-	assert.Equal(t, 0.0, bottom)
+				// Assert
+				assert.Equal(t, 12.3, left)
+				assert.Equal(t, 29.3, top)
+				assert.Equal(t, 0.0, right)
+				assert.Equal(t, 0.0, bottom)
+			},
+		},
+		{
+			// It's necessary because once every new pdf is set top 10 as default, and the set margins doesn't change the
+			// default top value (10), we need to subtract that in the get page margin to cancel the default set,
+			// this approach is necessary to
+			// doesn't break the version used currently
+			"Get page margins should have same as set when top lesser or equals 10",
+			[]float64{12.3, 10, 0},
+			func(m pdf.Maroto) {
+				m.SetPageMargins(12.3, 9.3, 0)
+			},
+			func(t *testing.T, m pdf.Maroto) {
+				left, top, right, bottom := m.GetPageMargins()
+
+				// Assert
+				assert.Equal(t, 12.3, left)
+				assert.Equal(t, 9.3, top)
+				assert.Equal(t, 0.0, right)
+				assert.Equal(t, 0.0, bottom)
+			},
+		},
+	}
+
+	for _, c := range cases {
+		// Arrange
+		Fpdf := baseFpdfTest(c.values[0], c.values[1], c.values[2])
+
+		m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+
+		// Act
+		c.act(m)
+
+		// Assert
+		c.assert(t, m)
+	}
 }
 
 func TestFpdfMaroto_AddPage(t *testing.T) {
