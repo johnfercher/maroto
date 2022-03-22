@@ -263,7 +263,7 @@ func TestFpdfMaroto_SetFirstPageNb(t *testing.T) {
 func TestFpdfMaroto_SetAliasNbPages(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	m.SetAliasNbPages("{nbs}")
@@ -513,7 +513,7 @@ func TestFpdfMaroto_Signature(t *testing.T) {
 		Fpdf := baseFpdfTest(10, 10, 10)
 		math := baseMathTest()
 		tableList := baseTableList()
-		m := newMarotoTest(Fpdf, math, nil, nil, signature, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, signature, nil, nil, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -769,7 +769,7 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		Fpdf := baseFpdfTest(10, 10, 10)
 		math := baseMathTest()
 		tableList := baseTableList()
-		m := newMarotoTest(Fpdf, math, nil, text, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, text, nil, nil, nil, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -939,7 +939,7 @@ func TestFpdfMaroto_FileImage(t *testing.T) {
 		image := c.image()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, image, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, image, nil, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -1113,7 +1113,7 @@ func TestFpdfMaroto_Base64Image(t *testing.T) {
 		image := c.image()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, image, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, image, nil, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -1271,7 +1271,7 @@ func TestFpdfMaroto_QrCode(t *testing.T) {
 		code := c.code()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, code, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, code, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -1367,7 +1367,7 @@ func TestFpdfMaroto_Barcode(t *testing.T) {
 		code := c.code()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, code, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, code, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -1533,7 +1533,7 @@ func TestFpdfMaroto_DataMatrixCode(t *testing.T) {
 		code := c.code()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, code, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, code, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -1649,7 +1649,7 @@ func TestFpdfMaroto_Row(t *testing.T) {
 		math := baseMathTest()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList, nil)
 		calledTimes := 0
 
 		// Act
@@ -1665,45 +1665,81 @@ func TestFpdfMaroto_Line(t *testing.T) {
 	cases := []struct {
 		name   string
 		Fpdf   func() *mocks.Fpdf
-		assert func(t *testing.T, Fpdf *mocks.Fpdf)
+		Line   func() *mocks.Line
+		assert func(t *testing.T, Fpdf *mocks.Fpdf, line *mocks.Line)
 		act    func(m pdf.Maroto)
 	}{
 		{
-			"One line",
+			"Line without prop",
 			func() *mocks.Fpdf {
 				Fpdf := baseFpdfTest(10, 10, 10)
-				Fpdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 				return Fpdf
 			},
-			func(t *testing.T, Fpdf *mocks.Fpdf) {
+			func() *mocks.Line {
+				line := new(mocks.Line)
+				line.On("Draw", mock.Anything, mock.Anything)
+				return line
+			},
+			func(t *testing.T, Fpdf *mocks.Fpdf, line *mocks.Line) {
 				Fpdf.AssertNumberOfCalls(t, "GetMargins", 5)
 				Fpdf.AssertNumberOfCalls(t, "GetPageSize", 5)
 
-				Fpdf.AssertNumberOfCalls(t, "Line", 1)
-				Fpdf.AssertCalled(t, "Line", 10.0, 10.5, 90.0, 10.5)
+				line.AssertNumberOfCalls(t, "Draw", 1)
+				line.AssertCalled(t, "Draw", internal.Cell{
+					X:      10,
+					Y:      10.5,
+					Width:  90,
+					Height: 10.5,
+				}, props.Line{
+					Color: color.Color{
+						Red:   0,
+						Green: 0,
+						Blue:  0,
+					},
+				})
 			},
 			func(m pdf.Maroto) {
 				m.Line(1.0)
 			},
 		},
 		{
-			"Two lines",
+			"One line with prop",
 			func() *mocks.Fpdf {
 				Fpdf := baseFpdfTest(10, 10, 10)
 				Fpdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 				return Fpdf
 			},
-			func(t *testing.T, Fpdf *mocks.Fpdf) {
-				Fpdf.AssertNumberOfCalls(t, "GetMargins", 8)
-				Fpdf.AssertNumberOfCalls(t, "GetPageSize", 8)
+			func() *mocks.Line {
+				line := new(mocks.Line)
+				line.On("Draw", mock.Anything, mock.Anything)
+				return line
+			},
+			func(t *testing.T, Fpdf *mocks.Fpdf, line *mocks.Line) {
+				Fpdf.AssertNumberOfCalls(t, "GetMargins", 5)
+				Fpdf.AssertNumberOfCalls(t, "GetPageSize", 5)
 
-				Fpdf.AssertNumberOfCalls(t, "Line", 2)
-				Fpdf.AssertCalled(t, "Line", 10.0, 11.0, 90.0, 11.0)
-				Fpdf.AssertCalled(t, "Line", 10.0, 14.0, 90.0, 14.0)
+				line.AssertNumberOfCalls(t, "Draw", 1)
+				line.AssertCalled(t, "Draw", internal.Cell{
+					X:      10,
+					Y:      11,
+					Width:  90,
+					Height: 11,
+				}, props.Line{
+					Color: color.Color{
+						Red:   255,
+						Green: 100,
+						Blue:  50,
+					},
+				})
 			},
 			func(m pdf.Maroto) {
-				m.Line(2.0)
-				m.Line(4.0)
+				m.Line(2.0, props.Line{
+					Color: color.Color{
+						Red:   255,
+						Green: 100,
+						Blue:  50,
+					},
+				})
 			},
 		},
 	}
@@ -1711,16 +1747,17 @@ func TestFpdfMaroto_Line(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		Fpdf := c.Fpdf()
+		line := c.Line()
 		math := baseMathTest()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList, line)
 
 		// Act
 		c.act(m)
 
 		// Assert
-		c.assert(t, Fpdf)
+		c.assert(t, Fpdf, line)
 	}
 }
 
@@ -1793,7 +1830,7 @@ func TestFpdfMaroto_ColSpace(t *testing.T) {
 		math := baseMathTest()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -1884,7 +1921,7 @@ func TestFpdfMaroto_Output(t *testing.T) {
 		math := baseMathTest()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList, nil)
 		footerCalls := 0
 
 		// Act
@@ -1956,7 +1993,7 @@ func TestFpdfMaroto_OutputFileAndClose(t *testing.T) {
 		math := baseMathTest()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, nil, nil, nil, nil, nil, tableList, nil)
 
 		// Act
 		err := m.OutputFileAndClose("AnyName")
@@ -1968,7 +2005,8 @@ func TestFpdfMaroto_OutputFileAndClose(t *testing.T) {
 }
 
 func newMarotoTest(fFpdf *mocks.Fpdf, math *mocks.Math, font *mocks.Font, text *mocks.Text,
-	signature *mocks.Signature, image *mocks.Image, code *mocks.Code, tableList *mocks.TableList) pdf.Maroto {
+	signature *mocks.Signature, image *mocks.Image, code *mocks.Code, tableList *mocks.TableList,
+	line *mocks.Line) pdf.Maroto {
 	m := &pdf.PdfMaroto{
 		Pdf:             fFpdf,
 		Math:            math,
@@ -1978,6 +2016,7 @@ func newMarotoTest(fFpdf *mocks.Fpdf, math *mocks.Math, font *mocks.Font, text *
 		Image:           image,
 		Code:            code,
 		TableListHelper: tableList,
+		LineHelper:      line,
 	}
 
 	m.SetDefaultFontFamily(consts.Arial)
@@ -2109,7 +2148,7 @@ func TestFpdfMaroto_RegisterFooter(t *testing.T) {
 		tableList := baseTableList()
 		footerCalls := 0
 
-		m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList, nil)
 
 		if c.hasFooter {
 			m.RegisterFooter(func() {
@@ -2194,7 +2233,7 @@ func TestFpdfMaroto_RegisterHeader(t *testing.T) {
 
 		headerCalls := 0
 
-		m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList, nil)
 
 		if c.hasClosure {
 			m.RegisterHeader(func() {
@@ -2260,7 +2299,7 @@ func TestFpdfMaroto_GetCurrentPage(t *testing.T) {
 		font := baseFontTest()
 		tableList := baseTableList()
 
-		m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList)
+		m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList, nil)
 
 		// Act
 		c.act(m)
@@ -2279,7 +2318,7 @@ func TestFpdfMaroto_GetCurrentPage_WhenCreateOffsetIsZero(t *testing.T) {
 	font := baseFontTest()
 	tableList := baseTableList()
 
-	m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList)
+	m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList, nil)
 
 	// Act
 	offset := m.GetCurrentOffset()
@@ -2296,7 +2335,7 @@ func TestFpdfMaroto_GetCurrentPage_WhenIsNotZero(t *testing.T) {
 	font := baseFontTest()
 	tableList := baseTableList()
 
-	m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList)
+	m := newMarotoTest(Fpdf, math, font, text, nil, nil, nil, tableList, nil)
 
 	m.Row(20, func() {
 		m.Col(0, func() {
@@ -2341,7 +2380,7 @@ func TestFpdfMaroto_SetPageMargins(t *testing.T) {
 		// Arrange
 		Fpdf := baseFpdfTest(12.3, 19.3, 0)
 
-		m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+		m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 		// Act
 		c.act(m)
@@ -2354,7 +2393,7 @@ func TestFpdfMaroto_SetPageMargins(t *testing.T) {
 func TestFpdfMaroto_SetBackgroundColor(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(12.3, 19.3, 0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 	white := color.NewWhite()
 
 	// Act
@@ -2368,7 +2407,7 @@ func TestFpdfMaroto_SetBackgroundColor(t *testing.T) {
 func TestFpdfMaroto_GetPageMargins(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(12.3, 19.3, 0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	left, top, right, bottom := m.GetPageMargins()
@@ -2383,7 +2422,7 @@ func TestFpdfMaroto_GetPageMargins(t *testing.T) {
 func TestFpdfMaroto_AddPage(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	m.AddPage()
@@ -2397,7 +2436,7 @@ func TestFpdfMaroto_AddPage(t *testing.T) {
 func TestPdfMaroto_AddUTF8Font(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	m.AddUTF8Font("family", "style", "file")
@@ -2409,7 +2448,7 @@ func TestPdfMaroto_AddUTF8Font(t *testing.T) {
 func TestPdfMaroto_SetFontLocation(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	m.SetFontLocation("/opt/fonts")
@@ -2421,7 +2460,7 @@ func TestPdfMaroto_SetFontLocation(t *testing.T) {
 func TestPdfMaroto_SetProtection(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	m.SetProtection(0, "userPassStr", "ownerPassStr")
@@ -2433,7 +2472,7 @@ func TestPdfMaroto_SetProtection(t *testing.T) {
 func TestPdfMaroto_SetGetDefaultFontFamily(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	m.SetDefaultFontFamily("family")
@@ -2446,7 +2485,7 @@ func TestPdfMaroto_SetGetDefaultFontFamily(t *testing.T) {
 func TestPdfMaroto_SetCompression(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	m.SetCompression(false)

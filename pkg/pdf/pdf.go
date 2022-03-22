@@ -32,7 +32,7 @@ type Maroto interface {
 
 	// Outside Col/Row Components
 	TableList(header []string, contents [][]string, prop ...props.TableList)
-	Line(spaceHeight float64)
+	Line(spaceHeight float64, prop ...props.Line)
 
 	// Inside Col/Row Components
 	Text(text string, prop ...props.Text)
@@ -82,6 +82,7 @@ type PdfMaroto struct {
 	Image           internal.Image
 	Code            internal.Code
 	TableListHelper internal.TableList
+	LineHelper      internal.Line
 
 	// Closures with Maroto Header and Footer logic.
 	headerClosure func()
@@ -137,6 +138,8 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 
 	tableList := internal.NewTableList(text, font)
 
+	lineHelper := internal.NewLine(fpdf)
+
 	maroto := &PdfMaroto{
 		Pdf:               fpdf,
 		Math:              math,
@@ -146,6 +149,7 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 		Image:             image,
 		Code:              code,
 		TableListHelper:   tableList,
+		LineHelper:        lineHelper,
 		pageSize:          pageSize,
 		orientation:       orientation,
 		calculationMode:   false,
@@ -313,14 +317,28 @@ func (s *PdfMaroto) GetPageSize() (width float64, height float64) {
 
 // Line draw a line from margin left to margin right
 // in the currently row.
-func (s *PdfMaroto) Line(spaceHeight float64) {
+func (s *PdfMaroto) Line(spaceHeight float64, prop ...props.Line) {
+	lineProp := props.Line{
+		Color: color.NewBlack(),
+	}
+	if len(prop) > 0 {
+		lineProp = prop[0]
+	}
+
 	s.Row(spaceHeight, func() {
 		s.Col(0, func() {
 			width, _ := s.Pdf.GetPageSize()
 			left, top, right, _ := s.Pdf.GetMargins()
 
 			const divisorToGetHalf = 2.0
-			s.Pdf.Line(left, s.offsetY+top+(spaceHeight/divisorToGetHalf), width-right, s.offsetY+top+(spaceHeight/divisorToGetHalf))
+			cell := internal.Cell{
+				X:      left,
+				Y:      s.offsetY + top + (spaceHeight / divisorToGetHalf),
+				Width:  width - right,
+				Height: s.offsetY + top + (spaceHeight / divisorToGetHalf),
+			}
+
+			s.LineHelper.Draw(cell, lineProp)
 		})
 	})
 }
