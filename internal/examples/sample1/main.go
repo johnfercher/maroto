@@ -67,7 +67,12 @@ func main() {
 			})
 		})
 
-		m.Line(1.0)
+		m.Line(1.0,
+			props.Line{
+				Color: color.Color{
+					255, 0, 0,
+				},
+			})
 
 		m.Row(12, func() {
 			m.Col(3, func() {
