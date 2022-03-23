@@ -24,7 +24,7 @@ type MarotoGridPart interface {
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
 
 	// Outside Col/Row Components.
-	Line(spaceHeight float64)
+	Line(spaceHeight float64, line ...props.Line)
 
 	// Inside Col/Row Components.
 	Text(text string, prop ...props.Text)

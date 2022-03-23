@@ -195,7 +195,7 @@ func (_m *Maroto) GetPageSize() (float64, float64) {
 }
 
 // Line provides a mock function with given fields: spaceHeight
-func (_m *Maroto) Line(spaceHeight float64) {
+func (_m *Maroto) Line(spaceHeight float64, prop ...props.Line) {
 	_m.Called(spaceHeight)
 }
 

@@ -65,6 +65,12 @@ type Text struct {
 	Color color.Color
 }
 
+// Line represents properties from a Line inside a cell.
+type Line struct {
+	// Color define the line color.
+	Color color.Color
+}
+
 // Font represents properties from a text.
 type Font struct {
 	// Family of the text, ex: consts.Arial, helvetica and etc.
