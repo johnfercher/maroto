@@ -1696,6 +1696,8 @@ func TestFpdfMaroto_Line(t *testing.T) {
 						Green: 0,
 						Blue:  0,
 					},
+					Style: consts.Solid,
+					Width: 0.1,
 				})
 			},
 			func(m pdf.Maroto) {
@@ -1703,7 +1705,7 @@ func TestFpdfMaroto_Line(t *testing.T) {
 			},
 		},
 		{
-			"One line with prop",
+			"One solid line without color",
 			func() *mocks.Fpdf {
 				Fpdf := baseFpdfTest(10, 10, 10)
 				Fpdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
@@ -1730,6 +1732,8 @@ func TestFpdfMaroto_Line(t *testing.T) {
 						Green: 100,
 						Blue:  50,
 					},
+					Style: consts.Solid,
+					Width: 0.1,
 				})
 			},
 			func(m pdf.Maroto) {
@@ -1739,6 +1743,84 @@ func TestFpdfMaroto_Line(t *testing.T) {
 						Green: 100,
 						Blue:  50,
 					},
+				})
+			},
+		},
+		// nolint:dupl // better this way
+		{
+			"One dashed line without color",
+			func() *mocks.Fpdf {
+				Fpdf := baseFpdfTest(10, 10, 10)
+				Fpdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
+			},
+			func() *mocks.Line {
+				line := new(mocks.Line)
+				line.On("Draw", mock.Anything, mock.Anything)
+				return line
+			},
+			func(t *testing.T, Fpdf *mocks.Fpdf, line *mocks.Line) {
+				Fpdf.AssertNumberOfCalls(t, "GetMargins", 5)
+				Fpdf.AssertNumberOfCalls(t, "GetPageSize", 5)
+
+				line.AssertNumberOfCalls(t, "Draw", 1)
+				line.AssertCalled(t, "Draw", internal.Cell{
+					X:      10,
+					Y:      11,
+					Width:  90,
+					Height: 11,
+				}, props.Line{
+					Color: color.Color{
+						Red:   0,
+						Green: 0,
+						Blue:  0,
+					},
+					Style: consts.Dashed,
+					Width: 0.1,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Line(2.0, props.Line{
+					Style: consts.Dashed,
+				})
+			},
+		},
+		// nolint:dupl // better this way
+		{
+			"One dotted line without color",
+			func() *mocks.Fpdf {
+				Fpdf := baseFpdfTest(10, 10, 10)
+				Fpdf.On("Line", mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+				return Fpdf
+			},
+			func() *mocks.Line {
+				line := new(mocks.Line)
+				line.On("Draw", mock.Anything, mock.Anything)
+				return line
+			},
+			func(t *testing.T, Fpdf *mocks.Fpdf, line *mocks.Line) {
+				Fpdf.AssertNumberOfCalls(t, "GetMargins", 5)
+				Fpdf.AssertNumberOfCalls(t, "GetPageSize", 5)
+
+				line.AssertNumberOfCalls(t, "Draw", 1)
+				line.AssertCalled(t, "Draw", internal.Cell{
+					X:      10,
+					Y:      11,
+					Width:  90,
+					Height: 11,
+				}, props.Line{
+					Color: color.Color{
+						Red:   0,
+						Green: 0,
+						Blue:  0,
+					},
+					Style: consts.Dotted,
+					Width: 0.1,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Line(2.0, props.Line{
+					Style: consts.Dotted,
 				})
 			},
 		},
