@@ -316,7 +316,7 @@ func (s *PdfMaroto) GetPageSize() (width float64, height float64) {
 }
 
 // Line draw a line from margin left to margin right
-// in the currently row.
+// in the current row.
 func (s *PdfMaroto) Line(spaceHeight float64, prop ...props.Line) {
 	lineProp := props.Line{
 		Color: color.NewBlack(),
@@ -324,6 +324,7 @@ func (s *PdfMaroto) Line(spaceHeight float64, prop ...props.Line) {
 	if len(prop) > 0 {
 		lineProp = prop[0]
 	}
+	lineProp.MakeValid(spaceHeight)
 
 	s.Row(spaceHeight, func() {
 		s.Col(0, func() {
