@@ -3,6 +3,8 @@ package consts
 const (
 	// MaxGridSum represents the max value from a cell grid width.
 	MaxGridSum float64 = 12.0
+	// DefaultLineWidth represents the default line width in gofpdf.
+	DefaultLineWidth float64 = 0.1
 )
 
 const (
@@ -84,4 +86,16 @@ const (
 	Jpg Extension = "jpg"
 	// Png represents a png extension.
 	Png Extension = "png"
+)
+
+// LineStyle is a representation of a line style.
+type LineStyle string
+
+const (
+	// Solid represents a solid style.
+	Solid LineStyle = "solid"
+	// Dashed represents a dashed style.
+	Dashed LineStyle = "dashed"
+	// Dotted represents a dotted style.
+	Dotted LineStyle = "dotted"
 )

@@ -102,7 +102,10 @@ func main() {
 			})
 		})
 
-		m.Line(1.0)
+		m.Line(1.0, props.Line{
+			Style: consts.Dotted,
+			Width: 1.0,
+		})
 
 		m.Row(22, func() {
 			m.Col(0, func() {
@@ -123,7 +126,10 @@ func main() {
 			})
 		})
 
-		m.Line(1.0)
+		m.Line(1.0, props.Line{
+			Style: consts.Dashed,
+			Width: 0.5,
+		})
 	})
 
 	m.RegisterFooter(func() {

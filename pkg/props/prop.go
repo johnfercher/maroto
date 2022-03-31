@@ -69,6 +69,10 @@ type Text struct {
 type Line struct {
 	// Color define the line color.
 	Color color.Color
+	// Style define the line style (solid, dashed or dotted).
+	Style consts.LineStyle
+	// Width define the line width (it cannot be greater than line height)
+	Width float64
 }
 
 // Font represents properties from a text.
@@ -321,5 +325,20 @@ func (s *TableList) MakeValid(header []string, defaultFamily string) {
 
 	if s.HeaderContentSpace == undefinedValue {
 		s.HeaderContentSpace = 4.0
+	}
+}
+
+// MakeValid from Line define default values for a Line.
+func (s *Line) MakeValid(spaceHeight float64) {
+	if s.Style == "" {
+		s.Style = consts.Solid
+	}
+
+	if s.Width == 0 {
+		s.Width = consts.DefaultLineWidth
+	}
+
+	if s.Width > spaceHeight {
+		s.Width = spaceHeight
 	}
 }

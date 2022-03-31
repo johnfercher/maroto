@@ -236,13 +236,17 @@ func ExamplePdfMaroto_TableList() {
 func ExamplePdfMaroto_Line() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
-	// Not passing Prop.Color make line black.
+	// Not passing Prop.Color make line as black.
+	// Not passing width make width as 0.1.
+	// Not passing style make style as solid.
 	m.Line(1.0, props.Line{
 		Color: color.Color{
 			Red:   255,
 			Green: 100,
 			Blue:  50,
 		},
+		Style: consts.Dotted,
+		Width: 1.0,
 	})
 
 	// Do more things and save...
