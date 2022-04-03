@@ -19,7 +19,7 @@ always when a new page appear, in this case, a header may have many rows, lines 
 * With `go get`:
 
 ```bash
-go get -u github.com/johnfercher/maroto
+go get -u github.com/johnfercher/maroto/internal
 ```
 
 ## Contributing
