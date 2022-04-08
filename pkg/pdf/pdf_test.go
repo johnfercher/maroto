@@ -2088,7 +2088,8 @@ func TestFpdfMaroto_OutputFileAndClose(t *testing.T) {
 
 func newMarotoTest(fFpdf *mocks.Fpdf, math *mocks.Math, font *mocks.Font, text *mocks.Text,
 	signature *mocks.Signature, image *mocks.Image, code *mocks.Code, tableList *mocks.TableList,
-	line *mocks.Line) pdf.Maroto {
+	line *mocks.Line,
+) pdf.Maroto {
 	m := &pdf.PdfMaroto{
 		Pdf:             fFpdf,
 		Math:            math,

@@ -25,5 +25,5 @@ examples:
 	go run internal/examples/qrgrid/main.go
 	go run internal/examples/sample1/main.go
 	go run internal/examples/textgrid/main.go
-	go run internal/examples/utfsample/main.go
 	go run internal/examples/zpl/main.go
+	go run internal/examples/utfsample/main.go
