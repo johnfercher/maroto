@@ -32,7 +32,8 @@ func NewMath(pdf fpdf.Fpdf) *math {
 // GetRectCenterColProperties define Width, Height, X Offset and Y Offset
 // to and rectangle (QrCode, Barcode, Image) be centralized inside a cell.
 func (s *math) GetRectCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64,
-	xColOffset float64, percent float64) (x float64, y float64, w float64, h float64) {
+	xColOffset float64, percent float64,
+) (x float64, y float64, w float64, h float64) {
 	percent /= 100.0
 	left, top, _, _ := s.pdf.GetMargins()
 
@@ -68,7 +69,8 @@ func (s *math) GetRectCenterColProperties(imageWidth float64, imageHeight float6
 
 // GetRectNonCenterColProperties define Width, Height to and rectangle (QrCode, Barcode, Image) inside a cell.
 func (s *math) GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64,
-	xColOffset float64, prop props.Rect) (x float64, y float64, w float64, h float64) {
+	xColOffset float64, prop props.Rect,
+) (x float64, y float64, w float64, h float64) {
 	percent := prop.Percent / maxPercent
 	left, top, _, _ := s.pdf.GetMargins()
 

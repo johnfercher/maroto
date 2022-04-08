@@ -154,6 +154,7 @@ func ExamplePdfMaroto_RegisterFooter() {
 	// It is important to remember that it is recommended to create Row's and
 	// Col's if necessary.
 	// You have to register the footer immediately after the Maroto
+	// All footers will be rendered at the bottom of all pages
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
