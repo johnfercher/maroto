@@ -203,6 +203,43 @@ func TestTableList_Create_Happy_Without_Line(t *testing.T) {
 	marotoGrid.AssertNumberOfCalls(t, "Line", 0)
 }
 
+func TestTableList_Create_HappyWithVerticalContentPadding(t *testing.T) {
+	// Arrange
+	text := &mocks.Text{}
+	text.On("GetLinesQuantity", mock.Anything, mock.Anything, mock.Anything).Return(1)
+
+	font := &mocks.Font{}
+	font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
+	font.On("GetScaleFactor").Return(1.5)
+
+	marotoGrid := &mocks.Maroto{}
+	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
+	marotoGrid.On("Line", mock.Anything).Return(nil)
+	marotoGrid.On("GetPageMargins").Return(10.0, 10.0, 10.0, 10.0)
+	marotoGrid.On("GetPageSize").Return(200.0, 600.0)
+
+	sut := internal.NewTableList(text, font)
+	sut.BindGrid(marotoGrid)
+
+	headers, contents := getContents()
+
+	// Act
+	sut.Create(headers, contents, consts.Arial, props.TableList{
+		VerticalContentPadding: 4.0,
+	})
+
+	// Assert
+	text.AssertNotCalled(t, "GetLinesQuantity")
+	text.AssertNumberOfCalls(t, "GetLinesQuantity", 84)
+
+	font.AssertCalled(t, "GetFont")
+	font.AssertNumberOfCalls(t, "GetFont", 21)
+
+	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
+	marotoGrid.AssertNumberOfCalls(t, "Row", 22)
+	marotoGrid.AssertNumberOfCalls(t, "Line", 0)
+}
+
 func TestTableList_Create_WhenContentIsEmptyWithLine(t *testing.T) {
 	// Arrange
 	text := &mocks.Text{}

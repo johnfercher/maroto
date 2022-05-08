@@ -397,6 +397,15 @@ func TestTableListProp_MakeValid(t *testing.T) {
 				assert.Equal(t, m.HeaderContentSpace, 4.0)
 			},
 		},
+		{
+			"When VerticalContentPadding is less than 0.0",
+			&props.TableList{
+				VerticalContentPadding: -4.0,
+			},
+			func(t *testing.T, m *props.TableList) {
+				assert.Equal(t, m.VerticalContentPadding, 0.0)
+			},
+		},
 	}
 
 	for _, c := range cases {

@@ -190,6 +190,7 @@ func ExamplePdfMaroto_TableList() {
 	// Not passing Content.GridSizes, make the method use an array with same length
 	// of content array in the first line, the values will be perfectly divided to make all columns with the same size.
 	// Not passing HeaderContentSpace, will make the method use 4.
+	// Not passing VerticalContentPadding, will make the method use 0. This prop cannot be less than 0.
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
@@ -218,8 +219,9 @@ func ExamplePdfMaroto_TableList() {
 			Green: 20,
 			Blue:  255,
 		},
-		HeaderContentSpace: 10.0,
-		Line:               false,
+		HeaderContentSpace:     10.0,
+		Line:                   false,
+		VerticalContentPadding: 4.0,
 	})
 
 	// TableList have to be used at same level as row

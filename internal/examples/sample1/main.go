@@ -185,6 +185,7 @@ func main() {
 			Green: 200,
 			Blue:  200,
 		},
+		VerticalContentPadding: 10,
 	})
 
 	m.AddPage()
