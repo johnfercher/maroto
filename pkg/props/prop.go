@@ -120,6 +120,8 @@ type TableList struct {
 	AlternatedBackground *color.Color
 	// HeaderContentSpace is the space between the header and the contents.
 	HeaderContentSpace float64
+	// VerticalContentPadding define the space between lines in content.
+	VerticalContentPadding float64
 	// Line adds a line after every content-row to separate rows. The line's spaceHeight is set to 1.0.
 	Line bool
 }
@@ -276,8 +278,8 @@ func (s *TableListContent) ToTextProp(align consts.Align, top float64, extrapola
 
 // MakeValid from TableList define default values for a TableList.
 func (s *TableList) MakeValid(header []string, defaultFamily string) {
-	undefinedValue := 0.0
-	if s.HeaderProp.Size == undefinedValue {
+	zeroValue := 0.0
+	if s.HeaderProp.Size == zeroValue {
 		s.HeaderProp.Size = 10.0
 	}
 
@@ -302,7 +304,7 @@ func (s *TableList) MakeValid(header []string, defaultFamily string) {
 		s.Align = consts.Left
 	}
 
-	if s.ContentProp.Size == undefinedValue {
+	if s.ContentProp.Size == zeroValue {
 		s.ContentProp.Size = 10.0
 	}
 
@@ -323,8 +325,12 @@ func (s *TableList) MakeValid(header []string, defaultFamily string) {
 		}
 	}
 
-	if s.HeaderContentSpace == undefinedValue {
+	if s.HeaderContentSpace == zeroValue {
 		s.HeaderContentSpace = 4.0
+	}
+
+	if s.VerticalContentPadding < zeroValue {
+		s.VerticalContentPadding = zeroValue
 	}
 }
 
