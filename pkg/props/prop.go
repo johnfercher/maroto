@@ -124,6 +124,8 @@ type TableList struct {
 	VerticalContentPadding float64
 	// Line adds a line after every content-row to separate rows. The line's spaceHeight is set to 1.0.
 	Line bool
+	// LineProp is the custom properties of the line separating the rows
+	LineProp Line
 }
 
 // MakeValid from Rect will make the properties from a rectangle reliable to fit inside a cell

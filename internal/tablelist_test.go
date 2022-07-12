@@ -261,6 +261,44 @@ func TestTableList_Create_WhenContentIsEmptyWithLine(t *testing.T) {
 	marotoGrid.AssertNotCalled(t, "Line")
 }
 
+func TestTableList_Create_WithLineProp(t *testing.T) {
+	// Arrange
+	text := &mocks.Text{}
+	text.On("GetLinesQuantity", mock.Anything, mock.Anything, mock.Anything).Return(1)
+
+	font := &mocks.Font{}
+	font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
+	font.On("GetScaleFactor").Return(1.5)
+
+	marotoGrid := &mocks.Maroto{}
+	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
+	marotoGrid.On("Line", mock.Anything).Return(nil)
+	marotoGrid.On("SetBackgroundColor", mock.Anything).Return(nil)
+	marotoGrid.On("GetPageMargins").Return(10.0, 10.0, 10.0, 10.0)
+	marotoGrid.On("GetPageSize").Return(200.0, 600.0)
+
+	sut := internal.NewTableList(text, font)
+	sut.BindGrid(marotoGrid)
+
+	headers, contents := getContents()
+	color := color.Color{
+		Red:   200,
+		Green: 200,
+		Blue:  200,
+	}
+
+	// Act
+	sut.Create(headers, contents, consts.Arial, props.TableList{
+		Line: true,
+		LineProp: props.Line{
+			Style: consts.Dashed,
+			Color: color,
+		},
+	})
+	marotoGrid.AssertCalled(t, "Line", mock.Anything)
+	marotoGrid.AssertNumberOfCalls(t, "Line", 20)
+}
+
 func getContents() ([]string, [][]string) {
 	header := []string{"j = 0", "j = 1", "j = 2", "j = 4"}
 
