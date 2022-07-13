@@ -106,6 +106,10 @@ func TestTableList_Create_Happy(t *testing.T) {
 	// Act
 	sut.Create(headers, contents, consts.Arial, props.TableList{
 		Line: true,
+		LineProp: props.Line{
+			Style: consts.Dotted,
+			Width: 1.0,
+		},
 	})
 
 	// Assert
@@ -116,6 +120,7 @@ func TestTableList_Create_Happy(t *testing.T) {
 	font.AssertNumberOfCalls(t, "GetFont", 21)
 
 	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
+	marotoGrid.AssertCalled(t, "Line", mock.Anything)
 	marotoGrid.AssertNumberOfCalls(t, "Row", 22)
 	marotoGrid.AssertNumberOfCalls(t, "Line", 20)
 	marotoGrid.AssertNotCalled(t, "SetBackgroundColor")
