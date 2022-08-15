@@ -116,7 +116,7 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 		}
 
 		if tableProp.Line {
-			s.pdf.Line(lineHeight)
+			s.pdf.Line(lineHeight, tableProp.LineProp)
 		}
 	}
 }

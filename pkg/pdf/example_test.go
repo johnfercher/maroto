@@ -191,6 +191,9 @@ func ExamplePdfMaroto_TableList() {
 	// of content array in the first line, the values will be perfectly divided to make all columns with the same size.
 	// Not passing HeaderContentSpace, will make the method use 4.
 	// Not passing VerticalContentPadding, will make the method use 0. This prop cannot be less than 0.
+	// Not passing LineProp.Color will make the method use black (if Line is true).
+	// Not passing LineProp.Width will make the method use 0.1 (if Line is true).
+	// Not passing LineProp.Style will make the method use solid (if Line is true).
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
@@ -219,8 +222,12 @@ func ExamplePdfMaroto_TableList() {
 			Green: 20,
 			Blue:  255,
 		},
-		HeaderContentSpace:     10.0,
-		Line:                   false,
+		HeaderContentSpace: 10.0,
+		Line:               false,
+		LineProp: props.Line{
+			Style: consts.Dotted,
+			Width: 0.4,
+		},
 		VerticalContentPadding: 4.0,
 	})
 

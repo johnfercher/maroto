@@ -213,6 +213,14 @@ func main() {
 		},
 		Align: consts.Center,
 		Line:  true,
+		LineProp: props.Line{
+			Color: color.Color{
+				Red:   128,
+				Green: 221,
+				Blue:  205,
+			},
+			Style: consts.Dashed,
+		},
 	})
 
 	err = m.OutputFileAndClose("internal/examples/pdfs/sample1.pdf")
