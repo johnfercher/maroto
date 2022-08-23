@@ -108,12 +108,29 @@ type PdfMaroto struct {
 	defaultFontFamily string
 }
 
+type Option struct {
+	useTextCN bool
+}
+
+type Setter func(*Option)
+
+func UseTextCN() Setter {
+	return func(o *Option) {
+		o.useTextCN = true
+	}
+}
+
 // NewMarotoCustomSize creates a Maroto instance returning a pointer to PdfMaroto
 // Receive an Orientation and a PageSize.
 // Use if custom page size is needed. Otherwise use NewMaroto() shorthand if using page sizes from consts.Pagesize.
 // If using custom width and height, pageSize is just a string value for the format and takes no effect.
 // Width and height inputs are measurements of the page in Portrait orientation.
-func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSize, unitStr string, width, height float64) Maroto {
+func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSize, unitStr string, width, height float64, setters ...Setter) Maroto {
+	opt := &Option{}
+	for _, setter := range setters {
+		setter(opt)
+	}
+
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: string(orientation),
 		UnitStr:        unitStr,
@@ -128,7 +145,13 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 
 	math := internal.NewMath(fpdf)
 	font := internal.NewFont(fpdf, defaultFontSize, consts.Arial, consts.Bold)
-	text := internal.NewText(fpdf, math, font)
+
+	var text internal.Text
+	if opt.useTextCN {
+		text = internal.NewTextCN(fpdf, math, font)
+	} else {
+		text = internal.NewText(fpdf, math, font)
+	}
 
 	signature := internal.NewSignature(fpdf, math, text)
 
@@ -172,8 +195,8 @@ func NewMarotoCustomSize(orientation consts.Orientation, pageSize consts.PageSiz
 // NewMaroto create a Maroto instance returning a pointer to PdfMaroto
 // Receive an Orientation and a PageSize.
 // Shorthand when using a preset page size from consts.PageSize.
-func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize) Maroto {
-	return NewMarotoCustomSize(orientation, pageSize, "mm", 0, 0)
+func NewMaroto(orientation consts.Orientation, pageSize consts.PageSize, setters ...Setter) Maroto {
+	return NewMarotoCustomSize(orientation, pageSize, "mm", 0, 0, setters...)
 }
 
 // AddPage adds a new page in the PDF.
