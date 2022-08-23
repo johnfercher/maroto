@@ -23,6 +23,8 @@ type MarotoGridPart interface {
 	GetPageSize() (width float64, height float64)
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
 
+	RegisterTableHeader(closure func())
+
 	// Outside Col/Row Components.
 	Line(spaceHeight float64, line ...props.Line)
 
@@ -76,7 +78,7 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 	headerHeight := s.calcLinesHeight(header, tableProp.HeaderProp, tableProp.Align)
 
 	// Draw header.
-	s.pdf.Row(headerHeight+1, func() {
+	drawHeader := func() {
 		for i, h := range header {
 			hs := h
 
@@ -85,12 +87,15 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 				s.pdf.Text(reason, tableProp.HeaderProp.ToTextProp(tableProp.Align, 0, false, 0.0))
 			})
 		}
-	})
+	}
+	s.pdf.Row(headerHeight+1, drawHeader)
 
 	// Define space between header and contents.
 	s.pdf.Row(tableProp.HeaderContentSpace, func() {
 		s.pdf.ColSpace(0)
 	})
+
+	s.pdf.RegisterTableHeader(drawHeader)
 
 	// Draw contents.
 	for index, content := range contents {

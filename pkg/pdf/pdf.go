@@ -88,6 +88,9 @@ type PdfMaroto struct {
 	headerClosure func()
 	footerClosure func()
 
+	// Closures with table header
+	tableHeaderClosure func()
+
 	// Computed values.
 	pageIndex                 int
 	offsetY                   float64
@@ -228,6 +231,12 @@ func (s *PdfMaroto) RegisterFooter(closure func()) {
 	s.calculationMode = true
 	closure()
 	s.calculationMode = false
+}
+
+// RegisterTableHeader define a sequence of Rows, Lines ou TableLists
+// which will be added in every new table of page.
+func (s *PdfMaroto) RegisterTableHeader(closure func()) {
+	s.tableHeaderClosure = closure
 }
 
 // GetCurrentPage obtain the current page index
@@ -403,6 +412,12 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 		if s.offsetY == 0 {
 			s.headerFooterContextActive = true
 			s.header()
+
+			// 添加新页头后，如果是表格，也要添加表头
+			if s.tableHeaderClosure != nil {
+				s.tableHeader(height)
+			}
+
 			s.headerFooterContextActive = false
 		}
 	}
@@ -677,6 +692,17 @@ func (s *PdfMaroto) header() {
 	if s.headerClosure != nil {
 		s.headerClosure()
 	}
+
+	s.SetBackgroundColor(backgroundColor)
+}
+
+func (s *PdfMaroto) tableHeader(height float64) {
+	backgroundColor := s.backgroundColor
+	s.SetBackgroundColor(color.NewWhite())
+
+	s.Row(height, func() {
+		s.Col(0, s.tableHeaderClosure)
+	})
 
 	s.SetBackgroundColor(backgroundColor)
 }
