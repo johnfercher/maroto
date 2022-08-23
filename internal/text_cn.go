@@ -98,18 +98,17 @@ const (
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
 func (s *textCN) GetLinesQuantity(text string, textProp props.Text, colWidth float64) int {
-	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	// Apply Unicode.
-	textTranslated := translator(text)
+	unicodeText := s.textToUnicode(text, textProp)
 
-	stringWidth := s.pdf.GetStringWidth(textTranslated)
+	stringWidth := s.pdf.GetStringWidth(unicodeText)
 	wc := getWorldCountByWidth(stringWidth, colWidth)
-	words := splitByWorldCount(textTranslated, wc)
+	words := splitByWorldCount(unicodeText, wc)
 
 	// If should add one line.
-	if stringWidth < colWidth || textProp.Extrapolate || len(words) == 1 {
+	if stringWidth < colWidth || textProp.Extrapolate {
 		return 1
 	}
 
