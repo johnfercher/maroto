@@ -698,6 +698,172 @@ func TestFpdfMaroto_Text(t *testing.T) {
 			},
 		},
 		{
+			"Left-indented text",
+			func(t *testing.T, text *mocks.Text) {
+				text.AssertNumberOfCalls(t, "Add", 1)
+				text.AssertCalled(t, "Add", "Text", internal.Cell{
+					X:      10.0,
+					Y:      0.0,
+					Width:  70.0,
+					Height: 0.0,
+				}, props.Text{
+					Family:      consts.Arial,
+					Align:       consts.Left,
+					Extrapolate: false,
+					Size:        10.0,
+					Left:        10.0,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(40, func() {
+					m.Col(12, func() {
+						m.Text("Text", props.Text{
+							Left: 10.0,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Right-indented text",
+			func(t *testing.T, text *mocks.Text) {
+				text.AssertNumberOfCalls(t, "Add", 1)
+				text.AssertCalled(t, "Add", "Text", internal.Cell{
+					X:      0.0,
+					Y:      0.0,
+					Width:  70.0,
+					Height: 0.0,
+				}, props.Text{
+					Family:      consts.Arial,
+					Align:       consts.Left,
+					Extrapolate: false,
+					Size:        10.0,
+					Right:       10.0,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(40, func() {
+					m.Col(12, func() {
+						m.Text("Text", props.Text{
+							Right: 10.0,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Left- and right-indented text",
+			func(t *testing.T, text *mocks.Text) {
+				text.AssertNumberOfCalls(t, "Add", 1)
+				text.AssertCalled(t, "Add", "Text", internal.Cell{
+					X:      10.0,
+					Y:      0.0,
+					Width:  60.0,
+					Height: 0.0,
+				}, props.Text{
+					Family:      consts.Arial,
+					Align:       consts.Left,
+					Extrapolate: false,
+					Size:        10.0,
+					Left:        10.0,
+					Right:       10.0,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(40, func() {
+					m.Col(12, func() {
+						m.Text("Text", props.Text{
+							Left:  10.0,
+							Right: 10.0,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Left-indent larger than col width",
+			func(t *testing.T, text *mocks.Text) {
+				text.AssertNumberOfCalls(t, "Add", 1)
+				text.AssertCalled(t, "Add", "Text", internal.Cell{
+					X:      80.0,
+					Y:      0.0,
+					Width:  0.0,
+					Height: 0.0,
+				}, props.Text{
+					Family:      consts.Arial,
+					Align:       consts.Left,
+					Extrapolate: false,
+					Size:        10.0,
+					Left:        80.0,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(40, func() {
+					m.Col(12, func() {
+						m.Text("Text", props.Text{
+							Left: 100.0,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Right-indent larger than col width",
+			func(t *testing.T, text *mocks.Text) {
+				text.AssertNumberOfCalls(t, "Add", 1)
+				text.AssertCalled(t, "Add", "Text", internal.Cell{
+					X:      0.0,
+					Y:      0.0,
+					Width:  0.0,
+					Height: 0.0,
+				}, props.Text{
+					Family:      consts.Arial,
+					Align:       consts.Left,
+					Extrapolate: false,
+					Size:        10.0,
+					Right:       80.0,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(40, func() {
+					m.Col(12, func() {
+						m.Text("Text", props.Text{
+							Right: 100.0,
+						})
+					})
+				})
+			},
+		},
+		{
+			"Indents larger than col width",
+			func(t *testing.T, text *mocks.Text) {
+				text.AssertNumberOfCalls(t, "Add", 1)
+				text.AssertCalled(t, "Add", "Text", internal.Cell{
+					X:      40.0,
+					Y:      0.0,
+					Width:  0.0,
+					Height: 0.0,
+				}, props.Text{
+					Family:      consts.Arial,
+					Align:       consts.Left,
+					Extrapolate: false,
+					Size:        10.0,
+					Left:        40.0,
+					Right:       60.0,
+				})
+			},
+			func(m pdf.Maroto) {
+				m.Row(40, func() {
+					m.Col(12, func() {
+						m.Text("Text", props.Text{
+							Left:  40.0,
+							Right: 60.0,
+						})
+					})
+				})
+			},
+		},
+		{
 			"When top is greater than row height",
 			func(t *testing.T, text *mocks.Text) {
 				text.AssertNumberOfCalls(t, "Add", 1)

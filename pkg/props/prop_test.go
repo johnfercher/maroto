@@ -230,6 +230,24 @@ func TestText_MakeValid(t *testing.T) {
 			},
 		},
 		{
+			"When Left is less than 0, it should become 0",
+			&props.Text{
+				Left: -5.0,
+			},
+			func(t *testing.T, prop *props.Text) {
+				assert.Equal(t, prop.Left, 0.0)
+			},
+		},
+		{
+			"When Right is less than 0, it should become 0",
+			&props.Text{
+				Right: -5.0,
+			},
+			func(t *testing.T, prop *props.Text) {
+				assert.Equal(t, prop.Right, 0.0)
+			},
+		},
+		{
 			"When vertical padding is less than 0",
 			&props.Text{
 				VerticalPadding: -5.0,

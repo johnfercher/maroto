@@ -272,7 +272,8 @@ func ExamplePdfMaroto_Text() {
 	// Not passing align, makes the method use left.
 	// Not passing extrapolate, makes the method use false.
 	// Not passing color, makes the method use the current color.
-	// Top cannot be less than 0.
+	// Not passing Top, Left, or Right makes the method use 0.0.
+	// Top, Left, and Right cannot be less than 0.
 	// VerticalPadding cannot be less than 0.
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
@@ -286,6 +287,8 @@ func ExamplePdfMaroto_Text() {
 				Family:          consts.Courier,
 				Align:           consts.Center,
 				Top:             1.0,
+				Left:            1.0,
+				Right:           1.0,
 				Extrapolate:     false,
 				VerticalPadding: 1.0,
 				Color: color.Color{
