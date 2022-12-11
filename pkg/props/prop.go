@@ -106,6 +106,8 @@ type TableListContent struct {
 	// value is not provided the width of all columns will be the
 	// same.
 	GridSizes []uint
+	// Align defines the individual Alignment for every Column
+	Align []consts.Align
 }
 
 // TableList represents properties from a TableList.
@@ -117,6 +119,7 @@ type TableList struct {
 	// the contents.
 	ContentProp TableListContent
 	// Align is the align of the text (header and content) inside the columns.
+	// It serves as a Fallback for the Header and Content Alignment.
 	Align consts.Align
 	// AlternatedBackground define the background color from even rows
 	// i.e rows with index (0, 2, 4, ..., N) will have background colorized,

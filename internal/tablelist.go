@@ -80,9 +80,14 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 		for i, h := range header {
 			hs := h
 
+			alignment := tableProp.Align
+			if tableProp.HeaderProp.Align != nil && tableProp.HeaderProp.Align[i] != "" {
+				alignment = tableProp.HeaderProp.Align[i]
+			}
+
 			s.pdf.Col(tableProp.HeaderProp.GridSizes[i], func() {
 				reason := hs
-				s.pdf.Text(reason, tableProp.HeaderProp.ToTextProp(tableProp.Align, 0, false, 0.0))
+				s.pdf.Text(reason, tableProp.HeaderProp.ToTextProp(alignment, 0, false, 0.0))
 			})
 		}
 	})
@@ -105,8 +110,13 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 			for i, c := range content {
 				cs := c
 
+				alignment := tableProp.Align
+				if tableProp.HeaderProp.Align != nil && tableProp.HeaderProp.Align[i] != "" {
+					alignment = tableProp.ContentProp.Align[i]
+				}
+
 				s.pdf.Col(tableProp.ContentProp.GridSizes[i], func() {
-					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/2.0, false, 0.0))
+					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(alignment, tableProp.VerticalContentPadding/2.0, false, 0.0))
 				})
 			}
 		})
