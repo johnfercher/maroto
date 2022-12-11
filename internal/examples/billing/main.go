@@ -117,6 +117,7 @@ func main() {
 		ContentProp: props.TableListContent{
 			Size:      8,
 			GridSizes: []uint{3, 4, 2, 3},
+			Align:     []consts.Align{consts.Center, consts.Center, consts.Center, consts.Right},
 		},
 		Align:                consts.Center,
 		AlternatedBackground: &grayColor,
