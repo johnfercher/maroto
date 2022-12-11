@@ -241,6 +241,76 @@ func ExamplePdfMaroto_TableList() {
 	// Do more things and save...
 }
 
+func ExamplePdfMaroto_TableList_variableAlignment() {
+	// Not passing this table list prop will lead the method to use all the follow values.
+	// Not passing HeaderProp.Size, make the method use 10.
+	// Not passing HeaderProp.Family, make the method use arial.
+	// Not passing HeaderProp.Style, make the method use bold.
+	// Not passing HeaderProp.GridSizes, make the method use an array with same length
+	// Not passing HeaderProp.Color, make the method use a black font
+	// of header array, the values will be perfectly divided to make all columns with the same size.
+	// Not passing Align, make the method to use left.
+	// Not passing ContentProp.Size, make the method use 10.
+	// Not passing ContentProp.Family, make the method use arial.
+	// Not passing ContentProp.Style, make the method use normal.
+	// Not passing ContentProp.Color, make the method use a black font
+	// Not passing Content.GridSizes, make the method use an array with same length
+	// of content array in the first line, the values will be perfectly divided to make all columns with the same size.
+	// Not passing HeaderContentSpace, will make the method use 4.
+	// Not passing VerticalContentPadding, will make the method use 0. This prop cannot be less than 0.
+	// Not passing LineProp.Color will make the method use black (if Line is true).
+	// Not passing LineProp.Width will make the method use 0.1 (if Line is true).
+	// Not passing LineProp.Style will make the method use solid (if Line is true).
+	// Not passing HeaderProp.Align / ContentProp.Align will make the alignment fall back to TableList.Align
+
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	headers := []string{"Header1", "Header2"}
+	contents := [][]string{
+		{"Content1", "Content2"},
+		{"Content3", "Content3"},
+	}
+
+	m.TableList(headers, contents, props.TableList{
+		HeaderProp: props.TableListContent{
+			Family:    consts.Arial,
+			Style:     consts.Bold,
+			Size:      11.0,
+			GridSizes: []uint{3, 9},
+			Align:     []consts.Align{consts.Left, consts.Right},
+		},
+		ContentProp: props.TableListContent{
+			Family:    consts.Courier,
+			Style:     consts.Normal,
+			Size:      10.0,
+			GridSizes: []uint{3, 9},
+			Align:     []consts.Align{consts.Right, consts.Left},
+		},
+		Align: consts.Center,
+		AlternatedBackground: &color.Color{
+			Red:   100,
+			Green: 20,
+			Blue:  255,
+		},
+		HeaderContentSpace: 10.0,
+		Line:               false,
+		LineProp: props.Line{
+			Style: consts.Dotted,
+			Width: 0.4,
+		},
+		VerticalContentPadding: 4.0,
+	})
+
+	// TableList have to be used at same level as row
+	m.Row(10, func() {
+		m.Col(12, func() {
+			// Add a component
+		})
+	})
+
+	// Do more things and save...
+}
+
 // ExamplePdfMaroto_Line demonstrates how to draw a line
 // separator.
 func ExamplePdfMaroto_Line() {
