@@ -81,7 +81,7 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 			hs := h
 
 			alignment := tableProp.Align
-			if tableProp.HeaderProp.Align != nil && tableProp.HeaderProp.Align[i] != "" {
+			if tableProp.HeaderProp.Align != nil && i < len(tableProp.HeaderProp.Align) && tableProp.HeaderProp.Align[i] != "" {
 				alignment = tableProp.HeaderProp.Align[i]
 			}
 
@@ -111,7 +111,7 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 				cs := c
 
 				alignment := tableProp.Align
-				if tableProp.HeaderProp.Align != nil && tableProp.HeaderProp.Align[i] != "" {
+				if tableProp.ContentProp.Align != nil && i < len(tableProp.ContentProp.Align) && tableProp.ContentProp.Align[i] != "" {
 					alignment = tableProp.ContentProp.Align[i]
 				}
 
