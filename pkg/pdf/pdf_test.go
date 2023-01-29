@@ -2611,7 +2611,7 @@ func TestFpdfMaroto_SetPageMargins(t *testing.T) {
 				m.SetPageMargins(12.3, 19.3, 0.0)
 			},
 			func(t *testing.T, m *mocks.Fpdf) {
-				m.AssertCalled(t, "SetMargins", 12.3, 10.0, 0.0)
+				m.AssertCalled(t, "SetMargins", 12.3, 19.3, 0.0)
 			},
 		},
 		{
@@ -2620,7 +2620,7 @@ func TestFpdfMaroto_SetPageMargins(t *testing.T) {
 				m.SetPageMargins(12.3, 9.0, 0.0)
 			},
 			func(t *testing.T, m *mocks.Fpdf) {
-				m.AssertCalled(t, "SetMargins", 12.3, 10.0, 0.0)
+				m.AssertCalled(t, "SetMargins", 12.3, 9.0, 0.0)
 			},
 		},
 	}
