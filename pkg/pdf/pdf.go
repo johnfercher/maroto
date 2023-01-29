@@ -226,7 +226,7 @@ func (s *PdfMaroto) SetPageMargins(left, top, right float64) {
 		s.marginTop = top - defaultTopMargin
 	}
 
-	s.Pdf.SetMargins(left, defaultTopMargin, right)
+	s.Pdf.SetMargins(left, top, right)
 }
 
 // GetPageMargins returns the set page margins. Comes in order of Left, Top, Right, Bottom
