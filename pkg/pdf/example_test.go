@@ -194,6 +194,8 @@ func ExamplePdfMaroto_TableList() {
 	// Not passing LineProp.Color will make the method use black (if Line is true).
 	// Not passing LineProp.Width will make the method use 0.1 (if Line is true).
 	// Not passing LineProp.Style will make the method use solid (if Line is true).
+	// Not passing ContentProp.CellTextColorChangerFunc will make the method to no change the cell text color. This prop must be
+	// used with the prop ContentProp.CellTextColorChangerColumnIndex to only change the desired cell text color of a specific column
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
@@ -211,10 +213,14 @@ func ExamplePdfMaroto_TableList() {
 			GridSizes: []uint{3, 9},
 		},
 		ContentProp: props.TableListContent{
-			Family:    consts.Courier,
-			Style:     consts.Normal,
-			Size:      10.0,
-			GridSizes: []uint{3, 9},
+			Family:                          consts.Courier,
+			Style:                           consts.Normal,
+			Size:                            10.0,
+			GridSizes:                       []uint{3, 9},
+			CellTextColorChangerColumnIndex: 1,
+			CellTextColorChangerFunc: func(cellValue string) color.Color {
+				return color.NewBlack()
+			},
 		},
 		Align: consts.Center,
 		AlternatedBackground: &color.Color{
