@@ -72,6 +72,8 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 		tableProp = prop[0]
 	}
 
+	predefinedCellTextColor := tableProp.ContentProp.Color
+
 	tableProp.MakeValid(header, defaultFontFamily)
 	headerHeight := s.calcLinesHeight(header, tableProp.HeaderProp, tableProp.Align)
 
@@ -106,7 +108,15 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 				cs := c
 
 				s.pdf.Col(tableProp.ContentProp.GridSizes[i], func() {
-					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/2.0, false, 0.0))
+
+					if tableProp.ContentProp.CellTextColorChangerFunc != nil &&
+						i == tableProp.ContentProp.CellTextColorChangerColumnIndex {
+						tableProp.ContentProp.Color = tableProp.ContentProp.CellTextColorChangerFunc(cs)
+					} else {
+						tableProp.ContentProp.Color = predefinedCellTextColor
+					}
+
+					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/2.0, false, 0.0), props.Text{})
 				})
 			}
 		})

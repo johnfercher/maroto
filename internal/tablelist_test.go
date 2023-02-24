@@ -2,6 +2,7 @@ package internal_test
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/johnfercher/maroto/internal"
@@ -243,6 +244,65 @@ func TestTableList_Create_HappyWithVerticalContentPadding(t *testing.T) {
 	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
 	marotoGrid.AssertNumberOfCalls(t, "Row", 22)
 	marotoGrid.AssertNumberOfCalls(t, "Line", 0)
+}
+
+func TestTableList_Create_HappyWithCustomCellColor(t *testing.T) {
+	// Arrange
+	text := &mocks.Text{}
+	text.On("GetLinesQuantity", mock.Anything, mock.Anything, mock.Anything).Return(1)
+
+	font := &mocks.Font{}
+	font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
+	font.On("GetScaleFactor").Return(1.5)
+
+	marotoGrid := &mocks.Maroto{}
+	marotoGrid.On("Row", mock.Anything, mock.Anything).Return(nil)
+	marotoGrid.On("Line", mock.Anything).Return(nil)
+	marotoGrid.On("SetBackgroundColor", mock.Anything).Return(nil)
+	marotoGrid.On("GetPageMargins").Return(10.0, 10.0, 10.0, 10.0)
+	marotoGrid.On("GetPageSize").Return(200.0, 600.0)
+
+	sut := internal.NewTableList(text, font)
+	sut.BindGrid(marotoGrid)
+
+	headers, contents := getContents()
+
+	// Act
+	sut.Create(headers, contents, consts.Arial, props.TableList{
+		ContentProp: props.TableListContent{
+			Size:                            8,
+			GridSizes:                       []uint{3, 4, 2, 3},
+			CellTextColorChangerColumnIndex: 0,
+			CellTextColorChangerFunc: func(cellValue string) color.Color {
+				if strings.Contains(cellValue, "i =") {
+					return color.Color{
+						Red:   255,
+						Green: 0,
+						Blue:  0,
+					}
+				}
+				return color.NewBlack()
+			},
+		},
+		Line: true,
+		LineProp: props.Line{
+			Style: consts.Dotted,
+			Width: 1.0,
+		},
+	})
+
+	// Assert
+	text.AssertNotCalled(t, "GetLinesQuantity")
+	text.AssertNumberOfCalls(t, "GetLinesQuantity", 84)
+
+	font.AssertCalled(t, "GetFont")
+	font.AssertNumberOfCalls(t, "GetFont", 21)
+
+	marotoGrid.AssertCalled(t, "Row", mock.Anything, mock.Anything)
+	marotoGrid.AssertCalled(t, "Line", mock.Anything)
+	marotoGrid.AssertNumberOfCalls(t, "Row", 22)
+	marotoGrid.AssertNumberOfCalls(t, "Line", 20)
+	marotoGrid.AssertNotCalled(t, "SetBackgroundColor")
 }
 
 func TestTableList_Create_WhenContentIsEmptyWithLine(t *testing.T) {
