@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"bytes"
+	"time"
 
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -59,14 +60,21 @@ type Maroto interface {
 	GetCurrentOffset() float64
 	SetPageMargins(left, top, right float64)
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
-	SetCompression(compress bool)
 
 	// Fonts
 	AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string)
 	SetFontLocation(fontDirStr string)
-	SetProtection(actionFlag byte, userPassStr, ownerPassStr string)
 	SetDefaultFontFamily(fontFamily string)
 	GetDefaultFontFamily() string
+
+	// Metadata
+	SetCompression(compress bool)
+	SetProtection(actionFlag byte, userPassStr, ownerPassStr string)
+	SetAuthor(author string, isUTF8 bool)
+	SetCreator(creator string, isUTF8 bool)
+	SetSubject(subject string, isUTF8 bool)
+	SetTitle(title string, isUTF8 bool)
+	SetCreationDate(time time.Time)
 }
 
 // PdfMaroto is the principal structure which implements Maroto abstraction.
@@ -297,12 +305,6 @@ func (s *PdfMaroto) SetFirstPageNb(number int) {
 // It will be substituted as the document is closed.
 func (s *PdfMaroto) SetAliasNbPages(alias string) {
 	s.Pdf.AliasNbPages(alias)
-}
-
-// SetCompression allows to set/unset compression for a page
-// Compression is on by default.
-func (s *PdfMaroto) SetCompression(compress bool) {
-	s.Pdf.SetCompression(compress)
 }
 
 // GetBorder return the actual border value.
@@ -590,9 +592,40 @@ func (s *PdfMaroto) SetFontLocation(fontDirStr string) {
 	s.Pdf.SetFontLocation(fontDirStr)
 }
 
+// SetCompression allows to set/unset compression for a page
+// Compression is on by default.
+func (s *PdfMaroto) SetCompression(compress bool) {
+	s.Pdf.SetCompression(compress)
+}
+
 // SetProtection define a password to open the pdf.
 func (s *PdfMaroto) SetProtection(actionFlag byte, userPassStr, ownerPassStr string) {
 	s.Pdf.SetProtection(actionFlag, userPassStr, ownerPassStr)
+}
+
+// SetAuthor allows to set author name.
+func (s *PdfMaroto) SetAuthor(author string, isUTF8 bool) {
+	s.Pdf.SetAuthor(author, isUTF8)
+}
+
+// SetCreator allows to set creator.
+func (s *PdfMaroto) SetCreator(creator string, isUTF8 bool) {
+	s.Pdf.SetCreator(creator, isUTF8)
+}
+
+// SetSubject allows to set subject.
+func (s *PdfMaroto) SetSubject(subject string, isUTF8 bool) {
+	s.Pdf.SetSubject(subject, isUTF8)
+}
+
+// SetTitle allows to set title.
+func (s *PdfMaroto) SetTitle(title string, isUTF8 bool) {
+	s.Pdf.SetTitle(title, isUTF8)
+}
+
+// SetCreationDate allows to set creation date.
+func (s *PdfMaroto) SetCreationDate(time time.Time) {
+	s.Pdf.SetCreationDate(time)
 }
 
 // SetDefaultFontFamily allows you to customize the default font. By default Arial is the original value.

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -2287,8 +2288,13 @@ func baseFpdfTest(left, top, right float64) *mocks.Fpdf {
 	Fpdf.On("SetFillColor", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("AddUTF8Font", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("SetFontLocation", mock.Anything)
-	Fpdf.On("SetProtection", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("SetCompression", mock.Anything)
+	Fpdf.On("SetProtection", mock.Anything, mock.Anything, mock.Anything)
+	Fpdf.On("SetAuthor", mock.Anything, mock.Anything)
+	Fpdf.On("SetCreator", mock.Anything, mock.Anything)
+	Fpdf.On("SetSubject", mock.Anything, mock.Anything)
+	Fpdf.On("SetTitle", mock.Anything, mock.Anything)
+	Fpdf.On("SetCreationDate", mock.Anything)
 	return Fpdf
 }
 
@@ -2706,18 +2712,6 @@ func TestPdfMaroto_SetFontLocation(t *testing.T) {
 	Fpdf.AssertCalled(t, "SetFontLocation", "/opt/fonts")
 }
 
-func TestPdfMaroto_SetProtection(t *testing.T) {
-	// Arrange
-	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
-	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
-
-	// Act
-	m.SetProtection(0, "userPassStr", "ownerPassStr")
-
-	// Assert
-	Fpdf.AssertCalled(t, "SetProtection", byte(0), "userPassStr", "ownerPassStr")
-}
-
 func TestPdfMaroto_SetGetDefaultFontFamily(t *testing.T) {
 	// Arrange
 	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
@@ -2741,4 +2735,77 @@ func TestPdfMaroto_SetCompression(t *testing.T) {
 
 	// Assert
 	Fpdf.AssertCalled(t, "SetCompression", false)
+}
+
+func TestPdfMaroto_SetProtection(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.SetProtection(0, "userPassStr", "ownerPassStr")
+
+	// Assert
+	Fpdf.AssertCalled(t, "SetProtection", byte(0), "userPassStr", "ownerPassStr")
+}
+
+func TestPdfMaroto_SetAuthor(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.SetAuthor("author", true)
+
+	// Assert
+	Fpdf.AssertCalled(t, "SetAuthor", "author", true)
+}
+
+func TestPdfMaroto_SetCreator(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.SetCreator("creator", true)
+
+	// Assert
+	Fpdf.AssertCalled(t, "SetCreator", "creator", true)
+}
+
+func TestPdfMaroto_SetSubject(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.SetSubject("subject", true)
+
+	// Assert
+	Fpdf.AssertCalled(t, "SetSubject", "subject", true)
+}
+
+func TestPdfMaroto_SetTitle(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.SetTitle("title", true)
+
+	// Assert
+	Fpdf.AssertCalled(t, "SetTitle", "title", true)
+}
+
+func TestPdfMaroto_SetCreationDate(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
+	timeNow := time.Now()
+
+	// Act
+	m.SetCreationDate(timeNow)
+
+	// Assert
+	Fpdf.AssertCalled(t, "SetCreationDate", timeNow)
 }
