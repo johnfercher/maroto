@@ -106,6 +106,15 @@ type TableListContent struct {
 	// value is not provided the width of all columns will be the
 	// same.
 	GridSizes []uint
+	// CellTextColorChangerFunc is a custom function that will be called
+	// before the cell is created and will change the text color
+	// following the logic inside the function
+	CellTextColorChangerFunc func(cellValue string) color.Color
+	// CellTextColorChangerColumnIndex will be used to only run the
+	// function ChangeCellTextColor when the column index matches the
+	// desired index
+	// Must start at 0
+	CellTextColorChangerColumnIndex int
 }
 
 // TableList represents properties from a TableList.
