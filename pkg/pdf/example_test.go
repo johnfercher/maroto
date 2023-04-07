@@ -743,6 +743,16 @@ func ExamplePdfMaroto_GetDefaultFontFamily() {
 	// Do more things and save...
 }
 
+// ExamplePdfMaroto_SetCompression demonstrates how to disable compression
+// By default compression is enabled.
+func ExamplePdfMaroto_SetCompression() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.SetCompression(false)
+
+	// Do more things and save...
+}
+
 // ExamplePdfMaroto_SetProtection demonstrates how to define a protection to pdf.
 func ExamplePdfMaroto_SetProtection() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
@@ -752,12 +762,48 @@ func ExamplePdfMaroto_SetProtection() {
 	// Do more things and save...
 }
 
-// ExamplePdfMaroto_SetCompression demonstrates how to disable compression
-// By default compression is enabled.
-func ExamplePdfMaroto_SetCompression() {
+// ExamplePdfMaroto_SetAuthor demonstrates how to define the author.
+func ExamplePdfMaroto_SetAuthor() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
-	m.SetCompression(false)
+	m.SetAuthor("author", true)
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_SetCreator demonstrates how to define the creator.
+func ExamplePdfMaroto_SetCreator() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.SetCreator("creator", true)
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_SetSubject demonstrates how to define the subject.
+func ExamplePdfMaroto_SetSubject() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.SetSubject("subject", true)
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_SetTitle demonstrates how to define the title.
+func ExamplePdfMaroto_SetTitle() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	m.SetTitle("title", true)
+
+	// Do more things and save...
+}
+
+// ExamplePdfMaroto_SetCreationDate demonstrates how to define the creation date.
+func ExamplePdfMaroto_SetCreationDate() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+	timeNow := time.Now()
+
+	m.SetCreationDate(timeNow)
 
 	// Do more things and save...
 }
