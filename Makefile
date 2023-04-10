@@ -18,6 +18,7 @@ install:
 examples:
 	go run internal/examples/barcodegrid/main.go
 	go run internal/examples/billing/main.go
+	go run internal/examples/billing-with-negative/main.go
 	go run internal/examples/certificate/main.go
 	go run internal/examples/customsize/main.go
 	go run internal/examples/dmgrid/main.go
