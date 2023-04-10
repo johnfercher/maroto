@@ -3,6 +3,7 @@ package pdf_test
 import (
 	"encoding/base64"
 	"fmt"
+	"io/ioutil"
 	"testing"
 	"time"
 
@@ -681,6 +682,33 @@ func ExamplePdfMaroto_AddUTF8Font() {
 	})
 
 	// Do more things and save...
+}
+
+// ExamplePdfMaroto_AddUTF8FontFromBytes demonstrates how to add a custom UTF8 font from bytes.
+func ExamplePdfMaroto_AddUTF8FontFromBytes() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Read font .ttf file contents
+	fontBytes, err := ioutil.ReadFile("internal/assets/fonts/arial-unicode-ms.ttf")
+	if err != nil {
+		// Return error
+	}
+
+	// Add font to Maroto
+	m.AddUTF8FontFromBytes("CustomArial", consts.Normal, fontBytes)
+	m.AddUTF8FontFromBytes("CustomArial", consts.Italic, fontBytes)
+	m.AddUTF8FontFromBytes("CustomArial", consts.Bold, fontBytes)
+	m.AddUTF8FontFromBytes("CustomArial", consts.BoldItalic, fontBytes)
+
+	m.Row(10, func() {
+		m.Col(12, func() {
+			// Use new font style
+			m.Text("CustomUtf8Font", props.Text{
+				Family: "CustomArial",
+				Style:  consts.Bold,
+			})
+		})
+	})
 }
 
 // ExamplePdfMaroto_SetFontLocation demonstrates how to add a custom utf8 font from custom location.
