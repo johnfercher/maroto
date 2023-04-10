@@ -2287,6 +2287,7 @@ func baseFpdfTest(left, top, right float64) *mocks.Fpdf {
 	Fpdf.On("SetMargins", mock.AnythingOfType("float64"), mock.AnythingOfType("float64"), mock.AnythingOfType("float64"))
 	Fpdf.On("SetFillColor", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("AddUTF8Font", mock.Anything, mock.Anything, mock.Anything)
+	Fpdf.On("AddUTF8FontFromBytes", mock.Anything, mock.Anything, mock.Anything)
 	Fpdf.On("SetFontLocation", mock.Anything)
 	Fpdf.On("SetCompression", mock.Anything)
 	Fpdf.On("SetProtection", mock.Anything, mock.Anything, mock.Anything)
@@ -2698,6 +2699,18 @@ func TestPdfMaroto_AddUTF8Font(t *testing.T) {
 
 	// Assert
 	Fpdf.AssertCalled(t, "AddUTF8Font", "family", "style", "file")
+}
+
+func TestPdfMaroto_AddUTF8FontFromBytes(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
+
+	// Act
+	m.AddUTF8FontFromBytes("family", "style", []byte("font-bytes"))
+
+	// Assert
+	Fpdf.AssertCalled(t, "AddUTF8FontFromBytes", "family", "style", []byte("font-bytes"))
 }
 
 func TestPdfMaroto_SetFontLocation(t *testing.T) {

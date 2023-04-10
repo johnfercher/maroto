@@ -80,6 +80,11 @@ func (_m *Fpdf) AddUTF8Font(familyStr string, styleStr string, fileStr string) {
 	_m.Called(familyStr, styleStr, fileStr)
 }
 
+// AddUTF8FontFromBytes provides a mock function with given fields: familyStr, styleStr, utf8Bytes
+func (_m *Fpdf) AddUTF8FontFromBytes(familyStr, styleStr string, utf8Bytes []byte) {
+	_m.Called(familyStr, styleStr, utf8Bytes)
+}
+
 // AliasNbPages provides a mock function with given fields: aliasStr
 func (_m *Fpdf) AliasNbPages(aliasStr string) {
 	_m.Called(aliasStr)
