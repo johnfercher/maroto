@@ -90,6 +90,7 @@ go get -u github.com/johnfercher/maroto/internal
 * [Properties](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/props?tab=doc): most of the components has properties which you can use to customize appearance and behavior
 * [SetBorder](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetBorder): Used to draw rectangles in every row and column
 * [SetBackgroundColor](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetBackgroundColor): Used to change the background color of one cell
+* [SetMaxGridSum](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf?tab=doc#PdfMaroto.SetMaxGridSum): Sets max amount of cols per row, default is 12 cols per row
 
 #### Roadmap
 * Updated in [Issues](https://github.com/johnfercher/maroto/issues)
