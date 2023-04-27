@@ -180,6 +180,11 @@ func main() {
 		HeaderProp: props.TableListContent{
 			GridSizes: []uint{3, 6, 3},
 		},
+		ContentStyles: []consts.Style{
+			consts.Normal,
+			consts.Bold,
+			consts.Italic,
+		},
 		AlternatedBackground: &color.Color{
 			Red:   200,
 			Green: 200,
