@@ -115,8 +115,12 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 					} else {
 						tableProp.ContentProp.Color = predefinedCellTextColor
 					}
+					textProp := tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/2.0, false, 0.0)
+					if len(tableProp.ContentStyles) > index {
+						textProp.Style = tableProp.ContentStyles[index]
+					}
 
-					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/2.0, false, 0.0), props.Text{})
+					s.pdf.Text(cs, textProp, props.Text{})
 				})
 			}
 		})

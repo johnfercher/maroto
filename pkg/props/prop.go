@@ -125,6 +125,8 @@ type TableList struct {
 	// ContentProp is the custom properties of the text inside
 	// the contents.
 	ContentProp TableListContent
+	// ContentStyles provides custom styles for each line
+	ContentStyles []consts.Style
 	// Align is the align of the text (header and content) inside the columns.
 	Align consts.Align
 	// AlternatedBackground define the background color from even rows
