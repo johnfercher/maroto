@@ -28,3 +28,4 @@ examples:
 	go run internal/examples/textgrid/main.go
 	go run internal/examples/zpl/main.go
 	go run internal/examples/utfsample/main.go
+	go run internal/examples/maxgridsum/main.go
