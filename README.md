@@ -1,7 +1,9 @@
 # Maroto 
 
 [![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://godoc.org/github.com/johnfercher/maroto)
-[![Travis](https://travis-ci.com/johnfercher/maroto.svg?branch=master)][travis] 
+[![Travis](https://travis-ci.com/johnfercher/maroto.svg?branch=master)][travis]
+![CI](https://github.com/johnfercher/maroto/actions/workflows/goci.yml/badge.svg)
+![Lint](https://github.com/johnfercher/maroto/actions/workflows/golangci-lint.yml/badge.svg)
 [![Codecov](https://img.shields.io/codecov/c/github/johnfercher/maroto)](https://codecov.io/gh/johnfercher/maroto) 
 [![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
 [![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines)  

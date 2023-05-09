@@ -1,4 +1,4 @@
-name: go-package
+name: build & test
 on:
   push:
     tags:
@@ -13,7 +13,7 @@ permissions:
   # pull-requests: read
 jobs:
   build:
-    name: build and test
+    name: build & test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
