@@ -116,6 +116,7 @@ with the code to generate the PDFs. There are examples of: [barcode](internal/ex
 | [divrhino/fruitful-pdf](https://github.com/divrhino/fruitful-pdf) | Repository |
 | [Creating PDFs using Golang](https://medium.com/@johnathanfercher/creating-pdfs-using-golang-98b722e99d6d) | Article |
 
+
 #### Code
 > This is part of the example [billing](internal/examples/billing).
 ```go
