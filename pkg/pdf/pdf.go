@@ -285,7 +285,7 @@ func (s *PdfMaroto) TableList(header []string, contents [][]string, prop ...prop
 	s.TableListHelper.Create(header, contents, s.defaultFontFamily, prop...)
 }
 
-// SetMaxGridSum changes the max grid size of the page
+// SetMaxGridSum changes the max grid size of the page.
 func (s *PdfMaroto) SetMaxGridSum(maxGridSum float64) {
 	s.maxGridSum = maxGridSum
 }
@@ -666,7 +666,7 @@ func (s *PdfMaroto) drawLastFooter() {
 			maxOffsetPage := int(pageHeight - bottom - top)
 
 			s.Row(float64(maxOffsetPage-totalOffsetY), func() {
-				s.ColSpace(12)
+				s.ColSpace(uint(s.maxGridSum))
 			})
 
 			s.headerFooterContextActive = true

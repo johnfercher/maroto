@@ -119,7 +119,6 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 				cs := c
 
 				s.pdf.Col(tableProp.ContentProp.GridSizes[i], func() {
-
 					if tableProp.ContentProp.CellTextColorChangerFunc != nil &&
 						i == tableProp.ContentProp.CellTextColorChangerColumnIndex {
 						tableProp.ContentProp.Color = tableProp.ContentProp.CellTextColorChangerFunc(cs)
@@ -127,7 +126,8 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 						tableProp.ContentProp.Color = predefinedCellTextColor
 					}
 
-					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/2.0, false, 0.0), props.Text{})
+					halfDivisor := 2.0
+					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/halfDivisor, false, 0.0), props.Text{})
 				})
 			}
 		})
