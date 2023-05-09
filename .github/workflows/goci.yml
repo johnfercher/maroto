@@ -13,7 +13,6 @@ permissions:
   # pull-requests: read
 jobs:
   build:
-    name: build & test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
