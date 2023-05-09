@@ -1,4 +1,4 @@
-name: code coverage
+name: coverage
 on:
   push:
     tags:
@@ -13,7 +13,7 @@ permissions:
   # pull-requests: read
 jobs:
   codecov:
-    name: compute & publish
+    name: publish
     runs-on: ubuntu-latest
     steps:
 
