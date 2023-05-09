@@ -61,7 +61,7 @@ func (s *tableList) BindGrid(pdf MarotoGridPart) {
 	s.pdf = pdf
 }
 
-// SetMaxGridSum changes the max grid size of the page
+// SetMaxGridSum changes the max grid size of the page.
 func (s *tableList) SetMaxGridSum(maxGridSum float64) {
 	s.maxGridSum = maxGridSum
 }
@@ -127,7 +127,8 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 					}
 
 					halfDivisor := 2.0
-					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/halfDivisor, false, 0.0), props.Text{})
+					topComputed := tableProp.VerticalContentPadding / halfDivisor
+					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, topComputed, false, 0.0), props.Text{})
 				})
 			}
 		})
