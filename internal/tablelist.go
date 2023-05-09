@@ -61,7 +61,7 @@ func (s *tableList) BindGrid(pdf MarotoGridPart) {
 	s.pdf = pdf
 }
 
-// SetMaxGridSum changes the max grid size of the page
+// SetMaxGridSum changes the max grid size of the page.
 func (s *tableList) SetMaxGridSum(maxGridSum float64) {
 	s.maxGridSum = maxGridSum
 }
@@ -119,7 +119,6 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 				cs := c
 
 				s.pdf.Col(tableProp.ContentProp.GridSizes[i], func() {
-
 					if tableProp.ContentProp.CellTextColorChangerFunc != nil &&
 						i == tableProp.ContentProp.CellTextColorChangerColumnIndex {
 						tableProp.ContentProp.Color = tableProp.ContentProp.CellTextColorChangerFunc(cs)
@@ -127,7 +126,9 @@ func (s *tableList) Create(header []string, contents [][]string, defaultFontFami
 						tableProp.ContentProp.Color = predefinedCellTextColor
 					}
 
-					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, tableProp.VerticalContentPadding/2.0, false, 0.0), props.Text{})
+					halfDivisor := 2.0
+					topComputed := tableProp.VerticalContentPadding / halfDivisor
+					s.pdf.Text(cs, tableProp.ContentProp.ToTextProp(tableProp.Align, topComputed, false, 0.0), props.Text{})
 				})
 			}
 		})
