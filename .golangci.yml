@@ -2,9 +2,6 @@ run:
   timeout: 5m
   modules-download-mode: readonly
 
-  skip-dirs:
-    - internal/fpdf
-
 linters-settings:
   lll:
     line-length: 140
@@ -53,7 +50,6 @@ linters-settings:
 linters:
   disable-all: true
   enable:
-    - bodyclose
     - dogsled
     - dupl
     - errcheck
