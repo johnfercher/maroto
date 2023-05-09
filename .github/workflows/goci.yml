@@ -1,4 +1,4 @@
-name: build & test
+name: ci
 on:
   push:
     tags:
@@ -13,6 +13,7 @@ permissions:
   # pull-requests: read
 jobs:
   build:
+    name: build & test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
