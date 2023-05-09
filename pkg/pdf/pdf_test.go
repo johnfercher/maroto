@@ -2271,6 +2271,7 @@ func newMarotoTest(fFpdf *mocks.Fpdf, math *mocks.Math, font *mocks.Font, text *
 
 	m.SetDefaultFontFamily(consts.Arial)
 	m.SetBackgroundColor(color.NewWhite())
+	m.SetMaxGridSum(consts.DefaultMaxGridSum)
 
 	return m
 }
@@ -2808,4 +2809,27 @@ func TestPdfMaroto_SetCreationDate(t *testing.T) {
 
 	// Assert
 	Fpdf.AssertCalled(t, "SetCreationDate", timeNow)
+}
+
+func TestPdfMaroto_SetMaxGridSum(t *testing.T) {
+	// Arrange
+	Fpdf := baseFpdfTest(10.0, 10.0, 10.0)
+	m := newMarotoTest(Fpdf, nil, nil, nil, nil, nil, nil, nil, nil)
+
+	m.Row(2, func() {
+		m.Col(6, func() {})
+	})
+
+	// Assert
+	Fpdf.AssertCalled(t, "CellFormat", 40, 2, "", "", 0, "C", false, 0, "")
+
+	// Act
+	m.SetMaxGridSum(24)
+
+	m.Row(1, func() {
+		m.Col(6, func() {})
+	})
+
+	// Assert
+	Fpdf.AssertCalled(t, "CellFormat", 20, 1, "", "", 0, "C", false, 0, "")
 }

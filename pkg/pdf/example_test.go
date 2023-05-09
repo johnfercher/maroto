@@ -807,3 +807,13 @@ func ExamplePdfMaroto_SetCreationDate() {
 
 	// Do more things and save...
 }
+
+// ExamplePdfMaroto_SetMaxGridSize configures max amount of cols per row. Default is 12 cols per row
+func ExamplePdfMaroto_SetMaxGridSize() {
+	m := pdf.NewMaroto(consts.Portrait, consts.A4)
+
+	// Set max cols per row
+	m.SetMaxGridSum(24)
+
+	// Do more things and save...
+}

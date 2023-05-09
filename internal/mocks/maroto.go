@@ -271,6 +271,11 @@ func (_m *Maroto) SetBorder(on bool) {
 	_m.Called(on)
 }
 
+// SetMaxGridSum provides a mock function with given fields: maxGridSum
+func (_m *Maroto) SetMaxGridSum(maxGridSum int) {
+	_m.Called(maxGridSum)
+}
+
 // SetPageMargins provides a mock function with given fields: left, top, right
 func (_m *Maroto) SetPageMargins(left float64, top float64, right float64) {
 	_m.Called(left, top, right)

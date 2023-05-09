@@ -139,6 +139,8 @@ type TableList struct {
 	Line bool
 	// LineProp is the custom properties of the line separating the rows
 	LineProp Line
+	// MaxGridSum of a TableList
+	MaxGridSum float64
 }
 
 // MakeValid from Rect will make the properties from a rectangle reliable to fit inside a cell
@@ -314,8 +316,12 @@ func (s *TableList) MakeValid(header []string, defaultFamily string) {
 		s.HeaderProp.Style = consts.Bold
 	}
 
+	if s.MaxGridSum < 0 {
+		s.MaxGridSum = consts.DefaultMaxGridSum
+	}
+
 	if len(s.HeaderProp.GridSizes) == 0 {
-		gridSize := uint(consts.MaxGridSum / float64(len(header)))
+		gridSize := uint(s.MaxGridSum / float64(len(header)))
 		s.HeaderProp.GridSizes = []uint{}
 
 		for range header {
@@ -340,7 +346,7 @@ func (s *TableList) MakeValid(header []string, defaultFamily string) {
 	}
 
 	if len(s.ContentProp.GridSizes) == 0 {
-		gridSize := uint(consts.MaxGridSum / float64(len(header)))
+		gridSize := uint(s.MaxGridSum / float64(len(header)))
 		s.ContentProp.GridSizes = []uint{}
 
 		for range header {

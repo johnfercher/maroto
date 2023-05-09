@@ -1,8 +1,8 @@
 package consts
 
 const (
-	// MaxGridSum represents the max value from a cell grid width.
-	MaxGridSum float64 = 12.0
+	// DefaultMaxGridSum represents the max value from a cell grid width.
+	DefaultMaxGridSum float64 = 12.0
 	// DefaultLineWidth represents the default line width in gofpdf.
 	DefaultLineWidth float64 = 0.1
 )
