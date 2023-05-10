@@ -25,13 +25,15 @@ go get -u github.com/johnfercher/maroto/internal
 
 ## Contributing
 
-| Command         | Description                                       | Dependencies                           |
-|-----------------|---------------------------------------------------|----------------------------------------|
-| `make fmt`      | Format files                                      | `gofmt`, `gofumpt` and `goimports`     |
-| `make lint`     | Check files                                       | `golangci-lint` and `goreportcard-cli` |
-| `make dod`      | (Definition of Done) Format files and check files | Same as `make fmt` and `make lint`     | 
-| `make install`  | Install all dependencies                          | `go`, `curl` and `git`                 |
-| `make examples` | Run all examples                                  | `go`                |
+| Command         | Description                                       | Dependencies                                                 |
+|-----------------|---------------------------------------------------|--------------------------------------------------------------|
+| `make build`    | Build project                                     | `go`                                                         |
+| `make test`     | Run unit tests                                    | `go`                                                         |
+| `make fmt`      | Format files                                      | `gofmt`, `gofumpt` and `goimports`                           |
+| `make lint`     | Check files                                       | `golangci-lint` and `goreportcard-cli`                       |
+| `make dod`      | (Definition of Done) Format files and check files | Same as`make build`, `make test`, `make fmt` and `make lint` | 
+| `make install`  | Install all dependencies                          | `go`, `curl` and `git`                                       |
+| `make examples` | Run all examples                                  | `go`                                                         |
 
 ## Features
 ![result](internal/assets/images/diagram.png)
@@ -289,9 +291,6 @@ func main() {
 	fmt.Println(end.Sub(begin))
 }
 ```
-
-[travis]: https://travis-ci.com/johnfercher/maroto
-[test]: test.sh
 
 ## Stargazers over time
 
