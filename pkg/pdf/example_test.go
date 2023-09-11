@@ -12,7 +12,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 )
 
-// ExampleNewMaroto demonstrates how to create maroto.
+// ExampleNewMaroto demonstrates how to create pdf.
 func ExampleNewMaroto() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
@@ -22,7 +22,7 @@ func ExampleNewMaroto() {
 	// Do more things and save...
 }
 
-// ExampleNewMaroto demonstrates how to create maroto with custom page size.
+// ExampleNewMaroto demonstrates how to create pdf with custom page size.
 func ExampleNewMarotoCustomSize() {
 	m := pdf.NewMarotoCustomSize(consts.Landscape, "C6", "mm", 114.0, 162.0)
 
@@ -36,10 +36,10 @@ func ExampleNewMarotoCustomSize() {
 func ExamplePdfMaroto_AddPage() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
-	// Add rows, cols and components
+	// Rows rows, cols and components
 	m.AddPage()
 
-	// Add rows, col and components in a new page
+	// Rows rows, col and components in a new page
 	// Do more things and save...
 }
 
@@ -51,14 +51,14 @@ func ExamplePdfMaroto_Row() {
 	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(12, func() {
-			// Add a component
+			// Rows a component
 		})
 	})
 
 	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(12, func() {
-			// Add another component
+			// Rows another component
 		})
 	})
 
@@ -75,7 +75,7 @@ func ExamplePdfMaroto_Col() {
 	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(12, func() {
-			// Add Image, Text, Signature, QrCode or Barcode...
+			// Rows Image, Text, Signature, QrCode or Barcode...
 		})
 	})
 
@@ -83,10 +83,10 @@ func ExamplePdfMaroto_Col() {
 	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(6, func() {
-			// Add Image, Text, Signature, QrCode or Barcode...
+			// Rows Image, Text, Signature, QrCode or Barcode...
 		})
 		m.Col(6, func() {
-			// Add Image, Text, Signature, QrCode or Barcode...
+			// Rows Image, Text, Signature, QrCode or Barcode...
 		})
 	})
 
@@ -120,8 +120,8 @@ func ExamplePdfMaroto_RegisterHeader() {
 	// In this closure you are free to set any components you want to compose
 	// your header.
 	// In this example there is a two texts with different props and one image.
-	// It is important to remember that it is recommended to create Row's and
-	// Col's if necessary.
+	// It is important to remember that it is recommended to create AddRow's and
+	// AddCol's if necessary.
 	// You have to register the header immediately after the Maroto
 
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
@@ -151,8 +151,8 @@ func ExamplePdfMaroto_RegisterFooter() {
 	// In this closure you are free to set any components you want to compose
 	// your footer.
 	// In this example there is a signature and a text with right align.
-	// It is important to remember that it is recommended to create Row's and
-	// Col's if necessary.
+	// It is important to remember that it is recommended to create AddRow's and
+	// AddCol's if necessary.
 	// You have to register the footer immediately after the Maroto
 	// All footers will be rendered at the bottom of all pages
 
@@ -240,7 +240,7 @@ func ExamplePdfMaroto_TableList() {
 	// TableList have to be used at same level as row
 	m.Row(10, func() {
 		m.Col(12, func() {
-			// Add a component
+			// Rows a component
 		})
 	})
 
@@ -366,7 +366,7 @@ func ExamplePdfMaroto_Base64Image() {
 }
 
 // ExamplePdfMaroto_Barcode demonstrates how to place a barcode inside
-// a Col.
+// a AddCol.
 func ExamplePdfMaroto_Barcode() {
 	// Passing nil on barcode props parameter implies the Barcode fills it's
 	// context cell depending on it's size.
@@ -374,7 +374,7 @@ func ExamplePdfMaroto_Barcode() {
 	// the top and left parameters unless center parameter is true.
 	// In brief, when center parameter equals true, left and top parameters has no effect.
 	// Percent parameter represents the Barcode's width/height inside the cell.
-	// i.e. Percent: 75 means that the Barcode will take up 75% of Col's width
+	// i.e. Percent: 75 means that the Barcode will take up 75% of AddCol's width
 	// There is a constraint in the proportion defined, height cannot be greater than 20% of
 	// the width, and height cannot be smaller than 10% of the width.
 
@@ -394,13 +394,13 @@ func ExamplePdfMaroto_Barcode() {
 }
 
 // ExamplePdfMaroto_QrCode demonstrates how to add
-// a QR Code inside a Col.
+// a QR Code inside a AddCol.
 func ExamplePdfMaroto_QrCode() {
 	// Passing nil on rectProps makes
 	// the QR Code fills the context cell.
 	// When center is true, left and top has no effect.
 	// Percent represents the width/height of the QR Code inside the cell.
-	// i.e. 80 means that the QR Code will take up 80% of Col's width
+	// i.e. 80 means that the QR Code will take up 80% of AddCol's width
 	// When center is false, positioning of the QR Code can be done through
 	// left and top.
 
@@ -420,13 +420,13 @@ func ExamplePdfMaroto_QrCode() {
 }
 
 // ExamplePdfMaroto_DataMatrixCode demonstrates how to add
-// a DataMatrixCode inside a Col.
+// a DataMatrixCode inside a AddCol.
 func ExamplePdfMaroto_DataMatrixCode() {
 	// Passing nil on rectProps makes
 	// the DataMatrixCode fill the context cell.
 	// When center is true, left and top has no effect.
 	// Percent represents the width/height of the DataMatrixCode inside the cell.
-	// i.e. 80 means that the DataMatrixCode will take up 80% of Col's width
+	// i.e. 80 means that the DataMatrixCode will take up 80% of AddCol's width
 	// When center is false, positioning of the DataMatrixCode can be done through
 	// left and top.
 
@@ -507,12 +507,12 @@ func ExamplePdfMaroto_SetBorder() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetBorder(true)
 
-	// Add some Rows, Cols, Lines and etc...
+	// Rows some Rows, Cols, Lines and etc...
 	// Here will be drawn borders in every cell.
 
 	m.SetBorder(false)
 
-	// Add some Rows, Cols, Lines and etc...
+	// Rows some Rows, Cols, Lines and etc...
 	// Here will not be drawn borders.
 
 	// Do more things and save...
@@ -554,20 +554,20 @@ func ExamplePdfMaroto_SetBackgroundColor() {
 		Blue:  30,
 	})
 
-	// This Row will be filled with the color.
+	// This AddRow will be filled with the color.
 	m.Row(20, func() {
 		m.Col(12, func() {
-			// Add components.
+			// Rows components.
 		})
 	})
 
 	m.SetBackgroundColor(color.NewWhite())
-	// Note: The default value is White (255, 255, 255), if maroto see this value it will ignore not will the cell with any color.
+	// Note: The default value is White (255, 255, 255), if pdf see this value it will ignore not will the cell with any color.
 
-	// This Row will not be filled with the color.
+	// This AddRow will not be filled with the color.
 	m.Row(20, func() {
 		m.Col(12, func() {
-			// Add components.
+			// Rows components.
 		})
 	})
 
@@ -609,7 +609,7 @@ func ExamplePdfMaroto_GetCurrentPage() {
 	// Index here will be 0.
 	_ = m.GetCurrentPage()
 
-	// Add Rows, Cols and Components.
+	// Rows Rows, Cols and Components.
 
 	// Index here will not be 0.
 	_ = m.GetCurrentPage()
@@ -625,12 +625,12 @@ func ExamplePdfMaroto_GetCurrentOffset() {
 	// Offset here will be 0.
 	_ = m.GetCurrentOffset()
 
-	// Add Rows, Cols and Components until maroto add a new page.
+	// Rows Rows, Cols and Components until pdf add a new page.
 
 	// Offset here will not be 0.
 	_ = m.GetCurrentOffset()
 
-	// Add Rows, Cols and Components to maroto add a new page.
+	// Rows Rows, Cols and Components to pdf add a new page.
 
 	// Offset here will be 0.
 	_ = m.GetCurrentOffset()

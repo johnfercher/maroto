@@ -31,11 +31,11 @@ type Maroto interface {
 	RegisterHeader(closure func())
 	RegisterFooter(closure func())
 
-	// Outside Col/Row Components
+	// Outside Col/AddRow Components
 	TableList(header []string, contents [][]string, prop ...props.TableList)
 	Line(spaceHeight float64, prop ...props.Line)
 
-	// Inside Col/Row Components
+	// Inside Col/AddRow Components
 	Text(text string, prop ...props.Text)
 	FileImage(filePathName string, prop ...props.Rect) (err error)
 	Base64Image(base64 string, extension consts.Extension, prop ...props.Rect) (err error)
@@ -371,7 +371,7 @@ func (s *PdfMaroto) Row(height float64, closure func()) {
 
 	// Note: The headerFooterContextActive is needed to avoid recursive
 	// calls without end, because footerClosure and headerClosure actually
-	// have Row calls too.
+	// have AddRow calls too.
 
 	// If the new cell to be added pass the useful space counting the
 	// height of the footer, add the footer.
@@ -589,7 +589,7 @@ func (s *PdfMaroto) Output() (bytes.Buffer, error) {
 	return buffer, err
 }
 
-// AddUTF8Font add a custom utf8 font. familyStr is the name of the custom font registered in maroto.
+// AddUTF8Font add a custom utf8 font. familyStr is the name of the custom font registered in pdf.
 // styleStr is the style of the font and fileStr is the path to the .ttf file.
 func (s *PdfMaroto) AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string) {
 	s.Pdf.AddUTF8Font(familyStr, string(styleStr), fileStr)

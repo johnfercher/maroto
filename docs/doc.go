@@ -1,10 +1,9 @@
 /*
-Package docs is the documentation of maroto. Maroto is a package which
+Package docs is the documentation of pdf. Maroto is a package which
 provide a simple way to generate PDF documents. The project is inspired
 in Bootstrap and uses gofpdf. Simple and Fast
 
-
-Features and Components
+# Features and Components
 
 -   Grid system with rows and columns
 
@@ -24,43 +23,39 @@ Features and Components
 
 Maroto has only gofpdf dependency. All tests pass on Linux and Mac.
 
-
-Installation
+# Installation
 
 To install the package on your system, run
 
-    go get github.com/johnfercher/maroto
+	go get github.com/johnfercher/pdf
 
 Later, to receive updates, run
 
-    go get -u -v github.com/johnfercher/maroto/...
+	go get -u -v github.com/johnfercher/pdf/...
 
-
-Quick Start
+# Quick Start
 
 The following Go Code generates a simple PDF file.
 
+	    m := pdf.NewMaroto(consts.Portrait, consts.Letter)
 
-    m := pdf.NewMaroto(consts.Portrait, consts.Letter)
-
-    m.Row(10, func() {
-		m.Col(12, func() {
-			m.Text(props.Text{
-				Size: 18,
-				Style: consts.Bold,
-				Align: consts.Center,
-				Top: 9,
+	    m.AddRow(10, func() {
+			m.AddCol(12, func() {
+				m.Text(props.Text{
+					Size: 18,
+					Style: consts.Bold,
+					Align: consts.Center,
+					Top: 9,
+				})
 			})
 		})
-	})
 
-	m.OutputFileAndClose("maroto.pdf")
+		m.OutputFileAndClose("pdf.pdf")
 
 See the functions in the maroto_test.go file (shown as examples in this
 documentation) for more advanced PDF examples.
 
-
-Conversion Notes
+# Conversion Notes
 
 This package is an high level API from gofpdf. The original API
 names have been slightly adapted. And the package search to be
@@ -69,19 +64,15 @@ simpler to use.
 The main contribution upside gofpdf is the grid system with
 high level components.
 
-
-License
+# License
 
 Maroto is released under the MIT License.
 
-
-Acknowledgments
+# Acknowledgments
 
 This package’s Code and documentation are based on gofpdf.
 
-
-Roadmap
-
+# Roadmap
 
 -   Improve test coverage as reported by the coverage tool.
 */

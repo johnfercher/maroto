@@ -23,10 +23,10 @@ type MarotoGridPart interface {
 	GetPageSize() (width float64, height float64)
 	GetPageMargins() (left float64, top float64, right float64, bottom float64)
 
-	// Outside Col/Row Components.
+	// Outside Col/AddRow Components.
 	Line(spaceHeight float64, line ...props.Line)
 
-	// Inside Col/Row Components.
+	// Inside Col/AddRow Components.
 	Text(text string, prop ...props.Text)
 }
 

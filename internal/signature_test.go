@@ -30,7 +30,7 @@ func TestSignature_AddSpaceFor_DefaultMargins(t *testing.T) {
 	math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 
 	text := &mocks.Text{}
-	text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+	text.On("Rows", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 
 	signature := internal.NewSignature(pdf, math, text)
 
@@ -40,8 +40,8 @@ func TestSignature_AddSpaceFor_DefaultMargins(t *testing.T) {
 	// Assert
 	pdf.AssertNumberOfCalls(t, "Line", 1)
 	pdf.AssertCalled(t, "Line", 19.0, 15.0, 13.0, 15.0)
-	text.AssertNumberOfCalls(t, "Add", 1)
-	text.AssertCalled(t, "Add", "label", internal.Cell{
+	text.AssertNumberOfCalls(t, "Rows", 1)
+	text.AssertCalled(t, "Rows", "label", internal.Cell{
 		5.0,
 		7.0,
 		2.0,
@@ -67,7 +67,7 @@ func TestSignature_AddSpaceFor_NotDefaultMargins(t *testing.T) {
 	math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 
 	text := &mocks.Text{}
-	text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+	text.On("Rows", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 
 	signature := internal.NewSignature(pdf, math, text)
 
@@ -77,8 +77,8 @@ func TestSignature_AddSpaceFor_NotDefaultMargins(t *testing.T) {
 	// Assert
 	pdf.AssertNumberOfCalls(t, "Line", 1)
 	pdf.AssertCalled(t, "Line", 26.0, 15.0, 23.0, 15.0)
-	text.AssertNumberOfCalls(t, "Add", 1)
-	text.AssertCalled(t, "Add", "label", internal.Cell{
+	text.AssertNumberOfCalls(t, "Rows", 1)
+	text.AssertCalled(t, "Rows", "label", internal.Cell{
 		2.0,
 		7.0,
 		5.0,
