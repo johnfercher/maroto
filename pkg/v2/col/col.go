@@ -6,6 +6,10 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/context"
 )
 
+const (
+	defaultGridSize = 12.0
+)
+
 type col struct {
 	size       int
 	_type      v2.DocumentType
@@ -48,6 +52,7 @@ func (c *col) render(fpdf fpdf.Fpdf, ctx context.Context) {
 
 func (c *col) setRelativeDimension(ctx context.Context) context.Context {
 	parentWidth := ctx.Dimensions.Width
-	colDimension := parentWidth / float64(c.size)
+	percent := float64(c.size) / defaultGridSize
+	colDimension := parentWidth * percent
 	return ctx.WithDimension(colDimension, ctx.Dimensions.Height)
 }

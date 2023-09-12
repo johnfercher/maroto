@@ -34,8 +34,8 @@ func (r *row) Add(components ...v2.Component) {
 func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
 	ctx.Print(r.height)
 
+	ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
 	for _, component := range r.components {
-		ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
 		component.Render(fpdf, ctx)
 	}
 
