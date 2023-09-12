@@ -41,5 +41,5 @@ func (r *row) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
 func (r *row) render(fpdf fpdf.Fpdf, ctx v2.Context) {
 	fpdf.AddPage()
 	fpdf.SetFont("Arial", "B", 16)
-	fpdf.CellFormat(ctx.Dimensions.Width-ctx.Margins.Left-ctx.Margins.Right, r.height, "", "1", 0, "C", false, 0, "")
+	fpdf.CellFormat(ctx.GetUsefulWidth(), r.height, "", "1", 0, "C", false, 0, "")
 }

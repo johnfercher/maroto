@@ -8,6 +8,10 @@ type Context struct {
 	Margins    *Margins
 }
 
+func (c *Context) GetUsefulWidth() float64 {
+	return c.Dimensions.Width - c.Margins.Left - c.Margins.Right
+}
+
 func (c *Context) Print(label interface{}) {
 	fmt.Println(label)
 	c.Margins.Print()
