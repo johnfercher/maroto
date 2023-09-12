@@ -38,12 +38,12 @@ func (c *col) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
 		component.Render(fpdf, ctx)
 	}
 	c.render(fpdf, ctx)
-	return ctx.WithCoordinateOffset(ctx.GetX(), ctx.GetY())
+	return ctx.WithCoordinates(ctx.GetXOffset(), ctx.GetYOffset())
 }
 
 func (c *col) render(fpdf fpdf.Fpdf, ctx context.Context) {
 	fpdf.SetDrawColor(255, 0, 0)
-	fpdf.CellFormat(ctx.GetX(), ctx.GetY(), "", "1", 0, "C", false, 0, "")
+	fpdf.CellFormat(ctx.GetXOffset(), ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 }
 
 func (c *col) setRelativeDimension(ctx context.Context) context.Context {

@@ -45,6 +45,6 @@ func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
 
 func (r *row) render(fpdf fpdf.Fpdf, ctx context.Context) {
 	fpdf.SetDrawColor(0, 0, 0)
-	//x, y := ctx.GetX(), ctx.GetY()
+	//x, y := ctx.GetXOffset(), ctx.GetYOffset()
 	fpdf.Ln(ctx.Dimensions.Height)
 }
