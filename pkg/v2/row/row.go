@@ -3,6 +3,7 @@ package row
 import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/v2/context"
 )
 
 type row struct {
@@ -30,19 +31,20 @@ func (r *row) Add(components ...v2.Component) {
 	}
 }
 
-func (r *row) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
+func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
 	ctx.Print(r.height)
-	ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
+
 	for _, component := range r.components {
+		ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
 		component.Render(fpdf, ctx)
 	}
+
 	r.render(fpdf, ctx)
+	return ctx
 }
 
-func (r *row) render(fpdf fpdf.Fpdf, ctx v2.Context) {
-	fpdf.SetFont("Arial", "B", 16)
+func (r *row) render(fpdf fpdf.Fpdf, ctx context.Context) {
 	fpdf.SetDrawColor(0, 0, 0)
-	x, y := ctx.GetX(), ctx.GetY()
-	fpdf.CellFormat(x, y, "", "1", 0, "C", false, 0, "")
+	//x, y := ctx.GetX(), ctx.GetY()
 	fpdf.Ln(ctx.Dimensions.Height)
 }

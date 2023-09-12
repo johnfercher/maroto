@@ -3,6 +3,7 @@ package text
 import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/v2/context"
 )
 
 type text struct {
@@ -18,11 +19,12 @@ func New(value string) *text {
 	}
 }
 
-func (t *text) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
+func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
 	ctx.Print(t.value)
 	for _, component := range t.components {
 		component.Render(fpdf, ctx)
 	}
+	return ctx
 }
 
 func (t *text) GetType() string {

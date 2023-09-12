@@ -1,4 +1,4 @@
-package v2
+package context
 
 import "fmt"
 
@@ -10,23 +10,6 @@ type Context struct {
 	Dimensions     *Dimensions
 	Margins        *Margins
 	pageDimensions *Dimensions
-}
-
-type Dimensions struct {
-	Width  float64
-	Height float64
-}
-
-type Coordinate struct {
-	X float64
-	Y float64
-}
-
-type Margins struct {
-	Left   float64
-	Right  float64
-	Top    float64
-	Bottom float64
 }
 
 // endregion
@@ -82,13 +65,9 @@ func (c *Context) GetY() float64 {
 
 func (c *Context) Print(label interface{}) {
 	fmt.Println(label)
+
+	c.Coordinate.Print()
+	c.Dimensions.Print()
+	c.pageDimensions.Print()
 	c.Margins.Print()
-}
-
-func (c *Margins) Print() {
-	if c == nil {
-		return
-	}
-
-	fmt.Printf("Left: %1.f, Right: %1.f, Top: %1.f, Bottom: %1.f\n", c.Left, c.Right, c.Left, c.Bottom)
 }

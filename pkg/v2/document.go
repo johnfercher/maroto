@@ -2,6 +2,7 @@ package v2
 
 import (
 	"github.com/johnfercher/maroto/internal/fpdf"
+	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/jung-kurt/gofpdf"
 )
 
@@ -11,7 +12,7 @@ type Maroto interface {
 }
 
 type document struct {
-	ctx        Context
+	ctx        context.Context
 	_type      DocumentType
 	fpdf       fpdf.Fpdf
 	components []Component
@@ -25,6 +26,8 @@ func NewDocument() *document {
 		FontDirStr:     "",
 	})
 
+	fpdf.SetFont("Arial", "B", 16)
+
 	width, height := fpdf.GetPageSize()
 	left, top, right, bottom := fpdf.GetMargins()
 	fpdf.AddPage()
@@ -32,7 +35,7 @@ func NewDocument() *document {
 	return &document{
 		fpdf:  fpdf,
 		_type: Document,
-		ctx: NewRootContext(width, height, &Margins{
+		ctx: context.NewRootContext(width, height, &context.Margins{
 			Left:   left,
 			Top:    top,
 			Right:  right,
@@ -51,9 +54,10 @@ func (d *document) Add(components ...Component) {
 
 func (d *document) Generate(file string) error {
 	d.ctx.Print(d._type)
+	ctx := d.ctx.WithDimension(d.ctx.MaxWidth(), d.ctx.MaxHeight())
+
 	for _, component := range d.components {
-		ctx := d.ctx.WithDimension(d.ctx.MaxWidth(), d.ctx.MaxHeight())
-		component.Render(d.fpdf, ctx)
+		ctx = component.Render(d.fpdf, ctx)
 	}
 
 	return d.fpdf.OutputFileAndClose(file)
