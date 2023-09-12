@@ -78,6 +78,7 @@ go get -u github.com/johnfercher/maroto/internal
 
 #### Fonts   
 * [AddUTF8Font](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.AddUTF8Font): Add a custom utf8 font and allow any character of any language.
+* [AddUTF8FontFromBytes](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.AddUTF8FontFromBytes): Add a custom utf8 font using bytes. Useful when directly embedding fonts into binary.
 * [SetDefaultFontFamily](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.SetProtection): Define a default font family, useful to use with a custom font.
 * [SetFontLocation](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#PdfMaroto.SetFontLocation): Define the default path to search the custom font
 * 100% Unicode
