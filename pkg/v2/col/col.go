@@ -1,7 +1,7 @@
 package col
 
 import (
-	"fmt"
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
 )
 
@@ -18,21 +18,21 @@ func New(size int) *col {
 	}
 }
 
-func (d *col) Render() {
-	fmt.Println(d.size)
-	for _, component := range d.components {
-		component.Render()
+func (c *col) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
+	ctx.Print(c.size)
+	for _, component := range c.components {
+		component.Render(fpdf, ctx)
 	}
 }
 
-func (d *col) GetType() string {
-	return d._type.String()
+func (c *col) GetType() string {
+	return c._type.String()
 }
 
-func (d *col) Add(components ...v2.Component) {
+func (c *col) Add(components ...v2.Component) {
 	for _, component := range components {
-		if d._type.Accept(component.GetType()) {
-			d.components = append(d.components, component)
+		if c._type.Accept(component.GetType()) {
+			c.components = append(c.components, component)
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package text
 
 import (
-	"fmt"
+	"github.com/johnfercher/maroto/internal/fpdf"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 )
 
@@ -18,17 +18,17 @@ func New(value string) *text {
 	}
 }
 
-func (d *text) Render() {
-	fmt.Println(d.value)
-	for _, component := range d.components {
-		component.Render()
+func (t *text) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
+	ctx.Print(t.value)
+	for _, component := range t.components {
+		component.Render(fpdf, ctx)
 	}
 }
 
-func (d *text) GetType() string {
-	return d._type.String()
+func (t *text) GetType() string {
+	return t._type.String()
 }
 
-func (d *text) Add(_ ...v2.Component) {
+func (t *text) Add(_ ...v2.Component) {
 	return
 }

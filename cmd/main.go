@@ -5,18 +5,22 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/col"
 	"github.com/johnfercher/maroto/pkg/v2/image"
 	"github.com/johnfercher/maroto/pkg/v2/row"
+	"log"
 )
 
 func main() {
-	pdf := v2.NewDocument("pdfzin")
+	pdf := v2.NewDocument()
 
 	header := buildRow()
-	content := buildRow()
-	footer := buildRow()
+	//content := buildRow()
+	//footer := buildRow()
 
-	pdf.Add(header, content, footer)
+	pdf.Add(header /*content, footer*/)
 
-	pdf.Render()
+	err := pdf.Generate("v2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
 func buildRow() v2.Component {

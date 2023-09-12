@@ -1,7 +1,7 @@
 package image
 
 import (
-	"fmt"
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
 )
 
@@ -18,17 +18,17 @@ func New(path string) *image {
 	}
 }
 
-func (d *image) Render() {
-	fmt.Println(d.path)
-	for _, component := range d.components {
-		component.Render()
+func (i *image) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
+	ctx.Print(i.path)
+	for _, component := range i.components {
+		component.Render(fpdf, ctx)
 	}
 }
 
-func (d *image) GetType() string {
-	return d._type.String()
+func (i *image) GetType() string {
+	return i._type.String()
 }
 
-func (d *image) Add(_ ...v2.Component) {
+func (i *image) Add(_ ...v2.Component) {
 	return
 }

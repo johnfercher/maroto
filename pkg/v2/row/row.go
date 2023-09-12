@@ -1,38 +1,45 @@
 package row
 
 import (
-	"fmt"
+	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
 )
 
 type row struct {
-	height     int
+	height     float64
 	_type      v2.DocumentType
 	components []v2.Component
 }
 
-func New(height int) *row {
+func New(height float64) *row {
 	return &row{
 		_type:  v2.Row,
 		height: height,
 	}
 }
 
-func (d *row) Render() {
-	fmt.Println(d.height)
-	for _, component := range d.components {
-		component.Render()
-	}
+func (r *row) GetType() string {
+	return r._type.String()
 }
 
-func (d *row) GetType() string {
-	return d._type.String()
-}
-
-func (d *row) Add(components ...v2.Component) {
+func (r *row) Add(components ...v2.Component) {
 	for _, component := range components {
-		if d._type.Accept(component.GetType()) {
-			d.components = append(d.components, component)
+		if r._type.Accept(component.GetType()) {
+			r.components = append(r.components, component)
 		}
 	}
+}
+
+func (r *row) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
+	ctx.Print(r.height)
+	r.render(fpdf, ctx)
+	for _, component := range r.components {
+		component.Render(fpdf, ctx)
+	}
+}
+
+func (r *row) render(fpdf fpdf.Fpdf, ctx v2.Context) {
+	fpdf.AddPage()
+	fpdf.SetFont("Arial", "B", 16)
+	fpdf.CellFormat(ctx.Dimensions.Width-ctx.Margins.Left-ctx.Margins.Right, r.height, "", "1", 0, "C", false, 0, "")
 }

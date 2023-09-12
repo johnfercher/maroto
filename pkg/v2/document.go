@@ -1,33 +1,42 @@
 package v2
 
-import "fmt"
+import (
+	"github.com/johnfercher/maroto/internal/fpdf"
+	"github.com/jung-kurt/gofpdf"
+)
+
+type Maroto interface {
+	Add(component ...Component)
+	Generate(file string) error
+}
 
 type document struct {
-	value      string
+	ctx        Context
 	_type      DocumentType
+	fpdf       fpdf.Fpdf
 	components []Component
 }
 
-func NewDocument(value string) *document {
+func NewDocument() *document {
+	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
+		OrientationStr: "P",
+		UnitStr:        "mm",
+		SizeStr:        "A4",
+		FontDirStr:     "",
+	})
+
+	width, height := fpdf.GetPageSize()
+	left, top, right, bottom := fpdf.GetMargins()
+
 	return &document{
+		fpdf:  fpdf,
 		_type: Document,
-		value: value,
+		ctx: Context{
+			Coordinate: &Coordinate{0, 0},
+			Dimensions: &Dimensions{width, height},
+			Margins:    &Margins{left, right, top, bottom},
+		},
 	}
-}
-
-func (d *document) Render() {
-	fmt.Println(d.value)
-	for _, component := range d.components {
-		component.Render()
-	}
-}
-
-func (d *document) IsDrawable() bool {
-	return false
-}
-
-func (d *document) GetType() string {
-	return d._type.String()
 }
 
 func (d *document) Add(components ...Component) {
@@ -36,4 +45,13 @@ func (d *document) Add(components ...Component) {
 			d.components = append(d.components, component)
 		}
 	}
+}
+
+func (d *document) Generate(file string) error {
+	d.ctx.Print(d._type)
+	for _, component := range d.components {
+		component.Render(d.fpdf, d.ctx)
+	}
+
+	return d.fpdf.OutputFileAndClose(file)
 }
