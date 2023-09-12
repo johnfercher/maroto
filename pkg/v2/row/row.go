@@ -32,15 +32,16 @@ func (r *row) Add(components ...v2.Component) {
 
 func (r *row) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
 	ctx.Print(r.height)
-	ctx = ctx.WithDimension(ctx.MaxWidth(), r.height)
-	r.render(fpdf, ctx)
+	ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
 	for _, component := range r.components {
 		component.Render(fpdf, ctx)
 	}
+	r.render(fpdf, ctx)
 }
 
 func (r *row) render(fpdf fpdf.Fpdf, ctx v2.Context) {
 	fpdf.SetFont("Arial", "B", 16)
+	fpdf.SetDrawColor(0, 0, 0)
 	x, y := ctx.GetX(), ctx.GetY()
 	fpdf.CellFormat(x, y, "", "1", 0, "C", false, 0, "")
 	fpdf.Ln(ctx.Dimensions.Height)

@@ -74,7 +74,7 @@ func (c *Context) GetX() float64 {
 func (c *Context) GetY() float64 {
 	baseY := c.Coordinate.Y + c.Dimensions.Height
 	if baseY > c.MaxHeight() {
-		// Verificar como indicar quebra de pagina
+		//Verificar como indicar quebra de pagina
 		return 0
 	}
 	return baseY
