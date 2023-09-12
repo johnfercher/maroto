@@ -19,18 +19,20 @@ func New(value string) *text {
 	}
 }
 
-func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	ctx.Print(t.value)
-	for _, component := range t.components {
-		component.Render(fpdf, ctx)
-	}
-	return
-}
-
 func (t *text) GetType() string {
 	return t._type.String()
 }
 
 func (t *text) Add(_ ...v2.Component) {
 	return
+}
+
+func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+	ctx.Print(t.value)
+	t.render(fpdf, ctx)
+	return
+}
+
+func (t *text) render(fpdf fpdf.Fpdf, ctx context.Context) {
+	fpdf.Text(ctx.GetXOffset(), ctx.GetYOffset(), t.value)
 }
