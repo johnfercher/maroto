@@ -19,12 +19,12 @@ func New(path string) *image {
 	}
 }
 
-func (i *image) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
+func (i *image) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	ctx.Print(i.path)
 	for _, component := range i.components {
 		component.Render(fpdf, ctx)
 	}
-	return ctx
+	return
 }
 
 func (i *image) GetType() string {

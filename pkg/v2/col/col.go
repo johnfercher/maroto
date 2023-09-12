@@ -35,14 +35,14 @@ func (c *col) Add(components ...v2.Component) {
 	}
 }
 
-func (c *col) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
+func (c *col) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	ctx.Print(c.size)
 	ctx = c.setRelativeDimension(ctx)
 	for _, component := range c.components {
 		component.Render(fpdf, ctx)
 	}
 	c.render(fpdf, ctx)
-	return ctx.WithCoordinates(ctx.GetXOffset(), ctx.GetYOffset())
+	return
 }
 
 func (c *col) render(fpdf fpdf.Fpdf, ctx context.Context) {

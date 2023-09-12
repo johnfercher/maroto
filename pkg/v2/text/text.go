@@ -19,12 +19,12 @@ func New(value string) *text {
 	}
 }
 
-func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
+func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	ctx.Print(t.value)
 	for _, component := range t.components {
 		component.Render(fpdf, ctx)
 	}
-	return ctx
+	return
 }
 
 func (t *text) GetType() string {

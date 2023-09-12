@@ -6,7 +6,7 @@ import (
 )
 
 type Component interface {
-	Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context
+	Render(fpdf fpdf.Fpdf, ctx context.Context)
 	GetType() string
 	Add(component ...Component)
 }

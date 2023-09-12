@@ -57,7 +57,7 @@ func (d *document) Generate(file string) error {
 	ctx := d.ctx.WithDimension(d.ctx.MaxWidth(), d.ctx.MaxHeight())
 
 	for _, component := range d.components {
-		ctx = component.Render(d.fpdf, ctx)
+		component.Render(d.fpdf, ctx)
 	}
 
 	return d.fpdf.OutputFileAndClose(file)

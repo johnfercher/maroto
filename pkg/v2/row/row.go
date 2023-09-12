@@ -31,7 +31,7 @@ func (r *row) Add(components ...v2.Component) {
 	}
 }
 
-func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
+func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	ctx.Print(r.height)
 
 	ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
@@ -40,7 +40,7 @@ func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) context.Context {
 	}
 
 	r.render(fpdf, ctx)
-	return ctx
+	return
 }
 
 func (r *row) render(fpdf fpdf.Fpdf, ctx context.Context) {
