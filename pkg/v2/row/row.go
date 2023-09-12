@@ -7,18 +7,13 @@ import (
 
 type row struct {
 	height     int
-	_type      string
-	accept     map[string]bool
+	_type      v2.DocumentType
 	components []v2.Component
 }
 
 func New(height int) *row {
-	accept := make(map[string]bool)
-	accept[v2.Col] = true
-
 	return &row{
 		_type:  v2.Row,
-		accept: accept,
 		height: height,
 	}
 }
@@ -31,12 +26,12 @@ func (d *row) Render() {
 }
 
 func (d *row) GetType() string {
-	return d._type
+	return d._type.String()
 }
 
 func (d *row) Add(components ...v2.Component) {
 	for _, component := range components {
-		if _, ok := d.accept[component.GetType()]; ok {
+		if d._type.Accept(component.GetType()) {
 			d.components = append(d.components, component)
 		}
 	}

@@ -7,19 +7,14 @@ import (
 
 type col struct {
 	size       int
-	_type      string
-	accept     map[string]bool
+	_type      v2.DocumentType
 	components []v2.Component
 }
 
 func New(size int) *col {
-	accept := make(map[string]bool)
-	accept[v2.Image] = true
-
 	return &col{
-		_type:  v2.Col,
-		accept: accept,
-		size:   size,
+		_type: v2.Col,
+		size:  size,
 	}
 }
 
@@ -31,12 +26,12 @@ func (d *col) Render() {
 }
 
 func (d *col) GetType() string {
-	return d._type
+	return d._type.String()
 }
 
 func (d *col) Add(components ...v2.Component) {
 	for _, component := range components {
-		if _, ok := d.accept[component.GetType()]; ok {
+		if d._type.Accept(component.GetType()) {
 			d.components = append(d.components, component)
 		}
 	}

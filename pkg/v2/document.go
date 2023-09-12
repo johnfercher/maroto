@@ -4,19 +4,14 @@ import "fmt"
 
 type document struct {
 	value      string
-	_type      string
-	accept     map[string]bool
+	_type      DocumentType
 	components []Component
 }
 
 func NewDocument(value string) *document {
-	accept := make(map[string]bool)
-	accept[Row] = true
-
 	return &document{
-		_type:  Document,
-		accept: accept,
-		value:  value,
+		_type: Document,
+		value: value,
 	}
 }
 
@@ -27,13 +22,17 @@ func (d *document) Render() {
 	}
 }
 
+func (d *document) IsDrawable() bool {
+	return false
+}
+
 func (d *document) GetType() string {
-	return d._type
+	return d._type.String()
 }
 
 func (d *document) Add(components ...Component) {
 	for _, component := range components {
-		if _, ok := d.accept[component.GetType()]; ok {
+		if d._type.Accept(component.GetType()) {
 			d.components = append(d.components, component)
 		}
 	}

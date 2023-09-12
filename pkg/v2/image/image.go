@@ -7,7 +7,7 @@ import (
 
 type image struct {
 	path       string
-	_type      string
+	_type      v2.DocumentType
 	components []v2.Component
 }
 
@@ -26,7 +26,7 @@ func (d *image) Render() {
 }
 
 func (d *image) GetType() string {
-	return d._type
+	return d._type.String()
 }
 
 func (d *image) Add(_ ...v2.Component) {
