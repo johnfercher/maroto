@@ -64,6 +64,7 @@ type Maroto interface {
 
 	// Fonts
 	AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string)
+	AddUTF8FontFromBytes(familyStr string, styleStr consts.Style, utf8Bytes []byte)
 	SetFontLocation(fontDirStr string)
 	SetDefaultFontFamily(fontFamily string)
 	GetDefaultFontFamily() string
@@ -593,6 +594,12 @@ func (s *PdfMaroto) Output() (bytes.Buffer, error) {
 // styleStr is the style of the font and fileStr is the path to the .ttf file.
 func (s *PdfMaroto) AddUTF8Font(familyStr string, styleStr consts.Style, fileStr string) {
 	s.Pdf.AddUTF8Font(familyStr, string(styleStr), fileStr)
+}
+
+// AddUTF8FontFromBytes adds a custom UTF8 font from the provided bytes. familyStr is the name of the custom font
+// registered in maroto. styleStr is the style of the font and fileStr is the path to the .ttf file.
+func (s *PdfMaroto) AddUTF8FontFromBytes(familyStr string, styleStr consts.Style, utf8Bytes []byte) {
+	s.Pdf.AddUTF8FontFromBytes(familyStr, string(styleStr), utf8Bytes)
 }
 
 // SetFontLocation allows you to change the fonts lookup location.  fontDirStr is an absolute path where the fonts should be located.
