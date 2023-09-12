@@ -18,7 +18,7 @@ func New(value string) *text {
 	}
 }
 
-func (t *text) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
+func (t *text) Render(fpdf fpdf.Fpdf, ctx *v2.Context) {
 	ctx.Print(t.value)
 	for _, component := range t.components {
 		component.Render(fpdf, ctx)

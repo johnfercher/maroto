@@ -27,15 +27,17 @@ func NewDocument() *document {
 
 	width, height := fpdf.GetPageSize()
 	left, top, right, bottom := fpdf.GetMargins()
+	fpdf.AddPage()
 
 	return &document{
 		fpdf:  fpdf,
 		_type: Document,
-		ctx: Context{
-			Coordinate: &Coordinate{0, 0},
-			Dimensions: &Dimensions{width, height},
-			Margins:    &Margins{left, right, top, bottom},
-		},
+		ctx: NewRootContext(width, height, &Margins{
+			Left:   left,
+			Top:    top,
+			Right:  right,
+			Bottom: bottom,
+		}),
 	}
 }
 
@@ -50,7 +52,7 @@ func (d *document) Add(components ...Component) {
 func (d *document) Generate(file string) error {
 	d.ctx.Print(d._type)
 	for _, component := range d.components {
-		component.Render(d.fpdf, d.ctx)
+		component.Render(d.fpdf, &d.ctx)
 	}
 
 	return d.fpdf.OutputFileAndClose(file)
