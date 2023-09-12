@@ -1,5 +1,7 @@
 package v2
 
+import "slices"
+
 const (
 	Document = "document"
 	Row      = "row"
@@ -16,8 +18,10 @@ func (t DocumentType) String() string {
 }
 
 func (t DocumentType) Accept(dt string) bool {
-	_, ok := buildAcceptedMap()[dt]
-	return ok
+	if val, ok := buildAcceptedMap()[t.String()]; ok {
+		return slices.Contains(val, dt)
+	}
+	return false
 }
 
 func buildAcceptedMap() map[string][]string {

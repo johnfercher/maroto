@@ -1,6 +1,6 @@
 module github.com/johnfercher/maroto
 
-go 1.13
+go 1.18
 
 require (
 	github.com/boombuler/barcode v1.0.1

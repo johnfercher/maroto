@@ -14,7 +14,6 @@ func main() {
 	header := buildRow()
 	//content := buildRow()
 	//footer := buildRow()
-
 	pdf.Add(header /*content, footer*/)
 
 	err := pdf.Generate("v2.pdf")
