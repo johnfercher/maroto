@@ -184,6 +184,7 @@ type Fpdf interface {
 	WriteLinkID(h float64, displayStr string, linkID int)
 	WriteLinkString(h float64, displayStr, targetStr string)
 	AddUTF8Font(familyStr, styleStr, fileStr string)
+	AddUTF8FontFromBytes(familyStr, styleStr string, utf8Bytes []byte)
 }
 
 type fpdf struct {
@@ -203,6 +204,10 @@ func (s fpdf) AddFont(familyStr, styleStr, fileStr string) {
 
 func (s fpdf) AddUTF8Font(familyStr, styleStr, fileStr string) {
 	s.Gofpdf.AddUTF8Font(familyStr, styleStr, fileStr)
+}
+
+func (s fpdf) AddUTF8FontFromBytes(familyStr, styleStr string, utf8Bytes []byte) {
+	s.Gofpdf.AddUTF8FontFromBytes(familyStr, styleStr, utf8Bytes)
 }
 
 func (s fpdf) AddFontFromBytes(familyStr, styleStr string, jsonFileBytes, zFileBytes []byte) {
