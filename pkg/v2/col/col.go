@@ -18,7 +18,7 @@ func New(size int) *col {
 	}
 }
 
-func (c *col) Render(fpdf fpdf.Fpdf, ctx *v2.Context) {
+func (c *col) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
 	ctx.Print(c.size)
 	for _, component := range c.components {
 		component.Render(fpdf, ctx)

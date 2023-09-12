@@ -48,16 +48,18 @@ func (c *Context) MaxWidth() float64 {
 	return c.pageDimensions.Width - c.Margins.Left - c.Margins.Right
 }
 
-func (c *Context) WithDimension(width, height float64) *Context {
-	c.Dimensions.Width = width
-	c.Dimensions.Height = height
-	return c
+func (c *Context) WithDimension(width, height float64) Context {
+	ctx := *c
+	ctx.Dimensions.Width = width
+	ctx.Dimensions.Height = height
+	return ctx
 }
 
-func (c *Context) WithCoordinateOffset(x, y float64) *Context {
-	c.Coordinate.X = x
-	c.Coordinate.Y = y
-	return c
+func (c *Context) WithCoordinateOffset(x, y float64) Context {
+	ctx := *c
+	ctx.Coordinate.X = x
+	ctx.Coordinate.Y = y
+	return ctx
 }
 
 func (c *Context) GetX() float64 {

@@ -52,7 +52,7 @@ func (d *document) Add(components ...Component) {
 func (d *document) Generate(file string) error {
 	d.ctx.Print(d._type)
 	for _, component := range d.components {
-		component.Render(d.fpdf, &d.ctx)
+		component.Render(d.fpdf, d.ctx)
 	}
 
 	return d.fpdf.OutputFileAndClose(file)

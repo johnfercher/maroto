@@ -18,7 +18,7 @@ func New(path string) *image {
 	}
 }
 
-func (i *image) Render(fpdf fpdf.Fpdf, ctx *v2.Context) {
+func (i *image) Render(fpdf fpdf.Fpdf, ctx v2.Context) {
 	ctx.Print(i.path)
 	for _, component := range i.components {
 		component.Render(fpdf, ctx)
