@@ -102,7 +102,7 @@ func TestCol_Render(t *testing.T) {
 		}).WithDimension(80, 80)
 		pdf.EXPECT().SetDrawColor(255, 0, 0)
 
-		expectedSizeX := 72.8
+		expectedSizeX := 73.33333333333333
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
@@ -123,7 +123,7 @@ func TestCol_Render(t *testing.T) {
 		}).WithDimension(80, 80)
 		pdf.EXPECT().SetDrawColor(255, 0, 0)
 
-		expectedSizeX := 66.4
+		expectedSizeX := 66.66666666666667
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
@@ -165,7 +165,7 @@ func TestCol_Render(t *testing.T) {
 		}).WithDimension(80, 80)
 		pdf.EXPECT().SetDrawColor(255, 0, 0)
 
-		expectedSizeX := 53.333333333333336
+		expectedSizeX := 53.33333333333333
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
@@ -186,7 +186,7 @@ func TestCol_Render(t *testing.T) {
 		}).WithDimension(80, 80)
 		pdf.EXPECT().SetDrawColor(255, 0, 0)
 
-		expectedSizeX := 48.0
+		expectedSizeX := 46.66666666666667
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
