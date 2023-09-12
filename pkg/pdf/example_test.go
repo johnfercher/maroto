@@ -3,7 +3,7 @@ package pdf_test
 import (
 	"encoding/base64"
 	"fmt"
-	"os"
+	"io/ioutil"
 	"testing"
 	"time"
 
@@ -689,7 +689,7 @@ func ExamplePdfMaroto_AddUTF8FontFromBytes() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
 	// Read font .ttf file contents
-	fontBytes, err := os.ReadFile("internal/assets/fonts/arial-unicode-ms.ttf")
+	fontBytes, err := ioutil.ReadFile("internal/assets/fonts/arial-unicode-ms.ttf")
 	if err != nil {
 		// Return error
 	}
