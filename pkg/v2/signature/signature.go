@@ -37,13 +37,11 @@ func (s *signature) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
-
+	x := fpdf.GetX() - ctx.Margins.Left - ctx.Dimensions.Width
+	y := fpdf.GetY() - ctx.Margins.Top
 	signature.AddSpaceFor(
 		s.value,
-		internal.Cell{fpdf.GetX() - ctx.Margins.Left,
-			fpdf.GetY() - ctx.Margins.Top,
-			ctx.Dimensions.Width,
-			ctx.Dimensions.Height},
+		internal.Cell{x, y, ctx.Dimensions.Width, ctx.Dimensions.Height},
 		s.prop)
 }
 

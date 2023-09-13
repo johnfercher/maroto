@@ -59,12 +59,10 @@ func (t *text) render(fpdf fpdf.Fpdf, ctx context.Context) {
 	font := internal.NewFont(fpdf, 2, consts.Arial, consts.Normal)
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)
-
+	x := fpdf.GetX() - ctx.Margins.Left - ctx.Dimensions.Width
+	y := fpdf.GetY() - ctx.Margins.Top
 	text.Add(
 		t.value,
-		internal.Cell{fpdf.GetX() - ctx.Margins.Left,
-			fpdf.GetY() - ctx.Margins.Top,
-			ctx.Dimensions.Width,
-			ctx.Dimensions.Height},
+		internal.Cell{x, y, ctx.Dimensions.Width, ctx.Dimensions.Height},
 		t.prop)
 }

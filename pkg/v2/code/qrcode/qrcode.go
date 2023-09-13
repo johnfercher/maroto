@@ -35,10 +35,11 @@ func (q *qrCode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 
 	code := internal.NewCode(fpdf, math)
-	code.AddQr(q.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
-		fpdf.GetY() - ctx.Margins.Top,
-		ctx.Dimensions.Width,
-		ctx.Dimensions.Height}, q.prop)
+	x := fpdf.GetX() - ctx.Margins.Left - ctx.Dimensions.Width
+	y := fpdf.GetY() - ctx.Margins.Top
+	code.AddQr(q.code,
+		internal.Cell{x, y, ctx.Dimensions.Width, ctx.Dimensions.Height},
+		q.prop)
 }
 
 func (q *qrCode) GetType() string {

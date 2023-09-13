@@ -61,14 +61,13 @@ func (r *row) GetStructure() *tree.Node[domain.Structure] {
 func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	//ctx.Print(r.height)
 	ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
-
 	fpdf.SetDrawColor(r.color.Red, r.color.Green, r.color.Blue)
 
 	for _, col := range r.cols {
 		col.Render(fpdf, ctx)
 	}
-
 	r.render(fpdf, ctx)
+
 	return
 }
 

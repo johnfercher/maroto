@@ -35,12 +35,11 @@ func NewFromFile(path string, imageProps ...props.Rect) domain.Component {
 func (f *fileImage) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 	img := internal.NewImage(fpdf, math)
+	x := fpdf.GetX() - ctx.Margins.Left - ctx.Dimensions.Width
+	y := fpdf.GetY() - ctx.Margins.Top
 	err := img.AddFromFile(
 		f.path,
-		internal.Cell{fpdf.GetX() - ctx.Margins.Left,
-			fpdf.GetY() - ctx.Margins.Top,
-			ctx.Dimensions.Width,
-			ctx.Dimensions.Height},
+		internal.Cell{x, y, ctx.Dimensions.Width, ctx.Dimensions.Height},
 		f.prop)
 	if err != nil {
 		fpdf.ClearError()
