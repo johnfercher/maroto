@@ -6,17 +6,43 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    :root {
+      --base-font-size: 14px;
+      --theme-color   : #4444bb;
+      --seconday-color: #44bb44;
+    }
+  </style>
+  <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      name: '',
-      repo: ''
-    }
-  </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<div id="app"></div>
+<script>
+  window.$docsify = {
+    search: 'auto',
+    name: 'Maroto',
+    repo: 'https://github.com/johnfercher/maroto',
+    loadSidebar: '_sidebar.md',
+    loadFooter: true,
+    coverpage: ['/', '/pt-br/'],
+    copyCode: {
+      buttonText : 'Copy to clipboard',
+      errorText  : 'Error',
+      successText: 'Copied'
+    },
+    pagination: {
+      crossChapter: true,
+      crossChapterText: true,
+    },
+  }
+</script>
+<!-- Docsify v4 -->
+<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+<script src="https://unpkg.com/docsify-copy-code@2"></script>
+<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/@alertbox/docsify-footer/dist/docsify-footer.min.js"></script>
+<script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
 </body>
 </html>
