@@ -2,6 +2,9 @@ package main
 
 import (
 	"github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/v2/code/barcode"
+	"github.com/johnfercher/maroto/pkg/v2/code/matrixcode"
+	"github.com/johnfercher/maroto/pkg/v2/code/qrcode"
 	"github.com/johnfercher/maroto/pkg/v2/col"
 	"github.com/johnfercher/maroto/pkg/v2/image"
 	"github.com/johnfercher/maroto/pkg/v2/row"
@@ -13,9 +16,9 @@ func main() {
 	pdf := v2.NewDocument()
 
 	header := buildRow()
-	//content := buildContent()
+	content := buildContent()
 	//footer := buildRow()
-	pdf.Add(header /*content  footer*/)
+	pdf.Add(header, content /*content  footer*/)
 
 	err := pdf.Generate("v2.pdf")
 	if err != nil {
@@ -44,13 +47,14 @@ func buildRow() v2.Component {
 func buildContent() v2.Component {
 	row := row.New(20)
 
-	tx := text.New("Hello World")
-
 	col1 := col.New(4)
-	col1.Add(tx)
+	col1.Add(barcode.New("barcode"))
 
 	col2 := col.New(4)
+	col2.Add(qrcode.New("qrcode"))
+
 	col3 := col.New(4)
+	col3.Add(matrixcode.New("qrcode"))
 
 	row.Add(col1, col2, col3)
 	return row

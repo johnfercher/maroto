@@ -10,6 +10,7 @@ const (
 	Image     = "image"
 	Text      = "text"
 	Signature = "signature"
+	Leaf     = "leaf"
 )
 
 type DocumentType string
@@ -30,6 +31,7 @@ func buildAcceptedMap() map[string][]string {
 		Document: {Row},
 		Page:     {Row},
 		Row:      {Col},
-		Col:      {Row, Image, Text, Signature},
+		Leaf:     {},
+		Col:      {Row, Image, Text, Signature, Leaf},
 	}
 }
