@@ -3,12 +3,13 @@ package v2
 import "slices"
 
 const (
-	Document = "document"
-	Row      = "row"
-	Page     = "page"
-	Col      = "col"
-	Image    = "image"
-	Text     = "text"
+	Document  = "document"
+	Row       = "row"
+	Page      = "page"
+	Col       = "col"
+	Image     = "image"
+	Text      = "text"
+	Signature = "signature"
 )
 
 type DocumentType string
@@ -29,6 +30,6 @@ func buildAcceptedMap() map[string][]string {
 		Document: {Row},
 		Page:     {Row},
 		Row:      {Col},
-		Col:      {Row, Image, Text},
+		Col:      {Row, Image, Text, Signature},
 	}
 }
