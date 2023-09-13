@@ -22,7 +22,9 @@ func main() {
 		content, content, content, content, content, content, content, content,
 		content, content, content, content, content, content, content, content,
 	)
-	pdf.Add(header, p /*content  footer*/)
+
+	pdf.Add(header /*content  footer*/)
+	pdf.ForceAddPage(p)
 
 	err := pdf.Generate()
 	if err != nil {
@@ -30,7 +32,7 @@ func main() {
 	}
 }
 
-func buildRow() v2.Component {
+func buildRow() v2.Row {
 	r := row.New(20)
 
 	//image := image.New("image1")
@@ -48,7 +50,7 @@ func buildRow() v2.Component {
 	return r
 }
 
-func buildContent() v2.Component {
+func buildContent() v2.Row {
 	row := row.New(20)
 
 	col1 := col.New(4)

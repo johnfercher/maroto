@@ -8,16 +8,17 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type signature struct {
 	value      string
-	_type      v2.DocumentType
-	components []v2.Component
+	_type      types.DocumentType
+	components []v2.Node
 	prop       props.Text
 }
 
-func New(value string, textProps ...props.Text) *signature {
+func New(value string, textProps ...props.Text) v2.Component {
 	prop := props.Text{}
 	if len(textProps) > 0 {
 		prop = textProps[0]
@@ -25,7 +26,7 @@ func New(value string, textProps ...props.Text) *signature {
 	prop.MakeValid(consts.Arial)
 
 	return &signature{
-		_type: v2.Signature,
+		_type: types.Signature,
 		value: value,
 		prop:  prop,
 	}
@@ -50,7 +51,7 @@ func (s *signature) GetType() string {
 	return s._type.String()
 }
 
-func (s *signature) Add(_ ...v2.Component) v2.Component {
+func (s *signature) Add(_ ...v2.Node) v2.Node {
 	return s
 }
 

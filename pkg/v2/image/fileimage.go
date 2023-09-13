@@ -8,16 +8,17 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/text"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type fileImage struct {
 	path       string
-	_type      v2.DocumentType
-	components []v2.Component
+	_type      types.DocumentType
+	components []v2.Node
 	prop       props.Rect
 }
 
-func NewFromFile(path string, imageProps ...props.Rect) *fileImage {
+func NewFromFile(path string, imageProps ...props.Rect) v2.Component {
 	prop := props.Rect{}
 	if len(imageProps) > 0 {
 		prop = imageProps[0]
@@ -25,7 +26,7 @@ func NewFromFile(path string, imageProps ...props.Rect) *fileImage {
 	prop.MakeValid()
 
 	return &fileImage{
-		_type: v2.Image,
+		_type: types.Image,
 		path:  path,
 		prop:  prop,
 	}
@@ -52,7 +53,7 @@ func (f *fileImage) GetType() string {
 	return f._type.String()
 }
 
-func (f *fileImage) Add(_ ...v2.Component) v2.Component {
+func (f *fileImage) Add(_ ...v2.Node) v2.Node {
 	return f
 }
 

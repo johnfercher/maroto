@@ -6,32 +6,28 @@ import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type row struct {
-	height     float64
-	_type      v2.DocumentType
-	components []v2.Component
+	height float64
+	_type  types.DocumentType
+	cols   []v2.Col
 }
 
-func New(height float64) *row {
+func (r *row) Add(cols ...v2.Col) {
+	r.cols = append(r.cols, cols...)
+}
+
+func New(height float64) v2.Row {
 	return &row{
-		_type:  v2.Row,
+		_type:  types.Row,
 		height: height,
 	}
 }
 
 func (r *row) GetType() string {
 	return r._type.String()
-}
-
-func (r *row) Add(components ...v2.Component) v2.Component {
-	for _, component := range components {
-		if r._type.Accept(component.GetType()) {
-			r.components = append(r.components, component)
-		}
-	}
-	return r
 }
 
 func (r *row) GetStructure() *tree.Node[v2.Structure] {
@@ -42,7 +38,7 @@ func (r *row) GetStructure() *tree.Node[v2.Structure] {
 
 	node := tree.NewNode(0, str)
 
-	for _, c := range r.components {
+	for _, c := range r.cols {
 		inner := c.GetStructure()
 		node.AddNext(inner)
 	}
@@ -57,8 +53,8 @@ func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 		fpdf.AddPage()
 		ctx = ctx.NewPage(fpdf.PageNo())
 	}
-	for _, component := range r.components {
-		component.Render(fpdf, ctx)
+	for _, col := range r.cols {
+		col.Render(fpdf, ctx)
 	}
 
 	r.render(fpdf, ctx)

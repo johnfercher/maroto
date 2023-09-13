@@ -9,17 +9,18 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/text"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type base64Image struct {
 	base64     string
 	extension  consts.Extension
-	_type      v2.DocumentType
-	components []v2.Component
+	_type      types.DocumentType
+	components []v2.Node
 	prop       props.Rect
 }
 
-func NewFromBase64(path string, extension consts.Extension, imageProps ...props.Rect) *base64Image {
+func NewFromBase64(path string, extension consts.Extension, imageProps ...props.Rect) v2.Component {
 	prop := props.Rect{}
 	if len(imageProps) > 0 {
 		prop = imageProps[0]
@@ -27,7 +28,7 @@ func NewFromBase64(path string, extension consts.Extension, imageProps ...props.
 	prop.MakeValid()
 
 	return &base64Image{
-		_type:     v2.Image,
+		_type:     types.Image,
 		base64:    path,
 		prop:      prop,
 		extension: extension,
@@ -55,10 +56,6 @@ func (b *base64Image) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 
 func (b *base64Image) GetType() string {
 	return b._type.String()
-}
-
-func (b *base64Image) Add(_ ...v2.Component) v2.Component {
-	return b
 }
 
 func (b *base64Image) GetStructure() *tree.Node[v2.Structure] {

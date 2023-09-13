@@ -4,21 +4,17 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 	"github.com/jung-kurt/gofpdf"
 )
 
-type Maroto interface {
-	Add(component ...Component)
-	Generate() error
-	GetStructure() *tree.Node[Structure]
-}
-
 type document struct {
-	file       string
-	ctx        context.Context
-	_type      DocumentType
-	fpdf       fpdf.Fpdf
-	components []Component
+	file  string
+	ctx   context.Context
+	_type types.DocumentType
+	fpdf  fpdf.Fpdf
+	pages []Page
+	rows  []Row
 }
 
 func NewDocument(file string) *document {
@@ -38,7 +34,7 @@ func NewDocument(file string) *document {
 	return &document{
 		file:  file,
 		fpdf:  fpdf,
-		_type: Document,
+		_type: types.Document,
 		ctx: context.NewRootContext(width, height, &context.Margins{
 			Left:   left,
 			Top:    top,
@@ -48,20 +44,24 @@ func NewDocument(file string) *document {
 	}
 }
 
-func (d *document) Add(components ...Component) {
-	for _, component := range components {
-		if d._type.Accept(component.GetType()) {
-			d.components = append(d.components, component)
-		}
-	}
+func (d *document) ForceAddPage(pages ...Page) {
+	d.pages = append(d.pages, pages...)
+}
+
+func (d *document) Add(rows ...Row) {
+	d.rows = append(d.rows, rows...)
 }
 
 func (d *document) Generate() error {
 	d.ctx.Print(d._type)
 	ctx := d.ctx.WithDimension(d.ctx.MaxWidth(), d.ctx.MaxHeight())
 
-	for _, component := range d.components {
-		component.Render(d.fpdf, ctx)
+	for _, row := range d.rows {
+		row.Render(d.fpdf, ctx)
+	}
+
+	for _, page := range d.pages {
+		page.Render(d.fpdf, ctx)
 	}
 
 	return d.fpdf.OutputFileAndClose(d.file)
@@ -74,8 +74,8 @@ func (d *document) GetStructure() *tree.Node[Structure] {
 	}
 	node := tree.NewNode(0, str)
 
-	for _, c := range d.components {
-		inner := c.GetStructure()
+	for _, r := range d.rows {
+		inner := r.GetStructure()
 		node.AddNext(inner)
 	}
 

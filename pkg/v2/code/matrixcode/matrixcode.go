@@ -7,16 +7,17 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type matrixCode struct {
 	code       string
-	_type      v2.DocumentType
-	components []v2.Component
+	_type      types.DocumentType
+	components []v2.Node
 	prop       props.Rect
 }
 
-func New(code string, barcodeProps ...props.Rect) *matrixCode {
+func New(code string, barcodeProps ...props.Rect) v2.Component {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]
@@ -24,7 +25,7 @@ func New(code string, barcodeProps ...props.Rect) *matrixCode {
 	prop.MakeValid()
 
 	return &matrixCode{
-		_type: v2.MatrixCode,
+		_type: types.MatrixCode,
 		code:  code,
 		prop:  prop,
 	}
@@ -44,7 +45,7 @@ func (m *matrixCode) GetType() string {
 	return m._type.String()
 }
 
-func (m *matrixCode) Add(component ...v2.Component) v2.Component {
+func (m *matrixCode) Add(component ...v2.Node) v2.Node {
 	return m
 }
 

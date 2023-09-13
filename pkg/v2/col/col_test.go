@@ -6,6 +6,7 @@ import (
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/text"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -46,7 +47,7 @@ func TestCol_Add(t *testing.T) {
 		txt := text.New("test")
 
 		// act
-		col.Add(txt)
+		col.AddRenderable(txt)
 
 		// assert
 		assert.Equal(t, 1, len(col.components))
@@ -56,10 +57,10 @@ func TestCol_Add(t *testing.T) {
 		// arrange
 		size := 12
 		col := New(size)
-		invalid := &invalidComponent{_type: v2.Page}
+		invalid := &invalidComponent{_type: types.Page}
 
 		// act
-		col.Add(invalid)
+		col.AddRenderable(invalid)
 
 		// assert
 		assert.Equal(t, 0, len(col.components))
@@ -329,7 +330,7 @@ func TestCol_Render(t *testing.T) {
 		// arrange
 		col := New(12)
 		child := text.New("test")
-		col.Add(child)
+		col.AddRenderable(child)
 		pdf := mocks.NewFpdf(t)
 
 		ctx := context.NewRootContext(100, 100, &context.Margins{
@@ -351,7 +352,7 @@ func TestCol_Render(t *testing.T) {
 
 // region Test Support
 type invalidComponent struct {
-	_type v2.DocumentType
+	_type types.DocumentType
 }
 
 func (i *invalidComponent) Render(fpdf fpdf.Fpdf, ctx context.Context) {
@@ -362,7 +363,7 @@ func (i *invalidComponent) GetType() string {
 	return i._type.String()
 }
 
-func (i *invalidComponent) Add(component ...v2.Component) v2.Component {
+func (i *invalidComponent) Add(component ...v2.Node) v2.Node {
 	return nil
 }
 

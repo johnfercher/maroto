@@ -8,16 +8,17 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/text"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type barcode struct {
 	code       string
-	_type      v2.DocumentType
-	components []v2.Component
+	_type      types.DocumentType
+	components []v2.Node
 	prop       props.Barcode
 }
 
-func New(code string, barcodeProps ...props.Barcode) *barcode {
+func New(code string, barcodeProps ...props.Barcode) v2.Component {
 	prop := props.Barcode{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]
@@ -25,7 +26,7 @@ func New(code string, barcodeProps ...props.Barcode) *barcode {
 	prop.MakeValid()
 
 	return &barcode{
-		_type: v2.Barcode,
+		_type: types.Barcode,
 		code:  code,
 		prop:  prop,
 	}
@@ -51,7 +52,7 @@ func (b *barcode) GetType() string {
 	return b._type.String()
 }
 
-func (b *barcode) Add(component ...v2.Component) v2.Component {
+func (b *barcode) Add(component ...v2.Node) v2.Node {
 	return b
 }
 

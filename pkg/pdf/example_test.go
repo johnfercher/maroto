@@ -36,10 +36,10 @@ func ExampleNewMarotoCustomSize() {
 func ExamplePdfMaroto_AddPage() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 
-	// Add rows, cols and components
+	// AddRenderable rows, cols and components
 	m.AddPage()
 
-	// Add rows, col and components in a new page
+	// AddRenderable rows, col and components in a new page
 	// Do more things and save...
 }
 
@@ -51,14 +51,14 @@ func ExamplePdfMaroto_Row() {
 	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(12, func() {
-			// Add a component
+			// AddRenderable a component
 		})
 	})
 
 	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(12, func() {
-			// Add another component
+			// AddRenderable another component
 		})
 	})
 
@@ -75,7 +75,7 @@ func ExamplePdfMaroto_Col() {
 	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(12, func() {
-			// Add Image, Text, Signature, QrCode or Barcode...
+			// AddRenderable Image, Text, Signature, QrCode or Barcode...
 		})
 	})
 
@@ -83,10 +83,10 @@ func ExamplePdfMaroto_Col() {
 	// Warning: There is no way to use a row inside a row or a row inside a col.
 	m.Row(rowHeight, func() {
 		m.Col(6, func() {
-			// Add Image, Text, Signature, QrCode or Barcode...
+			// AddRenderable Image, Text, Signature, QrCode or Barcode...
 		})
 		m.Col(6, func() {
-			// Add Image, Text, Signature, QrCode or Barcode...
+			// AddRenderable Image, Text, Signature, QrCode or Barcode...
 		})
 	})
 
@@ -240,7 +240,7 @@ func ExamplePdfMaroto_TableList() {
 	// TableList have to be used at same level as row
 	m.Row(10, func() {
 		m.Col(12, func() {
-			// Add a component
+			// AddRenderable a component
 		})
 	})
 
@@ -507,12 +507,12 @@ func ExamplePdfMaroto_SetBorder() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetBorder(true)
 
-	// Add some Rows, Cols, Lines and etc...
+	// AddRenderable some Rows, Cols, Lines and etc...
 	// Here will be drawn borders in every cell.
 
 	m.SetBorder(false)
 
-	// Add some Rows, Cols, Lines and etc...
+	// AddRenderable some Rows, Cols, Lines and etc...
 	// Here will not be drawn borders.
 
 	// Do more things and save...
@@ -557,7 +557,7 @@ func ExamplePdfMaroto_SetBackgroundColor() {
 	// This Row will be filled with the color.
 	m.Row(20, func() {
 		m.Col(12, func() {
-			// Add components.
+			// AddRenderable components.
 		})
 	})
 
@@ -567,7 +567,7 @@ func ExamplePdfMaroto_SetBackgroundColor() {
 	// This Row will not be filled with the color.
 	m.Row(20, func() {
 		m.Col(12, func() {
-			// Add components.
+			// AddRenderable components.
 		})
 	})
 
@@ -609,7 +609,7 @@ func ExamplePdfMaroto_GetCurrentPage() {
 	// Index here will be 0.
 	_ = m.GetCurrentPage()
 
-	// Add Rows, Cols and Components.
+	// AddRenderable Rows, Cols and Components.
 
 	// Index here will not be 0.
 	_ = m.GetCurrentPage()
@@ -625,12 +625,12 @@ func ExamplePdfMaroto_GetCurrentOffset() {
 	// Offset here will be 0.
 	_ = m.GetCurrentOffset()
 
-	// Add Rows, Cols and Components until maroto add a new page.
+	// AddRenderable Rows, Cols and Components until maroto add a new page.
 
 	// Offset here will not be 0.
 	_ = m.GetCurrentOffset()
 
-	// Add Rows, Cols and Components to maroto add a new page.
+	// AddRenderable Rows, Cols and Components to maroto add a new page.
 
 	// Offset here will be 0.
 	_ = m.GetCurrentOffset()

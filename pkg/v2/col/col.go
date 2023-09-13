@@ -6,6 +6,7 @@ import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 const (
@@ -14,13 +15,14 @@ const (
 
 type col struct {
 	size       int
-	_type      v2.DocumentType
+	_type      types.DocumentType
 	components []v2.Component
+	rows       []v2.Row
 }
 
-func New(size int) *col {
+func New(size int) v2.Col {
 	return &col{
-		_type: v2.Col,
+		_type: types.Col,
 		size:  size,
 	}
 }
@@ -29,12 +31,13 @@ func (c *col) GetType() string {
 	return c._type.String()
 }
 
-func (c *col) Add(components ...v2.Component) v2.Component {
-	for _, component := range components {
-		if c._type.Accept(component.GetType()) {
-			c.components = append(c.components, component)
-		}
-	}
+func (c *col) Add(components ...v2.Component) v2.Col {
+	c.components = append(c.components, components...)
+	return c
+}
+
+func (c *col) AddInner(rows ...v2.Row) v2.Col {
+	c.rows = append(c.rows, rows...)
 	return c
 }
 

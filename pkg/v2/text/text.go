@@ -8,16 +8,17 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type text struct {
 	value      string
-	_type      v2.DocumentType
-	components []v2.Component
+	_type      types.DocumentType
+	components []v2.Node
 	prop       props.Text
 }
 
-func New(value string, textProps ...props.Text) *text {
+func New(value string, textProps ...props.Text) v2.Component {
 	prop := props.Text{}
 	if len(textProps) > 0 {
 		prop = textProps[0]
@@ -25,7 +26,7 @@ func New(value string, textProps ...props.Text) *text {
 	prop.MakeValid(consts.Arial)
 
 	return &text{
-		_type: v2.Text,
+		_type: types.Text,
 		value: value,
 		prop:  prop,
 	}
@@ -35,7 +36,7 @@ func (t *text) GetType() string {
 	return t._type.String()
 }
 
-func (t *text) Add(_ ...v2.Component) v2.Component {
+func (t *text) Add(_ ...v2.Node) v2.Node {
 	return t
 }
 

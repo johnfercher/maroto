@@ -533,8 +533,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"One text inside one column, inside a row, without props",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text1", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text1", internal.Cell{
 					X:      0.0,
 					Y:      0.0,
 					Width:  80.0,
@@ -559,8 +559,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Two different text inside one colum, inside one row",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 2)
-				text.AssertCalled(t, "Add", "Text2", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 2)
+				text.AssertCalled(t, "AddRenderable", "Text2", internal.Cell{
 					X:      0.0,
 					Y:      0.0,
 					Width:  80.0,
@@ -573,7 +573,7 @@ func TestFpdfMaroto_Text(t *testing.T) {
 					Extrapolate: false,
 					Size:        10.0,
 				})
-				text.AssertCalled(t, "Add", "Text3", internal.Cell{
+				text.AssertCalled(t, "AddRenderable", "Text3", internal.Cell{
 					X:      0.0,
 					Y:      5.0,
 					Width:  80.0,
@@ -605,8 +605,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Two different text with different columns, inside one row",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 2)
-				text.AssertCalled(t, "Add", "Text4", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 2)
+				text.AssertCalled(t, "AddRenderable", "Text4", internal.Cell{
 					X:      0.0,
 					Y:      0.0,
 					Width:  80.0,
@@ -619,7 +619,7 @@ func TestFpdfMaroto_Text(t *testing.T) {
 					Extrapolate: false,
 					Size:        10.0,
 				})
-				text.AssertCalled(t, "Add", "Text5", internal.Cell{
+				text.AssertCalled(t, "AddRenderable", "Text5", internal.Cell{
 					X:      80.0,
 					Y:      4.4,
 					Width:  80.0,
@@ -653,8 +653,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Two different text with different columns, inside one row",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 2)
-				text.AssertCalled(t, "Add", "Text6", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 2)
+				text.AssertCalled(t, "AddRenderable", "Text6", internal.Cell{
 					X:      0.0,
 					Y:      0.0,
 					Width:  80.0,
@@ -667,7 +667,7 @@ func TestFpdfMaroto_Text(t *testing.T) {
 					Extrapolate: false,
 					Size:        10.0,
 				})
-				text.AssertCalled(t, "Add", "Text7", internal.Cell{
+				text.AssertCalled(t, "AddRenderable", "Text7", internal.Cell{
 					X:      0.0,
 					Y:      40.0,
 					Width:  80.0,
@@ -701,8 +701,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Left-indented text",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text", internal.Cell{
 					X:      10.0,
 					Y:      0.0,
 					Width:  70.0,
@@ -728,8 +728,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Right-indented text",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text", internal.Cell{
 					X:      0.0,
 					Y:      0.0,
 					Width:  70.0,
@@ -755,8 +755,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Left- and right-indented text",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text", internal.Cell{
 					X:      10.0,
 					Y:      0.0,
 					Width:  60.0,
@@ -784,8 +784,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Left-indent larger than col width",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text", internal.Cell{
 					X:      80.0,
 					Y:      0.0,
 					Width:  0.0,
@@ -811,8 +811,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Right-indent larger than col width",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text", internal.Cell{
 					X:      0.0,
 					Y:      0.0,
 					Width:  0.0,
@@ -838,8 +838,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"Indents larger than col width",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text", internal.Cell{
 					X:      40.0,
 					Y:      0.0,
 					Width:  0.0,
@@ -867,8 +867,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"When top is greater than row height",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text8", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text8", internal.Cell{
 					X:      0.0,
 					Y:      40.0,
 					Width:  80.0,
@@ -894,8 +894,8 @@ func TestFpdfMaroto_Text(t *testing.T) {
 		{
 			"custom color",
 			func(t *testing.T, text *mocks.Text) {
-				text.AssertNumberOfCalls(t, "Add", 1)
-				text.AssertCalled(t, "Add", "Text1", internal.Cell{
+				text.AssertNumberOfCalls(t, "AddRenderable", 1)
+				text.AssertCalled(t, "AddRenderable", "Text1", internal.Cell{
 					X:      0.0,
 					Y:      0.0,
 					Width:  80.0,
@@ -2307,7 +2307,7 @@ func baseMathTest() *mocks.Math {
 
 func baseTextTest() *mocks.Text {
 	text := &mocks.Text{}
-	text.On("Add", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+	text.On("AddRenderable", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 	text.On("GetLinesQuantity", mock.Anything, mock.Anything, mock.Anything).Return(1)
 	return text
 }
