@@ -10,7 +10,7 @@ const (
 	Image     = "image"
 	Text      = "text"
 	Signature = "signature"
-	Leaf     = "leaf"
+	Leaf      = "leaf"
 )
 
 type DocumentType string
@@ -28,7 +28,7 @@ func (t DocumentType) Accept(dt string) bool {
 
 func buildAcceptedMap() map[string][]string {
 	return map[string][]string{
-		Document: {Row},
+		Document: {Row, Page},
 		Page:     {Row},
 		Row:      {Col},
 		Leaf:     {},

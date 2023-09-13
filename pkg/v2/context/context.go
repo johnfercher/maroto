@@ -2,6 +2,7 @@ package context
 
 import (
 	"fmt"
+	"math"
 )
 
 const LineHeight = 20
@@ -67,6 +68,17 @@ func (c Context) GetYOffset() float64 {
 	return baseY
 }
 
+func (c Context) NewPage(pageCount int) Context {
+	ctx := c.copy()
+	ctx.CurrentPage = int(math.Max(float64(pageCount), float64(c.CurrentPage+1)))
+	ctx.Coordinate.X = 0
+	ctx.Coordinate.Y = 0
+	return ctx
+}
+
+func (c Context) GetCurrentPage() int {
+	return c.CurrentPage
+}
 func (c Context) Print(label interface{}) {
 	fmt.Println(label)
 

@@ -34,8 +34,11 @@ func (r *row) Add(components ...v2.Component) v2.Component {
 
 func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	ctx.Print(r.height)
-
 	ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
+	if ctx.GetYOffset() == 0 && ctx.GetCurrentPage() >= fpdf.PageCount() {
+		fpdf.AddPage()
+		ctx = ctx.NewPage(fpdf.PageNo())
+	}
 	for _, component := range r.components {
 		component.Render(fpdf, ctx)
 	}

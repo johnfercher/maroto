@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/code/qrcode"
 	"github.com/johnfercher/maroto/pkg/v2/col"
 	"github.com/johnfercher/maroto/pkg/v2/image"
+	"github.com/johnfercher/maroto/pkg/v2/page"
 	"github.com/johnfercher/maroto/pkg/v2/row"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
@@ -17,8 +18,11 @@ func main() {
 
 	header := buildRow()
 	content := buildContent()
-	//footer := buildRow()
-	pdf.Add(header, content /*content  footer*/)
+	p := page.New().Add(
+		content, content, content, content, content, content, content, content,
+		content, content, content, content, content, content, content, content,
+	)
+	pdf.Add(header, p /*content  footer*/)
 
 	err := pdf.Generate("v2.pdf")
 	if err != nil {
