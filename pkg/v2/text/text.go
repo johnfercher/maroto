@@ -50,7 +50,6 @@ func (t *text) GetStructure() *tree.Node[domain.Structure] {
 }
 
 func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	//ctx.Print(t.value)
 	t.render(fpdf, ctx)
 	return
 }
@@ -62,9 +61,6 @@ func (t *text) render(fpdf fpdf.Fpdf, ctx context.Context) {
 
 	text.Add(
 		t.value,
-		internal.Cell{fpdf.GetX() - ctx.Margins.Left,
-			fpdf.GetY() - ctx.Margins.Top,
-			ctx.Dimensions.Width,
-			ctx.Dimensions.Height},
+		internal.Cell{ctx.Coordinate.X, ctx.Coordinate.Y, ctx.Dimensions.Width, ctx.Dimensions.Height},
 		t.prop)
 }

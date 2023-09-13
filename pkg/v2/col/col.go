@@ -41,6 +41,10 @@ func (c *col) AddInner(rows ...domain.Row) domain.Col {
 	return c
 }
 
+func (c *col) GetSize() int {
+	return c.size
+}
+
 func (c *col) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{
 		Type:  string(c._type),
@@ -58,9 +62,13 @@ func (c *col) GetStructure() *tree.Node[domain.Structure] {
 }
 
 func (c *col) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	//ctx.Print(c.size)
-	ctx = c.setRelativeDimension(ctx)
+
 	c.render(fpdf, ctx)
+
+	parentWidth := ctx.Dimensions.Width
+	percent := float64(c.size) / defaultGridSize
+	colDimension := parentWidth * percent
+	ctx.Dimensions.Width = colDimension
 	for _, component := range c.components {
 		component.Render(fpdf, ctx)
 	}

@@ -38,6 +38,7 @@ type Col interface {
 	Node
 	Add(component ...Component) Col
 	AddInner(rows ...Row) Col
+	GetSize() int
 }
 
 type Structure struct {

@@ -59,13 +59,19 @@ func (r *row) GetStructure() *tree.Node[domain.Structure] {
 }
 
 func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	//ctx.Print(r.height)
-	ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
-
 	fpdf.SetDrawColor(r.color.Red, r.color.Green, r.color.Blue)
 
+	ctx.Dimensions.Height = r.height
+	innerCtx := ctx.Copy()
 	for _, col := range r.cols {
 		col.Render(fpdf, ctx)
+
+		size := col.GetSize()
+		parentWidth := ctx.Dimensions.Width
+		percent := float64(size) / 12
+		colDimension := parentWidth * percent
+
+		innerCtx.Coordinate.X += colDimension
 	}
 
 	r.render(fpdf, ctx)
@@ -73,6 +79,5 @@ func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 }
 
 func (r *row) render(fpdf fpdf.Fpdf, ctx context.Context) {
-	//x, y := ctx.GetXOffset(), ctx.GetYOffset()
 	fpdf.Ln(ctx.Dimensions.Height)
 }
