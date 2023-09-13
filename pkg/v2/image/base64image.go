@@ -33,17 +33,17 @@ func NewFromBase64(path string, extension consts.Extension, imageProps ...props.
 	}
 }
 
-func (i *base64Image) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (b *base64Image) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 	img := internal.NewImage(fpdf, math)
 	err := img.AddFromBase64(
-		i.path,
+		b.path,
 		internal.Cell{fpdf.GetX() - ctx.Margins.Left,
 			fpdf.GetY() - ctx.Margins.Top,
 			ctx.Dimensions.Width,
 			ctx.Dimensions.Height},
-		i.prop,
-		i.extension,
+		b.prop,
+		b.extension,
 	)
 	if err != nil {
 		fpdf.ClearError()
@@ -52,10 +52,10 @@ func (i *base64Image) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	}
 }
 
-func (i *base64Image) GetType() string {
-	return i._type.String()
+func (b *base64Image) GetType() string {
+	return b._type.String()
 }
 
-func (i *base64Image) Add(_ ...v2.Component) {
-	return
+func (b *base64Image) Add(_ ...v2.Component) v2.Component {
+	return b
 }

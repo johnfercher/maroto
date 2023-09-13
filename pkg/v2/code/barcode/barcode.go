@@ -30,14 +30,14 @@ func New(code string, barcodeProps ...props.Barcode) *barcode {
 	}
 }
 
-func (i *barcode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (b *barcode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 
 	code := internal.NewCode(fpdf, math)
-	err := code.AddBar(i.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
+	err := code.AddBar(b.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
 		fpdf.GetY() - ctx.Margins.Top,
 		ctx.Dimensions.Width,
-		ctx.Dimensions.Height}, i.prop)
+		ctx.Dimensions.Height}, b.prop)
 
 	if err != nil {
 		fpdf.ClearError()
@@ -46,10 +46,10 @@ func (i *barcode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	}
 }
 
-func (i *barcode) GetType() string {
-	return i._type.String()
+func (b *barcode) GetType() string {
+	return b._type.String()
 }
 
-func (i *barcode) Add(_ ...v2.Component) {
-	return
+func (b *barcode) Add(component ...v2.Component) v2.Component {
+	return b
 }

@@ -27,7 +27,7 @@ func main() {
 }
 
 func buildRow() v2.Component {
-	row := row.New(20)
+	r := row.New(20)
 
 	//image := image.New("image1")
 
@@ -40,8 +40,8 @@ func buildRow() v2.Component {
 	col3 := col.New(4)
 	col3.Add(text.New("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem. "))
 
-	row.Add(col1, col2, col3)
-	return row
+	r.Add(col1, col2, col3)
+	return r
 }
 
 func buildContent() v2.Component {

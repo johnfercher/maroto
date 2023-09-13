@@ -23,12 +23,13 @@ func (r *row) GetType() string {
 	return r._type.String()
 }
 
-func (r *row) Add(components ...v2.Component) {
+func (r *row) Add(components ...v2.Component) v2.Component {
 	for _, component := range components {
 		if r._type.Accept(component.GetType()) {
 			r.components = append(r.components, component)
 		}
 	}
+	return r
 }
 
 func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {

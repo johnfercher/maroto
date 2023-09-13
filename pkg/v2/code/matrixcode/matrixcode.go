@@ -29,20 +29,20 @@ func New(code string, barcodeProps ...props.Rect) *matrixCode {
 	}
 }
 
-func (i *matrixCode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (m *matrixCode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 
 	code := internal.NewCode(fpdf, math)
-	code.AddDataMatrix(i.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
+	code.AddDataMatrix(m.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
 		fpdf.GetY() - ctx.Margins.Top,
 		ctx.Dimensions.Width,
-		ctx.Dimensions.Height}, i.prop)
+		ctx.Dimensions.Height}, m.prop)
 }
 
-func (i *matrixCode) GetType() string {
-	return i._type.String()
+func (m *matrixCode) GetType() string {
+	return m._type.String()
 }
 
-func (i *matrixCode) Add(_ ...v2.Component) {
-	return
+func (m *matrixCode) Add(component ...v2.Component) v2.Component {
+	return m
 }

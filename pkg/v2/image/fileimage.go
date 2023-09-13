@@ -30,16 +30,16 @@ func NewFromFile(path string, imageProps ...props.Rect) *fileImage {
 	}
 }
 
-func (i *fileImage) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (f *fileImage) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 	img := internal.NewImage(fpdf, math)
 	err := img.AddFromFile(
-		i.path,
+		f.path,
 		internal.Cell{fpdf.GetX() - ctx.Margins.Left,
 			fpdf.GetY() - ctx.Margins.Top,
 			ctx.Dimensions.Width,
 			ctx.Dimensions.Height},
-		i.prop)
+		f.prop)
 	if err != nil {
 		fpdf.ClearError()
 		txt := text.New("Failed to render fileImage")
@@ -47,10 +47,10 @@ func (i *fileImage) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	}
 }
 
-func (i *fileImage) GetType() string {
-	return i._type.String()
+func (f *fileImage) GetType() string {
+	return f._type.String()
 }
 
-func (i *fileImage) Add(_ ...v2.Component) {
-	return
+func (f *fileImage) Add(_ ...v2.Component) v2.Component {
+	return f
 }

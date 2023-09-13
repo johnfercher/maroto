@@ -49,6 +49,6 @@ func (s *signature) GetType() string {
 	return s._type.String()
 }
 
-func (s *signature) Add(_ ...v2.Component) {
-	return
+func (s *signature) Add(_ ...v2.Component) v2.Component {
+	return s
 }

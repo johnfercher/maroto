@@ -34,8 +34,8 @@ func (t *text) GetType() string {
 	return t._type.String()
 }
 
-func (t *text) Add(_ ...v2.Component) {
-	return
+func (t *text) Add(_ ...v2.Component) v2.Component {
+	return t
 }
 
 func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) {

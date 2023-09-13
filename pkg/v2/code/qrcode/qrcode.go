@@ -29,20 +29,20 @@ func New(code string, barcodeProps ...props.Rect) *qrCode {
 	}
 }
 
-func (i *qrCode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (q *qrCode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 
 	code := internal.NewCode(fpdf, math)
-	code.AddQr(i.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
+	code.AddQr(q.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
 		fpdf.GetY() - ctx.Margins.Top,
 		ctx.Dimensions.Width,
-		ctx.Dimensions.Height}, i.prop)
+		ctx.Dimensions.Height}, q.prop)
 }
 
-func (i *qrCode) GetType() string {
-	return i._type.String()
+func (q *qrCode) GetType() string {
+	return q._type.String()
 }
 
-func (i *qrCode) Add(_ ...v2.Component) {
-	return
+func (q *qrCode) Add(component ...v2.Component) v2.Component {
+	return q
 }

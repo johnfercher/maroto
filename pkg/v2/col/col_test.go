@@ -362,8 +362,8 @@ func (i *invalidComponent) GetType() string {
 	return i._type.String()
 }
 
-func (i *invalidComponent) Add(_ ...v2.Component) {
-	return
+func (i *invalidComponent) Add(component ...v2.Component) v2.Component {
+	return nil
 }
 
 // endregion
