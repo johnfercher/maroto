@@ -1,6 +1,8 @@
 package row
 
 import (
+	"fmt"
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
@@ -30,6 +32,22 @@ func (r *row) Add(components ...v2.Component) v2.Component {
 		}
 	}
 	return r
+}
+
+func (r *row) GetStructure() *tree.Node[v2.Structure] {
+	str := v2.Structure{
+		Type:  string(r._type),
+		Value: fmt.Sprintf("%2.f", r.height),
+	}
+
+	node := tree.NewNode(0, str)
+
+	for _, c := range r.components {
+		inner := c.GetStructure()
+		node.AddNext(inner)
+	}
+
+	return node
 }
 
 func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {

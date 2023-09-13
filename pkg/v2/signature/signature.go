@@ -1,6 +1,7 @@
 package signature
 
 import (
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -51,4 +52,13 @@ func (s *signature) GetType() string {
 
 func (s *signature) Add(_ ...v2.Component) v2.Component {
 	return s
+}
+
+func (s *signature) GetStructure() *tree.Node[v2.Structure] {
+	str := v2.Structure{
+		Type:  string(s._type),
+		Value: s.value,
+	}
+
+	return tree.NewNode(0, str)
 }

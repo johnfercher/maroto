@@ -1,6 +1,7 @@
 package image
 
 import (
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -53,4 +54,13 @@ func (f *fileImage) GetType() string {
 
 func (f *fileImage) Add(_ ...v2.Component) v2.Component {
 	return f
+}
+
+func (f *fileImage) GetStructure() *tree.Node[v2.Structure] {
+	str := v2.Structure{
+		Type:  string(f._type),
+		Value: f.path,
+	}
+
+	return tree.NewNode(0, str)
 }

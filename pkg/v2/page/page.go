@@ -1,6 +1,7 @@
 package page
 
 import (
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
@@ -36,4 +37,19 @@ func (p *page) Add(components ...v2.Component) v2.Component {
 		}
 	}
 	return p
+}
+
+func (p *page) GetStructure() *tree.Node[v2.Structure] {
+	str := v2.Structure{
+		Type: string(p._type),
+	}
+
+	node := tree.NewNode(0, str)
+
+	for _, c := range p.components {
+		inner := c.GetStructure()
+		node.AddNext(inner)
+	}
+
+	return node
 }

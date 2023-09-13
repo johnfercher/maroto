@@ -1,6 +1,7 @@
 package matrixcode
 
 import (
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -23,7 +24,7 @@ func New(code string, barcodeProps ...props.Rect) *matrixCode {
 	prop.MakeValid()
 
 	return &matrixCode{
-		_type: v2.Leaf,
+		_type: v2.MatrixCode,
 		code:  code,
 		prop:  prop,
 	}
@@ -45,4 +46,13 @@ func (m *matrixCode) GetType() string {
 
 func (m *matrixCode) Add(component ...v2.Component) v2.Component {
 	return m
+}
+
+func (m *matrixCode) GetStructure() *tree.Node[v2.Structure] {
+	str := v2.Structure{
+		Type:  string(m._type),
+		Value: m.code,
+	}
+
+	return tree.NewNode(0, str)
 }

@@ -1,6 +1,7 @@
 package text
 
 import (
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -36,6 +37,15 @@ func (t *text) GetType() string {
 
 func (t *text) Add(_ ...v2.Component) v2.Component {
 	return t
+}
+
+func (t *text) GetStructure() *tree.Node[v2.Structure] {
+	str := v2.Structure{
+		Type:  string(t._type),
+		Value: t.value,
+	}
+
+	return tree.NewNode(0, str)
 }
 
 func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) {

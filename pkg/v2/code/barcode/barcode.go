@@ -1,6 +1,7 @@
 package barcode
 
 import (
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -24,7 +25,7 @@ func New(code string, barcodeProps ...props.Barcode) *barcode {
 	prop.MakeValid()
 
 	return &barcode{
-		_type: v2.Leaf,
+		_type: v2.Barcode,
 		code:  code,
 		prop:  prop,
 	}
@@ -52,4 +53,13 @@ func (b *barcode) GetType() string {
 
 func (b *barcode) Add(component ...v2.Component) v2.Component {
 	return b
+}
+
+func (b *barcode) GetStructure() *tree.Node[v2.Structure] {
+	str := v2.Structure{
+		Type:  string(b._type),
+		Value: b.code,
+	}
+
+	return tree.NewNode(0, str)
 }

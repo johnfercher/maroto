@@ -1,6 +1,7 @@
 package image
 
 import (
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -11,7 +12,7 @@ import (
 )
 
 type base64Image struct {
-	path       string
+	base64     string
 	extension  consts.Extension
 	_type      v2.DocumentType
 	components []v2.Component
@@ -27,7 +28,7 @@ func NewFromBase64(path string, extension consts.Extension, imageProps ...props.
 
 	return &base64Image{
 		_type:     v2.Image,
-		path:      path,
+		base64:    path,
 		prop:      prop,
 		extension: extension,
 	}
@@ -37,7 +38,7 @@ func (b *base64Image) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 	img := internal.NewImage(fpdf, math)
 	err := img.AddFromBase64(
-		b.path,
+		b.base64,
 		internal.Cell{fpdf.GetX() - ctx.Margins.Left,
 			fpdf.GetY() - ctx.Margins.Top,
 			ctx.Dimensions.Width,
@@ -58,4 +59,18 @@ func (b *base64Image) GetType() string {
 
 func (b *base64Image) Add(_ ...v2.Component) v2.Component {
 	return b
+}
+
+func (b *base64Image) GetStructure() *tree.Node[v2.Structure] {
+	trimLength := 10
+	if len(b.base64) < trimLength {
+		trimLength = len(b.base64)
+	}
+
+	str := v2.Structure{
+		Type:  string(b._type),
+		Value: b.base64[:trimLength],
+	}
+
+	return tree.NewNode(0, str)
 }

@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	pdf := v2.NewDocument()
+	pdf := v2.NewDocument("v2.pdf")
 
 	header := buildRow()
 	content := buildContent()
@@ -24,7 +24,7 @@ func main() {
 	)
 	pdf.Add(header, p /*content  footer*/)
 
-	err := pdf.Generate("v2.pdf")
+	err := pdf.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
