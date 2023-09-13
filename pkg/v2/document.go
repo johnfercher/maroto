@@ -1,9 +1,15 @@
 package v2
 
 import (
+	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal/fpdf"
+	"github.com/johnfercher/maroto/pkg/color"
+	"github.com/johnfercher/maroto/pkg/v2/col"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/page"
+	"github.com/johnfercher/maroto/pkg/v2/row"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 	"github.com/jung-kurt/gofpdf"
 )
@@ -13,8 +19,8 @@ type document struct {
 	ctx   context.Context
 	_type types.DocumentType
 	fpdf  fpdf.Fpdf
-	pages []Page
-	rows  []Row
+	pages []domain.Page
+	rows  []domain.Row
 }
 
 func NewDocument(file string) *document {
@@ -44,31 +50,66 @@ func NewDocument(file string) *document {
 	}
 }
 
-func (d *document) ForceAddPage(pages ...Page) {
+func (d *document) ForceAddPage(pages ...domain.Page) {
 	d.pages = append(d.pages, pages...)
 }
 
-func (d *document) Add(rows ...Row) {
+func (d *document) Add(rows ...domain.Row) {
 	d.rows = append(d.rows, rows...)
 }
 
 func (d *document) Generate() error {
-	d.ctx.Print(d._type)
+	//d.ctx.Print(d._type)
 	ctx := d.ctx.WithDimension(d.ctx.MaxWidth(), d.ctx.MaxHeight())
 
-	for _, row := range d.rows {
-		row.Render(d.fpdf, ctx)
+	maxHeight := d.ctx.MaxHeight()
+	currentHeight := 0.0
+	var buf []domain.Row
+	for _, dRow := range d.rows {
+		height := dRow.GetHeight()
+		if currentHeight+height >= maxHeight {
+			p := page.New()
+			p.Add(buf...)
+
+			c := col.New(12)
+			lastRowHeight := maxHeight - currentHeight
+			fmt.Printf("lastrow: %f, maxHeight: %f, currentHeight: %f, x: %f, y: %f\n", lastRowHeight, maxHeight, currentHeight, d.fpdf.GetX(), d.fpdf.GetY())
+			r := row.New(lastRowHeight, color.Color{255, 0, 0})
+			r.Add(c)
+			p.Add(r)
+
+			d.pages = append(d.pages, p)
+			buf = nil
+			currentHeight = 0
+		}
+
+		currentHeight += height
+		buf = append(buf, dRow)
 	}
+
+	p := page.New()
+	p.Add(buf...)
+	d.pages = append(d.pages, p)
 
 	for _, page := range d.pages {
 		page.Render(d.fpdf, ctx)
 	}
 
+	fmt.Println(len(d.pages))
+
+	/*for _, dRow := range d.rows {
+		dRow.Render(d.fpdf, ctx)
+	}
+
+	for _, page := range d.pages {
+		page.Render(d.fpdf, ctx)
+	}*/
+
 	return d.fpdf.OutputFileAndClose(d.file)
 }
 
-func (d *document) GetStructure() *tree.Node[Structure] {
-	str := Structure{
+func (d *document) GetStructure() *tree.Node[domain.Structure] {
+	str := domain.Structure{
 		Type:  string(d._type),
 		Value: d.file,
 	}

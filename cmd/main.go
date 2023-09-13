@@ -6,8 +6,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/code/matrixcode"
 	"github.com/johnfercher/maroto/pkg/v2/code/qrcode"
 	"github.com/johnfercher/maroto/pkg/v2/col"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/page"
 	"github.com/johnfercher/maroto/pkg/v2/row"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
@@ -18,13 +18,17 @@ func main() {
 
 	header := buildRow()
 	content := buildContent()
-	p := page.New().Add(
+
+	pdf.Add(header /*content  footer*/)
+	pdf.Add(
+		content, content, content, content, content, content, content, content,
+		content, content, content, content, content, content, content, content,
 		content, content, content, content, content, content, content, content,
 		content, content, content, content, content, content, content, content,
 	)
 
-	pdf.Add(header /*content  footer*/)
-	pdf.ForceAddPage(p)
+	//pdf.Add()
+	//pdf.ForceAddPage(p)
 
 	err := pdf.Generate()
 	if err != nil {
@@ -32,8 +36,8 @@ func main() {
 	}
 }
 
-func buildRow() v2.Row {
-	r := row.New(20)
+func buildRow() domain.Row {
+	r := row.New(70)
 
 	//image := image.New("image1")
 
@@ -50,8 +54,8 @@ func buildRow() v2.Row {
 	return r
 }
 
-func buildContent() v2.Row {
-	row := row.New(20)
+func buildContent() domain.Row {
+	row := row.New(70)
 
 	col1 := col.New(4)
 	col1.Add(barcode.New("barcode"))

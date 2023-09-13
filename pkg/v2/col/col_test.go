@@ -3,8 +3,8 @@ package col
 import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/internal/mocks"
-	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 	"github.com/stretchr/testify/assert"
@@ -363,7 +363,7 @@ func (i *invalidComponent) GetType() string {
 	return i._type.String()
 }
 
-func (i *invalidComponent) Add(component ...v2.Node) v2.Node {
+func (i *invalidComponent) Add(component ...domain.Node) domain.Node {
 	return nil
 }
 

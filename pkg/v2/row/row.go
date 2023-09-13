@@ -4,25 +4,37 @@ import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal/fpdf"
-	"github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type row struct {
 	height float64
 	_type  types.DocumentType
-	cols   []v2.Col
+	cols   []domain.Col
+	color  color.Color
 }
 
-func (r *row) Add(cols ...v2.Col) {
+func (r *row) GetHeight() float64 {
+	return r.height
+}
+
+func (r *row) Add(cols ...domain.Col) {
 	r.cols = append(r.cols, cols...)
 }
 
-func New(height float64) v2.Row {
+func New(height float64, c ...color.Color) domain.Row {
+	cx := color.NewBlack()
+	if len(c) > 0 {
+		cx = c[0]
+	}
+
 	return &row{
 		_type:  types.Row,
 		height: height,
+		color:  cx,
 	}
 }
 
@@ -30,8 +42,8 @@ func (r *row) GetType() string {
 	return r._type.String()
 }
 
-func (r *row) GetStructure() *tree.Node[v2.Structure] {
-	str := v2.Structure{
+func (r *row) GetStructure() *tree.Node[domain.Structure] {
+	str := domain.Structure{
 		Type:  string(r._type),
 		Value: fmt.Sprintf("%2.f", r.height),
 	}
@@ -47,12 +59,11 @@ func (r *row) GetStructure() *tree.Node[v2.Structure] {
 }
 
 func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	ctx.Print(r.height)
+	//ctx.Print(r.height)
 	ctx = ctx.WithDimension(ctx.Dimensions.Width, r.height)
-	if ctx.GetYOffset() == 0 && ctx.GetCurrentPage() >= fpdf.PageCount() {
-		fpdf.AddPage()
-		ctx = ctx.NewPage(fpdf.PageNo())
-	}
+
+	fpdf.SetDrawColor(r.color.Red, r.color.Green, r.color.Blue)
+
 	for _, col := range r.cols {
 		col.Render(fpdf, ctx)
 	}
@@ -62,7 +73,6 @@ func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 }
 
 func (r *row) render(fpdf fpdf.Fpdf, ctx context.Context) {
-	fpdf.SetDrawColor(0, 0, 0)
 	//x, y := ctx.GetXOffset(), ctx.GetYOffset()
 	fpdf.Ln(ctx.Dimensions.Height)
 }

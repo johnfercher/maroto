@@ -5,19 +5,19 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type matrixCode struct {
 	code       string
 	_type      types.DocumentType
-	components []v2.Node
+	components []domain.Node
 	prop       props.Rect
 }
 
-func New(code string, barcodeProps ...props.Rect) v2.Component {
+func New(code string, barcodeProps ...props.Rect) domain.Component {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]
@@ -45,12 +45,12 @@ func (m *matrixCode) GetType() string {
 	return m._type.String()
 }
 
-func (m *matrixCode) Add(component ...v2.Node) v2.Node {
+func (m *matrixCode) Add(component ...domain.Node) domain.Node {
 	return m
 }
 
-func (m *matrixCode) GetStructure() *tree.Node[v2.Structure] {
-	str := v2.Structure{
+func (m *matrixCode) GetStructure() *tree.Node[domain.Structure] {
+	str := domain.Structure{
 		Type:  string(m._type),
 		Value: m.code,
 	}

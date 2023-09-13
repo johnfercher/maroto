@@ -1,4 +1,4 @@
-package v2
+package domain
 
 import (
 	"github.com/johnfercher/go-tree/tree"
@@ -31,6 +31,7 @@ type Page interface {
 type Row interface {
 	Node
 	Add(cols ...Col)
+	GetHeight() float64
 }
 
 type Col interface {

@@ -6,19 +6,19 @@ import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
-	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type text struct {
 	value      string
 	_type      types.DocumentType
-	components []v2.Node
+	components []domain.Node
 	prop       props.Text
 }
 
-func New(value string, textProps ...props.Text) v2.Component {
+func New(value string, textProps ...props.Text) domain.Component {
 	prop := props.Text{}
 	if len(textProps) > 0 {
 		prop = textProps[0]
@@ -36,12 +36,12 @@ func (t *text) GetType() string {
 	return t._type.String()
 }
 
-func (t *text) Add(_ ...v2.Node) v2.Node {
+func (t *text) Add(_ ...domain.Node) domain.Node {
 	return t
 }
 
-func (t *text) GetStructure() *tree.Node[v2.Structure] {
-	str := v2.Structure{
+func (t *text) GetStructure() *tree.Node[domain.Structure] {
+	str := domain.Structure{
 		Type:  string(t._type),
 		Value: t.value,
 	}
@@ -50,7 +50,7 @@ func (t *text) GetStructure() *tree.Node[v2.Structure] {
 }
 
 func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	ctx.Print(t.value)
+	//ctx.Print(t.value)
 	t.render(fpdf, ctx)
 	return
 }

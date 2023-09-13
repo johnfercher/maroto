@@ -5,8 +5,8 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -14,11 +14,11 @@ import (
 type fileImage struct {
 	path       string
 	_type      types.DocumentType
-	components []v2.Node
+	components []domain.Node
 	prop       props.Rect
 }
 
-func NewFromFile(path string, imageProps ...props.Rect) v2.Component {
+func NewFromFile(path string, imageProps ...props.Rect) domain.Component {
 	prop := props.Rect{}
 	if len(imageProps) > 0 {
 		prop = imageProps[0]
@@ -53,12 +53,12 @@ func (f *fileImage) GetType() string {
 	return f._type.String()
 }
 
-func (f *fileImage) Add(_ ...v2.Node) v2.Node {
+func (f *fileImage) Add(_ ...domain.Node) domain.Node {
 	return f
 }
 
-func (f *fileImage) GetStructure() *tree.Node[v2.Structure] {
-	str := v2.Structure{
+func (f *fileImage) GetStructure() *tree.Node[domain.Structure] {
+	str := domain.Structure{
 		Type:  string(f._type),
 		Value: f.path,
 	}
