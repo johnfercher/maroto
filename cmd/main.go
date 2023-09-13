@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/col"
+	"github.com/johnfercher/maroto/pkg/v2/image"
 	"github.com/johnfercher/maroto/pkg/v2/row"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
@@ -28,10 +29,13 @@ func buildRow() v2.Component {
 	//image := image.New("image1")
 
 	col1 := col.New(4)
-	//col1.Add(image)
+	col1.Add(text.New("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem. "))
 
 	col2 := col.New(4)
+	col2.Add(image.NewFromFile("internal/assets/images/biplane.jpg"))
+
 	col3 := col.New(4)
+	col3.Add(text.New("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem. "))
 
 	row.Add(col1, col2, col3)
 	return row
