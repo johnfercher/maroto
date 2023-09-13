@@ -11,10 +11,10 @@ import (
 func main() {
 	pdf := v2.NewDocument()
 
-	header := buildRow()
-	//content := buildContent()
-	//footer := buildRow()
-	pdf.Add(header /*content  footer*/)
+	header := buildHeader()
+	content := buildContent()
+	//footer := buildHeader()
+	pdf.Add(header, content /* footer*/)
 
 	err := pdf.Generate("v2.pdf")
 	if err != nil {
@@ -22,32 +22,36 @@ func main() {
 	}
 }
 
-func buildRow() v2.Component {
+func buildHeader() v2.Row {
 	row := row.New(20)
 
-	//image := image.New("image1")
+	tx1 := text.New("Lorem ipsum dolor sit amet, consectetur ad")
+	col1 := col.New(3)
+	col1.Add(tx1)
 
-	col1 := col.New(4)
-	//col1.Add(image)
+	tx2 := text.New("tx2")
+	col2 := col.New(3)
+	col2.Add(tx2)
 
-	col2 := col.New(4)
-	col3 := col.New(4)
+	tx3 := text.New("tx3")
+	col3 := col.New(6)
+	col3.Add(tx3)
 
 	row.Add(col1, col2, col3)
 	return row
 }
 
-func buildContent() v2.Component {
-	row := row.New(20)
+func buildContent() v2.Row {
+	row := row.New(30)
 
-	tx := text.New("Hello World")
+	tx1 := text.New("txA")
+	col1 := col.New(6)
+	col1.Add(tx1)
 
-	col1 := col.New(4)
-	col1.Add(tx)
+	tx2 := text.New("txB")
+	col2 := col.New(6)
+	col2.Add(tx2)
 
-	col2 := col.New(4)
-	col3 := col.New(4)
-
-	row.Add(col1, col2, col3)
+	row.Add(col1, col2)
 	return row
 }

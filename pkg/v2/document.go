@@ -3,19 +3,15 @@ package v2
 import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 	"github.com/jung-kurt/gofpdf"
 )
 
-type Maroto interface {
-	Add(component ...Component)
-	Generate(file string) error
-}
-
 type document struct {
-	ctx        context.Context
-	_type      DocumentType
-	fpdf       fpdf.Fpdf
-	components []Component
+	ctx   context.Context
+	_type types.DocumentType
+	fpdf  fpdf.Fpdf
+	rows  []Row
 }
 
 func NewDocument() *document {
@@ -34,8 +30,8 @@ func NewDocument() *document {
 
 	return &document{
 		fpdf:  fpdf,
-		_type: Document,
-		ctx: context.NewRootContext(width, height, &context.Margins{
+		_type: types.Document,
+		ctx: context.NewRootContext(width, height, context.Margins{
 			Left:   left,
 			Top:    top,
 			Right:  right,
@@ -44,20 +40,19 @@ func NewDocument() *document {
 	}
 }
 
-func (d *document) Add(components ...Component) {
-	for _, component := range components {
-		if d._type.Accept(component.GetType()) {
-			d.components = append(d.components, component)
-		}
+func (d *document) Add(rows ...Row) {
+	for _, row := range rows {
+		d.rows = append(d.rows, row)
 	}
 }
 
 func (d *document) Generate(file string) error {
 	d.ctx.Print(d._type)
-	ctx := d.ctx.WithDimension(d.ctx.MaxWidth(), d.ctx.MaxHeight())
 
-	for _, component := range d.components {
-		component.Render(d.fpdf, ctx)
+	innerCtx := d.ctx.Copy()
+	for _, row := range d.rows {
+		row.Render(d.fpdf, innerCtx)
+		innerCtx.Coordinate.Y += row.GetHeight()
 	}
 
 	return d.fpdf.OutputFileAndClose(file)

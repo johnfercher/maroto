@@ -4,17 +4,18 @@ import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type image struct {
 	path       string
-	_type      v2.DocumentType
+	_type      types.DocumentType
 	components []v2.Component
 }
 
 func New(path string) *image {
 	return &image{
-		_type: v2.Image,
+		_type: types.Image,
 		path:  path,
 	}
 }

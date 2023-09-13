@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/context"
+	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 const (
@@ -11,43 +12,44 @@ const (
 )
 
 type col struct {
-	size       int
-	_type      v2.DocumentType
-	components []v2.Component
+	size        int
+	_type       types.DocumentType
+	renderables []v2.Renderable
 }
 
 func New(size int) *col {
 	return &col{
-		_type: v2.Col,
+		_type: types.Col,
 		size:  size,
 	}
 }
 
-func (c *col) GetType() string {
-	return c._type.String()
+func (c *col) GetSize() int {
+	return c.size
 }
 
-func (c *col) Add(components ...v2.Component) {
-	for _, component := range components {
-		if c._type.Accept(component.GetType()) {
-			c.components = append(c.components, component)
-		}
-	}
+func (c *col) Add(renderables ...v2.Renderable) {
+	c.renderables = append(renderables, renderables...)
 }
 
 func (c *col) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	ctx.Print(c.size)
-	ctx = c.setRelativeDimension(ctx)
-	for _, component := range c.components {
-		component.Render(fpdf, ctx)
+
+	parentWidth := ctx.Dimensions.Width
+	percent := float64(c.size) / defaultGridSize
+	colDimension := parentWidth * percent
+	ctx.Dimensions.Width = colDimension
+	for _, renderable := range c.renderables {
+		renderable.Render(fpdf, ctx)
 	}
+
 	c.render(fpdf, ctx)
 	return
 }
 
 func (c *col) render(fpdf fpdf.Fpdf, ctx context.Context) {
 	fpdf.SetDrawColor(255, 0, 0)
-	fpdf.CellFormat(ctx.GetXOffset(), ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
+	fpdf.CellFormat(ctx.Dimensions.Width, ctx.Dimensions.Height, "", "1", 0, "C", false, 0, "")
 }
 
 func (c *col) setRelativeDimension(ctx context.Context) context.Context {
