@@ -2,5 +2,5 @@
 
 # Maroto <small>PDF</small>
 
-[Linkedin](https://www.linkedin.com/in/johnathan-fercher/)
+[Github](https://github.com/johnfercher/maroto)
 [See](README.md)
