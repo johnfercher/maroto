@@ -14,12 +14,13 @@ import (
 )
 
 type document struct {
-	file     string
-	cell     internal.Cell
-	_type    types.DocumentType
-	provider domain.Provider
-	pages    []domain.Page
-	rows     []domain.Row
+	file          string
+	cell          internal.Cell
+	_type         types.DocumentType
+	provider      domain.Provider
+	pages         []domain.Page
+	rows          []domain.Row
+	currentHeight float64
 }
 
 func NewDocument(provider domain.Provider, file string) *document {
@@ -44,55 +45,18 @@ func (d *document) ForceAddPage(pages ...domain.Page) {
 }
 
 func (d *document) Add(rows ...domain.Row) {
-	d.rows = append(d.rows, rows...)
+	d.addRows(rows...)
 }
 
 func (d *document) Generate() error {
-	//d.ctx.Print(d._type)
-
-	maxHeight := d.cell.Height
-	currentHeight := 0.0
-	var buf []domain.Row
-	for _, dRow := range d.rows {
-		height := dRow.GetHeight()
-		sumHeight := height + currentHeight
-		if sumHeight >= maxHeight {
-			p := page.New()
-			p.Add(buf...)
-
-			c := col.New(12)
-			lastRowHeight := maxHeight - currentHeight
-			r := row.New(lastRowHeight, color.Color{255, 0, 0})
-			r.Add(c)
-			p.Add(r)
-
-			d.pages = append(d.pages, p)
-			buf = nil
-			currentHeight = 0
-		}
-
-		currentHeight += height
-		buf = append(buf, dRow)
-	}
-
-	p := page.New()
-	p.Add(buf...)
-	d.pages = append(d.pages, p)
-
+	d.fillPage()
 	innerCtx := d.cell.Copy()
-	for _, page := range d.pages {
-		page.Render(d.provider, innerCtx)
-	}
 
 	fmt.Println(len(d.pages))
 
-	/*for _, dRow := range d.rows {
-		dRow.Render(d.fpdf, ctx)
-	}
-
 	for _, page := range d.pages {
-		page.Render(d.fpdf, ctx)
-	}*/
+		page.Render(d.provider, innerCtx)
+	}
 
 	return d.provider.Generate(d.file)
 }
@@ -110,4 +74,48 @@ func (d *document) GetStructure() *tree.Node[domain.Structure] {
 	}
 
 	return node
+}
+
+func (d *document) addRows(rows ...domain.Row) {
+	for _, row := range rows {
+		d.addRow(row)
+	}
+}
+
+func (d *document) addRow(r domain.Row) {
+	maxHeight := d.cell.Height
+
+	height := r.GetHeight()
+	sumHeight := height + d.currentHeight
+
+	// Row smaller than the remain space on page
+	if sumHeight < maxHeight {
+		d.currentHeight += height
+		d.rows = append(d.rows, r)
+		return
+	}
+
+	// As row will extrapolate page, we will the empty space
+	// on the page to force a new page
+	d.fillPage()
+
+	// Add row on the new page
+	d.currentHeight += height
+	d.rows = append(d.rows, r)
+}
+
+func (d *document) fillPage() {
+	space := d.cell.Height - d.currentHeight
+
+	p := page.New()
+	p.Add(d.rows...)
+
+	c := col.New(12)
+	row := row.New(space, color.Color{255, 0, 0})
+	row.Add(c)
+	p.Add(row)
+
+	d.pages = append(d.pages, p)
+	d.rows = nil
+	d.currentHeight = 0
 }

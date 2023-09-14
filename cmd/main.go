@@ -41,9 +41,9 @@ func buildMarotoHTML(pageSize size.PageSize) domain.Maroto {
 }
 
 func gen(m domain.Maroto) {
-	m.Add(buildCodesRow())
-	m.Add(buildImageRow())
-	m.Add(buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow())
+	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
+	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
+	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 
 	err := m.Generate()
 	if err != nil {
@@ -67,7 +67,7 @@ func buildCodesRow() domain.Row {
 	return r
 }
 
-func buildImageRow() domain.Row {
+func buildImagesRow() domain.Row {
 	row := row.New(70)
 
 	col1 := col.New(6)
@@ -87,7 +87,7 @@ func buildImageRow() domain.Row {
 	return row
 }
 
-func buildTextRow() domain.Row {
+func buildTextsRow() domain.Row {
 	row := row.New(70)
 
 	colText := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
