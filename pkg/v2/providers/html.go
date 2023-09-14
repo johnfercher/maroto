@@ -10,6 +10,7 @@ import (
 
 type Div struct {
 	_type      string
+	label      string
 	content    string
 	dimensions Dimensions
 	margins    margins
@@ -25,9 +26,10 @@ type Cursor struct {
 	Y float64
 }
 
-func (d Div) Copy(_type string) Div {
+func (d Div) Copy(_type string, label string) Div {
 	return Div{
 		_type: _type,
+		label: label,
 		dimensions: Dimensions{
 			Width:  d.dimensions.Width,
 			Height: d.dimensions.Height,
@@ -84,12 +86,6 @@ func NewHTML() *html {
 }
 
 func (h *html) CreateRow(height float64) {
-	/*div := h.div.Copy("div")
-	div.dimensions.Height = height
-
-	row := tree.NewNode(div)
-	h.rows = append(h.rows, row)
-	h.*/
 	h.currentRow++
 }
 
@@ -100,12 +96,12 @@ func (h *html) CreateCol(width, _ float64) {
 	if rowsLength > h.currentRow {
 		row = h.rows[rowsLength-1]
 	} else {
-		div := h.div.Copy("div")
+		div := h.div.Copy("div", "row")
 		row = tree.NewNode(div)
 		h.rows = append(h.rows, row)
 	}
 
-	colDiv := row.GetData()
+	colDiv := row.GetData().Copy("div", "col")
 	colDiv.dimensions.Width = width
 	colNode := tree.NewNode(colDiv)
 
@@ -139,11 +135,7 @@ func (h *html) Generate(file string) error {
 	}
 	defer f.Close()
 
-	var content string
-	for _, row := range h.rows {
-		div := row.GetData()
-		content += fmt.Sprintf("<%s>%s</%s>\n", div._type, div.content, div._type)
-	}
+	content := h.getRows()
 
 	_, err = f.WriteString(content)
 	if err != nil {
@@ -155,4 +147,41 @@ func (h *html) Generate(file string) error {
 
 func (h *html) getLastCol() *tree.Node[Div] {
 	return h.cols[len(h.cols)-1]
+}
+
+func (h *html) getRows() string {
+	var content string
+	for _, row := range h.rows {
+		colContent := h.getCols(row)
+		div := row.GetData()
+		content += fmt.Sprintf("<%s label='%s'>\n%s</%s>\n", div._type, div.label, colContent, div._type)
+	}
+	return content
+}
+
+func (h *html) getCols(row *tree.Node[Div]) string {
+	identation := "\t"
+	var content string
+	colNodes := row.GetNexts()
+	for _, colNode := range colNodes {
+		col := colNode.GetData()
+		componentContent := h.getComponent(colNode)
+		content += fmt.Sprintf("%s<%s label='%s'>\n%s%s</%s>\n", identation, col._type, col.label, componentContent, identation, col._type)
+	}
+
+	return content
+}
+
+func (h *html) getComponent(col *tree.Node[Div]) string {
+	identation := "\t\t"
+	var content string
+	componentNodes := col.GetNexts()
+	for _, componentNode := range componentNodes {
+		component := componentNode.GetData()
+		if component._type == "span" {
+			content += fmt.Sprintf("%s<span>%s</span>\n", identation, component.content)
+		}
+	}
+
+	return content
 }

@@ -13,11 +13,11 @@ import (
 )
 
 func main() {
-	//provider := providers.NewGofpdf()
-	//pdf := v2.NewDocument(provider, "v2.pdf")
+	provider := providers.NewGofpdf()
+	pdf := v2.NewDocument(provider, "v2.pdf")
 
-	provider := providers.NewHTML()
-	pdf := v2.NewDocument(provider, "v2.html")
+	provider = providers.NewHTML()
+	pdf = v2.NewDocument(provider, "v2.html")
 
 	//pdf.Add(buildCodesRow())
 	//pdf.Add(buildImageRow())
