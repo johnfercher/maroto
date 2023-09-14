@@ -18,7 +18,7 @@ import (
 
 func TestNewDocument(t *testing.T) {
 	// Act
-	sut := v2.NewDocument("file.pdf")
+	sut := v2.NewMaroto("file.pdf")
 
 	// Assert
 	assert.NotNil(t, sut)
@@ -27,7 +27,7 @@ func TestNewDocument(t *testing.T) {
 
 func TestDocument_GetStructure(t *testing.T) {
 	// Arrange
-	p := v2.NewDocument("file.txt")
+	p := v2.NewMaroto("file.txt")
 
 	r1 := row.New(10)
 	r1c1 := col.New(4).Add(barcode.New("barcode"))

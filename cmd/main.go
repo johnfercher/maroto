@@ -30,25 +30,29 @@ func main() {
 	gen(html)
 }
 
-func buildMarotoPDF(pageSize size.PageSize) domain.Maroto {
+func buildMarotoPDF(pageSize size.PageSize) domain.MarotoMetrified {
 	provider := providers.NewGofpdf(pageSize)
-	return v2.NewDocument(provider, "v2.pdf")
+	m := v2.NewMaroto(provider, "v2.pdf")
+	return v2.NewMarotoMetrified(m)
 }
 
-func buildMarotoHTML(pageSize size.PageSize) domain.Maroto {
+func buildMarotoHTML(pageSize size.PageSize) domain.MarotoMetrified {
 	provider := providers.NewHTML(pageSize)
-	return v2.NewDocument(provider, "v2.html")
+	m := v2.NewMaroto(provider, "v2.html")
+	return v2.NewMarotoMetrified(m)
 }
 
-func gen(m domain.Maroto) {
+func gen(m domain.MarotoMetrified) {
 	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 
-	err := m.Generate()
+	report, err := m.GenerateWithReport()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	report.Print()
 }
 
 func buildCodesRow() domain.Row {

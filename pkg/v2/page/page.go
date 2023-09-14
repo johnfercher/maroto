@@ -8,8 +8,9 @@ import (
 )
 
 type page struct {
-	_type types.DocumentType
-	rows  []domain.Row
+	number int
+	_type  types.DocumentType
+	rows   []domain.Row
 }
 
 func New() domain.Page {
@@ -28,6 +29,14 @@ func (p *page) Render(provider domain.Provider, cell internal.Cell) {
 
 func (p *page) GetType() string {
 	return p._type.String()
+}
+
+func (p *page) SetNumber(number int) {
+	p.number = number
+}
+
+func (p *page) GetNumber() int {
+	return p.number
 }
 
 func (p *page) Add(rows ...domain.Row) domain.Page {

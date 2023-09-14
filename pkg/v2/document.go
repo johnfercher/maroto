@@ -1,7 +1,6 @@
 package v2
 
 import (
-	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -23,7 +22,7 @@ type document struct {
 	currentHeight float64
 }
 
-func NewDocument(provider domain.Provider, file string) *document {
+func NewMaroto(provider domain.Provider, file string) *document {
 	width, height := provider.GetDimensions()
 	left, top, right, bottom := provider.GetMargins()
 
@@ -52,9 +51,8 @@ func (d *document) Generate() error {
 	d.fillPage()
 	innerCtx := d.cell.Copy()
 
-	fmt.Println(len(d.pages))
-
 	for _, page := range d.pages {
+		//fmt.Printf("render page: %d\n", page.GetNumber())
 		page.Render(d.provider, innerCtx)
 	}
 
@@ -108,6 +106,7 @@ func (d *document) fillPage() {
 	space := d.cell.Height - d.currentHeight
 
 	p := page.New()
+	p.SetNumber(len(d.pages))
 	p.Add(d.rows...)
 
 	c := col.New(12)

@@ -12,6 +12,11 @@ type Maroto interface {
 	GetStructure() *tree.Node[Structure]
 }
 
+type MarotoMetrified interface {
+	Maroto
+	GenerateWithReport() (*Report, error)
+}
+
 type Node interface {
 	Render(fpdf Provider, ctx internal.Cell)
 	GetStructure() *tree.Node[Structure]
@@ -25,6 +30,8 @@ type Component interface {
 type Page interface {
 	Node
 	Add(rows ...Row) Page
+	GetNumber() int
+	SetNumber(number int)
 }
 
 type Row interface {
