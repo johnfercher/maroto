@@ -1,4 +1,4 @@
-# Maroto
+# Home
 
 ## V2
 
@@ -11,5 +11,13 @@
 ## Example V2 Option 1
 [filename](https://raw.githubusercontent.com/johnfercher/maroto/v2-start/cmd/main.go ':include :type=code')
 
+```pdf
+	assets/pdf/v2-option1.pdf
+```
+
 ## Example V2 Option 2
 [filename](https://raw.githubusercontent.com/johnfercher/maroto/v2-start-2/cmd/main.go ':include :type=code')
+
+```pdf
+	assets/pdf/v2-option2.pdf
+```
