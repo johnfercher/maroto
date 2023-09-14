@@ -3,7 +3,6 @@ package matrixcode
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
@@ -30,21 +29,12 @@ func New(code string, barcodeProps ...props.Rect) domain.Component {
 	}
 }
 
-func (m *matrixCode) Render(fpdf fpdf.Fpdf, ctx internal.Cell) {
-	math := internal.NewMath(fpdf)
-
-	code := internal.NewCode(fpdf, math)
-	code.AddDataMatrix(m.code,
-		internal.Cell{ctx.X, ctx.Y, ctx.Width, ctx.Height},
-		m.prop)
+func (m *matrixCode) Render(provider domain.Provider, cell internal.Cell) {
+	provider.AddMatrixCode(m.code, cell, m.prop)
 }
 
 func (m *matrixCode) GetType() string {
 	return m._type.String()
-}
-
-func (m *matrixCode) Add(component ...domain.Node) domain.Node {
-	return m
 }
 
 func (m *matrixCode) GetStructure() *tree.Node[domain.Structure] {
@@ -53,5 +43,5 @@ func (m *matrixCode) GetStructure() *tree.Node[domain.Structure] {
 		Value: m.code,
 	}
 
-	return tree.NewNode(0, str)
+	return tree.NewNode(str)
 }

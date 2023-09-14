@@ -3,7 +3,6 @@ package qrcode
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
@@ -30,21 +29,12 @@ func New(code string, barcodeProps ...props.Rect) domain.Component {
 	}
 }
 
-func (q *qrCode) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	math := internal.NewMath(fpdf)
-
-	code := internal.NewCode(fpdf, math)
-	code.AddQr(q.code,
-		cell,
-		q.prop)
+func (q *qrCode) Render(provider domain.Provider, cell internal.Cell) {
+	provider.AddQrCode(q.code, cell, q.prop)
 }
 
 func (q *qrCode) GetType() string {
 	return q._type.String()
-}
-
-func (q *qrCode) Add(component ...domain.Node) domain.Node {
-	return q
 }
 
 func (q *qrCode) GetStructure() *tree.Node[domain.Structure] {
@@ -53,5 +43,5 @@ func (q *qrCode) GetStructure() *tree.Node[domain.Structure] {
 		Value: q.code,
 	}
 
-	return tree.NewNode(0, str)
+	return tree.NewNode(str)
 }

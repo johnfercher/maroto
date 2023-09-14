@@ -3,11 +3,9 @@ package image
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/text"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
@@ -34,20 +32,8 @@ func NewFromBase64(path string, extension consts.Extension, imageProps ...props.
 	}
 }
 
-func (b *base64Image) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	math := internal.NewMath(fpdf)
-	img := internal.NewImage(fpdf, math)
-	err := img.AddFromBase64(
-		b.base64,
-		cell,
-		b.prop,
-		b.extension,
-	)
-	if err != nil {
-		fpdf.ClearError()
-		txt := text.New("Failed to render fileImage")
-		txt.Render(fpdf, cell)
-	}
+func (b *base64Image) Render(provider domain.Provider, cell internal.Cell) {
+	provider.AddImageFromBase64(b.base64, cell, b.prop, b.extension)
 }
 
 func (b *base64Image) GetType() string {
@@ -65,5 +51,5 @@ func (b *base64Image) GetStructure() *tree.Node[domain.Structure] {
 		Value: b.base64[:trimLength],
 	}
 
-	return tree.NewNode(0, str)
+	return tree.NewNode(str)
 }

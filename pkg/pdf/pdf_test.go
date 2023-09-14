@@ -1127,13 +1127,13 @@ func TestFpdfMaroto_Base64Image(t *testing.T) {
 			"One code inside a col inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+				image.On("AddImageFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
 					mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
-				image.AssertNumberOfCalls(t, "AddFromBase64", 1)
-				image.AssertCalled(t, "AddFromBase64", "Image1", internal.Cell{X: 0.0, Y: 0.0, Width: 80.0, Height: 20.0}, props.Rect{
+				image.AssertNumberOfCalls(t, "AddImageFromBase64", 1)
+				image.AssertCalled(t, "AddImageFromBase64", "Image1", internal.Cell{X: 0.0, Y: 0.0, Width: 80.0, Height: 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 100,
@@ -1152,19 +1152,19 @@ func TestFpdfMaroto_Base64Image(t *testing.T) {
 			"Two images inside a col inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+				image.On("AddImageFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
 					mock.Anything, mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
-				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image2", internal.Cell{X: 0.0, Y: 4.0, Width: 80.0, Height: 20.0}, props.Rect{
+				image.AssertNumberOfCalls(t, "AddImageFromBase64", 2)
+				image.AssertCalled(t, "AddImageFromBase64", "Image2", internal.Cell{X: 0.0, Y: 4.0, Width: 80.0, Height: 20.0}, props.Rect{
 					Left:    2,
 					Top:     4,
 					Percent: 40,
 					Center:  false,
 				}, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image3", internal.Cell{X: 0.0, Y: 0.0, Width: 80.0, Height: 20.0}, props.Rect{
+				image.AssertCalled(t, "AddImageFromBase64", "Image3", internal.Cell{X: 0.0, Y: 0.0, Width: 80.0, Height: 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 40,
@@ -1191,19 +1191,19 @@ func TestFpdfMaroto_Base64Image(t *testing.T) {
 			"Two images inside two cols inside a row",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+				image.On("AddImageFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
 					mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
-				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image4", internal.Cell{X: 0.0, Y: 4.5, Width: 40.0, Height: 20.0}, props.Rect{
+				image.AssertNumberOfCalls(t, "AddImageFromBase64", 2)
+				image.AssertCalled(t, "AddImageFromBase64", "Image4", internal.Cell{X: 0.0, Y: 4.5, Width: 40.0, Height: 20.0}, props.Rect{
 					Left:    4,
 					Top:     4.5,
 					Percent: 55,
 					Center:  false,
 				}, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image5", internal.Cell{X: 40.0, Y: 0.0, Width: 40.0, Height: 20.0}, props.Rect{
+				image.AssertCalled(t, "AddImageFromBase64", "Image5", internal.Cell{X: 40.0, Y: 0.0, Width: 40.0, Height: 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 53,
@@ -1232,19 +1232,19 @@ func TestFpdfMaroto_Base64Image(t *testing.T) {
 			"Two images inside one col inside two rows",
 			func() *mocks.Image {
 				image := &mocks.Image{}
-				image.On("AddFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+				image.On("AddImageFromBase64", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything,
 					mock.Anything, mock.Anything).Return(nil)
 				return image
 			},
 			func(t *testing.T, image *mocks.Image) {
-				image.AssertNumberOfCalls(t, "AddFromBase64", 2)
-				image.AssertCalled(t, "AddFromBase64", "Image6", internal.Cell{X: 0.0, Y: 8.5, Width: 80.0, Height: 20.0}, props.Rect{
+				image.AssertNumberOfCalls(t, "AddImageFromBase64", 2)
+				image.AssertCalled(t, "AddImageFromBase64", "Image6", internal.Cell{X: 0.0, Y: 8.5, Width: 80.0, Height: 20.0}, props.Rect{
 					Left:    7,
 					Top:     8.5,
 					Percent: 66,
 					Center:  false,
 				}, consts.Png)
-				image.AssertCalled(t, "AddFromBase64", "Image7", internal.Cell{X: 0.0, Y: 20.0, Width: 80.0, Height: 20.0}, props.Rect{
+				image.AssertCalled(t, "AddImageFromBase64", "Image7", internal.Cell{X: 0.0, Y: 20.0, Width: 80.0, Height: 20.0}, props.Rect{
 					Left:    0,
 					Top:     0,
 					Percent: 98,

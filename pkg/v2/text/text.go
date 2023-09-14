@@ -42,10 +42,6 @@ func (t *text) GetType() string {
 	return t._type.String()
 }
 
-func (t *text) Add(_ ...domain.Node) domain.Node {
-	return t
-}
-
 func (t *text) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{
 		Type:  string(t._type),

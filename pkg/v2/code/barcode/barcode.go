@@ -3,10 +3,8 @@ package barcode
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/text"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
@@ -31,28 +29,12 @@ func New(code string, barcodeProps ...props.Barcode) domain.Component {
 	}
 }
 
-func (b *barcode) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	math := internal.NewMath(fpdf)
-
-	code := internal.NewCode(fpdf, math)
-
-	err := code.AddBar(b.code,
-		cell,
-		b.prop)
-
-	if err != nil {
-		fpdf.ClearError()
-		txt := text.New("Failed to render code")
-		txt.Render(fpdf, cell)
-	}
+func (b *barcode) Render(provider domain.Provider, cell internal.Cell) {
+	provider.AddBarCode(b.code, cell, b.prop)
 }
 
 func (b *barcode) GetType() string {
 	return b._type.String()
-}
-
-func (b *barcode) Add(component ...domain.Node) domain.Node {
-	return b
 }
 
 func (b *barcode) GetStructure() *tree.Node[domain.Structure] {
@@ -61,5 +43,5 @@ func (b *barcode) GetStructure() *tree.Node[domain.Structure] {
 		Value: b.code,
 	}
 
-	return tree.NewNode(0, str)
+	return tree.NewNode(str)
 }

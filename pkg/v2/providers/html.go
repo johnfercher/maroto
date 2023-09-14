@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/size"
 	"github.com/yosssi/gohtml"
 	"os"
 )
@@ -60,18 +62,20 @@ type html struct {
 	currentCol int
 }
 
-func NewHTML() *html {
+func NewHTML(pageSize size.PageSize) *html {
+	width, height := size.GetDimensions(pageSize)
+
 	div := Div{
 		_type: "body",
 		dimensions: Dimensions{
-			Width:  300,
-			Height: 400,
+			Width:  width,
+			Height: height,
 		},
 		margins: margins{
-			Left:   10,
-			Right:  10,
-			Top:    10,
-			Bottom: 10,
+			Left:   size.MinLeftMargin,
+			Right:  size.MinRightMargin,
+			Top:    size.MinTopMargin,
+			Bottom: size.MinBottomMargin,
 		},
 	}
 
@@ -125,6 +129,76 @@ func (h *html) AddText(text string, _ internal.Cell, _ props.Text) {
 	textDiv := col.GetData()
 	textDiv._type = "span"
 	textDiv.content = text
+	textNode := tree.NewNode(textDiv)
+
+	col.AddNext(textNode)
+}
+
+func (h *html) AddSignature(text string, _ internal.Cell, _ props.Text) {
+	col := h.getLastCol()
+
+	textDiv := col.GetData()
+	textDiv._type = "span"
+	textDiv.content = text
+	textNode := tree.NewNode(textDiv)
+
+	col.AddNext(textNode)
+}
+
+func (h *html) AddMatrixCode(text string, _ internal.Cell, _ props.Rect) {
+	col := h.getLastCol()
+
+	textDiv := col.GetData()
+	textDiv._type = "span"
+	textDiv.content = text
+	textNode := tree.NewNode(textDiv)
+
+	col.AddNext(textNode)
+}
+
+func (h *html) AddQrCode(code string, _ internal.Cell, _ props.Rect) {
+	col := h.getLastCol()
+
+	textDiv := col.GetData()
+	textDiv._type = "span"
+	textDiv.content = code
+	textNode := tree.NewNode(textDiv)
+
+	col.AddNext(textNode)
+}
+
+func (h *html) AddBarCode(code string, _ internal.Cell, _ props.Barcode) {
+	col := h.getLastCol()
+
+	textDiv := col.GetData()
+	textDiv._type = "span"
+	textDiv.content = code
+	textNode := tree.NewNode(textDiv)
+
+	col.AddNext(textNode)
+}
+
+func (h *html) AddImageFromFile(file string, cell internal.Cell, prop props.Rect) {
+	col := h.getLastCol()
+
+	textDiv := col.GetData()
+	textDiv._type = "span"
+	textDiv.content = file
+	textNode := tree.NewNode(textDiv)
+
+	col.AddNext(textNode)
+}
+
+func (h *html) AddImageFromBase64(base64 string, cell internal.Cell, prop props.Rect, extension consts.Extension) {
+	minSize := 20
+	if len(base64) < minSize {
+		minSize = len(base64)
+	}
+	col := h.getLastCol()
+
+	textDiv := col.GetData()
+	textDiv._type = "span"
+	textDiv.content = base64[:minSize]
 	textNode := tree.NewNode(textDiv)
 
 	col.AddNext(textNode)

@@ -1,42 +1,49 @@
 package main
 
 import (
+	"encoding/base64"
+	"fmt"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/v2/code/barcode"
+	"github.com/johnfercher/maroto/pkg/v2/code/matrixcode"
+	"github.com/johnfercher/maroto/pkg/v2/code/qrcode"
 	"github.com/johnfercher/maroto/pkg/v2/col"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/image"
 	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/johnfercher/maroto/pkg/v2/row"
+	"github.com/johnfercher/maroto/pkg/v2/signature"
+	"github.com/johnfercher/maroto/pkg/v2/size"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
+	"os"
 )
 
 func main() {
-	pdf := buildMarotoPDF()
-	html := buildMarotoHTML()
+	pageSize := size.A4
+	pdf := buildMarotoPDF(pageSize)
+	html := buildMarotoHTML(pageSize)
 
 	gen(pdf)
 	gen(html)
 }
 
-func buildMarotoPDF() domain.Maroto {
-	provider := providers.NewGofpdf()
+func buildMarotoPDF(pageSize size.PageSize) domain.Maroto {
+	provider := providers.NewGofpdf(pageSize)
 	return v2.NewDocument(provider, "v2.pdf")
 }
 
-func buildMarotoHTML() domain.Maroto {
-	provider := providers.NewHTML()
+func buildMarotoHTML(pageSize size.PageSize) domain.Maroto {
+	provider := providers.NewHTML(pageSize)
 	return v2.NewDocument(provider, "v2.html")
 }
 
 func gen(m domain.Maroto) {
-	//pdf.Add(buildCodesRow())
-	//pdf.Add(buildImageRow())
+	m.Add(buildCodesRow())
+	m.Add(buildImageRow())
 	m.Add(buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow())
-
-	//pdf.Add()
-	//pdf.ForceAddPage(p)
 
 	err := m.Generate()
 	if err != nil {
@@ -44,10 +51,8 @@ func gen(m domain.Maroto) {
 	}
 }
 
-/*func buildCodesRow() domain.Row {
+func buildCodesRow() domain.Row {
 	r := row.New(70)
-
-	//image := image.New("image1")
 
 	col1 := col.New(4)
 	col1.Add(barcode.New("barcode"))
@@ -80,7 +85,7 @@ func buildImageRow() domain.Row {
 	row.Add(col1, col2)
 
 	return row
-}*/
+}
 
 func buildTextRow() domain.Row {
 	row := row.New(70)
@@ -91,14 +96,14 @@ func buildTextRow() domain.Row {
 		Align: consts.Center,
 	}))
 
-	/*col2 := col.New(6)
+	col2 := col.New(6)
 	col2.Add(signature.New("Fulano de Tal", props.Font{
 		Style:  consts.Italic,
 		Size:   20,
 		Family: consts.Courier,
-	}))*/
+	}))
 
-	row.Add(col1, col1)
+	row.Add(col1, col2)
 
 	return row
 }

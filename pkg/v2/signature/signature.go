@@ -31,25 +31,11 @@ func New(value string, textProps ...props.Font) domain.Component {
 }
 
 func (s *signature) Render(provider domain.Provider, cell internal.Cell) {
-	font := internal.NewFont(fpdf, s.prop.Size, s.prop.Family, s.prop.Style)
-	math := internal.NewMath(fpdf)
-	text := internal.NewText(fpdf, math, font)
-	signature := internal.NewSignature(fpdf, math, text)
-
-	font.SetFont(s.prop.Family, s.prop.Style, s.prop.Size)
-
-	signature.AddSpaceFor(
-		s.value,
-		cell,
-		s.prop.ToTextProp(consts.Center, 0.0, false, 0))
+	provider.AddSignature(s.value, cell, s.prop.ToTextProp(consts.Center, 0.0, false, 0))
 }
 
 func (s *signature) GetType() string {
 	return s._type.String()
-}
-
-func (s *signature) Add(_ ...domain.Node) domain.Node {
-	return s
 }
 
 func (s *signature) GetStructure() *tree.Node[domain.Structure] {
@@ -58,5 +44,5 @@ func (s *signature) GetStructure() *tree.Node[domain.Structure] {
 		Value: s.value,
 	}
 
-	return tree.NewNode(0, str)
+	return tree.NewNode(str)
 }
