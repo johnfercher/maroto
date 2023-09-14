@@ -61,11 +61,6 @@ func (c *col) GetStructure() *tree.Node[domain.Structure] {
 }
 
 func (c *col) Render(provider domain.Provider, cell internal.Cell) {
-	parentWidth := cell.Width
-	percent := float64(c.size) / defaultGridSize
-	colDimension := parentWidth * percent
-	cell.Width = colDimension
-
 	c.render(provider, cell)
 
 	for _, component := range c.components {

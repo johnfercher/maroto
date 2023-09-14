@@ -52,7 +52,6 @@ func (d *document) Generate() error {
 	innerCtx := d.cell.Copy()
 
 	for _, page := range d.pages {
-		//fmt.Printf("render page: %d\n", page.GetNumber())
 		page.Render(d.provider, innerCtx)
 	}
 

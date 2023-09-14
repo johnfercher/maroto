@@ -20,8 +20,9 @@ func (r *row) GetHeight() float64 {
 	return r.height
 }
 
-func (r *row) Add(cols ...domain.Col) {
+func (r *row) Add(cols ...domain.Col) domain.Row {
 	r.cols = append(r.cols, cols...)
+	return r
 }
 
 func New(height float64, c ...color.Color) domain.Row {
@@ -67,6 +68,7 @@ func (r *row) Render(provider domain.Provider, cell internal.Cell) {
 		parentWidth := cell.Width
 		percent := float64(size) / 12
 		colDimension := parentWidth * percent
+		innerCell.Width = colDimension
 
 		col.Render(provider, innerCell)
 		innerCell.X += colDimension

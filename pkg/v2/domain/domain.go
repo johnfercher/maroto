@@ -36,7 +36,7 @@ type Page interface {
 
 type Row interface {
 	Node
-	Add(cols ...Col)
+	Add(cols ...Col) Row
 	GetHeight() float64
 }
 
