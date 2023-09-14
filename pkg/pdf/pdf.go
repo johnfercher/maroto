@@ -487,7 +487,7 @@ func (s *PdfMaroto) FileImage(filePathName string, prop ...props.Rect) error {
 
 	cell := internal.Cell{
 		X:      s.xColOffset,
-		Y:      s.offsetY + rectProp.Top,
+		Y:      s.offsetY,
 		Width:  s.colWidth,
 		Height: s.rowHeight,
 	}
