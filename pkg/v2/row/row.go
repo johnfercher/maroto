@@ -64,13 +64,12 @@ func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	ctx.Dimensions.Height = r.height
 	innerCtx := ctx.Copy()
 	for _, col := range r.cols {
-		col.Render(fpdf, ctx)
-
 		size := col.GetSize()
 		parentWidth := ctx.Dimensions.Width
 		percent := float64(size) / 12
 		colDimension := parentWidth * percent
 
+		col.Render(fpdf, innerCtx)
 		innerCtx.Coordinate.X += colDimension
 	}
 

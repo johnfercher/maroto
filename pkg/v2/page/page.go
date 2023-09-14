@@ -22,8 +22,10 @@ func New() domain.Page {
 func (p *page) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	//ctx = ctx.NewPage(fpdf.PageNo())
 
+	innerCtx := ctx.Copy()
 	for _, row := range p.rows {
-		row.Render(fpdf, ctx)
+		row.Render(fpdf, innerCtx)
+		innerCtx.Coordinate.Y += row.GetHeight()
 	}
 	//fpdf.AddPage()
 

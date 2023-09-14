@@ -41,7 +41,7 @@ func NewDocument(file string) *document {
 		file:  file,
 		fpdf:  fpdf,
 		_type: types.Document,
-		ctx: context.NewRootContext(width, height, &context.Margins{
+		ctx: context.NewRootContext(width, height, context.Margins{
 			Left:   left,
 			Top:    top,
 			Right:  right,
@@ -60,14 +60,14 @@ func (d *document) Add(rows ...domain.Row) {
 
 func (d *document) Generate() error {
 	//d.ctx.Print(d._type)
-	ctx := d.ctx.WithDimension(d.ctx.MaxWidth(), d.ctx.MaxHeight())
 
-	maxHeight := d.ctx.MaxHeight()
+	maxHeight := d.ctx.Dimensions.Height
 	currentHeight := 0.0
 	var buf []domain.Row
 	for _, dRow := range d.rows {
 		height := dRow.GetHeight()
-		if currentHeight+height >= maxHeight {
+		sumHeight := height + currentHeight
+		if sumHeight >= maxHeight {
 			p := page.New()
 			p.Add(buf...)
 
@@ -91,8 +91,9 @@ func (d *document) Generate() error {
 	p.Add(buf...)
 	d.pages = append(d.pages, p)
 
+	innerCtx := d.ctx.Copy()
 	for _, page := range d.pages {
-		page.Render(d.fpdf, ctx)
+		page.Render(d.fpdf, innerCtx)
 	}
 
 	fmt.Println(len(d.pages))

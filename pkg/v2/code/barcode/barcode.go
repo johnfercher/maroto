@@ -1,7 +1,6 @@
 package barcode
 
 import (
-	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
@@ -37,11 +36,10 @@ func (b *barcode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 
 	code := internal.NewCode(fpdf, math)
-	fmt.Println(fpdf.GetX()-ctx.Margins.Left, fpdf.GetY()-ctx.Margins.Top)
-	err := code.AddBar(b.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
-		fpdf.GetY() - ctx.Margins.Top,
-		ctx.Dimensions.Width,
-		ctx.Dimensions.Height}, b.prop)
+
+	err := code.AddBar(b.code,
+		internal.Cell{ctx.Coordinate.X, ctx.Coordinate.Y, ctx.Dimensions.Width, ctx.Dimensions.Height},
+		b.prop)
 
 	if err != nil {
 		fpdf.ClearError()

@@ -17,7 +17,7 @@ type Context struct {
 func NewRootContext(pageWidth, pageHeight float64, margins Margins) Context {
 	return Context{
 		Coordinate: Coordinate{0, 0},
-		Dimensions: Dimensions{pageWidth - margins.Left - margins.Right, pageHeight},
+		Dimensions: Dimensions{pageWidth - margins.Left - margins.Right, pageHeight - margins.Top - margins.Bottom},
 	}
 }
 

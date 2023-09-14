@@ -62,13 +62,13 @@ func (c *col) GetStructure() *tree.Node[domain.Structure] {
 }
 
 func (c *col) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-
-	c.render(fpdf, ctx)
-
 	parentWidth := ctx.Dimensions.Width
 	percent := float64(c.size) / defaultGridSize
 	colDimension := parentWidth * percent
 	ctx.Dimensions.Width = colDimension
+
+	c.render(fpdf, ctx)
+
 	for _, component := range c.components {
 		component.Render(fpdf, ctx)
 	}
@@ -77,7 +77,7 @@ func (c *col) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 }
 
 func (c *col) render(fpdf fpdf.Fpdf, ctx context.Context) {
-	fpdf.CellFormat(ctx.GetXOffset(), ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
+	fpdf.CellFormat(ctx.Dimensions.Width, ctx.Dimensions.Height, "", "1", 0, "C", false, 0, "")
 }
 
 func (c *col) setRelativeDimension(ctx context.Context) context.Context {

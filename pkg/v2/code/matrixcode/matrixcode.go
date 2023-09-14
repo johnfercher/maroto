@@ -35,10 +35,9 @@ func (m *matrixCode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 	math := internal.NewMath(fpdf)
 
 	code := internal.NewCode(fpdf, math)
-	code.AddDataMatrix(m.code, internal.Cell{fpdf.GetX() - ctx.Margins.Left,
-		fpdf.GetY() - ctx.Margins.Top,
-		ctx.Dimensions.Width,
-		ctx.Dimensions.Height}, m.prop)
+	code.AddDataMatrix(m.code,
+		internal.Cell{ctx.Coordinate.X, ctx.Coordinate.Y, ctx.Dimensions.Width, ctx.Dimensions.Height},
+		m.prop)
 }
 
 func (m *matrixCode) GetType() string {

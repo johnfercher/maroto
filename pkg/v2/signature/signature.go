@@ -15,11 +15,11 @@ type signature struct {
 	value      string
 	_type      types.DocumentType
 	components []domain.Node
-	prop       props.Text
+	prop       props.Font
 }
 
-func New(value string, textProps ...props.Text) domain.Component {
-	prop := props.Text{}
+func New(value string, textProps ...props.Font) domain.Component {
+	prop := props.Font{}
 	if len(textProps) > 0 {
 		prop = textProps[0]
 	}
@@ -40,11 +40,8 @@ func (s *signature) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 
 	signature.AddSpaceFor(
 		s.value,
-		internal.Cell{fpdf.GetX() - ctx.Margins.Left,
-			fpdf.GetY() - ctx.Margins.Top,
-			ctx.Dimensions.Width,
-			ctx.Dimensions.Height},
-		s.prop)
+		internal.Cell{ctx.Coordinate.X, ctx.Coordinate.Y, ctx.Dimensions.Width, ctx.Dimensions.Height},
+		s.prop.ToTextProp(consts.Center, 0.0, false, 0))
 }
 
 func (s *signature) GetType() string {

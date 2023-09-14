@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/context"
@@ -18,17 +19,24 @@ type text struct {
 	prop       props.Text
 }
 
-func New(value string, textProps ...props.Text) domain.Component {
-	prop := props.Text{}
-	if len(textProps) > 0 {
-		prop = textProps[0]
+func New(value string, prop ...props.Text) domain.Component {
+	textProp := props.Text{
+		Color: color.Color{
+			Red:   0,
+			Green: 0,
+			Blue:  0,
+		},
 	}
-	prop.MakeValid(consts.Arial)
+
+	if len(prop) > 0 {
+		textProp = prop[0]
+	}
+	textProp.MakeValid(consts.Arial)
 
 	return &text{
 		_type: types.Text,
 		value: value,
-		prop:  prop,
+		prop:  textProp,
 	}
 }
 
@@ -58,6 +66,18 @@ func (t *text) render(fpdf fpdf.Fpdf, ctx context.Context) {
 	font := internal.NewFont(fpdf, 2, consts.Arial, consts.Normal)
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)
+
+	if t.prop.Top > ctx.Dimensions.Height {
+		t.prop.Top = ctx.Dimensions.Height
+	}
+
+	if t.prop.Left > ctx.Dimensions.Width {
+		t.prop.Left = ctx.Dimensions.Width
+	}
+
+	if t.prop.Right > ctx.Dimensions.Width {
+		t.prop.Right = ctx.Dimensions.Width
+	}
 
 	text.Add(
 		t.value,
