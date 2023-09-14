@@ -13,20 +13,32 @@ import (
 )
 
 func main() {
+	pdf := buildMarotoPDF()
+	html := buildMarotoHTML()
+
+	gen(pdf)
+	gen(html)
+}
+
+func buildMarotoPDF() domain.Maroto {
 	provider := providers.NewGofpdf()
-	pdf := v2.NewDocument(provider, "v2.pdf")
+	return v2.NewDocument(provider, "v2.pdf")
+}
 
-	provider = providers.NewHTML()
-	pdf = v2.NewDocument(provider, "v2.html")
+func buildMarotoHTML() domain.Maroto {
+	provider := providers.NewHTML()
+	return v2.NewDocument(provider, "v2.html")
+}
 
+func gen(m domain.Maroto) {
 	//pdf.Add(buildCodesRow())
 	//pdf.Add(buildImageRow())
-	pdf.Add(buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow())
+	m.Add(buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow())
 
 	//pdf.Add()
 	//pdf.ForceAddPage(p)
 
-	err := pdf.Generate()
+	err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
