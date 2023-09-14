@@ -3,8 +3,8 @@ package col
 import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
-	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -61,28 +61,21 @@ func (c *col) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (c *col) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	parentWidth := ctx.Dimensions.Width
+func (c *col) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
+	parentWidth := cell.Width
 	percent := float64(c.size) / defaultGridSize
 	colDimension := parentWidth * percent
-	ctx.Dimensions.Width = colDimension
+	cell.Width = colDimension
 
-	c.render(fpdf, ctx)
+	c.render(fpdf, cell)
 
 	for _, component := range c.components {
-		component.Render(fpdf, ctx)
+		component.Render(fpdf, cell)
 	}
 
 	return
 }
 
-func (c *col) render(fpdf fpdf.Fpdf, ctx context.Context) {
-	fpdf.CellFormat(ctx.Dimensions.Width, ctx.Dimensions.Height, "", "1", 0, "C", false, 0, "")
-}
-
-func (c *col) setRelativeDimension(ctx context.Context) context.Context {
-	parentWidth := ctx.Dimensions.Width
-	percent := float64(c.size) / defaultGridSize
-	colDimension := parentWidth * percent
-	return ctx.WithDimension(colDimension, ctx.Dimensions.Height)
+func (c *col) render(fpdf fpdf.Fpdf, cell internal.Cell) {
+	fpdf.CellFormat(cell.Width, cell.Height, "", "1", 0, "C", false, 0, "")
 }

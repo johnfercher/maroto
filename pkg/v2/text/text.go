@@ -7,7 +7,6 @@ import (
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -57,30 +56,30 @@ func (t *text) GetStructure() *tree.Node[domain.Structure] {
 	return tree.NewNode(0, str)
 }
 
-func (t *text) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	t.render(fpdf, ctx)
+func (t *text) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
+	t.render(fpdf, cell)
 	return
 }
 
-func (t *text) render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (t *text) render(fpdf fpdf.Fpdf, cell internal.Cell) {
 	font := internal.NewFont(fpdf, 2, consts.Arial, consts.Normal)
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)
 
-	if t.prop.Top > ctx.Dimensions.Height {
-		t.prop.Top = ctx.Dimensions.Height
+	if t.prop.Top > cell.Height {
+		t.prop.Top = cell.Height
 	}
 
-	if t.prop.Left > ctx.Dimensions.Width {
-		t.prop.Left = ctx.Dimensions.Width
+	if t.prop.Left > cell.Width {
+		t.prop.Left = cell.Width
 	}
 
-	if t.prop.Right > ctx.Dimensions.Width {
-		t.prop.Right = ctx.Dimensions.Width
+	if t.prop.Right > cell.Width {
+		t.prop.Right = cell.Width
 	}
 
 	text.Add(
 		t.value,
-		internal.Cell{ctx.Coordinate.X, ctx.Coordinate.Y, ctx.Dimensions.Width, ctx.Dimensions.Height},
+		cell,
 		t.prop)
 }

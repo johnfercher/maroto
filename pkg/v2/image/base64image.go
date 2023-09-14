@@ -6,7 +6,6 @@ import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"github.com/johnfercher/maroto/pkg/v2/types"
@@ -35,19 +34,19 @@ func NewFromBase64(path string, extension consts.Extension, imageProps ...props.
 	}
 }
 
-func (b *base64Image) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (b *base64Image) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
 	math := internal.NewMath(fpdf)
 	img := internal.NewImage(fpdf, math)
 	err := img.AddFromBase64(
 		b.base64,
-		internal.Cell{ctx.Coordinate.X, ctx.Coordinate.Y, ctx.Dimensions.Width, ctx.Dimensions.Height},
+		cell,
 		b.prop,
 		b.extension,
 	)
 	if err != nil {
 		fpdf.ClearError()
 		txt := text.New("Failed to render fileImage")
-		txt.Render(fpdf, ctx)
+		txt.Render(fpdf, cell)
 	}
 }
 

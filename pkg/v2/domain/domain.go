@@ -2,8 +2,8 @@ package domain
 
 import (
 	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
-	"github.com/johnfercher/maroto/pkg/v2/context"
 )
 
 type Maroto interface {
@@ -14,7 +14,7 @@ type Maroto interface {
 }
 
 type Node interface {
-	Render(fpdf fpdf.Fpdf, ctx context.Context)
+	Render(fpdf fpdf.Fpdf, ctx internal.Cell)
 	GetStructure() *tree.Node[Structure]
 }
 

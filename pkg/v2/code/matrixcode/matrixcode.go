@@ -5,7 +5,6 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -31,12 +30,12 @@ func New(code string, barcodeProps ...props.Rect) domain.Component {
 	}
 }
 
-func (m *matrixCode) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (m *matrixCode) Render(fpdf fpdf.Fpdf, ctx internal.Cell) {
 	math := internal.NewMath(fpdf)
 
 	code := internal.NewCode(fpdf, math)
 	code.AddDataMatrix(m.code,
-		internal.Cell{ctx.Coordinate.X, ctx.Coordinate.Y, ctx.Dimensions.Width, ctx.Dimensions.Height},
+		internal.Cell{ctx.X, ctx.Y, ctx.Width, ctx.Height},
 		m.prop)
 }
 

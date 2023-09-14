@@ -2,8 +2,8 @@ package page
 
 import (
 	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
-	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -19,13 +19,13 @@ func New() domain.Page {
 	}
 }
 
-func (p *page) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (p *page) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
 	//ctx = ctx.NewPage(fpdf.PageNo())
 
-	innerCtx := ctx.Copy()
+	innerCell := cell.Copy()
 	for _, row := range p.rows {
-		row.Render(fpdf, innerCtx)
-		innerCtx.Coordinate.Y += row.GetHeight()
+		row.Render(fpdf, innerCell)
+		innerCell.Y += row.GetHeight()
 	}
 	//fpdf.AddPage()
 

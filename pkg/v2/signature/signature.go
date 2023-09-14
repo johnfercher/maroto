@@ -6,7 +6,6 @@ import (
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -32,7 +31,7 @@ func New(value string, textProps ...props.Font) domain.Component {
 	}
 }
 
-func (s *signature) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (s *signature) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
 	font := internal.NewFont(fpdf, s.prop.Size, s.prop.Family, s.prop.Style)
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)
@@ -42,7 +41,7 @@ func (s *signature) Render(fpdf fpdf.Fpdf, ctx context.Context) {
 
 	signature.AddSpaceFor(
 		s.value,
-		internal.Cell{ctx.Coordinate.X, ctx.Coordinate.Y, ctx.Dimensions.Width, ctx.Dimensions.Height},
+		cell,
 		s.prop.ToTextProp(consts.Center, 0.0, false, 0))
 }
 

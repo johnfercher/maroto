@@ -3,9 +3,9 @@ package row
 import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -58,25 +58,25 @@ func (r *row) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (r *row) Render(fpdf fpdf.Fpdf, ctx context.Context) {
+func (r *row) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
 	fpdf.SetDrawColor(r.color.Red, r.color.Green, r.color.Blue)
 
-	ctx.Dimensions.Height = r.height
-	innerCtx := ctx.Copy()
+	cell.Height = r.height
+	innerCell := cell.Copy()
 	for _, col := range r.cols {
 		size := col.GetSize()
-		parentWidth := ctx.Dimensions.Width
+		parentWidth := cell.Width
 		percent := float64(size) / 12
 		colDimension := parentWidth * percent
 
-		col.Render(fpdf, innerCtx)
-		innerCtx.Coordinate.X += colDimension
+		col.Render(fpdf, innerCell)
+		innerCell.X += colDimension
 	}
 
-	r.render(fpdf, ctx)
+	r.render(fpdf, cell)
 	return
 }
 
-func (r *row) render(fpdf fpdf.Fpdf, ctx context.Context) {
-	fpdf.Ln(ctx.Dimensions.Height)
+func (r *row) render(fpdf fpdf.Fpdf, cell internal.Cell) {
+	fpdf.Ln(cell.Height)
 }

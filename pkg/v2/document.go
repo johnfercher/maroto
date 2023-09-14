@@ -3,6 +3,7 @@ package v2
 import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/v2/col"
@@ -16,7 +17,7 @@ import (
 
 type document struct {
 	file  string
-	ctx   context.Context
+	cell  internal.Cell
 	_type types.DocumentType
 	fpdf  fpdf.Fpdf
 	pages []domain.Page
@@ -41,7 +42,7 @@ func NewDocument(file string) *document {
 		file:  file,
 		fpdf:  fpdf,
 		_type: types.Document,
-		ctx: context.NewRootContext(width, height, context.Margins{
+		cell: context.NewRootContext(width, height, context.Margins{
 			Left:   left,
 			Top:    top,
 			Right:  right,
@@ -61,7 +62,7 @@ func (d *document) Add(rows ...domain.Row) {
 func (d *document) Generate() error {
 	//d.ctx.Print(d._type)
 
-	maxHeight := d.ctx.Dimensions.Height
+	maxHeight := d.cell.Height
 	currentHeight := 0.0
 	var buf []domain.Row
 	for _, dRow := range d.rows {
@@ -91,7 +92,7 @@ func (d *document) Generate() error {
 	p.Add(buf...)
 	d.pages = append(d.pages, p)
 
-	innerCtx := d.ctx.Copy()
+	innerCtx := d.cell.Copy()
 	for _, page := range d.pages {
 		page.Render(d.fpdf, innerCtx)
 	}
