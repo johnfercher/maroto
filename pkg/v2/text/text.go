@@ -3,7 +3,6 @@ package text
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -53,19 +52,15 @@ func (t *text) GetStructure() *tree.Node[domain.Structure] {
 		Value: t.value,
 	}
 
-	return tree.NewNode(0, str)
+	return tree.NewNode(str)
 }
 
-func (t *text) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	t.render(fpdf, cell)
+func (t *text) Render(provider domain.Provider, cell internal.Cell) {
+	t.render(provider, cell)
 	return
 }
 
-func (t *text) render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	font := internal.NewFont(fpdf, 2, consts.Arial, consts.Normal)
-	math := internal.NewMath(fpdf)
-	text := internal.NewText(fpdf, math, font)
-
+func (t *text) render(provider domain.Provider, cell internal.Cell) {
 	if t.prop.Top > cell.Height {
 		t.prop.Top = cell.Height
 	}
@@ -78,8 +73,5 @@ func (t *text) render(fpdf fpdf.Fpdf, cell internal.Cell) {
 		t.prop.Right = cell.Width
 	}
 
-	text.Add(
-		t.value,
-		cell,
-		t.prop)
+	provider.AddText(t.value, cell, t.prop)
 }

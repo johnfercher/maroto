@@ -5,7 +5,7 @@ go 1.21.1
 require (
 	github.com/boombuler/barcode v1.0.1
 	github.com/google/uuid v1.3.0
-	github.com/johnfercher/go-tree v1.0.2
+	github.com/johnfercher/go-tree v1.0.3
 	github.com/jung-kurt/gofpdf v1.16.2
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.4

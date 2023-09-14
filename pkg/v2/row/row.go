@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
@@ -48,7 +47,7 @@ func (r *row) GetStructure() *tree.Node[domain.Structure] {
 		Value: fmt.Sprintf("%2.f", r.height),
 	}
 
-	node := tree.NewNode(0, str)
+	node := tree.NewNode(str)
 
 	for _, c := range r.cols {
 		inner := c.GetStructure()
@@ -58,8 +57,8 @@ func (r *row) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (r *row) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	fpdf.SetDrawColor(r.color.Red, r.color.Green, r.color.Blue)
+func (r *row) Render(provider domain.Provider, cell internal.Cell) {
+	//fpdf.SetDrawColor(r.color.Red, r.color.Green, r.color.Blue)
 
 	cell.Height = r.height
 	innerCell := cell.Copy()
@@ -69,14 +68,14 @@ func (r *row) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
 		percent := float64(size) / 12
 		colDimension := parentWidth * percent
 
-		col.Render(fpdf, innerCell)
+		col.Render(provider, innerCell)
 		innerCell.X += colDimension
 	}
 
-	r.render(fpdf, cell)
+	r.render(provider, cell)
 	return
 }
 
-func (r *row) render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	fpdf.Ln(cell.Height)
+func (r *row) render(provider domain.Provider, cell internal.Cell) {
+	provider.CreateRow(cell.Height)
 }

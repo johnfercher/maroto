@@ -3,7 +3,6 @@ package signature
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
@@ -31,7 +30,7 @@ func New(value string, textProps ...props.Font) domain.Component {
 	}
 }
 
-func (s *signature) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
+func (s *signature) Render(provider domain.Provider, cell internal.Cell) {
 	font := internal.NewFont(fpdf, s.prop.Size, s.prop.Family, s.prop.Style)
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)

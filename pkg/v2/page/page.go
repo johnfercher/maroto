@@ -3,7 +3,6 @@ package page
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -19,16 +18,12 @@ func New() domain.Page {
 	}
 }
 
-func (p *page) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	//ctx = ctx.NewPage(fpdf.PageNo())
-
+func (p *page) Render(provider domain.Provider, cell internal.Cell) {
 	innerCell := cell.Copy()
 	for _, row := range p.rows {
-		row.Render(fpdf, innerCell)
+		row.Render(provider, innerCell)
 		innerCell.Y += row.GetHeight()
 	}
-	//fpdf.AddPage()
-
 }
 
 func (p *page) GetType() string {
@@ -45,7 +40,7 @@ func (p *page) GetStructure() *tree.Node[domain.Structure] {
 		Type: string(p._type),
 	}
 
-	node := tree.NewNode(0, str)
+	node := tree.NewNode(str)
 
 	for _, r := range p.rows {
 		inner := r.GetStructure()

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/types"
 )
@@ -51,7 +50,7 @@ func (c *col) GetStructure() *tree.Node[domain.Structure] {
 		Value: fmt.Sprintf("%d", c.size),
 	}
 
-	node := tree.NewNode(0, str)
+	node := tree.NewNode(str)
 
 	for _, c := range c.components {
 		inner := c.GetStructure()
@@ -61,21 +60,21 @@ func (c *col) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (c *col) Render(fpdf fpdf.Fpdf, cell internal.Cell) {
+func (c *col) Render(provider domain.Provider, cell internal.Cell) {
 	parentWidth := cell.Width
 	percent := float64(c.size) / defaultGridSize
 	colDimension := parentWidth * percent
 	cell.Width = colDimension
 
-	c.render(fpdf, cell)
+	c.render(provider, cell)
 
 	for _, component := range c.components {
-		component.Render(fpdf, cell)
+		component.Render(provider, cell)
 	}
 
 	return
 }
 
-func (c *col) render(fpdf fpdf.Fpdf, cell internal.Cell) {
-	fpdf.CellFormat(cell.Width, cell.Height, "", "1", 0, "C", false, 0, "")
+func (c *col) render(provider domain.Provider, cell internal.Cell) {
+	provider.CreateCol(cell.Width, cell.Height)
 }

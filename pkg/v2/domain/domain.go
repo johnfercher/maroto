@@ -3,7 +3,6 @@ package domain
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/fpdf"
 )
 
 type Maroto interface {
@@ -14,7 +13,7 @@ type Maroto interface {
 }
 
 type Node interface {
-	Render(fpdf fpdf.Fpdf, ctx internal.Cell)
+	Render(fpdf Provider, ctx internal.Cell)
 	GetStructure() *tree.Node[Structure]
 }
 

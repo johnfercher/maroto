@@ -1,30 +1,27 @@
 package main
 
 import (
-	"encoding/base64"
-	"fmt"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/code/barcode"
-	"github.com/johnfercher/maroto/pkg/v2/code/matrixcode"
-	"github.com/johnfercher/maroto/pkg/v2/code/qrcode"
 	"github.com/johnfercher/maroto/pkg/v2/col"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/image"
+	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/johnfercher/maroto/pkg/v2/row"
-	"github.com/johnfercher/maroto/pkg/v2/signature"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
-	"os"
 )
 
 func main() {
-	pdf := v2.NewDocument("v2.pdf")
+	//provider := providers.NewGofpdf()
+	//pdf := v2.NewDocument(provider, "v2.pdf")
 
-	pdf.Add(buildCodesRow())
-	pdf.Add(buildImageRow())
-	pdf.Add(buildTextRow())
+	provider := providers.NewHTML()
+	pdf := v2.NewDocument(provider, "v2.html")
+
+	//pdf.Add(buildCodesRow())
+	//pdf.Add(buildImageRow())
+	pdf.Add(buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow(), buildTextRow())
 
 	//pdf.Add()
 	//pdf.ForceAddPage(p)
@@ -35,7 +32,7 @@ func main() {
 	}
 }
 
-func buildCodesRow() domain.Row {
+/*func buildCodesRow() domain.Row {
 	r := row.New(70)
 
 	//image := image.New("image1")
@@ -71,7 +68,7 @@ func buildImageRow() domain.Row {
 	row.Add(col1, col2)
 
 	return row
-}
+}*/
 
 func buildTextRow() domain.Row {
 	row := row.New(70)
@@ -82,14 +79,14 @@ func buildTextRow() domain.Row {
 		Align: consts.Center,
 	}))
 
-	col2 := col.New(6)
+	/*col2 := col.New(6)
 	col2.Add(signature.New("Fulano de Tal", props.Font{
 		Style:  consts.Italic,
 		Size:   20,
 		Family: consts.Courier,
-	}))
+	}))*/
 
-	row.Add(col1, col2)
+	row.Add(col1, col1)
 
 	return row
 }
