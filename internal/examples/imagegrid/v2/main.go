@@ -10,11 +10,9 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/row"
 	"github.com/johnfercher/maroto/pkg/v2/size"
 	"os"
-	"time"
 )
 
 func main() {
-	begin := time.Now()
 	provider := providers.NewGofpdf(size.A4)
 	maroto := v2.NewMaroto(provider, "internal/examples/pdfs/imagegridv2.pdf")
 	m := v2.NewMarotoMetrified(maroto)
@@ -132,6 +130,4 @@ func main() {
 	}
 
 	report.Print()
-	end := time.Now()
-	fmt.Println(end.Sub(begin))
 }

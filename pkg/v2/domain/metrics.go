@@ -64,16 +64,14 @@ func hasGreaterThan1000(times []*Time) bool {
 
 func (m *Metric) String() string {
 	var content string
-	content += m.Key + "\n"
-	content += "executions: ["
+	content += m.Key + " -> avg: " + m.Avg.String() + ", executions: ["
 	for i, time := range m.Times {
 		content += time.String()
 		if i < len(m.Times)-1 {
 			content += ", "
 		}
 	}
-	content += "]\n"
-	content += "avg: " + m.Avg.String()
+	content += "]"
 	return content
 }
 
