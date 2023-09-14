@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/yosssi/gohtml"
 	"os"
 )
 
@@ -89,7 +90,7 @@ func (h *html) CreateRow(height float64) {
 	h.currentRow++
 }
 
-func (h *html) CreateCol(width, _ float64) {
+func (h *html) CreateCol(width, height float64) {
 	var row *tree.Node[Div]
 
 	rowsLength := len(h.rows)
@@ -103,6 +104,7 @@ func (h *html) CreateCol(width, _ float64) {
 
 	colDiv := row.GetData().Copy("div", "col")
 	colDiv.dimensions.Width = width
+	colDiv.dimensions.Height = height
 	colNode := tree.NewNode(colDiv)
 
 	h.cols = append(h.cols, colNode)
@@ -135,9 +137,11 @@ func (h *html) Generate(file string) error {
 	}
 	defer f.Close()
 
+	htmlTemplate := htmlTemplate()
 	content := h.getRows()
+	html := fmt.Sprintf(htmlTemplate, content)
 
-	_, err = f.WriteString(content)
+	_, err = f.WriteString(gohtml.Format(html))
 	if err != nil {
 		return err
 	}
@@ -154,34 +158,51 @@ func (h *html) getRows() string {
 	for _, row := range h.rows {
 		colContent := h.getCols(row)
 		div := row.GetData()
-		content += fmt.Sprintf("<%s label='%s'>\n%s</%s>\n", div._type, div.label, colContent, div._type)
+		content += fmt.Sprintf("<%s title=\"%s\" style=\"position:relative; width: %0.fmm;\">%s</%s>", div._type, div.label, div.dimensions.Width, colContent, div._type)
 	}
 	return content
 }
 
 func (h *html) getCols(row *tree.Node[Div]) string {
-	identation := "\t"
 	var content string
 	colNodes := row.GetNexts()
 	for _, colNode := range colNodes {
 		col := colNode.GetData()
 		componentContent := h.getComponent(colNode)
-		content += fmt.Sprintf("%s<%s label='%s'>\n%s%s</%s>\n", identation, col._type, col.label, componentContent, identation, col._type)
+		content += fmt.Sprintf("<%s title=\"%s\" style=\"float: left; position:relative; border: solid black 1px; width: %0.fmm; height: %0.fmm;\">%s</%s>", col._type, col.label, col.dimensions.Width, col.dimensions.Height, componentContent, col._type)
 	}
 
 	return content
 }
 
 func (h *html) getComponent(col *tree.Node[Div]) string {
-	identation := "\t\t"
 	var content string
 	componentNodes := col.GetNexts()
 	for _, componentNode := range componentNodes {
 		component := componentNode.GetData()
 		if component._type == "span" {
-			content += fmt.Sprintf("%s<span>%s</span>\n", identation, component.content)
+			content += fmt.Sprintf("<span>%s</span>", component.content)
 		}
 	}
 
 	return content
+}
+
+func htmlTemplate() string {
+	return `
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="description" content="Description">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" href="css/theme.css">
+	</head>
+	<body>
+		%s
+	</body>
+</html>
+`
 }

@@ -16,5 +16,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/ruudk/golang-pdf417 v0.0.0-20201230142125-a7e3863a1245 // indirect
 	github.com/stretchr/objx v0.5.0 // indirect
+	github.com/yosssi/gohtml v0.0.0-20201013000340-ee4748c638f4 // indirect
+	golang.org/x/net v0.15.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
