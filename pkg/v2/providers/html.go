@@ -1,6 +1,7 @@
 package providers
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
@@ -221,6 +222,15 @@ func (h *html) Generate(file string) error {
 	}
 
 	return nil
+}
+
+func (h *html) GenerateAndOutput() (bytes.Buffer, error) {
+	htmlTemplate := htmlTemplate()
+	content := h.getRows()
+	html := fmt.Sprintf(htmlTemplate, content)
+	var buf bytes.Buffer
+	buf = *bytes.NewBufferString(gohtml.Format(html))
+	return buf, nil
 }
 
 func (h *html) getLastCol() *tree.Node[Div] {

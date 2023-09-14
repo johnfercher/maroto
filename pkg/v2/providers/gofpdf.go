@@ -1,6 +1,7 @@
 package providers
 
 import (
+	"bytes"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -117,5 +118,10 @@ func (g *gofpdfProvider) CreateRow(height float64) {
 
 func (g *gofpdfProvider) Generate(file string) error {
 	return g.fpdf.OutputFileAndClose(file)
-	return g.fpdf.OutputFileAndClose(file)
+}
+
+func (g *gofpdfProvider) GenerateAndOutput() (bytes.Buffer, error) {
+	var buffer bytes.Buffer
+	err := g.fpdf.Output(&buffer)
+	return buffer, err
 }
