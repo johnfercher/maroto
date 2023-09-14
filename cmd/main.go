@@ -83,7 +83,11 @@ func buildTextRow() domain.Row {
 	}))
 
 	col2 := col.New(6)
-	col2.Add(signature.New("Fulano de Tal"))
+	col2.Add(signature.New("Fulano de Tal", props.Font{
+		Style:  consts.Italic,
+		Size:   20,
+		Family: consts.Courier,
+	}))
 
 	row.Add(col1, col2)
 

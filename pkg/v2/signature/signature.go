@@ -33,10 +33,12 @@ func New(value string, textProps ...props.Font) domain.Component {
 }
 
 func (s *signature) Render(fpdf fpdf.Fpdf, ctx context.Context) {
-	font := internal.NewFont(fpdf, 2, consts.Arial, consts.Normal)
+	font := internal.NewFont(fpdf, s.prop.Size, s.prop.Family, s.prop.Style)
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
+
+	font.SetFont(s.prop.Family, s.prop.Style, s.prop.Size)
 
 	signature.AddSpaceFor(
 		s.value,

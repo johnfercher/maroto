@@ -52,13 +52,21 @@ func main() {
 
 	m.Row(25, func() {
 		m.Col(4, func() {
-			m.Signature("Gopher Senior")
+			m.Signature("Gopher Senior", props.Font{
+				Size: 10,
+			})
 		})
 		m.Col(4, func() {
-			m.Signature("Gopheroid")
+			m.Signature("Gopheroid", props.Font{
+				Size:  10,
+				Style: consts.Italic,
+			})
 		})
 		m.Col(4, func() {
-			m.Signature("Sign Here")
+			m.Signature("Sign Here", props.Font{
+				Size:   10,
+				Family: consts.Courier,
+			})
 		})
 	})
 
