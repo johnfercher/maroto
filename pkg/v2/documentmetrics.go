@@ -74,7 +74,7 @@ func (d *documentMetrics) getTimeSpent(closure func()) *domain.Time {
 	start := time.Now()
 	closure()
 	return &domain.Time{
-		Value: time.Now().Sub(start).Nanoseconds(),
+		Value: float64(time.Now().Sub(start).Nanoseconds()),
 		Scale: domain.Nano,
 	}
 }
@@ -122,13 +122,13 @@ func (d *documentMetrics) getAVG(times []*domain.Time) *domain.Time {
 		return nil
 	}
 
-	var sum int64
+	var sum float64
 	for _, time := range times {
 		sum += time.Value
 	}
 
 	return &domain.Time{
-		Value: sum / int64(len(times)),
+		Value: sum / float64(len(times)),
 		Scale: times[0].Scale,
 	}
 }

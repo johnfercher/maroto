@@ -1,8 +1,6 @@
 package v2
 
 import (
-	"bytes"
-	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -10,14 +8,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/page"
-	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/johnfercher/maroto/pkg/v2/row"
-	"github.com/johnfercher/maroto/pkg/v2/size"
 	"github.com/johnfercher/maroto/pkg/v2/types"
-	"github.com/pdfcpu/pdfcpu/pkg/api"
-	"io"
-	"log"
-	"os"
 )
 
 type document struct {
@@ -59,6 +51,18 @@ func (d *document) Generate() error {
 	d.fillPage()
 	innerCtx := d.cell.Copy()
 
+	for _, page := range d.pages {
+		//fmt.Printf("render page: %d\n", page.GetNumber())
+		page.Render(d.provider, innerCtx)
+	}
+
+	return d.provider.Generate(d.file)
+}
+
+/*func (d *document) Generate() error {
+	d.fillPage()
+	innerCtx := d.cell.Copy()
+
 	p := pool.NewPool(10, func(i domain.Page) (bytes.Buffer, error) {
 		innerProvider := providers.NewGofpdf(size.A4)
 		i.Render(innerProvider, innerCtx)
@@ -83,7 +87,7 @@ func (d *document) Generate() error {
 		return err
 	}
 	return d.provider.Generate(d.file)
-}
+}*/
 
 func (d *document) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{

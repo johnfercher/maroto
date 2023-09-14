@@ -11,7 +11,7 @@ const (
 )
 
 type Time struct {
-	Value int64
+	Value float64
 	Scale TimeScale
 }
 
@@ -30,7 +30,7 @@ func (t *Time) Normalize() {
 }
 
 func (t *Time) String() string {
-	return fmt.Sprintf("%d(%s)", t.Value, t.Scale)
+	return fmt.Sprintf("%.2f%s", t.Value, t.Scale)
 }
 
 type Metric struct {

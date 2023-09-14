@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/pkg/props"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/col"
 	"github.com/johnfercher/maroto/pkg/v2/image"
@@ -10,15 +11,13 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/size"
 	"os"
 	"time"
-
-	"github.com/johnfercher/maroto/pkg/props"
 )
 
 func main() {
 	begin := time.Now()
-
 	provider := providers.NewGofpdf(size.A4)
-	m := v2.NewMaroto(provider, "internal/examples/pdfs/imagegridv2.pdf")
+	maroto := v2.NewMaroto(provider, "internal/examples/pdfs/imagegridv2.pdf")
+	m := v2.NewMarotoMetrified(maroto)
 
 	c1 := col.New(2).Add(image.NewFromFile("internal/assets/images/biplane.jpg", props.Rect{
 		Center:  true,
@@ -126,12 +125,13 @@ func main() {
 	r6 := row.New(40).Add(c15, c16)
 	m.Add(r6)
 
-	err := m.Generate()
+	report, err := m.GenerateWithReport()
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
 	}
 
+	report.Print()
 	end := time.Now()
 	fmt.Println(end.Sub(begin))
 }
