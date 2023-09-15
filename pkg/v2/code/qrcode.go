@@ -12,7 +12,7 @@ type qrCode struct {
 	prop props.Rect
 }
 
-func NewQrCode(code string, barcodeProps ...props.Rect) domain.Node {
+func NewQr(code string, barcodeProps ...props.Rect) domain.Node {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]

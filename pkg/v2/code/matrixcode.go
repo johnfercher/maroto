@@ -12,7 +12,7 @@ type matrixCode struct {
 	prop props.Rect
 }
 
-func NewMatrixCode(code string, barcodeProps ...props.Rect) domain.Node {
+func NewMatrix(code string, barcodeProps ...props.Rect) domain.Node {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]

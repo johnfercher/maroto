@@ -58,13 +58,13 @@ func buildCodesRow() domain.Row {
 	r := row.New(70)
 
 	col1 := col.New(4)
-	col1.Add(code.NewBarcode("barcode"))
+	col1.Add(code.NewBar("barcode"))
 
 	col2 := col.New(4)
-	col2.Add(code.NewQrCode("qrcode"))
+	col2.Add(code.NewQr("qrcode"))
 
 	col3 := col.New(4)
-	col3.Add(code.NewMatrixCode("matrixcode"))
+	col3.Add(code.NewMatrix("matrixcode"))
 
 	r.Add(col1, col2, col3)
 	return r

@@ -12,7 +12,7 @@ type barcode struct {
 	prop props.Barcode
 }
 
-func NewBarcode(code string, barcodeProps ...props.Barcode) domain.Node {
+func NewBar(code string, barcodeProps ...props.Barcode) domain.Node {
 	prop := props.Barcode{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]

@@ -29,9 +29,9 @@ func TestDocument_GetStructure(t *testing.T) {
 	maroto := v2.NewMaroto("file.txt")
 
 	r1 := row.New(10)
-	r1c1 := col.New(4).Add(code.NewBarcode("barcode"))
-	r1c2 := col.New(4).Add(code.NewMatrixCode("matrixcode"))
-	r1c3 := col.New(4).Add(code.NewQrCode("qrcode"))
+	r1c1 := col.New(4).Add(code.NewBar("barcode"))
+	r1c2 := col.New(4).Add(code.NewMatrix("matrixcode"))
+	r1c3 := col.New(4).Add(code.NewQr("qrcode"))
 	r1.Add(r1c1, r1c2, r1c3)
 
 	r2 := row.New(10)
