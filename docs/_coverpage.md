@@ -2,5 +2,5 @@
 
 # Maroto <small>PDF</small>
 
-[Github](https://github.com/johnfercher/maroto)
+[Github](https://github.com/johnfercher/maroto/tree/v2)
 [See](README.md)

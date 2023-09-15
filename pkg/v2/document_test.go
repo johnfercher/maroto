@@ -11,6 +11,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/image"
 	"github.com/johnfercher/maroto/pkg/v2/signature"
+	"github.com/johnfercher/maroto/pkg/v2/test"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -27,7 +28,7 @@ func TestNewDocument(t *testing.T) {
 
 func TestDocument_GetStructure(t *testing.T) {
 	// Arrange
-	p := v2.NewMaroto("file.txt")
+	maroto := v2.NewMaroto("file.txt")
 
 	r1 := row.New(10)
 	r1c1 := col.New(4).Add(barcode.New("barcode"))
@@ -42,17 +43,8 @@ func TestDocument_GetStructure(t *testing.T) {
 	r2c4 := col.New(3).Add(text.New("text"))
 	r2.Add(r2c1, r2c2, r2c3, r2c4)
 
-	p.Add(r1, r2)
+	maroto.Add(r1, r2)
 
-	// Act
-	nodeDocument := p.GetStructure()
-
-	// Assert Document
-	assert.NotNil(t, nodeDocument)
-	_, document := nodeDocument.Get()
-	assert.Equal(t, "document", document.Type)
-	assert.Equal(t, "file.txt", document.Value)
-
-	nodeRows := nodeDocument.GetNexts()
-	assert.Equal(t, 2, len(nodeRows))
+	// Assert
+	test.New(t).Assert(maroto).JSON(`{"type":"document","nodes":[{"type":"page","nodes":[{"type":"row","nodes":[{"type":"col","nodes":[{"type":"barcode"}]},{"type":"col","nodes":[{"type":"matrixcode"}]},{"type":"col","nodes":[{"type":"qrcode"}]}]},{"type":"row","nodes":[{"type":"col","nodes":[{"type":"fileimage"}]},{"type":"col","nodes":[{"type":"base64image"}]},{"type":"col","nodes":[{"type":"signature"}]},{"type":"col","nodes":[{"type":"text"}]}]},{"type":"row","nodes":[{"type":"col"}]}]}]}`)
 }

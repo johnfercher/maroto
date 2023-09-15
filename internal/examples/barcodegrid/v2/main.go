@@ -7,14 +7,11 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/code/barcode"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
-	"github.com/johnfercher/maroto/pkg/v2/providers"
-	"github.com/johnfercher/maroto/pkg/v2/size"
 	"os"
 )
 
 func main() {
-	provider := providers.NewGofpdf(size.A4)
-	maroto := v2.NewMaroto(provider, "internal/examples/pdfs/barcodegridv2.pdf")
+	maroto := v2.NewMaroto("internal/examples/pdfs/barcodegridv2.pdf")
 	m := v2.NewMarotoMetrified(maroto)
 
 	c1 := col.New(2).Add(barcode.New("https://github.com/johnfercher/maroto", props.Barcode{
