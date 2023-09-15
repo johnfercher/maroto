@@ -6,15 +6,15 @@ import (
 )
 
 func main() {
-	m := v2.NewMaroto("v2.pdf")
-	metrics := v2.NewMetricsDecorator(m)
+	m := v2.NewMaroto()
+	mMetrified := v2.NewMetricsDecorator(m)
 
 	// Add things
 
-	report, err := metrics.GenerateWithReport()
+	document, err := mMetrified.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	report.Print()
+	document.GetReport().Print()
 }

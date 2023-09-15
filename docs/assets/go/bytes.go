@@ -6,12 +6,14 @@ import (
 )
 
 func main() {
-	m := v2.NewMaroto("v2.pdf")
+	m := v2.NewMaroto()
 
-	// Add things
+	// Do things
 
-	err := m.GenerateConcurrently()
+	document, err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	bytes := document.GetBytes()
 }
