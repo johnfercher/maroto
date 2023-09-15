@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"github.com/johnfercher/maroto/pkg/consts"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/code/barcode"
-	"github.com/johnfercher/maroto/pkg/v2/code/matrixcode"
-	"github.com/johnfercher/maroto/pkg/v2/code/qrcode"
+	"github.com/johnfercher/maroto/pkg/v2/code"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/image"
@@ -31,9 +29,9 @@ func TestDocument_GetStructure(t *testing.T) {
 	maroto := v2.NewMaroto("file.txt")
 
 	r1 := row.New(10)
-	r1c1 := col.New(4).Add(barcode.New("barcode"))
-	r1c2 := col.New(4).Add(matrixcode.New("matrixcode"))
-	r1c3 := col.New(4).Add(qrcode.New("qrcode"))
+	r1c1 := col.New(4).Add(code.NewBar("barcode"))
+	r1c2 := col.New(4).Add(code.NewMatrix("matrixcode"))
+	r1c3 := col.New(4).Add(code.NewQr("qrcode"))
 	r1.Add(r1c1, r1c2, r1c3)
 
 	r2 := row.New(10)

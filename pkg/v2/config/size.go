@@ -1,4 +1,4 @@
-package size
+package config
 
 type PageSize string
 
@@ -11,9 +11,9 @@ const (
 	MinBottomMargin = 20.0
 )
 
-func GetDimensions(pageSize PageSize) (width float64, height float64) {
+func GetDimensions(pageSize PageSize) *Dimensions {
 	switch pageSize {
 	default:
-		return 210, 297
+		return &Dimensions{210, 297}
 	}
 }
