@@ -7,12 +7,10 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/code"
-	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/provider"
 	"github.com/johnfercher/maroto/pkg/v2/signature"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
@@ -20,38 +18,24 @@ import (
 )
 
 func main() {
-	pdf := buildMarotoPDF()
-	html := buildMarotoHTML()
+	maroto := v2.NewMaroto()
+	m := v2.NewMetricsDecorator(maroto)
 
-	gen(pdf)
-	gen(html)
-}
-
-func buildMarotoPDF() domain.MarotoMetrified {
-	m := v2.NewMaroto("v2.pdf")
-	return v2.NewMarotoMetrified(m)
-}
-
-func buildMarotoHTML() domain.MarotoMetrified {
-	builder := config.NewBuilder().
-		WithPageSize(config.A4).
-		WithProvider(provider.HTML)
-
-	m := v2.NewMaroto("v2.html", builder)
-	return v2.NewMarotoMetrified(m)
-}
-
-func gen(m domain.MarotoMetrified) {
 	for _ = range [10]int{} {
 		m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	}
 
-	report, err := m.GenerateWithReport()
+	document, err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	report.Print()
+	err = document.Save("v2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	document.Report.Print()
 }
 
 func buildCodesRow() domain.Row {
@@ -71,7 +55,7 @@ func buildCodesRow() domain.Row {
 }
 
 func buildImagesRow() domain.Row {
-	row := row.New(70)
+	r := row.New(70)
 
 	col1 := col.New(6)
 	col1.Add(image.NewFromFile("internal/assets/images/frontpage.png"))
@@ -85,9 +69,8 @@ func buildImagesRow() domain.Row {
 	col2 := col.New(6)
 	col2.Add(image.NewFromBase64(stringBase64, consts.Png))
 
-	row.Add(col1, col2)
-
-	return row
+	r.Add(col1, col2)
+	return r
 }
 
 func buildTextsRow() domain.Row {
@@ -107,6 +90,5 @@ func buildTextsRow() domain.Row {
 	}))
 
 	row.Add(col1, col2)
-
 	return row
 }

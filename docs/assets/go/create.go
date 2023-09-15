@@ -10,7 +10,7 @@ func main() {
 
 	// Add things
 
-	err := m.Generate()
+	err := m.GenerateConcurrently()
 	if err != nil {
 		log.Fatal(err.Error())
 	}

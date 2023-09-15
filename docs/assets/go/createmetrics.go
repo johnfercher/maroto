@@ -7,7 +7,7 @@ import (
 
 func main() {
 	m := v2.NewMaroto("v2.pdf")
-	metrics := v2.NewMarotoMetrified(m)
+	metrics := v2.NewMetricsDecorator(m)
 
 	// Add things
 

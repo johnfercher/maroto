@@ -98,7 +98,7 @@ func New(maroto *config.Maroto, options ...providers.ProviderOption) *html {
 	return provider
 }
 
-func (h *html) CreateRow(height float64) {
+func (h *html) CreateRow(_ float64) {
 	h.currentRow++
 }
 
@@ -190,7 +190,7 @@ func (h *html) AddBarCode(code string, _ internal.Cell, _ props.Barcode) {
 	col.AddNext(textNode)
 }
 
-func (h *html) AddImage(value string, cell internal.Cell, prop props.Rect, extension consts.Extension) {
+func (h *html) AddImage(value string, _ internal.Cell, _ props.Rect, extension consts.Extension) {
 	minSize := 20
 	if len(value) < minSize {
 		minSize = len(value)
@@ -214,7 +214,7 @@ func (h *html) AddImage(value string, cell internal.Cell, prop props.Rect, exten
 	col.AddNext(textNode)
 }
 
-func (h *html) Generate(file string) error {
+func (h *html) GenerateFile(file string) error {
 	f, err := os.Create(file)
 	if err != nil {
 		return err
@@ -233,13 +233,13 @@ func (h *html) Generate(file string) error {
 	return nil
 }
 
-func (h *html) GenerateAndOutput() (bytes.Buffer, error) {
+func (h *html) GenerateBytes() ([]byte, error) {
 	htmlTemplate := htmlTemplate()
 	content := h.getRows()
 	html := fmt.Sprintf(htmlTemplate, content)
 	var buf bytes.Buffer
 	buf = *bytes.NewBufferString(gohtml.Format(html))
-	return buf, nil
+	return buf.Bytes(), nil
 }
 
 func (h *html) getLastCol() *tree.Node[Div] {

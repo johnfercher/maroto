@@ -115,14 +115,15 @@ func (g *gofpdfProvider) CreateRow(height float64) {
 	g.fpdf.Ln(height)
 }
 
-func (g *gofpdfProvider) Generate(file string) error {
+func (g *gofpdfProvider) GenerateFile(file string) error {
 	return g.fpdf.OutputFileAndClose(file)
 }
 
-func (g *gofpdfProvider) GenerateAndOutput() (bytes.Buffer, error) {
+func (g *gofpdfProvider) GenerateBytes() ([]byte, error) {
 	var buffer bytes.Buffer
 	err := g.fpdf.Output(&buffer)
-	return buffer, err
+
+	return buffer.Bytes(), err
 }
 
 func (g *gofpdfProvider) SetCache(cache cache.Cache) {

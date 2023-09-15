@@ -12,7 +12,7 @@ import (
 
 func main() {
 	maroto := v2.NewMaroto("internal/examples/pdfs/datamatrixgridv2.pdf")
-	m := v2.NewMarotoMetrified(maroto)
+	m := v2.NewMetricsDecorator(maroto)
 
 	c1 := col.New(2).Add(code.NewMatrix("https://github.com/johnfercher/maroto", props.Rect{
 		Percent: 50,

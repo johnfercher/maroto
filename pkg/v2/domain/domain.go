@@ -3,18 +3,34 @@ package domain
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
+	"os"
 )
 
+type Document struct {
+	Bytes  []byte
+	Report *Report
+}
+
+func (r *Document) Save(file string) error {
+	f, err := os.Create(file)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	_, err = f.Write(r.Bytes)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 type Maroto interface {
-	Generate() error
+	Generate() (*Document, error)
 	ForceAddPage(pages ...Page)
 	Add(rows ...Row)
 	GetStructure() *tree.Node[Structure]
-}
-
-type MarotoMetrified interface {
-	Maroto
-	GenerateWithReport() (*Report, error)
 }
 
 type Node interface {

@@ -1,8 +1,6 @@
 package v2
 
 import (
-	"bytes"
-	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -19,12 +17,9 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 	"io"
-	"log"
-	"os"
 )
 
 type document struct {
-	file          string
 	cell          internal.Cell
 	provider      domain.Provider
 	pages         []domain.Page
@@ -34,7 +29,7 @@ type document struct {
 	config        []config.Builder
 }
 
-func NewMaroto(file string, config ...config.Builder) *document {
+func NewMaroto(config ...config.Builder) *document {
 	cache := cache.New()
 	provider := getProvider(cache, config...)
 
@@ -42,7 +37,6 @@ func NewMaroto(file string, config ...config.Builder) *document {
 	left, top, right, bottom := provider.GetMargins()
 
 	return &document{
-		file:     file,
 		provider: provider,
 		cell: context.NewRootContext(width, height, context.Margins{
 			Left:   left,
@@ -63,26 +57,32 @@ func (d *document) Add(rows ...domain.Row) {
 	d.addRows(rows...)
 }
 
-//func (d *document) Generate() error {
-//	d.fillPage()
-//	innerCtx := d.cell.Copy()
-//
-//	for _, page := range d.pages {
-//		//fmt.Printf("render page: %d\n", page.GetNumber())
-//		page.Render(d.provider, innerCtx)
-//	}
-//
-//	return d.provider.Generate(d.file)
-//}
-
-func (d *document) Generate() error {
+func (d *document) Generate() (*domain.Document, error) {
 	d.fillPage()
 	innerCtx := d.cell.Copy()
 
-	p := pool.NewPool(10, func(i domain.Page) (bytes.Buffer, error) {
+	for _, page := range d.pages {
+		page.Render(d.provider, innerCtx)
+	}
+
+	bytes, err := d.provider.GenerateBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	return &domain.Document{
+		Bytes: bytes,
+	}, nil
+}
+
+/*func (d *document) GenerateConcurrently() error {
+	d.fillPage()
+	innerCtx := d.cell.Copy()
+
+	p := pool.NewPool(10, func(i domain.Page) ([]byte, error) {
 		innerProvider := getProvider(d.imageCache, d.config...)
 		i.Render(innerProvider, innerCtx)
-		return innerProvider.GenerateAndOutput()
+		return innerProvider.GenerateBytes()
 	})
 
 	processed := p.Process(d.pages)
@@ -91,8 +91,8 @@ func (d *document) Generate() error {
 	}
 	readers := make([]io.ReadSeeker, len(processed.Results))
 	for i, result := range processed.Results {
-		buffer := result.Output.(bytes.Buffer)
-		readers[i] = bytes.NewReader(buffer.Bytes())
+		b := result.Output.([]byte)
+		readers[i] = bytes.NewReader(b)
 	}
 	writer, _ := os.Create(d.file)
 	defer writer.Close()
@@ -112,14 +112,13 @@ func (d *document) Generate() error {
 	}
 
 	return writer.Close()
-}
+}*/
 
 func (d *document) GetStructure() *tree.Node[domain.Structure] {
 	d.fillPage()
 
 	str := domain.Structure{
-		Type:  "document",
-		Value: d.file,
+		Type: "document",
 	}
 	node := tree.NewNode(str)
 

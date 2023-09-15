@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type documentMetrics struct {
+type metricsDecorator struct {
 	label         string
 	addRowTime    []*domain.Time
 	addPageTime   []*domain.Time
@@ -15,24 +15,27 @@ type documentMetrics struct {
 	inner         domain.Maroto
 }
 
-func NewMarotoMetrified(inner domain.Maroto) domain.MarotoMetrified {
-	return &documentMetrics{
+func NewMetricsDecorator(inner domain.Maroto) domain.Maroto {
+	return &metricsDecorator{
 		inner: inner,
 	}
 }
 
-func (d *documentMetrics) Generate() error {
+func (d *metricsDecorator) Generate() (*domain.Document, error) {
+	var result *domain.Document
 	var err error
 
 	timeSpent := d.getTimeSpent(func() {
-		err = d.inner.Generate()
+		result, err = d.inner.Generate()
 	})
 	d.generateTime = timeSpent
 
-	return err
+	result.Report = d.buildMetrics().Normalize()
+
+	return result, err
 }
 
-func (d *documentMetrics) ForceAddPage(pages ...domain.Page) {
+func (d *metricsDecorator) ForceAddPage(pages ...domain.Page) {
 	timeSpent := d.getTimeSpent(func() {
 		d.inner.ForceAddPage(pages...)
 	})
@@ -40,7 +43,7 @@ func (d *documentMetrics) ForceAddPage(pages ...domain.Page) {
 	d.addPageTime = append(d.addPageTime, timeSpent)
 }
 
-func (d *documentMetrics) Add(rows ...domain.Row) {
+func (d *metricsDecorator) Add(rows ...domain.Row) {
 	timeSpent := d.getTimeSpent(func() {
 		d.inner.Add(rows...)
 	})
@@ -48,7 +51,7 @@ func (d *documentMetrics) Add(rows ...domain.Row) {
 	d.addRowTime = append(d.addRowTime, timeSpent)
 }
 
-func (d *documentMetrics) GetStructure() *tree.Node[domain.Structure] {
+func (d *metricsDecorator) GetStructure() *tree.Node[domain.Structure] {
 	var tree *tree.Node[domain.Structure]
 
 	timeSpent := d.getTimeSpent(func() {
@@ -59,18 +62,7 @@ func (d *documentMetrics) GetStructure() *tree.Node[domain.Structure] {
 	return tree
 }
 
-func (d *documentMetrics) GenerateWithReport() (*domain.Report, error) {
-	var err error
-
-	timeSpent := d.getTimeSpent(func() {
-		err = d.inner.Generate()
-	})
-	d.generateTime = timeSpent
-
-	return d.buildMetrics().Normalize(), err
-}
-
-func (d *documentMetrics) getTimeSpent(closure func()) *domain.Time {
+func (d *metricsDecorator) getTimeSpent(closure func()) *domain.Time {
 	start := time.Now()
 	closure()
 	return &domain.Time{
@@ -79,7 +71,7 @@ func (d *documentMetrics) getTimeSpent(closure func()) *domain.Time {
 	}
 }
 
-func (d *documentMetrics) buildMetrics() *domain.Report {
+func (d *metricsDecorator) buildMetrics() *domain.Report {
 	var report domain.Report
 
 	if d.structureTime != nil {
@@ -117,7 +109,7 @@ func (d *documentMetrics) buildMetrics() *domain.Report {
 	return &report
 }
 
-func (d *documentMetrics) getAVG(times []*domain.Time) *domain.Time {
+func (d *metricsDecorator) getAVG(times []*domain.Time) *domain.Time {
 	if len(times) == 0 {
 		return nil
 	}
