@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/code"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
@@ -18,7 +19,9 @@ import (
 )
 
 func main() {
-	maroto := v2.NewMaroto()
+	cfg := config.NewBuilder().WithThreadPool(10)
+	maroto := v2.NewMaroto(cfg)
+
 	m := v2.NewMetricsDecorator(maroto)
 
 	for _ = range [10]int{} {
@@ -35,7 +38,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	document.Report.Print()
+	document.GetReport().Print()
 }
 
 func buildCodesRow() domain.Row {

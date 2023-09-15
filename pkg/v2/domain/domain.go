@@ -6,7 +6,7 @@ import (
 )
 
 type Maroto interface {
-	Generate() (*Document, error)
+	Generate() (Document, error)
 	ForceAddPage(pages ...Page)
 	Add(rows ...Row)
 	GetStructure() *tree.Node[Structure]

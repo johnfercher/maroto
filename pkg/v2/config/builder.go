@@ -9,6 +9,7 @@ type builder struct {
 	pageSize     PageSize
 	dimensions   *Dimensions
 	margins      *Margins
+	threadPool   int
 }
 
 type Builder interface {
@@ -16,6 +17,7 @@ type Builder interface {
 	WithDimensions(dimensions *Dimensions) Builder
 	WithMargins(margins *Margins) Builder
 	WithProvider(providerType provider.Type) Builder
+	WithThreadPool(pool int) Builder
 	GetConfig() *Maroto
 }
 
@@ -95,9 +97,20 @@ func (b *builder) WithProvider(providerType provider.Type) Builder {
 	return b
 }
 
+func (b *builder) WithThreadPool(pool int) Builder {
+	if pool <= 0 {
+		return b
+	}
+
+	b.threadPool = pool
+	return b
+}
+
 func (b *builder) GetConfig() *Maroto {
 	return &Maroto{
-		b.providerType,
-		b.dimensions,
+		ProviderType: b.providerType,
+		Dimensions:   b.dimensions,
+		Margins:      b.margins,
+		ThreadPool:   b.threadPool,
 	}
 }

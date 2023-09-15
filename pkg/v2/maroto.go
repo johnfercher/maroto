@@ -20,18 +20,21 @@ import (
 )
 
 type maroto struct {
+	config     *config.Maroto
+	provider   domain.Provider
+	imageCache cache.Cache
+
+	// Building
 	cell          internal.Cell
-	provider      domain.Provider
 	pages         []domain.Page
 	rows          []domain.Row
 	currentHeight float64
-	imageCache    cache.Cache
-	config        []config.Builder
 }
 
-func NewMaroto(config ...config.Builder) config.Maroto {
+func NewMaroto(builder ...config.Builder) domain.Maroto {
 	cache := cache.New()
-	provider := getProvider(cache, config...)
+	cfg := getConfig(builder...)
+	provider := getProvider(cache, cfg)
 
 	width, height := provider.GetDimensions()
 	left, top, right, bottom := provider.GetMargins()
@@ -45,7 +48,7 @@ func NewMaroto(config ...config.Builder) config.Maroto {
 			Bottom: bottom,
 		}),
 		imageCache: cache,
-		config:     config,
+		config:     cfg,
 	}
 }
 
@@ -57,62 +60,16 @@ func (d *maroto) Add(rows ...domain.Row) {
 	d.addRows(rows...)
 }
 
-func (d *maroto) Generate() (*domain.Document, error) {
+func (d *maroto) Generate() (domain.Document, error) {
 	d.fillPage()
-	innerCtx := d.cell.Copy()
 
-	for _, page := range d.pages {
-		page.Render(d.provider, innerCtx)
+	if d.config.ThreadPool > 0 {
+		return d.generate()
 	}
 
-	bytes, err := d.provider.GenerateBytes()
-	if err != nil {
-		return nil, err
-	}
-
-	return &domain.Document{
-		Bytes: bytes,
-	}, nil
+	// Change to parallel
+	return d.generate()
 }
-
-/*func (d *maroto) GenerateConcurrently() error {
-	d.fillPage()
-	innerCtx := d.cell.Copy()
-
-	p := pool.NewPool(10, func(i domain.Page) ([]byte, error) {
-		innerProvider := getProvider(d.imageCache, d.config...)
-		i.Render(innerProvider, innerCtx)
-		return innerProvider.GenerateBytes()
-	})
-
-	processed := p.Process(d.pages)
-	if processed.HasError {
-		log.Fatal("error on generating pages")
-	}
-	readers := make([]io.ReadSeeker, len(processed.Results))
-	for i, result := range processed.Results {
-		b := result.Output.([]byte)
-		readers[i] = bytes.NewReader(b)
-	}
-	writer, _ := os.Create(d.file)
-	defer writer.Close()
-
-	if len(d.config) == 0 || d.config[0].GetConfig().ProviderType == provider.Gofpdf {
-		err := mergePdfs(readers, writer)
-		if err != nil {
-			return err
-		}
-	}
-
-	for _, reader := range readers {
-		_, err := io.Copy(writer, reader)
-		if err != nil {
-			return err
-		}
-	}
-
-	return writer.Close()
-}*/
 
 func (d *maroto) GetStructure() *tree.Node[domain.Structure] {
 	d.fillPage()
@@ -175,20 +132,75 @@ func (d *maroto) fillPage() {
 	d.currentHeight = 0
 }
 
-func getProvider(cache cache.Cache, builders ...config.Builder) domain.Provider {
+func getConfig(builders ...config.Builder) *config.Maroto {
 	builder := config.NewBuilder()
 	if len(builders) > 0 {
 		builder = builders[0]
 	}
 
-	cfg := builder.GetConfig()
+	return builder.GetConfig()
+}
 
+func getProvider(cache cache.Cache, cfg *config.Maroto) domain.Provider {
 	if cfg.ProviderType == provider.HTML {
 		return html.New(cfg, providers.WithCache(cache))
 	}
 
 	return gofpdf.New(cfg, providers.WithCache(cache))
 }
+
+func (d *maroto) generate() (domain.Document, error) {
+	innerCtx := d.cell.Copy()
+
+	for _, page := range d.pages {
+		page.Render(d.provider, innerCtx)
+	}
+
+	bytes, err := d.provider.GenerateBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	return domain.NewDocument(bytes, nil), nil
+}
+
+/*func (d *maroto) generateConcurrently() error {
+	innerCtx := d.cell.Copy()
+
+	p := pool.NewPool(10, func(i domain.Page) ([]byte, error) {
+		innerProvider := getProvider(d.imageCache, d.config...)
+		i.Render(innerProvider, innerCtx)
+		return innerProvider.GenerateBytes()
+	})
+
+	processed := p.Process(d.pages)
+	if processed.HasError {
+		log.Fatal("error on generating pages")
+	}
+	readers := make([]io.ReadSeeker, len(processed.Results))
+	for i, result := range processed.Results {
+		b := result.Output.([]byte)
+		readers[i] = bytes.NewReader(b)
+	}
+	writer, _ := os.Create(d.file)
+	defer writer.Close()
+
+	if len(d.config) == 0 || d.config[0].GetConfig().ProviderType == provider.Gofpdf {
+		err := mergePdfs(readers, writer)
+		if err != nil {
+			return err
+		}
+	}
+
+	for _, reader := range readers {
+		_, err := io.Copy(writer, reader)
+		if err != nil {
+			return err
+		}
+	}
+
+	return writer.Close()
+}*/
 
 func mergePdfs(readers []io.ReadSeeker, writer io.Writer) error {
 	conf := api.LoadConfiguration()
