@@ -14,6 +14,6 @@ const (
 func GetDimensions(pageSize PageSize) *Dimensions {
 	switch pageSize {
 	default:
-		return &Dimensions{210, 297}
+		return &Dimensions{215.9, 279.4}
 	}
 }

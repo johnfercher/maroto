@@ -448,7 +448,7 @@ func (s *PdfMaroto) Text(text string, prop ...props.Text) {
 
 	textProp.MakeValid(s.defaultFontFamily)
 
-	if textProp.Top > s.rowHeight {
+	/*if textProp.Top > s.rowHeight {
 		textProp.Top = s.rowHeight
 	}
 
@@ -470,6 +470,25 @@ func (s *PdfMaroto) Text(text string, prop ...props.Text) {
 		Y:      s.offsetY + textProp.Top,
 		Width:  cellWidth,
 		Height: 0,
+	}*/
+
+	/*if textProp.Top > s.rowHeight {
+		textProp.Top = s.rowHeight
+	}
+
+	if textProp.Left > s.colWidth {
+		textProp.Left = s.colWidth
+	}
+
+	if textProp.Right > s.colWidth {
+		textProp.Right = s.colWidth
+	}*/
+
+	cell := internal.Cell{
+		X:      s.xColOffset,
+		Y:      s.offsetY,
+		Width:  s.colWidth,
+		Height: s.rowHeight,
 	}
 
 	s.TextHelper.Add(text, cell, textProp)

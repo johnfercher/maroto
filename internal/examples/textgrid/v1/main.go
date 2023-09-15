@@ -31,7 +31,11 @@ func main() {
 		})
 	})
 
-	m.Row(10, func() { m.Text("Aligned unindented text") })
+	m.Row(10, func() {
+		m.Col(12, func() {
+			m.Text("Aligned unindented text")
+		})
+	})
 
 	m.Row(40, func() {
 		m.Col(2, func() {
@@ -45,7 +49,11 @@ func main() {
 		})
 	})
 
-	m.Row(10, func() { m.Text("Aligned text with indentation") })
+	m.Row(10, func() {
+		m.Col(12, func() {
+			m.Text("Aligned text with indentation")
+		})
+	})
 
 	m.Row(40, func() {
 		m.Col(2, func() {
@@ -59,7 +67,11 @@ func main() {
 		})
 	})
 
-	m.Row(10, func() { m.Text("Multiline text") })
+	m.Row(10, func() {
+		m.Col(12, func() {
+			m.Text("Multiline text")
+		})
+	})
 
 	m.Row(40, func() {
 		m.Col(2, func() {
@@ -73,7 +85,11 @@ func main() {
 		})
 	})
 
-	m.Row(10, func() { m.Text("Multiline text with indentation") })
+	m.Row(10, func() {
+		m.Col(12, func() {
+			m.Text("Multiline text with indentation")
+		})
+	})
 
 	err := m.OutputFileAndClose("internal/examples/pdfs/textgrid.pdf")
 	if err != nil {

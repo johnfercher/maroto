@@ -93,7 +93,7 @@ func main() {
 		})
 	})
 
-	err := m.OutputFileAndClose("internal/examples/pdfs/dmgrid.pdf")
+	err := m.OutputFileAndClose("internal/examples/pdfs/datamatrixgrid.pdf")
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)

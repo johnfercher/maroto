@@ -97,11 +97,11 @@ func main() {
 	r5 := row.New(40).Add(c12, c13, c14)
 	m.Add(r5)
 
-	c15 := col.New(6).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
+	c15 := col.New(4).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
 		Center:  true,
 		Percent: 80,
 	}))
-	c16 := col.New(6).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
+	c16 := col.New(8).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
 		Center:  true,
 		Percent: 80,
 	}))

@@ -1,0 +1,2 @@
+generate -> avg: 1.85ms, executions: [1.85ms]
+add_row -> avg: 319.00ns, executions: [319.00ns]

@@ -45,8 +45,6 @@ func gen(m domain.MarotoMetrified) {
 	for _ = range [10]int{} {
 		m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	}
-	//m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
-	//m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 
 	report, err := m.GenerateWithReport()
 	if err != nil {
