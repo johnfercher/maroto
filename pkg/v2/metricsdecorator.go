@@ -3,15 +3,16 @@ package v2
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/metrics"
 	"time"
 )
 
 type metricsDecorator struct {
 	label         string
-	addRowTime    []*domain.Time
-	addPageTime   []*domain.Time
-	generateTime  *domain.Time
-	structureTime *domain.Time
+	addRowTime    []*metrics.Time
+	addPageTime   []*metrics.Time
+	generateTime  *metrics.Time
+	structureTime *metrics.Time
 	inner         domain.Maroto
 }
 
@@ -21,18 +22,17 @@ func NewMetricsDecorator(inner domain.Maroto) domain.Maroto {
 	}
 }
 
-func (d *metricsDecorator) Generate() (*domain.Document, error) {
-	var result *domain.Document
+func (d *metricsDecorator) Generate() (domain.Document, error) {
+	var document domain.Document
 	var err error
 
 	timeSpent := d.getTimeSpent(func() {
-		result, err = d.inner.Generate()
+		document, err = d.inner.Generate()
 	})
 	d.generateTime = timeSpent
 
-	result.Report = d.buildMetrics().Normalize()
-
-	return result, err
+	report := d.buildMetrics().Normalize()
+	return domain.NewDocument(document.GetBytes(), report), err
 }
 
 func (d *metricsDecorator) ForceAddPage(pages ...domain.Page) {
@@ -62,36 +62,36 @@ func (d *metricsDecorator) GetStructure() *tree.Node[domain.Structure] {
 	return tree
 }
 
-func (d *metricsDecorator) getTimeSpent(closure func()) *domain.Time {
+func (d *metricsDecorator) getTimeSpent(closure func()) *metrics.Time {
 	start := time.Now()
 	closure()
-	return &domain.Time{
+	return &metrics.Time{
 		Value: float64(time.Now().Sub(start).Nanoseconds()),
-		Scale: domain.Nano,
+		Scale: metrics.Nano,
 	}
 }
 
-func (d *metricsDecorator) buildMetrics() *domain.Report {
-	var report domain.Report
+func (d *metricsDecorator) buildMetrics() *metrics.Report {
+	var report metrics.Report
 
 	if d.structureTime != nil {
-		report = append(report, domain.Metric{
+		report = append(report, metrics.Metric{
 			Key:   "get_tree_structure",
-			Times: []*domain.Time{d.structureTime},
+			Times: []*metrics.Time{d.structureTime},
 			Avg:   d.structureTime,
 		})
 	}
 
 	if d.generateTime != nil {
-		report = append(report, domain.Metric{
+		report = append(report, metrics.Metric{
 			Key:   "generate",
-			Times: []*domain.Time{d.generateTime},
+			Times: []*metrics.Time{d.generateTime},
 			Avg:   d.generateTime,
 		})
 	}
 
 	if len(d.addPageTime) > 0 {
-		report = append(report, domain.Metric{
+		report = append(report, metrics.Metric{
 			Key:   "add_page",
 			Times: d.addPageTime,
 			Avg:   d.getAVG(d.addPageTime),
@@ -99,7 +99,7 @@ func (d *metricsDecorator) buildMetrics() *domain.Report {
 	}
 
 	if len(d.addRowTime) > 0 {
-		report = append(report, domain.Metric{
+		report = append(report, metrics.Metric{
 			Key:   "add_row",
 			Times: d.addRowTime,
 			Avg:   d.getAVG(d.addRowTime),
@@ -109,7 +109,7 @@ func (d *metricsDecorator) buildMetrics() *domain.Report {
 	return &report
 }
 
-func (d *metricsDecorator) getAVG(times []*domain.Time) *domain.Time {
+func (d *metricsDecorator) getAVG(times []*metrics.Time) *metrics.Time {
 	if len(times) == 0 {
 		return nil
 	}
@@ -119,7 +119,7 @@ func (d *metricsDecorator) getAVG(times []*domain.Time) *domain.Time {
 		sum += time.Value
 	}
 
-	return &domain.Time{
+	return &metrics.Time{
 		Value: sum / float64(len(times)),
 		Scale: times[0].Scale,
 	}
