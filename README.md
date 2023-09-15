@@ -15,7 +15,9 @@ You can write your PDFs like you are creating a site using Bootstrap. A Row may 
 Besides that, pages will be added when content may extrapolate the useful area. You can define a header which will be added
 always when a new page appear, in this case, a header may have many rows, lines or tablelist. 
 
-You can see the full documentation [here](https://maroto.io/).
+* You can see the full documentation [here](https://maroto.io/).
+* The RFC is being created [here](https://docs.google.com/document/u/1/d/1OMOdtR2c6FYfl4X5p6Y_KTId_GeONfGbZSebnK0Pxbk/edit).
+* Discussions are being addressed in [this issue](https://github.com/johnfercher/maroto/issues/257).
 
 ## Installation
 
