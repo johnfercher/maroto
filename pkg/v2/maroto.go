@@ -34,9 +34,9 @@ type maroto struct {
 	currentHeight float64
 }
 
-func NewMaroto(builder ...config.Builder) domain.Maroto {
+func NewMaroto(config ...*config.Maroto) domain.Maroto {
 	cache := cache.New()
-	cfg := getConfig(builder...)
+	cfg := getConfig(config...)
 	provider := getProvider(cache, cfg)
 
 	width, height := provider.GetDimensions()
@@ -135,13 +135,12 @@ func (d *maroto) fillPage() {
 	d.currentHeight = 0
 }
 
-func getConfig(builders ...config.Builder) *config.Maroto {
-	builder := config.NewBuilder()
-	if len(builders) > 0 {
-		builder = builders[0]
+func getConfig(configs ...*config.Maroto) *config.Maroto {
+	if len(configs) > 0 {
+		return configs[0]
 	}
 
-	return builder.GetConfig()
+	return config.NewBuilder().Build()
 }
 
 func getProvider(cache cache.Cache, cfg *config.Maroto) domain.Provider {

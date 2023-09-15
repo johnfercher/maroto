@@ -19,7 +19,8 @@ import (
 )
 
 func main() {
-	cfg := config.NewBuilder().WithThreadPool(10)
+	cfg := config.NewBuilder().WithThreadPool(10).Build()
+
 	maroto := v2.NewMaroto(cfg)
 
 	m := v2.NewMetricsDecorator(maroto)
