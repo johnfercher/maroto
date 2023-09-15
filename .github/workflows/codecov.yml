@@ -34,11 +34,11 @@ jobs:
               dep ensure
           fi
 
-      - name: Generate coverage report.txt
+      - name: Generate coverage report
         run: |
           go test `go list ./... | grep -v examples` -coverprofile=coverage.txt -covermode=atomic
 
-      - name: Upload coverage report.txt
+      - name: Upload coverage report
         uses: codecov/codecov-action@v1.0.2
         with:
           token: 2b901472-ebb4-4b88-8774-55d7597a03f9
