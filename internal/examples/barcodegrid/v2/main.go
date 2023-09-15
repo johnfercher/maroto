@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/pkg/props"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/code/barcode"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
@@ -9,13 +10,9 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/johnfercher/maroto/pkg/v2/size"
 	"os"
-	"time"
-
-	"github.com/johnfercher/maroto/pkg/props"
 )
 
 func main() {
-	begin := time.Now()
 	provider := providers.NewGofpdf(size.A4)
 	maroto := v2.NewMaroto(provider, "internal/examples/pdfs/barcodegridv2.pdf")
 	m := v2.NewMarotoMetrified(maroto)
@@ -76,12 +73,11 @@ func main() {
 
 	m.Add(r1, r2, r3, r4)
 
-	err := m.Generate()
+	report, err := m.GenerateWithReport()
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
 	}
 
-	end := time.Now()
-	fmt.Println(end.Sub(begin))
+	report.Print()
 }
