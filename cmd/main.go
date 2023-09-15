@@ -72,9 +72,9 @@ func buildImagesRow() domain.Row {
 	row := row.New(70)
 
 	col1 := col.New(6)
-	col1.Add(image.NewFromFile("internal/assets/images/biplane.jpg"))
+	col1.Add(image.NewFromFile("internal/assets/images/frontpage.png"))
 
-	byteSlices, err := os.ReadFile("internal/assets/images/gopherbw.png")
+	byteSlices, err := os.ReadFile("internal/assets/images/frontpage.png")
 	if err != nil {
 		fmt.Println("Got error while opening file:", err)
 		os.Exit(1)

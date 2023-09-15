@@ -2,7 +2,6 @@ package v2
 
 import (
 	"bytes"
-	"fmt"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
@@ -19,7 +18,6 @@ import (
 	"io"
 	"log"
 	"os"
-	"time"
 )
 
 type Config struct {
@@ -103,8 +101,6 @@ func (d *document) Generate() error {
 	d.fillPage()
 	innerCtx := d.cell.Copy()
 
-	start := time.Now()
-
 	p := pool.NewPool(10, func(i domain.Page) (bytes.Buffer, error) {
 		innerProvider := providers.NewGofpdf(size.A4, providers.WithCache(d.imageCache))
 		i.Render(innerProvider, innerCtx)
@@ -115,25 +111,15 @@ func (d *document) Generate() error {
 	if processed.HasError {
 		log.Fatal("error on generating pages")
 	}
-	asyncGen := time.Since(start).Nanoseconds()
-	fmt.Println(fmt.Sprintf("Time to generate async: %d", asyncGen))
-
-	start = time.Now()
 	readers := make([]io.ReadSeeker, len(processed.Results))
 	for i, result := range processed.Results {
 		buffer := result.Output.(bytes.Buffer)
 		readers[i] = bytes.NewReader(buffer.Bytes())
 	}
-	readResults := time.Since(start).Nanoseconds()
-	fmt.Println(fmt.Sprintf("Time to read results: %d", readResults))
-
-	start = time.Now()
 	writer, _ := os.Create(d.file)
 	conf := api.LoadConfiguration()
 
 	err := api.MergeRaw(readers, writer, conf)
-	mergeResults := time.Since(start).Nanoseconds()
-	fmt.Println(fmt.Sprintf("Time to merge results: %d", mergeResults))
 	if err != nil {
 		return err
 	}
