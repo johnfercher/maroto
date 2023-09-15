@@ -5,22 +5,25 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/jung-kurt/gofpdf"
 )
 
 type gofpdfProvider struct {
-	fpdf      *gofpdf.Fpdf
-	math      internal.Math
-	font      internal.Font
-	text      internal.Text
-	signature internal.Signature
-	code      internal.Code
-	image     internal.Image
+	fpdf       *gofpdf.Fpdf
+	math       internal.Math
+	font       internal.Font
+	text       internal.Text
+	signature  internal.Signature
+	code       internal.Code
+	image      internal.Image
+	imageCache cache.Cache
 }
 
-func New(maroto *config.Maroto) domain.Provider {
+func New(maroto *config.Maroto, options ...providers.ProviderOption) domain.Provider {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",
 		UnitStr:        "mm",
@@ -41,7 +44,7 @@ func New(maroto *config.Maroto) domain.Provider {
 	code := internal.NewCode(fpdf, math)
 	image := internal.NewImage(fpdf, math)
 
-	return &gofpdfProvider{
+	provider := &gofpdfProvider{
 		fpdf:      fpdf,
 		math:      math,
 		font:      font,
@@ -50,6 +53,12 @@ func New(maroto *config.Maroto) domain.Provider {
 		code:      code,
 		image:     image,
 	}
+
+	for _, option := range options {
+		option(provider)
+	}
+
+	return provider
 }
 
 func (g *gofpdfProvider) GetDimensions() (width float64, height float64) {
@@ -86,24 +95,16 @@ func (g *gofpdfProvider) AddBarCode(code string, cell internal.Cell, prop props.
 	}
 }
 
-func (g *gofpdfProvider) AddImageFromBase64(base64 string, cell internal.Cell, prop props.Rect, extension consts.Extension) {
-	err := g.image.AddFromBase64(base64, cell, prop, extension)
+func (g *gofpdfProvider) AddImage(file string, cell internal.Cell, prop props.Rect, extension consts.Extension) {
+	img, err := g.imageCache.Load(file, extension)
 	if err != nil {
 		textProp := props.Text{}
 		textProp.MakeValid(consts.Arial)
 		g.fpdf.ClearError()
-		g.AddText("Failed to render image from base64", cell, textProp)
+		g.AddText("Failed to load image from file", cell, textProp)
 	}
-}
 
-func (g *gofpdfProvider) AddImageFromFile(file string, cell internal.Cell, prop props.Rect) {
-	err := g.image.AddFromFile(file, cell, prop)
-	if err != nil {
-		textProp := props.Text{}
-		textProp.MakeValid(consts.Arial)
-		g.fpdf.ClearError()
-		g.AddText("Failed to render image from file", cell, textProp)
-	}
+	g.image.AddFromBase64(img.Value, cell, prop, img.Extension)
 }
 
 func (g *gofpdfProvider) CreateCol(width, height float64) {
@@ -122,4 +123,8 @@ func (g *gofpdfProvider) GenerateAndOutput() (bytes.Buffer, error) {
 	var buffer bytes.Buffer
 	err := g.fpdf.Output(&buffer)
 	return buffer, err
+}
+
+func (g *gofpdfProvider) SetCache(cache cache.Cache) {
+	g.imageCache = cache
 }

@@ -3,8 +3,10 @@ package image
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"strings"
 )
 
 type fileImage struct {
@@ -26,7 +28,8 @@ func NewFromFile(path string, imageProps ...props.Rect) domain.Node {
 }
 
 func (f *fileImage) Render(provider domain.Provider, cell internal.Cell) {
-	provider.AddImageFromFile(f.path, cell, f.prop)
+	extension := strings.Split(f.path, ".")[1]
+	provider.AddImage(f.path, cell, f.prop, consts.Extension(extension))
 }
 
 func (f *fileImage) GetStructure() *tree.Node[domain.Structure] {

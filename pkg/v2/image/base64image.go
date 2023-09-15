@@ -29,7 +29,7 @@ func NewFromBase64(path string, extension consts.Extension, imageProps ...props.
 }
 
 func (b *base64Image) Render(provider domain.Provider, cell internal.Cell) {
-	provider.AddImageFromBase64(b.base64, cell, b.prop, b.extension)
+	provider.AddImage(b.base64, cell, b.prop, b.extension)
 }
 
 func (b *base64Image) GetStructure() *tree.Node[domain.Structure] {

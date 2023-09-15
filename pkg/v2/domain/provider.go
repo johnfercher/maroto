@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/cache"
 )
 
 type Provider interface {
@@ -18,12 +19,12 @@ type Provider interface {
 	AddMatrixCode(code string, cell internal.Cell, prop props.Rect)
 	AddQrCode(code string, cell internal.Cell, rect props.Rect)
 	AddBarCode(code string, cell internal.Cell, prop props.Barcode)
-	AddImageFromBase64(base64 string, cell internal.Cell, prop props.Rect, extension consts.Extension)
-	AddImageFromFile(file string, cell internal.Cell, prop props.Rect)
+	AddImage(value string, cell internal.Cell, prop props.Rect, extension consts.Extension)
 
 	// General
 	GetDimensions() (width float64, height float64)
 	GetMargins() (left float64, top float64, right float64, bottom float64)
 	Generate(file string) error
 	GenerateAndOutput() (bytes.Buffer, error)
+	SetCache(cache cache.Cache)
 }
