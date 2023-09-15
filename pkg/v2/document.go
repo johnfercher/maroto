@@ -6,8 +6,8 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
@@ -31,6 +31,7 @@ type document struct {
 	rows          []domain.Row
 	currentHeight float64
 	imageCache    cache.Cache
+	config        []config.Builder
 }
 
 func NewMaroto(file string, config ...config.Builder) *document {
@@ -50,6 +51,7 @@ func NewMaroto(file string, config ...config.Builder) *document {
 			Bottom: bottom,
 		}),
 		imageCache: cache,
+		config:     config,
 	}
 }
 
@@ -78,7 +80,7 @@ func (d *document) Generate() error {
 	innerCtx := d.cell.Copy()
 
 	p := pool.NewPool(10, func(i domain.Page) (bytes.Buffer, error) {
-		innerProvider := provider.New(size.A4, providers.WithCache(d.imageCache))
+		innerProvider := getProvider(d.imageCache, d.config...)
 		i.Render(innerProvider, innerCtx)
 		return innerProvider.GenerateAndOutput()
 	})
@@ -93,12 +95,22 @@ func (d *document) Generate() error {
 		readers[i] = bytes.NewReader(buffer.Bytes())
 	}
 	writer, _ := os.Create(d.file)
-	conf := api.LoadConfiguration()
+	defer writer.Close()
 
-	err := api.MergeRaw(readers, writer, conf)
-	if err != nil {
-		return err
+	if len(d.config) == 0 || d.config[0].GetConfig().ProviderType == provider.Gofpdf {
+		err := mergePdfs(readers, writer)
+		if err != nil {
+			return err
+		}
 	}
+
+	for _, reader := range readers {
+		_, err := io.Copy(writer, reader)
+		if err != nil {
+			return err
+		}
+	}
+
 	return writer.Close()
 }
 
@@ -164,7 +176,7 @@ func (d *document) fillPage() {
 	d.currentHeight = 0
 }
 
-func getProvider( cache cache.Cache, builders ...config.Builder) domain.Provider {
+func getProvider(cache cache.Cache, builders ...config.Builder) domain.Provider {
 	builder := config.NewBuilder()
 	if len(builders) > 0 {
 		builder = builders[0]
@@ -177,4 +189,10 @@ func getProvider( cache cache.Cache, builders ...config.Builder) domain.Provider
 	}
 
 	return gofpdf.New(cfg, providers.WithCache(cache))
+}
+
+func mergePdfs(readers []io.ReadSeeker, writer io.Writer) error {
+	conf := api.LoadConfiguration()
+	conf.WriteXRefStream = false
+	return api.MergeRaw(readers, writer, conf)
 }
