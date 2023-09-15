@@ -7,17 +7,14 @@ import (
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type text struct {
-	value      string
-	_type      types.DocumentType
-	components []domain.Node
-	prop       props.Text
+	value string
+	prop  props.Text
 }
 
-func New(value string, prop ...props.Text) domain.Component {
+func New(value string, prop ...props.Text) domain.Node {
 	textProp := props.Text{
 		Color: color.Color{
 			Red:   0,
@@ -32,19 +29,14 @@ func New(value string, prop ...props.Text) domain.Component {
 	textProp.MakeValid(consts.Arial)
 
 	return &text{
-		_type: types.Text,
 		value: value,
 		prop:  textProp,
 	}
 }
 
-func (t *text) GetType() string {
-	return t._type.String()
-}
-
 func (t *text) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{
-		Type:  string(t._type),
+		Type:  "text",
 		Value: t.value,
 	}
 

@@ -4,18 +4,16 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/v2/col"
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/page"
-	"github.com/johnfercher/maroto/pkg/v2/row"
-	"github.com/johnfercher/maroto/pkg/v2/types"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/page"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 )
 
 type document struct {
 	file          string
 	cell          internal.Cell
-	_type         types.DocumentType
 	provider      domain.Provider
 	pages         []domain.Page
 	rows          []domain.Row
@@ -29,7 +27,6 @@ func NewMaroto(provider domain.Provider, file string) *document {
 	return &document{
 		file:     file,
 		provider: provider,
-		_type:    types.Document,
 		cell: context.NewRootContext(width, height, context.Margins{
 			Left:   left,
 			Top:    top,
@@ -91,7 +88,7 @@ func (d *document) Generate() error {
 
 func (d *document) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{
-		Type:  string(d._type),
+		Type:  "document",
 		Value: d.file,
 	}
 	node := tree.NewNode(str)
