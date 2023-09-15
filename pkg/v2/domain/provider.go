@@ -25,8 +25,7 @@ type Provider interface {
 	AddMatrixCode(code string, cell internal.Cell, prop props.Rect)
 	AddQrCode(code string, cell internal.Cell, rect props.Rect)
 	AddBarCode(code string, cell internal.Cell, prop props.Barcode)
-	AddImageFromBase64(base64 string, cell internal.Cell, prop props.Rect, extension consts.Extension)
-	AddImageFromFile(file string, cell internal.Cell, prop props.Rect)
+	AddImage(value string, cell internal.Cell, prop props.Rect, extension consts.Extension)
 
 	// General
 	GetDimensions() (width float64, height float64)

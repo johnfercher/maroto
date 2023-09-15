@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/size"
 	"github.com/yosssi/gohtml"
 	"os"
@@ -61,6 +62,7 @@ type html struct {
 	currentRow int
 	cols       []*tree.Node[Div]
 	currentCol int
+	imageCache cache.Cache
 }
 
 func NewHTML(pageSize size.PageSize) *html {
@@ -88,6 +90,7 @@ func NewHTML(pageSize size.PageSize) *html {
 		},
 		currentRow: 0,
 		currentCol: 0,
+		imageCache: cache.New(),
 	}
 }
 
@@ -179,27 +182,25 @@ func (h *html) AddBarCode(code string, _ internal.Cell, _ props.Barcode) {
 	col.AddNext(textNode)
 }
 
-func (h *html) AddImageFromFile(file string, cell internal.Cell, prop props.Rect) {
-	col := h.getLastCol()
-
-	textDiv := col.GetData()
-	textDiv._type = "span"
-	textDiv.content = file
-	textNode := tree.NewNode(textDiv)
-
-	col.AddNext(textNode)
-}
-
-func (h *html) AddImageFromBase64(base64 string, cell internal.Cell, prop props.Rect, extension consts.Extension) {
+func (h *html) AddImage(value string, cell internal.Cell, prop props.Rect, extension consts.Extension) {
 	minSize := 20
-	if len(base64) < minSize {
-		minSize = len(base64)
+	if len(value) < minSize {
+		minSize = len(value)
 	}
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
 	textDiv._type = "span"
-	textDiv.content = base64[:minSize]
+
+	image, err := h.imageCache.Load(value, extension)
+	if err != nil {
+		textDiv.content = "Failed to load image from file"
+		textNode := tree.NewNode(textDiv)
+		col.AddNext(textNode)
+		return
+	}
+
+	textDiv.content = image.Value[:minSize]
 	textNode := tree.NewNode(textDiv)
 
 	col.AddNext(textNode)
