@@ -1,7 +1,7 @@
 * [Maroto V2](README.md?id=home)
   * [Example](v2/example.md)
-  * [Documentation](v2/documentation.md?id=documentation)
-    * [1 - Creating Maroto](v2/documentation.md?id=_1-creating-maroto)
-      * [1.1 - Adding Metrics Decorator](v2/documentation.md?id=_11-adding-metrics-decorator)
+  * **Documentation**
+    * [Basics](v2/basics.md)
+    * [Config Builder](v2/configbuilder.md)
 * [Maroto V1 (Deprecated)](v1/README.md?id=deprecated)
   * [Documentation](v1/documentation.md)
