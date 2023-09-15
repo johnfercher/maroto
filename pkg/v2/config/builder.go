@@ -34,10 +34,12 @@ func NewBuilder() Builder {
 }
 
 func (b *builder) WithPageSize(size PageSize) Builder {
-	if size != "" {
-		b.pageSize = size
-		b.dimensions = GetDimensions(size)
+	if size == "" {
+		return b
 	}
+
+	b.pageSize = size
+	b.dimensions = GetDimensions(size)
 
 	return b
 }
@@ -46,7 +48,6 @@ func (b *builder) WithDimensions(dimensions *Dimensions) Builder {
 	if dimensions == nil {
 		return b
 	}
-
 	if dimensions.Width != 0 && dimensions.Height != 0 {
 		return b
 	}
@@ -81,14 +82,16 @@ func (b *builder) WithMargins(margins *Margins) Builder {
 	}
 
 	b.margins = margins
+
 	return b
 }
 
 func (b *builder) WithProvider(providerType provider.Type) Builder {
 	if providerType == "" {
-		b.providerType = providerType
+		return b
 	}
 
+	b.providerType = providerType
 	return b
 }
 
