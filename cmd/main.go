@@ -13,32 +13,27 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/johnfercher/maroto/pkg/v2/signature"
-	"github.com/johnfercher/maroto/pkg/v2/size"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
 	"os"
 )
 
 func main() {
-	pageSize := size.A4
-	pdf := buildMarotoPDF(pageSize)
-	html := buildMarotoHTML(pageSize)
+	pdf := buildMarotoPDF()
+	html := buildMarotoHTML()
 
 	gen(pdf)
 	gen(html)
 }
 
-func buildMarotoPDF(pageSize size.PageSize) domain.MarotoMetrified {
-	provider := providers.NewGofpdf(pageSize)
-	m := v2.NewMaroto(provider, "v2.pdf")
+func buildMarotoPDF() domain.MarotoMetrified {
+	m := v2.NewMaroto("v2.pdf")
 	return v2.NewMarotoMetrified(m)
 }
 
-func buildMarotoHTML(pageSize size.PageSize) domain.MarotoMetrified {
-	provider := providers.NewHTML(pageSize)
-	m := v2.NewMaroto(provider, "v2.html")
+func buildMarotoHTML() domain.MarotoMetrified {
+	m := v2.NewMaroto("v2.html")
 	return v2.NewMarotoMetrified(m)
 }
 

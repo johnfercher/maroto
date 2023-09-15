@@ -9,7 +9,24 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/page"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
+	"github.com/johnfercher/maroto/pkg/v2/providers"
+	"github.com/johnfercher/maroto/pkg/v2/size"
 )
+
+type Config struct {
+	PageSize     size.PageSize
+	ProviderType domain.ProviderType
+}
+
+func (c *Config) MakeValid() {
+	if c.PageSize == "" {
+		c.PageSize = size.A4
+	}
+
+	if c.ProviderType == "" {
+		c.ProviderType = domain.Gofpdf
+	}
+}
 
 type document struct {
 	file          string
@@ -20,7 +37,21 @@ type document struct {
 	currentHeight float64
 }
 
-func NewMaroto(provider domain.Provider, file string) *document {
+func NewMaroto(file string, config ...Config) *document {
+	cfg := Config{}
+	if len(config) > 0 {
+		cfg = config[0]
+	}
+
+	cfg.MakeValid()
+
+	var provider domain.Provider
+	if cfg.ProviderType == domain.Gofpdf {
+		provider = providers.NewGofpdf(cfg.PageSize)
+	} else {
+		provider = providers.NewHTML(cfg.PageSize)
+	}
+
 	width, height := provider.GetDimensions()
 	left, top, right, bottom := provider.GetMargins()
 
@@ -87,14 +118,16 @@ func (d *document) Generate() error {
 }*/
 
 func (d *document) GetStructure() *tree.Node[domain.Structure] {
+	d.fillPage()
+
 	str := domain.Structure{
 		Type:  "document",
 		Value: d.file,
 	}
 	node := tree.NewNode(str)
 
-	for _, r := range d.rows {
-		inner := r.GetStructure()
+	for _, p := range d.pages {
+		inner := p.GetStructure()
 		node.AddNext(inner)
 	}
 
