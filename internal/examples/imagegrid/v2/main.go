@@ -12,7 +12,7 @@ import (
 
 func main() {
 	maroto := v2.NewMaroto("internal/examples/pdfs/imagegridv2.pdf")
-	m := v2.NewMarotoMetrified(maroto)
+	m := v2.NewMetricsDecorator(maroto)
 
 	c1 := col.New(2).Add(image.NewFromFile("internal/assets/images/biplane.jpg", props.Rect{
 		Center:  true,

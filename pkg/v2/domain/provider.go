@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"bytes"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
@@ -24,7 +23,7 @@ type Provider interface {
 	// General
 	GetDimensions() (width float64, height float64)
 	GetMargins() (left float64, top float64, right float64, bottom float64)
-	Generate(file string) error
-	GenerateAndOutput() (bytes.Buffer, error)
+	GenerateFile(file string) error
+	GenerateBytes() ([]byte, error)
 	SetCache(cache cache.Cache)
 }

@@ -13,7 +13,7 @@ import (
 
 func main() {
 	maroto := v2.NewMaroto("internal/examples/pdfs/textgridv2.pdf")
-	m := v2.NewMarotoMetrified(maroto)
+	m := v2.NewMetricsDecorator(maroto)
 
 	longText := "This is a longer sentence that will be broken into multiple lines " +
 		"as it does not fit into the column otherwise."

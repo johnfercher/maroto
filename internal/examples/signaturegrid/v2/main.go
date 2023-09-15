@@ -14,7 +14,7 @@ import (
 
 func main() {
 	maroto := v2.NewMaroto("internal/examples/pdfs/signaturegridv2.pdf")
-	m := v2.NewMarotoMetrified(maroto)
+	m := v2.NewMetricsDecorator(maroto)
 
 	c1 := col.New(2).Add(signature.New("Signature 1"))
 	c2 := col.New(4).Add(signature.New("Signature 2", props.Font{Family: consts.Courier}))
