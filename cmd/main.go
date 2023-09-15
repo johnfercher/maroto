@@ -1,21 +1,48 @@
 package main
 
 import (
+	"encoding/base64"
+	"fmt"
+	"github.com/johnfercher/maroto/pkg/consts"
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/v2/code"
 	"github.com/johnfercher/maroto/pkg/v2/config"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
+	"github.com/johnfercher/maroto/pkg/v2/image"
+	"github.com/johnfercher/maroto/pkg/v2/signature"
+	"github.com/johnfercher/maroto/pkg/v2/text"
+	"log"
+	"os"
 )
 
 func main() {
-	cfg := config.NewBuilder().
-		WithThreadPool(10).
-		Build()
+	cfg := config.NewBuilder().WithThreadPool(10).Build()
 
-	m := v2.NewMaroto(cfg)
+	maroto := v2.NewMaroto(cfg)
 
-	// Save
+	m := v2.NewMetricsDecorator(maroto)
+
+	for _ = range [10]int{} {
+		m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
+	}
+
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("v2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	document.GetReport().Print()
 }
 
-/*func buildCodesRow() domain.Row {
+func buildCodesRow() domain.Row {
 	r := row.New(70)
 
 	col1 := col.New(4)
@@ -69,4 +96,3 @@ func buildTextsRow() domain.Row {
 	row.Add(col1, col2)
 	return row
 }
-*/
