@@ -33,7 +33,7 @@ func buildMarotoPDF() domain.MarotoMetrified {
 }
 
 func buildMarotoHTML() domain.MarotoMetrified {
-	m := v2.NewMaroto("v2.html")
+	m := v2.NewMaroto("v2.html", v2.Config{ProviderType: domain.HTML})
 	return v2.NewMarotoMetrified(m)
 }
 
