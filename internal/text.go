@@ -33,6 +33,26 @@ func NewText(pdf fpdf.Fpdf, math Math, font Font) *text {
 func (s *text) Add(text string, cell Cell, textProp props.Text) {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
+	if textProp.Top > cell.Height {
+		textProp.Top = cell.Height
+	}
+
+	if textProp.Left > cell.Width {
+		textProp.Left = cell.Width
+	}
+
+	if textProp.Right > cell.Width {
+		textProp.Right = cell.Width
+	}
+
+	cell.Width = cell.Width - textProp.Left - textProp.Right
+	if cell.Width < 0 {
+		cell.Width = 0
+	}
+
+	cell.X += textProp.Left
+	cell.Y += textProp.Top
+
 	originalColor := s.font.GetColor()
 	s.font.SetColor(textProp.Color)
 

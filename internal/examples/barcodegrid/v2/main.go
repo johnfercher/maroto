@@ -76,5 +76,6 @@ func main() {
 		os.Exit(1)
 	}
 
+	fmt.Println("barcode v1")
 	report.Print()
 }

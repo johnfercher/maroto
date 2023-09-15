@@ -29,189 +29,134 @@ go get -u github.com/johnfercher/maroto/internal
 
 ## Contributing
 
-| Command         | Description                                       | Dependencies                                                 |
-|-----------------|---------------------------------------------------|--------------------------------------------------------------|
-| `make build`    | Build project                                     | `go`                                                         |
-| `make test`     | Run unit tests                                    | `go`                                                         |
-| `make fmt`      | Format files                                      | `gofmt`, `gofumpt` and `goimports`                           |
-| `make lint`     | Check files                                       | `golangci-lint` and `goreportcard-cli`                       |
-| `make dod`      | (Definition of Done) Format files and check files | Same as`make build`, `make test`, `make fmt` and `make lint` | 
-| `make install`  | Install all dependencies                          | `go`, `curl` and `git`                                       |
-| `make examples` | Run all examples                                  | `go`                                                         |
+| Command        | Description                                       | Dependencies                                                 |
+|----------------|---------------------------------------------------|--------------------------------------------------------------|
+| `make build`   | Build project                                     | `go`                                                         |
+| `make test`    | Run unit tests                                    | `go`                                                         |
+| `make fmt`     | Format files                                      | `gofmt`, `gofumpt` and `goimports`                           |
+| `make lint`    | Check files                                       | `golangci-lint` and `goreportcard-cli`                       |
+| `make dod`     | (Definition of Done) Format files and check files | Same as`make build`, `make test`, `make fmt` and `make lint` | 
+| `make install` | Install all dependencies                          | `go`, `curl` and `git`                                       |
+| `make v1`      | Run all v1 examples                               | `go`                                                         |
+| `make v2`      | Run all v2 examples                               | `go`                                                         |
 
 ### Example
 ![result](docs/assets/images/result.png)
 
 ### Code
-> This is part of the example [billing](internal/examples/billing).
+
 ```go
-// Billing example
 package main
 
 import (
+	"encoding/base64"
 	"fmt"
-	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/pdf"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/v2/code"
+	"github.com/johnfercher/maroto/pkg/v2/config"
+	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
+	"github.com/johnfercher/maroto/pkg/v2/image"
+	"github.com/johnfercher/maroto/pkg/v2/provider"
+	"github.com/johnfercher/maroto/pkg/v2/signature"
+	"github.com/johnfercher/maroto/pkg/v2/text"
+	"log"
 	"os"
-	"time"
 )
 
 func main() {
-	begin := time.Now()
+	pdf := buildMarotoPDF()
+	html := buildMarotoHTML()
 
-	darkGrayColor := getDarkGrayColor()
-	grayColor := getGrayColor()
-	whiteColor := color.NewWhite()
-	header := getHeader()
-	contents := getContents()
+	gen(pdf)
+	gen(html)
+}
 
-	m := pdf.NewMaroto(consts.Portrait, consts.A4)
-	m.SetPageMargins(10, 15, 10)
-	//m.SetBorder(true)
+func buildMarotoPDF() domain.MarotoMetrified {
+	m := v2.NewMaroto("v2.pdf")
+	return v2.NewMarotoMetrified(m)
+}
 
-	m.RegisterHeader(func() {
-		m.Row(20, func() {
-			m.Col(3, func() {
-				_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
-					Center:  true,
-					Percent: 80,
-				})
-			})
+func buildMarotoHTML() domain.MarotoMetrified {
+	builder := config.NewBuilder().
+		WithPageSize(config.A4).
+		WithProvider(provider.HTML)
 
-			m.ColSpace(6)
+	m := v2.NewMaroto("v2.html", builder)
+	return v2.NewMarotoMetrified(m)
+}
 
-			m.Col(3, func() {
-				m.Text("AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.", props.Text{
-					Size:        8,
-					Align:       consts.Right,
-					Extrapolate: false,
-				})
-				m.Text("Tel: 55 024 12345-1234", props.Text{
-					Top:   12,
-					Style: consts.BoldItalic,
-					Size:  8,
-					Align: consts.Right,
-				})
-				m.Text("www.mycompany.com", props.Text{
-					Top:   15,
-					Style: consts.BoldItalic,
-					Size:  8,
-					Align: consts.Right,
-				})
-			})
-		})
-	})
+func gen(m domain.MarotoMetrified) {
+	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
+	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
+	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 
-	m.RegisterFooter(func() {
-		m.Row(20, func() {
-			m.Col(12, func() {
-				m.Text("Tel: 55 024 12345-1234", props.Text{
-					Top:   13,
-					Style: consts.BoldItalic,
-					Size:  8,
-					Align: consts.Left,
-				})
-				m.Text("www.mycompany.com", props.Text{
-					Top:   16,
-					Style: consts.BoldItalic,
-					Size:  8,
-					Align: consts.Left,
-				})
-			})
-		})
-	})
-
-	m.Row(10, func() {
-		m.Col(12, func() {
-			m.Text("Invoice ABC123456789", props.Text{
-				Top:   3,
-				Style: consts.Bold,
-				Align: consts.Center,
-			})
-		})
-	})
-
-	m.SetBackgroundColor(darkGrayColor)
-
-	m.Row(7, func() {
-		m.Col(3, func() {
-			m.Text("Transactions", props.Text{
-				Top:   1.5,
-				Size:  9,
-				Style: consts.Bold,
-				Align: consts.Center,
-			})
-		})
-		m.ColSpace(9)
-	})
-
-	m.SetBackgroundColor(whiteColor)
-
-	m.TableList(header, contents, props.TableList{
-		HeaderProp: props.TableListContent{
-			Size:      9,
-			GridSizes: []uint{3, 4, 2, 3},
-		},
-		ContentProp: props.TableListContent{
-			Size:      8,
-			GridSizes: []uint{3, 4, 2, 3},
-		},
-		Align:                consts.Center,
-		AlternatedBackground: &grayColor,
-		HeaderContentSpace:   1,
-		Line:                 false,
-	})
-
-	m.Row(20, func() {
-		m.ColSpace(7)
-		m.Col(2, func() {
-			m.Text("Total:", props.Text{
-				Top:   5,
-				Style: consts.Bold,
-				Size:  8,
-				Align: consts.Right,
-			})
-		})
-		m.Col(3, func() {
-			m.Text("R$ 2.567,00", props.Text{
-				Top:   5,
-				Style: consts.Bold,
-				Size:  8,
-				Align: consts.Center,
-			})
-		})
-	})
-
-	m.Row(15, func() {
-		m.Col(6, func() {
-			_ = m.Barcode("5123.151231.512314.1251251.123215", props.Barcode{
-				Percent: 0,
-				Proportion: props.Proportion{
-					Width:  20,
-					Height: 2,
-				},
-			})
-			m.Text("5123.151231.512314.1251251.123215", props.Text{
-				Top:    12,
-				Family: "",
-				Style:  consts.Bold,
-				Size:   9,
-				Align:  consts.Center,
-			})
-		})
-		m.ColSpace(6)
-	})
-
-	err := m.OutputFileAndClose("internal/examples/pdfs/billing.pdf")
+	report, err := m.GenerateWithReport()
 	if err != nil {
-		fmt.Println("Could not save PDF:", err)
-		os.Exit(1)
+		log.Fatal(err.Error())
 	}
 
-	end := time.Now()
-	fmt.Println(end.Sub(begin))
+	report.Print()
+}
+
+func buildCodesRow() domain.Row {
+	r := row.New(70)
+
+	col1 := col.New(4)
+	col1.Add(code.NewBar("barcode"))
+
+	col2 := col.New(4)
+	col2.Add(code.NewQr("qrcode"))
+
+	col3 := col.New(4)
+	col3.Add(code.NewMatrix("matrixcode"))
+
+	r.Add(col1, col2, col3)
+	return r
+}
+
+func buildImagesRow() domain.Row {
+	row := row.New(70)
+
+	col1 := col.New(6)
+	col1.Add(image.NewFromFile("internal/assets/images/biplane.jpg"))
+
+	byteSlices, err := os.ReadFile("internal/assets/images/gopherbw.png")
+	if err != nil {
+		fmt.Println("Got error while opening file:", err)
+		os.Exit(1)
+	}
+	stringBase64 := base64.StdEncoding.EncodeToString(byteSlices)
+	col2 := col.New(6)
+	col2.Add(image.NewFromBase64(stringBase64, consts.Png))
+
+	row.Add(col1, col2)
+
+	return row
+}
+
+func buildTextsRow() domain.Row {
+	row := row.New(70)
+
+	colText := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
+	col1 := col.New(6)
+	col1.Add(text.New(colText, props.Text{
+		Align: consts.Center,
+	}))
+
+	col2 := col.New(6)
+	col2.Add(signature.New("Fulano de Tal", props.Font{
+		Style:  consts.Italic,
+		Size:   20,
+		Family: consts.Courier,
+	}))
+
+	row.Add(col1, col2)
+
+	return row
 }
 ```
 

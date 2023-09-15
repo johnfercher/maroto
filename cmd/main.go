@@ -1,32 +1,22 @@
 package main
 
 import (
-	"encoding/base64"
-	"fmt"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/code"
-	"github.com/johnfercher/maroto/pkg/v2/config"
-	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/grid/col"
-	"github.com/johnfercher/maroto/pkg/v2/grid/row"
-	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/provider"
-	"github.com/johnfercher/maroto/pkg/v2/signature"
-	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
-	"os"
 )
 
 func main() {
-	pdf := buildMarotoPDF()
-	html := buildMarotoHTML()
+	m := v2.NewMaroto("v2.pdf")
 
-	gen(pdf)
-	gen(html)
+	// Add things
+
+	err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
+/*
 func buildMarotoPDF() domain.MarotoMetrified {
 	m := v2.NewMaroto("v2.pdf")
 	return v2.NewMarotoMetrified(m)
@@ -48,12 +38,12 @@ func gen(m domain.MarotoMetrified) {
 	//m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	//m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 
-	report, err := m.GenerateWithReport()
+	report.txt, err := m.GenerateWithReport()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	report.Print()
+	report.txt.Print()
 }
 
 func buildCodesRow() domain.Row {
@@ -112,3 +102,4 @@ func buildTextsRow() domain.Row {
 
 	return row
 }
+*/

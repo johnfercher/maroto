@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Bug report.txt
 about: Use this template to capture relevant information to track bug reports consistently
   and add priority to better organize work.
 title: ''

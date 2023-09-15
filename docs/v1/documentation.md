@@ -1,7 +1,7 @@
 # Documentation
 
 ## Features
-![result](assets/images/diagram.png)
+![result](../assets/images/diagram.png)
 
 #### Constructors
 * [New](https://pkg.go.dev/github.com/johnfercher/maroto/pkg/pdf#NewMaroto)
@@ -70,7 +70,7 @@ with the code to generate the PDFs. There are examples of: [barcode](internal/ex
 [text inside grid](internal/examples/textgrid), [custom utf8 fonts (any language)](internal/examples/utfsample) and a
 [label zpl](internal/examples/zpl).
 
-![result](assets/images/result.png)
+![result](../assets/images/result.png)
 
 ## Other Examples
 
