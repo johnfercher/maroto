@@ -5,16 +5,13 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/code"
-	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
-	"github.com/johnfercher/maroto/pkg/v2/provider/gofpdf"
 	"os"
 )
 
 func main() {
-	provider := gofpdf.New(config.A4)
-	maroto := v2.NewMaroto(provider, "internal/examples/pdfs/qrgridv2.pdf")
+	maroto := v2.NewMaroto("internal/examples/pdfs/qrgridv2.pdf")
 	m := v2.NewMarotoMetrified(maroto)
 
 	c1 := col.New(2).Add(code.NewQr("https://github.com/johnfercher/maroto", props.Rect{
