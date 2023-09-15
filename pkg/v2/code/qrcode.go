@@ -1,4 +1,4 @@
-package qrcode
+package code
 
 import (
 	"github.com/johnfercher/go-tree/tree"
@@ -12,7 +12,7 @@ type qrCode struct {
 	prop props.Rect
 }
 
-func New(code string, barcodeProps ...props.Rect) domain.Node {
+func NewQrCode(code string, barcodeProps ...props.Rect) domain.Node {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]

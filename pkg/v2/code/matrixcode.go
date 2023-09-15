@@ -1,4 +1,4 @@
-package matrixcode
+package code
 
 import (
 	"github.com/johnfercher/go-tree/tree"
@@ -12,7 +12,7 @@ type matrixCode struct {
 	prop props.Rect
 }
 
-func New(code string, barcodeProps ...props.Rect) domain.Node {
+func NewMatrixCode(code string, barcodeProps ...props.Rect) domain.Node {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]

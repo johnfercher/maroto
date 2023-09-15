@@ -7,13 +7,6 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 )
 
-type ProviderType string
-
-const (
-	Gofpdf ProviderType = "gofpdf"
-	HTML   ProviderType = "html"
-)
-
 type Provider interface {
 	// Grid
 	CreateRow(height float64)

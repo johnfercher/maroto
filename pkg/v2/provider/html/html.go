@@ -1,4 +1,4 @@
-package providers
+package html
 
 import (
 	"bytes"
@@ -7,7 +7,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2/size"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/yosssi/gohtml"
 	"os"
 )
@@ -63,20 +63,18 @@ type html struct {
 	currentCol int
 }
 
-func NewHTML(pageSize size.PageSize) *html {
-	width, height := size.GetDimensions(pageSize)
-
+func New(maroto *config.Maroto) *html {
 	div := Div{
 		_type: "body",
 		dimensions: Dimensions{
-			Width:  width,
-			Height: height,
+			Width:  maroto.Dimensions.Width,
+			Height: maroto.Dimensions.Height,
 		},
 		margins: margins{
-			Left:   size.MinLeftMargin,
-			Right:  size.MinRightMargin,
-			Top:    size.MinTopMargin,
-			Bottom: size.MinBottomMargin,
+			Left:   config.MinLeftMargin,
+			Right:  config.MinRightMargin,
+			Top:    config.MinTopMargin,
+			Bottom: config.MinBottomMargin,
 		},
 	}
 

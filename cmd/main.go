@@ -6,13 +6,13 @@ import (
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/code/barcode"
-	"github.com/johnfercher/maroto/pkg/v2/code/matrixcode"
-	"github.com/johnfercher/maroto/pkg/v2/code/qrcode"
+	"github.com/johnfercher/maroto/pkg/v2/code"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/image"
+	"github.com/johnfercher/maroto/pkg/v2/provider"
 	"github.com/johnfercher/maroto/pkg/v2/signature"
 	"github.com/johnfercher/maroto/pkg/v2/text"
 	"log"
@@ -33,7 +33,11 @@ func buildMarotoPDF() domain.MarotoMetrified {
 }
 
 func buildMarotoHTML() domain.MarotoMetrified {
-	m := v2.NewMaroto("v2.html", v2.Config{ProviderType: domain.HTML})
+	builder := config.NewBuilder().
+		WithPageSize(config.A4).
+		WithProvider(provider.HTML)
+
+	m := v2.NewMaroto("v2.html", builder)
 	return v2.NewMarotoMetrified(m)
 }
 
@@ -54,13 +58,13 @@ func buildCodesRow() domain.Row {
 	r := row.New(70)
 
 	col1 := col.New(4)
-	col1.Add(barcode.New("barcode"))
+	col1.Add(code.NewBarcode("barcode"))
 
 	col2 := col.New(4)
-	col2.Add(qrcode.New("qrcode"))
+	col2.Add(code.NewQrCode("qrcode"))
 
 	col3 := col.New(4)
-	col3.Add(matrixcode.New("matrixcode"))
+	col3.Add(code.NewMatrixCode("matrixcode"))
 
 	r.Add(col1, col2, col3)
 	return r

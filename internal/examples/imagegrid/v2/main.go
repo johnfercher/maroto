@@ -4,16 +4,16 @@ import (
 	"fmt"
 	"github.com/johnfercher/maroto/pkg/props"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/providers"
-	"github.com/johnfercher/maroto/pkg/v2/size"
+	"github.com/johnfercher/maroto/pkg/v2/provider/gofpdf"
 	"os"
 )
 
 func main() {
-	provider := providers.NewGofpdf(size.A4)
+	provider := gofpdf.New(config.A4)
 	maroto := v2.NewMaroto(provider, "internal/examples/pdfs/imagegridv2.pdf")
 	m := v2.NewMarotoMetrified(maroto)
 
