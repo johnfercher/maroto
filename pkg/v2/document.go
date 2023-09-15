@@ -6,34 +6,22 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/page"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
+	"github.com/johnfercher/maroto/pkg/v2/provider"
+	"github.com/johnfercher/maroto/pkg/v2/provider/gofpdf"
+	"github.com/johnfercher/maroto/pkg/v2/provider/html"
 	"github.com/johnfercher/maroto/pkg/v2/providers"
-	"github.com/johnfercher/maroto/pkg/v2/size"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 	"io"
 	"log"
 	"os"
 )
-
-type Config struct {
-	PageSize     size.PageSize
-	ProviderType domain.ProviderType
-}
-
-func (c *Config) MakeValid() {
-	if c.PageSize == "" {
-		c.PageSize = size.A4
-	}
-
-	if c.ProviderType == "" {
-		c.ProviderType = domain.Gofpdf
-	}
-}
 
 type document struct {
 	file          string
@@ -45,21 +33,9 @@ type document struct {
 	imageCache    cache.Cache
 }
 
-func NewMaroto(file string, config ...Config) *document {
-	cfg := Config{}
-	if len(config) > 0 {
-		cfg = config[0]
-	}
-
-	cfg.MakeValid()
+func NewMaroto(file string, config ...config.Builder) *document {
 	cache := cache.New()
-
-	var provider domain.Provider
-	if cfg.ProviderType == domain.Gofpdf {
-		provider = providers.NewGofpdf(cfg.PageSize, providers.WithCache(cache))
-	} else {
-		provider = providers.NewHTML(cfg.PageSize, providers.WithCache(cache))
-	}
+	provider := getProvider(cache, config...)
 
 	width, height := provider.GetDimensions()
 	left, top, right, bottom := provider.GetMargins()
@@ -102,7 +78,7 @@ func (d *document) Generate() error {
 	innerCtx := d.cell.Copy()
 
 	p := pool.NewPool(10, func(i domain.Page) (bytes.Buffer, error) {
-		innerProvider := providers.NewGofpdf(size.A4, providers.WithCache(d.imageCache))
+		innerProvider := provider.New(size.A4, providers.WithCache(d.imageCache))
 		i.Render(innerProvider, innerCtx)
 		return innerProvider.GenerateAndOutput()
 	})
@@ -186,4 +162,19 @@ func (d *document) fillPage() {
 	d.pages = append(d.pages, p)
 	d.rows = nil
 	d.currentHeight = 0
+}
+
+func getProvider( cache cache.Cache, builders ...config.Builder) domain.Provider {
+	builder := config.NewBuilder()
+	if len(builders) > 0 {
+		builder = builders[0]
+	}
+
+	cfg := builder.GetConfig()
+
+	if cfg.ProviderType == provider.HTML {
+		return html.New(cfg, providers.WithCache(cache))
+	}
+
+	return gofpdf.New(cfg, providers.WithCache(cache))
 }

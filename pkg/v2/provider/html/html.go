@@ -1,4 +1,4 @@
-package providers
+package html
 
 import (
 	"bytes"
@@ -8,7 +8,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
-	"github.com/johnfercher/maroto/pkg/v2/size"
+	"github.com/johnfercher/maroto/pkg/v2/config"
+	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/yosssi/gohtml"
 	"os"
 )
@@ -65,20 +66,18 @@ type html struct {
 	imageCache cache.Cache
 }
 
-func NewHTML(pageSize size.PageSize, options ...ProviderOption) *html {
-	width, height := size.GetDimensions(pageSize)
-
+func New(maroto *config.Maroto, options ...providers.ProviderOption) *html {
 	div := Div{
 		_type: "body",
 		dimensions: Dimensions{
-			Width:  width,
-			Height: height,
+			Width:  maroto.Dimensions.Width,
+			Height: maroto.Dimensions.Height,
 		},
 		margins: margins{
-			Left:   size.MinLeftMargin,
-			Right:  size.MinRightMargin,
-			Top:    size.MinTopMargin,
-			Bottom: size.MinBottomMargin,
+			Left:   config.MinLeftMargin,
+			Right:  config.MinRightMargin,
+			Top:    config.MinTopMargin,
+			Bottom: config.MinBottomMargin,
 		},
 	}
 

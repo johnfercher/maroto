@@ -7,14 +7,11 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/providers"
-	"github.com/johnfercher/maroto/pkg/v2/size"
 	"os"
 )
 
 func main() {
-	provider := providers.NewGofpdf(size.A4)
-	maroto := v2.NewMaroto(provider, "internal/examples/pdfs/imagegridv2.pdf")
+	maroto := v2.NewMaroto("internal/examples/pdfs/imagegridv2.pdf")
 	m := v2.NewMarotoMetrified(maroto)
 
 	c1 := col.New(2).Add(image.NewFromFile("internal/assets/images/biplane.jpg", props.Rect{

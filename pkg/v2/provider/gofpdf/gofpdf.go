@@ -1,4 +1,4 @@
-package providers
+package gofpdf
 
 import (
 	"bytes"
@@ -6,8 +6,9 @@ import (
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/size"
+	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/jung-kurt/gofpdf"
 )
 
@@ -22,16 +23,14 @@ type gofpdfProvider struct {
 	imageCache cache.Cache
 }
 
-func NewGofpdf(pageSize size.PageSize, options ...ProviderOption) domain.Provider {
-	width, height := size.GetDimensions(pageSize)
-
+func New(maroto *config.Maroto, options ...providers.ProviderOption) domain.Provider {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",
 		UnitStr:        "mm",
 		FontDirStr:     "",
 		Size: gofpdf.SizeType{
-			Wd: width,
-			Ht: height,
+			Wd: maroto.Dimensions.Width,
+			Ht: maroto.Dimensions.Height,
 		},
 	})
 

@@ -1,4 +1,4 @@
-package qrcode
+package code
 
 import (
 	"github.com/johnfercher/go-tree/tree"
@@ -7,32 +7,32 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 )
 
-type qrCode struct {
+type matrixCode struct {
 	code string
 	prop props.Rect
 }
 
-func New(code string, barcodeProps ...props.Rect) domain.Node {
+func NewMatrix(code string, barcodeProps ...props.Rect) domain.Node {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]
 	}
 	prop.MakeValid()
 
-	return &qrCode{
+	return &matrixCode{
 		code: code,
 		prop: prop,
 	}
 }
 
-func (q *qrCode) Render(provider domain.Provider, cell internal.Cell) {
-	provider.AddQrCode(q.code, cell, q.prop)
+func (m *matrixCode) Render(provider domain.Provider, cell internal.Cell) {
+	provider.AddMatrixCode(m.code, cell, m.prop)
 }
 
-func (q *qrCode) GetStructure() *tree.Node[domain.Structure] {
+func (m *matrixCode) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{
-		Type:  "qrcode",
-		Value: q.code,
+		Type:  "matrixcode",
+		Value: m.code,
 	}
 
 	return tree.NewNode(str)

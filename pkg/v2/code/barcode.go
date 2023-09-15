@@ -1,4 +1,4 @@
-package barcode
+package code
 
 import (
 	"github.com/johnfercher/go-tree/tree"
@@ -12,7 +12,7 @@ type barcode struct {
 	prop props.Barcode
 }
 
-func New(code string, barcodeProps ...props.Barcode) domain.Node {
+func NewBar(code string, barcodeProps ...props.Barcode) domain.Node {
 	prop := props.Barcode{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]
