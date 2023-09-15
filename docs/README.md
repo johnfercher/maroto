@@ -9,6 +9,8 @@
 ```
 
 ## HTML Generated
+### Rendered
+<iframe width="560" height="560" src="assets/html/v2.html" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-<iframe width="560" height="560" src="https://www.youtube.com/embed/oCb4TEgpAt0?si=2rvhn-63IDkJeV4M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+### Code
 [filename](assets/html/v2.html ':include :type=code')
