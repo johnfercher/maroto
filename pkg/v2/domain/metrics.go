@@ -15,18 +15,20 @@ type Time struct {
 	Scale TimeScale
 }
 
-func (t *Time) Normalize() {
+func (t *Time) Normalize() bool {
 	if t.Scale == Nano {
 		t.Scale = Micro
 		t.Value = t.Value / 1000.0
-		return
+		return true
 	}
 
 	if t.Scale == Micro {
 		t.Scale = Milli
 		t.Value = t.Value / 1000.0
-		return
+		return true
 	}
+
+	return false
 }
 
 func (t *Time) String() string {
@@ -43,7 +45,10 @@ func (m *Metric) Normalize() {
 	greaterThan1000 := hasGreaterThan1000(m.Times)
 	if greaterThan1000 {
 		for _, time := range m.Times {
-			time.Normalize()
+			done := time.Normalize()
+			if !done {
+				return
+			}
 		}
 	}
 
