@@ -1,3 +1,5 @@
-* [Home](README.md?id=home)
-  * [V2 Option1](README.md?id=example-v2-option-1)
-  * [V2 Option2](README.md?id=example-v2-option-2)
+* [Maroto V2](README.md?id=home)
+  * [Code Example](README.md?id=code-example)
+  * [PDF Generated](README.md?id=pdf-generated)
+  * [HTML Generated](README.md?id=html-generated)
+* [Maroto V1 (Deprecated)](v1.md?id=deprecated)

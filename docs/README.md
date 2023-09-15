@@ -1,23 +1,14 @@
 # Home
 
-## V2
+## Code Example
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/cmd/main.go ':include :type=code')
 
-* [RFC](https://docs.google.com/document/u/1/d/1OMOdtR2c6FYfl4X5p6Y_KTId_GeONfGbZSebnK0Pxbk/edit)
-* [Discussion](https://github.com/johnfercher/maroto/issues/257)
-* [Main Branch](https://github.com/johnfercher/maroto/tree/v2)
-* [Option 1 Branch](https://github.com/johnfercher/maroto/tree/v2-start)
-* [Option 2 Branch](https://github.com/johnfercher/maroto/tree/v2-start-2)
-
-## Example V2 Option 1
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2-start/cmd/main.go ':include :type=code')
-
+## PDF Generated
 ```pdf
-	assets/pdf/v2-option1.pdf
+	assets/pdf/v2.pdf
 ```
 
-## Example V2 Option 2
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2-start-2/cmd/main.go ':include :type=code')
+## HTML Generated
 
-```pdf
-	assets/pdf/v2-option2.pdf
-```
+<iframe width="560" height="560" src="https://www.youtube.com/embed/oCb4TEgpAt0?si=2rvhn-63IDkJeV4M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[filename](assets/html/v2.html ':include :type=code')
