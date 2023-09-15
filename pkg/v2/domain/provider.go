@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/cache"
 )
 
 type ProviderType string
@@ -32,4 +33,5 @@ type Provider interface {
 	GetMargins() (left float64, top float64, right float64, bottom float64)
 	Generate(file string) error
 	GenerateAndOutput() (bytes.Buffer, error)
+	SetCache(cache cache.Cache)
 }

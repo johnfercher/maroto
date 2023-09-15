@@ -22,7 +22,7 @@ type gofpdfProvider struct {
 	imageCache cache.Cache
 }
 
-func NewGofpdf(pageSize size.PageSize) domain.Provider {
+func NewGofpdf(pageSize size.PageSize, options ...ProviderOption) domain.Provider {
 	width, height := size.GetDimensions(pageSize)
 
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
@@ -45,16 +45,21 @@ func NewGofpdf(pageSize size.PageSize) domain.Provider {
 	code := internal.NewCode(fpdf, math)
 	image := internal.NewImage(fpdf, math)
 
-	return &gofpdfProvider{
-		fpdf:       fpdf,
-		math:       math,
-		font:       font,
-		text:       text,
-		signature:  signature,
-		code:       code,
-		image:      image,
-		imageCache: cache.New(),
+	provider := &gofpdfProvider{
+		fpdf:      fpdf,
+		math:      math,
+		font:      font,
+		text:      text,
+		signature: signature,
+		code:      code,
+		image:     image,
 	}
+
+	for _, option := range options {
+		option(provider)
+	}
+
+	return provider
 }
 
 func (g *gofpdfProvider) GetDimensions() (width float64, height float64) {
@@ -119,4 +124,8 @@ func (g *gofpdfProvider) GenerateAndOutput() (bytes.Buffer, error) {
 	var buffer bytes.Buffer
 	err := g.fpdf.Output(&buffer)
 	return buffer, err
+}
+
+func (g *gofpdfProvider) SetCache(cache cache.Cache) {
+	g.imageCache = cache
 }

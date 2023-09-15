@@ -6,6 +6,7 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
+	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/context"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
@@ -41,6 +42,7 @@ type document struct {
 	pages         []domain.Page
 	rows          []domain.Row
 	currentHeight float64
+	imageCache    cache.Cache
 }
 
 func NewMaroto(file string, config ...Config) *document {
@@ -70,6 +72,7 @@ func NewMaroto(file string, config ...Config) *document {
 			Right:  right,
 			Bottom: bottom,
 		}),
+		imageCache: cache.New(),
 	}
 }
 
@@ -98,7 +101,7 @@ func (d *document) Generate() error {
 	innerCtx := d.cell.Copy()
 
 	p := pool.NewPool(10, func(i domain.Page) (bytes.Buffer, error) {
-		innerProvider := providers.NewGofpdf(size.A4)
+		innerProvider := providers.NewGofpdf(size.A4, providers.WithCache(d.imageCache))
 		i.Render(innerProvider, innerCtx)
 		return innerProvider.GenerateAndOutput()
 	})

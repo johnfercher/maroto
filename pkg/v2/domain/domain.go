@@ -3,7 +3,6 @@ package domain
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/pkg/consts"
 )
 
 type Maroto interface {
@@ -47,9 +46,4 @@ type Structure struct {
 	Type  string
 	Value string
 	Props map[string]string
-}
-
-type Image struct {
-	Value     string
-	Extension consts.Extension
 }

@@ -65,7 +65,7 @@ type html struct {
 	imageCache cache.Cache
 }
 
-func NewHTML(pageSize size.PageSize) *html {
+func NewHTML(pageSize size.PageSize, options ...ProviderOption) *html {
 	width, height := size.GetDimensions(pageSize)
 
 	div := Div{
@@ -82,7 +82,7 @@ func NewHTML(pageSize size.PageSize) *html {
 		},
 	}
 
-	return &html{
+	provider := &html{
 		div: div,
 		cursor: Cursor{
 			X: 0,
@@ -90,12 +90,21 @@ func NewHTML(pageSize size.PageSize) *html {
 		},
 		currentRow: 0,
 		currentCol: 0,
-		imageCache: cache.New(),
 	}
+
+	for _, option := range options {
+		option(provider)
+	}
+
+	return provider
 }
 
 func (h *html) CreateRow(height float64) {
 	h.currentRow++
+}
+
+func (h *html) SetCache(cache cache.Cache) {
+	h.imageCache = cache
 }
 
 func (h *html) CreateCol(width, height float64) {
