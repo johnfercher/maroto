@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/johnfercher/maroto/pkg/props"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/image"
 	"github.com/johnfercher/maroto/pkg/v2/providers"
-	"github.com/johnfercher/maroto/pkg/v2/row"
 	"github.com/johnfercher/maroto/pkg/v2/size"
 	"os"
 )

@@ -326,7 +326,7 @@ func TestCol_Render(t *testing.T) {
 		// assert
 
 	})
-	t.Run("should render child components with width matching col width", func(t *testing.T) {
+	t.Run("should render child nodes with width matching col width", func(t *testing.T) {
 		// arrange
 		col := New(12)
 		child := text.New("test")

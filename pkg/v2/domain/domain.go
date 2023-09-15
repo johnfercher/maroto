@@ -22,11 +22,6 @@ type Node interface {
 	GetStructure() *tree.Node[Structure]
 }
 
-type Component interface {
-	Node
-	GetType() string // Just to differentiate from Node
-}
-
 type Page interface {
 	Node
 	Add(rows ...Row) Page
@@ -42,7 +37,7 @@ type Row interface {
 
 type Col interface {
 	Node
-	Add(component ...Component) Col
+	Add(nodes ...Node) Col
 	AddInner(rows ...Row) Col
 	GetSize() int
 }

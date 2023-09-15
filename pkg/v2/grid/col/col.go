@@ -5,7 +5,6 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 const (
@@ -13,25 +12,19 @@ const (
 )
 
 type col struct {
-	size       int
-	_type      types.DocumentType
-	components []domain.Component
-	rows       []domain.Row
+	size  int
+	nodes []domain.Node
+	rows  []domain.Row
 }
 
 func New(size int) domain.Col {
 	return &col{
-		_type: types.Col,
-		size:  size,
+		size: size,
 	}
 }
 
-func (c *col) GetType() string {
-	return c._type.String()
-}
-
-func (c *col) Add(components ...domain.Component) domain.Col {
-	c.components = append(c.components, components...)
+func (c *col) Add(node ...domain.Node) domain.Col {
+	c.nodes = append(c.nodes, node...)
 	return c
 }
 
@@ -46,13 +39,13 @@ func (c *col) GetSize() int {
 
 func (c *col) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{
-		Type:  string(c._type),
+		Type:  "col",
 		Value: fmt.Sprintf("%d", c.size),
 	}
 
 	node := tree.NewNode(str)
 
-	for _, c := range c.components {
+	for _, c := range c.nodes {
 		inner := c.GetStructure()
 		node.AddNext(inner)
 	}
@@ -63,7 +56,7 @@ func (c *col) GetStructure() *tree.Node[domain.Structure] {
 func (c *col) Render(provider domain.Provider, cell internal.Cell) {
 	c.render(provider, cell)
 
-	for _, component := range c.components {
+	for _, component := range c.nodes {
 		component.Render(provider, cell)
 	}
 

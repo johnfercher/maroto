@@ -4,19 +4,15 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type page struct {
 	number int
-	_type  types.DocumentType
 	rows   []domain.Row
 }
 
 func New() domain.Page {
-	return &page{
-		_type: types.Page,
-	}
+	return &page{}
 }
 
 func (p *page) Render(provider domain.Provider, cell internal.Cell) {
@@ -25,10 +21,6 @@ func (p *page) Render(provider domain.Provider, cell internal.Cell) {
 		row.Render(provider, innerCell)
 		innerCell.Y += row.GetHeight()
 	}
-}
-
-func (p *page) GetType() string {
-	return p._type.String()
 }
 
 func (p *page) SetNumber(number int) {
@@ -46,7 +38,7 @@ func (p *page) Add(rows ...domain.Row) domain.Page {
 
 func (p *page) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{
-		Type: string(p._type),
+		Type: "page",
 	}
 
 	node := tree.NewNode(str)

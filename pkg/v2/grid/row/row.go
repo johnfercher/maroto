@@ -6,12 +6,10 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/types"
 )
 
 type row struct {
 	height float64
-	_type  types.DocumentType
 	cols   []domain.Col
 	color  color.Color
 }
@@ -32,19 +30,14 @@ func New(height float64, c ...color.Color) domain.Row {
 	}
 
 	return &row{
-		_type:  types.Row,
 		height: height,
 		color:  cx,
 	}
 }
 
-func (r *row) GetType() string {
-	return r._type.String()
-}
-
 func (r *row) GetStructure() *tree.Node[domain.Structure] {
 	str := domain.Structure{
-		Type:  string(r._type),
+		Type:  "row",
 		Value: fmt.Sprintf("%2.f", r.height),
 	}
 
