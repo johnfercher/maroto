@@ -1,6 +1,8 @@
 package v2
 
 import (
+	"bytes"
+	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
@@ -17,6 +19,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 	"io"
+	"log"
 )
 
 type maroto struct {
@@ -31,9 +34,9 @@ type maroto struct {
 	currentHeight float64
 }
 
-func NewMaroto(builder ...config.Builder) domain.Maroto {
+func NewMaroto(config ...*config.Maroto) domain.Maroto {
 	cache := cache.New()
-	cfg := getConfig(builder...)
+	cfg := getConfig(config...)
 	provider := getProvider(cache, cfg)
 
 	width, height := provider.GetDimensions()
@@ -132,13 +135,12 @@ func (d *maroto) fillPage() {
 	d.currentHeight = 0
 }
 
-func getConfig(builders ...config.Builder) *config.Maroto {
-	builder := config.NewBuilder()
-	if len(builders) > 0 {
-		builder = builders[0]
+func getConfig(configs ...*config.Maroto) *config.Maroto {
+	if len(configs) > 0 {
+		return configs[0]
 	}
 
-	return builder.GetConfig()
+	return config.NewBuilder().Build()
 }
 
 func getProvider(cache cache.Cache, cfg *config.Maroto) domain.Provider {
@@ -164,11 +166,11 @@ func (d *maroto) generate() (domain.Document, error) {
 	return domain.NewDocument(bytes, nil), nil
 }
 
-/*func (d *maroto) generateConcurrently() error {
+func (d *maroto) generateConcurrently() (domain.Document, error) {
 	innerCtx := d.cell.Copy()
 
 	p := pool.NewPool(10, func(i domain.Page) ([]byte, error) {
-		innerProvider := getProvider(d.imageCache, d.config...)
+		innerProvider := getProvider(d.imageCache, d.config)
 		i.Render(innerProvider, innerCtx)
 		return innerProvider.GenerateBytes()
 	})
@@ -182,25 +184,26 @@ func (d *maroto) generate() (domain.Document, error) {
 		b := result.Output.([]byte)
 		readers[i] = bytes.NewReader(b)
 	}
-	writer, _ := os.Create(d.file)
-	defer writer.Close()
 
-	if len(d.config) == 0 || d.config[0].GetConfig().ProviderType == provider.Gofpdf {
+	var buf bytes.Buffer
+	writer := io.Writer(&buf)
+	if d.config.ProviderType == provider.Gofpdf {
 		err := mergePdfs(readers, writer)
 		if err != nil {
-			return err
+			return nil, err
+		}
+	} else {
+		for _, reader := range readers {
+			r := io.TeeReader(reader, &buf)
+			_, err := io.ReadAll(r)
+			if err != nil {
+				return nil, err
+			}
 		}
 	}
 
-	for _, reader := range readers {
-		_, err := io.Copy(writer, reader)
-		if err != nil {
-			return err
-		}
-	}
-
-	return writer.Close()
-}*/
+	return domain.NewDocument(buf.Bytes(), nil), nil
+}
 
 func mergePdfs(readers []io.ReadSeeker, writer io.Writer) error {
 	conf := api.LoadConfiguration()
