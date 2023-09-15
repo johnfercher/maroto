@@ -347,7 +347,7 @@ func ExamplePdfMaroto_Base64Image() {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	rowHeight := 5.0
 
-	// Bytes of the image loaded
+	// bytes of the image loaded
 	bytes := []byte{1, 2, 3}
 	base64String := base64.StdEncoding.EncodeToString(bytes)
 

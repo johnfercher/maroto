@@ -19,7 +19,7 @@ import (
 	"io"
 )
 
-type document struct {
+type maroto struct {
 	cell          internal.Cell
 	provider      domain.Provider
 	pages         []domain.Page
@@ -29,14 +29,14 @@ type document struct {
 	config        []config.Builder
 }
 
-func NewMaroto(config ...config.Builder) *document {
+func NewMaroto(config ...config.Builder) config.Maroto {
 	cache := cache.New()
 	provider := getProvider(cache, config...)
 
 	width, height := provider.GetDimensions()
 	left, top, right, bottom := provider.GetMargins()
 
-	return &document{
+	return &maroto{
 		provider: provider,
 		cell: context.NewRootContext(width, height, context.Margins{
 			Left:   left,
@@ -49,15 +49,15 @@ func NewMaroto(config ...config.Builder) *document {
 	}
 }
 
-func (d *document) ForceAddPage(pages ...domain.Page) {
+func (d *maroto) ForceAddPage(pages ...domain.Page) {
 	d.pages = append(d.pages, pages...)
 }
 
-func (d *document) Add(rows ...domain.Row) {
+func (d *maroto) Add(rows ...domain.Row) {
 	d.addRows(rows...)
 }
 
-func (d *document) Generate() (*domain.Document, error) {
+func (d *maroto) Generate() (*domain.Document, error) {
 	d.fillPage()
 	innerCtx := d.cell.Copy()
 
@@ -75,7 +75,7 @@ func (d *document) Generate() (*domain.Document, error) {
 	}, nil
 }
 
-/*func (d *document) GenerateConcurrently() error {
+/*func (d *maroto) GenerateConcurrently() error {
 	d.fillPage()
 	innerCtx := d.cell.Copy()
 
@@ -114,11 +114,11 @@ func (d *document) Generate() (*domain.Document, error) {
 	return writer.Close()
 }*/
 
-func (d *document) GetStructure() *tree.Node[domain.Structure] {
+func (d *maroto) GetStructure() *tree.Node[domain.Structure] {
 	d.fillPage()
 
 	str := domain.Structure{
-		Type: "document",
+		Type: "maroto",
 	}
 	node := tree.NewNode(str)
 
@@ -130,13 +130,13 @@ func (d *document) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (d *document) addRows(rows ...domain.Row) {
+func (d *maroto) addRows(rows ...domain.Row) {
 	for _, row := range rows {
 		d.addRow(row)
 	}
 }
 
-func (d *document) addRow(r domain.Row) {
+func (d *maroto) addRow(r domain.Row) {
 	maxHeight := d.cell.Height
 
 	height := r.GetHeight()
@@ -158,7 +158,7 @@ func (d *document) addRow(r domain.Row) {
 	d.rows = append(d.rows, r)
 }
 
-func (d *document) fillPage() {
+func (d *maroto) fillPage() {
 	space := d.cell.Height - d.currentHeight
 
 	p := page.New()

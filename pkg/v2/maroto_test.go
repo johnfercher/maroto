@@ -21,7 +21,7 @@ func TestNewDocument(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*v2.document", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*v2.maroto", fmt.Sprintf("%T", sut))
 }
 
 func TestDocument_GetStructure(t *testing.T) {
@@ -44,5 +44,5 @@ func TestDocument_GetStructure(t *testing.T) {
 	maroto.Add(r1, r2)
 
 	// Assert
-	test.New(t).Assert(maroto).JSON(`{"type":"document","nodes":[{"type":"page","nodes":[{"type":"row","nodes":[{"type":"col","nodes":[{"type":"barcode"}]},{"type":"col","nodes":[{"type":"matrixcode"}]},{"type":"col","nodes":[{"type":"qrcode"}]}]},{"type":"row","nodes":[{"type":"col","nodes":[{"type":"fileimage"}]},{"type":"col","nodes":[{"type":"base64image"}]},{"type":"col","nodes":[{"type":"signature"}]},{"type":"col","nodes":[{"type":"text"}]}]},{"type":"row","nodes":[{"type":"col"}]}]}]}`)
+	test.New(t).Assert(maroto).JSON(`{"type":"maroto","nodes":[{"type":"page","nodes":[{"type":"row","nodes":[{"type":"col","nodes":[{"type":"barcode"}]},{"type":"col","nodes":[{"type":"matrixcode"}]},{"type":"col","nodes":[{"type":"qrcode"}]}]},{"type":"row","nodes":[{"type":"col","nodes":[{"type":"fileimage"}]},{"type":"col","nodes":[{"type":"base64image"}]},{"type":"col","nodes":[{"type":"signature"}]},{"type":"col","nodes":[{"type":"text"}]}]},{"type":"row","nodes":[{"type":"col"}]}]}]}`)
 }
