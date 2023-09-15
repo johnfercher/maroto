@@ -21,12 +21,10 @@ func main() {
 		Center:  true,
 		Percent: 80,
 	}))
-
 	c2 := col.New(4).Add(image.NewFromFile("internal/assets/images/biplane.jpg", props.Rect{
 		Center:  true,
 		Percent: 80,
 	}))
-
 	c3 := col.New(6).Add(image.NewFromFile("internal/assets/images/biplane.jpg", props.Rect{
 		Center:  true,
 		Percent: 80,
@@ -40,13 +38,11 @@ func main() {
 		Percent: 50,
 		Left:    10,
 	}))
-
 	c5 := col.New(4).Add(image.NewFromFile("internal/assets/images/biplane.jpg", props.Rect{
 		Center:  false,
 		Percent: 50,
 		Top:     10,
 	}))
-
 	c6 := col.New(6).Add(image.NewFromFile("internal/assets/images/biplane.jpg", props.Rect{
 		Center:  false,
 		Percent: 50,
@@ -61,12 +57,10 @@ func main() {
 		Center:  true,
 		Percent: 80,
 	}))
-
 	c8 := col.New(4).Add(image.NewFromFile("internal/assets/images/biplane.jpg", props.Rect{
 		Center:  true,
 		Percent: 80,
 	}))
-
 	r3 := row.New(40).Add(c7, c8)
 	m.Add(r3)
 
@@ -76,13 +70,11 @@ func main() {
 		Top:     5,
 		Left:    10,
 	}))
-
 	c10 := col.New(4).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
 		Center:  false,
 		Percent: 80,
 		Top:     5,
 	}))
-
 	c11 := col.New(2).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
 		Center:  false,
 		Percent: 80,
@@ -96,12 +88,10 @@ func main() {
 		Center:  true,
 		Percent: 50,
 	}))
-
 	c13 := col.New(4).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
 		Center:  true,
 		Percent: 50,
 	}))
-
 	c14 := col.New(2).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
 		Center:  true,
 		Percent: 50,
@@ -114,7 +104,6 @@ func main() {
 		Center:  true,
 		Percent: 80,
 	}))
-
 	c16 := col.New(6).Add(image.NewFromFile("internal/assets/images/frontpage.png", props.Rect{
 		Center:  true,
 		Percent: 80,
