@@ -207,7 +207,7 @@ func (d *maroto) generate() (domain.Document, error) {
 	innerCtx := d.cell.Copy()
 
 	for _, page := range d.pages {
-		page.Render(d.provider, innerCtx, nil)
+		page.Render(d.provider, innerCtx, d.config)
 	}
 
 	bytes, err := d.provider.GenerateBytes()
