@@ -6,6 +6,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 )
 
 type qrCode struct {
@@ -13,7 +15,7 @@ type qrCode struct {
 	prop props.Rect
 }
 
-func NewQr(code string, barcodeProps ...props.Rect) domain.Node {
+func NewQr(code string, barcodeProps ...props.Rect) domain.Component {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]
@@ -24,6 +26,16 @@ func NewQr(code string, barcodeProps ...props.Rect) domain.Node {
 		code: code,
 		prop: prop,
 	}
+}
+
+func NewQrCol(size int, code string, ps ...props.Rect) domain.Col {
+	qrCode := NewQr(code, ps...)
+	return col.New(size).Add(qrCode)
+}
+
+func NewQrRow(height float64, code string, ps ...props.Rect) domain.Row {
+	c := NewQrCol(12, code, ps...)
+	return row.New(height).Add(c)
 }
 
 func (q *qrCode) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
@@ -37,4 +49,8 @@ func (q *qrCode) GetStructure() *tree.Node[domain.Structure] {
 	}
 
 	return tree.NewNode(str)
+}
+
+func (q *qrCode) GetValue() string {
+	return q.code
 }

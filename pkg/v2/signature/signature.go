@@ -7,6 +7,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 )
 
 type signature struct {
@@ -14,10 +16,10 @@ type signature struct {
 	prop  props.Font
 }
 
-func New(value string, textProps ...props.Font) domain.Node {
+func New(value string, ps ...props.Font) domain.Component {
 	prop := props.Font{}
-	if len(textProps) > 0 {
-		prop = textProps[0]
+	if len(ps) > 0 {
+		prop = ps[0]
 	}
 	prop.MakeValid(consts.Arial)
 
@@ -25,6 +27,16 @@ func New(value string, textProps ...props.Font) domain.Node {
 		value: value,
 		prop:  prop,
 	}
+}
+
+func NewCol(size int, value string, ps ...props.Font) domain.Col {
+	signature := New(value, ps...)
+	return col.New(size).Add(signature)
+}
+
+func NewRow(height float64, value string, ps ...props.Font) domain.Row {
+	c := NewCol(12, value, ps...)
+	return row.New(height).Add(c)
 }
 
 func (s *signature) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
@@ -38,4 +50,8 @@ func (s *signature) GetStructure() *tree.Node[domain.Structure] {
 	}
 
 	return tree.NewNode(str)
+}
+
+func (s *signature) GetValue() string {
+	return s.value
 }

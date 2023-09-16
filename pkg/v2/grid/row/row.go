@@ -66,10 +66,6 @@ func (r *row) Render(provider domain.Provider, cell internal.Cell, config *confi
 		innerCell.X += colDimension
 	}
 
-	r.render(provider, cell)
-	return
-}
-
-func (r *row) render(provider domain.Provider, cell internal.Cell) {
 	provider.CreateRow(cell.Height)
+	return
 }

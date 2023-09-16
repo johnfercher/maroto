@@ -14,7 +14,7 @@ const (
 
 type col struct {
 	size  int
-	nodes []domain.Node
+	nodes []domain.Component
 	rows  []domain.Row
 }
 
@@ -24,8 +24,8 @@ func New(size int) domain.Col {
 	}
 }
 
-func (c *col) Add(node ...domain.Node) domain.Col {
-	c.nodes = append(c.nodes, node...)
+func (c *col) Add(components ...domain.Component) domain.Col {
+	c.nodes = append(c.nodes, components...)
 	return c
 }
 

@@ -10,33 +10,34 @@ type Maroto interface {
 	Generate() (Document, error)
 	ForceAddPage(pages ...Page)
 	Add(rows ...Row)
+	AddCols(rowHeight float64, cols ...Col)
 	RegisterHeader(rows ...Row) error
 	GetStructure() *tree.Node[Structure]
 }
 
-type Node interface {
+type Component interface {
 	Render(provider Provider, cell internal.Cell, config *config.Maroto)
 	GetStructure() *tree.Node[Structure]
 }
 
-type Page interface {
-	Node
-	Add(rows ...Row) Page
-	GetNumber() int
-	SetNumber(number int)
+type Col interface {
+	Component
+	Add(components ...Component) Col
+	AddInner(rows ...Row) Col
+	GetSize() int
 }
 
 type Row interface {
-	Node
+	Component
 	Add(cols ...Col) Row
 	GetHeight() float64
 }
 
-type Col interface {
-	Node
-	Add(nodes ...Node) Col
-	AddInner(rows ...Row) Col
-	GetSize() int
+type Page interface {
+	Component
+	Add(rows ...Row) Page
+	GetNumber() int
+	SetNumber(number int)
 }
 
 type Structure struct {

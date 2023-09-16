@@ -6,6 +6,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 )
 
 type barcode struct {
@@ -13,10 +15,10 @@ type barcode struct {
 	prop props.Barcode
 }
 
-func NewBar(code string, barcodeProps ...props.Barcode) domain.Node {
+func NewBar(code string, ps ...props.Barcode) domain.Component {
 	prop := props.Barcode{}
-	if len(barcodeProps) > 0 {
-		prop = barcodeProps[0]
+	if len(ps) > 0 {
+		prop = ps[0]
 	}
 	prop.MakeValid()
 
@@ -24,6 +26,16 @@ func NewBar(code string, barcodeProps ...props.Barcode) domain.Node {
 		code: code,
 		prop: prop,
 	}
+}
+
+func NewBarCol(size int, code string, ps ...props.Barcode) domain.Col {
+	bar := NewBar(code, ps...)
+	return col.New(size).Add(bar)
+}
+
+func NewBarRow(height float64, code string, ps ...props.Barcode) domain.Row {
+	c := NewBarCol(12, code, ps...)
+	return row.New(height).Add(c)
 }
 
 func (b *barcode) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
@@ -37,4 +49,8 @@ func (b *barcode) GetStructure() *tree.Node[domain.Structure] {
 	}
 
 	return tree.NewNode(str)
+}
+
+func (b *barcode) GetValue() string {
+	return b.code
 }

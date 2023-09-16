@@ -7,6 +7,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"strings"
 )
 
@@ -15,10 +17,10 @@ type fileImage struct {
 	prop props.Rect
 }
 
-func NewFromFile(path string, imageProps ...props.Rect) domain.Node {
+func NewFromFile(path string, ps ...props.Rect) domain.Component {
 	prop := props.Rect{}
-	if len(imageProps) > 0 {
-		prop = imageProps[0]
+	if len(ps) > 0 {
+		prop = ps[0]
 	}
 	prop.MakeValid()
 
@@ -26,6 +28,16 @@ func NewFromFile(path string, imageProps ...props.Rect) domain.Node {
 		path: path,
 		prop: prop,
 	}
+}
+
+func NewFromFileCol(size int, path string, ps ...props.Rect) domain.Col {
+	image := NewFromFile(path, ps...)
+	return col.New(size).Add(image)
+}
+
+func NewFromFileRow(height float64, path string, ps ...props.Rect) domain.Row {
+	c := NewFromFileCol(12, path, ps...)
+	return row.New(height).Add(c)
 }
 
 func (f *fileImage) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
@@ -40,4 +52,8 @@ func (f *fileImage) GetStructure() *tree.Node[domain.Structure] {
 	}
 
 	return tree.NewNode(str)
+}
+
+func (f *fileImage) GetValue() string {
+	return f.path
 }

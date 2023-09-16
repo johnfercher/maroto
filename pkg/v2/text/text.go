@@ -8,6 +8,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 )
 
 type text struct {
@@ -15,7 +17,7 @@ type text struct {
 	prop  props.Text
 }
 
-func New(value string, prop ...props.Text) domain.Node {
+func New(value string, ps ...props.Text) domain.Component {
 	textProp := props.Text{
 		Color: color.Color{
 			Red:   0,
@@ -24,8 +26,8 @@ func New(value string, prop ...props.Text) domain.Node {
 		},
 	}
 
-	if len(prop) > 0 {
-		textProp = prop[0]
+	if len(ps) > 0 {
+		textProp = ps[0]
 	}
 	textProp.MakeValid(consts.Arial)
 
@@ -33,6 +35,16 @@ func New(value string, prop ...props.Text) domain.Node {
 		value: value,
 		prop:  textProp,
 	}
+}
+
+func NewCol(size int, value string, ps ...props.Text) domain.Col {
+	text := New(value, ps...)
+	return col.New(size).Add(text)
+}
+
+func NewRow(height float64, value string, ps ...props.Text) domain.Row {
+	c := NewCol(12, value, ps...)
+	return row.New(height).Add(c)
 }
 
 func (t *text) GetStructure() *tree.Node[domain.Structure] {
@@ -47,6 +59,10 @@ func (t *text) GetStructure() *tree.Node[domain.Structure] {
 func (t *text) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
 	t.render(provider, cell)
 	return
+}
+
+func (t *text) GetValue() string {
+	return t.value
 }
 
 func (t *text) render(provider domain.Provider, cell internal.Cell) {

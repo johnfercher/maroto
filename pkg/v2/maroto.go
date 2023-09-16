@@ -75,6 +75,11 @@ func (d *maroto) Add(rows ...domain.Row) {
 	d.addRows(rows...)
 }
 
+func (d *maroto) AddCols(rowHeight float64, cols ...domain.Col) {
+	r := row.New(rowHeight).Add(cols...)
+	d.addRow(r)
+}
+
 func (m *maroto) RegisterHeader(rows ...domain.Row) error {
 	var headerHeight float64
 	for _, row := range rows {

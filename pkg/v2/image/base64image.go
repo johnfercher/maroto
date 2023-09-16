@@ -7,6 +7,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 )
 
 type base64Image struct {
@@ -15,10 +17,10 @@ type base64Image struct {
 	prop      props.Rect
 }
 
-func NewFromBase64(path string, extension consts.Extension, imageProps ...props.Rect) domain.Node {
+func NewFromBase64(path string, extension consts.Extension, ps ...props.Rect) domain.Component {
 	prop := props.Rect{}
-	if len(imageProps) > 0 {
-		prop = imageProps[0]
+	if len(ps) > 0 {
+		prop = ps[0]
 	}
 	prop.MakeValid()
 
@@ -27,6 +29,16 @@ func NewFromBase64(path string, extension consts.Extension, imageProps ...props.
 		prop:      prop,
 		extension: extension,
 	}
+}
+
+func NewFromBase64Col(size int, path string, extension consts.Extension, ps ...props.Rect) domain.Col {
+	image := NewFromBase64(path, extension, ps...)
+	return col.New(size).Add(image)
+}
+
+func NewFromBase64eRow(height float64, path string, extension consts.Extension, ps ...props.Rect) domain.Row {
+	c := NewFromBase64Col(12, path, extension, ps...)
+	return row.New(height).Add(c)
 }
 
 func (b *base64Image) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
@@ -45,4 +57,8 @@ func (b *base64Image) GetStructure() *tree.Node[domain.Structure] {
 	}
 
 	return tree.NewNode(str)
+}
+
+func (b *base64Image) GetValue() string {
+	return b.base64
 }

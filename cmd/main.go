@@ -20,7 +20,6 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithWorkerPoolSize(10).
 		WithDebug(true).
 		Build()
 
@@ -52,15 +51,9 @@ func main() {
 
 func buildCodesRow() domain.Row {
 	return row.New(40).Add(
-		col.New(4).Add(
-			code.NewBar("barcode"),
-		),
-		col.New(4).Add(
-			code.NewQr("qrcode"),
-		),
-		col.New(4).Add(
-			code.NewMatrix("matrixcode"),
-		),
+		code.NewBarCol(4, "barcode"),
+		code.NewQrCol(4, "qrcode"),
+		code.NewMatrixCol(4, "matrixcode"),
 	)
 }
 
@@ -73,30 +66,22 @@ func buildImagesRow() domain.Row {
 	stringBase64 := base64.StdEncoding.EncodeToString(byteSlices)
 
 	return row.New(40).Add(
-		col.New(6).Add(
-			image.NewFromBase64(stringBase64, consts.Png),
-		),
-		col.New(6).Add(
-			image.NewFromFile("internal/assets/images/frontpage.png"),
-		),
+		image.NewFromBase64Col(6, stringBase64, consts.Png),
+		image.NewFromFileCol(6, "internal/assets/images/frontpage.png"),
 	)
 }
 
 func buildTextsRow() domain.Row {
 	colText := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
 	return row.New(40).Add(
-		col.New(6).Add(
-			text.New(colText, props.Text{
-				Align: consts.Center,
-			}),
-		),
-		col.New(6).Add(
-			signature.New("signature", props.Font{
-				Style:  consts.Italic,
-				Size:   15,
-				Family: consts.Courier,
-			}),
-		),
+		text.NewCol(6, colText, props.Text{
+			Align: consts.Center,
+		}),
+		signature.NewCol(6, "signature", props.Font{
+			Style:  consts.Italic,
+			Size:   15,
+			Family: consts.Courier,
+		}),
 	)
 }
 
@@ -116,15 +101,9 @@ func buildHeader() []domain.Row {
 	)
 
 	r2 := row.New(10).Add(
-		col.New(2).Add(
-			text.New("Site: https://maroto.io/"),
-		),
-		col.New(5).Add(
-			text.New("Discussions: https://github.com/johnfercher/maroto/issues/257"),
-		),
-		col.New(5).Add(
-			text.New("Branch: https://github.com/johnfercher/maroto/tree/v2"),
-		),
+		text.NewCol(2, "Site: https://maroto.io/"),
+		text.NewCol(5, "Discussions: https://github.com/johnfercher/maroto/issues/257"),
+		text.NewCol(5, "Branch: https://github.com/johnfercher/maroto/tree/v2"),
 	)
 
 	return []domain.Row{r1, r2}

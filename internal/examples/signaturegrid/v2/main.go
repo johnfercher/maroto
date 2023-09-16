@@ -6,8 +6,6 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/config"
-	"github.com/johnfercher/maroto/pkg/v2/grid/col"
-	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/signature"
 	"log"
 )
@@ -20,32 +18,16 @@ func main() {
 	maroto := v2.NewMaroto(cfg)
 	m := v2.NewMetricsDecorator(maroto)
 
-	m.Add(
-		row.New(40).Add(
-			col.New(2).Add(
-				signature.New("Signature 1"),
-			),
-			col.New(4).Add(
-				signature.New("Signature 2", props.Font{Family: consts.Courier}),
-			),
-			col.New(6).Add(
-				signature.New("Signature 3", props.Font{Style: consts.BoldItalic}),
-			),
-		),
+	m.AddCols(40,
+		signature.NewCol(2, "Signature 1"),
+		signature.NewCol(4, "Signature 2", props.Font{Family: consts.Courier}),
+		signature.NewCol(6, "Signature 3", props.Font{Style: consts.BoldItalic}),
 	)
 
-	m.Add(
-		row.New(40).Add(
-			col.New(6).Add(
-				signature.New("Signature 4", props.Font{Style: consts.Italic}),
-			),
-			col.New(4).Add(
-				signature.New("Signature 5", props.Font{Size: 12}),
-			),
-			col.New(2).Add(
-				signature.New("Signature 6", props.Font{Color: color.Color{255, 0, 0}}),
-			),
-		),
+	m.AddCols(40,
+		signature.NewCol(6, "Signature 4", props.Font{Style: consts.Italic}),
+		signature.NewCol(4, "Signature 5", props.Font{Size: 12}),
+		signature.NewCol(2, "Signature 6", props.Font{Color: color.Color{255, 0, 0}}),
 	)
 
 	document, err := m.Generate()

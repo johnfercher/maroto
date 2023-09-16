@@ -6,6 +6,8 @@ import (
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
+	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 )
 
 type matrixCode struct {
@@ -13,7 +15,7 @@ type matrixCode struct {
 	prop props.Rect
 }
 
-func NewMatrix(code string, barcodeProps ...props.Rect) domain.Node {
+func NewMatrix(code string, barcodeProps ...props.Rect) domain.Component {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
 		prop = barcodeProps[0]
@@ -24,6 +26,16 @@ func NewMatrix(code string, barcodeProps ...props.Rect) domain.Node {
 		code: code,
 		prop: prop,
 	}
+}
+
+func NewMatrixCol(size int, code string, ps ...props.Rect) domain.Col {
+	matrixCode := NewMatrix(code, ps...)
+	return col.New(size).Add(matrixCode)
+}
+
+func NewMatrixRow(height float64, code string, ps ...props.Rect) domain.Row {
+	c := NewMatrixCol(12, code, ps...)
+	return row.New(height).Add(c)
 }
 
 func (m *matrixCode) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
@@ -37,4 +49,8 @@ func (m *matrixCode) GetStructure() *tree.Node[domain.Structure] {
 	}
 
 	return tree.NewNode(str)
+}
+
+func (m *matrixCode) GetValue() string {
+	return m.code
 }

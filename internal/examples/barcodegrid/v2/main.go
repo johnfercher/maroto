@@ -5,8 +5,6 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/code"
 	"github.com/johnfercher/maroto/pkg/v2/config"
-	"github.com/johnfercher/maroto/pkg/v2/grid/col"
-	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"log"
 )
 
@@ -18,90 +16,58 @@ func main() {
 	maroto := v2.NewMaroto(cfg)
 	m := v2.NewMetricsDecorator(maroto)
 
-	m.Add(
-		row.New(40).Add(
-			col.New(2).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Percent: 50,
-				}),
-			),
-			col.New(4).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Percent: 75,
-				}),
-			),
-			col.New(6).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Percent: 100,
-				}),
-			),
-		),
+	m.AddCols(40,
+		code.NewBarCol(2, "https://github.com/johnfercher/maroto", props.Barcode{
+			Percent: 50,
+		}),
+		code.NewBarCol(4, "https://github.com/johnfercher/maroto", props.Barcode{
+			Percent: 75,
+		}),
+		code.NewBarCol(6, "https://github.com/johnfercher/maroto", props.Barcode{
+			Percent: 100,
+		}),
 	)
 
-	m.Add(
-		row.New(40).Add(
-			col.New(2).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Center:  true,
-					Percent: 50,
-				}),
-			),
-			col.New(4).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Center:  true,
-					Percent: 75,
-				}),
-			),
-			col.New(6).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Center:  true,
-					Percent: 100,
-				}),
-			),
-		),
+	m.AddCols(40,
+		code.NewBarCol(2, "https://github.com/johnfercher/maroto", props.Barcode{
+			Center:  true,
+			Percent: 50,
+		}),
+		code.NewBarCol(4, "https://github.com/johnfercher/maroto", props.Barcode{
+			Center:  true,
+			Percent: 75,
+		}),
+		code.NewBarCol(6, "https://github.com/johnfercher/maroto", props.Barcode{
+			Center:  true,
+			Percent: 100,
+		}),
 	)
 
-	m.Add(
-		row.New(40).Add(
-			col.New(6).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Percent: 50,
-				}),
-			),
-			col.New(4).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Percent: 75,
-				}),
-			),
-			col.New(2).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Percent: 100,
-				}),
-			),
-		),
+	m.AddCols(40,
+		code.NewBarCol(6, "https://github.com/johnfercher/maroto", props.Barcode{
+			Percent: 50,
+		}),
+		code.NewBarCol(4, "https://github.com/johnfercher/maroto", props.Barcode{
+			Percent: 75,
+		}),
+		code.NewBarCol(2, "https://github.com/johnfercher/maroto", props.Barcode{
+			Percent: 100,
+		}),
 	)
 
-	m.Add(
-		row.New(40).Add(
-			col.New(6).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Center:  true,
-					Percent: 50,
-				}),
-			),
-			col.New(4).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Center:  true,
-					Percent: 75,
-				}),
-			),
-			col.New(2).Add(
-				code.NewBar("https://github.com/johnfercher/maroto", props.Barcode{
-					Center:  true,
-					Percent: 100,
-				}),
-			),
-		),
+	m.AddCols(40,
+		code.NewBarCol(6, "https://github.com/johnfercher/maroto", props.Barcode{
+			Center:  true,
+			Percent: 50,
+		}),
+		code.NewBarCol(4, "https://github.com/johnfercher/maroto", props.Barcode{
+			Center:  true,
+			Percent: 75,
+		}),
+		code.NewBarCol(2, "https://github.com/johnfercher/maroto", props.Barcode{
+			Center:  true,
+			Percent: 100,
+		}),
 	)
 
 	document, err := m.Generate()
