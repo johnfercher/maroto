@@ -6,5 +6,5 @@ type Maroto struct {
 	ProviderType provider.Type
 	Dimensions   *Dimensions
 	Margins      *Margins
-	ThreadPool   int
+	Workers      int
 }

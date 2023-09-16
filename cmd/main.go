@@ -19,13 +19,13 @@ import (
 )
 
 func main() {
-	cfg := config.NewBuilder().WithThreadPool(10).Build()
+	cfg := config.NewBuilder().WithWorkerPoolSize(7).Build()
 
 	maroto := v2.NewMaroto(cfg)
 
 	m := v2.NewMetricsDecorator(maroto)
 
-	for _ = range [10]int{} {
+	for _ = range [100]int{} {
 		m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	}
 

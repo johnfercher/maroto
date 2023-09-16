@@ -17,7 +17,7 @@ type Builder interface {
 	WithDimensions(dimensions *Dimensions) Builder
 	WithMargins(margins *Margins) Builder
 	WithProvider(providerType provider.Type) Builder
-	WithThreadPool(pool int) Builder
+	WithWorkerPoolSize(pool int) Builder
 	Build() *Maroto
 }
 
@@ -97,7 +97,7 @@ func (b *builder) WithProvider(providerType provider.Type) Builder {
 	return b
 }
 
-func (b *builder) WithThreadPool(pool int) Builder {
+func (b *builder) WithWorkerPoolSize(pool int) Builder {
 	if pool <= 0 {
 		return b
 	}
@@ -111,6 +111,6 @@ func (b *builder) Build() *Maroto {
 		ProviderType: b.providerType,
 		Dimensions:   b.dimensions,
 		Margins:      b.margins,
-		ThreadPool:   b.threadPool,
+		Workers:      b.threadPool,
 	}
 }
