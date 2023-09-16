@@ -1,1 +1,1 @@
-[RFC](https://docs.google.com/document/u/1/d/1OMOdtR2c6FYfl4X5p6Y_KTId_GeONfGbZSebnK0Pxbk/edit) | [Discussion](https://github.com/johnfercher/maroto/issues/257) | [Default Branch](https://github.com/johnfercher/maroto/tree/v2)
+[Discussion](https://github.com/johnfercher/maroto/issues/257) | [Default Branch](https://github.com/johnfercher/maroto/tree/v2)
