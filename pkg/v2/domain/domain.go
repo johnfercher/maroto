@@ -3,17 +3,19 @@ package domain
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 )
 
 type Maroto interface {
 	Generate() (Document, error)
 	ForceAddPage(pages ...Page)
 	Add(rows ...Row)
+	RegisterHeader(rows ...Row) error
 	GetStructure() *tree.Node[Structure]
 }
 
 type Node interface {
-	Render(fpdf Provider, ctx internal.Cell)
+	Render(provider Provider, cell internal.Cell, config *config.Maroto)
 	GetStructure() *tree.Node[Structure]
 }
 

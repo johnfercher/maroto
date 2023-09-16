@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 )
 
@@ -28,7 +29,7 @@ func NewFromBase64(path string, extension consts.Extension, imageProps ...props.
 	}
 }
 
-func (b *base64Image) Render(provider domain.Provider, cell internal.Cell) {
+func (b *base64Image) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
 	provider.AddImage(b.base64, cell, b.prop, b.extension)
 }
 

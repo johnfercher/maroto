@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 )
 
@@ -25,7 +26,7 @@ func NewMatrix(code string, barcodeProps ...props.Rect) domain.Node {
 	}
 }
 
-func (m *matrixCode) Render(provider domain.Provider, cell internal.Cell) {
+func (m *matrixCode) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
 	provider.AddMatrixCode(m.code, cell, m.prop)
 }
 

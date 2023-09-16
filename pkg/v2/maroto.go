@@ -2,6 +2,7 @@ package v2
 
 import (
 	"bytes"
+	"errors"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
@@ -31,6 +32,8 @@ type maroto struct {
 	cell          internal.Cell
 	pages         []domain.Page
 	rows          []domain.Row
+	header        []domain.Row
+	headerHeight  float64
 	currentHeight float64
 }
 
@@ -55,34 +58,52 @@ func NewMaroto(config ...*config.Maroto) domain.Maroto {
 	}
 }
 
-func (d *maroto) ForceAddPage(pages ...domain.Page) {
-	d.pages = append(d.pages, pages...)
+func (m *maroto) ForceAddPage(pages ...domain.Page) {
+	m.pages = append(m.pages, pages...)
 }
 
-func (d *maroto) Add(rows ...domain.Row) {
-	d.addRows(rows...)
+func (m *maroto) Add(rows ...domain.Row) {
+	m.addRows(rows...)
 }
 
-func (d *maroto) Generate() (domain.Document, error) {
-	d.fillPage()
-
-	if d.config.ThreadPool > 0 {
-		return d.generate()
+func (m *maroto) RegisterHeader(rows ...domain.Row) error {
+	var headerHeight float64
+	for _, row := range rows {
+		headerHeight += row.GetHeight()
+	}
+	if headerHeight > m.config.Dimensions.Height {
+		return errors.New("header height is greater than page")
 	}
 
-	// Change to parallel
-	return d.generate()
+	m.headerHeight = headerHeight
+	m.header = rows
+
+	for _, headerRow := range rows {
+		m.addRow(headerRow)
+	}
+
+	return nil
 }
 
-func (d *maroto) GetStructure() *tree.Node[domain.Structure] {
-	d.fillPage()
+func (m *maroto) Generate() (domain.Document, error) {
+	m.fillPageToAddNew()
+
+	if m.config.ThreadPool > 0 {
+		return m.generate()
+	}
+
+	return m.generate()
+}
+
+func (m *maroto) GetStructure() *tree.Node[domain.Structure] {
+	m.fillPageToAddNew()
 
 	str := domain.Structure{
 		Type: "maroto",
 	}
 	node := tree.NewNode(str)
 
-	for _, p := range d.pages {
+	for _, p := range m.pages {
 		inner := p.GetStructure()
 		node.AddNext(inner)
 	}
@@ -90,49 +111,54 @@ func (d *maroto) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (d *maroto) addRows(rows ...domain.Row) {
+func (m *maroto) addRows(rows ...domain.Row) {
 	for _, row := range rows {
-		d.addRow(row)
+		m.addRow(row)
 	}
 }
 
-func (d *maroto) addRow(r domain.Row) {
-	maxHeight := d.cell.Height
+func (m *maroto) addRow(r domain.Row) {
+	maxHeight := m.cell.Height
 
 	height := r.GetHeight()
-	sumHeight := height + d.currentHeight
+	sumHeight := height + m.currentHeight
 
 	// Row smaller than the remain space on page
 	if sumHeight < maxHeight {
-		d.currentHeight += height
-		d.rows = append(d.rows, r)
+		m.currentHeight += height
+		m.rows = append(m.rows, r)
 		return
 	}
 
-	// As row will extrapolate page, we will the empty space
+	// As row will extrapolate page, we will add empty space
 	// on the page to force a new page
-	d.fillPage()
+	m.fillPageToAddNew()
+
+	for _, headerRow := range m.header {
+		m.currentHeight += headerRow.GetHeight()
+		m.rows = append(m.rows, headerRow)
+	}
 
 	// Add row on the new page
-	d.currentHeight += height
-	d.rows = append(d.rows, r)
+	m.currentHeight += height
+	m.rows = append(m.rows, r)
 }
 
-func (d *maroto) fillPage() {
-	space := d.cell.Height - d.currentHeight
+func (m *maroto) fillPageToAddNew() {
+	space := m.cell.Height - m.currentHeight
 
 	p := page.New()
-	p.SetNumber(len(d.pages))
-	p.Add(d.rows...)
+	p.SetNumber(len(m.pages))
+	p.Add(m.rows...)
 
 	c := col.New(12)
 	row := row.New(space, color.Color{255, 0, 0})
 	row.Add(c)
 	p.Add(row)
 
-	d.pages = append(d.pages, p)
-	d.rows = nil
-	d.currentHeight = 0
+	m.pages = append(m.pages, p)
+	m.rows = nil
+	m.currentHeight = 0
 }
 
 func getConfig(configs ...*config.Maroto) *config.Maroto {
@@ -151,14 +177,14 @@ func getProvider(cache cache.Cache, cfg *config.Maroto) domain.Provider {
 	return gofpdf.New(cfg, providers.WithCache(cache))
 }
 
-func (d *maroto) generate() (domain.Document, error) {
-	innerCtx := d.cell.Copy()
+func (m *maroto) generate() (domain.Document, error) {
+	innerCtx := m.cell.Copy()
 
-	for _, page := range d.pages {
-		page.Render(d.provider, innerCtx)
+	for _, page := range m.pages {
+		page.Render(m.provider, innerCtx, m.config)
 	}
 
-	bytes, err := d.provider.GenerateBytes()
+	bytes, err := m.provider.GenerateBytes()
 	if err != nil {
 		return nil, err
 	}
@@ -166,16 +192,16 @@ func (d *maroto) generate() (domain.Document, error) {
 	return domain.NewDocument(bytes, nil), nil
 }
 
-func (d *maroto) generateConcurrently() (domain.Document, error) {
-	innerCtx := d.cell.Copy()
+func (m *maroto) generateConcurrently() (domain.Document, error) {
+	innerCtx := m.cell.Copy()
 
 	p := pool.NewPool(10, func(i domain.Page) ([]byte, error) {
-		innerProvider := getProvider(d.imageCache, d.config)
-		i.Render(innerProvider, innerCtx)
+		innerProvider := getProvider(m.imageCache, m.config)
+		i.Render(innerProvider, innerCtx, nil)
 		return innerProvider.GenerateBytes()
 	})
 
-	processed := p.Process(d.pages)
+	processed := p.Process(m.pages)
 	if processed.HasError {
 		log.Fatal("error on generating pages")
 	}
@@ -187,7 +213,7 @@ func (d *maroto) generateConcurrently() (domain.Document, error) {
 
 	var buf bytes.Buffer
 	writer := io.Writer(&buf)
-	if d.config.ProviderType == provider.Gofpdf {
+	if m.config.ProviderType == provider.Gofpdf {
 		err := mergePdfs(readers, writer)
 		if err != nil {
 			return nil, err

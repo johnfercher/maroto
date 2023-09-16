@@ -10,6 +10,7 @@ type builder struct {
 	dimensions   *Dimensions
 	margins      *Margins
 	threadPool   int
+	debug        bool
 }
 
 type Builder interface {
@@ -18,6 +19,7 @@ type Builder interface {
 	WithMargins(margins *Margins) Builder
 	WithProvider(providerType provider.Type) Builder
 	WithThreadPool(pool int) Builder
+	WithDebug(on bool) Builder
 	Build() *Maroto
 }
 
@@ -106,11 +108,17 @@ func (b *builder) WithThreadPool(pool int) Builder {
 	return b
 }
 
+func (b *builder) WithDebug(on bool) Builder {
+	b.debug = on
+	return b
+}
+
 func (b *builder) Build() *Maroto {
 	return &Maroto{
 		ProviderType: b.providerType,
 		Dimensions:   b.dimensions,
 		Margins:      b.margins,
 		ThreadPool:   b.threadPool,
+		Debug:        b.debug,
 	}
 }

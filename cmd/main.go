@@ -19,11 +19,19 @@ import (
 )
 
 func main() {
-	cfg := config.NewBuilder().WithThreadPool(10).Build()
+	cfg := config.NewBuilder().
+		WithThreadPool(10).
+		WithDebug(true).
+		Build()
 
 	maroto := v2.NewMaroto(cfg)
 
 	m := v2.NewMetricsDecorator(maroto)
+
+	err := m.RegisterHeader(buildHeader()...)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 
 	for _ = range [10]int{} {
 		m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
@@ -43,56 +51,81 @@ func main() {
 }
 
 func buildCodesRow() domain.Row {
-	r := row.New(70)
-
-	col1 := col.New(4)
-	col1.Add(code.NewBar("barcode"))
-
-	col2 := col.New(4)
-	col2.Add(code.NewQr("qrcode"))
-
-	col3 := col.New(4)
-	col3.Add(code.NewMatrix("matrixcode"))
-
-	r.Add(col1, col2, col3)
-	return r
+	return row.New(40).Add(
+		col.New(4).Add(
+			code.NewBar("barcode"),
+		),
+		col.New(4).Add(
+			code.NewQr("qrcode"),
+		),
+		col.New(4).Add(
+			code.NewMatrix("matrixcode"),
+		),
+	)
 }
 
 func buildImagesRow() domain.Row {
-	r := row.New(70)
-
-	col1 := col.New(6)
-	col1.Add(image.NewFromFile("internal/assets/images/frontpage.png"))
-
 	byteSlices, err := os.ReadFile("internal/assets/images/frontpage.png")
 	if err != nil {
 		fmt.Println("Got error while opening file:", err)
 		os.Exit(1)
 	}
 	stringBase64 := base64.StdEncoding.EncodeToString(byteSlices)
-	col2 := col.New(6)
-	col2.Add(image.NewFromBase64(stringBase64, consts.Png))
 
-	r.Add(col1, col2)
-	return r
+	return row.New(40).Add(
+		col.New(6).Add(
+			image.NewFromBase64(stringBase64, consts.Png),
+		),
+		col.New(6).Add(
+			image.NewFromFile("internal/assets/images/frontpage.png"),
+		),
+	)
 }
 
 func buildTextsRow() domain.Row {
-	row := row.New(70)
-
 	colText := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
-	col1 := col.New(6)
-	col1.Add(text.New(colText, props.Text{
-		Align: consts.Center,
-	}))
+	return row.New(40).Add(
+		col.New(6).Add(
+			text.New(colText, props.Text{
+				Align: consts.Center,
+			}),
+		),
+		col.New(6).Add(
+			signature.New("signature", props.Font{
+				Style:  consts.Italic,
+				Size:   15,
+				Family: consts.Courier,
+			}),
+		),
+	)
+}
 
-	col2 := col.New(6)
-	col2.Add(signature.New("Fulano de Tal", props.Font{
-		Style:  consts.Italic,
-		Size:   20,
-		Family: consts.Courier,
-	}))
+func buildHeader() []domain.Row {
+	r1 := row.New(15).Add(
+		col.New(12).Add(
+			text.New("Maroto V2", props.Text{
+				Size:  15,
+				Align: consts.Center,
+			}),
+			text.New("The New Standard", props.Text{
+				Top:   8,
+				Size:  13,
+				Align: consts.Center,
+			}),
+		),
+	)
 
-	row.Add(col1, col2)
-	return row
+	r2 := row.New(10).Add(
+		col.New(2).Add(
+			text.New("Site: https://maroto.io/"),
+		),
+		col.New(5).Add(
+			text.New("Discussions: https://github.com/johnfercher/maroto/issues/257"),
+		),
+		col.New(5).Add(
+			text.New("Branch: https://github.com/johnfercher/maroto/tree/v2"),
+		),
+	)
+
+	return []domain.Row{r1, r2}
 }

@@ -11,6 +11,7 @@ type metricsDecorator struct {
 	label         string
 	addRowTime    []*metrics.Time
 	addPageTime   []*metrics.Time
+	headerTime    *metrics.Time
 	generateTime  *metrics.Time
 	structureTime *metrics.Time
 	inner         domain.Maroto
@@ -49,6 +50,15 @@ func (d *metricsDecorator) Add(rows ...domain.Row) {
 	})
 
 	d.addRowTime = append(d.addRowTime, timeSpent)
+}
+
+func (d *metricsDecorator) RegisterHeader(rows ...domain.Row) error {
+	var err error
+	timeSpent := d.getTimeSpent(func() {
+		err = d.inner.RegisterHeader(rows...)
+	})
+	d.headerTime = timeSpent
+	return err
 }
 
 func (d *metricsDecorator) GetStructure() *tree.Node[domain.Structure] {

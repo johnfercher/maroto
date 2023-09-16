@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"strings"
 )
@@ -27,7 +28,7 @@ func NewFromFile(path string, imageProps ...props.Rect) domain.Node {
 	}
 }
 
-func (f *fileImage) Render(provider domain.Provider, cell internal.Cell) {
+func (f *fileImage) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
 	extension := strings.Split(f.path, ".")[1]
 	provider.AddImage(f.path, cell, f.prop, consts.Extension(extension))
 }

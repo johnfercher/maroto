@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 )
 
@@ -53,16 +54,12 @@ func (c *col) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (c *col) Render(provider domain.Provider, cell internal.Cell) {
-	c.render(provider, cell)
+func (c *col) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+	provider.CreateCol(cell.Width, cell.Height, config)
 
 	for _, component := range c.nodes {
-		component.Render(provider, cell)
+		component.Render(provider, cell, config)
 	}
 
 	return
-}
-
-func (c *col) render(provider domain.Provider, cell internal.Cell) {
-	provider.CreateCol(cell.Width, cell.Height)
 }

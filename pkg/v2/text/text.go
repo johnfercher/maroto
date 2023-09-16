@@ -6,6 +6,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 )
 
@@ -43,7 +44,7 @@ func (t *text) GetStructure() *tree.Node[domain.Structure] {
 	return tree.NewNode(str)
 }
 
-func (t *text) Render(provider domain.Provider, cell internal.Cell) {
+func (t *text) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
 	t.render(provider, cell)
 	return
 }
