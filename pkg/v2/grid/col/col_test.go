@@ -85,7 +85,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 
@@ -107,7 +107,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 	})
@@ -128,7 +128,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 	})
@@ -149,7 +149,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 	})
@@ -170,7 +170,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 	})
@@ -191,7 +191,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 	})
@@ -212,7 +212,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 
@@ -234,7 +234,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 	})
@@ -255,7 +255,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 
@@ -277,7 +277,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 
@@ -299,7 +299,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 
@@ -321,7 +321,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(expectedSizeX, ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 
@@ -343,7 +343,7 @@ func TestCol_Render(t *testing.T) {
 		pdf.EXPECT().CellFormat(ctx.GetXOffset(), ctx.GetYOffset(), "", "1", 0, "C", false, 0, "")
 		pdf.EXPECT().Text(ctx.GetXOffset(), ctx.GetYOffset(), "test")
 		// act
-		col.Render(pdf, ctx)
+		col.Render(pdf, ctx, nil)
 
 		// assert
 

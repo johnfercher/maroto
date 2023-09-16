@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 )
 
@@ -51,9 +52,7 @@ func (r *row) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (r *row) Render(provider domain.Provider, cell internal.Cell) {
-	//fpdf.SetDrawColor(r.color.Red, r.color.Green, r.color.Blue)
-
+func (r *row) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
 	cell.Height = r.height
 	innerCell := cell.Copy()
 	for _, col := range r.cols {
@@ -63,7 +62,7 @@ func (r *row) Render(provider domain.Provider, cell internal.Cell) {
 		colDimension := parentWidth * percent
 		innerCell.Width = colDimension
 
-		col.Render(provider, innerCell)
+		col.Render(provider, innerCell, config)
 		innerCell.X += colDimension
 	}
 

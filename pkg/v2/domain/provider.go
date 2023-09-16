@@ -5,12 +5,13 @@ import (
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 )
 
 type Provider interface {
 	// Grid
 	CreateRow(height float64)
-	CreateCol(width, height float64)
+	CreateCol(width, height float64, config *config.Maroto)
 
 	// Features
 	AddText(text string, cell internal.Cell, prop props.Text)

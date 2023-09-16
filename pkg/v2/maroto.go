@@ -2,6 +2,7 @@ package v2
 
 import (
 	"bytes"
+	"errors"
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
@@ -32,6 +33,8 @@ type maroto struct {
 	cell          internal.Cell
 	pages         []domain.Page
 	rows          []domain.Row
+	header        []domain.Row
+	headerHeight  float64
 	currentHeight float64
 
 	// Processing
@@ -72,6 +75,25 @@ func (d *maroto) Add(rows ...domain.Row) {
 	d.addRows(rows...)
 }
 
+func (m *maroto) RegisterHeader(rows ...domain.Row) error {
+	var headerHeight float64
+	for _, row := range rows {
+		headerHeight += row.GetHeight()
+	}
+	if headerHeight > m.config.Dimensions.Height {
+		return errors.New("header height is greater than page")
+	}
+
+	m.headerHeight = headerHeight
+	m.header = rows
+
+	for _, headerRow := range rows {
+		m.addRow(headerRow)
+	}
+
+	return nil
+}
+
 func (d *maroto) Generate() (domain.Document, error) {
 	d.fillPage()
 
@@ -104,26 +126,48 @@ func (d *maroto) addRows(rows ...domain.Row) {
 	}
 }
 
-func (d *maroto) addRow(r domain.Row) {
-	maxHeight := d.cell.Height
+func (m *maroto) addRow(r domain.Row) {
+	maxHeight := m.cell.Height
 
 	height := r.GetHeight()
-	sumHeight := height + d.currentHeight
+	sumHeight := height + m.currentHeight
 
 	// Row smaller than the remain space on page
 	if sumHeight < maxHeight {
-		d.currentHeight += height
-		d.rows = append(d.rows, r)
+		m.currentHeight += height
+		m.rows = append(m.rows, r)
 		return
 	}
 
-	// As row will extrapolate page, we will the empty space
+	// As row will extrapolate page, we will add empty space
 	// on the page to force a new page
-	d.fillPage()
+	m.fillPageToAddNew()
+
+	for _, headerRow := range m.header {
+		m.currentHeight += headerRow.GetHeight()
+		m.rows = append(m.rows, headerRow)
+	}
 
 	// Add row on the new page
-	d.currentHeight += height
-	d.rows = append(d.rows, r)
+	m.currentHeight += height
+	m.rows = append(m.rows, r)
+}
+
+func (m *maroto) fillPageToAddNew() {
+	space := m.cell.Height - m.currentHeight
+
+	p := page.New()
+	p.SetNumber(len(m.pages))
+	p.Add(m.rows...)
+
+	c := col.New(12)
+	row := row.New(space, color.Color{255, 0, 0})
+	row.Add(c)
+	p.Add(row)
+
+	m.pages = append(m.pages, p)
+	m.rows = nil
+	m.currentHeight = 0
 }
 
 func (d *maroto) fillPage() {
@@ -163,7 +207,7 @@ func (d *maroto) generate() (domain.Document, error) {
 	innerCtx := d.cell.Copy()
 
 	for _, page := range d.pages {
-		page.Render(d.provider, innerCtx)
+		page.Render(d.provider, innerCtx, nil)
 	}
 
 	bytes, err := d.provider.GenerateBytes()
@@ -221,7 +265,7 @@ func (d *maroto) processPage(pages []domain.Page) ([]byte, error) {
 	innerCtx := d.cell.Copy()
 	innerProvider := getProvider(d.imageCache, d.config)
 	for _, page := range pages {
-		page.Render(innerProvider, innerCtx)
+		page.Render(innerProvider, innerCtx, d.config)
 	}
 
 	return innerProvider.GenerateBytes()

@@ -3,6 +3,7 @@ package page
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 )
 
@@ -15,10 +16,10 @@ func New() domain.Page {
 	return &page{}
 }
 
-func (p *page) Render(provider domain.Provider, cell internal.Cell) {
+func (p *page) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
 	innerCell := cell.Copy()
 	for _, row := range p.rows {
-		row.Render(provider, innerCell)
+		row.Render(provider, innerCell, config)
 		innerCell.Y += row.GetHeight()
 	}
 }

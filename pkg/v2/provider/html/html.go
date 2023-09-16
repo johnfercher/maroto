@@ -106,7 +106,7 @@ func (h *html) SetCache(cache cache.Cache) {
 	h.imageCache = cache
 }
 
-func (h *html) CreateCol(width, height float64) {
+func (h *html) CreateCol(width, height float64, config *config.Maroto) {
 	var row *tree.Node[Div]
 
 	rowsLength := len(h.rows)

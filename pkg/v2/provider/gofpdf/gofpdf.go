@@ -107,8 +107,12 @@ func (g *gofpdfProvider) AddImage(file string, cell internal.Cell, prop props.Re
 	g.image.AddFromBase64(img.Value, cell, prop, img.Extension)
 }
 
-func (g *gofpdfProvider) CreateCol(width, height float64) {
-	g.fpdf.CellFormat(width, height, "", "1", 0, "C", false, 0, "")
+func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Maroto) {
+	border := "0"
+	if config.Debug {
+		border = "1"
+	}
+	g.fpdf.CellFormat(width, height, "", border, 0, "C", false, 0, "")
 }
 
 func (g *gofpdfProvider) CreateRow(height float64) {

@@ -7,4 +7,5 @@ type Maroto struct {
 	Dimensions   *Dimensions
 	Margins      *Margins
 	Workers      int
+	Debug        bool
 }

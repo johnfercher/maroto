@@ -5,11 +5,12 @@ import (
 )
 
 type builder struct {
-	providerType provider.Type
-	pageSize     PageSize
-	dimensions   *Dimensions
-	margins      *Margins
-	threadPool   int
+	providerType   provider.Type
+	pageSize       PageSize
+	dimensions     *Dimensions
+	margins        *Margins
+	workerPoolSize int
+	debug          bool
 }
 
 type Builder interface {
@@ -17,7 +18,8 @@ type Builder interface {
 	WithDimensions(dimensions *Dimensions) Builder
 	WithMargins(margins *Margins) Builder
 	WithProvider(providerType provider.Type) Builder
-	WithWorkerPoolSize(pool int) Builder
+	WithWorkerPoolSize(poolSize int) Builder
+	WithDebug(on bool) Builder
 	Build() *Maroto
 }
 
@@ -97,12 +99,17 @@ func (b *builder) WithProvider(providerType provider.Type) Builder {
 	return b
 }
 
-func (b *builder) WithWorkerPoolSize(pool int) Builder {
-	if pool <= 0 {
+func (b *builder) WithWorkerPoolSize(poolSize int) Builder {
+	if poolSize <= 0 {
 		return b
 	}
 
-	b.threadPool = pool
+	b.workerPoolSize = poolSize
+	return b
+}
+
+func (b *builder) WithDebug(on bool) Builder {
+	b.debug = on
 	return b
 }
 
@@ -111,6 +118,7 @@ func (b *builder) Build() *Maroto {
 		ProviderType: b.providerType,
 		Dimensions:   b.dimensions,
 		Margins:      b.margins,
-		Workers:      b.threadPool,
+		Workers:      b.workerPoolSize,
+		Debug:        b.debug,
 	}
 }

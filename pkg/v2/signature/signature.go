@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
+	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 )
 
@@ -26,7 +27,7 @@ func New(value string, textProps ...props.Font) domain.Node {
 	}
 }
 
-func (s *signature) Render(provider domain.Provider, cell internal.Cell) {
+func (s *signature) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
 	provider.AddSignature(s.value, cell, s.prop.ToTextProp(consts.Center, 0.0, false, 0))
 }
 
