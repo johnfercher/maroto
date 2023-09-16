@@ -45,17 +45,17 @@ func (m *metricsDecorator) ForceAddPage(pages ...domain.Page) {
 	m.addPageTime = append(m.addPageTime, timeSpent)
 }
 
-func (m *metricsDecorator) Add(rows ...domain.Row) {
+func (m *metricsDecorator) AddRows(rows ...domain.Row) {
 	timeSpent := m.getTimeSpent(func() {
-		m.inner.Add(rows...)
+		m.inner.AddRows(rows...)
 	})
 
 	m.addRowTime = append(m.addRowTime, timeSpent)
 }
 
-func (m *metricsDecorator) AddCols(rowHeight float64, cols ...domain.Col) {
+func (m *metricsDecorator) AddRow(rowHeight float64, cols ...domain.Col) {
 	timeSpent := m.getTimeSpent(func() {
-		m.inner.AddCols(rowHeight, cols...)
+		m.inner.AddRow(rowHeight, cols...)
 	})
 
 	m.addColTime = append(m.addColTime, timeSpent)

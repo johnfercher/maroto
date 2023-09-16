@@ -9,7 +9,7 @@ func main() {
 	m := v2.NewMaroto()
 	mMetrified := v2.NewMetricsDecorator(m)
 
-	// Add things
+	// AddRows things
 
 	document, err := mMetrified.Generate()
 	if err != nil {

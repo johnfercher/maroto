@@ -71,11 +71,11 @@ func (d *maroto) ForceAddPage(pages ...domain.Page) {
 	d.pages = append(d.pages, pages...)
 }
 
-func (d *maroto) Add(rows ...domain.Row) {
+func (d *maroto) AddRows(rows ...domain.Row) {
 	d.addRows(rows...)
 }
 
-func (d *maroto) AddCols(rowHeight float64, cols ...domain.Col) {
+func (d *maroto) AddRow(rowHeight float64, cols ...domain.Col) {
 	r := row.New(rowHeight).Add(cols...)
 	d.addRow(r)
 }
@@ -154,7 +154,7 @@ func (m *maroto) addRow(r domain.Row) {
 		m.rows = append(m.rows, headerRow)
 	}
 
-	// Add row on the new page
+	// AddRows row on the new page
 	m.currentHeight += height
 	m.rows = append(m.rows, r)
 }

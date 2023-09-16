@@ -18,13 +18,13 @@ func main() {
 	maroto := v2.NewMaroto(cfg)
 	m := v2.NewMetricsDecorator(maroto)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		signature.NewCol(2, "Signature 1"),
 		signature.NewCol(4, "Signature 2", props.Font{Family: consts.Courier}),
 		signature.NewCol(6, "Signature 3", props.Font{Style: consts.BoldItalic}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		signature.NewCol(6, "Signature 4", props.Font{Style: consts.Italic}),
 		signature.NewCol(4, "Signature 5", props.Font{Size: 12}),
 		signature.NewCol(2, "Signature 6", props.Font{Color: color.Color{255, 0, 0}}),

@@ -8,12 +8,12 @@ import (
 )
 
 type Maroto interface {
-	Generate() (Document, error)
-	ForceAddPage(pages ...Page)
-	Add(rows ...Row)
-	AddCols(rowHeight float64, cols ...Col)
 	RegisterHeader(rows ...Row) error
+	AddRows(rows ...Row)
+	AddRow(rowHeight float64, cols ...Col)
+	ForceAddPage(pages ...Page)
 	GetStructure() *tree.Node[Structure]
+	Generate() (Document, error)
 }
 
 type Document interface {

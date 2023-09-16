@@ -16,7 +16,7 @@ func main() {
 	maroto := v2.NewMaroto(cfg)
 	m := v2.NewMetricsDecorator(maroto)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		image.NewFromFileCol(2, "internal/assets/images/biplane.jpg", props.Rect{
 			Center:  true,
 			Percent: 80,
@@ -31,7 +31,7 @@ func main() {
 		}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		image.NewFromFileCol(2, "internal/assets/images/biplane.jpg", props.Rect{
 			Center:  false,
 			Percent: 50,
@@ -50,7 +50,7 @@ func main() {
 		}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		image.NewFromFileCol(8, "internal/assets/images/biplane.jpg", props.Rect{
 			Center:  true,
 			Percent: 80,
@@ -61,7 +61,7 @@ func main() {
 		}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		image.NewFromFileCol(6, "internal/assets/images/frontpage.png", props.Rect{
 			Center:  false,
 			Percent: 80,
@@ -80,7 +80,7 @@ func main() {
 		}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		image.NewFromFileCol(6, "internal/assets/images/frontpage.png", props.Rect{
 			Center:  true,
 			Percent: 50,
@@ -95,7 +95,7 @@ func main() {
 		}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		image.NewFromFileCol(4, "internal/assets/images/frontpage.png", props.Rect{
 			Center:  true,
 			Percent: 80,

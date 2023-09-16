@@ -35,7 +35,7 @@ func BenchmarkMarotoGenerateAsync(b *testing.B) {
 				cfg := config.NewBuilder().WithWorkerPoolSize(param.workers).Build()
 				maroto := v2.NewMaroto(cfg)
 				for i := 0; i < param.pages; i++ {
-					maroto.Add(row.New(10).Add(col.New(12).Add(text.New("text"))))
+					maroto.AddRows(row.New(10).Add(col.New(12).Add(text.New("text"))))
 				}
 				maroto.Generate()
 			}

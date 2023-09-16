@@ -21,7 +21,7 @@ func main() {
 	maroto := v2.NewMaroto(cfg)
 	m := v2.NewMetricsDecorator(maroto)
 
-	m.Add(text.NewRow(10, fmt.Sprintf("Table with %d Columns", gridSum), props.Text{Style: consts.Bold}))
+	m.AddRows(text.NewRow(10, fmt.Sprintf("Table with %d Columns", gridSum), props.Text{Style: consts.Bold}))
 
 	var headers []domain.Col
 	var contents []domain.Col
@@ -30,8 +30,8 @@ func main() {
 		contents = append(contents, text.NewCol(1, fmt.Sprintf("C %d", i), props.Text{Top: 1, Left: 1.5, Size: 9}))
 	}
 
-	m.AddCols(8, headers...)
-	m.AddCols(8, contents...)
+	m.AddRow(8, headers...)
+	m.AddRow(8, contents...)
 
 	document, err := m.Generate()
 	if err != nil {

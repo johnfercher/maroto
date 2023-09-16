@@ -24,7 +24,6 @@ func main() {
 		Build()
 
 	maroto := v2.NewMaroto(cfg)
-
 	m := v2.NewMetricsDecorator(maroto)
 
 	err := m.RegisterHeader(buildHeader()...)
@@ -33,7 +32,7 @@ func main() {
 	}
 
 	for _ = range [10]int{} {
-		m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
+		m.AddRows(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	}
 
 	document, err := m.Generate()

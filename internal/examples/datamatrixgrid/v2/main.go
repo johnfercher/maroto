@@ -16,7 +16,7 @@ func main() {
 	maroto := v2.NewMaroto(cfg)
 	m := v2.NewMetricsDecorator(maroto)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		code.NewMatrixCol(2, "https://github.com/johnfercher/maroto", props.Rect{
 			Percent: 50,
 		}),
@@ -28,7 +28,7 @@ func main() {
 		}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		code.NewMatrixCol(2, "https://github.com/johnfercher/maroto", props.Rect{
 			Center:  true,
 			Percent: 50,
@@ -43,7 +43,7 @@ func main() {
 		}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		code.NewMatrixCol(6, "https://github.com/johnfercher/maroto", props.Rect{
 			Percent: 50,
 		}),
@@ -55,7 +55,7 @@ func main() {
 		}),
 	)
 
-	m.AddCols(40,
+	m.AddRow(40,
 		code.NewMatrixCol(6, "https://github.com/johnfercher/maroto", props.Rect{
 			Center:  true,
 			Percent: 50,

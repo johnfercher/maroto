@@ -41,7 +41,7 @@ func TestDocument_GetStructure(t *testing.T) {
 	r2c4 := col.New(3).Add(text.New("text"))
 	r2.Add(r2c1, r2c2, r2c3, r2c4)
 
-	maroto.Add(r1, r2)
+	maroto.AddRows(r1, r2)
 
 	// Assert
 	test.New(t).Assert(maroto).JSON(`{"type":"maroto","nodes":[{"type":"page","nodes":[{"type":"row","nodes":[{"type":"col","nodes":[{"type":"barcode"}]},{"type":"col","nodes":[{"type":"matrixcode"}]},{"type":"col","nodes":[{"type":"qrcode"}]}]},{"type":"row","nodes":[{"type":"col","nodes":[{"type":"fileimage"}]},{"type":"col","nodes":[{"type":"base64image"}]},{"type":"col","nodes":[{"type":"signature"}]},{"type":"col","nodes":[{"type":"text"}]}]},{"type":"row","nodes":[{"type":"col"}]}]}]}`)
