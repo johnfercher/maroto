@@ -33,7 +33,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	for _ = range [100]int{} {
+	for _ = range [10]int{} {
 		m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	}
 
