@@ -20,7 +20,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithThreadPool(10).
+		WithWorkerPoolSize(10).
 		WithDebug(true).
 		Build()
 
@@ -33,7 +33,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	for _ = range [10]int{} {
+	for _ = range [100]int{} {
 		m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	}
 

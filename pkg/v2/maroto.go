@@ -2,6 +2,7 @@ package v2
 
 import (
 	"bytes"
+	"github.com/f-amaral/go-async/async"
 	"errors"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
@@ -35,6 +36,9 @@ type maroto struct {
 	header        []domain.Row
 	headerHeight  float64
 	currentHeight float64
+
+	// Processing
+	pool async.Processor[[]domain.Page, []byte]
 }
 
 func NewMaroto(config ...*config.Maroto) domain.Maroto {
@@ -45,7 +49,7 @@ func NewMaroto(config ...*config.Maroto) domain.Maroto {
 	width, height := provider.GetDimensions()
 	left, top, right, bottom := provider.GetMargins()
 
-	return &maroto{
+	m := &maroto{
 		provider: provider,
 		cell: context.NewRootContext(width, height, context.Margins{
 			Left:   left,
@@ -56,6 +60,11 @@ func NewMaroto(config ...*config.Maroto) domain.Maroto {
 		imageCache: cache,
 		config:     cfg,
 	}
+	if cfg.Workers > 0 {
+		p := pool.NewPool(cfg.Workers, m.processPage)
+		m.pool = p
+	}
+	return m
 }
 
 func (m *maroto) ForceAddPage(pages ...domain.Page) {
@@ -88,10 +97,11 @@ func (m *maroto) RegisterHeader(rows ...domain.Row) error {
 func (m *maroto) Generate() (domain.Document, error) {
 	m.fillPageToAddNew()
 
-	if m.config.ThreadPool > 0 {
-		return m.generate()
+	if m.config.Workers > 0 && m.config.ProviderType != provider.HTML {
+		return m.generateConcurrently()
 	}
 
+	// Change to parallel
 	return m.generate()
 }
 
@@ -192,19 +202,27 @@ func (m *maroto) generate() (domain.Document, error) {
 	return domain.NewDocument(bytes, nil), nil
 }
 
-func (m *maroto) generateConcurrently() (domain.Document, error) {
-	innerCtx := m.cell.Copy()
+func (d *maroto) generateConcurrently() (domain.Document, error) {
+	chunks := len(d.pages) / d.config.Workers
+	if chunks == 0 {
+		chunks = 1
+	}
+	pageGroups := make([][]domain.Page, 0)
+	for i := 0; i < len(d.pages); i += chunks {
+		end := i + chunks
 
-	p := pool.NewPool(10, func(i domain.Page) ([]byte, error) {
-		innerProvider := getProvider(m.imageCache, m.config)
-		i.Render(innerProvider, innerCtx, nil)
-		return innerProvider.GenerateBytes()
-	})
+		if end > len(d.pages) {
+			end = len(d.pages)
+		}
 
-	processed := p.Process(m.pages)
+		pageGroups = append(pageGroups, d.pages[i:end])
+	}
+
+	processed := d.pool.Process(pageGroups)
 	if processed.HasError {
 		log.Fatal("error on generating pages")
 	}
+
 	readers := make([]io.ReadSeeker, len(processed.Results))
 	for i, result := range processed.Results {
 		b := result.Output.([]byte)
@@ -213,19 +231,9 @@ func (m *maroto) generateConcurrently() (domain.Document, error) {
 
 	var buf bytes.Buffer
 	writer := io.Writer(&buf)
-	if m.config.ProviderType == provider.Gofpdf {
-		err := mergePdfs(readers, writer)
-		if err != nil {
-			return nil, err
-		}
-	} else {
-		for _, reader := range readers {
-			r := io.TeeReader(reader, &buf)
-			_, err := io.ReadAll(r)
-			if err != nil {
-				return nil, err
-			}
-		}
+	err := mergePdfs(readers, writer)
+	if err != nil {
+		return nil, err
 	}
 
 	return domain.NewDocument(buf.Bytes(), nil), nil
@@ -235,4 +243,14 @@ func mergePdfs(readers []io.ReadSeeker, writer io.Writer) error {
 	conf := api.LoadConfiguration()
 	conf.WriteXRefStream = false
 	return api.MergeRaw(readers, writer, conf)
+}
+
+func (d *maroto) processPage(pages []domain.Page) ([]byte, error) {
+	innerCtx := d.cell.Copy()
+	innerProvider := getProvider(d.imageCache, d.config)
+	for _, page := range pages {
+		page.Render(innerProvider, innerCtx, d.config)
+	}
+
+	return innerProvider.GenerateBytes()
 }

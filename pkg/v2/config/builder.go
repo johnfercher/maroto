@@ -99,7 +99,7 @@ func (b *builder) WithProvider(providerType provider.Type) Builder {
 	return b
 }
 
-func (b *builder) WithThreadPool(pool int) Builder {
+func (b *builder) WithWorkerPoolSize(pool int) Builder {
 	if pool <= 0 {
 		return b
 	}
@@ -118,7 +118,7 @@ func (b *builder) Build() *Maroto {
 		ProviderType: b.providerType,
 		Dimensions:   b.dimensions,
 		Margins:      b.margins,
-		ThreadPool:   b.threadPool,
+		Workers:      b.threadPool,
 		Debug:        b.debug,
 	}
 }
