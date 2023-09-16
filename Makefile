@@ -27,13 +27,13 @@ v1:
 	go run internal/examples/datamatrixgrid/v1/main.go
 	go run internal/examples/qrgrid/v1/main.go
 	go run internal/examples/textgrid/v1/main.go
+	go run internal/examples/maxgridsum/v1/main.go
 	go run internal/examples/billing/main.go
 	go run internal/examples/billing-with-negative/main.go
 	go run internal/examples/certificate/main.go
 	go run internal/examples/customsize/main.go
 	go run internal/examples/sample1/main.go
 	go run internal/examples/zpl/main.go
-	go run internal/examples/maxgridsum/main.go
 	go run internal/examples/utfsample/main.go
 
 v2:
@@ -42,3 +42,4 @@ v2:
 	go run internal/examples/datamatrixgrid/v2/main.go
 	go run internal/examples/qrgrid/v2/main.go
 	go run internal/examples/textgrid/v2/main.go
+	go run internal/examples/maxgridsum/v2/main.go

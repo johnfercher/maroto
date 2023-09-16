@@ -11,8 +11,9 @@ import (
 )
 
 type barcode struct {
-	code string
-	prop props.Barcode
+	code   string
+	prop   props.Barcode
+	config *config.Maroto
 }
 
 func NewBar(code string, ps ...props.Barcode) domain.Component {
@@ -34,11 +35,12 @@ func NewBarCol(size int, code string, ps ...props.Barcode) domain.Col {
 }
 
 func NewBarRow(height float64, code string, ps ...props.Barcode) domain.Row {
-	c := NewBarCol(12, code, ps...)
+	bar := NewBar(code, ps...)
+	c := col.New().Add(bar)
 	return row.New(height).Add(c)
 }
 
-func (b *barcode) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+func (b *barcode) Render(provider domain.Provider, cell internal.Cell) {
 	provider.AddBarCode(b.code, cell, b.prop)
 }
 
@@ -53,4 +55,8 @@ func (b *barcode) GetStructure() *tree.Node[domain.Structure] {
 
 func (b *barcode) GetValue() string {
 	return b.code
+}
+
+func (b *barcode) SetConfig(config *config.Maroto) {
+	b.config = config
 }

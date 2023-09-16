@@ -10,17 +10,25 @@ import (
 type page struct {
 	number int
 	rows   []domain.Row
+	config *config.Maroto
 }
 
 func New() domain.Page {
 	return &page{}
 }
 
-func (p *page) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+func (p *page) Render(provider domain.Provider, cell internal.Cell) {
 	innerCell := cell.Copy()
 	for _, row := range p.rows {
-		row.Render(provider, innerCell, config)
+		row.Render(provider, innerCell)
 		innerCell.Y += row.GetHeight()
+	}
+}
+
+func (p *page) SetConfig(config *config.Maroto) {
+	p.config = config
+	for _, row := range p.rows {
+		row.SetConfig(config)
 	}
 }
 

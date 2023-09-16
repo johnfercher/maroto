@@ -13,8 +13,9 @@ import (
 )
 
 type text struct {
-	value string
-	prop  props.Text
+	value  string
+	prop   props.Text
+	config *config.Maroto
 }
 
 func New(value string, ps ...props.Text) domain.Component {
@@ -43,7 +44,8 @@ func NewCol(size int, value string, ps ...props.Text) domain.Col {
 }
 
 func NewRow(height float64, value string, ps ...props.Text) domain.Row {
-	c := NewCol(12, value, ps...)
+	text := New(value, ps...)
+	c := col.New().Add(text)
 	return row.New(height).Add(c)
 }
 
@@ -56,9 +58,12 @@ func (t *text) GetStructure() *tree.Node[domain.Structure] {
 	return tree.NewNode(str)
 }
 
-func (t *text) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+func (t *text) SetConfig(config *config.Maroto) {
+	t.config = config
+}
+
+func (t *text) Render(provider domain.Provider, cell internal.Cell) {
 	t.render(provider, cell)
-	return
 }
 
 func (t *text) GetValue() string {

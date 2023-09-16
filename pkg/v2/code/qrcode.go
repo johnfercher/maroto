@@ -11,8 +11,9 @@ import (
 )
 
 type qrCode struct {
-	code string
-	prop props.Rect
+	code   string
+	prop   props.Rect
+	config *config.Maroto
 }
 
 func NewQr(code string, barcodeProps ...props.Rect) domain.Component {
@@ -34,11 +35,12 @@ func NewQrCol(size int, code string, ps ...props.Rect) domain.Col {
 }
 
 func NewQrRow(height float64, code string, ps ...props.Rect) domain.Row {
-	c := NewQrCol(12, code, ps...)
+	qrCode := NewQr(code, ps...)
+	c := col.New().Add(qrCode)
 	return row.New(height).Add(c)
 }
 
-func (q *qrCode) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+func (q *qrCode) Render(provider domain.Provider, cell internal.Cell) {
 	provider.AddQrCode(q.code, cell, q.prop)
 }
 
@@ -51,6 +53,6 @@ func (q *qrCode) GetStructure() *tree.Node[domain.Structure] {
 	return tree.NewNode(str)
 }
 
-func (q *qrCode) GetValue() string {
-	return q.code
+func (q *qrCode) SetConfig(config *config.Maroto) {
+	q.config = config
 }

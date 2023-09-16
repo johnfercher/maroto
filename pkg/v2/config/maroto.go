@@ -8,4 +8,5 @@ type Maroto struct {
 	Margins      *Margins
 	Workers      int
 	Debug        bool
+	MaxGridSize  int
 }

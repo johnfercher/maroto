@@ -13,8 +13,9 @@ import (
 )
 
 type fileImage struct {
-	path string
-	prop props.Rect
+	path   string
+	prop   props.Rect
+	config *config.Maroto
 }
 
 func NewFromFile(path string, ps ...props.Rect) domain.Component {
@@ -36,11 +37,12 @@ func NewFromFileCol(size int, path string, ps ...props.Rect) domain.Col {
 }
 
 func NewFromFileRow(height float64, path string, ps ...props.Rect) domain.Row {
-	c := NewFromFileCol(12, path, ps...)
+	image := NewFromFile(path, ps...)
+	c := col.New().Add(image)
 	return row.New(height).Add(c)
 }
 
-func (f *fileImage) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+func (f *fileImage) Render(provider domain.Provider, cell internal.Cell) {
 	extension := strings.Split(f.path, ".")[1]
 	provider.AddImage(f.path, cell, f.prop, consts.Extension(extension))
 }
@@ -54,6 +56,6 @@ func (f *fileImage) GetStructure() *tree.Node[domain.Structure] {
 	return tree.NewNode(str)
 }
 
-func (f *fileImage) GetValue() string {
-	return f.path
+func (f *fileImage) SetConfig(config *config.Maroto) {
+	f.config = config
 }

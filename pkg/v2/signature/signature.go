@@ -12,8 +12,9 @@ import (
 )
 
 type signature struct {
-	value string
-	prop  props.Font
+	value  string
+	prop   props.Font
+	config *config.Maroto
 }
 
 func New(value string, ps ...props.Font) domain.Component {
@@ -35,11 +36,12 @@ func NewCol(size int, value string, ps ...props.Font) domain.Col {
 }
 
 func NewRow(height float64, value string, ps ...props.Font) domain.Row {
-	c := NewCol(12, value, ps...)
+	signature := New(value, ps...)
+	c := col.New().Add(signature)
 	return row.New(height).Add(c)
 }
 
-func (s *signature) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+func (s *signature) Render(provider domain.Provider, cell internal.Cell) {
 	provider.AddSignature(s.value, cell, s.prop.ToTextProp(consts.Center, 0.0, false, 0))
 }
 
@@ -52,6 +54,6 @@ func (s *signature) GetStructure() *tree.Node[domain.Structure] {
 	return tree.NewNode(str)
 }
 
-func (s *signature) GetValue() string {
-	return s.value
+func (s *signature) SetConfig(config *config.Maroto) {
+	s.config = config
 }

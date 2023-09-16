@@ -13,6 +13,14 @@ type row struct {
 	height float64
 	cols   []domain.Col
 	color  color.Color
+	config *config.Maroto
+}
+
+func (r *row) SetConfig(config *config.Maroto) {
+	r.config = config
+	for _, cols := range r.cols {
+		cols.SetConfig(config)
+	}
 }
 
 func (r *row) GetHeight() float64 {
@@ -52,17 +60,22 @@ func (r *row) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (r *row) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+func (r *row) Render(provider domain.Provider, cell internal.Cell) {
 	cell.Height = r.height
 	innerCell := cell.Copy()
 	for _, col := range r.cols {
-		size := col.GetSize()
+		size, isMax := col.GetSize()
 		parentWidth := cell.Width
-		percent := float64(size) / 12
+
+		percent := float64(size) / float64(r.config.MaxGridSize)
+		if isMax {
+			percent = 1
+		}
+
 		colDimension := parentWidth * percent
 		innerCell.Width = colDimension
 
-		col.Render(provider, innerCell, config)
+		col.Render(provider, innerCell)
 		innerCell.X += colDimension
 	}
 

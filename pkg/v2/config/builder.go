@@ -11,6 +11,7 @@ type builder struct {
 	margins        *Margins
 	workerPoolSize int
 	debug          bool
+	maxGridSize    int
 }
 
 type Builder interface {
@@ -20,6 +21,7 @@ type Builder interface {
 	WithProvider(providerType provider.Type) Builder
 	WithWorkerPoolSize(poolSize int) Builder
 	WithDebug(on bool) Builder
+	WithMaxGridSize(maxGridSize int) Builder
 	Build() *Maroto
 }
 
@@ -34,6 +36,7 @@ func NewBuilder() Builder {
 			Top:    MinTopMargin,
 			Bottom: MinBottomMargin,
 		},
+		maxGridSize: 12,
 	}
 }
 
@@ -100,7 +103,7 @@ func (b *builder) WithProvider(providerType provider.Type) Builder {
 }
 
 func (b *builder) WithWorkerPoolSize(poolSize int) Builder {
-	if poolSize <= 0 {
+	if poolSize < 0 {
 		return b
 	}
 
@@ -113,6 +116,15 @@ func (b *builder) WithDebug(on bool) Builder {
 	return b
 }
 
+func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
+	if maxGridSize < 0 {
+		return b
+	}
+
+	b.maxGridSize = maxGridSize
+	return b
+}
+
 func (b *builder) Build() *Maroto {
 	return &Maroto{
 		ProviderType: b.providerType,
@@ -120,5 +132,6 @@ func (b *builder) Build() *Maroto {
 		Margins:      b.margins,
 		Workers:      b.workerPoolSize,
 		Debug:        b.debug,
+		MaxGridSize:  b.maxGridSize,
 	}
 }

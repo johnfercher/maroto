@@ -101,6 +101,7 @@ func (m *maroto) RegisterHeader(rows ...domain.Row) error {
 
 func (d *maroto) Generate() (domain.Document, error) {
 	d.fillPage()
+	d.validate()
 
 	if d.config.Workers > 0 && d.config.ProviderType != provider.HTML {
 		return d.generateConcurrently()
@@ -175,6 +176,12 @@ func (m *maroto) fillPageToAddNew() {
 	m.currentHeight = 0
 }
 
+func (d *maroto) validate() {
+	for _, page := range d.pages {
+		page.SetConfig(d.config)
+	}
+}
+
 func (d *maroto) fillPage() {
 	space := d.cell.Height - d.currentHeight
 
@@ -182,7 +189,7 @@ func (d *maroto) fillPage() {
 	p.SetNumber(len(d.pages))
 	p.Add(d.rows...)
 
-	c := col.New(12)
+	c := col.New()
 	row := row.New(space, color.Color{255, 0, 0})
 	row.Add(c)
 	p.Add(row)
@@ -212,7 +219,7 @@ func (d *maroto) generate() (domain.Document, error) {
 	innerCtx := d.cell.Copy()
 
 	for _, page := range d.pages {
-		page.Render(d.provider, innerCtx, d.config)
+		page.Render(d.provider, innerCtx)
 	}
 
 	bytes, err := d.provider.GenerateBytes()
@@ -270,7 +277,7 @@ func (d *maroto) processPage(pages []domain.Page) ([]byte, error) {
 	innerCtx := d.cell.Copy()
 	innerProvider := getProvider(d.imageCache, d.config)
 	for _, page := range pages {
-		page.Render(innerProvider, innerCtx, d.config)
+		page.Render(innerProvider, innerCtx)
 	}
 
 	return innerProvider.GenerateBytes()

@@ -16,7 +16,8 @@ type Maroto interface {
 }
 
 type Component interface {
-	Render(provider Provider, cell internal.Cell, config *config.Maroto)
+	SetConfig(config *config.Maroto)
+	Render(provider Provider, cell internal.Cell)
 	GetStructure() *tree.Node[Structure]
 }
 
@@ -24,7 +25,7 @@ type Col interface {
 	Component
 	Add(components ...Component) Col
 	AddInner(rows ...Row) Col
-	GetSize() int
+	GetSize() (int, bool)
 }
 
 type Row interface {

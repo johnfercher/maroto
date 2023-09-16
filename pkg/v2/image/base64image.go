@@ -15,6 +15,7 @@ type base64Image struct {
 	base64    string
 	extension consts.Extension
 	prop      props.Rect
+	config    *config.Maroto
 }
 
 func NewFromBase64(path string, extension consts.Extension, ps ...props.Rect) domain.Component {
@@ -37,11 +38,12 @@ func NewFromBase64Col(size int, path string, extension consts.Extension, ps ...p
 }
 
 func NewFromBase64eRow(height float64, path string, extension consts.Extension, ps ...props.Rect) domain.Row {
-	c := NewFromBase64Col(12, path, extension, ps...)
+	image := NewFromBase64(path, extension, ps...)
+	c := col.New().Add(image)
 	return row.New(height).Add(c)
 }
 
-func (b *base64Image) Render(provider domain.Provider, cell internal.Cell, config *config.Maroto) {
+func (b *base64Image) Render(provider domain.Provider, cell internal.Cell) {
 	provider.AddImage(b.base64, cell, b.prop, b.extension)
 }
 
@@ -59,6 +61,6 @@ func (b *base64Image) GetStructure() *tree.Node[domain.Structure] {
 	return tree.NewNode(str)
 }
 
-func (b *base64Image) GetValue() string {
-	return b.base64
+func (b *base64Image) SetConfig(config *config.Maroto) {
+	b.config = config
 }
