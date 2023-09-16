@@ -6,13 +6,6 @@ import (
 	"os"
 )
 
-type Document interface {
-	GetBytes() []byte
-	GetBase64() string
-	Save(file string) error
-	GetReport() *metrics.Report
-}
-
 type document struct {
 	bytes  []byte
 	report *metrics.Report

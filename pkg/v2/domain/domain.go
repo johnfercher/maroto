@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/v2/config"
+	"github.com/johnfercher/maroto/pkg/v2/metrics"
 )
 
 type Maroto interface {
@@ -13,6 +14,13 @@ type Maroto interface {
 	AddCols(rowHeight float64, cols ...Col)
 	RegisterHeader(rows ...Row) error
 	GetStructure() *tree.Node[Structure]
+}
+
+type Document interface {
+	GetBytes() []byte
+	GetBase64() string
+	Save(file string) error
+	GetReport() *metrics.Report
 }
 
 type Component interface {
