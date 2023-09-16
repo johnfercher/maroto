@@ -8,5 +8,4 @@ type Maroto struct {
 	Margins      *Margins
 	Debug        bool
 	Workers      int
-	Debug        bool
 }
