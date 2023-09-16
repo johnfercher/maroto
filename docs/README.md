@@ -7,7 +7,7 @@ in many aspects. The main objectives of`v2.0.0`are:
 
 1. [Improve usability](README.md?id=improve-usability);
 2. [Allow unit testing](README.md?id=unit-testing);
-3. [Builtin metrics]()
+3. [Add built-in metrics](README.md?id=built-in-metrics);
 4. [Allow parallelism](README.md??id=parallelism);
 5. Allow recursive Row/Col; **(on roadmap)**
 6. Allow generation based on HTML/JSON; **(on roadmap)**
@@ -63,13 +63,21 @@ test package to facilitate the writing of unit tests.
 
 You can see an example [here](v2/tests.md).
 
+## Built-in Metrics
+This new version of maroto provides an **optional decorator** which metrifies almost all operations realized by the lib.
+When enabling the decorator, maroto will fill the **report** struct on the **document** response.
+
+The **report** struct has the follow informations. You can see the full example [here](v2/basics?id=using-metrics-decorator).
+
+[filename](../assets/text/report.txt ':include :type=code')
+
 ## Parallelism
 There are several performance improvements in maroto`v2`, but more expressive is the possibility to generate chunks
 of pages in a parallel way. These are the results by generating a PDF with **100 pages** with **all components supported** by maroto`v2`. 
 
 [filename](../assets/text/parallel.txt ':include :type=code')
 
-The pages are merged using [pdfcpu][pdfcpu] and you can see the example [here](v2/configbuilder.md?id=parallelism).
+The pages are merged using [pdfcpu][pdfcpu] and you can see full the example [here](v2/configbuilder.md?id=parallelism).
 
 [gofpdf]: https://github.com/jung-kurt/gofpdf
 [pdfcpu]: https://github.com/pdfcpu/pdfcpu
