@@ -17,6 +17,7 @@
 </head>
 <body>
 <div id="app"></div>
+<script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
 <script>
   window.$docsify = {
     search: 'auto',
@@ -34,6 +35,9 @@
       crossChapter: true,
       crossChapterText: true,
     },
+    plugins: [
+      EditOnGithubPlugin.create('https://github.com/johnfercher/maroto/tree/v2/docs/', 'https://github.com/johnfercher/maroto/edit/v2/docs/', " Edit on Github")
+    ]
   }
 </script>
 <!-- Docsify v4 -->
