@@ -7,7 +7,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithThreadPool(10).
+		WithWorkerPoolSize(10).
 		Build()
 
 	m := v2.NewMaroto(cfg)
