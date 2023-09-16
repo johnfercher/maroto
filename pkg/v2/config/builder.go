@@ -18,7 +18,7 @@ type Builder interface {
 	WithDimensions(dimensions *Dimensions) Builder
 	WithMargins(margins *Margins) Builder
 	WithProvider(providerType provider.Type) Builder
-	WithThreadPool(pool int) Builder
+	WithWorkerPoolSize(pool int) Builder
 	WithDebug(on bool) Builder
 	Build() *Maroto
 }
