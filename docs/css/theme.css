@@ -521,7 +521,7 @@ section.cover a {
     color: inherit;
     text-decoration: none;
 }
-section.cover img {
+section.cover p>img {
     width: 20%;
 }
 section.cover a:hover {
