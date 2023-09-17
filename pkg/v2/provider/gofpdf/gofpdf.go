@@ -36,7 +36,7 @@ func New(cfg *config.Maroto, options ...providers.ProviderOption) domain.Provide
 	})
 
 	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)
-	fpdf.SetFont("Arial", "B", 16)
+	fpdf.SetFont(cfg.Font.Family, string(cfg.Font.Style), cfg.Font.Size)
 	fpdf.AddPage()
 
 	font := internal.NewFont(fpdf, 2, consts.Arial, consts.Normal)

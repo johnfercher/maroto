@@ -1,17 +1,18 @@
 package config
 
 import (
+	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/v2/provider"
 )
 
 type builder struct {
 	providerType   provider.Type
-	pageSize       PageSize
 	dimensions     *Dimensions
 	margins        *Margins
 	workerPoolSize int
 	debug          bool
 	maxGridSize    int
+	font           *Font
 }
 
 type Builder interface {
@@ -22,6 +23,7 @@ type Builder interface {
 	WithWorkerPoolSize(poolSize int) Builder
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
+	WithFont(font *Font) Builder
 	Build() *Maroto
 }
 
@@ -34,6 +36,11 @@ func NewBuilder() Builder {
 			Top:   MinTopMargin,
 		},
 		maxGridSize: 12,
+		font: &Font{
+			Size:   10,
+			Family: consts.Arial,
+			Style:  consts.Normal,
+		},
 	}
 }
 
@@ -42,7 +49,6 @@ func (b *builder) WithPageSize(size PageSize) Builder {
 		return b
 	}
 
-	b.pageSize = size
 	b.dimensions = GetDimensions(size)
 
 	return b
@@ -52,7 +58,7 @@ func (b *builder) WithDimensions(dimensions *Dimensions) Builder {
 	if dimensions == nil {
 		return b
 	}
-	if dimensions.Width == 0 || dimensions.Height == 0 {
+	if dimensions.Width <= 0 || dimensions.Height <= 0 {
 		return b
 	}
 
@@ -66,19 +72,16 @@ func (b *builder) WithMargins(margins *Margins) Builder {
 		return b
 	}
 
-	/*
-		We need to warrant that the margins are in a certain limit due to gofpdf limitations
-	*/
 	if margins.Left < MinLeftMargin {
-		margins.Left = MinLeftMargin
+		return b
 	}
 
 	if margins.Right < MinRightMargin {
-		margins.Right = MinRightMargin
+		return b
 	}
 
 	if margins.Top < MinTopMargin {
-		margins.Top = MinTopMargin
+		return b
 	}
 
 	b.margins = margins
@@ -118,6 +121,26 @@ func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
 	return b
 }
 
+func (b *builder) WithFont(font *Font) Builder {
+	if font == nil {
+		return b
+	}
+
+	if font.Family != "" {
+		b.font.Family = font.Family
+	}
+
+	if font.Size != 0 {
+		b.font.Size = font.Size
+	}
+
+	if font.Style != "" {
+		b.font.Style = font.Style
+	}
+
+	return b
+}
+
 func (b *builder) Build() *Maroto {
 	return &Maroto{
 		ProviderType: b.providerType,
@@ -126,16 +149,13 @@ func (b *builder) Build() *Maroto {
 		Workers:      b.workerPoolSize,
 		Debug:        b.debug,
 		MaxGridSize:  b.maxGridSize,
+		Font:         b.font,
 	}
 }
 
 func (b *builder) getDimensions() *Dimensions {
 	if b.dimensions != nil {
 		return b.dimensions
-	}
-
-	if b.pageSize != "" {
-		return GetDimensions(b.pageSize)
 	}
 
 	return GetDimensions(A4)
