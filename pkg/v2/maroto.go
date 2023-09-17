@@ -6,11 +6,10 @@ import (
 	"io"
 	"log"
 
-	"github.com/johnfercher/maroto/internal"
-
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/context"
