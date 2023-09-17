@@ -57,7 +57,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	err = document.Save("v2.pdf")
+	err = document.Save("docs/assets/pdf/v2.pdf")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -83,7 +83,7 @@ func buildCodesRow() []domain.Row {
 }
 
 func buildImagesRow() []domain.Row {
-	byteSlices, err := os.ReadFile("internal/assets/images/frontpage.png")
+	byteSlices, err := os.ReadFile("docs/assets/images/frontpage.png")
 	if err != nil {
 		fmt.Println("Got error while opening file:", err)
 		os.Exit(1)
@@ -93,7 +93,7 @@ func buildImagesRow() []domain.Row {
 	return []domain.Row{
 		row.New(20).Add(
 			text.NewCol(4, "Image From File:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
-			image.NewFromFileCol(8, "internal/assets/images/biplane.jpg", props.Rect{Center: true, Percent: 90}),
+			image.NewFromFileCol(8, "docs/assets/images/biplane.jpg", props.Rect{Center: true, Percent: 90}),
 		),
 		row.New(20).Add(
 			text.NewCol(4, "Image From Base64::", props.Text{Size: 15, Top: 6, Align: consts.Center}),

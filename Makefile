@@ -21,25 +21,28 @@ lint:
 install:
 	bash install.sh
 
+font:
+	tar -xvf docs/assets/fonts/arial-unicode-ms.tgz
+
 v1:
-	go run internal/examples/barcodegrid/v1/main.go
-	go run internal/examples/imagegrid/v1/main.go
-	go run internal/examples/datamatrixgrid/v1/main.go
-	go run internal/examples/qrgrid/v1/main.go
-	go run internal/examples/textgrid/v1/main.go
-	go run internal/examples/maxgridsum/v1/main.go
-	go run internal/examples/billing/main.go
-	go run internal/examples/billing-with-negative/main.go
-	go run internal/examples/certificate/main.go
-	go run internal/examples/customsize/main.go
-	go run internal/examples/sample1/main.go
-	go run internal/examples/zpl/main.go
-	go run internal/examples/utfsample/main.go
+	go run docs/assets/examples/barcodegrid/v1/main.go
+	go run docs/assets/examples/imagegrid/v1/main.go
+	go run docs/assets/examples/datamatrixgrid/v1/main.go
+	go run docs/assets/examples/qrgrid/v1/main.go
+	go run docs/assets/examples/textgrid/v1/main.go
+	go run docs/assets/examples/maxgridsum/v1/main.go
+	go run docs/assets/examples/billing/main.go
+	go run docs/assets/examples/billing-with-negative/main.go
+	go run docs/assets/examples/certificate/main.go
+	go run docs/assets/examples/customsize/main.go
+	go run docs/assets/examples/sample1/main.go
+	go run docs/assets/examples/zpl/main.go
+	go run docs/assets/examples/utfsample/main.go
 
 v2:
-	go run internal/examples/barcodegrid/v2/main.go
-	go run internal/examples/imagegrid/v2/main.go
-	go run internal/examples/datamatrixgrid/v2/main.go
-	go run internal/examples/qrgrid/v2/main.go
-	go run internal/examples/textgrid/v2/main.go
-	go run internal/examples/maxgridsum/v2/main.go
+	go run docs/assets/examples/barcodegrid/v2/main.go
+	go run docs/assets/examples/imagegrid/v2/main.go
+	go run docs/assets/examples/datamatrixgrid/v2/main.go
+	go run docs/assets/examples/qrgrid/v2/main.go
+	go run docs/assets/examples/textgrid/v2/main.go
+	go run docs/assets/examples/maxgridsum/v2/main.go
