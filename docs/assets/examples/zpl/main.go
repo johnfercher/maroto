@@ -17,7 +17,7 @@ func main() {
 
 	m.Row(40, func() {
 		m.Col(4, func() {
-			_ = m.FileImage("internal/assets/images/biplane.jpg", props.Rect{
+			_ = m.FileImage("docs/assets/images/biplane.jpg", props.Rect{
 				Center:  true,
 				Percent: 80,
 			})
@@ -90,7 +90,7 @@ func main() {
 
 	m.SetBorder(false)
 
-	err := m.OutputFileAndClose("internal/examples/pdfs/zpl.pdf")
+	err := m.OutputFileAndClose("docs/assets/pdf/zpl.pdf")
 	if err != nil {
 		fmt.Println("Could not save PDF:", err)
 		os.Exit(1)
