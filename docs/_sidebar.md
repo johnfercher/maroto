@@ -4,7 +4,6 @@
     * [Config Builder](v2/configbuilder.md?id=config-builder)
     * [Unit Testing](v2/tests.md?id=unit-testing)
   * **Examples**
-    * [Development](v2/examples/dev.md?id=development)
     * [Barcode](v2/examples/barcode.md?id=barcode)
     * [Data Matrix](v2/examples/datamatrix.md?id=data-matrix)
     * [Footer](v2/examples/footer.md?id=footer)

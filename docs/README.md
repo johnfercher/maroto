@@ -90,6 +90,14 @@ containing **all components supported** by maroto`v2`.
 The pages are merged using [pdfcpu][pdfcpu]. For a complete example, please refer to
 [this link](v2/configbuilder.md?id=parallelism).
 
+## Code Example
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/cmd/main.go ':include :type=code')
+
+## PDF Generated
+```pdf
+	assets/pdf/v2.pdf
+```
+
 [gofpdf]: https://github.com/jung-kurt/gofpdf
 [pdfcpu]: https://github.com/pdfcpu/pdfcpu
 [old_maroto_interface]: https://github.com/johnfercher/maroto/blob/master/pkg/pdf/pdf.go
