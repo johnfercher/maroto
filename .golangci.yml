@@ -5,6 +5,7 @@ run:
     - cmd/*
     - docs/*
     - mocks/*
+    - internal/fpdf/*
 
 linters-settings:
   lll:
