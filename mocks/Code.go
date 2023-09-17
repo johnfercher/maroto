@@ -141,8 +141,7 @@ func (_c *Code_AddQr_Call) RunAndReturn(run func(string, internal.Cell, props.Re
 func NewCode(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Code {
+}) *Code {
 	mock := &Code{}
 	mock.Mock.Test(t)
 

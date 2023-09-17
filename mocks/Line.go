@@ -61,8 +61,7 @@ func (_c *Line_Draw_Call) RunAndReturn(run func(internal.Cell, props.Line)) *Lin
 func NewLine(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Line {
+}) *Line {
 	mock := &Line{}
 	mock.Mock.Test(t)
 

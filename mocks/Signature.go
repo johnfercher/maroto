@@ -62,8 +62,7 @@ func (_c *Signature_AddSpaceFor_Call) RunAndReturn(run func(string, internal.Cel
 func NewSignature(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Signature {
+}) *Signature {
 	mock := &Signature{}
 	mock.Mock.Test(t)
 

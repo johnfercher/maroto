@@ -415,8 +415,7 @@ func (_c *MarotoGridPart_Text_Call) RunAndReturn(run func(string, ...props.Text)
 func NewMarotoGridPart(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *MarotoGridPart {
+}) *MarotoGridPart {
 	mock := &MarotoGridPart{}
 	mock.Mock.Test(t)
 

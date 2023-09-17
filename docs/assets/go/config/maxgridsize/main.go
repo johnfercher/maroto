@@ -7,15 +7,10 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithMargins(&config.Margins{
-			Left:   10,
-			Right:  10,
-			Top:    10,
-			Bottom: 20,
-		}).
+		WithMaxGridSize(14).
 		Build()
 
-	m := v2.NewMaroto(cfg)
+	_ = v2.NewMaroto(cfg)
 
 	// Generate
 }

@@ -1604,8 +1604,7 @@ func (_c *Maroto_Text_Call) RunAndReturn(run func(string, ...props.Text)) *Marot
 func NewMaroto(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Maroto {
+}) *Maroto {
 	mock := &Maroto{}
 	mock.Mock.Test(t)
 

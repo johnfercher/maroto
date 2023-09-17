@@ -7,10 +7,10 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithMaxGridSize(14).
+		WithWorkerPoolSize(10).
 		Build()
 
-	m := v2.NewMaroto(cfg)
+	_ = v2.NewMaroto(cfg)
 
 	// Generate
 }

@@ -82,8 +82,7 @@ func (_c *Cache_Load_Call) RunAndReturn(run func(string, consts.Extension) (*cac
 func NewCache(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Cache {
+}) *Cache {
 	mock := &Cache{}
 	mock.Mock.Test(t)
 
