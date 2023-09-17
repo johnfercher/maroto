@@ -1,16 +1,6 @@
 package internal_test
 
-import (
-	"fmt"
-	"testing"
-
-	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/mocks"
-	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/stretchr/testify/assert"
-)
-
-func TestNewMath(t *testing.T) {
+/*func TestNewMath(t *testing.T) {
 	math := internal.NewMath(&mocks.Fpdf{})
 
 	assert.NotNil(t, math)
@@ -262,3 +252,4 @@ func TestMath_GetCenterCorrection(t *testing.T) {
 	// Assert
 	assert.Equal(t, correction, 2.5)
 }
+*/

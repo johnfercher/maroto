@@ -19,4 +19,4 @@
 - [ ] Updated README.md <!-- If applied -->
 - [ ] Executed `make v2` to update all examples inside docs/examples. <!-- If applied -->
 - [ ] New public methods/structs/interfaces has comments upside them explaining they responsibilities <!-- If applied -->
-- [ ] Executed `make dod` with none issues pointed out by `golangci-lint` and `goreportcard-cli`
+- [ ] Executed `make dod` with none issues pointed out by `golangci-lint`

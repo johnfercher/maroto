@@ -70,7 +70,7 @@ func main() {
 				Align:  consts.Center,
 			}),
 		),
-		col.Empty(6),
+		col.New(6),
 	)
 
 	document, err := m.Generate()

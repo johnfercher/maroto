@@ -25,7 +25,7 @@ func New(t *testing.T) *MarotoTest {
 	}
 }
 
-func (m *MarotoTest) Assert(maroto domain.Maroto) *MarotoTest {
+func (m *MarotoTest) Assert(maroto domain.MarotoV2) *MarotoTest {
 	m.node = maroto.GetStructure()
 	return m
 }

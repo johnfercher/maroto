@@ -1,10 +1,15 @@
-with-expecter: True
-inpackage: True
 all: True
+dir: "mocks/"
+outpkg: "mocks"
+filename: "{{.InterfaceName}}.go"
+mockname: "{{.InterfaceName}}"
 packages:
   github.com/johnfercher/maroto/internal:
     config:
       recursive: True
   github.com/johnfercher/maroto/pkg/v2:
+    config:
+      recursive: True
+  github.com/johnfercher/maroto/pkg/pdf:
     config:
       recursive: True

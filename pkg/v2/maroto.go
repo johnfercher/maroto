@@ -44,7 +44,7 @@ type maroto struct {
 	pool async.Processor[[]domain.Page, []byte]
 }
 
-func NewMaroto(config ...*config.Maroto) domain.Maroto {
+func NewMaroto(config ...*config.Maroto) domain.MarotoV2 {
 	cache := cache.New()
 	cfg := getConfig(config...)
 	provider := getProvider(cache, cfg)

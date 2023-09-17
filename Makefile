@@ -1,16 +1,16 @@
 GO_FILES = $(shell find . '(' -path '*/.*' -o -path './vendor' ')' -prune -o -name '*.go' -print | cut -b3-)
-GO_PATHS =  $(shell go list -f '{{ .Dir }}' ./...)
+GO_PATHS =  $(shell go list -f '{{ .Dir }}' ./... | grep -E -v 'docs|cmd')
 
 .PHONY: dod
 dod: build test fmt lint
 
 .PHONY: build
 build:
-	go build -v ./...
+	go build $(GO_PATHS)
 
 .PHONY: test
 test:
-	go test -v ./...
+	go test $(GO_PATHS)
 
 .PHONY: fmt
 fmt:
@@ -20,7 +20,6 @@ fmt:
 
 .PHONY: lint
 lint:
-	goreportcard-cli -v
 	golangci-lint run --config=.golangci.yml ./...
 
 .PHONY: install
@@ -78,5 +77,4 @@ v2: font
 
 .PHONY: mock
 mock:
-	go generate ./internal
-	go generate ./internal/fpdf
+	mockery

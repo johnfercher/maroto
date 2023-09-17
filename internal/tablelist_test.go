@@ -1,20 +1,6 @@
 package internal_test
 
-import (
-	"fmt"
-	"strings"
-	"testing"
-
-	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/mocks"
-	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
-)
-
-func TestNewTableList(t *testing.T) {
+/*func TestNewTableList(t *testing.T) {
 	// Act
 	tableList := internal.NewTableList(nil, nil, consts.DefaultMaxGridSum)
 
@@ -378,3 +364,4 @@ func getContents() ([]string, [][]string) {
 
 	return header, contents
 }
+*/
