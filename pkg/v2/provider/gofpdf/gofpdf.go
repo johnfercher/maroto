@@ -3,6 +3,7 @@ package gofpdf
 import (
 	"bytes"
 	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
@@ -108,14 +109,6 @@ func (g *gofpdfProvider) AddImage(file string, cell internal.Cell, prop props.Re
 	g.image.AddFromBase64(img.Value, cell, prop, img.Extension)
 }
 
-func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Maroto) {
-	border := "0"
-	if config.Debug {
-		border = "1"
-	}
-	g.fpdf.CellFormat(width, height, "", border, 0, "C", false, 0, "")
-}
-
 func (g *gofpdfProvider) CreateRow(height float64) {
 	g.fpdf.Ln(height)
 }
@@ -133,4 +126,51 @@ func (g *gofpdfProvider) GenerateBytes() ([]byte, error) {
 
 func (g *gofpdfProvider) SetCache(cache cache.Cache) {
 	g.imageCache = cache
+}
+
+func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Maroto, style *props.Style) {
+	if style == nil {
+		g.createStandard(width, height, config)
+		return
+	}
+
+	g.createCustom(width, height, config, style)
+}
+
+func (g *gofpdfProvider) createStandard(width, height float64, config *config.Maroto) {
+	border := "0"
+	if config.Debug {
+		border = "1"
+	}
+
+	g.fpdf.CellFormat(width, height, "", border, 0, "C", false, 0, "")
+}
+
+func (g *gofpdfProvider) createCustom(width, height float64, config *config.Maroto, style *props.Style) {
+	border := "0"
+	if style.Border || config.Debug {
+		border = "1"
+	}
+
+	fill := false
+	if style.BackgroundColor != nil {
+		g.fpdf.SetFillColor(style.BackgroundColor.Red, style.BackgroundColor.Green, style.BackgroundColor.Blue)
+		fill = true
+	}
+
+	if fill && style.BorderColor != nil {
+		g.fpdf.SetDrawColor(style.BorderColor.Red, style.BorderColor.Green, style.BorderColor.Blue)
+	}
+
+	g.fpdf.CellFormat(width, height, "", border, 0, "C", fill, 0, "")
+
+	if fill {
+		white := color.NewWhite()
+		g.fpdf.SetFillColor(white.Red, white.Green, white.Blue)
+	}
+
+	if fill && style.BorderColor != nil {
+		black := color.NewBlack()
+		g.fpdf.SetDrawColor(black.Red, black.Green, black.Blue)
+	}
 }

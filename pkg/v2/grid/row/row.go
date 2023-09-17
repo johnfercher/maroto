@@ -13,25 +13,19 @@ import (
 type row struct {
 	height float64
 	cols   []domain.Col
-	style  props.Style
+	style  *props.Style
 	config *config.Maroto
 }
 
-func New(height float64, ps ...props.Style) domain.Row {
-	style := props.Style{}
-	if len(ps) > 0 {
-		style = ps[0]
-	}
-
+func New(height float64) domain.Row {
 	return &row{
 		height: height,
-		style:  style,
 	}
 }
 
 func Empty(height float64) domain.Row {
 	r := New(height)
-	r.Add(col.Empty())
+	r.Add(col.Empty(12))
 	return r
 }
 
@@ -70,6 +64,11 @@ func (r *row) GetStructure() *tree.Node[domain.Structure] {
 func (r *row) Render(provider domain.Provider, cell internal.Cell) {
 	cell.Height = r.height
 	innerCell := cell.Copy()
+
+	if r.style != nil {
+		provider.CreateCol(cell.Width, cell.Height, r.config, r.style)
+	}
+
 	for _, col := range r.cols {
 		size, isMax := col.GetSize()
 		parentWidth := cell.Width
@@ -82,10 +81,15 @@ func (r *row) Render(provider domain.Provider, cell internal.Cell) {
 		colDimension := parentWidth * percent
 		innerCell.Width = colDimension
 
-		col.Render(provider, innerCell)
+		col.Render(provider, innerCell, r.style == nil)
 		innerCell.X += colDimension
 	}
 
 	provider.CreateRow(cell.Height)
 	return
+}
+
+func (r *row) WithStyle(style *props.Style) domain.Row {
+	r.style = style
+	return r
 }

@@ -11,7 +11,7 @@ import (
 type Provider interface {
 	// Grid
 	CreateRow(height float64)
-	CreateCol(width, height float64, config *config.Maroto)
+	CreateCol(width, height float64, config *config.Maroto, style *props.Style)
 
 	// Features
 	AddText(text string, cell internal.Cell, prop props.Text)

@@ -177,7 +177,7 @@ func (m *maroto) addFooter() {
 func (m *maroto) fillPageToAddNew() {
 	space := m.cell.Height - m.currentHeight - m.footerHeight
 
-	c := col.New()
+	c := col.New(m.config.MaxGridSize)
 	spaceRow := row.New(space)
 	spaceRow.Add(c)
 

@@ -44,8 +44,8 @@ func NewCol(size int, value string, ps ...props.Text) domain.Col {
 }
 
 func NewRow(height float64, value string, ps ...props.Text) domain.Row {
-	text := New(value, ps...)
-	c := col.New().Add(text)
+	r := New(value, ps...)
+	c := col.New(0).Add(r)
 	return row.New(height).Add(c)
 }
 

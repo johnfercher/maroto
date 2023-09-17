@@ -37,7 +37,7 @@ func NewCol(size int, value string, ps ...props.Font) domain.Col {
 
 func NewRow(height float64, value string, ps ...props.Font) domain.Row {
 	signature := New(value, ps...)
-	c := col.New().Add(signature)
+	c := col.New(0).Add(signature)
 	return row.New(height).Add(c)
 }
 

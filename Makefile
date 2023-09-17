@@ -60,6 +60,7 @@ v2: font
 	go run docs/assets/examples/barcodegrid/v2/main.go
 	# billing
 	# billing negative
+	go run docs/assets/examples/cellstyle/v2/main.go
 	# certificate
 	go run docs/assets/examples/customsize/v2/main.go
 	go run docs/assets/examples/datamatrixgrid/v2/main.go

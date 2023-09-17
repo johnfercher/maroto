@@ -36,7 +36,7 @@ func NewMatrixCol(size int, code string, ps ...props.Rect) domain.Col {
 
 func NewMatrixRow(height float64, code string, ps ...props.Rect) domain.Row {
 	matrixCode := NewMatrix(code, ps...)
-	c := col.New().Add(matrixCode)
+	c := col.New(0).Add(matrixCode)
 	return row.New(height).Add(c)
 }
 

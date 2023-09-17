@@ -3,6 +3,7 @@ package domain
 import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/metrics"
 )
@@ -24,30 +25,39 @@ type Document interface {
 	GetReport() *metrics.Report
 }
 
-type Component interface {
+type Node interface {
 	SetConfig(config *config.Maroto)
-	Render(provider Provider, cell internal.Cell)
 	GetStructure() *tree.Node[Structure]
 }
 
+type Component interface {
+	Node
+	Render(provider Provider, cell internal.Cell)
+}
+
 type Col interface {
-	Component
+	Node
 	Add(components ...Component) Col
 	AddInner(rows ...Row) Col
 	GetSize() (int, bool)
+	WithStyle(style *props.Style) Col
+	Render(provider Provider, cell internal.Cell, createCell bool)
 }
 
 type Row interface {
-	Component
+	Node
 	Add(cols ...Col) Row
 	GetHeight() float64
+	WithStyle(style *props.Style) Row
+	Render(provider Provider, cell internal.Cell)
 }
 
 type Page interface {
-	Component
+	Node
 	Add(rows ...Row) Page
 	GetNumber() int
 	SetNumber(number int)
+	Render(provider Provider, cell internal.Cell)
 }
 
 type Structure struct {

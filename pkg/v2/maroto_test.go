@@ -3,7 +3,7 @@ package v2_test
 import (
 	"fmt"
 	"github.com/johnfercher/maroto/pkg/consts"
-	v2 "github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/code"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
