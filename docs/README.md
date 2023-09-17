@@ -10,7 +10,7 @@ library in various aspects. The main objectives of`v2.0.0`are:
 1. [Improve usability](README.md?id=improve-usability);
 2. [Allow unit testing](README.md?id=unit-testing);
 3. [Add built-in metrics](README.md?id=built-in-metrics);
-4. [Allow parallelism](README.md??id=parallelism);
+4. [Improve execution time](README.md?id=execution-time-improvement);
 5. Allow recursive Row/Col; **(on roadmap)**
 6. Allow generation based on HTML/JSON; **(on roadmap)**
 
@@ -88,13 +88,15 @@ to [this link](v2/basics?id=using-metrics-decorator).
 
 [filename](../assets/text/report.txt ':include :type=code')
 
-## Parallelism
-In maroto`v2`, there are several performance improvements. One notably enhancement is the ability 
-to generate chunks of pages in parallel. The following results were obtained by generating a PDF with **100 pages** 
-containing **all components supported** by maroto`v2`.
+## Execution Time Improvement
+In Maroto`v2`, numerous performance enhancements have been implemented. The core algorithm is now **at least 
+twice as fast as V1**. This disparity becomes even more remarkable when parallel generation is enabled. The 
+subsequent results were achieved by generating a PDF with **100 pages** encompassing **all components supported** 
+by Maroto`v2`.
 
 [filename](../assets/text/parallel.txt ':include :type=code')
 
+The PDF generated was a custom version of ([billing example](v2/examples/billing?id=billing)), with **100 pages**.
 The pages are merged using [pdfcpu][pdfcpu]. For a complete example, please refer to
 [this link](v2/configbuilder.md?id=parallelism).
 
