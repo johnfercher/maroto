@@ -37,7 +37,7 @@ func NewFromBase64Col(size int, path string, extension consts.Extension, ps ...p
 	return col.New(size).Add(image)
 }
 
-func NewFromBase64eRow(height float64, path string, extension consts.Extension, ps ...props.Rect) domain.Row {
+func NewFromBase64Row(height float64, path string, extension consts.Extension, ps ...props.Rect) domain.Row {
 	image := NewFromBase64(path, extension, ps...)
 	c := col.New().Add(image)
 	return row.New(height).Add(c)

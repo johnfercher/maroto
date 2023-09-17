@@ -18,9 +18,10 @@ import (
 	"os"
 )
 
+var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
+
 func main() {
 	cfg := config.NewBuilder().
-		WithDebug(true).
 		Build()
 
 	maroto := v2.NewMaroto(cfg)
@@ -36,8 +37,19 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	for _ = range [10]int{} {
-		m.AddRows(buildCodesRow(), buildImagesRow(), buildTextsRow())
+	m.AddRows(
+		text.NewRow(20, "Main features", props.Text{Size: 15, Top: 6.5}),
+	)
+	m.AddRows(buildCodesRow()...)
+	m.AddRows(buildImagesRow()...)
+	m.AddRows(buildTextsRow()...)
+
+	m.AddRows(
+		text.NewRow(15, "Dummy Data", props.Text{Size: 12, Top: 5, Align: consts.Center}),
+	)
+
+	for i := 0; i < 100; i++ {
+		m.AddRows(text.NewRow(20, dummyText+dummyText+dummyText+dummyText+dummyText))
 	}
 
 	document, err := m.Generate()
@@ -53,15 +65,24 @@ func main() {
 	document.GetReport().Print()
 }
 
-func buildCodesRow() domain.Row {
-	return row.New(40).Add(
-		code.NewBarCol(4, "barcode"),
-		code.NewQrCol(4, "qrcode"),
-		code.NewMatrixCol(4, "matrixcode"),
-	)
+func buildCodesRow() []domain.Row {
+	return []domain.Row{
+		row.New(20).Add(
+			text.NewCol(4, "Barcode:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			code.NewBarCol(8, "barcode", props.Barcode{Center: true, Percent: 70}),
+		),
+		row.New(20).Add(
+			text.NewCol(4, "QrCode:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			code.NewQrCol(8, "qrcode", props.Rect{Center: true, Percent: 70}),
+		),
+		row.New(20).Add(
+			text.NewCol(4, "MatrixCode:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			code.NewMatrixCol(8, "matrixcode", props.Rect{Center: true, Percent: 70}),
+		),
+	}
 }
 
-func buildImagesRow() domain.Row {
+func buildImagesRow() []domain.Row {
 	byteSlices, err := os.ReadFile("internal/assets/images/frontpage.png")
 	if err != nil {
 		fmt.Println("Got error while opening file:", err)
@@ -69,57 +90,58 @@ func buildImagesRow() domain.Row {
 	}
 	stringBase64 := base64.StdEncoding.EncodeToString(byteSlices)
 
-	return row.New(40).Add(
-		image.NewFromBase64Col(6, stringBase64, consts.Png),
-		image.NewFromFileCol(6, "internal/assets/images/frontpage.png"),
-	)
+	return []domain.Row{
+		row.New(20).Add(
+			text.NewCol(4, "Image From File:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			image.NewFromFileCol(8, "internal/assets/images/biplane.jpg", props.Rect{Center: true, Percent: 90}),
+		),
+		row.New(20).Add(
+			text.NewCol(4, "Image From Base64::", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			image.NewFromBase64Col(8, stringBase64, consts.Png, props.Rect{Center: true, Percent: 90}),
+		),
+	}
 }
 
-func buildTextsRow() domain.Row {
+func buildTextsRow() []domain.Row {
 	colText := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
-	return row.New(40).Add(
-		text.NewCol(6, colText, props.Text{
-			Align: consts.Center,
-		}),
-		signature.NewCol(6, "signature", props.Font{
-			Style:  consts.Italic,
-			Size:   15,
-			Family: consts.Courier,
-		}),
-	)
+
+	return []domain.Row{
+		row.New(20).Add(
+			text.NewCol(4, "Text:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			text.NewCol(8, colText, props.Text{Size: 12, Top: 5, Align: consts.Center}),
+		),
+		row.New(40).Add(
+			text.NewCol(4, "Signature:", props.Text{Size: 15, Top: 17, Align: consts.Center}),
+			signature.NewCol(8, "Name", props.Font{Size: 10}),
+		),
+	}
 }
 
 func buildHeader() []domain.Row {
-	r1 := row.New(15).Add(
+	r1 := row.New(30).Add(
 		col.New(12).Add(
 			text.New("Maroto V2", props.Text{
+				Top:   5,
 				Size:  15,
 				Align: consts.Center,
 			}),
-			text.New("The New Standard", props.Text{
-				Top:   8,
+			text.New("Grid system, fast generation, embedded metrics and testable.", props.Text{
+				Top:   13,
 				Size:  13,
 				Align: consts.Center,
 			}),
 		),
 	)
 
-	r2 := row.New(10).Add(
-		text.NewCol(2, "Site: https://maroto.io/"),
-		text.NewCol(5, "Discussions: https://github.com/johnfercher/maroto/issues/257"),
-		text.NewCol(5, "Branch: https://github.com/johnfercher/maroto/tree/v2"),
-	)
-
-	return []domain.Row{r1, r2}
+	return []domain.Row{r1}
 }
 
 func buildFooter() []domain.Row {
 	return []domain.Row{
-		row.New(25).Add(
-			col.Empty(3),
-			signature.NewCol(6, "Signature"),
-			col.Empty(3),
+		row.New(10).Add(
+			text.NewCol(2, "Site: https://maroto.io/"),
+			text.NewCol(5, "Discussions: https://github.com/johnfercher/maroto/issues/257"),
+			text.NewCol(5, "Branch: https://github.com/johnfercher/maroto/tree/v2"),
 		),
-		text.NewRow(5, "this is the maroto footer"),
 	}
 }

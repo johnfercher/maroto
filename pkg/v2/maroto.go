@@ -7,7 +7,6 @@ import (
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/context"
@@ -110,7 +109,7 @@ func (m *maroto) RegisterFooter(rows ...domain.Row) error {
 }
 
 func (m *maroto) Generate() (domain.Document, error) {
-	m.fillPage()
+	m.fillPageToAddNew()
 	m.setConfig()
 
 	if m.config.Workers > 0 && m.config.ProviderType != provider.HTML {
@@ -121,7 +120,7 @@ func (m *maroto) Generate() (domain.Document, error) {
 }
 
 func (m *maroto) GetStructure() *tree.Node[domain.Structure] {
-	m.fillPage()
+	m.fillPageToAddNew()
 
 	str := domain.Structure{
 		Type: "maroto",
@@ -179,7 +178,7 @@ func (m *maroto) fillPageToAddNew() {
 	space := m.cell.Height - m.currentHeight - m.footerHeight
 
 	c := col.New(12)
-	spaceRow := row.New(space, color.Color{255, 0, 0})
+	spaceRow := row.New(space)
 	spaceRow.Add(c)
 
 	m.rows = append(m.rows, spaceRow)
@@ -201,23 +200,6 @@ func (m *maroto) setConfig() {
 	for _, page := range m.pages {
 		page.SetConfig(m.config)
 	}
-}
-
-func (m *maroto) fillPage() {
-	space := m.cell.Height - m.currentHeight
-
-	p := page.New()
-	p.SetNumber(len(m.pages))
-	p.Add(m.rows...)
-
-	c := col.New()
-	row := row.New(space, color.Color{255, 0, 0})
-	row.Add(c)
-	p.Add(row)
-
-	m.pages = append(m.pages, p)
-	m.rows = nil
-	m.currentHeight = 0
 }
 
 func (m *maroto) generate() (domain.Document, error) {

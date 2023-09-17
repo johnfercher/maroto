@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/pkg/color"
+	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
@@ -13,19 +13,19 @@ import (
 type row struct {
 	height float64
 	cols   []domain.Col
-	color  color.Color
+	style  props.Style
 	config *config.Maroto
 }
 
-func New(height float64, c ...color.Color) domain.Row {
-	cx := color.NewBlack()
-	if len(c) > 0 {
-		cx = c[0]
+func New(height float64, ps ...props.Style) domain.Row {
+	style := props.Style{}
+	if len(ps) > 0 {
+		style = ps[0]
 	}
 
 	return &row{
 		height: height,
-		color:  cx,
+		style:  style,
 	}
 }
 

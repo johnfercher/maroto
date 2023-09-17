@@ -4,7 +4,7 @@
 
 * :bulb: Grid system
 * :zap: Fast generation
-* :bar_chart: Embeded metrics
+* :bar_chart: Embedded metrics
 * :syringe: Testable
 
 [Github](https://github.com/johnfercher/maroto/tree/v2)
