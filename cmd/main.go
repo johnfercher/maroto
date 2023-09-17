@@ -48,7 +48,7 @@ func main() {
 		text.NewRow(15, "Dummy Data", props.Text{Size: 12, Top: 5, Align: consts.Center}),
 	)
 
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 50; i++ {
 		m.AddRows(text.NewRow(20, dummyText+dummyText+dummyText+dummyText+dummyText))
 	}
 
