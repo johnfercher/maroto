@@ -30,17 +30,17 @@ go get -u github.com/johnfercher/maroto/internal
 
 ## Contributing
 
-| Command        | Description                                       | Dependencies                                                 |
-|----------------|---------------------------------------------------|--------------------------------------------------------------|
-| `make build`   | Build project                                     | `go`                                                         |
-| `make test`    | Run unit tests                                    | `go`                                                         |
-| `make fmt`     | Format files                                      | `gofmt`, `gofumpt` and `goimports`                           |
-| `make lint`    | Check files                                       | `golangci-lint` and `goreportcard-cli`                       |
-| `make dod`     | (Definition of Done) Format files and check files | Same as`make build`, `make test`, `make fmt` and `make lint` | 
-| `make install` | Install all dependencies                          | `go`, `curl` and `git`                                       |
+| Command        | Description                                       | Dependencies                                                  |
+|----------------|---------------------------------------------------|---------------------------------------------------------------|
+| `make build`   | Build project                                     | `go`                                                          |
+| `make test`    | Run unit tests                                    | `go`                                                          |
+| `make fmt`     | Format files                                      | `gofmt`, `gofumpt` and `goimports`                            |
+| `make lint`    | Check files                                       | `golangci-lint` and `goreportcard-cli`                        |
+| `make dod`     | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt` and `make lint` | 
+| `make install` | Install all dependencies                          | `go`, `curl` and `git`                                        |
 | `make font`    | Extract font ut8 to use in development            | `tar`                                                         |
-| `make v1`      | Run all v1 examples                               | `go`                                                         |
-| `make v2`      | Run all v2 examples                               | `go`                                                         |
+| `make v1`      | Run all v1 examples                               | `go`                                                          |
+| `make v2`      | Run all v2 examples                               | `go`                                                          |
 
 
 ## Stargazers over time
