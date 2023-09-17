@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
+	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 )
 
 type row struct {
@@ -14,22 +15,6 @@ type row struct {
 	cols   []domain.Col
 	color  color.Color
 	config *config.Maroto
-}
-
-func (r *row) SetConfig(config *config.Maroto) {
-	r.config = config
-	for _, cols := range r.cols {
-		cols.SetConfig(config)
-	}
-}
-
-func (r *row) GetHeight() float64 {
-	return r.height
-}
-
-func (r *row) Add(cols ...domain.Col) domain.Row {
-	r.cols = append(r.cols, cols...)
-	return r
 }
 
 func New(height float64, c ...color.Color) domain.Row {
@@ -42,6 +27,28 @@ func New(height float64, c ...color.Color) domain.Row {
 		height: height,
 		color:  cx,
 	}
+}
+
+func Empty(height float64) domain.Row {
+	r := New(height)
+	r.Add(col.Empty())
+	return r
+}
+
+func (r *row) SetConfig(config *config.Maroto) {
+	r.config = config
+	for _, cols := range r.cols {
+		cols.SetConfig(config)
+	}
+}
+
+func (r *row) Add(cols ...domain.Col) domain.Row {
+	r.cols = append(r.cols, cols...)
+	return r
+}
+
+func (r *row) GetHeight() float64 {
+	return r.height
 }
 
 func (r *row) GetStructure() *tree.Node[domain.Structure] {

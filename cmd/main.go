@@ -31,6 +31,11 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	err = m.RegisterFooter(buildFooter()...)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	for _ = range [10]int{} {
 		m.AddRows(buildCodesRow(), buildImagesRow(), buildTextsRow())
 	}
@@ -106,4 +111,15 @@ func buildHeader() []domain.Row {
 	)
 
 	return []domain.Row{r1, r2}
+}
+
+func buildFooter() []domain.Row {
+	return []domain.Row{
+		row.New(25).Add(
+			col.Empty(3),
+			signature.NewCol(6, "Signature"),
+			col.Empty(3),
+		),
+		text.NewRow(5, "this is the maroto footer"),
+	}
 }

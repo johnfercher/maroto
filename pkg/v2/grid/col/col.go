@@ -32,6 +32,10 @@ func New(sizes ...int) domain.Col {
 	}
 }
 
+func Empty(size ...int) domain.Col {
+	return New(size...)
+}
+
 func (c *col) Add(components ...domain.Component) domain.Col {
 	c.components = append(c.components, components...)
 	return c

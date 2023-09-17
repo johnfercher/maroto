@@ -13,6 +13,7 @@ type metricsDecorator struct {
 	addColTime    []*metrics.Time
 	addPageTime   []*metrics.Time
 	headerTime    *metrics.Time
+	footerTime    *metrics.Time
 	generateTime  *metrics.Time
 	structureTime *metrics.Time
 	inner         domain.Maroto
@@ -70,6 +71,15 @@ func (m *metricsDecorator) RegisterHeader(rows ...domain.Row) error {
 	return err
 }
 
+func (m *metricsDecorator) RegisterFooter(rows ...domain.Row) error {
+	var err error
+	timeSpent := m.getTimeSpent(func() {
+		err = m.inner.RegisterFooter(rows...)
+	})
+	m.footerTime = timeSpent
+	return err
+}
+
 func (m *metricsDecorator) GetStructure() *tree.Node[domain.Structure] {
 	var tree *tree.Node[domain.Structure]
 
@@ -114,6 +124,14 @@ func (m *metricsDecorator) buildMetrics() *metrics.Report {
 			Key:   "header",
 			Times: []*metrics.Time{m.headerTime},
 			Avg:   m.headerTime,
+		})
+	}
+
+	if m.footerTime != nil {
+		report = append(report, metrics.Metric{
+			Key:   "footer",
+			Times: []*metrics.Time{m.footerTime},
+			Avg:   m.footerTime,
 		})
 	}
 
