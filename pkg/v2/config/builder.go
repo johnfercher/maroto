@@ -28,8 +28,6 @@ type Builder interface {
 func NewBuilder() Builder {
 	return &builder{
 		providerType: provider.Gofpdf,
-		pageSize:     A4,
-		dimensions:   GetDimensions(A4),
 		margins: &Margins{
 			Left:   MinLeftMargin,
 			Right:  MinRightMargin,
@@ -55,7 +53,7 @@ func (b *builder) WithDimensions(dimensions *Dimensions) Builder {
 	if dimensions == nil {
 		return b
 	}
-	if dimensions.Width != 0 && dimensions.Height != 0 {
+	if dimensions.Width == 0 || dimensions.Height == 0 {
 		return b
 	}
 
@@ -128,10 +126,22 @@ func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
 func (b *builder) Build() *Maroto {
 	return &Maroto{
 		ProviderType: b.providerType,
-		Dimensions:   b.dimensions,
+		Dimensions:   b.getDimensions(),
 		Margins:      b.margins,
 		Workers:      b.workerPoolSize,
 		Debug:        b.debug,
 		MaxGridSize:  b.maxGridSize,
 	}
+}
+
+func (b *builder) getDimensions() *Dimensions {
+	if b.dimensions != nil {
+		return b.dimensions
+	}
+
+	if b.pageSize != "" {
+		return GetDimensions(b.pageSize)
+	}
+
+	return GetDimensions(A4)
 }

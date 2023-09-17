@@ -12,9 +12,7 @@ import (
 
 func main() {
 	begin := time.Now()
-	m := pdf.NewMarotoCustomSize(consts.Landscape, "C6", "mm", 114.0, 162.0)
-	m.SetPageMargins(5, 5, 5)
-	// m.SetBorder(true)
+	m := pdf.NewMarotoCustomSize(consts.Portrait, "", "mm", 200, 200)
 
 	m.Row(40, func() {
 		m.Col(4, func() {
@@ -31,27 +29,6 @@ func main() {
 			})
 		})
 		m.ColSpace(4)
-	})
-
-	m.Line(10)
-
-	m.Row(30, func() {
-		m.Col(12, func() {
-			m.Text("João Sant'Ana 100 Main Street", props.Text{
-				Size:  10,
-				Align: consts.Right,
-			})
-			m.Text("Springfield TN 39021", props.Text{
-				Size:  10,
-				Align: consts.Right,
-				Top:   10,
-			})
-			m.Text("United States (USA)", props.Text{
-				Size:  10,
-				Align: consts.Right,
-				Top:   20,
-			})
-		})
 	})
 
 	err := m.OutputFileAndClose("docs/assets/pdf/customsize.pdf")

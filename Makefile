@@ -41,7 +41,7 @@ v1: font
 	go run docs/assets/examples/billing/main.go
 	go run docs/assets/examples/billing-with-negative/main.go
 	go run docs/assets/examples/certificate/main.go
-	go run docs/assets/examples/customsize/main.go
+	go run docs/assets/examples/customsize/v1/main.go
 	go run docs/assets/examples/datamatrixgrid/v1/main.go
 	go run docs/assets/examples/footer/v1/main.go
 	go run docs/assets/examples/header/v1/main.go
@@ -60,7 +60,7 @@ v2: font
 	# billing
 	# billing negative
 	# certificate
-	# custom size
+	go run docs/assets/examples/customsize/v2/main.go
 	go run docs/assets/examples/datamatrixgrid/v2/main.go
 	go run docs/assets/examples/footer/v2/main.go
 	go run docs/assets/examples/header/v2/main.go
