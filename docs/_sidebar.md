@@ -7,6 +7,7 @@
     * [Development](v2/examples/dev.md?id=development)
     * [Barcode](v2/examples/barcode.md?id=barcode)
     * [Data Matrix](v2/examples/datamatrix.md?id=data-matrix)
+    * [Header](v2/examples/header.md?id=header)
     * [Images](v2/examples/image.md?id=image)
     * [Max Grid Sum](v2/examples/maxgridsum.md?id=max-grid-sum)
     * [QR Code](v2/examples/qrcode.md?id=qrcode)

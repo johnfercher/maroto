@@ -36,26 +36,37 @@ font:
 	tar -xvf docs/assets/fonts/arial-unicode-ms.tgz
 
 .PHONY: v1
-v1:
+v1: font
 	go run docs/assets/examples/barcodegrid/v1/main.go
-	go run docs/assets/examples/imagegrid/v1/main.go
-	go run docs/assets/examples/datamatrixgrid/v1/main.go
-	go run docs/assets/examples/qrgrid/v1/main.go
-	go run docs/assets/examples/textgrid/v1/main.go
-	go run docs/assets/examples/maxgridsum/v1/main.go
 	go run docs/assets/examples/billing/main.go
 	go run docs/assets/examples/billing-with-negative/main.go
 	go run docs/assets/examples/certificate/main.go
 	go run docs/assets/examples/customsize/main.go
+	go run docs/assets/examples/datamatrixgrid/v1/main.go
+	# header
+	go run docs/assets/examples/imagegrid/v1/main.go
+	go run docs/assets/examples/maxgridsum/v1/main.go
+	go run docs/assets/examples/qrgrid/v1/main.go
 	go run docs/assets/examples/sample1/main.go
-	go run docs/assets/examples/zpl/main.go
+	go run docs/assets/examples/signaturegrid/v1/main.go
+	go run docs/assets/examples/textgrid/v1/main.go
 	go run docs/assets/examples/utfsample/main.go
+	go run docs/assets/examples/zpl/main.go
 
 .PHONY: v2
-v2:
+v2: font
 	go run docs/assets/examples/barcodegrid/v2/main.go
-	go run docs/assets/examples/imagegrid/v2/main.go
+	# billing
+	# billing negative
+	# certificate
+	# custom size
 	go run docs/assets/examples/datamatrixgrid/v2/main.go
-	go run docs/assets/examples/qrgrid/v2/main.go
-	go run docs/assets/examples/textgrid/v2/main.go
+	# header
+	go run docs/assets/examples/imagegrid/v2/main.go
 	go run docs/assets/examples/maxgridsum/v2/main.go
+	go run docs/assets/examples/qrgrid/v2/main.go
+	# sample 1
+	go run docs/assets/examples/signaturegrid/v2/main.go
+	go run docs/assets/examples/textgrid/v2/main.go
+	# utf8
+	# zpl
