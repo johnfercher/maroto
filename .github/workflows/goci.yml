@@ -24,7 +24,7 @@ jobs:
           go-version: '1.21.1'
 
       - name: Build
-        run: go build $(shell go list -f '{{ .Dir }}' ./... | grep -E -v 'docs|cmd')
+        run: go build $(go list -f '{{ .Dir }}' ./... | grep -E -v 'docs|cmd')
 
       - name: Test
-        run: go test -v $(shell go list -f '{{ .Dir }}' ./... | grep -E -v 'docs|cmd')
+        run: go test -v $(go list -f '{{ .Dir }}' ./... | grep -E -v 'docs|cmd')
