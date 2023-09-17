@@ -6,6 +6,7 @@ type Maroto struct {
 	ProviderType provider.Type
 	Dimensions   *Dimensions
 	Margins      *Margins
+	Font         *Font
 	Workers      int
 	Debug        bool
 	MaxGridSize  int

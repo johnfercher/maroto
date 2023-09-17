@@ -62,12 +62,12 @@ func (t *text) SetConfig(config *config.Maroto) {
 	t.config = config
 }
 
-func (t *text) Render(provider domain.Provider, cell internal.Cell) {
-	t.render(provider, cell)
-}
-
 func (t *text) GetValue() string {
 	return t.value
+}
+
+func (t *text) Render(provider domain.Provider, cell internal.Cell) {
+	t.render(provider, cell)
 }
 
 func (t *text) render(provider domain.Provider, cell internal.Cell) {
