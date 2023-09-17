@@ -76,9 +76,10 @@ func (m *maroto) AddRows(rows ...domain.Row) {
 	m.addRows(rows...)
 }
 
-func (m *maroto) AddRow(rowHeight float64, cols ...domain.Col) {
+func (m *maroto) AddRow(rowHeight float64, cols ...domain.Col) domain.Row {
 	r := row.New(rowHeight).Add(cols...)
 	m.addRow(r)
+	return r
 }
 
 func (m *maroto) RegisterHeader(rows ...domain.Row) error {

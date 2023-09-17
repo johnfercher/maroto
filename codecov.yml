@@ -5,8 +5,6 @@ coverage:
 
 ignore:
   - ".idea"
-  - "internal/assets"
-  - "internal/examples"
   - "internal/mocks"
   - "docs"
   - "vendor"

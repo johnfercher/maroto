@@ -12,7 +12,7 @@ type Maroto interface {
 	RegisterHeader(rows ...Row) error
 	RegisterFooter(rows ...Row) error
 	AddRows(rows ...Row)
-	AddRow(rowHeight float64, cols ...Col)
+	AddRow(rowHeight float64, cols ...Col) Row
 	ForceAddPage(pages ...Page)
 	GetStructure() *tree.Node[Structure]
 	Generate() (Document, error)

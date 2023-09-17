@@ -54,12 +54,14 @@ func (m *metricsDecorator) AddRows(rows ...domain.Row) {
 	m.addRowTime = append(m.addRowTime, timeSpent)
 }
 
-func (m *metricsDecorator) AddRow(rowHeight float64, cols ...domain.Col) {
+func (m *metricsDecorator) AddRow(rowHeight float64, cols ...domain.Col) domain.Row {
+	var r domain.Row
 	timeSpent := m.getTimeSpent(func() {
-		m.inner.AddRow(rowHeight, cols...)
+		r = m.inner.AddRow(rowHeight, cols...)
 	})
 
 	m.addColTime = append(m.addColTime, timeSpent)
+	return r
 }
 
 func (m *metricsDecorator) RegisterHeader(rows ...domain.Row) error {
