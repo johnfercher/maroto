@@ -8,3 +8,4 @@ ignore:
   - "mocks"
   - "docs"
   - "cmd"
+  - "internal/fpdf"
