@@ -194,8 +194,7 @@ func (_c *Document_Save_Call) RunAndReturn(run func(string) error) *Document_Sav
 func NewDocument(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Document {
+}) *Document {
 	mock := &Document{}
 	mock.Mock.Test(t)
 

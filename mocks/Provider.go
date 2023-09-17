@@ -557,8 +557,7 @@ func (_c *Provider_SetCache_Call) RunAndReturn(run func(cache.Cache)) *Provider_
 func NewProvider(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Provider {
+}) *Provider {
 	mock := &Provider{}
 	mock.Mock.Test(t)
 

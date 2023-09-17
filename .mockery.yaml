@@ -3,6 +3,7 @@ dir: "mocks/"
 outpkg: "mocks"
 filename: "{{.InterfaceName}}.go"
 mockname: "{{.InterfaceName}}"
+with-expecter: True
 packages:
   github.com/johnfercher/maroto/internal:
     config:

@@ -7,10 +7,14 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithDebug(true).
+		WithMargins(&config.Margins{
+			Left:  10,
+			Right: 10,
+			Top:   10,
+		}).
 		Build()
 
-	m := v2.NewMaroto(cfg)
+	_ = v2.NewMaroto(cfg)
 
 	// Generate
 }

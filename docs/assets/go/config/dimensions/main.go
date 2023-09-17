@@ -7,10 +7,13 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithPageSize(config.A4).
+		WithDimensions(&config.Dimensions{
+			Width:  200,
+			Height: 200,
+		}).
 		Build()
 
-	m := v2.NewMaroto(cfg)
+	_ = v2.NewMaroto(cfg)
 
 	// Generate
 }

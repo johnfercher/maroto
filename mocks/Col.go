@@ -286,8 +286,7 @@ func (_c *Col_WithStyle_Call) RunAndReturn(run func(*props.Style) domain.Col) *C
 func NewCol(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Col {
+}) *Col {
 	mock := &Col{}
 	mock.Mock.Test(t)
 

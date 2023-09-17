@@ -384,8 +384,7 @@ func (_c *MarotoV2_RegisterHeader_Call) RunAndReturn(run func(...domain.Row) err
 func NewMarotoV2(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *MarotoV2 {
+}) *MarotoV2 {
 	mock := &MarotoV2{}
 	mock.Mock.Test(t)
 

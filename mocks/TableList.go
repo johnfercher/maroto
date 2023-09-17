@@ -110,8 +110,7 @@ func (_c *TableList_Create_Call) RunAndReturn(run func([]string, [][]string, str
 func NewTableList(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *TableList {
+}) *TableList {
 	mock := &TableList{}
 	mock.Mock.Test(t)
 

@@ -210,8 +210,7 @@ func (_c *Math_GetRectNonCenterColProperties_Call) RunAndReturn(run func(float64
 func NewMath(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Math {
+}) *Math {
 	mock := &Math{}
 	mock.Mock.Test(t)
 
