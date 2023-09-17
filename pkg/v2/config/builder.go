@@ -29,10 +29,9 @@ func NewBuilder() Builder {
 	return &builder{
 		providerType: provider.Gofpdf,
 		margins: &Margins{
-			Left:   MinLeftMargin,
-			Right:  MinRightMargin,
-			Top:    MinTopMargin,
-			Bottom: MinBottomMargin,
+			Left:  MinLeftMargin,
+			Right: MinRightMargin,
+			Top:   MinTopMargin,
 		},
 		maxGridSize: 12,
 	}
@@ -80,10 +79,6 @@ func (b *builder) WithMargins(margins *Margins) Builder {
 
 	if margins.Top < MinTopMargin {
 		margins.Top = MinTopMargin
-	}
-
-	if margins.Bottom < MinBottomMargin {
-		margins.Bottom = MinBottomMargin
 	}
 
 	b.margins = margins

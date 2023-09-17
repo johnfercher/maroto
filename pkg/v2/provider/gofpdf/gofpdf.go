@@ -23,17 +23,18 @@ type gofpdfProvider struct {
 	imageCache cache.Cache
 }
 
-func New(maroto *config.Maroto, options ...providers.ProviderOption) domain.Provider {
+func New(cfg *config.Maroto, options ...providers.ProviderOption) domain.Provider {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",
 		UnitStr:        "mm",
 		FontDirStr:     "",
 		Size: gofpdf.SizeType{
-			Wd: maroto.Dimensions.Width,
-			Ht: maroto.Dimensions.Height,
+			Wd: cfg.Dimensions.Width,
+			Ht: cfg.Dimensions.Height,
 		},
 	})
 
+	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)
 	fpdf.SetFont("Arial", "B", 16)
 	fpdf.AddPage()
 

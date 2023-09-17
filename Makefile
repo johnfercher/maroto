@@ -46,6 +46,7 @@ v1: font
 	go run docs/assets/examples/footer/v1/main.go
 	go run docs/assets/examples/header/v1/main.go
 	go run docs/assets/examples/imagegrid/v1/main.go
+	go run docs/assets/examples/margins/v1/main.go
 	go run docs/assets/examples/maxgridsum/v1/main.go
 	go run docs/assets/examples/qrgrid/v1/main.go
 	go run docs/assets/examples/sample1/main.go
@@ -65,6 +66,7 @@ v2: font
 	go run docs/assets/examples/footer/v2/main.go
 	go run docs/assets/examples/header/v2/main.go
 	go run docs/assets/examples/imagegrid/v2/main.go
+	go run docs/assets/examples/margins/v2/main.go
 	go run docs/assets/examples/maxgridsum/v2/main.go
 	go run docs/assets/examples/qrgrid/v2/main.go
 	# sample 1

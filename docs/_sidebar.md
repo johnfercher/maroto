@@ -10,6 +10,7 @@
     * [Footer](v2/examples/footer.md?id=footer)
     * [Header](v2/examples/header.md?id=header)
     * [Images](v2/examples/image.md?id=image)
+    * [Margins](v2/examples/margins.md?id=custom-margins)
     * [Max Grid Sum](v2/examples/maxgridsum.md?id=max-grid-sum)
     * [QR Code](v2/examples/qrcode.md?id=qrcode)
     * [Signature](v2/examples/signature.md?id=signature)
