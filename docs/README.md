@@ -27,6 +27,14 @@ You can learn more about maroto`v2`following these topics:
    - [Alpha/Beta versions](https://go.dev/doc/modules/version-numbers) will be released as we achieve small deliverables.
    - Initially, the project will focus on defining a design that enables us to accomplish all objectives. Subsequently, we will begin incorporating all features from the old version, and finally, we will introduce the new features.
 
+## Code Example
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/cmd/main.go ':include :type=code')
+
+## PDF Generated
+```pdf
+	assets/pdf/v2.pdf
+```
+
 ## Conventions
 
 The way maroto`v2`works is similar to the old version. The concept of components still exists, but now they are more 
@@ -90,13 +98,6 @@ containing **all components supported** by maroto`v2`.
 The pages are merged using [pdfcpu][pdfcpu]. For a complete example, please refer to
 [this link](v2/configbuilder.md?id=parallelism).
 
-## Code Example
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/cmd/main.go ':include :type=code')
-
-## PDF Generated
-```pdf
-	assets/pdf/v2.pdf
-```
 
 [gofpdf]: https://github.com/jung-kurt/gofpdf
 [pdfcpu]: https://github.com/pdfcpu/pdfcpu
