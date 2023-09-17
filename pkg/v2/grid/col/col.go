@@ -19,18 +19,12 @@ type col struct {
 	style         *props.Style
 }
 
-func New(size int) domain.Col {
-	return &col{
-		size:  size,
-		isMax: size == 0,
+func New(size ...int) domain.Col {
+	if len(size) == 0 {
+		return &col{isMax: true}
 	}
-}
 
-func Empty(size int) domain.Col {
-	return &col{
-		size:  size,
-		isMax: size == 0,
-	}
+	return &col{size: size[0]}
 }
 
 func (c *col) Add(components ...domain.Component) domain.Col {
@@ -43,8 +37,12 @@ func (c *col) AddInner(rows ...domain.Row) domain.Col {
 	return c
 }
 
-func (c *col) GetSize() (int, bool) {
-	return c.size, c.isMax
+func (c *col) GetSize() int {
+	if c.isMax {
+		return c.config.MaxGridSize
+	}
+
+	return c.size
 }
 
 func (c *col) GetStructure() *tree.Node[domain.Structure] {

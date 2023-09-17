@@ -36,7 +36,7 @@ func NewBarCol(size int, code string, ps ...props.Barcode) domain.Col {
 
 func NewBarRow(height float64, code string, ps ...props.Barcode) domain.Row {
 	bar := NewBar(code, ps...)
-	c := col.New(0).Add(bar)
+	c := col.New().Add(bar)
 	return row.New(height).Add(c)
 }
 
