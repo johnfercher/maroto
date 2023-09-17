@@ -16,10 +16,10 @@ type metricsDecorator struct {
 	footerTime    *metrics.Time
 	generateTime  *metrics.Time
 	structureTime *metrics.Time
-	inner         domain.Maroto
+	inner         domain.MarotoV2
 }
 
-func NewMetricsDecorator(inner domain.Maroto) domain.Maroto {
+func NewMetricsDecorator(inner domain.MarotoV2) domain.MarotoV2 {
 	return &metricsDecorator{
 		inner: inner,
 	}

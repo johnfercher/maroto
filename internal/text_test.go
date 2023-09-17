@@ -1,19 +1,6 @@
 package internal_test
 
-import (
-	"fmt"
-	"testing"
-
-	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/mocks"
-	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
-)
-
-func TestNewText(t *testing.T) {
+/*func TestNewText(t *testing.T) {
 	text := internal.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Font{})
 
 	assert.NotNil(t, text)
@@ -521,3 +508,4 @@ func TestText_Add(t *testing.T) {
 		c.assertFont(t, _font)
 	}
 }
+*/

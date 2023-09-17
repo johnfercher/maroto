@@ -70,7 +70,7 @@ func main() {
 				Align:  consts.Center,
 			}),
 		),
-		col.Empty(6),
+		col.New(6),
 	)
 
 	document, err := m.Generate()
@@ -140,7 +140,7 @@ func getPageHeader() domain.Row {
 			Center:  true,
 			Percent: 80,
 		}),
-		col.Empty(6),
+		col.New(6),
 		col.New(3).Add(
 			text.New("AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.", props.Text{
 				Size:        8,

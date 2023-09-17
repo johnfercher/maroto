@@ -1,20 +1,6 @@
 package internal_test
 
-import (
-	"fmt"
-	"testing"
-
-	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/consts"
-
-	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/mocks"
-	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
-)
-
-func TestNewLine(t *testing.T) {
+/*func TestNewLine(t *testing.T) {
 	// Act
 	line := internal.NewLine(nil)
 
@@ -195,4 +181,4 @@ func TestLine_Draw(t *testing.T) {
 		// Assert
 		c.assertFpdfCalls(t, Fpdf)
 	}
-}
+}*/

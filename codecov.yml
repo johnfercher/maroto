@@ -5,7 +5,7 @@ coverage:
 
 ignore:
   - ".idea"
-  - "internal/mocks"
+  - "mocks"
   - "docs"
-  - "vendor"
+  - "cmd"
   - "internal/fpdf"

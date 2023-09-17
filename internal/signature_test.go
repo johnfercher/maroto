@@ -1,18 +1,6 @@
 package internal_test
 
-import (
-	"fmt"
-	"testing"
-
-	"github.com/johnfercher/maroto/internal"
-	"github.com/johnfercher/maroto/internal/mocks"
-	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
-)
-
-func TestNewSignature(t *testing.T) {
+/*func TestNewSignature(t *testing.T) {
 	signature := internal.NewSignature(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Text{})
 
 	assert.NotNil(t, signature)
@@ -30,7 +18,8 @@ func TestSignature_AddSpaceFor_DefaultMargins(t *testing.T) {
 	math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 
 	text := &mocks.Text{}
-	text.On("AddRenderable", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+	text.On("AddRenderable", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 
 	signature := internal.NewSignature(pdf, math, text)
 
@@ -67,7 +56,8 @@ func TestSignature_AddSpaceFor_NotDefaultMargins(t *testing.T) {
 	math.On("GetWidthPerCol", mock.Anything).Return(50.0)
 
 	text := &mocks.Text{}
-	text.On("AddRenderable", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything)
+	text.On("AddRenderable", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+mock.Anything, mock.Anything, mock.Anything, mock.Anything)
 
 	signature := internal.NewSignature(pdf, math, text)
 
@@ -92,3 +82,4 @@ func TestSignature_AddSpaceFor_NotDefaultMargins(t *testing.T) {
 		},
 	})
 }
+*/

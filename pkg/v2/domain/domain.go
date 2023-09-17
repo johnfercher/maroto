@@ -8,7 +8,7 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/metrics"
 )
 
-type Maroto interface {
+type MarotoV2 interface {
 	RegisterHeader(rows ...Row) error
 	RegisterFooter(rows ...Row) error
 	AddRows(rows ...Row)

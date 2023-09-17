@@ -6,11 +6,10 @@ import (
 	"io"
 	"log"
 
-	"github.com/johnfercher/maroto/internal"
-
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/context"
@@ -44,7 +43,7 @@ type maroto struct {
 	pool async.Processor[[]domain.Page, []byte]
 }
 
-func NewMaroto(config ...*config.Maroto) domain.Maroto {
+func NewMaroto(config ...*config.Maroto) domain.MarotoV2 {
 	cache := cache.New()
 	cfg := getConfig(config...)
 	provider := getProvider(cache, cfg)
