@@ -4,6 +4,7 @@ run:
   skip-files:
     - cmd/*
     - docs/*
+    - mocks/*
 
 linters-settings:
   lll:
