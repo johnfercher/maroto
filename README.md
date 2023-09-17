@@ -18,6 +18,8 @@ always when a new page appear, in this case, a header may have many rows, lines 
 * You can see the full documentation [here](https://maroto.io/).
 * Discussions are being addressed in [this issue](https://github.com/johnfercher/maroto/issues/257).
 
+![result](docs/assets/images/result.png)
+
 ## Installation
 
 * With `go get`:
@@ -36,128 +38,10 @@ go get -u github.com/johnfercher/maroto/internal
 | `make lint`    | Check files                                       | `golangci-lint` and `goreportcard-cli`                       |
 | `make dod`     | (Definition of Done) Format files and check files | Same as`make build`, `make test`, `make fmt` and `make lint` | 
 | `make install` | Install all dependencies                          | `go`, `curl` and `git`                                       |
+| `make font`    | Extract font ut8 to use in development            | `tar`                                                         |
 | `make v1`      | Run all v1 examples                               | `go`                                                         |
 | `make v2`      | Run all v2 examples                               | `go`                                                         |
 
-### Example
-![result](docs/assets/images/result.png)
-
-### Code
-
-```go
-package main
-
-import (
-	"encoding/base64"
-	"fmt"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/code"
-	"github.com/johnfercher/maroto/pkg/v2/config"
-	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/grid/col"
-	"github.com/johnfercher/maroto/pkg/v2/grid/row"
-	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/provider"
-	"github.com/johnfercher/maroto/pkg/v2/signature"
-	"github.com/johnfercher/maroto/pkg/v2/text"
-	"log"
-	"os"
-)
-
-func main() {
-	pdf := buildMarotoPDF()
-	html := buildMarotoHTML()
-
-	gen(pdf)
-	gen(html)
-}
-
-func buildMarotoPDF() domain.MarotoMetrified {
-	m := v2.NewMaroto("v2.pdf")
-	return v2.NewMarotoMetrified(m)
-}
-
-func buildMarotoHTML() domain.MarotoMetrified {
-	builder := config.NewBuilder().
-		WithPageSize(config.A4).
-		WithProvider(provider.HTML)
-
-	m := v2.NewMaroto("v2.html", builder)
-	return v2.NewMarotoMetrified(m)
-}
-
-func gen(m domain.MarotoMetrified) {
-	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
-	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
-	m.Add(buildCodesRow(), buildImagesRow(), buildTextsRow())
-
-	report, err := m.GenerateWithReport()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	report.Print()
-}
-
-func buildCodesRow() domain.Row {
-	r := row.New(70)
-
-	col1 := col.New(4)
-	col1.Add(code.NewBar("barcode"))
-
-	col2 := col.New(4)
-	col2.Add(code.NewQr("qrcode"))
-
-	col3 := col.New(4)
-	col3.Add(code.NewMatrix("matrixcode"))
-
-	r.Add(col1, col2, col3)
-	return r
-}
-
-func buildImagesRow() domain.Row {
-	row := row.New(70)
-
-	col1 := col.New(6)
-	col1.Add(image.NewFromFile("internal/assets/images/biplane.jpg"))
-
-	byteSlices, err := os.ReadFile("internal/assets/images/gopherbw.png")
-	if err != nil {
-		fmt.Println("Got error while opening file:", err)
-		os.Exit(1)
-	}
-	stringBase64 := base64.StdEncoding.EncodeToString(byteSlices)
-	col2 := col.New(6)
-	col2.Add(image.NewFromBase64(stringBase64, consts.Png))
-
-	row.Add(col1, col2)
-
-	return row
-}
-
-func buildTextsRow() domain.Row {
-	row := row.New(70)
-
-	colText := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
-	col1 := col.New(6)
-	col1.Add(text.New(colText, props.Text{
-		Align: consts.Center,
-	}))
-
-	col2 := col.New(6)
-	col2.Add(signature.New("Fulano de Tal", props.Font{
-		Style:  consts.Italic,
-		Size:   20,
-		Family: consts.Courier,
-	}))
-
-	row.Add(col1, col2)
-
-	return row
-}
-```
 
 ## Stargazers over time
 
