@@ -34,28 +34,8 @@ docs:
 font:
 	tar -xvf docs/assets/fonts/arial-unicode-ms.tgz
 
-.PHONY: v1
-v1: font
-	go run docs/assets/examples/barcodegrid/v1/main.go
-	go run docs/assets/examples/billing/main.go
-	go run docs/assets/examples/billing-with-negative/main.go
-	go run docs/assets/examples/certificate/main.go
-	go run docs/assets/examples/customsize/v1/main.go
-	go run docs/assets/examples/datamatrixgrid/v1/main.go
-	go run docs/assets/examples/footer/v1/main.go
-	go run docs/assets/examples/header/v1/main.go
-	go run docs/assets/examples/imagegrid/v1/main.go
-	go run docs/assets/examples/margins/v1/main.go
-	go run docs/assets/examples/maxgridsum/v1/main.go
-	go run docs/assets/examples/qrgrid/v1/main.go
-	go run docs/assets/examples/sample1/main.go
-	go run docs/assets/examples/signaturegrid/v1/main.go
-	go run docs/assets/examples/textgrid/v1/main.go
-	go run docs/assets/examples/utfsample/main.go
-	go run docs/assets/examples/zpl/main.go
-
-.PHONY: v2
-v2: font
+.PHONY: examples
+examples: font
 	go run docs/assets/examples/barcodegrid/v2/main.go
 	# billing
 	# billing negative
