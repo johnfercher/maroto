@@ -13,10 +13,12 @@ const (
 	Legal   PageSize = "legal"
 	Tabloid PageSize = "tabloid"
 
-	MinTopMargin    = 10.0
-	MinLeftMargin   = 10.0
-	MinRightMargin  = 10.0
-	MinBottomMargin = 20.0
+	MinTopMargin      = 10.0
+	MinLeftMargin     = 10.0
+	MinRightMargin    = 10.0
+	MinBottomMargin   = 20.0
+	DefaultFontSize   = 10.0
+	DefaultMaxGridSum = 12.0
 )
 
 func GetDimensions(pageSize PageSize) *Dimensions {

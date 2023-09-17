@@ -1,13 +1,14 @@
 package main
 
 import (
+	"log"
+
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
-	"github.com/johnfercher/maroto/pkg/v2"
+	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/signature"
-	"log"
 )
 
 func main() {

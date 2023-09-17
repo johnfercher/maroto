@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/pkg/color"
 	"os"
 	"time"
+
+	"github.com/johnfercher/maroto/pkg/color"
 
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"

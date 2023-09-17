@@ -3,10 +3,14 @@ package v2
 import (
 	"bytes"
 	"errors"
+	"io"
+	"log"
+
+	"github.com/johnfercher/maroto/internal"
+
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
-	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/context"
@@ -19,8 +23,6 @@ import (
 	"github.com/johnfercher/maroto/pkg/v2/provider/html"
 	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
-	"io"
-	"log"
 )
 
 type maroto struct {
@@ -169,12 +171,6 @@ func (m *maroto) addRow(r domain.Row) {
 	m.rows = append(m.rows, r)
 }
 
-func (m *maroto) addFooter() {
-	for _, r := range m.footer {
-		m.rows = append(m.rows, r)
-	}
-}
-
 func (m *maroto) fillPageToAddNew() {
 	space := m.cell.Height - m.currentHeight - m.footerHeight
 
@@ -183,10 +179,7 @@ func (m *maroto) fillPageToAddNew() {
 	spaceRow.Add(c)
 
 	m.rows = append(m.rows, spaceRow)
-
-	for _, r := range m.footer {
-		m.rows = append(m.rows, r)
-	}
+	m.rows = append(m.rows, m.footer...)
 
 	p := page.New()
 	p.SetNumber(len(m.pages))

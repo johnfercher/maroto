@@ -1,6 +1,8 @@
 package context
 
-import "github.com/johnfercher/maroto/internal"
+import (
+	"github.com/johnfercher/maroto/internal"
+)
 
 func NewRootContext(pageWidth, pageHeight float64, margins Margins) internal.Cell {
 	return internal.Cell{

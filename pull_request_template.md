@@ -13,6 +13,7 @@
 
 - [ ] All methods associated with structs has ```func (<first letter of struct> *struct) method() {}``` name style. <!-- If applied -->
 - [ ] Wrote unit tests for new/changed features. <!-- If applied -->
+- [ ] Followed the unit test ```when,should``` naming pattern. <!-- If applied -->
 - [ ] Updated docs/doc.go and docs/* <!-- If applied -->
 - [ ] Updated pkg/pdf/example_test.go <!-- If applied -->
 - [ ] Updated README.md <!-- If applied -->

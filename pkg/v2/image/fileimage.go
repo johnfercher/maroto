@@ -1,15 +1,17 @@
 package image
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"strings"
+
 	"github.com/johnfercher/maroto/internal"
+
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
-	"strings"
 )
 
 type fileImage struct {

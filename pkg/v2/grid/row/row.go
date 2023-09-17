@@ -2,8 +2,10 @@ package row
 
 import (
 	"fmt"
-	"github.com/johnfercher/go-tree/tree"
+
 	"github.com/johnfercher/maroto/internal"
+
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
@@ -83,7 +85,6 @@ func (r *row) Render(provider domain.Provider, cell internal.Cell) {
 	}
 
 	provider.CreateRow(cell.Height)
-	return
 }
 
 func (r *row) WithStyle(style *props.Style) domain.Row {

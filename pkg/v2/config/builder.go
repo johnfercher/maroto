@@ -35,9 +35,9 @@ func NewBuilder() Builder {
 			Right: MinRightMargin,
 			Top:   MinTopMargin,
 		},
-		maxGridSize: 12,
+		maxGridSize: DefaultMaxGridSum,
 		font: &Font{
-			Size:   10,
+			Size:   DefaultFontSize,
 			Family: consts.Arial,
 			Style:  consts.Normal,
 		},

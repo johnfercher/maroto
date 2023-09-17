@@ -16,3 +16,5 @@ go install ./cmd/goreportcard-cli
 cd ..
 sudo rm -R goreportcard
 sudo cp $GOPATH/bin/goreportcard-cli /usr/local/bin/
+
+go install github.com/vektra/mockery/v2@v2.33.3

@@ -2,11 +2,12 @@ package config_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/provider"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewBuilder(t *testing.T) {
@@ -52,7 +53,7 @@ func TestBuilder_WithDebug(t *testing.T) {
 }
 
 func TestBuilder_WithFont(t *testing.T) {
-	t.Run("when font is nil should not change the default value", func(t *testing.T) {
+	t.Run("when font is nil, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -65,7 +66,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		assert.Equal(t, consts.Normal, cfg.Font.Style)
 	})
 
-	t.Run("when family is filled should change the default value", func(t *testing.T) {
+	t.Run("when family is filled, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -80,7 +81,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		assert.Equal(t, consts.Normal, cfg.Font.Style)
 	})
 
-	t.Run("when style is filled should change the default value", func(t *testing.T) {
+	t.Run("when style is filled, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -95,7 +96,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		assert.Equal(t, consts.Bold, cfg.Font.Style)
 	})
 
-	t.Run("when size is filled should change the default value", func(t *testing.T) {
+	t.Run("when size is filled, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -112,7 +113,7 @@ func TestBuilder_WithFont(t *testing.T) {
 }
 
 func TestBuilder_WithPageSize(t *testing.T) {
-	t.Run("when page size is empty should not change the default value", func(t *testing.T) {
+	t.Run("when page size is empty, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -123,7 +124,7 @@ func TestBuilder_WithPageSize(t *testing.T) {
 		assert.Equal(t, 210.0, cfg.Dimensions.Width)
 		assert.Equal(t, 297.0, cfg.Dimensions.Height)
 	})
-	t.Run("when page size is filled should change the default value", func(t *testing.T) {
+	t.Run("when page size is filled, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -137,7 +138,7 @@ func TestBuilder_WithPageSize(t *testing.T) {
 }
 
 func TestBuilder_WithProvider(t *testing.T) {
-	t.Run("when provider is empty should not change the default value", func(t *testing.T) {
+	t.Run("when provider is empty, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -148,7 +149,7 @@ func TestBuilder_WithProvider(t *testing.T) {
 		assert.Equal(t, provider.Gofpdf, cfg.ProviderType)
 	})
 
-	t.Run("when provider is filled should change the default value", func(t *testing.T) {
+	t.Run("when provider is filled, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -161,7 +162,7 @@ func TestBuilder_WithProvider(t *testing.T) {
 }
 
 func TestBuilder_WithWorkerPoolSize(t *testing.T) {
-	t.Run("when worker pool size is invalid should not change the default value", func(t *testing.T) {
+	t.Run("when worker pool size is invalid, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -172,7 +173,7 @@ func TestBuilder_WithWorkerPoolSize(t *testing.T) {
 		assert.Equal(t, 0, cfg.Workers)
 	})
 
-	t.Run("when worker pool size is valid should change the default value", func(t *testing.T) {
+	t.Run("when worker pool size is valid, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -185,7 +186,7 @@ func TestBuilder_WithWorkerPoolSize(t *testing.T) {
 }
 
 func TestBuilder_WithDimensions(t *testing.T) {
-	t.Run("when dimensions is nil should not change the default value", func(t *testing.T) {
+	t.Run("when dimensions is nil, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -197,7 +198,7 @@ func TestBuilder_WithDimensions(t *testing.T) {
 		assert.Equal(t, 297.0, cfg.Dimensions.Height)
 	})
 
-	t.Run("when dimensions has invalid width should not change the default value", func(t *testing.T) {
+	t.Run("when dimensions has invalid width, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -209,7 +210,7 @@ func TestBuilder_WithDimensions(t *testing.T) {
 		assert.Equal(t, 297.0, cfg.Dimensions.Height)
 	})
 
-	t.Run("when dimensions has invalid height should not change the default value", func(t *testing.T) {
+	t.Run("when dimensions has invalid height, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -221,7 +222,7 @@ func TestBuilder_WithDimensions(t *testing.T) {
 		assert.Equal(t, 297.0, cfg.Dimensions.Height)
 	})
 
-	t.Run("when dimensions has valid values should change the default value", func(t *testing.T) {
+	t.Run("when dimensions has valid values, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -247,7 +248,7 @@ func TestBuilder_WithDimensions(t *testing.T) {
 }
 
 func TestBuilder_WithMaxGridSize(t *testing.T) {
-	t.Run("when max grid size is invalid should not change the default value", func(t *testing.T) {
+	t.Run("when max grid size is invalid, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -258,7 +259,7 @@ func TestBuilder_WithMaxGridSize(t *testing.T) {
 		assert.Equal(t, 12, cfg.MaxGridSize)
 	})
 
-	t.Run("when max grid size is valid should change the default value", func(t *testing.T) {
+	t.Run("when max grid size is valid, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -271,7 +272,7 @@ func TestBuilder_WithMaxGridSize(t *testing.T) {
 }
 
 func TestBuilder_WithMargins(t *testing.T) {
-	t.Run("when margins is nil should not change the default value", func(t *testing.T) {
+	t.Run("when margins is nil, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -284,7 +285,7 @@ func TestBuilder_WithMargins(t *testing.T) {
 		assert.Equal(t, 10.0, cfg.Margins.Right)
 	})
 
-	t.Run("when margins has invalid left should not change the default value", func(t *testing.T) {
+	t.Run("when margins has invalid left, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -297,7 +298,7 @@ func TestBuilder_WithMargins(t *testing.T) {
 		assert.Equal(t, 10.0, cfg.Margins.Right)
 	})
 
-	t.Run("when margins has invalid right should not change the default value", func(t *testing.T) {
+	t.Run("when margins has invalid right, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -310,7 +311,7 @@ func TestBuilder_WithMargins(t *testing.T) {
 		assert.Equal(t, 10.0, cfg.Margins.Right)
 	})
 
-	t.Run("when margins has invalid top should not change the default value", func(t *testing.T) {
+	t.Run("when margins has invalid top, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -323,7 +324,7 @@ func TestBuilder_WithMargins(t *testing.T) {
 		assert.Equal(t, 10.0, cfg.Margins.Right)
 	})
 
-	t.Run("when dimensions has valid values should change the default value", func(t *testing.T) {
+	t.Run("when dimensions has valid values, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 

@@ -37,6 +37,8 @@ type font struct {
 
 // NewFont create a Font.
 func NewFont(pdf fpdf.Fpdf, size float64, family string, style consts.Style) *font {
+	pdf.SetFont(family, string(style), size)
+
 	return &font{
 		pdf:         pdf,
 		size:        size,
