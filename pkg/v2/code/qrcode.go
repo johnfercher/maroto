@@ -36,7 +36,7 @@ func NewQrCol(size int, code string, ps ...props.Rect) domain.Col {
 
 func NewQrRow(height float64, code string, ps ...props.Rect) domain.Row {
 	qrCode := NewQr(code, ps...)
-	c := col.New(0).Add(qrCode)
+	c := col.New().Add(qrCode)
 	return row.New(height).Add(c)
 }
 

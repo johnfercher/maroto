@@ -33,7 +33,7 @@ func main() {
 			Size:        12,
 			Extrapolate: true,
 		}),
-		col.Empty(4),
+		col.New(4),
 	)
 
 	document, err := m.Generate()

@@ -25,7 +25,7 @@ func New(height float64) domain.Row {
 
 func Empty(height float64) domain.Row {
 	r := New(height)
-	r.Add(col.Empty(12))
+	r.Add(col.New())
 	return r
 }
 
@@ -70,13 +70,10 @@ func (r *row) Render(provider domain.Provider, cell internal.Cell) {
 	}
 
 	for _, col := range r.cols {
-		size, isMax := col.GetSize()
+		size := col.GetSize()
 		parentWidth := cell.Width
 
 		percent := float64(size) / float64(r.config.MaxGridSize)
-		if isMax {
-			percent = 1
-		}
 
 		colDimension := parentWidth * percent
 		innerCell.Width = colDimension

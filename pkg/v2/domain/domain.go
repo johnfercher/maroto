@@ -39,7 +39,7 @@ type Col interface {
 	Node
 	Add(components ...Component) Col
 	AddInner(rows ...Row) Col
-	GetSize() (int, bool)
+	GetSize() int
 	WithStyle(style *props.Style) Col
 	Render(provider Provider, cell internal.Cell, createCell bool)
 }

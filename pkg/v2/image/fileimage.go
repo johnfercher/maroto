@@ -38,7 +38,7 @@ func NewFromFileCol(size int, path string, ps ...props.Rect) domain.Col {
 
 func NewFromFileRow(height float64, path string, ps ...props.Rect) domain.Row {
 	image := NewFromFile(path, ps...)
-	c := col.New(0).Add(image)
+	c := col.New().Add(image)
 	return row.New(height).Add(c)
 }
 
