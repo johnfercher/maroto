@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"bytes"
+
 	"github.com/johnfercher/maroto/internal"
 	"github.com/johnfercher/maroto/pkg/color"
 	"github.com/johnfercher/maroto/pkg/consts"
@@ -36,10 +37,9 @@ func New(cfg *config.Maroto, options ...providers.ProviderOption) domain.Provide
 	})
 
 	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)
-	fpdf.SetFont(cfg.Font.Family, string(cfg.Font.Style), cfg.Font.Size)
 	fpdf.AddPage()
 
-	font := internal.NewFont(fpdf, 2, consts.Arial, consts.Normal)
+	font := internal.NewFont(fpdf, cfg.Font.Size, cfg.Font.Family, cfg.Font.Style)
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
@@ -104,9 +104,16 @@ func (g *gofpdfProvider) AddImage(file string, cell internal.Cell, prop props.Re
 		textProp.MakeValid(consts.Arial)
 		g.fpdf.ClearError()
 		g.AddText("Failed to load image from file", cell, textProp)
+		return
 	}
 
-	g.image.AddFromBase64(img.Value, cell, prop, img.Extension)
+	err = g.image.AddFromBase64(img.Value, cell, prop, img.Extension)
+	if err != nil {
+		textProp := props.Text{}
+		textProp.MakeValid(consts.Arial)
+		g.fpdf.ClearError()
+		g.AddText("Failed to load image from file", cell, textProp)
+	}
 }
 
 func (g *gofpdfProvider) CreateRow(height float64) {

@@ -1,0 +1,10 @@
+with-expecter: True
+inpackage: True
+all: True
+packages:
+  github.com/johnfercher/maroto/internal:
+    config:
+      recursive: True
+  github.com/johnfercher/maroto/pkg/v2:
+    config:
+      recursive: True

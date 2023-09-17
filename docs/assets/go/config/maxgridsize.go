@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/pkg/v2"
+	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 )
 

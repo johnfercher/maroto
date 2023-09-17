@@ -5,9 +5,10 @@ import "fmt"
 type TimeScale string
 
 const (
-	Nano  TimeScale = "ns"
-	Micro TimeScale = "μs"
-	Milli TimeScale = "ms"
+	Thousand float64   = 1000
+	Nano     TimeScale = "ns"
+	Micro    TimeScale = "μs"
+	Milli    TimeScale = "ms"
 )
 
 type Time struct {
@@ -18,13 +19,13 @@ type Time struct {
 func (t *Time) Normalize() bool {
 	if t.Scale == Nano {
 		t.Scale = Micro
-		t.Value = t.Value / 1000.0
+		t.Value /= Thousand
 		return true
 	}
 
 	if t.Scale == Micro {
 		t.Scale = Milli
-		t.Value = t.Value / 1000.0
+		t.Value /= Thousand
 		return true
 	}
 
@@ -59,7 +60,7 @@ func (m *Metric) Normalize() {
 
 func hasGreaterThan1000(times []*Time) bool {
 	for _, time := range times {
-		if time.Value > 1000 {
+		if time.Value > Thousand {
 			return true
 		}
 	}

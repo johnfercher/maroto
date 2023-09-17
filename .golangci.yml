@@ -1,6 +1,9 @@
 run:
   timeout: 5m
   modules-download-mode: readonly
+  skip-files:
+    - cmd/*
+    - docs/*
 
 linters-settings:
   lll:
@@ -44,7 +47,6 @@ linters-settings:
       - unlambda
       - unslice
       - valSwap
-      - whyNoLint
       - wrapperFunc
 
 linters:

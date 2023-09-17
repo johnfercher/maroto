@@ -2,10 +2,11 @@ package test
 
 import (
 	"encoding/json"
+	"testing"
+
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 type Node struct {

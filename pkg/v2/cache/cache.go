@@ -2,9 +2,10 @@ package cache
 
 import (
 	"encoding/base64"
-	"github.com/johnfercher/maroto/pkg/consts"
 	"os"
 	"sync"
+
+	"github.com/johnfercher/maroto/pkg/consts"
 )
 
 type Cache interface {

@@ -2,12 +2,13 @@ package v2_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/pkg/v2"
+	"testing"
+
+	v2 "github.com/johnfercher/maroto/pkg/v2"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/grid/col"
 	"github.com/johnfercher/maroto/pkg/v2/grid/row"
 	"github.com/johnfercher/maroto/pkg/v2/text"
-	"testing"
 )
 
 type testParams struct {
@@ -37,7 +38,7 @@ func BenchmarkMarotoGenerateAsync(b *testing.B) {
 				for i := 0; i < param.pages; i++ {
 					maroto.AddRows(row.New(10).Add(col.New(12).Add(text.New("text"))))
 				}
-				maroto.Generate()
+				_, _ = maroto.Generate()
 			}
 		})
 	}

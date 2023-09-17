@@ -1,14 +1,14 @@
 package v2
 
 import (
+	"time"
+
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/pkg/v2/domain"
 	"github.com/johnfercher/maroto/pkg/v2/metrics"
-	"time"
 )
 
 type metricsDecorator struct {
-	label         string
 	addRowTime    []*metrics.Time
 	addColTime    []*metrics.Time
 	addPageTime   []*metrics.Time
@@ -97,7 +97,7 @@ func (m *metricsDecorator) getTimeSpent(closure func()) *metrics.Time {
 	start := time.Now()
 	closure()
 	return &metrics.Time{
-		Value: float64(time.Now().Sub(start).Nanoseconds()),
+		Value: float64(time.Since(start).Nanoseconds()),
 		Scale: metrics.Nano,
 	}
 }

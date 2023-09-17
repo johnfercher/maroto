@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/pkg/v2"
 	"log"
+
+	v2 "github.com/johnfercher/maroto/pkg/v2"
 )
 
 func main() {

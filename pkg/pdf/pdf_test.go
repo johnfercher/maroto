@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/johnfercher/maroto/internal"
+
 	"github.com/johnfercher/maroto/pkg/color"
 
 	"github.com/johnfercher/maroto/internal/mocks"

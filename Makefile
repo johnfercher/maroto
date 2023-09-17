@@ -75,3 +75,8 @@ v2: font
 	go run docs/assets/examples/textgrid/v2/main.go
 	# utf8
 	# zpl
+
+.PHONY: mock
+mock:
+	go generate ./internal
+	go generate ./internal/fpdf

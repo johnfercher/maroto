@@ -3,15 +3,25 @@ package html
 import (
 	"bytes"
 	"fmt"
-	"github.com/johnfercher/go-tree/tree"
+	"os"
+
 	"github.com/johnfercher/maroto/internal"
+
+	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/props"
 	"github.com/johnfercher/maroto/pkg/v2/cache"
 	"github.com/johnfercher/maroto/pkg/v2/config"
 	"github.com/johnfercher/maroto/pkg/v2/providers"
 	"github.com/yosssi/gohtml"
-	"os"
+)
+
+const (
+	BodyTag = "body"
+	DivTag  = "div"
+	SpanTag = "span"
+	RowTag  = "row"
+	ColTag  = "col"
 )
 
 type Div struct {
@@ -68,7 +78,7 @@ type html struct {
 
 func New(maroto *config.Maroto, options ...providers.ProviderOption) *html {
 	div := Div{
-		_type: "body",
+		_type: BodyTag,
 		dimensions: Dimensions{
 			Width:  maroto.Dimensions.Width,
 			Height: maroto.Dimensions.Height,
@@ -113,12 +123,12 @@ func (h *html) CreateCol(width, height float64, _ *config.Maroto, _ *props.Style
 	if rowsLength > h.currentRow {
 		row = h.rows[rowsLength-1]
 	} else {
-		div := h.div.Copy("div", "row")
+		div := h.div.Copy(DivTag, RowTag)
 		row = tree.NewNode(div)
 		h.rows = append(h.rows, row)
 	}
 
-	colDiv := row.GetData().Copy("div", "col")
+	colDiv := row.GetData().Copy(DivTag, ColTag)
 	colDiv.dimensions.Width = width
 	colDiv.dimensions.Height = height
 	colNode := tree.NewNode(colDiv)
@@ -139,7 +149,7 @@ func (h *html) AddText(text string, _ internal.Cell, _ props.Text) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
-	textDiv._type = "span"
+	textDiv._type = SpanTag
 	textDiv.content = text
 	textNode := tree.NewNode(textDiv)
 
@@ -150,7 +160,7 @@ func (h *html) AddSignature(text string, _ internal.Cell, _ props.Text) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
-	textDiv._type = "span"
+	textDiv._type = SpanTag
 	textDiv.content = text
 	textNode := tree.NewNode(textDiv)
 
@@ -161,7 +171,7 @@ func (h *html) AddMatrixCode(text string, _ internal.Cell, _ props.Rect) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
-	textDiv._type = "span"
+	textDiv._type = SpanTag
 	textDiv.content = text
 	textNode := tree.NewNode(textDiv)
 
@@ -172,7 +182,7 @@ func (h *html) AddQrCode(code string, _ internal.Cell, _ props.Rect) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
-	textDiv._type = "span"
+	textDiv._type = SpanTag
 	textDiv.content = code
 	textNode := tree.NewNode(textDiv)
 
@@ -183,7 +193,7 @@ func (h *html) AddBarCode(code string, _ internal.Cell, _ props.Barcode) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
-	textDiv._type = "span"
+	textDiv._type = SpanTag
 	textDiv.content = code
 	textNode := tree.NewNode(textDiv)
 
@@ -198,7 +208,7 @@ func (h *html) AddImage(value string, _ internal.Cell, _ props.Rect, extension c
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
-	textDiv._type = "span"
+	textDiv._type = SpanTag
 
 	image, err := h.imageCache.Load(value, extension)
 	if err != nil {
@@ -237,8 +247,8 @@ func (h *html) GenerateBytes() ([]byte, error) {
 	htmlTemplate := htmlTemplate()
 	content := h.getRows()
 	html := fmt.Sprintf(htmlTemplate, content)
-	var buf bytes.Buffer
-	buf = *bytes.NewBufferString(gohtml.Format(html))
+
+	buf := *bytes.NewBufferString(gohtml.Format(html))
 	return buf.Bytes(), nil
 }
 
@@ -251,7 +261,8 @@ func (h *html) getRows() string {
 	for _, row := range h.rows {
 		colContent := h.getCols(row)
 		div := row.GetData()
-		content += fmt.Sprintf("<%s title=\"%s\" style=\"position:relative; width: %0.fmm;\">%s</%s>", div._type, div.label, div.dimensions.Width, colContent, div._type)
+		content += fmt.Sprintf("<%s title=\"%s\" style=\"position:relative; "+
+			"width: %0.fmm;\">%s</%s>", div._type, div.label, div.dimensions.Width, colContent, div._type)
 	}
 	return content
 }
@@ -262,7 +273,9 @@ func (h *html) getCols(row *tree.Node[Div]) string {
 	for _, colNode := range colNodes {
 		col := colNode.GetData()
 		componentContent := h.getComponent(colNode)
-		content += fmt.Sprintf("<%s title=\"%s\" style=\"float: left; position:relative; border: solid black 1px; width: %0.fmm; height: %0.fmm;\">%s</%s>", col._type, col.label, col.dimensions.Width, col.dimensions.Height, componentContent, col._type)
+		content += fmt.Sprintf("<%s title=\"%s\" style=\"float: left; position:relative; "+
+			"border: solid black 1px; width: %0.fmm; height: %0.fmm;\">%s</%s>",
+			col._type, col.label, col.dimensions.Width, col.dimensions.Height, componentContent, col._type)
 	}
 
 	return content
