@@ -5,6 +5,7 @@
     * [Unit Testing](v2/tests.md?id=unit-testing)
   * **Examples**
     * [Barcode](v2/examples/barcode.md?id=barcode)
+    * [Cell Style](v2/examples/cellstyle.md?id=cell-style)
     * [Custom Size](v2/examples/customsize.md?id=custom-size)
     * [Data Matrix](v2/examples/datamatrix.md?id=data-matrix)
     * [Footer](v2/examples/footer.md?id=footer)
