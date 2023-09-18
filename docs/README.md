@@ -1,9 +1,12 @@
 # Maroto
 
-#### Maroto`v2.0.0-alpha.10`is here! Try out:
+#### Maroto`v2.0.0-alpha.11`is here! Try out:
+
+* See changelog [here](https://github.com/johnfercher/maroto/releases).
+* Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.10
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.11
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
