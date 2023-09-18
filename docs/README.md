@@ -1,9 +1,9 @@
 # Maroto
 
-#### Maroto`v2.0.0-alpha.9`is here! Try out:
+#### Maroto`v2.0.0-alpha.10`is here! Try out:
 
 ```bash
-go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.9
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.10
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
