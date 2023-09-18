@@ -1,8 +1,8 @@
 package providers
 
 import (
-	"github.com/johnfercher/v2/maroto/cache"
-	"github.com/johnfercher/v2/maroto/domain"
+	"github.com/johnfercher/maroto/v2/maroto/cache"
+	"github.com/johnfercher/maroto/v2/maroto/domain"
 )
 
 type ProviderOption func(p domain.Provider)

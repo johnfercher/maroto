@@ -2,11 +2,11 @@ package maroto_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/v2/maroto"
-	"github.com/johnfercher/v2/maroto/config"
-	"github.com/johnfercher/v2/maroto/grid/col"
-	"github.com/johnfercher/v2/maroto/grid/row"
-	"github.com/johnfercher/v2/maroto/text"
+	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/grid/col"
+	"github.com/johnfercher/maroto/v2/maroto/grid/row"
+	"github.com/johnfercher/maroto/v2/maroto/text"
 	"testing"
 )
 

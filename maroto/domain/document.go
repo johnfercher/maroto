@@ -2,7 +2,7 @@ package domain
 
 import (
 	"encoding/base64"
-	"github.com/johnfercher/v2/maroto/metrics"
+	"github.com/johnfercher/maroto/v2/maroto/metrics"
 	"os"
 )
 

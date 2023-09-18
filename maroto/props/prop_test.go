@@ -1,8 +1,8 @@
 package props_test
 
 import (
-	"github.com/johnfercher/v2/maroto/consts"
-	"github.com/johnfercher/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/props"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

@@ -2,14 +2,14 @@ package gofpdf
 
 import (
 	"bytes"
-	"github.com/johnfercher/v2/internal"
-	"github.com/johnfercher/v2/maroto/cache"
-	"github.com/johnfercher/v2/maroto/color"
-	"github.com/johnfercher/v2/maroto/config"
-	"github.com/johnfercher/v2/maroto/consts"
-	"github.com/johnfercher/v2/maroto/domain"
-	"github.com/johnfercher/v2/maroto/props"
-	"github.com/johnfercher/v2/maroto/providers"
+	"github.com/johnfercher/maroto/v2/internal"
+	"github.com/johnfercher/maroto/v2/maroto/cache"
+	"github.com/johnfercher/maroto/v2/maroto/color"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/domain"
+	"github.com/johnfercher/maroto/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/maroto/providers"
 
 	"github.com/jung-kurt/gofpdf"
 )

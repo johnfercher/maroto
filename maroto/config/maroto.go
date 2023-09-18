@@ -1,6 +1,6 @@
 package config
 
-import "github.com/johnfercher/v2/maroto/provider"
+import "github.com/johnfercher/maroto/v2/maroto/provider"
 
 type Maroto struct {
 	ProviderType provider.Type

@@ -1,8 +1,8 @@
 package config
 
 import (
-	"github.com/johnfercher/v2/maroto/consts"
-	"github.com/johnfercher/v2/maroto/provider"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/provider"
 )
 
 type builder struct {

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/johnfercher/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto"
 	"log"
 )
 

@@ -3,8 +3,8 @@ package internal
 import (
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/qr"
-	"github.com/johnfercher/v2/internal/fpdf"
-	"github.com/johnfercher/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/internal/fpdf"
+	"github.com/johnfercher/maroto/v2/maroto/props"
 	"github.com/jung-kurt/gofpdf/contrib/barcode"
 )
 

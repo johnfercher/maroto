@@ -2,7 +2,7 @@ package cache
 
 import (
 	"encoding/base64"
-	"github.com/johnfercher/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
 	"os"
 	"sync"
 )

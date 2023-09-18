@@ -2,7 +2,7 @@ package test
 
 import (
 	"encoding/json"
-	"github.com/johnfercher/v2/maroto/domain"
+	"github.com/johnfercher/maroto/v2/maroto/domain"
 	"testing"
 
 	"github.com/johnfercher/go-tree/tree"

@@ -2,8 +2,8 @@ package col_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/v2/maroto/config"
-	"github.com/johnfercher/v2/maroto/grid/col"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/grid/col"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

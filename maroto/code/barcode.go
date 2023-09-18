@@ -2,12 +2,12 @@ package code
 
 import (
 	"github.com/johnfercher/go-tree/tree"
-	"github.com/johnfercher/v2/internal"
-	"github.com/johnfercher/v2/maroto/config"
-	"github.com/johnfercher/v2/maroto/domain"
-	"github.com/johnfercher/v2/maroto/grid/col"
-	"github.com/johnfercher/v2/maroto/grid/row"
-	"github.com/johnfercher/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/internal"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/domain"
+	"github.com/johnfercher/maroto/v2/maroto/grid/col"
+	"github.com/johnfercher/maroto/v2/maroto/grid/row"
+	"github.com/johnfercher/maroto/v2/maroto/props"
 )
 
 type barcode struct {

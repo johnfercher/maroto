@@ -5,9 +5,9 @@ import (
 	"encoding/base64"
 	"errors"
 	"github.com/google/uuid"
-	"github.com/johnfercher/v2/internal/fpdf"
-	"github.com/johnfercher/v2/maroto/consts"
-	"github.com/johnfercher/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/internal/fpdf"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/props"
 	"github.com/jung-kurt/gofpdf"
 )
 

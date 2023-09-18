@@ -1,8 +1,8 @@
 package props
 
 import (
-	"github.com/johnfercher/v2/maroto/color"
-	"github.com/johnfercher/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/color"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
 )
 
 type Style struct {

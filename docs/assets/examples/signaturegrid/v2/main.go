@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/johnfercher/v2/maroto"
-	"github.com/johnfercher/v2/maroto/color"
-	"github.com/johnfercher/v2/maroto/config"
-	"github.com/johnfercher/v2/maroto/consts"
-	"github.com/johnfercher/v2/maroto/props"
-	"github.com/johnfercher/v2/maroto/signature"
+	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto/color"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/maroto/signature"
 	"log"
 )
 

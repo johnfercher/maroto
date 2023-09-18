@@ -1,4 +1,4 @@
-module github.com/johnfercher/v2
+module github.com/johnfercher/maroto/v2
 
 go 1.21.1
 

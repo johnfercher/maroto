@@ -2,8 +2,8 @@ package maroto
 
 import (
 	"github.com/johnfercher/go-tree/tree"
-	"github.com/johnfercher/v2/maroto/domain"
-	"github.com/johnfercher/v2/maroto/metrics"
+	"github.com/johnfercher/maroto/v2/maroto/domain"
+	"github.com/johnfercher/maroto/v2/maroto/metrics"
 	"time"
 )
 
