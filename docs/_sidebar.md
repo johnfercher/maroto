@@ -6,6 +6,7 @@
   * **Features**
     * [Barcode](v2/features/barcode.md?id=barcode)
     * [Cell Style](v2/features/cellstyle.md?id=cell-style)
+    * [Custom Font](v2/features/customfont.md?id=custom-font)
     * [Custom Size](v2/features/customsize.md?id=custom-size)
     * [Data Matrix](v2/features/datamatrix.md?id=data-matrix)
     * [Footer](v2/features/footer.md?id=footer)
