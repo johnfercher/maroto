@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	domain "github.com/johnfercher/maroto/pkg/v2/domain"
+	domain "github.com/johnfercher/maroto/v2/maroto/domain"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -58,7 +58,8 @@ func (_c *ProviderOption_Execute_Call) RunAndReturn(run func(domain.Provider)) *
 func NewProviderOption(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *ProviderOption {
+},
+) *ProviderOption {
 	mock := &ProviderOption{}
 	mock.Mock.Test(t)
 

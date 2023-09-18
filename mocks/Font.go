@@ -3,8 +3,8 @@
 package mocks
 
 import (
-	color "github.com/johnfercher/maroto/pkg/color"
-	consts "github.com/johnfercher/maroto/pkg/consts"
+	color "github.com/johnfercher/maroto/v2/maroto/color"
+	consts "github.com/johnfercher/maroto/v2/maroto/consts"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -457,7 +457,8 @@ func (_c *Font_SetStyle_Call) RunAndReturn(run func(consts.Style)) *Font_SetStyl
 func NewFont(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Font {
+},
+) *Font {
 	mock := &Font{}
 	mock.Mock.Test(t)
 

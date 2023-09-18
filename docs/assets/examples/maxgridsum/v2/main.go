@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
-	v2 "github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/config"
-	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/text"
+	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/domain"
+	"github.com/johnfercher/maroto/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/maroto/text"
 )
 
 func main() {
@@ -19,8 +19,8 @@ func main() {
 		WithMaxGridSize(gridSum).
 		Build()
 
-	maroto := v2.NewMaroto(cfg)
-	m := v2.NewMetricsDecorator(maroto)
+	mrt := maroto.NewMaroto(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	m.AddRows(text.NewRow(10, fmt.Sprintf("Table with %d Columns", gridSum), props.Text{Style: consts.Bold}))
 

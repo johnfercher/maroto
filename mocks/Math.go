@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	props "github.com/johnfercher/maroto/pkg/props"
+	props "github.com/johnfercher/maroto/v2/maroto/props"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -210,7 +210,8 @@ func (_c *Math_GetRectNonCenterColProperties_Call) RunAndReturn(run func(float64
 func NewMath(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Math {
+},
+) *Math {
 	mock := &Math{}
 	mock.Mock.Test(t)
 

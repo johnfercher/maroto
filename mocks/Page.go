@@ -3,10 +3,10 @@
 package mocks
 
 import (
-	config "github.com/johnfercher/maroto/pkg/v2/config"
-	domain "github.com/johnfercher/maroto/pkg/v2/domain"
+	config "github.com/johnfercher/maroto/v2/maroto/config"
+	domain "github.com/johnfercher/maroto/v2/maroto/domain"
 
-	internal "github.com/johnfercher/maroto/internal"
+	internal "github.com/johnfercher/maroto/v2/internal"
 
 	mock "github.com/stretchr/testify/mock"
 
@@ -272,7 +272,8 @@ func (_c *Page_SetNumber_Call) RunAndReturn(run func(int)) *Page_SetNumber_Call 
 func NewPage(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Page {
+},
+) *Page {
 	mock := &Page{}
 	mock.Mock.Test(t)
 

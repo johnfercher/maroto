@@ -3,8 +3,8 @@
 package mocks
 
 import (
-	consts "github.com/johnfercher/maroto/pkg/consts"
-	cache "github.com/johnfercher/maroto/pkg/v2/cache"
+	cache "github.com/johnfercher/maroto/v2/maroto/cache"
+	consts "github.com/johnfercher/maroto/v2/maroto/consts"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -82,7 +82,8 @@ func (_c *Cache_Load_Call) RunAndReturn(run func(string, consts.Extension) (*cac
 func NewCache(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Cache {
+},
+) *Cache {
 	mock := &Cache{}
 	mock.Mock.Test(t)
 

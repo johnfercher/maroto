@@ -3,10 +3,10 @@
 package mocks
 
 import (
-	config "github.com/johnfercher/maroto/pkg/v2/config"
-	domain "github.com/johnfercher/maroto/pkg/v2/domain"
+	config "github.com/johnfercher/maroto/v2/maroto/config"
+	domain "github.com/johnfercher/maroto/v2/maroto/domain"
 
-	internal "github.com/johnfercher/maroto/internal"
+	internal "github.com/johnfercher/maroto/v2/internal"
 
 	mock "github.com/stretchr/testify/mock"
 
@@ -141,7 +141,8 @@ func (_c *Component_SetConfig_Call) RunAndReturn(run func(*config.Maroto)) *Comp
 func NewComponent(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Component {
+},
+) *Component {
 	mock := &Component{}
 	mock.Mock.Test(t)
 

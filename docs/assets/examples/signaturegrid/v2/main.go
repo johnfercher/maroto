@@ -3,12 +3,12 @@ package main
 import (
 	"log"
 
-	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
-	v2 "github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/config"
-	"github.com/johnfercher/maroto/pkg/v2/signature"
+	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto/color"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/maroto/signature"
 )
 
 func main() {
@@ -16,8 +16,8 @@ func main() {
 		WithDebug(true).
 		Build()
 
-	maroto := v2.NewMaroto(cfg)
-	m := v2.NewMetricsDecorator(maroto)
+	mrt := maroto.NewMaroto(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	m.AddRow(40,
 		signature.NewCol(2, "Signature 1"),

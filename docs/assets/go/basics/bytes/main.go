@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"log"
 
-	v2 "github.com/johnfercher/maroto/pkg/v2"
+	"github.com/johnfercher/maroto/v2/maroto"
 )
 
 func main() {
-	m := v2.NewMaroto()
+	m := maroto.NewMaroto()
 
 	// Do things
 

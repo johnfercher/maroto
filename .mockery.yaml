@@ -5,12 +5,9 @@ filename: "{{.InterfaceName}}.go"
 mockname: "{{.InterfaceName}}"
 with-expecter: True
 packages:
-  github.com/johnfercher/maroto/internal:
+  github.com/johnfercher/maroto/v2/internal:
     config:
       recursive: True
-  github.com/johnfercher/maroto/pkg/v2:
-    config:
-      recursive: True
-  github.com/johnfercher/maroto/pkg/pdf:
+  github.com/johnfercher/maroto/v2/maroto:
     config:
       recursive: True

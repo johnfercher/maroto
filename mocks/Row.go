@@ -3,14 +3,14 @@
 package mocks
 
 import (
-	config "github.com/johnfercher/maroto/pkg/v2/config"
-	domain "github.com/johnfercher/maroto/pkg/v2/domain"
+	config "github.com/johnfercher/maroto/v2/maroto/config"
+	domain "github.com/johnfercher/maroto/v2/maroto/domain"
 
-	internal "github.com/johnfercher/maroto/internal"
+	internal "github.com/johnfercher/maroto/v2/internal"
 
 	mock "github.com/stretchr/testify/mock"
 
-	props "github.com/johnfercher/maroto/pkg/props"
+	props "github.com/johnfercher/maroto/v2/maroto/props"
 
 	tree "github.com/johnfercher/go-tree/tree"
 )
@@ -285,7 +285,8 @@ func (_c *Row_WithStyle_Call) RunAndReturn(run func(*props.Style) domain.Row) *R
 func NewRow(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Row {
+},
+) *Row {
 	mock := &Row{}
 	mock.Mock.Test(t)
 

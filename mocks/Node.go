@@ -3,8 +3,8 @@
 package mocks
 
 import (
-	config "github.com/johnfercher/maroto/pkg/v2/config"
-	domain "github.com/johnfercher/maroto/pkg/v2/domain"
+	config "github.com/johnfercher/maroto/v2/maroto/config"
+	domain "github.com/johnfercher/maroto/v2/maroto/domain"
 
 	mock "github.com/stretchr/testify/mock"
 
@@ -105,7 +105,8 @@ func (_c *Node_SetConfig_Call) RunAndReturn(run func(*config.Maroto)) *Node_SetC
 func NewNode(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Node {
+},
+) *Node {
 	mock := &Node{}
 	mock.Mock.Test(t)
 

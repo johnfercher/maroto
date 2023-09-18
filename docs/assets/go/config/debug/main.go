@@ -1,8 +1,8 @@
 package main
 
 import (
-	v2 "github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/config"
+	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto/config"
 )
 
 func main() {
@@ -10,7 +10,7 @@ func main() {
 		WithDebug(true).
 		Build()
 
-	_ = v2.NewMaroto(cfg)
+	_ = maroto.NewMaroto(cfg)
 
 	// Generate
 }

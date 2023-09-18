@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	metrics "github.com/johnfercher/maroto/pkg/v2/metrics"
+	metrics "github.com/johnfercher/maroto/v2/maroto/metrics"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -194,7 +194,8 @@ func (_c *Document_Save_Call) RunAndReturn(run func(string) error) *Document_Sav
 func NewDocument(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Document {
+},
+) *Document {
 	mock := &Document{}
 	mock.Mock.Test(t)
 
