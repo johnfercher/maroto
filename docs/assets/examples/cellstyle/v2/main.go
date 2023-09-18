@@ -24,7 +24,7 @@ func main() {
 	}
 
 	whiteText := props.Text{
-		Color: color.Color{255, 255, 255},
+		Color: &color.Color{255, 255, 255},
 		Style: consts.Bold,
 		Size:  12,
 		Align: consts.Center,

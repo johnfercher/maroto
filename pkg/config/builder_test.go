@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/pkg/props"
+
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/provider"
@@ -72,7 +74,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithFont(&config.Font{
+		cfg := sut.WithFont(&props.Font{
 			Family: "new family",
 		}).Build()
 
@@ -87,7 +89,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithFont(&config.Font{
+		cfg := sut.WithFont(&props.Font{
 			Style: consts.Bold,
 		}).Build()
 
@@ -102,7 +104,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithFont(&config.Font{
+		cfg := sut.WithFont(&props.Font{
 			Size: 13,
 		}).Build()
 

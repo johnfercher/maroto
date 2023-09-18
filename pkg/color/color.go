@@ -24,8 +24,8 @@ func (s *Color) IsWhite() bool {
 }
 
 // NewWhite return a Color with all components (red, green and blue) as 255.
-func NewWhite() Color {
-	return Color{
+func NewWhite() *Color {
+	return &Color{
 		Red:   maxRGB8Bytes,
 		Green: maxRGB8Bytes,
 		Blue:  maxRGB8Bytes,
@@ -33,8 +33,8 @@ func NewWhite() Color {
 }
 
 // NewBlack return a Color with all components (red, green and blue) as 0.
-func NewBlack() Color {
-	return Color{
+func NewBlack() *Color {
+	return &Color{
 		Red:   minRGB8Bytes,
 		Green: minRGB8Bytes,
 		Blue:  minRGB8Bytes,

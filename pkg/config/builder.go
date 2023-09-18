@@ -32,7 +32,6 @@ type Builder interface {
 }
 
 func NewBuilder() Builder {
-	defaultColor := color.NewBlack()
 	return &builder{
 		providerType: provider.Gofpdf,
 		margins: &Margins{
@@ -45,7 +44,7 @@ func NewBuilder() Builder {
 			Size:   DefaultFontSize,
 			Family: consts.Arial,
 			Style:  consts.Normal,
-			Color:  &defaultColor,
+			Color:  color.NewBlack(),
 		},
 	}
 }

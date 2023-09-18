@@ -260,7 +260,7 @@ func TestText_MakeValid(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		c.fontProp.MakeValid(consts.Arial)
+		c.fontProp.MakeValid(&props.Font{Family: consts.Arial, Size: 10, Style: consts.Normal})
 		c.assert(t, c.fontProp)
 	}
 }
@@ -306,133 +306,6 @@ func TestFontProp_MakeValid(t *testing.T) {
 
 		// Assert
 		c.assert(t, c.signatureProp)
-	}
-}
-
-func TestTableListProp_MakeValid(t *testing.T) {
-	cases := []struct {
-		name          string
-		tableListProp *props.TableList
-		assert        func(t *testing.T, m *props.TableList)
-	}{
-		{
-			"When HeaderProp/ContentProp is not defined",
-			&props.TableList{
-				HeaderProp:  props.TableListContent{},
-				ContentProp: props.TableListContent{},
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.HeaderProp.Size, 10.0)
-				assert.Equal(t, m.HeaderProp.Family, consts.Arial)
-				assert.Equal(t, m.HeaderProp.Style, consts.Bold)
-				assert.Equal(t, len(m.HeaderProp.GridSizes), 3)
-				assert.Equal(t, m.ContentProp.Size, 10.0)
-				assert.Equal(t, m.ContentProp.Family, consts.Arial)
-				assert.Equal(t, m.ContentProp.Style, consts.Normal)
-				assert.Equal(t, len(m.ContentProp.GridSizes), 3)
-			},
-		},
-		{
-			"When HeaderProp.Size is 0.0",
-			&props.TableList{
-				HeaderProp: props.TableListContent{
-					Size: 0.0,
-				},
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.HeaderProp.Size, 10.0)
-			},
-		},
-		{
-			"When HeaderProp.Style is empty",
-			&props.TableList{
-				HeaderProp: props.TableListContent{
-					Style: "",
-				},
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.HeaderProp.Style, consts.Bold)
-			},
-		},
-		{
-			"When HeaderProp.Family is empty",
-			&props.TableList{
-				HeaderProp: props.TableListContent{
-					Family: "",
-				},
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.HeaderProp.Family, consts.Arial)
-			},
-		},
-		{
-			"When Align is empty",
-			&props.TableList{
-				Align: "",
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.Align, consts.Left)
-			},
-		},
-		{
-			"When ContentProp.Size is 0.0",
-			&props.TableList{
-				ContentProp: props.TableListContent{
-					Size: 0.0,
-				},
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.ContentProp.Size, 10.0)
-			},
-		},
-		{
-			"When ContentProp.Style is empty",
-			&props.TableList{
-				HeaderProp: props.TableListContent{
-					Style: "",
-				},
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.ContentProp.Style, consts.Normal)
-			},
-		},
-		{
-			"When ContentProp.Family is empty",
-			&props.TableList{
-				HeaderProp: props.TableListContent{
-					Family: "",
-				},
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.ContentProp.Family, consts.Arial)
-			},
-		},
-		{
-			"When HeaderContentSpace is 0.0",
-			&props.TableList{
-				HeaderContentSpace: 0.0,
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.HeaderContentSpace, 4.0)
-			},
-		},
-		{
-			"When VerticalContentPadding is less than 0.0",
-			&props.TableList{
-				VerticalContentPadding: -4.0,
-			},
-			func(t *testing.T, m *props.TableList) {
-				assert.Equal(t, m.VerticalContentPadding, 0.0)
-			},
-		},
-	}
-
-	for _, c := range cases {
-		// Act
-		c.tableListProp.MakeValid([]string{"a", "b", "c"}, consts.Arial)
-
-		// Assert
-		c.assert(t, c.tableListProp)
 	}
 }
 

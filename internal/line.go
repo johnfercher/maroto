@@ -14,7 +14,7 @@ type Line interface {
 
 type line struct {
 	pdf              fpdf.Fpdf
-	defaultLineColor color.Color
+	defaultLineColor *color.Color
 }
 
 // NewLine create a Line Helper.

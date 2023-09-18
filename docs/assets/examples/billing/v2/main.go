@@ -49,7 +49,7 @@ func main() {
 			Align: consts.Center,
 			Color: color.NewWhite(),
 		}),
-	).WithStyle(&props.Style{BackgroundColor: &darkGrayColor})
+	).WithStyle(&props.Style{BackgroundColor: darkGrayColor})
 
 	m.AddRows(getTransactions()...)
 
@@ -107,7 +107,7 @@ func getTransactions() []domain.Row {
 		)
 		if i%2 == 0 {
 			gray := getGrayColor()
-			r.WithStyle(&props.Style{BackgroundColor: &gray})
+			r.WithStyle(&props.Style{BackgroundColor: gray})
 		}
 
 		contentsRow = append(contentsRow, r)
@@ -187,32 +187,32 @@ func getPageFooter() domain.Row {
 	)
 }
 
-func getDarkGrayColor() color.Color {
-	return color.Color{
+func getDarkGrayColor() *color.Color {
+	return &color.Color{
 		Red:   55,
 		Green: 55,
 		Blue:  55,
 	}
 }
 
-func getGrayColor() color.Color {
-	return color.Color{
+func getGrayColor() *color.Color {
+	return &color.Color{
 		Red:   200,
 		Green: 200,
 		Blue:  200,
 	}
 }
 
-func getBlueColor() color.Color {
-	return color.Color{
+func getBlueColor() *color.Color {
+	return &color.Color{
 		Red:   10,
 		Green: 10,
 		Blue:  150,
 	}
 }
 
-func getRedColor() color.Color {
-	return color.Color{
+func getRedColor() *color.Color {
+	return &color.Color{
 		Red:   150,
 		Green: 10,
 		Blue:  10,
