@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -8,7 +10,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/grid/row"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/text"
-	"log"
 )
 
 func main() {

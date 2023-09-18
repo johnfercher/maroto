@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg"
 	"log"
+
+	"github.com/johnfercher/maroto/v2/pkg"
 )
 
 func main() {
