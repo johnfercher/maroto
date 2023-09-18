@@ -1,14 +1,13 @@
 package main
 
 import (
+	"github.com/johnfercher/v2/maroto"
+	"github.com/johnfercher/v2/maroto/config"
+	"github.com/johnfercher/v2/maroto/grid/col"
+	"github.com/johnfercher/v2/maroto/image"
+	"github.com/johnfercher/v2/maroto/props"
+	"github.com/johnfercher/v2/maroto/text"
 	"log"
-
-	"github.com/johnfercher/maroto/v2/maroto"
-	"github.com/johnfercher/maroto/v2/maroto/config"
-	"github.com/johnfercher/maroto/v2/maroto/grid/col"
-	"github.com/johnfercher/maroto/v2/maroto/image"
-	"github.com/johnfercher/maroto/v2/maroto/props"
-	"github.com/johnfercher/maroto/v2/maroto/text"
 )
 
 func main() {

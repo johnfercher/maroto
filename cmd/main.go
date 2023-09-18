@@ -3,20 +3,20 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"github.com/johnfercher/v2/maroto"
+	"github.com/johnfercher/v2/maroto/code"
+	"github.com/johnfercher/v2/maroto/config"
+	"github.com/johnfercher/v2/maroto/consts"
+	"github.com/johnfercher/v2/maroto/domain"
+	"github.com/johnfercher/v2/maroto/grid/col"
+	"github.com/johnfercher/v2/maroto/grid/row"
+	"github.com/johnfercher/v2/maroto/image"
+	"github.com/johnfercher/v2/maroto/props"
+	"github.com/johnfercher/v2/maroto/signature"
+	"github.com/johnfercher/v2/maroto/text"
+
 	"log"
 	"os"
-
-	"github.com/johnfercher/maroto/v2/maroto"
-	"github.com/johnfercher/maroto/v2/maroto/code"
-	"github.com/johnfercher/maroto/v2/maroto/config"
-	"github.com/johnfercher/maroto/v2/maroto/consts"
-	"github.com/johnfercher/maroto/v2/maroto/domain"
-	"github.com/johnfercher/maroto/v2/maroto/grid/col"
-	"github.com/johnfercher/maroto/v2/maroto/grid/row"
-	"github.com/johnfercher/maroto/v2/maroto/image"
-	"github.com/johnfercher/maroto/v2/maroto/props"
-	"github.com/johnfercher/maroto/v2/maroto/signature"
-	"github.com/johnfercher/maroto/v2/maroto/text"
 )
 
 var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
