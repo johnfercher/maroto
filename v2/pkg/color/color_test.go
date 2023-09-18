@@ -1,7 +1,6 @@
 package color_test
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/color"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
