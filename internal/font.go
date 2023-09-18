@@ -2,8 +2,8 @@ package internal
 
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
-	"github.com/johnfercher/maroto/v2/maroto/color"
-	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/pkg/color"
+	"github.com/johnfercher/maroto/v2/pkg/consts"
 )
 
 const (

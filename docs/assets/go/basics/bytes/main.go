@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/pkg"
 	"log"
 )
 
 func main() {
-	m := maroto.NewMaroto()
+	m := pkg.NewMaroto()
 
 	// Do things
 

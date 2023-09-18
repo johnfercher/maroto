@@ -1,5 +1,5 @@
 /*
-Package docs is the documentation of maroto. Maroto is a package which
+Package docs is the documentation of pkg. Maroto is a package which
 provide a simple way to generate PDF documents. The project is inspired
 in Bootstrap and uses gofpdf. Simple and Fast
 
@@ -27,11 +27,11 @@ Maroto has only gofpdf dependency. All tests pass on Linux and Mac.
 
 To install the package on your system, run
 
-	go get github.com/johnfercher/maroto
+	go get github.com/johnfercher/pkg
 
 Later, to receive updates, run
 
-	go get -u -v github.com/johnfercher/maroto/...
+	go get -u -v github.com/johnfercher/pkg/...
 
 # Quick Start
 
@@ -50,7 +50,7 @@ The following Go Code generates a simple PDF file.
 			})
 		})
 
-		m.OutputFileAndClose("maroto.pdf")
+		m.OutputFileAndClose("pkg.pdf")
 
 See the functions in the maroto_test.go file (shown as examples in this
 documentation) for more advanced PDF examples.

@@ -4,7 +4,7 @@ import (
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/qr"
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
-	"github.com/johnfercher/maroto/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/jung-kurt/gofpdf/contrib/barcode"
 )
 

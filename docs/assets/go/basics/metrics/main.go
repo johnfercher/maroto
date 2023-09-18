@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/pkg"
 	"log"
 )
 
 func main() {
-	mrt := maroto.NewMaroto()
-	m := maroto.NewMetricsDecorator(mrt)
+	mrt := pkg.NewMaroto()
+	m := pkg.NewMetricsDecorator(mrt)
 
 	// AddRows things
 

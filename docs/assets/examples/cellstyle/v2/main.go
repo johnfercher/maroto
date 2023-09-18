@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/maroto"
-	"github.com/johnfercher/maroto/v2/maroto/color"
-	"github.com/johnfercher/maroto/v2/maroto/config"
-	"github.com/johnfercher/maroto/v2/maroto/consts"
-	"github.com/johnfercher/maroto/v2/maroto/grid/row"
-	"github.com/johnfercher/maroto/v2/maroto/props"
-	"github.com/johnfercher/maroto/v2/maroto/text"
+	"github.com/johnfercher/maroto/v2/pkg"
+	"github.com/johnfercher/maroto/v2/pkg/color"
+	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts"
+	"github.com/johnfercher/maroto/v2/pkg/grid/row"
+	"github.com/johnfercher/maroto/v2/pkg/props"
+	"github.com/johnfercher/maroto/v2/pkg/text"
 	"log"
 )
 
@@ -43,8 +43,8 @@ func main() {
 		Top:   2,
 	}
 
-	mrt := maroto.NewMaroto(cfg)
-	m := maroto.NewMetricsDecorator(mrt)
+	mrt := pkg.NewMaroto(cfg)
+	m := pkg.NewMetricsDecorator(mrt)
 
 	for i := 0; i < 15; i++ {
 		m.AddRows(

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/maroto"
-	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/pkg"
+	"github.com/johnfercher/maroto/v2/pkg/config"
 )
 
 func main() {
@@ -10,7 +10,7 @@ func main() {
 		WithPageSize(config.A4).
 		Build()
 
-	_ = maroto.NewMaroto(cfg)
+	_ = pkg.NewMaroto(cfg)
 
 	// Generate
 }
