@@ -7,7 +7,14 @@
 [![Lint](https://github.com/johnfercher/maroto/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/johnfercher/maroto/actions/workflows/golangci-lint.yml)
 [![Codecov](https://img.shields.io/codecov/c/github/johnfercher/maroto)](https://codecov.io/gh/johnfercher/maroto)
 
-## This branch `master` is closed for development. The version `v1.0.0` mark the end of maroto V1. Please refer to https://maroto.io/ to know more about `v2.0.0`.
+## The branch `master` is currently closed for development. The version `v1.0.0` mark the end of maroto V1. Please refer to https://maroto.io/ to know more about `v2.0.0`.
+
+### V2 Migration roadmap
+- [x] [V2 specifications and docs](https://maroto.io/#/README)
+- [X] [Initial V2 alpha release](https://github.com/johnfercher/maroto/releases/tag/v2.0.0-alpha.9)
+- [ ] Stable V2 release
+- [ ] Migrate current `master` branch to `v1` branch
+- [ ] Migrate `v2` branch to `master` branch
 
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
