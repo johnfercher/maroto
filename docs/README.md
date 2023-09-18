@@ -1,8 +1,10 @@
 # Maroto
 
-#### Maroto is about to gain a version`v2.0.0`! 
+#### Maroto`v2.0.0-alpha.9`is here! Try out:
 
-!> **Working in progress**
+```bash
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.9
+```
 
 The public API was completely redesigned with the aim of enhancing the 
 library in various aspects. The main objectives of`v2.0.0`are:
@@ -20,10 +22,10 @@ You can learn more about maroto`v2`following these topics:
 
 ## Migration
 
-1. We will no longer maintain the current version`v0.43.0`of maroto.
-   - The current project`v0.43.0`will be released as version`v1.0.0`through the main branch, marking the end of the old version.
+1. We will no longer maintain the current version`v1.0.0`of maroto.
+   - The last version`v0.43.0`was release as`v1.0.0`through the main branch, marking the end of the old version.
    - We will clearly communicate this transition in the README.md.
-2. We will initiate a new branch for version`v2.0.0`and start development.
+2. We started a new branch for version`v2.0.0`.
    - [Alpha/Beta versions](https://go.dev/doc/modules/version-numbers) will be released as we achieve small deliverables.
    - Initially, the project will focus on defining a design that enables us to accomplish all objectives. Subsequently, we will begin incorporating all features from the old version, and finally, we will introduce the new features.
 
@@ -37,7 +39,7 @@ You can learn more about maroto`v2`following these topics:
 
 ## Conventions
 
-The way maroto`v2`works is similar to the old version. The concept of components still exists, but now they are more 
+The way that maroto`v2`works is similar to the old version. The concept of components still exists, but now they are more 
 rigorously controlled by maroto, meaning that`v2`will be less tightly integrated with [gofpdf][gofpdf]. This constraint will 
 enable maroto`v2`to utilize other PDF providers, such as [pdfcpu][pdfcpu], in the future and even to generate other types 
 of documents.
@@ -70,7 +72,7 @@ feature within maroto, such as (Row, Col, Text, QRCode, Image, etc). With the ne
 improved, enabling maroto to reach a whole new level in this fresh new step.
 
 ### New Interfaces
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/pkg/v2/domain/domain.go ':include :type=code')
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/v2/pkg/domain/domain.go ':include :type=code')
 
 ## Unit Testing
 In maroto`v2`, it will be possible to write unit tests by analyzing the **components tree**. To facilitate the 

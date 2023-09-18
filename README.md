@@ -25,7 +25,7 @@ always when a new page appear, in this case, a header may have many rows, lines 
 * With `go get`:
 
 ```bash
-go get -u github.com/johnfercher/pkg/internal
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.9
 ```
 
 ## Contributing
@@ -41,6 +41,7 @@ go get -u github.com/johnfercher/pkg/internal
 | `make font`     | Extract font ut8 to use in development            | `tar`                                                         |
 | `make examples` | Run all examples                                  | `go`                                                          |
 | `make mock`     | Generate mocks                                    | `go` and `mockery`                                            |
+| `make docs`     | Run docs serve local                              | `docsify`                                                     |
 
 
 
