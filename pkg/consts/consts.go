@@ -78,6 +78,10 @@ const (
 	BoldItalic Style = "BI"
 )
 
+func (s Style) IsValid() bool {
+	return s == Normal || s == Italic || s == BoldItalic || s == Bold
+}
+
 // Extension is a representation of a Image extension.
 type Extension string
 

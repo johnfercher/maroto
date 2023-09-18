@@ -15,6 +15,17 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
+var defaultErrorColor = &props.Font{
+	Family: consts.Arial,
+	Style:  consts.Bold,
+	Size:   10,
+	Color: &color.Color{
+		Red:   255,
+		Green: 0,
+		Blue:  0,
+	},
+}
+
 type gofpdfProvider struct {
 	fpdf       *gofpdf.Fpdf
 	math       internal.Math
@@ -36,6 +47,10 @@ func New(cfg *config.Maroto, options ...providers.ProviderOption) domain.Provide
 			Ht: cfg.Dimensions.Height,
 		},
 	})
+
+	for _, font := range cfg.CustomFonts {
+		fpdf.AddUTF8Font(font.Family, string(font.Style), font.File)
+	}
 
 	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)
 	fpdf.AddPage()
@@ -92,7 +107,7 @@ func (g *gofpdfProvider) AddBarCode(code string, cell internal.Cell, prop props.
 	err := g.code.AddBar(code, cell, prop)
 	if err != nil {
 		textProp := props.Text{}
-		textProp.MakeValid(consts.Arial)
+		textProp.MakeValid(defaultErrorColor)
 		g.fpdf.ClearError()
 		g.AddText("Failed to render code", cell, textProp)
 	}
@@ -102,7 +117,7 @@ func (g *gofpdfProvider) AddImage(file string, cell internal.Cell, prop props.Re
 	img, err := g.imageCache.Load(file, extension)
 	if err != nil {
 		textProp := props.Text{}
-		textProp.MakeValid(consts.Arial)
+		textProp.MakeValid(defaultErrorColor)
 		g.fpdf.ClearError()
 		g.AddText("Failed to load image from file", cell, textProp)
 		return
@@ -111,7 +126,7 @@ func (g *gofpdfProvider) AddImage(file string, cell internal.Cell, prop props.Re
 	err = g.image.AddFromBase64(img.Value, cell, prop, img.Extension)
 	if err != nil {
 		textProp := props.Text{}
-		textProp.MakeValid(consts.Arial)
+		textProp.MakeValid(defaultErrorColor)
 		g.fpdf.ClearError()
 		g.AddText("Failed to load image from file", cell, textProp)
 	}

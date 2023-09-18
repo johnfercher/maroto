@@ -22,8 +22,8 @@ type Font interface {
 	GetSize() float64
 	GetFont() (string, consts.Style, float64)
 	GetScaleFactor() (scaleFactor float64)
-	SetColor(color color.Color)
-	GetColor() color.Color
+	SetColor(color *color.Color)
+	GetColor() *color.Color
 }
 
 type font struct {
@@ -32,7 +32,7 @@ type font struct {
 	family      string
 	style       consts.Style
 	scaleFactor float64
-	fontColor   color.Color
+	fontColor   *color.Color
 }
 
 // NewFont create a Font.
@@ -45,7 +45,7 @@ func NewFont(pdf fpdf.Fpdf, size float64, family string, style consts.Style) *fo
 		family:      family,
 		style:       style,
 		scaleFactor: gofpdfFontScale1 / gofpdfFontScale2, // Value defined inside gofpdf constructor,
-		fontColor:   color.Color{Red: 0, Green: 0, Blue: 0},
+		fontColor:   &color.Color{Red: 0, Green: 0, Blue: 0},
 	}
 }
 
@@ -103,11 +103,15 @@ func (s *font) GetScaleFactor() (scaleFactor float64) {
 	return s.scaleFactor
 }
 
-func (s *font) SetColor(color color.Color) {
+func (s *font) SetColor(color *color.Color) {
+	if color == nil {
+		return
+	}
+
 	s.fontColor = color
 	s.pdf.SetTextColor(color.Red, color.Green, color.Blue)
 }
 
-func (s *font) GetColor() color.Color {
+func (s *font) GetColor() *color.Color {
 	return s.fontColor
 }

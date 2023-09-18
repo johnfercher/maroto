@@ -5,7 +5,6 @@ import (
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/domain"
 	"github.com/johnfercher/maroto/v2/pkg/grid/col"
 	"github.com/johnfercher/maroto/v2/pkg/grid/row"
@@ -20,7 +19,7 @@ type text struct {
 
 func New(value string, ps ...props.Text) domain.Component {
 	textProp := props.Text{
-		Color: color.Color{
+		Color: &color.Color{
 			Red:   0,
 			Green: 0,
 			Blue:  0,
@@ -30,7 +29,6 @@ func New(value string, ps ...props.Text) domain.Component {
 	if len(ps) > 0 {
 		textProp = ps[0]
 	}
-	textProp.MakeValid(consts.Arial)
 
 	return &text{
 		value: value,
@@ -67,21 +65,6 @@ func (t *text) GetValue() string {
 }
 
 func (t *text) Render(provider domain.Provider, cell internal.Cell) {
-	t.render(provider, cell)
-}
-
-func (t *text) render(provider domain.Provider, cell internal.Cell) {
-	if t.prop.Top > cell.Height {
-		t.prop.Top = cell.Height
-	}
-
-	if t.prop.Left > cell.Width {
-		t.prop.Left = cell.Width
-	}
-
-	if t.prop.Right > cell.Width {
-		t.prop.Right = cell.Width
-	}
-
+	t.prop.MakeValid(t.config.Font)
 	provider.AddText(t.value, cell, t.prop)
 }

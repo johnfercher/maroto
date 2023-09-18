@@ -1,7 +1,9 @@
 package config
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/consts"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/provider"
 )
 
@@ -12,7 +14,8 @@ type builder struct {
 	workerPoolSize int
 	debug          bool
 	maxGridSize    int
-	font           *Font
+	font           *props.Font
+	customFonts    []*CustomFont
 }
 
 type Builder interface {
@@ -23,11 +26,13 @@ type Builder interface {
 	WithWorkerPoolSize(poolSize int) Builder
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
-	WithFont(font *Font) Builder
+	WithFont(font *props.Font) Builder
+	AddUTF8Font(customFont *CustomFont) Builder
 	Build() *Maroto
 }
 
 func NewBuilder() Builder {
+	defaultColor := color.NewBlack()
 	return &builder{
 		providerType: provider.Gofpdf,
 		margins: &Margins{
@@ -36,10 +41,11 @@ func NewBuilder() Builder {
 			Top:   MinTopMargin,
 		},
 		maxGridSize: DefaultMaxGridSum,
-		font: &Font{
+		font: &props.Font{
 			Size:   DefaultFontSize,
 			Family: consts.Arial,
 			Style:  consts.Normal,
+			Color:  &defaultColor,
 		},
 	}
 }
@@ -121,7 +127,7 @@ func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
 	return b
 }
 
-func (b *builder) WithFont(font *Font) Builder {
+func (b *builder) WithFont(font *props.Font) Builder {
 	if font == nil {
 		return b
 	}
@@ -138,6 +144,31 @@ func (b *builder) WithFont(font *Font) Builder {
 		b.font.Style = font.Style
 	}
 
+	if font.Color != nil {
+		b.font.Color = font.Color
+	}
+
+	return b
+}
+
+func (b *builder) AddUTF8Font(customFont *CustomFont) Builder {
+	if customFont == nil {
+		return b
+	}
+
+	if customFont.Family == "" {
+		return b
+	}
+
+	if !customFont.Style.IsValid() {
+		return b
+	}
+
+	if customFont.File == "" {
+		return b
+	}
+
+	b.customFonts = append(b.customFonts, customFont)
 	return b
 }
 
@@ -150,6 +181,7 @@ func (b *builder) Build() *Maroto {
 		Debug:        b.debug,
 		MaxGridSize:  b.maxGridSize,
 		Font:         b.font,
+		CustomFonts:  b.customFonts,
 	}
 }
 
