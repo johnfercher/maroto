@@ -3,6 +3,9 @@ package pkg
 import (
 	"bytes"
 	"errors"
+	"io"
+	"log"
+
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
@@ -19,8 +22,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/provider/html"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
-	"io"
-	"log"
 )
 
 type maroto struct {

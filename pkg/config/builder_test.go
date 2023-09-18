@@ -2,10 +2,11 @@ package config_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/provider"
-	"testing"
 
 	"github.com/stretchr/testify/assert"
 )

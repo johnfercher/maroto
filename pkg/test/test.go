@@ -2,8 +2,9 @@ package test
 
 import (
 	"encoding/json"
-	"github.com/johnfercher/maroto/v2/pkg/domain"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/domain"
 
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/stretchr/testify/assert"

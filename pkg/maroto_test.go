@@ -2,6 +2,8 @@ package pkg_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/code"
 	"github.com/johnfercher/maroto/v2/pkg/consts"
@@ -11,7 +13,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/signature"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 	"github.com/johnfercher/maroto/v2/pkg/text"
-	"testing"
 
 	"github.com/stretchr/testify/assert"
 )

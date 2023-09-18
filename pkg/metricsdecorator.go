@@ -1,10 +1,11 @@
 package pkg
 
 import (
+	"time"
+
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/pkg/domain"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
-	"time"
 )
 
 type metricsDecorator struct {

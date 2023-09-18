@@ -1,9 +1,10 @@
 package fpdf
 
 import (
-	"github.com/jung-kurt/gofpdf"
 	"io"
 	"time"
+
+	"github.com/jung-kurt/gofpdf"
 )
 
 // Fpdf is an extension of gofpdf interface which can expose more useful methods.

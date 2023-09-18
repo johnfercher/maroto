@@ -3,6 +3,9 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"log"
+	"os"
+
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/code"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -14,9 +17,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/signature"
 	"github.com/johnfercher/maroto/v2/pkg/text"
-
-	"log"
-	"os"
 )
 
 var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."

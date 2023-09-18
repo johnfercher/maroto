@@ -2,6 +2,7 @@ package row
 
 import (
 	"fmt"
+
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/domain"

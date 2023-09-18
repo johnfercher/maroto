@@ -2,6 +2,7 @@ package col
 
 import (
 	"fmt"
+
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/config"

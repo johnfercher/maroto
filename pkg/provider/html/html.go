@@ -3,6 +3,8 @@ package html
 import (
 	"bytes"
 	"fmt"
+	"os"
+
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
@@ -11,7 +13,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
 	"github.com/yosssi/gohtml"
-	"os"
 )
 
 const (

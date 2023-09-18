@@ -2,8 +2,9 @@ package domain
 
 import (
 	"encoding/base64"
-	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
 
 type document struct {
