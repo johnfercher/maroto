@@ -2,6 +2,7 @@ package pkg_test
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/code"
 	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/grid/col"
@@ -21,7 +22,7 @@ func TestNewDocument(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*pkg.pkg", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*pkg.maroto", fmt.Sprintf("%T", sut))
 }
 
 func TestDocument_GetStructure(t *testing.T) {
