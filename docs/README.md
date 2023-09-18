@@ -72,7 +72,7 @@ feature within maroto, such as (Row, Col, Text, QRCode, Image, etc). With the ne
 improved, enabling maroto to reach a whole new level in this fresh new step.
 
 ### New Interfaces
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/v2/pkg/domain/domain.go ':include :type=code')
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/pkg/domain/domain.go ':include :type=code')
 
 ## Unit Testing
 In maroto`v2`, it will be possible to write unit tests by analyzing the **components tree**. To facilitate the 

@@ -2,7 +2,7 @@
 
 ## Code
 
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/v2/pkg/maroto_test.go ':include :type=code')
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/pkg/maroto_test.go ':include :type=code')
 
 ## Component Tree JSON
 
