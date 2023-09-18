@@ -39,8 +39,8 @@ jobs:
           #           takes precedence over all other caching options.
           # skip-cache: true
 
-          # Optional: if set to true then the action don't cache or restore ~/go/pkg.
-          # skip-pkg-cache: true
+          # Optional: if set to true then the action don't cache or restore ~/go/maroto.
+          # skip-maroto-cache: true
 
           # Optional: if set to true then the action don't cache or restore ~/.cache/go-build.
           # skip-build-cache: true

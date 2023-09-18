@@ -3,17 +3,17 @@ package main
 import (
 	"log"
 
-	"github.com/johnfercher/maroto/pkg/color"
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
-	v2 "github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/code"
-	"github.com/johnfercher/maroto/pkg/v2/config"
-	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/grid/col"
-	"github.com/johnfercher/maroto/pkg/v2/grid/row"
-	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/text"
+	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto/code"
+	"github.com/johnfercher/maroto/v2/maroto/color"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/domain"
+	"github.com/johnfercher/maroto/v2/maroto/grid/col"
+	"github.com/johnfercher/maroto/v2/maroto/grid/row"
+	"github.com/johnfercher/maroto/v2/maroto/image"
+	"github.com/johnfercher/maroto/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/maroto/text"
 )
 
 func main() {
@@ -22,8 +22,8 @@ func main() {
 		Build()
 
 	darkGrayColor := getDarkGrayColor()
-	maroto := v2.NewMaroto(cfg)
-	m := v2.NewMetricsDecorator(maroto)
+	mrt := maroto.NewMaroto(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	err := m.RegisterHeader(getPageHeader())
 	if err != nil {

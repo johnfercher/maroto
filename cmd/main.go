@@ -6,17 +6,17 @@ import (
 	"log"
 	"os"
 
-	"github.com/johnfercher/maroto/pkg/consts"
-	"github.com/johnfercher/maroto/pkg/props"
-	v2 "github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/code"
-	"github.com/johnfercher/maroto/pkg/v2/config"
-	"github.com/johnfercher/maroto/pkg/v2/domain"
-	"github.com/johnfercher/maroto/pkg/v2/grid/col"
-	"github.com/johnfercher/maroto/pkg/v2/grid/row"
-	"github.com/johnfercher/maroto/pkg/v2/image"
-	"github.com/johnfercher/maroto/pkg/v2/signature"
-	"github.com/johnfercher/maroto/pkg/v2/text"
+	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto/code"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/consts"
+	"github.com/johnfercher/maroto/v2/maroto/domain"
+	"github.com/johnfercher/maroto/v2/maroto/grid/col"
+	"github.com/johnfercher/maroto/v2/maroto/grid/row"
+	"github.com/johnfercher/maroto/v2/maroto/image"
+	"github.com/johnfercher/maroto/v2/maroto/props"
+	"github.com/johnfercher/maroto/v2/maroto/signature"
+	"github.com/johnfercher/maroto/v2/maroto/text"
 )
 
 var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
@@ -25,8 +25,8 @@ func main() {
 	cfg := config.NewBuilder().
 		Build()
 
-	maroto := v2.NewMaroto(cfg)
-	m := v2.NewMetricsDecorator(maroto)
+	mrt := maroto.NewMaroto(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	err := m.RegisterHeader(buildHeader()...)
 	if err != nil {
@@ -121,7 +121,7 @@ func buildTextsRow() []domain.Row {
 func buildHeader() []domain.Row {
 	r1 := row.New(30).Add(
 		col.New(12).Add(
-			text.New("MarotoV2 V2", props.Text{
+			text.New("Maroto V2", props.Text{
 				Top:   5,
 				Size:  15,
 				Align: consts.Center,

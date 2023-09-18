@@ -3,10 +3,10 @@ package main
 import (
 	"log"
 
-	"github.com/johnfercher/maroto/pkg/props"
-	v2 "github.com/johnfercher/maroto/pkg/v2"
-	"github.com/johnfercher/maroto/pkg/v2/code"
-	"github.com/johnfercher/maroto/pkg/v2/config"
+	"github.com/johnfercher/maroto/v2/maroto"
+	"github.com/johnfercher/maroto/v2/maroto/code"
+	"github.com/johnfercher/maroto/v2/maroto/config"
+	"github.com/johnfercher/maroto/v2/maroto/props"
 )
 
 func main() {
@@ -14,8 +14,8 @@ func main() {
 		WithDebug(true).
 		Build()
 
-	maroto := v2.NewMaroto(cfg)
-	m := v2.NewMetricsDecorator(maroto)
+	mrt := maroto.NewMaroto(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	m.AddRow(40,
 		code.NewQrCol(2, "https://github.com/johnfercher/maroto", props.Rect{
