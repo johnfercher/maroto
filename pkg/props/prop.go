@@ -72,7 +72,7 @@ type Text struct {
 	// VerticalPadding define an additional space between lines.
 	VerticalPadding float64
 	// Color define the font color.
-	Color color.Color
+	Color *color.Color
 }
 
 // Line represents properties from a Line inside a cell.
@@ -94,59 +94,7 @@ type Font struct {
 	// Size of the text.
 	Size float64
 	// Color define the font color.
-	Color color.Color
-}
-
-// TableListContent represents properties from a line (header/content) from a TableList.
-type TableListContent struct {
-	// Family of the text, ex: consts.Arial, helvetica and etc.
-	Family string
-	// Style of the text, ex: consts.Normal, bold and etc.
-	Style consts.Style
-	// Size of the text.
-	Size float64
-	// Color define the font color.
-	Color color.Color
-	// GridSizes is the custom properties of the size of the grid
-	// the sum of the values cannot be greater than 12, if this
-	// value is not provided the width of all columns will be the
-	// same.
-	GridSizes []uint
-	// CellTextColorChangerFunc is a custom function that will be called
-	// before the cell is created and will change the text color
-	// following the logic inside the function
-	CellTextColorChangerFunc func(cellValue string) color.Color
-	// CellTextColorChangerColumnIndex will be used to only run the
-	// function ChangeCellTextColor when the column index matches the
-	// desired index
-	// Must start at 0
-	CellTextColorChangerColumnIndex int
-}
-
-// TableList represents properties from a TableList.
-type TableList struct {
-	// HeaderProp is the custom properties of the text inside
-	// the headers.
-	HeaderProp TableListContent
-	// ContentProp is the custom properties of the text inside
-	// the contents.
-	ContentProp TableListContent
-	// Align is the align of the text (header and content) inside the columns.
-	Align consts.Align
-	// AlternatedBackground define the background color from even rows
-	// i.e rows with index (0, 2, 4, ..., N) will have background colorized,
-	// rows with index (1, 3, 5, ..., N) will not.
-	AlternatedBackground *color.Color
-	// HeaderContentSpace is the space between the header and the contents.
-	HeaderContentSpace float64
-	// VerticalContentPadding define the space between lines in content.
-	VerticalContentPadding float64
-	// Line adds a line after every content-row to separate rows. The line's spaceHeight is set to 1.0.
-	Line bool
-	// LineProp is the custom properties of the line separating the rows
-	LineProp Line
-	// MaxGridSum of a TableList
-	MaxGridSum float64
+	Color *color.Color
 }
 
 // MakeValid from Rect will make the properties from a rectangle reliable to fit inside a cell
@@ -217,24 +165,28 @@ func (s *Barcode) MakeValid() {
 }
 
 // MakeValid from Text define default values for a Text.
-func (s *Text) MakeValid(defaultFamily string) {
+func (s *Text) MakeValid(font *Font) {
 	minValue := 0.0
 	undefinedValue := 0.0
 
 	if s.Family == "" {
-		s.Family = defaultFamily
+		s.Family = font.Family
 	}
 
 	if s.Style == "" {
-		s.Style = consts.Normal
+		s.Style = font.Style
+	}
+
+	if s.Size == undefinedValue {
+		s.Size = font.Size
+	}
+
+	if s.Color == nil {
+		s.Color = font.Color
 	}
 
 	if s.Align == "" {
 		s.Align = consts.Left
-	}
-
-	if s.Size == undefinedValue {
-		s.Size = 10.0
 	}
 
 	if s.Top < minValue {
@@ -284,89 +236,9 @@ func (s *Font) ToTextProp(align consts.Align, top float64, extrapolate bool, ver
 		Color:           s.Color,
 	}
 
-	textProp.MakeValid(s.Family)
+	textProp.MakeValid(s)
 
 	return textProp
-}
-
-// ToTextProp from Font return a TableListContent based on Font.
-func (s *TableListContent) ToTextProp(align consts.Align, top float64, extrapolate bool, verticalPadding float64) Text {
-	textProp := Text{
-		Family:          s.Family,
-		Style:           s.Style,
-		Size:            s.Size,
-		Align:           align,
-		Top:             top,
-		Extrapolate:     extrapolate,
-		VerticalPadding: verticalPadding,
-		Color:           s.Color,
-	}
-
-	textProp.MakeValid(s.Family)
-
-	return textProp
-}
-
-// MakeValid from TableList define default values for a TableList.
-func (s *TableList) MakeValid(header []string, defaultFamily string) {
-	zeroValue := 0.0
-	if s.HeaderProp.Size == zeroValue {
-		s.HeaderProp.Size = 10.0
-	}
-
-	if s.HeaderProp.Family == "" {
-		s.HeaderProp.Family = defaultFamily
-	}
-
-	if s.HeaderProp.Style == "" {
-		s.HeaderProp.Style = consts.Bold
-	}
-
-	if s.MaxGridSum < 0 {
-		s.MaxGridSum = consts.DefaultMaxGridSum
-	}
-
-	if len(s.HeaderProp.GridSizes) == 0 {
-		gridSize := uint(s.MaxGridSum / float64(len(header)))
-		s.HeaderProp.GridSizes = []uint{}
-
-		for range header {
-			s.HeaderProp.GridSizes = append(s.HeaderProp.GridSizes, gridSize)
-		}
-	}
-
-	if s.Align == "" {
-		s.Align = consts.Left
-	}
-
-	if s.ContentProp.Size == zeroValue {
-		s.ContentProp.Size = 10.0
-	}
-
-	if s.ContentProp.Family == "" {
-		s.ContentProp.Family = defaultFamily
-	}
-
-	if s.ContentProp.Style == "" {
-		s.ContentProp.Style = consts.Normal
-	}
-
-	if len(s.ContentProp.GridSizes) == 0 {
-		gridSize := uint(s.MaxGridSum / float64(len(header)))
-		s.ContentProp.GridSizes = []uint{}
-
-		for range header {
-			s.ContentProp.GridSizes = append(s.ContentProp.GridSizes, gridSize)
-		}
-	}
-
-	if s.HeaderContentSpace == zeroValue {
-		s.HeaderContentSpace = 4.0
-	}
-
-	if s.VerticalContentPadding < zeroValue {
-		s.VerticalContentPadding = zeroValue
-	}
 }
 
 // MakeValid from Line define default values for a Line.

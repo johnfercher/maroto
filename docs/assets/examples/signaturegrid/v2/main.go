@@ -28,7 +28,7 @@ func main() {
 	m.AddRow(40,
 		signature.NewCol(6, "Signature 4", props.Font{Style: consts.Italic}),
 		signature.NewCol(4, "Signature 5", props.Font{Size: 12}),
-		signature.NewCol(2, "Signature 6", props.Font{Color: color.Color{255, 0, 0}}),
+		signature.NewCol(2, "Signature 6", props.Font{Color: &color.Color{255, 0, 0}}),
 	)
 
 	document, err := m.Generate()

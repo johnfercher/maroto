@@ -35,7 +35,11 @@ func (m *metricsDecorator) Generate() (domain.Document, error) {
 	m.generateTime = timeSpent
 
 	report := m.buildMetrics().Normalize()
-	return domain.NewDocument(document.GetBytes(), report), err
+	if err != nil {
+		return nil, err
+	}
+
+	return domain.NewDocument(document.GetBytes(), report), nil
 }
 
 func (m *metricsDecorator) ForceAddPage(pages ...domain.Page) {

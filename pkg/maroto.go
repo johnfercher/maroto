@@ -62,6 +62,7 @@ func NewMaroto(config ...*config.Maroto) domain.Maroto {
 		imageCache: cache,
 		config:     cfg,
 	}
+
 	if cfg.Workers > 0 {
 		p := pool.NewPool(cfg.Workers, m.processPage)
 		m.pool = p
