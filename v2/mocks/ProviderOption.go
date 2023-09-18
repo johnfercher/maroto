@@ -58,8 +58,7 @@ func (_c *ProviderOption_Execute_Call) RunAndReturn(run func(domain.Provider)) *
 func NewProviderOption(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *ProviderOption {
+}) *ProviderOption {
 	mock := &ProviderOption{}
 	mock.Mock.Test(t)
 

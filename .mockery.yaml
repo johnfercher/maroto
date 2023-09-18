@@ -1,5 +1,5 @@
 all: True
-dir: "mocks/"
+dir: "v2/mocks/"
 outpkg: "mocks"
 filename: "{{.InterfaceName}}.go"
 mockname: "{{.InterfaceName}}"

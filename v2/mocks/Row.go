@@ -285,8 +285,7 @@ func (_c *Row_WithStyle_Call) RunAndReturn(run func(*props.Style) domain.Row) *R
 func NewRow(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Row {
+}) *Row {
 	mock := &Row{}
 	mock.Mock.Test(t)
 

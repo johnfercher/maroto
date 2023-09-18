@@ -4,8 +4,8 @@ run:
   skip-files:
     - cmd/*
     - docs/*
-    - mocks/*
-    - internal/fpdf/*
+    - v2/mocks/*
+    - v2/internal/fpdf/*
 
 linters-settings:
   lll:

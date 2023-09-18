@@ -118,8 +118,7 @@ func (_c *Image_AddFromFile_Call) RunAndReturn(run func(string, internal.Cell, p
 func NewImage(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Image {
+}) *Image {
 	mock := &Image{}
 	mock.Mock.Test(t)
 

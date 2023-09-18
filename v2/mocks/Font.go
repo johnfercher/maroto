@@ -457,8 +457,7 @@ func (_c *Font_SetStyle_Call) RunAndReturn(run func(consts.Style)) *Font_SetStyl
 func NewFont(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Font {
+}) *Font {
 	mock := &Font{}
 	mock.Mock.Test(t)
 
