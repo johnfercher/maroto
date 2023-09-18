@@ -7,6 +7,8 @@
 [![Lint](https://github.com/johnfercher/maroto/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/johnfercher/maroto/actions/workflows/golangci-lint.yml)
 [![Codecov](https://img.shields.io/codecov/c/github/johnfercher/maroto)](https://codecov.io/gh/johnfercher/maroto)
 
+## This branch `master` is closed for development. The version `v1.0.0` mark the end of maroto V1. Please refer to https://maroto.io/ to know more about `v2.0.0`.
+
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
@@ -15,8 +17,6 @@ You can write your PDFs like you are creating a site using Bootstrap. A Row may 
 Besides that, pages will be added when content may extrapolate the useful area. You can define a header which will be added
 always when a new page appear, in this case, a header may have many rows, lines or tablelist. 
 
-## Maroto V2
-### This branch `master` is closed for development. The version `v1.0.0` mark the end of maroto V1. Please refer to https://maroto.io/ to know more about the new version. 
 
 ## Installation
 
