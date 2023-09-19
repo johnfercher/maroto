@@ -22,9 +22,6 @@ library in various aspects. The main objectives of`v2.0.0`are:
 5. Allow recursive Row/Col; **(on roadmap)**
 6. Allow generation based on HTML/JSON; **(on roadmap)**
 
-You can learn more about maroto`v2`following these topics:
-* Discussions are being addressed in [this issue](https://github.com/johnfercher/maroto/issues/257).
-
 ## Migration
 
 1. We will no longer maintain the current version`v1.0.0`of maroto.
