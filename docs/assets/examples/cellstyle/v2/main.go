@@ -1,11 +1,12 @@
 package main
 
 import (
+	"log"
+	"math/rand"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"log"
-	"math/rand"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/color"

@@ -1,10 +1,11 @@
 package main
 
 import (
+	"log"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/color"
@@ -18,10 +19,10 @@ func main() {
 	customFontFile := "docs/assets/fonts/arial-unicode-ms.ttf"
 
 	cfg := config.NewBuilder().
-		AddUTF8Font(&config.CustomFont{Family: customFont, Style: fontstyle.Normal, File: customFontFile}).
-		AddUTF8Font(&config.CustomFont{Family: customFont, Style: fontstyle.Italic, File: customFontFile}).
-		AddUTF8Font(&config.CustomFont{Family: customFont, Style: fontstyle.Bold, File: customFontFile}).
-		AddUTF8Font(&config.CustomFont{Family: customFont, Style: fontstyle.BoldItalic, File: customFontFile}).
+		AddUTF8Font(customFont, fontstyle.Normal, customFontFile).
+		AddUTF8Font(customFont, fontstyle.Italic, customFontFile).
+		AddUTF8Font(customFont, fontstyle.Bold, customFontFile).
+		AddUTF8Font(customFont, fontstyle.BoldItalic, customFontFile).
 		WithFont(&props.Font{Family: customFont}).
 		Build()
 

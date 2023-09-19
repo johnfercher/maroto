@@ -1,11 +1,12 @@
 package props_test
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
-	"testing"
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
 

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/base64"
 	"errors"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 
 	"github.com/google/uuid"

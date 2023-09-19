@@ -2,8 +2,9 @@ package pkg_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/code"

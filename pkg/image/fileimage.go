@@ -1,6 +1,8 @@
 package image
 
 import (
+	"strings"
+
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
@@ -8,7 +10,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/grid/col"
 	"github.com/johnfercher/maroto/v2/pkg/grid/row"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"strings"
 
 	"github.com/johnfercher/go-tree/tree"
 )

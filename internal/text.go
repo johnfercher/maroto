@@ -1,9 +1,10 @@
 package internal
 
 import (
+	"strings"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
-	"strings"
 
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/props"

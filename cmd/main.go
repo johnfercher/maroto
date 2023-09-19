@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/consts/align"
-	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"log"
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/code"

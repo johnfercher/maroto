@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"log"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/config"

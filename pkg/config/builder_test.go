@@ -2,10 +2,11 @@ package config_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
-	"testing"
 
 	"github.com/johnfercher/maroto/v2/pkg/color"
 
@@ -379,23 +380,12 @@ func TestBuilder_WithMargins(t *testing.T) {
 }
 
 func TestBuilder_AddUTF8Font(t *testing.T) {
-	t.Run("when fontstyle is nil, should not add value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-
-		// Act
-		cfg := sut.AddUTF8Font(nil).Build()
-
-		// Assert
-		assert.Equal(t, 0, len(cfg.CustomFonts))
-	})
-
 	t.Run("when fontstyle family is empty, should not add value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.AddUTF8Font(&config.CustomFont{Style: fontstyle.Bold, File: "file"}).Build()
+		cfg := sut.AddUTF8Font("", fontstyle.Bold, "file").Build()
 
 		// Assert
 		assert.Equal(t, 0, len(cfg.CustomFonts))
@@ -406,7 +396,7 @@ func TestBuilder_AddUTF8Font(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.AddUTF8Font(&config.CustomFont{Family: "family", Style: "invalid", File: "file"}).Build()
+		cfg := sut.AddUTF8Font("family", "invalid", "file").Build()
 
 		// Assert
 		assert.Equal(t, 0, len(cfg.CustomFonts))
@@ -417,7 +407,7 @@ func TestBuilder_AddUTF8Font(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.AddUTF8Font(&config.CustomFont{Family: "family", Style: fontstyle.Bold}).Build()
+		cfg := sut.AddUTF8Font("family", fontstyle.Bold, "").Build()
 
 		// Assert
 		assert.Equal(t, 0, len(cfg.CustomFonts))
@@ -428,7 +418,7 @@ func TestBuilder_AddUTF8Font(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.AddUTF8Font(&config.CustomFont{Family: "family", Style: fontstyle.Bold, File: "file"}).Build()
+		cfg := sut.AddUTF8Font("family", fontstyle.Bold, "file").Build()
 
 		// Assert
 		assert.Equal(t, 1, len(cfg.CustomFonts))

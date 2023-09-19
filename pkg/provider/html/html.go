@@ -3,9 +3,10 @@ package html
 import (
 	"bytes"
 	"fmt"
+	"os"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
-	"os"
 
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/internal"

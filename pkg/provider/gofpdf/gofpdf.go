@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"bytes"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"

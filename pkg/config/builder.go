@@ -29,7 +29,7 @@ type Builder interface {
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
 	WithFont(font *props.Font) Builder
-	AddUTF8Font(customFont *CustomFont) Builder
+	AddUTF8Font(family string, style fontstyle.Type, file string) Builder
 	Build() *Maroto
 }
 
@@ -156,24 +156,25 @@ func (b *builder) WithFont(font *props.Font) Builder {
 	return b
 }
 
-func (b *builder) AddUTF8Font(customFont *CustomFont) Builder {
-	if customFont == nil {
+func (b *builder) AddUTF8Font(family string, style fontstyle.Type, file string) Builder {
+	if family == "" {
 		return b
 	}
 
-	if customFont.Family == "" {
+	if !style.IsValid() {
 		return b
 	}
 
-	if !customFont.Style.IsValid() {
+	if file == "" {
 		return b
 	}
 
-	if customFont.File == "" {
-		return b
-	}
+	b.customFonts = append(b.customFonts, &CustomFont{
+		Family: family,
+		Style:  style,
+		File:   file,
+	})
 
-	b.customFonts = append(b.customFonts, customFont)
 	return b
 }
 
