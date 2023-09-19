@@ -1,5 +1,8 @@
 # Maroto
 
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines)  
+[![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
+
 #### Maroto`v2.0.0-alpha.11`is here! Try out:
 
 * See changelog [here](https://github.com/johnfercher/maroto/releases).
