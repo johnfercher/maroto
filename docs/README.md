@@ -1,7 +1,6 @@
 # Maroto
 
-[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines)  
-[![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines) [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev) [![Thread Discussion]([https://awesome.re/mentioned-badge.svg](https://img.shields.io/badge/thread-discussion-brightgreen))]([https://github.com/avelino/awesome-go#template-engines](https://github.com/johnfercher/maroto/issues/257)) 
 
 #### Maroto`v2.0.0-alpha.11`is here! Try out:
 
@@ -23,7 +22,6 @@ library in various aspects. The main objectives of`v2.0.0`are:
 6. Allow generation based on HTML/JSON; **(on roadmap)**
 
 You can learn more about maroto`v2`following these topics:
-* The default branch is [this](https://github.com/johnfercher/maroto/tree/v2).
 * Discussions are being addressed in [this issue](https://github.com/johnfercher/maroto/issues/257).
 
 ## Migration
