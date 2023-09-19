@@ -4,7 +4,7 @@ import (
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -19,7 +19,7 @@ type Provider interface {
 	AddMatrixCode(code string, cell internal.Cell, prop props.Rect)
 	AddQrCode(code string, cell internal.Cell, rect props.Rect)
 	AddBarCode(code string, cell internal.Cell, prop props.Barcode)
-	AddImage(value string, cell internal.Cell, prop props.Rect, extension consts.Extension)
+	AddImage(value string, cell internal.Cell, prop props.Rect, extension extension.Type)
 
 	// General
 	GetDimensions() (width float64, height float64)

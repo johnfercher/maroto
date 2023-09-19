@@ -3,13 +3,14 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"log"
 	"os"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/code"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/domain"
 	"github.com/johnfercher/maroto/v2/pkg/grid/col"
 	"github.com/johnfercher/maroto/v2/pkg/grid/row"
@@ -46,7 +47,7 @@ func main() {
 	m.AddRows(buildTextsRow()...)
 
 	m.AddRows(
-		text.NewRow(15, "Dummy Data", props.Text{Size: 12, Top: 5, Align: consts.Center}),
+		text.NewRow(15, "Dummy Data", props.Text{Size: 12, Top: 5, Align: align.Center}),
 	)
 
 	for i := 0; i < 50; i++ {
@@ -69,15 +70,15 @@ func main() {
 func buildCodesRow() []domain.Row {
 	return []domain.Row{
 		row.New(20).Add(
-			text.NewCol(4, "Barcode:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			text.NewCol(4, "Barcode:", props.Text{Size: 15, Top: 6, Align: align.Center}),
 			code.NewBarCol(8, "barcode", props.Barcode{Center: true, Percent: 70}),
 		),
 		row.New(20).Add(
-			text.NewCol(4, "QrCode:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			text.NewCol(4, "QrCode:", props.Text{Size: 15, Top: 6, Align: align.Center}),
 			code.NewQrCol(8, "qrcode", props.Rect{Center: true, Percent: 70}),
 		),
 		row.New(20).Add(
-			text.NewCol(4, "MatrixCode:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			text.NewCol(4, "MatrixCode:", props.Text{Size: 15, Top: 6, Align: align.Center}),
 			code.NewMatrixCol(8, "matrixcode", props.Rect{Center: true, Percent: 70}),
 		),
 	}
@@ -93,12 +94,12 @@ func buildImagesRow() []domain.Row {
 
 	return []domain.Row{
 		row.New(20).Add(
-			text.NewCol(4, "Image From File:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
+			text.NewCol(4, "Image From File:", props.Text{Size: 15, Top: 6, Align: align.Center}),
 			image.NewFromFileCol(8, "docs/assets/images/biplane.jpg", props.Rect{Center: true, Percent: 90}),
 		),
 		row.New(20).Add(
-			text.NewCol(4, "Image From Base64::", props.Text{Size: 15, Top: 6, Align: consts.Center}),
-			image.NewFromBase64Col(8, stringBase64, consts.Png, props.Rect{Center: true, Percent: 90}),
+			text.NewCol(4, "Image From Base64::", props.Text{Size: 15, Top: 6, Align: align.Center}),
+			image.NewFromBase64Col(8, stringBase64, extension.Png, props.Rect{Center: true, Percent: 90}),
 		),
 	}
 }
@@ -108,11 +109,11 @@ func buildTextsRow() []domain.Row {
 
 	return []domain.Row{
 		row.New(20).Add(
-			text.NewCol(4, "Text:", props.Text{Size: 15, Top: 6, Align: consts.Center}),
-			text.NewCol(8, colText, props.Text{Size: 12, Top: 5, Align: consts.Center}),
+			text.NewCol(4, "Text:", props.Text{Size: 15, Top: 6, Align: align.Center}),
+			text.NewCol(8, colText, props.Text{Size: 12, Top: 5, Align: align.Center}),
 		),
 		row.New(40).Add(
-			text.NewCol(4, "Signature:", props.Text{Size: 15, Top: 17, Align: consts.Center}),
+			text.NewCol(4, "Signature:", props.Text{Size: 15, Top: 17, Align: align.Center}),
 			signature.NewCol(8, "Name", props.Font{Size: 10}),
 		),
 	}
@@ -124,12 +125,12 @@ func buildHeader() []domain.Row {
 			text.New("Maroto V2", props.Text{
 				Top:   5,
 				Size:  15,
-				Align: consts.Center,
+				Align: align.Center,
 			}),
 			text.New("Grid system, fast generation, embedded metrics and testable.", props.Text{
 				Top:   13,
 				Size:  13,
-				Align: consts.Center,
+				Align: align.Center,
 			}),
 		),
 	)

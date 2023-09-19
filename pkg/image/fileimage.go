@@ -1,15 +1,14 @@
 package image
 
 import (
-	"strings"
-
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/domain"
 	"github.com/johnfercher/maroto/v2/pkg/grid/col"
 	"github.com/johnfercher/maroto/v2/pkg/grid/row"
 	"github.com/johnfercher/maroto/v2/pkg/props"
+	"strings"
 
 	"github.com/johnfercher/go-tree/tree"
 )
@@ -45,8 +44,8 @@ func NewFromFileRow(height float64, path string, ps ...props.Rect) domain.Row {
 }
 
 func (f *fileImage) Render(provider domain.Provider, cell internal.Cell) {
-	extension := strings.Split(f.path, ".")[1]
-	provider.AddImage(f.path, cell, f.prop, consts.Extension(extension))
+	extensionStr := strings.Split(f.path, ".")[1]
+	provider.AddImage(f.path, cell, f.prop, extension.Type(extensionStr))
 }
 
 func (f *fileImage) GetStructure() *tree.Node[domain.Structure] {

@@ -1,14 +1,15 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/border"
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/border"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"log"
 	"math/rand"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/grid/row"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/text"
@@ -60,16 +61,16 @@ func main() {
 
 	whiteText := props.Text{
 		Color: &color.Color{255, 255, 255},
-		Style: consts.Bold,
+		Style: fontstyle.Bold,
 		Size:  12,
-		Align: consts.Center,
+		Align: align.Center,
 		Top:   2,
 	}
 
 	blackText := props.Text{
-		Style: consts.Bold,
+		Style: fontstyle.Bold,
 		Size:  12,
-		Align: consts.Center,
+		Align: align.Center,
 		Top:   2,
 	}
 

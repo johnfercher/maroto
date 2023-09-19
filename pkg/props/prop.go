@@ -1,9 +1,11 @@
 package props
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/border"
 	"github.com/johnfercher/maroto/v2/pkg/color"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/border"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 )
 
 type Style struct {
@@ -62,17 +64,17 @@ type Text struct {
 	// Family of the text, ex: consts.Arial, helvetica and etc.
 	Family string
 	// Style of the text, ex: consts.Normal, bold and etc.
-	Style consts.Style
+	Style fontstyle.Type
 	// Size of the text.
 	Size float64
 	// Align of the text.
-	Align consts.Align
+	Align align.Type
 	// Extrapolate define if the text will automatically add a new line when.
 	// text reach the right cell boundary.
 	Extrapolate bool
 	// VerticalPadding define an additional space between lines.
 	VerticalPadding float64
-	// Color define the font color.
+	// Color define the fontstyle color.
 	Color *color.Color
 }
 
@@ -81,7 +83,7 @@ type Line struct {
 	// Color define the line color.
 	Color color.Color
 	// Style define the line style (solid, dashed or dotted).
-	Style consts.LineStyle
+	Style linestyle.Type
 	// Width define the line width (it cannot be greater than line height)
 	Width float64
 }
@@ -91,10 +93,10 @@ type Font struct {
 	// Family of the text, ex: consts.Arial, helvetica and etc.
 	Family string
 	// Style of the text, ex: consts.Normal, bold and etc.
-	Style consts.Style
+	Style fontstyle.Type
 	// Size of the text.
 	Size float64
-	// Color define the font color.
+	// Color define the fontstyle color.
 	Color *color.Color
 }
 
@@ -187,7 +189,7 @@ func (s *Text) MakeValid(font *Font) {
 	}
 
 	if s.Align == "" {
-		s.Align = consts.Left
+		s.Align = align.Center
 	}
 
 	if s.Top < minValue {
@@ -216,7 +218,7 @@ func (s *Font) MakeValid(defaultFamily string) {
 	}
 
 	if s.Style == "" {
-		s.Style = consts.Bold
+		s.Style = fontstyle.Bold
 	}
 
 	if s.Size == undefinedValue {
@@ -225,7 +227,7 @@ func (s *Font) MakeValid(defaultFamily string) {
 }
 
 // ToTextProp from Font return a Text based on Font.
-func (s *Font) ToTextProp(align consts.Align, top float64, extrapolate bool, verticalPadding float64) Text {
+func (s *Font) ToTextProp(align align.Type, top float64, extrapolate bool, verticalPadding float64) Text {
 	textProp := Text{
 		Family:          s.Family,
 		Style:           s.Style,
@@ -245,11 +247,11 @@ func (s *Font) ToTextProp(align consts.Align, top float64, extrapolate bool, ver
 // MakeValid from Line define default values for a Line.
 func (s *Line) MakeValid(spaceHeight float64) {
 	if s.Style == "" {
-		s.Style = consts.Solid
+		s.Style = linestyle.Solid
 	}
 
 	if s.Width == 0 {
-		s.Width = consts.DefaultLineWidth
+		s.Width = linestyle.DefaultLineWidth
 	}
 
 	if s.Width > spaceHeight {

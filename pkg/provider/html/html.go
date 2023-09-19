@@ -3,13 +3,14 @@ package html
 import (
 	"bytes"
 	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 	"os"
 
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
 	"github.com/yosssi/gohtml"
@@ -83,10 +84,10 @@ func New(maroto *config.Maroto, options ...providers.ProviderOption) *html {
 			Height: maroto.Dimensions.Height,
 		},
 		margins: margins{
-			Left:   config.MinLeftMargin,
-			Right:  config.MinRightMargin,
-			Top:    config.MinTopMargin,
-			Bottom: config.MinBottomMargin,
+			Left:   pagesize.MinLeftMargin,
+			Right:  pagesize.MinRightMargin,
+			Top:    pagesize.MinTopMargin,
+			Bottom: pagesize.MinBottomMargin,
 		},
 	}
 
@@ -199,7 +200,7 @@ func (h *html) AddBarCode(code string, _ internal.Cell, _ props.Barcode) {
 	col.AddNext(textNode)
 }
 
-func (h *html) AddImage(value string, _ internal.Cell, _ props.Rect, extension consts.Extension) {
+func (h *html) AddImage(value string, _ internal.Cell, _ props.Rect, extension extension.Type) {
 	minSize := 20
 	if len(value) < minSize {
 		minSize = len(value)

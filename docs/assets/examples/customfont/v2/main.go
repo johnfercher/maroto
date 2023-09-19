@@ -1,12 +1,14 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/text"
 )
@@ -16,10 +18,10 @@ func main() {
 	customFontFile := "docs/assets/fonts/arial-unicode-ms.ttf"
 
 	cfg := config.NewBuilder().
-		AddUTF8Font(&config.CustomFont{Family: customFont, Style: consts.Normal, File: customFontFile}).
-		AddUTF8Font(&config.CustomFont{Family: customFont, Style: consts.Italic, File: customFontFile}).
-		AddUTF8Font(&config.CustomFont{Family: customFont, Style: consts.Bold, File: customFontFile}).
-		AddUTF8Font(&config.CustomFont{Family: customFont, Style: consts.BoldItalic, File: customFontFile}).
+		AddUTF8Font(&config.CustomFont{Family: customFont, Style: fontstyle.Normal, File: customFontFile}).
+		AddUTF8Font(&config.CustomFont{Family: customFont, Style: fontstyle.Italic, File: customFontFile}).
+		AddUTF8Font(&config.CustomFont{Family: customFont, Style: fontstyle.Bold, File: customFontFile}).
+		AddUTF8Font(&config.CustomFont{Family: customFont, Style: fontstyle.BoldItalic, File: customFontFile}).
 		WithFont(&props.Font{Family: customFont}).
 		Build()
 
@@ -29,15 +31,15 @@ func main() {
 	header, contents := getLanguageSample()
 
 	m.AddRow(8,
-		text.NewCol(4, header[0], props.Text{Style: consts.Bold, Family: consts.Arial, Align: consts.Center}),
-		text.NewCol(8, header[1], props.Text{Style: consts.Bold, Family: consts.Arial, Align: consts.Center}),
+		text.NewCol(4, header[0], props.Text{Style: fontstyle.Bold, Family: fontfamily.Arial, Align: align.Center}),
+		text.NewCol(8, header[1], props.Text{Style: fontstyle.Bold, Family: fontfamily.Arial, Align: align.Center}),
 	)
 
 	grey := color.Color{200, 200, 200}
 	for i, content := range contents {
 		r := m.AddRow(5,
-			text.NewCol(4, content[0], props.Text{Align: consts.Center}),
-			text.NewCol(8, content[1], props.Text{Align: consts.Center}),
+			text.NewCol(4, content[0], props.Text{Align: align.Center}),
+			text.NewCol(8, content[1], props.Text{Align: align.Center}),
 		)
 
 		if i%2 == 0 {

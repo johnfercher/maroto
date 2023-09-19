@@ -1,10 +1,11 @@
 package internal
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -132,14 +133,14 @@ func (s *text) getLines(words []string, colWidth float64) []string {
 func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
 	left, top, _, _ := s.pdf.GetMargins()
 
-	if textProp.Align == consts.Left {
+	if textProp.Align == align.Left {
 		s.pdf.Text(xColOffset+left, yColOffset+top, text)
 		return
 	}
 
 	var modifier float64 = 2
 
-	if textProp.Align == consts.Right {
+	if textProp.Align == align.Right {
 		modifier = 1
 	}
 
@@ -149,11 +150,11 @@ func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, te
 }
 
 func (s *text) textToUnicode(txt string, props props.Text) string {
-	if props.Family == consts.Arial ||
-		props.Family == consts.Helvetica ||
-		props.Family == consts.Symbol ||
-		props.Family == consts.ZapBats ||
-		props.Family == consts.Courier {
+	if props.Family == fontfamily.Arial ||
+		props.Family == fontfamily.Helvetica ||
+		props.Family == fontfamily.Symbol ||
+		props.Family == fontfamily.ZapBats ||
+		props.Family == fontfamily.Courier {
 		translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 		return translator(txt)
 	}

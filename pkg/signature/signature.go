@@ -4,7 +4,8 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/domain"
 	"github.com/johnfercher/maroto/v2/pkg/grid/col"
 	"github.com/johnfercher/maroto/v2/pkg/grid/row"
@@ -22,7 +23,7 @@ func New(value string, ps ...props.Font) domain.Component {
 	if len(ps) > 0 {
 		prop = ps[0]
 	}
-	prop.MakeValid(consts.Arial)
+	prop.MakeValid(fontfamily.Arial)
 
 	return &signature{
 		value: value,
@@ -42,7 +43,7 @@ func NewRow(height float64, value string, ps ...props.Font) domain.Row {
 }
 
 func (s *signature) Render(provider domain.Provider, cell internal.Cell) {
-	provider.AddSignature(s.value, cell, s.prop.ToTextProp(consts.Center, 0.0, false, 0))
+	provider.AddSignature(s.value, cell, s.prop.ToTextProp(align.Center, 0.0, false, 0))
 }
 
 func (s *signature) GetStructure() *tree.Node[domain.Structure] {

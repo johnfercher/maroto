@@ -2,13 +2,15 @@ package gofpdf
 
 import (
 	"bytes"
-	"github.com/johnfercher/maroto/v2/pkg/border"
+	"github.com/johnfercher/maroto/v2/pkg/consts/border"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/domain"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
@@ -17,8 +19,8 @@ import (
 )
 
 var defaultErrorColor = &props.Font{
-	Family: consts.Arial,
-	Style:  consts.Bold,
+	Family: fontfamily.Arial,
+	Style:  fontstyle.Bold,
 	Size:   10,
 	Color: &color.Color{
 		Red:   255,
@@ -114,7 +116,7 @@ func (g *gofpdfProvider) AddBarCode(code string, cell internal.Cell, prop props.
 	}
 }
 
-func (g *gofpdfProvider) AddImage(file string, cell internal.Cell, prop props.Rect, extension consts.Extension) {
+func (g *gofpdfProvider) AddImage(file string, cell internal.Cell, prop props.Rect, extension extension.Type) {
 	img, err := g.imageCache.Load(file, extension)
 	if err != nil {
 		textProp := props.Text{}

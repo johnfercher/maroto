@@ -109,13 +109,13 @@ func main() {
 					Top:   13,
 					Style: consts.BoldItalic,
 					Size:  8,
-					Align: consts.Left,
+					Align: align.Type,
 				})
 				m.Text("www.mycompany.com", props.Text{
 					Top:   16,
 					Style: consts.BoldItalic,
 					Size:  8,
-					Align: consts.Left,
+					Align: align.Type,
 				})
 			})
 		})

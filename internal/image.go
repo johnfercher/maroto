@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"encoding/base64"
 	"errors"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 
 	"github.com/google/uuid"
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 )
@@ -15,7 +15,7 @@ import (
 // Image is the abstraction which deals of how to add images in a PDF.
 type Image interface {
 	AddFromFile(path string, cell Cell, prop props.Rect) (err error)
-	AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, extension consts.Extension) (err error)
+	AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, extension extension.Type) (err error)
 }
 
 type image struct {
@@ -47,7 +47,7 @@ func (s *image) AddFromFile(path string, cell Cell, prop props.Rect) error {
 }
 
 // AddFromBase64 use a base64 string to add to PDF.
-func (s *image) AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, extension consts.Extension) error {
+func (s *image) AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, extension extension.Type) error {
 	imageID, _ := uuid.NewRandom()
 
 	ss, _ := base64.StdEncoding.DecodeString(stringBase64)

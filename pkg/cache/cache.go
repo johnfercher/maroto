@@ -2,19 +2,18 @@ package cache
 
 import (
 	"encoding/base64"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"os"
 	"sync"
-
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 )
 
 type Cache interface {
-	Load(string, consts.Extension) (*Image, error)
+	Load(string, extension.Type) (*Image, error)
 }
 
 type Image struct {
 	Value     string
-	Extension consts.Extension
+	Extension extension.Type
 }
 
 type cache struct {
@@ -29,7 +28,7 @@ func New() Cache {
 	}
 }
 
-func (c *cache) Load(value string, extension consts.Extension) (*Image, error) {
+func (c *cache) Load(value string, extension extension.Type) (*Image, error) {
 	if _, ok := c.images[value]; !ok {
 		c.mutex.Lock()
 		defer c.mutex.Unlock()

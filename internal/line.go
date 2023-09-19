@@ -3,7 +3,7 @@ package internal
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/color"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -30,16 +30,16 @@ func (s *line) Draw(cell Cell, lineProp props.Line) {
 	s.pdf.SetLineWidth(lineProp.Width)
 	s.drawStylizedLine(cell, lineProp)
 	s.pdf.SetDrawColor(s.defaultLineColor.Red, s.defaultLineColor.Green, s.defaultLineColor.Blue)
-	s.pdf.SetLineWidth(consts.DefaultLineWidth)
+	s.pdf.SetLineWidth(linestyle.DefaultLineWidth)
 }
 
 func (s *line) drawStylizedLine(cell Cell, prop props.Line) {
-	if prop.Style == consts.Solid {
+	if prop.Style == linestyle.Solid {
 		s.pdf.Line(cell.X, cell.Y, cell.Width, cell.Height)
 		return
 	}
 
-	if prop.Style == consts.Dashed {
+	if prop.Style == linestyle.Dashed {
 		s.drawDashedLine(cell)
 		return
 	}

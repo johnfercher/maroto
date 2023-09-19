@@ -1,9 +1,12 @@
 package props_test
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/stretchr/testify/assert"
@@ -191,7 +194,7 @@ func TestText_MakeValid(t *testing.T) {
 				Family: "",
 			},
 			func(t *testing.T, prop *props.Text) {
-				assert.Equal(t, prop.Family, consts.Arial)
+				assert.Equal(t, prop.Family, fontfamily.Arial)
 			},
 		},
 		{
@@ -200,7 +203,7 @@ func TestText_MakeValid(t *testing.T) {
 				Style: "",
 			},
 			func(t *testing.T, prop *props.Text) {
-				assert.Equal(t, prop.Style, consts.Normal)
+				assert.Equal(t, prop.Style, fontstyle.Normal)
 			},
 		},
 		{
@@ -218,7 +221,7 @@ func TestText_MakeValid(t *testing.T) {
 				Align: "",
 			},
 			func(t *testing.T, prop *props.Text) {
-				assert.Equal(t, prop.Align, consts.Left)
+				assert.Equal(t, prop.Align, align.Center)
 			},
 		},
 		{
@@ -260,7 +263,7 @@ func TestText_MakeValid(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		c.fontProp.MakeValid(&props.Font{Family: consts.Arial, Size: 10, Style: consts.Normal})
+		c.fontProp.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
 		c.assert(t, c.fontProp)
 	}
 }
@@ -277,7 +280,7 @@ func TestFontProp_MakeValid(t *testing.T) {
 				Family: "",
 			},
 			func(t *testing.T, prop *props.Font) {
-				assert.Equal(t, prop.Family, consts.Arial)
+				assert.Equal(t, prop.Family, fontfamily.Arial)
 			},
 		},
 		{
@@ -286,7 +289,7 @@ func TestFontProp_MakeValid(t *testing.T) {
 				Style: "",
 			},
 			func(t *testing.T, prop *props.Font) {
-				assert.Equal(t, prop.Style, consts.Bold)
+				assert.Equal(t, prop.Style, fontstyle.Bold)
 			},
 		},
 		{
@@ -302,7 +305,7 @@ func TestFontProp_MakeValid(t *testing.T) {
 
 	for _, c := range cases {
 		// Act
-		c.signatureProp.MakeValid(consts.Arial)
+		c.signatureProp.MakeValid(fontfamily.Arial)
 
 		// Assert
 		c.assert(t, c.signatureProp)
@@ -321,7 +324,7 @@ func TestLine_MakeValid(t *testing.T) {
 			&props.Line{},
 			1.0,
 			func(t *testing.T, m *props.Line) {
-				assert.Equal(t, m.Style, consts.Solid)
+				assert.Equal(t, m.Style, linestyle.Solid)
 			},
 		},
 		{

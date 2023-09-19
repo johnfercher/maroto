@@ -2,11 +2,11 @@ package pkg_test
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/code"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/grid/col"
 	"github.com/johnfercher/maroto/v2/pkg/grid/row"
 	"github.com/johnfercher/maroto/v2/pkg/image"
@@ -38,7 +38,7 @@ func TestDocument_GetStructure(t *testing.T) {
 
 	r2 := row.New(10)
 	r2c1 := col.New(3).Add(image.NewFromFile("file.png"))
-	r2c2 := col.New(3).Add(image.NewFromBase64("base64string", consts.Png))
+	r2c2 := col.New(3).Add(image.NewFromBase64("base64string", extension.Png))
 	r2c3 := col.New(3).Add(signature.New("signature"))
 	r2c4 := col.New(3).Add(text.New("text"))
 	r2.Add(r2c1, r2c2, r2c3, r2c4)

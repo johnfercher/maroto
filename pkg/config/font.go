@@ -1,9 +1,9 @@
 package config
 
-import "github.com/johnfercher/maroto/v2/pkg/consts"
+import "github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
 type CustomFont struct {
 	Family string
-	Style  consts.Style
+	Style  fontstyle.Type
 	File   string
 }
