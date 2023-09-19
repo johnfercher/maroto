@@ -1,6 +1,7 @@
 package props
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/border"
 	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/consts"
 )
@@ -8,7 +9,7 @@ import (
 type Style struct {
 	BackgroundColor *color.Color
 	BorderColor     *color.Color
-	Border          bool
+	Border          border.Type
 }
 
 // Proportion represents a proportion from a rectangle, example: 16x9, 4x3...

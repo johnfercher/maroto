@@ -1,7 +1,9 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/border"
 	"log"
+	"math/rand"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/color"
@@ -19,8 +21,41 @@ func main() {
 
 	colStyle := &props.Style{
 		BackgroundColor: &color.Color{80, 80, 80},
-		Border:          true,
+		Border:          border.Full,
 		BorderColor:     &color.Color{200, 0, 0},
+	}
+
+	rowStyles := []*props.Style{
+		{
+			BackgroundColor: &color.Color{220, 220, 220},
+			Border:          border.None,
+			BorderColor:     &color.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &color.Color{220, 220, 220},
+			Border:          border.Full,
+			BorderColor:     &color.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &color.Color{220, 220, 220},
+			Border:          border.Left,
+			BorderColor:     &color.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &color.Color{220, 220, 220},
+			Border:          border.Right,
+			BorderColor:     &color.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &color.Color{220, 220, 220},
+			Border:          border.Top,
+			BorderColor:     &color.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &color.Color{220, 220, 220},
+			Border:          border.Bottom,
+			BorderColor:     &color.Color{0, 0, 200},
+		},
 	}
 
 	whiteText := props.Text{
@@ -29,12 +64,6 @@ func main() {
 		Size:  12,
 		Align: consts.Center,
 		Top:   2,
-	}
-
-	rowStyle := &props.Style{
-		BackgroundColor: &color.Color{220, 220, 220},
-		Border:          true,
-		BorderColor:     &color.Color{0, 0, 200},
 	}
 
 	blackText := props.Text{
@@ -56,13 +85,17 @@ func main() {
 			),
 		)
 
+		m.AddRows(row.New(10))
+
 		m.AddRows(
-			row.New(10).WithStyle(rowStyle).Add(
+			row.New(10).WithStyle(rowStyles[rand.Intn(len(rowStyles))]).Add(
 				text.NewCol(4, "string", blackText),
 				text.NewCol(4, "string", blackText),
 				text.NewCol(4, "string", blackText),
 			),
 		)
+
+		m.AddRows(row.New(10))
 	}
 
 	document, err := m.Generate()

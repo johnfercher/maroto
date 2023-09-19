@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"bytes"
+	"github.com/johnfercher/maroto/v2/pkg/border"
 
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
@@ -170,9 +171,9 @@ func (g *gofpdfProvider) createStandard(width, height float64, config *config.Ma
 }
 
 func (g *gofpdfProvider) createCustom(width, height float64, config *config.Maroto, style *props.Style) {
-	border := "0"
-	if style.Border || config.Debug {
-		border = "1"
+	bd := style.Border
+	if config.Debug {
+		bd = border.Full
 	}
 
 	fill := false
@@ -185,7 +186,7 @@ func (g *gofpdfProvider) createCustom(width, height float64, config *config.Maro
 		g.fpdf.SetDrawColor(style.BorderColor.Red, style.BorderColor.Green, style.BorderColor.Blue)
 	}
 
-	g.fpdf.CellFormat(width, height, "", border, 0, "C", fill, 0, "")
+	g.fpdf.CellFormat(width, height, "", string(bd), 0, "C", fill, 0, "")
 
 	if fill {
 		white := color.NewWhite()
