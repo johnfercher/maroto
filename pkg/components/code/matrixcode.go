@@ -14,7 +14,7 @@ import (
 type matrixCode struct {
 	code   string
 	prop   props.Rect
-	config *config.Maroto
+	config *config.Config
 }
 
 func NewMatrix(code string, barcodeProps ...props.Rect) core.Component {
@@ -54,6 +54,6 @@ func (m *matrixCode) GetStructure() *tree.Node[core.Structure] {
 	return tree.NewNode(str)
 }
 
-func (m *matrixCode) SetConfig(config *config.Maroto) {
+func (m *matrixCode) SetConfig(config *config.Config) {
 	m.config = config
 }

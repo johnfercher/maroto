@@ -13,7 +13,7 @@ import (
 type barcode struct {
 	code   string
 	prop   props.Barcode
-	config *config.Maroto
+	config *config.Config
 }
 
 func NewBar(code string, ps ...props.Barcode) core.Component {
@@ -57,6 +57,6 @@ func (b *barcode) GetValue() string {
 	return b.code
 }
 
-func (b *barcode) SetConfig(config *config.Maroto) {
+func (b *barcode) SetConfig(config *config.Config) {
 	b.config = config
 }

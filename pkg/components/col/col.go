@@ -14,8 +14,8 @@ type col struct {
 	size       int
 	isMax      bool
 	components []core.Component
-	config     *config.Maroto
-	style      *props.Style
+	config     *config.Config
+	style      *props.Cell
 }
 
 func New(size ...int) core.Col {
@@ -65,14 +65,14 @@ func (c *col) Render(provider core.Provider, cell context.Cell, createCell bool)
 	}
 }
 
-func (c *col) SetConfig(config *config.Maroto) {
+func (c *col) SetConfig(config *config.Config) {
 	c.config = config
 	for _, component := range c.components {
 		component.SetConfig(config)
 	}
 }
 
-func (c *col) WithStyle(style *props.Style) core.Col {
+func (c *col) WithStyle(style *props.Cell) core.Col {
 	c.style = style
 	return c
 }

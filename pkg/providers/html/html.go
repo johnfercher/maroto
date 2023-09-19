@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/johnfercher/maroto/v2/pkg/cache"
+
 	"github.com/johnfercher/maroto/v2/pkg/core/context"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 
 	"github.com/johnfercher/go-tree/tree"
-	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
@@ -78,7 +79,7 @@ type html struct {
 	imageCache cache.Cache
 }
 
-func New(maroto *config.Maroto, options ...providers.ProviderOption) *html {
+func New(maroto *config.Config, options ...providers.ProviderOption) *html {
 	div := Div{
 		_type: BodyTag,
 		dimensions: Dimensions{
@@ -118,7 +119,7 @@ func (h *html) SetCache(cache cache.Cache) {
 	h.imageCache = cache
 }
 
-func (h *html) CreateCol(width, height float64, _ *config.Maroto, _ *props.Style) {
+func (h *html) CreateCol(width, height float64, _ *config.Config, _ *props.Cell) {
 	var row *tree.Node[Div]
 
 	rowsLength := len(h.rows)

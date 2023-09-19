@@ -1,6 +1,6 @@
 package fontstyle
 
-// Type is a representation of a style Font.
+// Type is a representation of a style DefaultFont.
 type Type string
 
 const (

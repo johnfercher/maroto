@@ -6,7 +6,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
 	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -14,12 +13,12 @@ import (
 type text struct {
 	value  string
 	prop   props.Text
-	config *config.Maroto
+	config *config.Config
 }
 
 func New(value string, ps ...props.Text) core.Component {
 	textProp := props.Text{
-		Color: &color.Color{
+		Color: &props.Color{
 			Red:   0,
 			Green: 0,
 			Blue:  0,
@@ -56,7 +55,7 @@ func (t *text) GetStructure() *tree.Node[core.Structure] {
 	return tree.NewNode(str)
 }
 
-func (t *text) SetConfig(config *config.Maroto) {
+func (t *text) SetConfig(config *config.Config) {
 	t.config = config
 }
 
@@ -65,6 +64,6 @@ func (t *text) GetValue() string {
 }
 
 func (t *text) Render(provider core.Provider, cell context.Cell) {
-	t.prop.MakeValid(t.config.Font)
+	t.prop.MakeValid(t.config.DefaultFont)
 	provider.AddText(t.value, cell, t.prop)
 }

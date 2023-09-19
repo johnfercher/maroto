@@ -4,12 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
+	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
@@ -43,12 +41,12 @@ func TestBuilder_Build(t *testing.T) {
 	assert.Equal(t, 0, cfg.Workers)
 	assert.Equal(t, false, cfg.Debug)
 	assert.Equal(t, 12, cfg.MaxGridSize)
-	assert.Equal(t, fontfamily.Arial, cfg.Font.Family)
-	assert.Equal(t, 10.0, cfg.Font.Size)
-	assert.Equal(t, fontstyle.Normal, cfg.Font.Style)
-	assert.Equal(t, 0, cfg.Font.Color.Red)
-	assert.Equal(t, 0, cfg.Font.Color.Green)
-	assert.Equal(t, 0, cfg.Font.Color.Blue)
+	assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
+	assert.Equal(t, 10.0, cfg.DefaultFont.Size)
+	assert.Equal(t, fontstyle.Normal, cfg.DefaultFont.Style)
+	assert.Equal(t, 0, cfg.DefaultFont.Color.Red)
+	assert.Equal(t, 0, cfg.DefaultFont.Color.Green)
+	assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 }
 
 func TestBuilder_WithDebug(t *testing.T) {
@@ -71,12 +69,12 @@ func TestBuilder_WithFont(t *testing.T) {
 		cfg := sut.WithFont(nil).Build()
 
 		// Assert
-		assert.Equal(t, fontfamily.Arial, cfg.Font.Family)
-		assert.Equal(t, 10.0, cfg.Font.Size)
-		assert.Equal(t, fontstyle.Normal, cfg.Font.Style)
-		assert.Equal(t, 0, cfg.Font.Color.Red)
-		assert.Equal(t, 0, cfg.Font.Color.Green)
-		assert.Equal(t, 0, cfg.Font.Color.Blue)
+		assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
+		assert.Equal(t, 10.0, cfg.DefaultFont.Size)
+		assert.Equal(t, fontstyle.Normal, cfg.DefaultFont.Style)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Red)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Green)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 	})
 
 	t.Run("when family is filled, should change the default value", func(t *testing.T) {
@@ -89,12 +87,12 @@ func TestBuilder_WithFont(t *testing.T) {
 		}).Build()
 
 		// Assert
-		assert.Equal(t, "new family", cfg.Font.Family)
-		assert.Equal(t, 10.0, cfg.Font.Size)
-		assert.Equal(t, fontstyle.Normal, cfg.Font.Style)
-		assert.Equal(t, 0, cfg.Font.Color.Red)
-		assert.Equal(t, 0, cfg.Font.Color.Green)
-		assert.Equal(t, 0, cfg.Font.Color.Blue)
+		assert.Equal(t, "new family", cfg.DefaultFont.Family)
+		assert.Equal(t, 10.0, cfg.DefaultFont.Size)
+		assert.Equal(t, fontstyle.Normal, cfg.DefaultFont.Style)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Red)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Green)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 	})
 
 	t.Run("when style is filled, should change the default value", func(t *testing.T) {
@@ -107,12 +105,12 @@ func TestBuilder_WithFont(t *testing.T) {
 		}).Build()
 
 		// Assert
-		assert.Equal(t, fontfamily.Arial, cfg.Font.Family)
-		assert.Equal(t, 10.0, cfg.Font.Size)
-		assert.Equal(t, fontstyle.Bold, cfg.Font.Style)
-		assert.Equal(t, 0, cfg.Font.Color.Red)
-		assert.Equal(t, 0, cfg.Font.Color.Green)
-		assert.Equal(t, 0, cfg.Font.Color.Blue)
+		assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
+		assert.Equal(t, 10.0, cfg.DefaultFont.Size)
+		assert.Equal(t, fontstyle.Bold, cfg.DefaultFont.Style)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Red)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Green)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 	})
 
 	t.Run("when size is filled, should change the default value", func(t *testing.T) {
@@ -125,12 +123,12 @@ func TestBuilder_WithFont(t *testing.T) {
 		}).Build()
 
 		// Assert
-		assert.Equal(t, fontfamily.Arial, cfg.Font.Family)
-		assert.Equal(t, 13.0, cfg.Font.Size)
-		assert.Equal(t, fontstyle.Normal, cfg.Font.Style)
-		assert.Equal(t, 0, cfg.Font.Color.Red)
-		assert.Equal(t, 0, cfg.Font.Color.Green)
-		assert.Equal(t, 0, cfg.Font.Color.Blue)
+		assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
+		assert.Equal(t, 13.0, cfg.DefaultFont.Size)
+		assert.Equal(t, fontstyle.Normal, cfg.DefaultFont.Style)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Red)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Green)
+		assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 	})
 
 	t.Run("when color is filled, should change the default value", func(t *testing.T) {
@@ -139,16 +137,16 @@ func TestBuilder_WithFont(t *testing.T) {
 
 		// Act
 		cfg := sut.WithFont(&props.Font{
-			Color: &color.Color{Red: 10, Green: 10, Blue: 10},
+			Color: &props.Color{Red: 10, Green: 10, Blue: 10},
 		}).Build()
 
 		// Assert
-		assert.Equal(t, fontfamily.Arial, cfg.Font.Family)
-		assert.Equal(t, 10.0, cfg.Font.Size)
-		assert.Equal(t, fontstyle.Normal, cfg.Font.Style)
-		assert.Equal(t, 10, cfg.Font.Color.Red)
-		assert.Equal(t, 10, cfg.Font.Color.Green)
-		assert.Equal(t, 10, cfg.Font.Color.Blue)
+		assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
+		assert.Equal(t, 10.0, cfg.DefaultFont.Size)
+		assert.Equal(t, fontstyle.Normal, cfg.DefaultFont.Style)
+		assert.Equal(t, 10, cfg.DefaultFont.Color.Red)
+		assert.Equal(t, 10, cfg.DefaultFont.Color.Green)
+		assert.Equal(t, 10, cfg.DefaultFont.Color.Blue)
 	})
 }
 

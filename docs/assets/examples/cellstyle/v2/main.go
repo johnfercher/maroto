@@ -6,8 +6,6 @@ import (
 
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -22,47 +20,47 @@ func main() {
 		WithDebug(false).
 		Build()
 
-	colStyle := &props.Style{
-		BackgroundColor: &color.Color{80, 80, 80},
+	colStyle := &props.Cell{
+		BackgroundColor: &props.Color{80, 80, 80},
 		Border:          border.Full,
-		BorderColor:     &color.Color{200, 0, 0},
+		BorderColor:     &props.Color{200, 0, 0},
 	}
 
-	rowStyles := []*props.Style{
+	rowStyles := []*props.Cell{
 		{
-			BackgroundColor: &color.Color{220, 220, 220},
+			BackgroundColor: &props.Color{220, 220, 220},
 			Border:          border.None,
-			BorderColor:     &color.Color{0, 0, 200},
+			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
-			BackgroundColor: &color.Color{220, 220, 220},
+			BackgroundColor: &props.Color{220, 220, 220},
 			Border:          border.Full,
-			BorderColor:     &color.Color{0, 0, 200},
+			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
-			BackgroundColor: &color.Color{220, 220, 220},
+			BackgroundColor: &props.Color{220, 220, 220},
 			Border:          border.Left,
-			BorderColor:     &color.Color{0, 0, 200},
+			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
-			BackgroundColor: &color.Color{220, 220, 220},
+			BackgroundColor: &props.Color{220, 220, 220},
 			Border:          border.Right,
-			BorderColor:     &color.Color{0, 0, 200},
+			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
-			BackgroundColor: &color.Color{220, 220, 220},
+			BackgroundColor: &props.Color{220, 220, 220},
 			Border:          border.Top,
-			BorderColor:     &color.Color{0, 0, 200},
+			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
-			BackgroundColor: &color.Color{220, 220, 220},
+			BackgroundColor: &props.Color{220, 220, 220},
 			Border:          border.Bottom,
-			BorderColor:     &color.Color{0, 0, 200},
+			BorderColor:     &props.Color{0, 0, 200},
 		},
 	}
 
 	whiteText := props.Text{
-		Color: &color.Color{255, 255, 255},
+		Color: &props.Color{255, 255, 255},
 		Style: fontstyle.Bold,
 		Size:  12,
 		Align: align.Center,

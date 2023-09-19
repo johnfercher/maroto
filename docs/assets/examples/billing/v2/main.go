@@ -8,8 +8,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
@@ -50,9 +48,9 @@ func main() {
 			Size:  9,
 			Style: fontstyle.Bold,
 			Align: align.Center,
-			Color: color.NewWhite(),
+			Color: props.NewWhite(),
 		}),
-	).WithStyle(&props.Style{BackgroundColor: darkGrayColor})
+	).WithStyle(&props.Cell{BackgroundColor: darkGrayColor})
 
 	m.AddRows(getTransactions()...)
 
@@ -110,7 +108,7 @@ func getTransactions() []core.Row {
 		)
 		if i%2 == 0 {
 			gray := getGrayColor()
-			r.WithStyle(&props.Style{BackgroundColor: gray})
+			r.WithStyle(&props.Cell{BackgroundColor: gray})
 		}
 
 		contentsRow = append(contentsRow, r)
@@ -190,32 +188,32 @@ func getPageFooter() core.Row {
 	)
 }
 
-func getDarkGrayColor() *color.Color {
-	return &color.Color{
+func getDarkGrayColor() *props.Color {
+	return &props.Color{
 		Red:   55,
 		Green: 55,
 		Blue:  55,
 	}
 }
 
-func getGrayColor() *color.Color {
-	return &color.Color{
+func getGrayColor() *props.Color {
+	return &props.Color{
 		Red:   200,
 		Green: 200,
 		Blue:  200,
 	}
 }
 
-func getBlueColor() *color.Color {
-	return &color.Color{
+func getBlueColor() *props.Color {
+	return &props.Color{
 		Red:   10,
 		Green: 10,
 		Blue:  150,
 	}
 }
 
-func getRedColor() *color.Color {
-	return &color.Color{
+func getRedColor() *props.Color {
+	return &props.Color{
 		Red:   150,
 		Green: 10,
 		Blue:  10,

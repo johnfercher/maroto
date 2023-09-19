@@ -3,15 +3,14 @@ package gofpdf
 import (
 	"bytes"
 
+	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
 	"github.com/johnfercher/maroto/v2/pkg/core/context"
 
 	"github.com/johnfercher/maroto/v2/internal"
-	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -24,7 +23,7 @@ var defaultErrorColor = &props.Font{
 	Family: fontfamily.Arial,
 	Style:  fontstyle.Bold,
 	Size:   10,
-	Color: &color.Color{
+	Color: &props.Color{
 		Red:   255,
 		Green: 0,
 		Blue:  0,
@@ -42,7 +41,7 @@ type gofpdfProvider struct {
 	imageCache cache.Cache
 }
 
-func New(cfg *config.Maroto, options ...providers.ProviderOption) core.Provider {
+func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",
 		UnitStr:        "mm",
@@ -60,7 +59,7 @@ func New(cfg *config.Maroto, options ...providers.ProviderOption) core.Provider 
 	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)
 	fpdf.AddPage()
 
-	font := internal.NewFont(fpdf, cfg.Font.Size, cfg.Font.Family, cfg.Font.Style)
+	font := internal.NewFont(fpdf, cfg.DefaultFont.Size, cfg.DefaultFont.Family, cfg.DefaultFont.Style)
 	math := internal.NewMath(fpdf)
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
@@ -156,7 +155,7 @@ func (g *gofpdfProvider) SetCache(cache cache.Cache) {
 	g.imageCache = cache
 }
 
-func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Maroto, style *props.Style) {
+func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Config, style *props.Cell) {
 	if style == nil {
 		g.createStandard(width, height, config)
 		return
@@ -165,7 +164,7 @@ func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Maroto,
 	g.createCustom(width, height, config, style)
 }
 
-func (g *gofpdfProvider) createStandard(width, height float64, config *config.Maroto) {
+func (g *gofpdfProvider) createStandard(width, height float64, config *config.Config) {
 	border := "0"
 	if config.Debug {
 		border = "1"
@@ -174,7 +173,7 @@ func (g *gofpdfProvider) createStandard(width, height float64, config *config.Ma
 	g.fpdf.CellFormat(width, height, "", border, 0, "C", false, 0, "")
 }
 
-func (g *gofpdfProvider) createCustom(width, height float64, config *config.Maroto, style *props.Style) {
+func (g *gofpdfProvider) createCustom(width, height float64, config *config.Config, style *props.Cell) {
 	bd := style.Border
 	if config.Debug {
 		bd = border.Full
@@ -193,12 +192,12 @@ func (g *gofpdfProvider) createCustom(width, height float64, config *config.Maro
 	g.fpdf.CellFormat(width, height, "", string(bd), 0, "C", fill, 0, "")
 
 	if fill {
-		white := color.NewWhite()
+		white := props.NewWhite()
 		g.fpdf.SetFillColor(white.Red, white.Green, white.Blue)
 	}
 
 	if fill && style.BorderColor != nil {
-		black := color.NewBlack()
+		black := props.NewBlack()
 		g.fpdf.SetDrawColor(black.Red, black.Green, black.Blue)
 	}
 }

@@ -33,7 +33,7 @@ func TestCol_GetSize(t *testing.T) {
 	t.Run("when size not defined in creation, should use config max grid size", func(t *testing.T) {
 		// Arrange
 		c := col.New()
-		c.SetConfig(&config.Maroto{MaxGridSize: 14})
+		c.SetConfig(&config.Config{MaxGridSize: 14})
 
 		// Act
 		size := c.GetSize()

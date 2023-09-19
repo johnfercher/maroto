@@ -5,7 +5,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -30,7 +29,7 @@ type Builder interface {
 	WithMaxGridSize(maxGridSize int) Builder
 	WithFont(font *props.Font) Builder
 	AddUTF8Font(family string, style fontstyle.Type, file string) Builder
-	Build() *Maroto
+	Build() *Config
 }
 
 func NewBuilder() Builder {
@@ -46,7 +45,7 @@ func NewBuilder() Builder {
 			Size:   pagesize.DefaultFontSize,
 			Family: fontfamily.Arial,
 			Style:  fontstyle.Normal,
-			Color:  color.NewBlack(),
+			Color:  props.NewBlack(),
 		},
 	}
 }
@@ -178,15 +177,15 @@ func (b *builder) AddUTF8Font(family string, style fontstyle.Type, file string) 
 	return b
 }
 
-func (b *builder) Build() *Maroto {
-	return &Maroto{
+func (b *builder) Build() *Config {
+	return &Config{
 		ProviderType: b.providerType,
 		Dimensions:   b.getDimensions(),
 		Margins:      b.margins,
 		Workers:      b.workerPoolSize,
 		Debug:        b.debug,
 		MaxGridSize:  b.maxGridSize,
-		Font:         b.font,
+		DefaultFont:  b.font,
 		CustomFonts:  b.customFonts,
 	}
 }

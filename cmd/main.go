@@ -124,7 +124,7 @@ func buildTextsRow() []core.Row {
 func buildHeader() []core.Row {
 	r1 := row.New(30).Add(
 		col.New(12).Add(
-			text.New("Maroto V2", props.Text{
+			text.New("Config V2", props.Text{
 				Top:   5,
 				Size:  15,
 				Align: align.Center,

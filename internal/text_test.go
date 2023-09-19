@@ -1,7 +1,7 @@
 package internal_test
 
 /*func TestNewText(t *testing.T) {
-	text := internal.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Font{})
+	text := internal.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.DefaultFont{})
 
 	assert.NotNil(t, text)
 	assert.Equal(t, fmt.Sprintf("%T", text), "*internal.text")
@@ -15,7 +15,7 @@ func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(8.0)
 
-	fontstyle := &mocks.Font{}
+	fontstyle := &mocks.DefaultFont{}
 	fontstyle.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
 	sut := internal.NewText(pdf, nil, fontstyle)
@@ -35,7 +35,7 @@ func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
 
-	fontstyle := &mocks.Font{}
+	fontstyle := &mocks.DefaultFont{}
 	fontstyle.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
 	sut := internal.NewText(pdf, nil, fontstyle)
@@ -55,7 +55,7 @@ func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
 
-	fontstyle := &mocks.Font{}
+	fontstyle := &mocks.DefaultFont{}
 	fontstyle.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
 	sut := internal.NewText(pdf, nil, fontstyle)
@@ -78,7 +78,7 @@ func TestText_GetLinesQuantity_WhenHasToBreakLines(t *testing.T) {
 	math := &mocks.Math{}
 	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
 
-	fontstyle := &mocks.Font{}
+	fontstyle := &mocks.DefaultFont{}
 	fontstyle.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
 	sut := internal.NewText(pdf, math, fontstyle)
@@ -98,10 +98,10 @@ func TestText_Add(t *testing.T) {
 		family     string
 		color      color.Color
 		pdf        func() *mocks.Fpdf
-		fontstyle       func() *mocks.Font
+		fontstyle       func() *mocks.DefaultFont
 		cell       func() *internal.Cell
 		assertPdf  func(t *testing.T, pdf *mocks.Fpdf)
-		assertFont func(t *testing.T, fontstyle *mocks.Font)
+		assertFont func(t *testing.T, fontstyle *mocks.DefaultFont)
 	}{
 		{
 			"Left Align",
@@ -117,8 +117,8 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Font {
-				_font := &mocks.Font{}
+			func() *mocks.DefaultFont {
+				_font := &mocks.DefaultFont{}
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -137,7 +137,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
 				_pdf.AssertCalled(t, "Text", 11.0, 16.0, "TextHelper1")
 			},
-			func(t *testing.T, _font *mocks.Font) {
+			func(t *testing.T, _font *mocks.DefaultFont) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", consts.Arial, consts.BoldItalic, 16.0)
 				_font.AssertNumberOfCalls(t, "GetColor", 1)
@@ -146,7 +146,7 @@ func TestText_Add(t *testing.T) {
 			},
 		},
 		{
-			"Custom Font",
+			"Custom DefaultFont",
 			"TextHelper1",
 			align.Type,
 			"CustomFont",
@@ -159,8 +159,8 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Font {
-				_font := &mocks.Font{}
+			func() *mocks.DefaultFont {
+				_font := &mocks.DefaultFont{}
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -179,7 +179,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
 				_pdf.AssertCalled(t, "Text", 11.0, 16.0, "TextHelper1")
 			},
-			func(t *testing.T, _font *mocks.Font) {
+			func(t *testing.T, _font *mocks.DefaultFont) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", "CustomFont", consts.BoldItalic, 16.0)
 				_font.AssertNumberOfCalls(t, "GetColor", 1)
@@ -202,8 +202,8 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Font {
-				_font := &mocks.Font{}
+			func() *mocks.DefaultFont {
+				_font := &mocks.DefaultFont{}
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -223,7 +223,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
 				_pdf.AssertCalled(t, "Text", 12.5, 16.0, "TextHelper2")
 			},
-			func(t *testing.T, _font *mocks.Font) {
+			func(t *testing.T, _font *mocks.DefaultFont) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", consts.Arial, consts.BoldItalic, 16.0)
 				_font.AssertNumberOfCalls(t, "GetColor", 1)
@@ -246,8 +246,8 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Font {
-				_font := &mocks.Font{}
+			func() *mocks.DefaultFont {
+				_font := &mocks.DefaultFont{}
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -266,7 +266,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
 				_pdf.AssertCalled(t, "Text", 14.0, 16.0, "TextHelper3")
 			},
-			func(t *testing.T, _font *mocks.Font) {
+			func(t *testing.T, _font *mocks.DefaultFont) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", consts.Arial, consts.BoldItalic, 16.0)
 				_font.AssertNumberOfCalls(t, "GetColor", 1)
@@ -289,8 +289,8 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Font {
-				_font := &mocks.Font{}
+			func() *mocks.DefaultFont {
+				_font := &mocks.DefaultFont{}
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -309,7 +309,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
 				_pdf.AssertCalled(t, "Text", 14.0, 16.0, "TextHelper4")
 			},
-			func(t *testing.T, _font *mocks.Font) {
+			func(t *testing.T, _font *mocks.DefaultFont) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", consts.Arial, consts.BoldItalic, 16.0)
 				_font.AssertNumberOfCalls(t, "GetColor", 1)
@@ -342,8 +342,8 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Font {
-				_font := &mocks.Font{}
+			func() *mocks.DefaultFont {
+				_font := &mocks.DefaultFont{}
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -367,7 +367,7 @@ func TestText_Add(t *testing.T) {
 
 				_pdf.AssertNumberOfCalls(t, "Text", 92)
 			},
-			func(t *testing.T, _font *mocks.Font) {
+			func(t *testing.T, _font *mocks.DefaultFont) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", consts.Arial, consts.BoldItalic, 16.0)
 				_font.AssertNumberOfCalls(t, "GetColor", 1)
@@ -399,8 +399,8 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Font {
-				_font := &mocks.Font{}
+			func() *mocks.DefaultFont {
+				_font := &mocks.DefaultFont{}
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -429,7 +429,7 @@ func TestText_Add(t *testing.T) {
 
 				_pdf.AssertNumberOfCalls(t, "Text", 91)
 			},
-			func(t *testing.T, _font *mocks.Font) {
+			func(t *testing.T, _font *mocks.DefaultFont) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", consts.Arial, consts.BoldItalic, 16.0)
 				_font.AssertNumberOfCalls(t, "GetColor", 1)
@@ -438,7 +438,7 @@ func TestText_Add(t *testing.T) {
 			},
 		},
 		{
-			"Custom Font Color",
+			"Custom DefaultFont Color",
 			"CustomFontColor",
 			align.Type,
 			consts.Arial,
@@ -451,8 +451,8 @@ func TestText_Add(t *testing.T) {
 				_pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(value string) string { return value })
 				return _pdf
 			},
-			func() *mocks.Font {
-				_font := &mocks.Font{}
+			func() *mocks.DefaultFont {
+				_font := &mocks.DefaultFont{}
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -471,7 +471,7 @@ func TestText_Add(t *testing.T) {
 				_pdf.AssertNumberOfCalls(t, "Text", 1)
 				_pdf.AssertCalled(t, "Text", 11.0, 16.0, "CustomFontColor")
 			},
-			func(t *testing.T, _font *mocks.Font) {
+			func(t *testing.T, _font *mocks.DefaultFont) {
 				_font.AssertNumberOfCalls(t, "SetFont", 1)
 				_font.AssertCalled(t, "SetFont", consts.Arial, consts.BoldItalic, 16.0)
 				_font.AssertNumberOfCalls(t, "GetColor", 1)

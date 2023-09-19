@@ -15,7 +15,7 @@ type base64Image struct {
 	base64    string
 	extension extension.Type
 	prop      props.Rect
-	config    *config.Maroto
+	config    *config.Config
 }
 
 func NewFromBase64(path string, extension extension.Type, ps ...props.Rect) core.Component {
@@ -61,6 +61,6 @@ func (b *base64Image) GetStructure() *tree.Node[core.Structure] {
 	return tree.NewNode(str)
 }
 
-func (b *base64Image) SetConfig(config *config.Maroto) {
+func (b *base64Image) SetConfig(config *config.Config) {
 	b.config = config
 }

@@ -3,7 +3,7 @@ package internal
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 const (
@@ -22,8 +22,8 @@ type Font interface {
 	GetSize() float64
 	GetFont() (string, fontstyle.Type, float64)
 	GetScaleFactor() (scaleFactor float64)
-	SetColor(color *color.Color)
-	GetColor() *color.Color
+	SetColor(color *props.Color)
+	GetColor() *props.Color
 }
 
 type font struct {
@@ -32,7 +32,7 @@ type font struct {
 	family      string
 	style       fontstyle.Type
 	scaleFactor float64
-	fontColor   *color.Color
+	fontColor   *props.Color
 }
 
 // NewFont create a Font.
@@ -45,7 +45,7 @@ func NewFont(pdf fpdf.Fpdf, size float64, family string, style fontstyle.Type) *
 		family:      family,
 		style:       style,
 		scaleFactor: gofpdfFontScale1 / gofpdfFontScale2, // Value defined inside gofpdf constructor,
-		fontColor:   &color.Color{Red: 0, Green: 0, Blue: 0},
+		fontColor:   &props.Color{Red: 0, Green: 0, Blue: 0},
 	}
 }
 
@@ -103,7 +103,7 @@ func (s *font) GetScaleFactor() (scaleFactor float64) {
 	return s.scaleFactor
 }
 
-func (s *font) SetColor(color *color.Color) {
+func (s *font) SetColor(color *props.Color) {
 	if color == nil {
 		return
 	}
@@ -112,6 +112,6 @@ func (s *font) SetColor(color *color.Color) {
 	s.pdf.SetTextColor(color.Red, color.Green, color.Blue)
 }
 
-func (s *font) GetColor() *color.Color {
+func (s *font) GetColor() *props.Color {
 	return s.fontColor
 }

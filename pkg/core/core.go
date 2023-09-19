@@ -28,7 +28,7 @@ type Document interface {
 }
 
 type Node interface {
-	SetConfig(config *config.Maroto)
+	SetConfig(config *config.Config)
 	GetStructure() *tree.Node[Structure]
 }
 
@@ -41,7 +41,7 @@ type Col interface {
 	Node
 	Add(components ...Component) Col
 	GetSize() int
-	WithStyle(style *props.Style) Col
+	WithStyle(style *props.Cell) Col
 	Render(provider Provider, cell context.Cell, createCell bool)
 }
 
@@ -49,7 +49,7 @@ type Row interface {
 	Node
 	Add(cols ...Col) Row
 	GetHeight() float64
-	WithStyle(style *props.Style) Row
+	WithStyle(style *props.Cell) Row
 	Render(provider Provider, cell context.Cell)
 }
 
@@ -64,7 +64,7 @@ type Page interface {
 type Provider interface {
 	// Grid
 	CreateRow(height float64)
-	CreateCol(width, height float64, config *config.Maroto, style *props.Style)
+	CreateCol(width, height float64, config *config.Config, style *props.Cell)
 
 	// Features
 	AddText(text string, cell context.Cell, prop props.Text)

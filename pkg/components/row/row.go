@@ -15,8 +15,8 @@ import (
 type row struct {
 	height float64
 	cols   []core.Col
-	style  *props.Style
-	config *config.Maroto
+	style  *props.Cell
+	config *config.Config
 }
 
 func New(height float64) core.Row {
@@ -31,7 +31,7 @@ func Empty(height float64) core.Row {
 	return r
 }
 
-func (r *row) SetConfig(config *config.Maroto) {
+func (r *row) SetConfig(config *config.Config) {
 	r.config = config
 	for _, cols := range r.cols {
 		cols.SetConfig(config)
@@ -87,7 +87,7 @@ func (r *row) Render(provider core.Provider, cell context.Cell) {
 	provider.CreateRow(cell.Height)
 }
 
-func (r *row) WithStyle(style *props.Style) core.Row {
+func (r *row) WithStyle(style *props.Cell) core.Row {
 	r.style = style
 	return r
 }

@@ -4,8 +4,6 @@ import (
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/signature"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
@@ -31,7 +29,7 @@ func main() {
 	m.AddRow(40,
 		signature.NewCol(6, "Signature 4", props.Font{Style: fontstyle.Italic}),
 		signature.NewCol(4, "Signature 5", props.Font{Size: 12}),
-		signature.NewCol(2, "Signature 6", props.Font{Color: &color.Color{255, 0, 0}}),
+		signature.NewCol(2, "Signature 6", props.Font{Color: &props.Color{255, 0, 0}}),
 	)
 
 	document, err := m.Generate()

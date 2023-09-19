@@ -3,7 +3,6 @@ package internal
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
 	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -15,14 +14,14 @@ type Line interface {
 
 type line struct {
 	pdf              fpdf.Fpdf
-	defaultLineColor *color.Color
+	defaultLineColor *props.Color
 }
 
 // NewLine create a Line Helper.
 func NewLine(pdf fpdf.Fpdf) *line {
 	return &line{
 		pdf:              pdf,
-		defaultLineColor: color.NewBlack(),
+		defaultLineColor: props.NewBlack(),
 	}
 }
 

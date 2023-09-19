@@ -5,11 +5,11 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type Maroto struct {
+type Config struct {
 	ProviderType provider.Type
 	Dimensions   *Dimensions
 	Margins      *Margins
-	Font         *props.Font
+	DefaultFont  *props.Font
 	CustomFonts  []*CustomFont
 	Workers      int
 	Debug        bool

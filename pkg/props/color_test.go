@@ -1,16 +1,16 @@
-package color_test
+package props_test
 
 import (
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewWhite(t *testing.T) {
 	// Act
-	white := color.NewWhite()
+	white := props.NewWhite()
 
 	// Assert
 	assert.Equal(t, 255, white.Red)
@@ -20,7 +20,7 @@ func TestNewWhite(t *testing.T) {
 
 func TestNewBlack(t *testing.T) {
 	// Act
-	black := color.NewBlack()
+	black := props.NewBlack()
 
 	// Assert
 	assert.Equal(t, 0, black.Red)
@@ -30,7 +30,7 @@ func TestNewBlack(t *testing.T) {
 
 func TestColor_IsWhite(t *testing.T) {
 	// Act
-	white := color.NewWhite()
+	white := props.NewWhite()
 
 	// Assert
 	assert.True(t, white.IsWhite())

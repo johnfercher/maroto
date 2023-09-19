@@ -18,7 +18,7 @@ import (
 type fileImage struct {
 	path   string
 	prop   props.Rect
-	config *config.Maroto
+	config *config.Config
 }
 
 func NewFromFile(path string, ps ...props.Rect) core.Component {
@@ -59,6 +59,6 @@ func (f *fileImage) GetStructure() *tree.Node[core.Structure] {
 	return tree.NewNode(str)
 }
 
-func (f *fileImage) SetConfig(config *config.Maroto) {
+func (f *fileImage) SetConfig(config *config.Config) {
 	f.config = config
 }

@@ -10,7 +10,7 @@ import (
 type page struct {
 	number int
 	rows   []core.Row
-	config *config.Maroto
+	config *config.Config
 }
 
 func New() core.Page {
@@ -25,7 +25,7 @@ func (p *page) Render(provider core.Provider, cell context.Cell) {
 	}
 }
 
-func (p *page) SetConfig(config *config.Maroto) {
+func (p *page) SetConfig(config *config.Config) {
 	p.config = config
 	for _, row := range p.rows {
 		row.SetConfig(config)

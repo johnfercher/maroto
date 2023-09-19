@@ -4,8 +4,6 @@ import (
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
-	"github.com/johnfercher/maroto/v2/pkg/core/color"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -37,7 +35,7 @@ func main() {
 		text.NewCol(8, header[1], props.Text{Style: fontstyle.Bold, Family: fontfamily.Arial, Align: align.Center}),
 	)
 
-	grey := color.Color{200, 200, 200}
+	grey := props.Color{200, 200, 200}
 	for i, content := range contents {
 		r := m.AddRow(5,
 			text.NewCol(4, content[0], props.Text{Align: align.Center}),
@@ -45,7 +43,7 @@ func main() {
 		)
 
 		if i%2 == 0 {
-			r.WithStyle(&props.Style{
+			r.WithStyle(&props.Cell{
 				BackgroundColor: &grey,
 			})
 		}

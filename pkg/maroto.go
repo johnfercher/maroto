@@ -6,6 +6,8 @@ import (
 	"io"
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/cache"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
@@ -17,7 +19,6 @@ import (
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
-	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
@@ -25,7 +26,7 @@ import (
 )
 
 type maroto struct {
-	config     *config.Maroto
+	config     *config.Config
 	provider   core.Provider
 	imageCache cache.Cache
 
@@ -43,7 +44,7 @@ type maroto struct {
 	pool async.Processor[[]core.Page, []byte]
 }
 
-func NewMaroto(config ...*config.Maroto) core.Maroto {
+func NewMaroto(config ...*config.Config) core.Maroto {
 	cache := cache.New()
 	cfg := getConfig(config...)
 	provider := getProvider(cache, cfg)
@@ -267,7 +268,7 @@ func (m *maroto) getRowsHeight(rows ...core.Row) float64 {
 	return height
 }
 
-func getConfig(configs ...*config.Maroto) *config.Maroto {
+func getConfig(configs ...*config.Config) *config.Config {
 	if len(configs) > 0 {
 		return configs[0]
 	}
@@ -275,7 +276,7 @@ func getConfig(configs ...*config.Maroto) *config.Maroto {
 	return config.NewBuilder().Build()
 }
 
-func getProvider(cache cache.Cache, cfg *config.Maroto) core.Provider {
+func getProvider(cache cache.Cache, cfg *config.Config) core.Provider {
 	if cfg.ProviderType == provider.HTML {
 		return html.New(cfg, providers.WithCache(cache))
 	}

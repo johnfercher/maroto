@@ -14,7 +14,7 @@ import (
 type qrCode struct {
 	code   string
 	prop   props.Rect
-	config *config.Maroto
+	config *config.Config
 }
 
 func NewQr(code string, barcodeProps ...props.Rect) core.Component {
@@ -54,6 +54,6 @@ func (q *qrCode) GetStructure() *tree.Node[core.Structure] {
 	return tree.NewNode(str)
 }
 
-func (q *qrCode) SetConfig(config *config.Maroto) {
+func (q *qrCode) SetConfig(config *config.Config) {
 	q.config = config
 }

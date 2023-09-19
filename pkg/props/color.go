@@ -1,4 +1,4 @@
-package color
+package props
 
 // Color represents a color in the RGB (Red, Green, Blue) space,
 // is possible mix values, when all values are 0 the result color is black

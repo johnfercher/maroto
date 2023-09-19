@@ -15,7 +15,7 @@ import (
 type signature struct {
 	value  string
 	prop   props.Font
-	config *config.Maroto
+	config *config.Config
 }
 
 func New(value string, ps ...props.Font) core.Component {
@@ -55,6 +55,6 @@ func (s *signature) GetStructure() *tree.Node[core.Structure] {
 	return tree.NewNode(str)
 }
 
-func (s *signature) SetConfig(config *config.Maroto) {
+func (s *signature) SetConfig(config *config.Config) {
 	s.config = config
 }

@@ -1,14 +1,14 @@
 package fontfamily
 
 const (
-	// Arial represents an arial Font.
+	// Arial represents an arial DefaultFont.
 	Arial string = "arial"
-	// Helvetica represents a helvetica Font.
+	// Helvetica represents a helvetica DefaultFont.
 	Helvetica string = "helvetica"
-	// Symbol represents a symbol Font.
+	// Symbol represents a symbol DefaultFont.
 	Symbol string = "symbol"
-	// ZapBats represents a zapfdingbats Font.
+	// ZapBats represents a zapfdingbats DefaultFont.
 	ZapBats string = "zapfdingbats"
-	// Courier represents a courier Font.
+	// Courier represents a courier DefaultFont.
 	Courier string = "courier"
 )
