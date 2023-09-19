@@ -6,6 +6,7 @@ import (
 	"errors"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/core/context"
 
 	"github.com/google/uuid"
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
@@ -15,8 +16,8 @@ import (
 
 // Image is the abstraction which deals of how to add images in a PDF.
 type Image interface {
-	AddFromFile(path string, cell Cell, prop props.Rect) (err error)
-	AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, extension extension.Type) (err error)
+	AddFromFile(path string, cell context.Cell, prop props.Rect) (err error)
+	AddFromBase64(stringBase64 string, cell context.Cell, prop props.Rect, extension extension.Type) (err error)
 }
 
 type image struct {
@@ -33,7 +34,7 @@ func NewImage(pdf fpdf.Fpdf, math Math) *image {
 }
 
 // AddFromFile open an image from disk and add to PDF.
-func (s *image) AddFromFile(path string, cell Cell, prop props.Rect) error {
+func (s *image) AddFromFile(path string, cell context.Cell, prop props.Rect) error {
 	info := s.pdf.RegisterImageOptions(path, gofpdf.ImageOptions{
 		ReadDpi:   false,
 		ImageType: "",
@@ -48,7 +49,7 @@ func (s *image) AddFromFile(path string, cell Cell, prop props.Rect) error {
 }
 
 // AddFromBase64 use a base64 string to add to PDF.
-func (s *image) AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, extension extension.Type) error {
+func (s *image) AddFromBase64(stringBase64 string, cell context.Cell, prop props.Rect, extension extension.Type) error {
 	imageID, _ := uuid.NewRandom()
 
 	ss, _ := base64.StdEncoding.DecodeString(stringBase64)
@@ -70,7 +71,7 @@ func (s *image) AddFromBase64(stringBase64 string, cell Cell, prop props.Rect, e
 	return nil
 }
 
-func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell Cell, prop props.Rect) {
+func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell context.Cell, prop props.Rect) {
 	var x, y, w, h float64
 	if prop.Center {
 		x, y, w, h = s.math.GetRectCenterColProperties(info.Width(), info.Height(), cell.Width, cell.Height, cell.X, prop.Percent)

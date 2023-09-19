@@ -3,19 +3,20 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/code"
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
+	"github.com/johnfercher/maroto/v2/pkg/components/image"
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/core/color"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
 	"github.com/johnfercher/maroto/v2/pkg"
-	"github.com/johnfercher/maroto/v2/pkg/code"
-	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/domain"
-	"github.com/johnfercher/maroto/v2/pkg/grid/col"
-	"github.com/johnfercher/maroto/v2/pkg/grid/row"
-	"github.com/johnfercher/maroto/v2/pkg/image"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/johnfercher/maroto/v2/pkg/text"
 )
 
 func main() {
@@ -88,8 +89,8 @@ func main() {
 	document.GetReport().Print()
 }
 
-func getTransactions() []domain.Row {
-	rows := []domain.Row{
+func getTransactions() []core.Row {
+	rows := []core.Row{
 		row.New(5).Add(
 			col.New(3),
 			text.NewCol(4, "Product", props.Text{Size: 9, Align: align.Center, Style: fontstyle.Bold}),
@@ -98,7 +99,7 @@ func getTransactions() []domain.Row {
 		),
 	}
 
-	var contentsRow []domain.Row
+	var contentsRow []core.Row
 	contents := getContents()
 	for i, content := range contents {
 		r := row.New(4).Add(
@@ -136,7 +137,7 @@ func getTransactions() []domain.Row {
 	return rows
 }
 
-func getPageHeader() domain.Row {
+func getPageHeader() core.Row {
 	return row.New(20).Add(
 		image.NewFromFileCol(3, "docs/assets/images/biplane.jpg", props.Rect{
 			Center:  true,
@@ -168,7 +169,7 @@ func getPageHeader() domain.Row {
 	)
 }
 
-func getPageFooter() domain.Row {
+func getPageFooter() core.Row {
 	return row.New(20).Add(
 		col.New(12).Add(
 			text.New("Tel: 55 024 12345-1234", props.Text{

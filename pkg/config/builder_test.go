@@ -4,17 +4,16 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
+	"github.com/johnfercher/maroto/v2/pkg/core/color"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 
-	"github.com/johnfercher/maroto/v2/pkg/color"
-
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/provider"
-
 	"github.com/stretchr/testify/assert"
 )
 
