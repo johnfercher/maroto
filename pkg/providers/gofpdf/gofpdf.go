@@ -3,15 +3,13 @@ package gofpdf
 import (
 	"bytes"
 
+	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
+	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
-
-	"github.com/johnfercher/maroto/v2/internal"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
@@ -91,23 +89,23 @@ func (g *gofpdfProvider) GetMargins() (left float64, top float64, right float64,
 	return g.fpdf.GetMargins()
 }
 
-func (g *gofpdfProvider) AddText(text string, cell context.Cell, prop props.Text) {
+func (g *gofpdfProvider) AddText(text string, cell core.Cell, prop props.Text) {
 	g.text.Add(text, cell, prop)
 }
 
-func (g *gofpdfProvider) AddSignature(text string, cell context.Cell, prop props.Text) {
+func (g *gofpdfProvider) AddSignature(text string, cell core.Cell, prop props.Text) {
 	g.signature.AddSpaceFor(text, cell, prop)
 }
 
-func (g *gofpdfProvider) AddMatrixCode(code string, cell context.Cell, prop props.Rect) {
+func (g *gofpdfProvider) AddMatrixCode(code string, cell core.Cell, prop props.Rect) {
 	g.code.AddDataMatrix(code, cell, prop)
 }
 
-func (g *gofpdfProvider) AddQrCode(code string, cell context.Cell, rect props.Rect) {
+func (g *gofpdfProvider) AddQrCode(code string, cell core.Cell, rect props.Rect) {
 	g.code.AddQr(code, cell, rect)
 }
 
-func (g *gofpdfProvider) AddBarCode(code string, cell context.Cell, prop props.Barcode) {
+func (g *gofpdfProvider) AddBarCode(code string, cell core.Cell, prop props.Barcode) {
 	err := g.code.AddBar(code, cell, prop)
 	if err != nil {
 		textProp := props.Text{}
@@ -117,7 +115,7 @@ func (g *gofpdfProvider) AddBarCode(code string, cell context.Cell, prop props.B
 	}
 }
 
-func (g *gofpdfProvider) AddImage(file string, cell context.Cell, prop props.Rect, extension extension.Type) {
+func (g *gofpdfProvider) AddImage(file string, cell core.Cell, prop props.Rect, extension extension.Type) {
 	img, err := g.imageCache.Load(file, extension)
 	if err != nil {
 		textProp := props.Text{}

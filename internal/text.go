@@ -3,7 +3,7 @@ package internal
 import (
 	"strings"
 
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
@@ -14,7 +14,7 @@ import (
 
 // Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
-	Add(text string, cell context.Cell, textProp props.Text)
+	Add(text string, cell core.Cell, textProp props.Text)
 	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
 }
 
@@ -34,7 +34,7 @@ func NewText(pdf fpdf.Fpdf, math Math, font Font) *text {
 }
 
 // Add a text inside a cell.
-func (s *text) Add(text string, cell context.Cell, textProp props.Text) {
+func (s *text) Add(text string, cell core.Cell, textProp props.Text) {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	if textProp.Top > cell.Height {

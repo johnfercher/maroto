@@ -5,8 +5,6 @@ import (
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
-
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -45,7 +43,7 @@ func NewFromFileRow(height float64, path string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (f *fileImage) Render(provider core.Provider, cell context.Cell) {
+func (f *fileImage) Render(provider core.Provider, cell core.Cell) {
 	extensionStr := strings.Split(f.path, ".")[1]
 	provider.AddImage(f.path, cell, f.prop, extension.Type(extensionStr))
 }

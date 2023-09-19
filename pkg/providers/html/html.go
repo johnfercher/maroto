@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/johnfercher/maroto/v2/pkg/cache"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
+	"github.com/johnfercher/maroto/v2/pkg/cache"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
@@ -148,7 +148,7 @@ func (h *html) GetMargins() (left float64, top float64, right float64, bottom fl
 	return h.div.margins.Left, h.div.margins.Top, h.div.margins.Right, h.div.margins.Bottom
 }
 
-func (h *html) AddText(text string, _ context.Cell, _ props.Text) {
+func (h *html) AddText(text string, _ core.Cell, _ props.Text) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
@@ -159,7 +159,7 @@ func (h *html) AddText(text string, _ context.Cell, _ props.Text) {
 	col.AddNext(textNode)
 }
 
-func (h *html) AddSignature(text string, _ context.Cell, _ props.Text) {
+func (h *html) AddSignature(text string, _ core.Cell, _ props.Text) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
@@ -170,7 +170,7 @@ func (h *html) AddSignature(text string, _ context.Cell, _ props.Text) {
 	col.AddNext(textNode)
 }
 
-func (h *html) AddMatrixCode(text string, _ context.Cell, _ props.Rect) {
+func (h *html) AddMatrixCode(text string, _ core.Cell, _ props.Rect) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
@@ -181,7 +181,7 @@ func (h *html) AddMatrixCode(text string, _ context.Cell, _ props.Rect) {
 	col.AddNext(textNode)
 }
 
-func (h *html) AddQrCode(code string, _ context.Cell, _ props.Rect) {
+func (h *html) AddQrCode(code string, _ core.Cell, _ props.Rect) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
@@ -192,7 +192,7 @@ func (h *html) AddQrCode(code string, _ context.Cell, _ props.Rect) {
 	col.AddNext(textNode)
 }
 
-func (h *html) AddBarCode(code string, _ context.Cell, _ props.Barcode) {
+func (h *html) AddBarCode(code string, _ core.Cell, _ props.Barcode) {
 	col := h.getLastCol()
 
 	textDiv := col.GetData()
@@ -203,7 +203,7 @@ func (h *html) AddBarCode(code string, _ context.Cell, _ props.Barcode) {
 	col.AddNext(textNode)
 }
 
-func (h *html) AddImage(value string, _ context.Cell, _ props.Rect, extension extension.Type) {
+func (h *html) AddImage(value string, _ core.Cell, _ props.Rect, extension extension.Type) {
 	minSize := 20
 	if len(value) < minSize {
 		minSize = len(value)

@@ -1,4 +1,4 @@
-package context
+package core
 
 // Cell represents a cell inside the PDF.
 type Cell struct {

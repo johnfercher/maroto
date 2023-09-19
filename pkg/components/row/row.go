@@ -6,7 +6,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/johnfercher/go-tree/tree"
@@ -63,7 +62,7 @@ func (r *row) GetStructure() *tree.Node[core.Structure] {
 	return node
 }
 
-func (r *row) Render(provider core.Provider, cell context.Cell) {
+func (r *row) Render(provider core.Provider, cell core.Cell) {
 	cell.Height = r.height
 	innerCell := cell.Copy()
 

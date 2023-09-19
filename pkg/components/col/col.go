@@ -6,7 +6,6 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -55,7 +54,7 @@ func (c *col) GetStructure() *tree.Node[core.Structure] {
 	return node
 }
 
-func (c *col) Render(provider core.Provider, cell context.Cell, createCell bool) {
+func (c *col) Render(provider core.Provider, cell core.Cell, createCell bool) {
 	if createCell {
 		provider.CreateCol(cell.Width, cell.Height, c.config, c.style)
 	}

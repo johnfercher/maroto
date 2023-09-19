@@ -8,7 +8,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -42,7 +41,7 @@ func NewRow(height float64, value string, ps ...props.Font) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (s *signature) Render(provider core.Provider, cell context.Cell) {
+func (s *signature) Render(provider core.Provider, cell core.Cell) {
 	provider.AddSignature(s.value, cell, s.prop.ToTextProp(align.Center, 0.0, false, 0))
 }
 

@@ -6,7 +6,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -63,7 +62,7 @@ func (t *text) GetValue() string {
 	return t.value
 }
 
-func (t *text) Render(provider core.Provider, cell context.Cell) {
+func (t *text) Render(provider core.Provider, cell core.Cell) {
 	t.prop.MakeValid(t.config.DefaultFont)
 	provider.AddText(t.value, cell, t.prop)
 }

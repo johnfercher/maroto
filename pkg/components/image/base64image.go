@@ -7,7 +7,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -43,7 +42,7 @@ func NewFromBase64Row(height float64, path string, extension extension.Type, ps 
 	return row.New(height).Add(c)
 }
 
-func (b *base64Image) Render(provider core.Provider, cell context.Cell) {
+func (b *base64Image) Render(provider core.Provider, cell core.Cell) {
 	provider.AddImage(b.base64, cell, b.prop, b.extension)
 }
 

@@ -7,7 +7,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -41,7 +40,7 @@ func NewQrRow(height float64, code string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (q *qrCode) Render(provider core.Provider, cell context.Cell) {
+func (q *qrCode) Render(provider core.Provider, cell core.Cell) {
 	provider.AddQrCode(q.code, cell, q.prop)
 }
 

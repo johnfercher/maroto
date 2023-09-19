@@ -3,13 +3,13 @@ package internal
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 // Line is the abstraction which deals with lines.
 type Line interface {
-	Draw(cell context.Cell, lineProp props.Line)
+	Draw(cell core.Cell, lineProp props.Line)
 }
 
 type line struct {
@@ -25,7 +25,7 @@ func NewLine(pdf fpdf.Fpdf) *line {
 	}
 }
 
-func (s *line) Draw(cell context.Cell, lineProp props.Line) {
+func (s *line) Draw(cell core.Cell, lineProp props.Line) {
 	s.pdf.SetDrawColor(lineProp.Color.Red, lineProp.Color.Green, lineProp.Color.Blue)
 	s.pdf.SetLineWidth(lineProp.Width)
 	s.drawStylizedLine(cell, lineProp)
@@ -33,7 +33,7 @@ func (s *line) Draw(cell context.Cell, lineProp props.Line) {
 	s.pdf.SetLineWidth(linestyle.DefaultLineWidth)
 }
 
-func (s *line) drawStylizedLine(cell context.Cell, prop props.Line) {
+func (s *line) drawStylizedLine(cell core.Cell, prop props.Line) {
 	if prop.Style == linestyle.Solid {
 		s.pdf.Line(cell.X, cell.Y, cell.Width, cell.Height)
 		return
@@ -47,7 +47,7 @@ func (s *line) drawStylizedLine(cell context.Cell, prop props.Line) {
 	s.drawDottedLine(cell, prop.Width)
 }
 
-func (s *line) drawDashedLine(cell context.Cell) {
+func (s *line) drawDashedLine(cell core.Cell) {
 	xStep := 5.0
 	halfDivisor := 2.0
 	xHalfStep := xStep / halfDivisor
@@ -56,7 +56,7 @@ func (s *line) drawDashedLine(cell context.Cell) {
 	}
 }
 
-func (s *line) drawDottedLine(cell context.Cell, width float64) {
+func (s *line) drawDottedLine(cell core.Cell, width float64) {
 	xStep := 3.0
 	for x := cell.X; x < cell.Width; x += xStep {
 		s.pdf.Line(x, cell.Y, x+width, cell.Height)

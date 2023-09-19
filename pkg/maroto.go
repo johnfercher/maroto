@@ -12,7 +12,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
 	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf"
 	"github.com/johnfercher/maroto/v2/pkg/providers/html"
 
@@ -31,7 +30,7 @@ type maroto struct {
 	imageCache cache.Cache
 
 	// Building
-	cell          context.Cell
+	cell          core.Cell
 	pages         []core.Page
 	rows          []core.Row
 	header        []core.Row
@@ -54,7 +53,7 @@ func NewMaroto(config ...*config.Config) core.Maroto {
 
 	m := &maroto{
 		provider: provider,
-		cell: context.NewRootContext(width, height, context.Margins{
+		cell: core.NewRootContext(width, height, core.Margins{
 			Left:   left,
 			Top:    top,
 			Right:  right,

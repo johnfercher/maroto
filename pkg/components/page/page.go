@@ -4,7 +4,6 @@ import (
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/core/context"
 )
 
 type page struct {
@@ -17,7 +16,7 @@ func New() core.Page {
 	return &page{}
 }
 
-func (p *page) Render(provider core.Provider, cell context.Cell) {
+func (p *page) Render(provider core.Provider, cell core.Cell) {
 	innerCell := cell.Copy()
 	for _, row := range p.rows {
 		row.Render(provider, innerCell)
