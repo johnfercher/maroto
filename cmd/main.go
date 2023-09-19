@@ -6,9 +6,9 @@ import (
 	"log"
 	"os"
 
-	code2 "github.com/johnfercher/maroto/v2/pkg/components/code"
+	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
-	image2 "github.com/johnfercher/maroto/v2/pkg/components/image"
+	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/signature"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -73,15 +73,15 @@ func buildCodesRow() []core.Row {
 	return []core.Row{
 		row.New(20).Add(
 			text.NewCol(4, "Barcode:", props.Text{Size: 15, Top: 6, Align: align.Center}),
-			code2.NewBarCol(8, "barcode", props.Barcode{Center: true, Percent: 70}),
+			code.NewBarCol(8, "barcode", props.Barcode{Center: true, Percent: 70}),
 		),
 		row.New(20).Add(
 			text.NewCol(4, "QrCode:", props.Text{Size: 15, Top: 6, Align: align.Center}),
-			code2.NewQrCol(8, "qrcode", props.Rect{Center: true, Percent: 70}),
+			code.NewQrCol(8, "qrcode", props.Rect{Center: true, Percent: 70}),
 		),
 		row.New(20).Add(
 			text.NewCol(4, "MatrixCode:", props.Text{Size: 15, Top: 6, Align: align.Center}),
-			code2.NewMatrixCol(8, "matrixcode", props.Rect{Center: true, Percent: 70}),
+			code.NewMatrixCol(8, "matrixcode", props.Rect{Center: true, Percent: 70}),
 		),
 	}
 }
@@ -97,11 +97,11 @@ func buildImagesRow() []core.Row {
 	return []core.Row{
 		row.New(20).Add(
 			text.NewCol(4, "Image From File:", props.Text{Size: 15, Top: 6, Align: align.Center}),
-			image2.NewFromFileCol(8, "docs/assets/images/biplane.jpg", props.Rect{Center: true, Percent: 90}),
+			image.NewFromFileCol(8, "docs/assets/images/biplane.jpg", props.Rect{Center: true, Percent: 90}),
 		),
 		row.New(20).Add(
 			text.NewCol(4, "Image From Base64::", props.Text{Size: 15, Top: 6, Align: align.Center}),
-			image2.NewFromBase64Col(8, stringBase64, extension.Png, props.Rect{Center: true, Percent: 90}),
+			image.NewFromBase64Col(8, stringBase64, extension.Png, props.Rect{Center: true, Percent: 90}),
 		),
 	}
 }
