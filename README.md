@@ -18,6 +18,7 @@ always when a new page appear, in this case, a header may have many rows, lines 
 
 * You can see the full documentation [here](https://maroto.io/).
 * Discussions are being addressed in [this issue](https://github.com/johnfercher/maroto/issues/257).
+* Roadmap is [here](https://github.com/users/johnfercher/projects/1).
 
 ![result](docs/assets/images/result.png)
 
