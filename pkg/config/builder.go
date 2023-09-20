@@ -1,6 +1,8 @@
 package config
 
 import (
+	"strings"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
@@ -9,14 +11,16 @@ import (
 )
 
 type builder struct {
-	providerType   provider.Type
-	dimensions     *Dimensions
-	margins        *Margins
-	workerPoolSize int
-	debug          bool
-	maxGridSize    int
-	font           *props.Font
-	customFonts    []*CustomFont
+	providerType      provider.Type
+	dimensions        *Dimensions
+	margins           *Margins
+	workerPoolSize    int
+	debug             bool
+	maxGridSize       int
+	font              *props.Font
+	customFonts       []*CustomFont
+	pageNumberPattern string
+	pageNumberPlace   props.Place
 }
 
 type Builder interface {
@@ -29,6 +33,7 @@ type Builder interface {
 	WithMaxGridSize(maxGridSize int) Builder
 	WithFont(font *props.Font) Builder
 	AddUTF8Font(family string, style fontstyle.Type, file string) Builder
+	WithPageNumber(pattern string, place props.Place) Builder
 	Build() *Config
 }
 
@@ -177,16 +182,33 @@ func (b *builder) AddUTF8Font(family string, style fontstyle.Type, file string) 
 	return b
 }
 
+func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
+	if !strings.Contains(pattern, "{current}") && !strings.Contains(pattern, "{total}") {
+		return b
+	}
+
+	if !place.IsValid() {
+		return b
+	}
+
+	b.pageNumberPattern = pattern
+	b.pageNumberPlace = place
+
+	return b
+}
+
 func (b *builder) Build() *Config {
 	return &Config{
-		ProviderType: b.providerType,
-		Dimensions:   b.getDimensions(),
-		Margins:      b.margins,
-		Workers:      b.workerPoolSize,
-		Debug:        b.debug,
-		MaxGridSize:  b.maxGridSize,
-		DefaultFont:  b.font,
-		CustomFonts:  b.customFonts,
+		ProviderType:      b.providerType,
+		Dimensions:        b.getDimensions(),
+		Margins:           b.margins,
+		Workers:           b.workerPoolSize,
+		Debug:             b.debug,
+		MaxGridSize:       b.maxGridSize,
+		DefaultFont:       b.font,
+		CustomFonts:       b.customFonts,
+		PageNumberPattern: b.pageNumberPattern,
+		PageNumberPlace:   b.pageNumberPlace,
 	}
 }
 
