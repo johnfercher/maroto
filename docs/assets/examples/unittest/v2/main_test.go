@@ -1,6 +1,8 @@
 package main
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
@@ -8,7 +10,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/test"
-	"testing"
 )
 
 func TestDocument_GetStructure(t *testing.T) {
