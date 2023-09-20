@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/consts/line"
 	"log"
 	"math/rand"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/line"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"

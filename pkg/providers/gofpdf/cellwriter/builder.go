@@ -2,8 +2,7 @@ package cellwriter
 
 import "github.com/jung-kurt/gofpdf"
 
-type CellWriterBuilder struct {
-}
+type CellWriterBuilder struct{}
 
 func NewBuilder() *CellWriterBuilder {
 	return &CellWriterBuilder{}

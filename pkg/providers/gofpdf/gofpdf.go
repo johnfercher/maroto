@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"bytes"
+
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
