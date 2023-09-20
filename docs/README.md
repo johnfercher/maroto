@@ -1,6 +1,6 @@
 # Maroto
 
-[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines) [![Roadmap](https://img.shields.io/badge/V2-Roadmap-purple)](https://github.com/users/johnfercher/projects/1) [![Discussion](https://img.shields.io/badge/V2-Discussion-blue)](https://github.com/johnfercher/maroto/issues/257) [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines) [![Roadmap](https://img.shields.io/badge/V2-Roadmap-purple)](https://github.com/users/johnfercher/projects/1) [![Discussion](https://img.shields.io/badge/V2-Discussion-blue)](https://github.com/johnfercher/maroto/issues/257) [![Release Notes](https://img.shields.io/badge/Release-Notes-cyan)](https://github.com/johnfercher/maroto/tags) [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
 
 #### Maroto`v2.0.0-alpha.12`is here! Try out:
 
