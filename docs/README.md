@@ -79,7 +79,7 @@ improved, enabling maroto to reach a whole new level in this fresh new step.
 In maroto`v2`, it will be possible to write unit tests by analyzing the **components tree**. To facilitate the 
 writing of unit tests, we are in the process of creating a dedicated test package.
 
-For an example, refer to [this link](v2/tests.md).
+For an example, refer to [this link](v2/features/unittests.md).
 
 ## Built-in Metrics
 This new version of maroto introduces an **optional decorator** that provides metrics for nearly all operations 
