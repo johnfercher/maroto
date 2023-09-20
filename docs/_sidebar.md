@@ -14,6 +14,7 @@
     * [Images](v2/features/image.md?id=image)
     * [Margins](v2/features/margins.md?id=custom-margins)
     * [Max Grid Sum](v2/features/maxgridsum.md?id=max-grid-sum)
+    * [Page Number](v2/features/pagenumber.md?id=pagenumber)
     * [QR Code](v2/features/qrcode.md?id=qrcode)
     * [Signature](v2/features/signature.md?id=signature)
     * [Text](v2/features/text.md?id=text)
