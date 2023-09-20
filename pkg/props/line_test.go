@@ -3,7 +3,7 @@ package props_test
 import (
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/line"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/stretchr/testify/assert"
 )
@@ -20,7 +20,7 @@ func TestLine_MakeValid(t *testing.T) {
 			&props.Line{},
 			1.0,
 			func(t *testing.T, m *props.Line) {
-				assert.Equal(t, m.Style, linestyle.Solid)
+				assert.Equal(t, m.Style, line.Solid)
 			},
 		},
 		{

@@ -119,7 +119,7 @@ func (h *html) SetCache(cache cache.Cache) {
 	h.imageCache = cache
 }
 
-func (h *html) CreateCol(width, height float64, _ *config.Config, _ *props.Cell) {
+func (h *html) CreateCol(width, height float64, config *config.Config, prop *props.Cell) {
 	var row *tree.Node[Div]
 
 	rowsLength := len(h.rows)

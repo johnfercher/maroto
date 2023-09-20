@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/line"
 	"log"
 	"math/rand"
 
@@ -22,39 +23,41 @@ func main() {
 
 	colStyle := &props.Cell{
 		BackgroundColor: &props.Color{80, 80, 80},
-		Border:          border.Full,
+		BorderType:      border.Full,
 		BorderColor:     &props.Color{200, 0, 0},
+		LineStyle:       line.Dashed,
+		BorderThickness: 0.5,
 	}
 
 	rowStyles := []*props.Cell{
 		{
 			BackgroundColor: &props.Color{220, 220, 220},
-			Border:          border.None,
+			BorderType:      border.None,
 			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
 			BackgroundColor: &props.Color{220, 220, 220},
-			Border:          border.Full,
+			BorderType:      border.Full,
 			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
 			BackgroundColor: &props.Color{220, 220, 220},
-			Border:          border.Left,
+			BorderType:      border.Left,
 			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
 			BackgroundColor: &props.Color{220, 220, 220},
-			Border:          border.Right,
+			BorderType:      border.Right,
 			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
 			BackgroundColor: &props.Color{220, 220, 220},
-			Border:          border.Top,
+			BorderType:      border.Top,
 			BorderColor:     &props.Color{0, 0, 200},
 		},
 		{
 			BackgroundColor: &props.Color{220, 220, 220},
-			Border:          border.Bottom,
+			BorderType:      border.Bottom,
 			BorderColor:     &props.Color{0, 0, 200},
 		},
 	}

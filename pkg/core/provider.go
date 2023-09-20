@@ -10,7 +10,7 @@ import (
 type Provider interface {
 	// Grid
 	CreateRow(height float64)
-	CreateCol(width, height float64, config *config.Config, style *props.Cell)
+	CreateCol(width, height float64, config *config.Config, prop *props.Cell)
 
 	// Features
 	AddText(text string, cell Cell, prop props.Text)

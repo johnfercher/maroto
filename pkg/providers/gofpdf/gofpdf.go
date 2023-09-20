@@ -2,17 +2,16 @@ package gofpdf
 
 import (
 	"bytes"
-
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
+	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf/cellwriter"
 
 	"github.com/jung-kurt/gofpdf"
 )
@@ -37,6 +36,7 @@ type gofpdfProvider struct {
 	code       internal.Code
 	image      internal.Image
 	imageCache cache.Cache
+	cellWriter cellwriter.CellWriter
 }
 
 func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider {
@@ -63,15 +63,17 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 	signature := internal.NewSignature(fpdf, math, text)
 	code := internal.NewCode(fpdf, math)
 	image := internal.NewImage(fpdf, math)
+	cellWriter := cellwriter.NewBuilder().Build(fpdf)
 
 	provider := &gofpdfProvider{
-		fpdf:      fpdf,
-		math:      math,
-		font:      font,
-		text:      text,
-		signature: signature,
-		code:      code,
-		image:     image,
+		fpdf:       fpdf,
+		math:       math,
+		font:       font,
+		text:       text,
+		signature:  signature,
+		code:       code,
+		image:      image,
+		cellWriter: cellWriter,
 	}
 
 	for _, option := range options {
@@ -153,49 +155,6 @@ func (g *gofpdfProvider) SetCache(cache cache.Cache) {
 	g.imageCache = cache
 }
 
-func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Config, style *props.Cell) {
-	if style == nil {
-		g.createStandard(width, height, config)
-		return
-	}
-
-	g.createCustom(width, height, config, style)
-}
-
-func (g *gofpdfProvider) createStandard(width, height float64, config *config.Config) {
-	border := "0"
-	if config.Debug {
-		border = "1"
-	}
-
-	g.fpdf.CellFormat(width, height, "", border, 0, "C", false, 0, "")
-}
-
-func (g *gofpdfProvider) createCustom(width, height float64, config *config.Config, style *props.Cell) {
-	bd := style.Border
-	if config.Debug {
-		bd = border.Full
-	}
-
-	fill := false
-	if style.BackgroundColor != nil {
-		g.fpdf.SetFillColor(style.BackgroundColor.Red, style.BackgroundColor.Green, style.BackgroundColor.Blue)
-		fill = true
-	}
-
-	if fill && style.BorderColor != nil {
-		g.fpdf.SetDrawColor(style.BorderColor.Red, style.BorderColor.Green, style.BorderColor.Blue)
-	}
-
-	g.fpdf.CellFormat(width, height, "", string(bd), 0, "C", fill, 0, "")
-
-	if fill {
-		white := props.NewWhite()
-		g.fpdf.SetFillColor(white.Red, white.Green, white.Blue)
-	}
-
-	if fill && style.BorderColor != nil {
-		black := props.NewBlack()
-		g.fpdf.SetDrawColor(black.Red, black.Green, black.Blue)
-	}
+func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Config, prop *props.Cell) {
+	g.cellWriter.Apply(width, height, config, prop)
 }
