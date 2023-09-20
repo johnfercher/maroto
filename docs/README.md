@@ -2,13 +2,13 @@
 
 [![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines) [![Roadmap](https://img.shields.io/badge/V2-Roadmap-purple)](https://github.com/users/johnfercher/projects/1) [![Discussion](https://img.shields.io/badge/V2-Discussion-blue)](https://github.com/johnfercher/maroto/issues/257) [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
 
-#### Maroto`v2.0.0-alpha.11`is here! Try out:
+#### Maroto`v2.0.0-alpha.12`is here! Try out:
 
 * See changelog [here](https://github.com/johnfercher/maroto/releases).
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.11
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.12
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
@@ -73,7 +73,7 @@ feature within maroto, such as (Row, Col, Text, QRCode, Image, etc). With the ne
 improved, enabling maroto to reach a whole new level in this fresh new step.
 
 ### New Interfaces
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/pkg/domain/domain.go ':include :type=code')
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/pkg/core/core.go ':include :type=code')
 
 ## Unit Testing
 In maroto`v2`, it will be possible to write unit tests by analyzing the **components tree**. To facilitate the 
