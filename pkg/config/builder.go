@@ -1,10 +1,11 @@
 package config
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/color"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
+	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/johnfercher/maroto/v2/pkg/provider"
 )
 
 type builder struct {
@@ -19,7 +20,7 @@ type builder struct {
 }
 
 type Builder interface {
-	WithPageSize(size PageSize) Builder
+	WithPageSize(size pagesize.Type) Builder
 	WithDimensions(dimensions *Dimensions) Builder
 	WithMargins(margins *Margins) Builder
 	WithProvider(providerType provider.Type) Builder
@@ -27,34 +28,38 @@ type Builder interface {
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
 	WithFont(font *props.Font) Builder
-	AddUTF8Font(customFont *CustomFont) Builder
-	Build() *Maroto
+	AddUTF8Font(family string, style fontstyle.Type, file string) Builder
+	Build() *Config
 }
 
 func NewBuilder() Builder {
 	return &builder{
 		providerType: provider.Gofpdf,
 		margins: &Margins{
-			Left:  MinLeftMargin,
-			Right: MinRightMargin,
-			Top:   MinTopMargin,
+			Left:  pagesize.MinLeftMargin,
+			Right: pagesize.MinRightMargin,
+			Top:   pagesize.MinTopMargin,
 		},
-		maxGridSize: DefaultMaxGridSum,
+		maxGridSize: pagesize.DefaultMaxGridSum,
 		font: &props.Font{
-			Size:   DefaultFontSize,
-			Family: consts.Arial,
-			Style:  consts.Normal,
-			Color:  color.NewBlack(),
+			Size:   pagesize.DefaultFontSize,
+			Family: fontfamily.Arial,
+			Style:  fontstyle.Normal,
+			Color:  props.NewBlack(),
 		},
 	}
 }
 
-func (b *builder) WithPageSize(size PageSize) Builder {
+func (b *builder) WithPageSize(size pagesize.Type) Builder {
 	if size == "" {
 		return b
 	}
 
-	b.dimensions = GetDimensions(size)
+	width, height := pagesize.GetDimensions(size)
+	b.dimensions = &Dimensions{
+		Width:  width,
+		Height: height,
+	}
 
 	return b
 }
@@ -77,15 +82,15 @@ func (b *builder) WithMargins(margins *Margins) Builder {
 		return b
 	}
 
-	if margins.Left < MinLeftMargin {
+	if margins.Left < pagesize.MinLeftMargin {
 		return b
 	}
 
-	if margins.Right < MinRightMargin {
+	if margins.Right < pagesize.MinRightMargin {
 		return b
 	}
 
-	if margins.Top < MinTopMargin {
+	if margins.Top < pagesize.MinTopMargin {
 		return b
 	}
 
@@ -150,36 +155,37 @@ func (b *builder) WithFont(font *props.Font) Builder {
 	return b
 }
 
-func (b *builder) AddUTF8Font(customFont *CustomFont) Builder {
-	if customFont == nil {
+func (b *builder) AddUTF8Font(family string, style fontstyle.Type, file string) Builder {
+	if family == "" {
 		return b
 	}
 
-	if customFont.Family == "" {
+	if !style.IsValid() {
 		return b
 	}
 
-	if !customFont.Style.IsValid() {
+	if file == "" {
 		return b
 	}
 
-	if customFont.File == "" {
-		return b
-	}
+	b.customFonts = append(b.customFonts, &CustomFont{
+		Family: family,
+		Style:  style,
+		File:   file,
+	})
 
-	b.customFonts = append(b.customFonts, customFont)
 	return b
 }
 
-func (b *builder) Build() *Maroto {
-	return &Maroto{
+func (b *builder) Build() *Config {
+	return &Config{
 		ProviderType: b.providerType,
 		Dimensions:   b.getDimensions(),
 		Margins:      b.margins,
 		Workers:      b.workerPoolSize,
 		Debug:        b.debug,
 		MaxGridSize:  b.maxGridSize,
-		Font:         b.font,
+		DefaultFont:  b.font,
 		CustomFonts:  b.customFonts,
 	}
 }
@@ -189,5 +195,9 @@ func (b *builder) getDimensions() *Dimensions {
 		return b.dimensions
 	}
 
-	return GetDimensions(A4)
+	width, height := pagesize.GetDimensions(pagesize.A4)
+	return &Dimensions{
+		Width:  width,
+		Height: height,
+	}
 }

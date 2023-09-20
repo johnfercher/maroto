@@ -3,8 +3,9 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/code"
+
 	"github.com/johnfercher/maroto/v2/pkg"
-	"github.com/johnfercher/maroto/v2/pkg/code"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )

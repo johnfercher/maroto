@@ -3,17 +3,18 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/code"
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
+	"github.com/johnfercher/maroto/v2/pkg/components/image"
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+
 	"github.com/johnfercher/maroto/v2/pkg"
-	"github.com/johnfercher/maroto/v2/pkg/code"
-	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
-	"github.com/johnfercher/maroto/v2/pkg/domain"
-	"github.com/johnfercher/maroto/v2/pkg/grid/col"
-	"github.com/johnfercher/maroto/v2/pkg/grid/row"
-	"github.com/johnfercher/maroto/v2/pkg/image"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/johnfercher/maroto/v2/pkg/text"
 )
 
 func main() {
@@ -37,19 +38,19 @@ func main() {
 
 	m.AddRows(text.NewRow(10, "Invoice ABC123456789", props.Text{
 		Top:   3,
-		Style: consts.Bold,
-		Align: consts.Center,
+		Style: fontstyle.Bold,
+		Align: align.Center,
 	}))
 
 	m.AddRow(7,
 		text.NewCol(3, "Transactions", props.Text{
 			Top:   1.5,
 			Size:  9,
-			Style: consts.Bold,
-			Align: consts.Center,
-			Color: color.NewWhite(),
+			Style: fontstyle.Bold,
+			Align: align.Center,
+			Color: props.NewWhite(),
 		}),
-	).WithStyle(&props.Style{BackgroundColor: darkGrayColor})
+	).WithStyle(&props.Cell{BackgroundColor: darkGrayColor})
 
 	m.AddRows(getTransactions()...)
 
@@ -65,9 +66,9 @@ func main() {
 			text.New("5123.151231.512314.1251251.123215", props.Text{
 				Top:    12,
 				Family: "",
-				Style:  consts.Bold,
+				Style:  fontstyle.Bold,
 				Size:   9,
-				Align:  consts.Center,
+				Align:  align.Center,
 			}),
 		),
 		col.New(6),
@@ -86,28 +87,28 @@ func main() {
 	document.GetReport().Print()
 }
 
-func getTransactions() []domain.Row {
-	rows := []domain.Row{
+func getTransactions() []core.Row {
+	rows := []core.Row{
 		row.New(5).Add(
 			col.New(3),
-			text.NewCol(4, "Product", props.Text{Size: 9, Align: consts.Center, Style: consts.Bold}),
-			text.NewCol(2, "Quantity", props.Text{Size: 9, Align: consts.Center, Style: consts.Bold}),
-			text.NewCol(3, "Price", props.Text{Size: 9, Align: consts.Center, Style: consts.Bold}),
+			text.NewCol(4, "Product", props.Text{Size: 9, Align: align.Center, Style: fontstyle.Bold}),
+			text.NewCol(2, "Quantity", props.Text{Size: 9, Align: align.Center, Style: fontstyle.Bold}),
+			text.NewCol(3, "Price", props.Text{Size: 9, Align: align.Center, Style: fontstyle.Bold}),
 		),
 	}
 
-	var contentsRow []domain.Row
+	var contentsRow []core.Row
 	contents := getContents()
 	for i, content := range contents {
 		r := row.New(4).Add(
 			col.New(3),
-			text.NewCol(4, content[1], props.Text{Size: 8, Align: consts.Center}),
-			text.NewCol(2, content[2], props.Text{Size: 8, Align: consts.Center}),
-			text.NewCol(3, content[3], props.Text{Size: 8, Align: consts.Center}),
+			text.NewCol(4, content[1], props.Text{Size: 8, Align: align.Center}),
+			text.NewCol(2, content[2], props.Text{Size: 8, Align: align.Center}),
+			text.NewCol(3, content[3], props.Text{Size: 8, Align: align.Center}),
 		)
 		if i%2 == 0 {
 			gray := getGrayColor()
-			r.WithStyle(&props.Style{BackgroundColor: gray})
+			r.WithStyle(&props.Cell{BackgroundColor: gray})
 		}
 
 		contentsRow = append(contentsRow, r)
@@ -119,22 +120,22 @@ func getTransactions() []domain.Row {
 		col.New(7),
 		text.NewCol(2, "Total:", props.Text{
 			Top:   5,
-			Style: consts.Bold,
+			Style: fontstyle.Bold,
 			Size:  8,
-			Align: consts.Right,
+			Align: align.Right,
 		}),
 		text.NewCol(3, "R$ 2.567,00", props.Text{
 			Top:   5,
-			Style: consts.Bold,
+			Style: fontstyle.Bold,
 			Size:  8,
-			Align: consts.Center,
+			Align: align.Center,
 		}),
 	))
 
 	return rows
 }
 
-func getPageHeader() domain.Row {
+func getPageHeader() core.Row {
 	return row.New(20).Add(
 		image.NewFromFileCol(3, "docs/assets/images/biplane.jpg", props.Rect{
 			Center:  true,
@@ -144,75 +145,75 @@ func getPageHeader() domain.Row {
 		col.New(3).Add(
 			text.New("AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.", props.Text{
 				Size:        8,
-				Align:       consts.Right,
+				Align:       align.Right,
 				Extrapolate: false,
 				Color:       getRedColor(),
 			}),
 			text.New("Tel: 55 024 12345-1234", props.Text{
 				Top:   12,
-				Style: consts.BoldItalic,
+				Style: fontstyle.BoldItalic,
 				Size:  8,
-				Align: consts.Right,
+				Align: align.Right,
 				Color: getBlueColor(),
 			}),
 			text.New("www.mycompany.com", props.Text{
 				Top:   15,
-				Style: consts.BoldItalic,
+				Style: fontstyle.BoldItalic,
 				Size:  8,
-				Align: consts.Right,
+				Align: align.Right,
 				Color: getBlueColor(),
 			}),
 		),
 	)
 }
 
-func getPageFooter() domain.Row {
+func getPageFooter() core.Row {
 	return row.New(20).Add(
 		col.New(12).Add(
 			text.New("Tel: 55 024 12345-1234", props.Text{
 				Top:   13,
-				Style: consts.BoldItalic,
+				Style: fontstyle.BoldItalic,
 				Size:  8,
-				Align: consts.Left,
+				Align: align.Left,
 				Color: getBlueColor(),
 			}),
 			text.New("www.mycompany.com", props.Text{
 				Top:   16,
-				Style: consts.BoldItalic,
+				Style: fontstyle.BoldItalic,
 				Size:  8,
-				Align: consts.Left,
+				Align: align.Left,
 				Color: getBlueColor(),
 			}),
 		),
 	)
 }
 
-func getDarkGrayColor() *color.Color {
-	return &color.Color{
+func getDarkGrayColor() *props.Color {
+	return &props.Color{
 		Red:   55,
 		Green: 55,
 		Blue:  55,
 	}
 }
 
-func getGrayColor() *color.Color {
-	return &color.Color{
+func getGrayColor() *props.Color {
+	return &props.Color{
 		Red:   200,
 		Green: 200,
 		Blue:  200,
 	}
 }
 
-func getBlueColor() *color.Color {
-	return &color.Color{
+func getBlueColor() *props.Color {
+	return &props.Color{
 		Red:   10,
 		Green: 10,
 		Blue:  150,
 	}
 }
 
-func getRedColor() *color.Color {
-	return &color.Color{
+func getRedColor() *props.Color {
+	return &props.Color{
 		Red:   150,
 		Green: 10,
 		Blue:  10,

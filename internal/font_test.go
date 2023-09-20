@@ -8,14 +8,14 @@ package internal_test
 
 	fpdf := &mocks.Fpdf{}
 	fpdf.On("SetFont", family, string(style), size)
-	font := internal.NewFont(fpdf, size, family, style)
+	fontstyle := internal.NewFont(fpdf, size, family, style)
 
-	assert.NotNil(t, font)
-	assert.Equal(t, fmt.Sprintf("%T", font), "*internal.font")
-	assert.Equal(t, family, font.GetFamily())
-	assert.Equal(t, style, font.GetStyle())
-	assert.Equal(t, size, font.GetSize())
-	assert.Equal(t, color.Color{Red: 0, Green: 0, Blue: 0}, font.GetColor())
+	assert.NotNil(t, fontstyle)
+	assert.Equal(t, fmt.Sprintf("%T", fontstyle), "*internal.fontstyle")
+	assert.Equal(t, family, fontstyle.GetFamily())
+	assert.Equal(t, style, fontstyle.GetStyle())
+	assert.Equal(t, size, fontstyle.GetSize())
+	assert.Equal(t, color.Color{Red: 0, Green: 0, Blue: 0}, fontstyle.GetColor())
 }
 
 func TestFont_GetSetFamily(t *testing.T) {
@@ -111,24 +111,24 @@ func TestFont_GetSetFamily(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		fpdf := c.fpdf()
-		font := internal.NewFont(fpdf, 10, consts.Arial, consts.Bold)
+		fontstyle := internal.NewFont(fpdf, 10, consts.Arial, consts.Bold)
 
 		// Act
-		font.SetFamily(c.family)
+		fontstyle.SetFamily(c.family)
 
 		// Assert
 		c.assertCalls(t, fpdf)
-		c.assertFont(t, font.GetFamily())
+		c.assertFont(t, fontstyle.GetFamily())
 	}
 }
 
 func TestFont_GetSetStyle(t *testing.T) {
 	cases := []struct {
 		name        string
-		style       consts.Style
+		style       fontstyle.Type
 		fpdf        func() *mocks.Fpdf
 		assertCalls func(t *testing.T, Fpdf *mocks.Fpdf)
-		assertStyle func(t *testing.T, style consts.Style)
+		assertStyle func(t *testing.T, style fontstyle.Type)
 	}{
 		{
 			"PdfMaroto.Normal",
@@ -147,7 +147,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFontStyle", 1)
 				fpdf.AssertCalled(t, "SetFontStyle", "")
 			},
-			func(t *testing.T, style consts.Style) {
+			func(t *testing.T, style fontstyle.Type) {
 				assert.Equal(t, style, consts.Normal)
 			},
 		},
@@ -168,7 +168,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFontStyle", 1)
 				fpdf.AssertCalled(t, "SetFontStyle", "B")
 			},
-			func(t *testing.T, style consts.Style) {
+			func(t *testing.T, style fontstyle.Type) {
 				assert.Equal(t, style, consts.Bold)
 			},
 		},
@@ -189,7 +189,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFontStyle", 1)
 				fpdf.AssertCalled(t, "SetFontStyle", "I")
 			},
-			func(t *testing.T, style consts.Style) {
+			func(t *testing.T, style fontstyle.Type) {
 				assert.Equal(t, style, consts.Italic)
 			},
 		},
@@ -210,7 +210,7 @@ func TestFont_GetSetStyle(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFontStyle", 1)
 				fpdf.AssertCalled(t, "SetFontStyle", "BI")
 			},
-			func(t *testing.T, style consts.Style) {
+			func(t *testing.T, style fontstyle.Type) {
 				assert.Equal(t, style, consts.BoldItalic)
 			},
 		},
@@ -219,14 +219,14 @@ func TestFont_GetSetStyle(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		fpdf := c.fpdf()
-		font := internal.NewFont(fpdf, 10, consts.Arial, consts.Bold)
+		fontstyle := internal.NewFont(fpdf, 10, consts.Arial, consts.Bold)
 
 		// Act
-		font.SetStyle(c.style)
+		fontstyle.SetStyle(c.style)
 
 		// Assert
 		c.assertCalls(t, fpdf)
-		c.assertStyle(t, font.GetStyle())
+		c.assertStyle(t, fontstyle.GetStyle())
 	}
 }
 
@@ -239,26 +239,26 @@ func TestFont_GetSetSize(t *testing.T) {
 	fpdf := &mocks.Fpdf{}
 	fpdf.On("SetFont", family, string(style), size)
 	fpdf.On("SetFontSize", mock.Anything)
-	font := internal.NewFont(fpdf, 10, consts.Arial, consts.Bold)
+	fontstyle := internal.NewFont(fpdf, 10, consts.Arial, consts.Bold)
 
 	// Act
-	font.SetSize(16)
+	fontstyle.SetSize(16)
 
 	// Assert
 	fpdf.AssertNumberOfCalls(t, "SetFontSize", 1)
 	fpdf.MethodCalled("SetFontSize", 16)
-	assert.Equal(t, font.GetSize(), 16.0)
+	assert.Equal(t, fontstyle.GetSize(), 16.0)
 }
 
 func TestFont_GetSetFont(t *testing.T) {
 	cases := []struct {
 		name        string
 		family      string
-		style       consts.Style
+		style       fontstyle.Type
 		size        float64
 		fpdf        func() *mocks.Fpdf
 		assertCalls func(t *testing.T, Fpdf *mocks.Fpdf)
-		assertFont  func(t *testing.T, family string, style consts.Style, size float64)
+		assertFont  func(t *testing.T, family string, style fontstyle.Type, size float64)
 	}{
 		{
 			"PdfMaroto.Arial, PdfMaroto.Normal, 16",
@@ -274,7 +274,7 @@ func TestFont_GetSetFont(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFont", 2)
 				fpdf.AssertCalled(t, "SetFont", "arial", "", 16.0)
 			},
-			func(t *testing.T, family string, style consts.Style, size float64) {
+			func(t *testing.T, family string, style fontstyle.Type, size float64) {
 				assert.Equal(t, family, consts.Arial)
 				assert.Equal(t, style, consts.Normal)
 				assert.Equal(t, 16, int(size))
@@ -294,7 +294,7 @@ func TestFont_GetSetFont(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFont", 2)
 				fpdf.AssertCalled(t, "SetFont", "helvetica", "B", 13.0)
 			},
-			func(t *testing.T, family string, style consts.Style, size float64) {
+			func(t *testing.T, family string, style fontstyle.Type, size float64) {
 				assert.Equal(t, family, consts.Helvetica)
 				assert.Equal(t, style, consts.Bold)
 				assert.Equal(t, 13, int(size))
@@ -314,7 +314,7 @@ func TestFont_GetSetFont(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFont", 2)
 				fpdf.AssertCalled(t, "SetFont", "symbol", "I", 10.0)
 			},
-			func(t *testing.T, family string, style consts.Style, size float64) {
+			func(t *testing.T, family string, style fontstyle.Type, size float64) {
 				assert.Equal(t, family, consts.Symbol)
 				assert.Equal(t, style, consts.Italic)
 				assert.Equal(t, 10, int(size))
@@ -334,7 +334,7 @@ func TestFont_GetSetFont(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFont", 2)
 				fpdf.AssertCalled(t, "SetFont", "zapfdingbats", "BI", 5.0)
 			},
-			func(t *testing.T, family string, style consts.Style, size float64) {
+			func(t *testing.T, family string, style fontstyle.Type, size float64) {
 				assert.Equal(t, family, consts.ZapBats)
 				assert.Equal(t, style, consts.BoldItalic)
 				assert.Equal(t, 5, int(size))
@@ -354,7 +354,7 @@ func TestFont_GetSetFont(t *testing.T) {
 				fpdf.AssertNumberOfCalls(t, "SetFont", 2)
 				fpdf.AssertCalled(t, "SetFont", "courier", "", 12.0)
 			},
-			func(t *testing.T, family string, style consts.Style, size float64) {
+			func(t *testing.T, family string, style fontstyle.Type, size float64) {
 				assert.Equal(t, family, consts.Courier)
 				assert.Equal(t, style, consts.Normal)
 				assert.Equal(t, 12, int(size))
@@ -365,11 +365,11 @@ func TestFont_GetSetFont(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		fpdf := c.fpdf()
-		font := internal.NewFont(fpdf, 10, consts.Arial, consts.Bold)
+		fontstyle := internal.NewFont(fpdf, 10, consts.Arial, consts.Bold)
 
 		// Act
-		font.SetFont(c.family, c.style, c.size)
-		family, style, size := font.GetFont()
+		fontstyle.SetFont(c.family, c.style, c.size)
+		family, style, size := fontstyle.GetFont()
 
 		// Assert
 		c.assertCalls(t, fpdf)
@@ -454,11 +454,11 @@ func TestFont_GetSetColor(t *testing.T) {
 	for _, c := range cases {
 		// Arrange
 		Fpdf := c.Fpdf()
-		font := internal.NewFont(Fpdf, 10, consts.Arial, consts.Bold)
+		fontstyle := internal.NewFont(Fpdf, 10, consts.Arial, consts.Bold)
 
 		// Act
-		font.SetColor(c.fontColor)
-		fontColor := font.GetColor()
+		fontstyle.SetColor(c.fontColor)
+		fontColor := fontstyle.GetColor()
 
 		// Assert
 		c.assertCalls(t, Fpdf)

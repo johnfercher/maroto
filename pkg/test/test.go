@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/domain"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/go-tree/tree"
 	"github.com/stretchr/testify/assert"
@@ -17,7 +17,7 @@ type Node struct {
 
 type MarotoTest struct {
 	t    *testing.T
-	node *tree.Node[domain.Structure]
+	node *tree.Node[core.Structure]
 }
 
 func New(t *testing.T) *MarotoTest {
@@ -26,7 +26,7 @@ func New(t *testing.T) *MarotoTest {
 	}
 }
 
-func (m *MarotoTest) Assert(maroto domain.Maroto) *MarotoTest {
+func (m *MarotoTest) Assert(maroto core.Maroto) *MarotoTest {
 	m.node = maroto.GetStructure()
 	return m
 }
@@ -38,7 +38,7 @@ func (m *MarotoTest) JSON(expect string) {
 	assert.Equal(m.t, expect, string(actualBytes))
 }
 
-func (m *MarotoTest) buildNode(node *tree.Node[domain.Structure]) *Node {
+func (m *MarotoTest) buildNode(node *tree.Node[core.Structure]) *Node {
 	data := node.GetData()
 	actual := &Node{
 		Type: data.Type,

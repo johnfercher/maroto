@@ -6,44 +6,44 @@ import (
 	"io"
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/cache"
+
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
+	"github.com/johnfercher/maroto/v2/pkg/components/page"
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
+	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
+	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf"
+	"github.com/johnfercher/maroto/v2/pkg/providers/html"
+
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
-	"github.com/johnfercher/maroto/v2/internal"
-	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/context"
-	"github.com/johnfercher/maroto/v2/pkg/domain"
-	"github.com/johnfercher/maroto/v2/pkg/grid/col"
-	"github.com/johnfercher/maroto/v2/pkg/grid/page"
-	"github.com/johnfercher/maroto/v2/pkg/grid/row"
-	"github.com/johnfercher/maroto/v2/pkg/provider"
-	"github.com/johnfercher/maroto/v2/pkg/provider/gofpdf"
-	"github.com/johnfercher/maroto/v2/pkg/provider/html"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 )
 
 type maroto struct {
-	config     *config.Maroto
-	provider   domain.Provider
+	config     *config.Config
+	provider   core.Provider
 	imageCache cache.Cache
 
 	// Building
-	cell          internal.Cell
-	pages         []domain.Page
-	rows          []domain.Row
-	header        []domain.Row
-	footer        []domain.Row
+	cell          core.Cell
+	pages         []core.Page
+	rows          []core.Row
+	header        []core.Row
+	footer        []core.Row
 	headerHeight  float64
 	footerHeight  float64
 	currentHeight float64
 
 	// Processing
-	pool async.Processor[[]domain.Page, []byte]
+	pool async.Processor[[]core.Page, []byte]
 }
 
-func NewMaroto(config ...*config.Maroto) domain.Maroto {
+func NewMaroto(config ...*config.Config) core.Maroto {
 	cache := cache.New()
 	cfg := getConfig(config...)
 	provider := getProvider(cache, cfg)
@@ -53,7 +53,7 @@ func NewMaroto(config ...*config.Maroto) domain.Maroto {
 
 	m := &maroto{
 		provider: provider,
-		cell: context.NewRootContext(width, height, context.Margins{
+		cell: core.NewRootContext(width, height, core.Margins{
 			Left:   left,
 			Top:    top,
 			Right:  right,
@@ -70,21 +70,21 @@ func NewMaroto(config ...*config.Maroto) domain.Maroto {
 	return m
 }
 
-func (m *maroto) ForceAddPage(pages ...domain.Page) {
+func (m *maroto) ForceAddPage(pages ...core.Page) {
 	m.pages = append(m.pages, pages...)
 }
 
-func (m *maroto) AddRows(rows ...domain.Row) {
+func (m *maroto) AddRows(rows ...core.Row) {
 	m.addRows(rows...)
 }
 
-func (m *maroto) AddRow(rowHeight float64, cols ...domain.Col) domain.Row {
+func (m *maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	r := row.New(rowHeight).Add(cols...)
 	m.addRow(r)
 	return r
 }
 
-func (m *maroto) RegisterHeader(rows ...domain.Row) error {
+func (m *maroto) RegisterHeader(rows ...core.Row) error {
 	height := m.getRowsHeight(rows...)
 	if height+m.footerHeight > m.config.Dimensions.Height {
 		return errors.New("header height is greater than page useful area")
@@ -100,7 +100,7 @@ func (m *maroto) RegisterHeader(rows ...domain.Row) error {
 	return nil
 }
 
-func (m *maroto) RegisterFooter(rows ...domain.Row) error {
+func (m *maroto) RegisterFooter(rows ...core.Row) error {
 	height := m.getRowsHeight(rows...)
 	if height > m.config.Dimensions.Height {
 		return errors.New("footer height is greater than page useful area")
@@ -111,7 +111,7 @@ func (m *maroto) RegisterFooter(rows ...domain.Row) error {
 	return nil
 }
 
-func (m *maroto) Generate() (domain.Document, error) {
+func (m *maroto) Generate() (core.Document, error) {
 	m.fillPageToAddNew()
 	m.setConfig()
 
@@ -122,10 +122,10 @@ func (m *maroto) Generate() (domain.Document, error) {
 	return m.generate()
 }
 
-func (m *maroto) GetStructure() *tree.Node[domain.Structure] {
+func (m *maroto) GetStructure() *tree.Node[core.Structure] {
 	m.fillPageToAddNew()
 
-	str := domain.Structure{
+	str := core.Structure{
 		Type: "pkg",
 	}
 	node := tree.NewNode(str)
@@ -138,13 +138,13 @@ func (m *maroto) GetStructure() *tree.Node[domain.Structure] {
 	return node
 }
 
-func (m *maroto) addRows(rows ...domain.Row) {
+func (m *maroto) addRows(rows ...core.Row) {
 	for _, row := range rows {
 		m.addRow(row)
 	}
 }
 
-func (m *maroto) addRow(r domain.Row) {
+func (m *maroto) addRow(r core.Row) {
 	maxHeight := m.cell.Height
 
 	rowHeight := r.GetHeight()
@@ -196,7 +196,7 @@ func (m *maroto) setConfig() {
 	}
 }
 
-func (m *maroto) generate() (domain.Document, error) {
+func (m *maroto) generate() (core.Document, error) {
 	innerCtx := m.cell.Copy()
 
 	for _, page := range m.pages {
@@ -208,15 +208,15 @@ func (m *maroto) generate() (domain.Document, error) {
 		return nil, err
 	}
 
-	return domain.NewDocument(bytes, nil), nil
+	return core.NewDocument(bytes, nil), nil
 }
 
-func (m *maroto) generateConcurrently() (domain.Document, error) {
+func (m *maroto) generateConcurrently() (core.Document, error) {
 	chunks := len(m.pages) / m.config.Workers
 	if chunks == 0 {
 		chunks = 1
 	}
-	pageGroups := make([][]domain.Page, 0)
+	pageGroups := make([][]core.Page, 0)
 	for i := 0; i < len(m.pages); i += chunks {
 		end := i + chunks
 
@@ -245,10 +245,10 @@ func (m *maroto) generateConcurrently() (domain.Document, error) {
 		return nil, err
 	}
 
-	return domain.NewDocument(buf.Bytes(), nil), nil
+	return core.NewDocument(buf.Bytes(), nil), nil
 }
 
-func (m *maroto) processPage(pages []domain.Page) ([]byte, error) {
+func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
 	innerCtx := m.cell.Copy()
 	innerProvider := getProvider(m.imageCache, m.config)
 	for _, page := range pages {
@@ -258,7 +258,7 @@ func (m *maroto) processPage(pages []domain.Page) ([]byte, error) {
 	return innerProvider.GenerateBytes()
 }
 
-func (m *maroto) getRowsHeight(rows ...domain.Row) float64 {
+func (m *maroto) getRowsHeight(rows ...core.Row) float64 {
 	var height float64
 	for _, r := range rows {
 		height += r.GetHeight()
@@ -267,7 +267,7 @@ func (m *maroto) getRowsHeight(rows ...domain.Row) float64 {
 	return height
 }
 
-func getConfig(configs ...*config.Maroto) *config.Maroto {
+func getConfig(configs ...*config.Config) *config.Config {
 	if len(configs) > 0 {
 		return configs[0]
 	}
@@ -275,7 +275,7 @@ func getConfig(configs ...*config.Maroto) *config.Maroto {
 	return config.NewBuilder().Build()
 }
 
-func getProvider(cache cache.Cache, cfg *config.Maroto) domain.Provider {
+func getProvider(cache cache.Cache, cfg *config.Config) core.Provider {
 	if cfg.ProviderType == provider.HTML {
 		return html.New(cfg, providers.WithCache(cache))
 	}

@@ -2,13 +2,13 @@ package providers
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/cache"
-	"github.com/johnfercher/maroto/v2/pkg/domain"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 )
 
-type ProviderOption func(p domain.Provider)
+type ProviderOption func(p core.Provider)
 
 func WithCache(cache cache.Cache) ProviderOption {
-	return func(p domain.Provider) {
+	return func(p core.Provider) {
 		p.SetCache(cache)
 	}
 }

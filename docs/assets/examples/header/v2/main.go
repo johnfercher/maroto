@@ -3,11 +3,14 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/johnfercher/maroto/v2/pkg/text"
 )
 
 func main() {
@@ -20,8 +23,8 @@ func main() {
 
 	err := m.RegisterHeader(text.NewRow(20, "Header", props.Text{
 		Size:  10,
-		Style: consts.Bold,
-		Align: consts.Center,
+		Style: fontstyle.Bold,
+		Align: align.Center,
 	}))
 
 	for i := 0; i < 50; i++ {

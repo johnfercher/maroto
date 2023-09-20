@@ -2,14 +2,19 @@ package main
 
 import (
 	"log"
+	"math/rand"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/line"
+
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/border"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
 	"github.com/johnfercher/maroto/v2/pkg"
-	"github.com/johnfercher/maroto/v2/pkg/color"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts"
-	"github.com/johnfercher/maroto/v2/pkg/grid/row"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/johnfercher/maroto/v2/pkg/text"
 )
 
 func main() {
@@ -17,30 +22,59 @@ func main() {
 		WithDebug(false).
 		Build()
 
-	colStyle := &props.Style{
-		BackgroundColor: &color.Color{80, 80, 80},
-		Border:          true,
-		BorderColor:     &color.Color{200, 0, 0},
+	colStyle := &props.Cell{
+		BackgroundColor: &props.Color{80, 80, 80},
+		BorderType:      border.Full,
+		BorderColor:     &props.Color{200, 0, 0},
+		LineStyle:       line.Dashed,
+		BorderThickness: 0.5,
+	}
+
+	rowStyles := []*props.Cell{
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.None,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Full,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Left,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Right,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Top,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Bottom,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
 	}
 
 	whiteText := props.Text{
-		Color: &color.Color{255, 255, 255},
-		Style: consts.Bold,
+		Color: &props.Color{255, 255, 255},
+		Style: fontstyle.Bold,
 		Size:  12,
-		Align: consts.Center,
+		Align: align.Center,
 		Top:   2,
 	}
 
-	rowStyle := &props.Style{
-		BackgroundColor: &color.Color{220, 220, 220},
-		Border:          true,
-		BorderColor:     &color.Color{0, 0, 200},
-	}
-
 	blackText := props.Text{
-		Style: consts.Bold,
+		Style: fontstyle.Bold,
 		Size:  12,
-		Align: consts.Center,
+		Align: align.Center,
 		Top:   2,
 	}
 
@@ -56,13 +90,17 @@ func main() {
 			),
 		)
 
+		m.AddRows(row.New(10))
+
 		m.AddRows(
-			row.New(10).WithStyle(rowStyle).Add(
+			row.New(10).WithStyle(rowStyles[rand.Intn(len(rowStyles))]).Add(
 				text.NewCol(4, "string", blackText),
 				text.NewCol(4, "string", blackText),
 				text.NewCol(4, "string", blackText),
 			),
 		)
+
+		m.AddRows(row.New(10))
 	}
 
 	document, err := m.Generate()
