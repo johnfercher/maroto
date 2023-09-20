@@ -28,7 +28,12 @@ func NewCellCreator(fpdf *gofpdf.Fpdf) *cellWriter {
 
 func (c *cellWriter) Apply(width, height float64, config *config.Config, prop *props.Cell) {
 	if prop == nil {
-		c.fpdf.CellFormat(width, height, "", "0", 0, "C", false, 0, "")
+		bd := border.None
+		if config.Debug {
+			bd = border.Full
+		}
+
+		c.fpdf.CellFormat(width, height, "", string(bd), 0, "C", false, 0, "")
 		return
 	}
 
