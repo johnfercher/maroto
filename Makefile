@@ -34,13 +34,15 @@ docs:
 font:
 	tar -xvf docs/assets/fonts/arial-unicode-ms.tgz
 
+.PHONY: mock
+mock:
+	mockery
+
 .PHONY: examples
 examples: font
 	go run docs/assets/examples/barcodegrid/v2/main.go
-	# billing
-	# billing negative
+	go run docs/assets/examples/billing/v2/main.go
 	go run docs/assets/examples/cellstyle/v2/main.go
-	# certificate
 	go run docs/assets/examples/customfont/v2/main.go
 	go run docs/assets/examples/customsize/v2/main.go
 	go run docs/assets/examples/datamatrixgrid/v2/main.go
@@ -49,13 +51,9 @@ examples: font
 	go run docs/assets/examples/imagegrid/v2/main.go
 	go run docs/assets/examples/margins/v2/main.go
 	go run docs/assets/examples/maxgridsum/v2/main.go
+	go run docs/assets/examples/pagenumber/v2/main.go
+	go run docs/assets/examples/parallelism/v2/main.go
 	go run docs/assets/examples/qrgrid/v2/main.go
-	# sample 1
 	go run docs/assets/examples/signaturegrid/v2/main.go
 	go run docs/assets/examples/textgrid/v2/main.go
-	# utf8
-	# zpl
-
-.PHONY: mock
-mock:
-	mockery
+	go test docs/assets/examples/unittests/v2/main_test.go
