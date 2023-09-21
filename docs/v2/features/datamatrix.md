@@ -7,3 +7,6 @@
 ```pdf
 	assets/pdf/datamatrixgridv2.pdf
 ```
+
+## Time Execution
+[filename](../../assets/text/datamatrixgridv2.txt  ':include :type=code')

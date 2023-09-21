@@ -8,6 +8,8 @@
 	assets/pdf/parallelismv2.pdf
 ```
 
-## Response
+## Time Execution
+[filename](../../assets/text/parallelismv2.txt  ':include :type=code')
 
+## Time Execution (100 pages)
 [filename](../../assets/text/parallel.txt ':include :type=code')

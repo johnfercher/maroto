@@ -7,3 +7,6 @@
 ```pdf
 	assets/pdf/qrgridv2.pdf
 ```
+
+## Time Execution
+[filename](../../assets/text/qrgridv2.txt  ':include :type=code')
