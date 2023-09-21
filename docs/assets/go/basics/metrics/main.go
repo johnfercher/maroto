@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg"
@@ -17,5 +18,5 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	document.GetReport().Print()
+	fmt.Println(document.GetReport().String())
 }

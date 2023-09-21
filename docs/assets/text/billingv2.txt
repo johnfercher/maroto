@@ -1,0 +1,5 @@
+generate -> avg: 17.09ms, executions: [17.09ms]
+header -> avg: 251.00ns, executions: [251.00ns]
+footer -> avg: 59.00ns, executions: [59.00ns]
+add_row -> avg: 213.50ns, executions: [133.00ns, 294.00ns]
+add_cols -> avg: 160.50ns, executions: [150.00ns, 171.00ns]

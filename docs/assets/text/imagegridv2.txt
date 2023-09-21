@@ -1,0 +1,2 @@
+generate -> avg: 8.86ms, executions: [8.86ms]
+add_cols -> avg: 198.00ns, executions: [501.00ns, 190.00ns, 185.00ns, 88.00ns, 148.00ns, 76.00ns]

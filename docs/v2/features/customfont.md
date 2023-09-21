@@ -7,3 +7,5 @@
 ```pdf
 	assets/pdf/customfontv2.pdf
 ```
+## Time Execution
+[filename](../../assets/text/customfontv2.txt  ':include :type=code')

@@ -8,3 +8,6 @@
 ```pdf
 	assets/pdf/barcodegridv2.pdf
 ```
+
+## Time Execution
+[filename](../../assets/text/barcodegridv2.txt  ':include :type=code')

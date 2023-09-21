@@ -7,3 +7,6 @@
 ```pdf
 	assets/pdf/imagegridv2.pdf
 ```
+
+## Time Execution
+[filename](../../assets/text/imagegridv2.txt  ':include :type=code')

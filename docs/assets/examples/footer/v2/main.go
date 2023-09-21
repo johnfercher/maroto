@@ -45,5 +45,8 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	document.GetReport().Print()
+	err = document.GetReport().Save("docs/assets/text/footerv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }

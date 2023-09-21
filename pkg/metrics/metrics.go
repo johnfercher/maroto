@@ -1,6 +1,9 @@
 package metrics
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 type TimeScale string
 
@@ -90,8 +93,30 @@ func (r *Report) Normalize() *Report {
 	return r
 }
 
-func (r *Report) Print() {
+func (r *Report) Save(file string) error {
+	var content string
 	for _, metric := range *r {
-		fmt.Println(metric.String())
+		content += metric.String() + "\n"
 	}
+
+	f, err := os.Create(file)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	_, err = f.WriteString(content)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (r *Report) String() string {
+	var content string
+	for _, metric := range *r {
+		content += metric.String()
+	}
+	return content
 }

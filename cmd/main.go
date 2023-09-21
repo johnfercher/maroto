@@ -67,7 +67,10 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	document.GetReport().Print()
+	err = document.GetReport().Save("docs/assets/text/v2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
 func buildCodesRow() []core.Row {
