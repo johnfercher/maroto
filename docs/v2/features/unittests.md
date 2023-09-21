@@ -2,7 +2,7 @@
 
 ## Code
 
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/docs/assets/examples/unittests/v2/main_test.go ':include :type=code')
+[filename](../../assets/examples/unittests/v2/main_test.go ':include :type=code')
 
 ## Component Tree JSON
 

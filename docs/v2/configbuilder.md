@@ -9,12 +9,3 @@
 **Code**
 
 [filename](../assets/go/config/pagesize/main.go ':include :type=code')
-
-## Parallelism 
-**Code**
-
-[filename](../assets/go/config/parallel/main.go ':include :type=code')
-
-**Response**
-
-[filename](../assets/text/parallel.txt ':include :type=code')
