@@ -17,6 +17,7 @@
     * [Max Grid Sum](v2/features/maxgridsum.md?id=max-grid-sum)
     * [Page Number](v2/features/pagenumber.md?id=page-number)
     * [Parallelism](v2/features/parallelism.md?id=parallelism)
+    * [Protection](v2/features/protection.md?id=protection)
     * [QR Code](v2/features/qrcode.md?id=qrcode)
     * [Signature](v2/features/signature.md?id=signature)
     * [Text](v2/features/text.md?id=text)

@@ -120,6 +120,7 @@ func (m *maroto) RegisterFooter(rows ...core.Row) error {
 }
 
 func (m *maroto) Generate() (core.Document, error) {
+	m.provider.SetProtection(m.config.Protection)
 	m.fillPageToAddNew()
 	m.setConfig()
 

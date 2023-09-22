@@ -2,14 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"math/rand"
-
 	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
+	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -80,8 +78,7 @@ func getObjects(max int) []Object {
 	var objects []Object
 	for i := 0; i < max; i++ {
 		objects = append(objects, Object{
-			Key:   fmt.Sprintf("Key: %d", i),
-			Value: fmt.Sprintf("Value: %d", rand.Intn(3000)),
+			Key: fmt.Sprintf("Key: %d", i),
 		})
 	}
 	return objects

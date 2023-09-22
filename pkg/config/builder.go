@@ -23,6 +23,7 @@ type builder struct {
 	pageNumberPattern string
 	pageNumberPlace   props.Place
 	protection        *Protection
+	compression       bool
 }
 
 type Builder interface {
@@ -37,6 +38,7 @@ type Builder interface {
 	AddUTF8Font(family string, style fontstyle.Type, file string) Builder
 	WithPageNumber(pattern string, place props.Place) Builder
 	WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder
+	WithCompression(compression bool) Builder
 	Build() *Config
 }
 
@@ -210,6 +212,11 @@ func (b *builder) WithProtection(protectionType protection.Type, userPassword, o
 	return b
 }
 
+func (b *builder) WithCompression(compression bool) Builder {
+	b.compression = compression
+	return b
+}
+
 func (b *builder) Build() *Config {
 	return &Config{
 		ProviderType:      b.providerType,
@@ -223,6 +230,7 @@ func (b *builder) Build() *Config {
 		PageNumberPattern: b.pageNumberPattern,
 		PageNumberPlace:   b.pageNumberPlace,
 		Protection:        b.protection,
+		Compression:       b.compression,
 	}
 }
 

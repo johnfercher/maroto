@@ -17,4 +17,5 @@ type Config struct {
 	PageNumberPattern string
 	PageNumberPlace   props.Place
 	Protection        *Protection
+	Compression       bool
 }

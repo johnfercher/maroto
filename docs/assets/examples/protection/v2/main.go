@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg"
@@ -10,6 +11,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
+		WithProtection(protection.None, "user", "owner").
 		Build()
 
 	mrt := pkg.NewMaroto(cfg)
@@ -24,12 +26,12 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	err = document.Save("docs/assets/pdf/passwordv2.pdf")
+	err = document.Save("docs/assets/pdf/protectionv2.pdf")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	err = document.GetReport().Save("docs/assets/text/passwordv2.txt")
+	err = document.GetReport().Save("docs/assets/text/protectionv2.txt")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
