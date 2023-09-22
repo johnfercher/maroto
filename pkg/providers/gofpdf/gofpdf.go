@@ -163,3 +163,7 @@ func (g *gofpdfProvider) SetCache(cache cache.Cache) {
 func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Config, prop *props.Cell) {
 	g.cellWriter.Apply(width, height, config, prop)
 }
+
+func (g *gofpdfProvider) SetCompression(compression bool) {
+	g.fpdf.SetCompression(compression)
+}

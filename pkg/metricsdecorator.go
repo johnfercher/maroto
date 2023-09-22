@@ -34,12 +34,14 @@ func (m *metricsDecorator) Generate() (core.Document, error) {
 	})
 	m.generateTime = timeSpent
 
-	report := m.buildMetrics().Normalize()
+	bytes := document.GetBytes()
+
+	report := m.buildMetrics(len(bytes)).Normalize()
 	if err != nil {
 		return nil, err
 	}
 
-	return core.NewDocument(document.GetBytes(), report), nil
+	return core.NewDocument(bytes, report), nil
 }
 
 func (m *metricsDecorator) AddPages(pages ...core.Page) {
@@ -106,11 +108,11 @@ func (m *metricsDecorator) getTimeSpent(closure func()) *metrics.Time {
 	}
 }
 
-func (m *metricsDecorator) buildMetrics() *metrics.Report {
-	var report metrics.Report
+func (m *metricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
+	var timeMetrics []metrics.TimeMetric
 
 	if m.structureTime != nil {
-		report = append(report, metrics.Metric{
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
 			Key:   "get_tree_structure",
 			Times: []*metrics.Time{m.structureTime},
 			Avg:   m.structureTime,
@@ -118,7 +120,7 @@ func (m *metricsDecorator) buildMetrics() *metrics.Report {
 	}
 
 	if m.generateTime != nil {
-		report = append(report, metrics.Metric{
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
 			Key:   "generate",
 			Times: []*metrics.Time{m.generateTime},
 			Avg:   m.generateTime,
@@ -126,7 +128,7 @@ func (m *metricsDecorator) buildMetrics() *metrics.Report {
 	}
 
 	if m.headerTime != nil {
-		report = append(report, metrics.Metric{
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
 			Key:   "header",
 			Times: []*metrics.Time{m.headerTime},
 			Avg:   m.headerTime,
@@ -134,7 +136,7 @@ func (m *metricsDecorator) buildMetrics() *metrics.Report {
 	}
 
 	if m.footerTime != nil {
-		report = append(report, metrics.Metric{
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
 			Key:   "footer",
 			Times: []*metrics.Time{m.footerTime},
 			Avg:   m.footerTime,
@@ -142,7 +144,7 @@ func (m *metricsDecorator) buildMetrics() *metrics.Report {
 	}
 
 	if len(m.addPageTime) > 0 {
-		report = append(report, metrics.Metric{
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
 			Key:   "add_page",
 			Times: m.addPageTime,
 			Avg:   m.getAVG(m.addPageTime),
@@ -150,7 +152,7 @@ func (m *metricsDecorator) buildMetrics() *metrics.Report {
 	}
 
 	if len(m.addRowTime) > 0 {
-		report = append(report, metrics.Metric{
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
 			Key:   "add_row",
 			Times: m.addRowTime,
 			Avg:   m.getAVG(m.addRowTime),
@@ -158,14 +160,23 @@ func (m *metricsDecorator) buildMetrics() *metrics.Report {
 	}
 
 	if len(m.addColTime) > 0 {
-		report = append(report, metrics.Metric{
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
 			Key:   "add_cols",
 			Times: m.addColTime,
 			Avg:   m.getAVG(m.addColTime),
 		})
 	}
 
-	return &report
+	return &metrics.Report{
+		TimeMetrics: timeMetrics,
+		SizeMetric: metrics.SizeMetric{
+			Key: "file_size",
+			Size: metrics.Size{
+				Value: bytesSize,
+				Scale: metrics.Byte,
+			},
+		},
+	}
 }
 
 func (m *metricsDecorator) getAVG(times []*metrics.Time) *metrics.Time {

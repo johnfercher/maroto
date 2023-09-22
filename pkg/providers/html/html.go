@@ -250,6 +250,10 @@ func (h *html) GenerateFile(file string) error {
 	return nil
 }
 
+func (g *html) SetCompression(_ bool) {
+
+}
+
 func (h *html) GenerateBytes() ([]byte, error) {
 	htmlTemplate := htmlTemplate()
 	content := h.getRows()

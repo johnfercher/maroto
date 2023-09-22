@@ -28,4 +28,5 @@ type Provider interface {
 	SetCache(cache cache.Cache)
 
 	SetProtection(protection *config.Protection)
+	SetCompression(compression bool)
 }
