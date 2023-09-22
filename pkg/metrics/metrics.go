@@ -5,8 +5,10 @@ import (
 	"os"
 )
 
-type TimeScale string
-type SizeScale string
+type (
+	TimeScale string
+	SizeScale string
+)
 
 const (
 	Nano     TimeScale = "ns"
@@ -124,17 +126,17 @@ type SizeMetric struct {
 	Size Size
 }
 
-func (m *SizeMetric) Normalize() {
-	if m.Size.Value < 1000.0 {
+func (s *SizeMetric) Normalize() {
+	if s.Size.Value < 1000.0 {
 		return
 	}
 
-	m.Size.Normalize()
-	m.Normalize()
+	s.Size.Normalize()
+	s.Normalize()
 }
 
-func (r *SizeMetric) String() string {
-	return r.Key + " -> " + r.Size.String()
+func (s *SizeMetric) String() string {
+	return s.Key + " -> " + s.Size.String()
 }
 
 type Report struct {

@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 	"strings"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"

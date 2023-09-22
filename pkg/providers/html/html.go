@@ -119,8 +119,7 @@ func (h *html) SetCache(cache cache.Cache) {
 	h.imageCache = cache
 }
 
-func (g *html) SetProtection(_ *config.Protection) {
-
+func (h *html) SetProtection(_ *config.Protection) {
 }
 
 func (h *html) CreateCol(width, height float64, config *config.Config, prop *props.Cell) {
@@ -250,8 +249,7 @@ func (h *html) GenerateFile(file string) error {
 	return nil
 }
 
-func (g *html) SetCompression(_ bool) {
-
+func (h *html) SetCompression(_ bool) {
 }
 
 func (h *html) GenerateBytes() ([]byte, error) {
