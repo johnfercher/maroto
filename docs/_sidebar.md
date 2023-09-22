@@ -11,6 +11,7 @@
     * [Footer](v2/features/footer.md?id=footer)
     * [Header](v2/features/header.md?id=header)
     * [Images](v2/features/image.md?id=image)
+    * [List](v2/features/list.md?id=list)
     * [Margins](v2/features/margins.md?id=custom-margins)
     * [Max Grid Sum](v2/features/maxgridsum.md?id=max-grid-sum)
     * [Page Number](v2/features/pagenumber.md?id=page-number)
