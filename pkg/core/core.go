@@ -61,6 +61,6 @@ type Page interface {
 	Node
 	Add(rows ...Row) Page
 	GetNumber() int
-	SetNumber(number int)
+	SetNumber(number int, total int)
 	Render(provider Provider, cell Cell)
 }

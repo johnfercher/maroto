@@ -19,6 +19,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
+		WithPageNumber("Page {current} of {total}", props.SouthEast).
 		WithMargins(&config.Margins{Left: 10, Top: 15, Right: 10}).
 		Build()
 
@@ -84,7 +85,10 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	document.GetReport().Print()
+	err = document.GetReport().Save("docs/assets/text/billingv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
 func getTransactions() []core.Row {
@@ -99,6 +103,10 @@ func getTransactions() []core.Row {
 
 	var contentsRow []core.Row
 	contents := getContents()
+	/*for i := 0; i < 8; i++ {
+		contents = append(contents, contents...)
+	}*/
+
 	for i, content := range contents {
 		r := row.New(4).Add(
 			col.New(3),

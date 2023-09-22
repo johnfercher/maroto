@@ -1,9 +1,12 @@
 # Text
 
 ## Code Example
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/docs/assets/examples/textgrid/v2/main.go ':include :type=code')
+[filename](../../assets/examples/textgrid/v2/main.go ':include :type=code')
 
 ## PDF Generated
 ```pdf
 	assets/pdf/textgridv2.pdf
 ```
+
+## Time Execution
+[filename](../../assets/text/textgridv2.txt  ':include :type=code')

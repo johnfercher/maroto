@@ -26,6 +26,7 @@ var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec 
 
 func main() {
 	cfg := config.NewBuilder().
+		WithPageNumber("Page {current} of {total}", props.South).
 		Build()
 
 	mrt := pkg.NewMaroto(cfg)
@@ -66,7 +67,10 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	document.GetReport().Print()
+	err = document.GetReport().Save("docs/assets/text/v2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
 func buildCodesRow() []core.Row {

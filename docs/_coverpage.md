@@ -2,6 +2,8 @@
 
 # Maroto <small>V2</small>
 
+An open-source golang lib to create PDFs. Fast and Simple.
+
 * :bulb: Grid system
 * :bar_chart: Embedded metrics
 * :syringe: Testable

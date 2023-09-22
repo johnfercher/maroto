@@ -6,6 +6,8 @@ import (
 	"io"
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/props"
+
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 
 	"github.com/f-amaral/go-async/async"
@@ -159,8 +161,15 @@ func (m *maroto) fillPageToAddNew() {
 	m.rows = append(m.rows, spaceRow)
 	m.rows = append(m.rows, m.footer...)
 
-	p := page.New()
-	p.SetNumber(len(m.pages))
+	prop := props.Page{
+		Pattern: m.config.PageNumberPattern,
+		Place:   m.config.PageNumberPlace,
+		Family:  m.config.DefaultFont.Family,
+		Style:   m.config.DefaultFont.Style,
+		Size:    m.config.DefaultFont.Size,
+		Color:   m.config.DefaultFont.Color,
+	}
+	p := page.New(prop)
 	p.Add(m.rows...)
 
 	m.pages = append(m.pages, p)
@@ -169,8 +178,9 @@ func (m *maroto) fillPageToAddNew() {
 }
 
 func (m *maroto) setConfig() {
-	for _, page := range m.pages {
+	for i, page := range m.pages {
 		page.SetConfig(m.config)
+		page.SetNumber(i+1, len(m.pages))
 	}
 }
 

@@ -2,7 +2,6 @@
   * **Documentation**
     * [Basics](v2/basics.md?id=generating-pdf)
     * [Config Builder](v2/configbuilder.md?id=config-builder)
-    * [Unit Testing](v2/tests.md?id=unit-testing)
   * **Features**
     * [Barcode](v2/features/barcode.md?id=barcode)
     * [Cell Style](v2/features/cellstyle.md?id=cell-style)
@@ -12,11 +11,15 @@
     * [Footer](v2/features/footer.md?id=footer)
     * [Header](v2/features/header.md?id=header)
     * [Images](v2/features/image.md?id=image)
+    * [List](v2/features/list.md?id=list)
     * [Margins](v2/features/margins.md?id=custom-margins)
     * [Max Grid Sum](v2/features/maxgridsum.md?id=max-grid-sum)
+    * [Page Number](v2/features/pagenumber.md?id=page-number)
+    * [Parallelism](v2/features/parallelism.md?id=parallelism)
     * [QR Code](v2/features/qrcode.md?id=qrcode)
     * [Signature](v2/features/signature.md?id=signature)
     * [Text](v2/features/text.md?id=text)
+    * [Unit Testing](v2/features/unittests.md?id=unit-testing)
   * **Examples**
     * [Billing](v2/examples/billing.md?id=billing)
 * [Maroto V1 (Deprecated)](v1/README.md?id=deprecated)

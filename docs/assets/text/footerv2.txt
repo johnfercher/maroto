@@ -1,0 +1,3 @@
+generate -> avg: 9.91ms, executions: [9.91ms]
+footer -> avg: 163.00ns, executions: [163.00ns]
+add_row -> avg: 59.92ns, executions: [109.00ns, 89.00ns, 62.00ns, 26.00ns, 61.00ns, 22.00ns, 22.00ns, 16.00ns, 66.00ns, 16.00ns, 15.00ns, 14.00ns, 15.00ns, 15.00ns, 15.00ns, 16.00ns, 914.00ns, 16.00ns, 16.00ns, 16.00ns, 17.00ns, 16.00ns, 18.00ns, 17.00ns, 432.00ns, 70.00ns, 50.00ns, 15.00ns, 57.00ns, 16.00ns, 15.00ns, 15.00ns, 60.00ns, 28.00ns, 15.00ns, 15.00ns, 15.00ns, 16.00ns, 16.00ns, 14.00ns, 70.00ns, 16.00ns, 16.00ns, 16.00ns, 15.00ns, 15.00ns, 28.00ns, 18.00ns, 287.00ns, 57.00ns]

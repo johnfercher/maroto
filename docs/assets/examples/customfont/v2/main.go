@@ -58,6 +58,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	err = document.GetReport().Save("docs/assets/text/customfontv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
 func getLanguageSample() ([]string, [][]string) {
