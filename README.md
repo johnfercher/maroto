@@ -19,7 +19,7 @@ always when a new page appear, in this case, a header may have many rows, lines 
 * You can see the full documentation [here](https://maroto.io/).
 * Discussions are being addressed in [this issue](https://github.com/johnfercher/maroto/issues/257).
 * Roadmap is presented [here](https://github.com/users/johnfercher/projects/1).
-* Releases notes can be found [here](https://github.com/johnfercher/maroto/tags)
+* Releases notes can be found [here](https://github.com/johnfercher/maroto/releases)
 
 ![result](docs/assets/images/result.png)
 
@@ -28,7 +28,7 @@ always when a new page appear, in this case, a header may have many rows, lines 
 * With `go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.14
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.15
 ```
 
 
