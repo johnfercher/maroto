@@ -12,7 +12,7 @@ type Maroto interface {
 	RegisterFooter(rows ...Row) error
 	AddRows(rows ...Row)
 	AddRow(rowHeight float64, cols ...Col) Row
-	ForceAddPage(pages ...Page)
+	AddPages(pages ...Page)
 	GetStructure() *tree.Node[Structure]
 	Generate() (Document, error)
 }
@@ -53,6 +53,7 @@ type Row interface {
 type Page interface {
 	Node
 	Add(rows ...Row) Page
+	GetRows() []Row
 	GetNumber() int
 	SetNumber(number int, total int)
 	Render(provider Provider, cell Cell)

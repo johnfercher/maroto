@@ -42,9 +42,9 @@ func (m *metricsDecorator) Generate() (core.Document, error) {
 	return core.NewDocument(document.GetBytes(), report), nil
 }
 
-func (m *metricsDecorator) ForceAddPage(pages ...core.Page) {
+func (m *metricsDecorator) AddPages(pages ...core.Page) {
 	timeSpent := m.getTimeSpent(func() {
-		m.inner.ForceAddPage(pages...)
+		m.inner.AddPages(pages...)
 	})
 
 	m.addPageTime = append(m.addPageTime, timeSpent)
