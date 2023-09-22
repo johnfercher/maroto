@@ -74,10 +74,10 @@ func NewMaroto(config ...*config.Config) core.Maroto {
 
 func (m *maroto) AddPages(pages ...core.Page) {
 	for _, page := range pages {
-		if m.currentHeight != 0 {
+		if m.currentHeight != m.headerHeight {
 			m.fillPageToAddNew()
+			m.addHeader()
 		}
-		m.addHeader()
 		m.addRows(page.GetRows()...)
 	}
 }

@@ -23,33 +23,23 @@ func main() {
 	mrt := pkg.NewMaroto(cfg)
 	m := pkg.NewMetricsDecorator(mrt)
 
-	err := m.RegisterHeader(buildHeader()...)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = m.RegisterFooter(buildFooter()...)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	for i := 0; i < 50; i++ {
-		m.AddRows(
-			text.NewRow(10, "Dummy text", props.Text{
-				Size: 8,
-			}),
-		)
-	}
-
 	m.AddPages(
 		page.New().Add(
-			text.NewRow(10, "new page"),
+			text.NewRow(30, "page1 row1"),
+			text.NewRow(30, "page1 row2"),
+			text.NewRow(30, "page1 row3"),
+			text.NewRow(30, "page1 row4"),
+			text.NewRow(30, "page1 row5"),
+			text.NewRow(30, "page1 row6"),
+			text.NewRow(30, "page1 row7"),
+			text.NewRow(30, "page1 row8"),
+			text.NewRow(30, "page1 row9"),
 		),
 		page.New().Add(
-			text.NewRow(10, "new page"),
+			text.NewRow(10, "page2 row1"),
 		),
 		page.New().Add(
-			text.NewRow(10, "new page"),
+			text.NewRow(10, "page3 row1"),
 		),
 	)
 
