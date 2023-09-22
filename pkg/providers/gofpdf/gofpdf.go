@@ -141,6 +141,10 @@ func (g *gofpdfProvider) CreateRow(height float64) {
 	g.fpdf.Ln(height)
 }
 
+func (g *gofpdfProvider) SetProtection(protection *config.Protection) {
+	g.fpdf.SetProtection(byte(protection.Type), protection.UserPassword, protection.OwnerPassword)
+}
+
 func (g *gofpdfProvider) GenerateFile(file string) error {
 	return g.fpdf.OutputFileAndClose(file)
 }

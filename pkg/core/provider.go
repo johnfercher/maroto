@@ -26,4 +26,6 @@ type Provider interface {
 	GenerateFile(file string) error
 	GenerateBytes() ([]byte, error)
 	SetCache(cache cache.Cache)
+
+	SetProtection(protection *config.Protection)
 }

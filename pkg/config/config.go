@@ -16,4 +16,5 @@ type Config struct {
 	MaxGridSize       int
 	PageNumberPattern string
 	PageNumberPlace   props.Place
+	Protection        *Protection
 }
