@@ -60,6 +60,10 @@ func (p *page) Add(rows ...core.Row) core.Page {
 	return p
 }
 
+func (p *page) GetRows() []core.Row {
+	return p.rows
+}
+
 func (p *page) GetStructure() *tree.Node[core.Structure] {
 	str := core.Structure{
 		Type: "page",

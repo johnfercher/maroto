@@ -72,8 +72,14 @@ func NewMaroto(config ...*config.Config) core.Maroto {
 	return m
 }
 
-func (m *maroto) ForceAddPage(pages ...core.Page) {
-	m.pages = append(m.pages, pages...)
+func (m *maroto) AddPages(pages ...core.Page) {
+	for _, page := range pages {
+		if m.currentHeight != m.headerHeight {
+			m.fillPageToAddNew()
+			m.addHeader()
+		}
+		m.addRows(page.GetRows()...)
+	}
 }
 
 func (m *maroto) AddRows(rows ...core.Row) {
@@ -163,14 +169,18 @@ func (m *maroto) addRow(r core.Row) {
 	// on the page to force a new page
 	m.fillPageToAddNew()
 
-	for _, headerRow := range m.header {
-		m.currentHeight += headerRow.GetHeight()
-		m.rows = append(m.rows, headerRow)
-	}
+	m.addHeader()
 
 	// AddRows row on the new page
 	m.currentHeight += rowHeight
 	m.rows = append(m.rows, r)
+}
+
+func (m *maroto) addHeader() {
+	for _, headerRow := range m.header {
+		m.currentHeight += headerRow.GetHeight()
+		m.rows = append(m.rows, headerRow)
+	}
 }
 
 func (m *maroto) fillPageToAddNew() {

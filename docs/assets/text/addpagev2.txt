@@ -1,0 +1,2 @@
+generate -> avg: 3.61ms, executions: [3.61ms]
+add_page -> avg: 1519.00ns, executions: [1.52μs]
