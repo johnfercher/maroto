@@ -40,19 +40,23 @@ mock:
 
 .PHONY: examples
 examples: font
+	go run docs/assets/examples/addpage/v2/main.go
 	go run docs/assets/examples/barcodegrid/v2/main.go
 	go run docs/assets/examples/billing/v2/main.go
 	go run docs/assets/examples/cellstyle/v2/main.go
+	go run docs/assets/examples/compression/v2/main.go
 	go run docs/assets/examples/customfont/v2/main.go
 	go run docs/assets/examples/customsize/v2/main.go
 	go run docs/assets/examples/datamatrixgrid/v2/main.go
 	go run docs/assets/examples/footer/v2/main.go
 	go run docs/assets/examples/header/v2/main.go
 	go run docs/assets/examples/imagegrid/v2/main.go
+	go run docs/assets/examples/list/v2/main.go
 	go run docs/assets/examples/margins/v2/main.go
 	go run docs/assets/examples/maxgridsum/v2/main.go
 	go run docs/assets/examples/pagenumber/v2/main.go
 	go run docs/assets/examples/parallelism/v2/main.go
+	go run docs/assets/examples/protection/v2/main.go
 	go run docs/assets/examples/qrgrid/v2/main.go
 	go run docs/assets/examples/signaturegrid/v2/main.go
 	go run docs/assets/examples/textgrid/v2/main.go

@@ -172,7 +172,7 @@ func (m *metricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
 		SizeMetric: metrics.SizeMetric{
 			Key: "file_size",
 			Size: metrics.Size{
-				Value: bytesSize,
+				Value: float64(bytesSize),
 				Scale: metrics.Byte,
 			},
 		},

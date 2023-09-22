@@ -26,13 +26,13 @@ type Time struct {
 func (t *Time) Normalize() bool {
 	if t.Scale == Nano {
 		t.Scale = Micro
-		t.Value /= 1000
+		t.Value /= 1000.0
 		return true
 	}
 
 	if t.Scale == Micro {
 		t.Scale = Milli
-		t.Value /= 1000
+		t.Value /= 1000.0
 		return true
 	}
 
@@ -44,26 +44,26 @@ func (t *Time) String() string {
 }
 
 type Size struct {
-	Value int
+	Value float64
 	Scale SizeScale
 }
 
 func (t *Size) Normalize() bool {
 	if t.Scale == Byte {
 		t.Scale = KiloByte
-		t.Value /= 1000
+		t.Value /= 1000.0
 		return true
 	}
 
 	if t.Scale == KiloByte {
 		t.Scale = MegaByte
-		t.Value /= 1000
+		t.Value /= 1000.0
 		return true
 	}
 
 	if t.Scale == MegaByte {
 		t.Scale = GigaByte
-		t.Value /= 1000
+		t.Value /= 1000.0
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (t *Size) Normalize() bool {
 }
 
 func (t *Size) String() string {
-	return fmt.Sprintf("%d%s", t.Value, t.Scale)
+	return fmt.Sprintf("%.2f%s", t.Value, t.Scale)
 }
 
 type TimeMetric struct {
@@ -98,7 +98,7 @@ func (m *TimeMetric) Normalize() {
 
 func (m *TimeMetric) hasGreaterThan1000(times []*Time) bool {
 	for _, time := range times {
-		if time.Value > 1000 {
+		if time.Value > 1000.0 {
 			return true
 		}
 	}
@@ -125,7 +125,7 @@ type SizeMetric struct {
 }
 
 func (m *SizeMetric) Normalize() {
-	if m.Size.Value < 1000 {
+	if m.Size.Value < 1000.0 {
 		return
 	}
 
