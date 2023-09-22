@@ -20,7 +20,7 @@ func (p *page) Render(provider core.Provider, cell core.Cell) {
 	innerCell := cell.Copy()
 	for _, row := range p.rows {
 		row.Render(provider, innerCell)
-		innerCell.Y += row.GetHeight()
+		innerCell.Y += row.GetHeight(provider, innerCell.Width)
 	}
 }
 

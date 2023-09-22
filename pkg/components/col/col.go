@@ -17,6 +17,17 @@ type col struct {
 	style      *props.Cell
 }
 
+func (c *col) CalculateHeight(provider core.Provider, rowWidth float64) float64 {
+	var h float64
+	for _, cmp := range c.components {
+		if ahc, ok := cmp.(core.AdaptiveHeightComponent); ok {
+			h += ahc.GetComputedHeight(provider, c.GetWidth(rowWidth))
+		}
+	}
+
+	return h
+}
+
 func New(size ...int) core.Col {
 	if len(size) == 0 {
 		return &col{isMax: true}
@@ -38,6 +49,10 @@ func (c *col) GetSize() int {
 	return c.size
 }
 
+func (c *col) GetWidth(rowWidth float64) float64 {
+	return rowWidth * float64(c.GetSize()) / float64(c.config.MaxGridSize)
+}
+
 func (c *col) GetStructure() *tree.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "col",
@@ -55,12 +70,19 @@ func (c *col) GetStructure() *tree.Node[core.Structure] {
 }
 
 func (c *col) Render(provider core.Provider, cell core.Cell, createCell bool) {
+	innerCell := cell.Copy()
+
 	if createCell {
 		provider.CreateCol(cell.Width, cell.Height, c.config, c.style)
 	}
 
 	for _, component := range c.components {
-		component.Render(provider, cell)
+		component.Render(provider, innerCell)
+		h := 0.0
+		if ccc, ok := component.(core.AdaptiveHeightComponent); ok {
+			h += ccc.GetComputedHeight(provider, cell.Width)
+		}
+		innerCell.Y += h
 	}
 }
 

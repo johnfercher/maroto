@@ -14,6 +14,7 @@ type Provider interface {
 
 	// Features
 	AddText(text string, cell Cell, prop props.Text)
+	CalculateTextHeight(text string, width float64, prop props.Text) float64
 	AddSignature(text string, cell Cell, prop props.Text)
 	AddMatrixCode(code string, cell Cell, prop props.Rect)
 	AddQrCode(code string, cell Cell, rect props.Rect)

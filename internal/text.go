@@ -15,7 +15,7 @@ import (
 // Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
 	Add(text string, cell core.Cell, textProp props.Text)
-	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
+	GetComputedHeight(text string, fontFamily props.Text, colWidth float64) float64
 }
 
 type text struct {
@@ -91,24 +91,20 @@ func (s *text) Add(text string, cell core.Cell, textProp props.Text) {
 	s.font.SetColor(originalColor)
 }
 
-// GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
-func (s *text) GetLinesQuantity(text string, textProp props.Text, colWidth float64) int {
-	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
+// GetComputedHeight retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
+func (s *text) GetComputedHeight(text string, textProp props.Text, colWidth float64) float64 {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	// Apply Unicode.
-	textTranslated := translator(text)
-
-	stringWidth := s.pdf.GetStringWidth(textTranslated)
-	words := strings.Split(textTranslated, " ")
-
-	// If should add one line.
-	if stringWidth < colWidth || textProp.Extrapolate || len(words) == 1 {
-		return 1
-	}
+	unicodeText := s.textToUnicode(text, textProp)
+	words := strings.Split(unicodeText, " ")
 
 	lines := s.getLines(words, colWidth)
-	return len(lines)
+
+	_, _, fontSize := s.font.GetFont()
+	textHeight := fontSize / s.font.GetScaleFactor()
+
+	return textProp.Top + textProp.Bottom + float64(len(lines))*textHeight + float64(len(lines))*textProp.VerticalPadding
 }
 
 func (s *text) getLines(words []string, colWidth float64) []string {

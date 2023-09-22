@@ -18,9 +18,26 @@ type row struct {
 	config *config.Config
 }
 
+func (r *row) CalculateHeight(provider core.Provider, cellWidth float64) float64 {
+	for _, c := range r.cols {
+		h := c.CalculateHeight(provider, cellWidth)
+		if h > r.height {
+			r.height = h
+		}
+	}
+
+	return r.height
+}
+
 func New(height float64) core.Row {
 	return &row{
 		height: height,
+	}
+}
+
+func NewAdaptive(cols ...core.Col) core.Row {
+	return &row{
+		cols: cols,
 	}
 }
 
@@ -42,7 +59,11 @@ func (r *row) Add(cols ...core.Col) core.Row {
 	return r
 }
 
-func (r *row) GetHeight() float64 {
+func (r *row) GetHeight(provider core.Provider, cellWidth float64) float64 {
+	if r.height == 0 {
+		r.height = r.CalculateHeight(provider, cellWidth)
+	}
+
 	return r.height
 }
 
@@ -70,17 +91,11 @@ func (r *row) Render(provider core.Provider, cell core.Cell) {
 		provider.CreateCol(cell.Width, cell.Height, r.config, r.style)
 	}
 
-	for _, col := range r.cols {
-		size := col.GetSize()
-		parentWidth := cell.Width
+	for _, c := range r.cols {
+		innerCell.Width = c.GetWidth(cell.Width)
 
-		percent := float64(size) / float64(r.config.MaxGridSize)
-
-		colDimension := parentWidth * percent
-		innerCell.Width = colDimension
-
-		col.Render(provider, innerCell, r.style == nil)
-		innerCell.X += colDimension
+		c.Render(provider, innerCell, r.style == nil)
+		innerCell.X += innerCell.Width
 	}
 
 	provider.CreateRow(cell.Height)

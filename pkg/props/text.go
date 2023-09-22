@@ -9,6 +9,8 @@ import (
 type Text struct {
 	// Top is the amount of space between the upper cell limit and the text.
 	Top float64
+	// Bottom is the amount of space from bottom line of cell. Work only with adaptive rows
+	Bottom float64
 	// Left is the minimal amount of space between the left cell boundary and the text.
 	Left float64
 	// Right is the minimal amount of space between the right cell boundary and the text.

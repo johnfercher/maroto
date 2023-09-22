@@ -66,3 +66,8 @@ func (t *text) Render(provider core.Provider, cell core.Cell) {
 	t.prop.MakeValid(t.config.DefaultFont)
 	provider.AddText(t.value, cell, t.prop)
 }
+
+func (t *text) GetComputedHeight(provider core.Provider, width float64) float64 {
+	t.prop.MakeValid(t.config.DefaultFont)
+	return provider.CalculateTextHeight(t.value, width, t.prop)
+}

@@ -34,20 +34,27 @@ type Component interface {
 	Render(provider Provider, cell Cell)
 }
 
+type AdaptiveHeightComponent interface {
+	GetComputedHeight(provider Provider, width float64) float64
+}
+
 type Col interface {
 	Node
 	Add(components ...Component) Col
 	GetSize() int
 	WithStyle(style *props.Cell) Col
 	Render(provider Provider, cell Cell, createCell bool)
+	CalculateHeight(provider Provider, rowWidth float64) float64
+	GetWidth(rowWidth float64) float64
 }
 
 type Row interface {
 	Node
 	Add(cols ...Col) Row
-	GetHeight() float64
+	GetHeight(provider Provider, cellWidth float64) float64
 	WithStyle(style *props.Cell) Row
 	Render(provider Provider, cell Cell)
+	CalculateHeight(provider Provider, cellWidth float64) float64
 }
 
 type Page interface {

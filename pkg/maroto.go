@@ -8,19 +8,17 @@ import (
 
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 
-	"github.com/johnfercher/maroto/v2/pkg/components/col"
-	"github.com/johnfercher/maroto/v2/pkg/components/page"
-	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
-	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf"
-	"github.com/johnfercher/maroto/v2/pkg/providers/html"
-
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
+	"github.com/johnfercher/maroto/v2/pkg/components/page"
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
+	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 )
 
@@ -101,6 +99,9 @@ func (m *maroto) RegisterHeader(rows ...core.Row) error {
 }
 
 func (m *maroto) RegisterFooter(rows ...core.Row) error {
+	for _, r := range rows {
+		r.SetConfig(m.config)
+	}
 	height := m.getRowsHeight(rows...)
 	if height > m.config.Dimensions.Height {
 		return errors.New("footer height is greater than page useful area")
@@ -112,8 +113,8 @@ func (m *maroto) RegisterFooter(rows ...core.Row) error {
 }
 
 func (m *maroto) Generate() (core.Document, error) {
-	m.fillPageToAddNew()
-	m.setConfig()
+	//m.fillPageToAddNew()
+	m.splitPages()
 
 	if m.config.Workers > 0 && m.config.ProviderType != provider.HTML {
 		return m.generateConcurrently()
@@ -139,35 +140,12 @@ func (m *maroto) GetStructure() *tree.Node[core.Structure] {
 }
 
 func (m *maroto) addRows(rows ...core.Row) {
-	for _, row := range rows {
-		m.addRow(row)
+	for _, r := range rows {
+		m.addRow(r)
 	}
 }
 
 func (m *maroto) addRow(r core.Row) {
-	maxHeight := m.cell.Height
-
-	rowHeight := r.GetHeight()
-	sumHeight := rowHeight + m.currentHeight + m.footerHeight
-
-	// Row smaller than the remain space on page
-	if sumHeight < maxHeight {
-		m.currentHeight += rowHeight
-		m.rows = append(m.rows, r)
-		return
-	}
-
-	// As row will extrapolate page, we will add empty space
-	// on the page to force a new page
-	m.fillPageToAddNew()
-
-	for _, headerRow := range m.header {
-		m.currentHeight += headerRow.GetHeight()
-		m.rows = append(m.rows, headerRow)
-	}
-
-	// AddRows row on the new page
-	m.currentHeight += rowHeight
 	m.rows = append(m.rows, r)
 }
 
@@ -196,10 +174,61 @@ func (m *maroto) setConfig() {
 	}
 }
 
+func (m *maroto) createPage() core.Page {
+	p := page.New()
+	p.SetNumber(len(m.pages))
+
+	m.pages = append(m.pages, p)
+	m.currentHeight = 0
+
+	for _, headerRow := range m.header {
+		m.currentHeight += headerRow.GetHeight(m.provider, m.cell.Width)
+		p.Add(headerRow)
+	}
+
+	p.SetConfig(m.config)
+
+	return p
+}
+
+func (m *maroto) addPageFooter(p core.Page) {
+	space := m.cell.Height - m.currentHeight - m.footerHeight
+
+	er := row.New(space).Add(col.New(m.config.MaxGridSize))
+	er.SetConfig(m.config)
+
+	p.Add(er)
+	p.Add(m.footer...)
+}
+
+func (m *maroto) splitPages() {
+	p := m.createPage()
+
+	maxHeight := m.cell.Height
+	for _, r := range m.rows {
+		r.SetConfig(m.config)
+		rowHeight := r.GetHeight(m.provider, m.cell.Width)
+
+		sumHeight := rowHeight + m.currentHeight + m.footerHeight
+
+		// Row smaller than the remain space on page
+		if sumHeight > maxHeight {
+			m.addPageFooter(p)
+			p = m.createPage()
+		}
+
+		m.currentHeight += rowHeight
+		p.Add(r)
+	}
+
+	m.addPageFooter(p)
+}
+
 func (m *maroto) generate() (core.Document, error) {
 	innerCtx := m.cell.Copy()
 
 	for _, page := range m.pages {
+		page.SetConfig(m.config)
 		page.Render(m.provider, innerCtx)
 	}
 
@@ -261,7 +290,7 @@ func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
 func (m *maroto) getRowsHeight(rows ...core.Row) float64 {
 	var height float64
 	for _, r := range rows {
-		height += r.GetHeight()
+		height += r.GetHeight(m.provider, m.cell.Width)
 	}
 
 	return height
@@ -276,9 +305,6 @@ func getConfig(configs ...*config.Config) *config.Config {
 }
 
 func getProvider(cache cache.Cache, cfg *config.Config) core.Provider {
-	if cfg.ProviderType == provider.HTML {
-		return html.New(cfg, providers.WithCache(cache))
-	}
 
 	return gofpdf.New(cfg, providers.WithCache(cache))
 }
