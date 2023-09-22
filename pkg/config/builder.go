@@ -3,6 +3,8 @@ package config
 import (
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
@@ -21,6 +23,8 @@ type builder struct {
 	customFonts       []*CustomFont
 	pageNumberPattern string
 	pageNumberPlace   props.Place
+	protection        *Protection
+	compression       bool
 }
 
 type Builder interface {
@@ -34,6 +38,8 @@ type Builder interface {
 	WithFont(font *props.Font) Builder
 	AddUTF8Font(family string, style fontstyle.Type, file string) Builder
 	WithPageNumber(pattern string, place props.Place) Builder
+	WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder
+	WithCompression(compression bool) Builder
 	Build() *Config
 }
 
@@ -197,6 +203,21 @@ func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
 	return b
 }
 
+func (b *builder) WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder {
+	b.protection = &Protection{
+		Type:          protectionType,
+		UserPassword:  userPassword,
+		OwnerPassword: ownerPassword,
+	}
+
+	return b
+}
+
+func (b *builder) WithCompression(compression bool) Builder {
+	b.compression = compression
+	return b
+}
+
 func (b *builder) Build() *Config {
 	return &Config{
 		ProviderType:      b.providerType,
@@ -209,6 +230,8 @@ func (b *builder) Build() *Config {
 		CustomFonts:       b.customFonts,
 		PageNumberPattern: b.pageNumberPattern,
 		PageNumberPlace:   b.pageNumberPlace,
+		Protection:        b.protection,
+		Compression:       b.compression,
 	}
 }
 

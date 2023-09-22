@@ -141,6 +141,10 @@ func (g *gofpdfProvider) CreateRow(height float64) {
 	g.fpdf.Ln(height)
 }
 
+func (g *gofpdfProvider) SetProtection(protection *config.Protection) {
+	g.fpdf.SetProtection(byte(protection.Type), protection.UserPassword, protection.OwnerPassword)
+}
+
 func (g *gofpdfProvider) GenerateFile(file string) error {
 	return g.fpdf.OutputFileAndClose(file)
 }
@@ -158,4 +162,8 @@ func (g *gofpdfProvider) SetCache(cache cache.Cache) {
 
 func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Config, prop *props.Cell) {
 	g.cellWriter.Apply(width, height, config, prop)
+}
+
+func (g *gofpdfProvider) SetCompression(compression bool) {
+	g.fpdf.SetCompression(compression)
 }
