@@ -2,6 +2,7 @@ package list
 
 import (
 	"errors"
+
 	"github.com/johnfercher/maroto/v2/pkg/core"
 )
 
