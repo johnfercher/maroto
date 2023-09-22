@@ -6,6 +6,7 @@
     * [Add Page](v2/features/addpage.md?id=addpage)
     * [Barcode](v2/features/barcode.md?id=barcode)
     * [Cell Style](v2/features/cellstyle.md?id=cell-style)
+    * [Compression](v2/features/compression.md?id=compression)
     * [Custom Font](v2/features/customfont.md?id=custom-font)
     * [Custom Size](v2/features/customsize.md?id=custom-size)
     * [Data Matrix](v2/features/datamatrix.md?id=data-matrix)
