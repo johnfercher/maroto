@@ -53,7 +53,7 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 	})
 
 	for _, font := range cfg.CustomFonts {
-		fpdf.AddUTF8Font(font.Family, string(font.Style), font.File)
+		fpdf.AddUTF8FontFromBytes(font.Family, string(font.Style), font.Bytes)
 	}
 
 	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)

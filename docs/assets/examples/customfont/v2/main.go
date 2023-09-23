@@ -17,12 +17,19 @@ func main() {
 	customFont := "arial-unicode-ms"
 	customFontFile := "docs/assets/fonts/arial-unicode-ms.ttf"
 
-	cfg := config.NewBuilder().
+	repository := config.NewRepository().
 		AddUTF8Font(customFont, fontstyle.Normal, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Italic, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Bold, customFontFile).
-		AddUTF8Font(customFont, fontstyle.BoldItalic, customFontFile).
-		WithFont(&props.Font{Family: customFont}).
+		AddUTF8Font(customFont, fontstyle.BoldItalic, customFontFile)
+
+	builder, err := config.NewBuilder().
+		TryLoadRepository(repository)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	cfg := builder.WithDefaultFont(&props.Font{Family: customFont}).
 		Build()
 
 	mrt := pkg.NewMaroto(cfg)

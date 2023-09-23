@@ -6,4 +6,5 @@ type CustomFont struct {
 	Family string
 	Style  fontstyle.Type
 	File   string
+	Bytes  []byte
 }
