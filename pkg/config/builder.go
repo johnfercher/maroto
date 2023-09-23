@@ -3,6 +3,8 @@ package config
 import (
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
@@ -25,6 +27,7 @@ type builder struct {
 	pageNumberPlace   props.Place
 	protection        *Protection
 	compression       bool
+	orientation       orientation.Type
 }
 
 type Builder interface {
@@ -40,6 +43,7 @@ type Builder interface {
 	WithPageNumber(pattern string, place props.Place) Builder
 	WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder
 	WithCompression(compression bool) Builder
+	WithOrientation(orientation orientation.Type) Builder
 	Build() *Config
 }
 
@@ -218,6 +222,11 @@ func (b *builder) WithCompression(compression bool) Builder {
 	return b
 }
 
+func (b *builder) WithOrientation(orientation orientation.Type) Builder {
+	b.orientation = orientation
+	return b
+}
+
 func (b *builder) Build() *Config {
 	return &Config{
 		ProviderType:      b.providerType,
@@ -241,8 +250,14 @@ func (b *builder) getDimensions() *Dimensions {
 	}
 
 	width, height := pagesize.GetDimensions(pagesize.A4)
-	return &Dimensions{
+	dimensions := &Dimensions{
 		Width:  width,
 		Height: height,
 	}
+
+	if b.orientation == orientation.Landscape && height > width {
+		dimensions.Width, dimensions.Height = dimensions.Height, dimensions.Width
+	}
+
+	return dimensions
 }

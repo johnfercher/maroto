@@ -45,8 +45,9 @@ examples: font
 	go run docs/assets/examples/billing/v2/main.go
 	go run docs/assets/examples/cellstyle/v2/main.go
 	go run docs/assets/examples/compression/v2/main.go
+	go run docs/assets/examples/customdimensions/v2/main.go
 	go run docs/assets/examples/customfont/v2/main.go
-	go run docs/assets/examples/customsize/v2/main.go
+	go run docs/assets/examples/custompage/v2/main.go
 	go run docs/assets/examples/datamatrixgrid/v2/main.go
 	go run docs/assets/examples/footer/v2/main.go
 	go run docs/assets/examples/header/v2/main.go
@@ -54,6 +55,7 @@ examples: font
 	go run docs/assets/examples/list/v2/main.go
 	go run docs/assets/examples/margins/v2/main.go
 	go run docs/assets/examples/maxgridsum/v2/main.go
+	go run docs/assets/examples/orientation/v2/main.go
 	go run docs/assets/examples/pagenumber/v2/main.go
 	go run docs/assets/examples/parallelism/v2/main.go
 	go run docs/assets/examples/protection/v2/main.go

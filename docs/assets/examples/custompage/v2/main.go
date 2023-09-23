@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -14,9 +16,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithDimensions(&config.Dimensions{
-			200, 200,
-		}).
+		WithPageSize(pagesize.A2).
 		WithDebug(true).
 		Build()
 
@@ -41,12 +41,12 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	err = document.Save("docs/assets/pdf/customsizev2.pdf")
+	err = document.Save("docs/assets/pdf/custompagev2.pdf")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	err = document.GetReport().Save("docs/assets/text/customsizev2.txt")
+	err = document.GetReport().Save("docs/assets/text/custompagev2.txt")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
