@@ -2,12 +2,12 @@
 
 [![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines) [![Branch](https://img.shields.io/badge/V2-Branch-pink)](https://github.com/johnfercher/maroto/tree/v2)  [![Roadmap](https://img.shields.io/badge/V2-Roadmap-purple)](https://github.com/users/johnfercher/projects/1) [![Discussion](https://img.shields.io/badge/V2-Discussion-blue)](https://github.com/johnfercher/maroto/issues/257) [![Release Notes](https://img.shields.io/badge/Release-Notes-cyan)](https://github.com/johnfercher/maroto/releases) [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
 
-#### Maroto`v2.0.0-alpha.20`is here! Try out:
+#### Maroto`v2.0.0-alpha.21`is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.20
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.21
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
