@@ -29,4 +29,5 @@ type Provider interface {
 
 	SetProtection(protection *config.Protection)
 	SetCompression(compression bool)
+	SetMetadata(metadata *config.Metadata)
 }

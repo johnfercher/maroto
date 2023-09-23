@@ -55,6 +55,7 @@ examples: font
 	go run docs/assets/examples/list/v2/main.go
 	go run docs/assets/examples/margins/v2/main.go
 	go run docs/assets/examples/maxgridsum/v2/main.go
+	go run docs/assets/examples/metadatas/v2/main.go
 	go run docs/assets/examples/orientation/v2/main.go
 	go run docs/assets/examples/pagenumber/v2/main.go
 	go run docs/assets/examples/parallelism/v2/main.go
