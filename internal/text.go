@@ -1,7 +1,10 @@
 package internal
 
 import (
+	"fmt"
 	"strings"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
@@ -69,23 +72,31 @@ func (s *text) Add(text string, cell core.Cell, textProp props.Text) {
 	// Apply Unicode before calc spaces
 	unicodeText := s.textToUnicode(text, textProp)
 	stringWidth := s.pdf.GetStringWidth(unicodeText)
-	words := strings.Split(unicodeText, " ")
-	accumulateOffsetY := 0.0
 
 	// If should add one line
-	if stringWidth < cell.Width || textProp.Extrapolate || len(words) == 1 {
+	if stringWidth < cell.Width {
 		s.addLine(textProp, cell.X, cell.Width, cell.Y, stringWidth, unicodeText)
+		return
+	}
+
+	var lines []string
+
+	if textProp.BreakLineStrategy == breakline.EmptyLineStrategy {
+		words := strings.Split(unicodeText, " ")
+		lines = s.getLinesBreakingLineFromSpace(words, cell.Width)
 	} else {
-		lines := s.getLines(words, cell.Width)
+		lines = s.getLinesBreakingLineWithDash(unicodeText, cell.Width)
+	}
 
-		for index, line := range lines {
-			lineWidth := s.pdf.GetStringWidth(line)
-			_, _, fontSize := s.font.GetFont()
-			textHeight := fontSize / s.font.GetScaleFactor()
+	accumulateOffsetY := 0.0
 
-			s.addLine(textProp, cell.X, cell.Width, cell.Y+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
-			accumulateOffsetY += textProp.VerticalPadding
-		}
+	for index, line := range lines {
+		lineWidth := s.pdf.GetStringWidth(line)
+		_, _, fontSize := s.font.GetFont()
+		textHeight := fontSize / s.font.GetScaleFactor()
+
+		s.addLine(textProp, cell.X, cell.Width, cell.Y+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
+		accumulateOffsetY += textProp.VerticalPadding
 	}
 
 	s.font.SetColor(originalColor)
@@ -103,15 +114,15 @@ func (s *text) GetLinesQuantity(text string, textProp props.Text, colWidth float
 	words := strings.Split(textTranslated, " ")
 
 	// If should add one line.
-	if stringWidth < colWidth || textProp.Extrapolate || len(words) == 1 {
+	if stringWidth < colWidth || len(words) == 1 {
 		return 1
 	}
 
-	lines := s.getLines(words, colWidth)
+	lines := s.getLinesBreakingLineFromSpace(words, colWidth)
 	return len(lines)
 }
 
-func (s *text) getLines(words []string, colWidth float64) []string {
+func (s *text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {
 	currentlySize := 0.0
 	actualLine := 0
 
@@ -128,6 +139,31 @@ func (s *text) getLines(words []string, colWidth float64) []string {
 			lines[actualLine] = lines[actualLine] + word + " "
 			currentlySize = s.pdf.GetStringWidth(word + " ")
 		}
+	}
+
+	return lines
+}
+
+func (s *text) getLinesBreakingLineWithDash(words string, colWidth float64) []string {
+	currentlySize := 0.0
+
+	lines := []string{}
+
+	dashSize := s.pdf.GetStringWidth(" - ")
+
+	var content string
+	for _, letter := range words {
+		if currentlySize+dashSize > colWidth-dashSize {
+			content += "-"
+			lines = append(lines, content)
+			content = ""
+			currentlySize = 0
+		}
+
+		letterString := fmt.Sprintf("%c", letter)
+		width := s.pdf.GetStringWidth(letterString)
+		content += letterString
+		currentlySize += width
 	}
 
 	return lines

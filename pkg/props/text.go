@@ -2,6 +2,7 @@ package props
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 )
 
@@ -20,10 +21,8 @@ type Text struct {
 	// Size of the text.
 	Size float64
 	// Align of the text.
-	Align align.Type
-	// Extrapolate define if the text will automatically add a new line when.
-	// text reach the right cell boundary.
-	Extrapolate bool
+	Align             align.Type
+	BreakLineStrategy breakline.Strategy
 	// VerticalPadding define an additional space between lines.
 	VerticalPadding float64
 	// Color define the fontstyle color.
@@ -69,5 +68,9 @@ func (s *Text) MakeValid(font *Font) {
 
 	if s.VerticalPadding < 0 {
 		s.VerticalPadding = 0
+	}
+
+	if s.BreakLineStrategy == "" {
+		s.BreakLineStrategy = breakline.EmptyLineStrategy
 	}
 }

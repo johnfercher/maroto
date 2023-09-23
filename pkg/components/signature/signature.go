@@ -42,7 +42,7 @@ func NewRow(height float64, value string, ps ...props.Font) core.Row {
 }
 
 func (s *signature) Render(provider core.Provider, cell core.Cell) {
-	provider.AddSignature(s.value, cell, s.prop.ToTextProp(align.Center, 0.0, false, 0))
+	provider.AddSignature(s.value, cell, s.prop.ToTextProp(align.Center, 0.0, 0))
 }
 
 func (s *signature) GetStructure() *tree.Node[core.Structure] {
