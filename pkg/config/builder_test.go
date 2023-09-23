@@ -66,7 +66,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithFont(nil).Build()
+		cfg := sut.WithDefaultFont(nil).Build()
 
 		// Assert
 		assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
@@ -82,7 +82,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithFont(&props.Font{
+		cfg := sut.WithDefaultFont(&props.Font{
 			Family: "new family",
 		}).Build()
 
@@ -100,7 +100,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithFont(&props.Font{
+		cfg := sut.WithDefaultFont(&props.Font{
 			Style: fontstyle.Bold,
 		}).Build()
 
@@ -118,7 +118,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithFont(&props.Font{
+		cfg := sut.WithDefaultFont(&props.Font{
 			Size: 13,
 		}).Build()
 
@@ -136,7 +136,7 @@ func TestBuilder_WithFont(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithFont(&props.Font{
+		cfg := sut.WithDefaultFont(&props.Font{
 			Color: &props.Color{Red: 10, Green: 10, Blue: 10},
 		}).Build()
 
@@ -373,54 +373,5 @@ func TestBuilder_WithMargins(t *testing.T) {
 		assert.Equal(t, 20.0, cfg.Margins.Left)
 		assert.Equal(t, 20.0, cfg.Margins.Top)
 		assert.Equal(t, 20.0, cfg.Margins.Right)
-	})
-}
-
-func TestBuilder_AddUTF8Font(t *testing.T) {
-	t.Run("when fontstyle family is empty, should not add value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-
-		// Act
-		cfg := sut.AddUTF8Font("", fontstyle.Bold, "file").Build()
-
-		// Assert
-		assert.Equal(t, 0, len(cfg.CustomFonts))
-	})
-
-	t.Run("when fontstyle style is invalid, should not add value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-
-		// Act
-		cfg := sut.AddUTF8Font("family", "invalid", "file").Build()
-
-		// Assert
-		assert.Equal(t, 0, len(cfg.CustomFonts))
-	})
-
-	t.Run("when fontstyle file is empty, should not add value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-
-		// Act
-		cfg := sut.AddUTF8Font("family", fontstyle.Bold, "").Build()
-
-		// Assert
-		assert.Equal(t, 0, len(cfg.CustomFonts))
-	})
-
-	t.Run("when fontstyle is valid, should not value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-
-		// Act
-		cfg := sut.AddUTF8Font("family", fontstyle.Bold, "file").Build()
-
-		// Assert
-		assert.Equal(t, 1, len(cfg.CustomFonts))
-		assert.Equal(t, "family", cfg.CustomFonts[0].Family)
-		assert.Equal(t, fontstyle.Bold, cfg.CustomFonts[0].Style)
-		assert.Equal(t, "file", cfg.CustomFonts[0].File)
 	})
 }

@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"strings"
 	"time"
 
@@ -23,8 +24,8 @@ type Builder interface {
 	WithWorkerPoolSize(poolSize int) Builder
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
-	WithFont(font *props.Font) Builder
-	AddUTF8Font(family string, style fontstyle.Type, file string) Builder
+	WithDefaultFont(font *props.Font) Builder
+	TryLoadRepository(repository Repository) (Builder, error)
 	WithPageNumber(pattern string, place props.Place) Builder
 	WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder
 	WithCompression(compression bool) Builder
@@ -44,7 +45,7 @@ type builder struct {
 	workerPoolSize    int
 	debug             bool
 	maxGridSize       int
-	font              *props.Font
+	defaultFont       *props.Font
 	customFonts       []*CustomFont
 	pageNumberPattern string
 	pageNumberPlace   props.Place
@@ -63,7 +64,7 @@ func NewBuilder() Builder {
 			Top:   pagesize.MinTopMargin,
 		},
 		maxGridSize: pagesize.DefaultMaxGridSum,
-		font: &props.Font{
+		defaultFont: &props.Font{
 			Size:   pagesize.DefaultFontSize,
 			Family: fontfamily.Arial,
 			Style:  fontstyle.Normal,
@@ -154,50 +155,43 @@ func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
 	return b
 }
 
-func (b *builder) WithFont(font *props.Font) Builder {
+func (b *builder) WithDefaultFont(font *props.Font) Builder {
 	if font == nil {
 		return b
 	}
 
 	if font.Family != "" {
-		b.font.Family = font.Family
+		b.defaultFont.Family = font.Family
 	}
 
 	if font.Size != 0 {
-		b.font.Size = font.Size
+		b.defaultFont.Size = font.Size
 	}
 
 	if font.Style != "" {
-		b.font.Style = font.Style
+		b.defaultFont.Style = font.Style
 	}
 
 	if font.Color != nil {
-		b.font.Color = font.Color
+		b.defaultFont.Color = font.Color
 	}
 
 	return b
 }
 
-func (b *builder) AddUTF8Font(family string, style fontstyle.Type, file string) Builder {
-	if family == "" {
-		return b
+func (b *builder) TryLoadRepository(repository Repository) (Builder, error) {
+	if repository == nil {
+		return b, errors.New("repository is nil")
 	}
 
-	if !style.IsValid() {
-		return b
+	customFonts, err := repository.Load()
+	if err != nil {
+		return nil, err
 	}
 
-	if file == "" {
-		return b
-	}
+	b.customFonts = customFonts
 
-	b.customFonts = append(b.customFonts, &CustomFont{
-		Family: family,
-		Style:  style,
-		File:   file,
-	})
-
-	return b
+	return b, nil
 }
 
 func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
@@ -305,13 +299,13 @@ func (b *builder) Build() *Config {
 		Workers:           b.workerPoolSize,
 		Debug:             b.debug,
 		MaxGridSize:       b.maxGridSize,
-		DefaultFont:       b.font,
-		CustomFonts:       b.customFonts,
+		DefaultFont:       b.defaultFont,
 		PageNumberPattern: b.pageNumberPattern,
 		PageNumberPlace:   b.pageNumberPlace,
 		Protection:        b.protection,
 		Compression:       b.compression,
 		Metadata:          b.metadata,
+		CustomFonts:       b.customFonts,
 	}
 }
 

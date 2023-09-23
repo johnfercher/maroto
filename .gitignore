@@ -17,8 +17,6 @@
 .DS_Store
 *.tmp
 
-*.ttf
-
 goreportcard
 
 # Ignore

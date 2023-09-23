@@ -30,16 +30,12 @@ install:
 docs:
 	docsify serve docs/
 
-.PHONY: font
-font:
-	tar -xvf docs/assets/fonts/arial-unicode-ms.tgz
-
 .PHONY: mock
 mock:
 	mockery
 
 .PHONY: examples
-examples: font
+examples:
 	go run docs/assets/examples/addpage/v2/main.go
 	go run docs/assets/examples/addpdf/v2/main.go
 	go run docs/assets/examples/barcodegrid/v2/main.go
