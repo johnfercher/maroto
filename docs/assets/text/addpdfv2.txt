@@ -1,0 +1,4 @@
+generate -> avg: 10.08ms, executions: [10.08ms]
+add_row -> avg: 51.74ns, executions: [103.00ns, 106.00ns, 52.00ns, 23.00ns, 73.00ns, 23.00ns, 15.00ns, 23.00ns, 72.00ns, 16.00ns, 16.00ns, 15.00ns, 17.00ns, 514.00ns, 58.00ns, 51.00ns, 16.00ns, 55.00ns, 28.00ns, 16.00ns, 16.00ns, 58.00ns, 16.00ns, 15.00ns, 15.00ns, 15.00ns, 290.00ns, 48.00ns, 52.00ns, 14.00ns, 50.00ns, 16.00ns, 15.00ns, 19.00ns, 56.00ns, 16.00ns, 16.00ns, 16.00ns, 17.00ns, 226.00ns, 48.00ns, 57.00ns, 15.00ns, 55.00ns, 16.00ns, 14.00ns, 15.00ns, 51.00ns, 16.00ns, 22.00ns]
+add_pdf -> avg: 246.00ns, executions: [246.00ns]
+file_size -> 235.82Kb

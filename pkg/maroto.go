@@ -37,6 +37,7 @@ type maroto struct {
 	rows          []core.Row
 	header        []core.Row
 	footer        []core.Row
+	pdfs          [][]byte
 	headerHeight  float64
 	footerHeight  float64
 	currentHeight float64
@@ -150,6 +151,10 @@ func (m *maroto) GetStructure() *tree.Node[core.Structure] {
 	return node
 }
 
+func (m *maroto) AddPDFs(pdfs ...[]byte) {
+	m.pdfs = append(m.pdfs, pdfs...)
+}
+
 func (m *maroto) addRows(rows ...core.Row) {
 	for _, row := range rows {
 		m.addRow(row)
@@ -227,12 +232,29 @@ func (m *maroto) generate() (core.Document, error) {
 		page.Render(m.provider, innerCtx)
 	}
 
-	bytes, err := m.provider.GenerateBytes()
+	documentBytes, err := m.provider.GenerateBytes()
 	if err != nil {
 		return nil, err
 	}
 
-	return core.NewDocument(bytes, nil), nil
+	if len(m.pdfs) == 0 {
+		return core.NewDocument(documentBytes, nil), nil
+	}
+
+	readers := []io.ReadSeeker{}
+	readers = append(readers, bytes.NewReader(documentBytes))
+	for _, pdf := range m.pdfs {
+		readers = append(readers, bytes.NewReader(pdf))
+	}
+
+	var buf bytes.Buffer
+	writer := io.Writer(&buf)
+	err = mergePdfs(readers, writer)
+	if err != nil {
+		return nil, err
+	}
+
+	return core.NewDocument(buf.Bytes(), nil), nil
 }
 
 func (m *maroto) generateConcurrently() (core.Document, error) {
@@ -256,10 +278,14 @@ func (m *maroto) generateConcurrently() (core.Document, error) {
 		log.Fatal("error on generating pages")
 	}
 
-	readers := make([]io.ReadSeeker, len(processed.Results))
+	readers := make([]io.ReadSeeker, len(processed.Results)+len(m.pdfs))
 	for i, result := range processed.Results {
 		b := result.Output.([]byte)
 		readers[i] = bytes.NewReader(b)
+	}
+
+	for i, pdf := range m.pdfs {
+		readers[i+len(processed.Results)] = bytes.NewReader(pdf)
 	}
 
 	var buf bytes.Buffer

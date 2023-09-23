@@ -13,6 +13,7 @@ type Maroto interface {
 	AddRows(rows ...Row)
 	AddRow(rowHeight float64, cols ...Col) Row
 	AddPages(pages ...Page)
+	AddPDFs(pdfs ...[]byte)
 	GetStructure() *tree.Node[Structure]
 	Generate() (Document, error)
 }
