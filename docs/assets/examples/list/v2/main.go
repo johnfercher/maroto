@@ -79,7 +79,8 @@ func getObjects(max int) []Object {
 	var objects []Object
 	for i := 0; i < max; i++ {
 		objects = append(objects, Object{
-			Key: fmt.Sprintf("Key: %d", i),
+			Key:   fmt.Sprintf("Key: %d", i),
+			Value: fmt.Sprintf("Value: %d", i),
 		})
 	}
 	return objects
