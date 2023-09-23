@@ -2,7 +2,7 @@ package cellwriter
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts/line"
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 )
@@ -25,7 +25,7 @@ func (f *borderLineStyler) Apply(width, height float64, config *config.Config, p
 		return
 	}
 
-	if prop.LineStyle == line.Solid || prop.LineStyle == "" {
+	if prop.LineStyle == linestyle.Solid || prop.LineStyle == "" {
 		f.GoToNext(width, height, config, prop)
 		return
 	}

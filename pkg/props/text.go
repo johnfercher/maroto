@@ -21,7 +21,7 @@ type Text struct {
 	Size float64
 	// Align of the text.
 	Align align.Type
-	// Extrapolate define if the text will automatically add a new line when.
+	// Extrapolate define if the text will automatically add a new linestyle when.
 	// text reach the right cell boundary.
 	Extrapolate bool
 	// VerticalPadding define an additional space between lines.

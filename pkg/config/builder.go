@@ -326,7 +326,7 @@ func (b *builder) getDimensions() *Dimensions {
 		Height: height,
 	}
 
-	if b.orientation == orientation.Landscape && height > width {
+	if b.orientation == orientation.Horizontal && height > width {
 		dimensions.Width, dimensions.Height = dimensions.Height, dimensions.Width
 	}
 

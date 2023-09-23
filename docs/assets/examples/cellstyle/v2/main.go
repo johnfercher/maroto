@@ -4,7 +4,7 @@ import (
 	"log"
 	"math/rand"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/line"
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -26,7 +26,7 @@ func main() {
 		BackgroundColor: &props.Color{80, 80, 80},
 		BorderType:      border.Full,
 		BorderColor:     &props.Color{200, 0, 0},
-		LineStyle:       line.Dashed,
+		LineStyle:       linestyle.Dashed,
 		BorderThickness: 0.5,
 	}
 

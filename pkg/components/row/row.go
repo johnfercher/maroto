@@ -3,7 +3,6 @@ package row
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -22,12 +21,6 @@ func New(height float64) core.Row {
 	return &row{
 		height: height,
 	}
-}
-
-func Empty(height float64) core.Row {
-	r := New(height)
-	r.Add(col.New())
-	return r
 }
 
 func (r *row) SetConfig(config *config.Config) {

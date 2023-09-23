@@ -4,8 +4,8 @@ package orientation
 type Type string
 
 const (
-	// Portrait represents the portrait orientation.
-	Portrait Type = "P"
-	// Landscape represents the landscape orientation.
-	Landscape Type = "L"
+	// Vertical represents the portrait orientation.
+	Vertical Type = "P"
+	// Horizontal represents the landscape orientation.
+	Horizontal Type = "L"
 )

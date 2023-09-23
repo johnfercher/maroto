@@ -1,28 +1,49 @@
 package props
 
-import "github.com/johnfercher/maroto/v2/pkg/consts/line"
+import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
+)
 
 // Line represents properties from a Line inside a cell.
 type Line struct {
-	// Color define the line color.
+	// Color define the linestyle color.
 	Color Color
-	// Style define the line style (solid, dashed or dotted).
-	Style line.Style
-	// Width define the line width (it cannot be greater than line height)
-	Width float64
+	// Style define the linestyle style (solid, dashed or dotted).
+	Style         linestyle.Type
+	Thickness     float64
+	Orientation   orientation.Type
+	OffsetPercent float64
+	SizePercent   float64
 }
 
 // MakeValid from Line define default values for a Line.
-func (s *Line) MakeValid(spaceHeight float64) {
+func (s *Line) MakeValid() {
 	if s.Style == "" {
-		s.Style = line.Solid
+		s.Style = linestyle.Solid
 	}
 
-	if s.Width == 0 {
-		s.Width = line.DefaultLineWidth
+	if s.Thickness == 0 {
+		s.Thickness = linestyle.DefaultLineThickness
 	}
 
-	if s.Width > spaceHeight {
-		s.Width = spaceHeight
+	if s.Orientation == "" {
+		s.Orientation = orientation.Horizontal
+	}
+
+	if s.OffsetPercent < 5 {
+		s.OffsetPercent = 5
+	}
+
+	if s.OffsetPercent > 95 {
+		s.OffsetPercent = 95
+	}
+
+	if s.SizePercent <= 0 {
+		s.SizePercent = 90
+	}
+
+	if s.SizePercent > 100 {
+		s.SizePercent = 100
 	}
 }

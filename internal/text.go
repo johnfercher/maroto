@@ -72,7 +72,7 @@ func (s *text) Add(text string, cell core.Cell, textProp props.Text) {
 	words := strings.Split(unicodeText, " ")
 	accumulateOffsetY := 0.0
 
-	// If should add one line
+	// If should add one linestyle
 	if stringWidth < cell.Width || textProp.Extrapolate || len(words) == 1 {
 		s.addLine(textProp, cell.X, cell.Width, cell.Y, stringWidth, unicodeText)
 	} else {
@@ -102,7 +102,7 @@ func (s *text) GetLinesQuantity(text string, textProp props.Text, colWidth float
 	stringWidth := s.pdf.GetStringWidth(textTranslated)
 	words := strings.Split(textTranslated, " ")
 
-	// If should add one line.
+	// If should add one linestyle.
 	if stringWidth < colWidth || textProp.Extrapolate || len(words) == 1 {
 		return 1
 	}
