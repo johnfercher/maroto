@@ -1,13 +1,14 @@
 package config_test
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"github.com/stretchr/testify/assert"
 	"os"
 	"path"
 	"strings"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestRepository_AddUTF8Font(t *testing.T) {

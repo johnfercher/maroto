@@ -1,8 +1,9 @@
 package config
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 )
 
 type Repository interface {
