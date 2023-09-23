@@ -12,6 +12,7 @@ type metricsDecorator struct {
 	addRowTime    []*metrics.Time
 	addColTime    []*metrics.Time
 	addPageTime   []*metrics.Time
+	addPDFTime    []*metrics.Time
 	headerTime    *metrics.Time
 	footerTime    *metrics.Time
 	generateTime  *metrics.Time
@@ -50,6 +51,14 @@ func (m *metricsDecorator) AddPages(pages ...core.Page) {
 	})
 
 	m.addPageTime = append(m.addPageTime, timeSpent)
+}
+
+func (m *metricsDecorator) AddPDFs(pdfs ...[]byte) {
+	timeSpent := m.getTimeSpent(func() {
+		m.inner.AddPDFs(pdfs...)
+	})
+
+	m.addPDFTime = append(m.addPDFTime, timeSpent)
 }
 
 func (m *metricsDecorator) AddRows(rows ...core.Row) {
@@ -164,6 +173,14 @@ func (m *metricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
 			Key:   "add_cols",
 			Times: m.addColTime,
 			Avg:   m.getAVG(m.addColTime),
+		})
+	}
+
+	if len(m.addPDFTime) > 0 {
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
+			Key:   "add_pdf",
+			Times: m.addPDFTime,
+			Avg:   m.getAVG(m.addPDFTime),
 		})
 	}
 

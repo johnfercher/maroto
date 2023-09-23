@@ -3,7 +3,8 @@
     * [Basics](v2/basics.md?id=generating-pdf)
     * [Config Builder](v2/configbuilder.md?id=config-builder)
   * **Features**
-    * [Add Page](v2/features/addpage.md?id=addpage)
+    * [Add Page](v2/features/addpage.md?id=add-page)
+    * [Add PDF](v2/features/addpdf.md?id=add-pdf)
     * [Barcode](v2/features/barcode.md?id=barcode)
     * [Cell Style](v2/features/cellstyle.md?id=cell-style)
     * [Compression](v2/features/compression.md?id=compression)
