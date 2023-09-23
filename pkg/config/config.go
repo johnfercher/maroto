@@ -18,4 +18,5 @@ type Config struct {
 	PageNumberPlace   props.Place
 	Protection        *Protection
 	Compression       bool
+	Metadata          *Metadata
 }

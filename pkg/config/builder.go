@@ -2,6 +2,7 @@ package config
 
 import (
 	"strings"
+	"time"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 
@@ -13,22 +14,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
-
-type builder struct {
-	providerType      provider.Type
-	dimensions        *Dimensions
-	margins           *Margins
-	workerPoolSize    int
-	debug             bool
-	maxGridSize       int
-	font              *props.Font
-	customFonts       []*CustomFont
-	pageNumberPattern string
-	pageNumberPlace   props.Place
-	protection        *Protection
-	compression       bool
-	orientation       orientation.Type
-}
 
 type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
@@ -44,7 +29,29 @@ type Builder interface {
 	WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder
 	WithCompression(compression bool) Builder
 	WithOrientation(orientation orientation.Type) Builder
+	WithAuthor(author string, isUTF8 bool) Builder
+	WithCreator(creator string, isUTF8 bool) Builder
+	WithSubject(subject string, isUTF8 bool) Builder
+	WithTitle(title string, isUTF8 bool) Builder
+	WithCreationDate(time time.Time) Builder
 	Build() *Config
+}
+
+type builder struct {
+	providerType      provider.Type
+	dimensions        *Dimensions
+	margins           *Margins
+	workerPoolSize    int
+	debug             bool
+	maxGridSize       int
+	font              *props.Font
+	customFonts       []*CustomFont
+	pageNumberPattern string
+	pageNumberPlace   props.Place
+	protection        *Protection
+	compression       bool
+	orientation       orientation.Type
+	metadata          *Metadata
 }
 
 func NewBuilder() Builder {
@@ -62,6 +69,7 @@ func NewBuilder() Builder {
 			Style:  fontstyle.Normal,
 			Color:  props.NewBlack(),
 		},
+		metadata: &Metadata{},
 	}
 }
 
@@ -227,6 +235,68 @@ func (b *builder) WithOrientation(orientation orientation.Type) Builder {
 	return b
 }
 
+func (b *builder) WithAuthor(author string, isUTF8 bool) Builder {
+	if author == "" {
+		return b
+	}
+
+	b.metadata.Author = &Utf8Text{
+		Text: author,
+		UTF8: isUTF8,
+	}
+
+	return b
+}
+
+func (b *builder) WithCreator(creator string, isUTF8 bool) Builder {
+	if creator == "" {
+		return b
+	}
+
+	b.metadata.Creator = &Utf8Text{
+		Text: creator,
+		UTF8: isUTF8,
+	}
+
+	return b
+}
+
+func (b *builder) WithSubject(subject string, isUTF8 bool) Builder {
+	if subject == "" {
+		return b
+	}
+
+	b.metadata.Subject = &Utf8Text{
+		Text: subject,
+		UTF8: isUTF8,
+	}
+
+	return b
+}
+
+func (b *builder) WithTitle(title string, isUTF8 bool) Builder {
+	if title == "" {
+		return b
+	}
+
+	b.metadata.Title = &Utf8Text{
+		Text: title,
+		UTF8: isUTF8,
+	}
+
+	return b
+}
+
+func (b *builder) WithCreationDate(time time.Time) Builder {
+	if time.IsZero() {
+		return b
+	}
+
+	b.metadata.CreationDate = time
+
+	return b
+}
+
 func (b *builder) Build() *Config {
 	return &Config{
 		ProviderType:      b.providerType,
@@ -241,6 +311,7 @@ func (b *builder) Build() *Config {
 		PageNumberPlace:   b.pageNumberPlace,
 		Protection:        b.protection,
 		Compression:       b.compression,
+		Metadata:          b.metadata,
 	}
 }
 

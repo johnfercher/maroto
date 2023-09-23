@@ -122,6 +122,9 @@ func (h *html) SetCache(cache cache.Cache) {
 func (h *html) SetProtection(_ *config.Protection) {
 }
 
+func (h *html) SetMetadata(_ *config.Metadata) {
+}
+
 func (h *html) CreateCol(width, height float64, config *config.Config, prop *props.Cell) {
 	var row *tree.Node[Div]
 
