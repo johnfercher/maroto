@@ -1,11 +1,12 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
 	"github.com/johnfercher/maroto/v2/pkg"
@@ -55,6 +56,22 @@ func main() {
 			})
 		}
 	}
+
+	longText := "聲音之道㣲矣天地有自然之聲人聲有自然之節古之聖人得其節之自然者而為之依永和聲至於八音諧而神人和胥是道也文字之作無不講求音韻顧南北異" +
+		"其風土古今殊其轉變喉舌唇齒清濁輕重之分辨在毫釐動多訛舛樊然淆混不可究極自西域梵僧定字母為三十六分五音以總天下之聲而翻切之學興儒者若司馬光鄭樵" +
+		"皆宗之其法有音和類隔互用借聲類例不一後人苦其委曲繁重難以驟曉往往以類隔互用之切改從音和而終莫能得其原也我聖祖仁皇帝"
+
+	m.AddRows(text.NewRow(10, "long text without spaces", props.Text{
+		Top:    5,
+		Style:  fontstyle.Bold,
+		Family: fontfamily.Arial,
+	}))
+
+	m.AddRow(80,
+		text.NewCol(4, longText, props.Text{Align: align.Center, BreakLineStrategy: breakline.DashStrategy}),
+		text.NewCol(4, longText, props.Text{Align: align.Left, BreakLineStrategy: breakline.DashStrategy}),
+		text.NewCol(4, longText, props.Text{Align: align.Right, BreakLineStrategy: breakline.DashStrategy}),
+	)
 
 	document, err := m.Generate()
 	if err != nil {

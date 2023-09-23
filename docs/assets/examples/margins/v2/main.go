@@ -31,9 +31,8 @@ func main() {
 			Percent: 50,
 		}),
 		text.NewCol(4, "Margins Test", props.Text{
-			Top:         12,
-			Size:        12,
-			Extrapolate: true,
+			Top:  12,
+			Size: 12,
 		}),
 		col.New(4),
 	)

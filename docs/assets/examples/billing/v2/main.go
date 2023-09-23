@@ -152,10 +152,9 @@ func getPageHeader() core.Row {
 		col.New(6),
 		col.New(3).Add(
 			text.New("AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.", props.Text{
-				Size:        8,
-				Align:       align.Right,
-				Extrapolate: false,
-				Color:       getRedColor(),
+				Size:  8,
+				Align: align.Right,
+				Color: getRedColor(),
 			}),
 			text.New("Tel: 55 024 12345-1234", props.Text{
 				Top:   12,

@@ -29,9 +29,8 @@ func main() {
 			Percent: 50,
 		}),
 		text.NewCol(4, "Gopher International Shipping, Inc.", props.Text{
-			Top:         12,
-			Size:        12,
-			Extrapolate: true,
+			Top:  12,
+			Size: 12,
 		}),
 		col.New(4),
 	)

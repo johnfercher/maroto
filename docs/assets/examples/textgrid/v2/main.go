@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -48,7 +49,7 @@ func main() {
 	m.AddRows(text.NewRow(10, "Multiline text"))
 
 	m.AddRow(40,
-		text.NewCol(2, longText, props.Text{Top: 3, Left: 3, Right: 3, Align: align.Left}),
+		text.NewCol(2, longText, props.Text{Top: 3, Left: 3, Right: 3, Align: align.Left, BreakLineStrategy: breakline.DashStrategy}),
 		text.NewCol(4, longText, props.Text{Top: 3, Left: 3, Right: 3, Align: align.Center}),
 		text.NewCol(6, longText, props.Text{Top: 3, Left: 3, Right: 3, Align: align.Right}),
 	)
