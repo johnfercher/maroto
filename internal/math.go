@@ -99,7 +99,7 @@ func (s *math) GetRectNonCenterColProperties(imageWidth float64, imageHeight flo
 }
 
 // GetCenterCorrection return the correction of space in X or Y to
-// centralize a linestyle in relation with another linestyle.
+// centralize a line in relation with another line.
 func (s *math) GetCenterCorrection(outerSize, innerSize float64) float64 {
 	const divisorToGetHalf = 2.0
 	return (outerSize - innerSize) / divisorToGetHalf
