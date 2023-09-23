@@ -17,6 +17,7 @@
     * [List](v2/features/list.md?id=list)
     * [Margins](v2/features/margins.md?id=custom-margins)
     * [Max Grid Sum](v2/features/maxgridsum.md?id=max-grid-sum)
+    * [Orientation](v2/features/orientation.md?id=orientation)
     * [Page Number](v2/features/pagenumber.md?id=page-number)
     * [Parallelism](v2/features/parallelism.md?id=parallelism)
     * [Protection](v2/features/protection.md?id=protection)
