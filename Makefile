@@ -53,6 +53,7 @@ examples: font
 	go run docs/assets/examples/footer/v2/main.go
 	go run docs/assets/examples/header/v2/main.go
 	go run docs/assets/examples/imagegrid/v2/main.go
+	go run docs/assets/examples/line/v2/main.go
 	go run docs/assets/examples/list/v2/main.go
 	go run docs/assets/examples/margins/v2/main.go
 	go run docs/assets/examples/maxgridsum/v2/main.go

@@ -36,6 +36,7 @@ type gofpdfProvider struct {
 	signature  internal.Signature
 	code       internal.Code
 	image      internal.Image
+	line       internal.Line
 	imageCache cache.Cache
 	cellWriter cellwriter.CellWriter
 }
@@ -64,6 +65,7 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 	signature := internal.NewSignature(fpdf, math, text)
 	code := internal.NewCode(fpdf, math)
 	image := internal.NewImage(fpdf, math)
+	line := internal.NewLine(fpdf)
 	cellWriter := cellwriter.NewBuilder().Build(fpdf)
 
 	provider := &gofpdfProvider{
@@ -74,6 +76,7 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 		signature:  signature,
 		code:       code,
 		image:      image,
+		line:       line,
 		cellWriter: cellWriter,
 	}
 
@@ -94,6 +97,10 @@ func (g *gofpdfProvider) GetMargins() (left float64, top float64, right float64,
 
 func (g *gofpdfProvider) AddText(text string, cell core.Cell, prop props.Text) {
 	g.text.Add(text, cell, prop)
+}
+
+func (g *gofpdfProvider) AddLine(cell core.Cell, prop props.Line) {
+	g.line.Add(cell, prop)
 }
 
 func (g *gofpdfProvider) AddSignature(text string, cell core.Cell, prop props.Text) {

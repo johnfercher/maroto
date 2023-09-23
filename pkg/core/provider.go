@@ -13,6 +13,7 @@ type Provider interface {
 	CreateCol(width, height float64, config *config.Config, prop *props.Cell)
 
 	// Features
+	AddLine(cell Cell, prop props.Line)
 	AddText(text string, cell Cell, prop props.Text)
 	AddSignature(text string, cell Cell, prop props.Text)
 	AddMatrixCode(code string, cell Cell, prop props.Rect)

@@ -12,7 +12,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithOrientation(orientation.Landscape).
+		WithOrientation(orientation.Horizontal).
 		WithDebug(true).
 		Build()
 
