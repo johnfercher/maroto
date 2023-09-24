@@ -85,5 +85,6 @@ func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cel
 	} else {
 		rectCell = s.math.GetInnerNonCenterCell(dimensions, cell.GetDimensions(), prop)
 	}
-	s.pdf.Image(imageLabel, cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+prop.Top+margins.Top, rectCell.Width, rectCell.Height, false, "", 0, "")
+	s.pdf.Image(imageLabel, cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+prop.Top+margins.Top,
+		rectCell.Width, rectCell.Height, false, "", 0, "")
 }

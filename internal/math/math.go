@@ -24,7 +24,7 @@ func New() *math {
 	return &math{}
 }
 
-// GetInnerCenterCell define a inner cell formatted inside outer cell centered
+// GetInnerCenterCell define a inner cell formatted inside outer cell centered.
 func (s *math) GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimensions, percent float64) *core.Cell {
 	if percent > 100 {
 		percent = 100
@@ -62,7 +62,7 @@ func (s *math) GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimens
 	return innerCell
 }
 
-// GetInnerNonCenterCell define a inner cell formatted inside outer cell non centered
+// GetInnerNonCenterCell define a inner cell formatted inside outer cell non centered.
 func (s *math) GetInnerNonCenterCell(inner *config.Dimensions, outer *config.Dimensions, prop *props.Rect) *core.Cell {
 	if prop.Percent > 100 {
 		prop.Percent = 100

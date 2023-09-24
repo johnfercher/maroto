@@ -79,6 +79,7 @@ func (s *code) AddBar(code string, cell *core.Cell, margins *config.Margins, pro
 		rectCell = s.math.GetInnerNonCenterCell(dimensions, cell.GetDimensions(), rectProps)
 	}
 
-	barcode.Barcode(s.pdf, barcode.Register(bcode), cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+margins.Top, rectCell.Width, rectCell.Height, false)
+	barcode.Barcode(s.pdf, barcode.Register(bcode), cell.X+rectCell.X+margins.Left,
+		cell.Y+rectCell.Y+margins.Top, rectCell.Width, rectCell.Height, false)
 	return
 }

@@ -2,8 +2,9 @@ package math_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/config"
 
 	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/stretchr/testify/assert"
