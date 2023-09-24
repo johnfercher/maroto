@@ -1,13 +1,21 @@
 package math_test
 
-/*func TestNewMath(t *testing.T) {
-	math := internal.NewMath(&mocks.Fpdf{})
+import (
+	"fmt"
+	"testing"
 
-	assert.NotNil(t, math)
-	assert.Equal(t, fmt.Sprintf("%T", math), "*internal.math")
+	"github.com/johnfercher/maroto/v2/internal/math"
+	"github.com/stretchr/testify/assert"
+)
+
+func TestNewMath(t *testing.T) {
+	sut := math.New()
+
+	assert.NotNil(t, sut)
+	assert.Equal(t, "*math.math", fmt.Sprintf("%T", sut))
 }
 
-func TestMath_GetRectCenterColProperties(t *testing.T) {
+/*func TestMath_GetRectCenterColProperties(t *testing.T) {
 	cases := []struct {
 		name           string
 		width          float64
@@ -103,7 +111,7 @@ func TestMath_GetRectCenterColProperties(t *testing.T) {
 		// Arrange
 		pdf := c.pdf()
 
-		math := internal.NewMath(pdf)
+		math := internal.New(pdf)
 
 		// Act
 		x, y, w, h := math.GetRectCenterColProperties(c.width, c.height, 20, 25.0, 2, c.percent)
@@ -230,7 +238,7 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 		// Arrange
 		pdf := c.pdf()
 
-		math := internal.NewMath(pdf)
+		math := internal.New(pdf)
 
 		// Act
 		x, y, w, h := math.GetRectNonCenterColProperties(c.width, c.height, 20.0, 25.0, 2, c.prop)
@@ -244,7 +252,7 @@ func TestMath_GetRectNonCenterColProperties(t *testing.T) {
 func TestMath_GetCenterCorrection(t *testing.T) {
 	// Arrange
 	pdf := &mocks.Fpdf{}
-	math := internal.NewMath(pdf)
+	math := internal.New(pdf)
 
 	// Act
 	correction := math.GetCenterCorrection(10, 5)

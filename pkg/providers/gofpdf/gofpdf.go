@@ -63,7 +63,7 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 	fpdf.AddPage()
 
 	font := internal.NewFont(fpdf, cfg.DefaultFont.Size, cfg.DefaultFont.Family, cfg.DefaultFont.Style)
-	math := math.NewMath()
+	math := math.New()
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
 	code := internal.NewCode(fpdf, math)

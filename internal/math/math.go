@@ -19,8 +19,8 @@ type Math interface {
 
 type math struct{}
 
-// NewMath create a Math.
-func NewMath() *math {
+// New create a Math.
+func New() *math {
 	return &math{}
 }
 
