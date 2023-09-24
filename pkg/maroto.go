@@ -46,9 +46,9 @@ type maroto struct {
 	pool async.Processor[[]core.Page, []byte]
 }
 
-func NewMaroto(config ...*config.Config) core.Maroto {
+func NewMaroto(cfgs ...*config.Config) core.Maroto {
 	cache := cache.New()
-	cfg := getConfig(config...)
+	cfg := getConfig(cfgs...)
 	provider := getProvider(cache, cfg)
 
 	width, height := provider.GetDimensions()
@@ -56,7 +56,7 @@ func NewMaroto(config ...*config.Config) core.Maroto {
 
 	m := &maroto{
 		provider: provider,
-		cell: core.NewRootContext(width, height, core.Margins{
+		cell: core.NewRootContext(width, height, config.Margins{
 			Left:   left,
 			Top:    top,
 			Right:  right,

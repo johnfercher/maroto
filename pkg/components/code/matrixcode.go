@@ -40,8 +40,8 @@ func NewMatrixRow(height float64, code string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (m *matrixCode) Render(provider core.Provider, cell core.Cell) {
-	provider.AddMatrixCode(m.code, cell, m.prop)
+func (m *matrixCode) Render(provider core.Provider, cell *core.Cell) {
+	provider.AddMatrixCode(m.code, cell, &m.prop)
 }
 
 func (m *matrixCode) GetStructure() *tree.Node[core.Structure] {

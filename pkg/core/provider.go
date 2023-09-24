@@ -13,13 +13,13 @@ type Provider interface {
 	CreateCol(width, height float64, config *config.Config, prop *props.Cell)
 
 	// Features
-	AddLine(cell Cell, prop props.Line)
-	AddText(text string, cell Cell, prop props.Text)
-	AddSignature(text string, cell Cell, prop props.Text)
-	AddMatrixCode(code string, cell Cell, prop props.Rect)
-	AddQrCode(code string, cell Cell, rect props.Rect)
-	AddBarCode(code string, cell Cell, prop props.Barcode)
-	AddImage(value string, cell Cell, prop props.Rect, extension extension.Type)
+	AddLine(cell *Cell, prop *props.Line)
+	AddText(text string, cell *Cell, prop *props.Text)
+	AddSignature(text string, cell *Cell, prop *props.Text)
+	AddMatrixCode(code string, cell *Cell, prop *props.Rect)
+	AddQrCode(code string, cell *Cell, rect *props.Rect)
+	AddBarCode(code string, cell *Cell, prop *props.Barcode)
+	AddImage(value string, cell *Cell, prop *props.Rect, extension extension.Type)
 
 	// General
 	GetDimensions() (width float64, height float64)

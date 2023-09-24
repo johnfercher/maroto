@@ -3,13 +3,14 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"log"
+	"os"
+
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
-	"log"
-	"os"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
@@ -35,7 +36,7 @@ var background = &props.Color{
 
 func main() {
 	var content string
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 100; i++ {
 		fmt.Println(i)
 		content += fmt.Sprintf("%f", run().Value) + "\n"
 	}

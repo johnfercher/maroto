@@ -43,9 +43,9 @@ func NewFromFileRow(height float64, path string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (f *fileImage) Render(provider core.Provider, cell core.Cell) {
+func (f *fileImage) Render(provider core.Provider, cell *core.Cell) {
 	extensionStr := strings.Split(f.path, ".")[1]
-	provider.AddImage(f.path, cell, f.prop, extension.Type(extensionStr))
+	provider.AddImage(f.path, cell, &f.prop, extension.Type(extensionStr))
 }
 
 func (f *fileImage) GetStructure() *tree.Node[core.Structure] {

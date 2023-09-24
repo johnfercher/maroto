@@ -3,6 +3,8 @@ package gofpdf
 import (
 	"bytes"
 
+	"github.com/johnfercher/maroto/v2/internal/math"
+
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -30,7 +32,7 @@ var defaultErrorColor = &props.Font{
 
 type gofpdfProvider struct {
 	fpdf       *gofpdf.Fpdf
-	math       internal.Math
+	math       math.Math
 	font       internal.Font
 	text       internal.Text
 	signature  internal.Signature
@@ -39,6 +41,7 @@ type gofpdfProvider struct {
 	line       internal.Line
 	imageCache cache.Cache
 	cellWriter cellwriter.CellWriter
+	cfg        *config.Config
 }
 
 func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider {
@@ -60,7 +63,7 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 	fpdf.AddPage()
 
 	font := internal.NewFont(fpdf, cfg.DefaultFont.Size, cfg.DefaultFont.Family, cfg.DefaultFont.Style)
-	math := internal.NewMath(fpdf)
+	math := math.New()
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
 	code := internal.NewCode(fpdf, math)
@@ -78,6 +81,7 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 		image:      image,
 		line:       line,
 		cellWriter: cellWriter,
+		cfg:        cfg,
 	}
 
 	for _, option := range options {
@@ -95,49 +99,49 @@ func (g *gofpdfProvider) GetMargins() (left float64, top float64, right float64,
 	return g.fpdf.GetMargins()
 }
 
-func (g *gofpdfProvider) AddText(text string, cell core.Cell, prop props.Text) {
+func (g *gofpdfProvider) AddText(text string, cell *core.Cell, prop *props.Text) {
 	g.text.Add(text, cell, prop)
 }
 
-func (g *gofpdfProvider) AddLine(cell core.Cell, prop props.Line) {
+func (g *gofpdfProvider) AddLine(cell *core.Cell, prop *props.Line) {
 	g.line.Add(cell, prop)
 }
 
-func (g *gofpdfProvider) AddSignature(text string, cell core.Cell, prop props.Text) {
+func (g *gofpdfProvider) AddSignature(text string, cell *core.Cell, prop *props.Text) {
 	g.signature.AddSpaceFor(text, cell, prop)
 }
 
-func (g *gofpdfProvider) AddMatrixCode(code string, cell core.Cell, prop props.Rect) {
-	g.code.AddDataMatrix(code, cell, prop)
+func (g *gofpdfProvider) AddMatrixCode(code string, cell *core.Cell, prop *props.Rect) {
+	g.code.AddDataMatrix(code, cell, g.cfg.Margins, prop)
 }
 
-func (g *gofpdfProvider) AddQrCode(code string, cell core.Cell, rect props.Rect) {
-	g.code.AddQr(code, cell, rect)
+func (g *gofpdfProvider) AddQrCode(code string, cell *core.Cell, rect *props.Rect) {
+	g.code.AddQr(code, cell, g.cfg.Margins, rect)
 }
 
-func (g *gofpdfProvider) AddBarCode(code string, cell core.Cell, prop props.Barcode) {
-	err := g.code.AddBar(code, cell, prop)
+func (g *gofpdfProvider) AddBarCode(code string, cell *core.Cell, prop *props.Barcode) {
+	err := g.code.AddBar(code, cell, g.cfg.Margins, prop)
 	if err != nil {
-		textProp := props.Text{}
+		textProp := &props.Text{}
 		textProp.MakeValid(defaultErrorColor)
 		g.fpdf.ClearError()
 		g.AddText("Failed to render code", cell, textProp)
 	}
 }
 
-func (g *gofpdfProvider) AddImage(file string, cell core.Cell, prop props.Rect, extension extension.Type) {
+func (g *gofpdfProvider) AddImage(file string, cell *core.Cell, prop *props.Rect, extension extension.Type) {
 	img, err := g.imageCache.Load(file, extension)
 	if err != nil {
-		textProp := props.Text{}
+		textProp := &props.Text{}
 		textProp.MakeValid(defaultErrorColor)
 		g.fpdf.ClearError()
 		g.AddText("Failed to load image from file", cell, textProp)
 		return
 	}
 
-	err = g.image.AddFromBase64(img.Value, cell, prop, img.Extension)
+	err = g.image.AddFromBase64(img.Value, cell, g.cfg.Margins, prop, img.Extension)
 	if err != nil {
-		textProp := props.Text{}
+		textProp := &props.Text{}
 		textProp.MakeValid(defaultErrorColor)
 		g.fpdf.ClearError()
 		g.AddText("Failed to load image from file", cell, textProp)

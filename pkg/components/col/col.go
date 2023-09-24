@@ -60,7 +60,7 @@ func (c *col) Render(provider core.Provider, cell core.Cell, createCell bool) {
 	}
 
 	for _, component := range c.components {
-		component.Render(provider, cell)
+		component.Render(provider, &cell)
 	}
 }
 
