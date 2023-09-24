@@ -38,9 +38,9 @@ func (s *code) AddDataMatrix(code string, cell *core.Cell, margins *config.Margi
 
 	var rectCell *core.Cell
 	if prop.Center {
-		rectCell = s.math.GetRectCenterColProperties(dimensions, cell.GetDimensions(), prop.Percent)
+		rectCell = s.math.GetInnerCenterCell(dimensions, cell.GetDimensions(), prop.Percent)
 	} else {
-		rectCell = s.math.GetRectNonCenterColProperties(dimensions, cell.GetDimensions(), prop)
+		rectCell = s.math.GetInnerNonCenterCell(dimensions, cell.GetDimensions(), prop)
 	}
 
 	barcode.Barcode(s.pdf, key, cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+margins.Top, rectCell.Width, rectCell.Height, false)
@@ -53,9 +53,9 @@ func (s *code) AddQr(code string, cell *core.Cell, margins *config.Margins, prop
 
 	var rectCell *core.Cell
 	if prop.Center {
-		rectCell = s.math.GetRectCenterColProperties(dimensions, cell.GetDimensions(), prop.Percent)
+		rectCell = s.math.GetInnerCenterCell(dimensions, cell.GetDimensions(), prop.Percent)
 	} else {
-		rectCell = s.math.GetRectNonCenterColProperties(dimensions, cell.GetDimensions(), prop)
+		rectCell = s.math.GetInnerNonCenterCell(dimensions, cell.GetDimensions(), prop)
 	}
 
 	barcode.Barcode(s.pdf, key, cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+margins.Top, rectCell.Width, rectCell.Height, false)
@@ -73,10 +73,10 @@ func (s *code) AddBar(code string, cell *core.Cell, margins *config.Margins, pro
 
 	var rectCell *core.Cell
 	if prop.Center {
-		rectCell = s.math.GetRectCenterColProperties(dimensions, cell.GetDimensions(), prop.Percent)
+		rectCell = s.math.GetInnerCenterCell(dimensions, cell.GetDimensions(), prop.Percent)
 	} else {
 		rectProps := &props.Rect{Left: prop.Left, Top: prop.Top, Center: prop.Center, Percent: prop.Percent}
-		rectCell = s.math.GetRectNonCenterColProperties(dimensions, cell.GetDimensions(), rectProps)
+		rectCell = s.math.GetInnerNonCenterCell(dimensions, cell.GetDimensions(), rectProps)
 	}
 
 	barcode.Barcode(s.pdf, barcode.Register(bcode), cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+margins.Top, rectCell.Width, rectCell.Height, false)
