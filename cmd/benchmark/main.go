@@ -36,7 +36,7 @@ var background = &props.Color{
 
 func main() {
 	var content string
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 20; i++ {
 		fmt.Println(i)
 		content += fmt.Sprintf("%f", run().Value) + "\n"
 	}
