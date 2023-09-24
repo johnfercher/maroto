@@ -69,7 +69,7 @@ func (s *code) AddBar(code string, cell *core.Cell, margins *config.Margins, pro
 	}
 
 	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
-	dimensions := &config.Dimensions{cell.Width, cell.Width * heightPercentFromWidth}
+	dimensions := &config.Dimensions{Width: cell.Width, Height: cell.Width * heightPercentFromWidth}
 
 	var rectCell *core.Cell
 	if prop.Center {

@@ -52,7 +52,9 @@ func (s *image) AddFromFile(path string, cell *core.Cell, margins *config.Margin
 }
 
 // AddFromBase64 use a base64 string to add to PDF.
-func (s *image) AddFromBase64(stringBase64 string, cell *core.Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) error {
+func (s *image) AddFromBase64(stringBase64 string, cell *core.Cell, margins *config.Margins,
+	prop *props.Rect, extension extension.Type,
+) error {
 	imageID, _ := uuid.NewRandom()
 
 	ss, _ := base64.StdEncoding.DecodeString(stringBase64)

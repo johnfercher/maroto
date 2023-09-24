@@ -24,7 +24,9 @@ func NewMath() *math {
 	return &math{}
 }
 
-func (s *math) GetRectCenterColProperties(rectDimensions *config.Dimensions, cell *core.Cell, margins *config.Margins, percent float64) *core.Cell {
+func (s *math) GetRectCenterColProperties(rectDimensions *config.Dimensions, cell *core.Cell,
+	margins *config.Margins, percent float64,
+) *core.Cell {
 	percent /= 100.0
 	left, top := margins.Left, margins.Top
 
@@ -60,7 +62,9 @@ func (s *math) GetRectCenterColProperties(rectDimensions *config.Dimensions, cel
 }
 
 // GetRectNonCenterColProperties define Width, Height to and rectangle (QrCode, Barcode, Image) inside a cell.
-func (s *math) GetRectNonCenterColProperties(rectDimensions *config.Dimensions, cell *core.Cell, margins *config.Margins, prop *props.Rect) *core.Cell {
+func (s *math) GetRectNonCenterColProperties(rectDimensions *config.Dimensions, cell *core.Cell,
+	margins *config.Margins, prop *props.Rect,
+) *core.Cell {
 	percent := prop.Percent / maxPercent
 	left, top := margins.Left, margins.Top
 
