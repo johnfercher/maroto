@@ -2,6 +2,7 @@ package internal
 
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
+	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -13,12 +14,12 @@ type Signature interface {
 
 type signature struct {
 	pdf  fpdf.Fpdf
-	math Math
+	math math.Math
 	text Text
 }
 
 // NewSignature create a Signature.
-func NewSignature(pdf fpdf.Fpdf, math Math, text Text) *signature {
+func NewSignature(pdf fpdf.Fpdf, math math.Math, text Text) *signature {
 	return &signature{
 		pdf,
 		math,

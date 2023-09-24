@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"encoding/base64"
 	"errors"
+
+	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -17,17 +19,17 @@ import (
 
 // Image is the abstraction which deals of how to add images in a PDF.
 type Image interface {
-	AddFromFile(path string, cell *core.Cell, prop *props.Rect) (err error)
-	AddFromBase64(stringBase64 string, cell *core.Cell, prop *props.Rect, extension extension.Type) (err error)
+	AddFromFile(path string, cell *core.Cell, margins *config.Margins, prop *props.Rect) (err error)
+	AddFromBase64(stringBase64 string, cell *core.Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) (err error)
 }
 
 type image struct {
 	pdf  fpdf.Fpdf
-	math Math
+	math math.Math
 }
 
 // NewImage create an Image.
-func NewImage(pdf fpdf.Fpdf, math Math) *image {
+func NewImage(pdf fpdf.Fpdf, math math.Math) *image {
 	return &image{
 		pdf,
 		math,
@@ -35,7 +37,7 @@ func NewImage(pdf fpdf.Fpdf, math Math) *image {
 }
 
 // AddFromFile open an image from disk and add to PDF.
-func (s *image) AddFromFile(path string, cell *core.Cell, prop *props.Rect) error {
+func (s *image) AddFromFile(path string, cell *core.Cell, margins *config.Margins, prop *props.Rect) error {
 	info := s.pdf.RegisterImageOptions(path, gofpdf.ImageOptions{
 		ReadDpi:   false,
 		ImageType: "",
@@ -45,12 +47,12 @@ func (s *image) AddFromFile(path string, cell *core.Cell, prop *props.Rect) erro
 		return errors.New("could not register image options, maybe path/name is wrong")
 	}
 
-	s.addImageToPdf(path, info, cell, prop)
+	s.addImageToPdf(path, info, cell, margins, prop)
 	return nil
 }
 
 // AddFromBase64 use a base64 string to add to PDF.
-func (s *image) AddFromBase64(stringBase64 string, cell *core.Cell, prop *props.Rect, extension extension.Type) error {
+func (s *image) AddFromBase64(stringBase64 string, cell *core.Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) error {
 	imageID, _ := uuid.NewRandom()
 
 	ss, _ := base64.StdEncoding.DecodeString(stringBase64)
@@ -68,17 +70,18 @@ func (s *image) AddFromBase64(stringBase64 string, cell *core.Cell, prop *props.
 		return errors.New("could not register image options, maybe path/name is wrong")
 	}
 
-	s.addImageToPdf(imageID.String(), info, cell, prop)
+	s.addImageToPdf(imageID.String(), info, cell, margins, prop)
 	return nil
 }
 
-func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *core.Cell, prop *props.Rect) {
-	var x, y, w, h float64
+func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *core.Cell, margins *config.Margins, prop *props.Rect) {
+	rectCell := &core.Cell{}
+	dimensions := &config.Dimensions{Width: info.Width(), Height: info.Height()}
+
 	if prop.Center {
-		dimensions := &config.Dimensions{Width: info.Width(), Height: info.Height()}
-		x, y, w, h = s.math.GetRectCenterColProperties(dimensions, cell, prop.Percent)
+		rectCell = s.math.GetRectCenterColProperties(dimensions, cell, margins, prop.Percent)
 	} else {
-		x, y, w, h = s.math.GetRectNonCenterColProperties(info.Width(), info.Height(), cell.Width, cell.Height, cell.X, prop)
+		rectCell = s.math.GetRectNonCenterColProperties(dimensions, cell, margins, prop)
 	}
-	s.pdf.Image(imageLabel, x, y+cell.Y+prop.Top, w, h, false, "", 0, "")
+	s.pdf.Image(imageLabel, rectCell.X, rectCell.Y+cell.Y+prop.Top, rectCell.Width, rectCell.Height, false, "", 0, "")
 }

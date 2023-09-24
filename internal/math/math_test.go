@@ -1,4 +1,4 @@
-package internal_test
+package math_test
 
 /*func TestNewMath(t *testing.T) {
 	math := internal.NewMath(&mocks.Fpdf{})

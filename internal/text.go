@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/internal/math"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -23,12 +25,12 @@ type Text interface {
 
 type text struct {
 	pdf  fpdf.Fpdf
-	math Math
+	math math.Math
 	font Font
 }
 
 // NewText create a Text.
-func NewText(pdf fpdf.Fpdf, math Math, font Font) *text {
+func NewText(pdf fpdf.Fpdf, math math.Math, font Font) *text {
 	return &text{
 		pdf,
 		math,
