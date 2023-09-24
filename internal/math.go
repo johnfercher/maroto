@@ -15,7 +15,7 @@ const (
 type Math interface {
 	GetRectCenterColProperties(dimensions *config.Dimensions, cell *core.Cell, percent float64) (x float64, y float64, w float64, h float64)
 	GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64,
-		xColOffset float64, prop props.Rect) (x float64, y float64, w float64, h float64)
+		xColOffset float64, prop *props.Rect) (x float64, y float64, w float64, h float64)
 	GetCenterCorrection(outerSize, innerSize float64) float64
 }
 
@@ -67,7 +67,7 @@ func (s *math) GetRectCenterColProperties(dimensions *config.Dimensions, cell *c
 
 // GetRectNonCenterColProperties define Width, Height to and rectangle (QrCode, Barcode, Image) inside a cell.
 func (s *math) GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64,
-	xColOffset float64, prop props.Rect,
+	xColOffset float64, prop *props.Rect,
 ) (x float64, y float64, w float64, h float64) {
 	percent := prop.Percent / maxPercent
 	left, top, _, _ := s.pdf.GetMargins()

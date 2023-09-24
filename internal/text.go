@@ -17,7 +17,7 @@ import (
 
 // Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
-	Add(text string, cell *core.Cell, textProp props.Text)
+	Add(text string, cell *core.Cell, textProp *props.Text)
 	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
 }
 
@@ -37,7 +37,7 @@ func NewText(pdf fpdf.Fpdf, math Math, font Font) *text {
 }
 
 // Add a text inside a cell.
-func (s *text) Add(text string, cell *core.Cell, textProp props.Text) {
+func (s *text) Add(text string, cell *core.Cell, textProp *props.Text) {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	if textProp.Top > cell.Height {
@@ -169,7 +169,7 @@ func (s *text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 	return lines
 }
 
-func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
+func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
 	left, top, _, _ := s.pdf.GetMargins()
 
 	if textProp.Align == align.Left {
@@ -188,7 +188,7 @@ func (s *text) addLine(textProp props.Text, xColOffset, colWidth, yColOffset, te
 	s.pdf.Text(dx+xColOffset+left, yColOffset+top, text)
 }
 
-func (s *text) textToUnicode(txt string, props props.Text) string {
+func (s *text) textToUnicode(txt string, props *props.Text) string {
 	if props.Family == fontfamily.Arial ||
 		props.Family == fontfamily.Helvetica ||
 		props.Family == fontfamily.Symbol ||

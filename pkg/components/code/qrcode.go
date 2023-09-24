@@ -41,7 +41,7 @@ func NewQrRow(height float64, code string, ps ...props.Rect) core.Row {
 }
 
 func (q *qrCode) Render(provider core.Provider, cell *core.Cell) {
-	provider.AddQrCode(q.code, cell, q.prop)
+	provider.AddQrCode(q.code, cell, &q.prop)
 }
 
 func (q *qrCode) GetStructure() *tree.Node[core.Structure] {

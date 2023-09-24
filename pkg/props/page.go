@@ -33,8 +33,8 @@ type Page struct {
 	Color   *Color
 }
 
-func (p *Page) GetNumberTextProp(height float64) Text {
-	text := Text{
+func (p *Page) GetNumberTextProp(height float64) *Text {
+	text := &Text{
 		Family: p.Family,
 		Style:  p.Style,
 		Size:   p.Size,

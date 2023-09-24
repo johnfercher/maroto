@@ -60,5 +60,5 @@ func (t *text) SetConfig(config *config.Config) {
 
 func (t *text) Render(provider core.Provider, cell *core.Cell) {
 	t.prop.MakeValid(t.config.DefaultFont)
-	provider.AddText(t.value, cell, t.prop)
+	provider.AddText(t.value, cell, &t.prop)
 }

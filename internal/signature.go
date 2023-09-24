@@ -8,7 +8,7 @@ import (
 
 // Signature is the abstraction which deals of how to add a signature space inside PDF.
 type Signature interface {
-	AddSpaceFor(label string, cell *core.Cell, textProp props.Text)
+	AddSpaceFor(label string, cell *core.Cell, textProp *props.Text)
 }
 
 type signature struct {
@@ -27,7 +27,7 @@ func NewSignature(pdf fpdf.Fpdf, math Math, text Text) *signature {
 }
 
 // AddSpaceFor create a space for a signature inside a cell.
-func (s *signature) AddSpaceFor(label string, cell *core.Cell, textProp props.Text) {
+func (s *signature) AddSpaceFor(label string, cell *core.Cell, textProp *props.Text) {
 	lineSpaceProportion := 1.33
 	left, top, _, _ := s.pdf.GetMargins()
 	space := 4.0

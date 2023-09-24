@@ -50,5 +50,5 @@ func (l *line) SetConfig(config *config.Config) {
 }
 
 func (l *line) Render(provider core.Provider, cell *core.Cell) {
-	provider.AddLine(cell, l.prop)
+	provider.AddLine(cell, &l.prop)
 }

@@ -40,7 +40,7 @@ func NewBarRow(height float64, code string, ps ...props.Barcode) core.Row {
 }
 
 func (b *barcode) Render(provider core.Provider, cell *core.Cell) {
-	provider.AddBarCode(b.code, cell, b.prop)
+	provider.AddBarCode(b.code, cell, &b.prop)
 }
 
 func (b *barcode) GetStructure() *tree.Node[core.Structure] {

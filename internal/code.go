@@ -12,9 +12,9 @@ import (
 
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF.
 type Code interface {
-	AddQr(code string, cell *core.Cell, prop props.Rect)
-	AddBar(code string, cell *core.Cell, prop props.Barcode) (err error)
-	AddDataMatrix(code string, cell *core.Cell, prop props.Rect)
+	AddQr(code string, cell *core.Cell, prop *props.Rect)
+	AddBar(code string, cell *core.Cell, prop *props.Barcode) (err error)
+	AddDataMatrix(code string, cell *core.Cell, prop *props.Rect)
 }
 
 type code struct {
@@ -31,7 +31,7 @@ func NewCode(pdf fpdf.Fpdf, math Math) *code {
 }
 
 // AddDataMatrix creates a DataMatrix code inside a cell.
-func (s *code) AddDataMatrix(code string, cell *core.Cell, prop props.Rect) {
+func (s *code) AddDataMatrix(code string, cell *core.Cell, prop *props.Rect) {
 	key := barcode.RegisterDataMatrix(s.pdf, code)
 
 	var x, y, w, h float64
@@ -45,7 +45,7 @@ func (s *code) AddDataMatrix(code string, cell *core.Cell, prop props.Rect) {
 }
 
 // AddQr create a QrCode inside a cell.
-func (s *code) AddQr(code string, cell *core.Cell, prop props.Rect) {
+func (s *code) AddQr(code string, cell *core.Cell, prop *props.Rect) {
 	key := barcode.RegisterQR(s.pdf, code, qr.H, qr.Unicode)
 
 	var x, y, w, h float64
@@ -60,7 +60,7 @@ func (s *code) AddQr(code string, cell *core.Cell, prop props.Rect) {
 }
 
 // AddBar create a Barcode inside a cell.
-func (s *code) AddBar(code string, cell *core.Cell, prop props.Barcode) (err error) {
+func (s *code) AddBar(code string, cell *core.Cell, prop *props.Barcode) (err error) {
 	bcode, err := code128.Encode(code)
 	if err != nil {
 		return
@@ -72,7 +72,7 @@ func (s *code) AddBar(code string, cell *core.Cell, prop props.Barcode) (err err
 		dimensions := &config.Dimensions{cell.Width, cell.Width * heightPercentFromWidth}
 		x, y, w, h = s.math.GetRectCenterColProperties(dimensions, cell, prop.Percent)
 	} else {
-		rectProps := props.Rect{Left: prop.Left, Top: prop.Top, Center: prop.Center, Percent: prop.Percent}
+		rectProps := &props.Rect{Left: prop.Left, Top: prop.Top, Center: prop.Center, Percent: prop.Percent}
 		x, y, w, h = s.math.GetRectNonCenterColProperties(cell.Width, cell.Width*heightPercentFromWidth, cell.Width,
 			cell.Height, cell.X, rectProps)
 	}
