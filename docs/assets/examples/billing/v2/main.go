@@ -20,7 +20,7 @@ import (
 func main() {
 	cfg := config.NewBuilder().
 		WithPageNumber("Page {current} of {total}", props.SouthEast).
-		WithMargins(&config.Margins{Left: 10, Top: 15, Right: 10}).
+		WithMargins(10, 15, 10).
 		Build()
 
 	darkGrayColor := getDarkGrayColor()

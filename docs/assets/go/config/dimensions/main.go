@@ -7,10 +7,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithDimensions(&config.Dimensions{
-			Width:  200,
-			Height: 200,
-		}).
+		WithDimensions(200, 200).
 		Build()
 
 	_ = pkg.NewMaroto(cfg)

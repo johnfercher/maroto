@@ -14,9 +14,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithDimensions(&config.Dimensions{
-			200, 200,
-		}).
+		WithDimensions(200, 200).
 		WithDebug(true).
 		Build()
 

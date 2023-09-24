@@ -14,11 +14,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithMargins(&config.Margins{
-			Left:  20,
-			Right: 20,
-			Top:   20,
-		}).
+		WithMargins(20, 20, 20).
 		WithDebug(true).
 		Build()
 

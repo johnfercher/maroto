@@ -7,11 +7,7 @@ import (
 
 func main() {
 	cfg := config.NewBuilder().
-		WithMargins(&config.Margins{
-			Left:  10,
-			Right: 10,
-			Top:   10,
-		}).
+		WithMargins(10, 10, 10).
 		Build()
 
 	_ = pkg.NewMaroto(cfg)

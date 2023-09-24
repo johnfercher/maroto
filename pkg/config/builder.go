@@ -18,8 +18,8 @@ import (
 
 type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
-	WithDimensions(dimensions *Dimensions) Builder
-	WithMargins(margins *Margins) Builder
+	WithDimensions(width float64, height float64) Builder
+	WithMargins(left float64, top float64, right float64) Builder
 	WithProvider(providerType provider.Type) Builder
 	WithWorkerPoolSize(poolSize int) Builder
 	WithDebug(on bool) Builder
@@ -88,37 +88,37 @@ func (b *builder) WithPageSize(size pagesize.Type) Builder {
 	return b
 }
 
-func (b *builder) WithDimensions(dimensions *Dimensions) Builder {
-	if dimensions == nil {
-		return b
-	}
-	if dimensions.Width <= 0 || dimensions.Height <= 0 {
+func (b *builder) WithDimensions(width float64, height float64) Builder {
+	if width <= 0 || height <= 0 {
 		return b
 	}
 
-	b.dimensions = dimensions
+	b.dimensions = &Dimensions{
+		Width:  width,
+		Height: height,
+	}
 
 	return b
 }
 
-func (b *builder) WithMargins(margins *Margins) Builder {
-	if margins == nil {
+func (b *builder) WithMargins(left float64, top float64, right float64) Builder {
+	if left < pagesize.MinLeftMargin {
 		return b
 	}
 
-	if margins.Left < pagesize.MinLeftMargin {
+	if top < pagesize.MinRightMargin {
 		return b
 	}
 
-	if margins.Right < pagesize.MinRightMargin {
+	if right < pagesize.MinTopMargin {
 		return b
 	}
 
-	if margins.Top < pagesize.MinTopMargin {
-		return b
+	b.margins = &Margins{
+		Left:  left,
+		Top:   top,
+		Right: right,
 	}
-
-	b.margins = margins
 
 	return b
 }
