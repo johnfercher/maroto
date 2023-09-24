@@ -28,7 +28,7 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+				math.On("GetInnerCenterCell", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
 					Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -42,7 +42,7 @@ func TestImage_AddFromFile(t *testing.T) {
 				})
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 0)
+				math.AssertNumberOfCalls(t, "GetInnerCenterCell", 0)
 			},
 			func(t *testing.T, err error) {
 				assert.NotNil(t, err)
@@ -61,7 +61,7 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+				math.On("GetInnerCenterCell", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
 					Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -76,8 +76,8 @@ func TestImage_AddFromFile(t *testing.T) {
 				})
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 0)
-				math.AssertCalled(t, "GetRectCenterColProperties", 88, 119, 4, 5, 1, 100)
+				math.AssertNumberOfCalls(t, "GetInnerCenterCell", 0)
+				math.AssertCalled(t, "GetInnerCenterCell", 88, 119, 4, 5, 1, 100)
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
@@ -96,7 +96,7 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+				math.On("GetInnerCenterCell", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
 					Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -111,8 +111,8 @@ func TestImage_AddFromFile(t *testing.T) {
 				})
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 661, 521, 4, 5, 1, 100)
+				math.AssertNumberOfCalls(t, "GetInnerCenterCell", 1)
+				math.AssertCalled(t, "GetInnerCenterCell", 661, 521, 4, 5, 1, 100)
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
@@ -130,7 +130,7 @@ func TestImage_AddFromFile(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectNonCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+				math.On("GetInnerNonCenterCell", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
 					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -145,8 +145,8 @@ func TestImage_AddFromFile(t *testing.T) {
 				})
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetRectNonCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectNonCenterColProperties", 661, 521, 4, 5, 1, props.Rect{Center: false, Percent: 100})
+				math.AssertNumberOfCalls(t, "GetInnerNonCenterCell", 1)
+				math.AssertCalled(t, "GetInnerNonCenterCell", 661, 521, 4, 5, 1, props.Rect{Center: false, Percent: 100})
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
@@ -198,7 +198,7 @@ func TestImage_AddFromBase64(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+				math.On("GetInnerCenterCell", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
 					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -212,7 +212,7 @@ func TestImage_AddFromBase64(t *testing.T) {
 					"")
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 0)
+				math.AssertNumberOfCalls(t, "GetInnerCenterCell", 0)
 			},
 			func(t *testing.T, err error) {
 				assert.NotNil(t, err)
@@ -230,7 +230,7 @@ func TestImage_AddFromBase64(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+				math.On("GetInnerCenterCell", mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything).
 					Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -246,8 +246,8 @@ func TestImage_AddFromBase64(t *testing.T) {
 					"")
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 88, 119, 4, 5, 1, 100)
+				math.AssertNumberOfCalls(t, "GetInnerCenterCell", 1)
+				math.AssertCalled(t, "GetInnerCenterCell", 88, 119, 4, 5, 1, 100)
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)
@@ -265,7 +265,7 @@ func TestImage_AddFromBase64(t *testing.T) {
 			},
 			func() *mocks.Math {
 				math := &mocks.Math{}
-				math.On("GetRectCenterColProperties", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
+				math.On("GetInnerCenterCell", mock.Anything, mock.Anything, mock.Anything, mock.Anything,
 					mock.Anything, mock.Anything).Return(100.0, 20.0, 33.0, 0.0)
 				return math
 			},
@@ -281,8 +281,8 @@ func TestImage_AddFromBase64(t *testing.T) {
 					"")
 			},
 			func(t *testing.T, math *mocks.Math) {
-				math.AssertNumberOfCalls(t, "GetRectCenterColProperties", 1)
-				math.AssertCalled(t, "GetRectCenterColProperties", 661, 521, 4, 5, 1, 100)
+				math.AssertNumberOfCalls(t, "GetInnerCenterCell", 1)
+				math.AssertCalled(t, "GetInnerCenterCell", 661, 521, 4, 5, 1, 100)
 			},
 			func(t *testing.T, err error) {
 				assert.Nil(t, err)

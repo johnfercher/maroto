@@ -12,8 +12,8 @@ const (
 
 // Math is the abstraction which deals with useful calc.
 type Math interface {
-	GetRectCenterColProperties(rectDimensions *config.Dimensions, cell *core.Cell, margins *config.Margins, percent float64) *core.Cell
-	GetRectNonCenterColProperties(rectDimensions *config.Dimensions, cell *core.Cell, margins *config.Margins, prop *props.Rect) *core.Cell
+	GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimensions, percent float64) *core.Cell
+	GetInnerNonCenterCell(inner *config.Dimensions, outer *config.Dimensions, prop *props.Rect) *core.Cell
 	GetCenterCorrection(outerSize, innerSize float64) float64
 }
 
@@ -24,78 +24,78 @@ func New() *math {
 	return &math{}
 }
 
-func (s *math) GetRectCenterColProperties(rectDimensions *config.Dimensions, cell *core.Cell,
-	margins *config.Margins, percent float64,
-) *core.Cell {
+// GetInnerCenterCell define a inner cell formatted inside outer cell centered.
+func (s *math) GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimensions, percent float64) *core.Cell {
+	if percent > 100 {
+		percent = 100
+	}
 	percent /= 100.0
-	left, top := margins.Left, margins.Top
 
-	imageProportion := rectDimensions.Height / rectDimensions.Width
-	celProportion := cell.Height / cell.Width
+	innerProportion := inner.Height / inner.Width
+	outerProportion := outer.Height / outer.Width
 
-	rectCell := &core.Cell{}
-	if imageProportion > celProportion {
-		newImageWidth := cell.Height / imageProportion * percent
-		newImageHeight := newImageWidth * imageProportion
+	innerCell := &core.Cell{}
+	if innerProportion > outerProportion {
+		newInnerWidth := outer.Height / innerProportion * percent
+		newInnerHeight := newInnerWidth * innerProportion
 
-		widthCorrection := s.GetCenterCorrection(cell.Width, newImageWidth)
-		heightCorrection := s.GetCenterCorrection(cell.Height, newImageHeight)
+		widthCorrection := s.GetCenterCorrection(outer.Width, newInnerWidth)
+		heightCorrection := s.GetCenterCorrection(outer.Height, newInnerHeight)
 
-		rectCell.X = cell.X + left + widthCorrection
-		rectCell.Y = top + heightCorrection
-		rectCell.Width = newImageWidth
-		rectCell.Height = newImageHeight
+		innerCell.X = widthCorrection
+		innerCell.Y = heightCorrection
+		innerCell.Width = newInnerWidth
+		innerCell.Height = newInnerHeight
 	} else {
-		newImageWidth := cell.Width * percent
-		newImageHeight := newImageWidth * imageProportion
+		newInnerWidth := outer.Width * percent
+		newInnerHeight := newInnerWidth * innerProportion
 
-		widthCorrection := s.GetCenterCorrection(cell.Width, newImageWidth)
-		heightCorrection := s.GetCenterCorrection(cell.Height, newImageHeight)
+		widthCorrection := s.GetCenterCorrection(outer.Width, newInnerWidth)
+		heightCorrection := s.GetCenterCorrection(outer.Height, newInnerHeight)
 
-		rectCell.X = cell.X + left + widthCorrection
-		rectCell.Y = top + heightCorrection
-		rectCell.Width = newImageWidth
-		rectCell.Height = newImageHeight
+		innerCell.X = widthCorrection
+		innerCell.Y = heightCorrection
+		innerCell.Width = newInnerWidth
+		innerCell.Height = newInnerHeight
 	}
 
-	return rectCell
+	return innerCell
 }
 
-// GetRectNonCenterColProperties define Width, Height to and rectangle (QrCode, Barcode, Image) inside a cell.
-func (s *math) GetRectNonCenterColProperties(rectDimensions *config.Dimensions, cell *core.Cell,
-	margins *config.Margins, prop *props.Rect,
-) *core.Cell {
+// GetInnerNonCenterCell define a inner cell formatted inside outer cell non centered.
+func (s *math) GetInnerNonCenterCell(inner *config.Dimensions, outer *config.Dimensions, prop *props.Rect) *core.Cell {
+	if prop.Percent > 100 {
+		prop.Percent = 100
+	}
 	percent := prop.Percent / maxPercent
-	left, top := margins.Left, margins.Top
 
-	imageProportion := rectDimensions.Height / rectDimensions.Width
-	celProportion := cell.Height / cell.Width
+	innerProportion := inner.Height / inner.Width
+	outerProportion := outer.Height / outer.Width
 
-	rectCell := &core.Cell{}
-	if imageProportion > celProportion {
-		newImageWidth := cell.Height / imageProportion * percent
-		newImageHeight := newImageWidth * imageProportion
+	innerCell := &core.Cell{}
+	if innerProportion > outerProportion {
+		newInnerWidth := outer.Height / innerProportion * percent
+		newInnerHeight := newInnerWidth * innerProportion
 
-		rectCell.X = cell.X + left + prop.Left
-		rectCell.Y = top
-		rectCell.Width = newImageWidth
-		rectCell.Height = newImageHeight
+		innerCell.X = prop.Left
+		innerCell.Y = 0
+		innerCell.Width = newInnerWidth
+		innerCell.Height = newInnerHeight
 	} else {
-		newImageWidth := cell.Width * percent
-		newImageHeight := newImageWidth * imageProportion
+		newInnerWidth := outer.Width * percent
+		newInnerHeight := newInnerWidth * innerProportion
 
-		rectCell.X = cell.X + left + prop.Left
-		rectCell.Y = top
-		rectCell.Width = newImageWidth
-		rectCell.Height = newImageHeight
+		innerCell.X = prop.Left
+		innerCell.Y = 0
+		innerCell.Width = newInnerWidth
+		innerCell.Height = newInnerHeight
 	}
 
-	return rectCell
+	return innerCell
 }
 
 // GetCenterCorrection return the correction of space in X or Y to
 // centralize a line in relation with another line.
 func (s *math) GetCenterCorrection(outerSize, innerSize float64) float64 {
-	const divisorToGetHalf = 2.0
-	return (outerSize - innerSize) / divisorToGetHalf
+	return (outerSize - innerSize) / 2.0
 }

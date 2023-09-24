@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/pkg/config"
+
 	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/stretchr/testify/assert"
 )
@@ -15,249 +17,224 @@ func TestNewMath(t *testing.T) {
 	assert.Equal(t, "*math.math", fmt.Sprintf("%T", sut))
 }
 
-/*func TestMath_GetRectCenterColProperties(t *testing.T) {
-	cases := []struct {
-		name           string
-		width          float64
-		height         float64
-		percent        float64
-		pdf            func() *mocks.Fpdf
-		assertPdfCalls func(t *testing.T, pdf *mocks.Fpdf)
-		assertResult   func(t *testing.T, x, y, w, h float64)
-	}{
-		{
-			"When cel proportion is greater than col",
-			20,
-			26,
-			100.0,
-			func() *mocks.Fpdf {
-				pdf := &mocks.Fpdf{}
-				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
-				return pdf
-			},
-			func(t *testing.T, pdf *mocks.Fpdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-			},
-			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 14.3, 0.1)
-				assert.InDelta(t, y, 11.0, 0.1)
-				assert.InDelta(t, w, 19.2, 0.1)
-				assert.InDelta(t, h, 25.0, 0.1)
-			},
-		},
-		{
-			"When cel proportion is greater than col, 45 percent",
-			20,
-			26,
-			45.0,
-			func() *mocks.Fpdf {
-				pdf := &mocks.Fpdf{}
-				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
-				return pdf
-			},
-			func(t *testing.T, pdf *mocks.Fpdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-			},
-			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 19.6, 0.1)
-				assert.InDelta(t, y, 17.8, 0.1)
-				assert.InDelta(t, w, 8.6, 0.1)
-				assert.InDelta(t, h, 11.2, 0.1)
-			},
-		},
-		{
-			"When cen proportion is less than col",
-			26,
-			20,
-			100.0,
-			func() *mocks.Fpdf {
-				pdf := &mocks.Fpdf{}
-				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
-				return pdf
-			},
-			func(t *testing.T, pdf *mocks.Fpdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-			},
-			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 17.0, 0.1)
-				assert.InDelta(t, y, 16.8, 0.1)
-				assert.InDelta(t, w, 20.0, 0.1)
-				assert.InDelta(t, h, 15.3, 0.1)
-			},
-		},
-		{
-			"When cen proportion is less than col, 45 percent",
-			26,
-			20,
-			45.0,
-			func() *mocks.Fpdf {
-				pdf := &mocks.Fpdf{}
-				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
-				return pdf
-			},
-			func(t *testing.T, pdf *mocks.Fpdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-			},
-			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 22.5, 0.1)
-				assert.InDelta(t, y, 21.0, 0.1)
-				assert.InDelta(t, w, 9.0, 0.1)
-				assert.InDelta(t, h, 6.9, 0.1)
-			},
-		},
-	}
-
-	for _, c := range cases {
-		// Arrange
-		pdf := c.pdf()
-
-		math := internal.New(pdf)
-
-		// Act
-		x, y, w, h := math.GetRectCenterColProperties(c.width, c.height, 20, 25.0, 2, c.percent)
-
-		// Assert
-		c.assertPdfCalls(t, pdf)
-		c.assertResult(t, x, y, w, h)
-	}
-}
-
-func TestMath_GetRectNonCenterColProperties(t *testing.T) {
-	cases := []struct {
-		name           string
-		width          float64
-		height         float64
-		prop           props.Rect
-		pdf            func() *mocks.Fpdf
-		assertPdfCalls func(t *testing.T, pdf *mocks.Fpdf)
-		assertResult   func(t *testing.T, x, y, w, h float64)
-	}{
-		{
-			"When cel proportion is greater than rectangle",
-			20,
-			26,
-			props.Rect{
-				Percent: 100,
-				Center:  false,
-				Left:    0,
-				Top:     0,
-			},
-			func() *mocks.Fpdf {
-				pdf := &mocks.Fpdf{}
-				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
-				return pdf
-			},
-			func(t *testing.T, pdf *mocks.Fpdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-			},
-			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 14.0, 0.1)
-				assert.InDelta(t, y, 11, 0.1)
-				assert.InDelta(t, w, 19.2, 0.1)
-				assert.InDelta(t, h, 25.0, 0.1)
-			},
-		},
-		{
-			"When cel proportion is greater than rectangle, 45 percent",
-			20,
-			26,
-			props.Rect{
-				Percent: 45,
-				Center:  false,
-				Left:    0,
-				Top:     0,
-			},
-			func() *mocks.Fpdf {
-				pdf := &mocks.Fpdf{}
-				pdf.On("GetMargins").Return(12.0, 11.0, 13.0, 15.0)
-				return pdf
-			},
-			func(t *testing.T, pdf *mocks.Fpdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-			},
-			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 14.0, 0.1)
-				assert.InDelta(t, y, 11, 0.1)
-				assert.InDelta(t, w, 8.6, 0.1)
-				assert.InDelta(t, h, 11.25, 0.1)
-			},
-		},
-		{
-			"When cel proportion is less than rectangle",
-			26,
-			20,
-			props.Rect{
-				Percent: 100,
-				Center:  false,
-				Left:    0,
-				Top:     0,
-			},
-			func() *mocks.Fpdf {
-				pdf := &mocks.Fpdf{}
-				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
-				return pdf
-			},
-			func(t *testing.T, pdf *mocks.Fpdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-			},
-			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 17.0, 0.1)
-				assert.InDelta(t, y, 12.0, 0.1)
-				assert.InDelta(t, w, 20.0, 0.1)
-				assert.InDelta(t, h, 15.3, 0.1)
-			},
-		},
-		{
-			"When cel proportion is less than rectangle, 45 percent",
-			26,
-			20,
-			props.Rect{
-				Percent: 45,
-				Center:  false,
-				Left:    0,
-				Top:     0,
-			},
-			func() *mocks.Fpdf {
-				pdf := &mocks.Fpdf{}
-				pdf.On("GetMargins").Return(15.0, 12.0, 17.0, 10.0)
-				return pdf
-			},
-			func(t *testing.T, pdf *mocks.Fpdf) {
-				pdf.AssertNumberOfCalls(t, "GetMargins", 1)
-			},
-			func(t *testing.T, x, y, w, h float64) {
-				assert.InDelta(t, x, 17.0, 0.1)
-				assert.InDelta(t, y, 12.0, 0.1)
-				assert.InDelta(t, w, 9.0, 0.1)
-				assert.InDelta(t, h, 6.9, 0.1)
-			},
-		},
-	}
-
-	for _, c := range cases {
-		// Arrange
-		pdf := c.pdf()
-
-		math := internal.New(pdf)
-
-		// Act
-		x, y, w, h := math.GetRectNonCenterColProperties(c.width, c.height, 20.0, 25.0, 2, c.prop)
-
-		// Assert
-		c.assertPdfCalls(t, pdf)
-		c.assertResult(t, x, y, w, h)
-	}
-}
-
 func TestMath_GetCenterCorrection(t *testing.T) {
-	// Arrange
-	pdf := &mocks.Fpdf{}
-	math := internal.New(pdf)
+	t.Run("should get center correction correctly", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+		outerSize := 100.0
+		innerSize := 50.0
 
-	// Act
-	correction := math.GetCenterCorrection(10, 5)
+		// Act
+		correction := sut.GetCenterCorrection(outerSize, innerSize)
 
-	// Assert
-	assert.Equal(t, correction, 2.5)
+		// Assert
+		assert.Equal(t, 25.0, correction)
+	})
 }
-*/
+
+func TestMath_GetInnerCenterCell(t *testing.T) {
+	t.Run("inner same size, inner same proportion, inner 100%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 100.0
+		inner := &config.Dimensions{Width: 100, Height: 100}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 0.0, cell.X)
+		assert.Equal(t, 0.0, cell.Y)
+		assert.Equal(t, 100.0, cell.Width)
+		assert.Equal(t, 100.0, cell.Height)
+	})
+	t.Run("inner same size, inner same proportion, inner 75%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 75.0
+		inner := &config.Dimensions{Width: 100, Height: 100}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 12.5, cell.X)
+		assert.Equal(t, 12.5, cell.Y)
+		assert.Equal(t, 75.0, cell.Width)
+		assert.Equal(t, 75.0, cell.Height)
+	})
+	t.Run("inner smaller, inner same proportion, inner 100%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 100.0
+		inner := &config.Dimensions{Width: 80, Height: 80}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 0.0, cell.X)
+		assert.Equal(t, 0.0, cell.Y)
+		assert.Equal(t, 100.0, cell.Width)
+		assert.Equal(t, 100.0, cell.Height)
+	})
+	t.Run("inner smaller, inner same proportion, inner 75%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 75.0
+		inner := &config.Dimensions{Width: 80, Height: 80}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 12.5, cell.X)
+		assert.Equal(t, 12.5, cell.Y)
+		assert.Equal(t, 75.0, cell.Width)
+		assert.Equal(t, 75.0, cell.Height)
+	})
+	t.Run("inner greater, inner same proportion, inner 100%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 100.0
+		inner := &config.Dimensions{Width: 120, Height: 120}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 0.0, cell.X)
+		assert.Equal(t, 0.0, cell.Y)
+		assert.Equal(t, 100.0, cell.Width)
+		assert.Equal(t, 100.0, cell.Height)
+	})
+	t.Run("inner greater, inner same proportion, inner 75%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 75.0
+		inner := &config.Dimensions{Width: 120, Height: 120}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 12.5, cell.X)
+		assert.Equal(t, 12.5, cell.Y)
+		assert.Equal(t, 75.0, cell.Width)
+		assert.Equal(t, 75.0, cell.Height)
+	})
+	t.Run("inner smaller, inner width proportion greater, 100%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 100.0
+		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &config.Dimensions{Width: 100, Height: 80}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 0.0, cell.X)
+		assert.Equal(t, 10.0, cell.Y)
+		assert.Equal(t, 100.0, cell.Width)
+		assert.Equal(t, 80.0, cell.Height)
+	})
+	t.Run("inner smaller, inner width proportion greater, 75%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 75.0
+		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &config.Dimensions{Width: 100, Height: 80}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 12.5, cell.X)
+		assert.Equal(t, 20.0, cell.Y)
+		assert.Equal(t, 75.0, cell.Width)
+		assert.Equal(t, 60.0, cell.Height)
+	})
+	t.Run("inner smaller, inner height proportion greater, 100%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 100.0
+		inner := &config.Dimensions{Width: 80, Height: 100}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 10.0, cell.X)
+		assert.Equal(t, 0.0, cell.Y)
+		assert.Equal(t, 80.0, cell.Width)
+		assert.Equal(t, 100.0, cell.Height)
+	})
+	t.Run("inner smaller, inner height proportion greater, 75%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 75.0
+		inner := &config.Dimensions{Width: 80, Height: 100}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 20.0, cell.X)
+		assert.Equal(t, 12.5, cell.Y)
+		assert.Equal(t, 60.0, cell.Width)
+		assert.Equal(t, 75.0, cell.Height)
+	})
+	t.Run("inner greater, inner height proportion greater, 100%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 100.0
+		inner := &config.Dimensions{Width: 100, Height: 125}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 10.0, cell.X)
+		assert.Equal(t, 0.0, cell.Y)
+		assert.Equal(t, 80.0, cell.Width)
+		assert.Equal(t, 100.0, cell.Height)
+	})
+	t.Run("inner greter, inner height proportion greater, 75%", func(t *testing.T) {
+		// Arrange
+		sut := math.New()
+
+		percent := 75.0
+		inner := &config.Dimensions{Width: 100, Height: 125}
+		outer := &config.Dimensions{Width: 100, Height: 100}
+
+		// Act
+		cell := sut.GetInnerCenterCell(inner, outer, percent)
+
+		// Assert
+		assert.Equal(t, 20.0, cell.X)
+		assert.Equal(t, 12.5, cell.Y)
+		assert.Equal(t, 60.0, cell.Width)
+		assert.Equal(t, 75.0, cell.Height)
+	})
+}
