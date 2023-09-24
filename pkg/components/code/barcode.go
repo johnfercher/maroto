@@ -1,7 +1,7 @@
 package code
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -43,13 +43,13 @@ func (b *barcode) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddBarCode(b.code, cell, &b.prop)
 }
 
-func (b *barcode) GetStructure() *tree.Node[core.Structure] {
+func (b *barcode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "barcode",
 		Value: b.code,
 	}
 
-	return tree.NewNode(str)
+	return node.New(str)
 }
 
 func (b *barcode) GetValue() string {

@@ -6,7 +6,7 @@ require (
 	github.com/boombuler/barcode v1.0.1
 	github.com/f-amaral/go-async v0.1.1
 	github.com/google/uuid v1.3.1
-	github.com/johnfercher/go-tree v1.0.3
+	github.com/johnfercher/go-tree v1.0.5
 	github.com/jung-kurt/gofpdf v1.16.2
 	github.com/pdfcpu/pdfcpu v0.5.0
 	github.com/stretchr/testify v1.8.4

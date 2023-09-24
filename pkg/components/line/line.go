@@ -1,7 +1,7 @@
 package line
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -37,12 +37,12 @@ func NewRow(height float64, ps ...props.Line) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (l *line) GetStructure() *tree.Node[core.Structure] {
+func (l *line) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type: "linestyle",
 	}
 
-	return tree.NewNode(str)
+	return node.New(str)
 }
 
 func (l *line) SetConfig(config *config.Config) {

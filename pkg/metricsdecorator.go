@@ -1,9 +1,9 @@
 package pkg
 
 import (
+	"github.com/johnfercher/go-tree/node"
 	"time"
 
-	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
@@ -97,8 +97,8 @@ func (m *metricsDecorator) RegisterFooter(rows ...core.Row) error {
 	return err
 }
 
-func (m *metricsDecorator) GetStructure() *tree.Node[core.Structure] {
-	var tree *tree.Node[core.Structure]
+func (m *metricsDecorator) GetStructure() *node.Node[core.Structure] {
+	var tree *node.Node[core.Structure]
 
 	timeSpent := m.getTimeSpent(func() {
 		tree = m.inner.GetStructure()

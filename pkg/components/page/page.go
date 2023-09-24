@@ -1,7 +1,7 @@
 package page
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -64,12 +64,12 @@ func (p *page) GetRows() []core.Row {
 	return p.rows
 }
 
-func (p *page) GetStructure() *tree.Node[core.Structure] {
+func (p *page) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type: "page",
 	}
 
-	node := tree.NewNode(str)
+	node := node.New(str)
 
 	for _, r := range p.rows {
 		inner := r.GetStructure()

@@ -2,7 +2,7 @@
 package code
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -44,13 +44,13 @@ func (m *matrixCode) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddMatrixCode(m.code, cell, &m.prop)
 }
 
-func (m *matrixCode) GetStructure() *tree.Node[core.Structure] {
+func (m *matrixCode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "matrixcode",
 		Value: m.code,
 	}
 
-	return tree.NewNode(str)
+	return node.New(str)
 }
 
 func (m *matrixCode) SetConfig(config *config.Config) {

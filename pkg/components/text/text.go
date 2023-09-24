@@ -1,7 +1,7 @@
 package text
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -45,13 +45,13 @@ func NewRow(height float64, value string, ps ...props.Text) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (t *text) GetStructure() *tree.Node[core.Structure] {
+func (t *text) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "text",
 		Value: t.value,
 	}
 
-	return tree.NewNode(str)
+	return node.New(str)
 }
 
 func (t *text) SetConfig(config *config.Config) {

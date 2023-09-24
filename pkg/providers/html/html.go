@@ -3,6 +3,7 @@ package html
 import (
 	"bytes"
 	"fmt"
+	"github.com/johnfercher/go-tree/node"
 	"os"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -12,7 +13,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 
-	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
@@ -72,9 +72,9 @@ type margins struct {
 type html struct {
 	div        Div
 	cursor     Cursor
-	rows       []*tree.Node[Div]
+	rows       []*node.Node[Div]
 	currentRow int
-	cols       []*tree.Node[Div]
+	cols       []*node.Node[Div]
 	currentCol int
 	imageCache cache.Cache
 }
@@ -129,21 +129,21 @@ func (h *html) AddLine(_ *core.Cell, _ *props.Line) {
 }
 
 func (h *html) CreateCol(width, height float64, config *config.Config, prop *props.Cell) {
-	var row *tree.Node[Div]
+	var row *node.Node[Div]
 
 	rowsLength := len(h.rows)
 	if rowsLength > h.currentRow {
 		row = h.rows[rowsLength-1]
 	} else {
 		div := h.div.Copy(DivTag, RowTag)
-		row = tree.NewNode(div)
+		row = node.New(div)
 		h.rows = append(h.rows, row)
 	}
 
 	colDiv := row.GetData().Copy(DivTag, ColTag)
 	colDiv.dimensions.Width = width
 	colDiv.dimensions.Height = height
-	colNode := tree.NewNode(colDiv)
+	colNode := node.New(colDiv)
 
 	h.cols = append(h.cols, colNode)
 	row.AddNext(colNode)
@@ -163,7 +163,7 @@ func (h *html) AddText(text string, _ *core.Cell, _ *props.Text) {
 	textDiv := col.GetData()
 	textDiv._type = SpanTag
 	textDiv.content = text
-	textNode := tree.NewNode(textDiv)
+	textNode := node.New(textDiv)
 
 	col.AddNext(textNode)
 }
@@ -174,7 +174,7 @@ func (h *html) AddSignature(text string, _ *core.Cell, _ *props.Text) {
 	textDiv := col.GetData()
 	textDiv._type = SpanTag
 	textDiv.content = text
-	textNode := tree.NewNode(textDiv)
+	textNode := node.New(textDiv)
 
 	col.AddNext(textNode)
 }
@@ -185,7 +185,7 @@ func (h *html) AddMatrixCode(text string, _ *core.Cell, _ *props.Rect) {
 	textDiv := col.GetData()
 	textDiv._type = SpanTag
 	textDiv.content = text
-	textNode := tree.NewNode(textDiv)
+	textNode := node.New(textDiv)
 
 	col.AddNext(textNode)
 }
@@ -196,7 +196,7 @@ func (h *html) AddQrCode(code string, _ *core.Cell, _ *props.Rect) {
 	textDiv := col.GetData()
 	textDiv._type = SpanTag
 	textDiv.content = code
-	textNode := tree.NewNode(textDiv)
+	textNode := node.New(textDiv)
 
 	col.AddNext(textNode)
 }
@@ -207,7 +207,7 @@ func (h *html) AddBarCode(code string, _ *core.Cell, _ *props.Barcode) {
 	textDiv := col.GetData()
 	textDiv._type = SpanTag
 	textDiv.content = code
-	textNode := tree.NewNode(textDiv)
+	textNode := node.New(textDiv)
 
 	col.AddNext(textNode)
 }
@@ -225,13 +225,13 @@ func (h *html) AddImage(value string, _ *core.Cell, _ *props.Rect, extension ext
 	image, err := h.imageCache.Load(value, extension)
 	if err != nil {
 		textDiv.content = "Failed to load image from file"
-		textNode := tree.NewNode(textDiv)
+		textNode := node.New(textDiv)
 		col.AddNext(textNode)
 		return
 	}
 
 	textDiv.content = image.Value[:minSize]
-	textNode := tree.NewNode(textDiv)
+	textNode := node.New(textDiv)
 
 	col.AddNext(textNode)
 }
@@ -267,7 +267,7 @@ func (h *html) GenerateBytes() ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-func (h *html) getLastCol() *tree.Node[Div] {
+func (h *html) getLastCol() *node.Node[Div] {
 	return h.cols[len(h.cols)-1]
 }
 
@@ -282,7 +282,7 @@ func (h *html) getRows() string {
 	return content
 }
 
-func (h *html) getCols(row *tree.Node[Div]) string {
+func (h *html) getCols(row *node.Node[Div]) string {
 	var content string
 	colNodes := row.GetNexts()
 	for _, colNode := range colNodes {
@@ -296,7 +296,7 @@ func (h *html) getCols(row *tree.Node[Div]) string {
 	return content
 }
 
-func (h *html) getComponent(col *tree.Node[Div]) string {
+func (h *html) getComponent(col *node.Node[Div]) string {
 	var content string
 	componentNodes := col.GetNexts()
 	for _, componentNode := range componentNodes {
