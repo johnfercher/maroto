@@ -10,6 +10,10 @@ type Cell struct {
 	Height float64
 }
 
+func (c *Cell) GetDimensions() *config.Dimensions {
+	return &config.Dimensions{Width: c.Width, Height: c.Height}
+}
+
 func (c Cell) Copy() Cell {
 	return Cell{
 		X:      c.X,
