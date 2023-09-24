@@ -41,7 +41,7 @@ func NewRow(height float64, value string, ps ...props.Font) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (s *signature) Render(provider core.Provider, cell core.Cell) {
+func (s *signature) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddSignature(s.value, cell, s.prop.ToTextProp(align.Center, 0.0, 0))
 }
 

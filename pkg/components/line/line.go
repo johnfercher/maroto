@@ -49,6 +49,6 @@ func (l *line) SetConfig(config *config.Config) {
 	l.config = config
 }
 
-func (l *line) Render(provider core.Provider, cell core.Cell) {
+func (l *line) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddLine(cell, l.prop)
 }

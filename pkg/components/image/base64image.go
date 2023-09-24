@@ -42,7 +42,7 @@ func NewFromBase64Row(height float64, path string, extension extension.Type, ps 
 	return row.New(height).Add(c)
 }
 
-func (b *base64Image) Render(provider core.Provider, cell core.Cell) {
+func (b *base64Image) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddImage(b.base64, cell, b.prop, b.extension)
 }
 

@@ -39,7 +39,7 @@ func NewBarRow(height float64, code string, ps ...props.Barcode) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (b *barcode) Render(provider core.Provider, cell core.Cell) {
+func (b *barcode) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddBarCode(b.code, cell, b.prop)
 }
 

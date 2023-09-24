@@ -40,7 +40,7 @@ func NewQrRow(height float64, code string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (q *qrCode) Render(provider core.Provider, cell core.Cell) {
+func (q *qrCode) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddQrCode(q.code, cell, q.prop)
 }
 

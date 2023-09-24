@@ -2,6 +2,8 @@ package internal
 
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
+	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -11,8 +13,7 @@ const (
 
 // Math is the abstraction which deals with useful calc.
 type Math interface {
-	GetRectCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64,
-		xColOffset float64, percent float64) (x float64, y float64, w float64, h float64)
+	GetRectCenterColProperties(dimensions *config.Dimensions, cell *core.Cell, percent float64) (x float64, y float64, w float64, h float64)
 	GetRectNonCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64,
 		xColOffset float64, prop props.Rect) (x float64, y float64, w float64, h float64)
 	GetCenterCorrection(outerSize, innerSize float64) float64
@@ -29,36 +30,33 @@ func NewMath(pdf fpdf.Fpdf) *math {
 	}
 }
 
-// GetRectCenterColProperties define Width, Height, X Offset and Y Offset
-// to and rectangle (QrCode, Barcode, Image) be centralized inside a cell.
-func (s *math) GetRectCenterColProperties(imageWidth float64, imageHeight float64, colWidth float64, colHeight float64,
-	xColOffset float64, percent float64,
+func (s *math) GetRectCenterColProperties(dimensions *config.Dimensions, cell *core.Cell, percent float64,
 ) (x float64, y float64, w float64, h float64) {
 	percent /= 100.0
 	left, top, _, _ := s.pdf.GetMargins()
 
-	imageProportion := imageHeight / imageWidth
-	celProportion := colHeight / colWidth
+	imageProportion := dimensions.Height / dimensions.Width
+	celProportion := cell.Height / cell.Width
 
 	if imageProportion > celProportion {
-		newImageWidth := colHeight / imageProportion * percent
+		newImageWidth := cell.Height / imageProportion * percent
 		newImageHeight := newImageWidth * imageProportion
 
-		widthCorrection := s.GetCenterCorrection(colWidth, newImageWidth)
-		heightCorrection := s.GetCenterCorrection(colHeight, newImageHeight)
+		widthCorrection := s.GetCenterCorrection(cell.Width, newImageWidth)
+		heightCorrection := s.GetCenterCorrection(cell.Height, newImageHeight)
 
-		x = xColOffset + left + widthCorrection
+		x = cell.X + left + widthCorrection
 		y = top + heightCorrection
 		w = newImageWidth
 		h = newImageHeight
 	} else {
-		newImageWidth := colWidth * percent
+		newImageWidth := cell.Width * percent
 		newImageHeight := newImageWidth * imageProportion
 
-		widthCorrection := s.GetCenterCorrection(colWidth, newImageWidth)
-		heightCorrection := s.GetCenterCorrection(colHeight, newImageHeight)
+		widthCorrection := s.GetCenterCorrection(cell.Width, newImageWidth)
+		heightCorrection := s.GetCenterCorrection(cell.Height, newImageHeight)
 
-		x = xColOffset + left + widthCorrection
+		x = cell.X + left + widthCorrection
 		y = top + heightCorrection
 		w = newImageWidth
 		h = newImageHeight

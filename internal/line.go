@@ -9,7 +9,7 @@ import (
 )
 
 type Line interface {
-	Add(cell core.Cell, prop props.Line)
+	Add(cell *core.Cell, prop props.Line)
 }
 
 type line struct {
@@ -26,7 +26,7 @@ func NewLine(pdf fpdf.Fpdf) *line {
 	}
 }
 
-func (l *line) Add(cell core.Cell, prop props.Line) {
+func (l *line) Add(cell *core.Cell, prop props.Line) {
 	if prop.Orientation == orientation.Vertical {
 		l.renderVertical(cell, prop)
 	} else {
@@ -34,7 +34,7 @@ func (l *line) Add(cell core.Cell, prop props.Line) {
 	}
 }
 
-func (l *line) renderVertical(cell core.Cell, prop props.Line) {
+func (l *line) renderVertical(cell *core.Cell, prop props.Line) {
 	size := cell.Height * (prop.SizePercent / 100.0)
 	position := cell.Width * (prop.OffsetPercent / 100.0)
 
@@ -59,7 +59,7 @@ func (l *line) renderVertical(cell core.Cell, prop props.Line) {
 	}
 }
 
-func (l *line) renderHorizontal(cell core.Cell, prop props.Line) {
+func (l *line) renderHorizontal(cell *core.Cell, prop props.Line) {
 	size := cell.Width * (prop.SizePercent / 100.0)
 	position := cell.Height * (prop.OffsetPercent / 100.0)
 

@@ -45,16 +45,11 @@ func main() {
 	m.AddRows(
 		text.NewRow(20, "Main features", props.Text{Size: 15, Top: 6.5}),
 	)
-	m.AddRows(buildCodesRow()...)
-	m.AddRows(buildImagesRow()...)
-	m.AddRows(buildTextsRow()...)
 
-	m.AddRows(
-		text.NewRow(15, "Dummy Data", props.Text{Size: 12, Top: 5, Align: align.Center}),
-	)
-
-	for i := 0; i < 50; i++ {
-		m.AddRows(text.NewRow(20, dummyText+dummyText+dummyText+dummyText+dummyText))
+	for i := 0; i < 200; i++ {
+		m.AddRows(buildCodesRow()...)
+		m.AddRows(buildImagesRow()...)
+		m.AddRows(buildTextsRow()...)
 	}
 
 	document, err := m.Generate()

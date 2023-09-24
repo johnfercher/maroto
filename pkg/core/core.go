@@ -32,7 +32,7 @@ type Node interface {
 
 type Component interface {
 	Node
-	Render(provider Provider, cell Cell)
+	Render(provider Provider, cell *Cell)
 }
 
 type Col interface {
