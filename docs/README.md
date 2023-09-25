@@ -30,7 +30,7 @@ library in various aspects. The main objectives of`v2.0.0`are:
    - Initially, the project will focus on defining a design that enables us to accomplish all objectives. Subsequently, we will begin incorporating all features from the old version, and finally, we will introduce the new features.
 
 ## Code Example
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/cmd/main.go ':include :type=code')
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/cmd/dev/main.go ':include :type=code')
 
 ## PDF Generated
 ```pdf
