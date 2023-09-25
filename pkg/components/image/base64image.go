@@ -1,7 +1,7 @@
 package image
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -46,7 +46,7 @@ func (b *base64Image) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddImage(b.base64, cell, &b.prop, b.extension)
 }
 
-func (b *base64Image) GetStructure() *tree.Node[core.Structure] {
+func (b *base64Image) GetStructure() *node.Node[core.Structure] {
 	trimLength := 10
 	if len(b.base64) < trimLength {
 		trimLength = len(b.base64)
@@ -57,7 +57,7 @@ func (b *base64Image) GetStructure() *tree.Node[core.Structure] {
 		Value: b.base64[:trimLength],
 	}
 
-	return tree.NewNode(str)
+	return node.New(str)
 }
 
 func (b *base64Image) SetConfig(config *config.Config) {

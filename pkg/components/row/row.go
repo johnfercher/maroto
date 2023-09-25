@@ -2,12 +2,11 @@ package row
 
 import (
 	"fmt"
+	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-
-	"github.com/johnfercher/go-tree/tree"
 )
 
 type row struct {
@@ -39,13 +38,13 @@ func (r *row) GetHeight() float64 {
 	return r.height
 }
 
-func (r *row) GetStructure() *tree.Node[core.Structure] {
+func (r *row) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "row",
 		Value: fmt.Sprintf("%2.f", r.height),
 	}
 
-	node := tree.NewNode(str)
+	node := node.New(str)
 
 	for _, c := range r.cols {
 		inner := c.GetStructure()

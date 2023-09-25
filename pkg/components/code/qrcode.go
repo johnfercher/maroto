@@ -2,7 +2,7 @@
 package code
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -44,13 +44,13 @@ func (q *qrCode) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddQrCode(q.code, cell, &q.prop)
 }
 
-func (q *qrCode) GetStructure() *tree.Node[core.Structure] {
+func (q *qrCode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "qrcode",
 		Value: q.code,
 	}
 
-	return tree.NewNode(str)
+	return node.New(str)
 }
 
 func (q *qrCode) SetConfig(config *config.Config) {

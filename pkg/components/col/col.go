@@ -2,8 +2,8 @@ package col
 
 import (
 	"fmt"
+	"github.com/johnfercher/go-tree/node"
 
-	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -38,13 +38,13 @@ func (c *col) GetSize() int {
 	return c.size
 }
 
-func (c *col) GetStructure() *tree.Node[core.Structure] {
+func (c *col) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "col",
 		Value: fmt.Sprintf("%d", c.size),
 	}
 
-	node := tree.NewNode(str)
+	node := node.New(str)
 
 	for _, c := range c.components {
 		inner := c.GetStructure()

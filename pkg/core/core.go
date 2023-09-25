@@ -1,7 +1,7 @@
 package core
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -14,7 +14,7 @@ type Maroto interface {
 	AddRow(rowHeight float64, cols ...Col) Row
 	AddPages(pages ...Page)
 	AddPDFs(pdfs ...[]byte)
-	GetStructure() *tree.Node[Structure]
+	GetStructure() *node.Node[Structure]
 	Generate() (Document, error)
 }
 
@@ -27,7 +27,7 @@ type Document interface {
 
 type Node interface {
 	SetConfig(config *config.Config)
-	GetStructure() *tree.Node[Structure]
+	GetStructure() *node.Node[Structure]
 }
 
 type Component interface {

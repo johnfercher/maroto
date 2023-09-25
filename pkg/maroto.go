@@ -3,6 +3,7 @@ package pkg
 import (
 	"bytes"
 	"errors"
+	"github.com/johnfercher/go-tree/node"
 	"io"
 	"log"
 
@@ -19,7 +20,6 @@ import (
 
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
-	"github.com/johnfercher/go-tree/tree"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
@@ -135,13 +135,13 @@ func (m *maroto) Generate() (core.Document, error) {
 	return m.generate()
 }
 
-func (m *maroto) GetStructure() *tree.Node[core.Structure] {
+func (m *maroto) GetStructure() *node.Node[core.Structure] {
 	m.fillPageToAddNew()
 
 	str := core.Structure{
 		Type: "pkg",
 	}
-	node := tree.NewNode(str)
+	node := node.New(str)
 
 	for _, p := range m.pages {
 		inner := p.GetStructure()

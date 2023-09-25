@@ -1,7 +1,7 @@
 package signature
 
 import (
-	"github.com/johnfercher/go-tree/tree"
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -45,13 +45,13 @@ func (s *signature) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddSignature(s.value, cell, s.prop.ToTextProp(align.Center, 0.0, 0))
 }
 
-func (s *signature) GetStructure() *tree.Node[core.Structure] {
+func (s *signature) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "signature",
 		Value: s.value,
 	}
 
-	return tree.NewNode(str)
+	return node.New(str)
 }
 
 func (s *signature) SetConfig(config *config.Config) {

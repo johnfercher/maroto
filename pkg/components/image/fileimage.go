@@ -1,6 +1,7 @@
 package image
 
 import (
+	"github.com/johnfercher/go-tree/node"
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
@@ -9,8 +10,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-
-	"github.com/johnfercher/go-tree/tree"
 )
 
 type fileImage struct {
@@ -48,13 +47,13 @@ func (f *fileImage) Render(provider core.Provider, cell *core.Cell) {
 	provider.AddImage(f.path, cell, &f.prop, extension.Type(extensionStr))
 }
 
-func (f *fileImage) GetStructure() *tree.Node[core.Structure] {
+func (f *fileImage) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "fileimage",
 		Value: f.path,
 	}
 
-	return tree.NewNode(str)
+	return node.New(str)
 }
 
 func (f *fileImage) SetConfig(config *config.Config) {
