@@ -19,6 +19,10 @@ func main() {
 
 	m := pkg.NewMaroto(cfg)
 
+	r0 := row.NewAdaptive(
+		col.New(1).Add(text.New("ab 1234567890asdfasdf 1234567890asdfasdf", props.Text{ExtrapolateStrategy: "symbols"})).WithStyle(&props.Cell{BorderType: border.Full}),
+	)
+
 	r := row.NewAdaptive(
 		col.New(1).Add(text.New("as da s fas df asd fasd fas dfa sdf as d fas dfa sdf asdf df asd fasd fas dfa sdf as d fas dfa sdf asdf df asd fasd fas dfa sdf as d fas dfa sdf asdf df asd fasd fas dfa sdf as d fas dfa sdf asdf")).
 			WithStyle(&props.Cell{BorderType: border.Full}),
@@ -56,7 +60,7 @@ func main() {
 			WithStyle(&props.Cell{BorderType: border.Full}),
 	)
 
-	m.AddRows(r, r2, r3, r4)
+	m.AddRows(r0, r, r2, r3, r4)
 
 	document, err := m.Generate()
 	if err != nil {

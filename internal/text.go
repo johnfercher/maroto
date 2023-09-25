@@ -3,6 +3,7 @@ package internal
 import (
 	"strings"
 
+	textconsts "github.com/johnfercher/maroto/v2/pkg/consts/text"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -66,26 +67,16 @@ func (s *text) Add(text string, cell core.Cell, textProp props.Text) {
 
 	cell.Y += fontHeight
 
-	// Apply Unicode before calc spaces
-	unicodeText := s.textToUnicode(text, textProp)
-	stringWidth := s.pdf.GetStringWidth(unicodeText)
-	words := strings.Split(unicodeText, " ")
 	accumulateOffsetY := 0.0
+	lines := s.getLines(text, textProp, cell.Width)
 
-	// If should add one line
-	if stringWidth < cell.Width || textProp.Extrapolate || len(words) == 1 {
-		s.addLine(textProp, cell.X, cell.Width, cell.Y, stringWidth, unicodeText)
-	} else {
-		lines := s.getLines(words, cell.Width)
+	for index, line := range lines {
+		lineWidth := s.pdf.GetStringWidth(line)
+		_, _, fontSize := s.font.GetFont()
+		textHeight := fontSize / s.font.GetScaleFactor()
 
-		for index, line := range lines {
-			lineWidth := s.pdf.GetStringWidth(line)
-			_, _, fontSize := s.font.GetFont()
-			textHeight := fontSize / s.font.GetScaleFactor()
-
-			s.addLine(textProp, cell.X, cell.Width, cell.Y+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
-			accumulateOffsetY += textProp.VerticalPadding
-		}
+		s.addLine(textProp, cell.X, cell.Width, cell.Y+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
+		accumulateOffsetY += textProp.VerticalPadding
 	}
 
 	s.font.SetColor(originalColor)
@@ -95,11 +86,7 @@ func (s *text) Add(text string, cell core.Cell, textProp props.Text) {
 func (s *text) GetComputedHeight(text string, textProp props.Text, colWidth float64) float64 {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
-	// Apply Unicode.
-	unicodeText := s.textToUnicode(text, textProp)
-	words := strings.Split(unicodeText, " ")
-
-	lines := s.getLines(words, colWidth)
+	lines := s.getLines(text, textProp, colWidth-textProp.Right-textProp.Left)
 
 	_, _, fontSize := s.font.GetFont()
 	textHeight := fontSize / s.font.GetScaleFactor()
@@ -107,15 +94,71 @@ func (s *text) GetComputedHeight(text string, textProp props.Text, colWidth floa
 	return textProp.Top + textProp.Bottom + float64(len(lines))*textHeight + float64(len(lines))*textProp.VerticalPadding
 }
 
-func (s *text) getLines(words []string, colWidth float64) []string {
+func (s *text) getLines(text string, textProp props.Text, colWidth float64) []string {
+	// Apply Unicode.
+	unicodeText := s.textToUnicode(text, textProp)
+	words := strings.Split(unicodeText, " ")
+
+	if len(words) == 0 {
+		return []string{}
+	}
+
+	switch textProp.ExtrapolateStrategy {
+	case textconsts.ExtrapolateStrategyWords:
+		return s.extrapolateWords(words, colWidth)
+	case textconsts.ExtrapolateStrategySymbols:
+		return s.extrapolateSymbols(words, colWidth)
+	default:
+		return []string{unicodeText}
+	}
+}
+
+type splitter struct {
+	lines          []string
+	actualLine     int
+	colWidth       float64
+	getStringWidth func(string) float64
+}
+
+func (s *splitter) addWord(word string) {
+	if s.lines == nil {
+		s.lines = []string{""}
+	}
+
+	if s.getStringWidth(s.lines[s.actualLine]+word+" ") < s.colWidth {
+		s.lines[s.actualLine] += word + " "
+		return
+	}
+
+	for sIndex, symbol := range word {
+		if s.getStringWidth(s.lines[s.actualLine]+string(symbol)) < s.colWidth {
+			s.lines[s.actualLine] += string(symbol)
+		} else {
+			s.lines = append(s.lines, "")
+			s.actualLine++
+			s.addWord(word[sIndex:])
+			break
+		}
+	}
+}
+
+func (s *text) extrapolateSymbols(words []string, colWidth float64) []string {
+	wordSplitter := splitter{
+		colWidth:       colWidth,
+		getStringWidth: s.pdf.GetStringWidth,
+	}
+	for _, word := range words {
+		wordSplitter.addWord(word)
+	}
+
+	return wordSplitter.lines
+}
+
+func (s *text) extrapolateWords(words []string, colWidth float64) []string {
 	currentlySize := 0.0
 	actualLine := 0
 
 	var lines []string
-
-	if len(words) == 0 {
-		return lines
-	}
 
 	if len(words) == 1 {
 		return append(lines, words[0])

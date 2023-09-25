@@ -3,6 +3,7 @@ package props
 import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/text"
 )
 
 // Text represents properties from a Text inside a cell.
@@ -30,6 +31,8 @@ type Text struct {
 	VerticalPadding float64
 	// Color define the fontstyle color.
 	Color *Color
+	// ExtrapolateStrategy strategy of text extrapolation
+	ExtrapolateStrategy text.ExtrapolateStrategy
 }
 
 // MakeValid from Text define default values for a Text.
@@ -71,5 +74,9 @@ func (s *Text) MakeValid(font *Font) {
 
 	if s.VerticalPadding < 0 {
 		s.VerticalPadding = 0
+	}
+
+	if s.ExtrapolateStrategy == "" {
+		s.ExtrapolateStrategy = text.ExtrapolateStrategyWords
 	}
 }
