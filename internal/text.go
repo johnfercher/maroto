@@ -111,19 +111,31 @@ func (s *text) getLines(words []string, colWidth float64) []string {
 	currentlySize := 0.0
 	actualLine := 0
 
-	lines := []string{}
+	var lines []string
+
+	if len(words) == 0 {
+		return lines
+	}
+
+	if len(words) == 1 {
+		return append(lines, words[0])
+	}
+
 	lines = append(lines, "")
 
 	for _, word := range words {
 		if s.pdf.GetStringWidth(word+" ")+currentlySize < colWidth {
 			lines[actualLine] = lines[actualLine] + word + " "
 			currentlySize += s.pdf.GetStringWidth(word + " ")
-		} else {
+			continue
+		}
+
+		if lines[actualLine] != "" {
 			lines = append(lines, "")
 			actualLine++
-			lines[actualLine] = lines[actualLine] + word + " "
-			currentlySize = s.pdf.GetStringWidth(word + " ")
 		}
+		lines[actualLine] = lines[actualLine] + word + " "
+		currentlySize = s.pdf.GetStringWidth(word + " ")
 	}
 
 	return lines

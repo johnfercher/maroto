@@ -185,8 +185,14 @@ func (m *maroto) setConfig() {
 }
 
 func (m *maroto) createPage() core.Page {
-	p := page.New()
-	p.SetNumber(len(m.pages))
+	p := page.New(props.Page{
+		Pattern: m.config.PageNumberPattern,
+		Place:   m.config.PageNumberPlace,
+		Family:  m.config.DefaultFont.Family,
+		Style:   m.config.DefaultFont.Style,
+		Size:    m.config.DefaultFont.Size,
+		Color:   m.config.DefaultFont.Color,
+	})
 
 	m.pages = append(m.pages, p)
 	m.currentHeight = 0
@@ -202,7 +208,7 @@ func (m *maroto) createPage() core.Page {
 }
 
 func (m *maroto) addPageFooter(p core.Page) {
-	space := m.cell.Height - m.currentHeight - m.footerHeight
+	space := float64(int((m.cell.Height-m.currentHeight-m.footerHeight)*1000)) / 1000
 
 	er := row.New(space).Add(col.New(m.config.MaxGridSize))
 	er.SetConfig(m.config)
@@ -237,8 +243,8 @@ func (m *maroto) splitPages() {
 func (m *maroto) generate() (core.Document, error) {
 	innerCtx := m.cell.Copy()
 
+	m.setConfig()
 	for _, page := range m.pages {
-		page.SetConfig(m.config)
 		page.Render(m.provider, innerCtx)
 	}
 
