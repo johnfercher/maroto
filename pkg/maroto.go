@@ -16,7 +16,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf"
-	"github.com/johnfercher/maroto/v2/pkg/providers/html"
 
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
@@ -326,10 +325,6 @@ func getConfig(configs ...*config.Config) *config.Config {
 }
 
 func getProvider(cache cache.Cache, cfg *config.Config) core.Provider {
-	if cfg.ProviderType == provider.HTML {
-		return html.New(cfg, providers.WithCache(cache))
-	}
-
 	return gofpdf.New(cfg, providers.WithCache(cache))
 }
 

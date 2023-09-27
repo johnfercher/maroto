@@ -46,11 +46,20 @@ func NewZPLFromPDF(document Document) Document {
 		},
 		Avg: timeSpent,
 	}
-
 	timeMetric.Normalize()
+
+	sizeMetric := metrics.SizeMetric{
+		Key: "file_size",
+		Size: metrics.Size{
+			Value: float64(len(zplBytes)),
+			Scale: metrics.Byte,
+		},
+	}
+	sizeMetric.Normalize()
 
 	report := document.GetReport()
 	report.TimeMetrics = append(report.TimeMetrics, timeMetric)
+	report.SizeMetric = sizeMetric
 
 	return &zpl{
 		bytes:        zplBytes,
