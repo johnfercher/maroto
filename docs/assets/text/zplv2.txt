@@ -1,0 +1,5 @@
+generate -> avg: 1.77ms, executions: [1.77ms]
+add_row -> avg: 67.50ns, executions: [128.00ns, 31.00ns, 89.00ns, 22.00ns]
+add_cols -> avg: 321.00ns, executions: [505.00ns, 137.00ns]
+pdf2pzl -> avg: 150.77ms, executions: [150.77ms]
+file_size -> 19.95Kb

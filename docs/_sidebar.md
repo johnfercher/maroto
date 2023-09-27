@@ -23,6 +23,7 @@
     * [Orientation](v2/features/orientation.md?id=orientation)
     * [Page Number](v2/features/pagenumber.md?id=page-number)
     * [Parallelism](v2/features/parallelism.md?id=parallelism)
+    * [PDF 2 ZPL](v2/features/pdf2zpl?id=pdf-2-zpl)
     * [Protection](v2/features/protection.md?id=protection)
     * [QR Code](v2/features/qrcode.md?id=qrcode)
     * [Signature](v2/features/signature.md?id=signature)

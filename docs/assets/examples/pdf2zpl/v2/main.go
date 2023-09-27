@@ -97,12 +97,22 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	err = document.Save("docs/assets/pdf/zplv2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	document, err = document.To(documenttype.ZPL)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	err = document.Save("test.zpl")
+	err = document.Save("docs/assets/zpl/zplv2.zpl")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/zplv2.txt")
 	if err != nil {
 		log.Fatal(err.Error())
 	}

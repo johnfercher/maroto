@@ -238,7 +238,7 @@ func (m *maroto) generate() (core.Document, error) {
 	}
 
 	if len(m.pdfs) == 0 {
-		return core.NewDocument(documentBytes, nil), nil
+		return core.NewPDF(documentBytes, nil), nil
 	}
 
 	readers := []io.ReadSeeker{}
@@ -254,7 +254,7 @@ func (m *maroto) generate() (core.Document, error) {
 		return nil, err
 	}
 
-	return core.NewDocument(buf.Bytes(), nil), nil
+	return core.NewPDF(buf.Bytes(), nil), nil
 }
 
 func (m *maroto) generateConcurrently() (core.Document, error) {
@@ -295,7 +295,7 @@ func (m *maroto) generateConcurrently() (core.Document, error) {
 		return nil, err
 	}
 
-	return core.NewDocument(buf.Bytes(), nil), nil
+	return core.NewPDF(buf.Bytes(), nil), nil
 }
 
 func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
