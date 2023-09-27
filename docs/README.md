@@ -2,12 +2,12 @@
 
 [![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines) [![Branch](https://img.shields.io/badge/V2-Branch-pink)](https://github.com/johnfercher/maroto/tree/v2)  [![Roadmap](https://img.shields.io/badge/V2-Roadmap-purple)](https://github.com/users/johnfercher/projects/1) [![Discussion](https://img.shields.io/badge/V2-Discussion-blue)](https://github.com/johnfercher/maroto/issues/257) [![Release Notes](https://img.shields.io/badge/Release-Notes-cyan)](https://github.com/johnfercher/maroto/releases) [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
 
-#### Maroto`v2.0.0-alpha.24`is here! Try out:
+#### Maroto`v2.0.0-alpha.25`is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.24
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.25
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
@@ -30,7 +30,7 @@ library in various aspects. The main objectives of`v2.0.0`are:
    - Initially, the project will focus on defining a design that enables us to accomplish all objectives. Subsequently, we will begin incorporating all features from the old version, and finally, we will introduce the new features.
 
 ## Code Example
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/cmd/dev/main.go ':include :type=code')
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/cmd/dev/pdf/main.go ':include :type=code')
 
 ## PDF Generated
 ```pdf

@@ -3,9 +3,10 @@ package pkg
 import (
 	"bytes"
 	"errors"
-	"github.com/johnfercher/go-tree/node"
 	"io"
 	"log"
+
+	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
@@ -14,9 +15,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf"
-	"github.com/johnfercher/maroto/v2/pkg/providers/html"
 
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
@@ -128,7 +127,7 @@ func (m *maroto) Generate() (core.Document, error) {
 	m.fillPageToAddNew()
 	m.setConfig()
 
-	if m.config.Workers > 0 && m.config.ProviderType != provider.HTML {
+	if m.config.Workers > 0 {
 		return m.generateConcurrently()
 	}
 
@@ -238,7 +237,7 @@ func (m *maroto) generate() (core.Document, error) {
 	}
 
 	if len(m.pdfs) == 0 {
-		return core.NewDocument(documentBytes, nil), nil
+		return core.NewPDF(documentBytes, nil), nil
 	}
 
 	readers := []io.ReadSeeker{}
@@ -254,7 +253,7 @@ func (m *maroto) generate() (core.Document, error) {
 		return nil, err
 	}
 
-	return core.NewDocument(buf.Bytes(), nil), nil
+	return core.NewPDF(buf.Bytes(), nil), nil
 }
 
 func (m *maroto) generateConcurrently() (core.Document, error) {
@@ -295,7 +294,7 @@ func (m *maroto) generateConcurrently() (core.Document, error) {
 		return nil, err
 	}
 
-	return core.NewDocument(buf.Bytes(), nil), nil
+	return core.NewPDF(buf.Bytes(), nil), nil
 }
 
 func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
@@ -326,10 +325,6 @@ func getConfig(configs ...*config.Config) *config.Config {
 }
 
 func getProvider(cache cache.Cache, cfg *config.Config) core.Provider {
-	if cfg.ProviderType == provider.HTML {
-		return html.New(cfg, providers.WithCache(cache))
-	}
-
 	return gofpdf.New(cfg, providers.WithCache(cache))
 }
 

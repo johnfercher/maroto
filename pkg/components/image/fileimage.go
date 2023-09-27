@@ -1,8 +1,9 @@
 package image
 
 import (
-	"github.com/johnfercher/go-tree/node"
 	"strings"
+
+	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"

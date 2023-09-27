@@ -54,13 +54,13 @@ func (s *text) Add(text string, cell *core.Cell, textProp *props.Text) {
 		textProp.Right = cell.Width
 	}
 
-	cell.Width = cell.Width - textProp.Left - textProp.Right
-	if cell.Width < 0 {
-		cell.Width = 0
+	width := cell.Width - textProp.Left - textProp.Right
+	if width < 0 {
+		width = 0
 	}
 
-	cell.X += textProp.Left
-	cell.Y += textProp.Top
+	x := cell.X + textProp.Left
+	y := cell.Y + textProp.Top
 
 	originalColor := s.font.GetColor()
 	s.font.SetColor(textProp.Color)
@@ -69,15 +69,15 @@ func (s *text) Add(text string, cell *core.Cell, textProp *props.Text) {
 	_, _, fontSize := s.font.GetFont()
 	fontHeight := fontSize / s.font.GetScaleFactor()
 
-	cell.Y += fontHeight
+	y += fontHeight
 
 	// Apply Unicode before calc spaces
 	unicodeText := s.textToUnicode(text, textProp)
 	stringWidth := s.pdf.GetStringWidth(unicodeText)
 
 	// If should add one line
-	if stringWidth < cell.Width {
-		s.addLine(textProp, cell.X, cell.Width, cell.Y, stringWidth, unicodeText)
+	if stringWidth < width {
+		s.addLine(textProp, x, width, y, stringWidth, unicodeText)
 		return
 	}
 
@@ -85,9 +85,9 @@ func (s *text) Add(text string, cell *core.Cell, textProp *props.Text) {
 
 	if textProp.BreakLineStrategy == breakline.EmptyLineStrategy {
 		words := strings.Split(unicodeText, " ")
-		lines = s.getLinesBreakingLineFromSpace(words, cell.Width)
+		lines = s.getLinesBreakingLineFromSpace(words, width)
 	} else {
-		lines = s.getLinesBreakingLineWithDash(unicodeText, cell.Width)
+		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
 	}
 
 	accumulateOffsetY := 0.0
@@ -97,7 +97,7 @@ func (s *text) Add(text string, cell *core.Cell, textProp *props.Text) {
 		_, _, fontSize := s.font.GetFont()
 		textHeight := fontSize / s.font.GetScaleFactor()
 
-		s.addLine(textProp, cell.X, cell.Width, cell.Y+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
+		s.addLine(textProp, x, width, y+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
 		accumulateOffsetY += textProp.VerticalPadding
 	}
 

@@ -2,6 +2,7 @@ package row
 
 import (
 	"fmt"
+
 	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/config"

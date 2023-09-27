@@ -2,10 +2,9 @@ package pkg
 
 import (
 	"github.com/johnfercher/go-tree/node"
-	"time"
-
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
+	"github.com/johnfercher/maroto/v2/pkg/time"
 )
 
 type metricsDecorator struct {
@@ -30,7 +29,7 @@ func (m *metricsDecorator) Generate() (core.Document, error) {
 	var document core.Document
 	var err error
 
-	timeSpent := m.getTimeSpent(func() {
+	timeSpent := time.GetTimeSpent(func() {
 		document, err = m.inner.Generate()
 	})
 	m.generateTime = timeSpent
@@ -42,11 +41,11 @@ func (m *metricsDecorator) Generate() (core.Document, error) {
 		return nil, err
 	}
 
-	return core.NewDocument(bytes, report), nil
+	return core.NewPDF(bytes, report), nil
 }
 
 func (m *metricsDecorator) AddPages(pages ...core.Page) {
-	timeSpent := m.getTimeSpent(func() {
+	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddPages(pages...)
 	})
 
@@ -54,7 +53,7 @@ func (m *metricsDecorator) AddPages(pages ...core.Page) {
 }
 
 func (m *metricsDecorator) AddPDFs(pdfs ...[]byte) {
-	timeSpent := m.getTimeSpent(func() {
+	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddPDFs(pdfs...)
 	})
 
@@ -62,7 +61,7 @@ func (m *metricsDecorator) AddPDFs(pdfs ...[]byte) {
 }
 
 func (m *metricsDecorator) AddRows(rows ...core.Row) {
-	timeSpent := m.getTimeSpent(func() {
+	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddRows(rows...)
 	})
 
@@ -71,7 +70,7 @@ func (m *metricsDecorator) AddRows(rows ...core.Row) {
 
 func (m *metricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	var r core.Row
-	timeSpent := m.getTimeSpent(func() {
+	timeSpent := time.GetTimeSpent(func() {
 		r = m.inner.AddRow(rowHeight, cols...)
 	})
 
@@ -81,7 +80,7 @@ func (m *metricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row 
 
 func (m *metricsDecorator) RegisterHeader(rows ...core.Row) error {
 	var err error
-	timeSpent := m.getTimeSpent(func() {
+	timeSpent := time.GetTimeSpent(func() {
 		err = m.inner.RegisterHeader(rows...)
 	})
 	m.headerTime = timeSpent
@@ -90,7 +89,7 @@ func (m *metricsDecorator) RegisterHeader(rows ...core.Row) error {
 
 func (m *metricsDecorator) RegisterFooter(rows ...core.Row) error {
 	var err error
-	timeSpent := m.getTimeSpent(func() {
+	timeSpent := time.GetTimeSpent(func() {
 		err = m.inner.RegisterFooter(rows...)
 	})
 	m.footerTime = timeSpent
@@ -100,21 +99,12 @@ func (m *metricsDecorator) RegisterFooter(rows ...core.Row) error {
 func (m *metricsDecorator) GetStructure() *node.Node[core.Structure] {
 	var tree *node.Node[core.Structure]
 
-	timeSpent := m.getTimeSpent(func() {
+	timeSpent := time.GetTimeSpent(func() {
 		tree = m.inner.GetStructure()
 	})
 	m.structureTime = timeSpent
 
 	return tree
-}
-
-func (m *metricsDecorator) getTimeSpent(closure func()) *metrics.Time {
-	start := time.Now()
-	closure()
-	return &metrics.Time{
-		Value: float64(time.Since(start).Nanoseconds()),
-		Scale: metrics.Nano,
-	}
 }
 
 func (m *metricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
