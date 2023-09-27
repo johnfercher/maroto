@@ -3,9 +3,10 @@ package pkg
 import (
 	"bytes"
 	"errors"
-	"github.com/johnfercher/go-tree/node"
 	"io"
 	"log"
+
+	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
 

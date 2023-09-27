@@ -1,8 +1,9 @@
 package time
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"time"
+
+	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
 
 func GetTimeSpent(closure func()) *metrics.Time {

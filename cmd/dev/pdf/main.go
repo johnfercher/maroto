@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
 	"log"
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"

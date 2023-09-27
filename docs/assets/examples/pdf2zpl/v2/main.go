@@ -3,6 +3,9 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"log"
+	"os"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
@@ -12,8 +15,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"log"
-	"os"
 
 	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/config"

@@ -3,12 +3,14 @@ package core
 import (
 	"encoding/base64"
 	"errors"
+	"log"
+	"os"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"github.com/johnfercher/maroto/v2/pkg/time"
 	"github.com/karmdip-mi/go-fitz"
-	"log"
-	"os"
+
 	"simonwaldherr.de/go/zplgfa"
 )
 

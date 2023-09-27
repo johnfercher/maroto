@@ -3,8 +3,9 @@ package core
 import (
 	"encoding/base64"
 	"errors"
-	"github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
 
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
