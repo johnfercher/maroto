@@ -2,8 +2,9 @@ package math_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/props"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/johnfercher/maroto/v2/pkg/config"
 
