@@ -22,9 +22,6 @@ type Provider interface {
 	AddImage(value string, cell *Cell, prop *props.Rect, extension extension.Type)
 
 	// General
-	GetDimensions() (width float64, height float64)
-	GetMargins() (left float64, top float64, right float64, bottom float64)
-	GenerateFile(file string) error
 	GenerateBytes() ([]byte, error)
 	SetCache(cache cache.Cache)
 
