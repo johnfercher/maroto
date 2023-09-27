@@ -15,7 +15,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf"
 
 	"github.com/f-amaral/go-async/async"
@@ -128,7 +127,7 @@ func (m *maroto) Generate() (core.Document, error) {
 	m.fillPageToAddNew()
 	m.setConfig()
 
-	if m.config.Workers > 0 && m.config.ProviderType != provider.HTML {
+	if m.config.Workers > 0 {
 		return m.generateConcurrently()
 	}
 

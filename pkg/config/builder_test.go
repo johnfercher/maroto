@@ -175,30 +175,6 @@ func TestBuilder_WithPageSize(t *testing.T) {
 	})
 }
 
-func TestBuilder_WithProvider(t *testing.T) {
-	t.Run("when provider is empty, should not change the default value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-
-		// Act
-		cfg := sut.WithProvider("").Build()
-
-		// Assert
-		assert.Equal(t, provider.Gofpdf, cfg.ProviderType)
-	})
-
-	t.Run("when provider is filled, should change the default value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-
-		// Act
-		cfg := sut.WithProvider(provider.HTML).Build()
-
-		// Assert
-		assert.Equal(t, provider.HTML, cfg.ProviderType)
-	})
-}
-
 func TestBuilder_WithWorkerPoolSize(t *testing.T) {
 	t.Run("when worker pool size is invalid, should not change the default value", func(t *testing.T) {
 		// Arrange

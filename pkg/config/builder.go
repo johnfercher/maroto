@@ -20,7 +20,6 @@ type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
 	WithDimensions(width float64, height float64) Builder
 	WithMargins(left float64, top float64, right float64) Builder
-	WithProvider(providerType provider.Type) Builder
 	WithWorkerPoolSize(poolSize int) Builder
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
@@ -120,15 +119,6 @@ func (b *builder) WithMargins(left float64, top float64, right float64) Builder 
 		Right: right,
 	}
 
-	return b
-}
-
-func (b *builder) WithProvider(providerType provider.Type) Builder {
-	if providerType == "" {
-		return b
-	}
-
-	b.providerType = providerType
 	return b
 }
 
