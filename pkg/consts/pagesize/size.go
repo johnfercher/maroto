@@ -16,7 +16,7 @@ const (
 	MinTopMargin      = 10.0
 	MinLeftMargin     = 10.0
 	MinRightMargin    = 10.0
-	MinBottomMargin   = 20.0
+	MinBottomMargin   = 20.0025
 	DefaultFontSize   = 10.0
 	DefaultMaxGridSum = 12.0
 )
