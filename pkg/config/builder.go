@@ -58,9 +58,10 @@ func NewBuilder() Builder {
 	return &builder{
 		providerType: provider.Gofpdf,
 		margins: &Margins{
-			Left:  pagesize.MinLeftMargin,
-			Right: pagesize.MinRightMargin,
-			Top:   pagesize.MinTopMargin,
+			Left:   pagesize.MinLeftMargin,
+			Right:  pagesize.MinRightMargin,
+			Top:    pagesize.MinTopMargin,
+			Bottom: pagesize.MinBottomMargin,
 		},
 		maxGridSize: pagesize.DefaultMaxGridSum,
 		defaultFont: &props.Font{
@@ -113,11 +114,9 @@ func (b *builder) WithMargins(left float64, top float64, right float64) Builder 
 		return b
 	}
 
-	b.margins = &Margins{
-		Left:  left,
-		Top:   top,
-		Right: right,
-	}
+	b.margins.Left = left
+	b.margins.Top = top
+	b.margins.Right = right
 
 	return b
 }

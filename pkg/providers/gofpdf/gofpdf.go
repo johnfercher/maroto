@@ -91,14 +91,6 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 	return provider
 }
 
-func (g *gofpdfProvider) GetDimensions() (width float64, height float64) {
-	return g.fpdf.GetPageSize()
-}
-
-func (g *gofpdfProvider) GetMargins() (left float64, top float64, right float64, bottom float64) {
-	return g.fpdf.GetMargins()
-}
-
 func (g *gofpdfProvider) AddText(text string, cell *core.Cell, prop *props.Text) {
 	g.text.Add(text, cell, prop)
 }
@@ -184,10 +176,6 @@ func (g *gofpdfProvider) SetMetadata(metadata *config.Metadata) {
 	if !metadata.CreationDate.IsZero() {
 		g.fpdf.SetCreationDate(metadata.CreationDate)
 	}
-}
-
-func (g *gofpdfProvider) GenerateFile(file string) error {
-	return g.fpdf.OutputFileAndClose(file)
 }
 
 func (g *gofpdfProvider) GenerateBytes() ([]byte, error) {

@@ -50,16 +50,13 @@ func NewMaroto(cfgs ...*config.Config) core.Maroto {
 	cfg := getConfig(cfgs...)
 	provider := getProvider(cache, cfg)
 
-	width, height := provider.GetDimensions()
-	left, top, right, bottom := provider.GetMargins()
-
 	m := &maroto{
 		provider: provider,
-		cell: core.NewRootContext(width, height, config.Margins{
-			Left:   left,
-			Top:    top,
-			Right:  right,
-			Bottom: bottom,
+		cell: core.NewRootContext(cfg.Dimensions.Width, cfg.Dimensions.Height, config.Margins{
+			Left:   cfg.Margins.Left,
+			Top:    cfg.Margins.Top,
+			Right:  cfg.Margins.Right,
+			Bottom: cfg.Margins.Bottom,
 		}),
 		imageCache: cache,
 		config:     cfg,
