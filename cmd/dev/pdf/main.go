@@ -6,8 +6,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
-
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
@@ -69,17 +67,7 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	document, err = document.To(documenttype.ZPL)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/zpl/zplv2.zpl")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/zplv2.txt")
+	err = document.GetReport().Save("docs/assets/text/v2.txt")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
