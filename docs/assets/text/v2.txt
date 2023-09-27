@@ -1,5 +1,5 @@
-generate -> avg: 18.58ms, executions: [18.58ms]
-header -> avg: 522.00ns, executions: [522.00ns]
-footer -> avg: 64.00ns, executions: [64.00ns]
-add_row -> avg: 64.78ns, executions: [121.00ns, 146.00ns, 52.00ns, 107.00ns, 22.00ns, 18.00ns, 683.00ns, 73.00ns, 23.00ns, 66.00ns, 24.00ns, 16.00ns, 15.00ns, 54.00ns, 17.00ns, 16.00ns, 17.00ns, 345.00ns, 50.00ns, 16.00ns, 57.00ns, 15.00ns, 16.00ns, 22.00ns, 64.00ns, 16.00ns, 17.00ns, 17.00ns, 283.00ns, 49.00ns, 15.00ns, 58.00ns, 17.00ns, 19.00ns, 17.00ns, 60.00ns, 16.00ns, 19.00ns, 17.00ns, 209.00ns, 52.00ns, 17.00ns, 54.00ns, 18.00ns, 15.00ns, 15.00ns, 54.00ns, 16.00ns, 30.00ns, 18.00ns, 246.00ns, 52.00ns, 16.00ns, 60.00ns, 16.00ns]
-file_size -> 260.96Kb
+generate -> avg: 25.39ms, executions: [25.39ms]
+header -> avg: 306.00ns, executions: [306.00ns]
+footer -> avg: 57.00ns, executions: [57.00ns]
+add_row -> avg: 124.55ns, executions: [158.00ns, 158.00ns, 615.00ns, 363.00ns, 72.00ns, 33.00ns, 247.00ns, 65.00ns, 23.00ns, 59.00ns, 224.00ns, 42.00ns, 23.00ns, 43.00ns, 261.00ns, 40.00ns, 23.00ns, 41.00ns, 189.00ns, 38.00ns, 22.00ns, 46.00ns, 185.00ns, 55.00ns, 28.00ns, 59.00ns, 187.00ns, 50.00ns, 17.00ns, 45.00ns, 215.00ns, 51.00ns, 15.00ns, 65.00ns, 892.00ns, 52.00ns, 23.00ns, 65.00ns, 198.00ns, 57.00ns, 25.00ns, 51.00ns, 820.00ns, 50.00ns, 20.00ns, 69.00ns, 179.00ns, 51.00ns, 17.00ns, 50.00ns, 156.00ns, 48.00ns, 16.00ns, 55.00ns, 199.00ns]
+file_size -> 278.31Kb

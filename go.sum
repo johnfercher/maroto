@@ -19,6 +19,8 @@ github.com/johnfercher/go-tree v1.0.5/go.mod h1:DUO6QkXIFh1K7jeGBIkLCZaeUgnkdQAs
 github.com/jung-kurt/gofpdf v1.0.0/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/jung-kurt/gofpdf v1.16.2 h1:jgbatWHfRlPYiK85qgevsZTHviWXKwB1TTiKdz5PtRc=
 github.com/jung-kurt/gofpdf v1.16.2/go.mod h1:1hl7y57EsiPAkLbOwzpzqgx1A30nQCk/YmFV8S2vmK0=
+github.com/karmdip-mi/go-fitz v0.0.0-20210702102225-a530a79566e9 h1:w2zV18MDGv67JnuHgNQk7CG6ipj9HEBtuZGwy6TrJEE=
+github.com/karmdip-mi/go-fitz v0.0.0-20210702102225-a530a79566e9/go.mod h1:2aHtXmu2gpljEpoBoFMFr+C5GpdHIT8aI1l1UcyvEP4=
 github.com/mattn/go-runewidth v0.0.15 h1:UNAjwbU9l54TA3KzvqLGxwWjHmMgBUVhBiTjelZgg3U=
 github.com/mattn/go-runewidth v0.0.15/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
 github.com/pdfcpu/pdfcpu v0.5.0 h1:F3wC4bwPbaJM+RPgm1D0Q4SAUwxElw7BhwNvL3iPgDo=
@@ -81,3 +83,5 @@ gopkg.in/yaml.v2 v2.4.0 h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY=
 gopkg.in/yaml.v2 v2.4.0/go.mod h1:RDklbk79AGWmwhnvt/jBztapEOGDOx6ZbXqjP6csGnQ=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
 gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
+simonwaldherr.de/go/zplgfa v1.1.1 h1:mwQr4r3tNGMlxAyTUf6T/QlO1R7/azkIkC8HoLeq1n8=
+simonwaldherr.de/go/zplgfa v1.1.1/go.mod h1:aCtnniKZT90bgeKwxWnGlKW7cilzw60bZIvwasRDMu0=
