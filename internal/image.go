@@ -21,6 +21,7 @@ import (
 type Image interface {
 	AddFromFile(path string, cell *core.Cell, margins *config.Margins, prop *props.Rect) (err error)
 	AddFromBase64(stringBase64 string, cell *core.Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) (err error)
+	AddFromBytes(imgBytes []byte, cell *core.Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) (err error)
 }
 
 type image struct {
@@ -66,6 +67,29 @@ func (s *image) AddFromBase64(stringBase64 string, cell *core.Cell, margins *con
 			ImageType: string(extension),
 		},
 		bytes.NewReader(ss),
+	)
+
+	if info == nil {
+		return errors.New("could not register image options, maybe path/name is wrong")
+	}
+
+	s.addImageToPdf(imageID.String(), info, cell, margins, prop)
+	return nil
+}
+
+// AddFromBytes use a byte array string to add to PDF.
+func (s *image) AddFromBytes(imgBytes []byte, cell *core.Cell, margins *config.Margins,
+	prop *props.Rect, extension extension.Type,
+) error {
+	imageID, _ := uuid.NewRandom()
+
+	info := s.pdf.RegisterImageOptionsReader(
+		imageID.String(),
+		gofpdf.ImageOptions{
+			ReadDpi:   false,
+			ImageType: string(extension),
+		},
+		bytes.NewReader(imgBytes),
 	)
 
 	if info == nil {

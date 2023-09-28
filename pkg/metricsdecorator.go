@@ -34,12 +34,13 @@ func (m *metricsDecorator) Generate() (core.Document, error) {
 	})
 	m.generateTime = timeSpent
 
-	bytes := document.GetBytes()
-
-	report := m.buildMetrics(len(bytes)).Normalize()
 	if err != nil {
 		return nil, err
 	}
+
+	bytes := document.GetBytes()
+
+	report := m.buildMetrics(len(bytes)).Normalize()
 
 	return core.NewPDF(bytes, report), nil
 }

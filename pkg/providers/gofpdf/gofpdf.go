@@ -2,15 +2,13 @@ package gofpdf
 
 import (
 	"bytes"
-
 	"github.com/johnfercher/maroto/v2/internal/math"
+	"github.com/johnfercher/maroto/v2/pkg/merror"
 
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/providers"
@@ -18,17 +16,6 @@ import (
 
 	"github.com/jung-kurt/gofpdf"
 )
-
-var defaultErrorColor = &props.Font{
-	Family: fontfamily.Arial,
-	Style:  fontstyle.Bold,
-	Size:   10,
-	Color: &props.Color{
-		Red:   255,
-		Green: 0,
-		Blue:  0,
-	},
-}
 
 type gofpdfProvider struct {
 	fpdf       *gofpdf.Fpdf
@@ -66,8 +53,8 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 	math := math.New()
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
-	code := internal.NewCode(fpdf, math)
 	image := internal.NewImage(fpdf, math)
+	code := internal.NewCode(math, image, text)
 	line := internal.NewLine(fpdf)
 	cellWriter := cellwriter.NewBuilder().Build(fpdf)
 
@@ -112,31 +99,21 @@ func (g *gofpdfProvider) AddQrCode(code string, cell *core.Cell, rect *props.Rec
 }
 
 func (g *gofpdfProvider) AddBarCode(code string, cell *core.Cell, prop *props.Barcode) {
-	err := g.code.AddBar(code, cell, g.cfg.Margins, prop)
-	if err != nil {
-		textProp := &props.Text{}
-		textProp.MakeValid(defaultErrorColor)
-		g.fpdf.ClearError()
-		g.AddText("Failed to render code", cell, textProp)
-	}
+	g.code.AddBar(code, cell, g.cfg.Margins, prop)
 }
 
 func (g *gofpdfProvider) AddImage(file string, cell *core.Cell, prop *props.Rect, extension extension.Type) {
 	img, err := g.imageCache.Load(file, extension)
 	if err != nil {
-		textProp := &props.Text{}
-		textProp.MakeValid(defaultErrorColor)
 		g.fpdf.ClearError()
-		g.AddText("Failed to load image from file", cell, textProp)
+		g.AddText("Failed to load image from file", cell, merror.DefaultErrorText)
 		return
 	}
 
 	err = g.image.AddFromBase64(img.Value, cell, g.cfg.Margins, prop, img.Extension)
 	if err != nil {
-		textProp := &props.Text{}
-		textProp.MakeValid(defaultErrorColor)
 		g.fpdf.ClearError()
-		g.AddText("Failed to load image from file", cell, textProp)
+		g.AddText("Failed to load image from file", cell, merror.DefaultErrorText)
 	}
 }
 
