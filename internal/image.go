@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"errors"
 
-	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -17,19 +16,13 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// Image is the abstraction which deals of how to add images in a PDF.
-type Image interface {
-	AddFromBase64(stringBase64 string, cell *core.Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) (err error)
-	AddFromBytes(imgBytes []byte, cell *core.Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) (err error)
-}
-
 type image struct {
 	pdf  fpdf.Fpdf
-	math math.Math
+	math core.Math
 }
 
 // NewImage create an Image.
-func NewImage(pdf fpdf.Fpdf, math math.Math) *image {
+func NewImage(pdf fpdf.Fpdf, math core.Math) *image {
 	return &image{
 		pdf,
 		math,

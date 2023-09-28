@@ -12,7 +12,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/johnfercher/maroto/v2/pkg/providers"
 	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf/cellwriter"
 
 	"github.com/jung-kurt/gofpdf"
@@ -20,19 +19,18 @@ import (
 
 type gofpdfProvider struct {
 	fpdf       *gofpdf.Fpdf
-	math       math.Math
-	font       internal.Font
-	text       internal.Text
-	signature  internal.Signature
-	code       internal.Code
-	image      internal.Image
-	line       internal.Line
+	font       core.Font
+	text       core.Text
+	signature  core.Signature
+	code       core.Code
+	image      core.Image
+	line       core.Line
 	imageCache cache.Cache
 	cellWriter cellwriter.CellWriter
 	cfg        *config.Config
 }
 
-func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider {
+func New(cfg *config.Config, cache cache.Cache) core.Provider {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",
 		UnitStr:        "mm",
@@ -61,7 +59,6 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 
 	provider := &gofpdfProvider{
 		fpdf:       fpdf,
-		math:       math,
 		font:       font,
 		text:       text,
 		signature:  signature,
@@ -70,10 +67,7 @@ func New(cfg *config.Config, options ...providers.ProviderOption) core.Provider 
 		line:       line,
 		cellWriter: cellWriter,
 		cfg:        cfg,
-	}
-
-	for _, option := range options {
-		option(provider)
+		imageCache: cache,
 	}
 
 	return provider

@@ -10,7 +10,6 @@ import (
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/datamatrix"
 	"github.com/boombuler/barcode/qr"
-	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -18,21 +17,14 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-// Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF.
-type Code interface {
-	AddQr(code string, cell *core.Cell, margins *config.Margins, prop *props.Rect)
-	AddBar(code string, cell *core.Cell, margins *config.Margins, prop *props.Barcode)
-	AddDataMatrix(code string, cell *core.Cell, margins *config.Margins, prop *props.Rect)
-}
-
 type code struct {
-	math  math.Math
-	image Image
-	text  Text
+	math  core.Math
+	image core.Image
+	text  core.Text
 }
 
 // NewCode create a Code.
-func NewCode(math math.Math, image Image, text Text) *code {
+func NewCode(math core.Math, image core.Image, text core.Text) *code {
 	return &code{
 		math:  math,
 		image: image,

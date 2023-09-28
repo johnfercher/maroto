@@ -21,7 +21,6 @@ import (
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/providers"
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 )
 
@@ -322,7 +321,7 @@ func getConfig(configs ...*config.Config) *config.Config {
 }
 
 func getProvider(cache cache.Cache, cfg *config.Config) core.Provider {
-	return gofpdf.New(cfg, providers.WithCache(cache))
+	return gofpdf.New(cfg, cache)
 }
 
 func mergePdfs(readers []io.ReadSeeker, writer io.Writer) error {
