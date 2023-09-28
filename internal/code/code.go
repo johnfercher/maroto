@@ -15,8 +15,8 @@ import (
 
 type code struct{}
 
-// NewCode create a Code.
-func NewCode() *code {
+// New create a Code.
+func New() *code {
 	return &code{}
 }
 

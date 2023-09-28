@@ -10,9 +10,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewCode(t *testing.T) {
+func TestNew(t *testing.T) {
 	// Act
-	sut := code.NewCode()
+	sut := code.New()
 
 	// Assert
 	assert.NotNil(t, sut)
@@ -22,7 +22,7 @@ func TestNewCode(t *testing.T) {
 func TestCode_GenDataMatrix(t *testing.T) {
 	t.Run("When cannot generate data matrix, should return error", func(t *testing.T) {
 		// Arrange
-		sut := code.NewCode()
+		sut := code.New()
 
 		data := genStringWithLength(5000)
 
@@ -35,7 +35,7 @@ func TestCode_GenDataMatrix(t *testing.T) {
 	})
 	t.Run("When can generate data matrix, should return bytes", func(t *testing.T) {
 		// Arrange
-		sut := code.NewCode()
+		sut := code.New()
 
 		data := genStringWithLength(50)
 
@@ -51,7 +51,7 @@ func TestCode_GenDataMatrix(t *testing.T) {
 func TestCode_GenBar(t *testing.T) {
 	t.Run("When cannot generate bar code, should return error", func(t *testing.T) {
 		// Arrange
-		sut := code.NewCode()
+		sut := code.New()
 
 		cell := &core.Cell{
 			X:      10,
@@ -74,7 +74,7 @@ func TestCode_GenBar(t *testing.T) {
 	})
 	t.Run("When can generate bar code, should return bytes", func(t *testing.T) {
 		// Arrange
-		sut := code.NewCode()
+		sut := code.New()
 
 		cell := &core.Cell{
 			X:      10,
@@ -100,7 +100,7 @@ func TestCode_GenBar(t *testing.T) {
 func TestCode_GenQr(t *testing.T) {
 	t.Run("When cannot generate qr code, should return error", func(t *testing.T) {
 		// Arrange
-		sut := code.NewCode()
+		sut := code.New()
 
 		data := genStringWithLength(5000)
 
@@ -113,7 +113,7 @@ func TestCode_GenQr(t *testing.T) {
 	})
 	t.Run("When can generate qr code, should return bytes", func(t *testing.T) {
 		// Arrange
-		sut := code.NewCode()
+		sut := code.New()
 
 		data := genStringWithLength(50)
 

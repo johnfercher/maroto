@@ -54,7 +54,7 @@ func New(cfg *config.Config, cache cache.Cache) core.Provider {
 
 	font := internal.NewFont(fpdf, cfg.DefaultFont.Size, cfg.DefaultFont.Family, cfg.DefaultFont.Style)
 	math := math.New()
-	code := code.NewCode()
+	code := code.New()
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
 	image := internal.NewImage(fpdf, math)
