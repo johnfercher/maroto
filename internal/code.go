@@ -2,6 +2,9 @@ package internal
 
 import (
 	"bytes"
+	image2 "image"
+	"image/jpeg"
+
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/codabar"
 	"github.com/boombuler/barcode/code128"
@@ -13,8 +16,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/merror"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	image2 "image"
-	"image/jpeg"
 )
 
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF.

@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"bytes"
+
 	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/johnfercher/maroto/v2/pkg/merror"
 
