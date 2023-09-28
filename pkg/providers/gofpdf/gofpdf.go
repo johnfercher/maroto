@@ -5,6 +5,8 @@ import (
 	"encoding/base64"
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/internal/code"
+
 	"github.com/johnfercher/maroto/v2/pkg/merror"
 
 	"github.com/johnfercher/maroto/v2/internal"
@@ -52,7 +54,7 @@ func New(cfg *config.Config, cache cache.Cache) core.Provider {
 
 	font := internal.NewFont(fpdf, cfg.DefaultFont.Size, cfg.DefaultFont.Family, cfg.DefaultFont.Style)
 	math := math.New()
-	code := internal.NewCode()
+	code := code.NewCode()
 	text := internal.NewText(fpdf, math, font)
 	signature := internal.NewSignature(fpdf, math, text)
 	image := internal.NewImage(fpdf, math)
