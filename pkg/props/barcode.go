@@ -17,44 +17,53 @@ type Barcode struct {
 	Center bool
 }
 
+func (b *Barcode) ToRectProp() *Rect {
+	return &Rect{
+		Left:    b.Left,
+		Top:     b.Top,
+		Percent: b.Percent,
+		Center:  b.Center,
+	}
+}
+
 // MakeValid from Barcode will make the properties from a barcode reliable to fit inside a cell
 // and define default values for a barcode.
-func (s *Barcode) MakeValid() {
+func (b *Barcode) MakeValid() {
 	minPercentage := 0.0
 	maxPercentage := 100.0
 	minValue := 0.0
 
-	if s.Percent <= minPercentage || s.Percent > maxPercentage {
-		s.Percent = maxPercentage
+	if b.Percent <= minPercentage || b.Percent > maxPercentage {
+		b.Percent = maxPercentage
 	}
 
-	if s.Center {
-		s.Left = 0
-		s.Top = 0
+	if b.Center {
+		b.Left = 0
+		b.Top = 0
 	}
 
-	if s.Left < minValue {
-		s.Left = minValue
+	if b.Left < minValue {
+		b.Left = minValue
 	}
 
-	if s.Top < minValue {
-		s.Top = minValue
+	if b.Top < minValue {
+		b.Top = minValue
 	}
 
-	if s.Proportion.Width <= 0 {
-		s.Proportion.Width = 1
+	if b.Proportion.Width <= 0 {
+		b.Proportion.Width = 1
 	}
 
-	if s.Proportion.Height <= 0 {
-		s.Proportion.Height = 1
+	if b.Proportion.Height <= 0 {
+		b.Proportion.Height = 1
 	}
 
 	maxHeightProportionBasedOnWidth := 0.20
 	minHeightProportionBasedOnWidth := 0.10
 
-	if s.Proportion.Height > s.Proportion.Width*maxHeightProportionBasedOnWidth {
-		s.Proportion.Height = s.Proportion.Width * maxHeightProportionBasedOnWidth
-	} else if s.Proportion.Height < s.Proportion.Width*minHeightProportionBasedOnWidth {
-		s.Proportion.Height = s.Proportion.Width * minHeightProportionBasedOnWidth
+	if b.Proportion.Height > b.Proportion.Width*maxHeightProportionBasedOnWidth {
+		b.Proportion.Height = b.Proportion.Width * maxHeightProportionBasedOnWidth
+	} else if b.Proportion.Height < b.Proportion.Width*minHeightProportionBasedOnWidth {
+		b.Proportion.Height = b.Proportion.Width * minHeightProportionBasedOnWidth
 	}
 }
