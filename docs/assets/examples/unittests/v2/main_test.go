@@ -24,7 +24,7 @@ func TestDocument_GetStructure(t *testing.T) {
 
 	m.AddRow(10,
 		image.NewFromFileCol(3, "barcode"),
-		image.NewFromBase64Col(3, "base64string", extension.Png),
+		image.NewFromBytesCol(3, []byte{0, 1, 2}, extension.Png),
 		signature.NewCol(3, "signature"),
 		text.NewCol(3, "text"),
 	)
