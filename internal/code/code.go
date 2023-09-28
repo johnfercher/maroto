@@ -20,6 +20,7 @@ func New() *code {
 	return &code{}
 }
 
+// GenDataMatrix is responsible to generate a data matrix byte array.
 func (c *code) GenDataMatrix(code string) ([]byte, error) {
 	dataMatrix, err := datamatrix.Encode(code)
 	if err != nil {
@@ -29,6 +30,7 @@ func (c *code) GenDataMatrix(code string) ([]byte, error) {
 	return c.getBytes(dataMatrix)
 }
 
+// GenQr is responsible to generate a qr code byte array.
 func (c *code) GenQr(code string) ([]byte, error) {
 	qrCode, err := qr.Encode(code, qr.M, qr.Auto)
 	if err != nil {
@@ -38,6 +40,7 @@ func (c *code) GenQr(code string) ([]byte, error) {
 	return c.getBytes(qrCode)
 }
 
+// GenBar is responsible to generate a barcode byte array.
 func (c *code) GenBar(code string, cell *core.Cell, prop *props.Barcode) ([]byte, error) {
 	barCode, err := code128.Encode(code)
 	if err != nil {
