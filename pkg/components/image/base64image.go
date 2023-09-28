@@ -43,7 +43,7 @@ func NewFromBase64Row(height float64, path string, extension extension.Type, ps 
 }
 
 func (b *base64Image) Render(provider core.Provider, cell *core.Cell) {
-	provider.AddImage(b.base64, cell, &b.prop, b.extension)
+	provider.AddImageFromBase64(b.base64, cell, &b.prop, b.extension)
 }
 
 func (b *base64Image) GetStructure() *node.Node[core.Structure] {

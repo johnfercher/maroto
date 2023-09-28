@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/johnfercher/maroto/v2/internal/math"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -17,20 +15,14 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-// Text is the abstraction which deals of how to add text inside PDF.
-type Text interface {
-	Add(text string, cell *core.Cell, textProp *props.Text)
-	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
-}
-
 type text struct {
 	pdf  fpdf.Fpdf
-	math math.Math
-	font Font
+	math core.Math
+	font core.Font
 }
 
 // NewText create a Text.
-func NewText(pdf fpdf.Fpdf, math math.Math, font Font) *text {
+func NewText(pdf fpdf.Fpdf, math core.Math, font core.Font) *text {
 	return &text{
 		pdf,
 		math,

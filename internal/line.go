@@ -8,10 +8,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type Line interface {
-	Add(cell *core.Cell, prop *props.Line)
-}
-
 type line struct {
 	pdf              fpdf.Fpdf
 	defaultColor     *props.Color

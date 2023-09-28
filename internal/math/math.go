@@ -10,13 +10,6 @@ const (
 	maxPercent = 100.0
 )
 
-// Math is the abstraction which deals with useful calc.
-type Math interface {
-	GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimensions, percent float64) *core.Cell
-	GetInnerNonCenterCell(inner *config.Dimensions, outer *config.Dimensions, prop *props.Rect) *core.Cell
-	GetCenterCorrection(outerSize, innerSize float64) float64
-}
-
 type math struct{}
 
 // New create a Math.

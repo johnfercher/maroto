@@ -2,24 +2,18 @@ package internal
 
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
-	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-// Signature is the abstraction which deals of how to add a signature space inside PDF.
-type Signature interface {
-	AddSpaceFor(label string, cell *core.Cell, textProp *props.Text)
-}
-
 type signature struct {
 	pdf  fpdf.Fpdf
-	math math.Math
-	text Text
+	math core.Math
+	text core.Text
 }
 
 // NewSignature create a Signature.
-func NewSignature(pdf fpdf.Fpdf, math math.Math, text Text) *signature {
+func NewSignature(pdf fpdf.Fpdf, math core.Math, text core.Text) *signature {
 	return &signature{
 		pdf,
 		math,

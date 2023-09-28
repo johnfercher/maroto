@@ -188,7 +188,7 @@ type Object struct {
 func (o Object) GetHeader() core.Row {
 	return row.New(10).Add(
 		text.NewCol(4, "Key", props.Text{Style: fontstyle.Bold}),
-		text.NewCol(8, "Value", props.Text{Style: fontstyle.Bold}),
+		text.NewCol(8, "Bytes", props.Text{Style: fontstyle.Bold}),
 	)
 }
 
@@ -212,7 +212,7 @@ func getObjects(max int) []Object {
 	for i := 0; i < max; i++ {
 		objects = append(objects, Object{
 			Key:   fmt.Sprintf("Key: %d", i),
-			Value: fmt.Sprintf("Value: %d", i),
+			Value: fmt.Sprintf("Bytes: %d", i),
 		})
 	}
 	return objects

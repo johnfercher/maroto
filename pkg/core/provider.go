@@ -19,7 +19,9 @@ type Provider interface {
 	AddMatrixCode(code string, cell *Cell, prop *props.Rect)
 	AddQrCode(code string, cell *Cell, rect *props.Rect)
 	AddBarCode(code string, cell *Cell, prop *props.Barcode)
-	AddImage(value string, cell *Cell, prop *props.Rect, extension extension.Type)
+	AddImageFromFile(value string, cell *Cell, prop *props.Rect)
+	AddImageFromBase64(base64 string, cell *Cell, prop *props.Rect, extension extension.Type)
+	AddImageFromBytes(bytes []byte, cell *Cell, prop *props.Rect, extension extension.Type)
 
 	// General
 	GenerateBytes() ([]byte, error)

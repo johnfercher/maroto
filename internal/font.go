@@ -11,21 +11,6 @@ const (
 	gofpdfFontScale2 = 25.4
 )
 
-// Font is the abstraction which deals of how to set fontstyle configurations.
-type Font interface {
-	SetFamily(family string)
-	SetStyle(style fontstyle.Type)
-	SetSize(size float64)
-	SetFont(family string, style fontstyle.Type, size float64)
-	GetFamily() string
-	GetStyle() fontstyle.Type
-	GetSize() float64
-	GetFont() (string, fontstyle.Type, float64)
-	GetScaleFactor() (scaleFactor float64)
-	SetColor(color *props.Color)
-	GetColor() *props.Color
-}
-
 type font struct {
 	pdf         fpdf.Fpdf
 	size        float64
@@ -44,7 +29,7 @@ func NewFont(pdf fpdf.Fpdf, size float64, family string, style fontstyle.Type) *
 		size:        size,
 		family:      family,
 		style:       style,
-		scaleFactor: gofpdfFontScale1 / gofpdfFontScale2, // Value defined inside gofpdf constructor,
+		scaleFactor: gofpdfFontScale1 / gofpdfFontScale2, // Bytes defined inside gofpdf constructor,
 		fontColor:   &props.Color{Red: 0, Green: 0, Blue: 0},
 	}
 }
