@@ -3,7 +3,6 @@ package cache
 import (
 	"errors"
 	"os"
-	"sync"
 )
 
 type Cache interface {
@@ -13,31 +12,19 @@ type Cache interface {
 	SaveCode(code string, codeType string, bytes []byte)
 }
 
-type Image struct {
-	Bytes     []byte
-	Extension string
-}
-
 type cache struct {
-	images     map[string]*Image
-	imageMutex sync.RWMutex
-	codes      map[string][]byte
-	codeMutex  sync.RWMutex
+	images map[string]*Image
+	codes  map[string][]byte
 }
 
 func New() Cache {
 	return &cache{
-		images:     make(map[string]*Image),
-		imageMutex: sync.RWMutex{},
-		codes:      make(map[string][]byte),
-		codeMutex:  sync.RWMutex{},
+		images: make(map[string]*Image),
+		codes:  make(map[string][]byte),
 	}
 }
 
 func (c *cache) LoadImage(file string, extension string) error {
-	c.imageMutex.Lock()
-	defer c.imageMutex.Unlock()
-
 	imageBytes, err := os.ReadFile(file)
 	if err != nil {
 		return err
@@ -68,8 +55,5 @@ func (c *cache) GetCode(code string, codeType string) ([]byte, error) {
 }
 
 func (c *cache) SaveCode(code string, codeType string, bytes []byte) {
-	c.codeMutex.Lock()
-	defer c.codeMutex.Unlock()
-
 	c.codes[code+codeType] = bytes
 }

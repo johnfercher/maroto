@@ -25,9 +25,9 @@ import (
 )
 
 type maroto struct {
-	config     *config.Config
-	provider   core.Provider
-	imageCache cache.Cache
+	config   *config.Config
+	provider core.Provider
+	cache    cache.Cache
 
 	// Building
 	cell          core.Cell
@@ -57,8 +57,8 @@ func NewMaroto(cfgs ...*config.Config) core.Maroto {
 			Right:  cfg.Margins.Right,
 			Bottom: cfg.Margins.Bottom,
 		}),
-		imageCache: cache,
-		config:     cfg,
+		cache:  cache,
+		config: cfg,
 	}
 
 	if cfg.Workers > 0 {
@@ -295,7 +295,7 @@ func (m *maroto) generateConcurrently() (core.Document, error) {
 
 func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
 	innerCtx := m.cell.Copy()
-	innerProvider := getProvider(m.imageCache, m.config)
+	innerProvider := getProvider(cache.NewMutexDecorator(m.cache), m.config)
 	for _, page := range pages {
 		page.Render(innerProvider, innerCtx)
 	}
