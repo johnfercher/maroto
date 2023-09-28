@@ -29,7 +29,7 @@ func NewFont(pdf fpdf.Fpdf, size float64, family string, style fontstyle.Type) *
 		size:        size,
 		family:      family,
 		style:       style,
-		scaleFactor: gofpdfFontScale1 / gofpdfFontScale2, // Value defined inside gofpdf constructor,
+		scaleFactor: gofpdfFontScale1 / gofpdfFontScale2, // Bytes defined inside gofpdf constructor,
 		fontColor:   &props.Color{Red: 0, Green: 0, Blue: 0},
 	}
 }

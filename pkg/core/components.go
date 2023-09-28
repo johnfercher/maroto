@@ -16,30 +16,14 @@ type Math interface {
 
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF.
 type Code interface {
-	AddQr(code string, cell *Cell, margins *config.Margins, prop *props.Rect)
-	AddBar(code string, cell *Cell, margins *config.Margins, prop *props.Barcode)
-	AddDataMatrix(code string, cell *Cell, margins *config.Margins, prop *props.Rect)
-}
-
-// Font is the abstraction which deals of how to set fontstyle configurations.
-type Font interface {
-	SetFamily(family string)
-	SetStyle(style fontstyle.Type)
-	SetSize(size float64)
-	SetFont(family string, style fontstyle.Type, size float64)
-	GetFamily() string
-	GetStyle() fontstyle.Type
-	GetSize() float64
-	GetFont() (string, fontstyle.Type, float64)
-	GetScaleFactor() (scaleFactor float64)
-	SetColor(color *props.Color)
-	GetColor() *props.Color
+	GenQr(code string) ([]byte, error)
+	GenDataMatrix(code string) ([]byte, error)
+	GenBar(code string, cell *Cell, prop *props.Barcode) ([]byte, error)
 }
 
 // Image is the abstraction which deals of how to add images in a PDF.
 type Image interface {
-	AddFromBase64(stringBase64 string, cell *Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) (err error)
-	AddFromBytes(imgBytes []byte, cell *Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) (err error)
+	Add(imgBytes []byte, cell *Cell, margins *config.Margins, prop *props.Rect, extension extension.Type) error
 }
 
 type Line interface {
@@ -55,4 +39,19 @@ type Signature interface {
 type Text interface {
 	Add(text string, cell *Cell, textProp *props.Text)
 	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
+}
+
+// Font is the abstraction which deals of how to set fontstyle configurations.
+type Font interface {
+	SetFamily(family string)
+	SetStyle(style fontstyle.Type)
+	SetSize(size float64)
+	SetFont(family string, style fontstyle.Type, size float64)
+	GetFamily() string
+	GetStyle() fontstyle.Type
+	GetSize() float64
+	GetFont() (string, fontstyle.Type, float64)
+	GetScaleFactor() (scaleFactor float64)
+	SetColor(color *props.Color)
+	GetColor() *props.Color
 }

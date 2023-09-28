@@ -1,51 +1,74 @@
 package cache
 
 import (
-	"encoding/base64"
+	"errors"
 	"os"
 	"sync"
-
-	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 )
 
 type Cache interface {
-	Load(string, extension.Type) (*Image, error)
+	GetImage(value string, extension string) (*Image, error)
+	LoadImage(value string, extension string) error
+	GetCode(code string, codeType string) ([]byte, error)
+	SaveCode(code string, codeType string, bytes []byte)
 }
 
 type Image struct {
-	Value     string
-	Extension extension.Type
+	Bytes     []byte
+	Extension string
 }
 
 type cache struct {
-	images map[string]*Image
-	mutex  sync.RWMutex
+	images     map[string]*Image
+	imageMutex sync.RWMutex
+	codes      map[string][]byte
+	codeMutex  sync.RWMutex
 }
 
 func New() Cache {
 	return &cache{
-		images: make(map[string]*Image),
-		mutex:  sync.RWMutex{},
+		images:     make(map[string]*Image),
+		imageMutex: sync.RWMutex{},
+		codes:      make(map[string][]byte),
+		codeMutex:  sync.RWMutex{},
 	}
 }
 
-func (c *cache) Load(value string, extension extension.Type) (*Image, error) {
-	if _, ok := c.images[value]; !ok {
-		c.mutex.Lock()
-		defer c.mutex.Unlock()
-		if _, err := base64.StdEncoding.DecodeString(value); err == nil {
-			img := &Image{Value: value, Extension: extension}
-			c.images[value] = img
-			return img, nil
-		} else {
-			imageBytes, err := os.ReadFile(value)
-			if err != nil {
-				return nil, err
-			}
-			valueString := base64.StdEncoding.EncodeToString(imageBytes)
-			img := &Image{Value: valueString, Extension: extension}
-			c.images[value] = img
-		}
+func (c *cache) LoadImage(file string, extension string) error {
+	c.imageMutex.Lock()
+	defer c.imageMutex.Unlock()
+
+	imageBytes, err := os.ReadFile(file)
+	if err != nil {
+		return err
 	}
-	return c.images[value], nil
+
+	img := &Image{Bytes: imageBytes, Extension: extension}
+	c.images[file+extension] = img
+
+	return nil
+}
+func (c *cache) GetImage(file string, extension string) (*Image, error) {
+	image, ok := c.images[file+extension]
+	if ok {
+		return image, nil
+	}
+
+	return nil, errors.New("image not found")
+}
+
+func (c *cache) GetCode(code string, codeType string) ([]byte, error) {
+	bytes, ok := c.codes[code+codeType]
+	if ok {
+		return bytes, nil
+	}
+
+	return nil, errors.New("code not found")
+}
+
+func (c *cache) SaveCode(code string, codeType string, bytes []byte) {
+	c.codeMutex.Lock()
+	defer c.codeMutex.Unlock()
+
+	c.codes[code+codeType] = bytes
 }
