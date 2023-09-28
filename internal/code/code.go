@@ -1,4 +1,4 @@
-package internal
+package code
 
 import (
 	"bytes"
@@ -15,8 +15,8 @@ import (
 
 type code struct{}
 
-// NewCode create a Code.
-func NewCode() *code {
+// New create a Code.
+func New() *code {
 	return &code{}
 }
 
@@ -46,7 +46,7 @@ func (c *code) GenBar(code string, cell *core.Cell, prop *props.Barcode) ([]byte
 
 	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
 
-	proportion := 442.0 / cell.Width
+	proportion := float64(len(code)) * 12.0 / cell.Width
 
 	width := int(proportion * cell.Width)
 	height := int(cell.Width * heightPercentFromWidth * proportion)
