@@ -13,8 +13,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type code struct {
-}
+type code struct{}
 
 // NewCode create a Code.
 func NewCode() *code {

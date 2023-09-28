@@ -48,6 +48,7 @@ func (c *cache) LoadImage(file string, extension string) error {
 
 	return nil
 }
+
 func (c *cache) GetImage(file string, extension string) (*Image, error) {
 	image, ok := c.images[file+extension]
 	if ok {

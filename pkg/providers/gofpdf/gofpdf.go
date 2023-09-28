@@ -3,8 +3,9 @@ package gofpdf
 import (
 	"bytes"
 	"encoding/base64"
-	"github.com/johnfercher/maroto/v2/pkg/merror"
 	"strings"
+
+	"github.com/johnfercher/maroto/v2/pkg/merror"
 
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/internal/math"
@@ -148,6 +149,9 @@ func (g *gofpdfProvider) AddImageFromFile(file string, cell *core.Cell, prop *pr
 	image, err := g.cache.GetImage(file, extensionStr)
 	if err != nil {
 		err = g.cache.LoadImage(file, extensionStr)
+	} else {
+		g.AddImageFromBytes(image.Bytes, cell, prop, extension.Type(extensionStr))
+		return
 	}
 
 	if err != nil {
@@ -161,11 +165,7 @@ func (g *gofpdfProvider) AddImageFromFile(file string, cell *core.Cell, prop *pr
 		return
 	}
 
-	err = g.image.Add(image.Bytes, cell, g.cfg.Margins, prop, extension.Type(extensionStr))
-	if err != nil {
-		g.fpdf.ClearError()
-		g.text.Add("could not add barcode to document", cell, merror.DefaultErrorText)
-	}
+	g.AddImageFromBytes(image.Bytes, cell, prop, extension.Type(extensionStr))
 }
 
 func (g *gofpdfProvider) AddImageFromBase64(base64string string, cell *core.Cell, prop *props.Rect, extension extension.Type) {
@@ -175,11 +175,7 @@ func (g *gofpdfProvider) AddImageFromBase64(base64string string, cell *core.Cell
 		return
 	}
 
-	err = g.image.Add(bytes, cell, g.cfg.Margins, prop, extension)
-	if err != nil {
-		g.fpdf.ClearError()
-		g.text.Add("could not add image to document", cell, merror.DefaultErrorText)
-	}
+	g.AddImageFromBytes(bytes, cell, prop, extension)
 }
 
 func (g *gofpdfProvider) AddImageFromBytes(bytes []byte, cell *core.Cell, prop *props.Rect, extension extension.Type) {
