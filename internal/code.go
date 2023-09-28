@@ -104,5 +104,8 @@ func (c *code) addImage(img image2.Image, cell *core.Cell, margins *config.Margi
 		return
 	}
 
-	c.image.AddFromBytes(buf.Bytes(), cell, margins, rect, extension.Jpg)
+	err = c.image.AddFromBytes(buf.Bytes(), cell, margins, rect, extension.Jpg)
+	if err != nil {
+		c.text.Add("failed to add barcode to document", cell, merror.DefaultErrorText)
+	}
 }
