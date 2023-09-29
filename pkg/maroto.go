@@ -295,7 +295,8 @@ func (m *maroto) generateConcurrently() (core.Document, error) {
 
 func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
 	innerCtx := m.cell.Copy()
-	innerProvider := getProvider(cache.NewMutexDecorator(m.cache), m.config)
+
+	innerProvider := getProvider(cache.NewMutexDecorator(cache.New()), m.config)
 	for _, page := range pages {
 		page.Render(innerProvider, innerCtx)
 	}
