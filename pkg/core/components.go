@@ -11,7 +11,6 @@ import (
 type Math interface {
 	GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimensions, percent float64) *Cell
 	GetInnerNonCenterCell(inner *config.Dimensions, outer *config.Dimensions, prop *props.Rect) *Cell
-	GetCenterCorrection(outerSize, innerSize float64) float64
 }
 
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF.

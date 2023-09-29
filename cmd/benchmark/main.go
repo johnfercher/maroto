@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/base64"
 	"fmt"
 	"log"
 	"os"
@@ -117,12 +116,11 @@ func buildCodesRow() []core.Row {
 }
 
 func buildImagesRow() []core.Row {
-	byteSlices, err := os.ReadFile("docs/assets/images/frontpage.png")
+	bytes, err := os.ReadFile("docs/assets/images/frontpage.png")
 	if err != nil {
 		fmt.Println("Got error while opening file:", err)
 		os.Exit(1)
 	}
-	stringBase64 := base64.StdEncoding.EncodeToString(byteSlices)
 
 	return []core.Row{
 		row.New(20).Add(
@@ -130,8 +128,8 @@ func buildImagesRow() []core.Row {
 			image.NewFromFileCol(8, "docs/assets/images/biplane.jpg", props.Rect{Center: true, Percent: 90}),
 		),
 		row.New(20).Add(
-			text.NewCol(4, "Image From Base64::", props.Text{Size: 15, Top: 6, Align: align.Center}),
-			image.NewFromBase64Col(8, stringBase64, extension.Png, props.Rect{Center: true, Percent: 90}),
+			text.NewCol(4, "Image From Bytes:", props.Text{Size: 15, Top: 6, Align: align.Center}),
+			image.NewFromBytesCol(8, bytes, extension.Png, props.Rect{Center: true, Percent: 90}),
 		),
 	}
 }

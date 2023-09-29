@@ -6,10 +6,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-const (
-	maxPercent = 100.0
-)
-
 type math struct{}
 
 // New create a Math.
@@ -54,7 +50,7 @@ func (s *math) GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimens
 
 // GetInnerNonCenterCell define a inner cell formatted inside outer cell non centered.
 func (s *math) GetInnerNonCenterCell(inner *config.Dimensions, outer *config.Dimensions, prop *props.Rect) *core.Cell {
-	percent := prop.Percent / maxPercent
+	percent := prop.Percent / 100.0
 
 	innerProportion := inner.Height / inner.Width
 	outerProportion := outer.Height / outer.Width

@@ -20,7 +20,6 @@ type Provider interface {
 	AddQrCode(code string, cell *Cell, rect *props.Rect)
 	AddBarCode(code string, cell *Cell, prop *props.Barcode)
 	AddImageFromFile(value string, cell *Cell, prop *props.Rect)
-	AddImageFromBase64(base64 string, cell *Cell, prop *props.Rect, extension extension.Type)
 	AddImageFromBytes(bytes []byte, cell *Cell, prop *props.Rect, extension extension.Type)
 
 	// General

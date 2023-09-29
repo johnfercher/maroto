@@ -24,11 +24,11 @@ func TestDocument_GetStructure(t *testing.T) {
 
 	m.AddRow(10,
 		image.NewFromFileCol(3, "barcode"),
-		image.NewFromBase64Col(3, "base64string", extension.Png),
+		image.NewFromBytesCol(3, []byte{0, 1, 2}, extension.Png),
 		signature.NewCol(3, "signature"),
 		text.NewCol(3, "text"),
 	)
 
 	// nolint: lll
-	test.New(t).Assert(m).JSON(`{"type":"pkg","nodes":[{"type":"page","nodes":[{"type":"row","nodes":[{"type":"col","nodes":[{"type":"barcode"}]},{"type":"col","nodes":[{"type":"matrixcode"}]},{"type":"col","nodes":[{"type":"qrcode"}]}]},{"type":"row","nodes":[{"type":"col","nodes":[{"type":"fileimage"}]},{"type":"col","nodes":[{"type":"base64image"}]},{"type":"col","nodes":[{"type":"signature"}]},{"type":"col","nodes":[{"type":"text"}]}]},{"type":"row","nodes":[{"type":"col"}]}]}]}`)
+	test.New(t).Assert(m).JSON(`{"type":"pkg","nodes":[{"type":"page","nodes":[{"type":"row","nodes":[{"type":"col","nodes":[{"type":"barcode"}]},{"type":"col","nodes":[{"type":"matrixcode"}]},{"type":"col","nodes":[{"type":"qrcode"}]}]},{"type":"row","nodes":[{"type":"col","nodes":[{"type":"fileimage"}]},{"type":"col","nodes":[{"type":"bytesImage"}]},{"type":"col","nodes":[{"type":"signature"}]},{"type":"col","nodes":[{"type":"text"}]}]},{"type":"row","nodes":[{"type":"col"}]}]}]}`)
 }

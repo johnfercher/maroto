@@ -2,7 +2,6 @@ package gofpdf
 
 import (
 	"bytes"
-	"encoding/base64"
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/internal/code"
@@ -168,16 +167,6 @@ func (g *gofpdfProvider) AddImageFromFile(file string, cell *core.Cell, prop *pr
 	}
 
 	g.AddImageFromBytes(image.Bytes, cell, prop, extension.Type(extensionStr))
-}
-
-func (g *gofpdfProvider) AddImageFromBase64(base64string string, cell *core.Cell, prop *props.Rect, extension extension.Type) {
-	bytes, err := base64.StdEncoding.DecodeString(base64string)
-	if err != nil {
-		g.text.Add("could not parse image from base64", cell, merror.DefaultErrorText)
-		return
-	}
-
-	g.AddImageFromBytes(bytes, cell, prop, extension)
 }
 
 func (g *gofpdfProvider) AddImageFromBytes(bytes []byte, cell *core.Cell, prop *props.Rect, extension extension.Type) {
