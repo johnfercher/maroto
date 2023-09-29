@@ -2,6 +2,7 @@ package image
 
 import (
 	"fmt"
+
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
