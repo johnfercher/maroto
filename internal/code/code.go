@@ -49,7 +49,7 @@ func (c *code) GenBar(code string, cell *core.Cell, prop *props.Barcode) ([]byte
 
 	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
 
-	proportion := float64(len(code)) * 12.0 / cell.Width
+	proportion := float64(len(code)) * 20.0 / cell.Width
 
 	width := int(proportion * cell.Width)
 	height := int(cell.Width * heightPercentFromWidth * proportion)
