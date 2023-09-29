@@ -47,14 +47,17 @@ func (c *code) GenBar(code string, cell *core.Cell, prop *props.Barcode) ([]byte
 		return nil, err
 	}
 
+	width := cell.Width
+	unscaledWidth := float64(barCode.Bounds().Dx())
+	if unscaledWidth > width {
+		width = unscaledWidth
+	}
+
 	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
 
-	proportion := float64(len(code)) * 20.0 / cell.Width
+	height := int(width * heightPercentFromWidth)
 
-	width := int(proportion * cell.Width)
-	height := int(cell.Width * heightPercentFromWidth * proportion)
-
-	scaledBarCode, err := barcode.Scale(barCode, width, height)
+	scaledBarCode, err := barcode.Scale(barCode, int(width), height)
 	if err != nil {
 		return nil, err
 	}
