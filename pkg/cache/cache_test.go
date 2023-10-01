@@ -2,12 +2,13 @@ package cache_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"os"
 	"path"
 	"strings"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/stretchr/testify/assert"
