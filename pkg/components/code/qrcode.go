@@ -5,15 +5,15 @@ import (
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type qrCode struct {
 	code   string
 	prop   props.Rect
-	config *config.Config
+	config *entity.Config
 }
 
 func NewQr(code string, barcodeProps ...props.Rect) core.Component {
@@ -40,7 +40,7 @@ func NewQrRow(height float64, code string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (q *qrCode) Render(provider core.Provider, cell *core.Cell) {
+func (q *qrCode) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddQrCode(q.code, cell, &q.prop)
 }
 
@@ -53,6 +53,6 @@ func (q *qrCode) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
-func (q *qrCode) SetConfig(config *config.Config) {
+func (q *qrCode) SetConfig(config *entity.Config) {
 	q.config = config
 }

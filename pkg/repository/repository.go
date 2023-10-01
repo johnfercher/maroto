@@ -1,21 +1,23 @@
-package config
+package repository
 
 import (
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 )
 
 type Repository interface {
 	AddUTF8Font(family string, style fontstyle.Type, file string) Repository
-	Load() ([]*CustomFont, error)
+	Load() ([]*entity.CustomFont, error)
 }
 
 type repository struct {
-	customFonts []*CustomFont
+	customFonts []*entity.CustomFont
 }
 
-func NewRepository() Repository {
+func New() Repository {
 	return &repository{}
 }
 
@@ -32,7 +34,7 @@ func (r *repository) AddUTF8Font(family string, style fontstyle.Type, file strin
 		return r
 	}
 
-	r.customFonts = append(r.customFonts, &CustomFont{
+	r.customFonts = append(r.customFonts, &entity.CustomFont{
 		Family: family,
 		Style:  style,
 		File:   file,
@@ -41,7 +43,7 @@ func (r *repository) AddUTF8Font(family string, style fontstyle.Type, file strin
 	return r
 }
 
-func (r *repository) Load() ([]*CustomFont, error) {
+func (r *repository) Load() ([]*entity.CustomFont, error) {
 	for _, customFont := range r.customFonts {
 		bytes, err := os.ReadFile(customFont.File)
 		if err != nil {

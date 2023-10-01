@@ -2,8 +2,8 @@ package core
 
 import (
 	"github.com/johnfercher/go-tree/node"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	documenttype "github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -29,13 +29,13 @@ type Document interface {
 }
 
 type Node interface {
-	SetConfig(config *config.Config)
+	SetConfig(config *entity.Config)
 	GetStructure() *node.Node[Structure]
 }
 
 type Component interface {
 	Node
-	Render(provider Provider, cell *Cell)
+	Render(provider Provider, cell *entity.Cell)
 }
 
 type Col interface {
@@ -43,7 +43,7 @@ type Col interface {
 	Add(components ...Component) Col
 	GetSize() int
 	WithStyle(style *props.Cell) Col
-	Render(provider Provider, cell Cell, createCell bool)
+	Render(provider Provider, cell entity.Cell, createCell bool)
 }
 
 type Row interface {
@@ -51,7 +51,7 @@ type Row interface {
 	Add(cols ...Col) Row
 	GetHeight() float64
 	WithStyle(style *props.Cell) Row
-	Render(provider Provider, cell Cell)
+	Render(provider Provider, cell entity.Cell)
 }
 
 type Page interface {
@@ -60,5 +60,5 @@ type Page interface {
 	GetRows() []Row
 	GetNumber() int
 	SetNumber(number int, total int)
-	Render(provider Provider, cell Cell)
+	Render(provider Provider, cell entity.Cell)
 }

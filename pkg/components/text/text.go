@@ -4,15 +4,15 @@ import (
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type text struct {
 	value  string
 	prop   props.Text
-	config *config.Config
+	config *entity.Config
 }
 
 func New(value string, ps ...props.Text) core.Component {
@@ -54,11 +54,11 @@ func (t *text) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
-func (t *text) SetConfig(config *config.Config) {
+func (t *text) SetConfig(config *entity.Config) {
 	t.config = config
 }
 
-func (t *text) Render(provider core.Provider, cell *core.Cell) {
+func (t *text) Render(provider core.Provider, cell *entity.Cell) {
 	t.prop.MakeValid(t.config.DefaultFont)
 	provider.AddText(t.value, cell, &t.prop)
 }

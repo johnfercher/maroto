@@ -1,8 +1,7 @@
 package math
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -14,13 +13,13 @@ func New() *math {
 }
 
 // GetInnerCenterCell define a inner cell formatted inside outer cell centered.
-func (s *math) GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimensions, percent float64) *core.Cell {
+func (s *math) GetInnerCenterCell(inner *entity.Dimensions, outer *entity.Dimensions, percent float64) *entity.Cell {
 	percent /= 100.0
 
 	innerProportion := inner.Height / inner.Width
 	outerProportion := outer.Height / outer.Width
 
-	innerCell := &core.Cell{}
+	innerCell := &entity.Cell{}
 	if innerProportion > outerProportion {
 		newInnerWidth := outer.Height / innerProportion * percent
 		newInnerHeight := newInnerWidth * innerProportion
@@ -49,13 +48,13 @@ func (s *math) GetInnerCenterCell(inner *config.Dimensions, outer *config.Dimens
 }
 
 // GetInnerNonCenterCell define a inner cell formatted inside outer cell non centered.
-func (s *math) GetInnerNonCenterCell(inner *config.Dimensions, outer *config.Dimensions, prop *props.Rect) *core.Cell {
+func (s *math) GetInnerNonCenterCell(inner *entity.Dimensions, outer *entity.Dimensions, prop *props.Rect) *entity.Cell {
 	percent := prop.Percent / 100.0
 
 	innerProportion := inner.Height / inner.Width
 	outerProportion := outer.Height / outer.Width
 
-	innerCell := &core.Cell{}
+	innerCell := &entity.Cell{}
 	if innerProportion > outerProportion {
 		newInnerWidth := outer.Height / innerProportion * percent
 		newInnerHeight := newInnerWidth * innerProportion

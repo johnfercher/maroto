@@ -5,11 +5,12 @@ import (
 	image2 "image"
 	"image/jpeg"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/datamatrix"
 	"github.com/boombuler/barcode/qr"
-	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -41,7 +42,7 @@ func (c *code) GenQr(code string) ([]byte, error) {
 }
 
 // GenBar is responsible to generate a barcode byte array.
-func (c *code) GenBar(code string, cell *core.Cell, prop *props.Barcode) ([]byte, error) {
+func (c *code) GenBar(code string, cell *entity.Cell, prop *props.Barcode) ([]byte, error) {
 	barCode, err := code128.Encode(code)
 	if err != nil {
 		return nil, err

@@ -2,8 +2,8 @@ package page
 
 import (
 	"github.com/johnfercher/go-tree/node"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -11,7 +11,7 @@ type page struct {
 	number int
 	total  int
 	rows   []core.Row
-	config *config.Config
+	config *entity.Config
 	prop   props.Page
 }
 
@@ -26,8 +26,13 @@ func New(ps ...props.Page) core.Page {
 	}
 }
 
-func (p *page) Render(provider core.Provider, cell core.Cell) {
+func (p *page) Render(provider core.Provider, cell entity.Cell) {
 	innerCell := cell.Copy()
+
+	prop := &props.Rect{}
+	prop.MakeValid()
+
+	provider.AddBackgroundImageFromBytes(p.config.BackgroundImage.Bytes, &innerCell, prop, p.config.BackgroundImage.Extension)
 
 	for _, row := range p.rows {
 		row.Render(provider, innerCell)
@@ -39,7 +44,7 @@ func (p *page) Render(provider core.Provider, cell core.Cell) {
 	}
 }
 
-func (p *page) SetConfig(config *config.Config) {
+func (p *page) SetConfig(config *entity.Config) {
 	p.config = config
 	for _, row := range p.rows {
 		row.SetConfig(config)

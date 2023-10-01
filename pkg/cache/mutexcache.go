@@ -2,6 +2,9 @@ package cache
 
 import (
 	"sync"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
 
 type mutexCache struct {
@@ -18,14 +21,14 @@ func NewMutexDecorator(cache Cache) Cache {
 	}
 }
 
-func (c *mutexCache) LoadImage(file string, extension string) error {
+func (c *mutexCache) LoadImage(file string, extension extension.Type) error {
 	c.imageMutex.Lock()
 	defer c.imageMutex.Unlock()
 
 	return c.inner.LoadImage(file, extension)
 }
 
-func (c *mutexCache) GetImage(file string, extension string) (*Image, error) {
+func (c *mutexCache) GetImage(file string, extension extension.Type) (*entity.Image, error) {
 	return c.inner.GetImage(file, extension)
 }
 

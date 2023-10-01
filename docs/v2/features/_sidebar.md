@@ -2,6 +2,7 @@
 * **Features**
   * [Add Page](v2/features/addpage.md?id=add-page)
   * [Add PDF](v2/features/addpdf.md?id=add-pdf)
+  * [Background](v2/features/background.md?id=add-background)
   * [Barcode](v2/features/barcode.md?id=barcode)
   * [Cell Style](v2/features/cellstyle.md?id=cell-style)
   * [Compression](v2/features/compression.md?id=compression)

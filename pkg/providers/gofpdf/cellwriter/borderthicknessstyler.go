@@ -1,8 +1,8 @@
 package cellwriter
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 )
@@ -21,7 +21,7 @@ func NewBorderThicknessStyler(fpdf *gofpdf.Fpdf) *borderThicknessStyler {
 	}
 }
 
-func (f *borderThicknessStyler) Apply(width, height float64, config *config.Config, prop *props.Cell) {
+func (f *borderThicknessStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
 	if prop == nil {
 		f.GoToNext(width, height, config, prop)
 		return

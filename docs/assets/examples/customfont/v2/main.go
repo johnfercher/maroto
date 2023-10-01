@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/repository"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 
@@ -19,7 +21,7 @@ func main() {
 	customFont := "arial-unicode-ms"
 	customFontFile := "docs/assets/fonts/arial-unicode-ms.ttf"
 
-	repository := config.NewRepository().
+	repository := repository.New().
 		AddUTF8Font(customFont, fontstyle.Normal, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Italic, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Bold, customFontFile).

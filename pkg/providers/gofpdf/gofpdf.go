@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/maroto/v2/internal/code"
 
 	"github.com/johnfercher/maroto/v2/pkg/merror"
@@ -11,7 +13,6 @@ import (
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/johnfercher/maroto/v2/pkg/cache"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -30,10 +31,10 @@ type gofpdfProvider struct {
 	line       core.Line
 	cache      cache.Cache
 	cellWriter cellwriter.CellWriter
-	cfg        *config.Config
+	cfg        *entity.Config
 }
 
-func New(cfg *config.Config, cache cache.Cache) core.Provider {
+func New(cfg *entity.Config, cache cache.Cache) core.Provider {
 	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",
 		UnitStr:        "mm",
@@ -76,19 +77,19 @@ func New(cfg *config.Config, cache cache.Cache) core.Provider {
 	return provider
 }
 
-func (g *gofpdfProvider) AddText(text string, cell *core.Cell, prop *props.Text) {
+func (g *gofpdfProvider) AddText(text string, cell *entity.Cell, prop *props.Text) {
 	g.text.Add(text, cell, prop)
 }
 
-func (g *gofpdfProvider) AddLine(cell *core.Cell, prop *props.Line) {
+func (g *gofpdfProvider) AddLine(cell *entity.Cell, prop *props.Line) {
 	g.line.Add(cell, prop)
 }
 
-func (g *gofpdfProvider) AddSignature(text string, cell *core.Cell, prop *props.Text) {
+func (g *gofpdfProvider) AddSignature(text string, cell *entity.Cell, prop *props.Text) {
 	g.signature.AddSpaceFor(text, cell, prop)
 }
 
-func (g *gofpdfProvider) AddMatrixCode(code string, cell *core.Cell, prop *props.Rect) {
+func (g *gofpdfProvider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {
 	bytes, err := g.cache.GetCode(code, "matrixcode")
 	if err != nil {
 		bytes, err = g.code.GenDataMatrix(code)
@@ -100,14 +101,14 @@ func (g *gofpdfProvider) AddMatrixCode(code string, cell *core.Cell, prop *props
 	}
 
 	g.cache.SaveCode(code, "matrixcode", bytes)
-	err = g.image.Add(bytes, cell, g.cfg.Margins, prop, extension.Jpg)
+	err = g.image.Add(bytes, cell, g.cfg.Margins, prop, extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add matrixcode to document", cell, merror.DefaultErrorText)
 	}
 }
 
-func (g *gofpdfProvider) AddQrCode(code string, cell *core.Cell, prop *props.Rect) {
+func (g *gofpdfProvider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 	bytes, err := g.cache.GetCode(code, "qrcode")
 	if err != nil {
 		bytes, err = g.code.GenQr(code)
@@ -119,14 +120,14 @@ func (g *gofpdfProvider) AddQrCode(code string, cell *core.Cell, prop *props.Rec
 	}
 
 	g.cache.SaveCode(code, "qrcode", bytes)
-	err = g.image.Add(bytes, cell, g.cfg.Margins, prop, extension.Jpg)
+	err = g.image.Add(bytes, cell, g.cfg.Margins, prop, extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add qrcode to document", cell, merror.DefaultErrorText)
 	}
 }
 
-func (g *gofpdfProvider) AddBarCode(code string, cell *core.Cell, prop *props.Barcode) {
+func (g *gofpdfProvider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcode) {
 	bytes, err := g.cache.GetCode(code, "barcode")
 	if err != nil {
 		bytes, err = g.code.GenBar(code, cell, prop)
@@ -138,18 +139,18 @@ func (g *gofpdfProvider) AddBarCode(code string, cell *core.Cell, prop *props.Ba
 	}
 
 	g.cache.SaveCode(code, "barcode", bytes)
-	err = g.image.Add(bytes, cell, g.cfg.Margins, prop.ToRectProp(), extension.Jpg)
+	err = g.image.Add(bytes, cell, g.cfg.Margins, prop.ToRectProp(), extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add barcode to document", cell, merror.DefaultErrorText)
 	}
 }
 
-func (g *gofpdfProvider) AddImageFromFile(file string, cell *core.Cell, prop *props.Rect) {
+func (g *gofpdfProvider) AddImageFromFile(file string, cell *entity.Cell, prop *props.Rect) {
 	extensionStr := strings.Split(file, ".")[1]
-	image, err := g.cache.GetImage(file, extensionStr)
+	image, err := g.cache.GetImage(file, extension.Type(extensionStr))
 	if err != nil {
-		err = g.cache.LoadImage(file, extensionStr)
+		err = g.cache.LoadImage(file, extension.Type(extensionStr))
 	} else {
 		g.AddImageFromBytes(image.Bytes, cell, prop, extension.Type(extensionStr))
 		return
@@ -160,7 +161,7 @@ func (g *gofpdfProvider) AddImageFromFile(file string, cell *core.Cell, prop *pr
 		return
 	}
 
-	image, err = g.cache.GetImage(file, extensionStr)
+	image, err = g.cache.GetImage(file, extension.Type(extensionStr))
 	if err != nil {
 		g.text.Add("could not load image", cell, merror.DefaultErrorText)
 		return
@@ -169,19 +170,28 @@ func (g *gofpdfProvider) AddImageFromFile(file string, cell *core.Cell, prop *pr
 	g.AddImageFromBytes(image.Bytes, cell, prop, extension.Type(extensionStr))
 }
 
-func (g *gofpdfProvider) AddImageFromBytes(bytes []byte, cell *core.Cell, prop *props.Rect, extension extension.Type) {
-	err := g.image.Add(bytes, cell, g.cfg.Margins, prop, extension)
+func (g *gofpdfProvider) AddImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type) {
+	err := g.image.Add(bytes, cell, g.cfg.Margins, prop, extension, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add image to document", cell, merror.DefaultErrorText)
 	}
 }
 
+func (g *gofpdfProvider) AddBackgroundImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type) {
+	err := g.image.Add(bytes, cell, g.cfg.Margins, prop, extension, true)
+	if err != nil {
+		g.fpdf.ClearError()
+		g.text.Add("could not add image to document", cell, merror.DefaultErrorText)
+	}
+	g.fpdf.SetHomeXY()
+}
+
 func (g *gofpdfProvider) CreateRow(height float64) {
 	g.fpdf.Ln(height)
 }
 
-func (g *gofpdfProvider) SetProtection(protection *config.Protection) {
+func (g *gofpdfProvider) SetProtection(protection *entity.Protection) {
 	if protection == nil {
 		return
 	}
@@ -189,7 +199,7 @@ func (g *gofpdfProvider) SetProtection(protection *config.Protection) {
 	g.fpdf.SetProtection(byte(protection.Type), protection.UserPassword, protection.OwnerPassword)
 }
 
-func (g *gofpdfProvider) SetMetadata(metadata *config.Metadata) {
+func (g *gofpdfProvider) SetMetadata(metadata *entity.Metadata) {
 	if metadata == nil {
 		return
 	}
@@ -226,7 +236,7 @@ func (g *gofpdfProvider) SetCache(cache cache.Cache) {
 	g.cache = cache
 }
 
-func (g *gofpdfProvider) CreateCol(width, height float64, config *config.Config, prop *props.Cell) {
+func (g *gofpdfProvider) CreateCol(width, height float64, config *entity.Config, prop *props.Cell) {
 	g.cellWriter.Apply(width, height, config, prop)
 }
 

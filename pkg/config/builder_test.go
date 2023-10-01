@@ -279,7 +279,7 @@ func TestBuilder_WithMargins(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithMargins(8, 20, 20).Build()
+		cfg := sut.WithMargins(-1, 20, 20).Build()
 
 		// Assert
 		assert.Equal(t, 10.0, cfg.Margins.Left)
@@ -292,7 +292,7 @@ func TestBuilder_WithMargins(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithMargins(20, 20, 8).Build()
+		cfg := sut.WithMargins(20, 20, -1).Build()
 
 		// Assert
 		assert.Equal(t, 10.0, cfg.Margins.Left)
@@ -305,7 +305,7 @@ func TestBuilder_WithMargins(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithMargins(20, 8, 20).Build()
+		cfg := sut.WithMargins(20, -1, 20).Build()
 
 		// Assert
 		assert.Equal(t, 10.0, cfg.Margins.Left)

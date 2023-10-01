@@ -1,4 +1,4 @@
-package config
+package entity
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
@@ -19,4 +19,5 @@ type Config struct {
 	Protection        *Protection
 	Compression       bool
 	Metadata          *Metadata
+	BackgroundImage   *Image
 }

@@ -1,4 +1,4 @@
-package config
+package entity
 
 type Dimensions struct {
 	Width  float64

@@ -1,4 +1,4 @@
-package config_test
+package repository_test
 
 import (
 	"os"
@@ -6,7 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/repository"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/stretchr/testify/assert"
 )
@@ -14,7 +15,7 @@ import (
 func TestRepository_AddUTF8Font(t *testing.T) {
 	t.Run("when fontstyle family is empty, should not add value", func(t *testing.T) {
 		// Arrange
-		sut := config.NewRepository()
+		sut := repository.New()
 
 		// Act
 		customFonts, err := sut.AddUTF8Font("", fontstyle.Bold, "file").Load()
@@ -26,7 +27,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 	t.Run("when fontstyle style is invalid, should not add value", func(t *testing.T) {
 		// Arrange
-		sut := config.NewRepository()
+		sut := repository.New()
 
 		// Act
 		customFonts, err := sut.AddUTF8Font("family", "invalid", "file").Load()
@@ -38,7 +39,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 	t.Run("when fontstyle file is empty, should not add value", func(t *testing.T) {
 		// Arrange
-		sut := config.NewRepository()
+		sut := repository.New()
 
 		// Act
 		customFonts, err := sut.AddUTF8Font("family", fontstyle.Bold, "").Load()
@@ -50,7 +51,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 	t.Run("when fontstyle is valid, should not value", func(t *testing.T) {
 		// Arrange
-		sut := config.NewRepository()
+		sut := repository.New()
 
 		// Act
 		customFonts, err := sut.AddUTF8Font("family", fontstyle.Bold, buildPath("/docs/assets/fonts/arial-unicode-ms.ttf")).Load()
@@ -71,6 +72,6 @@ func buildPath(file string) string {
 		return ""
 	}
 
-	dir = strings.ReplaceAll(dir, "pkg/config", "")
+	dir = strings.ReplaceAll(dir, "pkg/repository", "")
 	return path.Join(dir, file)
 }

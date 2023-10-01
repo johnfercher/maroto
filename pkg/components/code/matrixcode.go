@@ -5,15 +5,15 @@ import (
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type matrixCode struct {
 	code   string
 	prop   props.Rect
-	config *config.Config
+	config *entity.Config
 }
 
 func NewMatrix(code string, barcodeProps ...props.Rect) core.Component {
@@ -40,7 +40,7 @@ func NewMatrixRow(height float64, code string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (m *matrixCode) Render(provider core.Provider, cell *core.Cell) {
+func (m *matrixCode) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddMatrixCode(m.code, cell, &m.prop)
 }
 
@@ -53,6 +53,6 @@ func (m *matrixCode) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
-func (m *matrixCode) SetConfig(config *config.Config) {
+func (m *matrixCode) SetConfig(config *entity.Config) {
 	m.config = config
 }

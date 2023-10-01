@@ -4,17 +4,17 @@ import (
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type signature struct {
 	value  string
 	prop   props.Font
-	config *config.Config
+	config *entity.Config
 }
 
 func New(value string, ps ...props.Font) core.Component {
@@ -41,7 +41,7 @@ func NewRow(height float64, value string, ps ...props.Font) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (s *signature) Render(provider core.Provider, cell *core.Cell) {
+func (s *signature) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddSignature(s.value, cell, s.prop.ToTextProp(align.Center, 0.0, 0))
 }
 
@@ -54,6 +54,6 @@ func (s *signature) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
-func (s *signature) SetConfig(config *config.Config) {
+func (s *signature) SetConfig(config *entity.Config) {
 	s.config = config
 }
