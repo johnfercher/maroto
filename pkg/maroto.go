@@ -1,10 +1,10 @@
 package pkg
 
 import (
-	"bytes"
 	"errors"
-	"io"
 	"log"
+
+	"github.com/johnfercher/maroto/v2/pkg/merge"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
@@ -23,7 +23,6 @@ import (
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/pdfcpu/pdfcpu/pkg/api"
 )
 
 type maroto struct {
@@ -37,7 +36,6 @@ type maroto struct {
 	rows          []core.Row
 	header        []core.Row
 	footer        []core.Row
-	pdfs          [][]byte
 	headerHeight  float64
 	footerHeight  float64
 	currentHeight float64
@@ -148,10 +146,6 @@ func (m *maroto) GetStructure() *node.Node[core.Structure] {
 	return node
 }
 
-func (m *maroto) AddPDFs(pdfs ...[]byte) {
-	m.pdfs = append(m.pdfs, pdfs...)
-}
-
 func (m *maroto) addRows(rows ...core.Row) {
 	for _, row := range rows {
 		m.addRow(row)
@@ -234,24 +228,7 @@ func (m *maroto) generate() (core.Document, error) {
 		return nil, err
 	}
 
-	if len(m.pdfs) == 0 {
-		return core.NewPDF(documentBytes, nil), nil
-	}
-
-	readers := []io.ReadSeeker{}
-	readers = append(readers, bytes.NewReader(documentBytes))
-	for _, pdf := range m.pdfs {
-		readers = append(readers, bytes.NewReader(pdf))
-	}
-
-	var buf bytes.Buffer
-	writer := io.Writer(&buf)
-	err = mergePdfs(readers, writer)
-	if err != nil {
-		return nil, err
-	}
-
-	return core.NewPDF(buf.Bytes(), nil), nil
+	return core.NewPDF(documentBytes, nil), nil
 }
 
 func (m *maroto) generateConcurrently() (core.Document, error) {
@@ -275,24 +252,18 @@ func (m *maroto) generateConcurrently() (core.Document, error) {
 		log.Fatal("error on generating pages")
 	}
 
-	readers := make([]io.ReadSeeker, len(processed.Results)+len(m.pdfs))
+	pdfs := make([][]byte, len(processed.Results))
 	for i, result := range processed.Results {
-		b := result.Output.([]byte)
-		readers[i] = bytes.NewReader(b)
+		bytes := result.Output.([]byte)
+		pdfs[i] = bytes
 	}
 
-	for i, pdf := range m.pdfs {
-		readers[i+len(processed.Results)] = bytes.NewReader(pdf)
-	}
-
-	var buf bytes.Buffer
-	writer := io.Writer(&buf)
-	err := mergePdfs(readers, writer)
+	mergedBytes, err := merge.Bytes(pdfs...)
 	if err != nil {
 		return nil, err
 	}
 
-	return core.NewPDF(buf.Bytes(), nil), nil
+	return core.NewPDF(mergedBytes, nil), nil
 }
 
 func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
@@ -325,10 +296,4 @@ func getConfig(configs ...*entity.Config) *entity.Config {
 
 func getProvider(cache cache.Cache, cfg *entity.Config) core.Provider {
 	return gofpdf.New(cfg, cache)
-}
-
-func mergePdfs(readers []io.ReadSeeker, writer io.Writer) error {
-	conf := api.LoadConfiguration()
-	conf.WriteXRefStream = false
-	return api.MergeRaw(readers, writer, conf)
 }

@@ -13,7 +13,6 @@ type Maroto interface {
 	AddRows(rows ...Row)
 	AddRow(rowHeight float64, cols ...Col) Row
 	AddPages(pages ...Page)
-	AddPDFs(pdfs ...[]byte)
 	GetStructure() *node.Node[Structure]
 	Generate() (Document, error)
 }
@@ -23,6 +22,7 @@ type Document interface {
 	GetBase64() string
 	Save(file string) error
 	GetReport() *metrics.Report
+	Merge([]byte) error
 }
 
 type Node interface {

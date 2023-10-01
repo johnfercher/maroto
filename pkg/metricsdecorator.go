@@ -53,14 +53,6 @@ func (m *metricsDecorator) AddPages(pages ...core.Page) {
 	m.addPageTime = append(m.addPageTime, timeSpent)
 }
 
-func (m *metricsDecorator) AddPDFs(pdfs ...[]byte) {
-	timeSpent := time.GetTimeSpent(func() {
-		m.inner.AddPDFs(pdfs...)
-	})
-
-	m.addPDFTime = append(m.addPDFTime, timeSpent)
-}
-
 func (m *metricsDecorator) AddRows(rows ...core.Row) {
 	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddRows(rows...)
