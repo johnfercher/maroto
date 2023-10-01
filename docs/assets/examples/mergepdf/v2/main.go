@@ -4,11 +4,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/johnfercher/maroto/v2/pkg/components/text"
-	"github.com/johnfercher/maroto/v2/pkg/props"
-
 	"github.com/johnfercher/maroto/v2/pkg"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
@@ -21,13 +20,6 @@ func main() {
 	mrt := pkg.NewMaroto(cfg)
 	m := pkg.NewMetricsDecorator(mrt)
 
-	pdf, err := os.ReadFile("docs/assets/pdf/v2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	m.AddPDFs(pdf)
-
 	for i := 0; i < 50; i++ {
 		m.AddRows(text.NewRow(20, "content"))
 	}
@@ -37,12 +29,22 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	err = document.Save("docs/assets/pdf/addpdfv2.pdf")
+	savedPdf, err := os.ReadFile("docs/assets/pdf/v2.pdf")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	err = document.GetReport().Save("docs/assets/text/addpdfv2.txt")
+	err = document.Merge(savedPdf)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/mergepdfv2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/mergepdfv2.txt")
 	if err != nil {
 		log.Fatal(err.Error())
 	}

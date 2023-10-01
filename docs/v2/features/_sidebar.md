@@ -1,7 +1,6 @@
 * [← Back To Home](README.md?id=maroto-v2)
 * **Features**
   * [Add Page](v2/features/addpage.md?id=add-page)
-  * [Add PDF](v2/features/addpdf.md?id=add-pdf)
   * [Background](v2/features/background.md?id=add-background)
   * [Barcode](v2/features/barcode.md?id=barcode)
   * [Cell Style](v2/features/cellstyle.md?id=cell-style)
@@ -17,6 +16,7 @@
   * [List](v2/features/list.md?id=list)
   * [Margins](v2/features/margins.md?id=custom-margins)
   * [Max Grid Sum](v2/features/maxgridsum.md?id=max-grid-sum)
+  * [Merge PDF](v2/features/mergepdf.md?id=merge-pdf)
   * [Metadatas](v2/features/metadatas.md?id=metadatas)
   * [Orientation](v2/features/orientation.md?id=orientation)
   * [Page Number](v2/features/pagenumber.md?id=page-number)
