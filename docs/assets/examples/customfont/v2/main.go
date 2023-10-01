@@ -21,7 +21,7 @@ func main() {
 	customFont := "arial-unicode-ms"
 	customFontFile := "docs/assets/fonts/arial-unicode-ms.ttf"
 
-	repository := repository.NewRepository().
+	repository := repository.New().
 		AddUTF8Font(customFont, fontstyle.Normal, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Italic, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Bold, customFontFile).

@@ -15,7 +15,7 @@ import (
 func TestRepository_AddUTF8Font(t *testing.T) {
 	t.Run("when fontstyle family is empty, should not add value", func(t *testing.T) {
 		// Arrange
-		sut := repository.NewRepository()
+		sut := repository.New()
 
 		// Act
 		customFonts, err := sut.AddUTF8Font("", fontstyle.Bold, "file").Load()
@@ -27,7 +27,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 	t.Run("when fontstyle style is invalid, should not add value", func(t *testing.T) {
 		// Arrange
-		sut := repository.NewRepository()
+		sut := repository.New()
 
 		// Act
 		customFonts, err := sut.AddUTF8Font("family", "invalid", "file").Load()
@@ -39,7 +39,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 	t.Run("when fontstyle file is empty, should not add value", func(t *testing.T) {
 		// Arrange
-		sut := repository.NewRepository()
+		sut := repository.New()
 
 		// Act
 		customFonts, err := sut.AddUTF8Font("family", fontstyle.Bold, "").Load()
@@ -51,7 +51,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 	t.Run("when fontstyle is valid, should not value", func(t *testing.T) {
 		// Arrange
-		sut := repository.NewRepository()
+		sut := repository.New()
 
 		// Act
 		customFonts, err := sut.AddUTF8Font("family", fontstyle.Bold, buildPath("/docs/assets/fonts/arial-unicode-ms.ttf")).Load()

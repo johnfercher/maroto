@@ -17,7 +17,7 @@ type repository struct {
 	customFonts []*entity.CustomFont
 }
 
-func NewRepository() Repository {
+func New() Repository {
 	return &repository{}
 }
 
