@@ -1,11 +1,12 @@
 package merror_test
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/merror"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestDefaultErrorText(t *testing.T) {

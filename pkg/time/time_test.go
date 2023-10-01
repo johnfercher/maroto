@@ -1,10 +1,11 @@
 package time_test
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/time"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	buildtinTime "time"
+
+	"github.com/johnfercher/maroto/v2/pkg/time"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetTimeSpent(t *testing.T) {

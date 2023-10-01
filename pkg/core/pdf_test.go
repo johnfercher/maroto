@@ -2,9 +2,10 @@ package core_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewPDF(t *testing.T) {
