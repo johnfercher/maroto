@@ -9,3 +9,7 @@ const (
 	// Png represents a png extension.
 	Png Type = "png"
 )
+
+func (t Type) IsValid() bool {
+	return t == Jpg || t == Png
+}
