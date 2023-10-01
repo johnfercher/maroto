@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+	"github.com/jung-kurt/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
@@ -12,7 +13,6 @@ import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 )
 
 type image struct {
@@ -29,7 +29,7 @@ func NewImage(pdf fpdf.Fpdf, math core.Math) *image {
 }
 
 // Add use a byte array to add image to PDF.
-func (s *image) Add(imgBytes []byte, cell *entity.Cell, margins *entity.Margins,
+func (s *image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, extension extension.Type, flow bool,
 ) error {
 	imageID, _ := uuid.NewRandom()
@@ -40,7 +40,7 @@ func (s *image) Add(imgBytes []byte, cell *entity.Cell, margins *entity.Margins,
 			ReadDpi:   false,
 			ImageType: string(extension),
 		},
-		bytes.NewReader(imgBytes),
+		bytes.NewReader(img.Bytes),
 	)
 
 	if info == nil {

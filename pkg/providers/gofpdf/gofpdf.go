@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/image"
+
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/internal/code"
@@ -90,9 +92,9 @@ func (g *gofpdfProvider) AddSignature(text string, cell *entity.Cell, prop *prop
 }
 
 func (g *gofpdfProvider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {
-	bytes, err := g.cache.GetCode(code, "matrixcode")
+	image, err := g.cache.GetImage(code, extension.Jpg)
 	if err != nil {
-		bytes, err = g.code.GenDataMatrix(code)
+		image, err = g.code.GenDataMatrix(code)
 	}
 
 	if err != nil {
@@ -100,8 +102,8 @@ func (g *gofpdfProvider) AddMatrixCode(code string, cell *entity.Cell, prop *pro
 		return
 	}
 
-	g.cache.SaveCode(code, "matrixcode", bytes)
-	err = g.image.Add(bytes, cell, g.cfg.Margins, prop, extension.Jpg, false)
+	g.cache.AddImage(code, image)
+	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add matrixcode to document", cell, merror.DefaultErrorText)
@@ -109,9 +111,9 @@ func (g *gofpdfProvider) AddMatrixCode(code string, cell *entity.Cell, prop *pro
 }
 
 func (g *gofpdfProvider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
-	bytes, err := g.cache.GetCode(code, "qrcode")
+	image, err := g.cache.GetImage(code, extension.Jpg)
 	if err != nil {
-		bytes, err = g.code.GenQr(code)
+		image, err = g.code.GenQr(code)
 	}
 
 	if err != nil {
@@ -119,8 +121,8 @@ func (g *gofpdfProvider) AddQrCode(code string, cell *entity.Cell, prop *props.R
 		return
 	}
 
-	g.cache.SaveCode(code, "qrcode", bytes)
-	err = g.image.Add(bytes, cell, g.cfg.Margins, prop, extension.Jpg, false)
+	g.cache.AddImage(code, image)
+	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add qrcode to document", cell, merror.DefaultErrorText)
@@ -128,9 +130,9 @@ func (g *gofpdfProvider) AddQrCode(code string, cell *entity.Cell, prop *props.R
 }
 
 func (g *gofpdfProvider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcode) {
-	bytes, err := g.cache.GetCode(code, "barcode")
+	image, err := g.cache.GetImage(code, extension.Jpg)
 	if err != nil {
-		bytes, err = g.code.GenBar(code, cell, prop)
+		image, err = g.code.GenBar(code, cell, prop)
 	}
 
 	if err != nil {
@@ -138,8 +140,8 @@ func (g *gofpdfProvider) AddBarCode(code string, cell *entity.Cell, prop *props.
 		return
 	}
 
-	g.cache.SaveCode(code, "barcode", bytes)
-	err = g.image.Add(bytes, cell, g.cfg.Margins, prop.ToRectProp(), extension.Jpg, false)
+	g.cache.AddImage(code, image)
+	err = g.image.Add(image, cell, g.cfg.Margins, prop.ToRectProp(), extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add barcode to document", cell, merror.DefaultErrorText)
@@ -171,7 +173,13 @@ func (g *gofpdfProvider) AddImageFromFile(file string, cell *entity.Cell, prop *
 }
 
 func (g *gofpdfProvider) AddImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type) {
-	err := g.image.Add(bytes, cell, g.cfg.Margins, prop, extension, false)
+	img, err := image.FromBytes(bytes, extension)
+	if err != nil {
+		g.fpdf.ClearError()
+		g.text.Add("could not parse image bytes", cell, merror.DefaultErrorText)
+	}
+
+	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add image to document", cell, merror.DefaultErrorText)
@@ -179,7 +187,13 @@ func (g *gofpdfProvider) AddImageFromBytes(bytes []byte, cell *entity.Cell, prop
 }
 
 func (g *gofpdfProvider) AddBackgroundImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type) {
-	err := g.image.Add(bytes, cell, g.cfg.Margins, prop, extension, true)
+	img, err := image.FromBytes(bytes, extension)
+	if err != nil {
+		g.fpdf.ClearError()
+		g.text.Add("could not parse image bytes", cell, merror.DefaultErrorText)
+	}
+
+	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension, true)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add image to document", cell, merror.DefaultErrorText)

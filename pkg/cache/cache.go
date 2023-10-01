@@ -11,8 +11,7 @@ import (
 type Cache interface {
 	GetImage(value string, extension extension.Type) (*entity.Image, error)
 	LoadImage(value string, extension extension.Type) error
-	GetCode(code string, codeType string) ([]byte, error)
-	SaveCode(code string, codeType string, bytes []byte)
+	AddImage(value string, image *entity.Image)
 }
 
 type cache struct {
@@ -39,6 +38,10 @@ func (c *cache) LoadImage(file string, extension extension.Type) error {
 	return nil
 }
 
+func (c *cache) AddImage(value string, image *entity.Image) {
+	c.images[value+string(image.Extension)] = image
+}
+
 func (c *cache) GetImage(file string, extension extension.Type) (*entity.Image, error) {
 	image, ok := c.images[file+string(extension)]
 	if ok {
@@ -46,17 +49,4 @@ func (c *cache) GetImage(file string, extension extension.Type) (*entity.Image, 
 	}
 
 	return nil, errors.New("image not found")
-}
-
-func (c *cache) GetCode(code string, codeType string) ([]byte, error) {
-	bytes, ok := c.codes[code+codeType]
-	if ok {
-		return bytes, nil
-	}
-
-	return nil, errors.New("code not found")
-}
-
-func (c *cache) SaveCode(code string, codeType string, bytes []byte) {
-	c.codes[code+codeType] = bytes
 }

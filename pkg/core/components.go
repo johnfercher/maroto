@@ -15,14 +15,14 @@ type Math interface {
 
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF.
 type Code interface {
-	GenQr(code string) ([]byte, error)
-	GenDataMatrix(code string) ([]byte, error)
-	GenBar(code string, cell *entity.Cell, prop *props.Barcode) ([]byte, error)
+	GenQr(code string) (*entity.Image, error)
+	GenDataMatrix(code string) (*entity.Image, error)
+	GenBar(code string, cell *entity.Cell, prop *props.Barcode) (*entity.Image, error)
 }
 
 // Image is the abstraction which deals of how to add images in a PDF.
 type Image interface {
-	Add(imgBytes []byte, cell *entity.Cell, margins *entity.Margins, prop *props.Rect, extension extension.Type, flow bool) error
+	Add(img *entity.Image, cell *entity.Cell, margins *entity.Margins, prop *props.Rect, extension extension.Type, flow bool) error
 }
 
 type Line interface {
