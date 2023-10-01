@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -33,7 +34,7 @@ func TestCol_GetSize(t *testing.T) {
 	t.Run("when size not defined in creation, should use config max grid size", func(t *testing.T) {
 		// Arrange
 		c := col.New()
-		c.SetConfig(&config.Config{MaxGridSize: 14})
+		c.SetConfig(&entity.Config{MaxGridSize: 14})
 
 		// Act
 		size := c.GetSize()

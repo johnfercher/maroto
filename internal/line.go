@@ -4,7 +4,7 @@ import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
-	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -22,7 +22,7 @@ func NewLine(pdf fpdf.Fpdf) *line {
 	}
 }
 
-func (l *line) Add(cell *core.Cell, prop *props.Line) {
+func (l *line) Add(cell *entity.Cell, prop *props.Line) {
 	if prop.Orientation == orientation.Vertical {
 		l.renderVertical(cell, prop)
 	} else {
@@ -30,7 +30,7 @@ func (l *line) Add(cell *core.Cell, prop *props.Line) {
 	}
 }
 
-func (l *line) renderVertical(cell *core.Cell, prop *props.Line) {
+func (l *line) renderVertical(cell *entity.Cell, prop *props.Line) {
 	size := cell.Height * (prop.SizePercent / 100.0)
 	position := cell.Width * (prop.OffsetPercent / 100.0)
 
@@ -55,7 +55,7 @@ func (l *line) renderVertical(cell *core.Cell, prop *props.Line) {
 	}
 }
 
-func (l *line) renderHorizontal(cell *core.Cell, prop *props.Line) {
+func (l *line) renderHorizontal(cell *entity.Cell, prop *props.Line) {
 	size := cell.Width * (prop.SizePercent / 100.0)
 	position := cell.Height * (prop.OffsetPercent / 100.0)
 

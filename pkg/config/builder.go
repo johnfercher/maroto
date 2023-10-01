@@ -2,8 +2,14 @@ package config
 
 import (
 	"errors"
+	"os"
 	"strings"
 	"time"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+	"github.com/johnfercher/maroto/v2/pkg/repository"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 
@@ -24,7 +30,6 @@ type Builder interface {
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
 	WithDefaultFont(font *props.Font) Builder
-	TryLoadRepository(repository Repository) (Builder, error)
 	WithPageNumber(pattern string, place props.Place) Builder
 	WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder
 	WithCompression(compression bool) Builder
@@ -34,34 +39,37 @@ type Builder interface {
 	WithSubject(subject string, isUTF8 bool) Builder
 	WithTitle(title string, isUTF8 bool) Builder
 	WithCreationDate(time time.Time) Builder
-	Build() *Config
+	TryLoadRepository(repository repository.Repository) (Builder, error)
+	WithBackgroundImage(file string) (Builder, error)
+	Build() *entity.Config
 }
 
 type builder struct {
 	providerType      provider.Type
-	dimensions        *Dimensions
-	margins           *Margins
+	dimensions        *entity.Dimensions
+	margins           *entity.Margins
 	workerPoolSize    int
 	debug             bool
 	maxGridSize       int
 	defaultFont       *props.Font
-	customFonts       []*CustomFont
+	customFonts       []*entity.CustomFont
 	pageNumberPattern string
 	pageNumberPlace   props.Place
-	protection        *Protection
+	protection        *entity.Protection
 	compression       bool
 	orientation       orientation.Type
-	metadata          *Metadata
+	metadata          *entity.Metadata
+	backgroundImage   *entity.Image
 }
 
 func NewBuilder() Builder {
 	return &builder{
 		providerType: provider.Gofpdf,
-		margins: &Margins{
-			Left:   pagesize.MinLeftMargin,
-			Right:  pagesize.MinRightMargin,
-			Top:    pagesize.MinTopMargin,
-			Bottom: pagesize.MinBottomMargin,
+		margins: &entity.Margins{
+			Left:   pagesize.DefaultLeftMargin,
+			Right:  pagesize.DefaultRightMargin,
+			Top:    pagesize.DefaultTopMargin,
+			Bottom: pagesize.DefaultBottomMargin,
 		},
 		maxGridSize: pagesize.DefaultMaxGridSum,
 		defaultFont: &props.Font{
@@ -70,7 +78,7 @@ func NewBuilder() Builder {
 			Style:  fontstyle.Normal,
 			Color:  props.NewBlack(),
 		},
-		metadata: &Metadata{},
+		metadata: &entity.Metadata{},
 	}
 }
 
@@ -80,7 +88,7 @@ func (b *builder) WithPageSize(size pagesize.Type) Builder {
 	}
 
 	width, height := pagesize.GetDimensions(size)
-	b.dimensions = &Dimensions{
+	b.dimensions = &entity.Dimensions{
 		Width:  width,
 		Height: height,
 	}
@@ -93,7 +101,7 @@ func (b *builder) WithDimensions(width float64, height float64) Builder {
 		return b
 	}
 
-	b.dimensions = &Dimensions{
+	b.dimensions = &entity.Dimensions{
 		Width:  width,
 		Height: height,
 	}
@@ -168,7 +176,7 @@ func (b *builder) WithDefaultFont(font *props.Font) Builder {
 	return b
 }
 
-func (b *builder) TryLoadRepository(repository Repository) (Builder, error) {
+func (b *builder) TryLoadRepository(repository repository.Repository) (Builder, error) {
 	if repository == nil {
 		return b, errors.New("repository is nil")
 	}
@@ -199,7 +207,7 @@ func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
 }
 
 func (b *builder) WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder {
-	b.protection = &Protection{
+	b.protection = &entity.Protection{
 		Type:          protectionType,
 		UserPassword:  userPassword,
 		OwnerPassword: ownerPassword,
@@ -223,7 +231,7 @@ func (b *builder) WithAuthor(author string, isUTF8 bool) Builder {
 		return b
 	}
 
-	b.metadata.Author = &Utf8Text{
+	b.metadata.Author = &entity.Utf8Text{
 		Text: author,
 		UTF8: isUTF8,
 	}
@@ -236,7 +244,7 @@ func (b *builder) WithCreator(creator string, isUTF8 bool) Builder {
 		return b
 	}
 
-	b.metadata.Creator = &Utf8Text{
+	b.metadata.Creator = &entity.Utf8Text{
 		Text: creator,
 		UTF8: isUTF8,
 	}
@@ -249,7 +257,7 @@ func (b *builder) WithSubject(subject string, isUTF8 bool) Builder {
 		return b
 	}
 
-	b.metadata.Subject = &Utf8Text{
+	b.metadata.Subject = &entity.Utf8Text{
 		Text: subject,
 		UTF8: isUTF8,
 	}
@@ -262,7 +270,7 @@ func (b *builder) WithTitle(title string, isUTF8 bool) Builder {
 		return b
 	}
 
-	b.metadata.Title = &Utf8Text{
+	b.metadata.Title = &entity.Utf8Text{
 		Text: title,
 		UTF8: isUTF8,
 	}
@@ -280,8 +288,24 @@ func (b *builder) WithCreationDate(time time.Time) Builder {
 	return b
 }
 
-func (b *builder) Build() *Config {
-	return &Config{
+func (b *builder) WithBackgroundImage(file string) (Builder, error) {
+	bytes, err := os.ReadFile(file)
+	if err != nil {
+		return nil, err
+	}
+
+	extensionStr := strings.Split(file, ".")[1]
+
+	b.backgroundImage = &entity.Image{
+		Bytes:     bytes,
+		Extension: extension.Type(extensionStr),
+	}
+
+	return b, nil
+}
+
+func (b *builder) Build() *entity.Config {
+	return &entity.Config{
 		ProviderType:      b.providerType,
 		Dimensions:        b.getDimensions(),
 		Margins:           b.margins,
@@ -295,16 +319,17 @@ func (b *builder) Build() *Config {
 		Compression:       b.compression,
 		Metadata:          b.metadata,
 		CustomFonts:       b.customFonts,
+		BackgroundImage:   b.backgroundImage,
 	}
 }
 
-func (b *builder) getDimensions() *Dimensions {
+func (b *builder) getDimensions() *entity.Dimensions {
 	if b.dimensions != nil {
 		return b.dimensions
 	}
 
 	width, height := pagesize.GetDimensions(pagesize.A4)
-	dimensions := &Dimensions{
+	dimensions := &entity.Dimensions{
 		Width:  width,
 		Height: height,
 	}

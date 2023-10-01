@@ -4,15 +4,15 @@ import (
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type barcode struct {
 	code   string
 	prop   props.Barcode
-	config *config.Config
+	config *entity.Config
 }
 
 func NewBar(code string, ps ...props.Barcode) core.Component {
@@ -39,7 +39,7 @@ func NewBarRow(height float64, code string, ps ...props.Barcode) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (b *barcode) Render(provider core.Provider, cell *core.Cell) {
+func (b *barcode) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddBarCode(b.code, cell, &b.prop)
 }
 
@@ -56,6 +56,6 @@ func (b *barcode) GetValue() string {
 	return b.code
 }
 
-func (b *barcode) SetConfig(config *config.Config) {
+func (b *barcode) SetConfig(config *entity.Config) {
 	b.config = config
 }

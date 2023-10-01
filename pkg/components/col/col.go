@@ -3,9 +3,10 @@ package col
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/go-tree/node"
 
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -14,7 +15,7 @@ type col struct {
 	size       int
 	isMax      bool
 	components []core.Component
-	config     *config.Config
+	config     *entity.Config
 	style      *props.Cell
 }
 
@@ -55,7 +56,7 @@ func (c *col) GetStructure() *node.Node[core.Structure] {
 	return node
 }
 
-func (c *col) Render(provider core.Provider, cell core.Cell, createCell bool) {
+func (c *col) Render(provider core.Provider, cell entity.Cell, createCell bool) {
 	if createCell {
 		provider.CreateCol(cell.Width, cell.Height, c.config, c.style)
 	}
@@ -65,7 +66,7 @@ func (c *col) Render(provider core.Provider, cell core.Cell, createCell bool) {
 	}
 }
 
-func (c *col) SetConfig(config *config.Config) {
+func (c *col) SetConfig(config *entity.Config) {
 	c.config = config
 	for _, component := range c.components {
 		component.SetConfig(config)

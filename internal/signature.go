@@ -3,6 +3,7 @@ package internal
 import (
 	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -22,7 +23,7 @@ func NewSignature(pdf fpdf.Fpdf, math core.Math, text core.Text) *signature {
 }
 
 // AddSpaceFor create a space for a signature inside a cell.
-func (s *signature) AddSpaceFor(label string, cell *core.Cell, textProp *props.Text) {
+func (s *signature) AddSpaceFor(label string, cell *entity.Cell, textProp *props.Text) {
 	lineSpaceProportion := 1.33
 	left, top, _, _ := s.pdf.GetMargins()
 	space := 4.0

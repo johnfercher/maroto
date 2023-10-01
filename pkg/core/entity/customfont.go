@@ -1,4 +1,4 @@
-package config
+package entity
 
 import "github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 

@@ -1,6 +1,4 @@
-package core
-
-import "github.com/johnfercher/maroto/v2/pkg/config"
+package entity
 
 // Cell represents a cell inside the PDF.
 type Cell struct {
@@ -10,8 +8,8 @@ type Cell struct {
 	Height float64
 }
 
-func (c *Cell) GetDimensions() *config.Dimensions {
-	return &config.Dimensions{Width: c.Width, Height: c.Height}
+func (c *Cell) GetDimensions() *Dimensions {
+	return &Dimensions{Width: c.Width, Height: c.Height}
 }
 
 func (c Cell) Copy() Cell {
@@ -23,7 +21,7 @@ func (c Cell) Copy() Cell {
 	}
 }
 
-func NewRootContext(pageWidth, pageHeight float64, margins config.Margins) Cell {
+func NewRootContext(pageWidth, pageHeight float64, margins Margins) Cell {
 	return Cell{
 		X:      0,
 		Y:      0,

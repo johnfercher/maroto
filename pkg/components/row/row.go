@@ -3,9 +3,10 @@ package row
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/go-tree/node"
 
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -14,7 +15,7 @@ type row struct {
 	height float64
 	cols   []core.Col
 	style  *props.Cell
-	config *config.Config
+	config *entity.Config
 }
 
 func New(height float64) core.Row {
@@ -23,7 +24,7 @@ func New(height float64) core.Row {
 	}
 }
 
-func (r *row) SetConfig(config *config.Config) {
+func (r *row) SetConfig(config *entity.Config) {
 	r.config = config
 	for _, cols := range r.cols {
 		cols.SetConfig(config)
@@ -55,7 +56,7 @@ func (r *row) GetStructure() *node.Node[core.Structure] {
 	return node
 }
 
-func (r *row) Render(provider core.Provider, cell core.Cell) {
+func (r *row) Render(provider core.Provider, cell entity.Cell) {
 	cell.Height = r.height
 	innerCell := cell.Copy()
 

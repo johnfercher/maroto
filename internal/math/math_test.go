@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/props"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
-	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/stretchr/testify/assert"
@@ -40,8 +40,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 100.0
-		inner := &config.Dimensions{Width: 100, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		_ = sut.GetInnerCenterCell(inner, outer, percent)
@@ -57,8 +57,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 100.0
-		inner := &config.Dimensions{Width: 100, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -74,8 +74,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 75.0
-		inner := &config.Dimensions{Width: 100, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -91,8 +91,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 100.0
-		inner := &config.Dimensions{Width: 80, Height: 80}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 80, Height: 80}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -108,8 +108,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 75.0
-		inner := &config.Dimensions{Width: 80, Height: 80}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 80, Height: 80}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -125,8 +125,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 100.0
-		inner := &config.Dimensions{Width: 120, Height: 120}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 120, Height: 120}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -142,8 +142,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 75.0
-		inner := &config.Dimensions{Width: 120, Height: 120}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 120, Height: 120}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -159,8 +159,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 100.0
-		outer := &config.Dimensions{Width: 100, Height: 100}
-		inner := &config.Dimensions{Width: 100, Height: 80}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 80}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -176,8 +176,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 75.0
-		outer := &config.Dimensions{Width: 100, Height: 100}
-		inner := &config.Dimensions{Width: 100, Height: 80}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 80}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -193,8 +193,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 100.0
-		inner := &config.Dimensions{Width: 80, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 80, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -210,8 +210,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 75.0
-		inner := &config.Dimensions{Width: 80, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 80, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -227,8 +227,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 100.0
-		inner := &config.Dimensions{Width: 100, Height: 125}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 125}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -244,8 +244,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 75.0
-		inner := &config.Dimensions{Width: 100, Height: 125}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 125}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -261,8 +261,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 100.0
-		inner := &config.Dimensions{Width: 125, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 125, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -278,8 +278,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		sut := math.New()
 
 		percent := 75.0
-		inner := &config.Dimensions{Width: 125, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 125, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
@@ -299,8 +299,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 
 		rect := &props.Rect{}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 100, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		_ = sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -320,8 +320,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Top:     15,
 			Left:    10,
 		}
-		inner := &config.Dimensions{Width: 100, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -340,8 +340,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 100,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 100, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -360,8 +360,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 75,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 100, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -380,8 +380,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 100,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 80, Height: 80}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 80, Height: 80}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -400,8 +400,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 75,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 80, Height: 80}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 80, Height: 80}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -420,8 +420,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 100,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 120, Height: 120}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 120, Height: 120}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -440,8 +440,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 75,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 120, Height: 120}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 120, Height: 120}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -460,8 +460,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 100,
 		}
 		rect.MakeValid()
-		outer := &config.Dimensions{Width: 100, Height: 100}
-		inner := &config.Dimensions{Width: 100, Height: 80}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 80}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -480,8 +480,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 75,
 		}
 		rect.MakeValid()
-		outer := &config.Dimensions{Width: 100, Height: 100}
-		inner := &config.Dimensions{Width: 100, Height: 80}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 80}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -500,8 +500,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 100,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 80, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 80, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -520,8 +520,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 75,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 80, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 80, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -540,8 +540,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 100,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 100, Height: 125}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 125}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -560,8 +560,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 75,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 100, Height: 125}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 100, Height: 125}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -580,8 +580,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 100,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 125, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 125, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)
@@ -600,8 +600,8 @@ func TestMath_GetInnerNonCenterCell(t *testing.T) {
 			Percent: 75,
 		}
 		rect.MakeValid()
-		inner := &config.Dimensions{Width: 125, Height: 100}
-		outer := &config.Dimensions{Width: 100, Height: 100}
+		inner := &entity.Dimensions{Width: 125, Height: 100}
+		outer := &entity.Dimensions{Width: 100, Height: 100}
 
 		// Act
 		cell := sut.GetInnerNonCenterCell(inner, outer, rect)

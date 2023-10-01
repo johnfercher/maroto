@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -31,7 +33,7 @@ func NewText(pdf fpdf.Fpdf, math core.Math, font core.Font) *text {
 }
 
 // Add a text inside a cell.
-func (s *text) Add(text string, cell *core.Cell, textProp *props.Text) {
+func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	if textProp.Top > cell.Height {

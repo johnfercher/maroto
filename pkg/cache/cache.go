@@ -3,41 +3,44 @@ package cache
 import (
 	"errors"
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
 
 type Cache interface {
-	GetImage(value string, extension string) (*Image, error)
-	LoadImage(value string, extension string) error
+	GetImage(value string, extension extension.Type) (*entity.Image, error)
+	LoadImage(value string, extension extension.Type) error
 	GetCode(code string, codeType string) ([]byte, error)
 	SaveCode(code string, codeType string, bytes []byte)
 }
 
 type cache struct {
-	images map[string]*Image
+	images map[string]*entity.Image
 	codes  map[string][]byte
 }
 
 func New() Cache {
 	return &cache{
-		images: make(map[string]*Image),
+		images: make(map[string]*entity.Image),
 		codes:  make(map[string][]byte),
 	}
 }
 
-func (c *cache) LoadImage(file string, extension string) error {
+func (c *cache) LoadImage(file string, extension extension.Type) error {
 	imageBytes, err := os.ReadFile(file)
 	if err != nil {
 		return err
 	}
 
-	img := &Image{Bytes: imageBytes, Extension: extension}
-	c.images[file+extension] = img
+	img := &entity.Image{Bytes: imageBytes, Extension: extension}
+	c.images[file+string(extension)] = img
 
 	return nil
 }
 
-func (c *cache) GetImage(file string, extension string) (*Image, error) {
-	image, ok := c.images[file+extension]
+func (c *cache) GetImage(file string, extension extension.Type) (*entity.Image, error) {
+	image, ok := c.images[file+string(extension)]
 	if ok {
 		return image, nil
 	}

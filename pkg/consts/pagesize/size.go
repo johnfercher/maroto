@@ -13,12 +13,16 @@ const (
 	Legal   Type = "legal"
 	Tabloid Type = "tabloid"
 
-	MinTopMargin      = 10.0
-	MinLeftMargin     = 10.0
-	MinRightMargin    = 10.0
-	MinBottomMargin   = 20.0025
-	DefaultFontSize   = 10.0
-	DefaultMaxGridSum = 12.0
+	DefaultTopMargin    = 10.0
+	DefaultLeftMargin   = 10.0
+	DefaultRightMargin  = 10.0
+	DefaultBottomMargin = MinBottomMargin
+	MinTopMargin        = 0.0
+	MinLeftMargin       = 0.0
+	MinRightMargin      = 0.0
+	MinBottomMargin     = 20.0025
+	DefaultFontSize     = 10.0
+	DefaultMaxGridSum   = 12.0
 )
 
 func GetDimensions(pageSize Type) (float64, float64) {

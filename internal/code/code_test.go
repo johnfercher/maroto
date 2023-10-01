@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/maroto/v2/internal/code"
-	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/stretchr/testify/assert"
 )
@@ -53,7 +54,7 @@ func TestCode_GenBar(t *testing.T) {
 		// Arrange
 		sut := code.New()
 
-		cell := &core.Cell{
+		cell := &entity.Cell{
 			X:      10,
 			Y:      10,
 			Width:  100,
@@ -76,7 +77,7 @@ func TestCode_GenBar(t *testing.T) {
 		// Arrange
 		sut := code.New()
 
-		cell := &core.Cell{
+		cell := &entity.Cell{
 			X:      10,
 			Y:      10,
 			Width:  100,

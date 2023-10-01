@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
@@ -29,8 +29,8 @@ func NewImage(pdf fpdf.Fpdf, math core.Math) *image {
 }
 
 // Add use a byte array to add image to PDF.
-func (s *image) Add(imgBytes []byte, cell *core.Cell, margins *config.Margins,
-	prop *props.Rect, extension extension.Type,
+func (s *image) Add(imgBytes []byte, cell *entity.Cell, margins *entity.Margins,
+	prop *props.Rect, extension extension.Type, flow bool,
 ) error {
 	imageID, _ := uuid.NewRandom()
 
@@ -47,13 +47,15 @@ func (s *image) Add(imgBytes []byte, cell *core.Cell, margins *config.Margins,
 		return errors.New("could not register image options, maybe path/name is wrong")
 	}
 
-	s.addImageToPdf(imageID.String(), info, cell, margins, prop)
+	s.addImageToPdf(imageID.String(), info, cell, margins, prop, flow)
 	return nil
 }
 
-func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *core.Cell, margins *config.Margins, prop *props.Rect) {
-	rectCell := &core.Cell{}
-	dimensions := &config.Dimensions{Width: info.Width(), Height: info.Height()}
+func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *entity.Cell, margins *entity.Margins,
+	prop *props.Rect, flow bool,
+) {
+	rectCell := &entity.Cell{}
+	dimensions := &entity.Dimensions{Width: info.Width(), Height: info.Height()}
 
 	if prop.Center {
 		rectCell = s.math.GetInnerCenterCell(dimensions, cell.GetDimensions(), prop.Percent)
@@ -61,5 +63,5 @@ func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cel
 		rectCell = s.math.GetInnerNonCenterCell(dimensions, cell.GetDimensions(), prop)
 	}
 	s.pdf.Image(imageLabel, cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+margins.Top,
-		rectCell.Width, rectCell.Height, false, "", 0, "")
+		rectCell.Width, rectCell.Height, flow, "", 0, "")
 }

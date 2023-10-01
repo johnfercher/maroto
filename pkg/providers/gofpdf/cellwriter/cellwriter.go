@@ -1,15 +1,15 @@
 package cellwriter
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/jung-kurt/gofpdf"
 )
 
 type CellWriter interface {
 	SetNext(next CellWriter)
-	Apply(width, height float64, config *config.Config, prop *props.Cell)
+	Apply(width, height float64, config *entity.Config, prop *props.Cell)
 }
 
 type cellWriter struct {
@@ -26,7 +26,7 @@ func NewCellCreator(fpdf *gofpdf.Fpdf) *cellWriter {
 	}
 }
 
-func (c *cellWriter) Apply(width, height float64, config *config.Config, prop *props.Cell) {
+func (c *cellWriter) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
 	if prop == nil {
 		bd := border.None
 		if config.Debug {

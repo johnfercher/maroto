@@ -6,6 +6,8 @@ import (
 	"io"
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -25,12 +27,12 @@ import (
 )
 
 type maroto struct {
-	config   *config.Config
+	config   *entity.Config
 	provider core.Provider
 	cache    cache.Cache
 
 	// Building
-	cell          core.Cell
+	cell          entity.Cell
 	pages         []core.Page
 	rows          []core.Row
 	header        []core.Row
@@ -44,14 +46,14 @@ type maroto struct {
 	pool async.Processor[[]core.Page, []byte]
 }
 
-func NewMaroto(cfgs ...*config.Config) core.Maroto {
+func NewMaroto(cfgs ...*entity.Config) core.Maroto {
 	cache := cache.New()
 	cfg := getConfig(cfgs...)
 	provider := getProvider(cache, cfg)
 
 	m := &maroto{
 		provider: provider,
-		cell: core.NewRootContext(cfg.Dimensions.Width, cfg.Dimensions.Height, config.Margins{
+		cell: entity.NewRootContext(cfg.Dimensions.Width, cfg.Dimensions.Height, entity.Margins{
 			Left:   cfg.Margins.Left,
 			Top:    cfg.Margins.Top,
 			Right:  cfg.Margins.Right,
@@ -313,7 +315,7 @@ func (m *maroto) getRowsHeight(rows ...core.Row) float64 {
 	return height
 }
 
-func getConfig(configs ...*config.Config) *config.Config {
+func getConfig(configs ...*entity.Config) *entity.Config {
 	if len(configs) > 0 {
 		return configs[0]
 	}
@@ -321,7 +323,7 @@ func getConfig(configs ...*config.Config) *config.Config {
 	return config.NewBuilder().Build()
 }
 
-func getProvider(cache cache.Cache, cfg *config.Config) core.Provider {
+func getProvider(cache cache.Cache, cfg *entity.Config) core.Provider {
 	return gofpdf.New(cfg, cache)
 }
 

@@ -2,10 +2,10 @@ package image
 
 import (
 	"github.com/johnfercher/go-tree/node"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -13,7 +13,7 @@ import (
 type fileImage struct {
 	path   string
 	prop   props.Rect
-	config *config.Config
+	config *entity.Config
 }
 
 func NewFromFile(path string, ps ...props.Rect) core.Component {
@@ -40,7 +40,7 @@ func NewFromFileRow(height float64, path string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
-func (f *fileImage) Render(provider core.Provider, cell *core.Cell) {
+func (f *fileImage) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddImageFromFile(f.path, cell, &f.prop)
 }
 
@@ -53,6 +53,6 @@ func (f *fileImage) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
-func (f *fileImage) SetConfig(config *config.Config) {
+func (f *fileImage) SetConfig(config *entity.Config) {
 	f.config = config
 }

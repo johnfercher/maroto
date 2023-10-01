@@ -3,10 +3,11 @@ package image
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -16,7 +17,7 @@ type bytesImage struct {
 	bytes     []byte
 	extension extension.Type
 	prop      props.Rect
-	config    *config.Config
+	config    *entity.Config
 }
 
 func NewFromBytes(bytes []byte, extension extension.Type, ps ...props.Rect) core.Component {
@@ -44,7 +45,7 @@ func NewFromBytesRow(height float64, bytes []byte, extension extension.Type, ps 
 	return row.New(height).Add(c)
 }
 
-func (b *bytesImage) Render(provider core.Provider, cell *core.Cell) {
+func (b *bytesImage) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddImageFromBytes(b.bytes, cell, &b.prop, b.extension)
 }
 
@@ -62,6 +63,6 @@ func (b *bytesImage) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
-func (b *bytesImage) SetConfig(config *config.Config) {
+func (b *bytesImage) SetConfig(config *entity.Config) {
 	b.config = config
 }

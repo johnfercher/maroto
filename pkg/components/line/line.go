@@ -4,13 +4,13 @@ import (
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type line struct {
-	config *config.Config
+	config *entity.Config
 	prop   props.Line
 }
 
@@ -45,10 +45,10 @@ func (l *line) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
-func (l *line) SetConfig(config *config.Config) {
+func (l *line) SetConfig(config *entity.Config) {
 	l.config = config
 }
 
-func (l *line) Render(provider core.Provider, cell *core.Cell) {
+func (l *line) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddLine(cell, &l.prop)
 }
