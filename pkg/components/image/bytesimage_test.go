@@ -2,10 +2,11 @@ package image_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewFromBytes(t *testing.T) {

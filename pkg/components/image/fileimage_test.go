@@ -2,9 +2,10 @@ package image_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewFromFile(t *testing.T) {
