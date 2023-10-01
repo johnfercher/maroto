@@ -39,12 +39,12 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	err = document.Save("docs/assets/pdf/mergepdf2.pdf")
+	err = document.Save("docs/assets/pdf/mergepdfv2.pdf")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	err = document.GetReport().Save("docs/assets/text/mergepdf2.txt")
+	err = document.GetReport().Save("docs/assets/text/mergepdfv2.txt")
 	if err != nil {
 		log.Fatal(err.Error())
 	}

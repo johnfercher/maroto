@@ -1,4 +1,4 @@
-# Add PDF
+# Merge PDF
 
 ## Code Example
 [filename](../../assets/examples/mergepdf/v2/main.go  ':include :type=code')
@@ -6,8 +6,8 @@
 
 ## PDF Generated
 ```pdf
-	assets/pdf/addpdfv2.pdf
+	assets/pdf/mergepdfv2.pdf
 ```
 
 ## Time Execution
-[filename](../../assets/text/addpdfv2.txt  ':include :type=code')
+[filename](../../assets/text/mergepdfv2.txt  ':include :type=code')
