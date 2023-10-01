@@ -32,7 +32,9 @@ func (p *page) Render(provider core.Provider, cell entity.Cell) {
 	prop := &props.Rect{}
 	prop.MakeValid()
 
-	provider.AddBackgroundImageFromBytes(p.config.BackgroundImage.Bytes, &innerCell, prop, p.config.BackgroundImage.Extension)
+	if p.config.BackgroundImage != nil {
+		provider.AddBackgroundImageFromBytes(p.config.BackgroundImage.Bytes, &innerCell, prop, p.config.BackgroundImage.Extension)
+	}
 
 	for _, row := range p.rows {
 		row.Render(provider, innerCell)
