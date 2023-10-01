@@ -2,34 +2,25 @@ package core
 
 import (
 	"encoding/base64"
-	"errors"
 	"os"
-
-	"github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
 
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
 
 type pdf struct {
-	bytes        []byte
-	report       *metrics.Report
-	documentType documenttype.DocumentType
+	bytes  []byte
+	report *metrics.Report
 }
 
 func NewPDF(bytes []byte, report *metrics.Report) Document {
 	return &pdf{
-		bytes:        bytes,
-		report:       report,
-		documentType: documenttype.PDF,
+		bytes:  bytes,
+		report: report,
 	}
 }
 
 func (p *pdf) GetBytes() []byte {
 	return p.bytes
-}
-
-func (p *pdf) GetType() documenttype.DocumentType {
-	return p.documentType
 }
 
 func (p *pdf) GetBase64() string {
@@ -53,16 +44,4 @@ func (p *pdf) Save(file string) error {
 	}
 
 	return nil
-}
-
-func (p *pdf) To(newType documenttype.DocumentType) (Document, error) {
-	if newType == documenttype.PDF {
-		return p, nil
-	}
-
-	if newType == documenttype.ZPL {
-		return NewZPLFromPDF(p), nil
-	}
-
-	return nil, errors.New("invalid type conversion")
 }

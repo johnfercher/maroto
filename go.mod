@@ -8,10 +8,8 @@ require (
 	github.com/google/uuid v1.3.1
 	github.com/johnfercher/go-tree v1.0.5
 	github.com/jung-kurt/gofpdf v1.16.2
-	github.com/karmdip-mi/go-fitz v0.0.0-20210702102225-a530a79566e9
 	github.com/pdfcpu/pdfcpu v0.5.0
 	github.com/stretchr/testify v1.8.4
-	simonwaldherr.de/go/zplgfa v1.1.1
 )
 
 require (

@@ -58,7 +58,6 @@ examples:
 	go run docs/assets/examples/orientation/v2/main.go
 	go run docs/assets/examples/pagenumber/v2/main.go
 	go run docs/assets/examples/parallelism/v2/main.go
-	go run docs/assets/examples/pdf2zpl/v2/main.go
 	go run docs/assets/examples/protection/v2/main.go
 	go run docs/assets/examples/qrgrid/v2/main.go
 	go run docs/assets/examples/signaturegrid/v2/main.go

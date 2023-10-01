@@ -2,7 +2,6 @@ package core
 
 import (
 	"github.com/johnfercher/go-tree/node"
-	documenttype "github.com/johnfercher/maroto/v2/pkg/consts/documenttype"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -21,11 +20,9 @@ type Maroto interface {
 
 type Document interface {
 	GetBytes() []byte
-	GetType() documenttype.DocumentType
 	GetBase64() string
 	Save(file string) error
 	GetReport() *metrics.Report
-	To(documenttype.DocumentType) (Document, error)
 }
 
 type Node interface {
