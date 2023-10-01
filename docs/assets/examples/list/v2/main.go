@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
-	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 )
 
@@ -21,8 +22,8 @@ var background = &props.Color{
 }
 
 func main() {
-	mrt := pkg.NewMaroto()
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New()
+	m := maroto.NewMetricsDecorator(mrt)
 
 	objects := getObjects(100)
 	rows, err := list.Build[Object](objects)

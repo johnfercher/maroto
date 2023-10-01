@@ -4,7 +4,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/johnfercher/maroto/v2/pkg"
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 )
@@ -18,8 +19,8 @@ func main() {
 		WithCreationDate(time.Now()).
 		Build()
 
-	mrt := pkg.NewMaroto(cfg)
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	m.AddRows(
 		text.NewRow(30, "metadatas"),

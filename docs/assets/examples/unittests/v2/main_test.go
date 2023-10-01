@@ -3,7 +3,8 @@ package main_test
 import (
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg"
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/signature"
@@ -14,7 +15,7 @@ import (
 
 func TestDocument_GetStructure(t *testing.T) {
 	// Arrange
-	m := pkg.NewMaroto()
+	m := maroto.New()
 
 	m.AddRow(10,
 		code.NewBarCol(4, "barcode"),

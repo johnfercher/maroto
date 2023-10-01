@@ -1,4 +1,4 @@
-package pkg
+package maroto
 
 import (
 	"errors"
@@ -44,7 +44,7 @@ type maroto struct {
 	pool async.Processor[[]core.Page, []byte]
 }
 
-func NewMaroto(cfgs ...*entity.Config) core.Maroto {
+func New(cfgs ...*entity.Config) core.Maroto {
 	cache := cache.New()
 	cfg := getConfig(cfgs...)
 	provider := getProvider(cache, cfg)

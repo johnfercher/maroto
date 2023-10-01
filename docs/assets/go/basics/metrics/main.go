@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/johnfercher/maroto/v2/pkg"
+	"github.com/johnfercher/maroto/v2"
 )
 
 func main() {
-	mrt := pkg.NewMaroto()
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New()
+	m := maroto.NewMetricsDecorator(mrt)
 
 	// AddRows things
 
