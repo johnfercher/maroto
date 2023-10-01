@@ -1,7 +1,7 @@
 # Add PDF
 
 ## Code Example
-[filename](../../assets/examples/addpdf/v2/main.go  ':include :type=code')
+[filename](../../assets/examples/mergepdf/v2/main.go  ':include :type=code')
 
 
 ## PDF Generated
