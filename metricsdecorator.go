@@ -1,4 +1,4 @@
-package pkg
+package maroto
 
 import (
 	"github.com/johnfercher/go-tree/node"

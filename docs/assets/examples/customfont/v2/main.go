@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/repository"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
@@ -12,7 +14,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
-	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -36,8 +37,8 @@ func main() {
 	cfg := builder.WithDefaultFont(&props.Font{Family: customFont}).
 		Build()
 
-	mrt := pkg.NewMaroto(cfg)
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	header, contents := getLanguageSample()
 

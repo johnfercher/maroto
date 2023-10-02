@@ -3,11 +3,12 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 
-	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -18,8 +19,8 @@ func main() {
 		WithDebug(true).
 		Build()
 
-	mrt := pkg.NewMaroto(cfg)
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	m.AddRow(40,
 		image.NewFromFileCol(4, "docs/assets/images/biplane.jpg", props.Rect{

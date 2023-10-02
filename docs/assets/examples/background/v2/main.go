@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
@@ -13,8 +15,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
-
-	"github.com/johnfercher/maroto/v2/pkg"
 )
 
 func main() {
@@ -28,8 +28,8 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	mrt := pkg.NewMaroto(b.Build())
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New(b.Build())
+	m := maroto.NewMetricsDecorator(mrt)
 
 	m.AddPages(AddPage(), AddPage(), AddPage(), AddPage(), AddPage())
 

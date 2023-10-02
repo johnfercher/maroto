@@ -1,14 +1,15 @@
-package pkg_test
+package maroto_test
 
 import (
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 
-	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 )
 
@@ -35,7 +36,7 @@ func BenchmarkMarotoGenerateAsync(b *testing.B) {
 		b.Run(fmt.Sprintf("pages=%d,workers=%d", param.pages, param.workers), func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				cfg := config.NewBuilder().WithWorkerPoolSize(param.workers).Build()
-				m := pkg.NewMaroto(cfg)
+				m := maroto.New(cfg)
 				for i := 0; i < param.pages; i++ {
 					m.AddRows(row.New(10).Add(col.New(12).Add(text.New("text"))))
 				}

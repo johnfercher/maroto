@@ -3,12 +3,13 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
-	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -18,8 +19,8 @@ func main() {
 		WithDebug(true).
 		Build()
 
-	mrt := pkg.NewMaroto(cfg)
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	err := m.RegisterFooter(text.NewRow(20, "Footer", props.Text{
 		Size:  10,

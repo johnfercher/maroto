@@ -4,6 +4,8 @@ import (
 	"log"
 	"math/rand"
 
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
@@ -12,7 +14,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
-	"github.com/johnfercher/maroto/v2/pkg"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -78,8 +79,8 @@ func main() {
 		Top:   2,
 	}
 
-	mrt := pkg.NewMaroto(cfg)
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	for i := 0; i < 15; i++ {
 		m.AddRows(

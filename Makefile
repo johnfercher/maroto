@@ -30,8 +30,8 @@ install:
 docs:
 	docsify serve docs/
 
-.PHONY: mock
-mock:
+.PHONY: mocks
+mocks:
 	mockery
 
 .PHONY: examples

@@ -8,7 +8,7 @@ type Cell struct {
 	Height float64
 }
 
-func (c *Cell) GetDimensions() *Dimensions {
+func (c Cell) GetDimensions() *Dimensions {
 	return &Dimensions{Width: c.Width, Height: c.Height}
 }
 

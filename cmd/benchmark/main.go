@@ -5,7 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/johnfercher/maroto/v2/pkg"
+	"github.com/johnfercher/maroto/v2"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -51,8 +52,8 @@ func run() *metrics.Time {
 		WithPageNumber("Page {current} of {total}", props.South).
 		Build()
 
-	mrt := pkg.NewMaroto(cfg)
-	m := pkg.NewMetricsDecorator(mrt)
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
 
 	err := m.RegisterHeader(buildHeader()...)
 	if err != nil {
