@@ -22,6 +22,17 @@ func BarcodeProp() props.Barcode {
 	return prop
 }
 
+func RectProp() props.Rect {
+	prop := props.Rect{
+		Top:     10,
+		Left:    10,
+		Percent: 98,
+		Center:  false,
+	}
+	prop.MakeValid()
+	return prop
+}
+
 func CellEntity() entity.Cell {
 	return entity.Cell{
 		X:      10,

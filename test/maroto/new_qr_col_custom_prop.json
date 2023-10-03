@@ -1,0 +1,16 @@
+{
+	"value": 12,
+	"type": "col",
+	"nodes": [
+		{
+			"value": "code",
+			"type": "qrcode",
+			"details": {
+				"prop_center": false,
+				"prop_left": 10,
+				"prop_percent": 98,
+				"prop_top": 10
+			}
+		}
+	]
+}

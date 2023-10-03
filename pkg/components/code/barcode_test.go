@@ -1,3 +1,4 @@
+// nolint: dupl
 package code_test
 
 import (
@@ -65,7 +66,7 @@ func TestNewBarRow(t *testing.T) {
 func TestBarcode_Render(t *testing.T) {
 	t.Run("should call provider correctly", func(t *testing.T) {
 		// Arrange
-		codeValue := "code"
+		codeValue := "barcode"
 		cell := fixture.CellEntity()
 		prop := fixture.BarcodeProp()
 		sut := code.NewBar(codeValue, prop)

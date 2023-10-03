@@ -63,14 +63,19 @@ func (m *MarotoTest) Assert(structure *node.Node[core.Structure]) *MarotoTest {
 
 func (m *MarotoTest) Equals(file string) *MarotoTest {
 	actual := m.buildNode(m.node)
-	actualBytes, _ := json.MarshalIndent(actual, "", "\t")
+	actualBytes, _ := json.Marshal(actual)
+	actualString := string(actualBytes)
 
-	expectBytes, err := os.ReadFile(configSingleton.getAbsoluteFilePath(file))
+	indentedExpectBytes, err := os.ReadFile(configSingleton.getAbsoluteFilePath(file))
 	if err != nil {
 		assert.Fail(m.t, err.Error())
 	}
 
-	assert.Equal(m.t, string(expectBytes), string(actualBytes))
+	savedNode := &Node{}
+	_ = json.Unmarshal(indentedExpectBytes, savedNode)
+	expectedBytes, _ := json.Marshal(savedNode)
+
+	assert.Equal(m.t, string(expectedBytes), actualString)
 	return m
 }
 

@@ -46,8 +46,9 @@ func (m *matrixCode) Render(provider core.Provider, cell *entity.Cell) {
 
 func (m *matrixCode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:  "matrixcode",
-		Value: m.code,
+		Type:    "matrixcode",
+		Value:   m.code,
+		Details: m.prop.ToMap(),
 	}
 
 	return node.New(str)

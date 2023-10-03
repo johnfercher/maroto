@@ -46,8 +46,9 @@ func (q *qrCode) Render(provider core.Provider, cell *entity.Cell) {
 
 func (q *qrCode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:  "qrcode",
-		Value: q.code,
+		Type:    "qrcode",
+		Value:   q.code,
+		Details: q.prop.ToMap(),
 	}
 
 	return node.New(str)
