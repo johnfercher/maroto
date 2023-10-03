@@ -1,38 +1,27 @@
 {
-	"value": null,
-	"type": "pkg",
-	"details": null,
+	"type": "maroto",
 	"nodes": [
 		{
-			"value": null,
 			"type": "page",
-			"details": null,
 			"nodes": [
 				{
 					"value": 10,
 					"type": "row",
-					"details": {
-						"cols_size": 3
-					},
 					"nodes": [
 						{
 							"value": 4,
 							"type": "col",
-							"details": {
-								"components_size": 1,
-								"is_max": false
-							},
 							"nodes": [
 								{
 									"value": "barcode",
 									"type": "barcode",
 									"details": {
-										"barcode_prop_center": false,
-										"barcode_prop_left": 0,
-										"barcode_prop_percent": 100,
-										"barcode_prop_proportion_height": 0.2,
-										"barcode_prop_proportion_width": 1,
-										"barcode_prop_top": 0
+										"prop_center": false,
+										"prop_left": 0,
+										"prop_percent": 100,
+										"prop_proportion_height": 0.2,
+										"prop_proportion_width": 1,
+										"prop_top": 0
 									}
 								}
 							]
@@ -40,30 +29,20 @@
 						{
 							"value": 4,
 							"type": "col",
-							"details": {
-								"components_size": 1,
-								"is_max": false
-							},
 							"nodes": [
 								{
 									"value": "matrixcode",
-									"type": "matrixcode",
-									"details": null
+									"type": "matrixcode"
 								}
 							]
 						},
 						{
 							"value": 4,
 							"type": "col",
-							"details": {
-								"components_size": 1,
-								"is_max": false
-							},
 							"nodes": [
 								{
 									"value": "qrcode",
-									"type": "qrcode",
-									"details": null
+									"type": "qrcode"
 								}
 							]
 						}
@@ -72,67 +51,44 @@
 				{
 					"value": 10,
 					"type": "row",
-					"details": {
-						"cols_size": 4
-					},
 					"nodes": [
 						{
 							"value": 3,
 							"type": "col",
-							"details": {
-								"components_size": 1,
-								"is_max": false
-							},
 							"nodes": [
 								{
 									"value": "barcode",
-									"type": "fileimage",
-									"details": null
+									"type": "fileimage"
 								}
 							]
 						},
 						{
 							"value": 3,
 							"type": "col",
-							"details": {
-								"components_size": 1,
-								"is_max": false
-							},
 							"nodes": [
 								{
 									"value": "[0 1 2]",
-									"type": "bytesImage",
-									"details": null
+									"type": "bytesImage"
 								}
 							]
 						},
 						{
 							"value": 3,
 							"type": "col",
-							"details": {
-								"components_size": 1,
-								"is_max": false
-							},
 							"nodes": [
 								{
 									"value": "signature",
-									"type": "signature",
-									"details": null
+									"type": "signature"
 								}
 							]
 						},
 						{
 							"value": 3,
 							"type": "col",
-							"details": {
-								"components_size": 1,
-								"is_max": false
-							},
 							"nodes": [
 								{
 									"value": "text",
-									"type": "text",
-									"details": null
+									"type": "text"
 								}
 							]
 						}
@@ -141,17 +97,10 @@
 				{
 					"value": 246.9975,
 					"type": "row",
-					"details": {
-						"cols_size": 1
-					},
 					"nodes": [
 						{
 							"value": 12,
-							"type": "col",
-							"details": {
-								"components_size": 0,
-								"is_max": false
-							}
+							"type": "col"
 						}
 					]
 				}

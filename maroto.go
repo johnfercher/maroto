@@ -134,7 +134,7 @@ func (m *maroto) GetStructure() *node.Node[core.Structure] {
 	m.fillPageToAddNew()
 
 	str := core.Structure{
-		Type: "pkg",
+		Type: "maroto",
 	}
 	node := node.New(str)
 
