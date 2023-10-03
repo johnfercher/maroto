@@ -1,0 +1,31 @@
+{
+	"value": 10,
+	"type": "row",
+	"details": {
+		"cols_size": 1
+	},
+	"nodes": [
+		{
+			"value": 0,
+			"type": "col",
+			"details": {
+				"components_size": 1,
+				"is_max": true
+			},
+			"nodes": [
+				{
+					"value": "code",
+					"type": "barcode",
+					"details": {
+						"prop_center": false,
+						"prop_left": 0,
+						"prop_percent": 100,
+						"prop_proportion_height": 0.2,
+						"prop_proportion_width": 1,
+						"prop_top": 0
+					}
+				}
+			]
+		}
+	]
+}

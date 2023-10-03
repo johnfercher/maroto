@@ -30,7 +30,6 @@ func TestMaroto_GetStructure(t *testing.T) {
 		text.NewCol(3, "text"),
 	)
 
-	// nolint: lll
-	test.New(t).Assert(m.GetStructure()).
-		EqualsToJsonFile("example_unit_test.json")
+	// Assert
+	test.New(t).Assert(m.GetStructure()).Equals("example_unit_test.json")
 }

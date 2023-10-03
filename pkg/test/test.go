@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"gopkg.in/yaml.v3"
 	"os"
 	"strings"
 	"testing"
+
+	"gopkg.in/yaml.v3"
 
 	"github.com/johnfercher/go-tree/node"
 
@@ -16,9 +17,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var marotoFile = ".maroto.yml"
-var goModFile = "go.mod"
-var configSingleton *Config = nil
+var (
+	marotoFile              = ".maroto.yml"
+	goModFile               = "go.mod"
+	configSingleton *Config = nil
+)
 
 type Node struct {
 	Value   interface{}            `json:"value"`
@@ -58,7 +61,7 @@ func (m *MarotoTest) Assert(structure *node.Node[core.Structure]) *MarotoTest {
 	return m
 }
 
-func (m *MarotoTest) EqualsToJsonFile(file string) *MarotoTest {
+func (m *MarotoTest) Equals(file string) *MarotoTest {
 	actual := m.buildNode(m.node)
 	actualBytes, _ := json.MarshalIndent(actual, "", "\t")
 
@@ -71,7 +74,7 @@ func (m *MarotoTest) EqualsToJsonFile(file string) *MarotoTest {
 	return m
 }
 
-func (m *MarotoTest) SaveJsonFile(file string) *MarotoTest {
+func (m *MarotoTest) Save(file string) *MarotoTest {
 	actual := m.buildNode(m.node)
 	actualBytes, _ := json.MarshalIndent(actual, "", "\t")
 
