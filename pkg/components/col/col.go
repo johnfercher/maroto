@@ -40,8 +40,6 @@ func (c *col) GetSize() int {
 
 func (c *col) GetStructure() *node.Node[core.Structure] {
 	detailsMap := c.style.ToMap()
-	detailsMap["is_max"] = c.isMax
-	detailsMap["components_size"] = len(c.components)
 
 	str := core.Structure{
 		Type:    "col",
