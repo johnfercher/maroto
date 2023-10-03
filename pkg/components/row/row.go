@@ -39,12 +39,13 @@ func (r *row) GetHeight() float64 {
 }
 
 func (r *row) GetStructure() *node.Node[core.Structure] {
+	detailsMap := r.style.ToMap()
+	detailsMap["cols_size"] = len(r.cols)
+
 	str := core.Structure{
-		Type:  "row",
-		Value: r.height,
-		Details: map[string]interface{}{
-			"cols_size": len(r.cols),
-		},
+		Type:    "row",
+		Value:   r.height,
+		Details: detailsMap,
 	}
 
 	node := node.New(str)

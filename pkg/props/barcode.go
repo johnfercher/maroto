@@ -17,6 +17,17 @@ type Barcode struct {
 	Center bool
 }
 
+func (b *Barcode) ToMap() map[string]interface{} {
+	return map[string]interface{}{
+		"barcode_prop_left":              b.Left,
+		"barcode_prop_top":               b.Top,
+		"barcode_prop_percent":           b.Percent,
+		"barcode_prop_proportion_width":  b.Proportion.Width,
+		"barcode_prop_proportion_height": b.Proportion.Height,
+		"barcode_prop_center":            b.Center,
+	}
+}
+
 func (b *Barcode) ToRectProp() *Rect {
 	return &Rect{
 		Left:    b.Left,

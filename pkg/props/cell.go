@@ -12,3 +12,17 @@ type Cell struct {
 	BorderThickness float64
 	LineStyle       linestyle.Type
 }
+
+func (c *Cell) ToMap() map[string]interface{} {
+	if c == nil {
+		return make(map[string]interface{})
+	}
+
+	return map[string]interface{}{
+		"cell_prop_backgrond_color":   c.BackgroundColor.ToString(),
+		"cell_prop_border_color":      c.BorderColor.ToString(),
+		"cell_prop_border_type":       c.BorderType,
+		"cell_prop_border_thickness":  c.BorderThickness,
+		"cell_prop_border_line_style": c.LineStyle,
+	}
+}
