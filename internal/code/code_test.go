@@ -12,12 +12,23 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	// Act
-	sut := code.New()
+	t.Run("constructor", func(t *testing.T) {
+		// Act
+		sut := code.New()
 
-	// Assert
-	assert.NotNil(t, sut)
-	assert.Equal(t, "*code.code", fmt.Sprintf("%T", sut))
+		// Assert
+		assert.NotNil(t, sut)
+		assert.Equal(t, "*code.code", fmt.Sprintf("%T", sut))
+	})
+	t.Run("singleton is applied", func(t *testing.T) {
+		// Act
+		sut1 := code.New()
+		sut2 := code.New()
+
+		// Assert
+		assert.NotNil(t, sut1)
+		assert.NotNil(t, sut2)
+	})
 }
 
 func TestCode_GenDataMatrix(t *testing.T) {

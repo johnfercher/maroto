@@ -13,7 +13,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/test"
 )
 
-func TestDocument_GetStructure(t *testing.T) {
+func TestMaroto_GetStructure(t *testing.T) {
 	// Arrange
 	m := maroto.New()
 
@@ -30,6 +30,6 @@ func TestDocument_GetStructure(t *testing.T) {
 		text.NewCol(3, "text"),
 	)
 
-	// nolint: lll
-	test.New(t).Assert(m).JSON(`{"type":"pkg","nodes":[{"type":"page","nodes":[{"type":"row","nodes":[{"type":"col","nodes":[{"type":"barcode"}]},{"type":"col","nodes":[{"type":"matrixcode"}]},{"type":"col","nodes":[{"type":"qrcode"}]}]},{"type":"row","nodes":[{"type":"col","nodes":[{"type":"fileimage"}]},{"type":"col","nodes":[{"type":"bytesImage"}]},{"type":"col","nodes":[{"type":"signature"}]},{"type":"col","nodes":[{"type":"text"}]}]},{"type":"row","nodes":[{"type":"col"}]}]}]}`)
+	// Assert
+	test.New(t).Assert(m.GetStructure()).Equals("example_unit_test.json")
 }

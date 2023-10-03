@@ -1,5 +1,7 @@
 package props
 
+import "fmt"
+
 // Color represents a color in the RGB (Red, Green, Blue) space,
 // is possible mix values, when all values are 0 the result color is black
 // when all values are 255 the result color is white.
@@ -12,10 +14,18 @@ type Color struct {
 	Blue int
 }
 
+func (c *Color) ToString() string {
+	if c == nil {
+		return ""
+	}
+
+	return fmt.Sprintf("RGB(%d, %d, %d)", c.Red, c.Green, c.Blue)
+}
+
 // IsWhite from Color will return true if all components of color.
 // are in the maximum value.
-func (s *Color) IsWhite() bool {
-	return s.Red == 255 && s.Green == 255 && s.Blue == 255
+func (c *Color) IsWhite() bool {
+	return c.Red == 255 && c.Green == 255 && c.Blue == 255
 }
 
 // NewWhite return a Color with all components (red, green and blue) as 255.

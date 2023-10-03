@@ -45,15 +45,12 @@ func (b *barcode) Render(provider core.Provider, cell *entity.Cell) {
 
 func (b *barcode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:  "barcode",
-		Value: b.code,
+		Type:    "barcode",
+		Value:   b.code,
+		Details: b.prop.ToMap(),
 	}
 
 	return node.New(str)
-}
-
-func (b *barcode) GetValue() string {
-	return b.code
 }
 
 func (b *barcode) SetConfig(config *entity.Config) {
