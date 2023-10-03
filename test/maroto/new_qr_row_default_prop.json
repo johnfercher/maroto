@@ -8,7 +8,13 @@
 			"nodes": [
 				{
 					"value": "code",
-					"type": "qrcode"
+					"type": "qrcode",
+					"details": {
+						"prop_center": false,
+						"prop_left": 0,
+						"prop_percent": 100,
+						"prop_top": 0
+					}
 				}
 			]
 		}
