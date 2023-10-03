@@ -25,25 +25,25 @@ func (r *Rect) ToMap() map[string]interface{} {
 
 // MakeValid from Rect will make the properties from a rectangle reliable to fit inside a cell
 // and define default values for a rectangle.
-func (s *Rect) MakeValid() {
+func (r *Rect) MakeValid() {
 	minPercentage := 0.0
 	maxPercentage := 100.0
 	minValue := 0.0
 
-	if s.Percent <= minPercentage || s.Percent > maxPercentage {
-		s.Percent = maxPercentage
+	if r.Percent <= minPercentage || r.Percent > maxPercentage {
+		r.Percent = maxPercentage
 	}
 
-	if s.Center {
-		s.Left = 0
-		s.Top = 0
+	if r.Center {
+		r.Left = 0
+		r.Top = 0
 	}
 
-	if s.Left < minValue {
-		s.Left = minValue
+	if r.Left < minValue {
+		r.Left = minValue
 	}
 
-	if s.Top < minValue {
-		s.Top = minValue
+	if r.Top < minValue {
+		r.Top = minValue
 	}
 }
