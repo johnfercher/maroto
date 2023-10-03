@@ -1,8 +1,6 @@
 package col
 
 import (
-	"fmt"
-
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/go-tree/node"
@@ -43,7 +41,11 @@ func (c *col) GetSize() int {
 func (c *col) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "col",
-		Value: fmt.Sprintf("%d", c.size),
+		Value: c.size,
+		Details: map[string]interface{}{
+			"is_max":          c.isMax,
+			"components_size": len(c.components),
+		},
 	}
 
 	node := node.New(str)

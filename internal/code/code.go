@@ -16,11 +16,19 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
+// codeInstance is the singleton of code, opted to use a singleton to ensure that
+// this will not be instantiated more than once since there is no need to do this
+// because code is stateless.
+var codeInstance *code = nil
+
 type code struct{}
 
-// New create a Code.
+// New create a Code (Singleton).
 func New() *code {
-	return &code{}
+	if codeInstance == nil {
+		codeInstance = &code{}
+	}
+	return codeInstance
 }
 
 // GenDataMatrix is responsible to generate a data matrix byte array.
@@ -50,14 +58,8 @@ func (c *code) GenBar(code string, cell *entity.Cell, prop *props.Barcode) (*ent
 		return nil, err
 	}
 
-	width := cell.Width
-	unscaledWidth := float64(barCode.Bounds().Dx())
-	if unscaledWidth > width {
-		width = unscaledWidth
-	}
-
+	width := float64(barCode.Bounds().Dx())
 	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
-
 	height := int(width * heightPercentFromWidth)
 
 	scaledBarCode, err := barcode.Scale(barCode, int(width), height)

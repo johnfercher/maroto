@@ -1,0 +1,161 @@
+{
+	"value": null,
+	"type": "pkg",
+	"details": null,
+	"nodes": [
+		{
+			"value": null,
+			"type": "page",
+			"details": null,
+			"nodes": [
+				{
+					"value": 10,
+					"type": "row",
+					"details": {
+						"cols_size": 3
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"details": {
+								"components_size": 1,
+								"is_max": false
+							},
+							"nodes": [
+								{
+									"value": "barcode",
+									"type": "barcode",
+									"details": {
+										"prop_center": false,
+										"prop_left": 0,
+										"prop_percent": 100,
+										"prop_proportion_height": 0.2,
+										"prop_proportion_width": 1,
+										"prop_top": 0
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"details": {
+								"components_size": 1,
+								"is_max": false
+							},
+							"nodes": [
+								{
+									"value": "matrixcode",
+									"type": "matrixcode",
+									"details": null
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"details": {
+								"components_size": 1,
+								"is_max": false
+							},
+							"nodes": [
+								{
+									"value": "qrcode",
+									"type": "qrcode",
+									"details": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"details": {
+						"cols_size": 4
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col",
+							"details": {
+								"components_size": 1,
+								"is_max": false
+							},
+							"nodes": [
+								{
+									"value": "barcode",
+									"type": "fileimage",
+									"details": null
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"details": {
+								"components_size": 1,
+								"is_max": false
+							},
+							"nodes": [
+								{
+									"value": "[0 1 2]",
+									"type": "bytesImage",
+									"details": null
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"details": {
+								"components_size": 1,
+								"is_max": false
+							},
+							"nodes": [
+								{
+									"value": "signature",
+									"type": "signature",
+									"details": null
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"details": {
+								"components_size": 1,
+								"is_max": false
+							},
+							"nodes": [
+								{
+									"value": "text",
+									"type": "text",
+									"details": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 246.9975,
+					"type": "row",
+					"details": {
+						"cols_size": 1
+					},
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"details": {
+								"components_size": 0,
+								"is_max": false
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

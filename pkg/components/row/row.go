@@ -1,8 +1,6 @@
 package row
 
 import (
-	"fmt"
-
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/go-tree/node"
@@ -43,7 +41,10 @@ func (r *row) GetHeight() float64 {
 func (r *row) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "row",
-		Value: fmt.Sprintf("%2.f", r.height),
+		Value: r.height,
+		Details: map[string]interface{}{
+			"cols_size": len(r.cols),
+		},
 	}
 
 	node := node.New(str)

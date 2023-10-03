@@ -47,13 +47,17 @@ func (b *barcode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:  "barcode",
 		Value: b.code,
+		Details: map[string]interface{}{
+			"prop_left":              b.prop.Left,
+			"prop_top":               b.prop.Top,
+			"prop_percent":           b.prop.Percent,
+			"prop_proportion_width":  b.prop.Proportion.Width,
+			"prop_proportion_height": b.prop.Proportion.Height,
+			"prop_center":            b.prop.Center,
+		},
 	}
 
 	return node.New(str)
-}
-
-func (b *barcode) GetValue() string {
-	return b.code
 }
 
 func (b *barcode) SetConfig(config *entity.Config) {
