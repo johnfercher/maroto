@@ -14,6 +14,15 @@ type Rect struct {
 	Center bool
 }
 
+func (r *Rect) ToMap() map[string]interface{} {
+	return map[string]interface{}{
+		"prop_left":    r.Left,
+		"prop_top":     r.Top,
+		"prop_percent": r.Percent,
+		"prop_center":  r.Center,
+	}
+}
+
 // MakeValid from Rect will make the properties from a rectangle reliable to fit inside a cell
 // and define default values for a rectangle.
 func (s *Rect) MakeValid() {

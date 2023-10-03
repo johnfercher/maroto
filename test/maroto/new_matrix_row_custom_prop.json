@@ -1,0 +1,22 @@
+{
+	"value": 10,
+	"type": "row",
+	"nodes": [
+		{
+			"value": 0,
+			"type": "col",
+			"nodes": [
+				{
+					"value": "code",
+					"type": "matrixcode",
+					"details": {
+						"prop_center": false,
+						"prop_left": 10,
+						"prop_percent": 98,
+						"prop_top": 10
+					}
+				}
+			]
+		}
+	]
+}
