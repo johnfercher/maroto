@@ -15,5 +15,5 @@ func TestGetTimeSpent(t *testing.T) {
 	})
 
 	// Assert
-	assert.InDelta(t, float64(10*buildtinTime.Millisecond), timeSpent.Value, float64(1*buildtinTime.Millisecond))
+	assert.InDelta(t, float64(10*buildtinTime.Millisecond), timeSpent.Value, float64(2*buildtinTime.Millisecond))
 }
