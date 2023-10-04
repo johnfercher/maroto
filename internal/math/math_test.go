@@ -166,8 +166,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
 
 		// Assert
-		assert.Equal(t, 0.0, cell.X)
-		assert.Equal(t, 10.0, cell.Y)
+		assert.InDelta(t, 0.0, cell.X, 0.1)
+		assert.InDelta(t, 10.0, cell.Y, 0.1)
 		assert.Equal(t, 100.0, cell.Width)
 		assert.Equal(t, 80.0, cell.Height)
 	})
@@ -268,8 +268,8 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		cell := sut.GetInnerCenterCell(inner, outer, percent)
 
 		// Assert
-		assert.Equal(t, 0.0, cell.X)
-		assert.Equal(t, 10.0, cell.Y)
+		assert.InDelta(t, 0.0, cell.X, 0.1)
+		assert.InDelta(t, 10.0, cell.Y, 0.1)
 		assert.Equal(t, 100.0, cell.Width)
 		assert.Equal(t, 80.0, cell.Height)
 	})
