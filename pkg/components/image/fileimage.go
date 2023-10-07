@@ -46,8 +46,9 @@ func (f *fileImage) Render(provider core.Provider, cell *entity.Cell) {
 
 func (f *fileImage) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:  "fileimage",
-		Value: f.path,
+		Type:    "fileImage",
+		Value:   f.path,
+		Details: f.prop.ToMap(),
 	}
 
 	return node.New(str)

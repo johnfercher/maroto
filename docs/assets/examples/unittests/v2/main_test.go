@@ -24,7 +24,7 @@ func TestMaroto_GetStructure(t *testing.T) {
 	)
 
 	m.AddRow(10,
-		image.NewFromFileCol(3, "barcode"),
+		image.NewFromFileCol(3, "image"),
 		image.NewFromBytesCol(3, []byte{0, 1, 2}, extension.Png),
 		signature.NewCol(3, "signature"),
 		text.NewCol(3, "text"),

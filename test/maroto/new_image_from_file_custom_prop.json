@@ -1,4 +1,10 @@
 {
 	"value": "path",
-	"type": "fileimage"
+	"type": "fileImage",
+	"details": {
+		"prop_center": false,
+		"prop_left": 10,
+		"prop_percent": 98,
+		"prop_top": 10
+	}
 }
