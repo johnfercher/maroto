@@ -1,0 +1,10 @@
+{
+	"value": 12,
+	"type": "col",
+	"nodes": [
+		{
+			"value": "path",
+			"type": "fileimage"
+		}
+	]
+}
