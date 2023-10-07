@@ -1,0 +1,17 @@
+{
+	"value": 12,
+	"type": "col",
+	"nodes": [
+		{
+			"type": "lineStyle",
+			"details": {
+				"prop_color": "RGB(100, 50, 200)",
+				"prop_offset_percent": 50,
+				"prop_orientation": "vertical",
+				"prop_size_percent": 20,
+				"prop_style": "dashed",
+				"prop_thickness": 1.1
+			}
+		}
+	]
+}

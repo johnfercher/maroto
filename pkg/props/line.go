@@ -9,41 +9,56 @@ import (
 type Line struct {
 	// Color define the line color.
 	Color Color
-	// Style define the line style (solid, dashed or dotted).
-	Style         linestyle.Type
-	Thickness     float64
-	Orientation   orientation.Type
+	// Style define the line style (solid or dashed).
+	Style linestyle.Type
+	// Thickness define the line thicknesl.
+	Thickness float64
+	// Orientation define if line would be horizontal or vertical.
+	Orientation orientation.Type
+	// OffsetPercent define where the line would be placed, 0 is the start of cell, 50 the middle and 100 the end.
 	OffsetPercent float64
-	SizePercent   float64
+	// SizePercent define the size of the line inside cell.
+	SizePercent float64
+}
+
+func (l *Line) ToMap() map[string]interface{} {
+	return map[string]interface{}{
+		"prop_color":          l.Color.ToString(),
+		"prop_style":          l.Style,
+		"prop_thickness":      l.Thickness,
+		"prop_orientation":    l.Orientation,
+		"prop_offset_percent": l.OffsetPercent,
+		"prop_size_percent":   l.SizePercent,
+	}
 }
 
 // MakeValid from Line define default values for a Line.
-func (s *Line) MakeValid() {
-	if s.Style == "" {
-		s.Style = linestyle.Solid
+func (l *Line) MakeValid() {
+	if l.Style == "" {
+		l.Style = linestyle.Solid
 	}
 
-	if s.Thickness == 0 {
-		s.Thickness = linestyle.DefaultLineThickness
+	if l.Thickness == 0 {
+		l.Thickness = linestyle.DefaultLineThickness
 	}
 
-	if s.Orientation == "" {
-		s.Orientation = orientation.Horizontal
+	if l.Orientation == "" {
+		l.Orientation = orientation.Horizontal
 	}
 
-	if s.OffsetPercent < 5 {
-		s.OffsetPercent = 5
+	if l.OffsetPercent < 5 {
+		l.OffsetPercent = 5
 	}
 
-	if s.OffsetPercent > 95 {
-		s.OffsetPercent = 95
+	if l.OffsetPercent > 95 {
+		l.OffsetPercent = 95
 	}
 
-	if s.SizePercent <= 0 {
-		s.SizePercent = 90
+	if l.SizePercent <= 0 {
+		l.SizePercent = 90
 	}
 
-	if s.SizePercent > 100 {
-		s.SizePercent = 100
+	if l.SizePercent > 100 {
+		l.SizePercent = 100
 	}
 }

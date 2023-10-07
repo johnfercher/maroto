@@ -6,6 +6,7 @@ run:
     - docs/*
     - mocks/*
     - internal/fpdf/*
+    - internal/fixture
 
 linters-settings:
   lll:

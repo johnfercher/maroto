@@ -1,8 +1,11 @@
 package fixture
 
 import (
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -58,5 +61,38 @@ func CellProp() props.Cell {
 		BorderThickness: 0.6,
 		LineStyle:       linestyle.Dashed,
 	}
+	return prop
+}
+
+func Node(rootType string) *node.Node[core.Structure] {
+	marotoNode := node.New[core.Structure](core.Structure{
+		Type: rootType,
+	})
+	pageNode := node.New[core.Structure](core.Structure{
+		Type: "page",
+	})
+
+	marotoNode.AddNext(pageNode)
+	return marotoNode
+}
+
+func ColorProp() props.Color {
+	return props.Color{
+		Red:   100,
+		Green: 50,
+		Blue:  200,
+	}
+}
+
+func LineProp() props.Line {
+	prop := props.Line{
+		Color:         ColorProp(),
+		Style:         linestyle.Dashed,
+		Thickness:     1.1,
+		Orientation:   orientation.Vertical,
+		OffsetPercent: 50,
+		SizePercent:   20,
+	}
+	prop.MakeValid()
 	return prop
 }

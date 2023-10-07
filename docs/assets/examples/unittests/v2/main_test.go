@@ -3,6 +3,8 @@ package main_test
 import (
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/line"
+
 	"github.com/johnfercher/maroto/v2"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
@@ -24,11 +26,13 @@ func TestMaroto_GetStructure(t *testing.T) {
 	)
 
 	m.AddRow(10,
-		image.NewFromFileCol(3, "barcode"),
+		image.NewFromFileCol(3, "image"),
 		image.NewFromBytesCol(3, []byte{0, 1, 2}, extension.Png),
 		signature.NewCol(3, "signature"),
 		text.NewCol(3, "text"),
 	)
+
+	m.AddRow(10, line.NewCol(12))
 
 	// Assert
 	test.New(t).Assert(m.GetStructure()).Equals("example_unit_test.json")

@@ -5,7 +5,7 @@ type Type string
 
 const (
 	// Vertical represents the portrait orientation.
-	Vertical Type = "P"
+	Vertical Type = "vertical"
 	// Horizontal represents the landscape orientation.
-	Horizontal Type = "L"
+	Horizontal Type = "horizontal"
 )

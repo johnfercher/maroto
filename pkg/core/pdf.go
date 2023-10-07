@@ -66,16 +66,5 @@ func (p *pdf) Merge(bytes []byte) error {
 }
 
 func (p *pdf) Save(file string) error {
-	f, err := os.Create(file)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	_, err = f.Write(p.bytes)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return os.WriteFile(file, p.bytes, os.ModePerm)
 }

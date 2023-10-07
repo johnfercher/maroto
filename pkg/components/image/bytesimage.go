@@ -1,8 +1,6 @@
 package image
 
 import (
-	"fmt"
-
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/go-tree/node"
@@ -56,9 +54,13 @@ func (b *bytesImage) GetStructure() *node.Node[core.Structure] {
 	}
 
 	str := core.Structure{
-		Type:  "bytesImage",
-		Value: fmt.Sprintf("%v", b.bytes[:trimLength]),
+		Type:    "bytesImage",
+		Value:   b.bytes[:trimLength],
+		Details: b.prop.ToMap(),
 	}
+
+	str.Details["extension"] = b.extension
+	str.Details["bytes_size"] = len(b.bytes)
 
 	return node.New(str)
 }
