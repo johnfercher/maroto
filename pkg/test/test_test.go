@@ -9,6 +9,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const (
+	file = "maroto_test.json"
+)
+
 func TestNew(t *testing.T) {
 	t.Run("when called first, should setup singleton and set t", func(t *testing.T) {
 		// Act
@@ -62,7 +66,6 @@ func TestMarotoTest_Save(t *testing.T) {
 	})
 	t.Run("when can save, should create file", func(t *testing.T) {
 		// Arrange
-		file := "maroto_test.json"
 		n := fixture.Node("maroto")
 		sut := New(t).Assert(n)
 
@@ -75,7 +78,7 @@ func TestMarotoTest_Save(t *testing.T) {
 		assert.Nil(t, err)
 
 		testNode := &Node{}
-		json.Unmarshal(bytes, testNode)
+		_ = json.Unmarshal(bytes, testNode)
 		assert.Equal(t, "maroto", testNode.Type)
 		assert.Equal(t, "page", testNode.Nodes[0].Type)
 	})
@@ -84,7 +87,6 @@ func TestMarotoTest_Save(t *testing.T) {
 func TestMarotoTest_Equals(t *testing.T) {
 	t.Run("when file saved is not equals to current, should fail", func(t *testing.T) {
 		// Arrange
-		file := "maroto_test.json"
 		n := fixture.Node("not_maroto")
 		innerT := &testing.T{}
 		sut := New(innerT).Assert(n)
@@ -97,7 +99,6 @@ func TestMarotoTest_Equals(t *testing.T) {
 	})
 	t.Run("when file saved is equals to current, should be success", func(t *testing.T) {
 		// Arrange
-		file := "maroto_test.json"
 		n := fixture.Node("maroto")
 		innerT := &testing.T{}
 		sut := New(innerT).Assert(n)
