@@ -70,7 +70,7 @@
 							"nodes": [
 								{
 									"value": "image",
-									"type": "fileimage",
+									"type": "fileImage",
 									"details": {
 										"prop_center": false,
 										"prop_left": 0,
