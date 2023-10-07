@@ -2,11 +2,12 @@ package core_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"os"
 	"path"
 	"strings"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/metrics"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/stretchr/testify/assert"

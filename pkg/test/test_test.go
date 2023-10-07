@@ -2,10 +2,11 @@ package test
 
 import (
 	"encoding/json"
-	"github.com/johnfercher/maroto/v2/internal/fixture"
-	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/internal/fixture"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNew(t *testing.T) {
