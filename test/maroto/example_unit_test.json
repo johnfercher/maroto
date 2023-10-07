@@ -121,7 +121,30 @@
 					]
 				},
 				{
-					"value": 246.9975,
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "lineStyle",
+									"details": {
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_offset_percent": 5,
+										"prop_orientation": "horizontal",
+										"prop_size_percent": 90,
+										"prop_style": "solid",
+										"prop_thickness": 0.2
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 236.9975,
 					"type": "row",
 					"nodes": [
 						{

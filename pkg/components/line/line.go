@@ -39,7 +39,8 @@ func NewRow(height float64, ps ...props.Line) core.Row {
 
 func (l *line) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
-		Type: "linestyle",
+		Type:    "lineStyle",
+		Details: l.prop.ToMap(),
 	}
 
 	return node.New(str)
