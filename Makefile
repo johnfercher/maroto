@@ -37,7 +37,6 @@ mocks:
 .PHONY: examples
 examples:
 	go run docs/assets/examples/addpage/v2/main.go
-	go run docs/assets/examples/addpdf/v2/main.go
 	go run docs/assets/examples/background/v2/main.go
 	go run docs/assets/examples/barcodegrid/v2/main.go
 	go run docs/assets/examples/billing/v2/main.go
@@ -54,6 +53,7 @@ examples:
 	go run docs/assets/examples/list/v2/main.go
 	go run docs/assets/examples/margins/v2/main.go
 	go run docs/assets/examples/maxgridsum/v2/main.go
+	go run docs/assets/examples/mergepdf/v2/main.go
 	go run docs/assets/examples/metadatas/v2/main.go
 	go run docs/assets/examples/orientation/v2/main.go
 	go run docs/assets/examples/pagenumber/v2/main.go
