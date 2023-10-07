@@ -66,3 +66,24 @@ func TestCell_Copy(t *testing.T) {
 		assert.Equal(t, 100.0, cell.Height)
 	})
 }
+
+func TestNewRootContext(t *testing.T) {
+	// Arrange
+	width := 100.0
+	height := 300.0
+	margins := entity.Margins{
+		Left:   10,
+		Right:  10,
+		Top:    10,
+		Bottom: 20,
+	}
+
+	// Act
+	cell := entity.NewRootContext(width, height, margins)
+
+	// Assert
+	assert.Equal(t, 0.0, cell.X)
+	assert.Equal(t, 0.0, cell.Y)
+	assert.Equal(t, 80.0, cell.Width)
+	assert.Equal(t, 270.0, cell.Height)
+}

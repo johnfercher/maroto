@@ -1,8 +1,10 @@
 package fixture
 
 import (
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -59,4 +61,16 @@ func CellProp() props.Cell {
 		LineStyle:       linestyle.Dashed,
 	}
 	return prop
+}
+
+func Node(rootType string) *node.Node[core.Structure] {
+	marotoNode := node.New[core.Structure](core.Structure{
+		Type: rootType,
+	})
+	pageNode := node.New[core.Structure](core.Structure{
+		Type: "page",
+	})
+
+	marotoNode.AddNext(pageNode)
+	return marotoNode
 }

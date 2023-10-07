@@ -7,5 +7,6 @@ ignore:
   - ".idea"
   - "docs"
   - "cmd"
-  - "v2/mocks"
-  - "v2/internal/fpdf"
+  - "mocks"
+  - "internal/fpdf"
+  - "internal/fixture"
