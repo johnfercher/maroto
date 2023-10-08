@@ -61,5 +61,6 @@ examples:
 	go run docs/assets/examples/protection/v2/main.go
 	go run docs/assets/examples/qrgrid/v2/main.go
 	go run docs/assets/examples/signaturegrid/v2/main.go
+	go run docs/assets/examples/simplest/v2/main.go
 	go run docs/assets/examples/textgrid/v2/main.go
 	go test docs/assets/examples/unittests/v2/main_test.go
