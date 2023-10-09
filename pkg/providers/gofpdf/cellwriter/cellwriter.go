@@ -22,7 +22,7 @@ func NewCellCreator(fpdf *gofpdf.Fpdf) *cellWriter {
 		StylerTemplate: StylerTemplate{
 			fpdf: fpdf,
 		},
-		defaultColor: props.NewBlack(),
+		defaultColor: &props.BlackColor,
 	}
 }
 
@@ -51,7 +51,7 @@ func (c *cellWriter) Apply(width, height float64, config *entity.Config, prop *p
 	c.fpdf.CellFormat(width, height, "", string(bd), 0, "C", fill, 0, "")
 
 	if fill {
-		white := props.NewWhite()
+		white := &props.WhiteColor
 		c.fpdf.SetFillColor(white.Red, white.Green, white.Blue)
 	}
 }

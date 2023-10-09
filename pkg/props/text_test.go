@@ -49,7 +49,7 @@ func TestText_MakeValid(t *testing.T) {
 				Align: "",
 			},
 			func(t *testing.T, prop *props.Text) {
-				assert.Equal(t, prop.Align, align.Center)
+				assert.Equal(t, prop.Align, align.Left)
 			},
 		},
 		{

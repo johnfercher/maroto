@@ -8,7 +8,7 @@ import (
 // Line represents properties from a Line inside a cell.
 type Line struct {
 	// Color define the line color.
-	Color Color
+	Color *Color
 	// Style define the line style (solid or dashed).
 	Style linestyle.Type
 	// Thickness define the line thicknesl.

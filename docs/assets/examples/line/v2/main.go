@@ -13,12 +13,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/config"
 )
 
-var redColor = props.Color{
-	Red:   255,
-	Green: 0,
-	Blue:  0,
-}
-
 func main() {
 	cfg := config.NewBuilder().
 		WithDebug(true).
@@ -41,7 +35,7 @@ func main() {
 
 	m.AddRow(40,
 		line.NewCol(2, props.Line{Thickness: 0.5}),
-		line.NewCol(4, props.Line{Color: redColor}),
+		line.NewCol(4, props.Line{Color: &props.RedColor}),
 		line.NewCol(6, props.Line{Orientation: orientation.Vertical}),
 	)
 
@@ -53,8 +47,8 @@ func main() {
 
 	m.AddRow(40,
 		line.NewCol(2, props.Line{Style: linestyle.Dashed}),
-		line.NewCol(4, props.Line{Color: redColor, Style: linestyle.Dashed, Thickness: 0.8, Orientation: orientation.Vertical, OffsetPercent: 70, SizePercent: 70}),
-		line.NewCol(6, props.Line{Color: redColor, Style: linestyle.Dashed, Thickness: 0.8, Orientation: orientation.Horizontal, OffsetPercent: 40, SizePercent: 40}),
+		line.NewCol(4, props.Line{Color: &props.RedColor, Style: linestyle.Dashed, Thickness: 0.8, Orientation: orientation.Vertical, OffsetPercent: 70, SizePercent: 70}),
+		line.NewCol(6, props.Line{Color: &props.RedColor, Style: linestyle.Dashed, Thickness: 0.8, Orientation: orientation.Horizontal, OffsetPercent: 40, SizePercent: 40}),
 	)
 
 	document, err := m.Generate()

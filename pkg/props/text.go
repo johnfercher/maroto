@@ -14,63 +14,83 @@ type Text struct {
 	Left float64
 	// Right is the minimal amount of space between the right cell boundary and the text.
 	Right float64
-	// Family of the text, ex: consts.Arial, helvetica and etc.
+	// Family of the text, ex: constt.Arial, helvetica and etc.
 	Family string
-	// Style of the text, ex: consts.Normal, bold and etc.
+	// Style of the text, ex: constt.Normal, bold and etc.
 	Style fontstyle.Type
 	// Size of the text.
 	Size float64
 	// Align of the text.
 	Align             align.Type
 	BreakLineStrategy breakline.Strategy
-	// VerticalPadding define an additional space between lines.
+	// VerticalPadding define an additional space between linet.
 	VerticalPadding float64
 	// Color define the fontstyle color.
 	Color *Color
 }
 
+func (t *Text) ToMap() map[string]interface{} {
+	m := map[string]interface{}{
+		"prop_top":                t.Top,
+		"prop_left":               t.Left,
+		"prop_right":              t.Right,
+		"prop_font_family":        t.Family,
+		"prop_font_style":         t.Style,
+		"prop_font_size":          t.Size,
+		"prop_align":              t.Align,
+		"prop_breakline_strategy": t.BreakLineStrategy,
+		"prop_vertical_padding":   t.VerticalPadding,
+	}
+
+	if t.Color != nil {
+		m["prop_color"] = t.Color.ToString()
+	}
+
+	return m
+}
+
 // MakeValid from Text define default values for a Text.
-func (s *Text) MakeValid(font *Font) {
+func (t *Text) MakeValid(font *Font) {
 	minValue := 0.0
 	undefinedValue := 0.0
 
-	if s.Family == "" {
-		s.Family = font.Family
+	if t.Family == "" {
+		t.Family = font.Family
 	}
 
-	if s.Style == "" {
-		s.Style = font.Style
+	if t.Style == "" {
+		t.Style = font.Style
 	}
 
-	if s.Size == undefinedValue {
-		s.Size = font.Size
+	if t.Size == undefinedValue {
+		t.Size = font.Size
 	}
 
-	if s.Color == nil {
-		s.Color = font.Color
+	if t.Color == nil {
+		t.Color = font.Color
 	}
 
-	if s.Align == "" {
-		s.Align = align.Center
+	if t.Align == "" {
+		t.Align = align.Left
 	}
 
-	if s.Top < minValue {
-		s.Top = minValue
+	if t.Top < minValue {
+		t.Top = minValue
 	}
 
-	if s.Left < minValue {
-		s.Left = minValue
+	if t.Left < minValue {
+		t.Left = minValue
 	}
 
-	if s.Right < minValue {
-		s.Right = minValue
+	if t.Right < minValue {
+		t.Right = minValue
 	}
 
-	if s.VerticalPadding < 0 {
-		s.VerticalPadding = 0
+	if t.VerticalPadding < 0 {
+		t.VerticalPadding = 0
 	}
 
-	if s.BreakLineStrategy == "" {
-		s.BreakLineStrategy = breakline.EmptyLineStrategy
+	if t.BreakLineStrategy == "" {
+		t.BreakLineStrategy = breakline.EmptyLineStrategy
 	}
 }

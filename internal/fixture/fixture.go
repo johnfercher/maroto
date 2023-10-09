@@ -2,13 +2,46 @@ package fixture
 
 import (
 	"github.com/johnfercher/go-tree/node"
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
+
+func TextProp() props.Text {
+	fontProp := FontProp()
+	prop := props.Text{
+		Top:               12,
+		Left:              3,
+		Family:            fontProp.Family,
+		Style:             fontProp.Style,
+		Size:              fontProp.Size,
+		Align:             align.Right,
+		BreakLineStrategy: breakline.DashStrategy,
+		VerticalPadding:   20,
+		Color:             fontProp.Color,
+	}
+	prop.MakeValid(&fontProp)
+	return prop
+}
+
+func FontProp() props.Font {
+	colorProp := ColorProp()
+	prop := props.Font{
+		Family: fontfamily.Helvetica,
+		Style:  fontstyle.Bold,
+		Size:   14,
+		Color:  &colorProp,
+	}
+	prop.MakeValid(fontfamily.Arial)
+	return prop
+}
 
 func BarcodeProp() props.Barcode {
 	prop := props.Barcode{
@@ -85,8 +118,9 @@ func ColorProp() props.Color {
 }
 
 func LineProp() props.Line {
+	colorProp := ColorProp()
 	prop := props.Line{
-		Color:         ColorProp(),
+		Color:         &colorProp,
 		Style:         linestyle.Dashed,
 		Thickness:     1.1,
 		Orientation:   orientation.Vertical,

@@ -5,7 +5,7 @@
 		{
 			"type": "lineStyle",
 			"details": {
-				"prop_color": "RGB(0, 0, 0)",
+				"prop_color": "",
 				"prop_offset_percent": 5,
 				"prop_orientation": "horizontal",
 				"prop_size_percent": 90,

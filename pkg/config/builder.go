@@ -76,7 +76,7 @@ func NewBuilder() Builder {
 			Size:   pagesize.DefaultFontSize,
 			Family: fontfamily.Arial,
 			Style:  fontstyle.Normal,
-			Color:  props.NewBlack(),
+			Color:  &props.BlackColor,
 		},
 		metadata: &entity.Metadata{},
 	}
