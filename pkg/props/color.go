@@ -2,6 +2,14 @@ package props
 
 import "fmt"
 
+var (
+	WhiteColor = Color{Red: 255, Green: 255, Blue: 255}
+	BlackColor = Color{Red: 0, Green: 0, Blue: 0}
+	RedColor   = Color{Red: 255, Green: 0, Blue: 0}
+	GreenColor = Color{Red: 0, Green: 255, Blue: 0}
+	BlueColor  = Color{Red: 0, Green: 0, Blue: 255}
+)
+
 // Color represents a color in the RGB (Red, Green, Blue) space,
 // is possible mix values, when all values are 0 the result color is black
 // when all values are 255 the result color is white.
@@ -26,22 +34,4 @@ func (c *Color) ToString() string {
 // are in the maximum value.
 func (c *Color) IsWhite() bool {
 	return c.Red == 255 && c.Green == 255 && c.Blue == 255
-}
-
-// NewWhite return a Color with all components (red, green and blue) as 255.
-func NewWhite() *Color {
-	return &Color{
-		Red:   255,
-		Green: 255,
-		Blue:  255,
-	}
-}
-
-// NewBlack return a Color with all components (red, green and blue) as 0.
-func NewBlack() *Color {
-	return &Color{
-		Red:   0,
-		Green: 0,
-		Blue:  0,
-	}
 }

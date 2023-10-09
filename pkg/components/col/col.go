@@ -39,12 +39,10 @@ func (c *col) GetSize() int {
 }
 
 func (c *col) GetStructure() *node.Node[core.Structure] {
-	detailsMap := c.style.ToMap()
-
 	str := core.Structure{
 		Type:    "col",
 		Value:   c.size,
-		Details: detailsMap,
+		Details: c.style.ToMap(),
 	}
 
 	node := node.New(str)

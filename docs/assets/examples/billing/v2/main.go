@@ -50,7 +50,7 @@ func main() {
 			Size:  9,
 			Style: fontstyle.Bold,
 			Align: align.Center,
-			Color: props.NewWhite(),
+			Color: &props.WhiteColor,
 		}),
 	).WithStyle(&props.Cell{BackgroundColor: darkGrayColor})
 

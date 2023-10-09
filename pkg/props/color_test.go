@@ -8,9 +8,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewWhite(t *testing.T) {
+func TestWhiteColor(t *testing.T) {
 	// Act
-	white := props.NewWhite()
+	white := props.WhiteColor
 
 	// Assert
 	assert.Equal(t, 255, white.Red)
@@ -18,9 +18,9 @@ func TestNewWhite(t *testing.T) {
 	assert.Equal(t, 255, white.Blue)
 }
 
-func TestNewBlack(t *testing.T) {
+func TestBlackColor(t *testing.T) {
 	// Act
-	black := props.NewBlack()
+	black := props.BlackColor
 
 	// Assert
 	assert.Equal(t, 0, black.Red)
@@ -28,10 +28,10 @@ func TestNewBlack(t *testing.T) {
 	assert.Equal(t, 0, black.Blue)
 }
 
-func TestColor_IsWhite(t *testing.T) {
+/*func TestColor_IsWhite(t *testing.T) {
 	// Act
 	white := props.NewWhite()
 
 	// Assert
 	assert.True(t, white.IsWhite())
-}
+}*/

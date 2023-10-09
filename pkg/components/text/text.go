@@ -47,8 +47,9 @@ func NewRow(height float64, value string, ps ...props.Text) core.Row {
 
 func (t *text) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:  "text",
-		Value: t.value,
+		Type:    "text",
+		Value:   t.value,
+		Details: t.prop.ToMap(),
 	}
 
 	return node.New(str)
