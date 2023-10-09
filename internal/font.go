@@ -54,6 +54,12 @@ func (s *font) GetFont() (string, fontstyle.Type, float64) {
 	return s.family, s.style, s.size
 }
 
+func (s *font) GetHeight(family string, style fontstyle.Type, size float64) float64 {
+	s.SetFont(family, style, size)
+	_, _, fontSize := s.GetFont()
+	return fontSize / s.GetScaleFactor()
+}
+
 // SetFamily defines a new Font family.
 func (s *font) SetFamily(family string) {
 	s.family = family

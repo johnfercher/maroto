@@ -23,14 +23,14 @@ func main() {
 
 	m.AddRow(40,
 		signature.NewCol(2, "Signature 1"),
-		signature.NewCol(4, "Signature 2", props.Font{Family: fontfamily.Courier}),
-		signature.NewCol(6, "Signature 3", props.Font{Style: fontstyle.BoldItalic}),
+		signature.NewCol(4, "Signature 2", props.Signature{FontFamily: fontfamily.Courier}),
+		signature.NewCol(6, "Signature 3", props.Signature{FontStyle: fontstyle.BoldItalic}),
 	)
 
 	m.AddRow(40,
-		signature.NewCol(6, "Signature 4", props.Font{Style: fontstyle.Italic}),
-		signature.NewCol(4, "Signature 5", props.Font{Size: 12}),
-		signature.NewCol(2, "Signature 6", props.Font{Color: &props.Color{255, 0, 0}}),
+		signature.NewCol(6, "Signature 4", props.Signature{FontStyle: fontstyle.Italic}),
+		signature.NewCol(4, "Signature 5", props.Signature{FontSize: 12}),
+		signature.NewCol(2, "Signature 6", props.Signature{FontColor: &props.Color{255, 0, 0}}),
 	)
 
 	document, err := m.Generate()

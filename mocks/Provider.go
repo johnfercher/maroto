@@ -465,6 +465,48 @@ func (_c *Provider_GenerateBytes_Call) RunAndReturn(run func() ([]byte, error)) 
 	return _c
 }
 
+// GetTextHeight provides a mock function with given fields: prop
+func (_m *Provider) GetTextHeight(prop *props.Font) float64 {
+	ret := _m.Called(prop)
+
+	var r0 float64
+	if rf, ok := ret.Get(0).(func(*props.Font) float64); ok {
+		r0 = rf(prop)
+	} else {
+		r0 = ret.Get(0).(float64)
+	}
+
+	return r0
+}
+
+// Provider_GetTextHeight_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetTextHeight'
+type Provider_GetTextHeight_Call struct {
+	*mock.Call
+}
+
+// GetTextHeight is a helper method to define mock.On call
+//   - prop *props.Font
+func (_e *Provider_Expecter) GetTextHeight(prop interface{}) *Provider_GetTextHeight_Call {
+	return &Provider_GetTextHeight_Call{Call: _e.mock.On("GetTextHeight", prop)}
+}
+
+func (_c *Provider_GetTextHeight_Call) Run(run func(prop *props.Font)) *Provider_GetTextHeight_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(*props.Font))
+	})
+	return _c
+}
+
+func (_c *Provider_GetTextHeight_Call) Return(_a0 float64) *Provider_GetTextHeight_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Provider_GetTextHeight_Call) RunAndReturn(run func(*props.Font) float64) *Provider_GetTextHeight_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // SetCache provides a mock function with given fields: _a0
 func (_m *Provider) SetCache(_a0 cache.Cache) {
 	_m.Called(_a0)
@@ -602,8 +644,7 @@ func (_c *Provider_SetProtection_Call) RunAndReturn(run func(*entity.Protection)
 func NewProvider(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Provider {
+}) *Provider {
 	mock := &Provider{}
 	mock.Mock.Test(t)
 

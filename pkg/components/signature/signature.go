@@ -13,12 +13,12 @@ import (
 
 type signature struct {
 	value  string
-	prop   props.Font
+	prop   props.Signature
 	config *entity.Config
 }
 
-func New(value string, ps ...props.Font) core.Component {
-	prop := props.Font{}
+func New(value string, ps ...props.Signature) core.Component {
+	prop := props.Signature{}
 	if len(ps) > 0 {
 		prop = ps[0]
 	}
@@ -30,19 +30,28 @@ func New(value string, ps ...props.Font) core.Component {
 	}
 }
 
-func NewCol(size int, value string, ps ...props.Font) core.Col {
+func NewCol(size int, value string, ps ...props.Signature) core.Col {
 	signature := New(value, ps...)
 	return col.New(size).Add(signature)
 }
 
-func NewRow(height float64, value string, ps ...props.Font) core.Row {
+func NewRow(height float64, value string, ps ...props.Signature) core.Row {
 	signature := New(value, ps...)
 	c := col.New().Add(signature)
 	return row.New(height).Add(c)
 }
 
 func (s *signature) Render(provider core.Provider, cell *entity.Cell) {
-	provider.AddSignature(s.value, cell, s.prop.ToTextProp(align.Center, 0.0, 0))
+	fontProp := s.prop.ToFontProp()
+	safePadding := 1.5
+	fontSize := provider.GetTextHeight(fontProp) * safePadding
+
+	textProp := s.prop.ToTextProp(align.Center, cell.Height-fontSize, 0)
+
+	offsetPercent := (cell.Height - fontSize) / cell.Height * 100.0
+
+	provider.AddText(s.value, cell, textProp)
+	provider.AddLine(cell, s.prop.ToLineProp(offsetPercent))
 }
 
 func (s *signature) GetStructure() *node.Node[core.Structure] {

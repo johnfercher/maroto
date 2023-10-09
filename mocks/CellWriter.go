@@ -98,8 +98,7 @@ func (_c *CellWriter_SetNext_Call) RunAndReturn(run func(cellwriter.CellWriter))
 func NewCellWriter(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *CellWriter {
+}) *CellWriter {
 	mock := &CellWriter{}
 	mock.Mock.Test(t)
 

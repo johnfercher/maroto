@@ -83,6 +83,10 @@ func (g *gofpdfProvider) AddText(text string, cell *entity.Cell, prop *props.Tex
 	g.text.Add(text, cell, prop)
 }
 
+func (g *gofpdfProvider) GetTextHeight(prop *props.Font) float64 {
+	return g.font.GetHeight(prop.Family, prop.Style, prop.Size)
+}
+
 func (g *gofpdfProvider) AddLine(cell *entity.Cell, prop *props.Line) {
 	g.line.Add(cell, prop)
 }

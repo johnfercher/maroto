@@ -50,6 +50,7 @@ type Font interface {
 	GetStyle() fontstyle.Type
 	GetSize() float64
 	GetFont() (string, fontstyle.Type, float64)
+	GetHeight(family string, style fontstyle.Type, size float64) float64
 	GetScaleFactor() (scaleFactor float64)
 	SetColor(color *props.Color)
 	GetColor() *props.Color
