@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/core"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 
 	"github.com/johnfercher/maroto/v2"
@@ -16,6 +18,24 @@ import (
 )
 
 func main() {
+	m := GetMaroto()
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/signaturegridv2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/signaturegridv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithDebug(true).
 		Build()
@@ -41,18 +61,5 @@ func main() {
 		signature.NewCol(4, "Signature 9", props.Signature{LineThickness: 0.5}),
 	)
 
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/pdf/signaturegridv2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/signaturegridv2.txt")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	return m
 }

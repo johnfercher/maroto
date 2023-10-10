@@ -22,14 +22,33 @@ type Line struct {
 }
 
 func (l *Line) ToMap() map[string]interface{} {
-	return map[string]interface{}{
-		"prop_color":          l.Color.ToString(),
-		"prop_style":          l.Style,
-		"prop_thickness":      l.Thickness,
-		"prop_orientation":    l.Orientation,
-		"prop_offset_percent": l.OffsetPercent,
-		"prop_size_percent":   l.SizePercent,
+	m := make(map[string]interface{})
+
+	if l.Color != nil {
+		m["prop_color"] = l.Color.ToString()
 	}
+
+	if l.Style != "" {
+		m["prop_style"] = l.Style
+	}
+
+	if l.Thickness != 0 {
+		m["prop_thickness"] = l.Thickness
+	}
+
+	if l.Orientation != "" {
+		m["prop_orientation"] = l.Orientation
+	}
+
+	if l.OffsetPercent != 0 {
+		m["prop_offset_percent"] = l.OffsetPercent
+	}
+
+	if l.SizePercent != 0 {
+		m["prop_size_percent"] = l.SizePercent
+	}
+
+	return m
 }
 
 // MakeValid from Line define default values for a Line.

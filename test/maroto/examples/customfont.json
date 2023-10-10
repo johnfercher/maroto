@@ -1,0 +1,3808 @@
+{
+	"type": "maroto",
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Language",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_family": "arial",
+										"prop_font_style": "B"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Phrase: Talk is cheap. Show me the code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_family": "arial",
+										"prop_font_style": "B"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Africâner",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Praat is goedkoop. Wys my die kode.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Albanês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Biseda është e lirë. Më trego kodin.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Alemão",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Reden ist billig. Zeig mir den Code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Amárico",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "ወሬ ርካሽ ነው ፡፡ ኮዱን አሳዩኝ ፡፡",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Árabe",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "كلام رخيص. أرني الكود.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Armênio",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Խոսակցությունն էժան է: Showույց տվեք ինձ ծածկագիրը:",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Azerbaijano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Danışıq ucuzdur. Kodu göstərin.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Basco",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Eztabaida merkea da. Erakutsi kodea.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Bengali",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "টক সস্তা। আমাকে কোডটি দেখান",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Bielorusso",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Размовы танныя. Пакажыце мне код.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Birmanês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "ဟောပြောချက်ကစျေးပေါတယ် ကုဒ်ကိုပြပါ။",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Bósnio",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Govor je jeftin. Pokaži mi šifru.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Búlgaro",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Разговорите са евтини. Покажи ми кода.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Canarim",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "ಮಾತುಕತೆ ಅಗ್ಗವಾಗಿದೆ. ನನಗೆ ಕೋಡ್ ತೋರಿಸಿ.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Catalão",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Parlar és barat. Mostra’m el codi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Cazeque",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Сөйлесу арзан. Маған кодты көрсетіңіз.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Cebuano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Barato ra ang sulti. Ipakita kanako ang code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Chinês Simplificado",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "谈话很便宜。给我看代码。",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Chinês Tradicional",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "談話很便宜。給我看代碼。",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Cingalês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "කතාව ලාභයි. කේතය මට පෙන්වන්න.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Coreano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "토크는 싸다. 코드를 보여주세요.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Corso",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Parlà hè bonu. Mostrami u codice.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Croata",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Razgovor je jeftin. Pokaži mi šifru.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Curdo",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Axaftin erzan e. Kodê nîşanî min bidin.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Dinamarquês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tal er billig. Vis mig koden.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Eslovaco",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Hovor je lacný. Ukáž mi kód.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Esloveno",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Pogovor je poceni. Pokaži mi kodo.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Espanhol",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Hablar es barato. Enséñame el código.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Esperanto",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Babilado estas malmultekosta. Montru al mi la kodon.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Estoniano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Rääkimine on odav. Näita mulle koodi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Filipino",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Mura ang usapan. Ipakita sa akin ang code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Finlandês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Puhe on halpaa. Näytä koodi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Francês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Parler n'est pas cher. Montre-moi le code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Frísio Ocidental",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Prate is goedkeap. Lit my de koade sjen.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Gaélico Escocês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tha còmhradh saor. Seall dhomh an còd.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Galego",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Falar é barato. Móstrame o código.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Galês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Mae siarad yn rhad. Dangoswch y cod i mi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Georgiano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "აუბარი იაფია. მაჩვენე კოდი.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Grego",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Η συζήτηση είναι φθηνή. Δείξε μου τον κωδικό.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Guzerate",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "વાતો કરવી સસ્તી છે. મને કોડ બતાવો.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Haitiano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Pale bon mache. Montre m kòd la.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Hauçá",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Magana tana da arha. Nuna min lambar.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Havaiano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Kūʻai ke kamaʻilio. E hōʻike mai iaʻu i ke pāʻālua.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Hebraico",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "הדיבורים זולים. הראה לי את הקוד.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Híndi",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "बोलना आसान है। मुझे कोड दिखाओ।",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Hmong",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Kev hais lus yog pheej yig. Qhia kuv cov code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Holandês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Praten is goedkoop. Laat me de code zien.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Húngaro",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Beszélni olcsó. Mutasd meg a kódot.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Igbo",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Okwu dị ọnụ ala. Gosi m koodu.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Lídiche",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "רעדן איז ביליק. ווייַזן מיר דעם קאָד.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Indonésio",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Berbicara itu murah. Tunjukkan kodenya.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 3.9975000000000023,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Inglês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Talk is cheap. Show me the code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Iorubá",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Ọrọ jẹ olowo poku. Fi koodu naa han mi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Irlandês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tá caint saor. Taispeáin dom an cód.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Islandês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tal er ódýrt. Sýndu mér kóðann.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Italiano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Parlare è economico. Mostrami il codice.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Japonês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "口で言うだけなら簡単です。コードを見せてください。",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Javanês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Omongan iku murah. Tampilake kode kasebut.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Khmer",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "ការនិយាយគឺថោក។ បង្ហាញលេខកូដមកខ្ញុំ",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Laosiano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "ການສົນທະນາແມ່ນລາຄາຖືກ. ສະແດງລະຫັດໃຫ້ຂ້ອຍ.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Latim",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Disputatio vilis est. Ostende mihi codice.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Letão",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Saruna ir lēta. Parādiet man kodu.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Lituano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Kalbėti pigu. Parodyk man kodą.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Luxemburguês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Schwätzen ass bëlleg. Weist mir de Code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Macedônio",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Зборувањето е ефтино. Покажи ми го кодот.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Malaiala",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "സംസാരം വിലകുറഞ്ഞതാണ്. എനിക്ക് കോഡ് കാണിക്കുക.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Malaio",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Perbincangan murah. Tunjukkan kod saya.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Malgaxe",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Mora ny resaka. Asehoy ahy ny kaody.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Maltês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "It-taħdita hija rħisa. Urini l-kodiċi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Maori",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "He iti te korero. Whakaatuhia mai te tohu.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Marati",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "चर्चा स्वस्त आहे. मला कोड दाखवा.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Mongol",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Яриа хямд. Надад кодоо харуул.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Nepalês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "कुरा सस्तो छ। मलाई कोड देखाउनुहोस्।",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Nianja",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Kulankhula ndikotsika mtengo. Ndiwonetseni nambala",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Norueguês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Snakk er billig. Vis meg koden.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Oriá",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "କଥାବାର୍ତ୍ତା ଶସ୍ତା ଅଟେ | ମୋତେ କୋଡ୍ ଦେଖାନ୍ତୁ |",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Panjabi",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "ਗੱਲ ਸਸਤਾ ਹੈ. ਮੈਨੂੰ ਕੋਡ ਦਿਖਾਓ.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Pashto",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "خبرې ارزانه دي. ما ته کوډ وښایاست",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Persa",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "بحث ارزان است. کد را به من نشان دهید",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Polonês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Rozmowa jest tania. Pokaż mi kod.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Português",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Falar é fácil. Mostre-me o código.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Quiniaruanda",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Ibiganiro birahendutse. Nyereka kode.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Quirguiz",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Сүйлөшүү арзан. Мага кодду көрсөтүңүз.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Romeno",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Vorbirea este ieftină. Arată-mi codul.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Russo",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Обсуждение дешево. Покажи мне код.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Samoano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "E taugofie talanoaga. Faʻaali mai le code.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Sérvio",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Причање је јефтино. Покажи ми шифру.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Sindi",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "ڳالهه سستا آهي. مونکي ڪوڊ ڏيکاريو.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Somali",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Hadalku waa jaban yahay. I tus lambarka.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Soto do Sul",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Puo e theko e tlase. Mpontshe khoutu.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Suaíli",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Mazungumzo ni ya bei rahisi. Nionyeshe nambari.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Sueco",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Prat är billigt. Visa mig koden.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Sundanês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Omongan mirah. Tunjukkeun kode na.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tadjique",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Сӯҳбат арзон аст. Рамзро ба ман нишон диҳед.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tailandês",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "พูดคุยราคาถูก แสดงรหัส",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tâmil",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "பேச்சு மலிவானது. குறியீட்டை எனக்குக் காட்டு.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tártaro",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Сөйләшү арзан. Миңа код күрсәтегез.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tcheco",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Mluvení je levné. Ukaž mi kód.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Télugo",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "చర్చ చౌకగా ఉంటుంది. నాకు కోడ్ చూపించు.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Turco",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Konuşma ucuz. Bana kodu göster.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Turcomeno",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Gepleşik arzan. Kody görkez",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Ucraniano",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Розмова дешева. Покажи мені код.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Uigur",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "پاراڭ ئەرزان. ماڭا كودنى كۆرسەت.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Urdu",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "بات گھٹیا ہے. مجھے کوڈ دکھائیں۔",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 1.9975000000000023,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Uzbeque",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Gapirish arzon. Menga kodni ko'rsating.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Vietnamita",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Nói chuyện là rẻ. Cho tôi xem mã.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Xhosa",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Ukuthetha akubizi. Ndibonise ikhowudi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Xona",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Kutaura kwakachipa. Ndiratidze kodhi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Zulu",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Ukukhuluma kushibhile. Ngikhombise ikhodi.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "long text without spaces",
+									"type": "text",
+									"details": {
+										"prop_font_family": "arial",
+										"prop_font_style": "B",
+										"prop_top": 5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 80,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "聲音之道㣲矣天地有自然之聲人聲有自然之節古之聖人得其節之自然者而為之依永和聲至於八音諧而神人和胥是道也文字之作無不講求音韻顧南北異其風土古今殊其轉變喉舌唇齒清濁輕重之分辨在毫釐動多訛舛樊然淆混不可究極自西域梵僧定字母為三十六分五音以總天下之聲而翻切之學興儒者若司馬光鄭樵皆宗之其法有音和類隔互用借聲類例不一後人苦其委曲繁重難以驟曉往往以類隔互用之切改從音和而終莫能得其原也我聖祖仁皇帝",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_breakline_strategy": "dash_strategy"
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "聲音之道㣲矣天地有自然之聲人聲有自然之節古之聖人得其節之自然者而為之依永和聲至於八音諧而神人和胥是道也文字之作無不講求音韻顧南北異其風土古今殊其轉變喉舌唇齒清濁輕重之分辨在毫釐動多訛舛樊然淆混不可究極自西域梵僧定字母為三十六分五音以總天下之聲而翻切之學興儒者若司馬光鄭樵皆宗之其法有音和類隔互用借聲類例不一後人苦其委曲繁重難以驟曉往往以類隔互用之切改從音和而終莫能得其原也我聖祖仁皇帝",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "dash_strategy"
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "聲音之道㣲矣天地有自然之聲人聲有自然之節古之聖人得其節之自然者而為之依永和聲至於八音諧而神人和胥是道也文字之作無不講求音韻顧南北異其風土古今殊其轉變喉舌唇齒清濁輕重之分辨在毫釐動多訛舛樊然淆混不可究極自西域梵僧定字母為三十六分五音以總天下之聲而翻切之學興儒者若司馬光鄭樵皆宗之其法有音和類隔互用借聲類例不一後人苦其委曲繁重難以驟曉往往以類隔互用之切改從音和而終莫能得其原也我聖祖仁皇帝",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "dash_strategy"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 151.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

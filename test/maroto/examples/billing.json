@@ -1,0 +1,1740 @@
+{
+	"type": "maroto",
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 80
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col"
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_color": "RGB(150, 10, 10)",
+										"prop_font_size": 8
+									}
+								},
+								{
+									"value": "Tel: 55 024 12345-1234",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_color": "RGB(10, 10, 150)",
+										"prop_font_size": 8,
+										"prop_font_style": "BI",
+										"prop_top": 12
+									}
+								},
+								{
+									"value": "www.mycompany.com",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_color": "RGB(10, 10, 150)",
+										"prop_font_size": 8,
+										"prop_font_style": "BI",
+										"prop_top": 15
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Invoice ABC123456789",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_style": "B",
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 7,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(55, 55, 55)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Transactions",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Product",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 9,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Quantity",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 9,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Price",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 9,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Swamp",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "12",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 4,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Sorin, A Planeswalker",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 90,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tassa",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 30,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Skinrender",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 9,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Island",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "12",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 4,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Mountain",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "12",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 4,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Plain",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "12",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 4,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Black Lotus",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 1.000,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Time Walk",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 1.000,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Emberclave",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 44,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Anax",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 32,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Murderous Rider",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 22,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Gray Merchant of Asphodel",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 2,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Ajani's Pridemate",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 2,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Renan, Chatuba",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 19,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tymarett",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 13,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Doom Blade",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 5,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Dark Lord",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 7,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Memory of Thanatos",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 32,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Poring",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 1,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Deviling",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 99,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Seiya",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 45,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Harry Potter",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 62,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Goku",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 77,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Phreoni",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 22,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Katheryn High Wizard",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 25,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Lord Seyren",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 55,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 7,
+							"type": "col"
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Total:",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_top": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "R$ 2.567,00",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_top": 5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 15,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "5123.151231.512314.1251251.123215",
+									"type": "barcode",
+									"details": {
+										"prop_percent": 100,
+										"prop_proportion_height": 2,
+										"prop_proportion_width": 20
+									}
+								},
+								{
+									"value": "5123.151231.512314.1251251.123215",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_top": 12
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 56.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Tel: 55 024 12345-1234",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_color": "RGB(10, 10, 150)",
+										"prop_font_size": 8,
+										"prop_font_style": "BI",
+										"prop_top": 13
+									}
+								},
+								{
+									"value": "www.mycompany.com",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_color": "RGB(10, 10, 150)",
+										"prop_font_size": 8,
+										"prop_font_style": "BI",
+										"prop_top": 16
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

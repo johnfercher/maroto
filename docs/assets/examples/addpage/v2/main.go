@@ -4,15 +4,33 @@ import (
 	"log"
 
 	"github.com/johnfercher/maroto/v2"
-
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
-	"github.com/johnfercher/maroto/v2/pkg/props"
-
 	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 func main() {
+	m := GetMaroto()
+
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/addpagev2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/addpagev2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithPageNumber("{current} / {total}", props.South).
 		WithDebug(true).
@@ -41,18 +59,5 @@ func main() {
 		),
 	)
 
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/pdf/addpagev2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/addpagev2.txt")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	return m
 }

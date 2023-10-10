@@ -18,14 +18,33 @@ type Barcode struct {
 }
 
 func (b *Barcode) ToMap() map[string]interface{} {
-	return map[string]interface{}{
-		"prop_left":              b.Left,
-		"prop_top":               b.Top,
-		"prop_percent":           b.Percent,
-		"prop_proportion_width":  b.Proportion.Width,
-		"prop_proportion_height": b.Proportion.Height,
-		"prop_center":            b.Center,
+	m := make(map[string]interface{})
+
+	if b.Left != 0 {
+		m["prop_left"] = b.Left
 	}
+
+	if b.Top != 0 {
+		m["prop_top"] = b.Top
+	}
+
+	if b.Percent != 0 {
+		m["prop_percent"] = b.Percent
+	}
+
+	if b.Proportion.Width != 0 {
+		m["prop_proportion_width"] = b.Proportion.Width
+	}
+
+	if b.Proportion.Height != 0 {
+		m["prop_proportion_height"] = b.Proportion.Height
+	}
+
+	if b.Center {
+		m["prop_center"] = b.Center
+	}
+
+	return m
 }
 
 func (b *Barcode) ToRectProp() *Rect {

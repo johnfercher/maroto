@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/core"
+
 	"github.com/johnfercher/maroto/v2"
 
 	"github.com/johnfercher/maroto/v2/pkg/repository"
@@ -19,8 +21,25 @@ import (
 )
 
 func main() {
+	m := GetMaroto("docs/assets/fonts/arial-unicode-ms.ttf")
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/customfontv2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/customfontv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func GetMaroto(customFontFile string) core.Maroto {
 	customFont := "arial-unicode-ms"
-	customFontFile := "docs/assets/fonts/arial-unicode-ms.ttf"
 
 	repository := repository.New().
 		AddUTF8Font(customFont, fontstyle.Normal, customFontFile).
@@ -77,20 +96,7 @@ func main() {
 		text.NewCol(4, longText, props.Text{Align: align.Right, BreakLineStrategy: breakline.DashStrategy}),
 	)
 
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/pdf/customfontv2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/customfontv2.txt")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	return m
 }
 
 func getLanguageSample() ([]string, [][]string) {

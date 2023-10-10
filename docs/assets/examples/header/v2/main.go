@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/core"
+
 	"github.com/johnfercher/maroto/v2"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -15,27 +17,7 @@ import (
 )
 
 func main() {
-	cfg := config.NewBuilder().
-		WithDebug(true).
-		Build()
-
-	mrt := maroto.New(cfg)
-	m := maroto.NewMetricsDecorator(mrt)
-
-	err := m.RegisterHeader(text.NewRow(20, "Header", props.Text{
-		Size:  10,
-		Style: fontstyle.Bold,
-		Align: align.Center,
-	}))
-
-	for i := 0; i < 50; i++ {
-		m.AddRows(
-			text.NewRow(10, "Dummy text", props.Text{
-				Size: 8,
-			}),
-		)
-	}
-
+	m := GetMaroto()
 	document, err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
@@ -50,4 +32,32 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+}
+
+func GetMaroto() core.Maroto {
+	cfg := config.NewBuilder().
+		WithDebug(true).
+		Build()
+
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
+
+	err := m.RegisterHeader(text.NewRow(20, "Header", props.Text{
+		Size:  10,
+		Style: fontstyle.Bold,
+		Align: align.Center,
+	}))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for i := 0; i < 50; i++ {
+		m.AddRows(
+			text.NewRow(10, "Dummy text", props.Text{
+				Size: 8,
+			}),
+		)
+	}
+
+	return m
 }

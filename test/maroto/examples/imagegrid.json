@@ -1,0 +1,282 @@
+{
+	"type": "maroto",
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 80
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 80
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 80
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_left": 10,
+										"prop_percent": 50
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_percent": 50,
+										"prop_top": 10
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_left": 15,
+										"prop_percent": 50,
+										"prop_top": 15
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 80
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 80
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/frontpage.png",
+									"type": "fileImage",
+									"details": {
+										"prop_left": 10,
+										"prop_percent": 80,
+										"prop_top": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/frontpage.png",
+									"type": "fileImage",
+									"details": {
+										"prop_percent": 80,
+										"prop_top": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/frontpage.png",
+									"type": "fileImage",
+									"details": {
+										"prop_left": 5,
+										"prop_percent": 80
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/frontpage.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 50
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/frontpage.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 50
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/frontpage.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 50
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/frontpage.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 80
+									}
+								}
+							]
+						},
+						{
+							"value": 8,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/frontpage.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 80
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 26.997500000000002,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

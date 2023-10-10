@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/core"
+
 	"github.com/johnfercher/maroto/v2"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
@@ -12,6 +14,24 @@ import (
 )
 
 func main() {
+	m := GetMaroto()
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/imagegridv2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/imagegridv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithDebug(true).
 		Build()
@@ -109,18 +129,5 @@ func main() {
 		}),
 	)
 
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/pdf/imagegridv2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/imagegridv2.txt")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	return m
 }

@@ -1,0 +1,321 @@
+{
+	"type": "maroto",
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Red text",
+									"type": "text",
+									"details": {
+										"prop_color": "RGB(255, 0, 0)"
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Green text",
+									"type": "text",
+									"details": {
+										"prop_color": "RGB(0, 255, 0)"
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Blue text",
+									"type": "text",
+									"details": {
+										"prop_color": "RGB(0, 0, 255)"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Left-aligned text",
+									"type": "text"
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Centered text",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Right-aligned text",
+									"type": "text",
+									"details": {
+										"prop_align": "R"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Aligned unindented text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Left-aligned text",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_left": 3,
+										"prop_top": 3
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Centered text",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_top": 3
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Right-aligned text",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_right": 3,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Aligned text with indentation",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "L"
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "C"
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "R"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Multiline text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "dash_strategy",
+										"prop_left": 3,
+										"prop_right": 3,
+										"prop_top": 3
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_left": 3,
+										"prop_right": 3,
+										"prop_top": 3
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_left": 3,
+										"prop_right": 3,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Multiline text with indentation",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 26.997500000000002,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

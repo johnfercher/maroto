@@ -16,6 +16,24 @@ import (
 )
 
 func main() {
+	m := GetMaroto()
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/maxgridsumv2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/maxgridsumv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func GetMaroto() core.Maroto {
 	gridSum := 14
 	cfg := config.NewBuilder().
 		WithDebug(true).
@@ -37,18 +55,5 @@ func main() {
 	m.AddRow(8, headers...)
 	m.AddRow(8, contents...)
 
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/pdf/maxgridsumv2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/maxgridsumv2.txt")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	return m
 }

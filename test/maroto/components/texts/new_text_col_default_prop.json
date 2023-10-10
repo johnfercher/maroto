@@ -4,19 +4,7 @@
 	"nodes": [
 		{
 			"value": "code",
-			"type": "text",
-			"details": {
-				"prop_align": "",
-				"prop_breakline_strategy": "",
-				"prop_color": "RGB(0, 0, 0)",
-				"prop_font_family": "",
-				"prop_font_size": 0,
-				"prop_font_style": "",
-				"prop_left": 0,
-				"prop_right": 0,
-				"prop_top": 0,
-				"prop_vertical_padding": 0
-			}
+			"type": "text"
 		}
 	]
 }

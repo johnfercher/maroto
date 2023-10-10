@@ -4,6 +4,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/johnfercher/maroto/v2/pkg/core"
+
 	"github.com/johnfercher/maroto/v2"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -11,6 +13,24 @@ import (
 )
 
 func main() {
+	m := GetMaroto()
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/metadatasv2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/metadatasv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithAuthor("author", false).
 		WithCreator("creator", false).
@@ -26,18 +46,5 @@ func main() {
 		text.NewRow(30, "metadatas"),
 	)
 
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/pdf/metadatasv2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/metadatasv2.txt")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	return m
 }
