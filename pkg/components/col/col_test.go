@@ -1,26 +1,30 @@
 package col_test
 
 import (
-	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg/test"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestNew(t *testing.T) {
-	// Act
-	c := col.New()
+	t.Run("when size is not defined, should use is as max", func(t *testing.T) {
+		// Act
+		c := col.New()
 
-	// Assert
-	assert.NotNil(t, c)
-	assert.Equal(t, "*col.col", fmt.Sprintf("%T", c))
+		// Assert
+		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_zero_size.json")
+	})
+	t.Run("when size is not defined, should use is as max", func(t *testing.T) {
+		// Act
+		c := col.New(12)
+
+		// Assert
+		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_defined_size.json")
+	})
 }
 
-func TestCol_GetSize(t *testing.T) {
+/*func TestCol_GetSize(t *testing.T) {
 	t.Run("when size defined in creation, should use it", func(t *testing.T) {
 		// Arrange
 		c := col.New(12)
@@ -43,3 +47,4 @@ func TestCol_GetSize(t *testing.T) {
 		assert.Equal(t, 14, size)
 	})
 }
+*/

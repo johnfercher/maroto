@@ -11,6 +11,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Header",
@@ -32,6 +35,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -51,6 +57,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -70,6 +79,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -89,6 +101,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -108,6 +123,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -127,6 +145,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -146,6 +167,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -165,6 +189,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -184,6 +211,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -203,6 +233,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -222,6 +255,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -241,6 +277,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -260,6 +299,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -279,6 +321,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -298,6 +343,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -317,6 +365,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -336,6 +387,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -355,6 +409,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -374,6 +431,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -393,6 +453,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -412,6 +475,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -431,6 +497,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -450,6 +519,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -469,6 +541,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -503,6 +578,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Header",
@@ -524,6 +602,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -543,6 +624,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -562,6 +646,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -581,6 +668,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -600,6 +690,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -619,6 +712,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -638,6 +734,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -657,6 +756,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -676,6 +778,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -695,6 +800,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -714,6 +822,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -733,6 +844,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -752,6 +866,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -771,6 +888,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -790,6 +910,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -809,6 +932,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -828,6 +954,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -847,6 +976,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -866,6 +998,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -885,6 +1020,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -904,6 +1042,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -923,6 +1064,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -942,6 +1086,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -961,6 +1108,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -995,6 +1145,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Header",
@@ -1016,6 +1169,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -1035,6 +1191,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",

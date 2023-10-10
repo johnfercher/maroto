@@ -45,6 +45,13 @@ func (c *col) GetStructure() *node.Node[core.Structure] {
 		Details: c.style.ToMap(),
 	}
 
+	if c.isMax {
+		if len(str.Details) == 0 {
+			str.Details = make(map[string]interface{})
+		}
+		str.Details["is_max"] = true
+	}
+
 	node := node.New(str)
 
 	for _, c := range c.components {
