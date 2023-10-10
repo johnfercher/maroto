@@ -17,14 +17,14 @@ func TestNewQr(t *testing.T) {
 		sut := code.NewQr("code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_qr_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := code.NewQr("code", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_qr_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_custom_prop.json")
 	})
 }
 
@@ -34,14 +34,14 @@ func TestNewQrCol(t *testing.T) {
 		sut := code.NewQrCol(12, "code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_qr_col_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := code.NewQrCol(12, "code", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_qr_col_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_col_custom_prop.json")
 	})
 }
 
@@ -51,14 +51,14 @@ func TestNewQrRow(t *testing.T) {
 		sut := code.NewQrRow(10, "code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_qr_row_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := code.NewQrRow(10, "code", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_qr_row_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_row_custom_prop.json")
 	})
 }
 
