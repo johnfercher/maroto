@@ -30,7 +30,7 @@ func (c *Config) ToMap() map[string]interface{} {
 	}
 
 	if c.Dimensions != nil {
-		m = c.Dimensions.AppendMap(m)
+		m = c.Dimensions.AppendMap("maroto", m)
 	}
 
 	if c.Margins != nil {
