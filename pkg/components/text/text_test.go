@@ -16,14 +16,14 @@ func TestNew(t *testing.T) {
 		sut := text.New("code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_text_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := text.New("code", fixture.TextProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_text_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_custom_prop.json")
 	})
 }
 
@@ -33,14 +33,14 @@ func TestNewCol(t *testing.T) {
 		sut := text.NewCol(12, "code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_text_col_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := text.NewCol(12, "code", fixture.TextProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_text_col_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_col_custom_prop.json")
 	})
 }
 
@@ -50,14 +50,14 @@ func TestNewRow(t *testing.T) {
 		sut := text.NewRow(10, "code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_text_row_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := text.NewRow(10, "code", fixture.TextProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_text_row_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_row_custom_prop.json")
 	})
 }
 

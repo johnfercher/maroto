@@ -17,14 +17,14 @@ func TestNewMatrix(t *testing.T) {
 		sut := code.NewMatrix("code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_matrix_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := code.NewMatrix("code", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_matrix_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_custom_prop.json")
 	})
 }
 
@@ -34,14 +34,14 @@ func TestTestNewMatrixCol(t *testing.T) {
 		sut := code.NewMatrixCol(12, "code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_matrix_col_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := code.NewMatrixCol(12, "code", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_matrix_col_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_col_custom_prop.json")
 	})
 }
 
@@ -51,14 +51,14 @@ func TestNewMatrixRow(t *testing.T) {
 		sut := code.NewMatrixRow(10, "code")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_matrix_row_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := code.NewMatrixRow(10, "code", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_matrix_row_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_row_custom_prop.json")
 	})
 }
 

@@ -16,14 +16,14 @@ func TestNew(t *testing.T) {
 		sut := signature.New("signature")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_signature_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := signature.New("signature", fixture.SignatureProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_signature_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_custom_prop.json")
 	})
 }
 
@@ -33,14 +33,14 @@ func TestNewCol(t *testing.T) {
 		sut := signature.NewCol(12, "signature")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_signature_col_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := signature.NewCol(12, "signature", fixture.SignatureProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_signature_col_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_col_custom_prop.json")
 	})
 }
 
@@ -50,14 +50,14 @@ func TestNewRow(t *testing.T) {
 		sut := signature.NewRow(10, "signature")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_signature_row_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := signature.NewRow(10, "signature", fixture.SignatureProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_signature_row_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_row_custom_prop.json")
 	})
 }
 

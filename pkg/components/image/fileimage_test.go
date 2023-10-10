@@ -16,14 +16,14 @@ func TestNewFromFile(t *testing.T) {
 		sut := image.NewFromFile("path")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_file_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := image.NewFromFile("path", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_file_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_custom_prop.json")
 	})
 }
 
@@ -33,14 +33,14 @@ func TestNewFromFileCol(t *testing.T) {
 		sut := image.NewFromFileCol(12, "path")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_file_col_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := image.NewFromFileCol(12, "path", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_file_col_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_col_custom_prop.json")
 	})
 }
 
@@ -50,14 +50,14 @@ func TestNewFromFileRow(t *testing.T) {
 		sut := image.NewFromFileRow(10, "path")
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_file_row_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := image.NewFromFileRow(12, "path", fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_file_row_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_row_custom_prop.json")
 	})
 }
 

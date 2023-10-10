@@ -16,14 +16,14 @@ func TestNewFromBytes(t *testing.T) {
 		sut := image.NewFromBytes([]byte{1, 2, 3}, extension.Jpg)
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_bytes_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := image.NewFromBytes([]byte{1, 2, 3}, extension.Jpg, fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_bytes_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_custom_prop.json")
 	})
 }
 
@@ -33,14 +33,14 @@ func TestNewFromBytesCol(t *testing.T) {
 		sut := image.NewFromBytesCol(12, []byte{1, 2, 3}, extension.Jpg)
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_bytes_col_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := image.NewFromBytesCol(12, []byte{1, 2, 3}, extension.Jpg, fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Save("new_image_from_bytes_col_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Save("components/images/new_image_from_bytes_col_custom_prop.json")
 	})
 }
 
@@ -50,14 +50,14 @@ func TestNewFromBytesRow(t *testing.T) {
 		sut := image.NewFromBytesRow(10, []byte{1, 2, 3}, extension.Jpg)
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_bytes_row_default_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
 		sut := image.NewFromBytesRow(10, []byte{1, 2, 3}, extension.Jpg, fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("new_image_from_bytes_row_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_row_custom_prop.json")
 	})
 }
 
