@@ -35,9 +35,9 @@ func main() {
 	)
 
 	m.AddRow(40,
-		signature.NewCol(4, "Signature 4", props.Signature{LineColor: &props.RedColor}),
-		signature.NewCol(4, "Signature 5", props.Signature{LineStyle: linestyle.Dashed}),
-		signature.NewCol(4, "Signature 6", props.Signature{LineThickness: 0.5}),
+		signature.NewCol(4, "Signature 7", props.Signature{LineColor: &props.RedColor}),
+		signature.NewCol(4, "Signature 8", props.Signature{LineStyle: linestyle.Dashed}),
+		signature.NewCol(4, "Signature 9", props.Signature{LineThickness: 0.5}),
 	)
 
 	document, err := m.Generate()
