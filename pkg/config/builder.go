@@ -273,7 +273,7 @@ func (b *builder) WithCreationDate(time time.Time) Builder {
 		return b
 	}
 
-	b.metadata.CreationDate = time
+	b.metadata.CreationDate = &time
 
 	return b
 }

@@ -1,5 +1,20 @@
 {
 	"type": "maroto",
+	"details": {
+		"config_margin_bottom": 20.0025,
+		"config_margin_left": 10,
+		"config_margin_right": 10,
+		"config_margin_top": 15,
+		"config_max_grid_sum": 12,
+		"config_page_number_pattern": "Page {current} of {total}",
+		"config_page_number_place": "south_east",
+		"config_provider_type": "gofpdf",
+		"dimension_height": 297,
+		"dimension_width": 210,
+		"prop_font_color": "RGB(0, 0, 0)",
+		"prop_font_family": "arial",
+		"prop_font_size": 10
+	},
 	"nodes": [
 		{
 			"type": "page",
@@ -93,7 +108,7 @@
 					"value": 7,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(55, 55, 55)"
+						"prop_background_color": "RGB(55, 55, 55)"
 					},
 					"nodes": [
 						{
@@ -174,7 +189,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -281,7 +296,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -388,7 +403,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -495,7 +510,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -602,7 +617,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -709,7 +724,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -816,7 +831,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -923,7 +938,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1030,7 +1045,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1137,7 +1152,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1244,7 +1259,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1351,7 +1366,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1458,7 +1473,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1565,7 +1580,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
+						"prop_background_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{

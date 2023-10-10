@@ -22,7 +22,7 @@ func TestNew(t *testing.T) {
 		// Assert
 		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_zero_size.json")
 	})
-	t.Run("when size is defined, should use not use max", func(t *testing.T) {
+	t.Run("when size is defined, should not use max", func(t *testing.T) {
 		// Act
 		c := col.New(12)
 
@@ -35,6 +35,14 @@ func TestNew(t *testing.T) {
 
 		// Assert
 		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_with_components.json")
+	})
+	t.Run("when has component, should retrieve components", func(t *testing.T) {
+		// Act
+		prop := fixture.CellProp()
+		c := col.New(12).WithStyle(&prop)
+
+		// Assert
+		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_with_props.json")
 	})
 }
 
@@ -63,7 +71,30 @@ func TestCol_GetSize(t *testing.T) {
 }
 
 func TestCol_Render(t *testing.T) {
-	t.Run("should call provider correctly", func(t *testing.T) {
+	t.Run("when not createCell, should call provider correctly", func(t *testing.T) {
+		// Arrange
+		cfg := &entity.Config{}
+		cell := fixture.CellEntity()
+		style := &props.Cell{}
+
+		provider := &mocks.Provider{}
+
+		component := &mocks.Component{}
+		component.EXPECT().Render(provider, &cell)
+		component.EXPECT().SetConfig(cfg)
+
+		sut := col.New(12).Add(component)
+		sut.WithStyle(style)
+		sut.SetConfig(cfg)
+
+		// Act
+		sut.Render(provider, cell, false)
+
+		// Assert
+		component.AssertNumberOfCalls(t, "Render", 1)
+		component.AssertNumberOfCalls(t, "SetConfig", 1)
+	})
+	t.Run("when createCell, should call provider correctly", func(t *testing.T) {
 		// Arrange
 		cfg := &entity.Config{}
 		cell := fixture.CellEntity()
