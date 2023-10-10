@@ -18,10 +18,18 @@ func (c *Cell) ToMap() map[string]interface{} {
 		return nil
 	}
 
-	m := map[string]interface{}{
-		"cell_prop_border_type":       c.BorderType,
-		"cell_prop_border_thickness":  c.BorderThickness,
-		"cell_prop_border_line_style": c.LineStyle,
+	m := make(map[string]interface{})
+
+	if c.BorderType != "" {
+		m["cell_prop_border_type"] = c.BorderType
+	}
+
+	if c.BorderThickness != 0 {
+		m["cell_prop_border_thickness"] = c.BorderThickness
+	}
+
+	if c.LineStyle != "" {
+		m["cell_prop_border_line_style"] = c.LineStyle
 	}
 
 	if c.BackgroundColor != nil {

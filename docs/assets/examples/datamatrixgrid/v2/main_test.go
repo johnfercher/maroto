@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/test"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/test"
 )
 
 func TestGetMaroto(t *testing.T) {

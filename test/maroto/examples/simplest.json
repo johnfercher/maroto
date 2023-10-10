@@ -16,12 +16,9 @@
 									"value": "barcode",
 									"type": "barcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 100,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -34,10 +31,7 @@
 									"value": "matrixcode",
 									"type": "matrixcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 100,
-										"prop_top": 0
+										"prop_percent": 100
 									}
 								}
 							]
@@ -50,10 +44,7 @@
 									"value": "qrcode",
 									"type": "qrcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 100,
-										"prop_top": 0
+										"prop_percent": 100
 									}
 								}
 							]
@@ -82,10 +73,7 @@
 									"value": "docs/assets/images/biplane.jpg",
 									"type": "fileImage",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 100,
-										"prop_top": 0
+										"prop_percent": 100
 									}
 								}
 							]
@@ -98,7 +86,7 @@
 									"value": "signature",
 									"type": "signature",
 									"details": {
-										"prop_font_familty": "arial",
+										"prop_font_family": "arial",
 										"prop_font_size": 8,
 										"prop_font_style": "B",
 										"prop_line_style": "solid",
@@ -140,7 +128,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,

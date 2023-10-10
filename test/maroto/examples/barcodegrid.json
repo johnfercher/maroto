@@ -16,12 +16,9 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "barcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 50,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -34,12 +31,9 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "barcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 75,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -52,12 +46,9 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "barcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 100,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -77,11 +68,9 @@
 									"type": "barcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
 										"prop_percent": 50,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -95,11 +84,9 @@
 									"type": "barcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
 										"prop_percent": 75,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -113,11 +100,9 @@
 									"type": "barcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
 										"prop_percent": 100,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -136,12 +121,9 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "barcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 50,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -154,12 +136,9 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "barcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 75,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -172,12 +151,9 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "barcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 100,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -197,11 +173,9 @@
 									"type": "barcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
 										"prop_percent": 50,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -215,11 +189,9 @@
 									"type": "barcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
 										"prop_percent": 75,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -233,11 +205,9 @@
 									"type": "barcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
 										"prop_percent": 100,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]

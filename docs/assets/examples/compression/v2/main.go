@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/components/code"
-	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"log"
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/components/code"
+	"github.com/johnfercher/maroto/v2/pkg/components/image"
 
 	"github.com/johnfercher/maroto/v2"
 
@@ -99,7 +100,6 @@ func GetMaroto(imagePath string) core.Maroto {
 }
 
 func buildImagesRow() []core.Row {
-
 	return []core.Row{}
 }
 

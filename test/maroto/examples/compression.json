@@ -52,11 +52,9 @@
 									"type": "barcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
 										"prop_percent": 70,
 										"prop_proportion_height": 0.2,
-										"prop_proportion_width": 1,
-										"prop_top": 0
+										"prop_proportion_width": 1
 									}
 								}
 							]
@@ -91,9 +89,7 @@
 									"type": "qrcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 70,
-										"prop_top": 0
+										"prop_percent": 70
 									}
 								}
 							]
@@ -128,9 +124,7 @@
 									"type": "matrixcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 70,
-										"prop_top": 0
+										"prop_percent": 70
 									}
 								}
 							]
@@ -165,9 +159,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 90,
-										"prop_top": 0
+										"prop_percent": 90
 									}
 								}
 							]
@@ -204,9 +196,7 @@
 										"bytes_size": 17668,
 										"extension": "png",
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 90,
-										"prop_top": 0
+										"prop_percent": 90
 									}
 								}
 							]
@@ -276,7 +266,7 @@
 									"value": "Name",
 									"type": "signature",
 									"details": {
-										"prop_font_familty": "arial",
+										"prop_font_family": "arial",
 										"prop_font_size": 10,
 										"prop_font_style": "B",
 										"prop_line_style": "solid",

@@ -17,9 +17,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]

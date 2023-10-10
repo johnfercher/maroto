@@ -15,7 +15,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,
@@ -32,7 +31,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,
@@ -49,7 +47,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,
@@ -72,7 +69,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,
@@ -89,7 +85,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,
@@ -106,7 +101,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,
@@ -129,7 +123,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,
@@ -163,7 +156,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "vertical",
 										"prop_size_percent": 90,
@@ -186,7 +178,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 50,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,
@@ -203,7 +194,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 50,
 										"prop_orientation": "vertical",
 										"prop_size_percent": 90,
@@ -220,7 +210,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 50,
@@ -243,7 +232,6 @@
 								{
 									"type": "lineStyle",
 									"details": {
-										"prop_color": "",
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
 										"prop_size_percent": 90,

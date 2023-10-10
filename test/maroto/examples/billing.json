@@ -17,9 +17,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]
@@ -92,10 +90,7 @@
 					"value": 7,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(55, 55, 55)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(55, 55, 55)"
 					},
 					"nodes": [
 						{
@@ -176,10 +171,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -286,10 +278,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -396,10 +385,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -506,10 +492,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -616,10 +599,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -726,10 +706,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -836,10 +813,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -946,10 +920,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1056,10 +1027,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1166,10 +1134,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1276,10 +1241,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1386,10 +1348,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1496,10 +1455,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1606,10 +1562,7 @@
 					"value": 4,
 					"type": "row",
 					"details": {
-						"cell_prop_backgrond_color": "RGB(200, 200, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_backgrond_color": "RGB(200, 200, 200)"
 					},
 					"nodes": [
 						{
@@ -1714,12 +1667,9 @@
 									"value": "5123.151231.512314.1251251.123215",
 									"type": "barcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 100,
 										"prop_proportion_height": 2,
-										"prop_proportion_width": 20,
-										"prop_top": 0
+										"prop_proportion_width": 20
 									}
 								},
 								{

@@ -91,10 +91,7 @@
 					"type": "row",
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
-						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_border_color": "RGB(0, 0, 200)"
 					},
 					"nodes": [
 						{
@@ -239,8 +236,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "1"
 					},
 					"nodes": [
@@ -386,8 +381,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "L"
 					},
 					"nodes": [
@@ -533,8 +526,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "R"
 					},
 					"nodes": [
@@ -680,8 +671,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "T"
 					},
 					"nodes": [
@@ -827,8 +816,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "B"
 					},
 					"nodes": [
@@ -988,10 +975,7 @@
 					"type": "row",
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
-						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_border_color": "RGB(0, 0, 200)"
 					},
 					"nodes": [
 						{
@@ -1136,8 +1120,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "1"
 					},
 					"nodes": [
@@ -1283,8 +1265,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "L"
 					},
 					"nodes": [
@@ -1430,8 +1410,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "R"
 					},
 					"nodes": [
@@ -1577,8 +1555,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "T"
 					},
 					"nodes": [
@@ -1724,8 +1700,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "B"
 					},
 					"nodes": [
@@ -1870,10 +1844,7 @@
 					"type": "row",
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
-						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
-						"cell_prop_border_type": ""
+						"cell_prop_border_color": "RGB(0, 0, 200)"
 					},
 					"nodes": [
 						{
@@ -2033,8 +2004,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "1"
 					},
 					"nodes": [
@@ -2180,8 +2149,6 @@
 					"details": {
 						"cell_prop_backgrond_color": "RGB(220, 220, 220)",
 						"cell_prop_border_color": "RGB(0, 0, 200)",
-						"cell_prop_border_line_style": "",
-						"cell_prop_border_thickness": 0,
 						"cell_prop_border_type": "L"
 					},
 					"nodes": [

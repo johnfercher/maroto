@@ -40,7 +40,7 @@ func TestNewFromBytesCol(t *testing.T) {
 		sut := image.NewFromBytesCol(12, []byte{1, 2, 3}, extension.Jpg, fixture.RectProp())
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Save("components/images/new_image_from_bytes_col_custom_prop.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_col_custom_prop.json")
 	})
 }
 

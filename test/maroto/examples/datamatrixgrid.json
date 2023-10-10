@@ -16,10 +16,7 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "matrixcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]
@@ -32,10 +29,7 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "matrixcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 75,
-										"prop_top": 0
+										"prop_percent": 75
 									}
 								}
 							]
@@ -48,10 +42,7 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "matrixcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 100,
-										"prop_top": 0
+										"prop_percent": 100
 									}
 								}
 							]
@@ -71,9 +62,7 @@
 									"type": "matrixcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]
@@ -87,9 +76,7 @@
 									"type": "matrixcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 75,
-										"prop_top": 0
+										"prop_percent": 75
 									}
 								}
 							]
@@ -103,9 +90,7 @@
 									"type": "matrixcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 100,
-										"prop_top": 0
+										"prop_percent": 100
 									}
 								}
 							]
@@ -124,10 +109,7 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "matrixcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]
@@ -140,10 +122,7 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "matrixcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 75,
-										"prop_top": 0
+										"prop_percent": 75
 									}
 								}
 							]
@@ -156,10 +135,7 @@
 									"value": "https://github.com/johnfercher/maroto",
 									"type": "matrixcode",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
-										"prop_percent": 100,
-										"prop_top": 0
+										"prop_percent": 100
 									}
 								}
 							]
@@ -179,9 +155,7 @@
 									"type": "matrixcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]
@@ -195,9 +169,7 @@
 									"type": "matrixcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 75,
-										"prop_top": 0
+										"prop_percent": 75
 									}
 								}
 							]
@@ -211,9 +183,7 @@
 									"type": "matrixcode",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 100,
-										"prop_top": 0
+										"prop_percent": 100
 									}
 								}
 							]

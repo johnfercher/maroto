@@ -17,9 +17,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]
@@ -33,9 +31,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]
@@ -49,9 +45,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]
@@ -70,10 +64,8 @@
 									"value": "docs/assets/images/biplane.jpg",
 									"type": "fileImage",
 									"details": {
-										"prop_center": false,
 										"prop_left": 10,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]
@@ -86,8 +78,6 @@
 									"value": "docs/assets/images/biplane.jpg",
 									"type": "fileImage",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 50,
 										"prop_top": 10
 									}
@@ -102,7 +92,6 @@
 									"value": "docs/assets/images/biplane.jpg",
 									"type": "fileImage",
 									"details": {
-										"prop_center": false,
 										"prop_left": 15,
 										"prop_percent": 50,
 										"prop_top": 15
@@ -125,9 +114,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]
@@ -141,9 +128,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]
@@ -162,7 +147,6 @@
 									"value": "docs/assets/images/frontpage.png",
 									"type": "fileImage",
 									"details": {
-										"prop_center": false,
 										"prop_left": 10,
 										"prop_percent": 80,
 										"prop_top": 5
@@ -178,8 +162,6 @@
 									"value": "docs/assets/images/frontpage.png",
 									"type": "fileImage",
 									"details": {
-										"prop_center": false,
-										"prop_left": 0,
 										"prop_percent": 80,
 										"prop_top": 5
 									}
@@ -194,10 +176,8 @@
 									"value": "docs/assets/images/frontpage.png",
 									"type": "fileImage",
 									"details": {
-										"prop_center": false,
 										"prop_left": 5,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]
@@ -217,9 +197,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]
@@ -233,9 +211,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]
@@ -249,9 +225,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 50,
-										"prop_top": 0
+										"prop_percent": 50
 									}
 								}
 							]
@@ -271,9 +245,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]
@@ -287,9 +259,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_left": 0,
-										"prop_percent": 80,
-										"prop_top": 0
+										"prop_percent": 80
 									}
 								}
 							]

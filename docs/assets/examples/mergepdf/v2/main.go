@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/core"
 	"log"
 	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2"
 

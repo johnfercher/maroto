@@ -25,12 +25,26 @@ type Signature struct {
 }
 
 func (s *Signature) ToMap() map[string]interface{} {
-	m := map[string]interface{}{
-		"prop_font_familty":   s.FontFamily,
-		"prop_font_style":     s.FontStyle,
-		"prop_font_size":      s.FontSize,
-		"prop_line_style":     s.LineStyle,
-		"prop_line_thickness": s.LineThickness,
+	m := make(map[string]interface{})
+
+	if s.FontFamily != "" {
+		m["prop_font_family"] = s.FontFamily
+	}
+
+	if s.FontStyle != "" {
+		m["prop_font_style"] = s.FontStyle
+	}
+
+	if s.FontSize != 0 {
+		m["prop_font_size"] = s.FontSize
+	}
+
+	if s.LineStyle != "" {
+		m["prop_line_style"] = s.LineStyle
+	}
+
+	if s.LineThickness != 0 {
+		m["prop_line_thickness"] = s.LineThickness
 	}
 
 	if s.FontColor != nil {
