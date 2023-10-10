@@ -11,5 +11,5 @@ func TestGetMaroto(t *testing.T) {
 	sut := GetMaroto()
 
 	// Assert
-	test.New(t).Assert(sut.GetStructure()).Save("examples/addpage.json")
+	test.New(t).Assert(sut.GetStructure()).Equals("examples/addpage.json")
 }

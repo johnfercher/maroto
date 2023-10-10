@@ -1,6 +1,8 @@
 package row_test
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
@@ -8,7 +10,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNew(t *testing.T) {
