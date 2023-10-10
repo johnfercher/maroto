@@ -1,9 +1,10 @@
 package entity
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestMetadata_AppendMap(t *testing.T) {

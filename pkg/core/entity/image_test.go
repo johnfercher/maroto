@@ -1,9 +1,10 @@
 package entity
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestImage_AppendMap(t *testing.T) {

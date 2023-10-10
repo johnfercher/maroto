@@ -1,9 +1,10 @@
 package entity
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestProtection_AppendMap(t *testing.T) {

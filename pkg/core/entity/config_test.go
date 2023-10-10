@@ -1,6 +1,8 @@
 package entity
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -8,7 +10,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestConfig_ToMap(t *testing.T) {
