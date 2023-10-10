@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"log"
 
 	"github.com/johnfercher/maroto/v2"
@@ -30,7 +31,13 @@ func main() {
 	m.AddRow(40,
 		signature.NewCol(6, "Signature 4", props.Signature{FontStyle: fontstyle.Italic}),
 		signature.NewCol(4, "Signature 5", props.Signature{FontSize: 12}),
-		signature.NewCol(2, "Signature 6", props.Signature{FontColor: &props.Color{255, 0, 0}}),
+		signature.NewCol(2, "Signature 6", props.Signature{FontColor: &props.RedColor}),
+	)
+
+	m.AddRow(40,
+		signature.NewCol(4, "Signature 4", props.Signature{LineColor: &props.RedColor}),
+		signature.NewCol(4, "Signature 5", props.Signature{LineStyle: linestyle.Dashed}),
+		signature.NewCol(4, "Signature 6", props.Signature{LineThickness: 0.5}),
 	)
 
 	document, err := m.Generate()

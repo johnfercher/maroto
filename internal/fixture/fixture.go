@@ -130,3 +130,19 @@ func LineProp() props.Line {
 	prop.MakeValid()
 	return prop
 }
+
+func SignatureProp() props.Signature {
+	textProp := TextProp()
+	lineProp := LineProp()
+	prop := props.Signature{
+		FontFamily:    textProp.Family,
+		FontStyle:     textProp.Style,
+		FontSize:      textProp.Size,
+		FontColor:     textProp.Color,
+		LineColor:     lineProp.Color,
+		LineStyle:     lineProp.Style,
+		LineThickness: lineProp.Thickness,
+	}
+	prop.MakeValid(textProp.Family)
+	return prop
+}

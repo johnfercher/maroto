@@ -27,7 +27,6 @@ type gofpdfProvider struct {
 	fpdf       *gofpdf.Fpdf
 	font       core.Font
 	text       core.Text
-	signature  core.Signature
 	code       core.Code
 	image      core.Image
 	line       core.Line
@@ -58,7 +57,6 @@ func New(cfg *entity.Config, cache cache.Cache) core.Provider {
 	math := math.New()
 	code := code.New()
 	text := internal.NewText(fpdf, math, font)
-	signature := internal.NewSignature(fpdf, math, text)
 	image := internal.NewImage(fpdf, math)
 	line := internal.NewLine(fpdf)
 	cellWriter := cellwriter.NewBuilder().Build(fpdf)
@@ -67,7 +65,6 @@ func New(cfg *entity.Config, cache cache.Cache) core.Provider {
 		fpdf:       fpdf,
 		font:       font,
 		text:       text,
-		signature:  signature,
 		code:       code,
 		image:      image,
 		line:       line,
@@ -89,10 +86,6 @@ func (g *gofpdfProvider) GetTextHeight(prop *props.Font) float64 {
 
 func (g *gofpdfProvider) AddLine(cell *entity.Cell, prop *props.Line) {
 	g.line.Add(cell, prop)
-}
-
-func (g *gofpdfProvider) AddSignature(text string, cell *entity.Cell, prop *props.Text) {
-	g.signature.AddSpaceFor(text, cell, prop)
 }
 
 func (g *gofpdfProvider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {

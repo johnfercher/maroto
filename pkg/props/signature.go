@@ -24,6 +24,26 @@ type Signature struct {
 	LineThickness float64
 }
 
+func (s *Signature) ToMap() map[string]interface{} {
+	m := map[string]interface{}{
+		"prop_font_familty":   s.FontFamily,
+		"prop_font_style":     s.FontStyle,
+		"prop_font_size":      s.FontSize,
+		"prop_line_style":     s.LineStyle,
+		"prop_line_thickness": s.LineThickness,
+	}
+
+	if s.FontColor != nil {
+		m["prop_font_color"] = s.FontColor.ToString()
+	}
+
+	if s.LineColor != nil {
+		m["prop_line_color"] = s.LineColor.ToString()
+	}
+
+	return m
+}
+
 func (s *Signature) MakeValid(defaultFontFamily string) {
 	if s.FontFamily == "" {
 		s.FontFamily = defaultFontFamily

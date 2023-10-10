@@ -56,8 +56,9 @@ func (s *signature) Render(provider core.Provider, cell *entity.Cell) {
 
 func (s *signature) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:  "signature",
-		Value: s.value,
+		Type:    "signature",
+		Value:   s.value,
+		Details: s.prop.ToMap(),
 	}
 
 	return node.New(str)

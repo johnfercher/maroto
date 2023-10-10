@@ -29,11 +29,6 @@ type Line interface {
 	Add(cell *entity.Cell, prop *props.Line)
 }
 
-// Signature is the abstraction which deals of how to add a signature space inside PDF.
-type Signature interface {
-	AddSpaceFor(label string, cell *entity.Cell, textProp *props.Text)
-}
-
 // Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
 	Add(text string, cell *entity.Cell, textProp *props.Text)

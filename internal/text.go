@@ -35,6 +35,7 @@ func NewText(pdf fpdf.Fpdf, math core.Math, font core.Font) *text {
 // Add a text inside a cell.
 func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
+	fontHeight := s.font.GetHeight(textProp.Family, textProp.Style, textProp.Size)
 
 	if textProp.Top > cell.Height {
 		textProp.Top = cell.Height
@@ -57,11 +58,9 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	y := cell.Y + textProp.Top
 
 	originalColor := s.font.GetColor()
-	s.font.SetColor(textProp.Color)
-
-	// duplicated
-	_, _, fontSize := s.font.GetFont()
-	fontHeight := fontSize / s.font.GetScaleFactor()
+	if textProp.Color != nil {
+		s.font.SetColor(textProp.Color)
+	}
 
 	y += fontHeight
 
@@ -72,6 +71,9 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	// If should add one line
 	if stringWidth < width {
 		s.addLine(textProp, x, width, y, stringWidth, unicodeText)
+		if textProp.Color != nil {
+			s.font.SetColor(originalColor)
+		}
 		return
 	}
 
@@ -95,7 +97,9 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 		accumulateOffsetY += textProp.VerticalPadding
 	}
 
-	s.font.SetColor(originalColor)
+	if textProp.Color != nil {
+		s.font.SetColor(originalColor)
+	}
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.

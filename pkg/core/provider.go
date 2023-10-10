@@ -16,7 +16,6 @@ type Provider interface {
 	AddLine(cell *entity.Cell, prop *props.Line)
 	AddText(text string, cell *entity.Cell, prop *props.Text)
 	GetTextHeight(prop *props.Font) float64
-	AddSignature(text string, cell *entity.Cell, prop *props.Text)
 	AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect)
 	AddQrCode(code string, cell *entity.Cell, rect *props.Rect)
 	AddBarCode(code string, cell *entity.Cell, prop *props.Barcode)
