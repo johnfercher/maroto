@@ -17,6 +17,26 @@ type Font struct {
 	Color *Color
 }
 
+func (f *Font) AppendMap(m map[string]interface{}) map[string]interface{} {
+	if f.Family != "" {
+		m["prop_font_family"] = f.Family
+	}
+
+	if f.Style != "" {
+		m["prop_font_style"] = f.Style
+	}
+
+	if f.Size != 0 {
+		m["prop_font_size"] = f.Size
+	}
+
+	if f.Color != nil {
+		m["prop_font_color"] = f.Color.ToString()
+	}
+
+	return m
+}
+
 // MakeValid from Font define default values for a Signature.
 func (f *Font) MakeValid(defaultFamily string) {
 	if f.Family == "" {

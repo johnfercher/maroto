@@ -232,7 +232,7 @@ func (g *gofpdfProvider) SetMetadata(metadata *entity.Metadata) {
 	}
 
 	if !metadata.CreationDate.IsZero() {
-		g.fpdf.SetCreationDate(metadata.CreationDate)
+		g.fpdf.SetCreationDate(*metadata.CreationDate)
 	}
 }
 

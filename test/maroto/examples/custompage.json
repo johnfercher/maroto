@@ -1,5 +1,19 @@
 {
 	"type": "maroto",
+	"details": {
+		"config_debug": true,
+		"config_margin_bottom": 20.0025,
+		"config_margin_left": 10,
+		"config_margin_right": 10,
+		"config_margin_top": 10,
+		"config_max_grid_sum": 12,
+		"config_provider_type": "gofpdf",
+		"dimension_height": 594,
+		"dimension_width": 419.9,
+		"prop_font_color": "RGB(0, 0, 0)",
+		"prop_font_family": "arial",
+		"prop_font_size": 10
+	},
 	"nodes": [
 		{
 			"type": "page",

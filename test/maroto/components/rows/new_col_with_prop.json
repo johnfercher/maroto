@@ -1,0 +1,11 @@
+{
+	"value": 12,
+	"type": "row",
+	"details": {
+		"prop_background_color": "RGB(255, 100, 50)",
+		"prop_border_color": "RGB(200, 80, 60)",
+		"prop_border_line_style": "dashed",
+		"prop_border_thickness": 0.6,
+		"prop_border_type": "L"
+	}
+}

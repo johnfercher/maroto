@@ -21,23 +21,23 @@ func (c *Cell) ToMap() map[string]interface{} {
 	m := make(map[string]interface{})
 
 	if c.BorderType != "" {
-		m["cell_prop_border_type"] = c.BorderType
+		m["prop_border_type"] = c.BorderType
 	}
 
 	if c.BorderThickness != 0 {
-		m["cell_prop_border_thickness"] = c.BorderThickness
+		m["prop_border_thickness"] = c.BorderThickness
 	}
 
 	if c.LineStyle != "" {
-		m["cell_prop_border_line_style"] = c.LineStyle
+		m["prop_border_line_style"] = c.LineStyle
 	}
 
 	if c.BackgroundColor != nil {
-		m["cell_prop_backgrond_color"] = c.BackgroundColor.ToString()
+		m["prop_background_color"] = c.BackgroundColor.ToString()
 	}
 
 	if c.BorderColor != nil {
-		m["cell_prop_border_color"] = c.BorderColor.ToString()
+		m["prop_border_color"] = c.BorderColor.ToString()
 	}
 
 	return m
