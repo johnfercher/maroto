@@ -16,14 +16,7 @@ type text struct {
 }
 
 func New(value string, ps ...props.Text) core.Component {
-	textProp := props.Text{
-		Color: &props.Color{
-			Red:   0,
-			Green: 0,
-			Blue:  0,
-		},
-	}
-
+	textProp := props.Text{}
 	if len(ps) > 0 {
 		textProp = ps[0]
 	}

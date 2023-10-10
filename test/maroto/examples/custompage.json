@@ -1,0 +1,60 @@
+{
+	"type": "maroto",
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_left": 0,
+										"prop_percent": 50,
+										"prop_top": 0
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Gopher International Shipping, Inc.",
+									"type": "text",
+									"details": {
+										"prop_font_size": 12,
+										"prop_top": 12
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 523.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

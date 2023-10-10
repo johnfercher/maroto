@@ -30,16 +30,41 @@ type Text struct {
 }
 
 func (t *Text) ToMap() map[string]interface{} {
-	m := map[string]interface{}{
-		"prop_top":                t.Top,
-		"prop_left":               t.Left,
-		"prop_right":              t.Right,
-		"prop_font_family":        t.Family,
-		"prop_font_style":         t.Style,
-		"prop_font_size":          t.Size,
-		"prop_align":              t.Align,
-		"prop_breakline_strategy": t.BreakLineStrategy,
-		"prop_vertical_padding":   t.VerticalPadding,
+	m := make(map[string]interface{})
+	if t.Top != 0 {
+		m["prop_top"] = t.Top
+	}
+
+	if t.Left != 0 {
+		m["prop_left"] = t.Left
+	}
+
+	if t.Right != 0 {
+		m["prop_right"] = t.Right
+	}
+
+	if t.Family != "" {
+		m["prop_font_family"] = t.Family
+	}
+
+	if t.Style != "" {
+		m["prop_font_style"] = t.Style
+	}
+
+	if t.Size != 0 {
+		m["prop_font_size"] = t.Size
+	}
+
+	if t.Align != "" {
+		m["prop_align"] = t.Align
+	}
+
+	if t.BreakLineStrategy != "" {
+		m["prop_breakline_strategy"] = t.BreakLineStrategy
+	}
+
+	if t.VerticalPadding != 0 {
+		m["prop_vertical_padding"] = t.VerticalPadding
 	}
 
 	if t.Color != nil {

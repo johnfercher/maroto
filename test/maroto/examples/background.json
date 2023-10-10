@@ -1,0 +1,365 @@
+{
+	"type": "maroto",
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 70,
+					"type": "row"
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col"
+						},
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
+									"type": "text",
+									"details": {
+										"prop_font_size": 18
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 15,
+					"type": "row"
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/signature.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_left": 0,
+										"prop_percent": 100,
+										"prop_top": 0
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 54.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 70,
+					"type": "row"
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col"
+						},
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
+									"type": "text",
+									"details": {
+										"prop_font_size": 18
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 15,
+					"type": "row"
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/signature.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_left": 0,
+										"prop_percent": 100,
+										"prop_top": 0
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 54.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 70,
+					"type": "row"
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col"
+						},
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
+									"type": "text",
+									"details": {
+										"prop_font_size": 18
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 15,
+					"type": "row"
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/signature.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_left": 0,
+										"prop_percent": 100,
+										"prop_top": 0
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 54.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 70,
+					"type": "row"
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col"
+						},
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
+									"type": "text",
+									"details": {
+										"prop_font_size": 18
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 15,
+					"type": "row"
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/signature.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_left": 0,
+										"prop_percent": 100,
+										"prop_top": 0
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 54.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 70,
+					"type": "row"
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col"
+						},
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
+									"type": "text",
+									"details": {
+										"prop_font_size": 18
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 15,
+					"type": "row"
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/signature.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_left": 0,
+										"prop_percent": 100,
+										"prop_top": 0
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 54.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 20,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

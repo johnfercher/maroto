@@ -1,38 +1,24 @@
 package main
 
 import (
-	"log"
-
 	"github.com/johnfercher/maroto/v2"
+	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
+	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
-	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 func main() {
-	b := config.NewBuilder().
-		WithMargins(0, 0, 0).
-		WithOrientation(orientation.Horizontal).
-		WithMaxGridSize(20)
-
-	b, err := b.WithBackgroundImage("docs/assets/images/certificate.png")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	mrt := maroto.New(b.Build())
-	m := maroto.NewMetricsDecorator(mrt)
-
-	m.AddPages(AddPage(), AddPage(), AddPage(), AddPage(), AddPage())
-
+	backgroundImage := "docs/assets/images/certificate.png"
+	m := GetMaroto(backgroundImage)
 	document, err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
@@ -47,6 +33,24 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+}
+
+func GetMaroto(image string) core.Maroto {
+	b := config.NewBuilder().
+		WithMargins(0, 0, 0).
+		WithOrientation(orientation.Horizontal).
+		WithMaxGridSize(20)
+
+	b, err := b.WithBackgroundImage(image)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	mrt := maroto.New(b.Build())
+	m := maroto.NewMetricsDecorator(mrt)
+
+	m.AddPages(AddPage(), AddPage(), AddPage(), AddPage(), AddPage())
+	return m
 }
 
 func AddPage() core.Page {

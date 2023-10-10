@@ -1,0 +1,193 @@
+{
+	"type": "maroto",
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 1",
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "arial",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.2
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 2",
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "courier",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.2
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 3",
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "arial",
+										"prop_font_size": 8,
+										"prop_font_style": "BI",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.2
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 4",
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "arial",
+										"prop_font_size": 8,
+										"prop_font_style": "I",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.2
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 5",
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "arial",
+										"prop_font_size": 12,
+										"prop_font_style": "B",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.2
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 6",
+									"type": "signature",
+									"details": {
+										"prop_font_color": "RGB(255, 0, 0)",
+										"prop_font_familty": "arial",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.2
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 7",
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "arial",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_line_color": "RGB(255, 0, 0)",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.2
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 8",
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "arial",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_line_style": "dashed",
+										"prop_line_thickness": 0.2
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Signature 9",
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "arial",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 146.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

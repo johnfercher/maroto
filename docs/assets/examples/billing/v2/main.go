@@ -19,6 +19,24 @@ import (
 )
 
 func main() {
+	m := GetMaroto()
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/billingv2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/billingv2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithPageNumber("Page {current} of {total}", props.SouthEast).
 		WithMargins(10, 15, 10).
@@ -75,21 +93,7 @@ func main() {
 		),
 		col.New(6),
 	)
-
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/pdf/billingv2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/billingv2.txt")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	return m
 }
 
 func getTransactions() []core.Row {

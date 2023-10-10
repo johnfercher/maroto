@@ -1,0 +1,36 @@
+{
+	"type": "maroto",
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "supersecret content",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 236.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

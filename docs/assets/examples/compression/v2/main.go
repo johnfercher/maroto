@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg/components/code"
+	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"log"
 	"os"
 
 	"github.com/johnfercher/maroto/v2"
 
-	"github.com/johnfercher/maroto/v2/pkg/components/code"
-	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/signature"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -24,20 +24,7 @@ import (
 var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
 
 func main() {
-	cfg := config.NewBuilder().
-		WithCompression(true).
-		Build()
-
-	mrt := maroto.New(cfg)
-	m := maroto.NewMetricsDecorator(mrt)
-
-	m.AddRows(
-		text.NewRow(20, "Main features", props.Text{Size: 15, Top: 6.5}),
-	)
-	m.AddRows(buildCodesRow()...)
-	m.AddRows(buildImagesRow()...)
-	m.AddRows(buildTextsRow()...)
-
+	m := GetMaroto("docs/assets/images/frontpage.png")
 	document, err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
@@ -54,8 +41,19 @@ func main() {
 	}
 }
 
-func buildCodesRow() []core.Row {
-	return []core.Row{
+func GetMaroto(imagePath string) core.Maroto {
+	cfg := config.NewBuilder().
+		WithCompression(true).
+		Build()
+
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
+
+	m.AddRows(
+		text.NewRow(20, "Main features", props.Text{Size: 15, Top: 6.5}),
+	)
+
+	m.AddRows(
 		row.New(20).Add(
 			text.NewCol(4, "Barcode:", props.Text{Size: 15, Top: 6, Align: align.Center}),
 			code.NewBarCol(8, "barcode", props.Barcode{Center: true, Percent: 70}),
@@ -68,17 +66,14 @@ func buildCodesRow() []core.Row {
 			text.NewCol(4, "MatrixCode:", props.Text{Size: 15, Top: 6, Align: align.Center}),
 			code.NewMatrixCol(8, "matrixcode", props.Rect{Center: true, Percent: 70}),
 		),
-	}
-}
+	)
 
-func buildImagesRow() []core.Row {
-	bytes, err := os.ReadFile("docs/assets/images/frontpage.png")
+	bytes, err := os.ReadFile(imagePath)
 	if err != nil {
 		fmt.Println("Got error while opening file:", err)
 		os.Exit(1)
 	}
-
-	return []core.Row{
+	m.AddRows(
 		row.New(20).Add(
 			text.NewCol(4, "Image From File:", props.Text{Size: 15, Top: 6, Align: align.Center}),
 			image.NewFromFileCol(8, "docs/assets/images/biplane.jpg", props.Rect{Center: true, Percent: 90}),
@@ -87,20 +82,27 @@ func buildImagesRow() []core.Row {
 			text.NewCol(4, "Image From Base64::", props.Text{Size: 15, Top: 6, Align: align.Center}),
 			image.NewFromBytesCol(8, bytes, extension.Png, props.Rect{Center: true, Percent: 90}),
 		),
-	}
-}
+	)
 
-func buildTextsRow() []core.Row {
-	colText := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
-
-	return []core.Row{
+	m.AddRows(
 		row.New(20).Add(
 			text.NewCol(4, "Text:", props.Text{Size: 15, Top: 6, Align: align.Center}),
-			text.NewCol(8, colText, props.Text{Size: 12, Top: 5, Align: align.Center}),
+			text.NewCol(8, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem.", props.Text{Size: 12, Top: 5, Align: align.Center}),
 		),
 		row.New(40).Add(
 			text.NewCol(4, "Signature:", props.Text{Size: 15, Top: 17, Align: align.Center}),
 			signature.NewCol(8, "Name", props.Signature{FontSize: 10}),
 		),
-	}
+	)
+
+	return m
+}
+
+func buildImagesRow() []core.Row {
+
+	return []core.Row{}
+}
+
+func buildTextsRow() []core.Row {
+	return []core.Row{}
 }

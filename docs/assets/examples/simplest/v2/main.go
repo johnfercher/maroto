@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
@@ -15,6 +16,19 @@ import (
 )
 
 func main() {
+	m := GetMaroto()
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = document.Save("docs/assets/pdf/simplestv2.pdf")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func GetMaroto() core.Maroto {
 	m := maroto.New()
 
 	m.AddRow(20,
@@ -35,13 +49,5 @@ func main() {
 
 	m.AddRow(20, line.NewCol(12))
 
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = document.Save("docs/assets/pdf/simplestv2.pdf")
-	if err != nil {
-		log.Fatal(err)
-	}
+	return m
 }

@@ -22,17 +22,7 @@ var background = &props.Color{
 }
 
 func main() {
-	mrt := maroto.New()
-	m := maroto.NewMetricsDecorator(mrt)
-
-	objects := getObjects(100)
-	rows, err := list.Build[Object](objects)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	m.AddRows(rows...)
-
+	m := GetMaroto()
 	document, err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
@@ -47,6 +37,20 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+}
+
+func GetMaroto() core.Maroto {
+	mrt := maroto.New()
+	m := maroto.NewMetricsDecorator(mrt)
+
+	objects := getObjects(100)
+	rows, err := list.Build[Object](objects)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	m.AddRows(rows...)
+	return m
 }
 
 type Object struct {

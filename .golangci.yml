@@ -3,7 +3,6 @@ run:
   modules-download-mode: readonly
   skip-files:
     - cmd/*
-    - docs/*
     - mocks/*
     - internal/fpdf/*
     - internal/fixture

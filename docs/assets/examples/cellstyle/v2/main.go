@@ -1,10 +1,9 @@
 package main
 
 import (
-	"log"
-	"math/rand"
-
 	"github.com/johnfercher/maroto/v2"
+	"github.com/johnfercher/maroto/v2/pkg/core"
+	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 
@@ -19,6 +18,24 @@ import (
 )
 
 func main() {
+	m := GetMaroto()
+	document, err := m.Generate()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.Save("docs/assets/pdf/cellstylev2.pdf")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	err = document.GetReport().Save("docs/assets/text/cellstylev2.txt")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
+func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithDebug(false).
 		Build()
@@ -82,6 +99,7 @@ func main() {
 	mrt := maroto.New(cfg)
 	m := maroto.NewMetricsDecorator(mrt)
 
+	count := 0
 	for i := 0; i < 15; i++ {
 		m.AddRows(
 			row.New(10).Add(
@@ -94,7 +112,7 @@ func main() {
 		m.AddRows(row.New(10))
 
 		m.AddRows(
-			row.New(10).WithStyle(rowStyles[rand.Intn(len(rowStyles))]).Add(
+			row.New(10).WithStyle(rowStyles[count]).Add(
 				text.NewCol(4, "string", blackText),
 				text.NewCol(4, "string", blackText),
 				text.NewCol(4, "string", blackText),
@@ -102,20 +120,10 @@ func main() {
 		)
 
 		m.AddRows(row.New(10))
+		count++
+		if count >= len(rowStyles) {
+			count = 0
+		}
 	}
-
-	document, err := m.Generate()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.Save("docs/assets/pdf/cellstylev2.pdf")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	err = document.GetReport().Save("docs/assets/text/cellstylev2.txt")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	return m
 }

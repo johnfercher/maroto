@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"log"
 
 	"github.com/johnfercher/maroto/v2"
@@ -12,18 +13,7 @@ import (
 )
 
 func main() {
-	cfg := config.NewBuilder().
-		WithOrientation(orientation.Horizontal).
-		WithDebug(true).
-		Build()
-
-	mrt := maroto.New(cfg)
-	m := maroto.NewMetricsDecorator(mrt)
-
-	m.AddRows(
-		text.NewRow(30, "content"),
-	)
-
+	m := GetMaroto()
 	document, err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
@@ -38,4 +28,20 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+}
+
+func GetMaroto() core.Maroto {
+	cfg := config.NewBuilder().
+		WithOrientation(orientation.Horizontal).
+		WithDebug(true).
+		Build()
+
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
+
+	m.AddRows(
+		text.NewRow(30, "content"),
+	)
+
+	return m
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"log"
 	"os"
 
@@ -14,17 +15,7 @@ import (
 var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
 
 func main() {
-	cfg := config.NewBuilder().
-		WithPageNumber("{current} / {total}", props.SouthEast).
-		Build()
-
-	mrt := maroto.New(cfg)
-	m := maroto.NewMetricsDecorator(mrt)
-
-	for i := 0; i < 50; i++ {
-		m.AddRows(text.NewRow(20, "content"))
-	}
-
+	m := GetMaroto()
 	document, err := m.Generate()
 	if err != nil {
 		log.Fatal(err.Error())
@@ -49,4 +40,19 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+}
+
+func GetMaroto() core.Maroto {
+	cfg := config.NewBuilder().
+		WithPageNumber("{current} / {total}", props.SouthEast).
+		Build()
+
+	mrt := maroto.New(cfg)
+	m := maroto.NewMetricsDecorator(mrt)
+
+	for i := 0; i < 50; i++ {
+		m.AddRows(text.NewRow(20, "content"))
+	}
+
+	return m
 }
