@@ -8,8 +8,8 @@
 		"config_margin_top": 10,
 		"config_max_grid_sum": 12,
 		"config_provider_type": "gofpdf",
-		"dimension_height": 594,
-		"dimension_width": 419.9,
+		"maroto_dimension_height": 594,
+		"maroto_dimension_width": 419.9,
 		"prop_font_color": "RGB(0, 0, 0)",
 		"prop_font_family": "arial",
 		"prop_font_size": 10

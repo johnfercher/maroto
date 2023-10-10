@@ -10,8 +10,8 @@
 		"config_page_number_pattern": "{current} / {total}",
 		"config_page_number_place": "south",
 		"config_provider_type": "gofpdf",
-		"dimension_height": 297,
-		"dimension_width": 210,
+		"maroto_dimension_height": 297,
+		"maroto_dimension_width": 210,
 		"prop_font_color": "RGB(0, 0, 0)",
 		"prop_font_family": "arial",
 		"prop_font_size": 10

@@ -29,7 +29,7 @@ func (i *Image) AppendMap(m map[string]interface{}) map[string]interface{} {
 	}
 
 	if i.Dimensions != nil {
-		m = i.Dimensions.AppendMap(m)
+		m = i.Dimensions.AppendMap("background", m)
 	}
 
 	return m
