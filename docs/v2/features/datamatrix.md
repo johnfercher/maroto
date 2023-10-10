@@ -10,3 +10,6 @@
 
 ## Time Execution
 [filename](../../assets/text/datamatrixgridv2.txt  ':include :type=code')
+
+## Test File
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/test/maroto/examples/datamatrixgrid.json  ':include :type=code')

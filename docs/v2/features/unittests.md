@@ -9,6 +9,6 @@ will keep the json files to unit test the components tree.
 ## Code
 [filename](../../assets/examples/unittests/v2/main_test.go ':include :type=code')
 
-## Component Tree JSON
+## Test file
 [filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/test/maroto/example_unit_test.json ':include :type=code')
 

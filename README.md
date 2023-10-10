@@ -28,7 +28,7 @@ always when a new page appear, in this case, a header may have many rows, lines 
 * With `go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.37
+go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.38
 ```
 
 
