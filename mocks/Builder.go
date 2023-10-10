@@ -904,7 +904,8 @@ func (_c *Builder_WithWorkerPoolSize_Call) RunAndReturn(run func(int) config.Bui
 func NewBuilder(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Builder {
+},
+) *Builder {
 	mock := &Builder{}
 	mock.Mock.Test(t)
 

@@ -106,7 +106,8 @@ func (_c *Text_GetLinesQuantity_Call) RunAndReturn(run func(string, props.Text, 
 func NewText(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Text {
+},
+) *Text {
 	mock := &Text{}
 	mock.Mock.Test(t)
 

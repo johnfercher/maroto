@@ -284,7 +284,8 @@ func (_c *Col_WithStyle_Call) RunAndReturn(run func(*props.Cell) core.Col) *Col_
 func NewCol(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Col {
+},
+) *Col {
 	mock := &Col{}
 	mock.Mock.Test(t)
 

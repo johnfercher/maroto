@@ -314,7 +314,8 @@ func (_c *Page_SetNumber_Call) RunAndReturn(run func(int, int)) *Page_SetNumber_
 func NewPage(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Page {
+},
+) *Page {
 	mock := &Page{}
 	mock.Mock.Test(t)
 

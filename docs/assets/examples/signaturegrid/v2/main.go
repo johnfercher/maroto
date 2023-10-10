@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"log"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 
 	"github.com/johnfercher/maroto/v2"
 

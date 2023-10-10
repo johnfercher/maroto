@@ -1,12 +1,13 @@
 package signature_test
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/signature"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 	"github.com/stretchr/testify/mock"
-	"testing"
 )
 
 func TestNew(t *testing.T) {

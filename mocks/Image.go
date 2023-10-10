@@ -76,7 +76,8 @@ func (_c *Image_Add_Call) RunAndReturn(run func(*entity.Image, *entity.Cell, *en
 func NewImage(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Image {
+},
+) *Image {
 	mock := &Image{}
 	mock.Mock.Test(t)
 
