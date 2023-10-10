@@ -29,9 +29,3 @@ func (c *Color) ToString() string {
 
 	return fmt.Sprintf("RGB(%d, %d, %d)", c.Red, c.Green, c.Blue)
 }
-
-// IsWhite from Color will return true if all components of color.
-// are in the maximum value.
-func (c *Color) IsWhite() bool {
-	return c.Red == 255 && c.Green == 255 && c.Blue == 255
-}

@@ -27,6 +27,12 @@ func main() {
 		"as it does not fit into the column otherwise."
 
 	m.AddRow(40,
+		text.NewCol(2, "Red text", props.Text{Color: &props.RedColor}),
+		text.NewCol(6, "Green text", props.Text{Color: &props.GreenColor}),
+		text.NewCol(4, "Blue text", props.Text{Color: &props.BlueColor}),
+	)
+
+	m.AddRow(40,
 		text.NewCol(2, "Left-aligned text"),
 		text.NewCol(4, "Centered text", props.Text{Align: align.Center}),
 		text.NewCol(6, "Right-aligned text", props.Text{Align: align.Right}),

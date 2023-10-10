@@ -38,7 +38,9 @@ func (l *line) renderVertical(cell *entity.Cell, prop *props.Line) {
 
 	left, top, _, _ := l.pdf.GetMargins()
 
-	l.pdf.SetDrawColor(prop.Color.Red, prop.Color.Green, prop.Color.Blue)
+	if prop.Color != nil {
+		l.pdf.SetDrawColor(prop.Color.Red, prop.Color.Green, prop.Color.Blue)
+	}
 	l.pdf.SetLineWidth(prop.Thickness)
 
 	if prop.Style != linestyle.Solid {
@@ -47,7 +49,9 @@ func (l *line) renderVertical(cell *entity.Cell, prop *props.Line) {
 
 	l.pdf.Line(left+cell.X+position, top+cell.Y+space, left+cell.X+position, top+cell.Y+cell.Height-space)
 
-	l.pdf.SetDrawColor(l.defaultColor.Red, l.defaultColor.Green, l.defaultColor.Blue)
+	if prop.Color != nil {
+		l.pdf.SetDrawColor(l.defaultColor.Red, l.defaultColor.Green, l.defaultColor.Blue)
+	}
 	l.pdf.SetLineWidth(l.defaultThickness)
 
 	if prop.Style != linestyle.Solid {
@@ -63,7 +67,9 @@ func (l *line) renderHorizontal(cell *entity.Cell, prop *props.Line) {
 
 	left, top, _, _ := l.pdf.GetMargins()
 
-	l.pdf.SetDrawColor(prop.Color.Red, prop.Color.Green, prop.Color.Blue)
+	if prop.Color != nil {
+		l.pdf.SetDrawColor(prop.Color.Red, prop.Color.Green, prop.Color.Blue)
+	}
 	l.pdf.SetLineWidth(prop.Thickness)
 
 	if prop.Style != linestyle.Solid {
@@ -72,7 +78,9 @@ func (l *line) renderHorizontal(cell *entity.Cell, prop *props.Line) {
 
 	l.pdf.Line(left+cell.X+space, top+cell.Y+position, left+cell.X+cell.Width-space, top+cell.Y+position)
 
-	l.pdf.SetDrawColor(l.defaultColor.Red, l.defaultColor.Green, l.defaultColor.Blue)
+	if prop.Color != nil {
+		l.pdf.SetDrawColor(l.defaultColor.Red, l.defaultColor.Green, l.defaultColor.Blue)
+	}
 	l.pdf.SetLineWidth(l.defaultThickness)
 
 	if prop.Style != linestyle.Solid {

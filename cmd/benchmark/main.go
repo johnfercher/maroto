@@ -145,7 +145,7 @@ func buildTextsRow() []core.Row {
 		),
 		row.New(40).Add(
 			text.NewCol(4, "Signature:", props.Text{Size: 15, Top: 17, Align: align.Center}),
-			signature.NewCol(8, "Name", props.Font{Size: 10}),
+			signature.NewCol(8, "Name", props.Signature{FontSize: 10}),
 		),
 	}
 }

@@ -104,7 +104,14 @@
 							"nodes": [
 								{
 									"value": "signature",
-									"type": "signature"
+									"type": "signature",
+									"details": {
+										"prop_font_familty": "arial",
+										"prop_font_size": 8,
+										"prop_font_style": "B",
+										"prop_line_style": "solid",
+										"prop_line_thickness": 0.2
+									}
 								}
 							]
 						},
