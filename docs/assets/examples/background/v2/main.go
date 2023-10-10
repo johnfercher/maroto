@@ -2,6 +2,9 @@ package main
 
 import (
 	"log"
+	"os"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -37,15 +40,15 @@ func main() {
 }
 
 func GetMaroto(image string) core.Maroto {
+	bytes, err := os.ReadFile(image)
+	if err != nil {
+		log.Fatal(err)
+	}
 	b := config.NewBuilder().
 		WithMargins(0, 0, 0).
 		WithOrientation(orientation.Horizontal).
-		WithMaxGridSize(20)
-
-	b, err := b.WithBackgroundImage(image)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+		WithMaxGridSize(20).
+		WithBackgroundImage(bytes, extension.Png)
 
 	mrt := maroto.New(b.Build())
 	m := maroto.NewMetricsDecorator(mrt)

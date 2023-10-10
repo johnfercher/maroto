@@ -41,17 +41,18 @@ func main() {
 func GetMaroto(customFontFile string) core.Maroto {
 	customFont := "arial-unicode-ms"
 
-	repository := repository.New().
+	customFonts, err := repository.New().
 		AddUTF8Font(customFont, fontstyle.Normal, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Italic, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Bold, customFontFile).
-		AddUTF8Font(customFont, fontstyle.BoldItalic, customFontFile)
-
-	builder, err := config.NewBuilder().
-		TryLoadRepository(repository)
+		AddUTF8Font(customFont, fontstyle.BoldItalic, customFontFile).
+		Load()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	builder := config.NewBuilder().
+		WithCustomFonts(customFonts)
 
 	cfg := builder.WithDefaultFont(&props.Font{Family: customFont}).
 		Build()
