@@ -1,7 +1,6 @@
 package config
 
 import (
-	"os"
 	"strings"
 	"time"
 
@@ -37,7 +36,7 @@ type Builder interface {
 	WithTitle(title string, isUTF8 bool) Builder
 	WithCreationDate(time time.Time) Builder
 	WithCustomFonts([]*entity.CustomFont) Builder
-	WithBackgroundImage(file string) (Builder, error)
+	WithBackgroundImage([]byte, extension.Type) Builder
 	Build() *entity.Config
 }
 
@@ -279,20 +278,13 @@ func (b *builder) WithCreationDate(time time.Time) Builder {
 	return b
 }
 
-func (b *builder) WithBackgroundImage(file string) (Builder, error) {
-	bytes, err := os.ReadFile(file)
-	if err != nil {
-		return nil, err
-	}
-
-	extensionStr := strings.Split(file, ".")[1]
-
+func (b *builder) WithBackgroundImage(bytes []byte, ext extension.Type) Builder {
 	b.backgroundImage = &entity.Image{
 		Bytes:     bytes,
-		Extension: extension.Type(extensionStr),
+		Extension: ext,
 	}
 
-	return b, nil
+	return b
 }
 
 func (b *builder) Build() *entity.Config {
