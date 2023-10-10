@@ -1,17 +1,14 @@
 package config
 
 import (
-	"errors"
 	"os"
 	"strings"
 	"time"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-	"github.com/johnfercher/maroto/v2/pkg/repository"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 
@@ -39,7 +36,7 @@ type Builder interface {
 	WithSubject(subject string, isUTF8 bool) Builder
 	WithTitle(title string, isUTF8 bool) Builder
 	WithCreationDate(time time.Time) Builder
-	TryLoadRepository(repository repository.Repository) (Builder, error)
+	WithCustomFonts([]*entity.CustomFont) Builder
 	WithBackgroundImage(file string) (Builder, error)
 	Build() *entity.Config
 }
@@ -176,19 +173,13 @@ func (b *builder) WithDefaultFont(font *props.Font) Builder {
 	return b
 }
 
-func (b *builder) TryLoadRepository(repository repository.Repository) (Builder, error) {
-	if repository == nil {
-		return b, errors.New("repository is nil")
-	}
-
-	customFonts, err := repository.Load()
-	if err != nil {
-		return nil, err
+func (b *builder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
+	if customFonts == nil {
+		return b
 	}
 
 	b.customFonts = customFonts
-
-	return b, nil
+	return b
 }
 
 func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
