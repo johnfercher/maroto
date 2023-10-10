@@ -11,6 +11,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -30,6 +33,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -49,6 +55,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -68,6 +77,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -87,6 +99,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -106,6 +121,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -125,6 +143,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -144,6 +165,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -163,6 +187,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -182,6 +209,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -201,6 +231,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -220,6 +253,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -239,6 +275,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -258,6 +297,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -277,6 +319,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -296,6 +341,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -315,6 +363,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -334,6 +385,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -353,6 +407,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -372,6 +429,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -391,6 +451,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -410,6 +473,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -429,6 +495,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -448,498 +517,9 @@
 						{
 							"value": 0,
 							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 6.997500000000002,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 12,
-							"type": "col"
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Footer",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 10,
-										"prop_font_style": "B"
-									}
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		{
-			"type": "page",
-			"nodes": [
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Dummy text",
-									"type": "text",
-									"details": {
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 10,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -969,6 +549,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Footer",
@@ -995,6 +578,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -1014,6 +600,576 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6.997500000000002,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Footer",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 10,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Dummy text",
+									"type": "text",
+									"details": {
+										"prop_font_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Dummy text",
@@ -1043,6 +1199,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Footer",

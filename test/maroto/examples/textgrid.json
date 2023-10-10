@@ -98,6 +98,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Aligned unindented text",
@@ -164,6 +167,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Aligned text with indentation",
@@ -225,6 +231,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Multiline text",
@@ -296,6 +305,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "Multiline text with indentation",

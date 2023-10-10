@@ -11,6 +11,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row1",
@@ -27,6 +30,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row2",
@@ -43,6 +49,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row3",
@@ -59,6 +68,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row4",
@@ -75,6 +87,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row5",
@@ -91,6 +106,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row6",
@@ -107,6 +125,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row7",
@@ -123,6 +144,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row8",
@@ -154,6 +178,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page1 row9",
@@ -185,6 +212,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page2 row1",
@@ -216,6 +246,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "page3 row1",

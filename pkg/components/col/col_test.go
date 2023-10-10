@@ -1,23 +1,41 @@
 package col_test
 
 import (
-	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/internal/fixture"
+	"github.com/johnfercher/maroto/v2/mocks"
+	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+	"github.com/johnfercher/maroto/v2/pkg/props"
+	"github.com/johnfercher/maroto/v2/pkg/test"
+	"github.com/stretchr/testify/assert"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestNew(t *testing.T) {
-	// Act
-	c := col.New()
+	t.Run("when size is not defined, should use is as max", func(t *testing.T) {
+		// Act
+		c := col.New()
 
-	// Assert
-	assert.NotNil(t, c)
-	assert.Equal(t, "*col.col", fmt.Sprintf("%T", c))
+		// Assert
+		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_zero_size.json")
+	})
+	t.Run("when size is defined, should use not use max", func(t *testing.T) {
+		// Act
+		c := col.New(12)
+
+		// Assert
+		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_defined_size.json")
+	})
+	t.Run("when has component, should retrieve components", func(t *testing.T) {
+		// Act
+		c := col.New(12).Add(code.NewQr("code"))
+
+		// Assert
+		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_with_components.json")
+	})
 }
 
 func TestCol_GetSize(t *testing.T) {
@@ -41,5 +59,33 @@ func TestCol_GetSize(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, 14, size)
+	})
+}
+
+func TestCol_Render(t *testing.T) {
+	t.Run("should call provider correctly", func(t *testing.T) {
+		// Arrange
+		cfg := &entity.Config{}
+		cell := fixture.CellEntity()
+		style := &props.Cell{}
+
+		provider := &mocks.Provider{}
+		provider.EXPECT().CreateCol(cell.Width, cell.Height, cfg, style)
+
+		component := &mocks.Component{}
+		component.EXPECT().Render(provider, &cell)
+		component.EXPECT().SetConfig(cfg)
+
+		sut := col.New(12).Add(component)
+		sut.WithStyle(style)
+		sut.SetConfig(cfg)
+
+		// Act
+		sut.Render(provider, cell, true)
+
+		// Assert
+		provider.AssertNumberOfCalls(t, "CreateCol", 1)
+		component.AssertNumberOfCalls(t, "Render", 1)
+		component.AssertNumberOfCalls(t, "SetConfig", 1)
 	})
 }

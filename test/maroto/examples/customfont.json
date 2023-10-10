@@ -3730,6 +3730,9 @@
 						{
 							"value": 0,
 							"type": "col",
+							"details": {
+								"is_max": true
+							},
 							"nodes": [
 								{
 									"value": "long text without spaces",
