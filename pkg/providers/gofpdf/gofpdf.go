@@ -231,7 +231,7 @@ func (g *gofpdfProvider) SetMetadata(metadata *entity.Metadata) {
 		g.fpdf.SetTitle(metadata.Title.Text, metadata.Title.UTF8)
 	}
 
-	if !metadata.CreationDate.IsZero() {
+	if metadata.CreationDate != nil {
 		g.fpdf.SetCreationDate(*metadata.CreationDate)
 	}
 }
