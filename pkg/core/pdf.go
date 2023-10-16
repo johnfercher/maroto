@@ -33,6 +33,10 @@ func (p *pdf) GetReport() *metrics.Report {
 	return p.report
 }
 
+func (p *pdf) Save(file string) error {
+	return os.WriteFile(file, p.bytes, os.ModePerm)
+}
+
 func (p *pdf) Merge(bytes []byte) error {
 	var mergedBytes []byte
 	var err error
@@ -43,7 +47,15 @@ func (p *pdf) Merge(bytes []byte) error {
 	if err != nil {
 		return err
 	}
+	p.bytes = mergedBytes
+	if p.report != nil {
+		p.appendMetric(timeSpent)
+	}
 
+	return nil
+}
+
+func (p *pdf) appendMetric(timeSpent *metrics.Time) {
 	timeMetric := metrics.TimeMetric{
 		Key:   "merge_pdf",
 		Times: []*metrics.Time{timeSpent},
@@ -52,19 +64,12 @@ func (p *pdf) Merge(bytes []byte) error {
 	timeMetric.Normalize()
 	p.report.TimeMetrics = append(p.report.TimeMetrics, timeMetric)
 
-	p.bytes = mergedBytes
 	p.report.SizeMetric = metrics.SizeMetric{
 		Key: "file_size",
 		Size: metrics.Size{
-			Value: float64(len(mergedBytes)),
+			Value: float64(len(p.bytes)),
 			Scale: metrics.Byte,
 		},
 	}
 	p.report.Normalize()
-
-	return nil
-}
-
-func (p *pdf) Save(file string) error {
-	return os.WriteFile(file, p.bytes, os.ModePerm)
 }
