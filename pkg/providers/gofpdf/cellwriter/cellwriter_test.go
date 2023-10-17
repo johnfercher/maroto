@@ -2,9 +2,10 @@ package cellwriter_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf/cellwriter"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewCellCreator(t *testing.T) {

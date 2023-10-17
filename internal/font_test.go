@@ -2,13 +2,14 @@ package internal_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewFont(t *testing.T) {
@@ -113,7 +114,7 @@ func TestFont_SetColor(t *testing.T) {
 		fpdf := &mocks.Fpdf{}
 		fpdf.EXPECT().SetFont(family, string(style), size)
 		font := internal.NewFont(fpdf, size, family, style)
-		color := &props.Color{0, 0, 0}
+		color := &props.Color{Red: 0, Green: 0, Blue: 0}
 
 		// Act
 		font.SetColor(nil)
@@ -131,7 +132,7 @@ func TestFont_SetColor(t *testing.T) {
 		fpdf.EXPECT().SetFont(family, string(style), size)
 		fpdf.EXPECT().SetTextColor(200, 200, 200)
 		font := internal.NewFont(fpdf, size, family, style)
-		color := &props.Color{200, 200, 200}
+		color := &props.Color{Red: 200, Green: 200, Blue: 200}
 
 		// Act
 		font.SetColor(color)

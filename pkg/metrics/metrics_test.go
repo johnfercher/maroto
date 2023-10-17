@@ -1,9 +1,10 @@
 package metrics_test
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestTime_Normalize(t *testing.T) {
