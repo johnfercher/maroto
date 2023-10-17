@@ -90,10 +90,8 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 
 	for index, line := range lines {
 		lineWidth := s.pdf.GetStringWidth(line)
-		_, _, fontSize := s.font.GetFont()
-		textHeight := fontSize / s.font.GetScaleFactor()
 
-		s.addLine(textProp, x, width, y+float64(index)*textHeight+accumulateOffsetY, lineWidth, line)
+		s.addLine(textProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, line)
 		accumulateOffsetY += textProp.VerticalPadding
 	}
 
