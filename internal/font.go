@@ -57,7 +57,7 @@ func (s *font) GetFont() (string, fontstyle.Type, float64) {
 func (s *font) GetHeight(family string, style fontstyle.Type, size float64) float64 {
 	s.SetFont(family, style, size)
 	_, _, fontSize := s.GetFont()
-	return fontSize / s.GetScaleFactor()
+	return fontSize / s.scaleFactor
 }
 
 // SetFamily defines a new Font family.
@@ -87,11 +87,6 @@ func (s *font) SetFont(family string, style fontstyle.Type, size float64) {
 	s.size = size
 
 	s.pdf.SetFont(s.family, string(s.style), s.size)
-}
-
-// GetScaleFactor retrieve the scale factor defined in the instantiation of gofpdf.
-func (s *font) GetScaleFactor() (scaleFactor float64) {
-	return s.scaleFactor
 }
 
 func (s *font) SetColor(color *props.Color) {

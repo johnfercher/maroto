@@ -1,13 +1,21 @@
 package internal_test
 
-/*func TestNewImage(t *testing.T) {
+import (
+	"fmt"
+	"github.com/johnfercher/maroto/v2/internal"
+	"github.com/johnfercher/maroto/v2/mocks"
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
+
+func TestNewImage(t *testing.T) {
 	image := internal.NewImage(&mocks.Fpdf{}, &mocks.Math{})
 
 	assert.NotNil(t, image)
 	assert.Equal(t, fmt.Sprintf("%T", image), "*internal.image")
 }
 
-func TestImage_AddFromFile(t *testing.T) {
+/*func TestImage_AddFromFile(t *testing.T) {
 	cases := []struct {
 		name            string
 		Fpdf            func() *mocks.Fpdf

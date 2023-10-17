@@ -1,13 +1,21 @@
 package internal_test
 
-/*func TestNewText(t *testing.T) {
-	text := internal.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.DefaultFont{})
+import (
+	"fmt"
+	"github.com/johnfercher/maroto/v2/internal"
+	"github.com/johnfercher/maroto/v2/mocks"
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
+
+func TestNewText(t *testing.T) {
+	text := internal.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Font{})
 
 	assert.NotNil(t, text)
 	assert.Equal(t, fmt.Sprintf("%T", text), "*internal.text")
 }
 
-func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
+/*func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
 	// Arrange
 	pdf := &mocks.Fpdf{}
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
