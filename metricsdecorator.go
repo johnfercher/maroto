@@ -8,8 +8,8 @@ import (
 )
 
 type metricsDecorator struct {
+	addRowsTime   []*metrics.Time
 	addRowTime    []*metrics.Time
-	addColTime    []*metrics.Time
 	addPageTime   []*metrics.Time
 	addPDFTime    []*metrics.Time
 	headerTime    *metrics.Time
@@ -58,7 +58,7 @@ func (m *metricsDecorator) AddRows(rows ...core.Row) {
 		m.inner.AddRows(rows...)
 	})
 
-	m.addRowTime = append(m.addRowTime, timeSpent)
+	m.addRowsTime = append(m.addRowsTime, timeSpent)
 }
 
 func (m *metricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row {
@@ -67,7 +67,7 @@ func (m *metricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row 
 		r = m.inner.AddRow(rowHeight, cols...)
 	})
 
-	m.addColTime = append(m.addColTime, timeSpent)
+	m.addRowTime = append(m.addRowTime, timeSpent)
 	return r
 }
 
@@ -151,11 +151,11 @@ func (m *metricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
 		})
 	}
 
-	if len(m.addColTime) > 0 {
+	if len(m.addRowsTime) > 0 {
 		timeMetrics = append(timeMetrics, metrics.TimeMetric{
-			Key:   "add_cols",
-			Times: m.addColTime,
-			Avg:   m.getAVG(m.addColTime),
+			Key:   "add_rows",
+			Times: m.addRowsTime,
+			Avg:   m.getAVG(m.addRowsTime),
 		})
 	}
 
@@ -180,10 +180,6 @@ func (m *metricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
 }
 
 func (m *metricsDecorator) getAVG(times []*metrics.Time) *metrics.Time {
-	if len(times) == 0 {
-		return nil
-	}
-
 	var sum float64
 	for _, time := range times {
 		sum += time.Value
