@@ -3,8 +3,8 @@
 package mocks
 
 import (
+	cellwriter "github.com/johnfercher/maroto/v2/internal/providers/gofpdf/cellwriter"
 	entity "github.com/johnfercher/maroto/v2/pkg/core/entity"
-	cellwriter "github.com/johnfercher/maroto/v2/pkg/providers/gofpdf/cellwriter"
 
 	mock "github.com/stretchr/testify/mock"
 

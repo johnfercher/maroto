@@ -1,7 +1,6 @@
-package internal
+package gofpdf
 
 import (
-	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
@@ -12,7 +11,7 @@ const (
 )
 
 type font struct {
-	pdf         fpdf.Fpdf
+	pdf         Fpdf
 	size        float64
 	family      string
 	style       fontstyle.Type
@@ -21,7 +20,7 @@ type font struct {
 }
 
 // NewFont create a Font.
-func NewFont(pdf fpdf.Fpdf, size float64, family string, style fontstyle.Type) *font {
+func NewFont(pdf Fpdf, size float64, family string, style fontstyle.Type) *font {
 	pdf.SetFont(family, string(style), size)
 
 	return &font{

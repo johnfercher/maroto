@@ -4,6 +4,10 @@ import (
 	"errors"
 	"log"
 
+	"github.com/johnfercher/maroto/v2/internal/cache"
+
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
+
 	"github.com/johnfercher/maroto/v2/pkg/merge"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
@@ -12,15 +16,11 @@ import (
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
-	"github.com/johnfercher/maroto/v2/pkg/cache"
-
+	"github.com/f-amaral/go-async/async"
+	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/providers/gofpdf"
-
-	"github.com/f-amaral/go-async/async"
-	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 )

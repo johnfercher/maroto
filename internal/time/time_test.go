@@ -4,7 +4,8 @@ import (
 	"testing"
 	buildtinTime "time"
 
-	"github.com/johnfercher/maroto/v2/pkg/time"
+	"github.com/johnfercher/maroto/v2/internal/time"
+
 	"github.com/stretchr/testify/assert"
 )
 

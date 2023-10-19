@@ -1,19 +1,20 @@
-package internal_test
+package gofpdf_test
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/internal"
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
+
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewText(t *testing.T) {
-	text := internal.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Font{})
+	text := gofpdf.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Font{})
 
 	assert.NotNil(t, text)
-	assert.Equal(t, fmt.Sprintf("%T", text), "*internal.text")
+	assert.Equal(t, fmt.Sprintf("%T", text), "*gofpdf.text")
 }
 
 /*func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {

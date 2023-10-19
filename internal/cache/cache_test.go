@@ -7,10 +7,11 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/internal/cache"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
-	"github.com/johnfercher/maroto/v2/pkg/cache"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -100,6 +101,6 @@ func buildPath(file string) string {
 		return ""
 	}
 
-	dir = strings.ReplaceAll(dir, "pkg/cache", "")
+	dir = strings.ReplaceAll(dir, "internal/cache", "")
 	return path.Join(dir, file)
 }

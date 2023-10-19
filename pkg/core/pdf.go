@@ -4,9 +4,10 @@ import (
 	"encoding/base64"
 	"os"
 
+	"github.com/johnfercher/maroto/v2/internal/time"
+
 	"github.com/johnfercher/maroto/v2/pkg/merge"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
-	"github.com/johnfercher/maroto/v2/pkg/time"
 )
 
 type pdf struct {

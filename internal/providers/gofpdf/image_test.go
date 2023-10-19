@@ -1,25 +1,26 @@
-package internal_test
+package gofpdf_test
 
 import (
 	"bytes"
 	"fmt"
 	"testing"
 
+	gofpdf2 "github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/internal/math"
 	"github.com/jung-kurt/gofpdf"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/johnfercher/maroto/v2/internal"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewImage(t *testing.T) {
-	image := internal.NewImage(&mocks.Fpdf{}, &mocks.Math{})
+	image := gofpdf2.NewImage(&mocks.Fpdf{}, &mocks.Math{})
 
 	assert.NotNil(t, image)
-	assert.Equal(t, fmt.Sprintf("%T", image), "*internal.image")
+	assert.Equal(t, fmt.Sprintf("%T", image), "*gofpdf.image")
 }
 
 func TestImage_Add(t *testing.T) {
@@ -37,7 +38,7 @@ func TestImage_Add(t *testing.T) {
 		pdf := &mocks.Fpdf{}
 		pdf.EXPECT().RegisterImageOptionsReader(mock.Anything, options, bytes.NewReader(img.Bytes)).Return(nil)
 
-		image := internal.NewImage(pdf, &mocks.Math{})
+		image := gofpdf2.NewImage(pdf, &mocks.Math{})
 
 		// Act
 		err := image.Add(&img, &cell, &margins, &rect, img.Extension, true)
@@ -62,7 +63,7 @@ func TestImage_Add(t *testing.T) {
 
 		m := math.New()
 
-		image := internal.NewImage(pdf, m)
+		image := gofpdf2.NewImage(pdf, m)
 
 		// Act
 		err := image.Add(&img, &cell, &margins, &rect, img.Extension, true)
@@ -88,7 +89,7 @@ func TestImage_Add(t *testing.T) {
 
 		m := math.New()
 
-		image := internal.NewImage(pdf, m)
+		image := gofpdf2.NewImage(pdf, m)
 
 		// Act
 		err := image.Add(&img, &cell, &margins, &rect, img.Extension, true)

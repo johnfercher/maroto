@@ -1,9 +1,10 @@
-package image_test
+package gofpdf_test
 
 import (
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/components/image"
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/stretchr/testify/assert"
 )
@@ -11,7 +12,7 @@ import (
 func TestFromBytes(t *testing.T) {
 	t.Run("when extension is not valid, should return error", func(t *testing.T) {
 		// Act
-		img, err := image.FromBytes([]byte{1, 2, 3}, "invalid")
+		img, err := gofpdf.FromBytes([]byte{1, 2, 3}, "invalid")
 
 		// Assert
 		assert.Nil(t, img)
@@ -19,7 +20,7 @@ func TestFromBytes(t *testing.T) {
 	})
 	t.Run("when extension is not valid, should return error", func(t *testing.T) {
 		// Act
-		img, err := image.FromBytes([]byte{1, 2, 3}, extension.Jpg)
+		img, err := gofpdf.FromBytes([]byte{1, 2, 3}, extension.Jpg)
 
 		// Assert
 		assert.NotNil(t, img)

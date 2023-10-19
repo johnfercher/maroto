@@ -5,8 +5,7 @@ package mocks
 import (
 	io "io"
 
-	gofpdf "github.com/jung-kurt/gofpdf"
-
+	jung_kurtgofpdf "github.com/jung-kurt/gofpdf"
 	mock "github.com/stretchr/testify/mock"
 
 	time "time"
@@ -248,7 +247,7 @@ func (_c *Fpdf_AddPage_Call) RunAndReturn(run func()) *Fpdf_AddPage_Call {
 }
 
 // AddPageFormat provides a mock function with given fields: orientationStr, size
-func (_m *Fpdf) AddPageFormat(orientationStr string, size gofpdf.SizeType) {
+func (_m *Fpdf) AddPageFormat(orientationStr string, size jung_kurtgofpdf.SizeType) {
 	_m.Called(orientationStr, size)
 }
 
@@ -259,14 +258,14 @@ type Fpdf_AddPageFormat_Call struct {
 
 // AddPageFormat is a helper method to define mock.On call
 //   - orientationStr string
-//   - size gofpdf.SizeType
+//   - size jung_kurtgofpdf.SizeType
 func (_e *Fpdf_Expecter) AddPageFormat(orientationStr interface{}, size interface{}) *Fpdf_AddPageFormat_Call {
 	return &Fpdf_AddPageFormat_Call{Call: _e.mock.On("AddPageFormat", orientationStr, size)}
 }
 
-func (_c *Fpdf_AddPageFormat_Call) Run(run func(orientationStr string, size gofpdf.SizeType)) *Fpdf_AddPageFormat_Call {
+func (_c *Fpdf_AddPageFormat_Call) Run(run func(orientationStr string, size jung_kurtgofpdf.SizeType)) *Fpdf_AddPageFormat_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(gofpdf.SizeType))
+		run(args[0].(string), args[1].(jung_kurtgofpdf.SizeType))
 	})
 	return _c
 }
@@ -276,7 +275,7 @@ func (_c *Fpdf_AddPageFormat_Call) Return() *Fpdf_AddPageFormat_Call {
 	return _c
 }
 
-func (_c *Fpdf_AddPageFormat_Call) RunAndReturn(run func(string, gofpdf.SizeType)) *Fpdf_AddPageFormat_Call {
+func (_c *Fpdf_AddPageFormat_Call) RunAndReturn(run func(string, jung_kurtgofpdf.SizeType)) *Fpdf_AddPageFormat_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -314,41 +313,6 @@ func (_c *Fpdf_AddSpotColor_Call) Return() *Fpdf_AddSpotColor_Call {
 }
 
 func (_c *Fpdf_AddSpotColor_Call) RunAndReturn(run func(string, byte, byte, byte, byte)) *Fpdf_AddSpotColor_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
-// AddUTF8Font provides a mock function with given fields: familyStr, styleStr, fileStr
-func (_m *Fpdf) AddUTF8Font(familyStr string, styleStr string, fileStr string) {
-	_m.Called(familyStr, styleStr, fileStr)
-}
-
-// Fpdf_AddUTF8Font_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddUTF8Font'
-type Fpdf_AddUTF8Font_Call struct {
-	*mock.Call
-}
-
-// AddUTF8Font is a helper method to define mock.On call
-//   - familyStr string
-//   - styleStr string
-//   - fileStr string
-func (_e *Fpdf_Expecter) AddUTF8Font(familyStr interface{}, styleStr interface{}, fileStr interface{}) *Fpdf_AddUTF8Font_Call {
-	return &Fpdf_AddUTF8Font_Call{Call: _e.mock.On("AddUTF8Font", familyStr, styleStr, fileStr)}
-}
-
-func (_c *Fpdf_AddUTF8Font_Call) Run(run func(familyStr string, styleStr string, fileStr string)) *Fpdf_AddUTF8Font_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(string), args[2].(string))
-	})
-	return _c
-}
-
-func (_c *Fpdf_AddUTF8Font_Call) Return() *Fpdf_AddUTF8Font_Call {
-	_c.Call.Return()
-	return _c
-}
-
-func (_c *Fpdf_AddUTF8Font_Call) RunAndReturn(run func(string, string, string)) *Fpdf_AddUTF8Font_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -499,7 +463,7 @@ func (_c *Fpdf_BeginLayer_Call) RunAndReturn(run func(int)) *Fpdf_BeginLayer_Cal
 }
 
 // Beziergon provides a mock function with given fields: points, styleStr
-func (_m *Fpdf) Beziergon(points []gofpdf.PointType, styleStr string) {
+func (_m *Fpdf) Beziergon(points []jung_kurtgofpdf.PointType, styleStr string) {
 	_m.Called(points, styleStr)
 }
 
@@ -509,15 +473,15 @@ type Fpdf_Beziergon_Call struct {
 }
 
 // Beziergon is a helper method to define mock.On call
-//   - points []gofpdf.PointType
+//   - points []jung_kurtgofpdf.PointType
 //   - styleStr string
 func (_e *Fpdf_Expecter) Beziergon(points interface{}, styleStr interface{}) *Fpdf_Beziergon_Call {
 	return &Fpdf_Beziergon_Call{Call: _e.mock.On("Beziergon", points, styleStr)}
 }
 
-func (_c *Fpdf_Beziergon_Call) Run(run func(points []gofpdf.PointType, styleStr string)) *Fpdf_Beziergon_Call {
+func (_c *Fpdf_Beziergon_Call) Run(run func(points []jung_kurtgofpdf.PointType, styleStr string)) *Fpdf_Beziergon_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].([]gofpdf.PointType), args[1].(string))
+		run(args[0].([]jung_kurtgofpdf.PointType), args[1].(string))
 	})
 	return _c
 }
@@ -527,7 +491,7 @@ func (_c *Fpdf_Beziergon_Call) Return() *Fpdf_Beziergon_Call {
 	return _c
 }
 
-func (_c *Fpdf_Beziergon_Call) RunAndReturn(run func([]gofpdf.PointType, string)) *Fpdf_Beziergon_Call {
+func (_c *Fpdf_Beziergon_Call) RunAndReturn(run func([]jung_kurtgofpdf.PointType, string)) *Fpdf_Beziergon_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -863,7 +827,7 @@ func (_c *Fpdf_ClipEnd_Call) RunAndReturn(run func()) *Fpdf_ClipEnd_Call {
 }
 
 // ClipPolygon provides a mock function with given fields: points, outline
-func (_m *Fpdf) ClipPolygon(points []gofpdf.PointType, outline bool) {
+func (_m *Fpdf) ClipPolygon(points []jung_kurtgofpdf.PointType, outline bool) {
 	_m.Called(points, outline)
 }
 
@@ -873,15 +837,15 @@ type Fpdf_ClipPolygon_Call struct {
 }
 
 // ClipPolygon is a helper method to define mock.On call
-//   - points []gofpdf.PointType
+//   - points []jung_kurtgofpdf.PointType
 //   - outline bool
 func (_e *Fpdf_Expecter) ClipPolygon(points interface{}, outline interface{}) *Fpdf_ClipPolygon_Call {
 	return &Fpdf_ClipPolygon_Call{Call: _e.mock.On("ClipPolygon", points, outline)}
 }
 
-func (_c *Fpdf_ClipPolygon_Call) Run(run func(points []gofpdf.PointType, outline bool)) *Fpdf_ClipPolygon_Call {
+func (_c *Fpdf_ClipPolygon_Call) Run(run func(points []jung_kurtgofpdf.PointType, outline bool)) *Fpdf_ClipPolygon_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].([]gofpdf.PointType), args[1].(bool))
+		run(args[0].([]jung_kurtgofpdf.PointType), args[1].(bool))
 	})
 	return _c
 }
@@ -891,7 +855,7 @@ func (_c *Fpdf_ClipPolygon_Call) Return() *Fpdf_ClipPolygon_Call {
 	return _c
 }
 
-func (_c *Fpdf_ClipPolygon_Call) RunAndReturn(run func([]gofpdf.PointType, bool)) *Fpdf_ClipPolygon_Call {
+func (_c *Fpdf_ClipPolygon_Call) RunAndReturn(run func([]jung_kurtgofpdf.PointType, bool)) *Fpdf_ClipPolygon_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -1072,15 +1036,15 @@ func (_c *Fpdf_ClosePath_Call) RunAndReturn(run func()) *Fpdf_ClosePath_Call {
 }
 
 // CreateTemplate provides a mock function with given fields: fn
-func (_m *Fpdf) CreateTemplate(fn func(*gofpdf.Tpl)) gofpdf.Template {
+func (_m *Fpdf) CreateTemplate(fn func(*jung_kurtgofpdf.Tpl)) jung_kurtgofpdf.Template {
 	ret := _m.Called(fn)
 
-	var r0 gofpdf.Template
-	if rf, ok := ret.Get(0).(func(func(*gofpdf.Tpl)) gofpdf.Template); ok {
+	var r0 jung_kurtgofpdf.Template
+	if rf, ok := ret.Get(0).(func(func(*jung_kurtgofpdf.Tpl)) jung_kurtgofpdf.Template); ok {
 		r0 = rf(fn)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(gofpdf.Template)
+			r0 = ret.Get(0).(jung_kurtgofpdf.Template)
 		}
 	}
 
@@ -1093,38 +1057,38 @@ type Fpdf_CreateTemplate_Call struct {
 }
 
 // CreateTemplate is a helper method to define mock.On call
-//   - fn func(*gofpdf.Tpl)
+//   - fn func(*jung_kurtgofpdf.Tpl)
 func (_e *Fpdf_Expecter) CreateTemplate(fn interface{}) *Fpdf_CreateTemplate_Call {
 	return &Fpdf_CreateTemplate_Call{Call: _e.mock.On("CreateTemplate", fn)}
 }
 
-func (_c *Fpdf_CreateTemplate_Call) Run(run func(fn func(*gofpdf.Tpl))) *Fpdf_CreateTemplate_Call {
+func (_c *Fpdf_CreateTemplate_Call) Run(run func(fn func(*jung_kurtgofpdf.Tpl))) *Fpdf_CreateTemplate_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(func(*gofpdf.Tpl)))
+		run(args[0].(func(*jung_kurtgofpdf.Tpl)))
 	})
 	return _c
 }
 
-func (_c *Fpdf_CreateTemplate_Call) Return(_a0 gofpdf.Template) *Fpdf_CreateTemplate_Call {
+func (_c *Fpdf_CreateTemplate_Call) Return(_a0 jung_kurtgofpdf.Template) *Fpdf_CreateTemplate_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Fpdf_CreateTemplate_Call) RunAndReturn(run func(func(*gofpdf.Tpl)) gofpdf.Template) *Fpdf_CreateTemplate_Call {
+func (_c *Fpdf_CreateTemplate_Call) RunAndReturn(run func(func(*jung_kurtgofpdf.Tpl)) jung_kurtgofpdf.Template) *Fpdf_CreateTemplate_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // CreateTemplateCustom provides a mock function with given fields: corner, size, fn
-func (_m *Fpdf) CreateTemplateCustom(corner gofpdf.PointType, size gofpdf.SizeType, fn func(*gofpdf.Tpl)) gofpdf.Template {
+func (_m *Fpdf) CreateTemplateCustom(corner jung_kurtgofpdf.PointType, size jung_kurtgofpdf.SizeType, fn func(*jung_kurtgofpdf.Tpl)) jung_kurtgofpdf.Template {
 	ret := _m.Called(corner, size, fn)
 
-	var r0 gofpdf.Template
-	if rf, ok := ret.Get(0).(func(gofpdf.PointType, gofpdf.SizeType, func(*gofpdf.Tpl)) gofpdf.Template); ok {
+	var r0 jung_kurtgofpdf.Template
+	if rf, ok := ret.Get(0).(func(jung_kurtgofpdf.PointType, jung_kurtgofpdf.SizeType, func(*jung_kurtgofpdf.Tpl)) jung_kurtgofpdf.Template); ok {
 		r0 = rf(corner, size, fn)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(gofpdf.Template)
+			r0 = ret.Get(0).(jung_kurtgofpdf.Template)
 		}
 	}
 
@@ -1137,26 +1101,26 @@ type Fpdf_CreateTemplateCustom_Call struct {
 }
 
 // CreateTemplateCustom is a helper method to define mock.On call
-//   - corner gofpdf.PointType
-//   - size gofpdf.SizeType
-//   - fn func(*gofpdf.Tpl)
+//   - corner jung_kurtgofpdf.PointType
+//   - size jung_kurtgofpdf.SizeType
+//   - fn func(*jung_kurtgofpdf.Tpl)
 func (_e *Fpdf_Expecter) CreateTemplateCustom(corner interface{}, size interface{}, fn interface{}) *Fpdf_CreateTemplateCustom_Call {
 	return &Fpdf_CreateTemplateCustom_Call{Call: _e.mock.On("CreateTemplateCustom", corner, size, fn)}
 }
 
-func (_c *Fpdf_CreateTemplateCustom_Call) Run(run func(corner gofpdf.PointType, size gofpdf.SizeType, fn func(*gofpdf.Tpl))) *Fpdf_CreateTemplateCustom_Call {
+func (_c *Fpdf_CreateTemplateCustom_Call) Run(run func(corner jung_kurtgofpdf.PointType, size jung_kurtgofpdf.SizeType, fn func(*jung_kurtgofpdf.Tpl))) *Fpdf_CreateTemplateCustom_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(gofpdf.PointType), args[1].(gofpdf.SizeType), args[2].(func(*gofpdf.Tpl)))
+		run(args[0].(jung_kurtgofpdf.PointType), args[1].(jung_kurtgofpdf.SizeType), args[2].(func(*jung_kurtgofpdf.Tpl)))
 	})
 	return _c
 }
 
-func (_c *Fpdf_CreateTemplateCustom_Call) Return(_a0 gofpdf.Template) *Fpdf_CreateTemplateCustom_Call {
+func (_c *Fpdf_CreateTemplateCustom_Call) Return(_a0 jung_kurtgofpdf.Template) *Fpdf_CreateTemplateCustom_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Fpdf_CreateTemplateCustom_Call) RunAndReturn(run func(gofpdf.PointType, gofpdf.SizeType, func(*gofpdf.Tpl)) gofpdf.Template) *Fpdf_CreateTemplateCustom_Call {
+func (_c *Fpdf_CreateTemplateCustom_Call) RunAndReturn(run func(jung_kurtgofpdf.PointType, jung_kurtgofpdf.SizeType, func(*jung_kurtgofpdf.Tpl)) jung_kurtgofpdf.Template) *Fpdf_CreateTemplateCustom_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -1986,14 +1950,14 @@ func (_c *Fpdf_GetFillSpotColor_Call) RunAndReturn(run func() (string, byte, byt
 }
 
 // GetFontDesc provides a mock function with given fields: familyStr, styleStr
-func (_m *Fpdf) GetFontDesc(familyStr string, styleStr string) gofpdf.FontDescType {
+func (_m *Fpdf) GetFontDesc(familyStr string, styleStr string) jung_kurtgofpdf.FontDescType {
 	ret := _m.Called(familyStr, styleStr)
 
-	var r0 gofpdf.FontDescType
-	if rf, ok := ret.Get(0).(func(string, string) gofpdf.FontDescType); ok {
+	var r0 jung_kurtgofpdf.FontDescType
+	if rf, ok := ret.Get(0).(func(string, string) jung_kurtgofpdf.FontDescType); ok {
 		r0 = rf(familyStr, styleStr)
 	} else {
-		r0 = ret.Get(0).(gofpdf.FontDescType)
+		r0 = ret.Get(0).(jung_kurtgofpdf.FontDescType)
 	}
 
 	return r0
@@ -2018,12 +1982,12 @@ func (_c *Fpdf_GetFontDesc_Call) Run(run func(familyStr string, styleStr string)
 	return _c
 }
 
-func (_c *Fpdf_GetFontDesc_Call) Return(_a0 gofpdf.FontDescType) *Fpdf_GetFontDesc_Call {
+func (_c *Fpdf_GetFontDesc_Call) Return(_a0 jung_kurtgofpdf.FontDescType) *Fpdf_GetFontDesc_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Fpdf_GetFontDesc_Call) RunAndReturn(run func(string, string) gofpdf.FontDescType) *Fpdf_GetFontDesc_Call {
+func (_c *Fpdf_GetFontDesc_Call) RunAndReturn(run func(string, string) jung_kurtgofpdf.FontDescType) *Fpdf_GetFontDesc_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -2080,15 +2044,15 @@ func (_c *Fpdf_GetFontSize_Call) RunAndReturn(run func() (float64, float64)) *Fp
 }
 
 // GetImageInfo provides a mock function with given fields: imageStr
-func (_m *Fpdf) GetImageInfo(imageStr string) *gofpdf.ImageInfoType {
+func (_m *Fpdf) GetImageInfo(imageStr string) *jung_kurtgofpdf.ImageInfoType {
 	ret := _m.Called(imageStr)
 
-	var r0 *gofpdf.ImageInfoType
-	if rf, ok := ret.Get(0).(func(string) *gofpdf.ImageInfoType); ok {
+	var r0 *jung_kurtgofpdf.ImageInfoType
+	if rf, ok := ret.Get(0).(func(string) *jung_kurtgofpdf.ImageInfoType); ok {
 		r0 = rf(imageStr)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*gofpdf.ImageInfoType)
+			r0 = ret.Get(0).(*jung_kurtgofpdf.ImageInfoType)
 		}
 	}
 
@@ -2113,12 +2077,12 @@ func (_c *Fpdf_GetImageInfo_Call) Run(run func(imageStr string)) *Fpdf_GetImageI
 	return _c
 }
 
-func (_c *Fpdf_GetImageInfo_Call) Return(info *gofpdf.ImageInfoType) *Fpdf_GetImageInfo_Call {
+func (_c *Fpdf_GetImageInfo_Call) Return(info *jung_kurtgofpdf.ImageInfoType) *Fpdf_GetImageInfo_Call {
 	_c.Call.Return(info)
 	return _c
 }
 
-func (_c *Fpdf_GetImageInfo_Call) RunAndReturn(run func(string) *gofpdf.ImageInfoType) *Fpdf_GetImageInfo_Call {
+func (_c *Fpdf_GetImageInfo_Call) RunAndReturn(run func(string) *jung_kurtgofpdf.ImageInfoType) *Fpdf_GetImageInfo_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -2281,14 +2245,14 @@ func (_c *Fpdf_GetPageSize_Call) RunAndReturn(run func() (float64, float64)) *Fp
 }
 
 // GetPageSizeStr provides a mock function with given fields: sizeStr
-func (_m *Fpdf) GetPageSizeStr(sizeStr string) gofpdf.SizeType {
+func (_m *Fpdf) GetPageSizeStr(sizeStr string) jung_kurtgofpdf.SizeType {
 	ret := _m.Called(sizeStr)
 
-	var r0 gofpdf.SizeType
-	if rf, ok := ret.Get(0).(func(string) gofpdf.SizeType); ok {
+	var r0 jung_kurtgofpdf.SizeType
+	if rf, ok := ret.Get(0).(func(string) jung_kurtgofpdf.SizeType); ok {
 		r0 = rf(sizeStr)
 	} else {
-		r0 = ret.Get(0).(gofpdf.SizeType)
+		r0 = ret.Get(0).(jung_kurtgofpdf.SizeType)
 	}
 
 	return r0
@@ -2312,12 +2276,12 @@ func (_c *Fpdf_GetPageSizeStr_Call) Run(run func(sizeStr string)) *Fpdf_GetPageS
 	return _c
 }
 
-func (_c *Fpdf_GetPageSizeStr_Call) Return(size gofpdf.SizeType) *Fpdf_GetPageSizeStr_Call {
+func (_c *Fpdf_GetPageSizeStr_Call) Return(size jung_kurtgofpdf.SizeType) *Fpdf_GetPageSizeStr_Call {
 	_c.Call.Return(size)
 	return _c
 }
 
-func (_c *Fpdf_GetPageSizeStr_Call) RunAndReturn(run func(string) gofpdf.SizeType) *Fpdf_GetPageSizeStr_Call {
+func (_c *Fpdf_GetPageSizeStr_Call) RunAndReturn(run func(string) jung_kurtgofpdf.SizeType) *Fpdf_GetPageSizeStr_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -2628,14 +2592,14 @@ func (_c *Fpdf_GetY_Call) RunAndReturn(run func() float64) *Fpdf_GetY_Call {
 }
 
 // HTMLBasicNew provides a mock function with given fields:
-func (_m *Fpdf) HTMLBasicNew() gofpdf.HTMLBasicType {
+func (_m *Fpdf) HTMLBasicNew() jung_kurtgofpdf.HTMLBasicType {
 	ret := _m.Called()
 
-	var r0 gofpdf.HTMLBasicType
-	if rf, ok := ret.Get(0).(func() gofpdf.HTMLBasicType); ok {
+	var r0 jung_kurtgofpdf.HTMLBasicType
+	if rf, ok := ret.Get(0).(func() jung_kurtgofpdf.HTMLBasicType); ok {
 		r0 = rf()
 	} else {
-		r0 = ret.Get(0).(gofpdf.HTMLBasicType)
+		r0 = ret.Get(0).(jung_kurtgofpdf.HTMLBasicType)
 	}
 
 	return r0
@@ -2658,12 +2622,12 @@ func (_c *Fpdf_HTMLBasicNew_Call) Run(run func()) *Fpdf_HTMLBasicNew_Call {
 	return _c
 }
 
-func (_c *Fpdf_HTMLBasicNew_Call) Return(html gofpdf.HTMLBasicType) *Fpdf_HTMLBasicNew_Call {
+func (_c *Fpdf_HTMLBasicNew_Call) Return(html jung_kurtgofpdf.HTMLBasicType) *Fpdf_HTMLBasicNew_Call {
 	_c.Call.Return(html)
 	return _c
 }
 
-func (_c *Fpdf_HTMLBasicNew_Call) RunAndReturn(run func() gofpdf.HTMLBasicType) *Fpdf_HTMLBasicNew_Call {
+func (_c *Fpdf_HTMLBasicNew_Call) RunAndReturn(run func() jung_kurtgofpdf.HTMLBasicType) *Fpdf_HTMLBasicNew_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -2710,7 +2674,7 @@ func (_c *Fpdf_Image_Call) RunAndReturn(run func(string, float64, float64, float
 }
 
 // ImageOptions provides a mock function with given fields: imageNameStr, x, y, w, h, flow, options, link, linkStr
-func (_m *Fpdf) ImageOptions(imageNameStr string, x float64, y float64, w float64, h float64, flow bool, options gofpdf.ImageOptions, link int, linkStr string) {
+func (_m *Fpdf) ImageOptions(imageNameStr string, x float64, y float64, w float64, h float64, flow bool, options jung_kurtgofpdf.ImageOptions, link int, linkStr string) {
 	_m.Called(imageNameStr, x, y, w, h, flow, options, link, linkStr)
 }
 
@@ -2726,16 +2690,16 @@ type Fpdf_ImageOptions_Call struct {
 //   - w float64
 //   - h float64
 //   - flow bool
-//   - options gofpdf.ImageOptions
+//   - options jung_kurtgofpdf.ImageOptions
 //   - link int
 //   - linkStr string
 func (_e *Fpdf_Expecter) ImageOptions(imageNameStr interface{}, x interface{}, y interface{}, w interface{}, h interface{}, flow interface{}, options interface{}, link interface{}, linkStr interface{}) *Fpdf_ImageOptions_Call {
 	return &Fpdf_ImageOptions_Call{Call: _e.mock.On("ImageOptions", imageNameStr, x, y, w, h, flow, options, link, linkStr)}
 }
 
-func (_c *Fpdf_ImageOptions_Call) Run(run func(imageNameStr string, x float64, y float64, w float64, h float64, flow bool, options gofpdf.ImageOptions, link int, linkStr string)) *Fpdf_ImageOptions_Call {
+func (_c *Fpdf_ImageOptions_Call) Run(run func(imageNameStr string, x float64, y float64, w float64, h float64, flow bool, options jung_kurtgofpdf.ImageOptions, link int, linkStr string)) *Fpdf_ImageOptions_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(float64), args[2].(float64), args[3].(float64), args[4].(float64), args[5].(bool), args[6].(gofpdf.ImageOptions), args[7].(int), args[8].(string))
+		run(args[0].(string), args[1].(float64), args[2].(float64), args[3].(float64), args[4].(float64), args[5].(bool), args[6].(jung_kurtgofpdf.ImageOptions), args[7].(int), args[8].(string))
 	})
 	return _c
 }
@@ -2745,7 +2709,7 @@ func (_c *Fpdf_ImageOptions_Call) Return() *Fpdf_ImageOptions_Call {
 	return _c
 }
 
-func (_c *Fpdf_ImageOptions_Call) RunAndReturn(run func(string, float64, float64, float64, float64, bool, gofpdf.ImageOptions, int, string)) *Fpdf_ImageOptions_Call {
+func (_c *Fpdf_ImageOptions_Call) RunAndReturn(run func(string, float64, float64, float64, float64, bool, jung_kurtgofpdf.ImageOptions, int, string)) *Fpdf_ImageOptions_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -3512,7 +3476,7 @@ func (_c *Fpdf_PointToUnitConvert_Call) RunAndReturn(run func(float64) float64) 
 }
 
 // Polygon provides a mock function with given fields: points, styleStr
-func (_m *Fpdf) Polygon(points []gofpdf.PointType, styleStr string) {
+func (_m *Fpdf) Polygon(points []jung_kurtgofpdf.PointType, styleStr string) {
 	_m.Called(points, styleStr)
 }
 
@@ -3522,15 +3486,15 @@ type Fpdf_Polygon_Call struct {
 }
 
 // Polygon is a helper method to define mock.On call
-//   - points []gofpdf.PointType
+//   - points []jung_kurtgofpdf.PointType
 //   - styleStr string
 func (_e *Fpdf_Expecter) Polygon(points interface{}, styleStr interface{}) *Fpdf_Polygon_Call {
 	return &Fpdf_Polygon_Call{Call: _e.mock.On("Polygon", points, styleStr)}
 }
 
-func (_c *Fpdf_Polygon_Call) Run(run func(points []gofpdf.PointType, styleStr string)) *Fpdf_Polygon_Call {
+func (_c *Fpdf_Polygon_Call) Run(run func(points []jung_kurtgofpdf.PointType, styleStr string)) *Fpdf_Polygon_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].([]gofpdf.PointType), args[1].(string))
+		run(args[0].([]jung_kurtgofpdf.PointType), args[1].(string))
 	})
 	return _c
 }
@@ -3540,7 +3504,7 @@ func (_c *Fpdf_Polygon_Call) Return() *Fpdf_Polygon_Call {
 	return _c
 }
 
-func (_c *Fpdf_Polygon_Call) RunAndReturn(run func([]gofpdf.PointType, string)) *Fpdf_Polygon_Call {
+func (_c *Fpdf_Polygon_Call) RunAndReturn(run func([]jung_kurtgofpdf.PointType, string)) *Fpdf_Polygon_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -3730,15 +3694,15 @@ func (_c *Fpdf_RegisterAlias_Call) RunAndReturn(run func(string, string)) *Fpdf_
 }
 
 // RegisterImage provides a mock function with given fields: fileStr, tp
-func (_m *Fpdf) RegisterImage(fileStr string, tp string) *gofpdf.ImageInfoType {
+func (_m *Fpdf) RegisterImage(fileStr string, tp string) *jung_kurtgofpdf.ImageInfoType {
 	ret := _m.Called(fileStr, tp)
 
-	var r0 *gofpdf.ImageInfoType
-	if rf, ok := ret.Get(0).(func(string, string) *gofpdf.ImageInfoType); ok {
+	var r0 *jung_kurtgofpdf.ImageInfoType
+	if rf, ok := ret.Get(0).(func(string, string) *jung_kurtgofpdf.ImageInfoType); ok {
 		r0 = rf(fileStr, tp)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*gofpdf.ImageInfoType)
+			r0 = ret.Get(0).(*jung_kurtgofpdf.ImageInfoType)
 		}
 	}
 
@@ -3764,26 +3728,26 @@ func (_c *Fpdf_RegisterImage_Call) Run(run func(fileStr string, tp string)) *Fpd
 	return _c
 }
 
-func (_c *Fpdf_RegisterImage_Call) Return(info *gofpdf.ImageInfoType) *Fpdf_RegisterImage_Call {
+func (_c *Fpdf_RegisterImage_Call) Return(info *jung_kurtgofpdf.ImageInfoType) *Fpdf_RegisterImage_Call {
 	_c.Call.Return(info)
 	return _c
 }
 
-func (_c *Fpdf_RegisterImage_Call) RunAndReturn(run func(string, string) *gofpdf.ImageInfoType) *Fpdf_RegisterImage_Call {
+func (_c *Fpdf_RegisterImage_Call) RunAndReturn(run func(string, string) *jung_kurtgofpdf.ImageInfoType) *Fpdf_RegisterImage_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // RegisterImageOptions provides a mock function with given fields: fileStr, options
-func (_m *Fpdf) RegisterImageOptions(fileStr string, options gofpdf.ImageOptions) *gofpdf.ImageInfoType {
+func (_m *Fpdf) RegisterImageOptions(fileStr string, options jung_kurtgofpdf.ImageOptions) *jung_kurtgofpdf.ImageInfoType {
 	ret := _m.Called(fileStr, options)
 
-	var r0 *gofpdf.ImageInfoType
-	if rf, ok := ret.Get(0).(func(string, gofpdf.ImageOptions) *gofpdf.ImageInfoType); ok {
+	var r0 *jung_kurtgofpdf.ImageInfoType
+	if rf, ok := ret.Get(0).(func(string, jung_kurtgofpdf.ImageOptions) *jung_kurtgofpdf.ImageInfoType); ok {
 		r0 = rf(fileStr, options)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*gofpdf.ImageInfoType)
+			r0 = ret.Get(0).(*jung_kurtgofpdf.ImageInfoType)
 		}
 	}
 
@@ -3797,38 +3761,38 @@ type Fpdf_RegisterImageOptions_Call struct {
 
 // RegisterImageOptions is a helper method to define mock.On call
 //   - fileStr string
-//   - options gofpdf.ImageOptions
+//   - options jung_kurtgofpdf.ImageOptions
 func (_e *Fpdf_Expecter) RegisterImageOptions(fileStr interface{}, options interface{}) *Fpdf_RegisterImageOptions_Call {
 	return &Fpdf_RegisterImageOptions_Call{Call: _e.mock.On("RegisterImageOptions", fileStr, options)}
 }
 
-func (_c *Fpdf_RegisterImageOptions_Call) Run(run func(fileStr string, options gofpdf.ImageOptions)) *Fpdf_RegisterImageOptions_Call {
+func (_c *Fpdf_RegisterImageOptions_Call) Run(run func(fileStr string, options jung_kurtgofpdf.ImageOptions)) *Fpdf_RegisterImageOptions_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(gofpdf.ImageOptions))
+		run(args[0].(string), args[1].(jung_kurtgofpdf.ImageOptions))
 	})
 	return _c
 }
 
-func (_c *Fpdf_RegisterImageOptions_Call) Return(info *gofpdf.ImageInfoType) *Fpdf_RegisterImageOptions_Call {
+func (_c *Fpdf_RegisterImageOptions_Call) Return(info *jung_kurtgofpdf.ImageInfoType) *Fpdf_RegisterImageOptions_Call {
 	_c.Call.Return(info)
 	return _c
 }
 
-func (_c *Fpdf_RegisterImageOptions_Call) RunAndReturn(run func(string, gofpdf.ImageOptions) *gofpdf.ImageInfoType) *Fpdf_RegisterImageOptions_Call {
+func (_c *Fpdf_RegisterImageOptions_Call) RunAndReturn(run func(string, jung_kurtgofpdf.ImageOptions) *jung_kurtgofpdf.ImageInfoType) *Fpdf_RegisterImageOptions_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // RegisterImageOptionsReader provides a mock function with given fields: imgName, options, r
-func (_m *Fpdf) RegisterImageOptionsReader(imgName string, options gofpdf.ImageOptions, r io.Reader) *gofpdf.ImageInfoType {
+func (_m *Fpdf) RegisterImageOptionsReader(imgName string, options jung_kurtgofpdf.ImageOptions, r io.Reader) *jung_kurtgofpdf.ImageInfoType {
 	ret := _m.Called(imgName, options, r)
 
-	var r0 *gofpdf.ImageInfoType
-	if rf, ok := ret.Get(0).(func(string, gofpdf.ImageOptions, io.Reader) *gofpdf.ImageInfoType); ok {
+	var r0 *jung_kurtgofpdf.ImageInfoType
+	if rf, ok := ret.Get(0).(func(string, jung_kurtgofpdf.ImageOptions, io.Reader) *jung_kurtgofpdf.ImageInfoType); ok {
 		r0 = rf(imgName, options, r)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*gofpdf.ImageInfoType)
+			r0 = ret.Get(0).(*jung_kurtgofpdf.ImageInfoType)
 		}
 	}
 
@@ -3842,39 +3806,39 @@ type Fpdf_RegisterImageOptionsReader_Call struct {
 
 // RegisterImageOptionsReader is a helper method to define mock.On call
 //   - imgName string
-//   - options gofpdf.ImageOptions
+//   - options jung_kurtgofpdf.ImageOptions
 //   - r io.Reader
 func (_e *Fpdf_Expecter) RegisterImageOptionsReader(imgName interface{}, options interface{}, r interface{}) *Fpdf_RegisterImageOptionsReader_Call {
 	return &Fpdf_RegisterImageOptionsReader_Call{Call: _e.mock.On("RegisterImageOptionsReader", imgName, options, r)}
 }
 
-func (_c *Fpdf_RegisterImageOptionsReader_Call) Run(run func(imgName string, options gofpdf.ImageOptions, r io.Reader)) *Fpdf_RegisterImageOptionsReader_Call {
+func (_c *Fpdf_RegisterImageOptionsReader_Call) Run(run func(imgName string, options jung_kurtgofpdf.ImageOptions, r io.Reader)) *Fpdf_RegisterImageOptionsReader_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(gofpdf.ImageOptions), args[2].(io.Reader))
+		run(args[0].(string), args[1].(jung_kurtgofpdf.ImageOptions), args[2].(io.Reader))
 	})
 	return _c
 }
 
-func (_c *Fpdf_RegisterImageOptionsReader_Call) Return(info *gofpdf.ImageInfoType) *Fpdf_RegisterImageOptionsReader_Call {
+func (_c *Fpdf_RegisterImageOptionsReader_Call) Return(info *jung_kurtgofpdf.ImageInfoType) *Fpdf_RegisterImageOptionsReader_Call {
 	_c.Call.Return(info)
 	return _c
 }
 
-func (_c *Fpdf_RegisterImageOptionsReader_Call) RunAndReturn(run func(string, gofpdf.ImageOptions, io.Reader) *gofpdf.ImageInfoType) *Fpdf_RegisterImageOptionsReader_Call {
+func (_c *Fpdf_RegisterImageOptionsReader_Call) RunAndReturn(run func(string, jung_kurtgofpdf.ImageOptions, io.Reader) *jung_kurtgofpdf.ImageInfoType) *Fpdf_RegisterImageOptionsReader_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // RegisterImageReader provides a mock function with given fields: imgName, tp, r
-func (_m *Fpdf) RegisterImageReader(imgName string, tp string, r io.Reader) *gofpdf.ImageInfoType {
+func (_m *Fpdf) RegisterImageReader(imgName string, tp string, r io.Reader) *jung_kurtgofpdf.ImageInfoType {
 	ret := _m.Called(imgName, tp, r)
 
-	var r0 *gofpdf.ImageInfoType
-	if rf, ok := ret.Get(0).(func(string, string, io.Reader) *gofpdf.ImageInfoType); ok {
+	var r0 *jung_kurtgofpdf.ImageInfoType
+	if rf, ok := ret.Get(0).(func(string, string, io.Reader) *jung_kurtgofpdf.ImageInfoType); ok {
 		r0 = rf(imgName, tp, r)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*gofpdf.ImageInfoType)
+			r0 = ret.Get(0).(*jung_kurtgofpdf.ImageInfoType)
 		}
 	}
 
@@ -3901,18 +3865,18 @@ func (_c *Fpdf_RegisterImageReader_Call) Run(run func(imgName string, tp string,
 	return _c
 }
 
-func (_c *Fpdf_RegisterImageReader_Call) Return(info *gofpdf.ImageInfoType) *Fpdf_RegisterImageReader_Call {
+func (_c *Fpdf_RegisterImageReader_Call) Return(info *jung_kurtgofpdf.ImageInfoType) *Fpdf_RegisterImageReader_Call {
 	_c.Call.Return(info)
 	return _c
 }
 
-func (_c *Fpdf_RegisterImageReader_Call) RunAndReturn(run func(string, string, io.Reader) *gofpdf.ImageInfoType) *Fpdf_RegisterImageReader_Call {
+func (_c *Fpdf_RegisterImageReader_Call) RunAndReturn(run func(string, string, io.Reader) *jung_kurtgofpdf.ImageInfoType) *Fpdf_RegisterImageReader_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // SVGBasicWrite provides a mock function with given fields: sb, scale
-func (_m *Fpdf) SVGBasicWrite(sb *gofpdf.SVGBasicType, scale float64) {
+func (_m *Fpdf) SVGBasicWrite(sb *jung_kurtgofpdf.SVGBasicType, scale float64) {
 	_m.Called(sb, scale)
 }
 
@@ -3922,15 +3886,15 @@ type Fpdf_SVGBasicWrite_Call struct {
 }
 
 // SVGBasicWrite is a helper method to define mock.On call
-//   - sb *gofpdf.SVGBasicType
+//   - sb *jung_kurtgofpdf.SVGBasicType
 //   - scale float64
 func (_e *Fpdf_Expecter) SVGBasicWrite(sb interface{}, scale interface{}) *Fpdf_SVGBasicWrite_Call {
 	return &Fpdf_SVGBasicWrite_Call{Call: _e.mock.On("SVGBasicWrite", sb, scale)}
 }
 
-func (_c *Fpdf_SVGBasicWrite_Call) Run(run func(sb *gofpdf.SVGBasicType, scale float64)) *Fpdf_SVGBasicWrite_Call {
+func (_c *Fpdf_SVGBasicWrite_Call) Run(run func(sb *jung_kurtgofpdf.SVGBasicType, scale float64)) *Fpdf_SVGBasicWrite_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(*gofpdf.SVGBasicType), args[1].(float64))
+		run(args[0].(*jung_kurtgofpdf.SVGBasicType), args[1].(float64))
 	})
 	return _c
 }
@@ -3940,7 +3904,7 @@ func (_c *Fpdf_SVGBasicWrite_Call) Return() *Fpdf_SVGBasicWrite_Call {
 	return _c
 }
 
-func (_c *Fpdf_SVGBasicWrite_Call) RunAndReturn(run func(*gofpdf.SVGBasicType, float64)) *Fpdf_SVGBasicWrite_Call {
+func (_c *Fpdf_SVGBasicWrite_Call) RunAndReturn(run func(*jung_kurtgofpdf.SVGBasicType, float64)) *Fpdf_SVGBasicWrite_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -4565,7 +4529,7 @@ func (_c *Fpdf_SetFont_Call) RunAndReturn(run func(string, string, float64)) *Fp
 }
 
 // SetFontLoader provides a mock function with given fields: loader
-func (_m *Fpdf) SetFontLoader(loader gofpdf.FontLoader) {
+func (_m *Fpdf) SetFontLoader(loader jung_kurtgofpdf.FontLoader) {
 	_m.Called(loader)
 }
 
@@ -4575,14 +4539,14 @@ type Fpdf_SetFontLoader_Call struct {
 }
 
 // SetFontLoader is a helper method to define mock.On call
-//   - loader gofpdf.FontLoader
+//   - loader jung_kurtgofpdf.FontLoader
 func (_e *Fpdf_Expecter) SetFontLoader(loader interface{}) *Fpdf_SetFontLoader_Call {
 	return &Fpdf_SetFontLoader_Call{Call: _e.mock.On("SetFontLoader", loader)}
 }
 
-func (_c *Fpdf_SetFontLoader_Call) Run(run func(loader gofpdf.FontLoader)) *Fpdf_SetFontLoader_Call {
+func (_c *Fpdf_SetFontLoader_Call) Run(run func(loader jung_kurtgofpdf.FontLoader)) *Fpdf_SetFontLoader_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(gofpdf.FontLoader))
+		run(args[0].(jung_kurtgofpdf.FontLoader))
 	})
 	return _c
 }
@@ -4592,7 +4556,7 @@ func (_c *Fpdf_SetFontLoader_Call) Return() *Fpdf_SetFontLoader_Call {
 	return _c
 }
 
-func (_c *Fpdf_SetFontLoader_Call) RunAndReturn(run func(gofpdf.FontLoader)) *Fpdf_SetFontLoader_Call {
+func (_c *Fpdf_SetFontLoader_Call) RunAndReturn(run func(jung_kurtgofpdf.FontLoader)) *Fpdf_SetFontLoader_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -5234,7 +5198,7 @@ func (_c *Fpdf_SetPageBox_Call) RunAndReturn(run func(string, float64, float64, 
 }
 
 // SetPageBoxRec provides a mock function with given fields: t, pb
-func (_m *Fpdf) SetPageBoxRec(t string, pb gofpdf.PageBox) {
+func (_m *Fpdf) SetPageBoxRec(t string, pb jung_kurtgofpdf.PageBox) {
 	_m.Called(t, pb)
 }
 
@@ -5245,14 +5209,14 @@ type Fpdf_SetPageBoxRec_Call struct {
 
 // SetPageBoxRec is a helper method to define mock.On call
 //   - t string
-//   - pb gofpdf.PageBox
+//   - pb jung_kurtgofpdf.PageBox
 func (_e *Fpdf_Expecter) SetPageBoxRec(t interface{}, pb interface{}) *Fpdf_SetPageBoxRec_Call {
 	return &Fpdf_SetPageBoxRec_Call{Call: _e.mock.On("SetPageBoxRec", t, pb)}
 }
 
-func (_c *Fpdf_SetPageBoxRec_Call) Run(run func(t string, pb gofpdf.PageBox)) *Fpdf_SetPageBoxRec_Call {
+func (_c *Fpdf_SetPageBoxRec_Call) Run(run func(t string, pb jung_kurtgofpdf.PageBox)) *Fpdf_SetPageBoxRec_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(gofpdf.PageBox))
+		run(args[0].(string), args[1].(jung_kurtgofpdf.PageBox))
 	})
 	return _c
 }
@@ -5262,7 +5226,7 @@ func (_c *Fpdf_SetPageBoxRec_Call) Return() *Fpdf_SetPageBoxRec_Call {
 	return _c
 }
 
-func (_c *Fpdf_SetPageBoxRec_Call) RunAndReturn(run func(string, gofpdf.PageBox)) *Fpdf_SetPageBoxRec_Call {
+func (_c *Fpdf_SetPageBoxRec_Call) RunAndReturn(run func(string, jung_kurtgofpdf.PageBox)) *Fpdf_SetPageBoxRec_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -5501,6 +5465,39 @@ func (_c *Fpdf_SetTopMargin_Call) Return() *Fpdf_SetTopMargin_Call {
 }
 
 func (_c *Fpdf_SetTopMargin_Call) RunAndReturn(run func(float64)) *Fpdf_SetTopMargin_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// SetUnderlineThickness provides a mock function with given fields: thickness
+func (_m *Fpdf) SetUnderlineThickness(thickness float64) {
+	_m.Called(thickness)
+}
+
+// Fpdf_SetUnderlineThickness_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'SetUnderlineThickness'
+type Fpdf_SetUnderlineThickness_Call struct {
+	*mock.Call
+}
+
+// SetUnderlineThickness is a helper method to define mock.On call
+//   - thickness float64
+func (_e *Fpdf_Expecter) SetUnderlineThickness(thickness interface{}) *Fpdf_SetUnderlineThickness_Call {
+	return &Fpdf_SetUnderlineThickness_Call{Call: _e.mock.On("SetUnderlineThickness", thickness)}
+}
+
+func (_c *Fpdf_SetUnderlineThickness_Call) Run(run func(thickness float64)) *Fpdf_SetUnderlineThickness_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(float64))
+	})
+	return _c
+}
+
+func (_c *Fpdf_SetUnderlineThickness_Call) Return() *Fpdf_SetUnderlineThickness_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *Fpdf_SetUnderlineThickness_Call) RunAndReturn(run func(float64)) *Fpdf_SetUnderlineThickness_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -5760,7 +5757,7 @@ func (_c *Fpdf_Text_Call) RunAndReturn(run func(float64, float64, string)) *Fpdf
 }
 
 // Transform provides a mock function with given fields: tm
-func (_m *Fpdf) Transform(tm gofpdf.TransformMatrix) {
+func (_m *Fpdf) Transform(tm jung_kurtgofpdf.TransformMatrix) {
 	_m.Called(tm)
 }
 
@@ -5770,14 +5767,14 @@ type Fpdf_Transform_Call struct {
 }
 
 // Transform is a helper method to define mock.On call
-//   - tm gofpdf.TransformMatrix
+//   - tm jung_kurtgofpdf.TransformMatrix
 func (_e *Fpdf_Expecter) Transform(tm interface{}) *Fpdf_Transform_Call {
 	return &Fpdf_Transform_Call{Call: _e.mock.On("Transform", tm)}
 }
 
-func (_c *Fpdf_Transform_Call) Run(run func(tm gofpdf.TransformMatrix)) *Fpdf_Transform_Call {
+func (_c *Fpdf_Transform_Call) Run(run func(tm jung_kurtgofpdf.TransformMatrix)) *Fpdf_Transform_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(gofpdf.TransformMatrix))
+		run(args[0].(jung_kurtgofpdf.TransformMatrix))
 	})
 	return _c
 }
@@ -5787,7 +5784,7 @@ func (_c *Fpdf_Transform_Call) Return() *Fpdf_Transform_Call {
 	return _c
 }
 
-func (_c *Fpdf_Transform_Call) RunAndReturn(run func(gofpdf.TransformMatrix)) *Fpdf_Transform_Call {
+func (_c *Fpdf_Transform_Call) RunAndReturn(run func(jung_kurtgofpdf.TransformMatrix)) *Fpdf_Transform_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -6460,7 +6457,7 @@ func (_c *Fpdf_UnitToPointConvert_Call) RunAndReturn(run func(float64) float64) 
 }
 
 // UseTemplate provides a mock function with given fields: t
-func (_m *Fpdf) UseTemplate(t gofpdf.Template) {
+func (_m *Fpdf) UseTemplate(t jung_kurtgofpdf.Template) {
 	_m.Called(t)
 }
 
@@ -6470,14 +6467,14 @@ type Fpdf_UseTemplate_Call struct {
 }
 
 // UseTemplate is a helper method to define mock.On call
-//   - t gofpdf.Template
+//   - t jung_kurtgofpdf.Template
 func (_e *Fpdf_Expecter) UseTemplate(t interface{}) *Fpdf_UseTemplate_Call {
 	return &Fpdf_UseTemplate_Call{Call: _e.mock.On("UseTemplate", t)}
 }
 
-func (_c *Fpdf_UseTemplate_Call) Run(run func(t gofpdf.Template)) *Fpdf_UseTemplate_Call {
+func (_c *Fpdf_UseTemplate_Call) Run(run func(t jung_kurtgofpdf.Template)) *Fpdf_UseTemplate_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(gofpdf.Template))
+		run(args[0].(jung_kurtgofpdf.Template))
 	})
 	return _c
 }
@@ -6487,13 +6484,13 @@ func (_c *Fpdf_UseTemplate_Call) Return() *Fpdf_UseTemplate_Call {
 	return _c
 }
 
-func (_c *Fpdf_UseTemplate_Call) RunAndReturn(run func(gofpdf.Template)) *Fpdf_UseTemplate_Call {
+func (_c *Fpdf_UseTemplate_Call) RunAndReturn(run func(jung_kurtgofpdf.Template)) *Fpdf_UseTemplate_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // UseTemplateScaled provides a mock function with given fields: t, corner, size
-func (_m *Fpdf) UseTemplateScaled(t gofpdf.Template, corner gofpdf.PointType, size gofpdf.SizeType) {
+func (_m *Fpdf) UseTemplateScaled(t jung_kurtgofpdf.Template, corner jung_kurtgofpdf.PointType, size jung_kurtgofpdf.SizeType) {
 	_m.Called(t, corner, size)
 }
 
@@ -6503,16 +6500,16 @@ type Fpdf_UseTemplateScaled_Call struct {
 }
 
 // UseTemplateScaled is a helper method to define mock.On call
-//   - t gofpdf.Template
-//   - corner gofpdf.PointType
-//   - size gofpdf.SizeType
+//   - t jung_kurtgofpdf.Template
+//   - corner jung_kurtgofpdf.PointType
+//   - size jung_kurtgofpdf.SizeType
 func (_e *Fpdf_Expecter) UseTemplateScaled(t interface{}, corner interface{}, size interface{}) *Fpdf_UseTemplateScaled_Call {
 	return &Fpdf_UseTemplateScaled_Call{Call: _e.mock.On("UseTemplateScaled", t, corner, size)}
 }
 
-func (_c *Fpdf_UseTemplateScaled_Call) Run(run func(t gofpdf.Template, corner gofpdf.PointType, size gofpdf.SizeType)) *Fpdf_UseTemplateScaled_Call {
+func (_c *Fpdf_UseTemplateScaled_Call) Run(run func(t jung_kurtgofpdf.Template, corner jung_kurtgofpdf.PointType, size jung_kurtgofpdf.SizeType)) *Fpdf_UseTemplateScaled_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(gofpdf.Template), args[1].(gofpdf.PointType), args[2].(gofpdf.SizeType))
+		run(args[0].(jung_kurtgofpdf.Template), args[1].(jung_kurtgofpdf.PointType), args[2].(jung_kurtgofpdf.SizeType))
 	})
 	return _c
 }
@@ -6522,7 +6519,7 @@ func (_c *Fpdf_UseTemplateScaled_Call) Return() *Fpdf_UseTemplateScaled_Call {
 	return _c
 }
 
-func (_c *Fpdf_UseTemplateScaled_Call) RunAndReturn(run func(gofpdf.Template, gofpdf.PointType, gofpdf.SizeType)) *Fpdf_UseTemplateScaled_Call {
+func (_c *Fpdf_UseTemplateScaled_Call) RunAndReturn(run func(jung_kurtgofpdf.Template, jung_kurtgofpdf.PointType, jung_kurtgofpdf.SizeType)) *Fpdf_UseTemplateScaled_Call {
 	_c.Call.Return(run)
 	return _c
 }

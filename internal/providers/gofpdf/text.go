@@ -1,8 +1,10 @@
-package internal
+package gofpdf
 
 import (
 	"fmt"
 	"strings"
+
+	"github.com/jung-kurt/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
@@ -13,18 +15,17 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 
-	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type text struct {
-	pdf  fpdf.Fpdf
+	pdf  gofpdf.Pdf
 	math core.Math
 	font core.Font
 }
 
 // NewText create a Text.
-func NewText(pdf fpdf.Fpdf, math core.Math, font core.Font) *text {
+func NewText(pdf gofpdf.Pdf, math core.Math, font core.Font) *text {
 	return &text{
 		pdf,
 		math,

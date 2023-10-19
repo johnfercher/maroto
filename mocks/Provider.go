@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	cache "github.com/johnfercher/maroto/v2/pkg/cache"
+	cache "github.com/johnfercher/maroto/v2/internal/cache"
 
 	entity "github.com/johnfercher/maroto/v2/pkg/core/entity"
 
@@ -269,41 +269,6 @@ func (_c *Provider_AddQrCode_Call) Return() *Provider_AddQrCode_Call {
 }
 
 func (_c *Provider_AddQrCode_Call) RunAndReturn(run func(string, *entity.Cell, *props.Rect)) *Provider_AddQrCode_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
-// AddSignature provides a mock function with given fields: text, cell, prop
-func (_m *Provider) AddSignature(text string, cell *entity.Cell, prop *props.Text) {
-	_m.Called(text, cell, prop)
-}
-
-// Provider_AddSignature_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddSignature'
-type Provider_AddSignature_Call struct {
-	*mock.Call
-}
-
-// AddSignature is a helper method to define mock.On call
-//   - text string
-//   - cell *entity.Cell
-//   - prop *props.Text
-func (_e *Provider_Expecter) AddSignature(text interface{}, cell interface{}, prop interface{}) *Provider_AddSignature_Call {
-	return &Provider_AddSignature_Call{Call: _e.mock.On("AddSignature", text, cell, prop)}
-}
-
-func (_c *Provider_AddSignature_Call) Run(run func(text string, cell *entity.Cell, prop *props.Text)) *Provider_AddSignature_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(*entity.Cell), args[2].(*props.Text))
-	})
-	return _c
-}
-
-func (_c *Provider_AddSignature_Call) Return() *Provider_AddSignature_Call {
-	_c.Call.Return()
-	return _c
-}
-
-func (_c *Provider_AddSignature_Call) RunAndReturn(run func(string, *entity.Cell, *props.Text)) *Provider_AddSignature_Call {
 	_c.Call.Return(run)
 	return _c
 }
