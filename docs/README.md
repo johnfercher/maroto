@@ -10,8 +10,6 @@
 go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.41
 ```
 
-* You can help us with a :star: [on Github](https://github.com/johnfercher/maroto)! Is Free. :heart:
-
 The public API was completely redesigned with the aim of enhancing the 
 library in various aspects. The main objectives of`v2.0.0`are:
 
