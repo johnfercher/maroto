@@ -1,10 +1,11 @@
-package internal_test
+package gofpdf_test
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/internal"
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
+
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -22,11 +23,11 @@ func TestNewFont(t *testing.T) {
 	fpdf.EXPECT().SetFont(family, string(style), size)
 
 	// Act
-	font := internal.NewFont(fpdf, size, family, style)
+	font := gofpdf.NewFont(fpdf, size, family, style)
 
 	// Assert
 	assert.NotNil(t, font)
-	assert.Equal(t, fmt.Sprintf("%T", font), "*internal.font")
+	assert.Equal(t, fmt.Sprintf("%T", font), "*gofpdf.font")
 	assert.Equal(t, family, font.GetFamily())
 	assert.Equal(t, style, font.GetStyle())
 	assert.Equal(t, size, font.GetSize())
@@ -41,7 +42,7 @@ func TestFont_GetHeight(t *testing.T) {
 
 	fpdf := &mocks.Fpdf{}
 	fpdf.EXPECT().SetFont(family, string(style), size)
-	font := internal.NewFont(fpdf, size, family, style)
+	font := gofpdf.NewFont(fpdf, size, family, style)
 
 	// Act
 	height := font.GetHeight(family, style, size)
@@ -59,7 +60,7 @@ func TestFont_SetFamily(t *testing.T) {
 	fpdf := &mocks.Fpdf{}
 	fpdf.EXPECT().SetFont(family, string(style), size)
 	fpdf.EXPECT().SetFont(fontfamily.Helvetica, string(style), size)
-	font := internal.NewFont(fpdf, size, family, style)
+	font := gofpdf.NewFont(fpdf, size, family, style)
 
 	// Act
 	font.SetFamily(fontfamily.Helvetica)
@@ -77,7 +78,7 @@ func TestFont_SetStyle(t *testing.T) {
 	fpdf := &mocks.Fpdf{}
 	fpdf.EXPECT().SetFont(family, string(style), size)
 	fpdf.EXPECT().SetFontStyle(string(fontstyle.BoldItalic))
-	font := internal.NewFont(fpdf, size, family, style)
+	font := gofpdf.NewFont(fpdf, size, family, style)
 
 	// Act
 	font.SetStyle(fontstyle.BoldItalic)
@@ -95,7 +96,7 @@ func TestFont_SetSize(t *testing.T) {
 	fpdf := &mocks.Fpdf{}
 	fpdf.EXPECT().SetFont(family, string(style), size)
 	fpdf.EXPECT().SetFontSize(14.0)
-	font := internal.NewFont(fpdf, size, family, style)
+	font := gofpdf.NewFont(fpdf, size, family, style)
 
 	// Act
 	font.SetSize(14.0)
@@ -113,7 +114,7 @@ func TestFont_SetColor(t *testing.T) {
 
 		fpdf := &mocks.Fpdf{}
 		fpdf.EXPECT().SetFont(family, string(style), size)
-		font := internal.NewFont(fpdf, size, family, style)
+		font := gofpdf.NewFont(fpdf, size, family, style)
 		color := &props.Color{Red: 0, Green: 0, Blue: 0}
 
 		// Act
@@ -131,7 +132,7 @@ func TestFont_SetColor(t *testing.T) {
 		fpdf := &mocks.Fpdf{}
 		fpdf.EXPECT().SetFont(family, string(style), size)
 		fpdf.EXPECT().SetTextColor(200, 200, 200)
-		font := internal.NewFont(fpdf, size, family, style)
+		font := gofpdf.NewFont(fpdf, size, family, style)
 		color := &props.Color{Red: 200, Green: 200, Blue: 200}
 
 		// Act

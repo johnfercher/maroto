@@ -6,6 +6,8 @@ import (
 	config "github.com/johnfercher/maroto/v2/pkg/config"
 	entity "github.com/johnfercher/maroto/v2/pkg/core/entity"
 
+	extension "github.com/johnfercher/maroto/v2/pkg/consts/extension"
+
 	mock "github.com/stretchr/testify/mock"
 
 	orientation "github.com/johnfercher/maroto/v2/pkg/consts/orientation"
@@ -15,8 +17,6 @@ import (
 	props "github.com/johnfercher/maroto/v2/pkg/props"
 
 	protection "github.com/johnfercher/maroto/v2/pkg/consts/protection"
-
-	repository "github.com/johnfercher/maroto/v2/pkg/repository"
 
 	time "time"
 )
@@ -77,60 +77,6 @@ func (_c *Builder_Build_Call) RunAndReturn(run func() *entity.Config) *Builder_B
 	return _c
 }
 
-// TryLoadRepository provides a mock function with given fields: _a0
-func (_m *Builder) TryLoadRepository(_a0 repository.Repository) (config.Builder, error) {
-	ret := _m.Called(_a0)
-
-	var r0 config.Builder
-	var r1 error
-	if rf, ok := ret.Get(0).(func(repository.Repository) (config.Builder, error)); ok {
-		return rf(_a0)
-	}
-	if rf, ok := ret.Get(0).(func(repository.Repository) config.Builder); ok {
-		r0 = rf(_a0)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(config.Builder)
-		}
-	}
-
-	if rf, ok := ret.Get(1).(func(repository.Repository) error); ok {
-		r1 = rf(_a0)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
-}
-
-// Builder_TryLoadRepository_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'TryLoadRepository'
-type Builder_TryLoadRepository_Call struct {
-	*mock.Call
-}
-
-// TryLoadRepository is a helper method to define mock.On call
-//   - _a0 repository.Repository
-func (_e *Builder_Expecter) TryLoadRepository(_a0 interface{}) *Builder_TryLoadRepository_Call {
-	return &Builder_TryLoadRepository_Call{Call: _e.mock.On("TryLoadRepository", _a0)}
-}
-
-func (_c *Builder_TryLoadRepository_Call) Run(run func(_a0 repository.Repository)) *Builder_TryLoadRepository_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(repository.Repository))
-	})
-	return _c
-}
-
-func (_c *Builder_TryLoadRepository_Call) Return(_a0 config.Builder, _a1 error) *Builder_TryLoadRepository_Call {
-	_c.Call.Return(_a0, _a1)
-	return _c
-}
-
-func (_c *Builder_TryLoadRepository_Call) RunAndReturn(run func(repository.Repository) (config.Builder, error)) *Builder_TryLoadRepository_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
 // WithAuthor provides a mock function with given fields: author, isUTF8
 func (_m *Builder) WithAuthor(author string, isUTF8 bool) config.Builder {
 	ret := _m.Called(author, isUTF8)
@@ -176,30 +122,20 @@ func (_c *Builder_WithAuthor_Call) RunAndReturn(run func(string, bool) config.Bu
 	return _c
 }
 
-// WithBackgroundImage provides a mock function with given fields: file
-func (_m *Builder) WithBackgroundImage(file string) (config.Builder, error) {
-	ret := _m.Called(file)
+// WithBackgroundImage provides a mock function with given fields: _a0, _a1
+func (_m *Builder) WithBackgroundImage(_a0 []byte, _a1 extension.Type) config.Builder {
+	ret := _m.Called(_a0, _a1)
 
 	var r0 config.Builder
-	var r1 error
-	if rf, ok := ret.Get(0).(func(string) (config.Builder, error)); ok {
-		return rf(file)
-	}
-	if rf, ok := ret.Get(0).(func(string) config.Builder); ok {
-		r0 = rf(file)
+	if rf, ok := ret.Get(0).(func([]byte, extension.Type) config.Builder); ok {
+		r0 = rf(_a0, _a1)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(config.Builder)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(string) error); ok {
-		r1 = rf(file)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return r0
 }
 
 // Builder_WithBackgroundImage_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'WithBackgroundImage'
@@ -208,24 +144,25 @@ type Builder_WithBackgroundImage_Call struct {
 }
 
 // WithBackgroundImage is a helper method to define mock.On call
-//   - file string
-func (_e *Builder_Expecter) WithBackgroundImage(file interface{}) *Builder_WithBackgroundImage_Call {
-	return &Builder_WithBackgroundImage_Call{Call: _e.mock.On("WithBackgroundImage", file)}
+//   - _a0 []byte
+//   - _a1 extension.Type
+func (_e *Builder_Expecter) WithBackgroundImage(_a0 interface{}, _a1 interface{}) *Builder_WithBackgroundImage_Call {
+	return &Builder_WithBackgroundImage_Call{Call: _e.mock.On("WithBackgroundImage", _a0, _a1)}
 }
 
-func (_c *Builder_WithBackgroundImage_Call) Run(run func(file string)) *Builder_WithBackgroundImage_Call {
+func (_c *Builder_WithBackgroundImage_Call) Run(run func(_a0 []byte, _a1 extension.Type)) *Builder_WithBackgroundImage_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string))
+		run(args[0].([]byte), args[1].(extension.Type))
 	})
 	return _c
 }
 
-func (_c *Builder_WithBackgroundImage_Call) Return(_a0 config.Builder, _a1 error) *Builder_WithBackgroundImage_Call {
-	_c.Call.Return(_a0, _a1)
+func (_c *Builder_WithBackgroundImage_Call) Return(_a0 config.Builder) *Builder_WithBackgroundImage_Call {
+	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Builder_WithBackgroundImage_Call) RunAndReturn(run func(string) (config.Builder, error)) *Builder_WithBackgroundImage_Call {
+func (_c *Builder_WithBackgroundImage_Call) RunAndReturn(run func([]byte, extension.Type) config.Builder) *Builder_WithBackgroundImage_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -359,6 +296,50 @@ func (_c *Builder_WithCreator_Call) Return(_a0 config.Builder) *Builder_WithCrea
 }
 
 func (_c *Builder_WithCreator_Call) RunAndReturn(run func(string, bool) config.Builder) *Builder_WithCreator_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// WithCustomFonts provides a mock function with given fields: _a0
+func (_m *Builder) WithCustomFonts(_a0 []*entity.CustomFont) config.Builder {
+	ret := _m.Called(_a0)
+
+	var r0 config.Builder
+	if rf, ok := ret.Get(0).(func([]*entity.CustomFont) config.Builder); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(config.Builder)
+		}
+	}
+
+	return r0
+}
+
+// Builder_WithCustomFonts_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'WithCustomFonts'
+type Builder_WithCustomFonts_Call struct {
+	*mock.Call
+}
+
+// WithCustomFonts is a helper method to define mock.On call
+//   - _a0 []*entity.CustomFont
+func (_e *Builder_Expecter) WithCustomFonts(_a0 interface{}) *Builder_WithCustomFonts_Call {
+	return &Builder_WithCustomFonts_Call{Call: _e.mock.On("WithCustomFonts", _a0)}
+}
+
+func (_c *Builder_WithCustomFonts_Call) Run(run func(_a0 []*entity.CustomFont)) *Builder_WithCustomFonts_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]*entity.CustomFont))
+	})
+	return _c
+}
+
+func (_c *Builder_WithCustomFonts_Call) Return(_a0 config.Builder) *Builder_WithCustomFonts_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Builder_WithCustomFonts_Call) RunAndReturn(run func([]*entity.CustomFont) config.Builder) *Builder_WithCustomFonts_Call {
 	_c.Call.Return(run)
 	return _c
 }

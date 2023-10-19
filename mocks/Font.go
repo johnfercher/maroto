@@ -208,47 +208,6 @@ func (_c *Font_GetHeight_Call) RunAndReturn(run func(string, fontstyle.Type, flo
 	return _c
 }
 
-// GetScaleFactor provides a mock function with given fields:
-func (_m *Font) GetScaleFactor() float64 {
-	ret := _m.Called()
-
-	var r0 float64
-	if rf, ok := ret.Get(0).(func() float64); ok {
-		r0 = rf()
-	} else {
-		r0 = ret.Get(0).(float64)
-	}
-
-	return r0
-}
-
-// Font_GetScaleFactor_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetScaleFactor'
-type Font_GetScaleFactor_Call struct {
-	*mock.Call
-}
-
-// GetScaleFactor is a helper method to define mock.On call
-func (_e *Font_Expecter) GetScaleFactor() *Font_GetScaleFactor_Call {
-	return &Font_GetScaleFactor_Call{Call: _e.mock.On("GetScaleFactor")}
-}
-
-func (_c *Font_GetScaleFactor_Call) Run(run func()) *Font_GetScaleFactor_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		run()
-	})
-	return _c
-}
-
-func (_c *Font_GetScaleFactor_Call) Return(scaleFactor float64) *Font_GetScaleFactor_Call {
-	_c.Call.Return(scaleFactor)
-	return _c
-}
-
-func (_c *Font_GetScaleFactor_Call) RunAndReturn(run func() float64) *Font_GetScaleFactor_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
 // GetSize provides a mock function with given fields:
 func (_m *Font) GetSize() float64 {
 	ret := _m.Called()

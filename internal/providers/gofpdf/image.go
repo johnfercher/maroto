@@ -1,4 +1,4 @@
-package internal
+package gofpdf
 
 import (
 	"bytes"
@@ -10,18 +10,17 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/google/uuid"
-	"github.com/johnfercher/maroto/v2/internal/fpdf"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type image struct {
-	pdf  fpdf.Fpdf
+	pdf  Fpdf
 	math core.Math
 }
 
 // NewImage create an Image.
-func NewImage(pdf fpdf.Fpdf, math core.Math) *image {
+func NewImage(pdf Fpdf, math core.Math) *image {
 	return &image{
 		pdf,
 		math,
