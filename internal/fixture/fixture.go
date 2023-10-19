@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
@@ -75,6 +76,22 @@ func CellEntity() entity.Cell {
 		Y:      15,
 		Width:  100,
 		Height: 150,
+	}
+}
+
+func MarginsEntity() entity.Margins {
+	return entity.Margins{
+		Left:   10,
+		Top:    10,
+		Right:  10,
+		Bottom: 10,
+	}
+}
+
+func ImageEntity() entity.Image {
+	return entity.Image{
+		Bytes:     []byte{1, 2, 3},
+		Extension: extension.Png,
 	}
 }
 
