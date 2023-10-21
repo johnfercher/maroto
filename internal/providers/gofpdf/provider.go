@@ -36,7 +36,7 @@ type provider struct {
 }
 
 func New(cfg *entity.Config, cache cache.Cache) core.Provider {
-	fpdf := gofpdf.NewCustom(&gofpdf.InitType{
+	fpdf := gofpdfwrapper.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",
 		UnitStr:        "mm",
 		FontDirStr:     "",

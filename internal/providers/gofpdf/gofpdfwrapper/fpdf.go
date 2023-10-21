@@ -7,11 +7,12 @@ import (
 	"github.com/jung-kurt/gofpdf"
 )
 
-// Pdf defines the interface used for various methods. It is implemented by the
+// Fpdf defines the interface used for various methods. It is implemented by the
 // main FPDF instance as well as templates.
 type Fpdf interface {
 	AddFont(familyStr, styleStr, fileStr string)
 	AddFontFromBytes(familyStr, styleStr string, jsonFileBytes, zFileBytes []byte)
+	AddUTF8FontFromBytes(familyStr, styleStr string, bytes []byte)
 	AddFontFromReader(familyStr, styleStr string, r io.Reader)
 	AddLayer(name string, visible bool) (layerID int)
 	AddLink() int
@@ -185,4 +186,8 @@ type Fpdf interface {
 	Write(h float64, txtStr string)
 	WriteLinkID(h float64, displayStr string, linkID int)
 	WriteLinkString(h float64, displayStr, targetStr string)
+}
+
+func NewCustom(init *gofpdf.InitType) Fpdf {
+	return gofpdf.NewCustom(init)
 }
