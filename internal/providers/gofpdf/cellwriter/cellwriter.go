@@ -9,6 +9,8 @@ import (
 
 type CellWriter interface {
 	SetNext(next CellWriter)
+	GetNext() CellWriter
+	GetName() string
 	Apply(width, height float64, config *entity.Config, prop *props.Cell)
 }
 
@@ -17,10 +19,11 @@ type cellWriter struct {
 	defaultColor *props.Color
 }
 
-func NewCellCreator(fpdf gofpdfwrapper.Fpdf) *cellWriter {
+func NewCellWriter(fpdf gofpdfwrapper.Fpdf) *cellWriter {
 	return &cellWriter{
 		StylerTemplate: StylerTemplate{
 			fpdf: fpdf,
+			name: "cellWriter",
 		},
 		defaultColor: &props.BlackColor,
 	}

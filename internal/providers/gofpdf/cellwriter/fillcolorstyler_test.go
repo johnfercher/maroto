@@ -5,15 +5,14 @@ import (
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/cellwriter"
-
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewCellCreator(t *testing.T) {
+func TestNewFillColorStyler(t *testing.T) {
 	// Act
-	sut := cellwriter.NewCellWriter(nil)
+	sut := cellwriter.NewFillColorStyler(nil)
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*cellwriter.cellWriter", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*cellwriter.fillColorStyler", fmt.Sprintf("%T", sut))
 }

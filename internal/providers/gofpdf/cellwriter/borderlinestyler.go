@@ -15,6 +15,7 @@ func NewBorderLineStyler(fpdf gofpdfwrapper.Fpdf) *borderLineStyler {
 	return &borderLineStyler{
 		StylerTemplate: StylerTemplate{
 			fpdf: fpdf,
+			name: "borderLineStyler",
 		},
 	}
 }

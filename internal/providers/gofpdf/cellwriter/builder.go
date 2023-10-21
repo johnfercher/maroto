@@ -11,14 +11,16 @@ func NewBuilder() *CellWriterBuilder {
 }
 
 func (c *CellWriterBuilder) Build(fpdf gofpdfwrapper.Fpdf) CellWriter {
-	cellCreator := NewCellCreator(fpdf)
+	cellCreator := NewCellWriter(fpdf)
 	borderColorStyle := NewBorderColorStyler(fpdf)
 	borderLineStyler := NewBorderLineStyler(fpdf)
 	borderThicknessStyler := NewBorderThicknessStyler(fpdf)
+	fillColorStyler := NewFillColorStyler(fpdf)
 
 	borderThicknessStyler.SetNext(borderLineStyler)
 	borderLineStyler.SetNext(borderColorStyle)
-	borderColorStyle.SetNext(cellCreator)
+	borderColorStyle.SetNext(fillColorStyler)
+	fillColorStyler.SetNext(cellCreator)
 
 	return borderThicknessStyler
 }
