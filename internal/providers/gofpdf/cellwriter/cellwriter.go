@@ -1,10 +1,10 @@
 package cellwriter
 
 import (
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 )
 
 type CellWriter interface {
@@ -17,7 +17,7 @@ type cellWriter struct {
 	defaultColor *props.Color
 }
 
-func NewCellCreator(fpdf *gofpdf.Fpdf) *cellWriter {
+func NewCellCreator(fpdf gofpdfwrapper.Fpdf) *cellWriter {
 	return &cellWriter{
 		StylerTemplate: StylerTemplate{
 			fpdf: fpdf,
@@ -42,16 +42,5 @@ func (c *cellWriter) Apply(width, height float64, config *entity.Config, prop *p
 		bd = border.Full
 	}
 
-	fill := false
-	if prop.BackgroundColor != nil {
-		c.fpdf.SetFillColor(prop.BackgroundColor.Red, prop.BackgroundColor.Green, prop.BackgroundColor.Blue)
-		fill = true
-	}
-
-	c.fpdf.CellFormat(width, height, "", string(bd), 0, "C", fill, 0, "")
-
-	if fill {
-		white := &props.WhiteColor
-		c.fpdf.SetFillColor(white.Red, white.Green, white.Blue)
-	}
+	c.fpdf.CellFormat(width, height, "", string(bd), 0, "C", prop.BackgroundColor != nil, 0, "")
 }

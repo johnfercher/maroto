@@ -1,4 +1,4 @@
-package gofpdf
+package gofpdfwrapper
 
 import (
 	"io"

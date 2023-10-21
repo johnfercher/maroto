@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
+
 	"github.com/johnfercher/maroto/v2/internal/cache"
 	"github.com/johnfercher/maroto/v2/internal/merror"
 
@@ -22,7 +24,7 @@ import (
 )
 
 type provider struct {
-	fpdf       Fpdf
+	fpdf       gofpdfwrapper.Fpdf
 	font       core.Font
 	text       core.Text
 	code       core.Code

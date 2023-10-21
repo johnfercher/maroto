@@ -1,14 +1,14 @@
 package cellwriter
 
 import (
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 )
 
 type StylerTemplate struct {
 	next CellWriter
-	fpdf *gofpdf.Fpdf
+	fpdf gofpdfwrapper.Fpdf
 }
 
 func (s *StylerTemplate) SetNext(next CellWriter) {
