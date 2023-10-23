@@ -6,25 +6,25 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type StylerTemplate struct {
+type stylerTemplate struct {
 	next CellWriter
 	fpdf gofpdfwrapper.Fpdf
 	name string
 }
 
-func (s *StylerTemplate) SetNext(next CellWriter) {
+func (s *stylerTemplate) SetNext(next CellWriter) {
 	s.next = next
 }
 
-func (s *StylerTemplate) GetName() string {
+func (s *stylerTemplate) GetName() string {
 	return s.name
 }
 
-func (s *StylerTemplate) GetNext() CellWriter {
+func (s *stylerTemplate) GetNext() CellWriter {
 	return s.next
 }
 
-func (s *StylerTemplate) GoToNext(width, height float64, config *entity.Config, prop *props.Cell) {
+func (s *stylerTemplate) GoToNext(width, height float64, config *entity.Config, prop *props.Cell) {
 	if s.next == nil {
 		return
 	}

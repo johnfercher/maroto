@@ -8,13 +8,13 @@ import (
 )
 
 type borderColorStyler struct {
-	StylerTemplate
+	stylerTemplate
 	defaultColor *props.Color
 }
 
 func NewBorderColorStyler(fpdf gofpdfwrapper.Fpdf) *borderColorStyler {
 	return &borderColorStyler{
-		StylerTemplate: StylerTemplate{
+		stylerTemplate: stylerTemplate{
 			fpdf: fpdf,
 			name: "borderColorStyler",
 		},

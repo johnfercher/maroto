@@ -15,13 +15,13 @@ type CellWriter interface {
 }
 
 type cellWriter struct {
-	StylerTemplate
+	stylerTemplate
 	defaultColor *props.Color
 }
 
 func NewCellWriter(fpdf gofpdfwrapper.Fpdf) *cellWriter {
 	return &cellWriter{
-		StylerTemplate: StylerTemplate{
+		stylerTemplate: stylerTemplate{
 			fpdf: fpdf,
 			name: "cellWriter",
 		},

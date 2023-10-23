@@ -13,14 +13,9 @@ import (
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
-	"github.com/johnfercher/maroto/v2/internal/code"
-
-	"github.com/johnfercher/maroto/v2/internal/math"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 )
 
 type provider struct {
@@ -35,46 +30,18 @@ type provider struct {
 	cfg        *entity.Config
 }
 
-func New(cfg *entity.Config, cache cache.Cache) core.Provider {
-	fpdf := gofpdfwrapper.NewCustom(&gofpdf.InitType{
-		OrientationStr: "P",
-		UnitStr:        "mm",
-		FontDirStr:     "",
-		Size: gofpdf.SizeType{
-			Wd: cfg.Dimensions.Width,
-			Ht: cfg.Dimensions.Height,
-		},
-	})
-
-	for _, font := range cfg.CustomFonts {
-		fpdf.AddUTF8FontFromBytes(font.Family, string(font.Style), font.Bytes)
+func New(dep *Dependencies) core.Provider {
+	return &provider{
+		fpdf:       dep.Fpdf,
+		font:       dep.Font,
+		text:       dep.Text,
+		code:       dep.Code,
+		image:      dep.Image,
+		line:       dep.Line,
+		cellWriter: dep.CellWriter,
+		cfg:        dep.Cfg,
+		cache:      dep.Cache,
 	}
-
-	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)
-	fpdf.AddPage()
-
-	font := NewFont(fpdf, cfg.DefaultFont.Size, cfg.DefaultFont.Family, cfg.DefaultFont.Style)
-	math := math.New()
-	code := code.New()
-	text := NewText(fpdf, math, font)
-	image := NewImage(fpdf, math)
-	line := NewLine(fpdf)
-	cellWriter := cellwriter.NewBuilder().
-		Build(fpdf)
-
-	provider := &provider{
-		fpdf:       fpdf,
-		font:       font,
-		text:       text,
-		code:       code,
-		image:      image,
-		line:       line,
-		cellWriter: cellWriter,
-		cfg:        cfg,
-		cache:      cache,
-	}
-
-	return provider
 }
 
 func (g *provider) AddText(text string, cell *entity.Cell, prop *props.Text) {
@@ -93,14 +60,13 @@ func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rec
 	image, err := g.cache.GetImage(code, extension.Jpg)
 	if err != nil {
 		image, err = g.code.GenDataMatrix(code)
+		if err != nil {
+			g.text.Add("could not generate matrixcode", cell, merror.DefaultErrorText)
+			return
+		}
+		g.cache.AddImage(code, image)
 	}
 
-	if err != nil {
-		g.text.Add("could not generate matrixcode", cell, merror.DefaultErrorText)
-		return
-	}
-
-	g.cache.AddImage(code, image)
 	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
@@ -113,7 +79,6 @@ func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 	if err != nil {
 		image, err = g.code.GenQr(code)
 	}
-
 	if err != nil {
 		g.text.Add("could not generate qrcode", cell, merror.DefaultErrorText)
 		return
@@ -132,7 +97,6 @@ func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcod
 	if err != nil {
 		image, err = g.code.GenBar(code, cell, prop)
 	}
-
 	if err != nil {
 		g.text.Add("could not generate barcode", cell, merror.DefaultErrorText)
 		return

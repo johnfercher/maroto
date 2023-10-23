@@ -8,13 +8,13 @@ import (
 )
 
 type fillColorStyler struct {
-	StylerTemplate
+	stylerTemplate
 	defaultFillColor *props.Color
 }
 
 func NewFillColorStyler(fpdf gofpdfwrapper.Fpdf) *fillColorStyler {
 	return &fillColorStyler{
-		StylerTemplate: StylerTemplate{
+		stylerTemplate: stylerTemplate{
 			fpdf: fpdf,
 			name: "fillColorStyler",
 		},

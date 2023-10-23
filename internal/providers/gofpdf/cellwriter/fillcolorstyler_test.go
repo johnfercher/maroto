@@ -3,7 +3,6 @@ package cellwriter_test
 import (
 	"fmt"
 	"github.com/johnfercher/maroto/v2/mocks"
-	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"testing"
@@ -67,23 +66,23 @@ func TestFillColorStyle_Apply(t *testing.T) {
 		// Assert
 		inner.AssertNumberOfCalls(t, "Apply", 1)
 	})
-	t.Run("When has prop and line style is dashed, should apply current and call next", func(t *testing.T) {
+	t.Run("When has prop and color is filled, should apply current and call next", func(t *testing.T) {
 		// Arrange
 		width := 100.0
 		height := 100.0
 		cfg := &entity.Config{}
 		prop := &props.Cell{
-			BorderThickness: 1.0,
+			BackgroundColor: &props.Color{Red: 100, Green: 150, Blue: 170},
 		}
 
 		inner := &mocks.CellWriter{}
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
 		fpdf := &mocks.Fpdf{}
-		fpdf.EXPECT().SetFillColor(prop.BorderThickness)
-		fpdf.EXPECT().SetFillColor(linestyle.DefaultLineThickness)
+		fpdf.EXPECT().SetFillColor(prop.BackgroundColor.Red, prop.BackgroundColor.Green, prop.BackgroundColor.Blue)
+		fpdf.EXPECT().SetFillColor(255, 255, 255)
 
-		sut := cellwriter.NewBorderThicknessStyler(fpdf)
+		sut := cellwriter.NewFillColorStyler(fpdf)
 		sut.SetNext(inner)
 
 		// Act
@@ -91,6 +90,6 @@ func TestFillColorStyle_Apply(t *testing.T) {
 
 		// Assert
 		inner.AssertNumberOfCalls(t, "Apply", 1)
-		fpdf.AssertNumberOfCalls(t, "SetLineWidth", 2)
+		fpdf.AssertNumberOfCalls(t, "SetFillColor", 2)
 	})
 }
