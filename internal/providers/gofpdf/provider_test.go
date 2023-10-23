@@ -848,3 +848,25 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 		fpdf.AssertNumberOfCalls(t, "SetHomeXY", 1)
 	})
 }
+
+/*func TestProvider_AddImageFromFile(t *testing.T) {
+	t.Run("when cannot find image in cache and cannot load image, should apply error message", func(t *testing.T) {
+		// Arrange
+		file := "file.jpg"
+		cell := &entity.Cell{}
+		prop := fixture.RectProp()
+
+		cache := &mocks.Cache{}
+		cache.EXPECT().GetImage(file, extension.Jpg)
+
+		dep := &gofpdf.Dependencies{
+			Cache: cache,
+		}
+
+		sut := gofpdf.New(dep)
+
+		// Act
+		sut.AddImageFromFile(file, cell, &prop)
+	})
+}
+*/
