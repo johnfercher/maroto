@@ -60,13 +60,13 @@ func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rec
 	image, err := g.cache.GetImage(code, extension.Jpg)
 	if err != nil {
 		image, err = g.code.GenDataMatrix(code)
-		if err != nil {
-			g.text.Add("could not generate matrixcode", cell, merror.DefaultErrorText)
-			return
-		}
-		g.cache.AddImage(code, image)
+	}
+	if err != nil {
+		g.text.Add("could not generate matrixcode", cell, merror.DefaultErrorText)
+		return
 	}
 
+	g.cache.AddImage(code, image)
 	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
@@ -137,8 +137,8 @@ func (g *provider) AddImageFromFile(file string, cell *entity.Cell, prop *props.
 func (g *provider) AddImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type) {
 	img, err := FromBytes(bytes, extension)
 	if err != nil {
-		g.fpdf.ClearError()
 		g.text.Add("could not parse image bytes", cell, merror.DefaultErrorText)
+		return
 	}
 
 	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension, false)
@@ -151,8 +151,8 @@ func (g *provider) AddImageFromBytes(bytes []byte, cell *entity.Cell, prop *prop
 func (g *provider) AddBackgroundImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type) {
 	img, err := FromBytes(bytes, extension)
 	if err != nil {
-		g.fpdf.ClearError()
 		g.text.Add("could not parse image bytes", cell, merror.DefaultErrorText)
+		return
 	}
 
 	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension, true)
@@ -206,10 +206,6 @@ func (g *provider) GenerateBytes() ([]byte, error) {
 	err := g.fpdf.Output(&buffer)
 
 	return buffer.Bytes(), err
-}
-
-func (g *provider) SetCache(cache cache.Cache) {
-	g.cache = cache
 }
 
 func (g *provider) CreateCol(width, height float64, config *entity.Config, prop *props.Cell) {
