@@ -2,12 +2,13 @@ package gofpdf_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestNewBuilder(t *testing.T) {

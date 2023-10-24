@@ -3,19 +3,24 @@ package gofpdf_test
 import (
 	"errors"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/internal/merror"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 	"github.com/stretchr/testify/mock"
-	"testing"
-	"time"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/stretchr/testify/assert"
+)
+
+const (
+	codeContent = "code"
 )
 
 func TestNew(t *testing.T) {
@@ -89,10 +94,10 @@ func TestProvider_AddLine(t *testing.T) {
 	line.AssertNumberOfCalls(t, "Add", 1)
 }
 
+// nolint: dupl
 func TestProvider_AddMatrixCode(t *testing.T) {
 	t.Run("when cannot find image on cache and cannot generate data matrix, should apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
@@ -123,7 +128,6 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 	})
 	t.Run("when can find image on cache but cannot add image, should apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
@@ -172,7 +176,6 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 	})
 	t.Run("when can find image on cache and can add image, should not apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
@@ -216,10 +219,10 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 	})
 }
 
+// nolint: dupl
 func TestProvider_AddQrCode(t *testing.T) {
 	t.Run("when cannot find image on cache and cannot generate qr code, should apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
@@ -250,7 +253,6 @@ func TestProvider_AddQrCode(t *testing.T) {
 	})
 	t.Run("when can find image on cache but cannot add image, should apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
@@ -299,7 +301,6 @@ func TestProvider_AddQrCode(t *testing.T) {
 	})
 	t.Run("when can find image on cache and can add image, should not apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
@@ -343,10 +344,10 @@ func TestProvider_AddQrCode(t *testing.T) {
 	})
 }
 
+// nolint: dupl
 func TestProvider_AddBarCode(t *testing.T) {
 	t.Run("when cannot find image on cache and cannot generate bar code, should apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.BarcodeProp()
 
@@ -377,7 +378,6 @@ func TestProvider_AddBarCode(t *testing.T) {
 	})
 	t.Run("when can find image on cache but cannot add image, should apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.BarcodeProp()
 
@@ -426,7 +426,6 @@ func TestProvider_AddBarCode(t *testing.T) {
 	})
 	t.Run("when can find image on cache and can add image, should not apply error message", func(t *testing.T) {
 		// Arrange
-		codeContent := "code"
 		cell := &entity.Cell{}
 		prop := fixture.BarcodeProp()
 

@@ -2,10 +2,11 @@ package cellwriter_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-	"testing"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/cellwriter"
 

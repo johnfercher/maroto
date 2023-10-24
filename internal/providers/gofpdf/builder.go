@@ -27,8 +27,7 @@ type Builder interface {
 	Build(cfg *entity.Config, cache cache.Cache) *Dependencies
 }
 
-type builder struct {
-}
+type builder struct{}
 
 func NewBuilder() *builder {
 	return &builder{}
