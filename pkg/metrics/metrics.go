@@ -17,7 +17,7 @@ const (
 	Byte     SizeScale = "b"
 	KiloByte SizeScale = "Kb"
 	MegaByte SizeScale = "Mb"
-	GigaByte           = "Gb"
+	GigaByte SizeScale = "Gb"
 )
 
 type Time struct {
@@ -154,6 +154,14 @@ func (r *Report) Normalize() *Report {
 	return r
 }
 
+func (r *Report) String() string {
+	var content string
+	for _, metric := range r.TimeMetrics {
+		content += metric.String()
+	}
+	return content
+}
+
 func (r *Report) Save(file string) error {
 	var content string
 	for _, metric := range r.TimeMetrics {
@@ -173,12 +181,4 @@ func (r *Report) Save(file string) error {
 	}
 
 	return nil
-}
-
-func (r *Report) String() string {
-	var content string
-	for _, metric := range r.TimeMetrics {
-		content += metric.String()
-	}
-	return content
 }
