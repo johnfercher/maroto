@@ -296,5 +296,6 @@ func getConfig(configs ...*entity.Config) *entity.Config {
 }
 
 func getProvider(cache cache.Cache, cfg *entity.Config) core.Provider {
-	return gofpdf.New(cfg, cache)
+	deps := gofpdf.NewBuilder().Build(cfg, cache)
+	return gofpdf.New(deps)
 }

@@ -1,6 +1,7 @@
 package gofpdf
 
 import (
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
@@ -8,12 +9,12 @@ import (
 )
 
 type line struct {
-	pdf              Fpdf
+	pdf              gofpdfwrapper.Fpdf
 	defaultColor     *props.Color
 	defaultThickness float64
 }
 
-func NewLine(pdf Fpdf) *line {
+func NewLine(pdf gofpdfwrapper.Fpdf) *line {
 	return &line{
 		pdf:              pdf,
 		defaultColor:     &props.BlackColor,

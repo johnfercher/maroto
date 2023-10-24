@@ -60,6 +60,90 @@ func (_c *CellWriter_Apply_Call) RunAndReturn(run func(float64, float64, *entity
 	return _c
 }
 
+// GetName provides a mock function with given fields:
+func (_m *CellWriter) GetName() string {
+	ret := _m.Called()
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func() string); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(string)
+	}
+
+	return r0
+}
+
+// CellWriter_GetName_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetName'
+type CellWriter_GetName_Call struct {
+	*mock.Call
+}
+
+// GetName is a helper method to define mock.On call
+func (_e *CellWriter_Expecter) GetName() *CellWriter_GetName_Call {
+	return &CellWriter_GetName_Call{Call: _e.mock.On("GetName")}
+}
+
+func (_c *CellWriter_GetName_Call) Run(run func()) *CellWriter_GetName_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *CellWriter_GetName_Call) Return(_a0 string) *CellWriter_GetName_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *CellWriter_GetName_Call) RunAndReturn(run func() string) *CellWriter_GetName_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetNext provides a mock function with given fields:
+func (_m *CellWriter) GetNext() cellwriter.CellWriter {
+	ret := _m.Called()
+
+	var r0 cellwriter.CellWriter
+	if rf, ok := ret.Get(0).(func() cellwriter.CellWriter); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(cellwriter.CellWriter)
+		}
+	}
+
+	return r0
+}
+
+// CellWriter_GetNext_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetNext'
+type CellWriter_GetNext_Call struct {
+	*mock.Call
+}
+
+// GetNext is a helper method to define mock.On call
+func (_e *CellWriter_Expecter) GetNext() *CellWriter_GetNext_Call {
+	return &CellWriter_GetNext_Call{Call: _e.mock.On("GetNext")}
+}
+
+func (_c *CellWriter_GetNext_Call) Run(run func()) *CellWriter_GetNext_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *CellWriter_GetNext_Call) Return(_a0 cellwriter.CellWriter) *CellWriter_GetNext_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *CellWriter_GetNext_Call) RunAndReturn(run func() cellwriter.CellWriter) *CellWriter_GetNext_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // SetNext provides a mock function with given fields: next
 func (_m *CellWriter) SetNext(next cellwriter.CellWriter) {
 	_m.Called(next)

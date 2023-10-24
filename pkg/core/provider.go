@@ -1,7 +1,6 @@
 package core
 
 import (
-	"github.com/johnfercher/maroto/v2/internal/cache"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -25,7 +24,6 @@ type Provider interface {
 
 	// General
 	GenerateBytes() ([]byte, error)
-	SetCache(cache cache.Cache)
 
 	SetProtection(protection *entity.Protection)
 	SetCompression(compression bool)

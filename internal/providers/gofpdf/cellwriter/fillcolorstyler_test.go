@@ -10,23 +10,22 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/cellwriter"
-
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewBorderColorStyler(t *testing.T) {
+func TestNewFillColorStyler(t *testing.T) {
 	// Act
-	sut := cellwriter.NewBorderColorStyler(nil)
+	sut := cellwriter.NewFillColorStyler(nil)
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*cellwriter.borderColorStyler", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*cellwriter.fillColorStyler", fmt.Sprintf("%T", sut))
 }
 
-func TestBorderColorStyler_Apply(t *testing.T) {
+func TestFillColorStyle_Apply(t *testing.T) {
 	t.Run("When prop is nil and next is nil, should skip calls", func(t *testing.T) {
 		// Arrange
-		sut := cellwriter.NewBorderColorStyler(nil)
+		sut := cellwriter.NewFillColorStyler(nil)
 
 		// Act
 		sut.Apply(100, 100, &entity.Config{}, nil)
@@ -41,7 +40,7 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 		inner := &mocks.CellWriter{}
 		inner.EXPECT().Apply(width, height, cfg, nilCellProp)
 
-		sut := cellwriter.NewBorderColorStyler(nil)
+		sut := cellwriter.NewFillColorStyler(nil)
 		sut.SetNext(inner)
 
 		// Act
@@ -50,7 +49,7 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 		// Assert
 		inner.AssertNumberOfCalls(t, "Apply", 1)
 	})
-	t.Run("When has prop but border color is nil, should skip current and call next", func(t *testing.T) {
+	t.Run("When has prop but background color is nil, should skip current and call next", func(t *testing.T) {
 		// Arrange
 		width := 100.0
 		height := 100.0
@@ -60,7 +59,7 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 		inner := &mocks.CellWriter{}
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
-		sut := cellwriter.NewBorderColorStyler(nil)
+		sut := cellwriter.NewFillColorStyler(nil)
 		sut.SetNext(inner)
 
 		// Act
@@ -69,23 +68,23 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 		// Assert
 		inner.AssertNumberOfCalls(t, "Apply", 1)
 	})
-	t.Run("When has prop and border color is defined, should apply current and call next", func(t *testing.T) {
+	t.Run("When has prop and color is filled, should apply current and call next", func(t *testing.T) {
 		// Arrange
 		width := 100.0
 		height := 100.0
 		cfg := &entity.Config{}
 		prop := &props.Cell{
-			BorderColor: &props.Color{Red: 140, Green: 100, Blue: 80},
+			BackgroundColor: &props.Color{Red: 100, Green: 150, Blue: 170},
 		}
 
 		inner := &mocks.CellWriter{}
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
 		fpdf := &mocks.Fpdf{}
-		fpdf.EXPECT().SetDrawColor(prop.BorderColor.Red, prop.BorderColor.Green, prop.BorderColor.Blue)
-		fpdf.EXPECT().SetDrawColor(0, 0, 0)
+		fpdf.EXPECT().SetFillColor(prop.BackgroundColor.Red, prop.BackgroundColor.Green, prop.BackgroundColor.Blue)
+		fpdf.EXPECT().SetFillColor(255, 255, 255)
 
-		sut := cellwriter.NewBorderColorStyler(fpdf)
+		sut := cellwriter.NewFillColorStyler(fpdf)
 		sut.SetNext(inner)
 
 		// Act
@@ -93,6 +92,6 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 
 		// Assert
 		inner.AssertNumberOfCalls(t, "Apply", 1)
-		fpdf.AssertNumberOfCalls(t, "SetDrawColor", 2)
+		fpdf.AssertNumberOfCalls(t, "SetFillColor", 2)
 	})
 }

@@ -1,37 +1,39 @@
+// nolint: dupl
 package cellwriter
 
 import (
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/jung-kurt/gofpdf"
 )
 
 type borderColorStyler struct {
-	StylerTemplate
+	stylerTemplate
 	defaultColor *props.Color
 }
 
-func NewBorderColorStyler(fpdf *gofpdf.Fpdf) *borderColorStyler {
+func NewBorderColorStyler(fpdf gofpdfwrapper.Fpdf) *borderColorStyler {
 	return &borderColorStyler{
-		StylerTemplate: StylerTemplate{
+		stylerTemplate: stylerTemplate{
 			fpdf: fpdf,
+			name: "borderColorStyler",
 		},
 		defaultColor: &props.BlackColor,
 	}
 }
 
-func (f *borderColorStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
+func (b *borderColorStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
 	if prop == nil {
-		f.GoToNext(width, height, config, prop)
+		b.GoToNext(width, height, config, prop)
 		return
 	}
 
 	if prop.BorderColor == nil {
-		f.GoToNext(width, height, config, prop)
+		b.GoToNext(width, height, config, prop)
 		return
 	}
 
-	f.fpdf.SetDrawColor(prop.BorderColor.Red, prop.BorderColor.Green, prop.BorderColor.Blue)
-	f.GoToNext(width, height, config, prop)
-	f.fpdf.SetDrawColor(f.defaultColor.Red, f.defaultColor.Green, f.defaultColor.Blue)
+	b.fpdf.SetDrawColor(prop.BorderColor.Red, prop.BorderColor.Green, prop.BorderColor.Blue)
+	b.GoToNext(width, height, config, prop)
+	b.fpdf.SetDrawColor(b.defaultColor.Red, b.defaultColor.Green, b.defaultColor.Blue)
 }

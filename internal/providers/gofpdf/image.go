@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"errors"
 
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
+
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/jung-kurt/gofpdf"
 
@@ -15,12 +17,12 @@ import (
 )
 
 type image struct {
-	pdf  Fpdf
+	pdf  gofpdfwrapper.Fpdf
 	math core.Math
 }
 
 // NewImage create an Image.
-func NewImage(pdf Fpdf, math core.Math) *image {
+func NewImage(pdf gofpdfwrapper.Fpdf, math core.Math) *image {
 	return &image{
 		pdf,
 		math,

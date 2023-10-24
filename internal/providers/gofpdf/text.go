@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/jung-kurt/gofpdf"
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
@@ -19,13 +19,13 @@ import (
 )
 
 type text struct {
-	pdf  gofpdf.Pdf
+	pdf  gofpdfwrapper.Fpdf
 	math core.Math
 	font core.Font
 }
 
 // NewText create a Text.
-func NewText(pdf gofpdf.Pdf, math core.Math, font core.Font) *text {
+func NewText(pdf gofpdfwrapper.Fpdf, math core.Math, font core.Font) *text {
 	return &text{
 		pdf,
 		math,
