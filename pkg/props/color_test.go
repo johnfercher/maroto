@@ -1,8 +1,9 @@
 package props_test
 
 import (
-	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/internal/fixture"
 
 	"github.com/johnfercher/maroto/v2/pkg/props"
 

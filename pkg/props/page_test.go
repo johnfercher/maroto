@@ -1,6 +1,8 @@
 package props_test
 
 import (
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
@@ -8,7 +10,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestPlace_IsValid(t *testing.T) {
@@ -63,6 +64,7 @@ func TestPlace_IsValid(t *testing.T) {
 	})
 }
 
+// nolint:dupl
 func TestPage_GetNumberTextProp(t *testing.T) {
 	t.Run("when place is left bottom, should map correctly", func(t *testing.T) {
 		// Arrange

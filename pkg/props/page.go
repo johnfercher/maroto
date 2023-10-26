@@ -2,8 +2,9 @@ package props
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"strings"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
