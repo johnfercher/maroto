@@ -7,7 +7,7 @@
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2/pkg@v2.0.0-alpha.41
+go get github.com/johnfercher/maroto/v2@v2.0.0-alpha.41
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
