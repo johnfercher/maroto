@@ -25,6 +25,10 @@ type Signature struct {
 }
 
 func (s *Signature) ToMap() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+
 	m := make(map[string]interface{})
 
 	if s.FontFamily != "" {

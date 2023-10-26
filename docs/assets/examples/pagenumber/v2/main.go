@@ -33,7 +33,7 @@ func main() {
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithDebug(true).
-		WithPageNumber("Page {current} of {total}", props.South).
+		WithPageNumber("Page {current} of {total}", props.Bottom).
 		Build()
 
 	mrt := maroto.New(cfg)

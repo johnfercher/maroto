@@ -49,7 +49,7 @@ func main() {
 
 func run() *metrics.Time {
 	cfg := config.NewBuilder().
-		WithPageNumber("Page {current} of {total}", props.South).
+		WithPageNumber("Page {current} of {total}", props.Bottom).
 		Build()
 
 	mrt := maroto.New(cfg)

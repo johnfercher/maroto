@@ -2,6 +2,7 @@ package props
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -11,17 +12,17 @@ import (
 type Place string
 
 const (
-	NorthWest Place = "north_west"
-	North     Place = "north"
-	NorthEast Place = "north_east"
-	SouthWest Place = "south_west"
-	South     Place = "south"
-	SouthEast Place = "south_east"
+	LeftTop     Place = "left_top"
+	Top         Place = "top"
+	RightTop    Place = "right_top"
+	LeftBottom  Place = "left_bottom"
+	Bottom      Place = "bottom"
+	RightBottom Place = "right_bottom"
 )
 
 func (p Place) IsValid() bool {
-	return p == NorthWest || p == North || p == NorthEast ||
-		p == SouthWest || p == South || p == SouthEast
+	return p == LeftTop || p == Top || p == RightTop ||
+		p == LeftBottom || p == Bottom || p == RightBottom
 }
 
 type Page struct {
@@ -42,15 +43,17 @@ func (p *Page) GetNumberTextProp(height float64) *Text {
 		Align:  align.Center,
 	}
 
-	if p.Place == SouthWest || p.Place == NorthWest {
+	if p.Place == LeftBottom || p.Place == LeftTop {
 		text.Align = align.Left
-	} else if p.Place == SouthEast || p.Place == NorthEast {
+	} else if p.Place == RightBottom || p.Place == RightTop {
 		text.Align = align.Right
 	}
 
-	if p.Place == SouthEast || p.Place == South || p.Place == SouthWest {
+	if p.Place == RightBottom || p.Place == Bottom || p.Place == LeftBottom {
 		text.Top = height
 	}
+
+	text.BreakLineStrategy = breakline.EmptyLineStrategy
 
 	return text
 }

@@ -32,7 +32,7 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithPageNumber("{current} / {total}", props.South).
+		WithPageNumber("{current} / {total}", props.Bottom).
 		WithDebug(true).
 		Build()
 

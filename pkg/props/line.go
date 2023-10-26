@@ -22,6 +22,10 @@ type Line struct {
 }
 
 func (l *Line) ToMap() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+
 	m := make(map[string]interface{})
 
 	if l.Color != nil {

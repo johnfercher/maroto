@@ -44,7 +44,7 @@ func (f *Font) MakeValid(defaultFamily string) {
 	}
 
 	if f.Style == "" {
-		f.Style = fontstyle.Bold
+		f.Style = fontstyle.Normal
 	}
 
 	if f.Size == 0.0 {

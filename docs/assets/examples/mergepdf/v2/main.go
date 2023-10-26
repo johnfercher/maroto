@@ -45,7 +45,7 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithPageNumber("{current} / {total}", props.SouthEast).
+		WithPageNumber("{current} / {total}", props.RightBottom).
 		Build()
 
 	mrt := maroto.New(cfg)
