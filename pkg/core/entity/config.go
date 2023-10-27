@@ -11,7 +11,7 @@ type Config struct {
 	Margins           *Margins
 	DefaultFont       *props.Font
 	CustomFonts       []*CustomFont
-	Workers           int
+	WorkersQuantity   int
 	Debug             bool
 	MaxGridSize       int
 	PageNumberPattern string
@@ -41,8 +41,8 @@ func (c *Config) ToMap() map[string]interface{} {
 		m = c.DefaultFont.AppendMap(m)
 	}
 
-	if c.Workers != 0 {
-		m["config_workers"] = c.Workers
+	if c.WorkersQuantity != 0 {
+		m["config_workers"] = c.WorkersQuantity
 	}
 
 	if c.Debug {
