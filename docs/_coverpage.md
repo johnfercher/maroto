@@ -9,5 +9,5 @@ An open-source golang lib to create PDFs. Fast and Simple.
 * :syringe: Testable
 * :zap: Fast generation **(At least 2x faster than V1)**
 
-[Github](https://github.com/johnfercher/maroto/tree/v2)
+[Github](https://github.com/johnfercher/maroto)
 [See](README.md)
