@@ -12,4 +12,4 @@
 [filename](../../assets/text/pagenumberv2.txt  ':include :type=code')
 
 ## Test File
-[filename](https://raw.githubusercontent.com/johnfercher/maroto/v2/test/maroto/examples/pagenumber.json  ':include :type=code')
+[filename](https://raw.githubusercontent.com/johnfercher/maroto/master/test/maroto/examples/pagenumber.json  ':include :type=code')
