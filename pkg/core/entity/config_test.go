@@ -64,7 +64,7 @@ func fixtureConfig() Config {
 		Dimensions:        &dimensions,
 		Margins:           &margins,
 		DefaultFont:       &font,
-		Workers:           7,
+		WorkersQuantity:   7,
 		Debug:             true,
 		MaxGridSize:       15,
 		PageNumberPattern: "pattern",

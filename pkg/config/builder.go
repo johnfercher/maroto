@@ -292,7 +292,7 @@ func (b *builder) Build() *entity.Config {
 		ProviderType:      b.providerType,
 		Dimensions:        b.getDimensions(),
 		Margins:           b.margins,
-		Workers:           b.workerPoolSize,
+		WorkersQuantity:   b.workerPoolSize,
 		Debug:             b.debug,
 		MaxGridSize:       b.maxGridSize,
 		DefaultFont:       b.defaultFont,

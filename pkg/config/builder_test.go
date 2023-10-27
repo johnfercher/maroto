@@ -38,7 +38,7 @@ func TestBuilder_Build(t *testing.T) {
 	assert.Equal(t, 10.0, cfg.Margins.Top)
 	assert.Equal(t, 10.0, cfg.Margins.Left)
 	assert.Equal(t, 10.0, cfg.Margins.Right)
-	assert.Equal(t, 0, cfg.Workers)
+	assert.Equal(t, 0, cfg.WorkersQuantity)
 	assert.Equal(t, false, cfg.Debug)
 	assert.Equal(t, 12, cfg.MaxGridSize)
 	assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
@@ -184,7 +184,7 @@ func TestBuilder_WithWorkerPoolSize(t *testing.T) {
 		cfg := sut.WithWorkerPoolSize(-1).Build()
 
 		// Assert
-		assert.Equal(t, 0, cfg.Workers)
+		assert.Equal(t, 0, cfg.WorkersQuantity)
 	})
 
 	t.Run("when worker pool size is valid, should change the default value", func(t *testing.T) {
@@ -195,7 +195,7 @@ func TestBuilder_WithWorkerPoolSize(t *testing.T) {
 		cfg := sut.WithWorkerPoolSize(7).Build()
 
 		// Assert
-		assert.Equal(t, 7, cfg.Workers)
+		assert.Equal(t, 7, cfg.WorkersQuantity)
 	})
 }
 
