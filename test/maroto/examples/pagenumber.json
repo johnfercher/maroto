@@ -8,7 +8,7 @@
 		"config_margin_top": 10,
 		"config_max_grid_sum": 12,
 		"config_page_number_pattern": "Page {current} of {total}",
-		"config_page_number_place": "south",
+		"config_page_number_place": "bottom",
 		"config_provider_type": "gofpdf",
 		"maroto_dimension_height": 297,
 		"maroto_dimension_width": 210,

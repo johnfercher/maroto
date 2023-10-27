@@ -18,6 +18,10 @@ type Barcode struct {
 }
 
 func (b *Barcode) ToMap() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+
 	m := make(map[string]interface{})
 
 	if b.Left != 0 {

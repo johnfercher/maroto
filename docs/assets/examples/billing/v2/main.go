@@ -38,7 +38,7 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithPageNumber("Page {current} of {total}", props.SouthEast).
+		WithPageNumber("Page {current} of {total}", props.RightBottom).
 		WithMargins(10, 15, 10).
 		Build()
 

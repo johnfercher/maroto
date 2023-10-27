@@ -35,7 +35,7 @@ func TestConfig_ToMap(t *testing.T) {
 	assert.Equal(t, true, m["config_debug"])
 	assert.Equal(t, 15, m["config_max_grid_sum"])
 	assert.Equal(t, "pattern", m["config_page_number_pattern"])
-	assert.Equal(t, props.South, m["config_page_number_place"])
+	assert.Equal(t, props.Bottom, m["config_page_number_place"])
 	assert.Equal(t, protection.Print, m["config_protection_type"])
 	assert.Equal(t, "654321", m["config_user_password"])
 	assert.Equal(t, "123456", m["config_owner_password"])
@@ -68,7 +68,7 @@ func fixtureConfig() Config {
 		Debug:             true,
 		MaxGridSize:       15,
 		PageNumberPattern: "pattern",
-		PageNumberPlace:   props.South,
+		PageNumberPlace:   props.Bottom,
 		Protection:        &protection,
 		Compression:       true,
 		Metadata:          &metadata,

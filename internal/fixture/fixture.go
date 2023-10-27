@@ -163,3 +163,16 @@ func SignatureProp() props.Signature {
 	prop.MakeValid(textProp.Family)
 	return prop
 }
+
+func PageProp() props.Page {
+	fontProp := FontProp()
+	prop := props.Page{
+		Pattern: "{current} / {total}",
+		Place:   props.LeftBottom,
+		Family:  fontProp.Family,
+		Style:   fontProp.Style,
+		Size:    fontProp.Size,
+		Color:   fontProp.Color,
+	}
+	return prop
+}

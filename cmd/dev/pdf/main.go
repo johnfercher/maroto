@@ -26,7 +26,7 @@ var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec 
 
 func main() {
 	cfg := config.NewBuilder().
-		WithPageNumber("Page {current} of {total}", props.South).
+		WithPageNumber("Page {current} of {total}", props.Bottom).
 		Build()
 
 	mrt := maroto.New(cfg)
