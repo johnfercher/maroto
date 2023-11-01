@@ -39,12 +39,9 @@ go get github.com/johnfercher/maroto/v2@v2.0.0-beta.1
 | `make lint`     | Check files                                       | `golangci-lint`                                               |
 | `make dod`      | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt` and `make lint` | 
 | `make install`  | Install all dependencies                          | `go`, `curl` and `git`                                        |
-| `make font`     | Extract font ut8 to use in development            | `tar`                                                         |
 | `make examples` | Run all examples                                  | `go`                                                          |
 | `make mocks`    | Generate mocks                                    | `go` and `mockery`                                            |
 | `make docs`     | Run docs serve local                              | `docsify`                                                     |
-
-
 
 ## Stargazers over time
 
