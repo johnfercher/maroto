@@ -2,7 +2,6 @@ package maroto
 
 import (
 	"errors"
-	"log"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
 
@@ -251,7 +250,7 @@ func (m *maroto) generateConcurrently() (core.Document, error) {
 
 	processed := m.pool.Process(pageGroups)
 	if processed.HasError {
-		log.Fatal("error on generating pages")
+		return nil, errors.New("an error has occurred while trying to generate PDFs concurrently")
 	}
 
 	pdfs := make([][]byte, len(processed.Results))
