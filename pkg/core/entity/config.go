@@ -20,6 +20,7 @@ type Config struct {
 	Compression       bool
 	Metadata          *Metadata
 	BackgroundImage   *Image
+	HeaderConfig      *HeaderConfig
 }
 
 func (c *Config) ToMap() map[string]interface{} {
