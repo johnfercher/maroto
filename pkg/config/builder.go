@@ -53,6 +53,7 @@ type builder struct {
 	pageNumberPlace   props.Place
 	protection        *entity.Protection
 	compression       bool
+	pageSize          *pagesize.Type
 	orientation       orientation.Type
 	metadata          *entity.Metadata
 	backgroundImage   *entity.Image
@@ -83,12 +84,7 @@ func (b *builder) WithPageSize(size pagesize.Type) Builder {
 		return b
 	}
 
-	width, height := pagesize.GetDimensions(size)
-	b.dimensions = &entity.Dimensions{
-		Width:  width,
-		Height: height,
-	}
-
+	b.pageSize = &size
 	return b
 }
 
@@ -311,7 +307,12 @@ func (b *builder) getDimensions() *entity.Dimensions {
 		return b.dimensions
 	}
 
-	width, height := pagesize.GetDimensions(pagesize.A4)
+	pageSize := pagesize.A4
+	if b.pageSize != nil {
+		pageSize = *b.pageSize
+	}
+
+	width, height := pagesize.GetDimensions(pageSize)
 	dimensions := &entity.Dimensions{
 		Width:  width,
 		Height: height,
