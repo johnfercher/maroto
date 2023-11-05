@@ -314,6 +314,7 @@ func (b *builder) Build() *entity.Config {
 		Metadata:          b.metadata,
 		CustomFonts:       b.customFonts,
 		BackgroundImage:   b.backgroundImage,
+		HeaderConfig:      b.headerConfig,
 	}
 }
 

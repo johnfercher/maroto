@@ -2,7 +2,7 @@ package entity
 
 // HeaderConfig represents configs from a header.
 type HeaderConfig struct {
-	// StartPage define start page of the header
+	// StartPage define start page of the header, start from 0
 	StartPage int
 }
 
