@@ -3,6 +3,9 @@ package config_test
 import (
 	"fmt"
 	"testing"
+	"time"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -324,5 +327,176 @@ func TestBuilder_WithMargins(t *testing.T) {
 		assert.Equal(t, 20.0, cfg.Margins.Left)
 		assert.Equal(t, 20.0, cfg.Margins.Top)
 		assert.Equal(t, 20.0, cfg.Margins.Right)
+	})
+}
+
+func TestBuilder_WithOrientation(t *testing.T) {
+	t.Run("when using default page size and orientation is not set, should use vertical", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.Build()
+
+		// Assert
+		assert.Equal(t, 210.0, cfg.Dimensions.Width)
+		assert.Equal(t, 297.0, cfg.Dimensions.Height)
+		assert.True(t, cfg.Dimensions.Height > cfg.Dimensions.Width)
+	})
+	t.Run("when using default page size and orientation is set to horizontal, should use horizontal", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithOrientation(orientation.Horizontal).Build()
+
+		// Assert
+		assert.Equal(t, 297.0, cfg.Dimensions.Width)
+		assert.Equal(t, 210.0, cfg.Dimensions.Height)
+		assert.True(t, cfg.Dimensions.Width > cfg.Dimensions.Height)
+	})
+	t.Run("when using default page size and orientation is not set, should use vertical", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithPageSize(pagesize.A5).Build()
+
+		// Assert
+		assert.Equal(t, 148.4, cfg.Dimensions.Width)
+		assert.Equal(t, 210.0, cfg.Dimensions.Height)
+		assert.True(t, cfg.Dimensions.Height > cfg.Dimensions.Width)
+	})
+	t.Run("when using default page size and orientation is set to horizontal, should use horizontal", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithPageSize(pagesize.A5).WithOrientation(orientation.Horizontal).Build()
+
+		// Assert
+		assert.Equal(t, 210.0, cfg.Dimensions.Width)
+		assert.Equal(t, 148.4, cfg.Dimensions.Height)
+		assert.True(t, cfg.Dimensions.Width > cfg.Dimensions.Height)
+	})
+}
+
+func TestBuilder_WithAuthor(t *testing.T) {
+	t.Run("when author is empty, should ignore", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithAuthor("", true).Build()
+
+		// Assert
+		assert.Nil(t, cfg.Metadata.Author)
+	})
+	t.Run("when author valid, should apply", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithAuthor("author", true).Build()
+
+		// Assert
+		assert.Equal(t, "author", cfg.Metadata.Author.Text)
+		assert.Equal(t, true, cfg.Metadata.Author.UTF8)
+	})
+}
+
+func TestBuilder_WithCreator(t *testing.T) {
+	t.Run("when creator is empty, should ignore", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithCreator("", true).Build()
+
+		// Assert
+		assert.Nil(t, cfg.Metadata.Creator)
+	})
+	t.Run("when creator valid, should apply", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithCreator("creator", true).Build()
+
+		// Assert
+		assert.Equal(t, "creator", cfg.Metadata.Creator.Text)
+		assert.Equal(t, true, cfg.Metadata.Creator.UTF8)
+	})
+}
+
+func TestBuilder_WithSubject(t *testing.T) {
+	t.Run("when subject is empty, should ignore", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithSubject("", true).Build()
+
+		// Assert
+		assert.Nil(t, cfg.Metadata.Subject)
+	})
+	t.Run("when subject valid, should apply", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithSubject("subject", true).Build()
+
+		// Assert
+		assert.Equal(t, "subject", cfg.Metadata.Subject.Text)
+		assert.Equal(t, true, cfg.Metadata.Subject.UTF8)
+	})
+}
+
+func TestBuilder_WithTitle(t *testing.T) {
+	t.Run("when title is empty, should ignore", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithTitle("", true).Build()
+
+		// Assert
+		assert.Nil(t, cfg.Metadata.Title)
+	})
+	t.Run("when title valid, should apply", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithTitle("title", true).Build()
+
+		// Assert
+		assert.Equal(t, "title", cfg.Metadata.Title.Text)
+		assert.Equal(t, true, cfg.Metadata.Title.UTF8)
+	})
+}
+
+func TestBuilder_WithCreationDate(t *testing.T) {
+	t.Run("when time is zero, should ignore", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithCreationDate(time.Time{}).Build()
+
+		// Assert
+		assert.Nil(t, cfg.Metadata.CreationDate)
+	})
+	t.Run("when time valid, should apply", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+		timeNow := time.Now()
+
+		// Act
+		cfg := sut.WithCreationDate(timeNow).Build()
+
+		// Assert
+		assert.Equal(t, &timeNow, cfg.Metadata.CreationDate)
 	})
 }
