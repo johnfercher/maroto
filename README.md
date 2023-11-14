@@ -10,6 +10,9 @@
 
 A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/jung-kurt/gofpdf). Fast and simple.
 
+![sirmaroto](docs/assets/images/logosmall.png)
+[Art by **@marinabankr**](https://www.instagram.com/marinabankr/)
+
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person.
 
 You can write your PDFs like you are creating a site using Bootstrap. A Row may have many Cols, and a Col may have many components. 

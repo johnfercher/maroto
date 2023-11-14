@@ -1,1 +1,1 @@
-[![Branch](https://img.shields.io/badge/V2-Branch-pink)](https://github.com/johnfercher/maroto/tree/v2)  [![Roadmap](https://img.shields.io/badge/V2-Roadmap-purple)](https://github.com/users/johnfercher/projects/1) [![Discussion](https://img.shields.io/badge/V2-Discussion-blue)](https://github.com/johnfercher/maroto/issues/257) [![Release Notes](https://img.shields.io/badge/Release-Notes-cyan)](https://github.com/johnfercher/maroto/releases)
+[Art by **@marinabankr**](https://www.instagram.com/marinabankr/)

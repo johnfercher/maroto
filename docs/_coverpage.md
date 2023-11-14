@@ -1,13 +1,15 @@
 ![logo](assets/images/logo.png)
 
-# Maroto <small>V2</small>
+# Maroto <small>v2.0.0-beta.3</small>
 
-An open-source golang lib to create PDFs. Fast and Simple.
+> An open-source golang lib to create PDFs. Fast and Simple.
 
-* :bulb: Grid system
-* :bar_chart: Embedded metrics
-* :syringe: Testable
-* :zap: Fast generation **(At least 2x faster than V1)**
+* Grid system
+* Embedded metrics
+* Testable
+* **At least 2x faster than V1**
 
 [Github](https://github.com/johnfercher/maroto)
 [See](README.md)
+
+![](assets/images/background.svg)
