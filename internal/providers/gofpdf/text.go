@@ -63,6 +63,11 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 		s.font.SetColor(textProp.Color)
 	}
 
+	// override style if hyperlink is set
+	if textProp.Hyperlink != nil {
+		s.font.SetColor(&props.BlueColor)
+	}
+
 	y += fontHeight
 
 	// Apply Unicode before calc spaces
@@ -171,8 +176,15 @@ func (s *text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
 	left, top, _, _ := s.pdf.GetMargins()
 
+	fontHeight := s.font.GetHeight(textProp.Family, textProp.Style, textProp.Size)
+
 	if textProp.Align == align.Left {
 		s.pdf.Text(xColOffset+left, yColOffset+top, text)
+
+		if textProp.Hyperlink != nil {
+			s.pdf.LinkString(xColOffset+left, yColOffset+top-fontHeight, textWidth, fontHeight, *textProp.Hyperlink)
+		}
+
 		return
 	}
 
@@ -183,6 +195,10 @@ func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 	}
 
 	dx := (colWidth - textWidth) / modifier
+
+	if textProp.Hyperlink != nil {
+		s.pdf.LinkString(dx+xColOffset+left, yColOffset+top-fontHeight, textWidth, fontHeight, *textProp.Hyperlink)
+	}
 
 	s.pdf.Text(dx+xColOffset+left, yColOffset+top, text)
 }

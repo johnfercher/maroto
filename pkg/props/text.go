@@ -27,6 +27,8 @@ type Text struct {
 	VerticalPadding float64
 	// Color define the fontstyle color.
 	Color *Color
+	// Hyperlink define a link to be opened when the text is clicked.
+	Hyperlink *string
 }
 
 func (t *Text) ToMap() map[string]interface{} {
@@ -69,6 +71,10 @@ func (t *Text) ToMap() map[string]interface{} {
 
 	if t.Color != nil {
 		m["prop_color"] = t.Color.ToString()
+	}
+
+	if t.Hyperlink != nil {
+		m["prop_hyperlink"] = *t.Hyperlink
 	}
 
 	return m

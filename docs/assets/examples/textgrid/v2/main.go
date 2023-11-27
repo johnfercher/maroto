@@ -84,5 +84,9 @@ func GetMaroto() core.Maroto {
 
 	m.AddRows(text.NewRow(10, "Multiline text with indentation"))
 
+	google := "https://google.com"
+
+	m.AddRows(text.NewRow(10, "text with hyperlink", props.Text{Hyperlink: &google}))
+
 	return m
 }

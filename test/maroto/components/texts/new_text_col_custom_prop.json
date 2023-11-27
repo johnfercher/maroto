@@ -14,7 +14,8 @@
 				"prop_font_style": "B",
 				"prop_left": 3,
 				"prop_top": 12,
-				"prop_vertical_padding": 20
+				"prop_vertical_padding": 20,
+				"prop_hyperlink": "https://www.google.com"
 			}
 		}
 	]

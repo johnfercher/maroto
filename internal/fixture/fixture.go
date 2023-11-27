@@ -17,6 +17,9 @@ import (
 
 func TextProp() props.Text {
 	fontProp := FontProp()
+
+	google := "https://www.google.com"
+
 	prop := props.Text{
 		Top:               12,
 		Left:              3,
@@ -27,6 +30,7 @@ func TextProp() props.Text {
 		BreakLineStrategy: breakline.DashStrategy,
 		VerticalPadding:   20,
 		Color:             fontProp.Color,
+		Hyperlink:         &google,
 	}
 	prop.MakeValid(&fontProp)
 	return prop
