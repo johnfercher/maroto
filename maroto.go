@@ -97,6 +97,10 @@ func (m *maroto) RegisterHeader(rows ...core.Row) error {
 	m.headerHeight = height
 	m.header = rows
 
+	if m.config.HeaderConfig != nil && m.config.HeaderConfig.StartPage > 0 {
+		return nil
+	}
+
 	for _, headerRow := range rows {
 		m.addRow(headerRow)
 	}
@@ -178,6 +182,10 @@ func (m *maroto) addRow(r core.Row) {
 }
 
 func (m *maroto) addHeader() {
+	if m.config.HeaderConfig != nil && m.config.HeaderConfig.StartPage > len(m.pages) {
+		return
+	}
+
 	for _, headerRow := range m.header {
 		m.currentHeight += headerRow.GetHeight()
 		m.rows = append(m.rows, headerRow)

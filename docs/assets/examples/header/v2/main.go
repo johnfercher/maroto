@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -35,8 +36,12 @@ func main() {
 }
 
 func GetMaroto() core.Maroto {
+	// start header from page 1
+	headerConfig := entity.HeaderConfig{StartPage: 1}
+
 	cfg := config.NewBuilder().
 		WithDebug(true).
+		WithHeaderConfig(&headerConfig).
 		Build()
 
 	mrt := maroto.New(cfg)
@@ -51,7 +56,7 @@ func GetMaroto() core.Maroto {
 		log.Fatal(err)
 	}
 
-	for i := 0; i < 50; i++ {
+	for i := 0; i < 70; i++ {
 		m.AddRows(
 			text.NewRow(10, "Dummy text", props.Text{
 				Size: 8,

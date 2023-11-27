@@ -37,6 +37,7 @@ type Builder interface {
 	WithCreationDate(time time.Time) Builder
 	WithCustomFonts([]*entity.CustomFont) Builder
 	WithBackgroundImage([]byte, extension.Type) Builder
+	WithHeaderConfig(headerConfig *entity.HeaderConfig) Builder
 	Build() *entity.Config
 }
 
@@ -57,6 +58,7 @@ type builder struct {
 	orientation       orientation.Type
 	metadata          *entity.Metadata
 	backgroundImage   *entity.Image
+	headerConfig      *entity.HeaderConfig
 }
 
 func NewBuilder() Builder {
@@ -283,6 +285,15 @@ func (b *builder) WithBackgroundImage(bytes []byte, ext extension.Type) Builder 
 	return b
 }
 
+func (b *builder) WithHeaderConfig(headerConfig *entity.HeaderConfig) Builder {
+	if headerConfig == nil {
+		return b
+	}
+
+	b.headerConfig = headerConfig
+	return b
+}
+
 func (b *builder) Build() *entity.Config {
 	return &entity.Config{
 		ProviderType:      b.providerType,
@@ -299,6 +310,7 @@ func (b *builder) Build() *entity.Config {
 		Metadata:          b.metadata,
 		CustomFonts:       b.customFonts,
 		BackgroundImage:   b.backgroundImage,
+		HeaderConfig:      b.headerConfig,
 	}
 }
 
