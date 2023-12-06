@@ -170,6 +170,10 @@ func (s *text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 		currentlySize += width
 	}
 
+	if content != "" {
+		lines = append(lines, content)
+	}
+
 	return lines
 }
 
