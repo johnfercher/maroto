@@ -85,8 +85,12 @@ func TestText_SetConfig(t *testing.T) {
 	t.Run("should call correctly", func(t *testing.T) {
 		// Arrange
 		sut := text.New("textValue")
+		fontProp := fixture.FontProp()
+		cfg := &entity.Config{
+			DefaultFont: &fontProp,
+		}
 
 		// Act
-		sut.SetConfig(nil)
+		sut.SetConfig(cfg)
 	})
 }

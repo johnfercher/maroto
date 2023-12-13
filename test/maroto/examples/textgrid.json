@@ -332,7 +332,29 @@
 					]
 				},
 				{
-					"value": 26.997500000000002,
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "text with hyperlink",
+									"type": "text",
+									"details": {
+										"prop_hyperlink": "https://google.com"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 16.997500000000002,
 					"type": "row",
 					"nodes": [
 						{
