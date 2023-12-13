@@ -50,9 +50,9 @@ func (t *text) GetStructure() *node.Node[core.Structure] {
 
 func (t *text) SetConfig(config *entity.Config) {
 	t.config = config
+	t.prop.MakeValid(t.config.DefaultFont)
 }
 
 func (t *text) Render(provider core.Provider, cell *entity.Cell) {
-	t.prop.MakeValid(t.config.DefaultFont)
 	provider.AddText(t.value, cell, &t.prop)
 }
