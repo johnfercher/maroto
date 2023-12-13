@@ -1,6 +1,6 @@
 ![logo](assets/images/logo.png)
 
-# Maroto <small>v2.0.0-beta.5</small>
+# Maroto <small>v2.0.0-beta.6</small>
 
 > An open-source golang lib to create PDFs. Fast and Simple.
 
