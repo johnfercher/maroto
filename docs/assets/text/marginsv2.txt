@@ -1,3 +1,3 @@
-generate -> avg: 187.23ms, executions: [187.23ms]
-add_cols -> avg: 288.00ns, executions: [288.00ns]
-file_size -> 253.31Kb
+generate -> avg: 190.56ms, executions: [190.56ms]
+add_row -> avg: 333.00ns, executions: [333.00ns]
+file_size -> 253.43Kb
