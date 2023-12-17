@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"bytes"
+	"path/filepath"
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
@@ -111,7 +112,7 @@ func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcod
 }
 
 func (g *provider) AddImageFromFile(file string, cell *entity.Cell, prop *props.Rect) {
-	extensionStr := strings.Split(file, ".")[1]
+	extensionStr := strings.ToLower(strings.TrimPrefix(filepath.Ext(file), "."))
 	image, err := g.cache.GetImage(file, extension.Type(extensionStr))
 	if err != nil {
 		err = g.cache.LoadImage(file, extension.Type(extensionStr))
