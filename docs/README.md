@@ -8,12 +8,12 @@
 [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
 [![Stars Badge](https://img.shields.io/github/stars/johnfercher/maroto.svg?style=social&label=Stars)](https://github.com/johnfercher/maroto/stargazers)
 
-#### Maroto`v2.0.0-beta.6`is here! Try out:
+#### Maroto`v2.0.0-beta.7`is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2@v2.0.0-beta.6
+go get github.com/johnfercher/maroto/v2@v2.0.0-beta.7
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
