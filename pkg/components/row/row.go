@@ -16,6 +16,7 @@ type row struct {
 	config *entity.Config
 }
 
+// New is responsible to create a core.Row.
 func New(height float64) core.Row {
 	return &row{
 		height: height,

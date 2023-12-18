@@ -43,6 +43,9 @@ type maroto struct {
 	pool async.Processor[[]core.Page, []byte]
 }
 
+// New is responsible for create a new instance of core.Maroto.
+// It's optional to provide an *entity.Config with customizations
+// those customization are created by using the config.Builder.
 func New(cfgs ...*entity.Config) core.Maroto {
 	cache := cache.New()
 	cfg := getConfig(cfgs...)
@@ -68,6 +71,11 @@ func New(cfgs ...*entity.Config) core.Maroto {
 	return m
 }
 
+// AddPages is responsible for add pages directly in the document.
+// By adding a page directly, the current cursor will reset and the
+// new page will appear as the next. If the page provided have
+// more rows than the maximum useful area of a page, maroto will split
+// that page in more than one.
 func (m *maroto) AddPages(pages ...core.Page) {
 	for _, page := range pages {
 		if m.currentHeight != m.headerHeight {
@@ -78,16 +86,30 @@ func (m *maroto) AddPages(pages ...core.Page) {
 	}
 }
 
+// AddRows is responsible for add rows in the current document.
+// By adding a row, if the row will extrapolate the useful area of a page,
+// maroto will automatically add a new page. Maroto use the information of
+// PageSize, PageMargin, FooterSize and HeaderSize to calculate the useful
+// area of a page.
 func (m *maroto) AddRows(rows ...core.Row) {
 	m.addRows(rows...)
 }
 
+// AddRow is responsible for add one row in the current document.
+// By adding a row, if the row will extrapolate the useful area of a page,
+// maroto will automatically add a new page. Maroto use the information of
+// PageSize, PageMargin, FooterSize and HeaderSize to calculate the useful
+// area of a page.
 func (m *maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	r := row.New(rowHeight).Add(cols...)
 	m.addRow(r)
 	return r
 }
 
+// RegisterHeader is responsible to define a set of rows as a header
+// of the document. The header will appear in every new page of the document.
+// The header cannot occupy an area greater than the useful area of the page,
+// it this case the method will return an error.
 func (m *maroto) RegisterHeader(rows ...core.Row) error {
 	height := m.getRowsHeight(rows...)
 	if height+m.footerHeight > m.config.Dimensions.Height {
@@ -104,6 +126,10 @@ func (m *maroto) RegisterHeader(rows ...core.Row) error {
 	return nil
 }
 
+// RegisterFooter is responsible to define a set of rows as a footer
+// of the document. The footer will appear in every new page of the document.
+// The footer cannot occupy an area greater than the useful area of the page,
+// it this case the method will return an error.
 func (m *maroto) RegisterFooter(rows ...core.Row) error {
 	height := m.getRowsHeight(rows...)
 	if height > m.config.Dimensions.Height {
@@ -115,6 +141,8 @@ func (m *maroto) RegisterFooter(rows ...core.Row) error {
 	return nil
 }
 
+// Generate is responsible to compute the component tree created by
+// the usage of all other Maroto methods, and generate the PDF document.
 func (m *maroto) Generate() (core.Document, error) {
 	m.provider.SetProtection(m.config.Protection)
 	m.provider.SetCompression(m.config.Compression)
@@ -130,6 +158,8 @@ func (m *maroto) Generate() (core.Document, error) {
 	return m.generate()
 }
 
+// GetStructure is responsible for return the component tree, this is useful
+// on unit tests cases.
 func (m *maroto) GetStructure() *node.Node[core.Structure] {
 	m.fillPageToAddNew()
 

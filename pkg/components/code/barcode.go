@@ -16,6 +16,7 @@ type barcode struct {
 	config *entity.Config
 }
 
+// NewBar is responsible to create an instance of a Barcode.
 func NewBar(code string, ps ...props.Barcode) core.Component {
 	prop := props.Barcode{}
 	if len(ps) > 0 {
@@ -29,11 +30,13 @@ func NewBar(code string, ps ...props.Barcode) core.Component {
 	}
 }
 
+// NewBarCol is responsible to create an instance of a Barcode wrapped in a Col.
 func NewBarCol(size int, code string, ps ...props.Barcode) core.Col {
 	bar := NewBar(code, ps...)
 	return col.New(size).Add(bar)
 }
 
+// NewBarRow is responsible to create an instance of a Barcode wrapped in a Row.
 func NewBarRow(height float64, code string, ps ...props.Barcode) core.Row {
 	bar := NewBar(code, ps...)
 	c := col.New().Add(bar)

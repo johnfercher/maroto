@@ -16,6 +16,7 @@ type qrCode struct {
 	config *entity.Config
 }
 
+// NewQr is responsible to create an instance of a QrCode.
 func NewQr(code string, barcodeProps ...props.Rect) core.Component {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
@@ -29,11 +30,13 @@ func NewQr(code string, barcodeProps ...props.Rect) core.Component {
 	}
 }
 
+// NewQrCol is responsible to create an instance of a QrCode wrapped in a Col.
 func NewQrCol(size int, code string, ps ...props.Rect) core.Col {
 	qrCode := NewQr(code, ps...)
 	return col.New(size).Add(qrCode)
 }
 
+// NewQrRow is responsible to create an instance of a QrCode wrapped in a Row.
 func NewQrRow(height float64, code string, ps ...props.Rect) core.Row {
 	qrCode := NewQr(code, ps...)
 	c := col.New().Add(qrCode)

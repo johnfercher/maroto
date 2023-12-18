@@ -17,6 +17,7 @@ type col struct {
 	style      *props.Cell
 }
 
+// New is responsible to create an instance of core.Col.
 func New(size ...int) core.Col {
 	if len(size) == 0 {
 		return &col{isMax: true}

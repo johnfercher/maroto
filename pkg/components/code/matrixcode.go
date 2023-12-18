@@ -16,6 +16,7 @@ type matrixCode struct {
 	config *entity.Config
 }
 
+// NewMatrix is responsible to create an instance of a MatrixCode.
 func NewMatrix(code string, barcodeProps ...props.Rect) core.Component {
 	prop := props.Rect{}
 	if len(barcodeProps) > 0 {
@@ -29,11 +30,13 @@ func NewMatrix(code string, barcodeProps ...props.Rect) core.Component {
 	}
 }
 
+// NewMatrixCol is responsible to create an instance of a MatrixCode wrapped in a Col.
 func NewMatrixCol(size int, code string, ps ...props.Rect) core.Col {
 	matrixCode := NewMatrix(code, ps...)
 	return col.New(size).Add(matrixCode)
 }
 
+// NewMatrixRow is responsible to create an instance of a MatrixCode wrapped in a Row.
 func NewMatrixRow(height float64, code string, ps ...props.Rect) core.Row {
 	matrixCode := NewMatrix(code, ps...)
 	c := col.New().Add(matrixCode)

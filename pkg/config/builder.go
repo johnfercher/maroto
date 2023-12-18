@@ -18,6 +18,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
+// Builder is the abstraction responsible for global customizations on the document.
 type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
 	WithDimensions(width float64, height float64) Builder
@@ -59,6 +60,7 @@ type builder struct {
 	backgroundImage   *entity.Image
 }
 
+// NewBuilder is responsible to create an instance of Builder.
 func NewBuilder() Builder {
 	return &builder{
 		providerType: provider.Gofpdf,
