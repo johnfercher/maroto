@@ -16,6 +16,7 @@ type fileImage struct {
 	config *entity.Config
 }
 
+// NewFromFile is responsible to create an instance of an Image.
 func NewFromFile(path string, ps ...props.Rect) core.Component {
 	prop := props.Rect{}
 	if len(ps) > 0 {
@@ -29,11 +30,13 @@ func NewFromFile(path string, ps ...props.Rect) core.Component {
 	}
 }
 
+// NewFromFileCol is responsible to create an instance of an Image wrapped in a Col.
 func NewFromFileCol(size int, path string, ps ...props.Rect) core.Col {
 	image := NewFromFile(path, ps...)
 	return col.New(size).Add(image)
 }
 
+// NewFromFileRow is responsible to create an instance of an Image wrapped in a Row.
 func NewFromFileRow(height float64, path string, ps ...props.Rect) core.Row {
 	image := NewFromFile(path, ps...)
 	c := col.New().Add(image)

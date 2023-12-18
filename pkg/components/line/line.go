@@ -14,6 +14,7 @@ type line struct {
 	prop   props.Line
 }
 
+// New is responsible to create an instance of a Line.
 func New(ps ...props.Line) core.Component {
 	lineProp := props.Line{}
 	if len(ps) > 0 {
@@ -26,11 +27,13 @@ func New(ps ...props.Line) core.Component {
 	}
 }
 
+// NewCol is responsible to create an instance of a Line wrapped in a Col.
 func NewCol(size int, ps ...props.Line) core.Col {
 	r := New(ps...)
 	return col.New(size).Add(r)
 }
 
+// NewRow is responsible to create an instance of a Line wrapped in a Row.
 func NewRow(height float64, ps ...props.Line) core.Row {
 	r := New(ps...)
 	c := col.New().Add(r)

@@ -18,6 +18,7 @@ type bytesImage struct {
 	config    *entity.Config
 }
 
+// NewFromBytes is responsible to create an instance of an Image.
 func NewFromBytes(bytes []byte, extension extension.Type, ps ...props.Rect) core.Component {
 	prop := props.Rect{}
 	if len(ps) > 0 {
@@ -32,11 +33,13 @@ func NewFromBytes(bytes []byte, extension extension.Type, ps ...props.Rect) core
 	}
 }
 
+// NewFromBytesCol is responsible to create an instance of an Image wrapped in a Col.
 func NewFromBytesCol(size int, bytes []byte, extension extension.Type, ps ...props.Rect) core.Col {
 	image := NewFromBytes(bytes, extension, ps...)
 	return col.New(size).Add(image)
 }
 
+// NewFromBytesRow is responsible to create an instance of an Image wrapped in a Row.
 func NewFromBytesRow(height float64, bytes []byte, extension extension.Type, ps ...props.Rect) core.Row {
 	image := NewFromBytes(bytes, extension, ps...)
 	c := col.New().Add(image)

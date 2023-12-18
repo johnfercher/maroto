@@ -18,6 +18,8 @@ type metricsDecorator struct {
 	inner         core.Maroto
 }
 
+// NewMetricsDecorator is responsible to create the metrics decorator
+// for the maroto instance.
 func NewMetricsDecorator(inner core.Maroto) core.Maroto {
 	return &metricsDecorator{
 		inner: inner,

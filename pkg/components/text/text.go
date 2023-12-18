@@ -15,6 +15,7 @@ type text struct {
 	config *entity.Config
 }
 
+// New is responsible to create an instance of a Text.
 func New(value string, ps ...props.Text) core.Component {
 	textProp := props.Text{}
 	if len(ps) > 0 {
@@ -27,11 +28,13 @@ func New(value string, ps ...props.Text) core.Component {
 	}
 }
 
+// NewCol is responsible to create an instance of a Text wrapped in a Col.
 func NewCol(size int, value string, ps ...props.Text) core.Col {
 	text := New(value, ps...)
 	return col.New(size).Add(text)
 }
 
+// NewRow is responsible to create an instance of a Text wrapped in a Row.
 func NewRow(height float64, value string, ps ...props.Text) core.Row {
 	r := New(value, ps...)
 	c := col.New().Add(r)

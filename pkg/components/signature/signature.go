@@ -17,6 +17,7 @@ type signature struct {
 	config *entity.Config
 }
 
+// New is responsible to create an instance of a Signature.
 func New(value string, ps ...props.Signature) core.Component {
 	prop := props.Signature{}
 	if len(ps) > 0 {
@@ -30,11 +31,13 @@ func New(value string, ps ...props.Signature) core.Component {
 	}
 }
 
+// NewCol is responsible to create an instance of a Signature wrapped in a Col.
 func NewCol(size int, value string, ps ...props.Signature) core.Col {
 	signature := New(value, ps...)
 	return col.New(size).Add(signature)
 }
 
+// NewRow is responsible to create an instance of a Signature wrapped in a Row.
 func NewRow(height float64, value string, ps ...props.Signature) core.Row {
 	signature := New(value, ps...)
 	c := col.New().Add(signature)

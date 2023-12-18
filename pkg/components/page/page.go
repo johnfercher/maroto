@@ -15,6 +15,7 @@ type page struct {
 	prop   props.Page
 }
 
+// New is responsible to create a core.Page.
 func New(ps ...props.Page) core.Page {
 	prop := props.Page{}
 	if len(ps) > 0 {
