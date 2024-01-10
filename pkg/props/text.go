@@ -1,4 +1,4 @@
-// Package contains all props used to customize components.
+// Package props contains all props used to customize components.
 package props
 
 import (
@@ -15,9 +15,9 @@ type Text struct {
 	Left float64
 	// Right is the minimal amount of space between the right cell boundary and the text.
 	Right float64
-	// Family of the text, ex: constt.Arial, helvetica and etc.
+	// Family of the text, ex: consts.Arial, helvetica and etc.
 	Family string
-	// Style of the text, ex: constt.Normal, bold and etc.
+	// Style of the text, ex: consts.Normal, bold and etc.
 	Style fontstyle.Type
 	// Size of the text.
 	Size float64
@@ -26,12 +26,13 @@ type Text struct {
 	BreakLineStrategy breakline.Strategy
 	// VerticalPadding define an additional space between linet.
 	VerticalPadding float64
-	// Color define the fontstyle color.
+	// Color define the font style color.
 	Color *Color
 	// Hyperlink define a link to be opened when the text is clicked.
 	Hyperlink *string
 }
 
+// ToMap converts a Text to a map.
 func (t *Text) ToMap() map[string]interface{} {
 	m := make(map[string]interface{})
 	if t.Top != 0 {
@@ -123,6 +124,6 @@ func (t *Text) MakeValid(font *Font) {
 	}
 
 	if t.BreakLineStrategy == "" {
-		t.BreakLineStrategy = breakline.EmptyLineStrategy
+		t.BreakLineStrategy = breakline.EmptySpaceStrategy
 	}
 }

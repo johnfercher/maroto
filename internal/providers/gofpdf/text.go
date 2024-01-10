@@ -5,16 +5,11 @@ import (
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
-
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-
-	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
-
-	"github.com/johnfercher/maroto/v2/pkg/core"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
-
+	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -85,7 +80,7 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 
 	var lines []string
 
-	if textProp.BreakLineStrategy == breakline.EmptyLineStrategy {
+	if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
 		words := strings.Split(unicodeText, " ")
 		lines = s.getLinesBreakingLineFromSpace(words, width)
 	} else {

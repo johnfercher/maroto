@@ -1,4 +1,4 @@
-// Package contains all core entities.
+// Package entity contains all core entities.
 package entity
 
 // Cell represents a cell inside the PDF.

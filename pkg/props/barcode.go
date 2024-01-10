@@ -1,4 +1,3 @@
-// Package contains all props used to customize components.
 package props
 
 // Barcode represents properties from a barcode inside a cell.
@@ -18,6 +17,7 @@ type Barcode struct {
 	Center bool
 }
 
+// ToMap from Barcode will return a map representation from Barcode.
 func (b *Barcode) ToMap() map[string]interface{} {
 	if b == nil {
 		return nil
@@ -52,6 +52,7 @@ func (b *Barcode) ToMap() map[string]interface{} {
 	return m
 }
 
+// ToRectProp from Barcode will return a Rect representation from Barcode.
 func (b *Barcode) ToRectProp() *Rect {
 	return &Rect{
 		Left:    b.Left,

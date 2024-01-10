@@ -3,13 +3,14 @@ package props_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestPlace_IsValid(t *testing.T) {
@@ -82,7 +83,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, fontstyle.Bold, textProp.Style)
 		assert.Equal(t, 14.0, textProp.Size)
 		assert.Equal(t, align.Left, textProp.Align)
-		assert.Equal(t, breakline.EmptyLineStrategy, textProp.BreakLineStrategy)
+		assert.Equal(t, breakline.EmptySpaceStrategy, textProp.BreakLineStrategy)
 		assert.Equal(t, 0.0, textProp.VerticalPadding)
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
@@ -102,7 +103,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, fontstyle.Bold, textProp.Style)
 		assert.Equal(t, 14.0, textProp.Size)
 		assert.Equal(t, align.Left, textProp.Align)
-		assert.Equal(t, breakline.EmptyLineStrategy, textProp.BreakLineStrategy)
+		assert.Equal(t, breakline.EmptySpaceStrategy, textProp.BreakLineStrategy)
 		assert.Equal(t, 0.0, textProp.VerticalPadding)
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
@@ -122,7 +123,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, fontstyle.Bold, textProp.Style)
 		assert.Equal(t, 14.0, textProp.Size)
 		assert.Equal(t, align.Right, textProp.Align)
-		assert.Equal(t, breakline.EmptyLineStrategy, textProp.BreakLineStrategy)
+		assert.Equal(t, breakline.EmptySpaceStrategy, textProp.BreakLineStrategy)
 		assert.Equal(t, 0.0, textProp.VerticalPadding)
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
@@ -142,7 +143,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, fontstyle.Bold, textProp.Style)
 		assert.Equal(t, 14.0, textProp.Size)
 		assert.Equal(t, align.Right, textProp.Align)
-		assert.Equal(t, breakline.EmptyLineStrategy, textProp.BreakLineStrategy)
+		assert.Equal(t, breakline.EmptySpaceStrategy, textProp.BreakLineStrategy)
 		assert.Equal(t, 0.0, textProp.VerticalPadding)
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
@@ -162,7 +163,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, fontstyle.Bold, textProp.Style)
 		assert.Equal(t, 14.0, textProp.Size)
 		assert.Equal(t, align.Right, textProp.Align)
-		assert.Equal(t, breakline.EmptyLineStrategy, textProp.BreakLineStrategy)
+		assert.Equal(t, breakline.EmptySpaceStrategy, textProp.BreakLineStrategy)
 		assert.Equal(t, 0.0, textProp.VerticalPadding)
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
@@ -182,7 +183,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, fontstyle.Bold, textProp.Style)
 		assert.Equal(t, 14.0, textProp.Size)
 		assert.Equal(t, align.Center, textProp.Align)
-		assert.Equal(t, breakline.EmptyLineStrategy, textProp.BreakLineStrategy)
+		assert.Equal(t, breakline.EmptySpaceStrategy, textProp.BreakLineStrategy)
 		assert.Equal(t, 0.0, textProp.VerticalPadding)
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
@@ -202,7 +203,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, fontstyle.Bold, textProp.Style)
 		assert.Equal(t, 14.0, textProp.Size)
 		assert.Equal(t, align.Left, textProp.Align)
-		assert.Equal(t, breakline.EmptyLineStrategy, textProp.BreakLineStrategy)
+		assert.Equal(t, breakline.EmptySpaceStrategy, textProp.BreakLineStrategy)
 		assert.Equal(t, 0.0, textProp.VerticalPadding)
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})

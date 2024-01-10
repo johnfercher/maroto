@@ -1,12 +1,11 @@
-// Package implements creation of columns.
+// Package col implements creation of columns.
 package col
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-
 	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -27,11 +26,13 @@ func New(size ...int) core.Col {
 	return &col{size: size[0]}
 }
 
+// Add is responsible to add a component to a core.Col.
 func (c *col) Add(components ...core.Component) core.Col {
 	c.components = append(c.components, components...)
 	return c
 }
 
+// GetSize returns the size of a core.Col.
 func (c *col) GetSize() int {
 	if c.isMax {
 		return c.config.MaxGridSize
@@ -40,6 +41,7 @@ func (c *col) GetSize() int {
 	return c.size
 }
 
+// GetStructure returns the Structure of a core.Col.
 func (c *col) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "col",
@@ -64,6 +66,7 @@ func (c *col) GetStructure() *node.Node[core.Structure] {
 	return node
 }
 
+// Render renders a core.Col into a PDF context.
 func (c *col) Render(provider core.Provider, cell entity.Cell, createCell bool) {
 	if createCell {
 		provider.CreateCol(cell.Width, cell.Height, c.config, c.style)
@@ -74,6 +77,7 @@ func (c *col) Render(provider core.Provider, cell entity.Cell, createCell bool) 
 	}
 }
 
+// SetConfig set the config for the component.
 func (c *col) SetConfig(config *entity.Config) {
 	c.config = config
 	for _, component := range c.components {
@@ -81,6 +85,7 @@ func (c *col) SetConfig(config *entity.Config) {
 	}
 }
 
+// WithStyle sets the style for the column.
 func (c *col) WithStyle(style *props.Cell) core.Col {
 	c.style = style
 	return c

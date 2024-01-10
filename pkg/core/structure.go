@@ -1,6 +1,6 @@
-// Package contains all core interfaces and basic implementations.
 package core
 
+// Structure is the representation of the component tree structure.
 type Structure struct {
 	Type    string
 	Value   interface{}

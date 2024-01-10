@@ -1,8 +1,9 @@
-// Package implements creation of pages.
+// Package page implements creation of pages.
 package page
 
 import (
 	"github.com/johnfercher/go-tree/node"
+
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -28,6 +29,7 @@ func New(ps ...props.Page) core.Page {
 	}
 }
 
+// Render renders a Page into a PDF context.
 func (p *page) Render(provider core.Provider, cell entity.Cell) {
 	innerCell := cell.Copy()
 
@@ -48,6 +50,7 @@ func (p *page) Render(provider core.Provider, cell entity.Cell) {
 	}
 }
 
+// SetConfig sets the page configuration.
 func (p *page) SetConfig(config *entity.Config) {
 	p.config = config
 	for _, row := range p.rows {
@@ -55,35 +58,39 @@ func (p *page) SetConfig(config *entity.Config) {
 	}
 }
 
+// SetNumber sets the page number and total.
 func (p *page) SetNumber(number int, total int) {
 	p.number = number
 	p.total = total
 }
 
+// GetNumber returns the page number.
 func (p *page) GetNumber() int {
 	return p.number
 }
 
+// Add adds one or more rows to the page.
 func (p *page) Add(rows ...core.Row) core.Page {
 	p.rows = append(p.rows, rows...)
 	return p
 }
 
+// GetRows returns the rows of the page.
 func (p *page) GetRows() []core.Row {
 	return p.rows
 }
 
+// GetStructure returns the Structure of a Page.
 func (p *page) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type: "page",
 	}
 
-	node := node.New(str)
-
+	n := node.New(str)
 	for _, r := range p.rows {
 		inner := r.GetStructure()
-		node.AddNext(inner)
+		n.AddNext(inner)
 	}
 
-	return node
+	return n
 }

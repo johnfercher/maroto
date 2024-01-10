@@ -1,4 +1,3 @@
-// Package contains all core entities.
 package entity
 
 import (
@@ -6,6 +5,7 @@ import (
 	"time"
 )
 
+// Metadata is the representation of a PDF metadata.
 type Metadata struct {
 	Author       *Utf8Text
 	Creator      *Utf8Text
@@ -14,6 +14,7 @@ type Metadata struct {
 	CreationDate *time.Time
 }
 
+// AppendMap appends the metadata to a map.
 func (m *Metadata) AppendMap(mp map[string]interface{}) map[string]interface{} {
 	if m.Author != nil {
 		mp["config_metadata_author"] = m.Author.ToString()
@@ -38,11 +39,13 @@ func (m *Metadata) AppendMap(mp map[string]interface{}) map[string]interface{} {
 	return mp
 }
 
+// Utf8Text is the representation of a text with a flag to indicate if it's UTF8.
 type Utf8Text struct {
 	Text string
 	UTF8 bool
 }
 
+// ToString returns a string representation of the text.
 func (u *Utf8Text) ToString() string {
 	return fmt.Sprintf("Utf8Text(%s, %v)", u.Text, u.UTF8)
 }

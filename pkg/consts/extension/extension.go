@@ -1,4 +1,4 @@
-// Package contains all image extensions.
+// Package extension contains all image extensions.
 package extension
 
 // Type is a representation of a Image extension.
@@ -13,6 +13,7 @@ const (
 	Png Type = "png"
 )
 
+// IsValid checks if the extension is valid.
 func (t Type) IsValid() bool {
 	return t == Jpg || t == Jpeg || t == Png
 }

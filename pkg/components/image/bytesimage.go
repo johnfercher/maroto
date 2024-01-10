@@ -1,14 +1,14 @@
-// Package implements creation of images from file and bytes.
+// Package image implements creation of images from file and bytes.
 package image
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-
 	"github.com/johnfercher/go-tree/node"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -47,10 +47,12 @@ func NewFromBytesRow(height float64, bytes []byte, extension extension.Type, ps 
 	return row.New(height).Add(c)
 }
 
+// Render renders an Image into a PDF context.
 func (b *bytesImage) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddImageFromBytes(b.bytes, cell, &b.prop, b.extension)
 }
 
+// GetStructure returns the Structure of an Image.
 func (b *bytesImage) GetStructure() *node.Node[core.Structure] {
 	trimLength := 10
 	if len(b.bytes) < trimLength {
@@ -69,6 +71,7 @@ func (b *bytesImage) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
+// SetConfig sets the pdf config.
 func (b *bytesImage) SetConfig(config *entity.Config) {
 	b.config = config
 }

@@ -2,6 +2,7 @@ package fixture
 
 import (
 	"github.com/johnfercher/go-tree/node"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
@@ -15,6 +16,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
+// TextProp is responsible to give a valid props.Text.
 func TextProp() props.Text {
 	fontProp := FontProp()
 
@@ -36,6 +38,7 @@ func TextProp() props.Text {
 	return prop
 }
 
+// FontProp is responsible to give a valid props.Font.
 func FontProp() props.Font {
 	colorProp := ColorProp()
 	prop := props.Font{
@@ -48,6 +51,7 @@ func FontProp() props.Font {
 	return prop
 }
 
+// BarcodeProp is responsible to give a valid props.Barcode.
 func BarcodeProp() props.Barcode {
 	prop := props.Barcode{
 		Top:     10,
@@ -63,6 +67,7 @@ func BarcodeProp() props.Barcode {
 	return prop
 }
 
+// RectProp is responsible to give a valid props.Rect.
 func RectProp() props.Rect {
 	prop := props.Rect{
 		Top:     10,
@@ -74,6 +79,7 @@ func RectProp() props.Rect {
 	return prop
 }
 
+// CellEntity is responsible to give a valid entity.Cell.
 func CellEntity() entity.Cell {
 	return entity.Cell{
 		X:      10,
@@ -83,6 +89,7 @@ func CellEntity() entity.Cell {
 	}
 }
 
+// MarginsEntity is responsible to give a valid entity.Margins.
 func MarginsEntity() entity.Margins {
 	return entity.Margins{
 		Left:   10,
@@ -92,6 +99,7 @@ func MarginsEntity() entity.Margins {
 	}
 }
 
+// ImageEntity is responsible to give a valid entity.Image.
 func ImageEntity() entity.Image {
 	return entity.Image{
 		Bytes:     []byte{1, 2, 3},
@@ -99,6 +107,7 @@ func ImageEntity() entity.Image {
 	}
 }
 
+// CellProp is responsible to give a valid props.Cell.
 func CellProp() props.Cell {
 	prop := props.Cell{
 		BackgroundColor: &props.Color{
@@ -118,6 +127,7 @@ func CellProp() props.Cell {
 	return prop
 }
 
+// Node is responsible to give a valid node.Node.
 func Node(rootType string) *node.Node[core.Structure] {
 	marotoNode := node.New[core.Structure](core.Structure{
 		Type: rootType,
@@ -130,6 +140,7 @@ func Node(rootType string) *node.Node[core.Structure] {
 	return marotoNode
 }
 
+// ColorProp is responsible to give a valid props.Color.
 func ColorProp() props.Color {
 	return props.Color{
 		Red:   100,
@@ -138,6 +149,7 @@ func ColorProp() props.Color {
 	}
 }
 
+// LineProp is responsible to give a valid props.Line.
 func LineProp() props.Line {
 	colorProp := ColorProp()
 	prop := props.Line{
@@ -152,6 +164,7 @@ func LineProp() props.Line {
 	return prop
 }
 
+// SignatureProp is responsible to give a valid props.Signature.
 func SignatureProp() props.Signature {
 	textProp := TextProp()
 	lineProp := LineProp()
@@ -168,6 +181,7 @@ func SignatureProp() props.Signature {
 	return prop
 }
 
+// PageProp is responsible to give a valid props.Page.
 func PageProp() props.Page {
 	fontProp := FontProp()
 	prop := props.Page{

@@ -1,4 +1,3 @@
-// Package contains all props used to customize components.
 package props
 
 import (
@@ -18,6 +17,7 @@ type Font struct {
 	Color *Color
 }
 
+// AppendMap appends the font fields to a map.
 func (f *Font) AppendMap(m map[string]interface{}) map[string]interface{} {
 	if f.Family != "" {
 		m["prop_font_family"] = f.Family

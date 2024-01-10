@@ -3,8 +3,9 @@ package entity_test
 import (
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
 
 func TestCell_GetDimensions(t *testing.T) {

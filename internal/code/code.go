@@ -5,14 +5,13 @@ import (
 	"image"
 	"image/jpeg"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
-
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/datamatrix"
 	"github.com/boombuler/barcode/qr"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 

@@ -1,8 +1,9 @@
-// Package implements creation of signatures.
+// Package signature implements creation of signatures.
 package signature
 
 import (
 	"github.com/johnfercher/go-tree/node"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -45,6 +46,7 @@ func NewRow(height float64, value string, ps ...props.Signature) core.Row {
 	return row.New(height).Add(c)
 }
 
+// Render renders a Signature into a PDF context.
 func (s *signature) Render(provider core.Provider, cell *entity.Cell) {
 	fontProp := s.prop.ToFontProp()
 	safePadding := 1.5
@@ -58,6 +60,7 @@ func (s *signature) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddLine(cell, s.prop.ToLineProp(offsetPercent))
 }
 
+// GetStructure returns the Structure of a Signature.
 func (s *signature) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "signature",
@@ -68,6 +71,7 @@ func (s *signature) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
+// SetConfig sets the config.
 func (s *signature) SetConfig(config *entity.Config) {
 	s.config = config
 }

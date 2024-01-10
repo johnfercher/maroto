@@ -1,8 +1,9 @@
-// Package implements creation of lines.
+// Package line implements creation of lines.
 package line
 
 import (
 	"github.com/johnfercher/go-tree/node"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -41,6 +42,7 @@ func NewRow(height float64, ps ...props.Line) core.Row {
 	return row.New(height).Add(c)
 }
 
+// GetStructure returns the Structure of a Line.
 func (l *line) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "lineStyle",
@@ -50,10 +52,12 @@ func (l *line) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
+// SetConfig sets the config.
 func (l *line) SetConfig(config *entity.Config) {
 	l.config = config
 }
 
+// Render renders a Line into a PDF context.
 func (l *line) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddLine(cell, &l.prop)
 }

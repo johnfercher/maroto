@@ -1,13 +1,15 @@
-// Package contains all core interfaces and basic implementations.
+// Package core contains all core interfaces and basic implementations.
 package core
 
 import (
 	"github.com/johnfercher/go-tree/node"
+
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
+// Maroto is the interface that wraps the basic methods of maroto.
 type Maroto interface {
 	RegisterHeader(rows ...Row) error
 	RegisterFooter(rows ...Row) error
@@ -18,6 +20,7 @@ type Maroto interface {
 	Generate() (Document, error)
 }
 
+// Document is the interface that wraps the basic methods of a document.
 type Document interface {
 	GetBytes() []byte
 	GetBase64() string
@@ -26,16 +29,19 @@ type Document interface {
 	Merge([]byte) error
 }
 
+// Node is the interface that wraps the basic methods of a node.
 type Node interface {
 	SetConfig(config *entity.Config)
 	GetStructure() *node.Node[Structure]
 }
 
+// Component is the interface that wraps the basic methods of a component.
 type Component interface {
 	Node
 	Render(provider Provider, cell *entity.Cell)
 }
 
+// Col is the interface that wraps the basic methods of a col.
 type Col interface {
 	Node
 	Add(components ...Component) Col
@@ -44,6 +50,7 @@ type Col interface {
 	Render(provider Provider, cell entity.Cell, createCell bool)
 }
 
+// Row is the interface that wraps the basic methods of a row.
 type Row interface {
 	Node
 	Add(cols ...Col) Row
@@ -52,6 +59,7 @@ type Row interface {
 	Render(provider Provider, cell entity.Cell)
 }
 
+// Page is the interface that wraps the basic methods of a page.
 type Page interface {
 	Node
 	Add(rows ...Row) Page

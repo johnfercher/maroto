@@ -1,4 +1,3 @@
-// Package implements unit test feature.
 package test
 
 import (
@@ -9,13 +8,11 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/johnfercher/go-tree/node"
+	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
 
-	"github.com/johnfercher/go-tree/node"
-
 	"github.com/johnfercher/maroto/v2/pkg/core"
-
-	"github.com/stretchr/testify/assert"
 )
 
 var (

@@ -3,8 +3,9 @@ package border_test
 import (
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 )
 
 func TestType_IsValid(t *testing.T) {

@@ -58,7 +58,6 @@ linters:
     - dogsled
     - dupl
     - errcheck
-    - godot
     - gochecknoinits
     - goconst
     - gocritic

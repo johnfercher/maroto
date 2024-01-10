@@ -1,4 +1,4 @@
-// Package implements creation of lists (old tablelist).
+// Package list implements creation of lists (old tablelist).
 package list
 
 import (

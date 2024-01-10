@@ -1,9 +1,10 @@
-// Package implements creation of barcode, matrixcode and qrcode.
-// nolint: dupl
+// Package code implements creation of barcode, matrixcode and qrcode.
+// nolint:dupl
 package code
 
 import (
 	"github.com/johnfercher/go-tree/node"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -44,10 +45,12 @@ func NewQrRow(height float64, code string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
+// Render renders a QrCode into a PDF context.
 func (q *qrCode) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddQrCode(q.code, cell, &q.prop)
 }
 
+// GetStructure returns the Structure of a QrCode.
 func (q *qrCode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "qrcode",
@@ -58,6 +61,7 @@ func (q *qrCode) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
+// SetConfig set the config for the component.
 func (q *qrCode) SetConfig(config *entity.Config) {
 	q.config = config
 }
