@@ -7,10 +7,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/metrics"
+	"github.com/stretchr/testify/assert"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/stretchr/testify/assert"
+	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
 
 func TestNewPDF(t *testing.T) {

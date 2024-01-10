@@ -3,8 +3,9 @@ package pagesize_test
 import (
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 )
 
 func TestGetDimensions(t *testing.T) {

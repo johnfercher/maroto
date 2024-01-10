@@ -3,11 +3,10 @@ package props_test
 import (
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/internal/fixture"
-
-	"github.com/johnfercher/maroto/v2/pkg/props"
-
 	"github.com/stretchr/testify/assert"
+
+	"github.com/johnfercher/maroto/v2/internal/fixture"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 func TestWhiteColor(t *testing.T) {

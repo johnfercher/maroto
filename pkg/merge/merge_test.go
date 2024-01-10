@@ -3,10 +3,11 @@ package merge_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/merge"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestBytes(t *testing.T) {

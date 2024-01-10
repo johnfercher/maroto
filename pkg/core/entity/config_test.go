@@ -3,13 +3,14 @@ package entity
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestConfig_ToMap(t *testing.T) {

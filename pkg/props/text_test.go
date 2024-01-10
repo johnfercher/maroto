@@ -3,11 +3,12 @@ package props_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestText_MakeValid(t *testing.T) {

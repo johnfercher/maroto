@@ -5,17 +5,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
-
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
-	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
-
-	"github.com/johnfercher/maroto/v2/pkg/props"
+	"github.com/stretchr/testify/assert"
 
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/stretchr/testify/assert"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
+	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
+	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 func TestNewBuilder(t *testing.T) {
