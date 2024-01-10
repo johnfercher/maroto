@@ -22,6 +22,13 @@ func TestType_IsValid(t *testing.T) {
 		// Act & Assert
 		assert.True(t, extensionType.IsValid())
 	})
+	t.Run("when type is jpeg, should be valid", func(t *testing.T) {
+		// Act
+		extensionType := extension.Jpeg
+
+		// Act & Assert
+		assert.True(t, extensionType.IsValid())
+	})
 	t.Run("when type is png, should be valid", func(t *testing.T) {
 		// Act
 		extensionType := extension.Png
