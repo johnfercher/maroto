@@ -1,3 +1,4 @@
+// Package contains metrics models, constants and formatting.
 package metrics
 
 import (

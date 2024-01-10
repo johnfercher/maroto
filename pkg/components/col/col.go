@@ -1,3 +1,4 @@
+// Package implements creation of columns.
 package col
 
 import (

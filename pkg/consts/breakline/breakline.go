@@ -1,3 +1,4 @@
+// Package contains all breakline strategies.
 package breakline
 
 type Strategy string

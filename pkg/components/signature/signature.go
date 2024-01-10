@@ -1,3 +1,4 @@
+// Package implements creation of signatures.
 package signature
 
 import (

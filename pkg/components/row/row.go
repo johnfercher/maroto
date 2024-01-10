@@ -1,3 +1,4 @@
+// Package implements creation of rows.
 package row
 
 import (

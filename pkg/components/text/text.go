@@ -1,3 +1,4 @@
+// Package implements creation of texts.
 package text
 
 import (

@@ -1,3 +1,4 @@
+// Package contains all line styles.
 package linestyle
 
 const (

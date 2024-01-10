@@ -1,3 +1,4 @@
+// Package implements creation of lists (old tablelist).
 package list
 
 import (

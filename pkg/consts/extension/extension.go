@@ -1,3 +1,4 @@
+// Package contains all image extensions.
 package extension
 
 // Type is a representation of a Image extension.

@@ -1,5 +1,5 @@
 /*
-Package docs is the documentation of pkg. Maroto is a package which
+Package docs is the documentation of maroto lib. Maroto is a package which
 provide a simple way to generate PDF documents. The project is inspired
 in Bootstrap and uses gofpdf. Simple and Fast
 

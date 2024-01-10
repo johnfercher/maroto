@@ -1,3 +1,4 @@
+// Package contains all props used to customize components.
 package props
 
 import (

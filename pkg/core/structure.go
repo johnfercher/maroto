@@ -1,3 +1,4 @@
+// Package contains all core interfaces and basic implementations.
 package core
 
 type Structure struct {

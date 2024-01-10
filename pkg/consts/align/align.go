@@ -1,3 +1,4 @@
+// Package contains all align types.
 package align
 
 // Type is arRepresentation of a column align.

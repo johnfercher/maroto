@@ -1,3 +1,4 @@
+// Package implements creation of pages.
 package page
 
 import (

@@ -1,3 +1,4 @@
+// Package implements unit test feature.
 package test
 
 import (

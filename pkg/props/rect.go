@@ -1,3 +1,4 @@
+// Package contains all props used to customize components.
 package props
 
 // Rect represents properties from a rectangle (Image, QrCode or Barcode) inside a cell.

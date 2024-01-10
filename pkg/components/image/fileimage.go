@@ -1,3 +1,4 @@
+// Package implements creation of images from file and bytes.
 package image
 
 import (

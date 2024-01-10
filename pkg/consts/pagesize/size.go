@@ -1,3 +1,4 @@
+// Package contains all default page sizes.
 package pagesize
 
 type Type string

@@ -1,3 +1,4 @@
+// Package implements creation of barcode, matrixcode and qrcode.
 // nolint: dupl
 package code
 

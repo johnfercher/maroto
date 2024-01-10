@@ -1,3 +1,4 @@
+// Package contains all orientations.
 package orientation
 
 // Type is a representation of a page orientation.

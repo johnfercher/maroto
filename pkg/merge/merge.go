@@ -1,3 +1,4 @@
+// Package implements PDF merge.
 package merge
 
 import (

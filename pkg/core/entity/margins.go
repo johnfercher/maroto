@@ -1,3 +1,4 @@
+// Package contains all core entities.
 package entity
 
 type Margins struct {

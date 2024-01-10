@@ -1,3 +1,4 @@
+// Package contains all border types.
 package border
 
 type Type string

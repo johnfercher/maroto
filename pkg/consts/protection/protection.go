@@ -1,3 +1,4 @@
+// Package contains all protection types.
 package protection
 
 type Type byte

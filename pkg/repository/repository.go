@@ -1,3 +1,4 @@
+// Package implements font repository.
 package repository
 
 import (

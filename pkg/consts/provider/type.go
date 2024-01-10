@@ -1,3 +1,4 @@
+// Package contains all document generation providers.
 package provider
 
 type Type string

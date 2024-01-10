@@ -1,3 +1,4 @@
+// Package contains all default font styles.
 package fontstyle
 
 // Type is a representation of a style DefaultFont.
