@@ -6,7 +6,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-// Provider is the abstraction to create a pdf.
+// Provider is the abstraction of a document creator provider.
 type Provider interface {
 	// Grid
 	CreateRow(height float64)

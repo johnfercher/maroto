@@ -38,7 +38,7 @@ func TextProp() props.Text {
 	return prop
 }
 
-// FontProp is responsible to give a valid props.Text.
+// FontProp is responsible to give a valid props.Font.
 func FontProp() props.Font {
 	colorProp := ColorProp()
 	prop := props.Font{

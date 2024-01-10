@@ -5,7 +5,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 )
 
-// Cell is the representation of a cell in a table.
+// Cell is the representation of a cell in the grid system.
 type Cell struct {
 	BackgroundColor *Color
 	BorderColor     *Color

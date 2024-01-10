@@ -43,7 +43,7 @@ type Page struct {
 	Color   *Color
 }
 
-// GetNumberTextProp returns a Text with the page number.
+// GetNumberTextProp returns the Text properties of the page number.
 func (p *Page) GetNumberTextProp(height float64) *Text {
 	text := &Text{
 		Family: p.Family,
@@ -63,7 +63,7 @@ func (p *Page) GetNumberTextProp(height float64) *Text {
 		text.Top = height
 	}
 
-	text.BreakLineStrategy = breakline.EmptyLineStrategy
+	text.BreakLineStrategy = breakline.EmptySpaceStrategy
 
 	return text
 }

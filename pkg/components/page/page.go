@@ -69,7 +69,7 @@ func (p *page) GetNumber() int {
 	return p.number
 }
 
-// Add adds a row to the page.
+// Add adds one or more rows to the page.
 func (p *page) Add(rows ...core.Row) core.Page {
 	p.rows = append(p.rows, rows...)
 	return p

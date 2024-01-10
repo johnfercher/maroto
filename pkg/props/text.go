@@ -124,6 +124,6 @@ func (t *Text) MakeValid(font *Font) {
 	}
 
 	if t.BreakLineStrategy == "" {
-		t.BreakLineStrategy = breakline.EmptyLineStrategy
+		t.BreakLineStrategy = breakline.EmptySpaceStrategy
 	}
 }

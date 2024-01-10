@@ -7,11 +7,11 @@ var (
 	WhiteColor = Color{Red: 255, Green: 255, Blue: 255}
 	// BlackColor is a Color with all values in 0.
 	BlackColor = Color{Red: 0, Green: 0, Blue: 0}
-	// RedColor is a Color with all values in 255.
+	// RedColor is a Color with only Red in 255.
 	RedColor = Color{Red: 255, Green: 0, Blue: 0}
-	// GreenColor is a Color with all values in 255.
+	// GreenColor is a Color with only Green in 255.
 	GreenColor = Color{Red: 0, Green: 255, Blue: 0}
-	// BlueColor is a Color with all values in 255.
+	// BlueColor is a Color with only Blue in 255.
 	BlueColor = Color{Red: 0, Green: 0, Blue: 255}
 )
 

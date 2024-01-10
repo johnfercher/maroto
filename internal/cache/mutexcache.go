@@ -12,7 +12,7 @@ type mutexCache struct {
 	imageMutex sync.RWMutex
 }
 
-// NewMutexDecorator is responsible to create a new Cache.
+// NewMutexDecorator is responsible to create a mutex decorator to read/write cache.
 func NewMutexDecorator(cache Cache) Cache {
 	return &mutexCache{
 		inner:      cache,
@@ -20,7 +20,7 @@ func NewMutexDecorator(cache Cache) Cache {
 	}
 }
 
-// LoadImage loads an image from a file.
+// LoadImage adds a behavior to lock/unlock cache write.
 func (c *mutexCache) LoadImage(file string, extension extension.Type) error {
 	c.imageMutex.Lock()
 	defer c.imageMutex.Unlock()
@@ -28,7 +28,7 @@ func (c *mutexCache) LoadImage(file string, extension extension.Type) error {
 	return c.inner.LoadImage(file, extension)
 }
 
-// AddImage adds an image to the cache.
+// AddImage adds a behavior to lock/unlock cache write.
 func (c *mutexCache) AddImage(value string, image *entity.Image) {
 	c.imageMutex.Lock()
 	defer c.imageMutex.Unlock()
@@ -36,7 +36,7 @@ func (c *mutexCache) AddImage(value string, image *entity.Image) {
 	c.inner.AddImage(value, image)
 }
 
-// GetImage returns an image from the cache.
+// GetImage adds a behavior to lock/unlock cache read.
 func (c *mutexCache) GetImage(file string, extension extension.Type) (*entity.Image, error) {
 	return c.inner.GetImage(file, extension)
 }

@@ -1,6 +1,6 @@
 package core
 
-// Structure is the representation of a structure.
+// Structure is the representation of the component tree structure.
 type Structure struct {
 	Type    string
 	Value   interface{}

@@ -32,7 +32,7 @@ func (r *row) SetConfig(config *entity.Config) {
 	}
 }
 
-// Add is responsible to add a core.Col to a core.Row.
+// Add is responsible to add one or more core.Col to a core.Row.
 func (r *row) Add(cols ...core.Col) core.Row {
 	r.cols = append(r.cols, cols...)
 	return r

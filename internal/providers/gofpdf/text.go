@@ -80,7 +80,7 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 
 	var lines []string
 
-	if textProp.BreakLineStrategy == breakline.EmptyLineStrategy {
+	if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
 		words := strings.Split(unicodeText, " ")
 		lines = s.getLinesBreakingLineFromSpace(words, width)
 	} else {

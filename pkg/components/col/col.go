@@ -85,7 +85,7 @@ func (c *col) SetConfig(config *entity.Config) {
 	}
 }
 
-// WithStyle sets the style for the component.
+// WithStyle sets the style for the column.
 func (c *col) WithStyle(style *props.Cell) core.Col {
 	c.style = style
 	return c
