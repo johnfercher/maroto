@@ -1,7 +1,7 @@
 // Package align contains all align types.
 package align
 
-// Type is arRepresentation of a column align.
+// Type is a representation of a column align.
 type Type string
 
 const (
