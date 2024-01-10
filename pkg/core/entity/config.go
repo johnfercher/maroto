@@ -1,4 +1,3 @@
-// Package contains all core entities.
 package entity
 
 import (
@@ -6,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
+// Config is the configuration of a maroto instance.
 type Config struct {
 	ProviderType      provider.Type
 	Dimensions        *Dimensions
@@ -23,6 +23,7 @@ type Config struct {
 	BackgroundImage   *Image
 }
 
+// ToMap converts Config to a map[string]interface{} .
 func (c *Config) ToMap() map[string]interface{} {
 	m := make(map[string]interface{})
 

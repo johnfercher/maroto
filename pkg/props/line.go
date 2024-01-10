@@ -1,4 +1,3 @@
-// Package contains all props used to customize components.
 package props
 
 import (
@@ -22,6 +21,7 @@ type Line struct {
 	SizePercent float64
 }
 
+// ToMap returns a map with the Line fields.
 func (l *Line) ToMap() map[string]interface{} {
 	if l == nil {
 		return nil

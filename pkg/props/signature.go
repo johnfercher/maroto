@@ -1,4 +1,3 @@
-// Package contains all props used to customize components.
 package props
 
 import (
@@ -25,6 +24,7 @@ type Signature struct {
 	LineThickness float64
 }
 
+// ToMap returns a map with the Signature fields.
 func (s *Signature) ToMap() map[string]interface{} {
 	if s == nil {
 		return nil
@@ -63,6 +63,7 @@ func (s *Signature) ToMap() map[string]interface{} {
 	return m
 }
 
+// MakeValid from Signature define default values for a Signature.
 func (s *Signature) MakeValid(defaultFontFamily string) {
 	if s.FontFamily == "" {
 		s.FontFamily = defaultFontFamily
@@ -85,6 +86,7 @@ func (s *Signature) MakeValid(defaultFontFamily string) {
 	}
 }
 
+// ToLineProp from Signature return a Line based on Signature.
 func (s *Signature) ToLineProp(offsetPercent float64) *Line {
 	line := &Line{
 		Color:         s.LineColor,
@@ -96,6 +98,7 @@ func (s *Signature) ToLineProp(offsetPercent float64) *Line {
 	return line
 }
 
+// ToFontProp from Signature return a Font based on Signature.
 func (s *Signature) ToFontProp() *Font {
 	font := &Font{
 		Family: s.FontFamily,
@@ -107,6 +110,7 @@ func (s *Signature) ToFontProp() *Font {
 	return font
 }
 
+// ToTextProp from Signature return a Text based on Signature.
 func (s *Signature) ToTextProp(align align.Type, top float64, verticalPadding float64) *Text {
 	font := s.ToFontProp()
 	text := &Text{

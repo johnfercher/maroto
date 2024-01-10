@@ -1,6 +1,6 @@
-// Package contains all core entities.
 package entity
 
+// Margins is the representation of a margin.
 type Margins struct {
 	Left   float64
 	Right  float64
@@ -8,6 +8,7 @@ type Margins struct {
 	Bottom float64
 }
 
+// AppendMap appends the margins to a map.
 func (m *Margins) AppendMap(mp map[string]interface{}) map[string]interface{} {
 	if m.Left != 0 {
 		mp["config_margin_left"] = m.Left

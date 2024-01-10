@@ -1,4 +1,3 @@
-// Package contains all props used to customize components.
 package props
 
 // Rect represents properties from a rectangle (Image, QrCode or Barcode) inside a cell.
@@ -15,6 +14,7 @@ type Rect struct {
 	Center bool
 }
 
+// ToMap from Rect will return a map representation from Rect.
 func (r *Rect) ToMap() map[string]interface{} {
 	m := make(map[string]interface{})
 

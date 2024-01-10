@@ -1,4 +1,3 @@
-// Package contains all core interfaces and basic implementations.
 package core
 
 import (
@@ -7,6 +6,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
+// Provider is the abstraction to create a pdf.
 type Provider interface {
 	// Grid
 	CreateRow(height float64)

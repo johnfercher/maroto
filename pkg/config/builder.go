@@ -1,4 +1,4 @@
-// Package implements custom configuration builder.
+// Package config implements custom configuration builder.
 package config
 
 import (

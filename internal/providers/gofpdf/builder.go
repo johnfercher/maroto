@@ -1,6 +1,8 @@
 package gofpdf
 
 import (
+	"github.com/jung-kurt/gofpdf"
+
 	"github.com/johnfercher/maroto/v2/internal/cache"
 	"github.com/johnfercher/maroto/v2/internal/code"
 	"github.com/johnfercher/maroto/v2/internal/math"
@@ -8,9 +10,9 @@ import (
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-	"github.com/jung-kurt/gofpdf"
 )
 
+// Dependencies is the dependencies provider for gofpdf
 type Dependencies struct {
 	Fpdf       gofpdfwrapper.Fpdf
 	Font       core.Font
@@ -23,16 +25,19 @@ type Dependencies struct {
 	Cfg        *entity.Config
 }
 
+// Builder is the dependencies builder for gofpdf
 type Builder interface {
 	Build(cfg *entity.Config, cache cache.Cache) *Dependencies
 }
 
 type builder struct{}
 
+// NewBuilder create a new Builder
 func NewBuilder() *builder {
 	return &builder{}
 }
 
+// Build create a new Dependencies
 func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	fpdf := gofpdfwrapper.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",

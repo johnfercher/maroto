@@ -1,4 +1,4 @@
-// Package implements creation of rows.
+// Package row implements creation of rows.
 package row
 
 import (
@@ -24,6 +24,7 @@ func New(height float64) core.Row {
 	}
 }
 
+// SetConfig sets the row configuration.
 func (r *row) SetConfig(config *entity.Config) {
 	r.config = config
 	for _, cols := range r.cols {
@@ -31,15 +32,18 @@ func (r *row) SetConfig(config *entity.Config) {
 	}
 }
 
+// Add is responsible to add a core.Col to a core.Row.
 func (r *row) Add(cols ...core.Col) core.Row {
 	r.cols = append(r.cols, cols...)
 	return r
 }
 
+// GetHeight returns the height of a core.Row.
 func (r *row) GetHeight() float64 {
 	return r.height
 }
 
+// GetStructure returns the Structure of a core.Row.
 func (r *row) GetStructure() *node.Node[core.Structure] {
 	detailsMap := r.style.ToMap()
 
@@ -59,6 +63,7 @@ func (r *row) GetStructure() *node.Node[core.Structure] {
 	return node
 }
 
+// Render renders a Row into a PDF context.
 func (r *row) Render(provider core.Provider, cell entity.Cell) {
 	cell.Height = r.height
 	innerCell := cell.Copy()
@@ -83,6 +88,7 @@ func (r *row) Render(provider core.Provider, cell entity.Cell) {
 	provider.CreateRow(cell.Height)
 }
 
+// WithStyle sets the style of a Row.
 func (r *row) WithStyle(style *props.Cell) core.Row {
 	r.style = style
 	return r

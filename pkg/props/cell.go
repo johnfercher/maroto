@@ -1,4 +1,3 @@
-// Package contains all props used to customize components.
 package props
 
 import (
@@ -6,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 )
 
+// Cell is the representation of a cell in a table.
 type Cell struct {
 	BackgroundColor *Color
 	BorderColor     *Color
@@ -14,6 +14,7 @@ type Cell struct {
 	LineStyle       linestyle.Type
 }
 
+// ToMap adds the Cell fields to the map.
 func (c *Cell) ToMap() map[string]interface{} {
 	if c == nil {
 		return nil

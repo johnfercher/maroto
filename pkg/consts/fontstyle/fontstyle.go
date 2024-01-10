@@ -1,4 +1,4 @@
-// Package contains all default font styles.
+// Package fontstyle contains all default font styles.
 package fontstyle
 
 // Type is a representation of a style DefaultFont.
@@ -9,12 +9,13 @@ const (
 	Normal Type = ""
 	// Bold represents a bold style.
 	Bold Type = "B"
-	// Italic represents a italic style.
+	// Italic represents an italic style.
 	Italic Type = "I"
 	// BoldItalic represents a bold and italic style.
 	BoldItalic Type = "BI"
 )
 
+// IsValid checks if the style is valid.
 func (s Type) IsValid() bool {
 	return s == Normal || s == Italic || s == BoldItalic || s == Bold
 }

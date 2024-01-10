@@ -1,4 +1,4 @@
-// Package contains metrics models, constants and formatting.
+// Package metrics contains metrics models, constants and formatting.
 package metrics
 
 import (
@@ -7,25 +7,36 @@ import (
 )
 
 type (
+	// TimeScale is the time scale.
 	TimeScale string
+	// SizeScale is the size scale.
 	SizeScale string
 )
 
 const (
-	Nano     TimeScale = "ns"
-	Micro    TimeScale = "μs"
-	Milli    TimeScale = "ms"
-	Byte     SizeScale = "b"
+	// Nano is the time scale in nanoseconds.
+	Nano TimeScale = "ns"
+	// Micro is the time scale in microseconds.
+	Micro TimeScale = "μs"
+	// Milli is the time scale in milliseconds.
+	Milli TimeScale = "ms"
+	// Byte is the size scale in bytes.
+	Byte SizeScale = "b"
+	// KiloByte is the size scale in kilobytes.
 	KiloByte SizeScale = "Kb"
+	// MegaByte is the size scale in megabytes.
 	MegaByte SizeScale = "Mb"
+	// GigaByte is the size scale in gigabytes.
 	GigaByte SizeScale = "Gb"
 )
 
+// Time scales.
 type Time struct {
 	Value float64
 	Scale TimeScale
 }
 
+// Normalize normalizes the time scale.
 func (t *Time) Normalize() bool {
 	if t.Scale == Nano {
 		t.Scale = Micro
@@ -42,15 +53,18 @@ func (t *Time) Normalize() bool {
 	return false
 }
 
+// String returns the time formatted.
 func (t *Time) String() string {
 	return fmt.Sprintf("%.2f%s", t.Value, t.Scale)
 }
 
+// Size scales.
 type Size struct {
 	Value float64
 	Scale SizeScale
 }
 
+// Normalize normalizes the size scale.
 func (t *Size) Normalize() bool {
 	if t.Scale == Byte {
 		t.Scale = KiloByte
@@ -73,16 +87,19 @@ func (t *Size) Normalize() bool {
 	return false
 }
 
+// String returns the size formatted.
 func (t *Size) String() string {
 	return fmt.Sprintf("%.2f%s", t.Value, t.Scale)
 }
 
+// TimeMetric is a time metric.
 type TimeMetric struct {
 	Key   string
 	Times []*Time
 	Avg   *Time
 }
 
+// Normalize normalizes the time metric.
 func (m *TimeMetric) Normalize() {
 	greaterThan1000 := m.hasGreaterThan1000(m.Times)
 	if greaterThan1000 {
@@ -109,6 +126,7 @@ func (m *TimeMetric) hasGreaterThan1000(times []*Time) bool {
 	return false
 }
 
+// String returns the time metric formatted.
 func (m *TimeMetric) String() string {
 	var content string
 	content += m.Key + " -> avg: " + m.Avg.String() + ", executions: ["
@@ -122,11 +140,13 @@ func (m *TimeMetric) String() string {
 	return content
 }
 
+// SizeMetric is a size metric.
 type SizeMetric struct {
 	Key  string
 	Size Size
 }
 
+// Normalize normalizes the size metric.
 func (s *SizeMetric) Normalize() {
 	if s.Size.Value < 1000.0 {
 		return
@@ -136,15 +156,18 @@ func (s *SizeMetric) Normalize() {
 	s.Normalize()
 }
 
+// String returns the size metric formatted.
 func (s *SizeMetric) String() string {
 	return s.Key + " -> " + s.Size.String()
 }
 
+// Report is a metrics report.
 type Report struct {
 	TimeMetrics []TimeMetric
 	SizeMetric  SizeMetric
 }
 
+// Normalize normalizes the report.
 func (r *Report) Normalize() *Report {
 	for _, metric := range r.TimeMetrics {
 		metric.Normalize()
@@ -155,6 +178,7 @@ func (r *Report) Normalize() *Report {
 	return r
 }
 
+// String returns the report formatted.
 func (r *Report) String() string {
 	var content string
 	for _, metric := range r.TimeMetrics {
@@ -163,6 +187,7 @@ func (r *Report) String() string {
 	return content
 }
 
+// Save saves the report in a file.
 func (r *Report) Save(file string) error {
 	var content string
 	for _, metric := range r.TimeMetrics {
@@ -174,10 +199,11 @@ func (r *Report) Save(file string) error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer func() {
+		_ = f.Close()
+	}()
 
-	_, err = f.WriteString(content)
-	if err != nil {
+	if _, err = f.WriteString(content); err != nil {
 		return err
 	}
 

@@ -1,8 +1,9 @@
-// Package implements creation of texts.
+// Package text implements creation of texts.
 package text
 
 import (
 	"github.com/johnfercher/go-tree/node"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -42,6 +43,7 @@ func NewRow(height float64, value string, ps ...props.Text) core.Row {
 	return row.New(height).Add(c)
 }
 
+// GetStructure returns the Structure of a Text.
 func (t *text) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "text",
@@ -52,11 +54,13 @@ func (t *text) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
+// SetConfig sets the config.
 func (t *text) SetConfig(config *entity.Config) {
 	t.config = config
 	t.prop.MakeValid(t.config.DefaultFont)
 }
 
+// Render renders a Text into a PDF context.
 func (t *text) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddText(t.value, cell, &t.prop)
 }

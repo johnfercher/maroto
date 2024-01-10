@@ -1,4 +1,4 @@
-// Package contains all default font families.
+// Package fontfamily contains all default font families.
 package fontfamily
 
 const (

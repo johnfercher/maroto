@@ -5,16 +5,11 @@ import (
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
-
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-
-	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
-
-	"github.com/johnfercher/maroto/v2/pkg/core"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
-
+	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 

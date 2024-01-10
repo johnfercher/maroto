@@ -1,4 +1,3 @@
-// Package contains all core entities.
 package entity
 
 import (
@@ -9,12 +8,14 @@ import (
 
 const trimSize = 10
 
+// Image is the representation of an image that can be added to the pdf.
 type Image struct {
 	Bytes      []byte
 	Extension  extension.Type
 	Dimensions *Dimensions
 }
 
+// AppendMap adds the Image fields to the map.
 func (i *Image) AppendMap(m map[string]interface{}) map[string]interface{} {
 	lenBytes := len(i.Bytes)
 	if lenBytes != 0 {

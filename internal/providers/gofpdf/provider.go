@@ -5,17 +5,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
-
 	"github.com/johnfercher/maroto/v2/internal/cache"
 	"github.com/johnfercher/maroto/v2/internal/merror"
-
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/cellwriter"
-
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -31,6 +27,7 @@ type provider struct {
 	cfg        *entity.Config
 }
 
+// New is the constructor of provider for gofpdf
 func New(dep *Dependencies) core.Provider {
 	return &provider{
 		fpdf:       dep.Fpdf,
