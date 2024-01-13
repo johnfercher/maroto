@@ -26,6 +26,7 @@ func NewMetricsDecorator(inner core.Maroto) core.Maroto {
 	}
 }
 
+// Generate decorates the Generate method of maroto instance.
 func (m *metricsDecorator) Generate() (core.Document, error) {
 	var document core.Document
 	var err error
@@ -46,6 +47,7 @@ func (m *metricsDecorator) Generate() (core.Document, error) {
 	return core.NewPDF(bytes, report), nil
 }
 
+// AddPages decorates the AddPages method of maroto instance.
 func (m *metricsDecorator) AddPages(pages ...core.Page) {
 	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddPages(pages...)
@@ -54,6 +56,7 @@ func (m *metricsDecorator) AddPages(pages ...core.Page) {
 	m.addPageTime = append(m.addPageTime, timeSpent)
 }
 
+// AddRows decorates the AddRows method of maroto instance.
 func (m *metricsDecorator) AddRows(rows ...core.Row) {
 	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddRows(rows...)
@@ -62,6 +65,7 @@ func (m *metricsDecorator) AddRows(rows ...core.Row) {
 	m.addRowsTime = append(m.addRowsTime, timeSpent)
 }
 
+// AddRow decorates the AddRow method of maroto instance.
 func (m *metricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	var r core.Row
 	timeSpent := time.GetTimeSpent(func() {
@@ -72,6 +76,7 @@ func (m *metricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row 
 	return r
 }
 
+// RegisterHeader decorates the RegisterHeader method of maroto instance.
 func (m *metricsDecorator) RegisterHeader(rows ...core.Row) error {
 	var err error
 	timeSpent := time.GetTimeSpent(func() {
@@ -81,6 +86,7 @@ func (m *metricsDecorator) RegisterHeader(rows ...core.Row) error {
 	return err
 }
 
+// RegisterFooter decorates the RegisterFooter method of maroto instance.
 func (m *metricsDecorator) RegisterFooter(rows ...core.Row) error {
 	var err error
 	timeSpent := time.GetTimeSpent(func() {
@@ -90,6 +96,7 @@ func (m *metricsDecorator) RegisterFooter(rows ...core.Row) error {
 	return err
 }
 
+// GetStructure decorates the GetStructure method of maroto instance.
 func (m *metricsDecorator) GetStructure() *node.Node[core.Structure] {
 	var tree *node.Node[core.Structure]
 

@@ -28,11 +28,13 @@ type Node struct {
 	Nodes   []*Node                `json:"nodes,omitempty"`
 }
 
+// MarotoTest is the unit test instance.
 type MarotoTest struct {
 	t    *testing.T
 	node *node.Node[core.Structure]
 }
 
+// New creates the MarotoTest instance to unit tests.
 func New(t *testing.T) *MarotoTest {
 	if configSingleton == nil {
 		path, err := getMarotoConfigFilePath()
@@ -54,11 +56,13 @@ func New(t *testing.T) *MarotoTest {
 	}
 }
 
+// Assert validates if the structure is the same as defined by Equals method.
 func (m *MarotoTest) Assert(structure *node.Node[core.Structure]) *MarotoTest {
 	m.node = structure
 	return m
 }
 
+// Equals defines which file will be loaded to do the comparison.
 func (m *MarotoTest) Equals(file string) *MarotoTest {
 	actual := m.buildNode(m.node)
 	actualBytes, _ := json.Marshal(actual)
@@ -77,6 +81,7 @@ func (m *MarotoTest) Equals(file string) *MarotoTest {
 	return m
 }
 
+// Save is an auxiliary method to update the file to be asserted.
 func (m *MarotoTest) Save(file string) *MarotoTest {
 	actual := m.buildNode(m.node)
 	actualBytes, _ := json.MarshalIndent(actual, "", "\t")

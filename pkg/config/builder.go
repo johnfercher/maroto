@@ -221,11 +221,13 @@ func (b *builder) WithCompression(compression bool) Builder {
 	return b
 }
 
+// WithOrientation defines the page orientation. The default orientation is vertical, if horizontal is defined width and height will be flipped.
 func (b *builder) WithOrientation(orientation orientation.Type) Builder {
 	b.orientation = orientation
 	return b
 }
 
+// WithAuthor defines the author name metadata.
 func (b *builder) WithAuthor(author string, isUTF8 bool) Builder {
 	if author == "" {
 		return b
@@ -239,6 +241,7 @@ func (b *builder) WithAuthor(author string, isUTF8 bool) Builder {
 	return b
 }
 
+// WithCreator defines the creator name metadata.
 func (b *builder) WithCreator(creator string, isUTF8 bool) Builder {
 	if creator == "" {
 		return b
@@ -252,6 +255,7 @@ func (b *builder) WithCreator(creator string, isUTF8 bool) Builder {
 	return b
 }
 
+// WithSubject defines the subject metadata.
 func (b *builder) WithSubject(subject string, isUTF8 bool) Builder {
 	if subject == "" {
 		return b
@@ -265,6 +269,7 @@ func (b *builder) WithSubject(subject string, isUTF8 bool) Builder {
 	return b
 }
 
+// WithTitle defines the title metadata.
 func (b *builder) WithTitle(title string, isUTF8 bool) Builder {
 	if title == "" {
 		return b
@@ -278,6 +283,7 @@ func (b *builder) WithTitle(title string, isUTF8 bool) Builder {
 	return b
 }
 
+// WithCreationDate defines the creation date metadata.
 func (b *builder) WithCreationDate(time time.Time) Builder {
 	if time.IsZero() {
 		return b
@@ -288,6 +294,7 @@ func (b *builder) WithCreationDate(time time.Time) Builder {
 	return b
 }
 
+// WithBackgroundImage defines the background image that will be applied in every page.
 func (b *builder) WithBackgroundImage(bytes []byte, ext extension.Type) Builder {
 	b.backgroundImage = &entity.Image{
 		Bytes:     bytes,
@@ -297,6 +304,7 @@ func (b *builder) WithBackgroundImage(bytes []byte, ext extension.Type) Builder 
 	return b
 }
 
+// Build finalizes the customization returning the entity.Config.
 func (b *builder) Build() *entity.Config {
 	return &entity.Config{
 		ProviderType:      b.providerType,

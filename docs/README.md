@@ -36,25 +36,6 @@ library in various aspects. The main objectives of`v2.0.0`are:
    - [Beta versions](https://go.dev/doc/modules/version-numbers) will be released as we achieve small deliverables.
    - There still some issues not solved from`v1`, but`v2`already solved more than 20 issues from`v1`.
 
-## Maroto Columns and Rows
-
-**Maroto** employs a flexible grid system to structure content in a PDF document, consisting of rows and columns. This system is designed to provide both simplicity and versatility in layout management.
-
-### Columns
-
-- **Grid System**: Maroto's layout is based on a 12-unit grid system. This means the width of each page is effectively divided into 12 equal parts (or "grid spaces").
-- **Column Widt**h: When creating a column (using col.New(colSize)), the colSize parameter specifies how many of these 12 grid spaces the column should occupy. For example, col.New(1) creates a column that spans 1/12 of the page width, while col.New(6) spans half the page width.
-- **Content Placement**: Columns are the primary containers for content such as text, images, and other components. The width of a column determines how much horizontal space its content occupies.
-- **Total Width Constraint**: The sum of the widths of all columns within a single row should not exceed 12 grid spaces, aligning with the full width of the page.
-
-### Rows
-
-- **Vertical Structuring**: Rows in Maroto are used to organize content vertically. Each row acts as a horizontal container for columns.
-- **Row Height**: The height of a row is defined when it is created (e.g., row.New(20)). This height determines the vertical space allocated for the row. Unlike columns, row height is not based on a grid system but is a relative unit of measurement.
-- **Sequential Layout**: Rows are added to the document in the order they are defined, creating a top-to-bottom flow of content. Each new row is placed immediately below the preceding row.
-- **Layout Flexibility**: Rows offer flexibility in the layout design, allowing for various configurations of columns within them. From single full-width columns to multiple columns of different widths, rows accommodate diverse layout patterns.
-
-
 ## Code Example
 This is part of the [simplest example](v2/examples/simplest?id=simplest).
 
@@ -66,6 +47,26 @@ This is part of the [billing example](v2/examples/billing?id=billing).
 ```pdf
 	assets/pdf/billingv2.pdf
 ```
+
+## Maroto Columns and Rows
+
+**Maroto** employs a flexible grid system to structure content in a PDF document, consisting of rows and columns. This system is designed to provide both simplicity and versatility in layout management.
+
+### Columns
+
+- **Grid System**: Maroto's layout is based on a 12-unit grid system. This means the width of each page is effectively divided into 12 equal parts (or "grid spaces").
+- **Column Width**: When creating a column (using col.New(colSize)), the colSize parameter specifies how many of these 12 grid spaces the column should occupy. For example, col.New(1) creates a column that spans 1/12 of the page width, while col.New(6) spans half the page width.
+- **Content Placement**: Columns are the primary containers for content such as text, images, and other components. The width of a column determines how much horizontal space its content occupies.
+- **Total Width Constraint**: The sum of the widths of all columns within a single row should not exceed 12 grid spaces, aligning with the full width of the page.
+- **Grid Space Customization**: Is possible to [customize](https://maroto.io/#/v2/features/maxgridsum?id=max-grid-sum) the max grid sum.
+
+### Rows
+
+- **Vertical Structuring**: Rows in Maroto are used to organize content vertically. Each row acts as a horizontal container for columns.
+- **Row Height**: The height of a row is defined when it is created (e.g., row.New(20)). This height determines the vertical space allocated for the row. Unlike columns, row height is not based on a grid system but is a relative unit of measurement.
+- **Sequential Layout**: Rows are added to the document in the order they are defined, creating a top-to-bottom flow of content. Each new row is placed immediately below the preceding row.
+- **Layout Flexibility**: Rows offer flexibility in the layout design, allowing for various configurations of columns within them. From single full-width columns to multiple columns of different widths, rows accommodate diverse layout patterns.
+
 
 ## Conventions
 

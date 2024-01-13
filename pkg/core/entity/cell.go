@@ -9,10 +9,12 @@ type Cell struct {
 	Height float64
 }
 
+// GetDimensions returns the dimensions of the Cell (width and height).
 func (c Cell) GetDimensions() *Dimensions {
 	return &Dimensions{Width: c.Width, Height: c.Height}
 }
 
+// Copy deep copy the cell data.
 func (c Cell) Copy() Cell {
 	return Cell{
 		X:      c.X,
@@ -22,7 +24,8 @@ func (c Cell) Copy() Cell {
 	}
 }
 
-func NewRootContext(pageWidth, pageHeight float64, margins Margins) Cell {
+// NewRootCell creates the main Cell.
+func NewRootCell(pageWidth, pageHeight float64, margins Margins) Cell {
 	return Cell{
 		X:      0,
 		Y:      0,

@@ -80,7 +80,7 @@ func TestNewRootContext(t *testing.T) {
 	}
 
 	// Act
-	cell := entity.NewRootContext(width, height, margins)
+	cell := entity.NewRootCell(width, height, margins)
 
 	// Assert
 	assert.Equal(t, 0.0, cell.X)

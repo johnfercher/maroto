@@ -53,7 +53,7 @@ func New(cfgs ...*entity.Config) core.Maroto {
 
 	m := &maroto{
 		provider: provider,
-		cell: entity.NewRootContext(cfg.Dimensions.Width, cfg.Dimensions.Height, entity.Margins{
+		cell: entity.NewRootCell(cfg.Dimensions.Width, cfg.Dimensions.Height, entity.Margins{
 			Left:   cfg.Margins.Left,
 			Top:    cfg.Margins.Top,
 			Right:  cfg.Margins.Right,
