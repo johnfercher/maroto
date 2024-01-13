@@ -221,7 +221,8 @@ func (b *builder) WithCompression(compression bool) Builder {
 	return b
 }
 
-// WithOrientation defines the page orientation. The default orientation is vertical, if horizontal is defined width and height will be flipped.
+// WithOrientation defines the page orientation. The default orientation is vertical,
+// if horizontal is defined width and height will be flipped.
 func (b *builder) WithOrientation(orientation orientation.Type) Builder {
 	b.orientation = orientation
 	return b
