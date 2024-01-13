@@ -1,4 +1,4 @@
-// Package config implements custom configuration CfgBuilder.
+// Package config implements custom configuration builder.
 package config
 
 import (

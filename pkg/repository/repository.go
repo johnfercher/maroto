@@ -18,12 +18,12 @@ type FontRepository struct {
 	customFonts []*entity.CustomFont
 }
 
-// New creates a new FontRepository.
+// New creates a new repository.
 func New() Repository {
 	return &FontRepository{}
 }
 
-// AddUTF8Font adds a custom font to the FontRepository.
+// AddUTF8Font adds a custom font to the repository.
 func (r *FontRepository) AddUTF8Font(family string, style fontstyle.Type, file string) Repository {
 	if family == "" {
 		return r
