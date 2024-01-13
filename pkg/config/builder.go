@@ -82,6 +82,7 @@ func NewBuilder() Builder {
 	}
 }
 
+// WithPageSize defines the page size, ex: A4, A4 and etc.
 func (b *builder) WithPageSize(size pagesize.Type) Builder {
 	if size == "" {
 		return b
@@ -91,6 +92,7 @@ func (b *builder) WithPageSize(size pagesize.Type) Builder {
 	return b
 }
 
+// WithDimensions defines custom page dimensions, this overrides page size.
 func (b *builder) WithDimensions(width float64, height float64) Builder {
 	if width <= 0 || height <= 0 {
 		return b
@@ -104,6 +106,7 @@ func (b *builder) WithDimensions(width float64, height float64) Builder {
 	return b
 }
 
+// WithMargins defines custom margins, bottom margin is not customizable due to gofpdf limitations.
 func (b *builder) WithMargins(left float64, top float64, right float64) Builder {
 	if left < pagesize.MinLeftMargin {
 		return b
@@ -124,6 +127,7 @@ func (b *builder) WithMargins(left float64, top float64, right float64) Builder 
 	return b
 }
 
+// WithWorkerPoolSize defines go routine workers, when defined this will execute maroto concurrently.
 func (b *builder) WithWorkerPoolSize(poolSize int) Builder {
 	if poolSize < 0 {
 		return b
@@ -133,11 +137,13 @@ func (b *builder) WithWorkerPoolSize(poolSize int) Builder {
 	return b
 }
 
+// WithDebug defines a debug behaviour where maroto will draw borders in everything.
 func (b *builder) WithDebug(on bool) Builder {
 	b.debug = on
 	return b
 }
 
+// WithMaxGridSize defines a custom max grid sum which it will change the sum of column sizes.
 func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
 	if maxGridSize < 0 {
 		return b
@@ -147,6 +153,7 @@ func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
 	return b
 }
 
+// WithDefaultFont defines a custom font, other than arial. This can be used to define a custom font as default.
 func (b *builder) WithDefaultFont(font *props.Font) Builder {
 	if font == nil {
 		return b
@@ -171,6 +178,7 @@ func (b *builder) WithDefaultFont(font *props.Font) Builder {
 	return b
 }
 
+// WithCustomFonts add custom fonts.
 func (b *builder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
 	if customFonts == nil {
 		return b
@@ -180,6 +188,7 @@ func (b *builder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
 	return b
 }
 
+// WithPageNumber defines a string pattern to write the current page and total.
 func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
 	if !strings.Contains(pattern, "{current}") && !strings.Contains(pattern, "{total}") {
 		return b
@@ -195,6 +204,7 @@ func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
 	return b
 }
 
+// WithProtection defines protection types to the PDF document.
 func (b *builder) WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder {
 	b.protection = &entity.Protection{
 		Type:          protectionType,
@@ -205,6 +215,7 @@ func (b *builder) WithProtection(protectionType protection.Type, userPassword, o
 	return b
 }
 
+// WithCompression defines compression.
 func (b *builder) WithCompression(compression bool) Builder {
 	b.compression = compression
 	return b

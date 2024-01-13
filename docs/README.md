@@ -1,6 +1,6 @@
 # Maroto V2
 
-[![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://pkg.go.dev/github.com/johnfercher/maroto/v2)
+[![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg)
 [![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines) 
 [![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
 [![CI](https://github.com/johnfercher/maroto/actions/workflows/goci.yml/badge.svg)](https://github.com/johnfercher/maroto/actions/workflows/goci.yml)
@@ -9,12 +9,12 @@
 [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
 [![Stars Badge](https://img.shields.io/github/stars/johnfercher/maroto.svg?style=social&label=Stars)](https://github.com/johnfercher/maroto/stargazers)
 
-#### Maroto`v2.0.0-beta.9`is here! Try out:
+#### Maroto`v2.0.0-beta.10`is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2@v2.0.0-beta.9
+go get github.com/johnfercher/maroto/v2@v2.0.0-beta.10
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
@@ -30,8 +30,8 @@ library in various aspects. The main objectives of`v2.0.0`are:
 ## Migration
 
 1. We will no longer maintain the current version`v1.0.0`of maroto.
-   - The last version`v0.43.0`was release as`v1.0.0`through the main branch, marking the end of the old version.
-   - The old`v1`code was move to a`v1`branch.
+   - The last version`v0.43.0`was released as`v1.0.0`through the main branch, marking the end of the old version.
+   - The old`v1`code was moved to a`v1`branch.
 2. The master branch now keeps the`v2`code, being the default implementation now.
    - [Beta versions](https://go.dev/doc/modules/version-numbers) will be released as we achieve small deliverables.
    - There still some issues not solved from`v1`, but`v2`already solved more than 20 issues from`v1`.
@@ -86,8 +86,8 @@ improved, enabling maroto to reach a whole new level in this fresh new step.
 [filename](https://raw.githubusercontent.com/johnfercher/maroto/master/pkg/core/core.go ':include :type=code')
 
 ## Unit Testing
-In maroto`v2`, it will be possible to write unit tests by analyzing the **components tree**. To facilitate the 
-writing of unit tests, we are in the process of creating a dedicated test package.
+In maroto`v2`, is be possible to write unit tests by analyzing the **components tree**. To facilitate the 
+writing of unit tests, we created a dedicated test package.
 
 For an example, refer to [this link](v2/features/unittests?id=unit-testing).
 
