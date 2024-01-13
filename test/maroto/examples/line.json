@@ -27,7 +27,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -43,7 +43,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -59,7 +59,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -81,7 +81,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -97,7 +97,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -113,7 +113,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -135,7 +135,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -151,7 +151,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_color": "RGB(255, 0, 0)",
 										"prop_offset_percent": 5,
@@ -168,7 +168,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "vertical",
@@ -190,7 +190,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 50,
 										"prop_orientation": "horizontal",
@@ -206,7 +206,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 50,
 										"prop_orientation": "vertical",
@@ -222,7 +222,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -244,7 +244,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
 										"prop_orientation": "horizontal",
@@ -260,7 +260,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_color": "RGB(255, 0, 0)",
 										"prop_offset_percent": 70,
@@ -277,7 +277,7 @@
 							"type": "col",
 							"nodes": [
 								{
-									"type": "lineStyle",
+									"type": "line",
 									"details": {
 										"prop_color": "RGB(255, 0, 0)",
 										"prop_offset_percent": 40,

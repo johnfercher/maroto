@@ -3,7 +3,7 @@
 	"type": "col",
 	"nodes": [
 		{
-			"type": "lineStyle",
+			"type": "line",
 			"details": {
 				"prop_offset_percent": 5,
 				"prop_orientation": "horizontal",

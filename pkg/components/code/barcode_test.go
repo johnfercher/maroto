@@ -64,7 +64,7 @@ func TestNewBarRow(t *testing.T) {
 func TestBarcode_Render(t *testing.T) {
 	t.Run("should call provider correctly", func(t *testing.T) {
 		// Arrange
-		codeValue := "barcode"
+		codeValue := "Barcode"
 		cell := fixture.CellEntity()
 		prop := fixture.BarcodeProp()
 		sut := code.NewBar(codeValue, prop)

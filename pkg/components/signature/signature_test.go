@@ -13,14 +13,14 @@ import (
 func TestNew(t *testing.T) {
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
 		// Act
-		sut := signature.New("signature")
+		sut := signature.New("Signature")
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
-		sut := signature.New("signature", fixture.SignatureProp())
+		sut := signature.New("Signature", fixture.SignatureProp())
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_custom_prop.json")
@@ -30,14 +30,14 @@ func TestNew(t *testing.T) {
 func TestNewCol(t *testing.T) {
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
 		// Act
-		sut := signature.NewCol(12, "signature")
+		sut := signature.NewCol(12, "Signature")
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
-		sut := signature.NewCol(12, "signature", fixture.SignatureProp())
+		sut := signature.NewCol(12, "Signature", fixture.SignatureProp())
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_col_custom_prop.json")
@@ -47,14 +47,14 @@ func TestNewCol(t *testing.T) {
 func TestNewRow(t *testing.T) {
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
 		// Act
-		sut := signature.NewRow(10, "signature")
+		sut := signature.NewRow(10, "Signature")
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
 		// Act
-		sut := signature.NewRow(10, "signature", fixture.SignatureProp())
+		sut := signature.NewRow(10, "Signature", fixture.SignatureProp())
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_row_custom_prop.json")
@@ -64,7 +64,7 @@ func TestNewRow(t *testing.T) {
 func TestSignature_Render(t *testing.T) {
 	t.Run("should call provider correctly", func(t *testing.T) {
 		// Arrange
-		label := "signature"
+		label := "Signature"
 		cell := fixture.CellEntity()
 		prop := fixture.SignatureProp()
 		sut := signature.New(label, prop)
@@ -88,7 +88,7 @@ func TestSignature_SetConfig(t *testing.T) {
 	t.Run("should call correctly", func(t *testing.T) {
 		// Arrange
 		prop := fixture.SignatureProp()
-		sut := signature.New("signature", prop)
+		sut := signature.New("Signature", prop)
 
 		// Act
 		sut.SetConfig(nil)

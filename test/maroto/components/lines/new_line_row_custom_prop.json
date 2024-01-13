@@ -10,7 +10,7 @@
 			},
 			"nodes": [
 				{
-					"type": "lineStyle",
+					"type": "line",
 					"details": {
 						"prop_color": "RGB(100, 50, 200)",
 						"prop_offset_percent": 50,

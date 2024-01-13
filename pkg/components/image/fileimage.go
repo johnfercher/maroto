@@ -11,7 +11,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type fileImage struct {
+type FileImage struct {
 	path   string
 	prop   props.Rect
 	config *entity.Config
@@ -25,7 +25,7 @@ func NewFromFile(path string, ps ...props.Rect) core.Component {
 	}
 	prop.MakeValid()
 
-	return &fileImage{
+	return &FileImage{
 		path: path,
 		prop: prop,
 	}
@@ -45,12 +45,12 @@ func NewFromFileRow(height float64, path string, ps ...props.Rect) core.Row {
 }
 
 // Render renders an Image into a PDF context.
-func (f *fileImage) Render(provider core.Provider, cell *entity.Cell) {
+func (f *FileImage) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddImageFromFile(f.path, cell, &f.prop)
 }
 
 // GetStructure returns the Structure of an Image.
-func (f *fileImage) GetStructure() *node.Node[core.Structure] {
+func (f *FileImage) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "fileImage",
 		Value:   f.path,
@@ -61,6 +61,6 @@ func (f *fileImage) GetStructure() *node.Node[core.Structure] {
 }
 
 // SetConfig sets the pdf config.
-func (f *fileImage) SetConfig(config *entity.Config) {
+func (f *FileImage) SetConfig(config *entity.Config) {
 	f.config = config
 }

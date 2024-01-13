@@ -72,6 +72,6 @@ func buildPath(file string) string {
 		return ""
 	}
 
-	dir = strings.ReplaceAll(dir, "pkg/repository", "")
+	dir = strings.ReplaceAll(dir, "pkg/FontRepository", "")
 	return path.Join(dir, file)
 }

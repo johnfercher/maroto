@@ -14,17 +14,17 @@ type Repository interface {
 	Load() ([]*entity.CustomFont, error)
 }
 
-type repository struct {
+type FontRepository struct {
 	customFonts []*entity.CustomFont
 }
 
-// New creates a new repository.
+// New creates a new FontRepository.
 func New() Repository {
-	return &repository{}
+	return &FontRepository{}
 }
 
-// AddUTF8Font adds a custom font to the repository.
-func (r *repository) AddUTF8Font(family string, style fontstyle.Type, file string) Repository {
+// AddUTF8Font adds a custom font to the FontRepository.
+func (r *FontRepository) AddUTF8Font(family string, style fontstyle.Type, file string) Repository {
 	if family == "" {
 		return r
 	}
@@ -47,7 +47,7 @@ func (r *repository) AddUTF8Font(family string, style fontstyle.Type, file strin
 }
 
 // Load loads all custom fonts.
-func (r *repository) Load() ([]*entity.CustomFont, error) {
+func (r *FontRepository) Load() ([]*entity.CustomFont, error) {
 	for _, customFont := range r.customFonts {
 		bytes, err := os.ReadFile(customFont.File)
 		if err != nil {

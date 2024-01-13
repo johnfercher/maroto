@@ -11,7 +11,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type line struct {
+type Line struct {
 	config *entity.Config
 	prop   props.Line
 }
@@ -24,7 +24,7 @@ func New(ps ...props.Line) core.Component {
 	}
 	lineProp.MakeValid()
 
-	return &line{
+	return &Line{
 		prop: lineProp,
 	}
 }
@@ -43,9 +43,9 @@ func NewRow(height float64, ps ...props.Line) core.Row {
 }
 
 // GetStructure returns the Structure of a Line.
-func (l *line) GetStructure() *node.Node[core.Structure] {
+func (l *Line) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:    "lineStyle",
+		Type:    "line",
 		Details: l.prop.ToMap(),
 	}
 
@@ -53,11 +53,11 @@ func (l *line) GetStructure() *node.Node[core.Structure] {
 }
 
 // SetConfig sets the config.
-func (l *line) SetConfig(config *entity.Config) {
+func (l *Line) SetConfig(config *entity.Config) {
 	l.config = config
 }
 
 // Render renders a Line into a PDF context.
-func (l *line) Render(provider core.Provider, cell *entity.Cell) {
+func (l *Line) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddLine(cell, &l.prop)
 }

@@ -11,7 +11,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type text struct {
+type Text struct {
 	value  string
 	prop   props.Text
 	config *entity.Config
@@ -24,7 +24,7 @@ func New(value string, ps ...props.Text) core.Component {
 		textProp = ps[0]
 	}
 
-	return &text{
+	return &Text{
 		value: value,
 		prop:  textProp,
 	}
@@ -44,7 +44,7 @@ func NewRow(height float64, value string, ps ...props.Text) core.Row {
 }
 
 // GetStructure returns the Structure of a Text.
-func (t *text) GetStructure() *node.Node[core.Structure] {
+func (t *Text) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "text",
 		Value:   t.value,
@@ -55,12 +55,12 @@ func (t *text) GetStructure() *node.Node[core.Structure] {
 }
 
 // SetConfig sets the config.
-func (t *text) SetConfig(config *entity.Config) {
+func (t *Text) SetConfig(config *entity.Config) {
 	t.config = config
 	t.prop.MakeValid(t.config.DefaultFont)
 }
 
 // Render renders a Text into a PDF context.
-func (t *text) Render(provider core.Provider, cell *entity.Cell) {
+func (t *Text) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddText(t.value, cell, &t.prop)
 }

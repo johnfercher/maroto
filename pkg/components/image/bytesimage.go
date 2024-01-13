@@ -12,7 +12,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type bytesImage struct {
+type BytesImage struct {
 	bytes     []byte
 	extension extension.Type
 	prop      props.Rect
@@ -27,7 +27,7 @@ func NewFromBytes(bytes []byte, extension extension.Type, ps ...props.Rect) core
 	}
 	prop.MakeValid()
 
-	return &bytesImage{
+	return &BytesImage{
 		bytes:     bytes,
 		prop:      prop,
 		extension: extension,
@@ -48,12 +48,12 @@ func NewFromBytesRow(height float64, bytes []byte, extension extension.Type, ps 
 }
 
 // Render renders an Image into a PDF context.
-func (b *bytesImage) Render(provider core.Provider, cell *entity.Cell) {
+func (b *BytesImage) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddImageFromBytes(b.bytes, cell, &b.prop, b.extension)
 }
 
 // GetStructure returns the Structure of an Image.
-func (b *bytesImage) GetStructure() *node.Node[core.Structure] {
+func (b *BytesImage) GetStructure() *node.Node[core.Structure] {
 	trimLength := 10
 	if len(b.bytes) < trimLength {
 		trimLength = len(b.bytes)
@@ -72,6 +72,6 @@ func (b *bytesImage) GetStructure() *node.Node[core.Structure] {
 }
 
 // SetConfig sets the pdf config.
-func (b *bytesImage) SetConfig(config *entity.Config) {
+func (b *BytesImage) SetConfig(config *entity.Config) {
 	b.config = config
 }

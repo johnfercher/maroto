@@ -1,4 +1,4 @@
-// Package code implements creation of barcode, matrixcode and qrcode.
+// Package code implements creation of Barcode, MatrixCode and QrCode.
 // nolint:dupl
 package code
 
@@ -12,7 +12,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type matrixCode struct {
+type MatrixCode struct {
 	code   string
 	prop   props.Rect
 	config *entity.Config
@@ -26,7 +26,7 @@ func NewMatrix(code string, barcodeProps ...props.Rect) core.Component {
 	}
 	prop.MakeValid()
 
-	return &matrixCode{
+	return &MatrixCode{
 		code: code,
 		prop: prop,
 	}
@@ -46,12 +46,12 @@ func NewMatrixRow(height float64, code string, ps ...props.Rect) core.Row {
 }
 
 // Render renders a MatrixCode into a PDF context.
-func (m *matrixCode) Render(provider core.Provider, cell *entity.Cell) {
+func (m *MatrixCode) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddMatrixCode(m.code, cell, &m.prop)
 }
 
 // GetStructure returns the Structure of a MatrixCode.
-func (m *matrixCode) GetStructure() *node.Node[core.Structure] {
+func (m *MatrixCode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "matrixcode",
 		Value:   m.code,
@@ -62,6 +62,6 @@ func (m *matrixCode) GetStructure() *node.Node[core.Structure] {
 }
 
 // SetConfig sets the configuration of a MatrixCode.
-func (m *matrixCode) SetConfig(config *entity.Config) {
+func (m *MatrixCode) SetConfig(config *entity.Config) {
 	m.config = config
 }
