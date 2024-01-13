@@ -22,7 +22,7 @@ func TestNewBuilder(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*config.builder", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*config.CfgBuilder", fmt.Sprintf("%T", sut))
 }
 
 func TestBuilder_Build(t *testing.T) {

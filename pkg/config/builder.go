@@ -42,7 +42,7 @@ type Builder interface {
 	Build() *entity.Config
 }
 
-type builder struct {
+type CfgBuilder struct {
 	providerType      provider.Type
 	dimensions        *entity.Dimensions
 	margins           *entity.Margins
@@ -63,7 +63,7 @@ type builder struct {
 
 // NewBuilder is responsible to create an instance of Builder.
 func NewBuilder() Builder {
-	return &builder{
+	return &CfgBuilder{
 		providerType: provider.Gofpdf,
 		margins: &entity.Margins{
 			Left:   pagesize.DefaultLeftMargin,
@@ -83,7 +83,7 @@ func NewBuilder() Builder {
 }
 
 // WithPageSize defines the page size, ex: A4, A4 and etc.
-func (b *builder) WithPageSize(size pagesize.Type) Builder {
+func (b *CfgBuilder) WithPageSize(size pagesize.Type) Builder {
 	if size == "" {
 		return b
 	}
@@ -93,7 +93,7 @@ func (b *builder) WithPageSize(size pagesize.Type) Builder {
 }
 
 // WithDimensions defines custom page dimensions, this overrides page size.
-func (b *builder) WithDimensions(width float64, height float64) Builder {
+func (b *CfgBuilder) WithDimensions(width float64, height float64) Builder {
 	if width <= 0 || height <= 0 {
 		return b
 	}
@@ -107,7 +107,7 @@ func (b *builder) WithDimensions(width float64, height float64) Builder {
 }
 
 // WithMargins defines custom margins, bottom margin is not customizable due to gofpdf limitations.
-func (b *builder) WithMargins(left float64, top float64, right float64) Builder {
+func (b *CfgBuilder) WithMargins(left float64, top float64, right float64) Builder {
 	if left < pagesize.MinLeftMargin {
 		return b
 	}
@@ -128,7 +128,7 @@ func (b *builder) WithMargins(left float64, top float64, right float64) Builder 
 }
 
 // WithWorkerPoolSize defines go routine workers, when defined this will execute maroto concurrently.
-func (b *builder) WithWorkerPoolSize(poolSize int) Builder {
+func (b *CfgBuilder) WithWorkerPoolSize(poolSize int) Builder {
 	if poolSize < 0 {
 		return b
 	}
@@ -138,13 +138,13 @@ func (b *builder) WithWorkerPoolSize(poolSize int) Builder {
 }
 
 // WithDebug defines a debug behaviour where maroto will draw borders in everything.
-func (b *builder) WithDebug(on bool) Builder {
+func (b *CfgBuilder) WithDebug(on bool) Builder {
 	b.debug = on
 	return b
 }
 
 // WithMaxGridSize defines a custom max grid sum which it will change the sum of column sizes.
-func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
+func (b *CfgBuilder) WithMaxGridSize(maxGridSize int) Builder {
 	if maxGridSize < 0 {
 		return b
 	}
@@ -154,7 +154,7 @@ func (b *builder) WithMaxGridSize(maxGridSize int) Builder {
 }
 
 // WithDefaultFont defines a custom font, other than arial. This can be used to define a custom font as default.
-func (b *builder) WithDefaultFont(font *props.Font) Builder {
+func (b *CfgBuilder) WithDefaultFont(font *props.Font) Builder {
 	if font == nil {
 		return b
 	}
@@ -179,7 +179,7 @@ func (b *builder) WithDefaultFont(font *props.Font) Builder {
 }
 
 // WithCustomFonts add custom fonts.
-func (b *builder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
+func (b *CfgBuilder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
 	if customFonts == nil {
 		return b
 	}
@@ -189,7 +189,7 @@ func (b *builder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
 }
 
 // WithPageNumber defines a string pattern to write the current page and total.
-func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
+func (b *CfgBuilder) WithPageNumber(pattern string, place props.Place) Builder {
 	if !strings.Contains(pattern, "{current}") && !strings.Contains(pattern, "{total}") {
 		return b
 	}
@@ -205,7 +205,7 @@ func (b *builder) WithPageNumber(pattern string, place props.Place) Builder {
 }
 
 // WithProtection defines protection types to the PDF document.
-func (b *builder) WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder {
+func (b *CfgBuilder) WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder {
 	b.protection = &entity.Protection{
 		Type:          protectionType,
 		UserPassword:  userPassword,
@@ -216,20 +216,20 @@ func (b *builder) WithProtection(protectionType protection.Type, userPassword, o
 }
 
 // WithCompression defines compression.
-func (b *builder) WithCompression(compression bool) Builder {
+func (b *CfgBuilder) WithCompression(compression bool) Builder {
 	b.compression = compression
 	return b
 }
 
 // WithOrientation defines the page orientation. The default orientation is vertical,
 // if horizontal is defined width and height will be flipped.
-func (b *builder) WithOrientation(orientation orientation.Type) Builder {
+func (b *CfgBuilder) WithOrientation(orientation orientation.Type) Builder {
 	b.orientation = orientation
 	return b
 }
 
 // WithAuthor defines the author name metadata.
-func (b *builder) WithAuthor(author string, isUTF8 bool) Builder {
+func (b *CfgBuilder) WithAuthor(author string, isUTF8 bool) Builder {
 	if author == "" {
 		return b
 	}
@@ -243,7 +243,7 @@ func (b *builder) WithAuthor(author string, isUTF8 bool) Builder {
 }
 
 // WithCreator defines the creator name metadata.
-func (b *builder) WithCreator(creator string, isUTF8 bool) Builder {
+func (b *CfgBuilder) WithCreator(creator string, isUTF8 bool) Builder {
 	if creator == "" {
 		return b
 	}
@@ -257,7 +257,7 @@ func (b *builder) WithCreator(creator string, isUTF8 bool) Builder {
 }
 
 // WithSubject defines the subject metadata.
-func (b *builder) WithSubject(subject string, isUTF8 bool) Builder {
+func (b *CfgBuilder) WithSubject(subject string, isUTF8 bool) Builder {
 	if subject == "" {
 		return b
 	}
@@ -271,7 +271,7 @@ func (b *builder) WithSubject(subject string, isUTF8 bool) Builder {
 }
 
 // WithTitle defines the title metadata.
-func (b *builder) WithTitle(title string, isUTF8 bool) Builder {
+func (b *CfgBuilder) WithTitle(title string, isUTF8 bool) Builder {
 	if title == "" {
 		return b
 	}
@@ -285,7 +285,7 @@ func (b *builder) WithTitle(title string, isUTF8 bool) Builder {
 }
 
 // WithCreationDate defines the creation date metadata.
-func (b *builder) WithCreationDate(time time.Time) Builder {
+func (b *CfgBuilder) WithCreationDate(time time.Time) Builder {
 	if time.IsZero() {
 		return b
 	}
@@ -296,7 +296,7 @@ func (b *builder) WithCreationDate(time time.Time) Builder {
 }
 
 // WithBackgroundImage defines the background image that will be applied in every page.
-func (b *builder) WithBackgroundImage(bytes []byte, ext extension.Type) Builder {
+func (b *CfgBuilder) WithBackgroundImage(bytes []byte, ext extension.Type) Builder {
 	b.backgroundImage = &entity.Image{
 		Bytes:     bytes,
 		Extension: ext,
@@ -306,7 +306,7 @@ func (b *builder) WithBackgroundImage(bytes []byte, ext extension.Type) Builder 
 }
 
 // Build finalizes the customization returning the entity.Config.
-func (b *builder) Build() *entity.Config {
+func (b *CfgBuilder) Build() *entity.Config {
 	return &entity.Config{
 		ProviderType:      b.providerType,
 		Dimensions:        b.getDimensions(),
@@ -325,7 +325,7 @@ func (b *builder) Build() *entity.Config {
 	}
 }
 
-func (b *builder) getDimensions() *entity.Dimensions {
+func (b *CfgBuilder) getDimensions() *entity.Dimensions {
 	if b.dimensions != nil {
 		return b.dimensions
 	}

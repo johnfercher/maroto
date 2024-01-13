@@ -1,5 +1,5 @@
-// Package code implements creation of barcode, matrixcode and qrcode.
-// nolint:dupl // It's similar to barcode.go and it's hard to extract common code.
+// Package code implements creation of Barcode, MatrixCode and QrCode.
+// nolint:dupl // It's similar to Barcode.go and it's hard to extract common code.
 package code
 
 import (
@@ -12,7 +12,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type barcode struct {
+type Barcode struct {
 	code   string
 	prop   props.Barcode
 	config *entity.Config
@@ -26,7 +26,7 @@ func NewBar(code string, ps ...props.Barcode) core.Component {
 	}
 	prop.MakeValid()
 
-	return &barcode{
+	return &Barcode{
 		code: code,
 		prop: prop,
 	}
@@ -46,12 +46,12 @@ func NewBarRow(height float64, code string, ps ...props.Barcode) core.Row {
 }
 
 // Render renders a Barcode into a PDF context.
-func (b *barcode) Render(provider core.Provider, cell *entity.Cell) {
+func (b *Barcode) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddBarCode(b.code, cell, &b.prop)
 }
 
 // GetStructure returns the Structure of a Barcode.
-func (b *barcode) GetStructure() *node.Node[core.Structure] {
+func (b *Barcode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "barcode",
 		Value:   b.code,
@@ -62,6 +62,6 @@ func (b *barcode) GetStructure() *node.Node[core.Structure] {
 }
 
 // SetConfig sets the configuration of a Barcode.
-func (b *barcode) SetConfig(config *entity.Config) {
+func (b *Barcode) SetConfig(config *entity.Config) {
 	b.config = config
 }

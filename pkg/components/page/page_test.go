@@ -14,5 +14,5 @@ func TestNew(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*page.page", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*page.Page", fmt.Sprintf("%T", sut))
 }

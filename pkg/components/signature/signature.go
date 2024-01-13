@@ -13,7 +13,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type signature struct {
+type Signature struct {
 	value  string
 	prop   props.Signature
 	config *entity.Config
@@ -27,7 +27,7 @@ func New(value string, ps ...props.Signature) core.Component {
 	}
 	prop.MakeValid(fontfamily.Arial)
 
-	return &signature{
+	return &Signature{
 		value: value,
 		prop:  prop,
 	}
@@ -47,7 +47,7 @@ func NewRow(height float64, value string, ps ...props.Signature) core.Row {
 }
 
 // Render renders a Signature into a PDF context.
-func (s *signature) Render(provider core.Provider, cell *entity.Cell) {
+func (s *Signature) Render(provider core.Provider, cell *entity.Cell) {
 	fontProp := s.prop.ToFontProp()
 	safePadding := 1.5
 	fontSize := provider.GetTextHeight(fontProp) * safePadding
@@ -61,7 +61,7 @@ func (s *signature) Render(provider core.Provider, cell *entity.Cell) {
 }
 
 // GetStructure returns the Structure of a Signature.
-func (s *signature) GetStructure() *node.Node[core.Structure] {
+func (s *Signature) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "signature",
 		Value:   s.value,
@@ -72,6 +72,6 @@ func (s *signature) GetStructure() *node.Node[core.Structure] {
 }
 
 // SetConfig sets the config.
-func (s *signature) SetConfig(config *entity.Config) {
+func (s *Signature) SetConfig(config *entity.Config) {
 	s.config = config
 }

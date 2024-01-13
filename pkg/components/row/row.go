@@ -10,7 +10,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type row struct {
+type Row struct {
 	height float64
 	cols   []core.Col
 	style  *props.Cell
@@ -19,13 +19,13 @@ type row struct {
 
 // New is responsible to create a core.Row.
 func New(height float64) core.Row {
-	return &row{
+	return &Row{
 		height: height,
 	}
 }
 
-// SetConfig sets the row configuration.
-func (r *row) SetConfig(config *entity.Config) {
+// SetConfig sets the Row configuration.
+func (r *Row) SetConfig(config *entity.Config) {
 	r.config = config
 	for _, cols := range r.cols {
 		cols.SetConfig(config)
@@ -33,18 +33,18 @@ func (r *row) SetConfig(config *entity.Config) {
 }
 
 // Add is responsible to add one or more core.Col to a core.Row.
-func (r *row) Add(cols ...core.Col) core.Row {
+func (r *Row) Add(cols ...core.Col) core.Row {
 	r.cols = append(r.cols, cols...)
 	return r
 }
 
 // GetHeight returns the height of a core.Row.
-func (r *row) GetHeight() float64 {
+func (r *Row) GetHeight() float64 {
 	return r.height
 }
 
 // GetStructure returns the Structure of a core.Row.
-func (r *row) GetStructure() *node.Node[core.Structure] {
+func (r *Row) GetStructure() *node.Node[core.Structure] {
 	detailsMap := r.style.ToMap()
 
 	str := core.Structure{
@@ -64,7 +64,7 @@ func (r *row) GetStructure() *node.Node[core.Structure] {
 }
 
 // Render renders a Row into a PDF context.
-func (r *row) Render(provider core.Provider, cell entity.Cell) {
+func (r *Row) Render(provider core.Provider, cell entity.Cell) {
 	cell.Height = r.height
 	innerCell := cell.Copy()
 
@@ -89,7 +89,7 @@ func (r *row) Render(provider core.Provider, cell entity.Cell) {
 }
 
 // WithStyle sets the style of a Row.
-func (r *row) WithStyle(style *props.Cell) core.Row {
+func (r *Row) WithStyle(style *props.Cell) core.Row {
 	r.style = style
 	return r
 }

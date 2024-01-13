@@ -9,7 +9,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type col struct {
+type Col struct {
 	size       int
 	isMax      bool
 	components []core.Component
@@ -20,20 +20,20 @@ type col struct {
 // New is responsible to create an instance of core.Col.
 func New(size ...int) core.Col {
 	if len(size) == 0 {
-		return &col{isMax: true}
+		return &Col{isMax: true}
 	}
 
-	return &col{size: size[0]}
+	return &Col{size: size[0]}
 }
 
 // Add is responsible to add a component to a core.Col.
-func (c *col) Add(components ...core.Component) core.Col {
+func (c *Col) Add(components ...core.Component) core.Col {
 	c.components = append(c.components, components...)
 	return c
 }
 
 // GetSize returns the size of a core.Col.
-func (c *col) GetSize() int {
+func (c *Col) GetSize() int {
 	if c.isMax {
 		return c.config.MaxGridSize
 	}
@@ -42,7 +42,7 @@ func (c *col) GetSize() int {
 }
 
 // GetStructure returns the Structure of a core.Col.
-func (c *col) GetStructure() *node.Node[core.Structure] {
+func (c *Col) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "col",
 		Value:   c.size,
@@ -67,7 +67,7 @@ func (c *col) GetStructure() *node.Node[core.Structure] {
 }
 
 // Render renders a core.Col into a PDF context.
-func (c *col) Render(provider core.Provider, cell entity.Cell, createCell bool) {
+func (c *Col) Render(provider core.Provider, cell entity.Cell, createCell bool) {
 	if createCell {
 		provider.CreateCol(cell.Width, cell.Height, c.config, c.style)
 	}
@@ -78,7 +78,7 @@ func (c *col) Render(provider core.Provider, cell entity.Cell, createCell bool) 
 }
 
 // SetConfig set the config for the component.
-func (c *col) SetConfig(config *entity.Config) {
+func (c *Col) SetConfig(config *entity.Config) {
 	c.config = config
 	for _, component := range c.components {
 		component.SetConfig(config)
@@ -86,7 +86,7 @@ func (c *col) SetConfig(config *entity.Config) {
 }
 
 // WithStyle sets the style for the column.
-func (c *col) WithStyle(style *props.Cell) core.Col {
+func (c *Col) WithStyle(style *props.Cell) core.Col {
 	c.style = style
 	return c
 }

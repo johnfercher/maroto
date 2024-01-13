@@ -9,7 +9,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type page struct {
+type Page struct {
 	number int
 	total  int
 	rows   []core.Row
@@ -24,13 +24,13 @@ func New(ps ...props.Page) core.Page {
 		prop = ps[0]
 	}
 
-	return &page{
+	return &Page{
 		prop: prop,
 	}
 }
 
 // Render renders a Page into a PDF context.
-func (p *page) Render(provider core.Provider, cell entity.Cell) {
+func (p *Page) Render(provider core.Provider, cell entity.Cell) {
 	innerCell := cell.Copy()
 
 	prop := &props.Rect{}
@@ -50,38 +50,38 @@ func (p *page) Render(provider core.Provider, cell entity.Cell) {
 	}
 }
 
-// SetConfig sets the page configuration.
-func (p *page) SetConfig(config *entity.Config) {
+// SetConfig sets the Page configuration.
+func (p *Page) SetConfig(config *entity.Config) {
 	p.config = config
 	for _, row := range p.rows {
 		row.SetConfig(config)
 	}
 }
 
-// SetNumber sets the page number and total.
-func (p *page) SetNumber(number int, total int) {
+// SetNumber sets the Page number and total.
+func (p *Page) SetNumber(number int, total int) {
 	p.number = number
 	p.total = total
 }
 
-// GetNumber returns the page number.
-func (p *page) GetNumber() int {
+// GetNumber returns the Page number.
+func (p *Page) GetNumber() int {
 	return p.number
 }
 
-// Add adds one or more rows to the page.
-func (p *page) Add(rows ...core.Row) core.Page {
+// Add adds one or more rows to the Page.
+func (p *Page) Add(rows ...core.Row) core.Page {
 	p.rows = append(p.rows, rows...)
 	return p
 }
 
-// GetRows returns the rows of the page.
-func (p *page) GetRows() []core.Row {
+// GetRows returns the rows of the Page.
+func (p *Page) GetRows() []core.Row {
 	return p.rows
 }
 
 // GetStructure returns the Structure of a Page.
-func (p *page) GetStructure() *node.Node[core.Structure] {
+func (p *Page) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type: "page",
 	}
