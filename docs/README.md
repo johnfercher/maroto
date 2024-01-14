@@ -9,6 +9,11 @@
 [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
 [![Stars Badge](https://img.shields.io/github/stars/johnfercher/maroto.svg?style=social&label=Stars)](https://github.com/johnfercher/maroto/stargazers)
 
+#### Discussion Opened:`Maroto Document Processor` :fire::fire::fire:: 
+
+* We are about to create a document processor to generate PDFs by interpreting serialized data as: yml, json or html. Please contribute with your ideas in [this discussion](https://github.com/johnfercher/maroto/discussions/390).
+
+
 #### Maroto`v2.0.0-beta.12`is here! Try out:
 
 * Installation with`go get`:
@@ -25,7 +30,7 @@ library in various aspects. The main objectives of`v2.0.0`are:
 3. [Add built-in metrics](README.md?id=built-in-metrics);
 4. [Improve execution time](README.md?id=execution-time-improvement);
 5. Allow recursive Row/Col; **(on roadmap)**
-6. Allow generation based on HTML/JSON; **(on roadmap)**
+6. Allow generation based on [serialized data](https://github.com/johnfercher/maroto/discussions/390).
 
 ## Migration
 
