@@ -1,5 +1,8 @@
 # Orientation
 
+## GoDoc
+* [builder : WithOrientation](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithOrientation)
+
 ## Code Example
 [filename](../../assets/examples/orientation/v2/main.go ':include :type=code')
 

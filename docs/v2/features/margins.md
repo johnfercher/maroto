@@ -1,5 +1,8 @@
 # Custom Margins
 
+## GoDoc
+* [builder : WithMargins](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithMargins)
+
 ## Code Example
 [filename](../../assets/examples/margins/v2/main.go ':include :type=code')
 

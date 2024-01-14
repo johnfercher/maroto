@@ -1,5 +1,8 @@
 # Parallelism
 
+## GoDoc
+* [builder : WithWorkerPoolSize](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithWorkerPoolSize)
+
 ## Code Example
 [filename](../../assets/examples/parallelism/v2/main.go  ':include :type=code')
 

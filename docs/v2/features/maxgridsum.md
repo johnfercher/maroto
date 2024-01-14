@@ -1,5 +1,8 @@
 # Max Grid Sum
 
+## GoDoc
+* [builder : WithMaxGridSize](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithMaxGridSize)
+
 ## Code Example
 [filename](../../assets/examples/maxgridsum/v2/main.go ':include :type=code')
 
