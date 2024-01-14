@@ -2,6 +2,7 @@
 
 ## GoDoc
 * [builder : WithPageNumber](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithPageNumber)
+* [props : Place](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/props#Place)
 
 ## Code Example
 [filename](../../assets/examples/pagenumber/v2/main.go ':include :type=code')
