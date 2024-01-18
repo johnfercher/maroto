@@ -9,12 +9,17 @@
 [![Visits Badge](https://badges.pufler.dev/visits/johnfercher/maroto)](https://badges.pufler.dev)
 [![Stars Badge](https://img.shields.io/github/stars/johnfercher/maroto.svg?style=social&label=Stars)](https://github.com/johnfercher/maroto/stargazers)
 
-#### Discussion Opened:`Maroto Document Processor` :fire::fire::fire:: 
+### News :new:
+
+#### 1. Github Star
+* Please, if you like maroto consider to nominate`@johnfercher`as a Github star. It's free!
+* Link: https://stars.github.com/
+
+#### 2. Discussion Opened:`Maroto Document Processor` :fire::fire::fire:: 
 
 * We are about to create a document processor to generate PDFs by interpreting serialized data as: yml, json or html. Please contribute with your ideas in [this discussion](https://github.com/johnfercher/maroto/discussions/390).
 
-
-#### Maroto`v2.0.0-beta.12`is here! Try out:
+#### 3. Maroto`v2.0.0-beta.12`is here! Try out:
 
 * Installation with`go get`:
 
