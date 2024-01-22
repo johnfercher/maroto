@@ -46,5 +46,4 @@ go get github.com/johnfercher/maroto/v2@v2.0.0-beta.12
 | `make docs`     | Run docs serve local                              | `docsify`                                                     |
 
 ## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/johnfercher/maroto.svg)](https://starchart.cc/johnfercher/maroto)
+[![Stargazers over time](https://starchart.cc/johnfercher/maroto.svg?variant=adaptive)](https://starchart.cc/johnfercher/maroto)
