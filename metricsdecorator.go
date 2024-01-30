@@ -26,7 +26,7 @@ func NewMetricsDecorator(inner core.Maroto) core.Maroto {
 	}
 }
 
-// Generate decorates the Generate method of Maroto instance.
+// Generate decorates the Generate method of maroto instance.
 func (m *MetricsDecorator) Generate() (core.Document, error) {
 	var document core.Document
 	var err error
@@ -47,7 +47,7 @@ func (m *MetricsDecorator) Generate() (core.Document, error) {
 	return core.NewPDF(bytes, report), nil
 }
 
-// AddPages decorates the AddPages method of Maroto instance.
+// AddPages decorates the AddPages method of maroto instance.
 func (m *MetricsDecorator) AddPages(pages ...core.Page) {
 	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddPages(pages...)
@@ -56,7 +56,7 @@ func (m *MetricsDecorator) AddPages(pages ...core.Page) {
 	m.addPageTime = append(m.addPageTime, timeSpent)
 }
 
-// AddRows decorates the AddRows method of Maroto instance.
+// AddRows decorates the AddRows method of maroto instance.
 func (m *MetricsDecorator) AddRows(rows ...core.Row) {
 	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddRows(rows...)
@@ -65,7 +65,7 @@ func (m *MetricsDecorator) AddRows(rows ...core.Row) {
 	m.addRowsTime = append(m.addRowsTime, timeSpent)
 }
 
-// AddRow decorates the AddRow method of Maroto instance.
+// AddRow decorates the AddRow method of maroto instance.
 func (m *MetricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	var r core.Row
 	timeSpent := time.GetTimeSpent(func() {
@@ -76,7 +76,7 @@ func (m *MetricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row 
 	return r
 }
 
-// RegisterHeader decorates the RegisterHeader method of Maroto instance.
+// RegisterHeader decorates the RegisterHeader method of maroto instance.
 func (m *MetricsDecorator) RegisterHeader(rows ...core.Row) error {
 	var err error
 	timeSpent := time.GetTimeSpent(func() {
@@ -86,7 +86,7 @@ func (m *MetricsDecorator) RegisterHeader(rows ...core.Row) error {
 	return err
 }
 
-// RegisterFooter decorates the RegisterFooter method of Maroto instance.
+// RegisterFooter decorates the RegisterFooter method of maroto instance.
 func (m *MetricsDecorator) RegisterFooter(rows ...core.Row) error {
 	var err error
 	timeSpent := time.GetTimeSpent(func() {
@@ -96,7 +96,7 @@ func (m *MetricsDecorator) RegisterFooter(rows ...core.Row) error {
 	return err
 }
 
-// GetStructure decorates the GetStructure method of Maroto instance.
+// GetStructure decorates the GetStructure method of maroto instance.
 func (m *MetricsDecorator) GetStructure() *node.Node[core.Structure] {
 	var tree *node.Node[core.Structure]
 
