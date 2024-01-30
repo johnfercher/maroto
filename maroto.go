@@ -24,7 +24,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 )
 
-type maroto struct {
+type Maroto struct {
 	config   *entity.Config
 	provider core.Provider
 	cache    cache.Cache
@@ -51,7 +51,7 @@ func New(cfgs ...*entity.Config) core.Maroto {
 	cfg := getConfig(cfgs...)
 	provider := getProvider(cache, cfg)
 
-	m := &maroto{
+	m := &Maroto{
 		provider: provider,
 		cell: entity.NewRootCell(cfg.Dimensions.Width, cfg.Dimensions.Height, entity.Margins{
 			Left:   cfg.Margins.Left,
@@ -76,7 +76,7 @@ func New(cfgs ...*entity.Config) core.Maroto {
 // new page will appear as the next. If the page provided have
 // more rows than the maximum useful area of a page, maroto will split
 // that page in more than one.
-func (m *maroto) AddPages(pages ...core.Page) {
+func (m *Maroto) AddPages(pages ...core.Page) {
 	for _, page := range pages {
 		if m.currentHeight != m.headerHeight {
 			m.fillPageToAddNew()
@@ -91,7 +91,7 @@ func (m *maroto) AddPages(pages ...core.Page) {
 // maroto will automatically add a new page. Maroto use the information of
 // PageSize, PageMargin, FooterSize and HeaderSize to calculate the useful
 // area of a page.
-func (m *maroto) AddRows(rows ...core.Row) {
+func (m *Maroto) AddRows(rows ...core.Row) {
 	m.addRows(rows...)
 }
 
@@ -100,7 +100,7 @@ func (m *maroto) AddRows(rows ...core.Row) {
 // maroto will automatically add a new page. Maroto use the information of
 // PageSize, PageMargin, FooterSize and HeaderSize to calculate the useful
 // area of a page.
-func (m *maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
+func (m *Maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	r := row.New(rowHeight).Add(cols...)
 	m.addRow(r)
 	return r
@@ -110,7 +110,7 @@ func (m *maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 // of the document. The header will appear in every new page of the document.
 // The header cannot occupy an area greater than the useful area of the page,
 // it this case the method will return an error.
-func (m *maroto) RegisterHeader(rows ...core.Row) error {
+func (m *Maroto) RegisterHeader(rows ...core.Row) error {
 	height := m.getRowsHeight(rows...)
 	if height+m.footerHeight > m.config.Dimensions.Height {
 		return errors.New("header height is greater than page useful area")
@@ -130,7 +130,7 @@ func (m *maroto) RegisterHeader(rows ...core.Row) error {
 // of the document. The footer will appear in every new page of the document.
 // The footer cannot occupy an area greater than the useful area of the page,
 // it this case the method will return an error.
-func (m *maroto) RegisterFooter(rows ...core.Row) error {
+func (m *Maroto) RegisterFooter(rows ...core.Row) error {
 	height := m.getRowsHeight(rows...)
 	if height > m.config.Dimensions.Height {
 		return errors.New("footer height is greater than page useful area")
@@ -143,7 +143,7 @@ func (m *maroto) RegisterFooter(rows ...core.Row) error {
 
 // Generate is responsible to compute the component tree created by
 // the usage of all other Maroto methods, and generate the PDF document.
-func (m *maroto) Generate() (core.Document, error) {
+func (m *Maroto) Generate() (core.Document, error) {
 	m.provider.SetProtection(m.config.Protection)
 	m.provider.SetCompression(m.config.Compression)
 	m.provider.SetMetadata(m.config.Metadata)
@@ -160,7 +160,7 @@ func (m *maroto) Generate() (core.Document, error) {
 
 // GetStructure is responsible for return the component tree, this is useful
 // on unit tests cases.
-func (m *maroto) GetStructure() *node.Node[core.Structure] {
+func (m *Maroto) GetStructure() *node.Node[core.Structure] {
 	m.fillPageToAddNew()
 
 	str := core.Structure{
@@ -177,13 +177,13 @@ func (m *maroto) GetStructure() *node.Node[core.Structure] {
 	return node
 }
 
-func (m *maroto) addRows(rows ...core.Row) {
+func (m *Maroto) addRows(rows ...core.Row) {
 	for _, row := range rows {
 		m.addRow(row)
 	}
 }
 
-func (m *maroto) addRow(r core.Row) {
+func (m *Maroto) addRow(r core.Row) {
 	maxHeight := m.cell.Height
 
 	rowHeight := r.GetHeight()
@@ -207,14 +207,14 @@ func (m *maroto) addRow(r core.Row) {
 	m.rows = append(m.rows, r)
 }
 
-func (m *maroto) addHeader() {
+func (m *Maroto) addHeader() {
 	for _, headerRow := range m.header {
 		m.currentHeight += headerRow.GetHeight()
 		m.rows = append(m.rows, headerRow)
 	}
 }
 
-func (m *maroto) fillPageToAddNew() {
+func (m *Maroto) fillPageToAddNew() {
 	space := m.cell.Height - m.currentHeight - m.footerHeight
 
 	c := col.New(m.config.MaxGridSize)
@@ -240,14 +240,14 @@ func (m *maroto) fillPageToAddNew() {
 	m.currentHeight = 0
 }
 
-func (m *maroto) setConfig() {
+func (m *Maroto) setConfig() {
 	for i, page := range m.pages {
 		page.SetConfig(m.config)
 		page.SetNumber(i+1, len(m.pages))
 	}
 }
 
-func (m *maroto) generate() (core.Document, error) {
+func (m *Maroto) generate() (core.Document, error) {
 	innerCtx := m.cell.Copy()
 
 	for _, page := range m.pages {
@@ -262,7 +262,7 @@ func (m *maroto) generate() (core.Document, error) {
 	return core.NewPDF(documentBytes, nil), nil
 }
 
-func (m *maroto) generateConcurrently() (core.Document, error) {
+func (m *Maroto) generateConcurrently() (core.Document, error) {
 	chunks := len(m.pages) / m.config.WorkersQuantity
 	if chunks == 0 {
 		chunks = 1
@@ -297,7 +297,7 @@ func (m *maroto) generateConcurrently() (core.Document, error) {
 	return core.NewPDF(mergedBytes, nil), nil
 }
 
-func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
+func (m *Maroto) processPage(pages []core.Page) ([]byte, error) {
 	innerCtx := m.cell.Copy()
 
 	innerProvider := getProvider(cache.NewMutexDecorator(cache.New()), m.config)
@@ -308,7 +308,7 @@ func (m *maroto) processPage(pages []core.Page) ([]byte, error) {
 	return innerProvider.GenerateBytes()
 }
 
-func (m *maroto) getRowsHeight(rows ...core.Row) float64 {
+func (m *Maroto) getRowsHeight(rows ...core.Row) float64 {
 	var height float64
 	for _, r := range rows {
 		height += r.GetHeight()

@@ -20,7 +20,7 @@ func TestNewMetricsDecorator(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*maroto.metricsDecorator", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*maroto.MetricsDecorator", fmt.Sprintf("%T", sut))
 }
 
 func TestMetricsDecorator_AddPages(t *testing.T) {
