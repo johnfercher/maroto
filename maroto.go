@@ -74,7 +74,7 @@ func New(cfgs ...*entity.Config) core.Maroto {
 // AddPages is responsible for add pages directly in the document.
 // By adding a page directly, the current cursor will reset and the
 // new page will appear as the next. If the page provided have
-// more rows than the maximum useful area of a page, Maroto will split
+// more rows than the maximum useful area of a page, maroto will split
 // that page in more than one.
 func (m *Maroto) AddPages(pages ...core.Page) {
 	for _, page := range pages {
@@ -88,7 +88,7 @@ func (m *Maroto) AddPages(pages ...core.Page) {
 
 // AddRows is responsible for add rows in the current document.
 // By adding a row, if the row will extrapolate the useful area of a page,
-// Maroto will automatically add a new page. Maroto use the information of
+// maroto will automatically add a new page. maroto use the information of
 // PageSize, PageMargin, FooterSize and HeaderSize to calculate the useful
 // area of a page.
 func (m *Maroto) AddRows(rows ...core.Row) {
@@ -97,7 +97,7 @@ func (m *Maroto) AddRows(rows ...core.Row) {
 
 // AddRow is responsible for add one row in the current document.
 // By adding a row, if the row will extrapolate the useful area of a page,
-// Maroto will automatically add a new page. Maroto use the information of
+// maroto will automatically add a new page. maroto use the information of
 // PageSize, PageMargin, FooterSize and HeaderSize to calculate the useful
 // area of a page.
 func (m *Maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
@@ -142,7 +142,7 @@ func (m *Maroto) RegisterFooter(rows ...core.Row) error {
 }
 
 // Generate is responsible to compute the component tree created by
-// the usage of all other Maroto methods, and generate the PDF document.
+// the usage of all other maroto methods, and generate the PDF document.
 func (m *Maroto) Generate() (core.Document, error) {
 	m.provider.SetProtection(m.config.Protection)
 	m.provider.SetCompression(m.config.Compression)
