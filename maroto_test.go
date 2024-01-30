@@ -23,7 +23,7 @@ func TestNew(t *testing.T) {
 
 		// Assert
 		assert.NotNil(t, sut)
-		assert.Equal(t, "*maroto.maroto", fmt.Sprintf("%T", sut))
+		assert.Equal(t, "*maroto.Maroto", fmt.Sprintf("%T", sut))
 	})
 	t.Run("new with config", func(t *testing.T) {
 		// Arrange
@@ -35,7 +35,7 @@ func TestNew(t *testing.T) {
 
 		// Assert
 		assert.NotNil(t, sut)
-		assert.Equal(t, "*maroto.maroto", fmt.Sprintf("%T", sut))
+		assert.Equal(t, "*maroto.Maroto", fmt.Sprintf("%T", sut))
 	})
 	t.Run("new with config and worker pool size", func(t *testing.T) {
 		// Arrange
@@ -48,7 +48,7 @@ func TestNew(t *testing.T) {
 
 		// Assert
 		assert.NotNil(t, sut)
-		assert.Equal(t, "*maroto.maroto", fmt.Sprintf("%T", sut))
+		assert.Equal(t, "*maroto.Maroto", fmt.Sprintf("%T", sut))
 	})
 }
 

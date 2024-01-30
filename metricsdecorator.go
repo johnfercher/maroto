@@ -7,7 +7,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
 
-type metricsDecorator struct {
+type MetricsDecorator struct {
 	addRowsTime   []*metrics.Time
 	addRowTime    []*metrics.Time
 	addPageTime   []*metrics.Time
@@ -19,15 +19,15 @@ type metricsDecorator struct {
 }
 
 // NewMetricsDecorator is responsible to create the metrics decorator
-// for the maroto instance.
+// for the Maroto instance.
 func NewMetricsDecorator(inner core.Maroto) core.Maroto {
-	return &metricsDecorator{
+	return &MetricsDecorator{
 		inner: inner,
 	}
 }
 
-// Generate decorates the Generate method of maroto instance.
-func (m *metricsDecorator) Generate() (core.Document, error) {
+// Generate decorates the Generate method of Maroto instance.
+func (m *MetricsDecorator) Generate() (core.Document, error) {
 	var document core.Document
 	var err error
 
@@ -47,8 +47,8 @@ func (m *metricsDecorator) Generate() (core.Document, error) {
 	return core.NewPDF(bytes, report), nil
 }
 
-// AddPages decorates the AddPages method of maroto instance.
-func (m *metricsDecorator) AddPages(pages ...core.Page) {
+// AddPages decorates the AddPages method of Maroto instance.
+func (m *MetricsDecorator) AddPages(pages ...core.Page) {
 	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddPages(pages...)
 	})
@@ -56,8 +56,8 @@ func (m *metricsDecorator) AddPages(pages ...core.Page) {
 	m.addPageTime = append(m.addPageTime, timeSpent)
 }
 
-// AddRows decorates the AddRows method of maroto instance.
-func (m *metricsDecorator) AddRows(rows ...core.Row) {
+// AddRows decorates the AddRows method of Maroto instance.
+func (m *MetricsDecorator) AddRows(rows ...core.Row) {
 	timeSpent := time.GetTimeSpent(func() {
 		m.inner.AddRows(rows...)
 	})
@@ -65,8 +65,8 @@ func (m *metricsDecorator) AddRows(rows ...core.Row) {
 	m.addRowsTime = append(m.addRowsTime, timeSpent)
 }
 
-// AddRow decorates the AddRow method of maroto instance.
-func (m *metricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row {
+// AddRow decorates the AddRow method of Maroto instance.
+func (m *MetricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	var r core.Row
 	timeSpent := time.GetTimeSpent(func() {
 		r = m.inner.AddRow(rowHeight, cols...)
@@ -76,8 +76,8 @@ func (m *metricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row 
 	return r
 }
 
-// RegisterHeader decorates the RegisterHeader method of maroto instance.
-func (m *metricsDecorator) RegisterHeader(rows ...core.Row) error {
+// RegisterHeader decorates the RegisterHeader method of Maroto instance.
+func (m *MetricsDecorator) RegisterHeader(rows ...core.Row) error {
 	var err error
 	timeSpent := time.GetTimeSpent(func() {
 		err = m.inner.RegisterHeader(rows...)
@@ -86,8 +86,8 @@ func (m *metricsDecorator) RegisterHeader(rows ...core.Row) error {
 	return err
 }
 
-// RegisterFooter decorates the RegisterFooter method of maroto instance.
-func (m *metricsDecorator) RegisterFooter(rows ...core.Row) error {
+// RegisterFooter decorates the RegisterFooter method of Maroto instance.
+func (m *MetricsDecorator) RegisterFooter(rows ...core.Row) error {
 	var err error
 	timeSpent := time.GetTimeSpent(func() {
 		err = m.inner.RegisterFooter(rows...)
@@ -96,8 +96,8 @@ func (m *metricsDecorator) RegisterFooter(rows ...core.Row) error {
 	return err
 }
 
-// GetStructure decorates the GetStructure method of maroto instance.
-func (m *metricsDecorator) GetStructure() *node.Node[core.Structure] {
+// GetStructure decorates the GetStructure method of Maroto instance.
+func (m *MetricsDecorator) GetStructure() *node.Node[core.Structure] {
 	var tree *node.Node[core.Structure]
 
 	timeSpent := time.GetTimeSpent(func() {
@@ -108,7 +108,7 @@ func (m *metricsDecorator) GetStructure() *node.Node[core.Structure] {
 	return tree
 }
 
-func (m *metricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
+func (m *MetricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
 	var timeMetrics []metrics.TimeMetric
 
 	if m.structureTime != nil {
@@ -179,7 +179,7 @@ func (m *metricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
 	}
 }
 
-func (m *metricsDecorator) getAVG(times []*metrics.Time) *metrics.Time {
+func (m *MetricsDecorator) getAVG(times []*metrics.Time) *metrics.Time {
 	var sum float64
 	for _, time := range times {
 		sum += time.Value
