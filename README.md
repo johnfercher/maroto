@@ -1,6 +1,6 @@
 # Maroto V2
 
-[![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg)
+[![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://pkg.go.dev/github.com/johnfercher/maroto/v2)
 [![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
 [![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines)  
 [![CI](https://github.com/johnfercher/maroto/actions/workflows/goci.yml/badge.svg)](https://github.com/johnfercher/maroto/actions/workflows/goci.yml)
@@ -43,7 +43,8 @@ go get github.com/johnfercher/maroto/v2@v2.0.0-beta.14
 | `make install`  | Install all dependencies                          | `go`, `curl` and `git`                                        |
 | `make examples` | Run all examples                                  | `go`                                                          |
 | `make mocks`    | Generate mocks                                    | `go` and `mockery`                                            |
-| `make docs`     | Run docs serve local                              | `docsify`                                                     |
+| `make docs`     | Run docsify docs server local                     | `docsify`                                                     |
+| `make godoc`    | Run godoc server local                            | `godoc`                                                       |
 
 ## Stargazers over time
 [![Stargazers over time](https://starchart.cc/johnfercher/maroto.svg?variant=adaptive)](https://starchart.cc/johnfercher/maroto)

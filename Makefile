@@ -30,6 +30,11 @@ install:
 docs:
 	docsify serve docs/
 
+.PHONY: godoc
+godoc:
+	godoc -http=127.0.0.1:6060
+
+
 .PHONY: mocks
 mocks:
 	mockery

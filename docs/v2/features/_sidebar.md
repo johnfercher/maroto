@@ -1,5 +1,6 @@
 * [← Back To Home](README.md?id=maroto-v2)
 * **Features**
+  * [Basics](v2/features/basics.md?id=basics)
   * [Add Page](v2/features/addpage.md?id=add-page)
   * [Background](v2/features/background.md?id=add-background)
   * [Barcode](v2/features/barcode.md?id=barcode)
