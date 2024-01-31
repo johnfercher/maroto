@@ -1,5 +1,8 @@
 # Header
 
+## GoDoc
+* [maroto : RegisterHeader](https://pkg.go.dev/github.com/johnfercher/maroto/v2#Maroto.RegisterHeader)
+
 ## Code Example
 [filename](../../assets/examples/header/v2/main.go ':include :type=code')
 

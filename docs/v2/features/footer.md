@@ -1,5 +1,8 @@
 # Footer
 
+## GoDoc
+* [maroto : RegisterFooter](https://pkg.go.dev/github.com/johnfercher/maroto/v2#Maroto.RegisterFooter)
+
 ## Code Example
 [filename](../../assets/examples/footer/v2/main.go ':include :type=code')
 

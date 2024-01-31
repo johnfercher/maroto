@@ -10,41 +10,41 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
 
-type pdf struct {
+type Pdf struct {
 	bytes  []byte
 	report *metrics.Report
 }
 
 // NewPDF is responsible to create a new instance of PDF.
 func NewPDF(bytes []byte, report *metrics.Report) Document {
-	return &pdf{
+	return &Pdf{
 		bytes:  bytes,
 		report: report,
 	}
 }
 
 // GetBytes returns the PDF bytes.
-func (p *pdf) GetBytes() []byte {
+func (p *Pdf) GetBytes() []byte {
 	return p.bytes
 }
 
 // GetBase64 returns the PDF bytes in base64.
-func (p *pdf) GetBase64() string {
+func (p *Pdf) GetBase64() string {
 	return base64.StdEncoding.EncodeToString(p.bytes)
 }
 
 // GetReport returns the metrics.Report.
-func (p *pdf) GetReport() *metrics.Report {
+func (p *Pdf) GetReport() *metrics.Report {
 	return p.report
 }
 
 // Save saves the PDF in a file.
-func (p *pdf) Save(file string) error {
+func (p *Pdf) Save(file string) error {
 	return os.WriteFile(file, p.bytes, os.ModePerm)
 }
 
 // Merge merges the PDF with another PDF.
-func (p *pdf) Merge(bytes []byte) error {
+func (p *Pdf) Merge(bytes []byte) error {
 	var mergedBytes []byte
 	var err error
 
@@ -62,7 +62,7 @@ func (p *pdf) Merge(bytes []byte) error {
 	return nil
 }
 
-func (p *pdf) appendMetric(timeSpent *metrics.Time) {
+func (p *Pdf) appendMetric(timeSpent *metrics.Time) {
 	timeMetric := metrics.TimeMetric{
 		Key:   "merge_pdf",
 		Times: []*metrics.Time{timeSpent},

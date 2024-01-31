@@ -1,8 +1,11 @@
 # Merge PDF
 
+## GoDoc
+* [merge : Bytes](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/merge#Bytes)
+* [core : Document](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/core#Document)
+
 ## Code Example
 [filename](../../assets/examples/mergepdf/v2/main.go  ':include :type=code')
-
 
 ## PDF Generated
 ```pdf

@@ -19,7 +19,7 @@ func TestNewPDF(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*core.pdf", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*core.Pdf", fmt.Sprintf("%T", sut))
 }
 
 func TestPdf_GetBase64(t *testing.T) {
