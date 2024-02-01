@@ -1,11 +1,12 @@
 package maroto_test
 
 import (
+	"log"
+
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"log"
 )
 
 // ExampleNew demonstrates how to create a maroto instance.
