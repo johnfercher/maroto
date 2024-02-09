@@ -39,26 +39,28 @@ type Builder interface {
 	WithCreationDate(time time.Time) Builder
 	WithCustomFonts([]*entity.CustomFont) Builder
 	WithBackgroundImage([]byte, extension.Type) Builder
+	WithDisableAutoPageBreak(disabled bool) Builder
 	Build() *entity.Config
 }
 
 type CfgBuilder struct {
-	providerType      provider.Type
-	dimensions        *entity.Dimensions
-	margins           *entity.Margins
-	workerPoolSize    int
-	debug             bool
-	maxGridSize       int
-	defaultFont       *props.Font
-	customFonts       []*entity.CustomFont
-	pageNumberPattern string
-	pageNumberPlace   props.Place
-	protection        *entity.Protection
-	compression       bool
-	pageSize          *pagesize.Type
-	orientation       orientation.Type
-	metadata          *entity.Metadata
-	backgroundImage   *entity.Image
+	providerType         provider.Type
+	dimensions           *entity.Dimensions
+	margins              *entity.Margins
+	workerPoolSize       int
+	debug                bool
+	maxGridSize          int
+	defaultFont          *props.Font
+	customFonts          []*entity.CustomFont
+	pageNumberPattern    string
+	pageNumberPlace      props.Place
+	protection           *entity.Protection
+	compression          bool
+	pageSize             *pagesize.Type
+	orientation          orientation.Type
+	metadata             *entity.Metadata
+	backgroundImage      *entity.Image
+	disableAutoPageBreak bool
 }
 
 // NewBuilder is responsible to create an instance of Builder.
@@ -305,23 +307,30 @@ func (b *CfgBuilder) WithBackgroundImage(bytes []byte, ext extension.Type) Build
 	return b
 }
 
+// WithDisableAutoPageBreak defines the option to disable automatic page breaks.
+func (b *CfgBuilder) WithDisableAutoPageBreak(disabled bool) Builder {
+	b.disableAutoPageBreak = disabled
+	return b
+}
+
 // Build finalizes the customization returning the entity.Config.
 func (b *CfgBuilder) Build() *entity.Config {
 	return &entity.Config{
-		ProviderType:      b.providerType,
-		Dimensions:        b.getDimensions(),
-		Margins:           b.margins,
-		WorkersQuantity:   b.workerPoolSize,
-		Debug:             b.debug,
-		MaxGridSize:       b.maxGridSize,
-		DefaultFont:       b.defaultFont,
-		PageNumberPattern: b.pageNumberPattern,
-		PageNumberPlace:   b.pageNumberPlace,
-		Protection:        b.protection,
-		Compression:       b.compression,
-		Metadata:          b.metadata,
-		CustomFonts:       b.customFonts,
-		BackgroundImage:   b.backgroundImage,
+		ProviderType:         b.providerType,
+		Dimensions:           b.getDimensions(),
+		Margins:              b.margins,
+		WorkersQuantity:      b.workerPoolSize,
+		Debug:                b.debug,
+		MaxGridSize:          b.maxGridSize,
+		DefaultFont:          b.defaultFont,
+		PageNumberPattern:    b.pageNumberPattern,
+		PageNumberPlace:      b.pageNumberPlace,
+		Protection:           b.protection,
+		Compression:          b.compression,
+		Metadata:             b.metadata,
+		CustomFonts:          b.customFonts,
+		BackgroundImage:      b.backgroundImage,
+		DisableAutoPageBreak: b.disableAutoPageBreak,
 	}
 }
 

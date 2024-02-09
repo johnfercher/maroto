@@ -53,6 +53,10 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 		fpdf.AddUTF8FontFromBytes(font.Family, string(font.Style), font.Bytes)
 	}
 
+	if cfg.DisableAutoPageBreak {
+		fpdf.SetAutoPageBreak(false, 0)
+	}
+
 	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)
 	fpdf.AddPage()
 

@@ -50,6 +50,7 @@ func TestConfig_ToMap(t *testing.T) {
 	assert.Equal(t, extension.Png, m["entity_extension"])
 	assert.Equal(t, 100.0, m["background_dimension_width"])
 	assert.Equal(t, 200.0, m["background_dimension_height"])
+	assert.Equal(t, true, m["config_disable_auto_page_break"])
 }
 
 func fixtureConfig() Config {
@@ -61,19 +62,20 @@ func fixtureConfig() Config {
 	image := fixtureImage()
 
 	return Config{
-		ProviderType:      provider.Gofpdf,
-		Dimensions:        &dimensions,
-		Margins:           &margins,
-		DefaultFont:       &font,
-		WorkersQuantity:   7,
-		Debug:             true,
-		MaxGridSize:       15,
-		PageNumberPattern: "pattern",
-		PageNumberPlace:   props.Bottom,
-		Protection:        &protection,
-		Compression:       true,
-		Metadata:          &metadata,
-		BackgroundImage:   &image,
+		ProviderType:         provider.Gofpdf,
+		Dimensions:           &dimensions,
+		Margins:              &margins,
+		DefaultFont:          &font,
+		WorkersQuantity:      7,
+		Debug:                true,
+		MaxGridSize:          15,
+		PageNumberPattern:    "pattern",
+		PageNumberPlace:      props.Bottom,
+		Protection:           &protection,
+		Compression:          true,
+		Metadata:             &metadata,
+		BackgroundImage:      &image,
+		DisableAutoPageBreak: true,
 	}
 }
 
