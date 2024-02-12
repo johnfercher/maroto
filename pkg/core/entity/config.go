@@ -7,20 +7,21 @@ import (
 
 // Config is the configuration of a maroto instance.
 type Config struct {
-	ProviderType      provider.Type
-	Dimensions        *Dimensions
-	Margins           *Margins
-	DefaultFont       *props.Font
-	CustomFonts       []*CustomFont
-	WorkersQuantity   int
-	Debug             bool
-	MaxGridSize       int
-	PageNumberPattern string
-	PageNumberPlace   props.Place
-	Protection        *Protection
-	Compression       bool
-	Metadata          *Metadata
-	BackgroundImage   *Image
+	ProviderType         provider.Type
+	Dimensions           *Dimensions
+	Margins              *Margins
+	DefaultFont          *props.Font
+	CustomFonts          []*CustomFont
+	WorkersQuantity      int
+	Debug                bool
+	MaxGridSize          int
+	PageNumberPattern    string
+	PageNumberPlace      props.Place
+	Protection           *Protection
+	Compression          bool
+	Metadata             *Metadata
+	BackgroundImage      *Image
+	DisableAutoPageBreak bool
 }
 
 // ToMap converts Config to a map[string]interface{} .
@@ -77,6 +78,10 @@ func (c *Config) ToMap() map[string]interface{} {
 
 	if c.BackgroundImage != nil {
 		m = c.BackgroundImage.AppendMap(m)
+	}
+
+	if c.DisableAutoPageBreak {
+		m["config_disable_auto_page_break"] = c.DisableAutoPageBreak
 	}
 
 	return m

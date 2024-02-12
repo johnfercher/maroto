@@ -477,6 +477,34 @@ func (_c *Builder_WithDimensions_Call) RunAndReturn(run func(float64, float64) c
 	return _c
 }
 
+// Builder_WithDisableAutoPageBreak_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'WithDisableAutoPageBreak'
+type Builder_WithDisableAutoPageBreak_Call struct {
+	*mock.Call
+}
+
+// WithDisableAutoPageBreak is a helper method to define mock.On call
+//   - disabled bool
+func (_e *Builder_Expecter) WithDisableAutoPageBreak(disabled interface{}) *Builder_WithDisableAutoPageBreak_Call {
+	return &Builder_WithDisableAutoPageBreak_Call{Call: _e.mock.On("WithDisableAutoPageBreak", disabled)}
+}
+
+func (_c *Builder_WithDisableAutoPageBreak_Call) Run(run func(disabled bool)) *Builder_WithDisableAutoPageBreak_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(bool))
+	})
+	return _c
+}
+
+func (_c *Builder_WithDisableAutoPageBreak_Call) Return(_a0 config.Builder) *Builder_WithDisableAutoPageBreak_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Builder_WithDisableAutoPageBreak_Call) RunAndReturn(run func(bool) config.Builder) *Builder_WithDisableAutoPageBreak_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // WithMargins provides a mock function with given fields: left, top, right
 func (_m *Builder) WithMargins(left float64, top float64, right float64) config.Builder {
 	ret := _m.Called(left, top, right)

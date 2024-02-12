@@ -41,6 +41,7 @@ func TestBuilder_Build(t *testing.T) {
 				Family: fontfamily.Arial,
 			},
 		},
+		DisableAutoPageBreak: true,
 	}
 
 	// Act
