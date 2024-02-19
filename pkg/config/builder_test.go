@@ -498,3 +498,26 @@ func TestBuilder_WithCreationDate(t *testing.T) {
 		assert.Equal(t, &timeNow, cfg.Metadata.CreationDate)
 	})
 }
+
+func TestBuilder_WithDisableAutoPageBreak(t *testing.T) {
+	t.Run("when disable auto page break is false, should not change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithDisableAutoPageBreak(false).Build()
+
+		// Assert
+		assert.Equal(t, false, cfg.DisableAutoPageBreak)
+	})
+	t.Run("when disable auto page break is true, should change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithDisableAutoPageBreak(true).Build()
+
+		// Assert
+		assert.Equal(t, true, cfg.DisableAutoPageBreak)
+	})
+}

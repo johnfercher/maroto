@@ -10,6 +10,7 @@
   * [Custom Font](v2/features/customfont.md?id=custom-font)
   * [Custom Page](v2/features/custompage.md?id=custom-page)
   * [Data Matrix](v2/features/datamatrix.md?id=data-matrix)
+  * [Disable Page Break](v2/features/disablepagebreak.md?id=disable-page-break)
   * [Footer](v2/features/footer.md?id=footer)
   * [Header](v2/features/header.md?id=header)
   * [Images](v2/features/image.md?id=image)
