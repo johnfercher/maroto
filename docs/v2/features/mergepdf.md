@@ -2,7 +2,8 @@
 
 ## GoDoc
 * [merge : Bytes](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/merge#Bytes)
-* [core : Document](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/core#Document)
+* [interface : Document](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/core#Document)
+* [pdf : Merge](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/core#Pdf.Merge)
 
 ## Code Example
 [filename](../../assets/examples/mergepdf/v2/main.go  ':include :type=code')
