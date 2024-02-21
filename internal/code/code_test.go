@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
+
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/internal/code"
@@ -102,6 +104,29 @@ func TestCode_GenBar(t *testing.T) {
 
 		// Act
 		bytes, err := sut.GenBar(data, cell, prop)
+
+		// Assert
+		assert.NotNil(t, bytes)
+		assert.Nil(t, err)
+	})
+	t.Run("When is ean and can generate bar code, should return bytes", func(t *testing.T) {
+		// Arrange
+		sut := code.New()
+
+		cell := &entity.Cell{
+			X:      10,
+			Y:      10,
+			Width:  100,
+			Height: 100,
+		}
+
+		prop := &props.Barcode{
+			Type: barcode.EAN,
+		}
+		prop.MakeValid()
+
+		// Act
+		bytes, err := sut.GenBar("123456789123", cell, prop)
 
 		// Assert
 		assert.NotNil(t, bytes)

@@ -5,6 +5,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
+
 	"github.com/johnfercher/maroto/v2/internal/cache"
 	"github.com/johnfercher/maroto/v2/internal/merror"
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/cellwriter"
@@ -91,7 +93,7 @@ func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 }
 
 func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcode) {
-	image, err := g.cache.GetImage(code, extension.Jpg)
+	image, err := g.cache.GetImage(g.getBarcodeImageName(code, prop), extension.Jpg)
 	if err != nil {
 		image, err = g.code.GenBar(code, cell, prop)
 	}
@@ -100,7 +102,7 @@ func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcod
 		return
 	}
 
-	g.cache.AddImage(code, image)
+	g.cache.AddImage(g.getBarcodeImageName(code, prop), image)
 	err = g.image.Add(image, cell, g.cfg.Margins, prop.ToRectProp(), extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
@@ -212,4 +214,12 @@ func (g *provider) CreateCol(width, height float64, config *entity.Config, prop 
 
 func (g *provider) SetCompression(compression bool) {
 	g.fpdf.SetCompression(compression)
+}
+
+func (g *provider) getBarcodeImageName(code string, prop *props.Barcode) string {
+	if prop == nil {
+		return code + string(barcode.Code128)
+	}
+
+	return code + string(prop.Type)
 }

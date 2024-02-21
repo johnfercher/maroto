@@ -6,6 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/internal/merror"
 	"github.com/johnfercher/maroto/v2/mocks"
@@ -352,7 +354,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 		prop := fixture.BarcodeProp()
 
 		cache := &mocks.Cache{}
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := &mocks.Code{}
 		code.EXPECT().GenBar(codeContent, cell, &prop).Return(nil, errors.New("anyError2"))
@@ -384,8 +386,8 @@ func TestProvider_AddBarCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := &mocks.Cache{}
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
-		cache.EXPECT().AddImage(codeContent, img)
+		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(img, nil)
+		cache.EXPECT().AddImage(codeContent+"code128", img)
 
 		text := &mocks.Text{}
 		text.EXPECT().Add("could not add barcode to document", cell, merror.DefaultErrorText)
@@ -432,8 +434,52 @@ func TestProvider_AddBarCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := &mocks.Cache{}
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
-		cache.EXPECT().AddImage(codeContent, img)
+		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(img, nil)
+		cache.EXPECT().AddImage(codeContent+"code128", img)
+
+		cfg := &entity.Config{
+			Margins: &entity.Margins{
+				Left:   10,
+				Top:    10,
+				Right:  10,
+				Bottom: 10,
+			},
+		}
+
+		image := &mocks.Image{}
+		image.EXPECT().Add(img, cell, cfg.Margins, prop.ToRectProp(), extension.Jpg, false).Return(nil)
+
+		fpdf := &mocks.Fpdf{}
+		fpdf.EXPECT().ClearError()
+
+		dep := &gofpdf.Dependencies{
+			Cache: cache,
+			Image: image,
+			Fpdf:  fpdf,
+			Cfg:   cfg,
+		}
+
+		sut := gofpdf.New(dep)
+
+		// Act
+		sut.AddBarCode(codeContent, cell, &prop)
+
+		// Assert
+		cache.AssertNumberOfCalls(t, "GetImage", 1)
+		cache.AssertNumberOfCalls(t, "AddImage", 1)
+		image.AssertNumberOfCalls(t, "Add", 1)
+	})
+	t.Run("when barcode is ean and everything is correct, should not apply error message", func(t *testing.T) {
+		// Arrange
+		cell := &entity.Cell{}
+		prop := fixture.BarcodeProp()
+		prop.Type = barcode.EAN
+
+		img := &entity.Image{Bytes: []byte{1, 2, 3}}
+
+		cache := &mocks.Cache{}
+		cache.EXPECT().GetImage(codeContent+"ean", extension.Jpg).Return(img, nil)
+		cache.EXPECT().AddImage(codeContent+"ean", img)
 
 		cfg := &entity.Config{
 			Margins: &entity.Margins{

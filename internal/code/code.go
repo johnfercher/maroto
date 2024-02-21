@@ -5,8 +5,11 @@ import (
 	"image"
 	"image/jpeg"
 
-	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/code128"
+	"github.com/boombuler/barcode/ean"
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
+
+	libBarcode "github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/datamatrix"
 	"github.com/boombuler/barcode/qr"
 
@@ -51,8 +54,10 @@ func (c *code) GenQr(code string) (*entity.Image, error) {
 }
 
 // GenBar is responsible to generate a barcode byte array.
-func (c *code) GenBar(code string, cell *entity.Cell, prop *props.Barcode) (*entity.Image, error) {
-	barCode, err := code128.Encode(code)
+func (c *code) GenBar(code string, _ *entity.Cell, prop *props.Barcode) (*entity.Image, error) {
+	barcodeGen := getBarcodeClosure(prop.Type)
+
+	barCode, err := barcodeGen(code)
 	if err != nil {
 		return nil, err
 	}
@@ -61,12 +66,21 @@ func (c *code) GenBar(code string, cell *entity.Cell, prop *props.Barcode) (*ent
 	heightPercentFromWidth := prop.Proportion.Height / prop.Proportion.Width
 	height := int(width * heightPercentFromWidth)
 
-	scaledBarCode, err := barcode.Scale(barCode, int(width), height)
+	scaledBarCode, err := libBarcode.Scale(barCode, int(width), height)
 	if err != nil {
 		return nil, err
 	}
 
 	return c.getImage(scaledBarCode)
+}
+
+func getBarcodeClosure(barcodeType barcode.Type) func(code string) (libBarcode.BarcodeIntCS, error) {
+	switch barcodeType {
+	case barcode.EAN:
+		return ean.Encode
+	default:
+		return code128.Encode
+	}
 }
 
 func (c *code) getImage(img image.Image) (*entity.Image, error) {
