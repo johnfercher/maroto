@@ -2,9 +2,10 @@ package gofpdf
 
 import (
 	"bytes"
-	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 	"path/filepath"
 	"strings"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
 	"github.com/johnfercher/maroto/v2/internal/merror"

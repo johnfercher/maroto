@@ -2,11 +2,12 @@ package code
 
 import (
 	"bytes"
+	"image"
+	"image/jpeg"
+
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/ean"
 	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
-	"image"
-	"image/jpeg"
 
 	libBarcode "github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/datamatrix"

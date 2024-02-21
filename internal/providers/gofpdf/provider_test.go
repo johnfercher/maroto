@@ -3,9 +3,10 @@ package gofpdf_test
 import (
 	"errors"
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 	"testing"
 	"time"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/internal/merror"

@@ -2,8 +2,9 @@ package code_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
