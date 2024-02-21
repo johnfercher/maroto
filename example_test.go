@@ -3,6 +3,8 @@ package maroto_test
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
+
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
@@ -50,7 +52,7 @@ func ExampleMaroto_AddPages() {
 func ExampleMaroto_AddRow() {
 	m := maroto.New()
 
-	m.AddRow(10, code.NewBarCol(12, "barcode"))
+	m.AddRow(10, text.NewCol(12, "text"))
 
 	// Do things and generate
 }
@@ -61,9 +63,23 @@ func ExampleMaroto_AddRows() {
 
 	m.AddRows(
 		code.NewBarRow(12, "barcode"),
-		code.NewQrRow(12, "barcode"),
-		code.NewMatrixRow(12, "barcode"),
+		text.NewRow(12, "text"),
 	)
+
+	// Do things and generate
+}
+
+// ExampleMaroto_RegisterFooter demonstrates how to register a footer to me added in every new page.
+// An error is returned if the area occupied by the footer is greater than the page area.
+func ExampleMaroto_RegisterFooter() {
+	m := maroto.New()
+
+	err := m.RegisterFooter(
+		code.NewBarRow(12, "barcode"),
+		text.NewRow(12, "text"))
+	if err != nil {
+		panic(err)
+	}
 
 	// Do things and generate
 }
