@@ -1,5 +1,7 @@
 package props
 
+import "github.com/johnfercher/maroto/v2/pkg/consts/barcode"
+
 // Barcode represents properties from a barcode inside a cell.
 type Barcode struct {
 	// Left is the space between the left cell boundary to the barcode, if center is false.
@@ -15,6 +17,8 @@ type Barcode struct {
 	Proportion Proportion
 	// Center define that the barcode will be vertically and horizontally centralized.
 	Center bool
+	// Type represents the barcode type. Default: code128
+	Type barcode.Type
 }
 
 // ToMap from Barcode will return a map representation from Barcode.
@@ -101,5 +105,9 @@ func (b *Barcode) MakeValid() {
 		b.Proportion.Height = b.Proportion.Width * maxHeightProportionBasedOnWidth
 	} else if b.Proportion.Height < b.Proportion.Width*minHeightProportionBasedOnWidth {
 		b.Proportion.Height = b.Proportion.Width * minHeightProportionBasedOnWidth
+	}
+
+	if b.Type == "" {
+		b.Type = barcode.Code128
 	}
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -90,6 +91,21 @@ func GetMaroto() core.Maroto {
 		code.NewBarCol(2, "https://github.com/johnfercher/maroto", props.Barcode{
 			Center:  true,
 			Percent: 100,
+		}),
+	)
+
+	m.AddRow(40,
+		code.NewBarCol(2, "123456789123", props.Barcode{
+			Center: true,
+			Type:   barcode.EAN,
+		}),
+		code.NewBarCol(4, "123456789123", props.Barcode{
+			Center: true,
+			Type:   barcode.EAN,
+		}),
+		code.NewBarCol(6, "123456789123", props.Barcode{
+			Center: true,
+			Type:   barcode.EAN,
 		}),
 	)
 
