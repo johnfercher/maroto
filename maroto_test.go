@@ -231,3 +231,32 @@ func TestMaroto_Generate(t *testing.T) {
 		assert.NotNil(t, doc)
 	})
 }
+
+func TestMaroto_GetCurrentHeight(t *testing.T) {
+	t.Run("with no rows", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Assert
+		currentHeight := sut.GetCurrentHeight()
+		if currentHeight != 0 {
+			t.Fatalf("should return expected current height, want: 0, got : %f", currentHeight)
+		}
+		t.Logf("should return expected current height")
+	})
+	t.Run("add two rows", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Act
+		sut.AddRow(10, col.New(12))
+		sut.AddRow(10, col.New(12))
+
+		// Assert
+		currentHeight := sut.GetCurrentHeight()
+		if currentHeight != 20 {
+			t.Fatalf("should return expected current height, want: 0, got : %f", currentHeight)
+		}
+		t.Logf("should return expected current height")
+	})
+}

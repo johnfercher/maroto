@@ -18,6 +18,7 @@ type Maroto interface {
 	AddPages(pages ...Page)
 	GetStructure() *node.Node[Structure]
 	Generate() (Document, error)
+	GetCurrentHeight() float64
 }
 
 // Document is the interface that wraps the basic methods of a document.

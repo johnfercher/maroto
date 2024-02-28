@@ -108,6 +108,18 @@ func (m *MetricsDecorator) GetStructure() *node.Node[core.Structure] {
 	return tree
 }
 
+// GetCurrentHeight decorates the GetCurrentHeight method of maroto instance.
+func (m *MetricsDecorator) GetCurrentHeight() float64 {
+	var height float64
+
+	timeSpent := time.GetTimeSpent(func() {
+		height = m.inner.GetCurrentHeight()
+	})
+	m.structureTime = timeSpent
+
+	return height
+}
+
 func (m *MetricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
 	var timeMetrics []metrics.TimeMetric
 

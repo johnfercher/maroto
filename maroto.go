@@ -177,6 +177,11 @@ func (m *Maroto) GetStructure() *node.Node[core.Structure] {
 	return node
 }
 
+// GetCurrentHeight is responsible for returning the currentHeight value
+func (m *Maroto) GetCurrentHeight() float64 {
+	return m.currentHeight
+}
+
 func (m *Maroto) addRows(rows ...core.Row) {
 	for _, row := range rows {
 		m.addRow(row)

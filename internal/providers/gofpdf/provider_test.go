@@ -22,7 +22,8 @@ import (
 )
 
 const (
-	codeContent = "code"
+	codeContent    = "code"
+	codeContent128 = "code128"
 )
 
 func TestNew(t *testing.T) {
@@ -354,7 +355,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 		prop := fixture.BarcodeProp()
 
 		cache := &mocks.Cache{}
-		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().GetImage(codeContent+codeContent128, extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := &mocks.Code{}
 		code.EXPECT().GenBar(codeContent, cell, &prop).Return(nil, errors.New("anyError2"))
@@ -386,8 +387,8 @@ func TestProvider_AddBarCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := &mocks.Cache{}
-		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(img, nil)
-		cache.EXPECT().AddImage(codeContent+"code128", img)
+		cache.EXPECT().GetImage(codeContent+codeContent128, extension.Jpg).Return(img, nil)
+		cache.EXPECT().AddImage(codeContent+codeContent128, img)
 
 		text := &mocks.Text{}
 		text.EXPECT().Add("could not add barcode to document", cell, merror.DefaultErrorText)
@@ -434,8 +435,8 @@ func TestProvider_AddBarCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := &mocks.Cache{}
-		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(img, nil)
-		cache.EXPECT().AddImage(codeContent+"code128", img)
+		cache.EXPECT().GetImage(codeContent+codeContent128, extension.Jpg).Return(img, nil)
+		cache.EXPECT().AddImage(codeContent+codeContent128, img)
 
 		cfg := &entity.Config{
 			Margins: &entity.Margins{
