@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/internal/time"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
 
@@ -118,6 +119,18 @@ func (m *MetricsDecorator) GetCurrentHeight() float64 {
 	m.structureTime = timeSpent
 
 	return height
+}
+
+// GetDimensions decorates the GetDimensions method of maroto instance.
+func (m *MetricsDecorator) GetDimensions() entity.Dimensions {
+	var dimensions entity.Dimensions
+
+	timeSpent := time.GetTimeSpent(func() {
+		dimensions = m.inner.GetDimensions()
+	})
+	m.structureTime = timeSpent
+
+	return dimensions
 }
 
 func (m *MetricsDecorator) buildMetrics(bytesSize int) *metrics.Report {

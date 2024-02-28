@@ -182,6 +182,11 @@ func (m *Maroto) GetCurrentHeight() float64 {
 	return m.currentHeight
 }
 
+// GetDimensions is responsible for returning the width and height dimensions
+func (m *Maroto) GetDimensions() entity.Dimensions {
+	return *m.config.Dimensions
+}
+
 func (m *Maroto) addRows(rows ...core.Row) {
 	for _, row := range rows {
 		m.addRow(row)

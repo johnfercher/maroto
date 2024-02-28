@@ -1,6 +1,7 @@
 package maroto_test
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -97,4 +98,27 @@ func ExampleMaroto_Generate() {
 
 	// You can retrieve as Base64, Save file, Merge with another file or GetReport.
 	_ = doc.GetBytes()
+}
+
+// ExampleMaroto_GetCurrentHeight demonstrates how to get current height of rows on page.
+func ExampleMaroto_GetCurrentHeight() {
+	m := maroto.New()
+
+	// Get dimensions
+
+	currentHeight := m.GetCurrentHeight()
+
+	fmt.Printf("Current Heigh: %f", currentHeight)
+}
+
+// ExampleMaroto_GetDimensions demonstrates how to get configured width and height dimensions.
+func ExampleMaroto_GetDimensions() {
+	m := maroto.New()
+
+	// Get dimensions
+
+	dimensions := m.GetDimensions()
+
+	// You can access Width and Height fields
+	fmt.Printf("Width: %f, Height: %f", dimensions.Width, dimensions.Height)
 }

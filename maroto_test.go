@@ -8,6 +8,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 
@@ -233,7 +234,7 @@ func TestMaroto_Generate(t *testing.T) {
 }
 
 func TestMaroto_GetCurrentHeight(t *testing.T) {
-	t.Run("with no rows", func(t *testing.T) {
+	t.Run("when no rows add, should get current height of 0", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -244,7 +245,7 @@ func TestMaroto_GetCurrentHeight(t *testing.T) {
 		}
 		t.Logf("should return expected current height")
 	})
-	t.Run("add two rows", func(t *testing.T) {
+	t.Run("when two 10 height rows added, should get current height of 20", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -255,8 +256,48 @@ func TestMaroto_GetCurrentHeight(t *testing.T) {
 		// Assert
 		currentHeight := sut.GetCurrentHeight()
 		if currentHeight != 20 {
-			t.Fatalf("should return expected current height, want: 0, got : %f", currentHeight)
+			t.Fatalf("should return expected current height, want: 20, got : %f", currentHeight)
 		}
 		t.Logf("should return expected current height")
+	})
+}
+
+func TestMaroto_GetDimensions(t *testing.T) {
+	t.Run("when created with default dimensions, should get default dimensions", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Assert
+		width, height := pagesize.GetDimensions("default")
+		dimensions := sut.GetDimensions()
+		if dimensions.Width != width {
+			t.Fatalf("should return expected width, want: %f, got : %f", width, dimensions.Width)
+		}
+		t.Logf("should return expected width")
+
+		if dimensions.Height != height {
+			t.Fatalf("should return expected height, want: %f, got : %f", height, dimensions.Height)
+		}
+		t.Logf("should return expected height")
+	})
+	t.Run("when created with A1 pagesize, should get A1 dimensions", func(t *testing.T) {
+		// Arrange
+		cfg := config.NewBuilder().
+			WithPageSize(pagesize.A1).
+			Build()
+		sut := maroto.New(cfg)
+
+		// Assert
+		width, height := pagesize.GetDimensions(pagesize.A1)
+		dimensions := sut.GetDimensions()
+		if dimensions.Width != width {
+			t.Fatalf("should return expected width, want: %f, got : %f", width, dimensions.Width)
+		}
+		t.Logf("should return expected width")
+
+		if dimensions.Height != height {
+			t.Fatalf("should return expected height, want: %f, got : %f", height, dimensions.Height)
+		}
+		t.Logf("should return expected height")
 	})
 }

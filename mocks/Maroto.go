@@ -4,6 +4,8 @@ package mocks
 
 import (
 	core "github.com/johnfercher/maroto/v2/pkg/core"
+	entity "github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	mock "github.com/stretchr/testify/mock"
 
 	node "github.com/johnfercher/go-tree/node"
@@ -275,6 +277,51 @@ func (_c *Maroto_GetCurrentHeight_Call) Return(_a0 float64) *Maroto_GetCurrentHe
 }
 
 func (_c *Maroto_GetCurrentHeight_Call) RunAndReturn(run func() float64) *Maroto_GetCurrentHeight_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetDimensions provides a mock function with given fields:
+func (_m *Maroto) GetDimensions() entity.Dimensions {
+	ret := _m.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetDimensions")
+	}
+
+	var r0 entity.Dimensions
+	if rf, ok := ret.Get(0).(func() entity.Dimensions); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(entity.Dimensions)
+	}
+
+	return r0
+}
+
+// Maroto_GetDimensions_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetDimensions'
+type Maroto_GetDimensions_Call struct {
+	*mock.Call
+}
+
+// GetDimensions is a helper method to define mock.On call
+func (_e *Maroto_Expecter) GetDimensions() *Maroto_GetDimensions_Call {
+	return &Maroto_GetDimensions_Call{Call: _e.mock.On("GetDimensions")}
+}
+
+func (_c *Maroto_GetDimensions_Call) Run(run func()) *Maroto_GetDimensions_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Maroto_GetDimensions_Call) Return(_a0 entity.Dimensions) *Maroto_GetDimensions_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Maroto_GetDimensions_Call) RunAndReturn(run func() entity.Dimensions) *Maroto_GetDimensions_Call {
 	_c.Call.Return(run)
 	return _c
 }
