@@ -240,10 +240,7 @@ func TestMaroto_GetCurrentHeight(t *testing.T) {
 
 		// Assert
 		currentHeight := sut.GetCurrentHeight()
-		if currentHeight != 0 {
-			t.Fatalf("should return expected current height, want: 0, got : %f", currentHeight)
-		}
-		t.Logf("should return expected current height")
+		assert.Equal(t, float64(0), currentHeight)
 	})
 	t.Run("when two 10 height rows added, should get current height of 20", func(t *testing.T) {
 		// Arrange
@@ -255,10 +252,7 @@ func TestMaroto_GetCurrentHeight(t *testing.T) {
 
 		// Assert
 		currentHeight := sut.GetCurrentHeight()
-		if currentHeight != 20 {
-			t.Fatalf("should return expected current height, want: 20, got : %f", currentHeight)
-		}
-		t.Logf("should return expected current height")
+		assert.Equal(t, float64(20), currentHeight)
 	})
 }
 
@@ -268,17 +262,10 @@ func TestMaroto_GetDimensions(t *testing.T) {
 		sut := maroto.New()
 
 		// Assert
-		width, height := pagesize.GetDimensions("default")
+		defaultWidth, defaultHeight := pagesize.GetDimensions("default")
 		dimensions := sut.GetDimensions()
-		if dimensions.Width != width {
-			t.Fatalf("should return expected width, want: %f, got : %f", width, dimensions.Width)
-		}
-		t.Logf("should return expected width")
-
-		if dimensions.Height != height {
-			t.Fatalf("should return expected height, want: %f, got : %f", height, dimensions.Height)
-		}
-		t.Logf("should return expected height")
+		assert.Equal(t, defaultWidth, dimensions.Width)
+		assert.Equal(t, defaultHeight, dimensions.Height)
 	})
 	t.Run("when created with A1 pagesize, should get A1 dimensions", func(t *testing.T) {
 		// Arrange
@@ -288,16 +275,9 @@ func TestMaroto_GetDimensions(t *testing.T) {
 		sut := maroto.New(cfg)
 
 		// Assert
-		width, height := pagesize.GetDimensions(pagesize.A1)
+		a1Width, a1Height := pagesize.GetDimensions(pagesize.A1)
 		dimensions := sut.GetDimensions()
-		if dimensions.Width != width {
-			t.Fatalf("should return expected width, want: %f, got : %f", width, dimensions.Width)
-		}
-		t.Logf("should return expected width")
-
-		if dimensions.Height != height {
-			t.Fatalf("should return expected height, want: %f, got : %f", height, dimensions.Height)
-		}
-		t.Logf("should return expected height")
+		assert.Equal(t, a1Width, dimensions.Width)
+		assert.Equal(t, a1Height, dimensions.Height)
 	})
 }

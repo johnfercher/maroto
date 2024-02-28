@@ -8,6 +8,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
@@ -144,4 +145,31 @@ func TestMetricsDecorator_GetStructure(t *testing.T) {
 	assert.Equal(t, 1, len(report.TimeMetrics[1].Times))
 	inner.AssertNumberOfCalls(t, "AddRows", 1)
 	inner.AssertNumberOfCalls(t, "GetStructure", 1)
+}
+
+func TestMetricsDecorator_GetDimensions(t *testing.T) {
+	// Arrange
+	inner := &mocks.Maroto{}
+	inner.EXPECT().GetDimensions().Return(entity.Dimensions{Width: 100, Height: 150})
+
+	sut := NewMetricsDecorator(inner)
+
+	// Assert
+	dimensions := sut.GetDimensions()
+	assert.Equal(t, float64(100), dimensions.Width)
+	assert.Equal(t, float64(150), dimensions.Height)
+	inner.AssertNumberOfCalls(t, "GetDimensions", 1)
+}
+
+func TestMetricsDecorator_GetCurrentHeight(t *testing.T) {
+	// Arrange
+	inner := &mocks.Maroto{}
+	inner.EXPECT().GetCurrentHeight().Return(120)
+
+	sut := NewMetricsDecorator(inner)
+
+	// Assert
+	currentHeight := sut.GetCurrentHeight()
+	assert.Equal(t, float64(120), currentHeight)
+	inner.AssertNumberOfCalls(t, "GetCurrentHeight", 1)
 }
