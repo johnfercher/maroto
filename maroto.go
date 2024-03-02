@@ -106,6 +106,8 @@ func (m *Maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	return r
 }
 
+// FitlnCurrentPage is responsible to validating whether a line fits on
+// the current page.
 func (m *Maroto) FitlnCurrentPage(heightNewLine float64) bool {
 	contentSize := m.getRowsHeight(m.rows...) + m.footerHeight + m.headerHeight
 	return contentSize+heightNewLine < m.config.Dimensions.Height
