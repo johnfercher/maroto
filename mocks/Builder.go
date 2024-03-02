@@ -78,7 +78,8 @@ func (_c *Builder_Build_Call) RunAndReturn(run func(*entity.Config, cache.Cache)
 func NewBuilder(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Builder {
+},
+) *Builder {
 	mock := &Builder{}
 	mock.Mock.Test(t)
 
