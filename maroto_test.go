@@ -233,7 +233,7 @@ func TestMaroto_Generate(t *testing.T) {
 }
 
 func TestMaroto_FitlnCurrentPage(t *testing.T) {
-	t.Run("if component is smaller than available size, then false", func(t *testing.T) {
+	t.Run("when component is smaller should available size, then false", func(t *testing.T) {
 		sut := maroto.New(config.NewBuilder().
 			WithDimensions(210.0, 297.0).
 			Build())
@@ -246,7 +246,7 @@ func TestMaroto_FitlnCurrentPage(t *testing.T) {
 		sut.AddPages(page.New().Add(rows...))
 		assert.False(t, sut.FitlnCurrentPage(40))
 	})
-	t.Run("if component is larger than the available size, then true", func(t *testing.T) {
+	t.Run("when component is larger should the available size, then true", func(t *testing.T) {
 		sut := maroto.New(config.NewBuilder().
 			WithDimensions(210.0, 297.0).
 			Build())
