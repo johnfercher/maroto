@@ -106,6 +106,11 @@ func (m *Maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	return r
 }
 
+func (m *Maroto) FitlnCurrentPage(heightNewLine float64) bool {
+	contentSize := m.getRowsHeight(m.rows...) + m.footerHeight + m.headerHeight
+	return contentSize+heightNewLine < m.config.Dimensions.Height
+}
+
 // RegisterHeader is responsible to define a set of rows as a header
 // of the document. The header will appear in every new page of the document.
 // The header cannot occupy an area greater than the useful area of the page,

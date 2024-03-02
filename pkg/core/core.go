@@ -15,6 +15,7 @@ type Maroto interface {
 	RegisterFooter(rows ...Row) error
 	AddRows(rows ...Row)
 	AddRow(rowHeight float64, cols ...Col) Row
+	FitlnCurrentPage(heightNewLine float64) bool
 	AddPages(pages ...Page)
 	GetStructure() *node.Node[Structure]
 	Generate() (Document, error)
