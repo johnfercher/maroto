@@ -26,6 +26,10 @@ func NewMetricsDecorator(inner core.Maroto) core.Maroto {
 	}
 }
 
+func (m *MetricsDecorator) FitlnCurrentPage(heightNewLine float64) bool {
+	return m.inner.FitlnCurrentPage(heightNewLine)
+}
+
 // Generate decorates the Generate method of maroto instance.
 func (m *MetricsDecorator) Generate() (core.Document, error) {
 	var document core.Document

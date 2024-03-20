@@ -231,3 +231,32 @@ func TestMaroto_Generate(t *testing.T) {
 		assert.NotNil(t, doc)
 	})
 }
+
+func TestMaroto_FitlnCurrentPage(t *testing.T) {
+	t.Run("when component is smaller should available size, then false", func(t *testing.T) {
+		sut := maroto.New(config.NewBuilder().
+			WithDimensions(210.0, 297.0).
+			Build())
+
+		var rows []core.Row
+		for i := 0; i < 26; i++ {
+			rows = append(rows, row.New(10).Add(col.New(12)))
+		}
+
+		sut.AddPages(page.New().Add(rows...))
+		assert.False(t, sut.FitlnCurrentPage(40))
+	})
+	t.Run("when component is larger should the available size, then true", func(t *testing.T) {
+		sut := maroto.New(config.NewBuilder().
+			WithDimensions(210.0, 297.0).
+			Build())
+
+		var rows []core.Row
+		for i := 0; i < 10; i++ {
+			rows = append(rows, row.New(10).Add(col.New(12)))
+		}
+
+		sut.AddPages(page.New().Add(rows...))
+		assert.True(t, sut.FitlnCurrentPage(40))
+	})
+}

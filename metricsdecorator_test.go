@@ -145,3 +145,14 @@ func TestMetricsDecorator_GetStructure(t *testing.T) {
 	inner.AssertNumberOfCalls(t, "AddRows", 1)
 	inner.AssertNumberOfCalls(t, "GetStructure", 1)
 }
+
+func TestMetricsDecorator_FitlnCurrentPage(t *testing.T) {
+	inner := &mocks.Maroto{}
+	inner.EXPECT().FitlnCurrentPage(10.0).Return(true)
+	inner.EXPECT().FitlnCurrentPage(20.0).Return(false)
+
+	sut := NewMetricsDecorator(inner)
+	// Assert
+	assert.True(t, sut.FitlnCurrentPage(10))
+	assert.False(t, sut.FitlnCurrentPage(20))
+}
