@@ -57,6 +57,17 @@ func ExampleMaroto_FitlnCurrentPage() {
 	// Do things and generate
 }
 
+// ExampleMarotoGetStruct demonstrates how to get maroto component tree
+func ExampleMaroto_GetStructure() {
+	m := maroto.New()
+
+	m.AddRow(40, text.NewCol(12, "text"))
+
+	m.GetStructure()
+
+	// Do things and generate
+}
+
 // ExampleMaroto_AddRow demonstrates how to add a new row in maroto.
 func ExampleMaroto_AddRow() {
 	m := maroto.New()
