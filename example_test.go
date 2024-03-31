@@ -48,6 +48,15 @@ func ExampleMaroto_AddPages() {
 	// Do things and generate
 }
 
+// ExampleMaroto_FitlnCurrentPage demonstrate how to check if the new line fits on the current page
+func ExampleMaroto_FitlnCurrentPage() {
+	m := maroto.New()
+
+	m.FitlnCurrentPage(12)
+
+	// Do things and generate
+}
+
 // ExampleMaroto_AddRow demonstrates how to add a new row in maroto.
 func ExampleMaroto_AddRow() {
 	m := maroto.New()
