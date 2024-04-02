@@ -3,7 +3,9 @@ package maroto_test
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
@@ -132,4 +134,14 @@ func ExampleMaroto_Generate() {
 
 	// You can retrieve as Base64, Save file, Merge with another file or GetReport.
 	_ = doc.GetBytes()
+}
+
+// ExampleNewBar demonstrates how to add a barcode in maroto
+func ExampleNewBar() {
+	mrt := maroto.New()
+	m := maroto.NewMetricsDecorator(mrt)
+
+	m.AddRow(10, col.New(6).Add(code.NewBar("123456789", props.Barcode{Percent: 70.5})))
+
+	// generate document
 }
