@@ -19,6 +19,8 @@ type Barcode struct {
 }
 
 // NewBar is responsible to create an instance of a Barcode.
+//   - code: The value that must be placed in the barcode
+//   - ps: A set of settings that must be applied to the barcode
 func NewBar(code string, ps ...props.Barcode) core.Component {
 	prop := props.Barcode{}
 	if len(ps) > 0 {
@@ -33,24 +35,34 @@ func NewBar(code string, ps ...props.Barcode) core.Component {
 }
 
 // NewBarCol is responsible to create an instance of a Barcode wrapped in a Col.
+//   - size: O tamanho da coluna
+//   - code: The value that must be placed in the barcode
+//   - ps: A set of settings that must be applied to the barcode
 func NewBarCol(size int, code string, ps ...props.Barcode) core.Col {
 	bar := NewBar(code, ps...)
 	return col.New(size).Add(bar)
 }
 
 // NewBarRow is responsible to create an instance of a Barcode wrapped in a Row.
+// using this method the col size will be automatically set to the maximum value
+//   - height: The height of the line
+//   - code: The value that must be placed in the barcode
+//   - ps: A set of settings that must be applied to the barcode
 func NewBarRow(height float64, code string, ps ...props.Barcode) core.Row {
 	bar := NewBar(code, ps...)
 	c := col.New().Add(bar)
 	return row.New(height).Add(c)
 }
 
-// Render renders a Barcode into a PDF context.
+// Render renders a Barcode into a PDF context. The maroto cal this methodo in process to
+// generate the pdf.
+//   - provider: Is the creator provider used to generate the pdf
+//   - cell: cell represents the space available to draw the component
 func (b *Barcode) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddBarCode(b.code, cell, &b.prop)
 }
 
-// GetStructure returns the Structure of a Barcode.
+// GetStructure returns the structure of a barcode. This method is typically used when creating tests
 func (b *Barcode) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
 		Type:    "barcode",
