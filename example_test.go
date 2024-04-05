@@ -48,6 +48,26 @@ func ExampleMaroto_AddPages() {
 	// Do things and generate
 }
 
+// ExampleMaroto_FitlnCurrentPage demonstrate how to check if the new line fits on the current page
+func ExampleMaroto_FitlnCurrentPage() {
+	m := maroto.New()
+
+	m.FitlnCurrentPage(12)
+
+	// Do things and generate
+}
+
+// ExampleMarotoGetStruct demonstrates how to get maroto component tree
+func ExampleMaroto_GetStructure() {
+	m := maroto.New()
+
+	m.AddRow(40, text.NewCol(12, "text"))
+
+	m.GetStructure()
+
+	// Do things and generate
+}
+
 // ExampleMaroto_AddRow demonstrates how to add a new row in maroto.
 func ExampleMaroto_AddRow() {
 	m := maroto.New()
@@ -65,6 +85,21 @@ func ExampleMaroto_AddRows() {
 		code.NewBarRow(12, "barcode"),
 		text.NewRow(12, "text"),
 	)
+
+	// Do things and generate
+}
+
+// ExampleMaroto_RegisterHeader demonstrates how to register a header to me added in every new page.
+// An error is returned if the area occupied by the header is greater than the page area.
+func ExampleMaroto_RegisterHeader() {
+	m := maroto.New()
+
+	err := m.RegisterHeader(
+		code.NewBarRow(12, "barcode"),
+		text.NewRow(12, "text"))
+	if err != nil {
+		panic(err)
+	}
 
 	// Do things and generate
 }
