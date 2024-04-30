@@ -53,7 +53,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestMaroto_AddRow(t *testing.T) {
-	t.Run("when col is not sent, then empty col is set", func(t *testing.T) {
+	t.Run("when col is not sent, should empty col is set", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -109,7 +109,7 @@ func TestMaroto_AddRow(t *testing.T) {
 }
 
 func TestMaroto_AddRows(t *testing.T) {
-	t.Run("when col is not sent, then empty col is set", func(t *testing.T) {
+	t.Run("when col is not sent, should empty col is set", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
