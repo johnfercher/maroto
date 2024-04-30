@@ -56,6 +56,7 @@ type Row interface {
 	Node
 	Add(cols ...Col) Row
 	GetHeight() float64
+	GetColumns() []Col
 	WithStyle(style *props.Cell) Row
 	Render(provider Provider, cell entity.Cell)
 }
