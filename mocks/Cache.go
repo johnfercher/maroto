@@ -167,8 +167,7 @@ func (_c *Cache_LoadImage_Call) RunAndReturn(run func(string, extension.Type) er
 func NewCache(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Cache {
+}) *Cache {
 	mock := &Cache{}
 	mock.Mock.Test(t)
 

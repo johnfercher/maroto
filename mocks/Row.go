@@ -87,6 +87,53 @@ func (_c *Row_Add_Call) RunAndReturn(run func(...core.Col) core.Row) *Row_Add_Ca
 	return _c
 }
 
+// GetColumns provides a mock function with given fields:
+func (_m *Row) GetColumns() []core.Col {
+	ret := _m.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetColumns")
+	}
+
+	var r0 []core.Col
+	if rf, ok := ret.Get(0).(func() []core.Col); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]core.Col)
+		}
+	}
+
+	return r0
+}
+
+// Row_GetColumns_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetColumns'
+type Row_GetColumns_Call struct {
+	*mock.Call
+}
+
+// GetColumns is a helper method to define mock.On call
+func (_e *Row_Expecter) GetColumns() *Row_GetColumns_Call {
+	return &Row_GetColumns_Call{Call: _e.mock.On("GetColumns")}
+}
+
+func (_c *Row_GetColumns_Call) Run(run func()) *Row_GetColumns_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Row_GetColumns_Call) Return(_a0 []core.Col) *Row_GetColumns_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Row_GetColumns_Call) RunAndReturn(run func() []core.Col) *Row_GetColumns_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetHeight provides a mock function with given fields:
 func (_m *Row) GetHeight() float64 {
 	ret := _m.Called()
@@ -299,8 +346,7 @@ func (_c *Row_WithStyle_Call) RunAndReturn(run func(*props.Cell) core.Row) *Row_
 func NewRow(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Row {
+}) *Row {
 	mock := &Row{}
 	mock.Mock.Test(t)
 
