@@ -23,7 +23,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Equal(t, 0, len(customFonts))
+		assert.Len(t, customFonts, 0)
 	})
 
 	t.Run("when fontstyle style is invalid, should not add value", func(t *testing.T) {
@@ -35,7 +35,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Equal(t, 0, len(customFonts))
+		assert.Len(t, customFonts, 0)
 	})
 
 	t.Run("when fontstyle file is empty, should not add value", func(t *testing.T) {
@@ -47,7 +47,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Equal(t, 0, len(customFonts))
+		assert.Len(t, customFonts, 0)
 	})
 
 	t.Run("when fontstyle is valid, should not value", func(t *testing.T) {
@@ -59,7 +59,7 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Equal(t, 1, len(customFonts))
+		assert.Len(t, customFonts, 1)
 		assert.Equal(t, "family", customFonts[0].Family)
 		assert.Equal(t, fontstyle.Bold, customFonts[0].Style)
 		assert.NotEmpty(t, customFonts[0].File)
@@ -77,7 +77,7 @@ func TestRepository_AddUTF8FontFromBytes(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Equal(t, 0, len(customFonts))
+		assert.Len(t, customFonts, 0)
 	})
 
 	t.Run("when fontstyle style is invalid, should not add value", func(t *testing.T) {
@@ -89,7 +89,7 @@ func TestRepository_AddUTF8FontFromBytes(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Equal(t, 0, len(customFonts))
+		assert.Len(t, customFonts, 0)
 	})
 
 	t.Run("when fontstyle bytes is nil, should not add value", func(t *testing.T) {
@@ -101,7 +101,7 @@ func TestRepository_AddUTF8FontFromBytes(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Equal(t, 0, len(customFonts))
+		assert.Len(t, customFonts, 0)
 	})
 
 	t.Run("when fontstyle is valid, should not value", func(t *testing.T) {
@@ -115,7 +115,7 @@ func TestRepository_AddUTF8FontFromBytes(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Equal(t, 1, len(customFonts))
+		assert.Len(t, customFonts, 1)
 		assert.Equal(t, "family", customFonts[0].Family)
 		assert.Equal(t, fontstyle.Bold, customFonts[0].Style)
 		assert.Empty(t, customFonts[0].File)
