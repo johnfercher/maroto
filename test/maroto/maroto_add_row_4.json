@@ -1,0 +1,43 @@
+{
+	"type": "maroto",
+	"details": {
+		"config_margin_bottom": 20.0025,
+		"config_margin_left": 10,
+		"config_margin_right": 10,
+		"config_margin_top": 10,
+		"config_max_grid_sum": 12,
+		"config_provider_type": "gofpdf",
+		"maroto_dimension_height": 297,
+		"maroto_dimension_width": 210,
+		"prop_font_color": "RGB(0, 0, 0)",
+		"prop_font_family": "arial",
+		"prop_font_size": 10
+	},
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 256.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

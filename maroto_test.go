@@ -53,6 +53,26 @@ func TestNew(t *testing.T) {
 }
 
 func TestMaroto_AddRow(t *testing.T) {
+	t.Run("when col is not sent, then empty col is set", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Act
+		sut.AddRow(10)
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_4.json")
+	})
+	t.Run("add one row", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Act
+		sut.AddRow(10, col.New(12))
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_1.json")
+	})
 	t.Run("add one row", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
@@ -89,6 +109,16 @@ func TestMaroto_AddRow(t *testing.T) {
 }
 
 func TestMaroto_AddRows(t *testing.T) {
+	t.Run("when col is not sent, then empty col is set", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Act
+		sut.AddRows(row.New(15))
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_rows_4.json")
+	})
 	t.Run("add one row", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
