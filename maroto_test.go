@@ -61,7 +61,7 @@ func TestMaroto_AddRow(t *testing.T) {
 		sut.AddRow(10)
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_4.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_1.json")
 	})
 	t.Run("add one row", func(t *testing.T) {
 		// Arrange
@@ -117,7 +117,7 @@ func TestMaroto_AddRows(t *testing.T) {
 		sut.AddRows(row.New(15))
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_rows_4.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_rows_1.json")
 	})
 	t.Run("add one row", func(t *testing.T) {
 		// Arrange
