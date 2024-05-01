@@ -68,7 +68,7 @@ func TestLine_Render(t *testing.T) {
 		prop := fixture.LineProp()
 		sut := line.New(prop)
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddLine(&cell, &prop)
 
 		// Act

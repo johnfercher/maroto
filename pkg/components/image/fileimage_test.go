@@ -69,7 +69,7 @@ func TestFileImage_Render(t *testing.T) {
 		prop := fixture.RectProp()
 		sut := image.NewFromFile(path, prop)
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddImageFromFile(path, &cell, &prop)
 
 		// Act

@@ -69,7 +69,7 @@ func TestBarcode_Render(t *testing.T) {
 		prop := fixture.BarcodeProp()
 		sut := code.NewBar(codeValue, prop)
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddBarCode(codeValue, &cell, &prop)
 
 		// Act

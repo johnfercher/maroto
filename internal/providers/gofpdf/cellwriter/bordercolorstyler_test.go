@@ -38,7 +38,7 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 		cfg := &entity.Config{}
 		var nilCellProp *props.Cell
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, nilCellProp)
 
 		sut := cellwriter.NewBorderColorStyler(nil)
@@ -57,7 +57,7 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 		cfg := &entity.Config{}
 		prop := &props.Cell{}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
 		sut := cellwriter.NewBorderColorStyler(nil)
@@ -78,10 +78,10 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 			BorderColor: &props.Color{Red: 140, Green: 100, Blue: 80},
 		}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().SetDrawColor(prop.BorderColor.Red, prop.BorderColor.Green, prop.BorderColor.Blue)
 		fpdf.EXPECT().SetDrawColor(0, 0, 0)
 

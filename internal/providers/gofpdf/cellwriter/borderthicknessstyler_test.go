@@ -38,7 +38,7 @@ func TestBorderThicknessStyler_Apply(t *testing.T) {
 		cfg := &entity.Config{}
 		var nilCellProp *props.Cell
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, nilCellProp)
 
 		sut := cellwriter.NewBorderThicknessStyler(nil)
@@ -57,7 +57,7 @@ func TestBorderThicknessStyler_Apply(t *testing.T) {
 		cfg := &entity.Config{}
 		prop := &props.Cell{}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
 		sut := cellwriter.NewBorderThicknessStyler(nil)
@@ -78,10 +78,10 @@ func TestBorderThicknessStyler_Apply(t *testing.T) {
 			BorderThickness: 1.0,
 		}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().SetLineWidth(prop.BorderThickness)
 		fpdf.EXPECT().SetLineWidth(linestyle.DefaultLineThickness)
 

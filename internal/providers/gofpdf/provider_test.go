@@ -40,7 +40,7 @@ func TestProvider_AddText(t *testing.T) {
 	cell := &entity.Cell{}
 	prop := fixture.TextProp()
 
-	text := &mocks.Text{}
+	text := mocks.NewText(t)
 	text.EXPECT().Add(txtContent, cell, &prop)
 
 	dep := &gofpdf.Dependencies{
@@ -60,7 +60,7 @@ func TestProvider_GetTextHeight(t *testing.T) {
 	fontHeightToReturn := 10.0
 	prop := fixture.FontProp()
 
-	font := &mocks.Font{}
+	font := mocks.NewFont(t)
 	font.EXPECT().GetHeight(prop.Family, prop.Style, prop.Size).Return(fontHeightToReturn)
 
 	dep := &gofpdf.Dependencies{
@@ -81,7 +81,7 @@ func TestProvider_AddLine(t *testing.T) {
 	cell := &entity.Cell{}
 	prop := fixture.LineProp()
 
-	line := &mocks.Line{}
+	line := mocks.NewLine(t)
 	line.EXPECT().Add(cell, &prop)
 
 	dep := &gofpdf.Dependencies{
@@ -103,13 +103,13 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
 
-		code := &mocks.Code{}
+		code := mocks.NewCode(t)
 		code.EXPECT().GenDataMatrix(codeContent).Return(nil, errors.New("anyError2"))
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not generate matrixcode", cell, merror.DefaultErrorText)
 
 		dep := &gofpdf.Dependencies{
@@ -135,11 +135,11 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
 		cache.EXPECT().AddImage(codeContent, img)
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not add matrixcode to document", cell, merror.DefaultErrorText)
 
 		cfg := &entity.Config{
@@ -151,10 +151,10 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, extension.Jpg, false).Return(errors.New("anyError"))
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 
 		dep := &gofpdf.Dependencies{
@@ -183,7 +183,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
 		cache.EXPECT().AddImage(codeContent, img)
 
@@ -196,10 +196,10 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, extension.Jpg, false).Return(nil)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 
 		dep := &gofpdf.Dependencies{
@@ -228,13 +228,13 @@ func TestProvider_AddQrCode(t *testing.T) {
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
 
-		code := &mocks.Code{}
+		code := mocks.NewCode(t)
 		code.EXPECT().GenQr(codeContent).Return(nil, errors.New("anyError2"))
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not generate qrcode", cell, merror.DefaultErrorText)
 
 		dep := &gofpdf.Dependencies{
@@ -260,11 +260,11 @@ func TestProvider_AddQrCode(t *testing.T) {
 
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
 		cache.EXPECT().AddImage(codeContent, img)
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not add qrcode to document", cell, merror.DefaultErrorText)
 
 		cfg := &entity.Config{
@@ -276,10 +276,10 @@ func TestProvider_AddQrCode(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, extension.Jpg, false).Return(errors.New("anyError"))
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 
 		dep := &gofpdf.Dependencies{
@@ -308,7 +308,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
 		cache.EXPECT().AddImage(codeContent, img)
 
@@ -321,10 +321,10 @@ func TestProvider_AddQrCode(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, extension.Jpg, false).Return(nil)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 
 		dep := &gofpdf.Dependencies{
@@ -353,13 +353,13 @@ func TestProvider_AddBarCode(t *testing.T) {
 		cell := &entity.Cell{}
 		prop := fixture.BarcodeProp()
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(nil, errors.New("anyError1"))
 
-		code := &mocks.Code{}
+		code := mocks.NewCode(t)
 		code.EXPECT().GenBar(codeContent, cell, &prop).Return(nil, errors.New("anyError2"))
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not generate barcode", cell, merror.DefaultErrorText)
 
 		dep := &gofpdf.Dependencies{
@@ -385,11 +385,11 @@ func TestProvider_AddBarCode(t *testing.T) {
 
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(img, nil)
 		cache.EXPECT().AddImage(codeContent+"code128", img)
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not add barcode to document", cell, merror.DefaultErrorText)
 
 		cfg := &entity.Config{
@@ -401,10 +401,10 @@ func TestProvider_AddBarCode(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, prop.ToRectProp(), extension.Jpg, false).Return(errors.New("anyError"))
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 
 		dep := &gofpdf.Dependencies{
@@ -433,7 +433,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(img, nil)
 		cache.EXPECT().AddImage(codeContent+"code128", img)
 
@@ -446,10 +446,10 @@ func TestProvider_AddBarCode(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, prop.ToRectProp(), extension.Jpg, false).Return(nil)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 
 		dep := &gofpdf.Dependencies{
@@ -477,7 +477,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(codeContent+"ean", extension.Jpg).Return(img, nil)
 		cache.EXPECT().AddImage(codeContent+"ean", img)
 
@@ -490,10 +490,10 @@ func TestProvider_AddBarCode(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, prop.ToRectProp(), extension.Jpg, false).Return(nil)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 
 		dep := &gofpdf.Dependencies{
@@ -519,7 +519,7 @@ func TestProvider_CreateRow(t *testing.T) {
 	// Arrange
 	height := 10.0
 
-	fpdf := &mocks.Fpdf{}
+	fpdf := mocks.NewFpdf(t)
 	fpdf.EXPECT().Ln(height)
 
 	dep := &gofpdf.Dependencies{
@@ -542,7 +542,7 @@ func TestProvider_CreateCol(t *testing.T) {
 	cfg := &entity.Config{}
 	prop := fixture.CellProp()
 
-	cellWriter := &mocks.CellWriter{}
+	cellWriter := mocks.NewCellWriter(t)
 	cellWriter.EXPECT().Apply(width, height, cfg, &prop)
 
 	dep := &gofpdf.Dependencies{
@@ -575,7 +575,7 @@ func TestProvider_SetProtection(t *testing.T) {
 			OwnerPassword: "ownerPassword",
 		}
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().SetProtection(byte(p.Type), p.UserPassword, p.OwnerPassword)
 
 		dep := &gofpdf.Dependencies{
@@ -594,7 +594,7 @@ func TestProvider_SetProtection(t *testing.T) {
 
 func TestProvider_SetCompression(t *testing.T) {
 	// Arrange
-	fpdf := &mocks.Fpdf{}
+	fpdf := mocks.NewFpdf(t)
 	fpdf.EXPECT().SetCompression(true)
 
 	dep := &gofpdf.Dependencies{
@@ -624,7 +624,7 @@ func TestProvider_SetMetadata(t *testing.T) {
 		// Arrange
 		timeNow := time.Now()
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().SetAuthor("author", true)
 		fpdf.EXPECT().SetCreator("creator", true)
 		fpdf.EXPECT().SetSubject("subject", true)
@@ -668,7 +668,7 @@ func TestProvider_SetMetadata(t *testing.T) {
 
 func TestProvider_GenerateBytes(t *testing.T) {
 	// Arrange
-	fpdf := &mocks.Fpdf{}
+	fpdf := mocks.NewFpdf(t)
 	fpdf.EXPECT().Output(mock.Anything).Return(errors.New("anyError"))
 
 	dep := &gofpdf.Dependencies{
@@ -691,7 +691,7 @@ func TestProvider_AddImageFromBytes(t *testing.T) {
 		prop := fixture.RectProp()
 		cell := &entity.Cell{}
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not parse image bytes", cell, merror.DefaultErrorText)
 
 		dep := &gofpdf.Dependencies{
@@ -724,13 +724,13 @@ func TestProvider_AddImageFromBytes(t *testing.T) {
 			},
 		}
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not add image to document", cell, merror.DefaultErrorText)
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, img.Extension, false).Return(errors.New("anyError"))
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 
 		dep := &gofpdf.Dependencies{
@@ -768,7 +768,7 @@ func TestProvider_AddImageFromBytes(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, img.Extension, false).Return(nil)
 
 		dep := &gofpdf.Dependencies{
@@ -792,7 +792,7 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 		prop := fixture.RectProp()
 		cell := &entity.Cell{}
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not parse image bytes", cell, merror.DefaultErrorText)
 
 		dep := &gofpdf.Dependencies{
@@ -825,13 +825,13 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 			},
 		}
 
-		text := &mocks.Text{}
+		text := mocks.NewText(t)
 		text.EXPECT().Add("could not add image to document", cell, merror.DefaultErrorText)
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, img.Extension, true).Return(errors.New("anyError"))
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().ClearError()
 		fpdf.EXPECT().SetHomeXY()
 
@@ -871,10 +871,10 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 			},
 		}
 
-		image := &mocks.Image{}
+		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, img.Extension, true).Return(nil)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().SetHomeXY()
 
 		dep := &gofpdf.Dependencies{
@@ -901,7 +901,7 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
 
-		cache := &mocks.Cache{}
+		cache := mocks.NewCache(t)
 		cache.EXPECT().GetImage(file, extension.Jpg)
 
 		dep := &gofpdf.Dependencies{

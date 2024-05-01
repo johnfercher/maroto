@@ -11,7 +11,7 @@ import (
 )
 
 func TestNewText(t *testing.T) {
-	text := gofpdf.NewText(&mocks.Fpdf{}, &mocks.Math{}, &mocks.Font{})
+	text := gofpdf.NewText(mocks.NewFpdf(t), mocks.NewMath(t), mocks.NewFont(t))
 
 	assert.NotNil(t, text)
 	assert.Equal(t, fmt.Sprintf("%T", text), "*gofpdf.text")
@@ -19,13 +19,13 @@ func TestNewText(t *testing.T) {
 
 /*func TestText_GetLinesQuantity_WhenStringSmallerThanLimits(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Fpdf{}
+	pdf := mocks.NewFpdf(t)
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
 		return text
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(8.0)
 
-	fontstyle := &mocks.DefaultFont{}
+	fontstyle := mocks.NewDefaultFont(t)
 	fontstyle.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
 	sut := internal.NewText(pdf, nil, fontstyle)
@@ -39,13 +39,13 @@ func TestNewText(t *testing.T) {
 
 func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Fpdf{}
+	pdf := mocks.NewFpdf(t)
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
 		return text
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
 
-	fontstyle := &mocks.DefaultFont{}
+	fontstyle := mocks.NewDefaultFont(t)
 	fontstyle.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
 	sut := internal.NewText(pdf, nil, fontstyle)
@@ -59,13 +59,13 @@ func TestText_GetLinesQuantity_WhenHasOneWord(t *testing.T) {
 
 func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Fpdf{}
+	pdf := mocks.NewFpdf(t)
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
 		return text
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
 
-	fontstyle := &mocks.DefaultFont{}
+	fontstyle := mocks.NewDefaultFont(t)
 	fontstyle.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
 	sut := internal.NewText(pdf, nil, fontstyle)
@@ -79,16 +79,16 @@ func TestText_GetLinesQuantity_WhenExtrapolate(t *testing.T) {
 
 func TestText_GetLinesQuantity_WhenHasToBreakLines(t *testing.T) {
 	// Arrange
-	pdf := &mocks.Fpdf{}
+	pdf := mocks.NewFpdf(t)
 	pdf.On("UnicodeTranslatorFromDescriptor", mock.Anything).Return(func(text string) string {
 		return text
 	})
 	pdf.On("GetStringWidth", mock.Anything).Return(15.0)
 
-	math := &mocks.Math{}
+	math := mocks.NewMath(t)
 	math.On("GetWidthPerCol", mock.Anything).Return(10.0)
 
-	fontstyle := &mocks.DefaultFont{}
+	fontstyle := mocks.NewDefaultFont(t)
 	fontstyle.On("SetFont", mock.Anything, mock.Anything, mock.Anything).Return(nil)
 
 	sut := internal.NewText(pdf, math, fontstyle)
@@ -120,7 +120,7 @@ func TestText_Add(t *testing.T) {
 			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
-				_pdf := &mocks.Fpdf{}
+				_pdf := mocks.NewFpdf(t)
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -128,7 +128,7 @@ func TestText_Add(t *testing.T) {
 				return _pdf
 			},
 			func() *mocks.DefaultFont {
-				_font := &mocks.DefaultFont{}
+				_font := mocks.NewDefaultFont(t)
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -162,7 +162,7 @@ func TestText_Add(t *testing.T) {
 			"CustomFont",
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
-				_pdf := &mocks.Fpdf{}
+				_pdf := mocks.NewFpdf(t)
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -170,7 +170,7 @@ func TestText_Add(t *testing.T) {
 				return _pdf
 			},
 			func() *mocks.DefaultFont {
-				_font := &mocks.DefaultFont{}
+				_font := mocks.NewDefaultFont(t)
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -205,7 +205,7 @@ func TestText_Add(t *testing.T) {
 			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
-				_pdf := &mocks.Fpdf{}
+				_pdf := mocks.NewFpdf(t)
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -213,7 +213,7 @@ func TestText_Add(t *testing.T) {
 				return _pdf
 			},
 			func() *mocks.DefaultFont {
-				_font := &mocks.DefaultFont{}
+				_font := mocks.NewDefaultFont(t)
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -249,7 +249,7 @@ func TestText_Add(t *testing.T) {
 			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
-				_pdf := &mocks.Fpdf{}
+				_pdf := mocks.NewFpdf(t)
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -257,7 +257,7 @@ func TestText_Add(t *testing.T) {
 				return _pdf
 			},
 			func() *mocks.DefaultFont {
-				_font := &mocks.DefaultFont{}
+				_font := mocks.NewDefaultFont(t)
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -292,7 +292,7 @@ func TestText_Add(t *testing.T) {
 			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
-				_pdf := &mocks.Fpdf{}
+				_pdf := mocks.NewFpdf(t)
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -300,7 +300,7 @@ func TestText_Add(t *testing.T) {
 				return _pdf
 			},
 			func() *mocks.DefaultFont {
-				_font := &mocks.DefaultFont{}
+				_font := mocks.NewDefaultFont(t)
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -339,7 +339,7 @@ func TestText_Add(t *testing.T) {
 			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
-				_pdf := &mocks.Fpdf{}
+				_pdf := mocks.NewFpdf(t)
 				_pdf.On("GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting "+
 					"industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer "+
 					"took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, "+
@@ -353,7 +353,7 @@ func TestText_Add(t *testing.T) {
 				return _pdf
 			},
 			func() *mocks.DefaultFont {
-				_font := &mocks.DefaultFont{}
+				_font := mocks.NewDefaultFont(t)
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -396,7 +396,7 @@ func TestText_Add(t *testing.T) {
 			consts.Arial,
 			color.Color{Red: 0, Green: 0, Blue: 0},
 			func() *mocks.Fpdf {
-				_pdf := &mocks.Fpdf{}
+				_pdf := mocks.NewFpdf(t)
 				_pdf.On("GetStringWidth", "Lorem Ipsum is simply dummy textá of the printing and typesetting industry."+
 					" Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of"+
 					" type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic "+
@@ -410,7 +410,7 @@ func TestText_Add(t *testing.T) {
 				return _pdf
 			},
 			func() *mocks.DefaultFont {
-				_font := &mocks.DefaultFont{}
+				_font := mocks.NewDefaultFont(t)
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)
@@ -454,7 +454,7 @@ func TestText_Add(t *testing.T) {
 			consts.Arial,
 			color.Color{Red: 20, Green: 20, Blue: 20},
 			func() *mocks.Fpdf {
-				_pdf := &mocks.Fpdf{}
+				_pdf := mocks.NewFpdf(t)
 				_pdf.On("GetStringWidth", mock.Anything).Return(12.0)
 				_pdf.On("GetMargins").Return(10.0, 10.0, 10.0, 10.0)
 				_pdf.On("Text", mock.Anything, mock.Anything, mock.Anything)
@@ -462,7 +462,7 @@ func TestText_Add(t *testing.T) {
 				return _pdf
 			},
 			func() *mocks.DefaultFont {
-				_font := &mocks.DefaultFont{}
+				_font := mocks.NewDefaultFont(t)
 				_font.On("GetScaleFactor").Return(1.0)
 				_font.On("GetFont").Return(consts.Arial, consts.Bold, 1.0)
 				_font.On("SetFont", mock.Anything, mock.Anything, mock.Anything)

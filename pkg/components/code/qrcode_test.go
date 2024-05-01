@@ -69,7 +69,7 @@ func TestQrCode_Render(t *testing.T) {
 		prop := fixture.RectProp()
 		sut := code.NewQr(codeValue, prop)
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddQrCode(codeValue, &cell, &prop)
 
 		// Act

@@ -9,7 +9,7 @@
 <!-- If it has any issue related to this PR, please add a reference here. -->
 
 **Checklist**
-> check with "x", if applied to your change
+> check with "x", **ONLY IF APPLIED** to your change
 
 - [ ] All methods associated with structs has ```func (<first letter of struct> *struct) method() {}``` name style. <!-- If applied -->
 - [ ] Wrote unit tests for new/changed features. <!-- If applied -->

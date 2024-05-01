@@ -28,7 +28,7 @@ func TestMutexCache_AddImage(t *testing.T) {
 	value := "value1"
 	img := &entity.Image{}
 
-	innerMock := &mocks.Cache{}
+	innerMock := mocks.NewCache(t)
 	innerMock.EXPECT().AddImage(value, img)
 
 	sut := cache.NewMutexDecorator(innerMock)
@@ -47,7 +47,7 @@ func TestMutexCache_GetImage(t *testing.T) {
 	imgToReturn := &entity.Image{}
 	errToReturn := errors.New("any error")
 
-	innerMock := &mocks.Cache{}
+	innerMock := mocks.NewCache(t)
 	innerMock.EXPECT().GetImage(value, ext).Return(imgToReturn, errToReturn)
 
 	sut := cache.NewMutexDecorator(innerMock)
@@ -67,7 +67,7 @@ func TestMutexCache_LoadImage(t *testing.T) {
 	ext := extension.Jpg
 	errToReturn := errors.New("any error")
 
-	innerMock := &mocks.Cache{}
+	innerMock := mocks.NewCache(t)
 	innerMock.EXPECT().LoadImage(value, ext).Return(errToReturn)
 
 	sut := cache.NewMutexDecorator(innerMock)

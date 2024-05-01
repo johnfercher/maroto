@@ -55,10 +55,10 @@ func TestRow_GetStructure(t *testing.T) {
 		}
 		cell := fixture.CellEntity()
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().CreateRow(cell.Height)
 
-		col := &mocks.Col{}
+		col := mocks.NewCol(t)
 		col.EXPECT().Render(provider, cell, true)
 		col.EXPECT().SetConfig(cfg)
 		col.EXPECT().GetSize().Return(12)
@@ -82,11 +82,11 @@ func TestRow_GetStructure(t *testing.T) {
 		cell := fixture.CellEntity()
 		prop := fixture.CellProp()
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().CreateRow(cell.Height)
 		provider.EXPECT().CreateCol(cell.Width, cell.Height, cfg, &prop)
 
-		col := &mocks.Col{}
+		col := mocks.NewCol(t)
 		col.EXPECT().Render(provider, cell, false)
 		col.EXPECT().SetConfig(cfg)
 		col.EXPECT().GetSize().Return(12)
