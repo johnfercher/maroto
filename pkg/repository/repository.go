@@ -11,6 +11,7 @@ import (
 // Repository is the abstraction to load custom fonts.
 type Repository interface {
 	AddUTF8Font(family string, style fontstyle.Type, file string) Repository
+	AddUTF8FontFromBytes(family string, style fontstyle.Type, bytes []byte) Repository
 	Load() ([]*entity.CustomFont, error)
 }
 
@@ -46,9 +47,35 @@ func (r *FontRepository) AddUTF8Font(family string, style fontstyle.Type, file s
 	return r
 }
 
+// AddUTF8FontFromBytes adds a custom font to the repository from a byte slice.
+func (r *FontRepository) AddUTF8FontFromBytes(family string, style fontstyle.Type, bytes []byte) Repository {
+	if family == "" {
+		return r
+	}
+
+	if !style.IsValid() {
+		return r
+	}
+
+	if bytes == nil {
+		return r
+	}
+
+	r.customFonts = append(r.customFonts, &entity.CustomFont{
+		Family: family,
+		Style:  style,
+		Bytes:  bytes,
+	})
+
+	return r
+}
+
 // Load loads all custom fonts.
 func (r *FontRepository) Load() ([]*entity.CustomFont, error) {
 	for _, customFont := range r.customFonts {
+		if customFont.File == "" {
+			continue
+		}
 		bytes, err := os.ReadFile(customFont.File)
 		if err != nil {
 			return nil, err

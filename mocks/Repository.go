@@ -44,6 +44,11 @@ func (_m *Repository) AddUTF8Font(family string, style fontstyle.Type, file stri
 	return r0
 }
 
+func (_m *Repository) AddUTF8FontFromBytes(family string, style fontstyle.Type, bytes []byte) repository.Repository {
+	var r0 repository.Repository
+	return r0
+}
+
 // Repository_AddUTF8Font_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddUTF8Font'
 type Repository_AddUTF8Font_Call struct {
 	*mock.Call
