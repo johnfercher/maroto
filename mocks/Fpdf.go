@@ -6934,8 +6934,7 @@ func (_c *Fpdf_Writef_Call) RunAndReturn(run func(float64, string, ...interface{
 func NewFpdf(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Fpdf {
+}) *Fpdf {
 	mock := &Fpdf{}
 	mock.Mock.Test(t)
 

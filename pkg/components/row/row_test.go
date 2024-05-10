@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 	"github.com/stretchr/testify/assert"
@@ -44,6 +45,18 @@ func TestRow_GetHeight(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, 10.0, r.GetHeight())
+	})
+}
+
+func TestRow_GetColumns(t *testing.T) {
+	t.Run("when GetColumns is called, should return the number of registered columns", func(t *testing.T) {
+		// Act
+		newCol := []core.Col{col.New(12)}
+
+		r := row.New(10).Add(newCol[0])
+
+		// Assert
+		assert.Equal(t, newCol, r.GetColumns())
 	})
 }
 

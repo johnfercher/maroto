@@ -141,8 +141,7 @@ func (_c *Repository_Load_Call) RunAndReturn(run func() ([]*entity.CustomFont, e
 func NewRepository(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Repository {
+}) *Repository {
 	mock := &Repository{}
 	mock.Mock.Test(t)
 

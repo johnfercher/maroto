@@ -38,6 +38,11 @@ func (r *Row) Add(cols ...core.Col) core.Row {
 	return r
 }
 
+// GetColumns returns the columns of a core.Row.
+func (r *Row) GetColumns() []core.Col {
+	return r.cols
+}
+
 // GetHeight returns the height of a core.Row.
 func (r *Row) GetHeight() float64 {
 	return r.height

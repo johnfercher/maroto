@@ -191,6 +191,10 @@ func (m *Maroto) addRows(rows ...core.Row) {
 }
 
 func (m *Maroto) addRow(r core.Row) {
+	if len(r.GetColumns()) == 0 {
+		r.Add(col.New())
+	}
+
 	maxHeight := m.cell.Height
 
 	rowHeight := r.GetHeight()
