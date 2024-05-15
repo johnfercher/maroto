@@ -199,13 +199,9 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, extension.Jpg, false).Return(nil)
 
-		fpdf := mocks.NewFpdf(t)
-		fpdf.EXPECT().ClearError()
-
 		dep := &gofpdf.Dependencies{
 			Cache: cache,
 			Image: image,
-			Fpdf:  fpdf,
 			Cfg:   cfg,
 		}
 
@@ -324,13 +320,9 @@ func TestProvider_AddQrCode(t *testing.T) {
 		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, &prop, extension.Jpg, false).Return(nil)
 
-		fpdf := mocks.NewFpdf(t)
-		fpdf.EXPECT().ClearError()
-
 		dep := &gofpdf.Dependencies{
 			Cache: cache,
 			Image: image,
-			Fpdf:  fpdf,
 			Cfg:   cfg,
 		}
 
@@ -449,13 +441,9 @@ func TestProvider_AddBarCode(t *testing.T) {
 		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, prop.ToRectProp(), extension.Jpg, false).Return(nil)
 
-		fpdf := mocks.NewFpdf(t)
-		fpdf.EXPECT().ClearError()
-
 		dep := &gofpdf.Dependencies{
 			Cache: cache,
 			Image: image,
-			Fpdf:  fpdf,
 			Cfg:   cfg,
 		}
 
@@ -493,13 +481,9 @@ func TestProvider_AddBarCode(t *testing.T) {
 		image := mocks.NewImage(t)
 		image.EXPECT().Add(img, cell, cfg.Margins, prop.ToRectProp(), extension.Jpg, false).Return(nil)
 
-		fpdf := mocks.NewFpdf(t)
-		fpdf.EXPECT().ClearError()
-
 		dep := &gofpdf.Dependencies{
 			Cache: cache,
 			Image: image,
-			Fpdf:  fpdf,
 			Cfg:   cfg,
 		}
 
