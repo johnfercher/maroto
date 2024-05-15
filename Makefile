@@ -21,10 +21,15 @@ fmt:
 .PHONY: lint
 lint:
 	golangci-lint run --config=.golangci.yml ./...
+	make mock-lint
+
+.PHONY: mock-lint
+mock-lint:
+	bash shell/mock-check.sh
 
 .PHONY: install
 install:
-	bash install.sh
+	bash shell/install.sh
 
 .PHONY: docs
 docs:

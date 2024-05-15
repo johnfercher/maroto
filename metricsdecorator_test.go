@@ -27,9 +27,9 @@ func TestMetricsDecorator_AddPages(t *testing.T) {
 	// Arrange
 	pg := page.New()
 
-	docToReturn := &mocks.Document{}
+	docToReturn := mocks.NewDocument(t)
 	docToReturn.EXPECT().GetBytes().Return([]byte{1, 2, 3})
-	inner := &mocks.Maroto{}
+	inner := mocks.NewMaroto(t)
 	inner.EXPECT().AddPages(pg)
 	inner.EXPECT().Generate().Return(docToReturn, nil)
 
@@ -57,9 +57,9 @@ func TestMetricsDecorator_AddRow(t *testing.T) {
 	// Arrange
 	col := col.New(12)
 
-	docToReturn := &mocks.Document{}
+	docToReturn := mocks.NewDocument(t)
 	docToReturn.EXPECT().GetBytes().Return([]byte{1, 2, 3})
-	inner := &mocks.Maroto{}
+	inner := mocks.NewMaroto(t)
 	inner.EXPECT().AddRow(10.0, col).Return(nil)
 	inner.EXPECT().Generate().Return(docToReturn, nil)
 
@@ -87,9 +87,9 @@ func TestMetricsDecorator_AddRows(t *testing.T) {
 	// Arrange
 	row := row.New(10).Add(col.New(12))
 
-	docToReturn := &mocks.Document{}
+	docToReturn := mocks.NewDocument(t)
 	docToReturn.EXPECT().GetBytes().Return([]byte{1, 2, 3})
-	inner := &mocks.Maroto{}
+	inner := mocks.NewMaroto(t)
 	inner.EXPECT().AddRows(row)
 	inner.EXPECT().Generate().Return(docToReturn, nil)
 
@@ -117,9 +117,9 @@ func TestMetricsDecorator_GetStructure(t *testing.T) {
 	// Arrange
 	row := row.New(10).Add(col.New(12))
 
-	docToReturn := &mocks.Document{}
+	docToReturn := mocks.NewDocument(t)
 	docToReturn.EXPECT().GetBytes().Return([]byte{1, 2, 3})
-	inner := &mocks.Maroto{}
+	inner := mocks.NewMaroto(t)
 	inner.EXPECT().AddRows(row)
 	inner.EXPECT().GetStructure().Return(&node.Node[core.Structure]{})
 	inner.EXPECT().Generate().Return(docToReturn, nil)
@@ -147,7 +147,7 @@ func TestMetricsDecorator_GetStructure(t *testing.T) {
 }
 
 func TestMetricsDecorator_FitlnCurrentPage(t *testing.T) {
-	inner := &mocks.Maroto{}
+	inner := mocks.NewMaroto(t)
 	inner.EXPECT().FitlnCurrentPage(10.0).Return(true)
 	inner.EXPECT().FitlnCurrentPage(20.0).Return(false)
 

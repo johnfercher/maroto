@@ -28,7 +28,7 @@ func TestCellWriter_Apply(t *testing.T) {
 		config := &entity.Config{}
 		width := 100.0
 		height := 200.0
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().CellFormat(width, height, "", "", 0, "C", false, 0, "")
 
 		sut := cellwriter.NewCellWriter(fpdf)
@@ -46,7 +46,7 @@ func TestCellWriter_Apply(t *testing.T) {
 		}
 		width := 100.0
 		height := 200.0
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().CellFormat(width, height, "", "1", 0, "C", false, 0, "")
 
 		sut := cellwriter.NewCellWriter(fpdf)
@@ -63,7 +63,7 @@ func TestCellWriter_Apply(t *testing.T) {
 		prop := fixture.CellProp()
 		width := 100.0
 		height := 200.0
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().CellFormat(width, height, "", "L", 0, "C", true, 0, "")
 
 		sut := cellwriter.NewCellWriter(fpdf)
@@ -82,7 +82,7 @@ func TestCellWriter_Apply(t *testing.T) {
 		prop := fixture.CellProp()
 		width := 100.0
 		height := 200.0
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().CellFormat(width, height, "", "1", 0, "C", true, 0, "")
 
 		sut := cellwriter.NewCellWriter(fpdf)

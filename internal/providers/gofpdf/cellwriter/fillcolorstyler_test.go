@@ -37,7 +37,7 @@ func TestFillColorStyle_Apply(t *testing.T) {
 		cfg := &entity.Config{}
 		var nilCellProp *props.Cell
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, nilCellProp)
 
 		sut := cellwriter.NewFillColorStyler(nil)
@@ -56,7 +56,7 @@ func TestFillColorStyle_Apply(t *testing.T) {
 		cfg := &entity.Config{}
 		prop := &props.Cell{}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
 		sut := cellwriter.NewFillColorStyler(nil)
@@ -77,10 +77,10 @@ func TestFillColorStyle_Apply(t *testing.T) {
 			BackgroundColor: &props.Color{Red: 100, Green: 150, Blue: 170},
 		}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().SetFillColor(prop.BackgroundColor.Red, prop.BackgroundColor.Green, prop.BackgroundColor.Blue)
 		fpdf.EXPECT().SetFillColor(255, 255, 255)
 

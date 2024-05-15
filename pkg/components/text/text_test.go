@@ -69,7 +69,7 @@ func TestText_Render(t *testing.T) {
 		prop := fixture.TextProp()
 		sut := text.New(value, prop)
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddText(value, &cell, &prop)
 		sut.SetConfig(&entity.Config{})
 

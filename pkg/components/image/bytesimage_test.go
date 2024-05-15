@@ -70,7 +70,7 @@ func TestBytesImage_Render(t *testing.T) {
 		prop := fixture.RectProp()
 		sut := image.NewFromBytes(bytes, ext, prop)
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddImageFromBytes(bytes, &cell, &prop, ext)
 
 		// Act

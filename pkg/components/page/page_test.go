@@ -50,8 +50,8 @@ func TestPage_Render(t *testing.T) {
 		prop.Pattern = ""
 		cfg := &entity.Config{}
 
-		provider := &mocks.Provider{}
-		row := &mocks.Row{}
+		provider := mocks.NewProvider(t)
+		row := mocks.NewRow(t)
 		row.EXPECT().Render(provider, cell)
 		row.EXPECT().GetHeight().Return(10.0)
 		row.EXPECT().SetConfig(cfg)
@@ -82,9 +82,9 @@ func TestPage_Render(t *testing.T) {
 		rectProp := &props.Rect{}
 		rectProp.MakeValid()
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddBackgroundImageFromBytes(cfg.BackgroundImage.Bytes, &cell, rectProp, cfg.BackgroundImage.Extension)
-		row := &mocks.Row{}
+		row := mocks.NewRow(t)
 		row.EXPECT().Render(provider, cell)
 		row.EXPECT().GetHeight().Return(10.0)
 		row.EXPECT().SetConfig(cfg)
@@ -115,10 +115,10 @@ func TestPage_Render(t *testing.T) {
 		rectProp := &props.Rect{}
 		rectProp.MakeValid()
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddBackgroundImageFromBytes(cfg.BackgroundImage.Bytes, &cell, rectProp, cfg.BackgroundImage.Extension)
 		provider.EXPECT().AddText("0 / 0", &cell, prop.GetNumberTextProp(cell.Height))
-		row := &mocks.Row{}
+		row := mocks.NewRow(t)
 		row.EXPECT().Render(provider, cell)
 		row.EXPECT().GetHeight().Return(10.0)
 		row.EXPECT().SetConfig(cfg)
@@ -154,7 +154,7 @@ func TestPage_SetNumber(t *testing.T) {
 func TestPage_GetRows(t *testing.T) {
 	t.Run("when called get rows, should return rows correctly", func(t *testing.T) {
 		// Arrange
-		row := &mocks.Row{}
+		row := mocks.NewRow(t)
 
 		sut := page.New()
 		sut.Add(row)

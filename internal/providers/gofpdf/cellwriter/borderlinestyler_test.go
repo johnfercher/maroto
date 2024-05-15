@@ -38,7 +38,7 @@ func TestBorderLineStyler_Apply(t *testing.T) {
 		cfg := &entity.Config{}
 		var nilCellProp *props.Cell
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, nilCellProp)
 
 		sut := cellwriter.NewBorderLineStyler(nil)
@@ -59,7 +59,7 @@ func TestBorderLineStyler_Apply(t *testing.T) {
 			LineStyle: linestyle.Solid,
 		}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
 		sut := cellwriter.NewBorderLineStyler(nil)
@@ -78,7 +78,7 @@ func TestBorderLineStyler_Apply(t *testing.T) {
 		cfg := &entity.Config{}
 		prop := &props.Cell{}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
 		sut := cellwriter.NewBorderLineStyler(nil)
@@ -99,10 +99,10 @@ func TestBorderLineStyler_Apply(t *testing.T) {
 			LineStyle: linestyle.Dashed,
 		}
 
-		inner := &mocks.CellWriter{}
+		inner := mocks.NewCellWriter(t)
 		inner.EXPECT().Apply(width, height, cfg, prop)
 
-		fpdf := &mocks.Fpdf{}
+		fpdf := mocks.NewFpdf(t)
 		fpdf.EXPECT().SetDashPattern([]float64{1, 1}, 0.0)
 		fpdf.EXPECT().SetDashPattern([]float64{1, 0}, 0.0)
 

@@ -77,9 +77,9 @@ func TestCol_Render(t *testing.T) {
 		cell := fixture.CellEntity()
 		style := &props.Cell{}
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 
-		component := &mocks.Component{}
+		component := mocks.NewComponent(t)
 		component.EXPECT().Render(provider, &cell)
 		component.EXPECT().SetConfig(cfg)
 
@@ -100,10 +100,10 @@ func TestCol_Render(t *testing.T) {
 		cell := fixture.CellEntity()
 		style := &props.Cell{}
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().CreateCol(cell.Width, cell.Height, cfg, style)
 
-		component := &mocks.Component{}
+		component := mocks.NewComponent(t)
 		component.EXPECT().Render(provider, &cell)
 		component.EXPECT().SetConfig(cfg)
 

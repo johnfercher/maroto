@@ -69,7 +69,7 @@ func TestMatrixCode_Render(t *testing.T) {
 		prop := fixture.RectProp()
 		sut := code.NewMatrix(codeValue, prop)
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddMatrixCode(codeValue, &cell, &prop)
 
 		// Act

@@ -69,7 +69,7 @@ func TestSignature_Render(t *testing.T) {
 		prop := fixture.SignatureProp()
 		sut := signature.New(label, prop)
 
-		provider := &mocks.Provider{}
+		provider := mocks.NewProvider(t)
 		provider.On("AddText", mock.Anything, mock.Anything, mock.Anything).Return(10.0)
 		provider.On("GetTextHeight", mock.Anything).Return(10.0)
 		provider.On("AddLine", mock.Anything, mock.Anything)
