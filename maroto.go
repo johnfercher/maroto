@@ -2,6 +2,7 @@ package maroto
 
 import (
 	"errors"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"

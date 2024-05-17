@@ -1,8 +1,9 @@
 package entity
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 
 	"github.com/stretchr/testify/assert"
 

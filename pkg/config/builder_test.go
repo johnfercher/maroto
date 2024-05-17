@@ -2,9 +2,10 @@ package config_test
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 	"testing"
 	"time"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 
 	"github.com/stretchr/testify/assert"
 
@@ -177,6 +178,7 @@ func TestBuilder_WithPageSize(t *testing.T) {
 	})
 }
 
+// nolint:dupl // dupl is good here
 func TestBuilder_WithConcurrentMode(t *testing.T) {
 	t.Run("when chunk size is invalid, should not change the default value", func(t *testing.T) {
 		// Arrange
@@ -226,6 +228,7 @@ func TestBuilder_WithConcurrentMode(t *testing.T) {
 	})
 }
 
+// nolint:dupl // dupl is good here
 func TestCfgBuilder_WithSequentialLowMemoryMode(t *testing.T) {
 	t.Run("when chunk size is invalid, should not change the default value", func(t *testing.T) {
 		// Arrange

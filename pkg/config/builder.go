@@ -2,9 +2,10 @@
 package config
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 	"strings"
 	"time"
+
+	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 
