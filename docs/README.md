@@ -73,7 +73,7 @@ This is part of the [billing example](v2/examples/billing?id=billing).
 ### Rows
 
 - **Vertical Structuring**: Rows in Maroto are used to organize content vertically. Each row acts as a horizontal container for columns.
-- **Row Height**: The height of a row is defined when it is created (e.g., row.New(20)). This height determines the vertical space allocated for the row. Unlike columns, row height is not based on a grid system but is a relative unit of measurement.
+- **Row Height**: The height of a row is defined when it is created (e.g., row.New(20)). This height determines the vertical space allocated for the row. Unlike columns, row height is not based on a grid system but is a relative unit of `mm`.
 - **Sequential Layout**: Rows are added to the document in the order they are defined, creating a top-to-bottom flow of content. Each new row is placed immediately below the preceding row.
 - **Layout Flexibility**: Rows offer flexibility in the layout design, allowing for various configurations of columns within them. From single full-width columns to multiple columns of different widths, rows accommodate diverse layout patterns.
 
