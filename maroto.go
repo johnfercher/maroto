@@ -65,7 +65,7 @@ func New(cfgs ...*entity.Config) core.Maroto {
 	}
 
 	if cfg.GenerationMode == generation.Concurrent {
-		p := pool.NewPool[[]core.Page, []byte](cfg.WorkersQuantity, m.processPage,
+		p := pool.NewPool[[]core.Page, []byte](cfg.ChunkWorkers, m.processPage,
 			pool.WithSortingOutput[[]core.Page, []byte]())
 		m.pool = p
 	}
@@ -280,7 +280,7 @@ func (m *Maroto) generate() (core.Document, error) {
 }
 
 func (m *Maroto) generateConcurrently() (core.Document, error) {
-	chunks := len(m.pages) / m.config.WorkersQuantity
+	chunks := len(m.pages) / m.config.ChunkWorkers
 	if chunks == 0 {
 		chunks = 1
 	}
@@ -315,7 +315,7 @@ func (m *Maroto) generateConcurrently() (core.Document, error) {
 }
 
 func (m *Maroto) generateLowMemory() (core.Document, error) {
-	chunks := len(m.pages) / m.config.WorkersQuantity
+	chunks := len(m.pages) / m.config.ChunkWorkers
 	if chunks == 0 {
 		chunks = 1
 	}

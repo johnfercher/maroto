@@ -40,7 +40,7 @@ func TestBuilder_Build(t *testing.T) {
 	assert.Equal(t, 10.0, cfg.Margins.Top)
 	assert.Equal(t, 10.0, cfg.Margins.Left)
 	assert.Equal(t, 10.0, cfg.Margins.Right)
-	assert.Equal(t, 0, cfg.WorkersQuantity)
+	assert.Equal(t, 1, cfg.ChunkWorkers)
 	assert.Equal(t, false, cfg.Debug)
 	assert.Equal(t, 12, cfg.MaxGridSize)
 	assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
@@ -187,7 +187,7 @@ func TestBuilder_WithConcurrentMode(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, generation.Sequential, cfg.GenerationMode)
-		assert.Equal(t, 0, cfg.WorkersQuantity)
+		assert.Equal(t, 1, cfg.ChunkWorkers)
 	})
 
 	t.Run("when worker pool size is valid, should change the default value", func(t *testing.T) {
@@ -199,7 +199,7 @@ func TestBuilder_WithConcurrentMode(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, generation.Concurrent, cfg.GenerationMode)
-		assert.Equal(t, 7, cfg.WorkersQuantity)
+		assert.Equal(t, 7, cfg.ChunkWorkers)
 	})
 }
 

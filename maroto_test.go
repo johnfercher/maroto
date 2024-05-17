@@ -53,7 +53,7 @@ func TestNew(t *testing.T) {
 	t.Run("new with config an low memory mode on", func(t *testing.T) {
 		// Arrange
 		cfg := config.NewBuilder().
-			WithSequentialLowMemoryMode().
+			WithSequentialLowMemoryMode(10).
 			Build()
 
 		// Act
@@ -275,7 +275,7 @@ func TestMaroto_Generate(t *testing.T) {
 	t.Run("add rows until add new page, execute in low memory mode", func(t *testing.T) {
 		// Arrange
 		cfg := config.NewBuilder().
-			WithSequentialLowMemoryMode().
+			WithSequentialLowMemoryMode(10).
 			Build()
 
 		sut := maroto.New(cfg)

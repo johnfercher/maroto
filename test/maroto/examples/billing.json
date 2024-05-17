@@ -1,6 +1,7 @@
 {
 	"type": "maroto",
 	"details": {
+		"chunk_workers": 1,
 		"config_margin_bottom": 20.0025,
 		"config_margin_left": 10,
 		"config_margin_right": 10,

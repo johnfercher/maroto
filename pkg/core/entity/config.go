@@ -14,7 +14,7 @@ type Config struct {
 	DefaultFont          *props.Font
 	CustomFonts          []*CustomFont
 	GenerationMode       generation.Mode
-	WorkersQuantity      int
+	ChunkWorkers         int
 	Debug                bool
 	MaxGridSize          int
 	PageNumberPattern    string
@@ -47,9 +47,7 @@ func (c *Config) ToMap() map[string]interface{} {
 	}
 
 	m["generation_mode"] = c.GenerationMode
-	if c.GenerationMode == generation.Concurrent {
-		m["config_workers"] = c.WorkersQuantity
-	}
+	m["chunk_workers"] = c.ChunkWorkers
 
 	if c.Debug {
 		m["config_debug"] = c.Debug

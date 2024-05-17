@@ -33,7 +33,7 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithWorkerPoolSize(7).
+		WithConcurrentMode(7).
 		WithDebug(true).
 		WithPageNumber("{current} / {total}", props.Bottom).
 		Build()

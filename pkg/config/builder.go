@@ -25,9 +25,9 @@ type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
 	WithDimensions(width float64, height float64) Builder
 	WithMargins(left float64, top float64, right float64) Builder
-	WithConcurrentMode(poolSize int) Builder
+	WithConcurrentMode(chunkWorkers int) Builder
 	WithSequentialMode() Builder
-	WithSequentialLowMemoryMode() Builder
+	WithSequentialLowMemoryMode(chunkWorkers int) Builder
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
 	WithDefaultFont(font *props.Font) Builder
@@ -50,7 +50,7 @@ type CfgBuilder struct {
 	providerType         provider.Type
 	dimensions           *entity.Dimensions
 	margins              *entity.Margins
-	workerPoolSize       int
+	chunkWorkers         int
 	debug                bool
 	maxGridSize          int
 	defaultFont          *props.Font
@@ -85,6 +85,7 @@ func NewBuilder() Builder {
 			Color:  &props.BlackColor,
 		},
 		generationMode: generation.Sequential,
+		chunkWorkers:   1,
 		metadata:       &entity.Metadata{},
 	}
 }
@@ -134,27 +135,33 @@ func (b *CfgBuilder) WithMargins(left float64, top float64, right float64) Build
 	return b
 }
 
-// WithConcurrentMode defines go routine workers, when defined this will execute maroto concurrently.
-func (b *CfgBuilder) WithConcurrentMode(poolSize int) Builder {
-	if poolSize < 0 {
+// WithConcurrentMode defines concurrent generation, chunk workers define how mano chuncks
+// will be executed concurrently.
+func (b *CfgBuilder) WithConcurrentMode(chunkWorkers int) Builder {
+	if chunkWorkers < 1 {
 		return b
 	}
 
 	b.generationMode = generation.Concurrent
-	b.workerPoolSize = poolSize
+	b.chunkWorkers = chunkWorkers
 	return b
 }
 
-// WithSequentialLowMemoryMode defines that maroto will run focusing in reduce memory consumption.
-func (b *CfgBuilder) WithSequentialLowMemoryMode() Builder {
-	b.workerPoolSize = 0
+// WithSequentialLowMemoryMode defines that maroto will run focusing in reduce memory consumption,
+// chunk workers define how many divisions the work will have.
+func (b *CfgBuilder) WithSequentialLowMemoryMode(chunkWorkers int) Builder {
+	if chunkWorkers < 1 {
+		return b
+	}
+
 	b.generationMode = generation.SequentialLowMemory
+	b.chunkWorkers = chunkWorkers
 	return b
 }
 
 // WithSequentialMode defines that maroto will run in default mode.
 func (b *CfgBuilder) WithSequentialMode() Builder {
-	b.workerPoolSize = 0
+	b.chunkWorkers = 0
 	b.generationMode = generation.Sequential
 	return b
 }
@@ -340,7 +347,7 @@ func (b *CfgBuilder) Build() *entity.Config {
 		Dimensions:           b.getDimensions(),
 		Margins:              b.margins,
 		GenerationMode:       b.generationMode,
-		WorkersQuantity:      b.workerPoolSize,
+		ChunkWorkers:         b.chunkWorkers,
 		Debug:                b.debug,
 		MaxGridSize:          b.maxGridSize,
 		DefaultFont:          b.defaultFont,
