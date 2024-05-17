@@ -2,6 +2,7 @@ package maroto
 
 import (
 	"errors"
+	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
 
@@ -63,11 +64,12 @@ func New(cfgs ...*entity.Config) core.Maroto {
 		config: cfg,
 	}
 
-	if cfg.WorkersQuantity > 0 {
+	if cfg.GenerationMode == generation.Concurrent {
 		p := pool.NewPool[[]core.Page, []byte](cfg.WorkersQuantity, m.processPage,
 			pool.WithSortingOutput[[]core.Page, []byte]())
 		m.pool = p
 	}
+
 	return m
 }
 
@@ -158,8 +160,12 @@ func (m *Maroto) Generate() (core.Document, error) {
 	m.fillPageToAddNew()
 	m.setConfig()
 
-	if m.config.WorkersQuantity > 0 {
+	if m.config.GenerationMode == generation.Concurrent {
 		return m.generateConcurrently()
+	}
+
+	if m.config.GenerationMode == generation.SequentialLowMemory {
+		return m.generateLowMemory()
 	}
 
 	return m.generate()
@@ -301,6 +307,40 @@ func (m *Maroto) generateConcurrently() (core.Document, error) {
 	}
 
 	mergedBytes, err := merge.Bytes(pdfs...)
+	if err != nil {
+		return nil, err
+	}
+
+	return core.NewPDF(mergedBytes, nil), nil
+}
+
+func (m *Maroto) generateLowMemory() (core.Document, error) {
+	chunks := len(m.pages) / m.config.WorkersQuantity
+	if chunks == 0 {
+		chunks = 1
+	}
+	pageGroups := make([][]core.Page, 0)
+	for i := 0; i < len(m.pages); i += chunks {
+		end := i + chunks
+
+		if end > len(m.pages) {
+			end = len(m.pages)
+		}
+
+		pageGroups = append(pageGroups, m.pages[i:end])
+	}
+
+	var pdfResults [][]byte
+	for _, pageGroup := range pageGroups {
+		bytes, err := m.processPage(pageGroup)
+		if err != nil {
+			return nil, errors.New("an error has occurred while trying to generate PDFs in slow memory mode")
+		}
+
+		pdfResults = append(pdfResults, bytes)
+	}
+
+	mergedBytes, err := merge.Bytes(pdfResults...)
 	if err != nil {
 		return nil, err
 	}

@@ -2,6 +2,7 @@
 package config
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 	"strings"
 	"time"
 
@@ -24,7 +25,9 @@ type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
 	WithDimensions(width float64, height float64) Builder
 	WithMargins(left float64, top float64, right float64) Builder
-	WithWorkerPoolSize(poolSize int) Builder
+	WithConcurrentMode(poolSize int) Builder
+	WithSequentialMode() Builder
+	WithSequentialLowMemoryMode() Builder
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
 	WithDefaultFont(font *props.Font) Builder
@@ -61,6 +64,7 @@ type CfgBuilder struct {
 	metadata             *entity.Metadata
 	backgroundImage      *entity.Image
 	disableAutoPageBreak bool
+	generationMode       generation.Mode
 }
 
 // NewBuilder is responsible to create an instance of Builder.
@@ -80,7 +84,8 @@ func NewBuilder() Builder {
 			Style:  fontstyle.Normal,
 			Color:  &props.BlackColor,
 		},
-		metadata: &entity.Metadata{},
+		generationMode: generation.Sequential,
+		metadata:       &entity.Metadata{},
 	}
 }
 
@@ -129,13 +134,28 @@ func (b *CfgBuilder) WithMargins(left float64, top float64, right float64) Build
 	return b
 }
 
-// WithWorkerPoolSize defines go routine workers, when defined this will execute maroto concurrently.
-func (b *CfgBuilder) WithWorkerPoolSize(poolSize int) Builder {
+// WithConcurrentMode defines go routine workers, when defined this will execute maroto concurrently.
+func (b *CfgBuilder) WithConcurrentMode(poolSize int) Builder {
 	if poolSize < 0 {
 		return b
 	}
 
+	b.generationMode = generation.Concurrent
 	b.workerPoolSize = poolSize
+	return b
+}
+
+// WithSequentialLowMemoryMode defines that maroto will run focusing in reduce memory consumption.
+func (b *CfgBuilder) WithSequentialLowMemoryMode() Builder {
+	b.workerPoolSize = 0
+	b.generationMode = generation.SequentialLowMemory
+	return b
+}
+
+// WithSequentialMode defines that maroto will run in default mode.
+func (b *CfgBuilder) WithSequentialMode() Builder {
+	b.workerPoolSize = 0
+	b.generationMode = generation.Sequential
 	return b
 }
 
@@ -319,6 +339,7 @@ func (b *CfgBuilder) Build() *entity.Config {
 		ProviderType:         b.providerType,
 		Dimensions:           b.getDimensions(),
 		Margins:              b.margins,
+		GenerationMode:       b.generationMode,
 		WorkersQuantity:      b.workerPoolSize,
 		Debug:                b.debug,
 		MaxGridSize:          b.maxGridSize,

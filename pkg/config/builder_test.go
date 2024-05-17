@@ -2,6 +2,7 @@ package config_test
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 	"testing"
 	"time"
 
@@ -176,15 +177,16 @@ func TestBuilder_WithPageSize(t *testing.T) {
 	})
 }
 
-func TestBuilder_WithWorkerPoolSize(t *testing.T) {
+func TestBuilder_WithConcurrentMode(t *testing.T) {
 	t.Run("when worker pool size is invalid, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithWorkerPoolSize(-1).Build()
+		cfg := sut.WithConcurrentMode(-1).Build()
 
 		// Assert
+		assert.Equal(t, generation.Sequential, cfg.GenerationMode)
 		assert.Equal(t, 0, cfg.WorkersQuantity)
 	})
 
@@ -193,9 +195,10 @@ func TestBuilder_WithWorkerPoolSize(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithWorkerPoolSize(7).Build()
+		cfg := sut.WithConcurrentMode(7).Build()
 
 		// Assert
+		assert.Equal(t, generation.Concurrent, cfg.GenerationMode)
 		assert.Equal(t, 7, cfg.WorkersQuantity)
 	})
 }

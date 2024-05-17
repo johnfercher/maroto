@@ -37,10 +37,23 @@ func TestNew(t *testing.T) {
 		assert.NotNil(t, sut)
 		assert.Equal(t, "*maroto.Maroto", fmt.Sprintf("%T", sut))
 	})
-	t.Run("new with config and worker pool size", func(t *testing.T) {
+	t.Run("new with config an concurrent mode on", func(t *testing.T) {
 		// Arrange
 		cfg := config.NewBuilder().
-			WithWorkerPoolSize(7).
+			WithConcurrentMode(7).
+			Build()
+
+		// Act
+		sut := maroto.New(cfg)
+
+		// Assert
+		assert.NotNil(t, sut)
+		assert.Equal(t, "*maroto.Maroto", fmt.Sprintf("%T", sut))
+	})
+	t.Run("new with config an low memory mode on", func(t *testing.T) {
+		// Arrange
+		cfg := config.NewBuilder().
+			WithSequentialLowMemoryMode().
 			Build()
 
 		// Act
@@ -244,7 +257,25 @@ func TestMaroto_Generate(t *testing.T) {
 	t.Run("add rows until add new page, execute in parallel", func(t *testing.T) {
 		// Arrange
 		cfg := config.NewBuilder().
-			WithWorkerPoolSize(7).
+			WithConcurrentMode(7).
+			Build()
+
+		sut := maroto.New(cfg)
+
+		// Act
+		for i := 0; i < 30; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+
+		// Assert
+		doc, err := sut.Generate()
+		assert.Nil(t, err)
+		assert.NotNil(t, doc)
+	})
+	t.Run("add rows until add new page, execute in low memory mode", func(t *testing.T) {
+		// Arrange
+		cfg := config.NewBuilder().
+			WithSequentialLowMemoryMode().
 			Build()
 
 		sut := maroto.New(cfg)

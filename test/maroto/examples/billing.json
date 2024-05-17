@@ -9,6 +9,7 @@
 		"config_page_number_pattern": "Page {current} of {total}",
 		"config_page_number_place": "right_bottom",
 		"config_provider_type": "gofpdf",
+		"generation_mode": "sequential",
 		"maroto_dimension_height": 297,
 		"maroto_dimension_width": 210,
 		"prop_font_color": "RGB(0, 0, 0)",
