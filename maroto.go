@@ -334,7 +334,7 @@ func (m *Maroto) generateLowMemory() (core.Document, error) {
 	for _, pageGroup := range pageGroups {
 		bytes, err := m.processPage(pageGroup)
 		if err != nil {
-			return nil, errors.New("an error has occurred while trying to generate PDFs in slow memory mode")
+			return nil, errors.New("an error has occurred while trying to generate PDFs in low memory mode")
 		}
 
 		pdfResults = append(pdfResults, bytes)
