@@ -161,7 +161,7 @@ func (b *CfgBuilder) WithSequentialLowMemoryMode(chunkWorkers int) Builder {
 
 // WithSequentialMode defines that maroto will run in default mode.
 func (b *CfgBuilder) WithSequentialMode() Builder {
-	b.chunkWorkers = 0
+	b.chunkWorkers = 1
 	b.generationMode = generation.Sequential
 	return b
 }
