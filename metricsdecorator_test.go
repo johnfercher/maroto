@@ -2,8 +2,9 @@ package maroto
 
 import (
 	"fmt"
-	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
 
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
