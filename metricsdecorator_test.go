@@ -2,6 +2,7 @@ package maroto
 
 import (
 	"fmt"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"testing"
 
 	"github.com/johnfercher/go-tree/node"
@@ -155,4 +156,56 @@ func TestMetricsDecorator_FitlnCurrentPage(t *testing.T) {
 	// Assert
 	assert.True(t, sut.FitlnCurrentPage(10))
 	assert.False(t, sut.FitlnCurrentPage(20))
+}
+
+func TestMetricsDecorator_RegisterHeader(t *testing.T) {
+	// Arrange
+	row := text.NewRow(10, "text")
+
+	inner := mocks.NewMaroto(t)
+	inner.EXPECT().RegisterHeader(row).Return(nil)
+	inner.EXPECT().Generate().Return(&core.Pdf{}, nil)
+
+	sut := NewMetricsDecorator(inner)
+
+	// Act
+	err := sut.RegisterHeader(row)
+
+	// Assert
+	assert.Nil(t, err)
+
+	doc, err := sut.Generate()
+	assert.Nil(t, err)
+
+	report := doc.GetReport()
+	assert.NotNil(t, report)
+	assert.Equal(t, 2, len(report.TimeMetrics))
+	assert.Equal(t, "generate", report.TimeMetrics[0].Key)
+	assert.Equal(t, "header", report.TimeMetrics[1].Key)
+}
+
+func TestMetricsDecorator_RegisterFooter(t *testing.T) {
+	// Arrange
+	row := text.NewRow(10, "text")
+
+	inner := mocks.NewMaroto(t)
+	inner.EXPECT().RegisterFooter(row).Return(nil)
+	inner.EXPECT().Generate().Return(&core.Pdf{}, nil)
+
+	sut := NewMetricsDecorator(inner)
+
+	// Act
+	err := sut.RegisterFooter(row)
+
+	// Assert
+	assert.Nil(t, err)
+
+	doc, err := sut.Generate()
+	assert.Nil(t, err)
+
+	report := doc.GetReport()
+	assert.NotNil(t, report)
+	assert.Equal(t, 2, len(report.TimeMetrics))
+	assert.Equal(t, "generate", report.TimeMetrics[0].Key)
+	assert.Equal(t, "footer", report.TimeMetrics[1].Key)
 }
