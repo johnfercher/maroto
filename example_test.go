@@ -48,22 +48,14 @@ func ExampleMaroto_AddPages() {
 	// Do things and generate
 }
 
-// ExampleMaroto_FitlnCurrentPage demonstrate how to check if the new line fits on the current page
-func ExampleMaroto_FitlnCurrentPage() {
+// ExampleMaroto_AddRows demonstrates how to add new rows in maroto.
+func ExampleMaroto_AddRows() {
 	m := maroto.New()
 
-	m.FitlnCurrentPage(12)
-
-	// Do things and generate
-}
-
-// ExampleMarotoGetStruct demonstrates how to get maroto component tree
-func ExampleMaroto_GetStructure() {
-	m := maroto.New()
-
-	m.AddRow(40, text.NewCol(12, "text"))
-
-	m.GetStructure()
+	m.AddRows(
+		code.NewBarRow(12, "barcode"),
+		text.NewRow(12, "text"),
+	)
 
 	// Do things and generate
 }
@@ -77,14 +69,11 @@ func ExampleMaroto_AddRow() {
 	// Do things and generate
 }
 
-// ExampleMaroto_AddRows demonstrates how to add new rows in maroto.
-func ExampleMaroto_AddRows() {
+// ExampleMaroto_FitlnCurrentPage demonstrate how to check if the new line fits on the current page
+func ExampleMaroto_FitlnCurrentPage() {
 	m := maroto.New()
 
-	m.AddRows(
-		code.NewBarRow(12, "barcode"),
-		text.NewRow(12, "text"),
-	)
+	m.FitlnCurrentPage(12)
 
 	// Do things and generate
 }
@@ -132,4 +121,15 @@ func ExampleMaroto_Generate() {
 
 	// You can retrieve as Base64, Save file, Merge with another file or GetReport.
 	_ = doc.GetBytes()
+}
+
+// ExampleMarotoGetStruct demonstrates how to get maroto component tree
+func ExampleMaroto_GetStructure() {
+	m := maroto.New()
+
+	m.AddRow(40, text.NewCol(12, "text"))
+
+	m.GetStructure()
+
+	// Do things and generate
 }

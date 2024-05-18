@@ -1,7 +1,7 @@
 # Low Memory
 
 ## GoDoc
-* [builder : WithSequentialLowMemory](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithSequentialLowMemory)
+* [builder : WithSequentialLowMemory](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithSequentialLowMemoryMode)
 
 ## Code Example
 [filename](../../assets/examples/lowmemory/v2/main.go  ':include :type=code')
