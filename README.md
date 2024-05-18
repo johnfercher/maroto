@@ -23,7 +23,7 @@ always when a new page appear, in this case, a header may have many rows, lines 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2@v2.0.1
+go get github.com/johnfercher/maroto/v2@v2.0.2
 ```
 
 * You can see the full `v2` documentation [here](https://maroto.io/).
