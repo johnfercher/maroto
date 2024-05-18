@@ -57,7 +57,7 @@ func TestMarotoTest_Save(t *testing.T) {
 		sut := New(innerT).Assert(n)
 
 		// Act
-		sut.Save(file)
+		sut.Equals(file)
 
 		// Assert
 		path := configSingleton.getAbsoluteFilePath(file)
@@ -71,7 +71,7 @@ func TestMarotoTest_Save(t *testing.T) {
 		sut := New(t).Assert(n)
 
 		// Act
-		sut.Save(file)
+		sut.Equals(file)
 
 		// Assert
 		path := configSingleton.getAbsoluteFilePath(file)

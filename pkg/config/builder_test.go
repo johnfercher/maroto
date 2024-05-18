@@ -5,6 +5,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
+
 	"github.com/stretchr/testify/assert"
 
 	"github.com/johnfercher/maroto/v2/pkg/config"
@@ -39,7 +41,7 @@ func TestBuilder_Build(t *testing.T) {
 	assert.Equal(t, 10.0, cfg.Margins.Top)
 	assert.Equal(t, 10.0, cfg.Margins.Left)
 	assert.Equal(t, 10.0, cfg.Margins.Right)
-	assert.Equal(t, 0, cfg.WorkersQuantity)
+	assert.Equal(t, 1, cfg.ChunkWorkers)
 	assert.Equal(t, false, cfg.Debug)
 	assert.Equal(t, 12, cfg.MaxGridSize)
 	assert.Equal(t, fontfamily.Arial, cfg.DefaultFont.Family)
@@ -176,27 +178,141 @@ func TestBuilder_WithPageSize(t *testing.T) {
 	})
 }
 
-func TestBuilder_WithWorkerPoolSize(t *testing.T) {
-	t.Run("when worker pool size is invalid, should not change the default value", func(t *testing.T) {
+// nolint:dupl // dupl is good here
+func TestBuilder_WithConcurrentMode(t *testing.T) {
+	t.Run("when chunk size is invalid, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithWorkerPoolSize(-1).Build()
+		cfg := sut.WithConcurrentMode(-1).Build()
 
 		// Assert
-		assert.Equal(t, 0, cfg.WorkersQuantity)
+		assert.Equal(t, generation.Sequential, cfg.GenerationMode)
+		assert.Equal(t, 1, cfg.ChunkWorkers)
 	})
-
-	t.Run("when worker pool size is valid, should change the default value", func(t *testing.T) {
+	t.Run("when chunk size is valid, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithWorkerPoolSize(7).Build()
+		cfg := sut.WithConcurrentMode(7).Build()
 
 		// Assert
-		assert.Equal(t, 7, cfg.WorkersQuantity)
+		assert.Equal(t, generation.Concurrent, cfg.GenerationMode)
+		assert.Equal(t, 7, cfg.ChunkWorkers)
+	})
+	t.Run("when chunk size is valid, should override sequential", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+		sut.WithSequentialMode()
+
+		// Act
+		cfg := sut.WithConcurrentMode(7).Build()
+
+		// Assert
+		assert.Equal(t, generation.Concurrent, cfg.GenerationMode)
+		assert.Equal(t, 7, cfg.ChunkWorkers)
+	})
+	t.Run("when chunk size is valid, should override sequential low memory", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+		sut.WithSequentialLowMemoryMode(5)
+
+		// Act
+		cfg := sut.WithConcurrentMode(7).Build()
+
+		// Assert
+		assert.Equal(t, generation.Concurrent, cfg.GenerationMode)
+		assert.Equal(t, 7, cfg.ChunkWorkers)
+	})
+}
+
+// nolint:dupl // dupl is good here
+func TestCfgBuilder_WithSequentialLowMemoryMode(t *testing.T) {
+	t.Run("when chunk size is invalid, should not change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithSequentialLowMemoryMode(-1).Build()
+
+		// Assert
+		assert.Equal(t, generation.Sequential, cfg.GenerationMode)
+		assert.Equal(t, 1, cfg.ChunkWorkers)
+	})
+	t.Run("when chunk size is valid, should change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithSequentialLowMemoryMode(7).Build()
+
+		// Assert
+		assert.Equal(t, generation.SequentialLowMemory, cfg.GenerationMode)
+		assert.Equal(t, 7, cfg.ChunkWorkers)
+	})
+	t.Run("when chunk size is valid, should override sequential low memory", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+		sut.WithSequentialMode()
+
+		// Act
+		cfg := sut.WithSequentialLowMemoryMode(7).Build()
+
+		// Assert
+		assert.Equal(t, generation.SequentialLowMemory, cfg.GenerationMode)
+		assert.Equal(t, 7, cfg.ChunkWorkers)
+	})
+	t.Run("when chunk size is valid, should override concurrent", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+		sut.WithConcurrentMode(5)
+
+		// Act
+		cfg := sut.WithSequentialLowMemoryMode(7).Build()
+
+		// Assert
+		assert.Equal(t, generation.SequentialLowMemory, cfg.GenerationMode)
+		assert.Equal(t, 7, cfg.ChunkWorkers)
+	})
+}
+
+func TestCfgBuilder_WithSequentialMode(t *testing.T) {
+	t.Run("when sequential, should apply sequential", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithSequentialMode().Build()
+
+		// Assert
+		assert.Equal(t, generation.Sequential, cfg.GenerationMode)
+		assert.Equal(t, 1, cfg.ChunkWorkers)
+	})
+	t.Run("when sequential, should override sequential low memory", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+		sut.WithSequentialLowMemoryMode(10)
+
+		// Act
+		cfg := sut.WithSequentialMode().Build()
+
+		// Assert
+		assert.Equal(t, generation.Sequential, cfg.GenerationMode)
+		assert.Equal(t, 1, cfg.ChunkWorkers)
+	})
+	t.Run("when sequential, should override concurrent", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+		sut.WithConcurrentMode(10)
+
+		// Act
+		cfg := sut.WithSequentialMode().Build()
+
+		// Assert
+		assert.Equal(t, generation.Sequential, cfg.GenerationMode)
+		assert.Equal(t, 1, cfg.ChunkWorkers)
 	})
 }
 

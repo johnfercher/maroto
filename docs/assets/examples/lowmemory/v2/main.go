@@ -20,12 +20,12 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	err = document.Save("docs/assets/pdf/parallelismv2.pdf")
+	err = document.Save("docs/assets/pdf/lowmemoryv2.pdf")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	err = document.GetReport().Save("docs/assets/text/parallelismv2.txt")
+	err = document.GetReport().Save("docs/assets/text/lowmemoryv2.txt")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -33,7 +33,7 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithConcurrentMode(7).
+		WithSequentialLowMemoryMode(7).
 		WithDebug(true).
 		WithPageNumber("{current} / {total}", props.Bottom).
 		Build()

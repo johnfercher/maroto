@@ -1,12 +1,14 @@
 {
 	"type": "maroto",
 	"details": {
+		"chunk_workers": 1,
 		"config_margin_bottom": 20.0025,
 		"config_margin_left": 10,
 		"config_margin_right": 10,
 		"config_margin_top": 10,
 		"config_max_grid_sum": 12,
 		"config_provider_type": "gofpdf",
+		"generation_mode": "sequential",
 		"maroto_dimension_height": 297,
 		"maroto_dimension_width": 210,
 		"prop_font_color": "RGB(0, 0, 0)",
@@ -24,7 +26,9 @@
 						{
 							"value": 0,
 							"type": "col",
-							"details":{"is_max":true}
+							"details": {
+								"is_max": true
+							}
 						}
 					]
 				},
