@@ -290,6 +290,54 @@ func TestMaroto_Generate(t *testing.T) {
 		assert.Nil(t, err)
 		assert.NotNil(t, doc)
 	})
+	t.Run("sequential generation", func(t *testing.T) {
+		// Arrange
+		cfg := config.NewBuilder().
+			WithSequentialMode().
+			Build()
+
+		sut := maroto.New(cfg)
+
+		// Act
+		for i := 0; i < 30; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_sequential.json")
+	})
+	t.Run("sequential low memory generation", func(t *testing.T) {
+		// Arrange
+		cfg := config.NewBuilder().
+			WithSequentialLowMemoryMode(10).
+			Build()
+
+		sut := maroto.New(cfg)
+
+		// Act
+		for i := 0; i < 30; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_sequential_low_memory.json")
+	})
+	t.Run("sequential low memory generation", func(t *testing.T) {
+		// Arrange
+		cfg := config.NewBuilder().
+			WithConcurrentMode(10).
+			Build()
+
+		sut := maroto.New(cfg)
+
+		// Act
+		for i := 0; i < 30; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_concurrent.json")
+	})
 }
 
 func TestMaroto_FitlnCurrentPage(t *testing.T) {
