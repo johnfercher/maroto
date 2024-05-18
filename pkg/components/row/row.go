@@ -18,7 +18,7 @@ type Row struct {
 }
 
 // New is responsible to create a core.Row.
-// height is defined in mm
+// height is defined in mm.
 func New(height float64) core.Row {
 	return &Row{
 		height: height,
