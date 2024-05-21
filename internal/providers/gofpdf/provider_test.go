@@ -613,6 +613,7 @@ func TestProvider_SetMetadata(t *testing.T) {
 		fpdf.EXPECT().SetCreator("creator", true)
 		fpdf.EXPECT().SetSubject("subject", true)
 		fpdf.EXPECT().SetTitle("title", true)
+		fpdf.EXPECT().SetKeywords("keyword", true)
 		fpdf.EXPECT().SetCreationDate(timeNow)
 
 		dep := &gofpdf.Dependencies{
@@ -638,6 +639,10 @@ func TestProvider_SetMetadata(t *testing.T) {
 				Text: "title",
 				UTF8: true,
 			},
+			KeywordsStr: &entity.Utf8Text{
+				Text: "keyword",
+				UTF8: true,
+			},
 			CreationDate: &timeNow,
 		})
 
@@ -647,6 +652,7 @@ func TestProvider_SetMetadata(t *testing.T) {
 		fpdf.AssertNumberOfCalls(t, "SetSubject", 1)
 		fpdf.AssertNumberOfCalls(t, "SetTitle", 1)
 		fpdf.AssertNumberOfCalls(t, "SetCreationDate", 1)
+		fpdf.AssertNumberOfCalls(t, "SetKeywords", 1)
 	})
 }
 
