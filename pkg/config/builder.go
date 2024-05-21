@@ -44,6 +44,7 @@ type Builder interface {
 	WithCustomFonts([]*entity.CustomFont) Builder
 	WithBackgroundImage([]byte, extension.Type) Builder
 	WithDisableAutoPageBreak(disabled bool) Builder
+	Withkeywords(keywordsStr string, isUTF8 bool) Builder
 	Build() *entity.Config
 }
 
@@ -89,6 +90,19 @@ func NewBuilder() Builder {
 		chunkWorkers:   1,
 		metadata:       &entity.Metadata{},
 	}
+}
+
+func (b *CfgBuilder) Withkeywords(keywordsStr string, isUTF8 bool) Builder {
+	if keywordsStr == "" {
+		return b
+	}
+
+	b.metadata.KeywordsStr = &entity.Utf8Text{
+		Text: keywordsStr,
+		UTF8: isUTF8,
+	}
+
+	return b
 }
 
 // WithPageSize defines the page size, ex: A4, A4 and etc.
