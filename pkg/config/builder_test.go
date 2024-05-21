@@ -525,7 +525,7 @@ func TestBuilder_WithKeywords(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.Withkeywords("", true).Build()
+		cfg := sut.WithKeywords("", true).Build()
 
 		// Assert
 		assert.Nil(t, cfg.Metadata.KeywordsStr)
@@ -535,7 +535,7 @@ func TestBuilder_WithKeywords(t *testing.T) {
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.Withkeywords("keyword", true).Build()
+		cfg := sut.WithKeywords("keyword", true).Build()
 
 		// Assert
 		assert.Equal(t, "keyword", cfg.Metadata.KeywordsStr.Text)

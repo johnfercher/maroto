@@ -1,3 +1,3 @@
-generate -> avg: 602.08μs, executions: [602.08μs]
-add_rows -> avg: 1032.00ns, executions: [1.03μs]
+generate -> avg: 1.05ms, executions: [1.05ms]
+add_rows -> avg: 1313.00ns, executions: [1.31μs]
 file_size -> 1.29Kb

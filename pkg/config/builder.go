@@ -44,7 +44,7 @@ type Builder interface {
 	WithCustomFonts([]*entity.CustomFont) Builder
 	WithBackgroundImage([]byte, extension.Type) Builder
 	WithDisableAutoPageBreak(disabled bool) Builder
-	Withkeywords(keywordsStr string, isUTF8 bool) Builder
+	WithKeywords(keywordsStr string, isUTF8 bool) Builder
 	Build() *entity.Config
 }
 
@@ -92,7 +92,8 @@ func NewBuilder() Builder {
 	}
 }
 
-func (b *CfgBuilder) Withkeywords(keywordsStr string, isUTF8 bool) Builder {
+// Withkeywords defines the document's keyword metadata
+func (b *CfgBuilder) WithKeywords(keywordsStr string, isUTF8 bool) Builder {
 	if keywordsStr == "" {
 		return b
 	}
