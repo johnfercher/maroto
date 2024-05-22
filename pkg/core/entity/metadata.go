@@ -12,6 +12,7 @@ type Metadata struct {
 	Subject      *Utf8Text
 	Title        *Utf8Text
 	CreationDate *time.Time
+	KeywordsStr  *Utf8Text
 }
 
 // AppendMap appends the metadata to a map.
@@ -34,6 +35,10 @@ func (m *Metadata) AppendMap(mp map[string]interface{}) map[string]interface{} {
 
 	if m.CreationDate != nil {
 		mp["config_metadata_creation_date"] = true
+	}
+
+	if m.KeywordsStr != nil {
+		mp["config_metadata_keywords"] = m.KeywordsStr.ToString()
 	}
 
 	return mp

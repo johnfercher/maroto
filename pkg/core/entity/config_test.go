@@ -48,6 +48,7 @@ func TestConfig_ToMap(t *testing.T) {
 	assert.Equal(t, "Utf8Text(creator, false)", m["config_metadata_creator"])
 	assert.Equal(t, "Utf8Text(subject, true)", m["config_metadata_subject"])
 	assert.Equal(t, "Utf8Text(title, true)", m["config_metadata_title"])
+	assert.Equal(t, "Utf8Text(keyword, true)", m["config_metadata_keywords"])
 	assert.Equal(t, true, m["config_metadata_creation_date"])
 	assert.Equal(t, "[1 2 3]", m["entity_image_bytes"])
 	assert.Equal(t, extension.Png, m["entity_extension"])

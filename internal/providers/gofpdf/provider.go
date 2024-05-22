@@ -199,6 +199,10 @@ func (g *provider) SetMetadata(metadata *entity.Metadata) {
 	if metadata.CreationDate != nil {
 		g.fpdf.SetCreationDate(*metadata.CreationDate)
 	}
+
+	if metadata.KeywordsStr != nil {
+		g.fpdf.SetKeywords(metadata.KeywordsStr.Text, metadata.KeywordsStr.UTF8)
+	}
 }
 
 func (g *provider) GenerateBytes() ([]byte, error) {

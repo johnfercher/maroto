@@ -519,6 +519,30 @@ func TestBuilder_WithAuthor(t *testing.T) {
 	})
 }
 
+func TestBuilder_WithKeywords(t *testing.T) {
+	t.Run("when keywords is empty, should ignore", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithKeywords("", true).Build()
+
+		// Assert
+		assert.Nil(t, cfg.Metadata.KeywordsStr)
+	})
+	t.Run("when author valid, should apply", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithKeywords("keyword", true).Build()
+
+		// Assert
+		assert.Equal(t, "keyword", cfg.Metadata.KeywordsStr.Text)
+		assert.Equal(t, true, cfg.Metadata.KeywordsStr.UTF8)
+	})
+}
+
 func TestBuilder_WithCreator(t *testing.T) {
 	t.Run("when creator is empty, should ignore", func(t *testing.T) {
 		// Arrange

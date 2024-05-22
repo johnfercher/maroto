@@ -36,6 +36,7 @@ func GetMaroto() core.Maroto {
 		WithCreator("creator", false).
 		WithSubject("subject", false).
 		WithTitle("title", false).
+		WithKeywords("keyword", false).
 		WithCreationDate(time.Now()).
 		Build()
 
