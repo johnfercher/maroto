@@ -371,6 +371,16 @@ func TestMaroto_FitlnCurrentPage(t *testing.T) {
 	})
 }
 
+func TestMaroto_GetCurrentConfig(t *testing.T) {
+	t.Run("When GetCurrentConfig is called then current settings are returned", func(t *testing.T) {
+		sut := maroto.New(config.NewBuilder().
+			WithMaxGridSize(20).
+			Build())
+
+		assert.Equal(t, sut.GetCurrentConfig().MaxGridSize, 20)
+	})
+}
+
 // nolint:dupl // dupl is good here
 func TestMaroto_RegisterHeader(t *testing.T) {
 	t.Run("when header size is greater than useful area, should return error", func(t *testing.T) {
