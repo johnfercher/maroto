@@ -16,6 +16,7 @@ type Maroto interface {
 	AddRows(rows ...Row)
 	AddRow(rowHeight float64, cols ...Col) Row
 	FitlnCurrentPage(heightNewLine float64) bool
+	GetCurrentConfig() *entity.Config
 	AddPages(pages ...Page)
 	GetStructure() *node.Node[Structure]
 	Generate() (Document, error)
