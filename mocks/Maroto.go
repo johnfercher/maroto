@@ -4,6 +4,8 @@ package mocks
 
 import (
 	core "github.com/johnfercher/maroto/v2/pkg/core"
+	entity "github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	mock "github.com/stretchr/testify/mock"
 
 	node "github.com/johnfercher/go-tree/node"
@@ -280,6 +282,53 @@ func (_c *Maroto_Generate_Call) RunAndReturn(run func() (core.Document, error)) 
 	return _c
 }
 
+// GetCurrentConfig provides a mock function with given fields:
+func (_m *Maroto) GetCurrentConfig() *entity.Config {
+	ret := _m.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetCurrentConfig")
+	}
+
+	var r0 *entity.Config
+	if rf, ok := ret.Get(0).(func() *entity.Config); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*entity.Config)
+		}
+	}
+
+	return r0
+}
+
+// Maroto_GetCurrentConfig_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetCurrentConfig'
+type Maroto_GetCurrentConfig_Call struct {
+	*mock.Call
+}
+
+// GetCurrentConfig is a helper method to define mock.On call
+func (_e *Maroto_Expecter) GetCurrentConfig() *Maroto_GetCurrentConfig_Call {
+	return &Maroto_GetCurrentConfig_Call{Call: _e.mock.On("GetCurrentConfig")}
+}
+
+func (_c *Maroto_GetCurrentConfig_Call) Run(run func()) *Maroto_GetCurrentConfig_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Maroto_GetCurrentConfig_Call) Return(_a0 *entity.Config) *Maroto_GetCurrentConfig_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Maroto_GetCurrentConfig_Call) RunAndReturn(run func() *entity.Config) *Maroto_GetCurrentConfig_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetStructure provides a mock function with given fields:
 func (_m *Maroto) GetStructure() *node.Node[core.Structure] {
 	ret := _m.Called()
@@ -450,8 +499,7 @@ func (_c *Maroto_RegisterHeader_Call) RunAndReturn(run func(...core.Row) error) 
 func NewMaroto(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Maroto {
+}) *Maroto {
 	mock := &Maroto{}
 	mock.Mock.Test(t)
 

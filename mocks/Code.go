@@ -203,8 +203,7 @@ func (_c *Code_GenQr_Call) RunAndReturn(run func(string) (*entity.Image, error))
 func NewCode(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Code {
+}) *Code {
 	mock := &Code{}
 	mock.Mock.Test(t)
 
