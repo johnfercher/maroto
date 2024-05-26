@@ -44,6 +44,7 @@ godoc:
 
 .PHONY: mocks
 mocks:
+	rm -R mocks || true
 	mockery
 	make fmt
 
