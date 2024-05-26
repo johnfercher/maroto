@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 
 	"github.com/johnfercher/go-tree/node"
@@ -149,14 +151,33 @@ func TestMetricsDecorator_GetStructure(t *testing.T) {
 }
 
 func TestMetricsDecorator_FitlnCurrentPage(t *testing.T) {
+	// Arrange
 	inner := mocks.NewMaroto(t)
 	inner.EXPECT().FitlnCurrentPage(10.0).Return(true)
 	inner.EXPECT().FitlnCurrentPage(20.0).Return(false)
 
 	sut := NewMetricsDecorator(inner)
-	// Assert
+
+	// Act & Assert
 	assert.True(t, sut.FitlnCurrentPage(10))
 	assert.False(t, sut.FitlnCurrentPage(20))
+}
+
+func TestMetricsDecorator_GetCurrentConfig(t *testing.T) {
+	// Arrange
+	cfgToReturn := &entity.Config{
+		MaxGridSize: 15,
+	}
+	inner := mocks.NewMaroto(t)
+	inner.EXPECT().GetCurrentConfig().Return(cfgToReturn)
+
+	sut := NewMetricsDecorator(inner)
+
+	// Act
+	cfg := sut.GetCurrentConfig()
+
+	// Assert
+	assert.Equal(t, cfgToReturn.MaxGridSize, cfg.MaxGridSize)
 }
 
 func TestMetricsDecorator_RegisterHeader(t *testing.T) {

@@ -10,6 +10,7 @@
 		"config_metadata_author": "Utf8Text(author, false)",
 		"config_metadata_creation_date": true,
 		"config_metadata_creator": "Utf8Text(creator, false)",
+		"config_metadata_keywords": "Utf8Text(keyword, false)",
 		"config_metadata_subject": "Utf8Text(subject, false)",
 		"config_metadata_title": "Utf8Text(title, false)",
 		"config_provider_type": "gofpdf",

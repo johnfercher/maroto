@@ -109,7 +109,8 @@ func (_c *Node_SetConfig_Call) RunAndReturn(run func(*entity.Config)) *Node_SetC
 func NewNode(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Node {
+},
+) *Node {
 	mock := &Node{}
 	mock.Mock.Test(t)
 
