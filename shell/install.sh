@@ -10,3 +10,4 @@ curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/insta
 sudo cp $GOPATH/bin/golangci-lint /usr/local/bin/
 
 go install github.com/vektra/mockery/v2@latest
+sudo cp $GOPATH/bin/mockery /usr/local/bin/
