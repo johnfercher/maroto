@@ -27,6 +27,7 @@ func NewMetricsDecorator(inner core.Maroto) core.Maroto {
 	}
 }
 
+// FitlnCurrentPage decoratess the FitlnCurrentPage method of maroto instance.
 func (m *MetricsDecorator) FitlnCurrentPage(heightNewLine float64) bool {
 	return m.inner.FitlnCurrentPage(heightNewLine)
 }

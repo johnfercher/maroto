@@ -1,5 +1,5 @@
 GO_FILES = $(shell find . '(' -path '*/.*' -o -path './vendor' ')' -prune -o -name '*.go' -print | cut -b3-)
-GO_PATHS =  $(shell go list -f '{{ .Dir }}' ./... | grep -E -v 'docs|cmd|mocks')
+GO_PATHS =  $(shell go list -f '{{ .Dir }}' ./... | grep -E -v 'cmd|mocks')
 
 .PHONY: dod
 dod: build test fmt lint
@@ -43,6 +43,7 @@ godoc:
 .PHONY: mocks
 mocks:
 	mockery
+	make fmt
 
 .PHONY: examples
 examples:

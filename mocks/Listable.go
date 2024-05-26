@@ -121,7 +121,8 @@ func (_c *Listable_GetHeader_Call) RunAndReturn(run func() core.Row) *Listable_G
 func NewListable(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Listable {
+},
+) *Listable {
 	mock := &Listable{}
 	mock.Mock.Test(t)
 

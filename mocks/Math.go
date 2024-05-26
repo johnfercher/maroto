@@ -127,7 +127,8 @@ func (_c *Math_GetInnerNonCenterCell_Call) RunAndReturn(run func(*entity.Dimensi
 func NewMath(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Math {
+},
+) *Math {
 	mock := &Math{}
 	mock.Mock.Test(t)
 
