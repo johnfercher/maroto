@@ -1,9 +1,10 @@
 package main
 
 import (
+	"log"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
-	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
 

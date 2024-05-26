@@ -91,20 +91,6 @@ func NewBuilder() Builder {
 	}
 }
 
-// Withkeywords defines the document's keyword metadata
-func (b *CfgBuilder) WithKeywords(keywordsStr string, isUTF8 bool) Builder {
-	if keywordsStr == "" {
-		return b
-	}
-
-	b.metadata.KeywordsStr = &entity.Utf8Text{
-		Text: keywordsStr,
-		UTF8: isUTF8,
-	}
-
-	return b
-}
-
 // WithPageSize defines the page size, ex: A4, A4 and etc.
 func (b *CfgBuilder) WithPageSize(size pagesize.Type) Builder {
 	if size == "" {
@@ -339,6 +325,20 @@ func (b *CfgBuilder) WithCreationDate(time time.Time) Builder {
 	}
 
 	b.metadata.CreationDate = &time
+
+	return b
+}
+
+// WithKeywords defines the document's keyword metadata.
+func (b *CfgBuilder) WithKeywords(keywordsStr string, isUTF8 bool) Builder {
+	if keywordsStr == "" {
+		return b
+	}
+
+	b.metadata.KeywordsStr = &entity.Utf8Text{
+		Text: keywordsStr,
+		UTF8: isUTF8,
+	}
 
 	return b
 }

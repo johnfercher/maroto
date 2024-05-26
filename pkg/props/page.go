@@ -99,29 +99,29 @@ func (p *PageNumber) GetPageString(current, total int) string {
 }
 
 // AppendMap appends the font fields to a map.
-func (f *PageNumber) AppendMap(m map[string]interface{}) map[string]interface{} {
-	if f.Pattern != "" {
-		m["page_number_pattern"] = f.Pattern
+func (p *PageNumber) AppendMap(m map[string]interface{}) map[string]interface{} {
+	if p.Pattern != "" {
+		m["page_number_pattern"] = p.Pattern
 	}
 
-	if f.Place != "" {
-		m["page_number_place"] = f.Place
+	if p.Place != "" {
+		m["page_number_place"] = p.Place
 	}
 
-	if f.Family != "" {
-		m["page_number_family"] = f.Family
+	if p.Family != "" {
+		m["page_number_family"] = p.Family
 	}
 
-	if f.Style != "" {
-		m["page_number_style"] = f.Style
+	if p.Style != "" {
+		m["page_number_style"] = p.Style
 	}
 
-	if f.Size != 0 {
-		m["page_number_size"] = f.Size
+	if p.Size != 0 {
+		m["page_number_size"] = p.Size
 	}
 
-	if f.Color != nil {
-		m["page_number_color"] = f.Color.ToString()
+	if p.Color != nil {
+		m["page_number_color"] = p.Color.ToString()
 	}
 
 	return m
