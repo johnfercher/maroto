@@ -78,6 +78,15 @@ func ExampleMaroto_FitlnCurrentPage() {
 	// Do things and generate
 }
 
+// ExampleMaroto_FitlnCurrentPage demonstrate how to check if the new line fits on the current page
+func ExampleMaroto_GetCurrentConfig() {
+	m := maroto.New()
+
+	m.GetCurrentConfig()
+
+	// Do things and generate
+}
+
 // ExampleMaroto_RegisterHeader demonstrates how to register a header to me added in every new page.
 // An error is returned if the area occupied by the header is greater than the page area.
 func ExampleMaroto_RegisterHeader() {

@@ -44,11 +44,6 @@ func (_m *Repository) AddUTF8Font(family string, style fontstyle.Type, file stri
 	return r0
 }
 
-func (_m *Repository) AddUTF8FontFromBytes(family string, style fontstyle.Type, bytes []byte) repository.Repository {
-	var r0 repository.Repository
-	return r0
-}
-
 // Repository_AddUTF8Font_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddUTF8Font'
 type Repository_AddUTF8Font_Call struct {
 	*mock.Call
@@ -75,6 +70,56 @@ func (_c *Repository_AddUTF8Font_Call) Return(_a0 repository.Repository) *Reposi
 }
 
 func (_c *Repository_AddUTF8Font_Call) RunAndReturn(run func(string, fontstyle.Type, string) repository.Repository) *Repository_AddUTF8Font_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// AddUTF8FontFromBytes provides a mock function with given fields: family, style, bytes
+func (_m *Repository) AddUTF8FontFromBytes(family string, style fontstyle.Type, bytes []byte) repository.Repository {
+	ret := _m.Called(family, style, bytes)
+
+	if len(ret) == 0 {
+		panic("no return value specified for AddUTF8FontFromBytes")
+	}
+
+	var r0 repository.Repository
+	if rf, ok := ret.Get(0).(func(string, fontstyle.Type, []byte) repository.Repository); ok {
+		r0 = rf(family, style, bytes)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(repository.Repository)
+		}
+	}
+
+	return r0
+}
+
+// Repository_AddUTF8FontFromBytes_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddUTF8FontFromBytes'
+type Repository_AddUTF8FontFromBytes_Call struct {
+	*mock.Call
+}
+
+// AddUTF8FontFromBytes is a helper method to define mock.On call
+//   - family string
+//   - style fontstyle.Type
+//   - bytes []byte
+func (_e *Repository_Expecter) AddUTF8FontFromBytes(family interface{}, style interface{}, bytes interface{}) *Repository_AddUTF8FontFromBytes_Call {
+	return &Repository_AddUTF8FontFromBytes_Call{Call: _e.mock.On("AddUTF8FontFromBytes", family, style, bytes)}
+}
+
+func (_c *Repository_AddUTF8FontFromBytes_Call) Run(run func(family string, style fontstyle.Type, bytes []byte)) *Repository_AddUTF8FontFromBytes_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(string), args[1].(fontstyle.Type), args[2].([]byte))
+	})
+	return _c
+}
+
+func (_c *Repository_AddUTF8FontFromBytes_Call) Return(_a0 repository.Repository) *Repository_AddUTF8FontFromBytes_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Repository_AddUTF8FontFromBytes_Call) RunAndReturn(run func(string, fontstyle.Type, []byte) repository.Repository) *Repository_AddUTF8FontFromBytes_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -141,8 +186,7 @@ func (_c *Repository_Load_Call) RunAndReturn(run func() ([]*entity.CustomFont, e
 func NewRepository(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Repository {
+}) *Repository {
 	mock := &Repository{}
 	mock.Mock.Test(t)
 

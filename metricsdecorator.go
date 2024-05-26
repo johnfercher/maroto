@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/internal/time"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
 
@@ -28,6 +29,11 @@ func NewMetricsDecorator(inner core.Maroto) core.Maroto {
 
 func (m *MetricsDecorator) FitlnCurrentPage(heightNewLine float64) bool {
 	return m.inner.FitlnCurrentPage(heightNewLine)
+}
+
+// GetCurrentConfig decorates the GetCurrentConfig method of maroto instance.
+func (m *MetricsDecorator) GetCurrentConfig() *entity.Config {
+	return m.inner.GetCurrentConfig()
 }
 
 // Generate decorates the Generate method of maroto instance.
