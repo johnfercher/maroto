@@ -28,4 +28,4 @@ jobs:
         run: go build $(go list -f '{{ .Dir }}' ./... | grep -E -v 'cmd|mocks')
 
       - name: Test
-        run: go test -v $(go list -f '{{ .Dir }}' ./... | grep -E -v 'cmd|mocks')
+        run: go test -v $(go list -f '{{ .Dir }}' ./... | grep -E -v 'docs|cmd|mocks')
