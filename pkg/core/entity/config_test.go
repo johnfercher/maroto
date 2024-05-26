@@ -38,8 +38,11 @@ func TestConfig_ToMap(t *testing.T) {
 	assert.Equal(t, 7, m["chunk_workers"])
 	assert.Equal(t, true, m["config_debug"])
 	assert.Equal(t, 15, m["config_max_grid_sum"])
-	assert.Equal(t, "pattern", m["config_page_number_pattern"])
-	assert.Equal(t, props.Bottom, m["config_page_number_place"])
+	assert.Equal(t, "RGB(255, 0, 0)", m["page_number_color"])
+	assert.Equal(t, "helvetica", m["page_number_family"])
+	assert.Equal(t, "Page {current} of {total}", m["page_number_pattern"])
+	assert.Equal(t, props.RightBottom, m["page_number_place"])
+	assert.Equal(t, 15.0, m["page_number_size"])
 	assert.Equal(t, protection.Print, m["config_protection_type"])
 	assert.Equal(t, "654321", m["config_user_password"])
 	assert.Equal(t, "123456", m["config_owner_password"])
@@ -74,8 +77,7 @@ func fixtureConfig() Config {
 		ChunkWorkers:         7,
 		Debug:                true,
 		MaxGridSize:          15,
-		PageNumberPattern:    "pattern",
-		PageNumberPlace:      props.Bottom,
+		PageNumber:           fixturePageNumber(),
 		Protection:           &protection,
 		Compression:          true,
 		Metadata:             &metadata,
@@ -90,5 +92,16 @@ func fixtureFont() props.Font {
 		Style:  fontstyle.Bold,
 		Size:   15,
 		Color:  &props.RedColor,
+	}
+}
+
+func fixturePageNumber() *props.PageNumber {
+	return &props.PageNumber{
+		Pattern: "Page {current} of {total}",
+		Place:   props.RightBottom,
+		Family:  fontfamily.Helvetica,
+		Style:   fontstyle.Bold,
+		Size:    15,
+		Color:   &props.RedColor,
 	}
 }

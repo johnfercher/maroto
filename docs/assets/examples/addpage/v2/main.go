@@ -8,7 +8,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 func main() {
@@ -32,7 +31,7 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithPageNumber("{current} / {total}", props.Bottom).
+		WithPageNumber().
 		WithDebug(true).
 		Build()
 

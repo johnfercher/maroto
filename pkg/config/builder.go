@@ -32,7 +32,7 @@ type Builder interface {
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
 	WithDefaultFont(font *props.Font) Builder
-	WithPageNumber(pattern string, place props.Place) Builder
+	WithPageNumber(pageNumber ...props.PageNumber) Builder
 	WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder
 	WithCompression(compression bool) Builder
 	WithOrientation(orientation orientation.Type) Builder
@@ -57,8 +57,7 @@ type CfgBuilder struct {
 	maxGridSize          int
 	defaultFont          *props.Font
 	customFonts          []*entity.CustomFont
-	pageNumberPattern    string
-	pageNumberPlace      props.Place
+	pageNumber           *props.PageNumber
 	protection           *entity.Protection
 	compression          bool
 	pageSize             *pagesize.Type
@@ -234,17 +233,21 @@ func (b *CfgBuilder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
 }
 
 // WithPageNumber defines a string pattern to write the current page and total.
-func (b *CfgBuilder) WithPageNumber(pattern string, place props.Place) Builder {
-	if !strings.Contains(pattern, "{current}") && !strings.Contains(pattern, "{total}") {
-		return b
+func (b *CfgBuilder) WithPageNumber(pageNumber ...props.PageNumber) Builder {
+	var pageN props.PageNumber
+	if len(pageNumber) > 0 {
+		pageN = pageNumber[0]
 	}
 
-	if !place.IsValid() {
-		return b
+	if !strings.Contains(pageN.Pattern, "{current}") && !strings.Contains(pageN.Pattern, "{total}") {
+		pageN.Pattern = "{current} / {total}"
 	}
 
-	b.pageNumberPattern = pattern
-	b.pageNumberPlace = place
+	if !pageN.Place.IsValid() {
+		pageN.Place = props.Bottom
+	}
+
+	b.pageNumber = &pageN
 
 	return b
 }
@@ -358,6 +361,10 @@ func (b *CfgBuilder) WithDisableAutoPageBreak(disabled bool) Builder {
 
 // Build finalizes the customization returning the entity.Config.
 func (b *CfgBuilder) Build() *entity.Config {
+	if b.pageNumber != nil {
+		b.pageNumber.WithDefaultFont(b.defaultFont)
+	}
+
 	return &entity.Config{
 		ProviderType:         b.providerType,
 		Dimensions:           b.getDimensions(),
@@ -367,8 +374,7 @@ func (b *CfgBuilder) Build() *entity.Config {
 		Debug:                b.debug,
 		MaxGridSize:          b.maxGridSize,
 		DefaultFont:          b.defaultFont,
-		PageNumberPattern:    b.pageNumberPattern,
-		PageNumberPlace:      b.pageNumberPlace,
+		PageNumber:           b.pageNumber,
 		Protection:           b.protection,
 		Compression:          b.compression,
 		Metadata:             b.metadata,

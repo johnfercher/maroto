@@ -15,8 +15,6 @@ import (
 
 	"github.com/johnfercher/go-tree/node"
 
-	"github.com/johnfercher/maroto/v2/pkg/props"
-
 	"github.com/f-amaral/go-async/async"
 	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
@@ -247,15 +245,13 @@ func (m *Maroto) fillPageToAddNew() {
 	m.rows = append(m.rows, spaceRow)
 	m.rows = append(m.rows, m.footer...)
 
-	prop := props.Page{
-		Pattern: m.config.PageNumberPattern,
-		Place:   m.config.PageNumberPlace,
-		Family:  m.config.DefaultFont.Family,
-		Style:   m.config.DefaultFont.Style,
-		Size:    m.config.DefaultFont.Size,
-		Color:   m.config.DefaultFont.Color,
+	var p core.Page
+	if m.config.PageNumber != nil {
+		p = page.New(*m.config.PageNumber)
+	} else {
+		p = page.New()
 	}
-	p := page.New(prop)
+
 	p.Add(m.rows...)
 
 	m.pages = append(m.pages, p)

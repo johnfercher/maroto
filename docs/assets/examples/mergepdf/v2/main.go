@@ -10,7 +10,6 @@ import (
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/config"
-	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
@@ -45,7 +44,7 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithPageNumber("{current} / {total}", props.RightBottom).
+		WithPageNumber().
 		Build()
 
 	mrt := maroto.New(cfg)

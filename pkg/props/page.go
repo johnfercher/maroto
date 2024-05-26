@@ -33,8 +33,8 @@ func (p Place) IsValid() bool {
 		p == LeftBottom || p == Bottom || p == RightBottom
 }
 
-// Page is the representation of a page.
-type Page struct {
+// PageNumber have attributes of page number
+type PageNumber struct {
 	// Pattern is the string pattern which will be used to apply the page count component.
 	Pattern string
 	// Place defines where the page count component will be placed.
@@ -49,8 +49,26 @@ type Page struct {
 	Color *Color
 }
 
+func (p *PageNumber) WithDefaultFont(font *Font) {
+	if p.Color == nil {
+		p.Color = font.Color
+	}
+
+	if p.Size == 0 {
+		p.Size = font.Size
+	}
+
+	if p.Style == "" {
+		p.Style = font.Style
+	}
+
+	if p.Family == "" {
+		p.Family = font.Family
+	}
+}
+
 // GetNumberTextProp returns the Text properties of the page number.
-func (p *Page) GetNumberTextProp(height float64) *Text {
+func (p *PageNumber) GetNumberTextProp(height float64) *Text {
 	text := &Text{
 		Family: p.Family,
 		Style:  p.Style,
@@ -75,7 +93,36 @@ func (p *Page) GetNumberTextProp(height float64) *Text {
 }
 
 // GetPageString returns the page string.
-func (p *Page) GetPageString(current, total int) string {
+func (p *PageNumber) GetPageString(current, total int) string {
 	pattern := strings.ReplaceAll(p.Pattern, "{current}", fmt.Sprintf("%d", current))
 	return strings.ReplaceAll(pattern, "{total}", fmt.Sprintf("%d", total))
+}
+
+// AppendMap appends the font fields to a map.
+func (f *PageNumber) AppendMap(m map[string]interface{}) map[string]interface{} {
+	if f.Pattern != "" {
+		m["page_number_pattern"] = f.Pattern
+	}
+
+	if f.Place != "" {
+		m["page_number_place"] = f.Place
+	}
+
+	if f.Family != "" {
+		m["page_number_family"] = f.Family
+	}
+
+	if f.Style != "" {
+		m["page_number_style"] = f.Style
+	}
+
+	if f.Size != 0 {
+		m["page_number_size"] = f.Size
+	}
+
+	if f.Color != nil {
+		m["page_number_color"] = f.Color.ToString()
+	}
+
+	return m
 }
