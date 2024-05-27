@@ -67,6 +67,7 @@ func fixtureConfig() Config {
 	protection := fixtureProtection()
 	metadata := fixtureMetadata()
 	image := fixtureImage()
+	pageNumber := fixturePageNumber()
 
 	return Config{
 		ProviderType:         provider.Gofpdf,
@@ -77,7 +78,7 @@ func fixtureConfig() Config {
 		ChunkWorkers:         7,
 		Debug:                true,
 		MaxGridSize:          15,
-		PageNumber:           fixturePageNumber(),
+		PageNumber:           pageNumber,
 		Protection:           &protection,
 		Compression:          true,
 		Metadata:             &metadata,
