@@ -340,6 +340,22 @@ func TestMaroto_Generate(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_concurrent.json")
 	})
+	t.Run("page number", func(t *testing.T) {
+		// Arrange
+		cfg := config.NewBuilder().
+			WithPageNumber().
+			Build()
+
+		sut := maroto.New(cfg)
+
+		// Act
+		for i := 0; i < 30; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_page_number.json")
+	})
 }
 
 func TestMaroto_FitlnCurrentPage(t *testing.T) {
