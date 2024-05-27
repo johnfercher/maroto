@@ -381,7 +381,7 @@ func (b *CfgBuilder) WithKeywords(keywordsStr string, isUTF8 bool) Builder {
 // Build finalizes the customization returning the entity.Config.
 func (b *CfgBuilder) Build() *entity.Config {
 	if b.pageNumber != nil {
-		b.pageNumber.WithDefaultFont(b.defaultFont)
+		b.pageNumber.WithFont(b.defaultFont)
 	}
 
 	return &entity.Config{

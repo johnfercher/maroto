@@ -49,24 +49,6 @@ type PageNumber struct {
 	Color *Color
 }
 
-func (p *PageNumber) WithDefaultFont(font *Font) {
-	if p.Color == nil {
-		p.Color = font.Color
-	}
-
-	if p.Size == 0 {
-		p.Size = font.Size
-	}
-
-	if p.Style == "" {
-		p.Style = font.Style
-	}
-
-	if p.Family == "" {
-		p.Family = font.Family
-	}
-}
-
 // GetNumberTextProp returns the Text properties of the page number.
 func (p *PageNumber) GetNumberTextProp(height float64) *Text {
 	text := &Text{
@@ -96,6 +78,25 @@ func (p *PageNumber) GetNumberTextProp(height float64) *Text {
 func (p *PageNumber) GetPageString(current, total int) string {
 	pattern := strings.ReplaceAll(p.Pattern, "{current}", fmt.Sprintf("%d", current))
 	return strings.ReplaceAll(pattern, "{total}", fmt.Sprintf("%d", total))
+}
+
+// WithFont apply font if not defined before.
+func (p *PageNumber) WithFont(font *Font) {
+	if p.Color == nil {
+		p.Color = font.Color
+	}
+
+	if p.Size == 0 {
+		p.Size = font.Size
+	}
+
+	if p.Style == "" {
+		p.Style = font.Style
+	}
+
+	if p.Family == "" {
+		p.Family = font.Family
+	}
 }
 
 // AppendMap appends the font fields to a map.
