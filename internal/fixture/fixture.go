@@ -181,10 +181,10 @@ func SignatureProp() props.Signature {
 	return prop
 }
 
-// PageProp is responsible to give a valid props.Page.
-func PageProp() props.Page {
+// PageProp is responsible to give a valid props.PageNumber.
+func PageProp() props.PageNumber {
 	fontProp := FontProp()
-	prop := props.Page{
+	prop := props.PageNumber{
 		Pattern: "{current} / {total}",
 		Place:   props.LeftBottom,
 		Family:  fontProp.Family,

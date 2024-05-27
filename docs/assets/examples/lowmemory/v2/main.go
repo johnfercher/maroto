@@ -35,7 +35,7 @@ func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithSequentialLowMemoryMode(7).
 		WithDebug(true).
-		WithPageNumber("{current} / {total}", props.Bottom).
+		WithPageNumber().
 		Build()
 
 	mrt := maroto.New(cfg)

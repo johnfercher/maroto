@@ -219,3 +219,78 @@ func TestPage_GetPageString(t *testing.T) {
 	// Assert
 	assert.Equal(t, "10 / 101", s)
 }
+
+func TestPageNumber_WithFont(t *testing.T) {
+	t.Run("when font already defined, should keep it", func(t *testing.T) {
+		// Arrange
+		pageNumber := &props.PageNumber{
+			Color:  &props.RedColor,
+			Size:   15,
+			Style:  fontstyle.Bold,
+			Family: fontfamily.Helvetica,
+		}
+
+		font := &props.Font{
+			Color:  &props.BlueColor,
+			Size:   13,
+			Style:  fontstyle.Italic,
+			Family: fontfamily.Arial,
+		}
+
+		// Act
+		pageNumber.WithFont(font)
+
+		// Assert
+		assert.Equal(t, &props.RedColor, pageNumber.Color)
+		assert.Equal(t, 15.0, pageNumber.Size)
+		assert.Equal(t, fontstyle.Bold, pageNumber.Style)
+		assert.Equal(t, fontfamily.Helvetica, pageNumber.Family)
+	})
+	t.Run("when font not defined, should apply", func(t *testing.T) {
+		// Arrange
+		pageNumber := &props.PageNumber{}
+
+		font := &props.Font{
+			Color:  &props.BlueColor,
+			Size:   13,
+			Style:  fontstyle.Italic,
+			Family: fontfamily.Arial,
+		}
+
+		// Act
+		pageNumber.WithFont(font)
+
+		// Assert
+		assert.Equal(t, &props.BlueColor, pageNumber.Color)
+		assert.Equal(t, 13.0, pageNumber.Size)
+		assert.Equal(t, fontstyle.Italic, pageNumber.Style)
+		assert.Equal(t, fontfamily.Arial, pageNumber.Family)
+	})
+}
+
+func TestPageNumber_AppendMap(t *testing.T) {
+	t.Run("when append map, should append correctly", func(t *testing.T) {
+		// Arrange
+		pageNumber := &props.PageNumber{
+			Pattern: "pattern",
+			Place:   props.Bottom,
+			Color:   &props.RedColor,
+			Size:    15,
+			Style:   fontstyle.Bold,
+			Family:  fontfamily.Helvetica,
+		}
+
+		m := make(map[string]interface{})
+
+		// Act
+		m = pageNumber.AppendMap(m)
+
+		// Assert
+		assert.Equal(t, "pattern", m["page_number_pattern"])
+		assert.Equal(t, props.Bottom, m["page_number_place"])
+		assert.Equal(t, fontfamily.Helvetica, m["page_number_family"])
+		assert.Equal(t, fontstyle.Bold, m["page_number_style"])
+		assert.Equal(t, 15.0, m["page_number_size"])
+		assert.Equal(t, "RGB(255, 0, 0)", m["page_number_color"])
+	})
+}

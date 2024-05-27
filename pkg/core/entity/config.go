@@ -17,8 +17,7 @@ type Config struct {
 	ChunkWorkers         int
 	Debug                bool
 	MaxGridSize          int
-	PageNumberPattern    string
-	PageNumberPlace      props.Place
+	PageNumber           *props.PageNumber
 	Protection           *Protection
 	Compression          bool
 	Metadata             *Metadata
@@ -57,12 +56,8 @@ func (c *Config) ToMap() map[string]interface{} {
 		m["config_max_grid_sum"] = c.MaxGridSize
 	}
 
-	if c.PageNumberPattern != "" {
-		m["config_page_number_pattern"] = c.PageNumberPattern
-	}
-
-	if c.PageNumberPlace != "" {
-		m["config_page_number_place"] = c.PageNumberPlace
+	if c.PageNumber != nil {
+		m = c.PageNumber.AppendMap(m)
 	}
 
 	if c.Protection != nil {

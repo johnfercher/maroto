@@ -14,12 +14,12 @@ type Page struct {
 	total  int
 	rows   []core.Row
 	config *entity.Config
-	prop   props.Page
+	prop   props.PageNumber
 }
 
 // New is responsible to create a core.Page.
-func New(ps ...props.Page) core.Page {
-	prop := props.Page{}
+func New(ps ...props.PageNumber) core.Page {
+	prop := props.PageNumber{}
 	if len(ps) > 0 {
 		prop = ps[0]
 	}

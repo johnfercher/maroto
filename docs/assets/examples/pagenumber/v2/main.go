@@ -3,6 +3,9 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2"
@@ -31,9 +34,20 @@ func main() {
 }
 
 func GetMaroto() core.Maroto {
+	pageNumber := props.PageNumber{
+		Pattern: "Page {current} of {total}",
+		Place:   props.Bottom,
+		Family:  fontfamily.Courier,
+		Style:   fontstyle.Bold,
+		Size:    9,
+		Color: &props.Color{
+			Red: 255,
+		},
+	}
+
 	cfg := config.NewBuilder().
 		WithDebug(true).
-		WithPageNumber("Page {current} of {total}", props.Bottom).
+		WithPageNumber(pageNumber).
 		Build()
 
 	mrt := maroto.New(cfg)

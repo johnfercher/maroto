@@ -32,7 +32,7 @@ type Builder interface {
 	WithDebug(on bool) Builder
 	WithMaxGridSize(maxGridSize int) Builder
 	WithDefaultFont(font *props.Font) Builder
-	WithPageNumber(pattern string, place props.Place) Builder
+	WithPageNumber(pageNumber ...props.PageNumber) Builder
 	WithProtection(protectionType protection.Type, userPassword, ownerPassword string) Builder
 	WithCompression(compression bool) Builder
 	WithOrientation(orientation orientation.Type) Builder
@@ -57,8 +57,7 @@ type CfgBuilder struct {
 	maxGridSize          int
 	defaultFont          *props.Font
 	customFonts          []*entity.CustomFont
-	pageNumberPattern    string
-	pageNumberPlace      props.Place
+	pageNumber           *props.PageNumber
 	protection           *entity.Protection
 	compression          bool
 	pageSize             *pagesize.Type
@@ -88,22 +87,7 @@ func NewBuilder() Builder {
 		},
 		generationMode: generation.Sequential,
 		chunkWorkers:   1,
-		metadata:       &entity.Metadata{},
 	}
-}
-
-// Withkeywords defines the document's keyword metadata
-func (b *CfgBuilder) WithKeywords(keywordsStr string, isUTF8 bool) Builder {
-	if keywordsStr == "" {
-		return b
-	}
-
-	b.metadata.KeywordsStr = &entity.Utf8Text{
-		Text: keywordsStr,
-		UTF8: isUTF8,
-	}
-
-	return b
 }
 
 // WithPageSize defines the page size, ex: A4, A4 and etc.
@@ -163,6 +147,13 @@ func (b *CfgBuilder) WithConcurrentMode(chunkWorkers int) Builder {
 	return b
 }
 
+// WithSequentialMode defines that maroto will run in default mode.
+func (b *CfgBuilder) WithSequentialMode() Builder {
+	b.chunkWorkers = 1
+	b.generationMode = generation.Sequential
+	return b
+}
+
 // WithSequentialLowMemoryMode defines that maroto will run focusing in reduce memory consumption,
 // chunk workers define how many divisions the work will have.
 func (b *CfgBuilder) WithSequentialLowMemoryMode(chunkWorkers int) Builder {
@@ -172,13 +163,6 @@ func (b *CfgBuilder) WithSequentialLowMemoryMode(chunkWorkers int) Builder {
 
 	b.generationMode = generation.SequentialLowMemory
 	b.chunkWorkers = chunkWorkers
-	return b
-}
-
-// WithSequentialMode defines that maroto will run in default mode.
-func (b *CfgBuilder) WithSequentialMode() Builder {
-	b.chunkWorkers = 1
-	b.generationMode = generation.Sequential
 	return b
 }
 
@@ -223,28 +207,22 @@ func (b *CfgBuilder) WithDefaultFont(font *props.Font) Builder {
 	return b
 }
 
-// WithCustomFonts add custom fonts.
-func (b *CfgBuilder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
-	if customFonts == nil {
-		return b
-	}
-
-	b.customFonts = customFonts
-	return b
-}
-
 // WithPageNumber defines a string pattern to write the current page and total.
-func (b *CfgBuilder) WithPageNumber(pattern string, place props.Place) Builder {
-	if !strings.Contains(pattern, "{current}") && !strings.Contains(pattern, "{total}") {
-		return b
+func (b *CfgBuilder) WithPageNumber(pageNumber ...props.PageNumber) Builder {
+	var pageN props.PageNumber
+	if len(pageNumber) > 0 {
+		pageN = pageNumber[0]
 	}
 
-	if !place.IsValid() {
-		return b
+	if !strings.Contains(pageN.Pattern, "{current}") || !strings.Contains(pageN.Pattern, "{total}") {
+		pageN.Pattern = "{current} / {total}"
 	}
 
-	b.pageNumberPattern = pattern
-	b.pageNumberPlace = place
+	if !pageN.Place.IsValid() {
+		pageN.Place = props.Bottom
+	}
+
+	b.pageNumber = &pageN
 
 	return b
 }
@@ -279,6 +257,10 @@ func (b *CfgBuilder) WithAuthor(author string, isUTF8 bool) Builder {
 		return b
 	}
 
+	if b.metadata == nil {
+		b.metadata = &entity.Metadata{}
+	}
+
 	b.metadata.Author = &entity.Utf8Text{
 		Text: author,
 		UTF8: isUTF8,
@@ -291,6 +273,10 @@ func (b *CfgBuilder) WithAuthor(author string, isUTF8 bool) Builder {
 func (b *CfgBuilder) WithCreator(creator string, isUTF8 bool) Builder {
 	if creator == "" {
 		return b
+	}
+
+	if b.metadata == nil {
+		b.metadata = &entity.Metadata{}
 	}
 
 	b.metadata.Creator = &entity.Utf8Text{
@@ -307,6 +293,10 @@ func (b *CfgBuilder) WithSubject(subject string, isUTF8 bool) Builder {
 		return b
 	}
 
+	if b.metadata == nil {
+		b.metadata = &entity.Metadata{}
+	}
+
 	b.metadata.Subject = &entity.Utf8Text{
 		Text: subject,
 		UTF8: isUTF8,
@@ -319,6 +309,10 @@ func (b *CfgBuilder) WithSubject(subject string, isUTF8 bool) Builder {
 func (b *CfgBuilder) WithTitle(title string, isUTF8 bool) Builder {
 	if title == "" {
 		return b
+	}
+
+	if b.metadata == nil {
+		b.metadata = &entity.Metadata{}
 	}
 
 	b.metadata.Title = &entity.Utf8Text{
@@ -335,8 +329,18 @@ func (b *CfgBuilder) WithCreationDate(time time.Time) Builder {
 		return b
 	}
 
+	if b.metadata == nil {
+		b.metadata = &entity.Metadata{}
+	}
+
 	b.metadata.CreationDate = &time
 
+	return b
+}
+
+// WithCustomFonts add custom fonts.
+func (b *CfgBuilder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
+	b.customFonts = customFonts
 	return b
 }
 
@@ -356,8 +360,30 @@ func (b *CfgBuilder) WithDisableAutoPageBreak(disabled bool) Builder {
 	return b
 }
 
+// WithKeywords defines the document's keyword metadata.
+func (b *CfgBuilder) WithKeywords(keywordsStr string, isUTF8 bool) Builder {
+	if keywordsStr == "" {
+		return b
+	}
+
+	if b.metadata == nil {
+		b.metadata = &entity.Metadata{}
+	}
+
+	b.metadata.KeywordsStr = &entity.Utf8Text{
+		Text: keywordsStr,
+		UTF8: isUTF8,
+	}
+
+	return b
+}
+
 // Build finalizes the customization returning the entity.Config.
 func (b *CfgBuilder) Build() *entity.Config {
+	if b.pageNumber != nil {
+		b.pageNumber.WithFont(b.defaultFont)
+	}
+
 	return &entity.Config{
 		ProviderType:         b.providerType,
 		Dimensions:           b.getDimensions(),
@@ -367,8 +393,7 @@ func (b *CfgBuilder) Build() *entity.Config {
 		Debug:                b.debug,
 		MaxGridSize:          b.maxGridSize,
 		DefaultFont:          b.defaultFont,
-		PageNumberPattern:    b.pageNumberPattern,
-		PageNumberPlace:      b.pageNumberPlace,
+		PageNumber:           b.pageNumber,
 		Protection:           b.protection,
 		Compression:          b.compression,
 		Metadata:             b.metadata,
