@@ -117,6 +117,7 @@ func (b *CfgBuilder) WithDimensions(width float64, height float64) Builder {
 	return b
 }
 
+// WithLeftMargin customize margin.
 func (b *CfgBuilder) WithLeftMargin(left float64) Builder {
 	if left < pagesize.MinLeftMargin {
 		return b
@@ -126,6 +127,7 @@ func (b *CfgBuilder) WithLeftMargin(left float64) Builder {
 	return b
 }
 
+// WithTopMargin customize margin.
 func (b *CfgBuilder) WithTopMargin(top float64) Builder {
 	if top < pagesize.MinTopMargin {
 		return b
@@ -135,6 +137,7 @@ func (b *CfgBuilder) WithTopMargin(top float64) Builder {
 	return b
 }
 
+// WithRightMargin customize margin.
 func (b *CfgBuilder) WithRightMargin(right float64) Builder {
 	if right < pagesize.MinRightMargin {
 		return b
@@ -144,6 +147,7 @@ func (b *CfgBuilder) WithRightMargin(right float64) Builder {
 	return b
 }
 
+// WithBottomMargin customize margin.
 func (b *CfgBuilder) WithBottomMargin(bottom float64) Builder {
 	if bottom < pagesize.MinBottomMargin {
 		return b
