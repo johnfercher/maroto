@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"log"
+
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
 
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
@@ -55,7 +56,6 @@ func GetMaroto() core.Maroto {
 			col.New(4),
 		),
 	)
-
 	if err != nil {
 		log.Fatal(err)
 	}

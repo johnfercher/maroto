@@ -2,10 +2,11 @@ package gofpdf_test
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-	"testing"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
 	"github.com/stretchr/testify/assert"
@@ -81,5 +82,4 @@ func TestBuilder_Build(t *testing.T) {
 		// Assert
 		assert.NotNil(t, dep)
 	})
-
 }
