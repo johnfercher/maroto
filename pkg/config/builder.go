@@ -25,7 +25,7 @@ import (
 type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
 	WithDimensions(width float64, height float64) Builder
-	WithMargins(left float64, top float64, right float64) Builder
+	WithMargins(margins *entity.Margins) Builder
 	WithConcurrentMode(chunkWorkers int) Builder
 	WithSequentialMode() Builder
 	WithSequentialLowMemoryMode(chunkWorkers int) Builder
@@ -115,22 +115,28 @@ func (b *CfgBuilder) WithDimensions(width float64, height float64) Builder {
 }
 
 // WithMargins defines custom margins, bottom margin is not customizable due to gofpdf limitations.
-func (b *CfgBuilder) WithMargins(left float64, top float64, right float64) Builder {
-	if left < pagesize.MinLeftMargin {
+func (b *CfgBuilder) WithMargins(margins *entity.Margins) Builder {
+	if margins == nil {
 		return b
 	}
 
-	if top < pagesize.MinRightMargin {
-		return b
+	if margins.Left < pagesize.MinLeftMargin {
+		margins.Left = pagesize.DefaultLeftMargin
 	}
 
-	if right < pagesize.MinTopMargin {
-		return b
+	if margins.Top < pagesize.MinTopMargin {
+		margins.Top = pagesize.DefaultTopMargin
 	}
 
-	b.margins.Left = left
-	b.margins.Top = top
-	b.margins.Right = right
+	if margins.Right < pagesize.MinRightMargin {
+		margins.Right = pagesize.DefaultRightMargin
+	}
+
+	if margins.Bottom < pagesize.MinBottomMargin {
+		margins.Bottom = pagesize.DefaultBottomMargin
+	}
+
+	b.margins = margins
 
 	return b
 }

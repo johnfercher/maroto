@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"log"
 	"os"
 
@@ -45,7 +46,7 @@ func GetMaroto(image string) core.Maroto {
 		log.Fatal(err)
 	}
 	b := config.NewBuilder().
-		WithMargins(0, 0, 0).
+		WithMargins(&entity.Margins{Left: 0, Top: 0, Right: 0, Bottom: 0}).
 		WithOrientation(orientation.Horizontal).
 		WithMaxGridSize(20).
 		WithBackgroundImage(bytes, extension.Png)

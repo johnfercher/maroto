@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
 
 // ExampleNewBuilder demonstrates how to use builder.
@@ -38,9 +39,9 @@ func ExampleCfgBuilder_WithPageSize() {
 
 // ExampleCfgBuilder_WithMargins demonstrates how to customize margins
 func ExampleCfgBuilder_WithMargins() {
-	// If any margins is smaller than zero, then ignore customization.
+	// Ignore all margin customizations that are less than 0.
 	cfg := config.NewBuilder().
-		WithMargins(5, 5, 5).
+		WithMargins(&entity.Margins{}).
 		Build()
 
 	_ = maroto.New(cfg)
