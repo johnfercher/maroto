@@ -157,33 +157,6 @@ func (b *CfgBuilder) WithBottomMargin(bottom float64) Builder {
 	return b
 }
 
-// WithMargins defines custom margins, bottom margin is not customizable due to gofpdf limitations.
-func (b *CfgBuilder) WithMargins(margins *entity.Margins) Builder {
-	if margins == nil {
-		return b
-	}
-
-	if margins.Left < pagesize.MinLeftMargin {
-		margins.Left = pagesize.DefaultLeftMargin
-	}
-
-	if margins.Top < pagesize.MinTopMargin {
-		margins.Top = pagesize.DefaultTopMargin
-	}
-
-	if margins.Right < pagesize.MinRightMargin {
-		margins.Right = pagesize.DefaultRightMargin
-	}
-
-	if margins.Bottom < pagesize.MinBottomMargin {
-		margins.Bottom = pagesize.DefaultBottomMargin
-	}
-
-	b.margins = margins
-
-	return b
-}
-
 // WithConcurrentMode defines concurrent generation, chunk workers define how mano chuncks
 // will be executed concurrently.
 func (b *CfgBuilder) WithConcurrentMode(chunkWorkers int) Builder {
