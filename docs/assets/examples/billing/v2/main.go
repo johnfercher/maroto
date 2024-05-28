@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"log"
 
 	"github.com/johnfercher/maroto/v2"
@@ -40,7 +39,9 @@ func main() {
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithPageNumber().
-		WithMargins(&entity.Margins{Left: 10, Top: 15, Right: 10}).
+		WithLeftMargin(10).
+		WithTopMargin(15).
+		WithRightMargin(10).
 		Build()
 
 	darkGrayColor := getDarkGrayColor()

@@ -135,105 +135,95 @@ func TestBuilder_WithDimensions(t *testing.T) {
 	})
 }
 
-func TestBuilder_WithMargins(t *testing.T) {
-	t.Run("when margins is nil, should use default", func(t *testing.T) {
+func TestCfgBuilder_WithTopMargin(t *testing.T) {
+	t.Run("when top is invalid, should not change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
 
 		// Act
-		cfg := sut.WithMargins(nil).Build()
+		cfg := sut.WithTopMargin(-1).Build()
+
+		// Assert
+		assert.Equal(t, 10.0, cfg.Margins.Top)
+	})
+	t.Run("when top is valid, should change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithTopMargin(5).Build()
+
+		// Assert
+		assert.Equal(t, 5.0, cfg.Margins.Top)
+	})
+}
+
+func TestCfgBuilder_WithLeftMargin(t *testing.T) {
+	t.Run("when left is invalid, should not change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithLeftMargin(-1).Build()
 
 		// Assert
 		assert.Equal(t, 10.0, cfg.Margins.Left)
-		assert.Equal(t, 10.0, cfg.Margins.Top)
+	})
+	t.Run("when left is valid, should change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithLeftMargin(5).Build()
+
+		// Assert
+		assert.Equal(t, 5.0, cfg.Margins.Left)
+	})
+}
+
+func TestCfgBuilder_WithRightMargin(t *testing.T) {
+	t.Run("when right is invalid, should not change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithRightMargin(-1).Build()
+
+		// Assert
 		assert.Equal(t, 10.0, cfg.Margins.Right)
+	})
+	t.Run("when right is valid, should change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithRightMargin(5).Build()
+
+		// Assert
+		assert.Equal(t, 5.0, cfg.Margins.Right)
+	})
+}
+
+func TestCfgBuilder_WithBottomMargin(t *testing.T) {
+	t.Run("when bottom is invalid, should not change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithBottomMargin(-1).Build()
+
+		// Assert
 		assert.Equal(t, 20.0025, cfg.Margins.Bottom)
 	})
-	t.Run("when margins has invalid left, should not change the default value", func(t *testing.T) {
+	t.Run("when bottom is valid, should change the default value", func(t *testing.T) {
 		// Arrange
 		sut := config.NewBuilder()
-		margins := &entity.Margins{
-			Left: -1,
-		}
 
 		// Act
-		cfg := sut.WithMargins(margins).Build()
+		cfg := sut.WithBottomMargin(5).Build()
 
 		// Assert
-		assert.Equal(t, 10.0, cfg.Margins.Left)
-		assert.Equal(t, 0.0, cfg.Margins.Top)
-		assert.Equal(t, 0.0, cfg.Margins.Right)
-		assert.Equal(t, 0.0, cfg.Margins.Bottom)
-	})
-	t.Run("when margins has invalid right, should not change the default value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-		margins := &entity.Margins{
-			Right: -1,
-		}
-
-		// Act
-		cfg := sut.WithMargins(margins).Build()
-
-		// Assert
-		assert.Equal(t, 0.0, cfg.Margins.Left)
-		assert.Equal(t, 0.0, cfg.Margins.Top)
-		assert.Equal(t, 10.0, cfg.Margins.Right)
-		assert.Equal(t, 0.0, cfg.Margins.Bottom)
-	})
-	t.Run("when margins has invalid top, should not change the default value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-		margins := &entity.Margins{
-			Top: -1,
-		}
-
-		// Act
-		cfg := sut.WithMargins(margins).Build()
-
-		// Assert
-		assert.Equal(t, 0.0, cfg.Margins.Left)
-		assert.Equal(t, 10.0, cfg.Margins.Top)
-		assert.Equal(t, 0.0, cfg.Margins.Right)
-		assert.Equal(t, 0.0, cfg.Margins.Bottom)
-	})
-	t.Run("when dimensions has invalid bottom, should not change the default value", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-		margins := &entity.Margins{
-			Left:   10,
-			Top:    10,
-			Right:  10,
-			Bottom: -1,
-		}
-
-		// Act
-		cfg := sut.WithMargins(margins).Build()
-
-		// Assert
-		assert.Equal(t, 10.0, cfg.Margins.Left)
-		assert.Equal(t, 10.0, cfg.Margins.Top)
-		assert.Equal(t, 10.0, cfg.Margins.Right)
-		assert.Equal(t, 20.0025, cfg.Margins.Bottom)
-	})
-	t.Run("when dimensions is valid, should change values", func(t *testing.T) {
-		// Arrange
-		sut := config.NewBuilder()
-		margins := &entity.Margins{
-			Left:   1,
-			Top:    1,
-			Right:  1,
-			Bottom: 1,
-		}
-
-		// Act
-		cfg := sut.WithMargins(margins).Build()
-
-		// Assert
-		assert.Equal(t, 1.0, cfg.Margins.Left)
-		assert.Equal(t, 1.0, cfg.Margins.Top)
-		assert.Equal(t, 1.0, cfg.Margins.Right)
-		assert.Equal(t, 1.0, cfg.Margins.Bottom)
+		assert.Equal(t, 5.0, cfg.Margins.Bottom)
 	})
 }
 

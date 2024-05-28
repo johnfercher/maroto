@@ -4,7 +4,6 @@ import (
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
 
 // ExampleNewBuilder demonstrates how to use builder.
@@ -37,11 +36,47 @@ func ExampleCfgBuilder_WithPageSize() {
 	// generate document
 }
 
-// ExampleCfgBuilder_WithMargins demonstrates how to customize margins
-func ExampleCfgBuilder_WithMargins() {
-	// Ignore all margin customizations that are less than 0.
+// ExampleCfgBuilder_WithTopMargin demonstrates how to customize margin.
+func ExampleCfgBuilder_WithTopMargin() {
+	// If top less than minimum, ignore customization.
 	cfg := config.NewBuilder().
-		WithMargins(&entity.Margins{}).
+		WithTopMargin(15).
+		Build()
+
+	_ = maroto.New(cfg)
+
+	// generate document
+}
+
+// ExampleCfgBuilder_WithRightMargin demonstrates how to customize margin.
+func ExampleCfgBuilder_WithRightMargin() {
+	// If top less than minimum, ignore customization.
+	cfg := config.NewBuilder().
+		WithRightMargin(15).
+		Build()
+
+	_ = maroto.New(cfg)
+
+	// generate document
+}
+
+// ExampleCfgBuilder_WithLeftMargin demonstrates how to customize margin.
+func ExampleCfgBuilder_WithLeftMargin() {
+	// If top less than minimum, ignore customization.
+	cfg := config.NewBuilder().
+		WithLeftMargin(15).
+		Build()
+
+	_ = maroto.New(cfg)
+
+	// generate document
+}
+
+// ExampleCfgBuilder_WithBottomMargin demonstrates how to customize margin.
+func ExampleCfgBuilder_WithBottomMargin() {
+	// If top less than minimum, ignore customization.
+	cfg := config.NewBuilder().
+		WithBottomMargin(15).
 		Build()
 
 	_ = maroto.New(cfg)

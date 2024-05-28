@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"log"
 	"os"
 
@@ -40,7 +39,9 @@ func GetMaroto(image string) core.Maroto {
 		log.Fatal(err)
 	}
 	b := config.NewBuilder().
-		WithMargins(&entity.Margins{Left: 0, Top: 0, Right: 0}).
+		WithTopMargin(0).
+		WithRightMargin(0).
+		WithLeftMargin(0).
 		WithDimensions(361.8, 203.2).
 		WithDisableAutoPageBreak(true).
 		WithOrientation(orientation.Horizontal).

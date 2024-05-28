@@ -25,7 +25,10 @@ import (
 type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
 	WithDimensions(width float64, height float64) Builder
-	WithMargins(margins *entity.Margins) Builder
+	WithLeftMargin(left float64) Builder
+	WithTopMargin(top float64) Builder
+	WithRightMargin(right float64) Builder
+	WithBottomMargin(bottom float64) Builder
 	WithConcurrentMode(chunkWorkers int) Builder
 	WithSequentialMode() Builder
 	WithSequentialLowMemoryMode(chunkWorkers int) Builder
@@ -111,6 +114,42 @@ func (b *CfgBuilder) WithDimensions(width float64, height float64) Builder {
 		Height: height,
 	}
 
+	return b
+}
+
+func (b *CfgBuilder) WithLeftMargin(left float64) Builder {
+	if left < pagesize.MinLeftMargin {
+		return b
+	}
+
+	b.margins.Left = left
+	return b
+}
+
+func (b *CfgBuilder) WithTopMargin(top float64) Builder {
+	if top < pagesize.MinTopMargin {
+		return b
+	}
+
+	b.margins.Top = top
+	return b
+}
+
+func (b *CfgBuilder) WithRightMargin(right float64) Builder {
+	if right < pagesize.MinRightMargin {
+		return b
+	}
+
+	b.margins.Right = right
+	return b
+}
+
+func (b *CfgBuilder) WithBottomMargin(bottom float64) Builder {
+	if bottom < pagesize.MinBottomMargin {
+		return b
+	}
+
+	b.margins.Bottom = bottom
 	return b
 }
 

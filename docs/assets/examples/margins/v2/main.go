@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"log"
 
 	"github.com/johnfercher/maroto/v2"
@@ -34,7 +33,9 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithMargins(&entity.Margins{}).
+		WithTopMargin(20).
+		WithLeftMargin(20).
+		WithRightMargin(20).
 		WithDebug(true).
 		Build()
 
