@@ -39,7 +39,9 @@ func GetMaroto(image string) core.Maroto {
 		log.Fatal(err)
 	}
 	b := config.NewBuilder().
-		WithMargins(0, 0, 0).
+		WithTopMargin(0).
+		WithRightMargin(0).
+		WithLeftMargin(0).
 		WithDimensions(361.8, 203.2).
 		WithDisableAutoPageBreak(true).
 		WithOrientation(orientation.Horizontal).

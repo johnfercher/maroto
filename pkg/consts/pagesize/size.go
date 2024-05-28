@@ -30,7 +30,7 @@ const (
 	// DefaultRightMargin represents the default right margin in page size.
 	DefaultRightMargin = 10.0
 	// DefaultBottomMargin represents the default bottom margin in page size.
-	DefaultBottomMargin = MinBottomMargin
+	DefaultBottomMargin = 20.0025
 	// MinTopMargin represents the minimum top margin in page size.
 	MinTopMargin = 0.0
 	// MinLeftMargin represents the minimum left margin in page size.
@@ -38,7 +38,7 @@ const (
 	// MinRightMargin represents the minimum right margin in page size.
 	MinRightMargin = 0.0
 	// MinBottomMargin represents the minimum bottom margin in page size.
-	MinBottomMargin = 20.0025
+	MinBottomMargin = 0.0
 	// DefaultFontSize represents the default font size in page size.
 	DefaultFontSize = 10.0
 	// DefaultMaxGridSum represents the default max grid sum in page size.

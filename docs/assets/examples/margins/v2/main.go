@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
+
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
@@ -32,24 +34,35 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
-		WithMargins(20, 20, 20).
+		WithTopMargin(20).
+		WithLeftMargin(20).
+		WithRightMargin(20).
 		WithDebug(true).
 		Build()
 
 	mrt := maroto.New(cfg)
 	m := maroto.NewMetricsDecorator(mrt)
 
-	m.AddRow(40,
-		image.NewFromFileCol(4, "docs/assets/images/gopherbw.png", props.Rect{
-			Center:  true,
-			Percent: 50,
-		}),
-		text.NewCol(4, "Margins Test", props.Text{
-			Top:  12,
-			Size: 12,
-		}),
-		col.New(4),
+	err := m.RegisterHeader(
+		row.New(40).Add(
+			image.NewFromFileCol(4, "docs/assets/images/gopherbw.png", props.Rect{
+				Center:  true,
+				Percent: 50,
+			}),
+			text.NewCol(4, "Margins Test", props.Text{
+				Top:  12,
+				Size: 12,
+			}),
+			col.New(4),
+		),
 	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for i := 0; i < 10; i++ {
+		m.AddRows(text.NewRow(30, "any text"))
+	}
 
 	return m
 }

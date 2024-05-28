@@ -45,7 +45,9 @@ func GetMaroto(image string) core.Maroto {
 		log.Fatal(err)
 	}
 	b := config.NewBuilder().
-		WithMargins(0, 0, 0).
+		WithTopMargin(0).
+		WithLeftMargin(0).
+		WithRightMargin(0).
 		WithOrientation(orientation.Horizontal).
 		WithMaxGridSize(20).
 		WithBackgroundImage(bytes, extension.Png)

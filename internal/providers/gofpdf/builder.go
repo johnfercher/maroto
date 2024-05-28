@@ -55,6 +55,8 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 
 	if cfg.DisableAutoPageBreak {
 		fpdf.SetAutoPageBreak(false, 0)
+	} else {
+		fpdf.SetAutoPageBreak(true, cfg.Margins.Bottom)
 	}
 
 	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)

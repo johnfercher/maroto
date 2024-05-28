@@ -25,7 +25,10 @@ import (
 type Builder interface {
 	WithPageSize(size pagesize.Type) Builder
 	WithDimensions(width float64, height float64) Builder
-	WithMargins(left float64, top float64, right float64) Builder
+	WithLeftMargin(left float64) Builder
+	WithTopMargin(top float64) Builder
+	WithRightMargin(right float64) Builder
+	WithBottomMargin(bottom float64) Builder
 	WithConcurrentMode(chunkWorkers int) Builder
 	WithSequentialMode() Builder
 	WithSequentialLowMemoryMode(chunkWorkers int) Builder
@@ -114,24 +117,43 @@ func (b *CfgBuilder) WithDimensions(width float64, height float64) Builder {
 	return b
 }
 
-// WithMargins defines custom margins, bottom margin is not customizable due to gofpdf limitations.
-func (b *CfgBuilder) WithMargins(left float64, top float64, right float64) Builder {
+// WithLeftMargin customize margin.
+func (b *CfgBuilder) WithLeftMargin(left float64) Builder {
 	if left < pagesize.MinLeftMargin {
 		return b
 	}
 
-	if top < pagesize.MinRightMargin {
-		return b
-	}
-
-	if right < pagesize.MinTopMargin {
-		return b
-	}
-
 	b.margins.Left = left
-	b.margins.Top = top
-	b.margins.Right = right
+	return b
+}
 
+// WithTopMargin customize margin.
+func (b *CfgBuilder) WithTopMargin(top float64) Builder {
+	if top < pagesize.MinTopMargin {
+		return b
+	}
+
+	b.margins.Top = top
+	return b
+}
+
+// WithRightMargin customize margin.
+func (b *CfgBuilder) WithRightMargin(right float64) Builder {
+	if right < pagesize.MinRightMargin {
+		return b
+	}
+
+	b.margins.Right = right
+	return b
+}
+
+// WithBottomMargin customize margin.
+func (b *CfgBuilder) WithBottomMargin(bottom float64) Builder {
+	if bottom < pagesize.MinBottomMargin {
+		return b
+	}
+
+	b.margins.Bottom = bottom
 	return b
 }
 

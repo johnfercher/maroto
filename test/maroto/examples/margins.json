@@ -59,7 +59,250 @@
 					]
 				},
 				{
-					"value": 216.9975,
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6.997500000000002,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/gopherbw.png",
+									"type": "fileImage",
+									"details": {
+										"prop_center": true,
+										"prop_percent": 50
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Margins Test",
+									"type": "text",
+									"details": {
+										"prop_font_size": 12,
+										"prop_top": 12
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col"
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 30,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "any text",
+									"type": "text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 126.9975,
 					"type": "row",
 					"nodes": [
 						{

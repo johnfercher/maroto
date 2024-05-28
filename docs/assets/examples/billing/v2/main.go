@@ -39,7 +39,9 @@ func main() {
 func GetMaroto() core.Maroto {
 	cfg := config.NewBuilder().
 		WithPageNumber().
-		WithMargins(10, 15, 10).
+		WithLeftMargin(10).
+		WithTopMargin(15).
+		WithRightMargin(10).
 		Build()
 
 	darkGrayColor := getDarkGrayColor()
