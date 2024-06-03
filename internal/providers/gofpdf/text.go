@@ -28,76 +28,35 @@ func NewText(pdf gofpdfwrapper.Fpdf, math core.Math, font core.Font) *text {
 	}
 }
 
-// Add a text inside a cell.
+// This method is responsible for adding new text to the file
 func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
-	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
-	fontHeight := s.font.GetHeight(textProp.Family, textProp.Style, textProp.Size)
+	entity.NewSubText(text, props.NewSubText(textProp))
+	s.AddCustomText([]*entity.SubText{entity.NewSubText(text, props.NewSubText(textProp))}, cell, textProp)
+}
 
-	if textProp.Top > cell.Height {
-		textProp.Top = cell.Height
-	}
-
-	if textProp.Left > cell.Width {
-		textProp.Left = cell.Width
-	}
-
-	if textProp.Right > cell.Width {
-		textProp.Right = cell.Width
-	}
-
-	width := cell.Width - textProp.Left - textProp.Right
-	if width < 0 {
-		width = 0
-	}
-
-	x := cell.X + textProp.Left
-	y := cell.Y + textProp.Top
-
+// This method is responsible for allowing the union of a set of subtexts in the same text
+func (s *text) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text) {
 	originalColor := s.font.GetColor()
-	if textProp.Color != nil {
-		s.font.SetColor(textProp.Color)
-	}
+	defer s.font.SetColor(originalColor)
 
-	// override style if hyperlink is set
-	if textProp.Hyperlink != nil {
-		s.font.SetColor(&props.BlueColor)
-	}
-
-	y += fontHeight
-
-	// Apply Unicode before calc spaces
-	unicodeText := s.textToUnicode(text, textProp)
-	stringWidth := s.pdf.GetStringWidth(unicodeText)
-
-	// If should add one line
-	if stringWidth < width {
-		s.addLine(textProp, x, width, y, stringWidth, unicodeText)
-		if textProp.Color != nil {
-			s.font.SetColor(originalColor)
-		}
-		return
-	}
-
-	var lines []string
-
-	if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
-		words := strings.Split(unicodeText, " ")
-		lines = s.getLinesBreakingLineFromSpace(words, width)
-	} else {
-		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
-	}
+	width := s.validTextProps(textPs, cell, cell.Width-textPs.Left-textPs.Right)
+	lines := s.orderSubTextsInLines(subs, width, textPs.BreakLineStrategy)
 
 	accumulateOffsetY := 0.0
-
+	sumFonts := 0.0
 	for index, line := range lines {
-		lineWidth := s.pdf.GetStringWidth(line)
+		x := cell.X + textPs.Left
+		heightLargestFont := s.findLargestFontHeight(line)
+		if index > 0 {
+			sumFonts += heightLargestFont
+		}
 
-		s.addLine(textProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, line)
-		accumulateOffsetY += textProp.VerticalPadding
-	}
-
-	if textProp.Color != nil {
-		s.font.SetColor(originalColor)
+		for _, subText := range line {
+			y := s.setTheLineProps(subText, heightLargestFont, cell.Y+textPs.Top)
+			s.addLine(&subText.Prop, x, width, y+sumFonts+accumulateOffsetY, subText.Value, textPs.Align)
+			x += s.pdf.GetStringWidth(subText.Value)
+		}
+		accumulateOffsetY += textPs.VerticalPadding
 	}
 }
 
@@ -109,27 +68,116 @@ func (s *text) GetLinesQuantity(text string, textProp props.Text, colWidth float
 	// Apply Unicode.
 	textTranslated := translator(text)
 
-	stringWidth := s.pdf.GetStringWidth(textTranslated)
 	words := strings.Split(textTranslated, " ")
 
 	// If should add one line.
-	if stringWidth < colWidth || len(words) == 1 {
+	if s.pdf.GetStringWidth(textTranslated) < colWidth || len(words) == 1 {
 		return 1
 	}
 
-	lines := s.getLinesBreakingLineFromSpace(words, colWidth)
+	lines, _ := s.getLinesBreakingLineFromSpace(textTranslated, colWidth, 0)
 	return len(lines)
 }
 
-func (s *text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {
-	currentlySize := 0.0
+// This method is responsible for checking the subtexts and adding them to the line according to the chosen strategy
+func (s *text) orderSubTextsInLines(subs []*entity.SubText, widthAvailable float64, breakLineStrategy breakline.Strategy) [][]*entity.SubText {
+	sizeLasLine := 0.0
+	newText := [][]*entity.SubText{}
+
+	for _, sub := range subs {
+		sizeLasLine, newText = s.factoryLine(sub, widthAvailable, sizeLasLine, newText, s.selectStrategyBreak(breakLineStrategy))
+	}
+	return newText
+}
+
+// This method is responsible for making a new line with the subText sent, here it is defined whether the subText will be inserted in a new Line or in the current Line
+func (s *text) factoryLine(sub *entity.SubText, widthAvailable float64, sizeLasLine float64, newText [][]*entity.SubText, getLines func(string, float64, float64) ([]string, float64)) (float64, [][]*entity.SubText) {
+	s.font.SetFont(sub.Prop.Family, sub.Prop.Style, sub.Prop.Size)
+	lineValues, currentSize := getLines(s.textToUnicode(sub.Value, &sub.Prop), widthAvailable, sizeLasLine)
+	return currentSize, s.mergeSubtext(newText, lineValues, s.fitsInTheCurrentLine(lineValues[0], sizeLasLine, widthAvailable), sub.Prop)
+}
+
+// This method is responsible for defining the line props, returning the position of the text on the y axis
+func (s *text) setTheLineProps(sub *entity.SubText, heightLargestFont, y float64) float64 {
+	s.font.SetFont(sub.Prop.Family, sub.Prop.Style, sub.Prop.Size)
+	s.font.SetColor(sub.Prop.Color)
+
+	fontHeight := s.font.GetHeight(sub.Prop.Family, sub.Prop.Style, sub.Prop.Size)
+	if heightLargestFont > fontHeight {
+		y -= (heightLargestFont - fontHeight) / 2
+	}
+	return y
+}
+
+// This method is responsible for validating text properties, ensuring that they are within the standard
+func (s *text) validTextProps(ps *props.Text, cell *entity.Cell, width float64) float64 {
+	if ps.Top > cell.Height {
+		ps.Top = cell.Height
+	}
+
+	if ps.Left > cell.Width {
+		ps.Left = cell.Width
+	}
+
+	if ps.Right > cell.Width {
+		ps.Right = cell.Width
+	}
+	if width < 0 {
+		width = 0
+	}
+	return width
+}
+
+// This method is responsible for finding the font with the highest height in the set of subtexts.
+func (s *text) findLargestFontHeight(subs []*entity.SubText) float64 {
+	fontSize := 0.0
+	for _, sub := range subs {
+		size := s.font.GetHeight(sub.Prop.Family, sub.Prop.Style, sub.Prop.Size)
+		if size > fontSize {
+			fontSize = size
+		}
+	}
+	return fontSize
+}
+
+// This function is responsible for merging the subText, ensuring that when necessary they will occupy the same line
+func (s *text) mergeSubtext(currentLines [][]*entity.SubText, newLines []string, joinOnTheSameLine bool, ps props.SubText) [][]*entity.SubText {
+	startInsert := 0
+
+	if joinOnTheSameLine && len(currentLines) != 0 {
+		currentLines[len(currentLines)-1] = append(currentLines[len(currentLines)-1], entity.NewSubText(newLines[0], ps))
+		startInsert = 1
+	}
+
+	for i := startInsert; i < len(newLines); i++ {
+		currentLines = append(currentLines, []*entity.SubText{entity.NewSubText(newLines[i], ps)})
+	}
+	return currentLines
+}
+
+// This method is responsible for selecting the correct function to break the line according to the passed strategy
+func (s *text) selectStrategyBreak(strategy breakline.Strategy) func(text string, colWidth float64, currentlySize float64) ([]string, float64) {
+	if strategy == breakline.EmptySpaceStrategy {
+		return s.getLinesBreakingLineFromSpace
+	} else {
+		return s.getLinesBreakingLineWithDash
+	}
+}
+
+// This method is responsible for checking if the word fits on the current line
+func (s *text) fitsInTheCurrentLine(word string, currentSize, widthAvailable float64) bool {
+	return s.pdf.GetStringWidth(word)+currentSize < widthAvailable
+}
+
+func (s *text) getLinesBreakingLineFromSpace(text string, colWidth, currentlySize float64) ([]string, float64) {
 	actualLine := 0
+	words := strings.Split(text, " ")
 
 	lines := []string{}
 	lines = append(lines, "")
 
 	for _, word := range words {
-		if s.pdf.GetStringWidth(word+" ")+currentlySize < colWidth {
+		if s.fitsInTheCurrentLine(word+" ", currentlySize, colWidth) {
 			lines[actualLine] = lines[actualLine] + word + " "
 			currentlySize += s.pdf.GetStringWidth(word + " ")
 		} else {
@@ -140,19 +188,17 @@ func (s *text) getLinesBreakingLineFromSpace(words []string, colWidth float64) [
 		}
 	}
 
-	return lines
+	return lines, currentlySize
 }
 
-func (s *text) getLinesBreakingLineWithDash(words string, colWidth float64) []string {
-	currentlySize := 0.0
-
+func (s *text) getLinesBreakingLineWithDash(words string, colWidth, currentlySize float64) ([]string, float64) {
 	lines := []string{}
 
 	dashSize := s.pdf.GetStringWidth(" - ")
 
 	var content string
 	for _, letter := range words {
-		if currentlySize+dashSize > colWidth-dashSize {
+		if !s.fitsInTheCurrentLine(" - ", currentlySize, colWidth-dashSize) {
 			content += "-"
 			lines = append(lines, content)
 			content = ""
@@ -160,28 +206,28 @@ func (s *text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 		}
 
 		letterString := fmt.Sprintf("%c", letter)
-		width := s.pdf.GetStringWidth(letterString)
 		content += letterString
-		currentlySize += width
+		currentlySize += s.pdf.GetStringWidth(letterString)
 	}
 
 	if content != "" {
 		lines = append(lines, content)
 	}
 
-	return lines
+	return lines, currentlySize
 }
 
-func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
+func (s *text) addLine(subProp *props.SubText, xColOffset, colWidth, yColOffset float64, text string, alignText align.Type) {
 	left, top, _, _ := s.pdf.GetMargins()
+	textWidth := s.pdf.GetStringWidth(text)
 
-	fontHeight := s.font.GetHeight(textProp.Family, textProp.Style, textProp.Size)
+	fontHeight := s.font.GetHeight(subProp.Family, subProp.Style, subProp.Size)
 
-	if textProp.Align == align.Left {
+	if alignText == align.Left {
 		s.pdf.Text(xColOffset+left, yColOffset+top, text)
 
-		if textProp.Hyperlink != nil {
-			s.pdf.LinkString(xColOffset+left, yColOffset+top-fontHeight, textWidth, fontHeight, *textProp.Hyperlink)
+		if subProp.Hyperlink != nil {
+			s.pdf.LinkString(xColOffset+left, yColOffset+top-fontHeight, textWidth, fontHeight, *subProp.Hyperlink)
 		}
 
 		return
@@ -189,20 +235,20 @@ func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 
 	var modifier float64 = 2
 
-	if textProp.Align == align.Right {
+	if alignText == align.Right {
 		modifier = 1
 	}
 
 	dx := (colWidth - textWidth) / modifier
 
-	if textProp.Hyperlink != nil {
-		s.pdf.LinkString(dx+xColOffset+left, yColOffset+top-fontHeight, textWidth, fontHeight, *textProp.Hyperlink)
+	if subProp.Hyperlink != nil {
+		s.pdf.LinkString(dx+xColOffset+left, yColOffset+top-fontHeight, textWidth, fontHeight, *subProp.Hyperlink)
 	}
 
 	s.pdf.Text(dx+xColOffset+left, yColOffset+top, text)
 }
 
-func (s *text) textToUnicode(txt string, props *props.Text) string {
+func (s *text) textToUnicode(txt string, props *props.SubText) string {
 	if props.Family == fontfamily.Arial ||
 		props.Family == fontfamily.Helvetica ||
 		props.Family == fontfamily.Symbol ||
