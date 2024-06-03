@@ -32,6 +32,7 @@ type Line interface {
 // Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
 	Add(text string, cell *entity.Cell, textProp *props.Text)
+	AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text)
 	GetLinesQuantity(text string, fontFamily props.Text, colWidth float64) int
 }
 
