@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 )
 
@@ -64,20 +65,20 @@ func TestNewRow(t *testing.T) {
 func TestText_Render(t *testing.T) {
 	t.Run("should call provider correctly", func(t *testing.T) {
 		// Arrange
-		value := "textValue"
 		cell := fixture.CellEntity()
 		prop := fixture.TextProp()
-		sut := text.New(value, prop)
+		subs := []*entity.SubText{entity.NewSubText("textValue", props.NewSubText(&prop))}
+		sut := text.NewCustomText(subs, prop)
 
 		provider := mocks.NewProvider(t)
-		provider.EXPECT().AddText(value, &cell, &prop)
+		provider.EXPECT().AddCustomText(subs, &cell, &prop)
 		sut.SetConfig(&entity.Config{})
 
 		// Act
 		sut.Render(provider, &cell)
 
 		// Assert
-		provider.AssertNumberOfCalls(t, "AddText", 1)
+		provider.AssertNumberOfCalls(t, "AddCustomText", 1)
 	})
 }
 

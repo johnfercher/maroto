@@ -1,6 +1,18 @@
 {
-	"value": "code",
 	"type": "text",
+	"nodes": [
+		{
+			"value": "code",
+			"type": "sub_text",
+			"details": {
+				"prop_color": "RGB(100, 50, 200)",
+				"prop_font_family": "helvetica",
+				"prop_font_size": 14,
+				"prop_font_style": "B",
+				"prop_hyperlink": "https://www.google.com"
+			}
+		}
+	],
 	"details": {
 		"prop_align": "R",
 		"prop_breakline_strategy": "dash_strategy",

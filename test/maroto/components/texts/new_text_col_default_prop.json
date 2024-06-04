@@ -3,8 +3,13 @@
 	"type": "col",
 	"nodes": [
 		{
-			"value": "code",
-			"type": "text"
+			"type": "text",
+			"nodes": [
+				{
+					"type": "sub_text",
+					"value": "code"
+				}
+			]
 		}
 	]
 }
