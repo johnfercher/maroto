@@ -12,9 +12,9 @@ import (
 )
 
 type Text struct {
-	value  string
-	prop   props.Text
+	text   []*entity.SubText
 	config *entity.Config
+	props  props.Text
 }
 
 // New is responsible to create an instance of a Text.
@@ -25,8 +25,24 @@ func New(value string, ps ...props.Text) core.Component {
 	}
 
 	return &Text{
-		value: value,
-		prop:  textProp,
+		text:  []*entity.SubText{entity.NewSubText(value, props.NewSubText(&textProp))},
+		props: textProp,
+	}
+}
+
+// NewCustomText is responsible for creating an instance of a Text based on SubTexts
+func NewCustomText(subText []*entity.SubText, ps ...props.Text) core.Component {
+	textProp := props.Text{}
+	if len(ps) > 0 {
+		textProp = ps[0]
+	}
+	if len(subText) == 0 {
+		subText = append(subText, entity.NewSubText(""))
+	}
+
+	return &Text{
+		text:  subText,
+		props: textProp,
 	}
 }
 
@@ -45,10 +61,24 @@ func NewRow(height float64, value string, ps ...props.Text) core.Row {
 
 // GetStructure returns the Structure of a Text.
 func (t *Text) GetStructure() *node.Node[core.Structure] {
+	node := node.New(
+		core.Structure{
+			Type:    "text",
+			Details: t.props.ToMap(),
+		})
+
+	for _, sub := range t.text {
+		node.AddNext(t.getStructSubText(sub))
+	}
+
+	return node
+}
+
+func (t *Text) getStructSubText(sub *entity.SubText) *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:    "text",
-		Value:   t.value,
-		Details: t.prop.ToMap(),
+		Type:    "sub_text",
+		Value:   sub.Value,
+		Details: sub.Prop.ToMap(),
 	}
 
 	return node.New(str)
@@ -57,10 +87,14 @@ func (t *Text) GetStructure() *node.Node[core.Structure] {
 // SetConfig sets the config.
 func (t *Text) SetConfig(config *entity.Config) {
 	t.config = config
-	t.prop.MakeValid(t.config.DefaultFont)
+	t.props.MakeValid(t.config.DefaultFont)
+	for _, sub := range t.text {
+		sub.Prop.MakeValid(t.config.DefaultFont)
+	}
 }
 
 // Render renders a Text into a PDF context.
 func (t *Text) Render(provider core.Provider, cell *entity.Cell) {
-	provider.AddText(t.value, cell, &t.prop)
+	innerCell := cell.Copy()
+	provider.AddCustomText(t.text, &innerCell, &t.props)
 }

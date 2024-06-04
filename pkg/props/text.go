@@ -7,6 +7,75 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 )
 
+// SubText represents properties from a SubText inside a cell.
+type SubText struct {
+	// Family of the text, ex: consts.Arial, helvetica and etc.
+	Family string
+	// Style of the text, ex: consts.Normal, bold and etc.
+	Style fontstyle.Type
+	// Size of the text.
+	Size float64
+	// Color define the font style color.
+	Color *Color
+	// Hyperlink define a link to be opened when the text is clicked.
+	Hyperlink *string
+}
+
+func (sub *SubText) MakeValid(font *Font) {
+	undefinedValue := 0.0
+
+	if sub.Family == "" {
+		sub.Family = font.Family
+	}
+
+	if sub.Style == "" {
+		sub.Style = font.Style
+	}
+
+	if sub.Size == undefinedValue {
+		sub.Size = font.Size
+	}
+
+	if sub.Color == nil {
+		sub.Color = font.Color
+	}
+}
+
+func (t *SubText) ToMap() map[string]interface{} {
+	m := make(map[string]interface{})
+	if t.Family != "" {
+		m["prop_font_family"] = t.Family
+	}
+
+	if t.Style != "" {
+		m["prop_font_style"] = t.Style
+	}
+
+	if t.Size != 0 {
+		m["prop_font_size"] = t.Size
+	}
+
+	if t.Color != nil {
+		m["prop_color"] = t.Color.ToString()
+	}
+
+	if t.Hyperlink != nil {
+		m["prop_hyperlink"] = *t.Hyperlink
+	}
+
+	return m
+}
+
+func NewSubText(t *Text) SubText {
+	return SubText{
+		Family:    t.Family,
+		Style:     t.Style,
+		Size:      t.Size,
+		Color:     t.Color,
+		Hyperlink: t.Hyperlink,
+	}
+}
+
 // Text represents properties from a Text inside a cell.
 type Text struct {
 	// Top is the amount of space between the upper cell limit and the text.
