@@ -11,6 +11,24 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/test"
 )
 
+func TestNewCustomText(t *testing.T) {
+	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		// Act
+		sut := text.NewCustomText([]*entity.SubText{entity.NewSubText("code")})
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_default_prop.json")
+	})
+
+	t.Run("when sub text is not sent, should use an empty string", func(t *testing.T) {
+		// Act
+		sut := text.NewCustomText([]*entity.SubText{})
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_empty.json")
+	})
+}
+
 func TestNew(t *testing.T) {
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
 		// Act
