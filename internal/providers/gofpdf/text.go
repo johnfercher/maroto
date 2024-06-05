@@ -106,7 +106,7 @@ func (s *text) setTheLineProps(sub *entity.SubText, heightLargestFont, y float64
 	if heightLargestFont > fontHeight {
 		y -= (heightLargestFont - fontHeight) / 2
 	}
-	return y
+	return y + heightLargestFont
 }
 
 // This method is responsible for validating text properties, ensuring that they are within the standard
