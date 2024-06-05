@@ -37,8 +37,13 @@
 							},
 							"nodes": [
 								{
-									"value": "metadatas",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "metadatas",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}

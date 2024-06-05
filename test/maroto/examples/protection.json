@@ -33,8 +33,13 @@
 							},
 							"nodes": [
 								{
-									"value": "supersecret content",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "supersecret content",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}

@@ -43,12 +43,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Margins Test",
 									"type": "text",
 									"details": {
 										"prop_font_size": 12,
 										"prop_top": 12
-									}
+									},
+									"nodes": [
+										{
+											"value": "Margins Test",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 12
+											}
+										}
+									]
 								}
 							]
 						},
@@ -70,8 +78,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -89,8 +102,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -108,8 +126,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -127,8 +150,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -146,8 +174,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -165,8 +198,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -184,8 +222,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -229,12 +272,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Margins Test",
 									"type": "text",
 									"details": {
 										"prop_font_size": 12,
 										"prop_top": 12
-									}
+									},
+									"nodes": [
+										{
+											"value": "Margins Test",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 12
+											}
+										}
+									]
 								}
 							]
 						},
@@ -256,8 +307,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -275,8 +331,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -294,8 +355,13 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}

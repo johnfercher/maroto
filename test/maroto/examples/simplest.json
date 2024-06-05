@@ -115,8 +115,13 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "text",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "text",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
