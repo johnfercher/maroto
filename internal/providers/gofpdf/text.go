@@ -85,16 +85,17 @@ func (s *text) orderSubTexts(subs []*entity.SubText, widthAvailable float64, bre
 	newText := [][]*entity.SubText{}
 
 	for _, sub := range subs {
-		sizeLasLine, newText = s.factoryLine(sub, widthAvailable, sizeLasLine, newText, s.selectStrategyBreak(breakLineStrategy))
+		sizeLasLine, newText = s.factoryLine(sub, widthAvailable, sizeLasLine, newText, breakLineStrategy)
 	}
 	return newText
 }
 
 // This method is responsible for making a new line with the subText sent.
-func (s *text) factoryLine(sub *entity.SubText, widthAvailable float64, sizeLasLine float64, newText [][]*entity.SubText, getLines func(string, float64, float64) ([]string, float64)) (float64, [][]*entity.SubText) {
+func (s *text) factoryLine(sub *entity.SubText, width float64, sizeLastLine float64, newText [][]*entity.SubText, strategy breakline.Strategy) (float64, [][]*entity.SubText) {
+	getLines := s.selectStrategyBreak(strategy)
 	s.font.SetFont(sub.Prop.Family, sub.Prop.Style, sub.Prop.Size)
-	lineValues, currentSize := getLines(s.textToUnicode(sub.Value, &sub.Prop), widthAvailable, sizeLasLine)
-	return currentSize, s.mergeSubtext(newText, lineValues, s.fitsInTheCurrentLine(lineValues[0], sizeLasLine, widthAvailable), sub.Prop)
+	lineValues, currentSize := getLines(s.textToUnicode(sub.Value, &sub.Prop), width, sizeLastLine)
+	return currentSize, s.mergeSubtext(newText, lineValues, s.fitsInTheCurrentLine(lineValues[0], sizeLastLine, width), sub.Prop)
 }
 
 // This method is responsible for defining the line props, returning the position of the text on the y axis
@@ -141,10 +142,10 @@ func (s *text) findLargestFontHeight(subs []*entity.SubText) float64 {
 }
 
 // This function is responsible for merging the subText, ensuring that when necessary they will occupy the same line
-func (s *text) mergeSubtext(currentLines [][]*entity.SubText, newLines []string, joinOnTheSameLine bool, ps props.SubText) [][]*entity.SubText {
+func (s *text) mergeSubtext(currentLines [][]*entity.SubText, newLines []string, merge bool, ps props.SubText) [][]*entity.SubText {
 	startInsert := 0
 
-	if joinOnTheSameLine && len(currentLines) != 0 {
+	if merge && len(currentLines) != 0 {
 		currentLines[len(currentLines)-1] = append(currentLines[len(currentLines)-1], entity.NewSubText(newLines[0], ps))
 		startInsert = 1
 	}
@@ -156,7 +157,7 @@ func (s *text) mergeSubtext(currentLines [][]*entity.SubText, newLines []string,
 }
 
 // This method is responsible for selecting the correct function to break the line according to the passed strategy
-func (s *text) selectStrategyBreak(strategy breakline.Strategy) func(text string, colWidth float64, currentlySize float64) ([]string, float64) {
+func (s *text) selectStrategyBreak(strategy breakline.Strategy) func(string, float64, float64) ([]string, float64) {
 	if strategy == breakline.EmptySpaceStrategy {
 		return s.getLinesBreakingLineFromSpace
 	} else {
