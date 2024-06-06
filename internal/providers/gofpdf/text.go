@@ -40,7 +40,7 @@ func (s *text) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *
 	defer s.font.SetColor(originalColor)
 
 	width := s.validTextProps(textPs, cell, cell.Width-textPs.Left-textPs.Right)
-	lines := s.orderSubTextsInLines(subs, width, textPs.BreakLineStrategy)
+	lines := s.orderSubTexts(subs, width, textPs.BreakLineStrategy)
 
 	accumulateOffsetY := 0.0
 	sumFonts := 0.0
@@ -80,7 +80,7 @@ func (s *text) GetLinesQuantity(text string, textProp props.Text, colWidth float
 }
 
 // This method is responsible for checking the subtexts and adding them to the line according to the chosen strategy
-func (s *text) orderSubTextsInLines(subs []*entity.SubText, widthAvailable float64, breakLineStrategy breakline.Strategy) [][]*entity.SubText {
+func (s *text) orderSubTexts(subs []*entity.SubText, widthAvailable float64, breakLineStrategy breakline.Strategy) [][]*entity.SubText {
 	sizeLasLine := 0.0
 	newText := [][]*entity.SubText{}
 
@@ -90,7 +90,7 @@ func (s *text) orderSubTextsInLines(subs []*entity.SubText, widthAvailable float
 	return newText
 }
 
-// This method is responsible for making a new line with the subText sent, here it is defined whether the subText will be inserted in a new Line or in the current Line
+// This method is responsible for making a new line with the subText sent.
 func (s *text) factoryLine(sub *entity.SubText, widthAvailable float64, sizeLasLine float64, newText [][]*entity.SubText, getLines func(string, float64, float64) ([]string, float64)) (float64, [][]*entity.SubText) {
 	s.font.SetFont(sub.Prop.Family, sub.Prop.Style, sub.Prop.Size)
 	lineValues, currentSize := getLines(s.textToUnicode(sub.Value, &sub.Prop), widthAvailable, sizeLasLine)

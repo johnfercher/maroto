@@ -21,46 +21,46 @@ type SubText struct {
 	Hyperlink *string
 }
 
-func (sub *SubText) MakeValid(font *Font) {
+func (s *SubText) MakeValid(font *Font) {
 	undefinedValue := 0.0
 
-	if sub.Family == "" {
-		sub.Family = font.Family
+	if s.Family == "" {
+		s.Family = font.Family
 	}
 
-	if sub.Style == "" {
-		sub.Style = font.Style
+	if s.Style == "" {
+		s.Style = font.Style
 	}
 
-	if sub.Size == undefinedValue {
-		sub.Size = font.Size
+	if s.Size == undefinedValue {
+		s.Size = font.Size
 	}
 
-	if sub.Color == nil {
-		sub.Color = font.Color
+	if s.Color == nil {
+		s.Color = font.Color
 	}
 }
 
-func (t *SubText) ToMap() map[string]interface{} {
+func (s *SubText) ToMap() map[string]interface{} {
 	m := make(map[string]interface{})
-	if t.Family != "" {
-		m["prop_font_family"] = t.Family
+	if s.Family != "" {
+		m["prop_font_family"] = s.Family
 	}
 
-	if t.Style != "" {
-		m["prop_font_style"] = t.Style
+	if s.Style != "" {
+		m["prop_font_style"] = s.Style
 	}
 
-	if t.Size != 0 {
-		m["prop_font_size"] = t.Size
+	if s.Size != 0 {
+		m["prop_font_size"] = s.Size
 	}
 
-	if t.Color != nil {
-		m["prop_color"] = t.Color.ToString()
+	if s.Color != nil {
+		m["prop_color"] = s.Color.ToString()
 	}
 
-	if t.Hyperlink != nil {
-		m["prop_hyperlink"] = *t.Hyperlink
+	if s.Hyperlink != nil {
+		m["prop_hyperlink"] = *s.Hyperlink
 	}
 
 	return m
