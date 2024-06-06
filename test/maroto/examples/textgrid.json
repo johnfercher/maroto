@@ -468,7 +468,45 @@
 					]
 				},
 				{
-					"value": 16.997500000000002,
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"nodes": [
+										{
+											"value": "This is a text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 255)"
+											}
+										},
+										{
+											"value": " with multiple",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 7
+											}
+										},
+										{
+											"value": " styles",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(255, 0, 0)"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6.997500000000002,
 					"type": "row",
 					"nodes": [
 						{
