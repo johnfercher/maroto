@@ -91,7 +91,9 @@ func (s *text) orderSubTexts(subs []*entity.SubText, widthAvailable float64, bre
 }
 
 // This method is responsible for making a new line with the subText sent.
-func (s *text) factoryLine(sub *entity.SubText, width float64, sizeLastLine float64, newText [][]*entity.SubText, strategy breakline.Strategy) (float64, [][]*entity.SubText) {
+func (s *text) factoryLine(sub *entity.SubText, width float64, sizeLastLine float64, newText [][]*entity.SubText,
+	strategy breakline.Strategy) (float64, [][]*entity.SubText) {
+
 	getLines := s.selectStrategyBreak(strategy)
 	s.font.SetFont(sub.Prop.Family, sub.Prop.Style, sub.Prop.Size)
 	lineValues, currentSize := getLines(s.textToUnicode(sub.Value, &sub.Prop), width, sizeLastLine)
