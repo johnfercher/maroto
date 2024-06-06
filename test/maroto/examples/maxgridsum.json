@@ -32,11 +32,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Table with 14 Columns",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Table with 14 Columns",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -51,13 +59,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 0",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 0",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -66,13 +82,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 1",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 1",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -81,13 +105,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 2",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 2",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -96,13 +128,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 3",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 3",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -111,13 +151,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 4",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -126,13 +174,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 5",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 5",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -141,13 +197,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 6",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 6",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -156,13 +220,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 7",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 7",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -171,13 +243,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 8",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 8",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -186,13 +266,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 9",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 9",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -201,13 +289,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 10",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 10",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -216,13 +312,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 11",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 11",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -231,13 +335,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 12",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 12",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -246,13 +358,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "H 13",
 									"type": "text",
 									"details": {
 										"prop_font_style": "B",
 										"prop_left": 1.5,
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "H 13",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -267,13 +387,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 0",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 0",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -282,13 +410,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 1",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 1",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -297,13 +433,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 2",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 2",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -312,13 +456,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 3",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 3",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -327,13 +479,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 4",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -342,13 +502,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 5",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 5",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -357,13 +525,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 6",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 6",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -372,13 +548,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 7",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 7",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -387,13 +571,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 8",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 8",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -402,13 +594,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 9",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 9",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -417,13 +617,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 10",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 10",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -432,13 +640,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 11",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 11",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -447,13 +663,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 12",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 12",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						},
@@ -462,13 +686,21 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "C 13",
 									"type": "text",
 									"details": {
 										"prop_font_size": 9,
 										"prop_left": 1.5,
 										"prop_top": 1
-									}
+									},
+									"nodes": [
+										{
+											"value": "C 13",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9
+											}
+										}
+									]
 								}
 							]
 						}

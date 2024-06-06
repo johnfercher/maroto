@@ -32,8 +32,13 @@
 							},
 							"nodes": [
 								{
-									"value": "content",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "content",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}

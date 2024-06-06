@@ -4,11 +4,14 @@ import (
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -88,5 +91,11 @@ func GetMaroto() core.Maroto {
 
 	m.AddRows(text.NewRow(10, "text with hyperlink", props.Text{Hyperlink: &google}))
 
+	subText1 := entity.NewSubText("This is a text", props.SubText{Color: &props.BlueColor})
+	subText2 := entity.NewSubText(" with multiple", props.SubText{Size: 7})
+	subText3 := entity.NewSubText(" styles", props.SubText{Color: &props.RedColor})
+
+	customText := col.New(12).Add(text.NewCustomText([]*entity.SubText{subText1, subText2, subText3}))
+	m.AddRows(row.New(10).Add(customText))
 	return m
 }

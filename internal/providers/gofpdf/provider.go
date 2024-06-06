@@ -48,6 +48,10 @@ func (g *provider) AddText(text string, cell *entity.Cell, prop *props.Text) {
 	g.text.Add(text, cell, prop)
 }
 
+func (g *provider) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text) {
+	g.text.AddCustomText(subs, cell, textPs)
+}
+
 func (g *provider) GetTextHeight(prop *props.Font) float64 {
 	return g.font.GetHeight(prop.Family, prop.Style, prop.Size)
 }

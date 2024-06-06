@@ -95,6 +95,41 @@ func (_c *Provider_AddBarCode_Call) RunAndReturn(run func(string, *entity.Cell, 
 	return _c
 }
 
+// AddCustomText provides a mock function with given fields: subs, cell, textPs
+func (_m *Provider) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text) {
+	_m.Called(subs, cell, textPs)
+}
+
+// Provider_AddCustomText_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddCustomText'
+type Provider_AddCustomText_Call struct {
+	*mock.Call
+}
+
+// AddCustomText is a helper method to define mock.On call
+//   - subs []*entity.SubText
+//   - cell *entity.Cell
+//   - textPs *props.Text
+func (_e *Provider_Expecter) AddCustomText(subs interface{}, cell interface{}, textPs interface{}) *Provider_AddCustomText_Call {
+	return &Provider_AddCustomText_Call{Call: _e.mock.On("AddCustomText", subs, cell, textPs)}
+}
+
+func (_c *Provider_AddCustomText_Call) Run(run func(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text)) *Provider_AddCustomText_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]*entity.SubText), args[1].(*entity.Cell), args[2].(*props.Text))
+	})
+	return _c
+}
+
+func (_c *Provider_AddCustomText_Call) Return() *Provider_AddCustomText_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *Provider_AddCustomText_Call) RunAndReturn(run func([]*entity.SubText, *entity.Cell, *props.Text)) *Provider_AddCustomText_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // AddImageFromBytes provides a mock function with given fields: bytes, cell, prop, _a3
 func (_m *Provider) AddImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, _a3 extension.Type) {
 	_m.Called(bytes, cell, prop, _a3)

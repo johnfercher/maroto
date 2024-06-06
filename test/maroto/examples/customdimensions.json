@@ -43,12 +43,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Gopher International Shipping, Inc.",
 									"type": "text",
 									"details": {
 										"prop_font_size": 12,
 										"prop_top": 12
-									}
+									},
+									"nodes": [
+										{
+											"value": "Gopher International Shipping, Inc.",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 12
+											}
+										}
+									]
 								}
 							]
 						},

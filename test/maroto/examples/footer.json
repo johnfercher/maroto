@@ -32,11 +32,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -54,11 +62,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -76,11 +92,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -98,11 +122,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -120,11 +152,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -142,11 +182,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -164,11 +212,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -186,11 +242,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -208,11 +272,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -230,11 +302,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -252,11 +332,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -274,11 +362,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -296,11 +392,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -318,11 +422,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -340,11 +452,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -362,11 +482,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -384,11 +512,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -406,11 +542,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -428,11 +572,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -450,11 +602,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -472,11 +632,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -494,11 +662,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -516,11 +692,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -538,11 +722,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -570,13 +762,22 @@
 							},
 							"nodes": [
 								{
-									"value": "Footer",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 10,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Footer",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 10,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -599,11 +800,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -621,11 +830,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -643,11 +860,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -665,11 +890,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -687,11 +920,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -709,11 +950,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -731,11 +980,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -753,11 +1010,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -775,11 +1040,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -797,11 +1070,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -819,11 +1100,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -841,11 +1130,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -863,11 +1160,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -885,11 +1190,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -907,11 +1220,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -929,11 +1250,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -951,11 +1280,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -973,11 +1310,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -995,11 +1340,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1017,11 +1370,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1039,11 +1400,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1061,11 +1430,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1083,11 +1460,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1105,11 +1490,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1137,13 +1530,22 @@
 							},
 							"nodes": [
 								{
-									"value": "Footer",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 10,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Footer",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 10,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1166,11 +1568,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1188,11 +1598,19 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1220,13 +1638,22 @@
 							},
 							"nodes": [
 								{
-									"value": "Footer",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 10,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Footer",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 10,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}

@@ -51,16 +51,24 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.",
 									"type": "text",
 									"details": {
 										"prop_align": "R",
 										"prop_color": "RGB(150, 10, 10)",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(150, 10, 10)",
+												"prop_font_size": 8
+											}
+										}
+									]
 								},
 								{
-									"value": "Tel: 55 024 12345-1234",
 									"type": "text",
 									"details": {
 										"prop_align": "R",
@@ -68,10 +76,20 @@
 										"prop_font_size": 8,
 										"prop_font_style": "BI",
 										"prop_top": 12
-									}
+									},
+									"nodes": [
+										{
+											"value": "Tel: 55 024 12345-1234",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(10, 10, 150)",
+												"prop_font_size": 8,
+												"prop_font_style": "BI"
+											}
+										}
+									]
 								},
 								{
-									"value": "www.mycompany.com",
 									"type": "text",
 									"details": {
 										"prop_align": "R",
@@ -79,7 +97,18 @@
 										"prop_font_size": 8,
 										"prop_font_style": "BI",
 										"prop_top": 15
-									}
+									},
+									"nodes": [
+										{
+											"value": "www.mycompany.com",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(10, 10, 150)",
+												"prop_font_size": 8,
+												"prop_font_style": "BI"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -97,13 +126,21 @@
 							},
 							"nodes": [
 								{
-									"value": "Invoice ABC123456789",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_style": "B",
 										"prop_top": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "Invoice ABC123456789",
+											"type": "sub_text",
+											"details": {
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -121,7 +158,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Transactions",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -129,7 +165,18 @@
 										"prop_font_size": 9,
 										"prop_font_style": "B",
 										"prop_top": 1.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "Transactions",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(255, 255, 255)",
+												"prop_font_size": 9,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -148,13 +195,22 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Product",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 9,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Product",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -163,13 +219,22 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Quantity",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 9,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Quantity",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -178,13 +243,22 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Price",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 9,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Price",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -206,12 +280,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Swamp",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Swamp",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -220,12 +302,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "12",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "12",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -234,12 +324,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 4,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 4,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -258,12 +356,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Sorin, A Planeswalker",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Sorin, A Planeswalker",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -272,12 +378,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -286,119 +400,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 90,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"details": {
-						"prop_background_color": "RGB(200, 200, 200)"
-					},
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Tassa",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 30,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Skinrender",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 9,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 90,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -420,12 +435,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Island",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Tassa",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -434,12 +457,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "12",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -448,12 +479,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 4,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 30,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -472,12 +511,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Mountain",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Skinrender",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -486,12 +533,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "12",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -500,119 +555,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 4,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"details": {
-						"prop_background_color": "RGB(200, 200, 200)"
-					},
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Plain",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "12",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 4,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Black Lotus",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "1",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 1.000,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 9,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -634,12 +590,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Time Walk",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Island",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -648,12 +612,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "1",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "12",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -662,12 +634,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 1.000,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 4,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -686,12 +666,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Emberclave",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Mountain",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -700,12 +688,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "12",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -714,119 +710,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 44,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"details": {
-						"prop_background_color": "RGB(200, 200, 200)"
-					},
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Anax",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 32,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Murderous Rider",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 22,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 4,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -848,12 +745,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Gray Merchant of Asphodel",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Plain",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -862,12 +767,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "12",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -876,12 +789,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 2,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 4,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -900,12 +821,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Ajani's Pridemate",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Black Lotus",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -914,12 +843,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "1",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -928,119 +865,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 2,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"details": {
-						"prop_background_color": "RGB(200, 200, 200)"
-					},
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Renan, Chatuba",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 19,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Tymarett",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 13,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 1.000,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1062,12 +900,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Doom Blade",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Time Walk",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1076,12 +922,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "1",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1090,12 +944,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 5,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 1.000,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1114,12 +976,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Dark Lord",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Emberclave",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1128,12 +998,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "3",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1142,119 +1020,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 7,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"details": {
-						"prop_background_color": "RGB(200, 200, 200)"
-					},
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Memory of Thanatos",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "3",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 32,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Poring",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 1,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 44,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1276,12 +1055,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Deviling",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Anax",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1290,12 +1077,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1304,12 +1099,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 99,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 32,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1328,12 +1131,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Seiya",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Murderous Rider",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1342,12 +1153,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1356,119 +1175,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 45,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"details": {
-						"prop_background_color": "RGB(200, 200, 200)"
-					},
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Harry Potter",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 62,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 4,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 3,
-							"type": "col"
-						},
-						{
-							"value": 4,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "Goku",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 2,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "4",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
-								}
-							]
-						},
-						{
-							"value": 3,
-							"type": "col",
-							"nodes": [
-								{
-									"value": "R$ 77,00",
-									"type": "text",
-									"details": {
-										"prop_align": "C",
-										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 22,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1490,12 +1210,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Phreoni",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Gray Merchant of Asphodel",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1504,12 +1232,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1518,12 +1254,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 22,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 2,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1542,12 +1286,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Katheryn High Wizard",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Ajani's Pridemate",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1556,12 +1308,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1570,12 +1330,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 25,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 2,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1597,12 +1365,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Lord Seyren",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Renan, Chatuba",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1611,12 +1387,20 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "4",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1625,12 +1409,950 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 55,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 19,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Tymarett",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 13,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Doom Blade",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 5,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Dark Lord",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "3",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 7,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Memory of Thanatos",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "3",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 32,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Poring",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 1,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Deviling",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 99,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Seiya",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 45,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Harry Potter",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 62,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Goku",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 77,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Phreoni",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 22,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Katheryn High Wizard",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 25,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 4,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(200, 200, 200)"
+					},
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col"
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "Lord Seyren",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "4",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_font_size": 8
+									},
+									"nodes": [
+										{
+											"value": "R$ 55,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1649,14 +2371,23 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Total:",
 									"type": "text",
 									"details": {
 										"prop_align": "R",
 										"prop_font_size": 8,
 										"prop_font_style": "B",
 										"prop_top": 5
-									}
+									},
+									"nodes": [
+										{
+											"value": "Total:",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1665,14 +2396,23 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "R$ 2.567,00",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 8,
 										"prop_font_style": "B",
 										"prop_top": 5
-									}
+									},
+									"nodes": [
+										{
+											"value": "R$ 2.567,00",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 8,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1696,14 +2436,23 @@
 									}
 								},
 								{
-									"value": "5123.151231.512314.1251251.123215",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
 										"prop_font_size": 9,
 										"prop_font_style": "B",
 										"prop_top": 12
-									}
+									},
+									"nodes": [
+										{
+											"value": "5123.151231.512314.1251251.123215",
+											"type": "sub_text",
+											"details": {
+												"prop_font_size": 9,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						},
@@ -1732,7 +2481,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Tel: 55 024 12345-1234",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1740,10 +2488,20 @@
 										"prop_font_size": 8,
 										"prop_font_style": "BI",
 										"prop_top": 13
-									}
+									},
+									"nodes": [
+										{
+											"value": "Tel: 55 024 12345-1234",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(10, 10, 150)",
+												"prop_font_size": 8,
+												"prop_font_style": "BI"
+											}
+										}
+									]
 								},
 								{
-									"value": "www.mycompany.com",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1751,7 +2509,18 @@
 										"prop_font_size": 8,
 										"prop_font_style": "BI",
 										"prop_top": 16
-									}
+									},
+									"nodes": [
+										{
+											"value": "www.mycompany.com",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(10, 10, 150)",
+												"prop_font_size": 8,
+												"prop_font_style": "BI"
+											}
+										}
+									]
 								}
 							]
 						}

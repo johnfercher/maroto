@@ -37,8 +37,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row1",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row1",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -56,8 +61,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row2",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row2",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -75,8 +85,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row3",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row3",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -94,8 +109,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row4",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row4",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -113,8 +133,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row5",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row5",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -132,8 +157,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row6",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row6",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -151,8 +181,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row7",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row7",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -170,8 +205,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row8",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row8",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -204,8 +244,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page1 row9",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page1 row9",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -238,8 +283,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page2 row1",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page2 row1",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
@@ -272,8 +322,13 @@
 							},
 							"nodes": [
 								{
-									"value": "page3 row1",
-									"type": "text"
+									"type": "text",
+									"nodes": [
+										{
+											"value": "page3 row1",
+											"type": "sub_text"
+										}
+									]
 								}
 							]
 						}
