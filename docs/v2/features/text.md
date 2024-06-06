@@ -17,7 +17,7 @@ Different builders are offered to facilitate use, they are:
 * [constructor : NewRow](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/components/text#NewRow)
 * [constructor : NewCustomText](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/components/text#NewCustomText)
 
-In naughty texts can contain one or more styles, if your text does not need to mix several styles, you can use the constructors **New**, **NewCol** or **NewRow**; However, if you need to merge different styles, this can be done with the **NewCustomText** constructor, unlike the previous constructors, you will need to pass a list of [Sub texts](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/core/entity#SubText), each subtext will have its own [style](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/props#SubText)
+In Maroto, texts can contain one or more styles, if your text does not need to mix several styles, you can use the constructors **New**, **NewCol** or **NewRow**; However, if you need to merge different styles, this can be done with the **NewCustomText** constructor, unlike the previous constructors, you will need to pass a list of [Sub texts](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/core/entity#SubText), each subtext will have its own [style](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/props#SubText)
 
 
 ## Code Example
