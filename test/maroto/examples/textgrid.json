@@ -70,7 +70,7 @@
 					"type": "row",
 					"nodes": [
 						{
-							"value": 2,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -80,7 +80,7 @@
 							]
 						},
 						{
-							"value": 4,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -93,7 +93,7 @@
 							]
 						},
 						{
-							"value": 6,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -101,6 +101,19 @@
 									"type": "text",
 									"details": {
 										"prop_align": "R"
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Justify-aligned text",
+									"type": "text",
+									"details": {
+										"prop_align": "J"
 									}
 								}
 							]
@@ -131,7 +144,7 @@
 					"type": "row",
 					"nodes": [
 						{
-							"value": 2,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -146,7 +159,7 @@
 							]
 						},
 						{
-							"value": 4,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -160,7 +173,7 @@
 							]
 						},
 						{
-							"value": 6,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -169,6 +182,20 @@
 									"details": {
 										"prop_align": "R",
 										"prop_right": 3,
+										"prop_top": 3
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Justify-aligned text",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
 										"prop_top": 3
 									}
 								}
@@ -200,7 +227,7 @@
 					"type": "row",
 					"nodes": [
 						{
-							"value": 2,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -213,7 +240,7 @@
 							]
 						},
 						{
-							"value": 4,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -226,7 +253,7 @@
 							]
 						},
 						{
-							"value": 6,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -234,6 +261,18 @@
 									"type": "text",
 									"details": {
 										"prop_align": "R"
+									}
+								}
+							]
+						},{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J"
 									}
 								}
 							]
@@ -264,7 +303,7 @@
 					"type": "row",
 					"nodes": [
 						{
-							"value": 2,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -281,7 +320,7 @@
 							]
 						},
 						{
-							"value": 4,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -297,7 +336,7 @@
 							]
 						},
 						{
-							"value": 6,
+							"value": 3,
 							"type": "col",
 							"nodes": [
 								{
@@ -305,6 +344,21 @@
 									"type": "text",
 									"details": {
 										"prop_align": "R",
+										"prop_left": 3,
+										"prop_right": 3,
+										"prop_top": 3
+									}
+								}
+							]
+						},{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3

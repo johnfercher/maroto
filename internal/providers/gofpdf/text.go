@@ -3,6 +3,7 @@ package gofpdf
 import (
 	"fmt"
 	"strings"
+	"unicode"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -187,6 +188,33 @@ func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 		return
 	}
 
+	if textProp.Align == align.Justify {
+		const spaceString = " "
+		const emptyString = ""
+
+		text = strings.TrimRight(text, spaceString)
+		textNotSpaces := strings.ReplaceAll(text, spaceString, emptyString)
+		textWidth = s.pdf.GetStringWidth(textNotSpaces)
+		defaultSpaceWidth := s.pdf.GetStringWidth(spaceString)
+		words := strings.Fields(text)
+
+		numSpaces := max(len(words)-1, 1)
+		spaceWidth := (colWidth - textWidth) / float64(numSpaces)
+		x := xColOffset + left
+
+		if isIncorrectSpaceWidth(textWidth, spaceWidth, defaultSpaceWidth, textNotSpaces) {
+			spaceWidth = defaultSpaceWidth
+		}
+
+		for _, word := range words {
+			s.pdf.Text(x, yColOffset+top, word)
+			x += s.pdf.GetStringWidth(word) + spaceWidth
+		}
+
+		return
+
+	}
+
 	var modifier float64 = 2
 
 	if textProp.Align == align.Right {
@@ -213,4 +241,13 @@ func (s *text) textToUnicode(txt string, props *props.Text) string {
 	}
 
 	return txt
+}
+
+func isIncorrectSpaceWidth(textWidth, spaceWidth, defaultSpaceWidth float64, text string) bool {
+	if textWidth <= 0 || spaceWidth <= defaultSpaceWidth*10 {
+		return false
+	}
+
+	lastChar := rune(text[len(text)-1])
+	return !unicode.IsLetter(lastChar) && !unicode.IsNumber(lastChar)
 }
