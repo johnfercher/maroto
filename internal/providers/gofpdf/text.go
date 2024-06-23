@@ -205,10 +205,16 @@ func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 		if isIncorrectSpaceWidth(textWidth, spaceWidth, defaultSpaceWidth, textNotSpaces) {
 			spaceWidth = defaultSpaceWidth
 		}
-
+		initX := x
+		var finishX float64
 		for _, word := range words {
 			s.pdf.Text(x, yColOffset+top, word)
-			x += s.pdf.GetStringWidth(word) + spaceWidth
+			finishX = x + s.pdf.GetStringWidth(word)
+			x = finishX + spaceWidth
+		}
+
+		if textProp.Hyperlink != nil {
+			s.pdf.LinkString(initX, yColOffset+top-fontHeight, finishX-initX, fontHeight, *textProp.Hyperlink)
 		}
 
 		return
