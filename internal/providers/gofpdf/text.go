@@ -218,7 +218,6 @@ func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 		}
 
 		return
-
 	}
 
 	var modifier float64 = 2
