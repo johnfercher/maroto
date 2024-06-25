@@ -88,5 +88,12 @@ func GetMaroto() core.Maroto {
 
 	m.AddRows(text.NewRow(10, "text with hyperlink", props.Text{Hyperlink: &google}))
 
+	m.AddRow(45,
+		text.NewCol(2, longText, props.Text{Top: 3, Left: 3, Right: 3, Align: align.Justify, BreakLineStrategy: breakline.DashStrategy}),
+		text.NewCol(4, longText+" "+longText, props.Text{Top: 10, Left: 3, Right: 3, Align: align.Justify}),
+		text.NewCol(6, longText+" "+longText, props.Text{Hyperlink: &google, Top: 10, Left: 10, Right: 10, Align: align.Justify}),
+	)
+	m.AddRows(text.NewRow(10, "Justify-aligned text", props.Text{Align: align.Justify}))
+
 	return m
 }

@@ -366,6 +366,98 @@
 					]
 				}
 			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 45,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_breakline_strategy": "dash_strategy",
+										"prop_left": 3,
+										"prop_right": 3,
+										"prop_top": 3
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_left": 3,
+										"prop_right": 3,
+										"prop_top": 10
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_hyperlink": "https://google.com",
+										"prop_left": 10,
+										"prop_right": 10,
+										"prop_top": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Justify-aligned text" ,
+									"type": "text",
+									"details": {
+										"prop_align": "J"
+									}								}
+							]
+						}
+					]
+				},
+				{
+					"value": 211.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
 		}
 	]
 }
