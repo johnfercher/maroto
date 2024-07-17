@@ -48,6 +48,10 @@ func (g *provider) AddText(text string, cell *entity.Cell, prop *props.Text) {
 	g.text.Add(text, cell, prop)
 }
 
+func (g *provider) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {
+	return g.text.GetLinesQuantity(text, textProp, colWidth)
+}
+
 func (g *provider) GetTextHeight(prop *props.Font) float64 {
 	return g.font.GetHeight(prop.Family, prop.Style, prop.Size)
 }
