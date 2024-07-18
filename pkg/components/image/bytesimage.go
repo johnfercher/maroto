@@ -47,6 +47,13 @@ func NewFromBytesRow(height float64, bytes []byte, extension extension.Type, ps 
 	return row.New(height).Add(c)
 }
 
+// NewAutoFromBytesRow is responsible to create an instance of an Image wrapped in a automatic row.
+func NewAutoFromBytesRow(bytes []byte, extension extension.Type, ps ...props.Rect) core.Row {
+	image := NewFromBytes(bytes, extension, ps...)
+	c := col.New().Add(image)
+	return row.New().Add(c)
+}
+
 // Render renders an Image into a PDF context.
 func (b *BytesImage) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddImageFromBytes(b.bytes, cell, &b.prop, b.extension)
@@ -69,6 +76,17 @@ func (b *BytesImage) GetStructure() *node.Node[core.Structure] {
 	str.Details["bytes_size"] = len(b.bytes)
 
 	return node.New(str)
+}
+
+// GetHeight returns the height that the image will have in the PDF
+func (b *BytesImage) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	dimensions, err := provider.GetDimensionsByImageByte(b.bytes, b.extension)
+	if err != nil {
+		return 0
+	}
+	proportion := dimensions.Height / dimensions.Width
+	width := (b.prop.Percent / 100) * cell.Width
+	return proportion * width
 }
 
 // SetConfig sets the pdf config.

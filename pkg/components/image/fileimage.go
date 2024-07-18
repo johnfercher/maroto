@@ -44,6 +44,13 @@ func NewFromFileRow(height float64, path string, ps ...props.Rect) core.Row {
 	return row.New(height).Add(c)
 }
 
+// NewFromFileRow is responsible to create an instance of an Image wrapped in a automatic Row.
+func NewAutoFromFileRow(path string, ps ...props.Rect) core.Row {
+	image := NewFromFile(path, ps...)
+	c := col.New().Add(image)
+	return row.New().Add(c)
+}
+
 // Render renders an Image into a PDF context.
 func (f *FileImage) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddImageFromFile(f.path, cell, &f.prop)
@@ -58,6 +65,17 @@ func (f *FileImage) GetStructure() *node.Node[core.Structure] {
 	}
 
 	return node.New(str)
+}
+
+// GetHeight returns the height that the image will have in the PDF
+func (f *FileImage) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	dimensions, err := provider.GetDimensionsByImage(f.path)
+	if err != nil {
+		return 0.0
+	}
+	proportion := dimensions.Height / dimensions.Width
+	width := (f.prop.Percent / 100) * cell.Width
+	return proportion * width
 }
 
 // SetConfig sets the pdf config.

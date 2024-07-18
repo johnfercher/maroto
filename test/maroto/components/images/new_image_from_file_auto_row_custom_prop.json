@@ -1,0 +1,24 @@
+{
+	"value": 0,
+	"type": "row",
+	"nodes": [
+		{
+			"value": 0,
+			"type": "col",
+			"details": {
+				"is_max": true
+			},
+			"nodes": [
+				{
+					"value": "path",
+					"type": "fileImage",
+					"details": {
+						"prop_left": 10,
+						"prop_percent": 98,
+						"prop_top": 10
+					}
+				}
+			]
+		}
+	]
+}
