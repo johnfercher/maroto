@@ -61,6 +61,23 @@ func TestNewRow(t *testing.T) {
 	})
 }
 
+func TestNewAutoRow(t *testing.T) {
+	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		// Act
+		sut := line.NewAutoRow()
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("components/lines/new_line_auto_row_default_prop.json")
+	})
+	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		// Act
+		sut := line.NewAutoRow(fixture.LineProp())
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("components/lines/new_line_auto_row_custom_prop.json")
+	})
+}
+
 func TestLine_Render(t *testing.T) {
 	t.Run("should call provider correctly", func(t *testing.T) {
 		// Arrange
