@@ -9,8 +9,8 @@ import (
 
 // Math is the abstraction which deals with useful calc.
 type Math interface {
-	GetInnerCenterCell(inner *entity.Dimensions, outer *entity.Dimensions, percent float64) *entity.Cell
-	GetInnerNonCenterCell(inner *entity.Dimensions, outer *entity.Dimensions, prop *props.Rect) *entity.Cell
+	GetInnerCenterCell(inner *entity.Dimensions, outer *entity.Dimensions) *entity.Cell
+	Resize(inner *entity.Dimensions, outer *entity.Dimensions, percent float64, justReferenceWidth bool) *entity.Dimensions
 }
 
 // Code is the abstraction which deals of how to add QrCodes or Barcode in a PDF.

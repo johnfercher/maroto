@@ -2,7 +2,6 @@ package math
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type math struct{}
@@ -12,68 +11,46 @@ func New() *math {
 	return &math{}
 }
 
-// GetInnerCenterCell define a inner cell formatted inside outer cell centered.
-func (s *math) GetInnerCenterCell(inner *entity.Dimensions, outer *entity.Dimensions, percent float64) *entity.Cell {
+// Resize adjusts the internal dimension of an element to occupy a percentage of the available space
+//   - inner: The inner dimensions of the element
+//   - outer: The outer dimensions of the element
+//   - percent: The percentage of the external dimension that can be occupied
+//   - justReferenceWidth: Indicates whether resizing should be done only in relation to width or in relation to width and height
+func (s *math) Resize(inner *entity.Dimensions, outer *entity.Dimensions, percent float64, justReferenceWidth bool) *entity.Dimensions {
 	percent /= 100.0
 
 	innerProportion := inner.Height / inner.Width
 	outerProportion := outer.Height / outer.Width
 
-	innerCell := &entity.Cell{}
-	if innerProportion > outerProportion {
-		newInnerWidth := outer.Height / innerProportion * percent
-		newInnerHeight := newInnerWidth * innerProportion
+	newInnerWidth := 0.0
 
-		widthCorrection := s.GetCenterCorrection(outer.Width, newInnerWidth)
-		heightCorrection := s.GetCenterCorrection(outer.Height, newInnerHeight)
-
-		innerCell.X = widthCorrection
-		innerCell.Y = heightCorrection
-		innerCell.Width = newInnerWidth
-		innerCell.Height = newInnerHeight
+	if innerProportion > outerProportion && !justReferenceWidth {
+		newInnerWidth = outer.Height / innerProportion * percent
 	} else {
-		newInnerWidth := outer.Width * percent
-		newInnerHeight := newInnerWidth * innerProportion
-
-		widthCorrection := s.GetCenterCorrection(outer.Width, newInnerWidth)
-		heightCorrection := s.GetCenterCorrection(outer.Height, newInnerHeight)
-
-		innerCell.X = widthCorrection
-		innerCell.Y = heightCorrection
-		innerCell.Width = newInnerWidth
-		innerCell.Height = newInnerHeight
+		newInnerWidth = outer.Width * percent
 	}
 
-	return innerCell
+	newInnerHeight := newInnerWidth * innerProportion
+
+	if justReferenceWidth && newInnerHeight > outer.Height {
+		newInnerWidth = outer.Height / innerProportion * 1
+		newInnerHeight = newInnerWidth * innerProportion
+	}
+
+	return &entity.Dimensions{Width: newInnerWidth, Height: newInnerHeight}
 }
 
-// GetInnerNonCenterCell define a inner cell formatted inside outer cell non centered.
-func (s *math) GetInnerNonCenterCell(inner *entity.Dimensions, outer *entity.Dimensions, prop *props.Rect) *entity.Cell {
-	percent := prop.Percent / 100.0
+// GetInnerCenterCell define a inner cell formatted inside outer cell centered.
+func (s *math) GetInnerCenterCell(inner *entity.Dimensions, outer *entity.Dimensions) *entity.Cell {
+	widthCorrection := s.GetCenterCorrection(outer.Width, inner.Width)
+	heightCorrection := s.GetCenterCorrection(outer.Height, inner.Height)
 
-	innerProportion := inner.Height / inner.Width
-	outerProportion := outer.Height / outer.Width
-
-	innerCell := &entity.Cell{}
-	if innerProportion > outerProportion {
-		newInnerWidth := outer.Height / innerProportion * percent
-		newInnerHeight := newInnerWidth * innerProportion
-
-		innerCell.X = prop.Left
-		innerCell.Y = prop.Top
-		innerCell.Width = newInnerWidth
-		innerCell.Height = newInnerHeight
-	} else {
-		newInnerWidth := outer.Width * percent
-		newInnerHeight := newInnerWidth * innerProportion
-
-		innerCell.X = prop.Left
-		innerCell.Y = prop.Top
-		innerCell.Width = newInnerWidth
-		innerCell.Height = newInnerHeight
+	return &entity.Cell{
+		X:      widthCorrection,
+		Y:      heightCorrection,
+		Width:  inner.Width,
+		Height: inner.Height,
 	}
-
-	return innerCell
 }
 
 // GetCenterCorrection return the correction of space in X or Y to
