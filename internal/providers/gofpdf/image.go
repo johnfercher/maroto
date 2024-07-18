@@ -27,6 +27,21 @@ func NewImage(pdf gofpdfwrapper.Fpdf, math core.Math) *image {
 	}
 }
 
+// GetImageInfo is responsible for loading the image in PDF and returning its information
+func (s image) GetImageInfo(img *entity.Image, extension extension.Type) (*gofpdf.ImageInfoType, uuid.UUID) {
+	imageID, _ := uuid.NewRandom()
+
+	info := s.pdf.RegisterImageOptionsReader(
+		imageID.String(),
+		gofpdf.ImageOptions{
+			ReadDpi:   false,
+			ImageType: string(extension),
+		},
+		bytes.NewReader(img.Bytes),
+	)
+	return info, imageID
+}
+
 // Add use a byte array to add image to PDF.
 func (s *image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, extension extension.Type, flow bool,

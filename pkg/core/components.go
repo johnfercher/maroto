@@ -1,10 +1,12 @@
 package core
 
 import (
+	"github.com/google/uuid"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
+	"github.com/jung-kurt/gofpdf"
 )
 
 // Math is the abstraction which deals with useful calc.
@@ -23,6 +25,7 @@ type Code interface {
 // Image is the abstraction which deals of how to add images in a PDF.
 type Image interface {
 	Add(img *entity.Image, cell *entity.Cell, margins *entity.Margins, prop *props.Rect, extension extension.Type, flow bool) error
+	GetImageInfo(img *entity.Image, extension extension.Type) (*gofpdf.ImageInfoType, uuid.UUID)
 }
 
 type Line interface {
