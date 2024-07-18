@@ -38,6 +38,15 @@ func NewQrCol(size int, code string, ps ...props.Rect) core.Col {
 	return col.New(size).Add(qrCode)
 }
 
+// NewAutoMatrixRow is responsible to create an instance of a qrcode wrapped in a Row with automatic height.
+//   - code: The value that must be placed in the qrcode
+//   - ps: A set of settings that must be applied to the qrcode
+func NewAutoQrRow(code string, ps ...props.Rect) core.Row {
+	qrCode := NewQr(code, ps...)
+	c := col.New().Add(qrCode)
+	return row.New().Add(c)
+}
+
 // NewQrRow is responsible to create an instance of a QrCode wrapped in a Row.
 func NewQrRow(height float64, code string, ps ...props.Rect) core.Row {
 	qrCode := NewQr(code, ps...)
@@ -59,6 +68,17 @@ func (q *QrCode) GetStructure() *node.Node[core.Structure] {
 	}
 
 	return node.New(str)
+}
+
+// GetHeight returns the height that the QrCode will have in the PDF
+func (b *QrCode) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	dimensions, err := provider.GetDimensionsByQrCode(b.code)
+	if err != nil {
+		return 0
+	}
+	proportion := dimensions.Height / dimensions.Width
+	width := (b.prop.Percent / 100) * cell.Width
+	return proportion * width
 }
 
 // SetConfig set the config for the component.

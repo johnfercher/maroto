@@ -54,6 +54,16 @@ func NewBarRow(height float64, code string, ps ...props.Barcode) core.Row {
 	return row.New(height).Add(c)
 }
 
+// NewAutoBarRow is responsible to create an instance of a Barcode wrapped in a Row with automatic height.
+// using this method the col size will be automatically set to the maximum value
+//   - code: The value that must be placed in the barcode
+//   - ps: A set of settings that must be applied to the barcode
+func NewAutoBarRow(code string, ps ...props.Barcode) core.Row {
+	bar := NewBar(code, ps...)
+	c := col.New().Add(bar)
+	return row.New().Add(c)
+}
+
 // Render renders a Barcode into a PDF context. The maroto cal this methodo in process to
 // generate the pdf.
 //   - provider: Is the creator provider used to generate the pdf
@@ -71,6 +81,13 @@ func (b *Barcode) GetStructure() *node.Node[core.Structure] {
 	}
 
 	return node.New(str)
+}
+
+// GetHeight returns the height that the barcode will have in the PDF
+func (b *Barcode) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	proportion := b.prop.Proportion.Height / b.prop.Proportion.Width
+	width := (b.prop.Percent / 100) * cell.Width
+	return proportion * width
 }
 
 // SetConfig sets the configuration of a Barcode.

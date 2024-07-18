@@ -38,6 +38,15 @@ func NewMatrixCol(size int, code string, ps ...props.Rect) core.Col {
 	return col.New(size).Add(matrixCode)
 }
 
+// NewAutoMatrixRow is responsible to create an instance of a Matrix code wrapped in a Row with automatic height.
+//   - code: The value that must be placed in the matrixcode
+//   - ps: A set of settings that must be applied to the matrixcode
+func NewAutoMatrixRow(code string, ps ...props.Rect) core.Row {
+	matrixCode := NewMatrix(code, ps...)
+	c := col.New().Add(matrixCode)
+	return row.New().Add(c)
+}
+
 // NewMatrixRow is responsible to create an instance of a MatrixCode wrapped in a Row.
 func NewMatrixRow(height float64, code string, ps ...props.Rect) core.Row {
 	matrixCode := NewMatrix(code, ps...)
@@ -59,6 +68,17 @@ func (m *MatrixCode) GetStructure() *node.Node[core.Structure] {
 	}
 
 	return node.New(str)
+}
+
+// GetHeight returns the height that the code will have in the PDF
+func (b *MatrixCode) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	dimensions, err := provider.GetDimensionsByMatrixCode(b.code)
+	if err != nil {
+		return 0
+	}
+	proportion := dimensions.Height / dimensions.Width
+	width := (b.prop.Percent / 100) * cell.Width
+	return proportion * width
 }
 
 // SetConfig sets the configuration of a MatrixCode.
