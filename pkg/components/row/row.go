@@ -18,10 +18,15 @@ type Row struct {
 }
 
 // New is responsible to create a core.Row.
-// height is defined in mm.
-func New(height float64) core.Row {
+//
+// Height is an optional parameter that, if not sent, will be calculated automatically
+// Height is defined in mm.
+func New(height ...float64) core.Row {
+	if len(height) == 0 {
+		height = append(height, 0)
+	}
 	return &Row{
-		height: height,
+		height: height[0],
 	}
 }
 
@@ -36,6 +41,7 @@ func (r *Row) SetConfig(config *entity.Config) {
 // Add is responsible to add one or more core.Col to a core.Row.
 func (r *Row) Add(cols ...core.Col) core.Row {
 	r.cols = append(r.cols, cols...)
+	r.resetHeight()
 	return r
 }
 
@@ -44,8 +50,23 @@ func (r *Row) GetColumns() []core.Col {
 	return r.cols
 }
 
+// Returns the height of the row content
+func (r *Row) getBiggestCol(provider core.Provider, cell *entity.Cell) float64 {
+	greaterHeight := 0.0
+	for _, col := range r.cols {
+		height := col.GetHeight(provider, cell)
+		if greaterHeight < height {
+			greaterHeight = height
+		}
+	}
+	return greaterHeight
+}
+
 // GetHeight returns the height of a core.Row.
-func (r *Row) GetHeight() float64 {
+func (r *Row) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	if r.height == 0 {
+		r.height = r.getBiggestCol(provider, cell)
+	}
 	return r.height
 }
 
@@ -71,7 +92,7 @@ func (r *Row) GetStructure() *node.Node[core.Structure] {
 
 // Render renders a Row into a PDF context.
 func (r *Row) Render(provider core.Provider, cell entity.Cell) {
-	cell.Height = r.height
+	cell.Height = r.GetHeight(provider, &cell)
 	innerCell := cell.Copy()
 
 	if r.style != nil {
@@ -98,4 +119,9 @@ func (r *Row) Render(provider core.Provider, cell entity.Cell) {
 func (r *Row) WithStyle(style *props.Cell) core.Row {
 	r.style = style
 	return r
+}
+
+// resetHeight resets the line height to 0
+func (r *Row) resetHeight() {
+	r.height = 0
 }

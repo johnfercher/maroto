@@ -120,3 +120,31 @@ func TestCol_Render(t *testing.T) {
 		component.AssertNumberOfCalls(t, "SetConfig", 1)
 	})
 }
+
+func TestCol_GetHeight(t *testing.T) {
+	t.Run("when column has two components, should return the largest", func(t *testing.T) {
+		// Arrange
+		cell := fixture.CellEntity()
+		cfg := &entity.Config{MaxGridSize: 12}
+
+		provider := mocks.NewProvider(t)
+
+		component := mocks.NewComponent(t)
+		component.EXPECT().GetHeight(provider, &cell).Return(10.0)
+		component.EXPECT().SetConfig(cfg)
+
+		component2 := mocks.NewComponent(t)
+		component2.EXPECT().GetHeight(provider, &cell).Return(15.0)
+		component2.EXPECT().SetConfig(cfg)
+
+		sut := col.New(12).Add(component, component2)
+		sut.SetConfig(cfg)
+		// Act
+		height := sut.GetHeight(provider, &cell)
+
+		// Assert
+
+		component.AssertNumberOfCalls(t, "GetHeight", 1)
+		assert.Equal(t, height, 15.0)
+	})
+}

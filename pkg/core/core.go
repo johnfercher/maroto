@@ -41,6 +41,7 @@ type Node interface {
 type Component interface {
 	Node
 	Render(provider Provider, cell *entity.Cell)
+	GetHeight(provider Provider, cell *entity.Cell) float64
 }
 
 // Col is the interface that wraps the basic methods of a col.
@@ -48,6 +49,7 @@ type Col interface {
 	Node
 	Add(components ...Component) Col
 	GetSize() int
+	GetHeight(provider Provider, cell *entity.Cell) float64
 	WithStyle(style *props.Cell) Col
 	Render(provider Provider, cell entity.Cell, createCell bool)
 }
@@ -56,7 +58,7 @@ type Col interface {
 type Row interface {
 	Node
 	Add(cols ...Col) Row
-	GetHeight() float64
+	GetHeight(provider Provider, cell *entity.Cell) float64
 	GetColumns() []Col
 	WithStyle(style *props.Cell) Row
 	Render(provider Provider, cell entity.Cell)
