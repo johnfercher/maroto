@@ -11,10 +11,11 @@ import (
 )
 
 type Row struct {
-	height float64
-	cols   []core.Col
-	style  *props.Cell
-	config *entity.Config
+	height     float64
+	autoHeight bool
+	cols       []core.Col
+	style      *props.Cell
+	config     *entity.Config
 }
 
 // New is responsible to create a core.Row.
@@ -22,11 +23,14 @@ type Row struct {
 // Height is an optional parameter that, if not sent, will be calculated automatically
 // Height is defined in mm.
 func New(height ...float64) core.Row {
+	autoHeight := false
 	if len(height) == 0 {
 		height = append(height, 0)
+		autoHeight = true
 	}
 	return &Row{
-		height: height[0],
+		height:     height[0],
+		autoHeight: autoHeight,
 	}
 }
 
@@ -41,7 +45,9 @@ func (r *Row) SetConfig(config *entity.Config) {
 // Add is responsible to add one or more core.Col to a core.Row.
 func (r *Row) Add(cols ...core.Col) core.Row {
 	r.cols = append(r.cols, cols...)
-	r.resetHeight()
+	if r.autoHeight {
+		r.resetHeight()
+	}
 	return r
 }
 
