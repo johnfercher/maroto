@@ -53,7 +53,7 @@ func TestPage_Render(t *testing.T) {
 		provider := mocks.NewProvider(t)
 		row := mocks.NewRow(t)
 		row.EXPECT().Render(provider, cell)
-		row.EXPECT().GetHeight().Return(10.0)
+		row.EXPECT().GetHeight(provider, &cell).Return(10.0)
 		row.EXPECT().SetConfig(cfg)
 
 		sut := page.New(prop)
@@ -67,6 +67,7 @@ func TestPage_Render(t *testing.T) {
 		row.AssertNumberOfCalls(t, "Render", 1)
 		row.AssertNumberOfCalls(t, "GetHeight", 1)
 	})
+
 	t.Run("when there is background image and there is no page pattern, should call row render and provider correctly", func(t *testing.T) {
 		// Arrange
 		cell := fixture.CellEntity()
@@ -86,7 +87,7 @@ func TestPage_Render(t *testing.T) {
 		provider.EXPECT().AddBackgroundImageFromBytes(cfg.BackgroundImage.Bytes, &cell, rectProp, cfg.BackgroundImage.Extension)
 		row := mocks.NewRow(t)
 		row.EXPECT().Render(provider, cell)
-		row.EXPECT().GetHeight().Return(10.0)
+		row.EXPECT().GetHeight(provider, &cell).Return(10.0)
 		row.EXPECT().SetConfig(cfg)
 
 		sut := page.New(prop)
@@ -120,7 +121,7 @@ func TestPage_Render(t *testing.T) {
 		provider.EXPECT().AddText("0 / 0", &cell, prop.GetNumberTextProp(cell.Height))
 		row := mocks.NewRow(t)
 		row.EXPECT().Render(provider, cell)
-		row.EXPECT().GetHeight().Return(10.0)
+		row.EXPECT().GetHeight(provider, &cell).Return(10.0)
 		row.EXPECT().SetConfig(cfg)
 
 		sut := page.New(prop)

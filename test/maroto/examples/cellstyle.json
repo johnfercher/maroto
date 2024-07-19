@@ -39,7 +39,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -63,7 +65,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -87,7 +91,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -127,6 +133,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -143,6 +152,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -159,6 +171,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -201,7 +216,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -225,7 +242,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -249,7 +268,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -290,6 +311,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -306,6 +330,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -322,6 +349,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -364,7 +394,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -388,7 +420,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -412,7 +446,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -453,6 +489,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -469,6 +508,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -485,6 +527,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -527,7 +572,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -551,7 +598,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -575,7 +624,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -616,6 +667,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -632,6 +686,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -648,6 +705,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -690,7 +750,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -714,7 +776,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -738,7 +802,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -779,6 +845,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -795,6 +864,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -811,6 +883,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -853,7 +928,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -877,7 +954,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -901,7 +980,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -942,6 +1023,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -958,6 +1042,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -974,6 +1061,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1016,7 +1106,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1040,7 +1132,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1064,7 +1158,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1119,6 +1215,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1135,6 +1234,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1151,6 +1253,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1193,7 +1298,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1217,7 +1324,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1241,7 +1350,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1282,6 +1393,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1298,6 +1412,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1314,6 +1431,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1356,7 +1476,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1380,7 +1502,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1404,7 +1528,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1445,6 +1571,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1461,6 +1590,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1477,6 +1609,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1519,7 +1654,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1543,7 +1680,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1567,7 +1706,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1608,6 +1749,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1624,6 +1768,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1640,6 +1787,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1682,7 +1832,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1706,7 +1858,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1730,7 +1884,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1771,6 +1927,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1787,6 +1946,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1803,6 +1965,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1845,7 +2010,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1869,7 +2036,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1893,7 +2062,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1934,6 +2105,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1950,6 +2124,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -1966,6 +2143,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2008,7 +2188,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2032,7 +2214,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2056,7 +2240,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2096,6 +2282,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2112,6 +2301,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2128,6 +2320,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2185,7 +2380,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2209,7 +2406,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2233,7 +2432,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2274,6 +2475,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2290,6 +2494,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2306,6 +2513,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2348,7 +2558,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2372,7 +2584,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2396,7 +2610,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2437,6 +2653,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2453,6 +2672,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2
@@ -2469,6 +2691,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_font_style": "B",
 										"prop_top": 2

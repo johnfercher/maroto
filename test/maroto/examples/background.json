@@ -47,6 +47,10 @@
 									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
 									"type": "text",
 									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 18
 									}
 								}
@@ -135,6 +139,10 @@
 									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
 									"type": "text",
 									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 18
 									}
 								}
@@ -223,6 +231,10 @@
 									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
 									"type": "text",
 									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 18
 									}
 								}
@@ -311,6 +323,10 @@
 									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
 									"type": "text",
 									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 18
 									}
 								}
@@ -399,6 +415,10 @@
 									"value": "O GDG-Petrópolis certifica que Fulano de Tal 123 participou do Evento Exemplo 123 no dia 2019-03-30.",
 									"type": "text",
 									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 18
 									}
 								}

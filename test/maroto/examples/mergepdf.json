@@ -37,7 +37,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -56,7 +63,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -75,7 +89,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -94,7 +115,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -113,7 +141,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -132,7 +167,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -151,7 +193,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -170,7 +219,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -189,7 +245,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -208,7 +271,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -227,7 +297,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -246,7 +323,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -265,269 +349,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 6.997500000000002,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 12,
-							"type": "col"
-						}
-					]
-				}
-			]
-		},
-		{
-			"type": "page",
-			"nodes": [
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
-								}
-							]
-						}
-					]
-				},
-				{
-					"value": 20,
-					"type": "row",
-					"nodes": [
-						{
-							"value": 0,
-							"type": "col",
-							"details": {
-								"is_max": true
-							},
-							"nodes": [
-								{
-									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -561,7 +390,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -580,7 +416,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -599,7 +442,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -618,7 +468,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -637,7 +494,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -656,7 +520,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -675,7 +546,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -694,7 +572,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -713,7 +598,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -732,7 +624,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -751,7 +650,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -770,7 +676,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -789,7 +702,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -823,7 +743,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -842,7 +769,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -861,7 +795,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -880,7 +821,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -899,7 +847,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -918,7 +873,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -937,7 +899,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -956,7 +925,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -975,7 +951,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -994,7 +977,14 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -1013,7 +1003,367 @@
 							"nodes": [
 								{
 									"value": "content",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6.997500000000002,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "content",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
