@@ -1,0 +1,26 @@
+{
+	"value": 0,
+	"type": "row",
+	"nodes": [
+		{
+			"value": 0,
+			"type": "col",
+			"details": {
+				"is_max": true
+			},
+			"nodes": [
+				{
+					"value": "signature",
+					"type": "signature",
+					"details": {
+						"prop_font_family": "arial",
+						"prop_font_size": 8,
+						"prop_font_style": "B",
+						"prop_line_style": "solid",
+						"prop_line_thickness": 0.2
+					}
+				}
+			]
+		}
+	]
+}

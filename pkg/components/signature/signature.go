@@ -46,11 +46,16 @@ func NewRow(height float64, value string, ps ...props.Signature) core.Row {
 	return row.New(height).Add(c)
 }
 
+// NewRow is responsible to create an instance of a Signature wrapped in a automatic Row.
+func NewAutoRow(value string, ps ...props.Signature) core.Row {
+	signature := New(value, ps...)
+	c := col.New().Add(signature)
+	return row.New().Add(c)
+}
+
 // Render renders a Signature into a PDF context.
 func (s *Signature) Render(provider core.Provider, cell *entity.Cell) {
-	fontProp := s.prop.ToFontProp()
-	safePadding := 1.5
-	fontSize := provider.GetTextHeight(fontProp) * safePadding
+	fontSize := provider.GetTextHeight(s.prop.ToFontProp()) * s.prop.SafePadding
 
 	textProp := s.prop.ToTextProp(align.Center, cell.Height-fontSize, 0)
 
@@ -69,6 +74,11 @@ func (s *Signature) GetStructure() *node.Node[core.Structure] {
 	}
 
 	return node.New(str)
+}
+
+// GetHeight returns the height that the signature will have in the PDF
+func (s *Signature) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	return s.prop.LineThickness + provider.GetTextHeight(s.prop.ToFontProp())*s.prop.SafePadding
 }
 
 // SetConfig sets the config.
