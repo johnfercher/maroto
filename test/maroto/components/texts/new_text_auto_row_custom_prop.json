@@ -1,0 +1,31 @@
+{
+	"value": 0,
+	"type": "row",
+	"nodes": [
+		{
+			"value": 0,
+			"type": "col",
+			"details": {
+				"is_max": true
+			},
+			"nodes": [
+				{
+					"value": "code",
+					"type": "text",
+					"details": {
+						"prop_align": "R",
+						"prop_breakline_strategy": "dash_strategy",
+						"prop_color": "RGB(100, 50, 200)",
+						"prop_font_family": "helvetica",
+						"prop_font_size": 14,
+						"prop_font_style": "B",
+						"prop_hyperlink": "https://www.google.com",
+						"prop_left": 3,
+						"prop_top": 12,
+						"prop_vertical_padding": 20
+					}
+				}
+			]
+		}
+	]
+}

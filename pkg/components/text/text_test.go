@@ -7,7 +7,9 @@ import (
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/test"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNew(t *testing.T) {
@@ -61,6 +63,23 @@ func TestNewRow(t *testing.T) {
 	})
 }
 
+func TestNewAutoRow(t *testing.T) {
+	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		// Act
+		sut := text.NewAutoRow("code")
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_auto_row_default_prop.json")
+	})
+	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		// Act
+		sut := text.NewAutoRow("code", fixture.TextProp())
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_auto_row_custom_prop.json")
+	})
+}
+
 func TestText_Render(t *testing.T) {
 	t.Run("should call provider correctly", func(t *testing.T) {
 		// Arrange
@@ -92,5 +111,24 @@ func TestText_SetConfig(t *testing.T) {
 
 		// Act
 		sut.SetConfig(cfg)
+	})
+}
+
+func TestText_GetHeight(t *testing.T) {
+
+	t.Run("When text has a height of 22, should return 22", func(t *testing.T) {
+		cell := fixture.CellEntity()
+		textProp := fixture.TextProp()
+		font := props.Font{Family: textProp.Family, Style: textProp.Style, Size: textProp.Size, Color: textProp.Color}
+
+		sut := text.New("text", textProp)
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetLinesQuantity("text", &textProp, 97.0).Return(5.0)
+		provider.EXPECT().GetTextHeight(&font).Return(2.0)
+
+		// Act
+		height := sut.GetHeight(provider, &cell)
+		assert.Equal(t, 22.0, height)
 	})
 }
