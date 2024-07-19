@@ -75,7 +75,7 @@ func (f *FileImage) GetHeight(provider core.Provider, cell *entity.Cell) float64
 	}
 	proportion := dimensions.Height / dimensions.Width
 	width := (f.prop.Percent / 100) * cell.Width
-	return proportion * width
+	return (proportion * width) + f.prop.Top
 }
 
 // SetConfig sets the pdf config.
