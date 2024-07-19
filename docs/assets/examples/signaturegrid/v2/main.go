@@ -61,5 +61,11 @@ func GetMaroto() core.Maroto {
 		signature.NewCol(4, "Signature 9", props.Signature{LineThickness: 0.5}),
 	)
 
+	m.AddAutoRow(
+		signature.NewCol(4, "Signature 7", props.Signature{LineColor: &props.RedColor}),
+		signature.NewCol(4, "Signature 8", props.Signature{LineStyle: linestyle.Dashed}),
+		signature.NewCol(4, "Signature 9", props.Signature{LineThickness: 0.5}),
+	)
+
 	return m
 }

@@ -71,5 +71,10 @@ func GetMaroto() core.Maroto {
 		line.NewCol(6, props.Line{Color: &props.RedColor, Style: linestyle.Dashed, Thickness: 0.8, Orientation: orientation.Horizontal, OffsetPercent: 40, SizePercent: 40}),
 	)
 
+	m.AddAutoRow(
+		line.NewCol(2, props.Line{Style: linestyle.Dashed}),
+		line.NewCol(4, props.Line{Color: &props.RedColor, Style: linestyle.Dashed, Thickness: 0.8, Orientation: orientation.Vertical, OffsetPercent: 70, SizePercent: 70}),
+		line.NewCol(6, props.Line{Color: &props.RedColor, Style: linestyle.Dashed, Thickness: 0.8, Orientation: orientation.Horizontal, OffsetPercent: 40, SizePercent: 40}),
+	)
 	return m
 }

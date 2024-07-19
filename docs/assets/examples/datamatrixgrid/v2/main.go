@@ -93,5 +93,22 @@ func GetMaroto() core.Maroto {
 		}),
 	)
 
+	m.AddAutoRow(
+		code.NewMatrixCol(6, "https://github.com/johnfercher/maroto", props.Rect{
+			Center:             true,
+			Percent:            20,
+			JustReferenceWidth: true,
+		}),
+		code.NewMatrixCol(4, "https://github.com/johnfercher/maroto", props.Rect{
+			Center:             true,
+			Percent:            75,
+			JustReferenceWidth: true,
+		}),
+		code.NewMatrixCol(2, "https://github.com/johnfercher/maroto", props.Rect{
+			Center:             true,
+			Percent:            100,
+			JustReferenceWidth: true,
+		}),
+	)
 	return m
 }

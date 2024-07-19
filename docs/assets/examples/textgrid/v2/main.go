@@ -95,5 +95,14 @@ func GetMaroto() core.Maroto {
 	)
 	m.AddRows(text.NewRow(10, "Justify-aligned text", props.Text{Align: align.Justify}))
 
+	m.AddAutoRow(
+		text.NewCol(2, longText, props.Text{Top: 0, Left: 3, Right: 3, Align: align.Justify, BreakLineStrategy: breakline.DashStrategy}),
+		text.NewCol(4, longText+" "+longText, props.Text{Top: 0, Left: 3, Right: 3, Align: align.Justify}),
+		text.NewCol(6, longText+" "+longText+" "+longText, props.Text{Hyperlink: &google, Top: 0, Left: 10, Right: 10, Align: align.Justify}),
+	)
+
+	m.AddAutoRow(
+		text.NewCol(12, longText+" "+longText+" "+longText, props.Text{Top: 15, Left: 3, Right: 3, Align: align.Justify, BreakLineStrategy: breakline.EmptySpaceStrategy}),
+	)
 	return m
 }

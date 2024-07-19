@@ -128,6 +128,39 @@ func GetMaroto() core.Maroto {
 			Percent: 80,
 		}),
 	)
+	m.AddAutoRow(
+		image.NewFromFileCol(4, "docs/assets/images/frontpage.png", props.Rect{
+			Center:             true,
+			Percent:            20,
+			JustReferenceWidth: true,
+		}),
+		image.NewFromFileCol(8, "docs/assets/images/frontpage.png", props.Rect{
+			Center:             true,
+			Percent:            30,
+			JustReferenceWidth: true,
+		}),
+	)
 
+	m.AddAutoRow(
+		image.NewFromFileCol(2, "docs/assets/images/biplane.jpg", props.Rect{
+			Center:             false,
+			Percent:            50,
+			Left:               10,
+			JustReferenceWidth: true,
+		}),
+		image.NewFromFileCol(4, "docs/assets/images/biplane.jpg", props.Rect{
+			Center:             false,
+			Percent:            50,
+			Top:                10,
+			JustReferenceWidth: true,
+		}),
+		image.NewFromFileCol(6, "docs/assets/images/biplane.jpg", props.Rect{
+			Center:             false,
+			Percent:            50,
+			Left:               15,
+			Top:                15,
+			JustReferenceWidth: true,
+		}),
+	)
 	return m
 }
