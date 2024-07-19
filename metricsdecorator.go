@@ -9,14 +9,15 @@ import (
 )
 
 type MetricsDecorator struct {
-	addRowsTime   []*metrics.Time
-	addRowTime    []*metrics.Time
-	addPageTime   []*metrics.Time
-	headerTime    *metrics.Time
-	footerTime    *metrics.Time
-	generateTime  *metrics.Time
-	structureTime *metrics.Time
-	inner         core.Maroto
+	addRowsTime    []*metrics.Time
+	addRowTime     []*metrics.Time
+	addAutoRowTime []*metrics.Time
+	addPageTime    []*metrics.Time
+	headerTime     *metrics.Time
+	footerTime     *metrics.Time
+	generateTime   *metrics.Time
+	structureTime  *metrics.Time
+	inner          core.Maroto
 }
 
 // NewMetricsDecorator is responsible to create the metrics decorator
@@ -84,6 +85,17 @@ func (m *MetricsDecorator) AddRow(rowHeight float64, cols ...core.Col) core.Row 
 	})
 
 	m.addRowTime = append(m.addRowTime, timeSpent)
+	return r
+}
+
+// AddRow decorates the AddRow method of maroto instance.
+func (m *MetricsDecorator) AddAutoRow(cols ...core.Col) core.Row {
+	var r core.Row
+	timeSpent := time.GetTimeSpent(func() {
+		r = m.inner.AddAutoRow(cols...)
+	})
+
+	m.addAutoRowTime = append(m.addAutoRowTime, timeSpent)
 	return r
 }
 

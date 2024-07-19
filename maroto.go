@@ -112,6 +112,15 @@ func (m *Maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	return r
 }
 
+// AddAutoRow is responsible for adding a line with automatic height to the
+// current document.
+// The row height will be calculated based on its content.
+func (m *Maroto) AddAutoRow(cols ...core.Col) core.Row {
+	r := row.New().Add(cols...)
+	m.addRow(r)
+	return r
+}
+
 // FitlnCurrentPage is responsible to validating whether a line fits on
 // the current page.
 func (m *Maroto) FitlnCurrentPage(heightNewLine float64) bool {
