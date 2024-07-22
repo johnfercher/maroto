@@ -57,7 +57,7 @@ func (g *provider) AddLine(cell *entity.Cell, prop *props.Line) {
 }
 
 func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {
-	image, err := g.cache.GetImage(code, extension.Jpg)
+	image, err := g.cache.GetImage(code, extension.Png)
 	if err != nil {
 		image, err = g.code.GenDataMatrix(code)
 	}
@@ -67,7 +67,7 @@ func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rec
 	}
 
 	g.cache.AddImage(code, image)
-	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Jpg, false)
+	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Png, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add matrixcode to document", cell, merror.DefaultErrorText)
@@ -75,7 +75,7 @@ func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rec
 }
 
 func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
-	image, err := g.cache.GetImage(code, extension.Jpg)
+	image, err := g.cache.GetImage(code, extension.Png)
 	if err != nil {
 		image, err = g.code.GenQr(code)
 	}
@@ -85,7 +85,7 @@ func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 	}
 
 	g.cache.AddImage(code, image)
-	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Jpg, false)
+	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Png, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add qrcode to document", cell, merror.DefaultErrorText)
@@ -93,7 +93,7 @@ func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 }
 
 func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcode) {
-	image, err := g.cache.GetImage(g.getBarcodeImageName(code, prop), extension.Jpg)
+	image, err := g.cache.GetImage(g.getBarcodeImageName(code, prop), extension.Png)
 	if err != nil {
 		image, err = g.code.GenBar(code, cell, prop)
 	}
@@ -103,7 +103,7 @@ func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcod
 	}
 
 	g.cache.AddImage(g.getBarcodeImageName(code, prop), image)
-	err = g.image.Add(image, cell, g.cfg.Margins, prop.ToRectProp(), extension.Jpg, false)
+	err = g.image.Add(image, cell, g.cfg.Margins, prop.ToRectProp(), extension.Png, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add barcode to document", cell, merror.DefaultErrorText)
