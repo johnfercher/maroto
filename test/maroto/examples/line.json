@@ -294,7 +294,63 @@
 					]
 				},
 				{
-					"value": 66.9975,
+					"value": 0.8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "line",
+									"details": {
+										"prop_offset_percent": 5,
+										"prop_orientation": "horizontal",
+										"prop_size_percent": 90,
+										"prop_style": "dashed",
+										"prop_thickness": 0.2
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "line",
+									"details": {
+										"prop_color": "RGB(255, 0, 0)",
+										"prop_offset_percent": 70,
+										"prop_orientation": "vertical",
+										"prop_size_percent": 70,
+										"prop_style": "dashed",
+										"prop_thickness": 0.8
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "line",
+									"details": {
+										"prop_color": "RGB(255, 0, 0)",
+										"prop_offset_percent": 40,
+										"prop_orientation": "horizontal",
+										"prop_size_percent": 40,
+										"prop_style": "dashed",
+										"prop_thickness": 0.8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 66.19749999999999,
 					"type": "row",
 					"nodes": [
 						{
