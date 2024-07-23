@@ -223,7 +223,6 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		cache.AssertNumberOfCalls(t, "AddImage", 0)
 		image.AssertNumberOfCalls(t, "Add", 1)
 	})
-
 }
 
 // nolint: dupl
@@ -899,6 +898,7 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 	})
 }
 
+// nolint: dupl
 func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 	t.Run("when cannot find image on cache and cannot generate data matrix, should return error", func(t *testing.T) {
 		// Arrange
@@ -924,7 +924,6 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 		code.AssertNumberOfCalls(t, "GenDataMatrix", 1)
 		assert.Nil(t, dimensions)
 		assert.NotNil(t, err)
-
 	})
 
 	t.Run("when cannot find image on cache but can generate data matrix, should return dimension", func(t *testing.T) {
@@ -969,7 +968,7 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 		assert.Nil(t, err)
 	})
 
-	t.Run("when can find image on cache, should return dimension", func(t *testing.T) {
+	t.Run("when can find matrix on cache, should return dimension", func(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
@@ -977,14 +976,7 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 
 		code := mocks.NewCode(t)
 
-		cfg := &entity.Config{
-			Margins: &entity.Margins{
-				Left:   10,
-				Top:    10,
-				Right:  10,
-				Bottom: 10,
-			},
-		}
+		cfg := &entity.Config{Margins: &entity.Margins{Left: 10, Top: 10, Right: 10, Bottom: 10}}
 
 		image := mocks.NewImage(t)
 		image.EXPECT().GetImageInfo(img, extension.Jpg).Return(&gpdf.ImageInfoType{}, uuid.UUID{})
@@ -1009,9 +1001,9 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 	})
 }
 
+// nolint: dupl
 func TestProvider_GetDimensionsByQrCode(t *testing.T) {
-
-	t.Run("when cannot find image on cache and cannot generate data matrix, should return error", func(t *testing.T) {
+	t.Run("when cannot find image on cache and cannot generate qrCode, should return error", func(t *testing.T) {
 		// Arrange
 
 		cache := mocks.NewCache(t)
@@ -1035,10 +1027,9 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 		code.AssertNumberOfCalls(t, "GenQr", 1)
 		assert.Nil(t, dimensions)
 		assert.NotNil(t, err)
-
 	})
 
-	t.Run("when cannot find image on cache but can generate data matrix, should return dimension", func(t *testing.T) {
+	t.Run("when cannot find image on cache but can generate qrCode, should return dimension", func(t *testing.T) {
 		// Arrange
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
@@ -1080,7 +1071,7 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 		assert.Nil(t, err)
 	})
 
-	t.Run("when can find image on cache, should return dimension", func(t *testing.T) {
+	t.Run("when can find qrCode on cache, should return dimension", func(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
@@ -1114,13 +1105,12 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 
 		// Assert
 		cache.AssertNumberOfCalls(t, "GetImage", 1)
-		code.AssertNumberOfCalls(t, "GenQr", 0)
 		assert.NotNil(t, dimensions)
 		assert.Nil(t, err)
 	})
-
 }
 
+// nolint: dupl
 func TestProvider_GetDimensionsByImage(t *testing.T) {
 	t.Run("when cannot find image on cache and cannot load image, should return error", func(t *testing.T) {
 		// Arrange
@@ -1172,11 +1162,10 @@ func TestProvider_GetDimensionsByImage(t *testing.T) {
 		assert.Nil(t, err)
 		assert.NotNil(t, dimensions)
 	})
-
 }
 
+// nolint: dupl
 func TestProvider_GetDimensionsByImageByte(t *testing.T) {
-
 	t.Run("when invalid format is sent, should return an error", func(t *testing.T) {
 		// Arrange
 		dep := &gofpdf.Dependencies{}
@@ -1213,7 +1202,6 @@ func TestProvider_GetDimensionsByImageByte(t *testing.T) {
 		assert.Nil(t, err)
 		assert.NotNil(t, dimensions)
 	})
-
 }
 
 /*func TestProvider_AddImageFromFile(t *testing.T) {

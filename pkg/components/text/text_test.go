@@ -115,7 +115,6 @@ func TestText_SetConfig(t *testing.T) {
 }
 
 func TestText_GetHeight(t *testing.T) {
-
 	t.Run("When text has a height of 22, should return 22", func(t *testing.T) {
 		cell := fixture.CellEntity()
 		textProp := fixture.TextProp()

@@ -115,12 +115,18 @@ func TestSignature_SetConfig(t *testing.T) {
 }
 
 func TestSignature_GetHeight(t *testing.T) {
-
 	t.Run("When signature has a height of 10, should return 10", func(t *testing.T) {
 		cell := fixture.CellEntity()
 		font := fixture.FontProp()
 
-		sut := signature.New("signature", props.Signature{SafePadding: 1, FontFamily: font.Family, FontStyle: font.Style, FontSize: font.Size, FontColor: font.Color, LineThickness: 2})
+		sut := signature.New("signature",
+			props.Signature{
+				SafePadding: 1,
+				FontFamily:  font.Family,
+				FontStyle:   font.Style,
+				FontSize:    font.Size, FontColor: font.Color,
+				LineThickness: 2,
+			})
 
 		provider := mocks.NewProvider(t)
 		provider.EXPECT().GetTextHeight(&font).Return(5.0)

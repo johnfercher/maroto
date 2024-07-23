@@ -95,7 +95,7 @@ func (c *Col) WithStyle(style *props.Cell) core.Col {
 func (c *Col) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
 	innerCell := cell.Copy()
 	percent := float64(c.GetSize()) / float64(c.config.MaxGridSize)
-	innerCell.Width = innerCell.Width * percent
+	innerCell.Width *= percent
 
 	greaterHeight := 0.0
 	for _, component := range c.components {

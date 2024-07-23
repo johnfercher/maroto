@@ -71,13 +71,13 @@ func (q *QrCode) GetStructure() *node.Node[core.Structure] {
 }
 
 // GetHeight returns the height that the QrCode will have in the PDF
-func (b *QrCode) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
-	dimensions, err := provider.GetDimensionsByQrCode(b.code)
+func (q *QrCode) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	dimensions, err := provider.GetDimensionsByQrCode(q.code)
 	if err != nil {
 		return 0
 	}
 	proportion := dimensions.Height / dimensions.Width
-	width := (b.prop.Percent / 100) * cell.Width
+	width := (q.prop.Percent / 100) * cell.Width
 	return proportion * width
 }
 

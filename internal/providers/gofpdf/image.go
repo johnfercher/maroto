@@ -68,7 +68,11 @@ func (s *image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margin
 func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, flow bool,
 ) {
-	dimensions := s.math.Resize(&entity.Dimensions{Width: info.Width(), Height: info.Height()}, cell.GetDimensions(), prop.Percent, prop.JustReferenceWidth)
+	dimensions := s.math.Resize(&entity.Dimensions{
+		Width:  info.Width(),
+		Height: info.Height(),
+	}, cell.GetDimensions(), prop.Percent, prop.JustReferenceWidth)
+
 	rectCell := &entity.Cell{X: prop.Left, Y: prop.Top, Width: dimensions.Width, Height: dimensions.Height}
 
 	if prop.Center {

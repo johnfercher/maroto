@@ -71,13 +71,13 @@ func (m *MatrixCode) GetStructure() *node.Node[core.Structure] {
 }
 
 // GetHeight returns the height that the code will have in the PDF
-func (b *MatrixCode) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
-	dimensions, err := provider.GetDimensionsByMatrixCode(b.code)
+func (m *MatrixCode) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	dimensions, err := provider.GetDimensionsByMatrixCode(m.code)
 	if err != nil {
 		return 0
 	}
 	proportion := dimensions.Height / dimensions.Width
-	width := (b.prop.Percent / 100) * cell.Width
+	width := (m.prop.Percent / 100) * cell.Width
 	return proportion * width
 }
 
