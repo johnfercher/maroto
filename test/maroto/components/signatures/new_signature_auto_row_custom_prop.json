@@ -1,0 +1,28 @@
+{
+	"value": 0,
+	"type": "row",
+	"nodes": [
+		{
+			"value": 0,
+			"type": "col",
+			"details": {
+				"is_max": true
+			},
+			"nodes": [
+				{
+					"value": "signature",
+					"type": "signature",
+					"details": {
+						"prop_font_color": "RGB(100, 50, 200)",
+						"prop_font_family": "helvetica",
+						"prop_font_size": 14,
+						"prop_font_style": "B",
+						"prop_line_color": "RGB(100, 50, 200)",
+						"prop_line_style": "dashed",
+						"prop_line_thickness": 1.1
+					}
+				}
+			]
+		}
+	]
+}

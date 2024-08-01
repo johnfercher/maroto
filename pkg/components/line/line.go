@@ -42,6 +42,13 @@ func NewRow(height float64, ps ...props.Line) core.Row {
 	return row.New(height).Add(c)
 }
 
+// NewRow is responsible to create an instance of a Line wrapped in a automatic Row.
+func NewAutoRow(ps ...props.Line) core.Row {
+	r := New(ps...)
+	c := col.New().Add(r)
+	return row.New().Add(c)
+}
+
 // GetStructure returns the Structure of a Line.
 func (l *Line) GetStructure() *node.Node[core.Structure] {
 	str := core.Structure{
@@ -55,6 +62,11 @@ func (l *Line) GetStructure() *node.Node[core.Structure] {
 // SetConfig sets the config.
 func (l *Line) SetConfig(config *entity.Config) {
 	l.config = config
+}
+
+// GetHeight returns the height that the line will have in the PDF
+func (l *Line) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	return l.prop.Thickness
 }
 
 // Render renders a Line into a PDF context.

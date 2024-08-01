@@ -36,6 +36,13 @@ func NewCol(size int, value string, ps ...props.Text) core.Col {
 	return col.New(size).Add(text)
 }
 
+// NewAutoRow is responsible for creating an instance of Text grouped in a Line with automatic height.
+func NewAutoRow(value string, ps ...props.Text) core.Row {
+	r := New(value, ps...)
+	c := col.New().Add(r)
+	return row.New().Add(c)
+}
+
 // NewRow is responsible to create an instance of a Text wrapped in a Row.
 func NewRow(height float64, value string, ps ...props.Text) core.Row {
 	r := New(value, ps...)
@@ -52,6 +59,13 @@ func (t *Text) GetStructure() *node.Node[core.Structure] {
 	}
 
 	return node.New(str)
+}
+
+// GetHeight returns the height that the text will have in the PDF
+func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	lines := provider.GetLinesQuantity(t.value, &t.prop, cell.Width-t.prop.Left-t.prop.Right)
+	height := provider.GetTextHeight(&props.Font{Family: t.prop.Family, Style: t.prop.Style, Size: t.prop.Size, Color: t.prop.Color})
+	return (float64(lines) * height) + t.prop.Top
 }
 
 // SetConfig sets the config.

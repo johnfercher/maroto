@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"bytes"
+	"errors"
 	"path/filepath"
 	"strings"
 
@@ -48,6 +49,10 @@ func (g *provider) AddText(text string, cell *entity.Cell, prop *props.Text) {
 	g.text.Add(text, cell, prop)
 }
 
+func (g *provider) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {
+	return g.text.GetLinesQuantity(text, textProp, colWidth)
+}
+
 func (g *provider) GetTextHeight(prop *props.Font) float64 {
 	return g.font.GetHeight(prop.Family, prop.Style, prop.Size)
 }
@@ -57,17 +62,13 @@ func (g *provider) AddLine(cell *entity.Cell, prop *props.Line) {
 }
 
 func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {
-	image, err := g.cache.GetImage(code, extension.Jpg)
-	if err != nil {
-		image, err = g.code.GenDataMatrix(code)
-	}
+	img, err := g.loadCode(code, g.code.GenDataMatrix)
 	if err != nil {
 		g.text.Add("could not generate matrixcode", cell, merror.DefaultErrorText)
 		return
 	}
 
-	g.cache.AddImage(code, image)
-	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Jpg, false)
+	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add matrixcode to document", cell, merror.DefaultErrorText)
@@ -75,17 +76,13 @@ func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rec
 }
 
 func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
-	image, err := g.cache.GetImage(code, extension.Jpg)
-	if err != nil {
-		image, err = g.code.GenQr(code)
-	}
+	img, err := g.loadCode(code, g.code.GenQr)
 	if err != nil {
 		g.text.Add("could not generate qrcode", cell, merror.DefaultErrorText)
 		return
 	}
 
-	g.cache.AddImage(code, image)
-	err = g.image.Add(image, cell, g.cfg.Margins, prop, extension.Jpg, false)
+	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add qrcode to document", cell, merror.DefaultErrorText)
@@ -112,20 +109,7 @@ func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcod
 
 func (g *provider) AddImageFromFile(file string, cell *entity.Cell, prop *props.Rect) {
 	extensionStr := strings.ToLower(strings.TrimPrefix(filepath.Ext(file), "."))
-	image, err := g.cache.GetImage(file, extension.Type(extensionStr))
-	if err != nil {
-		err = g.cache.LoadImage(file, extension.Type(extensionStr))
-	} else {
-		g.AddImageFromBytes(image.Bytes, cell, prop, extension.Type(extensionStr))
-		return
-	}
-
-	if err != nil {
-		g.text.Add("could not load image", cell, merror.DefaultErrorText)
-		return
-	}
-
-	image, err = g.cache.GetImage(file, extension.Type(extensionStr))
+	image, err := g.loadImage(file, extensionStr)
 	if err != nil {
 		g.text.Add("could not load image", cell, merror.DefaultErrorText)
 		return
@@ -205,6 +189,69 @@ func (g *provider) SetMetadata(metadata *entity.Metadata) {
 	}
 }
 
+// GetDimensionsByImage is responsible for obtaining the dimensions of an image
+// If the image cannot be loaded, an error is returned
+func (g *provider) GetDimensionsByImage(file string) (*entity.Dimensions, error) {
+	extensionStr := strings.ToLower(strings.TrimPrefix(filepath.Ext(file), "."))
+	img, err := g.loadImage(file, extensionStr)
+	if err != nil {
+		return nil, err
+	}
+
+	imgInfo, _ := g.image.GetImageInfo(img, extension.Type(extensionStr))
+
+	if imgInfo == nil {
+		return nil, errors.New("could not read image options, maybe path/name is wrong")
+	}
+	return &entity.Dimensions{Width: imgInfo.Width(), Height: imgInfo.Height()}, nil
+}
+
+// GetDimensionsByImageByte is responsible for obtaining the dimensions of an image
+// If the image cannot be loaded, an error is returned
+func (g *provider) GetDimensionsByImageByte(bytes []byte, extension extension.Type) (*entity.Dimensions, error) {
+	img, err := FromBytes(bytes, extension)
+	if err != nil {
+		return nil, err
+	}
+
+	imgInfo, _ := g.image.GetImageInfo(img, extension)
+	if imgInfo == nil {
+		return nil, errors.New("could not read image options, maybe path/name is wrong")
+	}
+	return &entity.Dimensions{Width: imgInfo.Width(), Height: imgInfo.Height()}, nil
+}
+
+// GetDimensionsByMatrixCode is responsible for obtaining the dimensions of an MatrixCode
+// If the image cannot be loaded, an error is returned
+func (g *provider) GetDimensionsByMatrixCode(code string) (*entity.Dimensions, error) {
+	img, err := g.loadCode(code, g.code.GenDataMatrix)
+	if err != nil {
+		return nil, err
+	}
+
+	imgInfo, _ := g.image.GetImageInfo(img, extension.Jpg)
+
+	if imgInfo == nil {
+		return nil, errors.New("could not read image options, maybe path/name is wrong")
+	}
+	return &entity.Dimensions{Width: imgInfo.Width(), Height: imgInfo.Height()}, nil
+}
+
+// GetDimensionsByQrCode is responsible for obtaining the dimensions of an QrCode
+// If the image cannot be loaded, an error is returned
+func (g *provider) GetDimensionsByQrCode(code string) (*entity.Dimensions, error) {
+	img, err := g.loadCode(code, g.code.GenQr)
+	if err != nil {
+		return nil, err
+	}
+
+	imgInfo, _ := g.image.GetImageInfo(img, extension.Jpg)
+	if imgInfo == nil {
+		return nil, errors.New("could not read image options, maybe path/name is wrong")
+	}
+	return &entity.Dimensions{Width: imgInfo.Width(), Height: imgInfo.Height()}, nil
+}
+
 func (g *provider) GenerateBytes() ([]byte, error) {
 	var buffer bytes.Buffer
 	err := g.fpdf.Output(&buffer)
@@ -226,4 +273,35 @@ func (g *provider) getBarcodeImageName(code string, prop *props.Barcode) string 
 	}
 
 	return code + string(prop.Type)
+}
+
+// loadImage is responsible for loading an codes
+func (g *provider) loadCode(code string, generate func(code string) (*entity.Image, error)) (*entity.Image, error) {
+	image, err := g.cache.GetImage(code, extension.Jpg)
+	if err != nil {
+		image, err = generate(code)
+	} else {
+		return image, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	g.cache.AddImage(code, image)
+
+	return image, nil
+}
+
+// loadImage is responsible for loading an image
+func (g *provider) loadImage(file, extensionStr string) (*entity.Image, error) {
+	image, err := g.cache.GetImage(file, extension.Type(extensionStr))
+
+	if err == nil {
+		return image, err
+	}
+
+	if err = g.cache.LoadImage(file, extension.Type(extensionStr)); err != nil {
+		return nil, err
+	}
+
+	return g.cache.GetImage(file, extension.Type(extensionStr))
 }

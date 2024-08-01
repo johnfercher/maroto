@@ -46,6 +46,10 @@
 									"value": "Gopher International Shipping, Inc.",
 									"type": "text",
 									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_top": 12
 									}

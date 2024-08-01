@@ -32,7 +32,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_font_style": "B"
 									}
 								}
@@ -47,7 +50,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_font_style": "B"
 									}
 								}
@@ -70,7 +76,11 @@
 									"value": "Africâner",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -83,7 +93,11 @@
 									"value": "Praat is goedkoop. Wys my die kode.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -102,7 +116,11 @@
 									"value": "Albanês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -115,7 +133,11 @@
 									"value": "Biseda është e lirë. Më trego kodin.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -137,7 +159,11 @@
 									"value": "Alemão",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -150,7 +176,11 @@
 									"value": "Reden ist billig. Zeig mir den Code.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -169,7 +199,11 @@
 									"value": "Amárico",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -182,7 +216,11 @@
 									"value": "ወሬ ርካሽ ነው ፡፡ ኮዱን አሳዩኝ ፡፡",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -204,7 +242,11 @@
 									"value": "Árabe",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -217,7 +259,11 @@
 									"value": "كلام رخيص. أرني الكود.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -236,7 +282,11 @@
 									"value": "Armênio",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -249,7 +299,11 @@
 									"value": "Խոսակցությունն էժան է: Showույց տվեք ինձ ծածկագիրը:",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -271,7 +325,11 @@
 									"value": "Azerbaijano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -284,7 +342,11 @@
 									"value": "Danışıq ucuzdur. Kodu göstərin.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -303,7 +365,11 @@
 									"value": "Basco",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -316,7 +382,11 @@
 									"value": "Eztabaida merkea da. Erakutsi kodea.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -338,7 +408,11 @@
 									"value": "Bengali",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -351,7 +425,11 @@
 									"value": "টক সস্তা। আমাকে কোডটি দেখান",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -370,7 +448,11 @@
 									"value": "Bielorusso",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -383,7 +465,11 @@
 									"value": "Размовы танныя. Пакажыце мне код.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -405,7 +491,11 @@
 									"value": "Birmanês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -418,7 +508,11 @@
 									"value": "ဟောပြောချက်ကစျေးပေါတယ် ကုဒ်ကိုပြပါ။",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -437,7 +531,11 @@
 									"value": "Bósnio",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -450,7 +548,11 @@
 									"value": "Govor je jeftin. Pokaži mi šifru.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -472,7 +574,11 @@
 									"value": "Búlgaro",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -485,7 +591,11 @@
 									"value": "Разговорите са евтини. Покажи ми кода.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -504,7 +614,11 @@
 									"value": "Canarim",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -517,7 +631,11 @@
 									"value": "ಮಾತುಕತೆ ಅಗ್ಗವಾಗಿದೆ. ನನಗೆ ಕೋಡ್ ತೋರಿಸಿ.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -539,7 +657,11 @@
 									"value": "Catalão",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -552,7 +674,11 @@
 									"value": "Parlar és barat. Mostra’m el codi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -571,7 +697,11 @@
 									"value": "Cazeque",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -584,7 +714,11 @@
 									"value": "Сөйлесу арзан. Маған кодты көрсетіңіз.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -606,7 +740,11 @@
 									"value": "Cebuano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -619,7 +757,11 @@
 									"value": "Barato ra ang sulti. Ipakita kanako ang code.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -638,7 +780,11 @@
 									"value": "Chinês Simplificado",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -651,7 +797,11 @@
 									"value": "谈话很便宜。给我看代码。",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -673,7 +823,11 @@
 									"value": "Chinês Tradicional",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -686,7 +840,11 @@
 									"value": "談話很便宜。給我看代碼。",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -705,7 +863,11 @@
 									"value": "Cingalês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -718,7 +880,11 @@
 									"value": "කතාව ලාභයි. කේතය මට පෙන්වන්න.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -740,7 +906,11 @@
 									"value": "Coreano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -753,7 +923,11 @@
 									"value": "토크는 싸다. 코드를 보여주세요.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -772,7 +946,11 @@
 									"value": "Corso",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -785,7 +963,11 @@
 									"value": "Parlà hè bonu. Mostrami u codice.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -807,7 +989,11 @@
 									"value": "Croata",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -820,7 +1006,11 @@
 									"value": "Razgovor je jeftin. Pokaži mi šifru.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -839,7 +1029,11 @@
 									"value": "Curdo",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -852,7 +1046,11 @@
 									"value": "Axaftin erzan e. Kodê nîşanî min bidin.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -874,7 +1072,11 @@
 									"value": "Dinamarquês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -887,7 +1089,11 @@
 									"value": "Tal er billig. Vis mig koden.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -906,7 +1112,11 @@
 									"value": "Eslovaco",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -919,7 +1129,11 @@
 									"value": "Hovor je lacný. Ukáž mi kód.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -941,7 +1155,11 @@
 									"value": "Esloveno",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -954,7 +1172,11 @@
 									"value": "Pogovor je poceni. Pokaži mi kodo.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -973,7 +1195,11 @@
 									"value": "Espanhol",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -986,7 +1212,11 @@
 									"value": "Hablar es barato. Enséñame el código.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1008,7 +1238,11 @@
 									"value": "Esperanto",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1021,7 +1255,11 @@
 									"value": "Babilado estas malmultekosta. Montru al mi la kodon.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1040,7 +1278,11 @@
 									"value": "Estoniano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1053,7 +1295,11 @@
 									"value": "Rääkimine on odav. Näita mulle koodi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1075,7 +1321,11 @@
 									"value": "Filipino",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1088,7 +1338,11 @@
 									"value": "Mura ang usapan. Ipakita sa akin ang code.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1107,7 +1361,11 @@
 									"value": "Finlandês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1120,7 +1378,11 @@
 									"value": "Puhe on halpaa. Näytä koodi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1142,7 +1404,11 @@
 									"value": "Francês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1155,7 +1421,11 @@
 									"value": "Parler n'est pas cher. Montre-moi le code.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1174,7 +1444,11 @@
 									"value": "Frísio Ocidental",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1187,7 +1461,11 @@
 									"value": "Prate is goedkeap. Lit my de koade sjen.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1209,7 +1487,11 @@
 									"value": "Gaélico Escocês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1222,7 +1504,11 @@
 									"value": "Tha còmhradh saor. Seall dhomh an còd.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1241,7 +1527,11 @@
 									"value": "Galego",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1254,7 +1544,11 @@
 									"value": "Falar é barato. Móstrame o código.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1276,7 +1570,11 @@
 									"value": "Galês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1289,7 +1587,11 @@
 									"value": "Mae siarad yn rhad. Dangoswch y cod i mi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1308,7 +1610,11 @@
 									"value": "Georgiano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1321,7 +1627,11 @@
 									"value": "აუბარი იაფია. მაჩვენე კოდი.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1343,7 +1653,11 @@
 									"value": "Grego",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1356,7 +1670,11 @@
 									"value": "Η συζήτηση είναι φθηνή. Δείξε μου τον κωδικό.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1375,7 +1693,11 @@
 									"value": "Guzerate",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1388,7 +1710,11 @@
 									"value": "વાતો કરવી સસ્તી છે. મને કોડ બતાવો.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1410,7 +1736,11 @@
 									"value": "Haitiano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1423,7 +1753,11 @@
 									"value": "Pale bon mache. Montre m kòd la.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1442,7 +1776,11 @@
 									"value": "Hauçá",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1455,7 +1793,11 @@
 									"value": "Magana tana da arha. Nuna min lambar.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1477,7 +1819,11 @@
 									"value": "Havaiano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1490,7 +1836,11 @@
 									"value": "Kūʻai ke kamaʻilio. E hōʻike mai iaʻu i ke pāʻālua.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1509,7 +1859,11 @@
 									"value": "Hebraico",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1522,7 +1876,11 @@
 									"value": "הדיבורים זולים. הראה לי את הקוד.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1544,7 +1902,11 @@
 									"value": "Híndi",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1557,7 +1919,11 @@
 									"value": "बोलना आसान है। मुझे कोड दिखाओ।",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1576,7 +1942,11 @@
 									"value": "Hmong",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1589,7 +1959,11 @@
 									"value": "Kev hais lus yog pheej yig. Qhia kuv cov code.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1611,7 +1985,11 @@
 									"value": "Holandês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1624,7 +2002,11 @@
 									"value": "Praten is goedkoop. Laat me de code zien.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1643,7 +2025,11 @@
 									"value": "Húngaro",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1656,7 +2042,11 @@
 									"value": "Beszélni olcsó. Mutasd meg a kódot.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1678,7 +2068,11 @@
 									"value": "Igbo",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1691,7 +2085,11 @@
 									"value": "Okwu dị ọnụ ala. Gosi m koodu.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1710,7 +2108,11 @@
 									"value": "Lídiche",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1723,7 +2125,11 @@
 									"value": "רעדן איז ביליק. ווייַזן מיר דעם קאָד.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1745,7 +2151,11 @@
 									"value": "Indonésio",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1758,7 +2168,11 @@
 									"value": "Berbicara itu murah. Tunjukkan kodenya.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1792,7 +2206,11 @@
 									"value": "Inglês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1805,7 +2223,11 @@
 									"value": "Talk is cheap. Show me the code.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1827,7 +2249,11 @@
 									"value": "Iorubá",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1840,7 +2266,11 @@
 									"value": "Ọrọ jẹ olowo poku. Fi koodu naa han mi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1859,7 +2289,11 @@
 									"value": "Irlandês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1872,7 +2306,11 @@
 									"value": "Tá caint saor. Taispeáin dom an cód.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1894,7 +2332,11 @@
 									"value": "Islandês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1907,7 +2349,11 @@
 									"value": "Tal er ódýrt. Sýndu mér kóðann.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1926,7 +2372,11 @@
 									"value": "Italiano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1939,7 +2389,11 @@
 									"value": "Parlare è economico. Mostrami il codice.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1961,7 +2415,11 @@
 									"value": "Japonês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1974,7 +2432,11 @@
 									"value": "口で言うだけなら簡単です。コードを見せてください。",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -1993,7 +2455,11 @@
 									"value": "Javanês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2006,7 +2472,11 @@
 									"value": "Omongan iku murah. Tampilake kode kasebut.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2028,7 +2498,11 @@
 									"value": "Khmer",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2041,7 +2515,11 @@
 									"value": "ការនិយាយគឺថោក។ បង្ហាញលេខកូដមកខ្ញុំ",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2060,7 +2538,11 @@
 									"value": "Laosiano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2073,7 +2555,11 @@
 									"value": "ການສົນທະນາແມ່ນລາຄາຖືກ. ສະແດງລະຫັດໃຫ້ຂ້ອຍ.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2095,7 +2581,11 @@
 									"value": "Latim",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2108,7 +2598,11 @@
 									"value": "Disputatio vilis est. Ostende mihi codice.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2127,7 +2621,11 @@
 									"value": "Letão",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2140,7 +2638,11 @@
 									"value": "Saruna ir lēta. Parādiet man kodu.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2162,7 +2664,11 @@
 									"value": "Lituano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2175,7 +2681,11 @@
 									"value": "Kalbėti pigu. Parodyk man kodą.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2194,7 +2704,11 @@
 									"value": "Luxemburguês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2207,7 +2721,11 @@
 									"value": "Schwätzen ass bëlleg. Weist mir de Code.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2229,7 +2747,11 @@
 									"value": "Macedônio",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2242,7 +2764,11 @@
 									"value": "Зборувањето е ефтино. Покажи ми го кодот.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2261,7 +2787,11 @@
 									"value": "Malaiala",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2274,7 +2804,11 @@
 									"value": "സംസാരം വിലകുറഞ്ഞതാണ്. എനിക്ക് കോഡ് കാണിക്കുക.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2296,7 +2830,11 @@
 									"value": "Malaio",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2309,7 +2847,11 @@
 									"value": "Perbincangan murah. Tunjukkan kod saya.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2328,7 +2870,11 @@
 									"value": "Malgaxe",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2341,7 +2887,11 @@
 									"value": "Mora ny resaka. Asehoy ahy ny kaody.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2363,7 +2913,11 @@
 									"value": "Maltês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2376,7 +2930,11 @@
 									"value": "It-taħdita hija rħisa. Urini l-kodiċi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2395,7 +2953,11 @@
 									"value": "Maori",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2408,7 +2970,11 @@
 									"value": "He iti te korero. Whakaatuhia mai te tohu.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2430,7 +2996,11 @@
 									"value": "Marati",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2443,7 +3013,11 @@
 									"value": "चर्चा स्वस्त आहे. मला कोड दाखवा.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2462,7 +3036,11 @@
 									"value": "Mongol",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2475,7 +3053,11 @@
 									"value": "Яриа хямд. Надад кодоо харуул.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2497,7 +3079,11 @@
 									"value": "Nepalês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2510,7 +3096,11 @@
 									"value": "कुरा सस्तो छ। मलाई कोड देखाउनुहोस्।",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2529,7 +3119,11 @@
 									"value": "Nianja",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2542,7 +3136,11 @@
 									"value": "Kulankhula ndikotsika mtengo. Ndiwonetseni nambala",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2564,7 +3162,11 @@
 									"value": "Norueguês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2577,7 +3179,11 @@
 									"value": "Snakk er billig. Vis meg koden.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2596,7 +3202,11 @@
 									"value": "Oriá",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2609,7 +3219,11 @@
 									"value": "କଥାବାର୍ତ୍ତା ଶସ୍ତା ଅଟେ | ମୋତେ କୋଡ୍ ଦେଖାନ୍ତୁ |",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2631,7 +3245,11 @@
 									"value": "Panjabi",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2644,7 +3262,11 @@
 									"value": "ਗੱਲ ਸਸਤਾ ਹੈ. ਮੈਨੂੰ ਕੋਡ ਦਿਖਾਓ.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2663,7 +3285,11 @@
 									"value": "Pashto",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2676,7 +3302,11 @@
 									"value": "خبرې ارزانه دي. ما ته کوډ وښایاست",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2698,7 +3328,11 @@
 									"value": "Persa",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2711,7 +3345,11 @@
 									"value": "بحث ارزان است. کد را به من نشان دهید",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2730,7 +3368,11 @@
 									"value": "Polonês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2743,7 +3385,11 @@
 									"value": "Rozmowa jest tania. Pokaż mi kod.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2765,7 +3411,11 @@
 									"value": "Português",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2778,7 +3428,11 @@
 									"value": "Falar é fácil. Mostre-me o código.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2797,7 +3451,11 @@
 									"value": "Quiniaruanda",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2810,7 +3468,11 @@
 									"value": "Ibiganiro birahendutse. Nyereka kode.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2832,7 +3494,11 @@
 									"value": "Quirguiz",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2845,7 +3511,11 @@
 									"value": "Сүйлөшүү арзан. Мага кодду көрсөтүңүз.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2864,7 +3534,11 @@
 									"value": "Romeno",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2877,7 +3551,11 @@
 									"value": "Vorbirea este ieftină. Arată-mi codul.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2899,7 +3577,11 @@
 									"value": "Russo",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2912,7 +3594,11 @@
 									"value": "Обсуждение дешево. Покажи мне код.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2931,7 +3617,11 @@
 									"value": "Samoano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2944,7 +3634,11 @@
 									"value": "E taugofie talanoaga. Faʻaali mai le code.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2966,7 +3660,11 @@
 									"value": "Sérvio",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2979,7 +3677,11 @@
 									"value": "Причање је јефтино. Покажи ми шифру.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -2998,7 +3700,11 @@
 									"value": "Sindi",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3011,7 +3717,11 @@
 									"value": "ڳالهه سستا آهي. مونکي ڪوڊ ڏيکاريو.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3033,7 +3743,11 @@
 									"value": "Somali",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3046,7 +3760,11 @@
 									"value": "Hadalku waa jaban yahay. I tus lambarka.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3065,7 +3783,11 @@
 									"value": "Soto do Sul",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3078,7 +3800,11 @@
 									"value": "Puo e theko e tlase. Mpontshe khoutu.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3100,7 +3826,11 @@
 									"value": "Suaíli",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3113,7 +3843,11 @@
 									"value": "Mazungumzo ni ya bei rahisi. Nionyeshe nambari.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3132,7 +3866,11 @@
 									"value": "Sueco",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3145,7 +3883,11 @@
 									"value": "Prat är billigt. Visa mig koden.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3167,7 +3909,11 @@
 									"value": "Sundanês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3180,7 +3926,11 @@
 									"value": "Omongan mirah. Tunjukkeun kode na.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3199,7 +3949,11 @@
 									"value": "Tadjique",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3212,7 +3966,11 @@
 									"value": "Сӯҳбат арзон аст. Рамзро ба ман нишон диҳед.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3234,7 +3992,11 @@
 									"value": "Tailandês",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3247,7 +4009,11 @@
 									"value": "พูดคุยราคาถูก แสดงรหัส",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3266,7 +4032,11 @@
 									"value": "Tâmil",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3279,7 +4049,11 @@
 									"value": "பேச்சு மலிவானது. குறியீட்டை எனக்குக் காட்டு.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3301,7 +4075,11 @@
 									"value": "Tártaro",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3314,7 +4092,11 @@
 									"value": "Сөйләшү арзан. Миңа код күрсәтегез.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3333,7 +4115,11 @@
 									"value": "Tcheco",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3346,7 +4132,11 @@
 									"value": "Mluvení je levné. Ukaž mi kód.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3368,7 +4158,11 @@
 									"value": "Télugo",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3381,7 +4175,11 @@
 									"value": "చర్చ చౌకగా ఉంటుంది. నాకు కోడ్ చూపించు.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3400,7 +4198,11 @@
 									"value": "Turco",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3413,7 +4215,11 @@
 									"value": "Konuşma ucuz. Bana kodu göster.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3435,7 +4241,11 @@
 									"value": "Turcomeno",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3448,7 +4258,11 @@
 									"value": "Gepleşik arzan. Kody görkez",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3467,7 +4281,11 @@
 									"value": "Ucraniano",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3480,7 +4298,11 @@
 									"value": "Розмова дешева. Покажи мені код.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3502,7 +4324,11 @@
 									"value": "Uigur",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3515,7 +4341,11 @@
 									"value": "پاراڭ ئەرزان. ماڭا كودنى كۆرسەت.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3534,7 +4364,11 @@
 									"value": "Urdu",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3547,7 +4381,11 @@
 									"value": "بات گھٹیا ہے. مجھے کوڈ دکھائیں۔",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3584,7 +4422,11 @@
 									"value": "Uzbeque",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3597,7 +4439,11 @@
 									"value": "Gapirish arzon. Menga kodni ko'rsating.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3616,7 +4462,11 @@
 									"value": "Vietnamita",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3629,7 +4479,11 @@
 									"value": "Nói chuyện là rẻ. Cho tôi xem mã.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3651,7 +4505,11 @@
 									"value": "Xhosa",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3664,7 +4522,11 @@
 									"value": "Ukuthetha akubizi. Ndibonise ikhowudi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3683,7 +4545,11 @@
 									"value": "Xona",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3696,7 +4562,11 @@
 									"value": "Kutaura kwakachipa. Ndiratidze kodhi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3718,7 +4588,11 @@
 									"value": "Zulu",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3731,7 +4605,11 @@
 									"value": "Ukukhuluma kushibhile. Ngikhombise ikhodi.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3753,7 +4631,11 @@
 									"value": "long text without spaces",
 									"type": "text",
 									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_font_style": "B",
 										"prop_top": 5
 									}
@@ -3775,7 +4657,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
-										"prop_breakline_strategy": "dash_strategy"
+										"prop_breakline_strategy": "dash_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3789,7 +4674,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "L",
-										"prop_breakline_strategy": "dash_strategy"
+										"prop_breakline_strategy": "dash_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -3803,7 +4691,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "R",
-										"prop_breakline_strategy": "dash_strategy"
+										"prop_breakline_strategy": "dash_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
 									}
 								}
 							]

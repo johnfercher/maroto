@@ -10,6 +10,9 @@ type Rect struct {
 	// ex 100%: The rectangle will fulfill the entire cell
 	// ex 50%: The greater side from the rectangle will have half the size of the cell.
 	Percent float64
+	// indicate whether only the width should be used as a reference to calculate the component size, disregarding the height
+	// ex true: The component will be scaled only based on the available width, disregarding the available height
+	JustReferenceWidth bool
 	// Center define that the barcode will be vertically and horizontally centralized.
 	Center bool
 }
@@ -34,6 +37,9 @@ func (r *Rect) ToMap() map[string]interface{} {
 		m["prop_center"] = r.Center
 	}
 
+	if r.JustReferenceWidth {
+		m["prop_just_reference_Width"] = r.JustReferenceWidth
+	}
 	return m
 }
 

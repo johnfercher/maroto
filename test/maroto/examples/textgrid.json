@@ -32,7 +32,11 @@
 									"value": "Red text",
 									"type": "text",
 									"details": {
-										"prop_color": "RGB(255, 0, 0)"
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -45,7 +49,11 @@
 									"value": "Green text",
 									"type": "text",
 									"details": {
-										"prop_color": "RGB(0, 255, 0)"
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 255, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -58,7 +66,11 @@
 									"value": "Blue text",
 									"type": "text",
 									"details": {
-										"prop_color": "RGB(0, 0, 255)"
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -75,7 +87,14 @@
 							"nodes": [
 								{
 									"value": "Left-aligned text",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						},
@@ -87,7 +106,11 @@
 									"value": "Centered text",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -100,7 +123,11 @@
 									"value": "Right-aligned text",
 									"type": "text",
 									"details": {
-										"prop_align": "R"
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -120,7 +147,14 @@
 							"nodes": [
 								{
 									"value": "Aligned unindented text",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -139,6 +173,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_top": 3
 									}
@@ -154,6 +192,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_top": 3
 									}
 								}
@@ -168,6 +210,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_right": 3,
 										"prop_top": 3
 									}
@@ -189,7 +235,14 @@
 							"nodes": [
 								{
 									"value": "Aligned text with indentation",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -207,7 +260,11 @@
 									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
-										"prop_align": "L"
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -220,7 +277,11 @@
 									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
-										"prop_align": "C"
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -233,7 +294,11 @@
 									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
-										"prop_align": "R"
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
 									}
 								}
 							]
@@ -253,7 +318,14 @@
 							"nodes": [
 								{
 									"value": "Multiline text",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -273,6 +345,9 @@
 									"details": {
 										"prop_align": "L",
 										"prop_breakline_strategy": "dash_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3
@@ -289,6 +364,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3
@@ -305,6 +384,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3
@@ -327,7 +410,14 @@
 							"nodes": [
 								{
 									"value": "Multiline text with indentation",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -348,6 +438,11 @@
 									"value": "text with hyperlink",
 									"type": "text",
 									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_hyperlink": "https://google.com"
 									}
 								}
@@ -384,6 +479,9 @@
 									"details": {
 										"prop_align": "J",
 										"prop_breakline_strategy": "dash_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3
@@ -400,6 +498,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "J",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 10
@@ -416,6 +518,10 @@
 									"type": "text",
 									"details": {
 										"prop_align": "J",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
 										"prop_hyperlink": "https://google.com",
 										"prop_left": 10,
 										"prop_right": 10,
@@ -438,17 +544,112 @@
 							},
 							"nodes": [
 								{
-									"value": "Justify-aligned text" ,
+									"value": "Justify-aligned text",
 									"type": "text",
 									"details": {
-										"prop_align": "J"
-									}								}
+										"prop_align": "J",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
 							]
 						}
 					]
 				},
 				{
-					"value": 211.9975,
+					"value": 31.750000000000004,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_breakline_strategy": "dash_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_left": 3,
+										"prop_right": 3
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_left": 3,
+										"prop_right": 3
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_hyperlink": "https://google.com",
+										"prop_left": 10,
+										"prop_right": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 25.583333333333336,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_left": 3,
+										"prop_right": 3,
+										"prop_top": 15
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 154.66416666666666,
 					"type": "row",
 					"nodes": [
 						{

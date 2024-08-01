@@ -112,6 +112,15 @@ func (m *Maroto) AddRow(rowHeight float64, cols ...core.Col) core.Row {
 	return r
 }
 
+// AddAutoRow is responsible for adding a line with automatic height to the
+// current document.
+// The row height will be calculated based on its content.
+func (m *Maroto) AddAutoRow(cols ...core.Col) core.Row {
+	r := row.New().Add(cols...)
+	m.addRow(r)
+	return r
+}
+
 // FitlnCurrentPage is responsible to validating whether a line fits on
 // the current page.
 func (m *Maroto) FitlnCurrentPage(heightNewLine float64) bool {
@@ -207,7 +216,8 @@ func (m *Maroto) addRow(r core.Row) {
 
 	maxHeight := m.cell.Height
 
-	rowHeight := r.GetHeight()
+	r.SetConfig(m.config)
+	rowHeight := r.GetHeight(m.provider, &m.cell)
 	sumHeight := rowHeight + m.currentHeight + m.footerHeight
 
 	// Row smaller than the remain space on page
@@ -230,7 +240,7 @@ func (m *Maroto) addRow(r core.Row) {
 
 func (m *Maroto) addHeader() {
 	for _, headerRow := range m.header {
-		m.currentHeight += headerRow.GetHeight()
+		m.currentHeight += headerRow.GetHeight(m.provider, &m.cell)
 		m.rows = append(m.rows, headerRow)
 	}
 }
@@ -252,6 +262,7 @@ func (m *Maroto) fillPageToAddNew() {
 		p = page.New()
 	}
 
+	p.SetConfig(m.config)
 	p.Add(m.rows...)
 
 	m.pages = append(m.pages, p)
@@ -364,7 +375,7 @@ func (m *Maroto) processPage(pages []core.Page) ([]byte, error) {
 func (m *Maroto) getRowsHeight(rows ...core.Row) float64 {
 	var height float64
 	for _, r := range rows {
-		height += r.GetHeight()
+		height += r.GetHeight(m.provider, &m.cell)
 	}
 
 	return height

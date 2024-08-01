@@ -38,7 +38,14 @@
 							"nodes": [
 								{
 									"value": "page1 row1",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -57,7 +64,14 @@
 							"nodes": [
 								{
 									"value": "page1 row2",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -76,7 +90,14 @@
 							"nodes": [
 								{
 									"value": "page1 row3",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -95,7 +116,14 @@
 							"nodes": [
 								{
 									"value": "page1 row4",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -114,7 +142,14 @@
 							"nodes": [
 								{
 									"value": "page1 row5",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -133,7 +168,14 @@
 							"nodes": [
 								{
 									"value": "page1 row6",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -152,7 +194,14 @@
 							"nodes": [
 								{
 									"value": "page1 row7",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -171,7 +220,14 @@
 							"nodes": [
 								{
 									"value": "page1 row8",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -205,7 +261,14 @@
 							"nodes": [
 								{
 									"value": "page1 row9",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -239,7 +302,14 @@
 							"nodes": [
 								{
 									"value": "page2 row1",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}
@@ -273,7 +343,14 @@
 							"nodes": [
 								{
 									"value": "page3 row1",
-									"type": "text"
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
 								}
 							]
 						}

@@ -103,23 +103,16 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
-func (s *text) GetLinesQuantity(text string, textProp props.Text, colWidth float64) int {
-	translator := s.pdf.UnicodeTranslatorFromDescriptor("")
+func (s *text) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
-	// Apply Unicode.
-	textTranslated := translator(text)
+	textTranslated := s.textToUnicode(text, textProp)
 
-	stringWidth := s.pdf.GetStringWidth(textTranslated)
-	words := strings.Split(textTranslated, " ")
-
-	// If should add one line.
-	if stringWidth < colWidth || len(words) == 1 {
-		return 1
+	if textProp.BreakLineStrategy == breakline.DashStrategy {
+		return len(s.getLinesBreakingLineWithDash(text, colWidth))
+	} else {
+		return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth))
 	}
-
-	lines := s.getLinesBreakingLineFromSpace(words, colWidth)
-	return len(lines)
 }
 
 func (s *text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {

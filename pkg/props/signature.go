@@ -22,6 +22,8 @@ type Signature struct {
 	LineStyle linestyle.Type
 	// LineThickness define the line thickness.
 	LineThickness float64
+
+	SafePadding float64
 }
 
 // ToMap returns a map with the Signature fields.
@@ -83,6 +85,9 @@ func (s *Signature) MakeValid(defaultFontFamily string) {
 
 	if s.LineThickness == 0 {
 		s.LineThickness = linestyle.DefaultLineThickness
+	}
+	if s.SafePadding <= 0 {
+		s.SafePadding = 1.5
 	}
 }
 

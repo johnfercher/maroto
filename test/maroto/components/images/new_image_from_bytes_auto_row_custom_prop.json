@@ -1,0 +1,26 @@
+{
+	"value": 0,
+	"type": "row",
+	"nodes": [
+		{
+			"value": 0,
+			"type": "col",
+			"details": {
+				"is_max": true
+			},
+			"nodes": [
+				{
+					"value": "AQID",
+					"type": "bytesImage",
+					"details": {
+						"bytes_size": 3,
+						"extension": "jpg",
+						"prop_left": 10,
+						"prop_percent": 98,
+						"prop_top": 10
+					}
+				}
+			]
+		}
+	]
+}

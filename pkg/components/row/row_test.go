@@ -39,12 +39,19 @@ func TestNew(t *testing.T) {
 }
 
 func TestRow_GetHeight(t *testing.T) {
-	t.Run("should return height correctly", func(t *testing.T) {
+	t.Run("When a row has a column with height 5, should return 5", func(t *testing.T) {
+		cell := fixture.CellEntity()
+
+		provider := mocks.NewProvider(t)
+
+		columns := mocks.NewCol(t)
+		columns.EXPECT().GetHeight(provider, &cell).Return(5)
+
 		// Act
-		r := row.New(10)
+		r := row.New().Add(columns)
 
 		// Assert
-		assert.Equal(t, 10.0, r.GetHeight())
+		assert.Equal(t, 5.0, r.GetHeight(provider, &cell))
 	})
 }
 

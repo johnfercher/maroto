@@ -110,5 +110,20 @@ func GetMaroto() core.Maroto {
 		}),
 	)
 
+	m.AddAutoRow(
+		code.NewBarCol(2, "123456789123", props.Barcode{
+			Center: true,
+			Type:   barcode.EAN,
+		}),
+		code.NewBarCol(4, "123456789123", props.Barcode{
+			Center: true,
+			Type:   barcode.EAN,
+		}),
+		code.NewBarCol(6, "123456789123", props.Barcode{
+			Center: true,
+			Type:   barcode.EAN,
+		}),
+	)
+
 	return m
 }

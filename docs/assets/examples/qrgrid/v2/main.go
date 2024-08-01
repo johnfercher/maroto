@@ -93,5 +93,22 @@ func GetMaroto() core.Maroto {
 		}),
 	)
 
+	m.AddAutoRow(
+		code.NewQrCol(6, "https://github.com/johnfercher/maroto", props.Rect{
+			Center:             true,
+			Percent:            30,
+			JustReferenceWidth: true,
+		}),
+		code.NewQrCol(4, "https://github.com/johnfercher/maroto", props.Rect{
+			Center:             true,
+			Percent:            75,
+			JustReferenceWidth: true,
+		}),
+		code.NewQrCol(2, "https://github.com/johnfercher/maroto", props.Rect{
+			Center:             true,
+			Percent:            100,
+			JustReferenceWidth: true,
+		}),
+	)
 	return m
 }

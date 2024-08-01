@@ -90,3 +90,19 @@ func (c *Col) WithStyle(style *props.Cell) core.Col {
 	c.style = style
 	return c
 }
+
+// GetHeight returns the height of the column content
+func (c *Col) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+	innerCell := cell.Copy()
+	percent := float64(c.GetSize()) / float64(c.config.MaxGridSize)
+	innerCell.Width *= percent
+
+	greaterHeight := 0.0
+	for _, component := range c.components {
+		height := component.GetHeight(provider, &innerCell)
+		if greaterHeight < height {
+			greaterHeight = height
+		}
+	}
+	return greaterHeight
+}

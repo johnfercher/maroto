@@ -27,6 +27,21 @@ func NewImage(pdf gofpdfwrapper.Fpdf, math core.Math) *image {
 	}
 }
 
+// GetImageInfo is responsible for loading the image in PDF and returning its information
+func (s image) GetImageInfo(img *entity.Image, extension extension.Type) (*gofpdf.ImageInfoType, uuid.UUID) {
+	imageID, _ := uuid.NewRandom()
+
+	info := s.pdf.RegisterImageOptionsReader(
+		imageID.String(),
+		gofpdf.ImageOptions{
+			ReadDpi:   false,
+			ImageType: string(extension),
+		},
+		bytes.NewReader(img.Bytes),
+	)
+	return info, imageID
+}
+
 // Add use a byte array to add image to PDF.
 func (s *image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, extension extension.Type, flow bool,
@@ -53,14 +68,17 @@ func (s *image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margin
 func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, flow bool,
 ) {
-	rectCell := &entity.Cell{}
-	dimensions := &entity.Dimensions{Width: info.Width(), Height: info.Height()}
+	dimensions := s.math.Resize(&entity.Dimensions{
+		Width:  info.Width(),
+		Height: info.Height(),
+	}, cell.GetDimensions(), prop.Percent, prop.JustReferenceWidth)
+
+	rectCell := &entity.Cell{X: prop.Left, Y: prop.Top, Width: dimensions.Width, Height: dimensions.Height}
 
 	if prop.Center {
-		rectCell = s.math.GetInnerCenterCell(dimensions, cell.GetDimensions(), prop.Percent)
-	} else {
-		rectCell = s.math.GetInnerNonCenterCell(dimensions, cell.GetDimensions(), prop)
+		rectCell = s.math.GetInnerCenterCell(dimensions, cell.GetDimensions())
 	}
+
 	s.pdf.Image(imageLabel, cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+margins.Top,
 		rectCell.Width, rectCell.Height, flow, "", 0, "")
 }

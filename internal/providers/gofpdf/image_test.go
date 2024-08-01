@@ -98,3 +98,45 @@ func TestImage_Add(t *testing.T) {
 		assert.Nil(t, err)
 	})
 }
+
+func TestImage_GetImageInfo(t *testing.T) {
+	t.Run("when RegisterImageOptionsReader return nil, should return nil", func(t *testing.T) {
+		// Arrange
+		img := fixture.ImageEntity()
+		options := gofpdf.ImageOptions{
+			ReadDpi:   false,
+			ImageType: string(img.Extension),
+		}
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().RegisterImageOptionsReader(mock.Anything, options, bytes.NewReader(img.Bytes)).Return(nil)
+
+		image := gofpdf2.NewImage(pdf, mocks.NewMath(t))
+
+		// Act
+		info, _ := image.GetImageInfo(&img, img.Extension)
+
+		// Assert
+		assert.Nil(t, info)
+	})
+
+	t.Run("when RegisterImageOptionsReader return info, should return info", func(t *testing.T) {
+		// Arrange
+		img := fixture.ImageEntity()
+		options := gofpdf.ImageOptions{
+			ReadDpi:   false,
+			ImageType: string(img.Extension),
+		}
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().RegisterImageOptionsReader(mock.Anything, options, bytes.NewReader(img.Bytes)).Return(&gofpdf.ImageInfoType{})
+
+		image := gofpdf2.NewImage(pdf, mocks.NewMath(t))
+
+		// Act
+		info, _ := image.GetImageInfo(&img, img.Extension)
+
+		// Assert
+		assert.NotNil(t, info)
+	})
+}

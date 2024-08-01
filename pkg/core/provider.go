@@ -16,9 +16,14 @@ type Provider interface {
 	AddLine(cell *entity.Cell, prop *props.Line)
 	AddText(text string, cell *entity.Cell, prop *props.Text)
 	GetTextHeight(prop *props.Font) float64
+	GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int
 	AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect)
 	AddQrCode(code string, cell *entity.Cell, rect *props.Rect)
 	AddBarCode(code string, cell *entity.Cell, prop *props.Barcode)
+	GetDimensionsByMatrixCode(code string) (*entity.Dimensions, error)
+	GetDimensionsByImageByte(bytes []byte, extension extension.Type) (*entity.Dimensions, error)
+	GetDimensionsByImage(file string) (*entity.Dimensions, error)
+	GetDimensionsByQrCode(code string) (*entity.Dimensions, error)
 	AddImageFromFile(value string, cell *entity.Cell, prop *props.Rect)
 	AddImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type)
 	AddBackgroundImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type)

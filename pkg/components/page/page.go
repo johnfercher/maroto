@@ -42,7 +42,7 @@ func (p *Page) Render(provider core.Provider, cell entity.Cell) {
 
 	for _, row := range p.rows {
 		row.Render(provider, innerCell)
-		innerCell.Y += row.GetHeight()
+		innerCell.Y += row.GetHeight(provider, &innerCell)
 	}
 
 	if p.prop.Pattern != "" {
