@@ -102,7 +102,7 @@ func GetMaroto() core.Maroto {
 	)
 
 	m.AddAutoRow(
-		text.NewCol(12, longText+" "+longText+" "+longText, props.Text{Top: 15, Left: 3, Right: 3, Align: align.Justify, BreakLineStrategy: breakline.EmptySpaceStrategy}),
+		text.NewCol(12, longText+" "+longText+" "+longText, props.Text{Left: 3, Right: 3, Align: align.Justify, BreakLineStrategy: breakline.EmptySpaceStrategy}),
 	)
 	return m
 }

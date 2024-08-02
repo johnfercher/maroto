@@ -3,6 +3,7 @@ package gofpdf
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"path/filepath"
 	"strings"
 
@@ -62,7 +63,7 @@ func (g *provider) AddLine(cell *entity.Cell, prop *props.Line) {
 }
 
 func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {
-	img, err := g.loadCode(code, g.code.GenDataMatrix)
+	img, err := g.loadCode(fmt.Sprintf("matrix-code-%s", code), g.code.GenDataMatrix)
 	if err != nil {
 		g.text.Add("could not generate matrixcode", cell, merror.DefaultErrorText)
 		return
@@ -76,7 +77,7 @@ func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rec
 }
 
 func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
-	img, err := g.loadCode(code, g.code.GenQr)
+	img, err := g.loadCode(fmt.Sprintf("qr-code-%s", code), g.code.GenQr)
 	if err != nil {
 		g.text.Add("could not generate qrcode", cell, merror.DefaultErrorText)
 		return
@@ -90,7 +91,7 @@ func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 }
 
 func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcode) {
-	image, err := g.cache.GetImage(g.getBarcodeImageName(code, prop), extension.Jpg)
+	image, err := g.cache.GetImage(g.getBarcodeImageName(fmt.Sprintf("bar-code-%s", code), prop), extension.Jpg)
 	if err != nil {
 		image, err = g.code.GenBar(code, cell, prop)
 	}
@@ -99,7 +100,7 @@ func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcod
 		return
 	}
 
-	g.cache.AddImage(g.getBarcodeImageName(code, prop), image)
+	g.cache.AddImage(g.getBarcodeImageName(fmt.Sprintf("bar-code-%s", code), prop), image)
 	err = g.image.Add(image, cell, g.cfg.Margins, prop.ToRectProp(), extension.Jpg, false)
 	if err != nil {
 		g.fpdf.ClearError()
