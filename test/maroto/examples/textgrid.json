@@ -623,7 +623,7 @@
 					]
 				},
 				{
-					"value": 25.583333333333336,
+					"value": 10.583333333333334,
 					"type": "row",
 					"nodes": [
 						{
@@ -640,8 +640,7 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 10,
 										"prop_left": 3,
-										"prop_right": 3,
-										"prop_top": 15
+										"prop_right": 3
 									}
 								}
 							]
@@ -649,7 +648,7 @@
 					]
 				},
 				{
-					"value": 154.66416666666666,
+					"value": 169.6641666666667,
 					"type": "row",
 					"nodes": [
 						{

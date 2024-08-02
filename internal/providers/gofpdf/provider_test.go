@@ -106,10 +106,10 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		prop := fixture.RectProp()
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().GetImage("matrix-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := mocks.NewCode(t)
-		code.EXPECT().GenDataMatrix(codeContent).Return(nil, errors.New("anyError2"))
+		code.EXPECT().GenDataMatrix("matrix-code-code").Return(nil, errors.New("anyError2"))
 
 		text := mocks.NewText(t)
 		text.EXPECT().Add("could not generate matrixcode", cell, merror.DefaultErrorText)
@@ -139,7 +139,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
+		cache.EXPECT().GetImage("matrix-code-code", extension.Jpg).Return(img, nil)
 
 		code := mocks.NewCode(t)
 
@@ -173,7 +173,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		sut := gofpdf.New(dep)
 
 		// Act
-		sut.AddMatrixCode(codeContent, cell, &prop)
+		sut.AddMatrixCode("code", cell, &prop)
 
 		// Assert
 		cache.AssertNumberOfCalls(t, "GetImage", 1)
@@ -190,7 +190,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
+		cache.EXPECT().GetImage("matrix-code-code", extension.Jpg).Return(img, nil)
 
 		code := mocks.NewCode(t)
 
@@ -216,7 +216,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		sut := gofpdf.New(dep)
 
 		// Act
-		sut.AddMatrixCode(codeContent, cell, &prop)
+		sut.AddMatrixCode("code", cell, &prop)
 
 		// Assert
 		cache.AssertNumberOfCalls(t, "GetImage", 1)
@@ -233,10 +233,10 @@ func TestProvider_AddQrCode(t *testing.T) {
 		prop := fixture.RectProp()
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().GetImage("qr-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := mocks.NewCode(t)
-		code.EXPECT().GenQr(codeContent).Return(nil, errors.New("anyError2"))
+		code.EXPECT().GenQr("qr-code-code").Return(nil, errors.New("anyError2"))
 
 		text := mocks.NewText(t)
 		text.EXPECT().Add("could not generate qrcode", cell, merror.DefaultErrorText)
@@ -250,7 +250,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		sut := gofpdf.New(dep)
 
 		// Act
-		sut.AddQrCode(codeContent, cell, &prop)
+		sut.AddQrCode("code", cell, &prop)
 
 		// Assert
 		cache.AssertNumberOfCalls(t, "GetImage", 1)
@@ -266,7 +266,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
+		cache.EXPECT().GetImage("qr-code-code", extension.Jpg).Return(img, nil)
 
 		code := mocks.NewCode(t)
 
@@ -300,7 +300,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		sut := gofpdf.New(dep)
 
 		// Act
-		sut.AddQrCode(codeContent, cell, &prop)
+		sut.AddQrCode("code", cell, &prop)
 
 		// Assert
 		cache.AssertNumberOfCalls(t, "GetImage", 1)
@@ -317,7 +317,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
+		cache.EXPECT().GetImage("qr-code-code", extension.Jpg).Return(img, nil)
 
 		code := mocks.NewCode(t)
 
@@ -343,7 +343,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		sut := gofpdf.New(dep)
 
 		// Act
-		sut.AddQrCode(codeContent, cell, &prop)
+		sut.AddQrCode("code", cell, &prop)
 
 		// Assert
 		cache.AssertNumberOfCalls(t, "GetImage", 1)
@@ -360,7 +360,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 		prop := fixture.BarcodeProp()
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().GetImage("bar-code-codecode128", extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := mocks.NewCode(t)
 		code.EXPECT().GenBar(codeContent, cell, &prop).Return(nil, errors.New("anyError2"))
@@ -392,8 +392,8 @@ func TestProvider_AddBarCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(img, nil)
-		cache.EXPECT().AddImage(codeContent+"code128", img)
+		cache.EXPECT().GetImage("bar-code-codecode128", extension.Jpg).Return(img, nil)
+		cache.EXPECT().AddImage("bar-code-codecode128", img)
 
 		text := mocks.NewText(t)
 		text.EXPECT().Add("could not add barcode to document", cell, merror.DefaultErrorText)
@@ -440,8 +440,8 @@ func TestProvider_AddBarCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent+"code128", extension.Jpg).Return(img, nil)
-		cache.EXPECT().AddImage(codeContent+"code128", img)
+		cache.EXPECT().GetImage("bar-code-codecode128", extension.Jpg).Return(img, nil)
+		cache.EXPECT().AddImage("bar-code-codecode128", img)
 
 		cfg := &entity.Config{
 			Margins: &entity.Margins{
@@ -480,8 +480,8 @@ func TestProvider_AddBarCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent+"ean", extension.Jpg).Return(img, nil)
-		cache.EXPECT().AddImage(codeContent+"ean", img)
+		cache.EXPECT().GetImage("bar-code-codeean", extension.Jpg).Return(img, nil)
+		cache.EXPECT().AddImage("bar-code-codeean", img)
 
 		cfg := &entity.Config{
 			Margins: &entity.Margins{
