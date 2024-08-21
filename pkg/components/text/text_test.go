@@ -132,7 +132,7 @@ func TestText_GetHeight(t *testing.T) {
 		assert.Equal(t, 20.0, height)
 	})
 
-	t.Run("When verical padding is sent, should increment row height with vertical padding", func(t *testing.T) {
+	t.Run("When vertical padding is sent, should increment row height with vertical padding", func(t *testing.T) {
 		cell := fixture.CellEntity()
 		font := fixture.FontProp()
 		textProp := props.Text{VerticalPadding: 5}
