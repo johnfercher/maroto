@@ -71,7 +71,7 @@ func TestProvider_GetTextHeight(t *testing.T) {
 	sut := gofpdf.New(dep)
 
 	// Act
-	fontHeight := sut.GetTextHeight(&prop)
+	fontHeight := sut.GetFontHeight(&prop)
 
 	// Assert
 	font.AssertNumberOfCalls(t, "GetHeight", 1)

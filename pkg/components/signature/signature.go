@@ -55,7 +55,7 @@ func NewAutoRow(value string, ps ...props.Signature) core.Row {
 
 // Render renders a Signature into a PDF context.
 func (s *Signature) Render(provider core.Provider, cell *entity.Cell) {
-	fontSize := provider.GetTextHeight(s.prop.ToFontProp()) * s.prop.SafePadding
+	fontSize := provider.GetFontHeight(s.prop.ToFontProp()) * s.prop.SafePadding
 
 	textProp := s.prop.ToTextProp(align.Center, cell.Height-fontSize, 0)
 
@@ -78,7 +78,7 @@ func (s *Signature) GetStructure() *node.Node[core.Structure] {
 
 // GetHeight returns the height that the signature will have in the PDF
 func (s *Signature) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
-	return s.prop.LineThickness + provider.GetTextHeight(s.prop.ToFontProp())*s.prop.SafePadding
+	return s.prop.LineThickness + provider.GetFontHeight(s.prop.ToFontProp())*s.prop.SafePadding
 }
 
 // SetConfig sets the config.
