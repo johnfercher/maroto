@@ -115,19 +115,54 @@ func TestText_SetConfig(t *testing.T) {
 }
 
 func TestText_GetHeight(t *testing.T) {
-	t.Run("When text has a height of 22, should return 22", func(t *testing.T) {
+	t.Run("When top margin is sent, should increment row height with top margin", func(t *testing.T) {
 		cell := fixture.CellEntity()
-		textProp := fixture.TextProp()
-		font := props.Font{Family: textProp.Family, Style: textProp.Style, Size: textProp.Size, Color: textProp.Color}
+		font := fixture.FontProp()
+		textProp := props.Text{Top: 10}
+		textProp.MakeValid(&font)
 
 		sut := text.New("text", textProp)
 
 		provider := mocks.NewProvider(t)
-		provider.EXPECT().GetLinesQuantity("text", &textProp, 97.0).Return(5.0)
-		provider.EXPECT().GetTextHeight(&font).Return(2.0)
+		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(5.0)
+		provider.EXPECT().GetFontHeight(&font).Return(2.0)
 
 		// Act
 		height := sut.GetHeight(provider, &cell)
-		assert.Equal(t, 22.0, height)
+		assert.Equal(t, 20.0, height)
+	})
+
+	t.Run("When verical padding is sent, should increment row height with vertical padding", func(t *testing.T) {
+		cell := fixture.CellEntity()
+		font := fixture.FontProp()
+		textProp := props.Text{VerticalPadding: 5}
+		textProp.MakeValid(&font)
+
+		sut := text.New("text", textProp)
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(5.0)
+		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+
+		// Act
+		height := sut.GetHeight(provider, &cell)
+		assert.Equal(t, 30.0, height)
+	})
+
+	t.Run("When font has a height of 2, should return 10", func(t *testing.T) {
+		cell := fixture.CellEntity()
+		font := fixture.FontProp()
+		textProp := props.Text{}
+		textProp.MakeValid(&font)
+
+		sut := text.New("text", textProp)
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(5.0)
+		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+
+		// Act
+		height := sut.GetHeight(provider, &cell)
+		assert.Equal(t, 10.0, height)
 	})
 }
