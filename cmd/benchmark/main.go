@@ -7,7 +7,6 @@ import (
 
 	"github.com/johnfercher/maroto/v2"
 
-	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
@@ -69,13 +68,13 @@ func run() *metrics.Time {
 		text.NewRow(20, "Main features", props.Text{Size: 15, Top: 6.5}),
 	)
 
-	objects := getObjects(1158)
-	rows, err := list.Build[Object](objects)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	// objects := getObjects(1158)
+	// rows, err := list.ge[Object](objects)
+	// if err != nil {
+	// 	log.Fatal(err.Error())
+	// }
 
-	m.AddRows(rows...)
+	// m.AddRows(rows...)
 
 	for i := 0; i < 1158; i++ {
 		m.AddRows(buildCodesRow()...)
