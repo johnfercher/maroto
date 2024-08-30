@@ -3,8 +3,11 @@ package list_test
 import (
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -45,5 +48,105 @@ func TestAdd(t *testing.T) {
 		}
 
 		assert.Equal(t, 10, len(myList.Content))
+	})
+}
+
+func TestBuildListWithFixedHeader(t *testing.T) {
+	t.Run("when Maroto is not sent, an error is returned", func(t *testing.T) {
+		myList := list.New(row.New(10)).Add(row.New(10))
+
+		err := myList.BuildListWithFixedHeader(nil)
+
+		assert.NotNil(t, err)
+	})
+	t.Run("when list uses 2 pages, should repeat the header on both pages", func(t *testing.T) {
+		m := mocks.NewMaroto(t)
+
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2")).Return(2)
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content2")).Return(2)
+
+		m.EXPECT().AddRows(text.NewAutoRow("header"), text.NewAutoRow("content1"))
+		m.EXPECT().AddRows(text.NewAutoRow("header"), text.NewAutoRow("content2"))
+
+		m.EXPECT().FillPageToAddNew()
+
+		myList := list.New(text.NewAutoRow("header")).Add(text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+
+		assert.Nil(t, myList.BuildListWithFixedHeader(m))
+
+		m.AssertNumberOfCalls(t, "AddRows", 2)
+		m.AssertNumberOfCalls(t, "FitsOnCurrentPage", 2)
+		m.AssertNumberOfCalls(t, "FillPageToAddNew", 1)
+	})
+
+	// nolint: dupl
+	t.Run("when the header does not fit on the current page, should move the list to the next page", func(t *testing.T) {
+		m := mocks.NewMaroto(t)
+
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2")).Return(0).Once()
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2")).Return(3)
+
+		m.EXPECT().AddRows(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+		m.EXPECT().FillPageToAddNew()
+
+		myList := list.New(text.NewAutoRow("header"), props.List{MinimumRowsBypage: 2})
+		myList.Add(text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+
+		assert.Nil(t, myList.BuildListWithFixedHeader(m))
+
+		m.AssertNumberOfCalls(t, "AddRows", 1)
+		m.AssertNumberOfCalls(t, "FitsOnCurrentPage", 2)
+		m.AssertNumberOfCalls(t, "FillPageToAddNew", 1)
+	})
+	// nolint: dupl
+	t.Run("when only header fits on current page, should move list to next page", func(t *testing.T) {
+		m := mocks.NewMaroto(t)
+
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2")).Return(1).Once()
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2")).Return(3)
+
+		m.EXPECT().AddRows(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+		m.EXPECT().FillPageToAddNew()
+
+		myList := list.New(text.NewAutoRow("header"), props.List{MinimumRowsBypage: 2})
+		myList.Add(text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+
+		assert.Nil(t, myList.BuildListWithFixedHeader(m))
+
+		m.AssertNumberOfCalls(t, "AddRows", 1)
+		m.AssertNumberOfCalls(t, "FitsOnCurrentPage", 2)
+		m.AssertNumberOfCalls(t, "FillPageToAddNew", 1)
+	})
+
+	t.Run("when list fit on current page, should add list to the current page", func(t *testing.T) {
+		m := mocks.NewMaroto(t)
+
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2")).Return(3)
+		m.EXPECT().AddRows(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+
+		myList := list.New(text.NewAutoRow("header")).Add(text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+
+		assert.Nil(t, myList.BuildListWithFixedHeader(m))
+
+		m.AssertNumberOfCalls(t, "AddRows", 1)
+		m.AssertNumberOfCalls(t, "FitsOnCurrentPage", 1)
+	})
+
+	t.Run("when it is not possible to add a group of rows, should return error", func(t *testing.T) {
+		m := mocks.NewMaroto(t)
+
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content1"),
+			text.NewAutoRow("content2"), text.NewAutoRow("content3")).Return(3)
+		m.EXPECT().FitsOnCurrentPage(text.NewAutoRow("header"), text.NewAutoRow("content3")).Return(0)
+		m.EXPECT().AddRows(text.NewAutoRow("header"), text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+		m.EXPECT().FillPageToAddNew()
+
+		myList := list.New(text.NewAutoRow("header"))
+		myList.Add(text.NewAutoRow("content1"), text.NewAutoRow("content2"), text.NewAutoRow("content3"))
+
+		assert.NotNil(t, myList.BuildListWithFixedHeader(m))
+		m.AssertNumberOfCalls(t, "AddRows", 1)
+		m.AssertNumberOfCalls(t, "FitsOnCurrentPage", 3)
+		m.AssertNumberOfCalls(t, "FillPageToAddNew", 2)
 	})
 }
