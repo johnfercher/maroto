@@ -648,7 +648,33 @@
 					]
 				},
 				{
-					"value": 169.6641666666667,
+					"value": 30.583333333333336,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_left": 3,
+										"prop_right": 3,
+										"prop_vertical_padding": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 139.08083333333335,
 					"type": "row",
 					"nodes": [
 						{
