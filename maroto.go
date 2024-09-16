@@ -375,6 +375,7 @@ func (m *Maroto) processPage(pages []core.Page) ([]byte, error) {
 func (m *Maroto) getRowsHeight(rows ...core.Row) float64 {
 	var height float64
 	for _, r := range rows {
+		r.SetConfig(m.config)
 		height += r.GetHeight(m.provider, &m.cell)
 	}
 
