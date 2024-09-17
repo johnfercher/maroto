@@ -90,7 +90,7 @@ func TestSignature_Render(t *testing.T) {
 
 		provider := mocks.NewProvider(t)
 		provider.On("AddText", mock.Anything, mock.Anything, mock.Anything).Return(10.0)
-		provider.On("GetTextHeight", mock.Anything).Return(10.0)
+		provider.On("GetFontHeight", mock.Anything).Return(10.0)
 		provider.On("AddLine", mock.Anything, mock.Anything)
 
 		// Act
@@ -98,7 +98,7 @@ func TestSignature_Render(t *testing.T) {
 
 		// Assert
 		provider.AssertNumberOfCalls(t, "AddText", 1)
-		provider.AssertNumberOfCalls(t, "GetTextHeight", 1)
+		provider.AssertNumberOfCalls(t, "GetFontHeight", 1)
 		provider.AssertNumberOfCalls(t, "AddLine", 1)
 	})
 }
@@ -129,7 +129,7 @@ func TestSignature_GetHeight(t *testing.T) {
 			})
 
 		provider := mocks.NewProvider(t)
-		provider.EXPECT().GetTextHeight(&font).Return(5.0)
+		provider.EXPECT().GetFontHeight(&font).Return(5.0)
 
 		// Act
 		height := sut.GetHeight(provider, &cell)

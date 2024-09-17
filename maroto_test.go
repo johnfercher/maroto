@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
@@ -170,6 +171,34 @@ func TestMaroto_AddRows(t *testing.T) {
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_rows_3.json")
+	})
+
+	t.Run("when autoRow is sent, should set autoRow", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Act
+		for i := 0; i < 20; i++ {
+			sut.AddRows(row.New().Add(text.NewCol(12, "teste")))
+		}
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_rows_5.json")
+	})
+}
+
+func TestMaroto_AddAutoRow(t *testing.T) {
+	t.Run("When 100 automatic rows are sent, it should create 2 pages", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Act
+		for i := 0; i < 150; i++ {
+			sut.AddAutoRow(text.NewCol(12, "teste"))
+		}
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_auto_row_1.json")
 	})
 }
 
@@ -403,6 +432,20 @@ func TestMaroto_FitsOnCurrentPage(t *testing.T) {
 		sut.AddPages(page.New().Add(rows...))
 		assert.Equal(t, 6, sut.FitsOnCurrentPage(rows...))
 	})
+	t.Run("when it have content with an automatic height of 10 and the height sent fits the current page, it should return true",
+		func(t *testing.T) {
+			sut := maroto.New(config.NewBuilder().
+				WithDimensions(210.0, 297.0).
+				Build())
+
+			var rows []core.Row
+			for i := 0; i < 10; i++ {
+				rows = append(rows, row.New().Add(text.NewCol(12, "teste")))
+			}
+
+			sut.AddPages(page.New().Add(rows...))
+			assert.True(t, sut.FitlnCurrentPage(40))
+		})
 }
 
 func TestMaroto_GetCurrentConfig(t *testing.T) {
@@ -441,6 +484,22 @@ func TestMaroto_RegisterHeader(t *testing.T) {
 		assert.Nil(t, err)
 		test.New(t).Assert(sut.GetStructure()).Equals("header.json")
 	})
+	t.Run("when autoRow is sent, should set autoRow", func(t *testing.T) {
+		sut := maroto.New()
+
+		err := sut.RegisterHeader(text.NewAutoRow("header"))
+
+		var rows []core.Row
+		for i := 0; i < 5; i++ {
+			rows = append(rows, row.New(100).Add(col.New(12)))
+		}
+
+		sut.AddRows(rows...)
+
+		// Assert
+		assert.Nil(t, err)
+		test.New(t).Assert(sut.GetStructure()).Equals("header_auto_row.json")
+	})
 }
 
 // nolint:dupl // dupl is good here
@@ -468,5 +527,21 @@ func TestMaroto_RegisterFooter(t *testing.T) {
 		// Assert
 		assert.Nil(t, err)
 		test.New(t).Assert(sut.GetStructure()).Equals("footer.json")
+	})
+	t.Run("when autoRow is sent, should set autoRow", func(t *testing.T) {
+		sut := maroto.New()
+
+		err := sut.RegisterFooter(text.NewAutoRow("header"))
+
+		var rows []core.Row
+		for i := 0; i < 5; i++ {
+			rows = append(rows, row.New(100).Add(col.New(12)))
+		}
+
+		sut.AddRows(rows...)
+
+		// Assert
+		assert.Nil(t, err)
+		test.New(t).Assert(sut.GetStructure()).Equals("footer_auto_row.json")
 	})
 }

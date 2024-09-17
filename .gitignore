@@ -23,3 +23,5 @@ goreportcard
 ignore.sh
 
 .vscode
+
+node_modules/*

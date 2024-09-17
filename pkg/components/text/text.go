@@ -63,9 +63,10 @@ func (t *Text) GetStructure() *node.Node[core.Structure] {
 
 // GetHeight returns the height that the text will have in the PDF
 func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
-	lines := provider.GetLinesQuantity(t.value, &t.prop, cell.Width-t.prop.Left-t.prop.Right)
-	height := provider.GetTextHeight(&props.Font{Family: t.prop.Family, Style: t.prop.Style, Size: t.prop.Size, Color: t.prop.Color})
-	return (float64(lines) * height) + t.prop.Top
+	amountLines := provider.GetLinesQuantity(t.value, &t.prop, cell.Width-t.prop.Left-t.prop.Right)
+	fontHeight := provider.GetFontHeight(&props.Font{Family: t.prop.Family, Style: t.prop.Style, Size: t.prop.Size, Color: t.prop.Color})
+	textHeight := float64(amountLines)*fontHeight + float64(amountLines-1)*t.prop.VerticalPadding
+	return textHeight + t.prop.Top
 }
 
 // SetConfig sets the config.
