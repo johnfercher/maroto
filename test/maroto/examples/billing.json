@@ -2009,7 +2009,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(10, 10, 150)",
+										"prop_font_family": "arial",
 										"prop_font_size": 8,
 										"prop_font_style": "BI",
 										"prop_top": 13
@@ -2020,7 +2022,9 @@
 									"type": "text",
 									"details": {
 										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
 										"prop_color": "RGB(10, 10, 150)",
+										"prop_font_family": "arial",
 										"prop_font_size": 8,
 										"prop_font_style": "BI",
 										"prop_top": 16
