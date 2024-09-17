@@ -432,7 +432,7 @@ func TestMaroto_FitsOnCurrentPage(t *testing.T) {
 		sut.AddPages(page.New().Add(rows...))
 		assert.Equal(t, 6, sut.FitsOnCurrentPage(rows...))
 	})
-	t.Run("when it have content with an automatic height of 10 and the height sent fits the current page, it should return true",
+	t.Run("when it have content with an automatic height of 10 and the height sent fits the current page, it should return 1",
 		func(t *testing.T) {
 			sut := maroto.New(config.NewBuilder().
 				WithDimensions(210.0, 297.0).
@@ -440,11 +440,11 @@ func TestMaroto_FitsOnCurrentPage(t *testing.T) {
 
 			var rows []core.Row
 			for i := 0; i < 10; i++ {
-				rows = append(rows, row.New().Add(text.NewCol(12, "teste")))
+				rows = append(rows, row.New().Add(text.NewCol(12, "test")))
 			}
 
 			sut.AddPages(page.New().Add(rows...))
-			assert.True(t, sut.FitlnCurrentPage(40))
+			assert.Equal(t, 1, sut.FitsOnCurrentPage(text.NewRow(40, "test")))
 		})
 }
 
