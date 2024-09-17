@@ -3,11 +3,13 @@ package list_test
 import (
 	"testing"
 
+	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/props"
+	"github.com/johnfercher/maroto/v2/pkg/test"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -77,6 +79,18 @@ func TestBuildListWithFixedHeader(t *testing.T) {
 		m.AssertNumberOfCalls(t, "AddRows", 2)
 		m.AssertNumberOfCalls(t, "FitsOnCurrentPage", 2)
 		m.AssertNumberOfCalls(t, "FillPageToAddNew", 1)
+	})
+
+	t.Run("when the list has auto-height rows, it should generate the list", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+		// Act
+		myList := list.New(text.NewAutoRow("header")).Add(text.NewAutoRow("content1"), text.NewAutoRow("content2"))
+		err := myList.BuildListWithFixedHeader(sut)
+
+		// Assert
+		assert.Nil(t, err)
+		test.New(t).Assert(sut.GetStructure()).Equals("components/list/list_with_auto_row.json")
 	})
 
 	// nolint: dupl
