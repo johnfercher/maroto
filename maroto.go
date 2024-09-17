@@ -126,6 +126,7 @@ func (m *Maroto) AddAutoRow(cols ...core.Col) core.Row {
 func (m *Maroto) FitsOnCurrentPage(rows ...core.Row) int {
 	totalHeight := 0.0
 	for i, row := range rows {
+		row.SetConfig(m.config)
 		rowHeight := row.GetHeight(m.provider, &m.cell)
 		if fit := m.fitsOnCurrentPage(rowHeight, totalHeight+m.currentHeight); !fit {
 			return i
