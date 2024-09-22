@@ -109,7 +109,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		cache.EXPECT().GetImage("matrix-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := mocks.NewCode(t)
-		code.EXPECT().GenDataMatrix("matrix-code-code").Return(nil, errors.New("anyError2"))
+		code.EXPECT().GenDataMatrix(codeContent).Return(nil, errors.New("anyError2"))
 
 		text := mocks.NewText(t)
 		text.EXPECT().Add("could not generate matrixcode", cell, merror.DefaultErrorText)
@@ -223,6 +223,40 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		cache.AssertNumberOfCalls(t, "AddImage", 0)
 		image.AssertNumberOfCalls(t, "Add", 1)
 	})
+
+	t.Run("when matrx code is generated with the code sent, it should generate matrix code with the same code", func(t *testing.T) {
+		// Arrange
+		cell := &entity.Cell{}
+		cfg := fixture.ConfigEntity()
+		prop := fixture.RectProp()
+		img := &entity.Image{Bytes: []byte{1, 2, 3}}
+
+		cache := mocks.NewCache(t)
+		cache.EXPECT().GetImage("matrix-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().AddImage("matrix-code-code", img).Return()
+
+		code := mocks.NewCode(t)
+		code.EXPECT().GenDataMatrix(codeContent).Return(img, nil)
+
+		image := mocks.NewImage(t)
+		image.EXPECT().Add(img, cell, cfg.Margins, &prop, extension.Jpg, false).Return(nil)
+
+		dep := &gofpdf.Dependencies{
+			Cache: cache,
+			Code:  code,
+			Cfg:   &cfg,
+			Image: image,
+		}
+
+		// Act
+		gofpdf.New(dep).AddMatrixCode(codeContent, cell, &prop)
+
+		// Assert
+		cache.AssertNumberOfCalls(t, "GetImage", 1)
+		code.AssertNumberOfCalls(t, "GenDataMatrix", 1)
+		cache.AssertNumberOfCalls(t, "AddImage", 1)
+		image.AssertNumberOfCalls(t, "Add", 1)
+	})
 }
 
 // nolint: dupl
@@ -236,7 +270,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		cache.EXPECT().GetImage("qr-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := mocks.NewCode(t)
-		code.EXPECT().GenQr("qr-code-code").Return(nil, errors.New("anyError2"))
+		code.EXPECT().GenQr(codeContent).Return(nil, errors.New("anyError2"))
 
 		text := mocks.NewText(t)
 		text.EXPECT().Add("could not generate qrcode", cell, merror.DefaultErrorText)
@@ -348,6 +382,42 @@ func TestProvider_AddQrCode(t *testing.T) {
 		// Assert
 		cache.AssertNumberOfCalls(t, "GetImage", 1)
 		cache.AssertNumberOfCalls(t, "AddImage", 0)
+		image.AssertNumberOfCalls(t, "Add", 1)
+	})
+
+	t.Run("when qrcode is generated with the code sent, it should generate qr code with the same code", func(t *testing.T) {
+		// Arrange
+		cell := &entity.Cell{}
+		prop := fixture.RectProp()
+		img := &entity.Image{Bytes: []byte{1, 2, 3}}
+		cfg := fixture.ConfigEntity()
+
+		cache := mocks.NewCache(t)
+		cache.EXPECT().GetImage("qr-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().AddImage("qr-code-code", img).Return()
+
+		code := mocks.NewCode(t)
+		code.EXPECT().GenQr(codeContent).Return(img, nil)
+
+		image := mocks.NewImage(t)
+		image.EXPECT().Add(img, cell, cfg.Margins, &prop, extension.Jpg, false).Return(nil)
+
+		dep := &gofpdf.Dependencies{
+			Cache: cache,
+			Code:  code,
+			Cfg:   &cfg,
+			Image: image,
+		}
+
+		sut := gofpdf.New(dep)
+
+		// Act
+		sut.AddQrCode(codeContent, cell, &prop)
+
+		// Assert
+		cache.AssertNumberOfCalls(t, "GetImage", 1)
+		code.AssertNumberOfCalls(t, "GenQr", 1)
+		cache.AssertNumberOfCalls(t, "AddImage", 1)
 		image.AssertNumberOfCalls(t, "Add", 1)
 	})
 }
@@ -904,7 +974,7 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 		// Arrange
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().GetImage("matrix-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := mocks.NewCode(t)
 		code.EXPECT().GenDataMatrix(codeContent).Return(nil, errors.New("anyError2"))
@@ -931,8 +1001,8 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
-		cache.EXPECT().AddImage(codeContent, img)
+		cache.EXPECT().GetImage("matrix-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().AddImage("matrix-code-code", img)
 
 		code := mocks.NewCode(t)
 		code.EXPECT().GenDataMatrix(codeContent).Return(img, nil)
@@ -972,7 +1042,7 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
+		cache.EXPECT().GetImage("matrix-code-code", extension.Jpg).Return(img, nil)
 
 		code := mocks.NewCode(t)
 
@@ -1007,7 +1077,7 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 		// Arrange
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().GetImage("qr-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
 
 		code := mocks.NewCode(t)
 		code.EXPECT().GenQr(codeContent).Return(nil, errors.New("anyError2"))
@@ -1034,8 +1104,8 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(nil, errors.New("anyError1"))
-		cache.EXPECT().AddImage(codeContent, img)
+		cache.EXPECT().GetImage("qr-code-code", extension.Jpg).Return(nil, errors.New("anyError1"))
+		cache.EXPECT().AddImage("qr-code-code", img)
 
 		code := mocks.NewCode(t)
 		code.EXPECT().GenQr(codeContent).Return(img, nil)
@@ -1075,7 +1145,7 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
-		cache.EXPECT().GetImage(codeContent, extension.Jpg).Return(img, nil)
+		cache.EXPECT().GetImage("qr-code-code", extension.Jpg).Return(img, nil)
 
 		code := mocks.NewCode(t)
 
