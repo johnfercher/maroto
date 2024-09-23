@@ -79,6 +79,18 @@ func RectProp() props.Rect {
 	return prop
 }
 
+// ConfigEntity is responsible to give a valid entity.Config.
+func ConfigEntity() entity.Config {
+	return entity.Config{
+		Margins: &entity.Margins{
+			Left:   10,
+			Top:    10,
+			Right:  10,
+			Bottom: 10,
+		},
+	}
+}
+
 // CellEntity is responsible to give a valid entity.Cell.
 func CellEntity() entity.Cell {
 	return entity.Cell{

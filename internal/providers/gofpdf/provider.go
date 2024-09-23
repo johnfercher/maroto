@@ -63,7 +63,7 @@ func (g *provider) AddLine(cell *entity.Cell, prop *props.Line) {
 }
 
 func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {
-	img, err := g.loadCode(fmt.Sprintf("matrix-code-%s", code), g.code.GenDataMatrix)
+	img, err := g.loadCode(code, "matrix-code-", g.code.GenDataMatrix)
 	if err != nil {
 		g.text.Add("could not generate matrixcode", cell, merror.DefaultErrorText)
 		return
@@ -77,7 +77,7 @@ func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rec
 }
 
 func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
-	img, err := g.loadCode(fmt.Sprintf("qr-code-%s", code), g.code.GenQr)
+	img, err := g.loadCode(code, "qr-code-", g.code.GenQr)
 	if err != nil {
 		g.text.Add("could not generate qrcode", cell, merror.DefaultErrorText)
 		return
@@ -225,7 +225,7 @@ func (g *provider) GetDimensionsByImageByte(bytes []byte, extension extension.Ty
 // GetDimensionsByMatrixCode is responsible for obtaining the dimensions of an MatrixCode
 // If the image cannot be loaded, an error is returned
 func (g *provider) GetDimensionsByMatrixCode(code string) (*entity.Dimensions, error) {
-	img, err := g.loadCode(code, g.code.GenDataMatrix)
+	img, err := g.loadCode(code, "matrix-code-", g.code.GenDataMatrix)
 	if err != nil {
 		return nil, err
 	}
@@ -241,7 +241,7 @@ func (g *provider) GetDimensionsByMatrixCode(code string) (*entity.Dimensions, e
 // GetDimensionsByQrCode is responsible for obtaining the dimensions of an QrCode
 // If the image cannot be loaded, an error is returned
 func (g *provider) GetDimensionsByQrCode(code string) (*entity.Dimensions, error) {
-	img, err := g.loadCode(code, g.code.GenQr)
+	img, err := g.loadCode(code, "qr-code-", g.code.GenQr)
 	if err != nil {
 		return nil, err
 	}
@@ -277,8 +277,8 @@ func (g *provider) getBarcodeImageName(code string, prop *props.Barcode) string 
 }
 
 // loadImage is responsible for loading an codes
-func (g *provider) loadCode(code string, generate func(code string) (*entity.Image, error)) (*entity.Image, error) {
-	image, err := g.cache.GetImage(code, extension.Jpg)
+func (g *provider) loadCode(code, codeType string, generate func(code string) (*entity.Image, error)) (*entity.Image, error) {
+	image, err := g.cache.GetImage(codeType+code, extension.Jpg)
 	if err != nil {
 		image, err = generate(code)
 	} else {
@@ -287,7 +287,7 @@ func (g *provider) loadCode(code string, generate func(code string) (*entity.Ima
 	if err != nil {
 		return nil, err
 	}
-	g.cache.AddImage(code, image)
+	g.cache.AddImage(codeType+code, image)
 
 	return image, nil
 }
