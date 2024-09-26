@@ -3,6 +3,7 @@ package processor
 import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
+	"github.com/johnfercher/maroto/v2/pkg/processor/repository"
 )
 
 type processor struct {
@@ -13,15 +14,15 @@ type processor struct {
 }
 
 func NewProcessor() *processor {
-	return &processor{}
+	return &processor{repository: repository.NewMemoryStorage()}
 }
 
-func (p *processor) RegisterTemplate(template string) error {
-	return p.repository.RegisterTemplate(template)
+func (p *processor) RegisterTemplate(templateName string, template string) error {
+	return p.repository.RegisterTemplate(templateName, template)
 }
 
-func (p *processor) GenerateDocument(templateId int, content string) ([]byte, error) {
-	templateJson, err := p.repository.ReadTemplate(templateId)
+func (p *processor) GenerateDocument(templateName string, content string) ([]byte, error) {
+	templateJson, err := p.repository.ReadTemplate(templateName)
 	if err != nil {
 		return nil, err
 	}
