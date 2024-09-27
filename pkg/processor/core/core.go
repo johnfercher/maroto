@@ -1,6 +1,10 @@
 package core
 
-import "github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+import (
+	"html/template"
+
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/content"
+)
 
 type Processor interface {
 	RegisterTemplate(templateName string, template string) error
@@ -13,8 +17,8 @@ type Repository interface {
 }
 
 type DocumentDeserializer interface {
-	DesserializeTemplate(template string) (mappers.Template, error)
-	DesserializeContent(content string) (mappers.Content, error)
+	DesserializeTemplate(template string) (template.Template, error)
+	DesserializeContent(content string) (content.Content, error)
 }
 
 type Component interface {

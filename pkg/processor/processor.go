@@ -1,15 +1,15 @@
 package processor
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/factory"
 	"github.com/johnfercher/maroto/v2/pkg/processor/repository"
 )
 
 type processor struct {
 	repository   core.Repository
 	deserializer core.DocumentDeserializer
-	factory      components.FactoryComponents
+	factory      factory.FactoryComponents
 	provider     core.Provider
 }
 

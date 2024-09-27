@@ -1,4 +1,4 @@
-package mappers
+package content
 
 type Content struct {
 }
