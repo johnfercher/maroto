@@ -8,7 +8,7 @@ import (
 
 type processor struct {
 	repository   core.Repository
-	deserializer core.DocumentDeserializer[interface{}]
+	deserializer core.DocumentDeserializer
 	factory      components.FactoryComponents
 	provider     core.Provider
 }
