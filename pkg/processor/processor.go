@@ -2,14 +2,12 @@ package processor
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/factory"
 	"github.com/johnfercher/maroto/v2/pkg/processor/repository"
 )
 
 type processor struct {
 	repository   core.Repository
 	deserializer core.DocumentDeserializer
-	factory      factory.FactoryComponents
 	provider     core.Provider
 }
 
@@ -37,10 +35,10 @@ func (p *processor) GenerateDocument(templateName string, content string) ([]byt
 		return nil, err
 	}
 
-	componentTree, err := p.factory.FactoryComponentTree(documentTemplate, documentContent)
+	pdfComponent, err := documentTemplate.Generate(documentContent)
 	if err != nil {
 		return nil, err
 	}
 
-	return p.provider.GeneratePdf(componentTree)
+	return p.provider.GeneratePdf(pdfComponent)
 }

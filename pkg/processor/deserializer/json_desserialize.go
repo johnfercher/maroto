@@ -4,7 +4,7 @@ package deserializer
 import (
 	"encoding/json"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/pdf"
+	pdf "github.com/johnfercher/maroto/v2/pkg/processor/mappers/pdfmapper"
 )
 
 type jsonDeserializer struct {

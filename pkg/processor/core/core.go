@@ -1,7 +1,8 @@
 package core
 
 import (
-	"html/template"
+	"github.com/johnfercher/maroto/v2/pkg/processor/components"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/pdfmapper"
 )
 
 type Processor interface {
@@ -15,13 +16,10 @@ type Repository interface {
 }
 
 type DocumentDeserializer interface {
-	DesserializeTemplate(template string) (template.Template, error)
+	DesserializeTemplate(template string) (pdfmapper.Pdf, error)
 	DesserializeContent(content string) (map[string]interface{}, error)
 }
 
-type Component interface {
-}
-
 type Provider interface {
-	GeneratePdf(componentTree Component) ([]byte, error)
+	GeneratePdf(componentTree components.Component) ([]byte, error)
 }
