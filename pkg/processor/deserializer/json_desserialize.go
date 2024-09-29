@@ -4,7 +4,6 @@ package deserializer
 import (
 	"encoding/json"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/content"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/pdf"
 )
 
@@ -20,9 +19,9 @@ func (j *jsonDeserializer) DesserializeTemplate(templateJson string) (pdf.Pdf, e
 	return deserializer[pdf.Pdf](templateJson)
 }
 
-// DesserializeContent is responsible for transforming a string into a content structure
-func (j *jsonDeserializer) DesserializeContent(contentJson string) (content.Content, error) {
-	return deserializer[content.Content](contentJson)
+// DesserializeContent is responsible for transforming a string into a content map
+func (j *jsonDeserializer) DesserializeContent(contentJson string) (map[string]interface{}, error) {
+	return deserializer[map[string]interface{}](contentJson)
 }
 
 func deserializer[T interface{}](jsonDocument string) (T, error) {

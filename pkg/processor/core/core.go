@@ -2,8 +2,6 @@ package core
 
 import (
 	"html/template"
-
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/content"
 )
 
 type Processor interface {
@@ -18,7 +16,7 @@ type Repository interface {
 
 type DocumentDeserializer interface {
 	DesserializeTemplate(template string) (template.Template, error)
-	DesserializeContent(content string) (content.Content, error)
+	DesserializeContent(content string) (map[string]interface{}, error)
 }
 
 type Component interface {
