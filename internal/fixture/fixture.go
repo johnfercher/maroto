@@ -24,6 +24,7 @@ func TextProp() props.Text {
 
 	prop := props.Text{
 		Top:               12,
+		Bottom:            13,
 		Left:              3,
 		Family:            fontProp.Family,
 		Style:             fontProp.Style,
