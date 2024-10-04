@@ -6,7 +6,9 @@ type memoryStorage struct {
 }
 
 func NewMemoryStorage() *memoryStorage {
-	return &memoryStorage{}
+	return &memoryStorage{
+		template: make(map[string]string),
+	}
 }
 
 // RegisterTemplate is responsible for register a template in memory

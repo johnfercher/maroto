@@ -19,7 +19,7 @@ func (p *Page) Generate(content map[string]interface{}) (*page.Page, error) {
 		return nil, err
 	}
 
-	rows, err := p.generateRows(content, p.Header)
+	rows, err := p.generateRows(content, p.Rows)
 	if err != nil {
 		return nil, err
 	}
@@ -28,14 +28,14 @@ func (p *Page) Generate(content map[string]interface{}) (*page.Page, error) {
 }
 
 func (p *Page) generateRows(content map[string]interface{}, templates []rowmapper.Row) ([]row.Row, error) {
-	rows := make([]row.Row, len(content))
+	rows := make([]row.Row, len(templates))
 
-	for _, headerRow := range templates {
-		generatedRow, err := headerRow.Generate(content)
+	for i, template := range templates {
+		generatedRow, err := template.Generate(content)
 		if err != nil {
 			return nil, err
 		}
-		rows = append(rows, *generatedRow)
+		rows[i] = *generatedRow
 	}
 
 	return rows, nil

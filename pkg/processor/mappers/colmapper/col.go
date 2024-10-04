@@ -26,14 +26,14 @@ func (c *Col) Generate(content map[string]interface{}) (*col.Col, error) {
 	if err != nil {
 		return nil, err
 	}
-	return col.NewCol(props.ColProps{Size: c.Props.Size}, components), nil
+	return col.NewCol(props.ColProps{Size: c.Props.Size}, components...), nil
 }
 
 func (c *Col) factoryComponents(content map[string]interface{}) ([]components.Component, error) {
-	componentsTemplate := make([]mappers.Componentmapper, 1)
+	componentsTemplate := make([]mappers.Componentmapper, 0)
 
-	for _, text := range c.Text {
-		componentsTemplate = append(componentsTemplate, &text)
+	for _, t := range c.Text {
+		componentsTemplate = append(componentsTemplate, &text.Text{Props: t.Props, SourceKey: t.SourceKey, DefaultValue: t.DefaultValue})
 	}
 
 	for _, barcode := range c.BarCode {
@@ -51,12 +51,15 @@ func (c *Col) factoryComponents(content map[string]interface{}) ([]components.Co
 func (c *Col) generateComponents(content map[string]interface{}, templates ...mappers.Componentmapper) ([]components.Component, error) {
 	components := make([]components.Component, len(templates))
 
-	for _, template := range templates {
+	if len(templates) == 0 {
+		return components, nil
+	}
+	for i, template := range templates {
 		component, err := template.Generate(content)
 		if err != nil {
 			return nil, err
 		}
-		components = append(components, component)
+		components[i] = component
 	}
 	return components, nil
 }

@@ -2,17 +2,19 @@ package processor
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
+	"github.com/johnfercher/maroto/v2/pkg/processor/deserializer"
+	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
 	"github.com/johnfercher/maroto/v2/pkg/processor/repository"
 )
 
 type processor struct {
 	repository   core.Repository
 	deserializer core.DocumentDeserializer
-	provider     core.Provider
+	provider     provider.Provider
 }
 
 func NewProcessor() *processor {
-	return &processor{repository: repository.NewMemoryStorage()}
+	return &processor{repository: repository.NewMemoryStorage(), deserializer: deserializer.NewJsonDeserialize(), provider: provider.NewMaroto()}
 }
 
 func (p *processor) RegisterTemplate(templateName string, template string) error {
@@ -30,7 +32,7 @@ func (p *processor) GenerateDocument(templateName string, content string) ([]byt
 		return nil, err
 	}
 
-	documentContent, err := p.deserializer.DesserializeContent(templateJson)
+	documentContent, err := p.deserializer.DesserializeContent(content)
 	if err != nil {
 		return nil, err
 	}
@@ -40,5 +42,5 @@ func (p *processor) GenerateDocument(templateName string, content string) ([]byt
 		return nil, err
 	}
 
-	return p.provider.GeneratePdf(pdfComponent)
+	return pdfComponent.Generate(p.provider).GeneratePdf()
 }

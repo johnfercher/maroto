@@ -23,12 +23,12 @@ func (p *Pdf) Generate(content map[string]interface{}) (*pdf.Pdf, error) {
 	for pageKey, pageContent := range content {
 		pageTemplate, ok := p.Pages[pageKey]
 		if !ok {
-			return nil, fmt.Errorf("key %s does not match any page template", pageKey)
+			return nil, fmt.Errorf("the document content references a page template with key \"%s\", but no page with that key was found in the current template", pageKey)
 		}
 
 		content, ok := pageContent.(map[string]interface{})
 		if !ok {
-			return nil, fmt.Errorf("key %s has content that cannot be converted to a valid format", pageKey)
+			return nil, fmt.Errorf("key \"%s\" references a content that cannot be converted to a valid format, ensure that this content can be converted to a map[string]interface{}", pageKey)
 		}
 
 		generatedPage, err := pageTemplate.Generate(content)

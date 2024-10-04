@@ -37,23 +37,29 @@ func (r *Row) getListContent(listKey string, content map[string]interface{}) (ma
 		return nil, fmt.Errorf("the model needed a list with key %s, but that key was not found in the content", r.List)
 	}
 
-	contentMap, ok := contentList.(map[string]interface{})
+	contentMap, ok := contentList.([]interface{})
 	if !ok {
-		return nil, fmt.Errorf("the model needed a list with key %s, but that key was not found in the content", r.List)
+		return nil, fmt.Errorf("key \"%s\" references a content that cannot be converted to a valid format, ensure that this content can be converted to a map[string]interface{}", r.List)
 	}
 
-	return contentMap, nil
+	b := contentMap[0]
+	c, ok := b.(map[string]interface{})
+	if !ok {
+		return nil, fmt.Errorf("key \"%s\" references a content that cannot be converted to a valid format, ensure that this content can be converted to a map[string]interface{}", r.List)
+	}
+
+	return c, nil
 }
 
 func (r *Row) generateCols(content map[string]interface{}) ([]col.Col, error) {
 	generatedCols := make([]col.Col, len(r.Cols))
 
-	for _, col := range r.Cols {
+	for i, col := range r.Cols {
 		generatedCol, err := col.Generate(content)
 		if err != nil {
 			return nil, err
 		}
-		generatedCols = append(generatedCols, *generatedCol)
+		generatedCols[i] = *generatedCol
 	}
 	return generatedCols, nil
 }
