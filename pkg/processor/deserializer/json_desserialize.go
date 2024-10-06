@@ -3,8 +3,6 @@ package deserializer
 
 import (
 	"encoding/json"
-
-	pdf "github.com/johnfercher/maroto/v2/pkg/processor/mappers/pdfmapper"
 )
 
 type jsonDeserializer struct {
@@ -14,18 +12,9 @@ func NewJsonDeserialize() *jsonDeserializer {
 	return &jsonDeserializer{}
 }
 
-// DesserializeTemplate is responsible for transforming a string into a template structure
-func (j *jsonDeserializer) DesserializeTemplate(templateJson string) (pdf.Pdf, error) {
-	return deserializer[pdf.Pdf](templateJson)
-}
-
-// DesserializeContent is responsible for transforming a string into a content map
-func (j *jsonDeserializer) DesserializeContent(contentJson string) (map[string]interface{}, error) {
-	return deserializer[map[string]interface{}](contentJson)
-}
-
-func deserializer[T interface{}](jsonDocument string) (T, error) {
-	var document T
-	err := json.Unmarshal([]byte(jsonDocument), &document)
+func (j *jsonDeserializer) Deserialize(documentJson string) (map[string]interface{}, error) {
+	var document map[string]interface{}
+	err := json.Unmarshal([]byte(documentJson), &document)
 	return document, err
+
 }

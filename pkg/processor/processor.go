@@ -1,20 +1,20 @@
 package processor
 
 import (
+	"fmt"
+
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/deserializer"
-	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
 	"github.com/johnfercher/maroto/v2/pkg/processor/repository"
 )
 
 type processor struct {
 	repository   core.Repository
-	deserializer core.DocumentDeserializer
-	provider     provider.Provider
+	deserializer core.Deserializer
 }
 
 func NewProcessor() *processor {
-	return &processor{repository: repository.NewMemoryStorage(), deserializer: deserializer.NewJsonDeserialize(), provider: provider.NewMaroto()}
+	return &processor{repository: repository.NewMemoryStorage(), deserializer: deserializer.NewJsonDeserialize()}
 }
 
 func (p *processor) RegisterTemplate(templateName string, template string) error {
@@ -27,20 +27,16 @@ func (p *processor) GenerateDocument(templateName string, content string) ([]byt
 		return nil, err
 	}
 
-	documentTemplate, err := p.deserializer.DesserializeTemplate(templateJson)
+	documentTemplate, err := p.deserializer.Deserialize(templateJson)
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println(documentTemplate)
 
-	documentContent, err := p.deserializer.DesserializeContent(content)
-	if err != nil {
-		return nil, err
-	}
+	// documentContent, err := p.deserializer.DesserializeContent(content)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	pdfComponent, err := documentTemplate.Generate(documentContent)
-	if err != nil {
-		return nil, err
-	}
-
-	return pdfComponent.Generate(p.provider).GeneratePdf()
+	return nil, nil
 }

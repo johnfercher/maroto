@@ -2,41 +2,17 @@
 package pagemapper
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/processor/components/page"
-	"github.com/johnfercher/maroto/v2/pkg/processor/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/rowmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 )
 
 type Page struct {
-	Header []rowmapper.Row `json:"header"`
-	Rows   []rowmapper.Row `json:"rows"`
+	Teste string
 }
 
-// generate is responsible for the builder page according to the submitted content
-func (p *Page) Generate(content map[string]interface{}) (*page.Page, error) {
-	header, err := p.generateRows(content, p.Header)
-	if err != nil {
-		return nil, err
-	}
-
-	rows, err := p.generateRows(content, p.Rows)
-	if err != nil {
-		return nil, err
-	}
-
-	return page.NewPage(header, rows), nil
+func NewPage(page interface{}) (*Page, error) {
+	return nil, nil
 }
 
-func (p *Page) generateRows(content map[string]interface{}, templates []rowmapper.Row) ([]row.Row, error) {
-	rows := make([]row.Row, len(templates))
-
-	for i, template := range templates {
-		generatedRow, err := template.Generate(content)
-		if err != nil {
-			return nil, err
-		}
-		rows[i] = *generatedRow
-	}
-
-	return rows, nil
+func (r *Page) Generate(content map[string]interface{}) (components.Component, error) {
+	return nil, nil
 }
