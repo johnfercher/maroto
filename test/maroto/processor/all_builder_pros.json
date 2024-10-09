@@ -1,0 +1,43 @@
+{
+    "dimensions": {
+        "width": 10.0,
+        "height": 10.0
+    },
+    "margins": {
+        "left": 10,
+        "right": 10,
+        "top": 10,
+        "bottom": 10
+    },
+    "chunk_workers": 10,
+    "debug": true,
+    "max_grid_size": 10,
+    "default_font": {
+        "family": "Arial",
+        "style": "bold",
+        "size": 10,
+        "color": {
+            "red": 10,
+            "green": 100,
+            "blue": 150
+        }
+    },
+    "protection": {
+        "type": "Print",
+        "user_password": "senha123",
+        "owner_password": "senha123"
+    },
+    "compression": true,
+    "page_size": "T",
+    "orientation": "portrait",
+    "metadata": {
+        "author": {"text": "user_test", "utf8": true},       
+        "creator": {"text": "user_test", "utf8": true}, 
+        "subject": {"text": "test", "utf8": true},       
+        "title": {"text": "report", "utf8": true},     
+        "creation_date": "2024-10-09 14:30:00",    
+        "keywords_str": {"text": "test", "utf8": true}   
+    },
+    "disable_auto_page_break": true,
+    "generation_mode": "concurrent"
+}
