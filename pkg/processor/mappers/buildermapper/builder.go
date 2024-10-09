@@ -1,21 +1,57 @@
 package buildermapper
 
-import "github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+import (
+	"fmt"
+
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+)
 
 type Builder struct {
-	Dimensions           propsmapper.Dimensions   `json:"dimensions"`
-	Margins              propsmapper.Margins      `json:"margins"`
-	ChunkWorkers         int                      `json:"chunk_workers"`
-	Debug                bool                     `json:"debug"`
-	MaxGridSize          int                      `json:"max_grid_size"`
-	DefaultFont          propsmapper.Font         `json:"default_font"`
-	CustomFonts          []propsmapper.CustomFont `json:"custom_fonts"`
-	PageNumber           propsmapper.PageNumber   `json:"page_number"`
-	Protection           propsmapper.Protection   `json:"protection"`
-	Compression          bool                     `json:"compression"`
-	PageSize             string                   `json:"page_size"`
-	Orientation          string                   `json:"orientation"`
-	Metadata             propsmapper.Metadata     `json:"metadata"`
-	DisableAutoPageBreak bool                     `json:"disable_auto_page_break"`
-	GenerationMode       string                   `json:"generation_mode"`
+	Dimensions           *propsmapper.Dimensions
+	Margins              *propsmapper.Margins
+	ChunkWorkers         int
+	Debug                bool
+	MaxGridSize          int
+	DefaultFont          *propsmapper.Font
+	CustomFonts          []*propsmapper.CustomFont
+	PageNumber           *propsmapper.PageNumber
+	Protection           *propsmapper.Protection
+	Compression          bool
+	PageSize             string
+	Orientation          string
+	Metadata             *propsmapper.Metadata
+	DisableAutoPageBreak bool
+	GenerationMode       string
+}
+
+// NewBuilder is responsible for creating Builder properties. If an invalid property is provided, a default value will be assigned.
+func NewBuilder(builder interface{}) (*Builder, error) {
+	builderMap, ok := builder.(map[string]interface{})
+	if !ok {
+		return nil, fmt.Errorf("builder settings could not be deserialized")
+	}
+
+	return &Builder{
+		Dimensions:           propsmapper.NewDimensions(builderMap["dimensions"]),
+		Margins:              propsmapper.NewMargins(builderMap["margins"]),
+		ChunkWorkers:         int(factoryField(builderMap["chunk_workers"], -1.0)),
+		Debug:                factoryField(builderMap["debug"], false),
+		MaxGridSize:          int(factoryField(builderMap["max_grid_size"], -1.0)),
+		DefaultFont:          propsmapper.NewFont(builderMap["default_font"]),
+		Protection:           propsmapper.NewProtection(builderMap["protection"]),
+		Compression:          factoryField(builderMap["compression"], false),
+		PageSize:             factoryField(builderMap["page_size"], ""),
+		Orientation:          factoryField(builderMap["orientation"], ""),
+		Metadata:             propsmapper.NewMetadata(builderMap["metadata"]),
+		DisableAutoPageBreak: factoryField(builderMap["disable_auto_page_break"], false),
+		GenerationMode:       factoryField(builderMap["generation_mode"], ""),
+	}, nil
+}
+
+func factoryField[T any](val interface{}, defaultValue T) T {
+	result, ok := val.(T)
+	if !ok {
+		return defaultValue
+	}
+	return result
 }
