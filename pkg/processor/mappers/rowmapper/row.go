@@ -7,7 +7,7 @@ type Row struct {
 	Test string
 }
 
-func NewRow(document interface{}) (*Row, error) {
+func NewRow(document interface{}, sourceKey string) (*Row, error) {
 	return &Row{Test: "a"}, nil
 }
 

@@ -5,12 +5,12 @@ import (
 	"fmt"
 
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/pdf"
-	"github.com/johnfercher/maroto/v2/pkg/processor2/core"
-	"github.com/johnfercher/maroto/v2/pkg/processor2/mappers"
-	"github.com/johnfercher/maroto/v2/pkg/processor2/mappers/buildermapper"
-	"github.com/johnfercher/maroto/v2/pkg/processor2/mappers/listmapper"
-	"github.com/johnfercher/maroto/v2/pkg/processor2/mappers/pagemapper"
-	"github.com/johnfercher/maroto/v2/pkg/processor2/mappers/rowmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/core"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/buildermapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/listmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/pagemapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/rowmapper"
 )
 
 type Document struct {
@@ -67,23 +67,24 @@ func (p *Document) getFieldMappers() map[string]func(interface{}) error {
 
 // setBuilder is responsible for factories builder information
 func (p *Document) setBuilder(builderDoc interface{}) error {
-	builder, ok := builderDoc.(buildermapper.Builder)
-	if !ok {
-		return fmt.Errorf("builder settings could not be deserialized")
+	builder, err := buildermapper.NewBuilder(builderDoc)
+	if err != nil {
+		return err
 	}
-	p.Builder = builder
+
+	p.Builder = *builder
 	return nil
 }
 
 // setHeader is responsible for factory the header
 func (p *Document) setHeader(rowsDoc interface{}) error {
-	rowsTemplate, ok := rowsDoc.([]interface{})
+	rowsTemplate, ok := rowsDoc.(map[string]interface{})
 	if !ok {
 		return fmt.Errorf("header cannot be deserialized, ensure header has an array of rows")
 	}
 
-	for _, rowTemplate := range rowsTemplate {
-		row, err := rowmapper.NewRow(rowTemplate)
+	for templateKey, rowTemplate := range rowsTemplate {
+		row, err := rowmapper.NewRow(rowTemplate, templateKey)
 		if err != nil {
 			return err
 		}
@@ -95,13 +96,13 @@ func (p *Document) setHeader(rowsDoc interface{}) error {
 
 // setFooter is responsible for factory the footer
 func (p *Document) setFooter(rowsDoc interface{}) error {
-	rowsTemplate, ok := rowsDoc.([]interface{})
+	rowsTemplate, ok := rowsDoc.(map[string]interface{})
 	if !ok {
-		return fmt.Errorf("header cannot be deserialized, ensure header has an array of rows")
+		return fmt.Errorf("footer cannot be deserialized, ensure footer has an array of rows")
 	}
 
-	for _, rowTemplate := range rowsTemplate {
-		row, err := rowmapper.NewRow(rowTemplate)
+	for templateKey, rowTemplate := range rowsTemplate {
+		row, err := rowmapper.NewRow(rowTemplate, templateKey)
 		if err != nil {
 			return err
 		}
