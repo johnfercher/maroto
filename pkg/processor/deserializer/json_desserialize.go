@@ -5,8 +5,7 @@ import (
 	"encoding/json"
 )
 
-type jsonDeserializer struct {
-}
+type jsonDeserializer struct{}
 
 func NewJsonDeserialize() *jsonDeserializer {
 	return &jsonDeserializer{}
@@ -16,5 +15,4 @@ func (j *jsonDeserializer) Deserialize(documentJson string) (map[string]interfac
 	var document map[string]interface{}
 	err := json.Unmarshal([]byte(documentJson), &document)
 	return document, err
-
 }

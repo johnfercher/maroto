@@ -1,8 +1,11 @@
 package processor
 
 import (
+	"fmt"
+
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/deserializer"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/abstractfactory"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/documentmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/repository"
 )
@@ -26,10 +29,11 @@ func (p *processor) GenerateDocument(templateName string, content string) ([]byt
 		return nil, err
 	}
 
-	document, err := documentmapper.NewPdf(templateJson, p.deserializer)
+	document, err := documentmapper.NewPdf(templateJson, p.deserializer, abstractfactory.NewAbstractFactoryMaps())
 	if err != nil {
 		return nil, err
 	}
+	fmt.Print(document)
 
 	return nil, nil
 }
