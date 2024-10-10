@@ -6,15 +6,15 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 )
 
-type List[T mappers.Componentmapper] struct {
+type List struct {
 	sourceKey string
-	templates T
+	templates mappers.Componentmapper
 }
 
-func NewList[T mappers.Componentmapper](document interface{}) (*List[T], error) {
-	return nil, nil
+func NewList(document interface{}, sourceKey string, generate mappers.GenerateComponent) (*List, error) {
+	return &List{}, nil
 }
 
-func (r *List[T]) Generate(content map[string]interface{}) (components.Component, error) {
+func (r *List) Generate(content map[string]interface{}) (components.Component, error) {
 	return nil, nil
 }

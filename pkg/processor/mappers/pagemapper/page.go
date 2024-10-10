@@ -9,7 +9,7 @@ type Page struct {
 	Teste string
 }
 
-func NewPage(page interface{}) (*Page, error) {
+func NewPage(page interface{}, sourceKey string) (*Page, error) {
 	return nil, nil
 }
 

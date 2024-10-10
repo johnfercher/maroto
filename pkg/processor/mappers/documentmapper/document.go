@@ -3,17 +3,16 @@ package documentmapper
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/pdf"
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/buildermapper"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/listmapper"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/pagemapper"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/rowmapper"
 )
 
 type Document struct {
+	factory mappers.AbstractFactoryMaps
 	Builder buildermapper.Builder
 	Header  []mappers.Componentmapper
 	Footer  []mappers.Componentmapper
@@ -21,8 +20,8 @@ type Document struct {
 }
 
 // NewPdf is responsible for creating the pdf template
-func NewPdf(document string, deserializer core.Deserializer) (*Document, error) {
-	newPdf := Document{}
+func NewPdf(document string, deserializer core.Deserializer, factory mappers.AbstractFactoryMaps) (*Document, error) {
+	newPdf := Document{factory: factory}
 	template, err := deserializer.Deserialize(document)
 	if err != nil {
 		return nil, err
@@ -84,7 +83,7 @@ func (p *Document) setHeader(rowsDoc interface{}) error {
 	}
 
 	for templateKey, rowTemplate := range rowsTemplate {
-		row, err := rowmapper.NewRow(rowTemplate, templateKey)
+		row, err := p.factory.NewRow(rowTemplate, templateKey)
 		if err != nil {
 			return err
 		}
@@ -102,11 +101,11 @@ func (p *Document) setFooter(rowsDoc interface{}) error {
 	}
 
 	for templateKey, rowTemplate := range rowsTemplate {
-		row, err := rowmapper.NewRow(rowTemplate, templateKey)
+		row, err := p.factory.NewRow(rowTemplate, templateKey)
 		if err != nil {
 			return err
 		}
-		p.Header = append(p.Footer, row)
+		p.Footer = append(p.Footer, row)
 	}
 
 	return nil
@@ -120,14 +119,14 @@ func (p *Document) setPages(rowsDoc interface{}) error {
 		return fmt.Errorf("ensure pages can be converted to map[string] interface{}")
 	}
 
-	for templateName, pageTemplate := range templatePage {
+	for templateName, template := range templatePage {
 		var page mappers.Componentmapper
 		var err error
 
-		if templateName == "list" {
-			page, err = listmapper.NewList[*pagemapper.Page](pageTemplate)
+		if strings.HasPrefix(templateName, "list") {
+			page, err = p.factory.NewList(template, templateName, p.factory.NewPage)
 		} else {
-			page, err = pagemapper.NewPage(pageTemplate)
+			page, err = p.factory.NewPage(template, templateName)
 		}
 
 		if err != nil {
