@@ -29,8 +29,13 @@ func NewMetricsDecorator(inner core.Maroto) core.Maroto {
 }
 
 // FitlnCurrentPage decoratess the FitlnCurrentPage method of maroto instance.
-func (m *MetricsDecorator) FitlnCurrentPage(heightNewLine float64) bool {
-	return m.inner.FitlnCurrentPage(heightNewLine)
+func (m *MetricsDecorator) FitsOnCurrentPage(rows ...core.Row) int {
+	return m.inner.FitsOnCurrentPage(rows...)
+}
+
+// FillPageToAddNew is responsible for adding a new page
+func (m *MetricsDecorator) FillPageToAddNew() {
+	m.inner.FillPageToAddNew()
 }
 
 // GetCurrentConfig decorates the GetCurrentConfig method of maroto instance.
