@@ -3,7 +3,7 @@ package pdf
 import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/builder"
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/page"
-	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Pdf struct {
@@ -18,7 +18,7 @@ func NewPdf(builder *builder.Builder, pages ...*page.Page) *Pdf {
 	}
 }
 
-func (p *Pdf) Generate(provider provider.Provider) provider.Provider {
+func (p *Pdf) Generate(provider processorprovider.ProcessorProvider) processorprovider.ProcessorProvider {
 	for _, page := range p.Pages {
 		page.Generate(provider)
 	}

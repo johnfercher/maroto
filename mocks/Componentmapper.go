@@ -22,23 +22,23 @@ func (_m *Componentmapper) EXPECT() *Componentmapper_Expecter {
 }
 
 // Generate provides a mock function with given fields: content
-func (_m *Componentmapper) Generate(content map[string]interface{}) (components.Component, error) {
+func (_m *Componentmapper) Generate(content map[string]interface{}) (components.PdfComponent, error) {
 	ret := _m.Called(content)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Generate")
 	}
 
-	var r0 components.Component
+	var r0 components.PdfComponent
 	var r1 error
-	if rf, ok := ret.Get(0).(func(map[string]interface{}) (components.Component, error)); ok {
+	if rf, ok := ret.Get(0).(func(map[string]interface{}) (components.PdfComponent, error)); ok {
 		return rf(content)
 	}
-	if rf, ok := ret.Get(0).(func(map[string]interface{}) components.Component); ok {
+	if rf, ok := ret.Get(0).(func(map[string]interface{}) components.PdfComponent); ok {
 		r0 = rf(content)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(components.Component)
+			r0 = ret.Get(0).(components.PdfComponent)
 		}
 	}
 
@@ -69,12 +69,12 @@ func (_c *Componentmapper_Generate_Call) Run(run func(content map[string]interfa
 	return _c
 }
 
-func (_c *Componentmapper_Generate_Call) Return(_a0 components.Component, _a1 error) *Componentmapper_Generate_Call {
+func (_c *Componentmapper_Generate_Call) Return(_a0 components.PdfComponent, _a1 error) *Componentmapper_Generate_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *Componentmapper_Generate_Call) RunAndReturn(run func(map[string]interface{}) (components.Component, error)) *Componentmapper_Generate_Call {
+func (_c *Componentmapper_Generate_Call) RunAndReturn(run func(map[string]interface{}) (components.PdfComponent, error)) *Componentmapper_Generate_Call {
 	_c.Call.Return(run)
 	return _c
 }

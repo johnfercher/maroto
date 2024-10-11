@@ -11,6 +11,6 @@ func NewRow(document interface{}, sourceKey string) (*Row, error) {
 	return &Row{Test: "a"}, nil
 }
 
-func (r *Row) Generate(content map[string]interface{}) (components.Component, error) {
+func (r *Row) Generate(content map[string]interface{}) (components.PdfComponent, error) {
 	return nil, nil
 }

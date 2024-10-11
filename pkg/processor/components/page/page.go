@@ -3,7 +3,7 @@ package page
 import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Page struct {
@@ -16,7 +16,7 @@ func NewPage(header, rows []row.Row) *Page {
 	}
 }
 
-func (p *Page) Generate(provider provider.Provider) {
+func (p *Page) Generate(provider processorprovider.ProcessorProvider) {
 	rows := make([]core.Row, len(p.Rows))
 
 	for i, row := range p.Rows {

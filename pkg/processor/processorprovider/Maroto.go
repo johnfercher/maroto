@@ -1,4 +1,4 @@
-package provider
+package processorprovider
 
 import (
 	"github.com/johnfercher/maroto/v2"
@@ -33,16 +33,16 @@ func (m *Maroto) GeneratePdf() ([]byte, error) {
 	return doc.GetBytes(), nil
 }
 
-func (m *Maroto) ConfigureBuilder(builder builder.Builder) Provider {
+func (m *Maroto) ConfigureBuilder(builder builder.Builder) ProcessorProvider {
 	return nil
 }
 
-func (m *Maroto) RegisterHeader(rows ...core.Row) Provider {
+func (m *Maroto) RegisterHeader(rows ...core.Row) ProcessorProvider {
 	(*m.maroto).RegisterHeader(rows...)
 	return m
 }
 
-func (m *Maroto) RegisterFooter(rows ...core.Row) Provider {
+func (m *Maroto) RegisterFooter(rows ...core.Row) ProcessorProvider {
 	(*m.maroto).RegisterFooter(rows...)
 	return m
 }

@@ -3,7 +3,7 @@ package row
 import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/col"
-	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Row struct {
@@ -16,7 +16,7 @@ func NewRow(cols ...col.Col) *Row {
 	}
 }
 
-func (r *Row) Generate(provider provider.Provider) core.Row {
+func (r *Row) Generate(provider processorprovider.ProcessorProvider) core.Row {
 	cols := make([]core.Col, len(r.Cols))
 
 	for i, col := range r.Cols {

@@ -1,4 +1,4 @@
-package provider
+package processorprovider
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -6,11 +6,11 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/props"
 )
 
-type Provider interface {
+type ProcessorProvider interface {
 	GeneratePdf() ([]byte, error)
-	ConfigureBuilder(builder builder.Builder) Provider
-	RegisterHeader(rows ...core.Row) Provider
-	RegisterFooter(rows ...core.Row) Provider
+	ConfigureBuilder(builder builder.Builder) ProcessorProvider
+	RegisterHeader(rows ...core.Row) ProcessorProvider
+	RegisterFooter(rows ...core.Row) ProcessorProvider
 	CreatePage(components ...core.Row) core.Page
 	CreateRow(components ...core.Col) core.Row
 	CreateCol(size int, components ...core.Component) core.Col

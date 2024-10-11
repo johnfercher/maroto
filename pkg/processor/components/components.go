@@ -2,9 +2,9 @@ package components
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
-	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
-type Component interface {
-	Generate(provider provider.Provider) core.Component
+type PdfComponent interface {
+	Generate(provider processorprovider.ProcessorProvider) core.Component
 }

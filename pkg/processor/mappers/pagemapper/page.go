@@ -13,6 +13,6 @@ func NewPage(page interface{}, sourceKey string) (*Page, error) {
 	return nil, nil
 }
 
-func (r *Page) Generate(content map[string]interface{}) (components.Component, error) {
+func (r *Page) Generate(content map[string]interface{}) (components.PdfComponent, error) {
 	return nil, nil
 }

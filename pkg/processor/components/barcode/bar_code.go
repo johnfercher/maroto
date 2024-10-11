@@ -3,7 +3,7 @@ package barcode
 import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/props"
-	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type BarCode struct {
@@ -18,6 +18,6 @@ func NewBarCode(props props.BarCodeProps, code string) *BarCode {
 	}
 }
 
-func (b *BarCode) Generate(provider provider.Provider) core.Component {
+func (b *BarCode) Generate(provider processorprovider.ProcessorProvider) core.Component {
 	return provider.CreateBarCode(b.Code, b.Props)
 }

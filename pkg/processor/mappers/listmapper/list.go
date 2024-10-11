@@ -15,6 +15,6 @@ func NewList(document interface{}, sourceKey string, generate mappers.GenerateCo
 	return &List{}, nil
 }
 
-func (r *List) Generate(content map[string]interface{}) (components.Component, error) {
+func (r *List) Generate(content map[string]interface{}) (components.PdfComponent, error) {
 	return nil, nil
 }

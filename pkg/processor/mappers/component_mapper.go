@@ -5,7 +5,7 @@ import "github.com/johnfercher/maroto/v2/pkg/processor/components"
 type GenerateComponent func(document interface{}, sourceKey string) (Componentmapper, error)
 
 type Componentmapper interface {
-	Generate(content map[string]interface{}) (components.Component, error)
+	Generate(content map[string]interface{}) (components.PdfComponent, error)
 }
 
 type AbstractFactoryMaps interface {

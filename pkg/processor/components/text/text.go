@@ -3,7 +3,7 @@ package text
 import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/props"
-	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Text struct {
@@ -18,6 +18,6 @@ func NewText(props props.TextProps, value string) *Text {
 	}
 }
 
-func (t *Text) Generate(provider provider.Provider) core.Component {
+func (t *Text) Generate(provider processorprovider.ProcessorProvider) core.Component {
 	return provider.CreateText(t.Value, t.Props)
 }

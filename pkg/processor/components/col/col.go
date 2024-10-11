@@ -4,22 +4,22 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/props"
-	"github.com/johnfercher/maroto/v2/pkg/processor/provider"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Col struct {
 	Props      props.ColProps
-	Components []components.Component
+	Components []components.PdfComponent
 }
 
-func NewCol(props props.ColProps, components ...components.Component) *Col {
+func NewCol(props props.ColProps, components ...components.PdfComponent) *Col {
 	return &Col{
 		Props:      props,
 		Components: components,
 	}
 }
 
-func (c *Col) Generate(provider provider.Provider) core.Col {
+func (c *Col) Generate(provider processorprovider.ProcessorProvider) core.Col {
 	components := make([]core.Component, len(c.Components))
 
 	for i, component := range c.Components {
