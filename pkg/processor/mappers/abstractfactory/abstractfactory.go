@@ -21,7 +21,7 @@ func (f *abstractFactoryMaps) NewRow(document interface{}, sourceKey string) (ma
 
 // NewPage is responsible for wrapper the creation of a page
 func (f *abstractFactoryMaps) NewPage(document interface{}, sourceKey string) (mappers.Componentmapper, error) {
-	return pagemapper.NewPage(document, sourceKey)
+	return pagemapper.NewPage(document, sourceKey, f)
 }
 
 // NewList is responsible for wrapper the creation of a list

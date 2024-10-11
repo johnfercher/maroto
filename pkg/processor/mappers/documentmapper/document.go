@@ -113,8 +113,8 @@ func (p *Document) setFooter(rowsDoc interface{}) error {
 
 // setPages is responsible for factory the pages.
 // pages can be a list of pages or just one page
-func (p *Document) setPages(rowsDoc interface{}) error {
-	templatePage, ok := rowsDoc.(map[string]interface{})
+func (p *Document) setPages(pagesDoc interface{}) error {
+	templatePage, ok := pagesDoc.(map[string]interface{})
 	if !ok {
 		return fmt.Errorf("ensure pages can be converted to map[string] interface{}")
 	}

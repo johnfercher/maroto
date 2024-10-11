@@ -1,7 +1,6 @@
 package processorprovider
 
 import (
-	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
@@ -20,8 +19,8 @@ type Maroto struct {
 }
 
 func NewMaroto() *Maroto {
-	m := maroto.New()
-	return &Maroto{maroto: &m}
+	// m := maroto.New()
+	return nil
 }
 
 func (m *Maroto) GeneratePdf() ([]byte, error) {
