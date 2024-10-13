@@ -69,7 +69,7 @@ func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rec
 		return
 	}
 
-	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension.Jpg, false)
+	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension.Png, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add matrixcode to document", cell, merror.DefaultErrorText)
@@ -83,7 +83,7 @@ func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 		return
 	}
 
-	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension.Jpg, false)
+	err = g.image.Add(img, cell, g.cfg.Margins, prop, extension.Png, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add qrcode to document", cell, merror.DefaultErrorText)
@@ -91,7 +91,7 @@ func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 }
 
 func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcode) {
-	image, err := g.cache.GetImage(g.getBarcodeImageName(fmt.Sprintf("bar-code-%s", code), prop), extension.Jpg)
+	image, err := g.cache.GetImage(g.getBarcodeImageName(fmt.Sprintf("bar-code-%s", code), prop), extension.Png)
 	if err != nil {
 		image, err = g.code.GenBar(code, cell, prop)
 	}
@@ -101,7 +101,7 @@ func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcod
 	}
 
 	g.cache.AddImage(g.getBarcodeImageName(fmt.Sprintf("bar-code-%s", code), prop), image)
-	err = g.image.Add(image, cell, g.cfg.Margins, prop.ToRectProp(), extension.Jpg, false)
+	err = g.image.Add(image, cell, g.cfg.Margins, prop.ToRectProp(), extension.Png, false)
 	if err != nil {
 		g.fpdf.ClearError()
 		g.text.Add("could not add barcode to document", cell, merror.DefaultErrorText)
@@ -230,7 +230,7 @@ func (g *provider) GetDimensionsByMatrixCode(code string) (*entity.Dimensions, e
 		return nil, err
 	}
 
-	imgInfo, _ := g.image.GetImageInfo(img, extension.Jpg)
+	imgInfo, _ := g.image.GetImageInfo(img, extension.Png)
 
 	if imgInfo == nil {
 		return nil, errors.New("could not read image options, maybe path/name is wrong")
@@ -246,7 +246,7 @@ func (g *provider) GetDimensionsByQrCode(code string) (*entity.Dimensions, error
 		return nil, err
 	}
 
-	imgInfo, _ := g.image.GetImageInfo(img, extension.Jpg)
+	imgInfo, _ := g.image.GetImageInfo(img, extension.Png)
 	if imgInfo == nil {
 		return nil, errors.New("could not read image options, maybe path/name is wrong")
 	}
@@ -278,7 +278,7 @@ func (g *provider) getBarcodeImageName(code string, prop *props.Barcode) string 
 
 // loadImage is responsible for loading an codes
 func (g *provider) loadCode(code, codeType string, generate func(code string) (*entity.Image, error)) (*entity.Image, error) {
-	image, err := g.cache.GetImage(codeType+code, extension.Jpg)
+	image, err := g.cache.GetImage(codeType+code, extension.Png)
 	if err != nil {
 		image, err = generate(code)
 	} else {
