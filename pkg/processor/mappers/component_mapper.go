@@ -11,5 +11,6 @@ type Componentmapper interface {
 type AbstractFactoryMaps interface {
 	NewRow(document interface{}, sourceKey string) (Componentmapper, error)
 	NewPage(document interface{}, sourceKey string) (Componentmapper, error)
+	NewCol(document interface{}) (Componentmapper, error)
 	NewList(document interface{}, sourceKey string, generate GenerateComponent) (Componentmapper, error)
 }

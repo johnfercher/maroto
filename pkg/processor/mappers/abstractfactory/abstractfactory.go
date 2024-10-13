@@ -2,6 +2,7 @@ package abstractfactory
 
 import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/colmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/listmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/pagemapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/rowmapper"
@@ -16,12 +17,17 @@ func NewAbstractFactoryMaps() *abstractFactoryMaps {
 
 // NewRow is responsible for wrapper the creation of a row
 func (f *abstractFactoryMaps) NewRow(document interface{}, sourceKey string) (mappers.Componentmapper, error) {
-	return rowmapper.NewRow(document, sourceKey)
+	return rowmapper.NewRow(document, sourceKey, f)
 }
 
 // NewPage is responsible for wrapper the creation of a page
 func (f *abstractFactoryMaps) NewPage(document interface{}, sourceKey string) (mappers.Componentmapper, error) {
 	return pagemapper.NewPage(document, sourceKey, f)
+}
+
+// NewCol is responsible for wrapper the creation of a col
+func (f *abstractFactoryMaps) NewCol(document interface{}) (mappers.Componentmapper, error) {
+	return colmapper.NewCol(document)
 }
 
 // NewList is responsible for wrapper the creation of a list
