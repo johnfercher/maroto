@@ -13,4 +13,11 @@ type AbstractFactoryMaps interface {
 	NewPage(document interface{}, sourceKey string) (Componentmapper, error)
 	NewCol(document interface{}) (Componentmapper, error)
 	NewList(document interface{}, sourceKey string, generate GenerateComponent) (Componentmapper, error)
+	NewBarcode(document interface{}) (Componentmapper, error)
+	NewMatrixcode(document interface{}) (Componentmapper, error)
+	NewQrcode(document interface{}) (Componentmapper, error)
+	NewImage(document interface{}) (Componentmapper, error)
+	NewLine(document interface{}) (Componentmapper, error)
+	NewSignature(document interface{}) (Componentmapper, error)
+	NewText(document interface{}) (Componentmapper, error)
 }

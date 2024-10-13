@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/mocks"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/rowmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/rowmapper"
 	"github.com/stretchr/testify/assert"
 )
 

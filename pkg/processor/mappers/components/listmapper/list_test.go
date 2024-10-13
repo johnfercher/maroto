@@ -6,7 +6,7 @@ import (
 
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/mocks"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/listmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/listmapper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
