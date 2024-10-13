@@ -9,7 +9,8 @@ import (
 
 func MapperRow() *rowmapper.Row {
 	return &rowmapper.Row{
-		Test: "1",
+		Height: 0,
+		Cols:   make([]mappers.Componentmapper, 0),
 	}
 }
 

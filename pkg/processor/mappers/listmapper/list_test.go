@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-//se interface invalida for passada erro é retornada
+// se interface invalida for passada erro é retornada
 // se componente não puder ser gerado, erro é retornado
 // se uma lista de 2 componentes for passada, 1 erro é retornado
 

@@ -20,6 +20,64 @@ func (_m *AbstractFactoryMaps) EXPECT() *AbstractFactoryMaps_Expecter {
 	return &AbstractFactoryMaps_Expecter{mock: &_m.Mock}
 }
 
+// NewCol provides a mock function with given fields: document
+func (_m *AbstractFactoryMaps) NewCol(document interface{}) (mappers.Componentmapper, error) {
+	ret := _m.Called(document)
+
+	if len(ret) == 0 {
+		panic("no return value specified for NewCol")
+	}
+
+	var r0 mappers.Componentmapper
+	var r1 error
+	if rf, ok := ret.Get(0).(func(interface{}) (mappers.Componentmapper, error)); ok {
+		return rf(document)
+	}
+	if rf, ok := ret.Get(0).(func(interface{}) mappers.Componentmapper); ok {
+		r0 = rf(document)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(mappers.Componentmapper)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(interface{}) error); ok {
+		r1 = rf(document)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// AbstractFactoryMaps_NewCol_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'NewCol'
+type AbstractFactoryMaps_NewCol_Call struct {
+	*mock.Call
+}
+
+// NewCol is a helper method to define mock.On call
+//   - document interface{}
+func (_e *AbstractFactoryMaps_Expecter) NewCol(document interface{}) *AbstractFactoryMaps_NewCol_Call {
+	return &AbstractFactoryMaps_NewCol_Call{Call: _e.mock.On("NewCol", document)}
+}
+
+func (_c *AbstractFactoryMaps_NewCol_Call) Run(run func(document interface{})) *AbstractFactoryMaps_NewCol_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(interface{}))
+	})
+	return _c
+}
+
+func (_c *AbstractFactoryMaps_NewCol_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewCol_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *AbstractFactoryMaps_NewCol_Call) RunAndReturn(run func(interface{}) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewCol_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // NewList provides a mock function with given fields: document, sourceKey, generate
 func (_m *AbstractFactoryMaps) NewList(document interface{}, sourceKey string, generate mappers.GenerateComponent) (mappers.Componentmapper, error) {
 	ret := _m.Called(document, sourceKey, generate)
