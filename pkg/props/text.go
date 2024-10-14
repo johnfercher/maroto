@@ -11,6 +11,8 @@ import (
 type Text struct {
 	// Top is the amount of space between the upper cell limit and the text.
 	Top float64
+	// Bottom is the amount of space between the lower cell limit and the text. (Used by auto row only)
+	Bottom float64
 	// Left is the minimal amount of space between the left cell boundary and the text.
 	Left float64
 	// Right is the minimal amount of space between the right cell boundary and the text.
@@ -38,6 +40,9 @@ func (t *Text) ToMap() map[string]interface{} {
 	m := make(map[string]interface{})
 	if t.Top != 0 {
 		m["prop_top"] = t.Top
+	}
+	if t.Bottom != 0 {
+		m["prop_bottom"] = t.Bottom
 	}
 
 	if t.Left != 0 {
@@ -110,6 +115,10 @@ func (t *Text) MakeValid(font *Font) {
 
 	if t.Top < minValue {
 		t.Top = minValue
+	}
+
+	if t.Bottom < minValue {
+		t.Bottom = minValue
 	}
 
 	if t.Left < minValue {

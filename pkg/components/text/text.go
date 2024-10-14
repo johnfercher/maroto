@@ -66,7 +66,7 @@ func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
 	amountLines := provider.GetLinesQuantity(t.value, &t.prop, cell.Width-t.prop.Left-t.prop.Right)
 	fontHeight := provider.GetFontHeight(&props.Font{Family: t.prop.Family, Style: t.prop.Style, Size: t.prop.Size, Color: t.prop.Color})
 	textHeight := float64(amountLines)*fontHeight + float64(amountLines-1)*t.prop.VerticalPadding
-	return textHeight + t.prop.Top
+	return textHeight + t.prop.Top + t.prop.Bottom
 }
 
 // SetConfig sets the config.

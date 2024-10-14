@@ -54,6 +54,15 @@ func GetMaroto() core.Maroto {
 	)
 
 	m.AddAutoRow(
+		image.NewFromFileCol(5, "docs/assets/images/biplane.jpg"),
+		text.NewCol(7, intro, props.Text{
+			Size:   13,
+			Top:    8,
+			Bottom: 9,
+		}),
+	)
+
+	m.AddAutoRow(
 		code.NewBarCol(4, "code"),
 		text.NewCol(8, intro),
 	)

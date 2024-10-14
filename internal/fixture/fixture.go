@@ -24,6 +24,7 @@ func TextProp() props.Text {
 
 	prop := props.Text{
 		Top:               12,
+		Bottom:            13,
 		Left:              3,
 		Family:            fontProp.Family,
 		Style:             fontProp.Style,
@@ -77,6 +78,18 @@ func RectProp() props.Rect {
 	}
 	prop.MakeValid()
 	return prop
+}
+
+// ConfigEntity is responsible to give a valid entity.Config.
+func ConfigEntity() entity.Config {
+	return entity.Config{
+		Margins: &entity.Margins{
+			Left:   10,
+			Top:    10,
+			Right:  10,
+			Bottom: 10,
+		},
+	}
 }
 
 // CellEntity is responsible to give a valid entity.Cell.
