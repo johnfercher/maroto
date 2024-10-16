@@ -16,23 +16,8 @@ func NewProtection(protection interface{}) *Protection {
 	}
 
 	return &Protection{
-		Type:          factoryTypeProtection(*convertFields(protectionMap["type"], "None")),
+		Type:          NewTypeProtection(*convertFields(protectionMap["type"], "None")),
 		UserPassword:  *convertFields(protectionMap["user_password"], ""),
 		OwnerPassword: *convertFields(protectionMap["owner_password"], ""),
 	}
-}
-
-func factoryTypeProtection(typeProtection string) byte {
-	switch typeProtection {
-	case "Print":
-		return 4
-	case "Modify":
-		return 8
-	case "Copy":
-		return 16
-	case "AnnotForms":
-		return 32
-	}
-
-	return 0
 }
