@@ -175,11 +175,7 @@ func (m *Maroto) RegisterFooter(rows ...core.Row) error {
 // Generate is responsible to compute the component tree created by
 // the usage of all other Maroto methods, and generate the PDF document.
 func (m *Maroto) Generate() (core.Document, error) {
-	m.provider.SetProtection(m.config.Protection)
-	m.provider.SetCompression(m.config.Compression)
-	m.provider.SetMetadata(m.config.Metadata)
-
-	m.FillPageToAddNew()
+	m.fillPageToAddNew()
 	m.setConfig()
 
 	if m.config.GenerationMode == generation.Concurrent {
@@ -402,5 +398,9 @@ func getConfig(configs ...*entity.Config) *entity.Config {
 
 func getProvider(cache cache.Cache, cfg *entity.Config) core.Provider {
 	deps := gofpdf.NewBuilder().Build(cfg, cache)
-	return gofpdf.New(deps)
+	provider := gofpdf.New(deps)
+	provider.SetMetadata(cfg.Metadata)
+	provider.SetCompression(cfg.Compression)
+	provider.SetProtection(cfg.Protection)
+	return provider
 }
