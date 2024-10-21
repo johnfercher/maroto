@@ -71,6 +71,22 @@ func TestNew(t *testing.T) {
 }
 
 func TestMaroto_AddRow(t *testing.T) {
+	t.Run("When row height and available sapacing are equals, should add row in current page", func(t *testing.T) {
+		cfg := config.NewBuilder().
+			WithDimensions(20, 20).
+			WithBottomMargin(0).
+			WithTopMargin(0).
+			WithLeftMargin(0).
+			WithRightMargin(0).
+			Build()
+		sut := maroto.New(cfg)
+		// Act
+		sut.AddRow(19)
+		sut.AddRow(1)
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row.json")
+	})
 	t.Run("when col is not sent, should empty col is set", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
