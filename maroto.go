@@ -175,7 +175,7 @@ func (m *Maroto) RegisterFooter(rows ...core.Row) error {
 // Generate is responsible to compute the component tree created by
 // the usage of all other Maroto methods, and generate the PDF document.
 func (m *Maroto) Generate() (core.Document, error) {
-	m.fillPageToAddNew()
+	m.FillPageToAddNew()
 	m.setConfig()
 
 	if m.config.GenerationMode == generation.Concurrent {
