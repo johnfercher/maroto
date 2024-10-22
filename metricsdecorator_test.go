@@ -150,17 +150,28 @@ func TestMetricsDecorator_GetStructure(t *testing.T) {
 	inner.AssertNumberOfCalls(t, "GetStructure", 1)
 }
 
+func TestMetricsDecorator_FillPageToAddNew(t *testing.T) {
+	// Arrange
+	inner := mocks.NewMaroto(t)
+	inner.EXPECT().FillPageToAddNew()
+	sut := NewMetricsDecorator(inner)
+
+	// Act & Assert
+	sut.FillPageToAddNew()
+	inner.AssertNumberOfCalls(t, "FillPageToAddNew", 1)
+}
+
 func TestMetricsDecorator_FitlnCurrentPage(t *testing.T) {
 	// Arrange
 	inner := mocks.NewMaroto(t)
-	inner.EXPECT().FitlnCurrentPage(10.0).Return(true)
-	inner.EXPECT().FitlnCurrentPage(20.0).Return(false)
+	inner.EXPECT().FitsOnCurrentPage(text.NewRow(10, "text")).Return(1)
+	inner.EXPECT().FitsOnCurrentPage(text.NewRow(20, "text")).Return(0)
 
 	sut := NewMetricsDecorator(inner)
 
 	// Act & Assert
-	assert.True(t, sut.FitlnCurrentPage(10))
-	assert.False(t, sut.FitlnCurrentPage(20))
+	assert.Equal(t, sut.FitsOnCurrentPage(text.NewRow(10, "text")), 1)
+	assert.Equal(t, sut.FitsOnCurrentPage(text.NewRow(20, "text")), 0)
 }
 
 func TestMetricsDecorator_GetCurrentConfig(t *testing.T) {

@@ -7,7 +7,6 @@ import (
 
 	"github.com/johnfercher/maroto/v2"
 
-	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
@@ -15,6 +14,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
+	"github.com/johnfercher/maroto/v2/pkg/components/list"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/signature"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -68,14 +68,12 @@ func run() *metrics.Time {
 	m.AddRows(
 		text.NewRow(20, "Main features", props.Text{Size: 15, Top: 6.5}),
 	)
+	myList := list.New(getHeader(), props.List{MinimumRowsBypage: 3}).Add(getObjects(1158)...)
 
-	objects := getObjects(1158)
-	rows, err := list.Build[Object](objects)
+	err = myList.BuildListWithFixedHeader(m)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-
-	m.AddRows(rows...)
 
 	for i := 0; i < 1158; i++ {
 		m.AddRows(buildCodesRow()...)
@@ -184,17 +182,17 @@ type Object struct {
 	Value string
 }
 
-func (o Object) GetHeader() core.Row {
+func getHeader() core.Row {
 	return row.New(10).Add(
 		text.NewCol(4, "Key", props.Text{Style: fontstyle.Bold}),
 		text.NewCol(8, "Bytes", props.Text{Style: fontstyle.Bold}),
 	)
 }
 
-func (o Object) GetContent(i int) core.Row {
+func getContent(i int) core.Row {
 	r := row.New(5).Add(
-		text.NewCol(4, o.Key),
-		text.NewCol(8, o.Value),
+		text.NewCol(4, fmt.Sprintf("Key: %d", i)),
+		text.NewCol(8, fmt.Sprintf("Value: %d", i)),
 	)
 
 	if i%2 == 0 {
@@ -202,17 +200,13 @@ func (o Object) GetContent(i int) core.Row {
 			BackgroundColor: background,
 		})
 	}
-
 	return r
 }
 
-func getObjects(max int) []Object {
-	var objects []Object
+func getObjects(max int) []core.Row {
+	var objects []core.Row
 	for i := 0; i < max; i++ {
-		objects = append(objects, Object{
-			Key:   fmt.Sprintf("Key: %d", i),
-			Value: fmt.Sprintf("Bytes: %d", i),
-		})
+		objects = append(objects, getContent(i))
 	}
 	return objects
 }

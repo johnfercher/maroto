@@ -70,10 +70,19 @@ func ExampleMaroto_AddRow() {
 }
 
 // ExampleMaroto_FitlnCurrentPage demonstrate how to check if the new line fits on the current page
-func ExampleMaroto_FitlnCurrentPage() {
+func ExampleMaroto_FitsOnCurrentPage() {
 	m := maroto.New()
 
-	m.FitlnCurrentPage(12)
+	_ = m.FitsOnCurrentPage(text.NewAutoRow("text"))
+
+	// Do things and generate
+}
+
+// ExampleMaroto_FillPageToAddNew demonstrate how add a new page
+func ExampleMaroto_FillPageToAddNew() {
+	m := maroto.New()
+
+	m.FillPageToAddNew()
 
 	// Do things and generate
 }
