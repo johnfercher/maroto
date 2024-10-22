@@ -1,5 +1,7 @@
 package propsmapper
 
+import "fmt"
+
 // Barcode represents properties from a barcode inside a cell.
 type Barcode struct {
 	// Left is the space between the left cell boundary to the barcode, if center is false.
@@ -21,10 +23,10 @@ type Barcode struct {
 
 // NewBarcode is responsible for creating the barcode, if the font fields cannot be
 // converted, an invalid value is set.
-func NewBarcode(barcode interface{}) *Barcode {
+func NewBarcode(barcode interface{}) (*Barcode, error) {
 	barcodeMap, ok := barcode.(map[string]interface{})
 	if !ok {
-		return nil
+		return nil, fmt.Errorf("ensure barcode props can be converted to map[string] interface{}")
 	}
 
 	return &Barcode{
@@ -34,5 +36,5 @@ func NewBarcode(barcode interface{}) *Barcode {
 		Proportion: *NewProportion(barcodeMap["proportion"]),
 		Center:     *convertFields(barcodeMap["center"], false),
 		Type:       NewCodeType(*convertFields(barcodeMap["type"], "")),
-	}
+	}, nil
 }

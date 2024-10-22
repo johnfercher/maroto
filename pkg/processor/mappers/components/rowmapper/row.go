@@ -32,6 +32,8 @@ func NewRow(templateRows interface{}, sourceKey string, factory mappers.Abstract
 	return row, nil
 }
 
+// addComponents is responsible for adding the row components according to
+// the properties informed in the map
 func (r *Row) addComponents(mapRows map[string]interface{}) error {
 	fieldMappers := r.getFieldMappers()
 

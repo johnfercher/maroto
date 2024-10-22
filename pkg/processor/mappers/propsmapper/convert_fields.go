@@ -2,6 +2,8 @@ package propsmapper
 
 import "time"
 
+// convertFields is responsible for converting a value to a type.
+// if it is not possible to convert, a default value is used
 func convertFields[T any](val interface{}, defaultValue T) *T {
 	result, ok := val.(T)
 	if !ok {
