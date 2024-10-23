@@ -8,6 +8,14 @@ import (
 )
 
 func TestNewMatrixcode(t *testing.T) {
+	t.Run("when invalid matrixcode is sent, should return an error", func(t *testing.T) {
+		matrixcodeTemplate := 1
+
+		matrixcode, err := codemapper.NewMatrixcode(matrixcodeTemplate)
+
+		assert.Nil(t, matrixcode)
+		assert.NotNil(t, err)
+	})
 	t.Run("when props is not sent, matrixcode is created", func(t *testing.T) {
 		matrixcodeTemplate := map[string]interface{}{
 			"code": "123456789",

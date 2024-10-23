@@ -8,6 +8,14 @@ import (
 )
 
 func TestNewBarcode(t *testing.T) {
+	t.Run("when invalid barcode is sent, should return an error", func(t *testing.T) {
+		barcodeTemplate := 1
+
+		barcode, err := codemapper.NewMatrixcode(barcodeTemplate)
+
+		assert.Nil(t, barcode)
+		assert.NotNil(t, err)
+	})
 	t.Run("when props is not sent, barcode is created", func(t *testing.T) {
 		barcodeTemplate := map[string]interface{}{
 			"code": "123456789",
