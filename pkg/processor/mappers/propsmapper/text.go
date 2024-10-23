@@ -1,5 +1,7 @@
 package propsmapper
 
+import "fmt"
+
 // Text represents properties from a Text inside a cell.
 type Text struct {
 	// Top is the amount of space between the upper cell limit and the text.
@@ -28,10 +30,10 @@ type Text struct {
 
 // NewText is responsible for creating the Text, if the font fields cannot be
 // converted, an invalid value is set.
-func NewText(signature interface{}) *Text {
+func NewText(signature interface{}) (*Text, error) {
 	signatureMap, ok := signature.(map[string]interface{})
 	if !ok {
-		return nil
+		return nil, fmt.Errorf("ensure text props can be converted to map[string] interface{}")
 	}
 
 	return &Text{
@@ -46,5 +48,5 @@ func NewText(signature interface{}) *Text {
 		VerticalPadding:   *convertFields(signatureMap["vertical_padding"], -1.0),
 		Color:             NewColor(signatureMap["color"]),
 		Hyperlink:         *convertFields(signatureMap["hyperlink"], ""),
-	}
+	}, nil
 }

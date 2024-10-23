@@ -33,10 +33,10 @@ func NewSignature(code interface{}) (*Signature, error) {
 
 // addFields is responsible for adding the signature fields according to
 // the properties informed in the map
-func (s *Signature) addFields(csignatureMap map[string]interface{}) error {
+func (s *Signature) addFields(signatureMap map[string]interface{}) error {
 	fieldMappers := s.getFieldMappers()
 
-	for templateName, template := range csignatureMap {
+	for templateName, template := range signatureMap {
 		mapper, ok := fieldMappers[templateName]
 		if !ok {
 			return fmt.Errorf("the field %s present in the signature cannot be mapped to any valid field", templateName)
