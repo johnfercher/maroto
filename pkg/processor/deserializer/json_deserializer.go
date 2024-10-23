@@ -3,12 +3,17 @@ package deserializer
 
 import (
 	"encoding/json"
+
+	"github.com/johnfercher/maroto/v2/pkg/processor/core"
+	"github.com/johnfercher/maroto/v2/pkg/processor/loader"
 )
 
-type jsonDeserializer struct{}
+type jsonDeserializer struct {
+	loader core.Loader
+}
 
-func NewJsonDeserialize() *jsonDeserializer {
-	return &jsonDeserializer{}
+func NewJsonDeserializer() *jsonDeserializer {
+	return &jsonDeserializer{loader: loader.NewLoader()}
 }
 
 func (j *jsonDeserializer) Deserialize(documentJson string) (map[string]interface{}, error) {

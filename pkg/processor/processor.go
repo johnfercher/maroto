@@ -13,23 +13,31 @@ import (
 type processor struct {
 	repository   core.Repository
 	deserializer core.Deserializer
+	loader       core.Loader
 }
 
 func NewProcessor() *processor {
-	return &processor{repository: repository.NewMemoryStorage(), deserializer: deserializer.NewJsonDeserialize()}
+	return &processor{
+		repository:   repository.NewMemoryStorage(),
+		deserializer: deserializer.NewJsonDeserializer(),
+	}
 }
 
 func (p *processor) RegisterTemplate(templateName string, template string) error {
-	return p.repository.RegisterTemplate(templateName, template)
+	t, err := p.deserializer.Deserialize(template)
+	if err != nil {
+		return err
+	}
+	return p.repository.RegisterTemplate(templateName, t)
 }
 
 func (p *processor) GenerateDocument(templateName string, content string) ([]byte, error) {
-	templateJson, err := p.repository.ReadTemplate(templateName)
+	template, err := p.repository.ReadTemplate(templateName)
 	if err != nil {
 		return nil, err
 	}
 
-	document, err := documentmapper.NewPdf(templateJson, p.deserializer, abstractfactory.NewAbstractFactoryMaps())
+	document, err := documentmapper.NewPdf(template, abstractfactory.NewAbstractFactoryMaps())
 	if err != nil {
 		return nil, err
 	}
