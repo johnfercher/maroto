@@ -1,5 +1,3 @@
-// loader is responsible for loading assets (images, fonts)
-// into memory for templates and documents
 package loader
 
 import (
@@ -19,7 +17,9 @@ func NewLoader() *loader {
 	return &loader{}
 }
 
-func (localloader *loader) Load(path string) ([]byte, error) {
+// Load takes the path/url/uri of an asset (image, font)
+// and returns its contents.
+func (l *loader) Load(path string) ([]byte, error) {
 	ext := getExt(path)
 	if _, ok := validExts[ext]; !ok {
 		return nil, errors.Wrap(ErrUnsupportedExtension, ext)

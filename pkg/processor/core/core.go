@@ -14,6 +14,8 @@ type Deserializer interface {
 	Deserialize(document string) (map[string]interface{}, error)
 }
 
+// Takes a path and returns its bytes
+// path may be file path or url
 type Loader interface {
 	Load(path string) ([]byte, error)
 }
