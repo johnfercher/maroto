@@ -1,5 +1,7 @@
 package propsmapper
 
+import "fmt"
+
 // Line represents properties from a Line inside a cell.
 type Line struct {
 	// Color define the line color.
@@ -18,10 +20,10 @@ type Line struct {
 
 // NewLine is responsible for creating the Line, if the font fields cannot be
 // converted, an invalid value is set.
-func NewLine(line interface{}) *Line {
+func NewLine(line interface{}) (*Line, error) {
 	lineMap, ok := line.(map[string]interface{})
 	if !ok {
-		return nil
+		return nil, fmt.Errorf("ensure line props can be converted to map[string] interface{}")
 	}
 
 	return &Line{
@@ -31,5 +33,5 @@ func NewLine(line interface{}) *Line {
 		Orientation:   NewOrientation(*convertFields(lineMap["orientation"], "")),
 		OffsetPercent: *convertFields(lineMap["offset_percent"], -1.0),
 		SizePercent:   *convertFields(lineMap["size_percent"], -1.0),
-	}
+	}, nil
 }
