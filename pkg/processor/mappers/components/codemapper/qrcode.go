@@ -33,10 +33,10 @@ func NewQrcode(code interface{}) (*Qrcode, error) {
 
 // addFields is responsible for adding the qrcode fields according to
 // the properties informed in the map
-func (b *Qrcode) addFields(mapRows map[string]interface{}) error {
+func (b *Qrcode) addFields(codeMap map[string]interface{}) error {
 	fieldMappers := b.getFieldMappers()
 
-	for templateName, template := range mapRows {
+	for templateName, template := range codeMap {
 		mapper, ok := fieldMappers[templateName]
 		if !ok {
 			return fmt.Errorf("the field %s present in the qrcode cannot be mapped to any valid field", templateName)

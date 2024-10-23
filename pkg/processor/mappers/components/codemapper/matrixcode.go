@@ -33,10 +33,10 @@ func NewMatrixcode(code interface{}) (*Matrixcode, error) {
 
 // addFields is responsible for adding the matrix code fields according to
 // the properties informed in the map
-func (m *Matrixcode) addFields(mapRows map[string]interface{}) error {
+func (m *Matrixcode) addFields(codeMap map[string]interface{}) error {
 	fieldMappers := m.getFieldMappers()
 
-	for templateName, template := range mapRows {
+	for templateName, template := range codeMap {
 		mapper, ok := fieldMappers[templateName]
 		if !ok {
 			return fmt.Errorf("the field %s present in the matrix code cannot be mapped to any valid field", templateName)
