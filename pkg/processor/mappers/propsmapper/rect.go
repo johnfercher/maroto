@@ -1,5 +1,7 @@
 package propsmapper
 
+import "fmt"
+
 // Rect represents properties from a rectangle (Image, QrCode or Barcode) inside a cell.
 type Rect struct {
 	// Left is the space between the left cell boundary to the rectangle, if center is false.
@@ -19,10 +21,10 @@ type Rect struct {
 
 // NewRect is responsible for creating the Rect, if the font fields cannot be
 // converted, an invalid value is set.
-func NewRect(rect interface{}) *Rect {
+func NewRect(rect interface{}) (*Rect, error) {
 	rectMap, ok := rect.(map[string]interface{})
 	if !ok {
-		return nil
+		return nil, fmt.Errorf("ensure matrix code props can be converted to map[string] interface{}")
 	}
 
 	return &Rect{
@@ -31,5 +33,5 @@ func NewRect(rect interface{}) *Rect {
 		Percent:            *convertFields(rectMap["percent"], -1.0),
 		JustReferenceWidth: *convertFields(rectMap["just_reference_width"], false),
 		Center:             *convertFields(rectMap["center"], false),
-	}
+	}, nil
 }
