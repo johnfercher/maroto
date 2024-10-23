@@ -6,10 +6,11 @@ type Processor interface {
 }
 
 type Repository interface {
-	RegisterTemplate(name string, template string) error
-	ReadTemplate(templateName string) (string, error)
+	RegisterTemplate(templateName string, template map[string]any) error
+	ReadTemplate(templateName string) (map[string]any, error)
 }
 
 type Deserializer interface {
 	Deserialize(document string) (map[string]interface{}, error)
 }
+
