@@ -14,3 +14,6 @@ type Deserializer interface {
 	Deserialize(document string) (map[string]interface{}, error)
 }
 
+type Loader interface {
+	Load(path string) ([]byte, error)
+}
