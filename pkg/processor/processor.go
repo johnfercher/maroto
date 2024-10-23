@@ -19,7 +19,7 @@ type processor struct {
 func NewProcessor() *processor {
 	return &processor{
 		repository:   repository.NewMemoryStorage(),
-		deserializer: deserializer.NewJsonDeserialize(),
+		deserializer: deserializer.NewJsonDeserializer(),
 	}
 }
 
