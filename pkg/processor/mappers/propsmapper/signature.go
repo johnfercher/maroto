@@ -1,6 +1,8 @@
 package propsmapper
 
 import (
+	"fmt"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 )
 
@@ -26,10 +28,10 @@ type Signature struct {
 
 // NewSignature is responsible for creating the Signature, if the font fields cannot be
 // converted, an invalid value is set.
-func NewSignature(signature interface{}) *Signature {
+func NewSignature(signature interface{}) (*Signature, error) {
 	signatureMap, ok := signature.(map[string]interface{})
 	if !ok {
-		return nil
+		return nil, fmt.Errorf("ensure barcode props can be converted to map[string] interface{}")
 	}
 
 	return &Signature{
@@ -41,5 +43,5 @@ func NewSignature(signature interface{}) *Signature {
 		LineStyle:     linestyle.Type(NewLineStyle(*convertFields(signatureMap["line_style"], ""))),
 		LineThickness: *convertFields(signatureMap["line_thickness"], 0.0),
 		SafePadding:   *convertFields(signatureMap["safe_padding"], -1.0),
-	}
+	}, nil
 }
