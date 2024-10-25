@@ -66,16 +66,14 @@ var validExts = map[string]struct{}{
 }
 
 var loadFuncs = map[string]func(string) (io.ReadCloser, error){
-	"http":  loadHttp,
-	"https": loadHttp,
+	"http":  loadHTTP,
+	"https": loadHTTP,
 	"file":  loadLocal,
 	"":      loadLocal,
 }
 
 func loadLocal(path string) (io.ReadCloser, error) {
-	if strings.HasPrefix(path, "file://") {
-		path = path[len("file://"):]
-	}
+	path = strings.TrimPrefix(path, "file://")
 	absolutePath, err := filepath.Abs(path)
 	if err != nil {
 		return nil, err
@@ -87,7 +85,7 @@ func loadLocal(path string) (io.ReadCloser, error) {
 	return f, nil
 }
 
-func loadHttp(path string) (io.ReadCloser, error) {
+func loadHTTP(path string) (io.ReadCloser, error) {
 	resp, err := http.Get(path)
 	if err != nil {
 		return nil, err

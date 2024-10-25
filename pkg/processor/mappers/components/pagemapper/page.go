@@ -54,6 +54,6 @@ func (p *Page) setRows(rowsDoc interface{}) error {
 	return nil
 }
 
-func (r *Page) Generate(content map[string]interface{}) (components.PdfComponent, error) {
+func (p *Page) Generate(content map[string]interface{}) (components.PdfComponent, error) {
 	return nil, nil
 }

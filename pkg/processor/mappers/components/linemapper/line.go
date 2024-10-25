@@ -60,6 +60,6 @@ func (l *Line) setProps(templateProps interface{}) error {
 	return nil
 }
 
-func (b *Line) Generate(content map[string]interface{}) (components.PdfComponent, error) {
+func (l *Line) Generate(content map[string]interface{}) (components.PdfComponent, error) {
 	return nil, nil
 }

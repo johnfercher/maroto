@@ -28,7 +28,7 @@ func (m *Maroto) GeneratePdf() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	doc.Save("docs/assets/pdf/backgroundv2.pdf")
+
 	return doc.GetBytes(), nil
 }
 

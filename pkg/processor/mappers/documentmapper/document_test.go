@@ -21,7 +21,7 @@ func TestNewPdf(t *testing.T) {
 		`
 		factory := mocks.NewAbstractFactoryMaps(t)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		doc, err := NewPdf(template, factory)
@@ -33,7 +33,7 @@ func TestNewPdf(t *testing.T) {
 		builderDocument := `{"builder": 10}`
 		factory := mocks.NewAbstractFactoryMaps(t)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		doc, err := NewPdf(template, factory)
@@ -53,7 +53,7 @@ func TestNewPdf(t *testing.T) {
 		factory := mocks.NewAbstractFactoryMaps(t)
 		factory.On("NewRow", mock.Anything, mock.Anything).Return(validRow, nil)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		doc, err := NewPdf(template, factory)
@@ -66,7 +66,7 @@ func TestNewPdf(t *testing.T) {
 		builderDocument := `{"header": 1}`
 		factory := mocks.NewAbstractFactoryMaps(t)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		_, err = NewPdf(template, factory)
@@ -84,7 +84,7 @@ func TestNewPdf(t *testing.T) {
 		factory := mocks.NewAbstractFactoryMaps(t)
 		factory.On("NewRow", mock.Anything, mock.Anything).Return(validRow, nil)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		doc, err := NewPdf(template, factory)
@@ -97,7 +97,7 @@ func TestNewPdf(t *testing.T) {
 		builderDocument := `{"footer": 1}`
 		factory := mocks.NewAbstractFactoryMaps(t)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		_, err = NewPdf(template, factory)
@@ -117,7 +117,7 @@ func TestNewPdf(t *testing.T) {
 		factory.On("NewPage", mock.Anything, "page_template_1").Return(validPage, nil)
 		factory.On("NewPage", mock.Anything, "page_template_2").Return(validPage, nil)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		doc, err := NewPdf(template, factory)
@@ -137,7 +137,7 @@ func TestNewPdf(t *testing.T) {
 		factory := mocks.NewAbstractFactoryMaps(t)
 		factory.On("NewList", mock.Anything, "list_template_1", mock.Anything).Return(validPage, nil)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		doc, err := NewPdf(template, factory)
@@ -151,7 +151,7 @@ func TestNewPdf(t *testing.T) {
 		builderDocument := `{"pages": 1}`
 		factory := mocks.NewAbstractFactoryMaps(t)
 
-		template, err := deserializer.NewJsonDeserializer().Deserialize(builderDocument)
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
 		_, err = NewPdf(template, factory)

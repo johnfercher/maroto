@@ -1,4 +1,5 @@
 // Package codemapper implements creation of matrixCode, MatrixCode and QrCode.
+// nolint:dupl
 package codemapper
 
 import (

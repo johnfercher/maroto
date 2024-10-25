@@ -11,10 +11,6 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-// se interface invalida for passada erro é retornada
-// se componente não puder ser gerado, erro é retornado
-// se uma lista de 2 componentes for passada, 1 erro é retornado
-
 func TestNewList(t *testing.T) {
 	t.Run("when invalid interface is sent, it should return an error", func(t *testing.T) {
 		var invalidInterface interface{} = 1
@@ -40,7 +36,7 @@ func TestNewList(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 
-	t.Run("when 2-components are sent, it should add 2 componentes in list", func(t *testing.T) {
+	t.Run("when 2-components are sent, it should add 2 components in list", func(t *testing.T) {
 		validPage := fixture.MapperPage()
 		templatePages := map[string]interface{}{
 			"page_template_1": nil,

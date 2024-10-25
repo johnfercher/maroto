@@ -12,12 +12,12 @@ type jsonDeserializer struct {
 	loader core.Loader
 }
 
-func NewJsonDeserializer() *jsonDeserializer {
+func NewJSONDeserializer() *jsonDeserializer {
 	return &jsonDeserializer{loader: loader.NewLoader()}
 }
 
-func (j *jsonDeserializer) Deserialize(documentJson string) (map[string]interface{}, error) {
+func (j *jsonDeserializer) Deserialize(documentJSON string) (map[string]interface{}, error) {
 	var document map[string]interface{}
-	err := json.Unmarshal([]byte(documentJson), &document)
+	err := json.Unmarshal([]byte(documentJSON), &document)
 	return document, err
 }

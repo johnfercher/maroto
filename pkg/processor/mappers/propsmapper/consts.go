@@ -29,13 +29,10 @@ func NewCodeType(typeProtection string) string {
 }
 
 func NewLineStyle(style string) string {
-	switch style {
-	case "dashed":
-		return "dashed"
-	case "solid":
-		return "dashed"
+	if style != "dashed" && style != "solid" {
+		return ""
 	}
-	return ""
+	return style
 }
 
 func NewOrientation(orientation string) string {

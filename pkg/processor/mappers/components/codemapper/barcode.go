@@ -1,4 +1,5 @@
 // codemapper code implements creation of Barcode, MatrixCode and QrCode.
+// nolint:dupl
 package codemapper
 
 import (

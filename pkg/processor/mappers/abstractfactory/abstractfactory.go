@@ -36,7 +36,9 @@ func (f *abstractFactoryMaps) NewCol(document interface{}) (mappers.Componentmap
 }
 
 // NewList is responsible for wrapper the creation of a list
-func (f *abstractFactoryMaps) NewList(document interface{}, sourceKey string, generate mappers.GenerateComponent) (mappers.Componentmapper, error) {
+func (f *abstractFactoryMaps) NewList(document interface{}, sourceKey string,
+	generate mappers.GenerateComponent,
+) (mappers.Componentmapper, error) {
 	return listmapper.NewList(document, sourceKey, generate)
 }
 

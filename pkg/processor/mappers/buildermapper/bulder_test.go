@@ -63,7 +63,10 @@ func TestNewBuilder(t *testing.T) {
 		file, _ := test.NewFileReader().LoadFile("processor/all_builder_pros.json")
 
 		var builderInterface interface{}
-		json.Unmarshal(file, &builderInterface)
+		if err := json.Unmarshal(file, &builderInterface); err != nil {
+			t.Error("could not deserialize json")
+			return
+		}
 
 		generateBuilder, err := NewBuilder(builderInterface)
 		assert.Nil(t, err)
@@ -75,7 +78,10 @@ func TestNewBuilder(t *testing.T) {
 		const defaultDimensions = -1.0
 
 		var builderInterface interface{}
-		json.Unmarshal(file, &builderInterface)
+		if err := json.Unmarshal(file, &builderInterface); err != nil {
+			t.Error("could not deserialize json")
+			return
+		}
 
 		generateBuilder, err := NewBuilder(builderInterface)
 		assert.Nil(t, err)
@@ -86,8 +92,10 @@ func TestNewBuilder(t *testing.T) {
 		file, _ := test.NewFileReader().LoadFile("processor/without_builder_props.json")
 
 		var builderInterface interface{}
-		json.Unmarshal(file, &builderInterface)
-
+		if err := json.Unmarshal(file, &builderInterface); err != nil {
+			t.Error("could not deserialize json")
+			return
+		}
 		_, err := NewBuilder(builderInterface)
 		assert.Nil(t, err)
 	})

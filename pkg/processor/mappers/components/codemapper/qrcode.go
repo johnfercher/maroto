@@ -1,4 +1,5 @@
 // Package codemapper implements creation of qrcode, MatrixCode and QrCode.
+// nolint:dupl
 package codemapper
 
 import (
@@ -33,8 +34,8 @@ func NewQrcode(code interface{}) (*Qrcode, error) {
 
 // addFields is responsible for adding the qrcode fields according to
 // the properties informed in the map
-func (b *Qrcode) addFields(codeMap map[string]interface{}) error {
-	fieldMappers := b.getFieldMappers()
+func (q *Qrcode) addFields(codeMap map[string]interface{}) error {
+	fieldMappers := q.getFieldMappers()
 
 	for templateName, template := range codeMap {
 		mapper, ok := fieldMappers[templateName]
@@ -51,43 +52,43 @@ func (b *Qrcode) addFields(codeMap map[string]interface{}) error {
 
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.
 // To do this, the component name is linked to a function in a Map.
-func (b *Qrcode) getFieldMappers() map[string]func(interface{}) error {
+func (q *Qrcode) getFieldMappers() map[string]func(interface{}) error {
 	return map[string]func(interface{}) error{
-		"source_key": b.setSourceKey,
-		"code":       b.setCode,
-		"props":      b.setProps,
+		"source_key": q.setSourceKey,
+		"code":       q.setCode,
+		"props":      q.setProps,
 	}
 }
 
-func (b *Qrcode) setSourceKey(template interface{}) error {
+func (q *Qrcode) setSourceKey(template interface{}) error {
 	sourceKey, ok := template.(string)
 	if !ok {
 		return fmt.Errorf("source_key cannot be converted to a string")
 	}
-	b.SourceKey = sourceKey
+	q.SourceKey = sourceKey
 	return nil
 }
 
-func (b *Qrcode) setCode(template interface{}) error {
+func (q *Qrcode) setCode(template interface{}) error {
 	code, ok := template.(string)
 	if !ok {
 		return fmt.Errorf("code cannot be converted to a string")
 	}
-	b.Code = code
+	q.Code = code
 	return nil
 }
 
-func (b *Qrcode) setProps(template interface{}) error {
+func (q *Qrcode) setProps(template interface{}) error {
 	props, err := propsmapper.NewRect(template)
 	if err != nil {
 		return err
 	}
-	b.Props = props
+	q.Props = props
 	return nil
 }
 
-func (b *Qrcode) validateFields() error {
-	if b.Code == "" && b.SourceKey == "" {
+func (q *Qrcode) validateFields() error {
+	if q.Code == "" && q.SourceKey == "" {
 		return fmt.Errorf("no value passed for qrcode. Add the 'source_key' or a code")
 	}
 	return nil

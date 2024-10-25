@@ -93,6 +93,6 @@ func (s *Signature) validateFields() error {
 	return nil
 }
 
-func (b *Signature) Generate(content map[string]interface{}) (components.PdfComponent, error) {
+func (s *Signature) Generate(content map[string]interface{}) (components.PdfComponent, error) {
 	return nil, nil
 }
