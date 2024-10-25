@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/pkg/processor/components/pdf"
-	"github.com/johnfercher/maroto/v2/pkg/processor/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/buildermapper"
 )
@@ -20,14 +19,10 @@ type Document struct {
 }
 
 // NewPdf is responsible for creating the pdf template
-func NewPdf(document string, deserializer core.Deserializer, factory mappers.AbstractFactoryMaps) (*Document, error) {
+func NewPdf(template map[string]any, factory mappers.AbstractFactoryMaps) (*Document, error) {
 	newPdf := Document{factory: factory}
-	template, err := deserializer.Deserialize(document)
-	if err != nil {
-		return nil, err
-	}
 
-	err = newPdf.addComponentsToPdf(template)
+	err := newPdf.addComponentsToPdf(template)
 	if err != nil {
 		return nil, err
 	}
