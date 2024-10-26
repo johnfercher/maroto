@@ -5,6 +5,8 @@ type memoryStorage struct {
 	template map[string]map[string]any
 }
 
+// NewMemoryStorage is responsible for creating a repository
+// implementation that stores data in memory
 func NewMemoryStorage() *memoryStorage {
 	return &memoryStorage{
 		template: make(map[string]map[string]any),

@@ -16,6 +16,8 @@ type processor struct {
 	loader       core.Loader
 }
 
+// NewProcessor is responsible for creating a processor object
+// The processor object should be used to create PDF from a serialized document
 func NewProcessor() *processor {
 	return &processor{
 		repository:   repository.NewMemoryStorage(),
@@ -23,6 +25,8 @@ func NewProcessor() *processor {
 	}
 }
 
+// RegisterTemplate is responsible for recording the document template.
+// Each template must be accompanied by a name that will identify it.
 func (p *processor) RegisterTemplate(templateName string, template string) error {
 	t, err := p.deserializer.Deserialize(template)
 	if err != nil {
@@ -31,6 +35,9 @@ func (p *processor) RegisterTemplate(templateName string, template string) error
 	return p.repository.RegisterTemplate(templateName, t)
 }
 
+// GenerateDocument is responsible for generating the pdf
+// templateName must reference a previously saved template,
+// this template will be computed with the data sent in content
 func (p *processor) GenerateDocument(templateName string, content string) ([]byte, error) {
 	template, err := p.repository.ReadTemplate(templateName)
 	if err != nil {

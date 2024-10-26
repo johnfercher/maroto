@@ -13,9 +13,9 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/textmapper"
 )
 
-// abstractFactoryMaps is responsible for providing a factory for all mapper components
 type abstractFactoryMaps struct{}
 
+// NewAbstractFactoryMaps is responsible for creating an object that encapsulates the creation of components
 func NewAbstractFactoryMaps() *abstractFactoryMaps {
 	return &abstractFactoryMaps{}
 }

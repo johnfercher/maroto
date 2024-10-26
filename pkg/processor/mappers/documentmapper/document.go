@@ -19,6 +19,7 @@ type Document struct {
 }
 
 // NewPdf is responsible for creating the pdf template
+// parse the model and create the pdf object
 func NewPdf(template map[string]any, factory mappers.AbstractFactoryMaps) (*Document, error) {
 	newPdf := Document{factory: factory}
 
