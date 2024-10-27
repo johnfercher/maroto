@@ -5,8 +5,8 @@ package codemapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Barcode struct {
@@ -94,6 +94,30 @@ func (b *Barcode) validateFields() error {
 	return nil
 }
 
-func (b *Barcode) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (b *Barcode) getCode(content map[string]interface{}) (string, error) {
+	if b.Code != "" {
+		return b.Code, nil
+	}
+	codeFound, ok := content[b.SourceKey]
+	if !ok {
+		return "", fmt.Errorf("barcode requires a source key named %s, but it was not found", b.SourceKey)
+	}
+	codeValid, ok := codeFound.(string)
+	if !ok {
+		return "", fmt.Errorf("unable to generate barcode, invalid code. source key %s", b.SourceKey)
+	}
+	return codeValid, nil
+}
+
+func (b *Barcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+	code, err := b.getCode(content)
+	if err != nil {
+		return nil, err
+	}
+	b.Code = code
+
+	if b.Props != nil {
+		return provider.CreateBarCode(b.Code, b.Props), nil
+	}
+	return provider.CreateBarCode(b.Code), nil
 }
