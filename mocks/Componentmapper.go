@@ -3,8 +3,7 @@
 package mocks
 
 import (
-	components "github.com/johnfercher/maroto/v2/pkg/processor/components"
-
+	processorprovider "github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -21,29 +20,29 @@ func (_m *Componentmapper) EXPECT() *Componentmapper_Expecter {
 	return &Componentmapper_Expecter{mock: &_m.Mock}
 }
 
-// Generate provides a mock function with given fields: content
-func (_m *Componentmapper) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	ret := _m.Called(content)
+// Generate provides a mock function with given fields: content, provider
+func (_m *Componentmapper) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+	ret := _m.Called(content, provider)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Generate")
 	}
 
-	var r0 components.PdfComponent
+	var r0 processorprovider.PDFComponent
 	var r1 error
-	if rf, ok := ret.Get(0).(func(map[string]interface{}) (components.PdfComponent, error)); ok {
-		return rf(content)
+	if rf, ok := ret.Get(0).(func(map[string]interface{}, processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error)); ok {
+		return rf(content, provider)
 	}
-	if rf, ok := ret.Get(0).(func(map[string]interface{}) components.PdfComponent); ok {
-		r0 = rf(content)
+	if rf, ok := ret.Get(0).(func(map[string]interface{}, processorprovider.ProcessorProvider) processorprovider.PDFComponent); ok {
+		r0 = rf(content, provider)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(components.PdfComponent)
+			r0 = ret.Get(0).(processorprovider.PDFComponent)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(map[string]interface{}) error); ok {
-		r1 = rf(content)
+	if rf, ok := ret.Get(1).(func(map[string]interface{}, processorprovider.ProcessorProvider) error); ok {
+		r1 = rf(content, provider)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -58,23 +57,24 @@ type Componentmapper_Generate_Call struct {
 
 // Generate is a helper method to define mock.On call
 //   - content map[string]interface{}
-func (_e *Componentmapper_Expecter) Generate(content interface{}) *Componentmapper_Generate_Call {
-	return &Componentmapper_Generate_Call{Call: _e.mock.On("Generate", content)}
+//   - provider processorprovider.ProcessorProvider
+func (_e *Componentmapper_Expecter) Generate(content interface{}, provider interface{}) *Componentmapper_Generate_Call {
+	return &Componentmapper_Generate_Call{Call: _e.mock.On("Generate", content, provider)}
 }
 
-func (_c *Componentmapper_Generate_Call) Run(run func(content map[string]interface{})) *Componentmapper_Generate_Call {
+func (_c *Componentmapper_Generate_Call) Run(run func(content map[string]interface{}, provider processorprovider.ProcessorProvider)) *Componentmapper_Generate_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(map[string]interface{}))
+		run(args[0].(map[string]interface{}), args[1].(processorprovider.ProcessorProvider))
 	})
 	return _c
 }
 
-func (_c *Componentmapper_Generate_Call) Return(_a0 components.PdfComponent, _a1 error) *Componentmapper_Generate_Call {
+func (_c *Componentmapper_Generate_Call) Return(_a0 processorprovider.PDFComponent, _a1 error) *Componentmapper_Generate_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *Componentmapper_Generate_Call) RunAndReturn(run func(map[string]interface{}) (components.PdfComponent, error)) *Componentmapper_Generate_Call {
+func (_c *Componentmapper_Generate_Call) RunAndReturn(run func(map[string]interface{}, processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error)) *Componentmapper_Generate_Call {
 	_c.Call.Return(run)
 	return _c
 }
