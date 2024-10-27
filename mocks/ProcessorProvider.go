@@ -84,6 +84,69 @@ func (_c *ProcessorProvider_CreateBarCode_Call) RunAndReturn(run func(string, ..
 	return _c
 }
 
+// CreateMatrixCode provides a mock function with given fields: value, props
+func (_m *ProcessorProvider) CreateMatrixCode(value string, props ...*propsmapper.Rect) processorprovider.PDFComponent {
+	_va := make([]interface{}, len(props))
+	for _i := range props {
+		_va[_i] = props[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, value)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreateMatrixCode")
+	}
+
+	var r0 processorprovider.PDFComponent
+	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Rect) processorprovider.PDFComponent); ok {
+		r0 = rf(value, props...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(processorprovider.PDFComponent)
+		}
+	}
+
+	return r0
+}
+
+// ProcessorProvider_CreateMatrixCode_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateMatrixCode'
+type ProcessorProvider_CreateMatrixCode_Call struct {
+	*mock.Call
+}
+
+// CreateMatrixCode is a helper method to define mock.On call
+//   - value string
+//   - props ...*propsmapper.Rect
+func (_e *ProcessorProvider_Expecter) CreateMatrixCode(value interface{}, props ...interface{}) *ProcessorProvider_CreateMatrixCode_Call {
+	return &ProcessorProvider_CreateMatrixCode_Call{Call: _e.mock.On("CreateMatrixCode",
+		append([]interface{}{value}, props...)...)}
+}
+
+func (_c *ProcessorProvider_CreateMatrixCode_Call) Run(run func(value string, props ...*propsmapper.Rect)) *ProcessorProvider_CreateMatrixCode_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]*propsmapper.Rect, len(args)-1)
+		for i, a := range args[1:] {
+			if a != nil {
+				variadicArgs[i] = a.(*propsmapper.Rect)
+			}
+		}
+		run(args[0].(string), variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *ProcessorProvider_CreateMatrixCode_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateMatrixCode_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *ProcessorProvider_CreateMatrixCode_Call) RunAndReturn(run func(string, ...*propsmapper.Rect) processorprovider.PDFComponent) *ProcessorProvider_CreateMatrixCode_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // NewProcessorProvider creates a new instance of ProcessorProvider. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewProcessorProvider(t interface {

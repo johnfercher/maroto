@@ -4,6 +4,7 @@ package codemapper_test
 import (
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/codemapper"
 	"github.com/stretchr/testify/assert"
 )
@@ -97,5 +98,56 @@ func TestNewMatrixcode(t *testing.T) {
 
 		assert.Nil(t, err)
 		assert.Equal(t, matrixcode.Code, "code")
+	})
+}
+
+func TestMatrixcodeGenerate(t *testing.T) {
+	t.Run("if source key is not found, should return an error", func(t *testing.T) {
+		content := map[string]interface{}{}
+		provider := mocks.NewProcessorProvider(t)
+
+		matrixcode := codemapper.Matrixcode{SourceKey: "code"}
+		component, err := matrixcode.Generate(content, provider)
+
+		assert.Nil(t, component)
+		assert.NotNil(t, err)
+	})
+	t.Run("if source key content is not valid, should return an error", func(t *testing.T) {
+		content := map[string]interface{}{
+			"code": 1,
+		}
+		provider := mocks.NewProcessorProvider(t)
+
+		matrixcode := codemapper.Matrixcode{SourceKey: "code"}
+		component, err := matrixcode.Generate(content, provider)
+
+		assert.Nil(t, component)
+		assert.NotNil(t, err)
+	})
+	t.Run("If the matrixcode has no props, the props will not be sent", func(t *testing.T) {
+		content := map[string]interface{}{
+			"code": "code",
+		}
+
+		provider := mocks.NewProcessorProvider(t)
+		provider.EXPECT().CreateMatrixCode("code").Return(nil)
+
+		matrixcode := codemapper.Matrixcode{SourceKey: "code"}
+		_, err := matrixcode.Generate(content, provider)
+
+		assert.Nil(t, err)
+		provider.AssertNumberOfCalls(t, "CreateMatrixCode", 1)
+	})
+	t.Run("when valid code is sent, should generate matrixcode", func(t *testing.T) {
+		content := map[string]interface{}{}
+
+		provider := mocks.NewProcessorProvider(t)
+		provider.EXPECT().CreateMatrixCode("code").Return(nil)
+
+		matrixcode := codemapper.Matrixcode{Code: "code"}
+		_, err := matrixcode.Generate(content, provider)
+
+		assert.Nil(t, err)
+		provider.AssertNumberOfCalls(t, "CreateMatrixCode", 1)
 	})
 }
