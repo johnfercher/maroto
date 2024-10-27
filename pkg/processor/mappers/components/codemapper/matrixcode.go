@@ -5,8 +5,8 @@ package codemapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Matrixcode struct {
@@ -94,6 +94,30 @@ func (m *Matrixcode) validateFields() error {
 	return nil
 }
 
-func (m *Matrixcode) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (m *Matrixcode) getCode(content map[string]interface{}) (string, error) {
+	if m.Code != "" {
+		return m.Code, nil
+	}
+	codeFound, ok := content[m.SourceKey]
+	if !ok {
+		return "", fmt.Errorf("matrixcode requires a source key named %s, but it was not found", m.SourceKey)
+	}
+	codeValid, ok := codeFound.(string)
+	if !ok {
+		return "", fmt.Errorf("unable to generate matrixcode, invalid code. source key %s", m.SourceKey)
+	}
+	return codeValid, nil
+}
+
+func (m *Matrixcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+	code, err := m.getCode(content)
+	if err != nil {
+		return nil, err
+	}
+	m.Code = code
+
+	if m.Props != nil {
+		return provider.CreateMatrixCode(m.Code, m.Props), nil
+	}
+	return provider.CreateMatrixCode(m.Code), nil
 }

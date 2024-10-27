@@ -15,4 +15,5 @@ type PDFComponent interface {
 // Maroto provides for pdf builder
 type ProcessorProvider interface {
 	CreateBarCode(value string, props ...*propsmapper.Barcode) PDFComponent
+	CreateMatrixCode(value string, props ...*propsmapper.Rect) PDFComponent
 }
