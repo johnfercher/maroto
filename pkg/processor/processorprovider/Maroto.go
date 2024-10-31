@@ -29,6 +29,18 @@ func (m *Maroto) CreateMatrixCode(codeValue string, codeProps ...*propsmapper.Re
 	})
 }
 
+func (m *Maroto) CreateQrCode(codeValue string, codeProps ...*propsmapper.Rect) PDFComponent {
+	cProps := propsmapper.Rect{}
+	if len(codeProps) > 0 {
+		cProps = *codeProps[0]
+	}
+
+	return code.NewQr(codeValue, props.Rect{
+		Left: cProps.Left, Top: cProps.Top, Percent: cProps.Percent,
+		JustReferenceWidth: cProps.JustReferenceWidth, Center: cProps.Center,
+	})
+}
+
 func (m *Maroto) CreateBarCode(codeValue string, codeProps ...*propsmapper.Barcode) PDFComponent {
 	cProps := propsmapper.Barcode{}
 	if len(codeProps) > 0 {

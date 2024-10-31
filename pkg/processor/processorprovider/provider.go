@@ -16,4 +16,5 @@ type PDFComponent interface {
 type ProcessorProvider interface {
 	CreateBarCode(value string, props ...*propsmapper.Barcode) PDFComponent
 	CreateMatrixCode(value string, props ...*propsmapper.Rect) PDFComponent
+	CreateQrCode(value string, props ...*propsmapper.Rect) PDFComponent
 }

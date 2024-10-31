@@ -5,8 +5,8 @@ package codemapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Qrcode struct {
@@ -94,6 +94,30 @@ func (q *Qrcode) validateFields() error {
 	return nil
 }
 
-func (q *Qrcode) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (q *Qrcode) getCode(content map[string]interface{}) (string, error) {
+	if q.Code != "" {
+		return q.Code, nil
+	}
+	codeFound, ok := content[q.SourceKey]
+	if !ok {
+		return "", fmt.Errorf("qrcode requires a source key named %s, but it was not found", q.SourceKey)
+	}
+	codeValid, ok := codeFound.(string)
+	if !ok {
+		return "", fmt.Errorf("unable to generate qrcode, invalid code. source key %s", q.SourceKey)
+	}
+	return codeValid, nil
+}
+
+func (q *Qrcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+	code, err := q.getCode(content)
+	if err != nil {
+		return nil, err
+	}
+	q.Code = code
+
+	if q.Props != nil {
+		return provider.CreateQrCode(q.Code, q.Props), nil
+	}
+	return provider.CreateQrCode(q.Code), nil
 }
