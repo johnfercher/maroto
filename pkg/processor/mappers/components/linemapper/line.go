@@ -4,8 +4,8 @@ package linemapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Line struct {
@@ -60,6 +60,6 @@ func (l *Line) setProps(templateProps interface{}) error {
 	return nil
 }
 
-func (l *Line) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (l *Line) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+	return provider.CreateLine(l.Props), nil
 }

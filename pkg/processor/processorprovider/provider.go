@@ -18,4 +18,5 @@ type ProcessorProvider interface {
 	CreateMatrixCode(value string, props ...*propsmapper.Rect) PDFComponent
 	CreateQrCode(value string, props ...*propsmapper.Rect) PDFComponent
 	CreateImage(value []byte, extension string, props ...*propsmapper.Rect) PDFComponent
+	CreateLine(props *propsmapper.Line) PDFComponent
 }
