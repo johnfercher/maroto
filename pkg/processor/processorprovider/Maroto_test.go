@@ -58,3 +58,17 @@ func TestCreateImage(t *testing.T) {
 		test.New(t).Assert(image.GetStructure()).Equals("processor/provider/image.json")
 	})
 }
+
+func TestCreateLine(t *testing.T) {
+	t.Run("when CreateLine is called, should generate a line", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		barcode := m.CreateLine(
+			&propsmapper.Line{
+				Color: &propsmapper.Color{Red: 10, Green: 10, Blue: 10}, Style: "solid", Thickness: 10.0,
+				Orientation: "vertical", OffsetPercent: 50, SizePercent: 50,
+			},
+		)
+
+		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/line.json")
+	})
+}

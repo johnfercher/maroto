@@ -148,6 +148,54 @@ func (_c *ProcessorProvider_CreateImage_Call) RunAndReturn(run func([]byte, stri
 	return _c
 }
 
+// CreateLine provides a mock function with given fields: props
+func (_m *ProcessorProvider) CreateLine(props *propsmapper.Line) processorprovider.PDFComponent {
+	ret := _m.Called(props)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreateLine")
+	}
+
+	var r0 processorprovider.PDFComponent
+	if rf, ok := ret.Get(0).(func(*propsmapper.Line) processorprovider.PDFComponent); ok {
+		r0 = rf(props)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(processorprovider.PDFComponent)
+		}
+	}
+
+	return r0
+}
+
+// ProcessorProvider_CreateLine_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateLine'
+type ProcessorProvider_CreateLine_Call struct {
+	*mock.Call
+}
+
+// CreateLine is a helper method to define mock.On call
+//   - props *propsmapper.Line
+func (_e *ProcessorProvider_Expecter) CreateLine(props interface{}) *ProcessorProvider_CreateLine_Call {
+	return &ProcessorProvider_CreateLine_Call{Call: _e.mock.On("CreateLine", props)}
+}
+
+func (_c *ProcessorProvider_CreateLine_Call) Run(run func(props *propsmapper.Line)) *ProcessorProvider_CreateLine_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(*propsmapper.Line))
+	})
+	return _c
+}
+
+func (_c *ProcessorProvider_CreateLine_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateLine_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *ProcessorProvider_CreateLine_Call) RunAndReturn(run func(*propsmapper.Line) processorprovider.PDFComponent) *ProcessorProvider_CreateLine_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // CreateMatrixCode provides a mock function with given fields: value, props
 func (_m *ProcessorProvider) CreateMatrixCode(value string, props ...*propsmapper.Rect) processorprovider.PDFComponent {
 	_va := make([]interface{}, len(props))
