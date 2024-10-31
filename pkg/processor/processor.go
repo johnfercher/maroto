@@ -44,7 +44,7 @@ func (p *processor) GenerateDocument(templateName string, content string) ([]byt
 		return nil, err
 	}
 
-	document, err := documentmapper.NewPdf(template, abstractfactory.NewAbstractFactoryMaps())
+	document, err := documentmapper.NewPdf(template, abstractfactory.NewAbstractFactoryMaps(p.repository))
 	if err != nil {
 		return nil, err
 	}

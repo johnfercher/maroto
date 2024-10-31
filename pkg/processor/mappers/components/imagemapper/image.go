@@ -4,31 +4,33 @@ package imagemapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
+	"github.com/johnfercher/maroto/v2/pkg/processor/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Image struct {
-	SourceKey string
-	Props     *propsmapper.Rect
+	Path       string
+	SourceKey  string
+	Props      *propsmapper.Rect
+	Repository core.Repository
 }
 
-func NewImage(templateImage interface{}) (*Image, error) {
+func NewImage(templateImage interface{}, repository core.Repository) (*Image, error) {
 	imageMap, ok := templateImage.(map[string]interface{})
 	if !ok {
 		return nil, fmt.Errorf("ensure image can be converted to map[string] interface{}")
 	}
 
-	image := &Image{}
+	image := &Image{Repository: repository}
 	if err := image.addFields(imageMap); err != nil {
 		return nil, err
 	}
 	if image.SourceKey == "" {
-		return nil, fmt.Errorf("no value passed for image. Add the 'source_key'")
+		return nil, fmt.Errorf("no value passed for image. Add the 'source_key' or a path")
 	}
 
 	return image, nil
-
 }
 
 // addFields is responsible for adding the barcode fields according to
@@ -55,6 +57,7 @@ func (i *Image) getFieldMappers() map[string]func(interface{}) error {
 	return map[string]func(interface{}) error{
 		"source_key": i.setSourceKey,
 		"props":      i.setProps,
+		"path":       i.setPath,
 	}
 }
 
@@ -67,6 +70,15 @@ func (i *Image) setSourceKey(template interface{}) error {
 	return nil
 }
 
+func (i *Image) setPath(template interface{}) error {
+	path, ok := template.(string)
+	if !ok {
+		return fmt.Errorf("path cannot be converted to a string")
+	}
+	i.Path = path
+	return nil
+}
+
 func (b *Image) setProps(template interface{}) error {
 	props, err := propsmapper.NewRect(template)
 	if err != nil {
@@ -76,6 +88,34 @@ func (b *Image) setProps(template interface{}) error {
 	return nil
 }
 
-func (b *Image) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (i *Image) getImagePath(content map[string]interface{}) (string, error) {
+	if i.Path != "" {
+		return i.Path, nil
+	}
+	imageFound, ok := content[i.SourceKey]
+	if !ok {
+		return "", fmt.Errorf("image requires a source key named %s, but it was not found", i.SourceKey)
+	}
+	imageValid, ok := imageFound.(string)
+	if !ok {
+		return "", fmt.Errorf("unable to generate image, invalid path. source key %s", i.SourceKey)
+	}
+	return imageValid, nil
+}
+
+func (i *Image) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+	path, err := i.getImagePath(content)
+	if err != nil {
+		return nil, err
+	}
+	i.Path = path
+	extension, img, err := i.Repository.GetDocument(i.Path)
+	if err != nil {
+		return nil, err
+	}
+
+	if i.Props != nil {
+		return provider.CreateImage(img, extension, i.Props), nil
+	}
+	return provider.CreateImage(img, extension), nil
 }

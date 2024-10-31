@@ -1,6 +1,7 @@
 package abstractfactory
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/processor/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/codemapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/colmapper"
@@ -13,11 +14,13 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/textmapper"
 )
 
-type abstractFactoryMaps struct{}
+type abstractFactoryMaps struct {
+	repository core.Repository
+}
 
 // NewAbstractFactoryMaps is responsible for creating an object that encapsulates the creation of components
-func NewAbstractFactoryMaps() *abstractFactoryMaps {
-	return &abstractFactoryMaps{}
+func NewAbstractFactoryMaps(repository core.Repository) *abstractFactoryMaps {
+	return &abstractFactoryMaps{repository: repository}
 }
 
 // NewRow is responsible for wrapper the creation of a row
@@ -59,7 +62,7 @@ func (f *abstractFactoryMaps) NewQrcode(document interface{}) (mappers.Component
 
 // NewImage is responsible for wrapper the creation of a image
 func (f *abstractFactoryMaps) NewImage(document interface{}) (mappers.Componentmapper, error) {
-	return imagemapper.NewImage(document)
+	return imagemapper.NewImage(document, f.repository)
 }
 
 // NewLine is responsible for wrapper the creation of a libe

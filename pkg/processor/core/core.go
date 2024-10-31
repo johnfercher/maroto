@@ -8,6 +8,7 @@ type Processor interface {
 type Repository interface {
 	RegisterTemplate(templateName string, template map[string]any) error
 	ReadTemplate(templateName string) (map[string]any, error)
+	GetDocument(documentName string) (extension string, doc []byte, err error)
 }
 
 type Deserializer interface {

@@ -13,6 +13,12 @@ func NewMemoryStorage() *memoryStorage {
 	}
 }
 
+// GetDocument is responsible search and return the document according to the name sent
+//   - documentName is the name that the document references
+func (m *memoryStorage) GetDocument(documentName string) (string, []byte, error) {
+	return "", nil, nil
+}
+
 // RegisterTemplate is responsible for register a template in memory
 //   - name is the model identifier and is used to access it
 //   - template is the template that will be stored
