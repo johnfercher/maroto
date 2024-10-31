@@ -35,3 +35,13 @@ func TestCreateMatrixCode(t *testing.T) {
 		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/matrixcode.json")
 	})
 }
+func TestCreateQRCode(t *testing.T) {
+	t.Run("when CreateQrCode is called, should generate a qrcode", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		barcode := m.CreateQrCode("code",
+			&propsmapper.Rect{Left: 10.0, Top: 10.0, Percent: 100.0, JustReferenceWidth: false, Center: false},
+		)
+
+		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/qrcode.json")
+	})
+}
