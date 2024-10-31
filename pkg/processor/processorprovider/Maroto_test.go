@@ -25,6 +25,7 @@ func TestCreateBarCode(t *testing.T) {
 		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/barcode.json")
 	})
 }
+
 func TestCreateMatrixCode(t *testing.T) {
 	t.Run("when CreateMatrixCode is called, should generate a matrixcode", func(t *testing.T) {
 		m := processorprovider.NewMaroto()
@@ -35,6 +36,7 @@ func TestCreateMatrixCode(t *testing.T) {
 		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/matrixcode.json")
 	})
 }
+
 func TestCreateQRCode(t *testing.T) {
 	t.Run("when CreateQrCode is called, should generate a qrcode", func(t *testing.T) {
 		m := processorprovider.NewMaroto()
@@ -43,5 +45,16 @@ func TestCreateQRCode(t *testing.T) {
 		)
 
 		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/qrcode.json")
+	})
+}
+
+func TestCreateImage(t *testing.T) {
+	t.Run("when CreateImage is called, should generate a image", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		image := m.CreateImage(make([]byte, 0), "png",
+			&propsmapper.Rect{Left: 10.0, Top: 10.0, Percent: 100.0, JustReferenceWidth: false, Center: false},
+		)
+
+		test.New(t).Assert(image.GetStructure()).Equals("processor/provider/image.json")
 	})
 }

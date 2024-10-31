@@ -17,6 +17,71 @@ func (_m *Repository) EXPECT() *Repository_Expecter {
 	return &Repository_Expecter{mock: &_m.Mock}
 }
 
+// GetDocument provides a mock function with given fields: documentName
+func (_m *Repository) GetDocument(documentName string) (string, []byte, error) {
+	ret := _m.Called(documentName)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetDocument")
+	}
+
+	var r0 string
+	var r1 []byte
+	var r2 error
+	if rf, ok := ret.Get(0).(func(string) (string, []byte, error)); ok {
+		return rf(documentName)
+	}
+	if rf, ok := ret.Get(0).(func(string) string); ok {
+		r0 = rf(documentName)
+	} else {
+		r0 = ret.Get(0).(string)
+	}
+
+	if rf, ok := ret.Get(1).(func(string) []byte); ok {
+		r1 = rf(documentName)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).([]byte)
+		}
+	}
+
+	if rf, ok := ret.Get(2).(func(string) error); ok {
+		r2 = rf(documentName)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
+}
+
+// Repository_GetDocument_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetDocument'
+type Repository_GetDocument_Call struct {
+	*mock.Call
+}
+
+// GetDocument is a helper method to define mock.On call
+//   - documentName string
+func (_e *Repository_Expecter) GetDocument(documentName interface{}) *Repository_GetDocument_Call {
+	return &Repository_GetDocument_Call{Call: _e.mock.On("GetDocument", documentName)}
+}
+
+func (_c *Repository_GetDocument_Call) Run(run func(documentName string)) *Repository_GetDocument_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(string))
+	})
+	return _c
+}
+
+func (_c *Repository_GetDocument_Call) Return(extension string, doc []byte, err error) *Repository_GetDocument_Call {
+	_c.Call.Return(extension, doc, err)
+	return _c
+}
+
+func (_c *Repository_GetDocument_Call) RunAndReturn(run func(string) (string, []byte, error)) *Repository_GetDocument_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // ReadTemplate provides a mock function with given fields: templateName
 func (_m *Repository) ReadTemplate(templateName string) (map[string]interface{}, error) {
 	ret := _m.Called(templateName)
