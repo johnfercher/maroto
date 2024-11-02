@@ -1,0 +1,17 @@
+{
+    "value": "text",
+    "type": "text",
+    "details": {
+        "prop_align": "center",
+        "prop_breakline_strategy": "dash_strategy",
+        "prop_color": "RGB(10, 10, 10)",
+        "prop_font_family": "Arial",
+        "prop_font_size": 10,
+        "prop_font_style": "bold",
+        "prop_hyperlink": "test",
+        "prop_left": 10,
+        "prop_right": 10,
+        "prop_top": 10,
+        "prop_vertical_padding": 10
+    }
+}

@@ -3,6 +3,7 @@ package textmapper_test
 import (
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/textmapper"
 	"github.com/stretchr/testify/assert"
 )
@@ -96,5 +97,56 @@ func TestNewText(t *testing.T) {
 
 		assert.Nil(t, err)
 		assert.Equal(t, text.Value, "value")
+	})
+}
+
+func TestGenerate(t *testing.T) {
+	t.Run("if source key is not found, should return an error", func(t *testing.T) {
+		content := map[string]interface{}{}
+		provider := mocks.NewProcessorProvider(t)
+
+		text := textmapper.Text{SourceKey: "text"}
+		component, err := text.Generate(content, provider)
+
+		assert.Nil(t, component)
+		assert.NotNil(t, err)
+	})
+	t.Run("if source key content is not valid, should return an error", func(t *testing.T) {
+		content := map[string]interface{}{
+			"value": 1,
+		}
+		provider := mocks.NewProcessorProvider(t)
+
+		text := textmapper.Text{SourceKey: "value"}
+		component, err := text.Generate(content, provider)
+
+		assert.Nil(t, component)
+		assert.NotNil(t, err)
+	})
+	t.Run("If the text has no props, the props will not be sent", func(t *testing.T) {
+		content := map[string]interface{}{
+			"value": "text",
+		}
+
+		provider := mocks.NewProcessorProvider(t)
+		provider.EXPECT().CreateText("text").Return(nil)
+
+		text := textmapper.Text{SourceKey: "value"}
+		_, err := text.Generate(content, provider)
+
+		assert.Nil(t, err)
+		provider.AssertNumberOfCalls(t, "CreateText", 1)
+	})
+	t.Run("when valid text is sent, should generate text", func(t *testing.T) {
+		content := map[string]interface{}{}
+
+		provider := mocks.NewProcessorProvider(t)
+		provider.EXPECT().CreateText("text").Return(nil)
+
+		text := textmapper.Text{Value: "text"}
+		_, err := text.Generate(content, provider)
+
+		assert.Nil(t, err)
+		provider.AssertNumberOfCalls(t, "CreateText", 1)
 	})
 }
