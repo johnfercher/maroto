@@ -4,8 +4,10 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/line"
+	"github.com/johnfercher/maroto/v2/pkg/components/signature"
 	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -20,6 +22,20 @@ type Maroto struct {
 func NewMaroto() *Maroto {
 	// m := maroto.New()
 	return nil
+}
+
+func (m *Maroto) CreateSignature(value string, signaturesProps ...*propsmapper.Signature) PDFComponent {
+	sProps := propsmapper.Signature{}
+	if len(signaturesProps) > 0 {
+		sProps = *signaturesProps[0]
+	}
+
+	return signature.New(value, props.Signature{
+		FontFamily: sProps.FontFamily, FontStyle: fontstyle.Type(sProps.FontStyle), FontSize: sProps.FontSize,
+		FontColor: (*props.Color)(sProps.FontColor), LineColor: (*props.Color)(sProps.LineColor), LineStyle: sProps.LineStyle,
+		LineThickness: sProps.LineThickness, SafePadding: sProps.SafePadding,
+	})
+
 }
 
 func (m *Maroto) CreateLine(lineProps ...*propsmapper.Line) PDFComponent {

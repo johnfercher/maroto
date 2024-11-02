@@ -4,8 +4,8 @@ package signaturemapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Signature struct {
@@ -93,6 +93,30 @@ func (s *Signature) validateFields() error {
 	return nil
 }
 
-func (s *Signature) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (s *Signature) getSignature(content map[string]interface{}) (string, error) {
+	if s.Value != "" {
+		return s.Value, nil
+	}
+	signatureFound, ok := content[s.SourceKey]
+	if !ok {
+		return "", fmt.Errorf("signature requires a source key named %s, but it was not found", s.SourceKey)
+	}
+	signatureValid, ok := signatureFound.(string)
+	if !ok {
+		return "", fmt.Errorf("unable to generate signature, invalid value. source key %s", s.SourceKey)
+	}
+	return signatureValid, nil
+}
+
+func (s *Signature) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+	signature, err := s.getSignature(content)
+	if err != nil {
+		return nil, err
+	}
+	s.Value = signature
+
+	if s.Props != nil {
+		return provider.CreateSignature(s.Value, s.Props), nil
+	}
+	return provider.CreateSignature(s.Value), nil
 }
