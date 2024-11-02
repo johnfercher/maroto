@@ -72,3 +72,17 @@ func TestCreateLine(t *testing.T) {
 		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/line.json")
 	})
 }
+
+func TestCreateSignature(t *testing.T) {
+	t.Run("when CreateSignature is called, should generate a signature", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		barcode := m.CreateSignature("signature",
+			&propsmapper.Signature{
+				FontFamily: "Arial", FontStyle: "bold", FontSize: 10.0, FontColor: &propsmapper.Color{Red: 10, Green: 10, Blue: 10},
+				LineColor: &propsmapper.Color{Red: 10, Green: 10, Blue: 10}, LineStyle: "solid", LineThickness: 10.0, SafePadding: 10.0,
+			},
+		)
+
+		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/signature.json")
+	})
+}

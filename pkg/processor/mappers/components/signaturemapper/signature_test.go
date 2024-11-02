@@ -3,6 +3,7 @@ package signaturemapper_test
 import (
 	"testing"
 
+	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/signaturemapper"
 	"github.com/stretchr/testify/assert"
 )
@@ -95,5 +96,56 @@ func TestNewSignature(t *testing.T) {
 
 		assert.Nil(t, err)
 		assert.Equal(t, signature.Value, "value")
+	})
+}
+
+func TestGenerate(t *testing.T) {
+	t.Run("if source key is not found, should return an error", func(t *testing.T) {
+		content := map[string]interface{}{}
+		provider := mocks.NewProcessorProvider(t)
+
+		signature := signaturemapper.Signature{SourceKey: "code"}
+		component, err := signature.Generate(content, provider)
+
+		assert.Nil(t, component)
+		assert.NotNil(t, err)
+	})
+	t.Run("if source key content is not valid, should return an error", func(t *testing.T) {
+		content := map[string]interface{}{
+			"value": 1,
+		}
+		provider := mocks.NewProcessorProvider(t)
+
+		signature := signaturemapper.Signature{SourceKey: "value"}
+		component, err := signature.Generate(content, provider)
+
+		assert.Nil(t, component)
+		assert.NotNil(t, err)
+	})
+	t.Run("If the signature has no props, the props will not be sent", func(t *testing.T) {
+		content := map[string]interface{}{
+			"value": "signature",
+		}
+
+		provider := mocks.NewProcessorProvider(t)
+		provider.EXPECT().CreateSignature("signature").Return(nil)
+
+		signature := signaturemapper.Signature{SourceKey: "value"}
+		_, err := signature.Generate(content, provider)
+
+		assert.Nil(t, err)
+		provider.AssertNumberOfCalls(t, "CreateSignature", 1)
+	})
+	t.Run("when valid code is sent, should generate signature", func(t *testing.T) {
+		content := map[string]interface{}{}
+
+		provider := mocks.NewProcessorProvider(t)
+		provider.EXPECT().CreateSignature("signature").Return(nil)
+
+		signature := signaturemapper.Signature{Value: "signature"}
+		_, err := signature.Generate(content, provider)
+
+		assert.Nil(t, err)
+		provider.AssertNumberOfCalls(t, "CreateSignature", 1)
 	})
 }
