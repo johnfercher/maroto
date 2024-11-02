@@ -3,8 +3,8 @@ package textmapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Text struct {
@@ -92,6 +92,30 @@ func (t *Text) validateFields() error {
 	return nil
 }
 
-func (t *Text) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (t *Text) getValue(content map[string]interface{}) (string, error) {
+	if t.Value != "" {
+		return t.Value, nil
+	}
+	textFound, ok := content[t.SourceKey]
+	if !ok {
+		return "", fmt.Errorf("text requires a source key named %s, but it was not found", t.SourceKey)
+	}
+	textValid, ok := textFound.(string)
+	if !ok {
+		return "", fmt.Errorf("unable to generate text, invalid value. source key %s", t.SourceKey)
+	}
+	return textValid, nil
+}
+
+func (t *Text) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+	signature, err := t.getValue(content)
+	if err != nil {
+		return nil, err
+	}
+	t.Value = signature
+
+	if t.Props != nil {
+		return provider.CreateText(t.Value, t.Props), nil
+	}
+	return provider.CreateText(t.Value), nil
 }

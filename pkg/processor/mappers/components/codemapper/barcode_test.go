@@ -150,5 +150,4 @@ func TestGenerate(t *testing.T) {
 		assert.Nil(t, err)
 		provider.AssertNumberOfCalls(t, "CreateBarCode", 1)
 	})
-
 }

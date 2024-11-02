@@ -14,6 +14,7 @@ type PDFComponent interface {
 // ProcessorProvider provides an interface with all the methods that
 // Maroto provides for pdf builder
 type ProcessorProvider interface {
+	CreateText(value string, props ...*propsmapper.Text) PDFComponent
 	CreateSignature(value string, props ...*propsmapper.Signature) PDFComponent
 	CreateBarCode(value string, props ...*propsmapper.Barcode) PDFComponent
 	CreateMatrixCode(value string, props ...*propsmapper.Rect) PDFComponent
