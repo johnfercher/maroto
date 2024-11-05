@@ -1,9 +1,14 @@
 package processorprovider
 
 import (
+	"fmt"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/line"
+	"github.com/johnfercher/maroto/v2/pkg/components/page"
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/signature"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -27,19 +32,59 @@ func NewMaroto() *Maroto {
 	return nil
 }
 
-func (m *Maroto) CreateText(value string, textsProps ...*propsmapper.Text) PDFComponent {
+func convertComponentType[T any](components ...ProviderComponent) ([]T, error) {
+	newComponents := make([]T, len(components))
+	for i, component := range components {
+		validComponent, ok := component.(T)
+		if !ok {
+			return nil, fmt.Errorf("could not convert pdf components to a valid type")
+		}
+		newComponents[i] = validComponent
+	}
+	return newComponents, nil
+}
+
+func (m *Maroto) CreatePage(components ...ProviderComponent) (ProviderComponent, error) {
+	newComponents, err := convertComponentType[core.Row](components...)
+	if err != nil {
+		return nil, err
+	}
+
+	return page.New().Add(newComponents...), nil
+}
+
+func (m *Maroto) CreateRow(height float64, components ...ProviderComponent) (ProviderComponent, error) {
+	newComponents, err := convertComponentType[core.Col](components...)
+	if err != nil {
+		return nil, err
+	}
+
+	return row.New(height).Add(newComponents...), nil
+}
+
+func (m *Maroto) CreateCol(size int, components ...ProviderComponent) (ProviderComponent, error) {
+	newComponents, err := convertComponentType[core.Component](components...)
+	if err != nil {
+		return nil, err
+	}
+
+	return col.New(size).Add(newComponents...), nil
+}
+
+func (m *Maroto) CreateText(value string, textsProps ...*propsmapper.Text) ProviderComponent {
 	tProps := propsmapper.Text{}
 	if len(textsProps) > 0 {
 		tProps = *textsProps[0]
 	}
 
-	return text.New(value, props.Text{Top: tProps.Top, Left: tProps.Left, Right: tProps.Right, Family: tProps.Family,
+	return text.New(value, props.Text{
+		Top: tProps.Top, Left: tProps.Left, Right: tProps.Right, Family: tProps.Family,
 		Style: fontstyle.Type(tProps.Style), Size: tProps.Size, Align: align.Type(tProps.Align), BreakLineStrategy: breakline.Strategy(tProps.BreakLineStrategy),
 		VerticalPadding: tProps.VerticalPadding, Color: (*props.Color)(tProps.Color), Hyperlink: &tProps.Hyperlink,
 	})
 }
 
-func (m *Maroto) CreateSignature(value string, signaturesProps ...*propsmapper.Signature) PDFComponent {
+func (m *Maroto) CreateSignature(value string, signaturesProps ...*propsmapper.Signature) ProviderComponent {
 	sProps := propsmapper.Signature{}
 	if len(signaturesProps) > 0 {
 		sProps = *signaturesProps[0]
@@ -52,7 +97,7 @@ func (m *Maroto) CreateSignature(value string, signaturesProps ...*propsmapper.S
 	})
 }
 
-func (m *Maroto) CreateLine(lineProps ...*propsmapper.Line) PDFComponent {
+func (m *Maroto) CreateLine(lineProps ...*propsmapper.Line) ProviderComponent {
 	lProps := propsmapper.Line{}
 	if len(lineProps) > 0 {
 		lProps = *lineProps[0]
@@ -64,7 +109,7 @@ func (m *Maroto) CreateLine(lineProps ...*propsmapper.Line) PDFComponent {
 	})
 }
 
-func (m *Maroto) CreateImage(img []byte, ext string, imgProps ...*propsmapper.Rect) PDFComponent {
+func (m *Maroto) CreateImage(img []byte, ext string, imgProps ...*propsmapper.Rect) ProviderComponent {
 	cProps := propsmapper.Rect{}
 	if len(imgProps) > 0 {
 		cProps = *imgProps[0]
@@ -76,7 +121,7 @@ func (m *Maroto) CreateImage(img []byte, ext string, imgProps ...*propsmapper.Re
 	})
 }
 
-func (m *Maroto) CreateMatrixCode(codeValue string, codeProps ...*propsmapper.Rect) PDFComponent {
+func (m *Maroto) CreateMatrixCode(codeValue string, codeProps ...*propsmapper.Rect) ProviderComponent {
 	cProps := propsmapper.Rect{}
 	if len(codeProps) > 0 {
 		cProps = *codeProps[0]
@@ -88,7 +133,7 @@ func (m *Maroto) CreateMatrixCode(codeValue string, codeProps ...*propsmapper.Re
 	})
 }
 
-func (m *Maroto) CreateQrCode(codeValue string, codeProps ...*propsmapper.Rect) PDFComponent {
+func (m *Maroto) CreateQrCode(codeValue string, codeProps ...*propsmapper.Rect) ProviderComponent {
 	cProps := propsmapper.Rect{}
 	if len(codeProps) > 0 {
 		cProps = *codeProps[0]
@@ -100,7 +145,7 @@ func (m *Maroto) CreateQrCode(codeValue string, codeProps ...*propsmapper.Rect) 
 	})
 }
 
-func (m *Maroto) CreateBarCode(codeValue string, codeProps ...*propsmapper.Barcode) PDFComponent {
+func (m *Maroto) CreateBarCode(codeValue string, codeProps ...*propsmapper.Barcode) ProviderComponent {
 	cProps := propsmapper.Barcode{}
 	if len(codeProps) > 0 {
 		cProps = *codeProps[0]

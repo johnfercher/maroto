@@ -4,14 +4,15 @@ package rowmapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Row struct {
-	Height  float64
-	Cols    []mappers.Componentmapper
-	factory mappers.AbstractFactoryMaps
+	Height    float64
+	Cols      []mappers.Componentmapper
+	Factory   mappers.AbstractFactoryMaps
+	SourceKey string
 }
 
 func NewRow(templateRows interface{}, sourceKey string, factory mappers.AbstractFactoryMaps) (*Row, error) {
@@ -20,9 +21,10 @@ func NewRow(templateRows interface{}, sourceKey string, factory mappers.Abstract
 		return nil, fmt.Errorf("ensure that rows can be converted to map[string] interface{}")
 	}
 	row := &Row{
-		Height:  0,
-		Cols:    make([]mappers.Componentmapper, 0),
-		factory: factory,
+		Height:    0,
+		Cols:      make([]mappers.Componentmapper, 0),
+		Factory:   factory,
+		SourceKey: sourceKey,
 	}
 
 	err := row.addComponents(mapRows)
@@ -67,7 +69,7 @@ func (r *Row) setCols(template interface{}) error {
 	r.Cols = make([]mappers.Componentmapper, len(cols))
 
 	for i, col := range cols {
-		newCol, err := r.factory.NewCol(col)
+		newCol, err := r.Factory.NewCol(col)
 		if err != nil {
 			return err
 		}
@@ -86,6 +88,35 @@ func (r *Row) getFieldMappers() map[string]func(interface{}) error {
 	}
 }
 
-func (r *Row) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (r *Row) getRowContent(content map[string]interface{}) (map[string]interface{}, error) {
+	rowContent, ok := content[r.SourceKey]
+	if !ok {
+		return nil, fmt.Errorf("the row needs the source key \"%s\", but it was not found", r.SourceKey)
+	}
+	if mapRow, ok := rowContent.(map[string]interface{}); ok {
+		return mapRow, nil
+	}
+	return nil, fmt.Errorf("ensure that the contents of the row \"%s\" can be converted to map[string]interface{}", r.SourceKey)
+}
+
+func (r *Row) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+	rowContent, err := r.getRowContent(content)
+	if err != nil {
+		return nil, err
+	}
+
+	cols := make([]processorprovider.ProviderComponent, 0, len(r.Cols))
+	for _, col := range r.Cols {
+		newCol, err := col.Generate(rowContent, provider)
+		if err != nil {
+			return nil, err
+		}
+		cols = append(cols, newCol...)
+	}
+
+	row, err := provider.CreateRow(r.Height, cols...)
+	if err != nil {
+		return nil, err
+	}
+	return []processorprovider.ProviderComponent{row}, nil
 }
