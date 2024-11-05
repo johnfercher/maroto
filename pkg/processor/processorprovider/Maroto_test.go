@@ -4,6 +4,8 @@ import (
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 	"github.com/johnfercher/maroto/v2/pkg/test"
@@ -98,5 +100,62 @@ func TestCreateText(t *testing.T) {
 		)
 
 		test.New(t).Assert(barcode.GetStructure()).Equals("processor/provider/text.json")
+	})
+}
+
+func TestCreateCol(t *testing.T) {
+	t.Run("when CreateCol is called, should generate a col", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		text := text.New("test")
+
+		col, err := m.CreateCol(10, text)
+
+		assert.Nil(t, err)
+		assert.NotNil(t, col)
+	})
+
+	t.Run("when invalid components are sent, should return an error", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		page, err := m.CreatePage(text.NewCol(10, "10"))
+
+		assert.Nil(t, page)
+		assert.NotNil(t, err)
+	})
+}
+
+func TestCreateRow(t *testing.T) {
+	t.Run("when CreateRow is called, should generate a row", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		text := text.NewCol(12, "test")
+
+		col, err := m.CreateRow(10, text)
+
+		assert.Nil(t, err)
+		assert.NotNil(t, col)
+	})
+
+	t.Run("when invalid components are sent, should return an error", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		page, err := m.CreatePage(text.New("10"))
+
+		assert.Nil(t, page)
+		assert.NotNil(t, err)
+	})
+}
+
+func TestCreatePage(t *testing.T) {
+	t.Run("when CreatePage is called, should generate a page", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		page, err := m.CreatePage(row.New(10))
+
+		assert.Nil(t, err)
+		assert.NotNil(t, page)
+	})
+	t.Run("when invalid components are sent, should return an error", func(t *testing.T) {
+		m := processorprovider.NewMaroto()
+		page, err := m.CreatePage(text.New("10"))
+
+		assert.Nil(t, page)
+		assert.NotNil(t, err)
 	})
 }
