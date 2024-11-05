@@ -15,11 +15,11 @@ import (
 )
 
 type abstractFactoryMaps struct {
-	repository core.Repository
+	repository core.ProcessorRepository
 }
 
 // NewAbstractFactoryMaps is responsible for creating an object that encapsulates the creation of components
-func NewAbstractFactoryMaps(repository core.Repository) *abstractFactoryMaps {
+func NewAbstractFactoryMaps(repository core.ProcessorRepository) *abstractFactoryMaps {
 	return &abstractFactoryMaps{repository: repository}
 }
 

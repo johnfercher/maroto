@@ -107,7 +107,7 @@ func (t *Text) getValue(content map[string]interface{}) (string, error) {
 	return textValid, nil
 }
 
-func (t *Text) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+func (t *Text) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
 	signature, err := t.getValue(content)
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ func (t *Text) Generate(content map[string]interface{}, provider processorprovid
 	t.Value = signature
 
 	if t.Props != nil {
-		return provider.CreateText(t.Value, t.Props), nil
+		return []processorprovider.ProviderComponent{provider.CreateText(t.Value, t.Props)}, nil
 	}
-	return provider.CreateText(t.Value), nil
+	return []processorprovider.ProviderComponent{provider.CreateText(t.Value)}, nil
 }

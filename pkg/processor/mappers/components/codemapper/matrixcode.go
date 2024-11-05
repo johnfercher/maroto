@@ -109,7 +109,7 @@ func (m *Matrixcode) getCode(content map[string]interface{}) (string, error) {
 	return codeValid, nil
 }
 
-func (m *Matrixcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+func (m *Matrixcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
 	code, err := m.getCode(content)
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ func (m *Matrixcode) Generate(content map[string]interface{}, provider processor
 	m.Code = code
 
 	if m.Props != nil {
-		return provider.CreateMatrixCode(m.Code, m.Props), nil
+		return []processorprovider.ProviderComponent{provider.CreateMatrixCode(m.Code, m.Props)}, nil
 	}
-	return provider.CreateMatrixCode(m.Code), nil
+	return []processorprovider.ProviderComponent{provider.CreateMatrixCode(m.Code)}, nil
 }

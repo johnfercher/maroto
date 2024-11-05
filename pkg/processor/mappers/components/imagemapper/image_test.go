@@ -12,7 +12,7 @@ import (
 func TestNewImage(t *testing.T) {
 	t.Run("when invalid image is sent, should return an error", func(t *testing.T) {
 		imageTemplate := 1
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -23,7 +23,7 @@ func TestNewImage(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"source_key": "image",
 		}
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -35,7 +35,7 @@ func TestNewImage(t *testing.T) {
 			"props":      1,
 			"source_key": "name",
 		}
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -47,7 +47,7 @@ func TestNewImage(t *testing.T) {
 			"invalid_field": 1,
 			"source_key":    "name",
 		}
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -56,7 +56,7 @@ func TestNewImage(t *testing.T) {
 	})
 	t.Run("when source_key is not sent, should return an error", func(t *testing.T) {
 		imageTemplate := map[string]interface{}{}
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -67,7 +67,7 @@ func TestNewImage(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"source_key": 123,
 		}
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -76,7 +76,7 @@ func TestNewImage(t *testing.T) {
 	})
 	t.Run("when source_key and path are not sent, should return an error", func(t *testing.T) {
 		imageTemplate := map[string]interface{}{}
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -87,7 +87,7 @@ func TestNewImage(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"source_key": "icon",
 		}
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -101,7 +101,7 @@ func TestNewImage(t *testing.T) {
 				"left": 10.0,
 			},
 		}
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image, err := imagemapper.NewImage(imageTemplate, repository)
 
@@ -114,7 +114,7 @@ func TestImageGenerate(t *testing.T) {
 	t.Run("if image is not found, should return an error", func(t *testing.T) {
 		content := map[string]interface{}{}
 		provider := mocks.NewProcessorProvider(t)
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 
 		image := imagemapper.Image{SourceKey: "code", Repository: repository}
 		component, err := image.Generate(content, provider)
@@ -140,7 +140,7 @@ func TestImageGenerate(t *testing.T) {
 		}
 		provider := mocks.NewProcessorProvider(t)
 		provider.EXPECT().CreateImage([]byte("image"), "png").Return(nil)
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 		repository.EXPECT().GetDocument("path.png").Return("png", []byte("image"), nil)
 
 		image := imagemapper.Image{SourceKey: "Path", Repository: repository}
@@ -154,7 +154,7 @@ func TestImageGenerate(t *testing.T) {
 		content := map[string]interface{}{}
 
 		provider := mocks.NewProcessorProvider(t)
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 		repository.EXPECT().GetDocument("path.png").Return("", nil, fmt.Errorf("any"))
 
 		image := imagemapper.Image{Path: "path.png", Repository: repository}
@@ -168,7 +168,7 @@ func TestImageGenerate(t *testing.T) {
 
 		provider := mocks.NewProcessorProvider(t)
 		provider.EXPECT().CreateImage([]byte("image"), "png").Return(nil)
-		repository := mocks.NewRepository(t)
+		repository := mocks.NewProcessorRepository(t)
 		repository.EXPECT().GetDocument("path.png").Return("png", []byte("image"), nil)
 
 		image := imagemapper.Image{Path: "path.png", Repository: repository}

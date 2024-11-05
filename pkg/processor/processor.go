@@ -11,7 +11,7 @@ import (
 )
 
 type processor struct {
-	repository   core.Repository
+	repository   core.ProcessorRepository
 	deserializer core.Deserializer
 	loader       core.Loader
 }

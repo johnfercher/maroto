@@ -109,7 +109,7 @@ func (b *Barcode) getCode(content map[string]interface{}) (string, error) {
 	return codeValid, nil
 }
 
-func (b *Barcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+func (b *Barcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
 	code, err := b.getCode(content)
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ func (b *Barcode) Generate(content map[string]interface{}, provider processorpro
 	b.Code = code
 
 	if b.Props != nil {
-		return provider.CreateBarCode(b.Code, b.Props), nil
+		return []processorprovider.ProviderComponent{provider.CreateBarCode(b.Code, b.Props)}, nil
 	}
-	return provider.CreateBarCode(b.Code), nil
+	return []processorprovider.ProviderComponent{provider.CreateBarCode(b.Code)}, nil
 }

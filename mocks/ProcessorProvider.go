@@ -22,7 +22,7 @@ func (_m *ProcessorProvider) EXPECT() *ProcessorProvider_Expecter {
 }
 
 // CreateBarCode provides a mock function with given fields: value, props
-func (_m *ProcessorProvider) CreateBarCode(value string, props ...*propsmapper.Barcode) processorprovider.PDFComponent {
+func (_m *ProcessorProvider) CreateBarCode(value string, props ...*propsmapper.Barcode) processorprovider.ProviderComponent {
 	_va := make([]interface{}, len(props))
 	for _i := range props {
 		_va[_i] = props[_i]
@@ -36,12 +36,12 @@ func (_m *ProcessorProvider) CreateBarCode(value string, props ...*propsmapper.B
 		panic("no return value specified for CreateBarCode")
 	}
 
-	var r0 processorprovider.PDFComponent
-	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Barcode) processorprovider.PDFComponent); ok {
+	var r0 processorprovider.ProviderComponent
+	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Barcode) processorprovider.ProviderComponent); ok {
 		r0 = rf(value, props...)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(processorprovider.PDFComponent)
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
@@ -74,18 +74,91 @@ func (_c *ProcessorProvider_CreateBarCode_Call) Run(run func(value string, props
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateBarCode_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateBarCode_Call {
+func (_c *ProcessorProvider_CreateBarCode_Call) Return(_a0 processorprovider.ProviderComponent) *ProcessorProvider_CreateBarCode_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateBarCode_Call) RunAndReturn(run func(string, ...*propsmapper.Barcode) processorprovider.PDFComponent) *ProcessorProvider_CreateBarCode_Call {
+func (_c *ProcessorProvider_CreateBarCode_Call) RunAndReturn(run func(string, ...*propsmapper.Barcode) processorprovider.ProviderComponent) *ProcessorProvider_CreateBarCode_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// CreateCol provides a mock function with given fields: size, components
+func (_m *ProcessorProvider) CreateCol(size int, components ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error) {
+	_va := make([]interface{}, len(components))
+	for _i := range components {
+		_va[_i] = components[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, size)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreateCol")
+	}
+
+	var r0 processorprovider.ProviderComponent
+	var r1 error
+	if rf, ok := ret.Get(0).(func(int, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)); ok {
+		return rf(size, components...)
+	}
+	if rf, ok := ret.Get(0).(func(int, ...processorprovider.ProviderComponent) processorprovider.ProviderComponent); ok {
+		r0 = rf(size, components...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(int, ...processorprovider.ProviderComponent) error); ok {
+		r1 = rf(size, components...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ProcessorProvider_CreateCol_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateCol'
+type ProcessorProvider_CreateCol_Call struct {
+	*mock.Call
+}
+
+// CreateCol is a helper method to define mock.On call
+//   - size int
+//   - components ...processorprovider.ProviderComponent
+func (_e *ProcessorProvider_Expecter) CreateCol(size interface{}, components ...interface{}) *ProcessorProvider_CreateCol_Call {
+	return &ProcessorProvider_CreateCol_Call{Call: _e.mock.On("CreateCol",
+		append([]interface{}{size}, components...)...)}
+}
+
+func (_c *ProcessorProvider_CreateCol_Call) Run(run func(size int, components ...processorprovider.ProviderComponent)) *ProcessorProvider_CreateCol_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]processorprovider.ProviderComponent, len(args)-1)
+		for i, a := range args[1:] {
+			if a != nil {
+				variadicArgs[i] = a.(processorprovider.ProviderComponent)
+			}
+		}
+		run(args[0].(int), variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *ProcessorProvider_CreateCol_Call) Return(_a0 processorprovider.ProviderComponent, _a1 error) *ProcessorProvider_CreateCol_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *ProcessorProvider_CreateCol_Call) RunAndReturn(run func(int, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)) *ProcessorProvider_CreateCol_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // CreateImage provides a mock function with given fields: value, extension, props
-func (_m *ProcessorProvider) CreateImage(value []byte, extension string, props ...*propsmapper.Rect) processorprovider.PDFComponent {
+func (_m *ProcessorProvider) CreateImage(value []byte, extension string, props ...*propsmapper.Rect) processorprovider.ProviderComponent {
 	_va := make([]interface{}, len(props))
 	for _i := range props {
 		_va[_i] = props[_i]
@@ -99,12 +172,12 @@ func (_m *ProcessorProvider) CreateImage(value []byte, extension string, props .
 		panic("no return value specified for CreateImage")
 	}
 
-	var r0 processorprovider.PDFComponent
-	if rf, ok := ret.Get(0).(func([]byte, string, ...*propsmapper.Rect) processorprovider.PDFComponent); ok {
+	var r0 processorprovider.ProviderComponent
+	if rf, ok := ret.Get(0).(func([]byte, string, ...*propsmapper.Rect) processorprovider.ProviderComponent); ok {
 		r0 = rf(value, extension, props...)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(processorprovider.PDFComponent)
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
@@ -138,30 +211,30 @@ func (_c *ProcessorProvider_CreateImage_Call) Run(run func(value []byte, extensi
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateImage_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateImage_Call {
+func (_c *ProcessorProvider_CreateImage_Call) Return(_a0 processorprovider.ProviderComponent) *ProcessorProvider_CreateImage_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateImage_Call) RunAndReturn(run func([]byte, string, ...*propsmapper.Rect) processorprovider.PDFComponent) *ProcessorProvider_CreateImage_Call {
+func (_c *ProcessorProvider_CreateImage_Call) RunAndReturn(run func([]byte, string, ...*propsmapper.Rect) processorprovider.ProviderComponent) *ProcessorProvider_CreateImage_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // CreateLine provides a mock function with given fields: props
-func (_m *ProcessorProvider) CreateLine(props *propsmapper.Line) processorprovider.PDFComponent {
+func (_m *ProcessorProvider) CreateLine(props *propsmapper.Line) processorprovider.ProviderComponent {
 	ret := _m.Called(props)
 
 	if len(ret) == 0 {
 		panic("no return value specified for CreateLine")
 	}
 
-	var r0 processorprovider.PDFComponent
-	if rf, ok := ret.Get(0).(func(*propsmapper.Line) processorprovider.PDFComponent); ok {
+	var r0 processorprovider.ProviderComponent
+	if rf, ok := ret.Get(0).(func(*propsmapper.Line) processorprovider.ProviderComponent); ok {
 		r0 = rf(props)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(processorprovider.PDFComponent)
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
@@ -186,18 +259,18 @@ func (_c *ProcessorProvider_CreateLine_Call) Run(run func(props *propsmapper.Lin
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateLine_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateLine_Call {
+func (_c *ProcessorProvider_CreateLine_Call) Return(_a0 processorprovider.ProviderComponent) *ProcessorProvider_CreateLine_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateLine_Call) RunAndReturn(run func(*propsmapper.Line) processorprovider.PDFComponent) *ProcessorProvider_CreateLine_Call {
+func (_c *ProcessorProvider_CreateLine_Call) RunAndReturn(run func(*propsmapper.Line) processorprovider.ProviderComponent) *ProcessorProvider_CreateLine_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // CreateMatrixCode provides a mock function with given fields: value, props
-func (_m *ProcessorProvider) CreateMatrixCode(value string, props ...*propsmapper.Rect) processorprovider.PDFComponent {
+func (_m *ProcessorProvider) CreateMatrixCode(value string, props ...*propsmapper.Rect) processorprovider.ProviderComponent {
 	_va := make([]interface{}, len(props))
 	for _i := range props {
 		_va[_i] = props[_i]
@@ -211,12 +284,12 @@ func (_m *ProcessorProvider) CreateMatrixCode(value string, props ...*propsmappe
 		panic("no return value specified for CreateMatrixCode")
 	}
 
-	var r0 processorprovider.PDFComponent
-	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Rect) processorprovider.PDFComponent); ok {
+	var r0 processorprovider.ProviderComponent
+	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Rect) processorprovider.ProviderComponent); ok {
 		r0 = rf(value, props...)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(processorprovider.PDFComponent)
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
@@ -249,18 +322,89 @@ func (_c *ProcessorProvider_CreateMatrixCode_Call) Run(run func(value string, pr
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateMatrixCode_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateMatrixCode_Call {
+func (_c *ProcessorProvider_CreateMatrixCode_Call) Return(_a0 processorprovider.ProviderComponent) *ProcessorProvider_CreateMatrixCode_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateMatrixCode_Call) RunAndReturn(run func(string, ...*propsmapper.Rect) processorprovider.PDFComponent) *ProcessorProvider_CreateMatrixCode_Call {
+func (_c *ProcessorProvider_CreateMatrixCode_Call) RunAndReturn(run func(string, ...*propsmapper.Rect) processorprovider.ProviderComponent) *ProcessorProvider_CreateMatrixCode_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// CreatePage provides a mock function with given fields: components
+func (_m *ProcessorProvider) CreatePage(components ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error) {
+	_va := make([]interface{}, len(components))
+	for _i := range components {
+		_va[_i] = components[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreatePage")
+	}
+
+	var r0 processorprovider.ProviderComponent
+	var r1 error
+	if rf, ok := ret.Get(0).(func(...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)); ok {
+		return rf(components...)
+	}
+	if rf, ok := ret.Get(0).(func(...processorprovider.ProviderComponent) processorprovider.ProviderComponent); ok {
+		r0 = rf(components...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(...processorprovider.ProviderComponent) error); ok {
+		r1 = rf(components...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ProcessorProvider_CreatePage_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreatePage'
+type ProcessorProvider_CreatePage_Call struct {
+	*mock.Call
+}
+
+// CreatePage is a helper method to define mock.On call
+//   - components ...processorprovider.ProviderComponent
+func (_e *ProcessorProvider_Expecter) CreatePage(components ...interface{}) *ProcessorProvider_CreatePage_Call {
+	return &ProcessorProvider_CreatePage_Call{Call: _e.mock.On("CreatePage",
+		append([]interface{}{}, components...)...)}
+}
+
+func (_c *ProcessorProvider_CreatePage_Call) Run(run func(components ...processorprovider.ProviderComponent)) *ProcessorProvider_CreatePage_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]processorprovider.ProviderComponent, len(args)-0)
+		for i, a := range args[0:] {
+			if a != nil {
+				variadicArgs[i] = a.(processorprovider.ProviderComponent)
+			}
+		}
+		run(variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *ProcessorProvider_CreatePage_Call) Return(_a0 processorprovider.ProviderComponent, _a1 error) *ProcessorProvider_CreatePage_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *ProcessorProvider_CreatePage_Call) RunAndReturn(run func(...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)) *ProcessorProvider_CreatePage_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // CreateQrCode provides a mock function with given fields: value, props
-func (_m *ProcessorProvider) CreateQrCode(value string, props ...*propsmapper.Rect) processorprovider.PDFComponent {
+func (_m *ProcessorProvider) CreateQrCode(value string, props ...*propsmapper.Rect) processorprovider.ProviderComponent {
 	_va := make([]interface{}, len(props))
 	for _i := range props {
 		_va[_i] = props[_i]
@@ -274,12 +418,12 @@ func (_m *ProcessorProvider) CreateQrCode(value string, props ...*propsmapper.Re
 		panic("no return value specified for CreateQrCode")
 	}
 
-	var r0 processorprovider.PDFComponent
-	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Rect) processorprovider.PDFComponent); ok {
+	var r0 processorprovider.ProviderComponent
+	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Rect) processorprovider.ProviderComponent); ok {
 		r0 = rf(value, props...)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(processorprovider.PDFComponent)
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
@@ -312,18 +456,91 @@ func (_c *ProcessorProvider_CreateQrCode_Call) Run(run func(value string, props 
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateQrCode_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateQrCode_Call {
+func (_c *ProcessorProvider_CreateQrCode_Call) Return(_a0 processorprovider.ProviderComponent) *ProcessorProvider_CreateQrCode_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateQrCode_Call) RunAndReturn(run func(string, ...*propsmapper.Rect) processorprovider.PDFComponent) *ProcessorProvider_CreateQrCode_Call {
+func (_c *ProcessorProvider_CreateQrCode_Call) RunAndReturn(run func(string, ...*propsmapper.Rect) processorprovider.ProviderComponent) *ProcessorProvider_CreateQrCode_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// CreateRow provides a mock function with given fields: height, components
+func (_m *ProcessorProvider) CreateRow(height float64, components ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error) {
+	_va := make([]interface{}, len(components))
+	for _i := range components {
+		_va[_i] = components[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, height)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreateRow")
+	}
+
+	var r0 processorprovider.ProviderComponent
+	var r1 error
+	if rf, ok := ret.Get(0).(func(float64, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)); ok {
+		return rf(height, components...)
+	}
+	if rf, ok := ret.Get(0).(func(float64, ...processorprovider.ProviderComponent) processorprovider.ProviderComponent); ok {
+		r0 = rf(height, components...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(float64, ...processorprovider.ProviderComponent) error); ok {
+		r1 = rf(height, components...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ProcessorProvider_CreateRow_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateRow'
+type ProcessorProvider_CreateRow_Call struct {
+	*mock.Call
+}
+
+// CreateRow is a helper method to define mock.On call
+//   - height float64
+//   - components ...processorprovider.ProviderComponent
+func (_e *ProcessorProvider_Expecter) CreateRow(height interface{}, components ...interface{}) *ProcessorProvider_CreateRow_Call {
+	return &ProcessorProvider_CreateRow_Call{Call: _e.mock.On("CreateRow",
+		append([]interface{}{height}, components...)...)}
+}
+
+func (_c *ProcessorProvider_CreateRow_Call) Run(run func(height float64, components ...processorprovider.ProviderComponent)) *ProcessorProvider_CreateRow_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]processorprovider.ProviderComponent, len(args)-1)
+		for i, a := range args[1:] {
+			if a != nil {
+				variadicArgs[i] = a.(processorprovider.ProviderComponent)
+			}
+		}
+		run(args[0].(float64), variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *ProcessorProvider_CreateRow_Call) Return(_a0 processorprovider.ProviderComponent, _a1 error) *ProcessorProvider_CreateRow_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *ProcessorProvider_CreateRow_Call) RunAndReturn(run func(float64, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)) *ProcessorProvider_CreateRow_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // CreateSignature provides a mock function with given fields: value, props
-func (_m *ProcessorProvider) CreateSignature(value string, props ...*propsmapper.Signature) processorprovider.PDFComponent {
+func (_m *ProcessorProvider) CreateSignature(value string, props ...*propsmapper.Signature) processorprovider.ProviderComponent {
 	_va := make([]interface{}, len(props))
 	for _i := range props {
 		_va[_i] = props[_i]
@@ -337,12 +554,12 @@ func (_m *ProcessorProvider) CreateSignature(value string, props ...*propsmapper
 		panic("no return value specified for CreateSignature")
 	}
 
-	var r0 processorprovider.PDFComponent
-	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Signature) processorprovider.PDFComponent); ok {
+	var r0 processorprovider.ProviderComponent
+	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Signature) processorprovider.ProviderComponent); ok {
 		r0 = rf(value, props...)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(processorprovider.PDFComponent)
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
@@ -375,18 +592,18 @@ func (_c *ProcessorProvider_CreateSignature_Call) Run(run func(value string, pro
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateSignature_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateSignature_Call {
+func (_c *ProcessorProvider_CreateSignature_Call) Return(_a0 processorprovider.ProviderComponent) *ProcessorProvider_CreateSignature_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateSignature_Call) RunAndReturn(run func(string, ...*propsmapper.Signature) processorprovider.PDFComponent) *ProcessorProvider_CreateSignature_Call {
+func (_c *ProcessorProvider_CreateSignature_Call) RunAndReturn(run func(string, ...*propsmapper.Signature) processorprovider.ProviderComponent) *ProcessorProvider_CreateSignature_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // CreateText provides a mock function with given fields: value, props
-func (_m *ProcessorProvider) CreateText(value string, props ...*propsmapper.Text) processorprovider.PDFComponent {
+func (_m *ProcessorProvider) CreateText(value string, props ...*propsmapper.Text) processorprovider.ProviderComponent {
 	_va := make([]interface{}, len(props))
 	for _i := range props {
 		_va[_i] = props[_i]
@@ -400,12 +617,12 @@ func (_m *ProcessorProvider) CreateText(value string, props ...*propsmapper.Text
 		panic("no return value specified for CreateText")
 	}
 
-	var r0 processorprovider.PDFComponent
-	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Text) processorprovider.PDFComponent); ok {
+	var r0 processorprovider.ProviderComponent
+	if rf, ok := ret.Get(0).(func(string, ...*propsmapper.Text) processorprovider.ProviderComponent); ok {
 		r0 = rf(value, props...)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(processorprovider.PDFComponent)
+			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
@@ -438,12 +655,12 @@ func (_c *ProcessorProvider_CreateText_Call) Run(run func(value string, props ..
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateText_Call) Return(_a0 processorprovider.PDFComponent) *ProcessorProvider_CreateText_Call {
+func (_c *ProcessorProvider_CreateText_Call) Return(_a0 processorprovider.ProviderComponent) *ProcessorProvider_CreateText_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateText_Call) RunAndReturn(run func(string, ...*propsmapper.Text) processorprovider.PDFComponent) *ProcessorProvider_CreateText_Call {
+func (_c *ProcessorProvider_CreateText_Call) RunAndReturn(run func(string, ...*propsmapper.Text) processorprovider.ProviderComponent) *ProcessorProvider_CreateText_Call {
 	_c.Call.Return(run)
 	return _c
 }

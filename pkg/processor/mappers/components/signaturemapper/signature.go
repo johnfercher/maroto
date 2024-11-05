@@ -108,7 +108,7 @@ func (s *Signature) getSignature(content map[string]interface{}) (string, error)
 	return signatureValid, nil
 }
 
-func (s *Signature) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+func (s *Signature) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
 	signature, err := s.getSignature(content)
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ func (s *Signature) Generate(content map[string]interface{}, provider processorp
 	s.Value = signature
 
 	if s.Props != nil {
-		return provider.CreateSignature(s.Value, s.Props), nil
+		return []processorprovider.ProviderComponent{provider.CreateSignature(s.Value, s.Props)}, nil
 	}
-	return provider.CreateSignature(s.Value), nil
+	return []processorprovider.ProviderComponent{provider.CreateSignature(s.Value)}, nil
 }

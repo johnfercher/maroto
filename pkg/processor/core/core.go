@@ -5,7 +5,7 @@ type Processor interface {
 	GenerateDocument(templateName string, content string) []byte
 }
 
-type Repository interface {
+type ProcessorRepository interface {
 	RegisterTemplate(templateName string, template map[string]any) error
 	ReadTemplate(templateName string) (map[string]any, error)
 	GetDocument(documentName string) (extension string, doc []byte, err error)

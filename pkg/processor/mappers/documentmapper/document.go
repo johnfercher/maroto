@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components/pdf"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/buildermapper"
 )
@@ -135,6 +135,6 @@ func (p *Document) setPages(pagesDoc interface{}) error {
 }
 
 // generate is responsible for the builder pdf according to the submitted content
-func (p *Document) Generate(content map[string]interface{}) (*pdf.Pdf, error) {
+func (p *Document) Generate(content map[string]interface{}) (*core.Component, error) {
 	return nil, nil
 }

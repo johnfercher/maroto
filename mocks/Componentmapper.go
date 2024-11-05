@@ -21,23 +21,23 @@ func (_m *Componentmapper) EXPECT() *Componentmapper_Expecter {
 }
 
 // Generate provides a mock function with given fields: content, provider
-func (_m *Componentmapper) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error) {
+func (_m *Componentmapper) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
 	ret := _m.Called(content, provider)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Generate")
 	}
 
-	var r0 processorprovider.PDFComponent
+	var r0 []processorprovider.ProviderComponent
 	var r1 error
-	if rf, ok := ret.Get(0).(func(map[string]interface{}, processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error)); ok {
+	if rf, ok := ret.Get(0).(func(map[string]interface{}, processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error)); ok {
 		return rf(content, provider)
 	}
-	if rf, ok := ret.Get(0).(func(map[string]interface{}, processorprovider.ProcessorProvider) processorprovider.PDFComponent); ok {
+	if rf, ok := ret.Get(0).(func(map[string]interface{}, processorprovider.ProcessorProvider) []processorprovider.ProviderComponent); ok {
 		r0 = rf(content, provider)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(processorprovider.PDFComponent)
+			r0 = ret.Get(0).([]processorprovider.ProviderComponent)
 		}
 	}
 
@@ -69,12 +69,12 @@ func (_c *Componentmapper_Generate_Call) Run(run func(content map[string]interfa
 	return _c
 }
 
-func (_c *Componentmapper_Generate_Call) Return(_a0 processorprovider.PDFComponent, _a1 error) *Componentmapper_Generate_Call {
+func (_c *Componentmapper_Generate_Call) Return(_a0 []processorprovider.ProviderComponent, _a1 error) *Componentmapper_Generate_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *Componentmapper_Generate_Call) RunAndReturn(run func(map[string]interface{}, processorprovider.ProcessorProvider) (processorprovider.PDFComponent, error)) *Componentmapper_Generate_Call {
+func (_c *Componentmapper_Generate_Call) RunAndReturn(run func(map[string]interface{}, processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error)) *Componentmapper_Generate_Call {
 	_c.Call.Return(run)
 	return _c
 }
