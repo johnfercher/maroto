@@ -3,8 +3,8 @@ package colmapper
 import (
 	"fmt"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Col struct {
@@ -29,10 +29,6 @@ func NewCol(templateCols interface{}, factory mappers.AbstractFactoryMaps) (*Col
 		return nil, err
 	}
 	return col, nil
-}
-
-func (c *Col) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
 }
 
 func (c *Col) addComponents(mapComponents map[string]interface{}) error {
@@ -77,4 +73,23 @@ func (c *Col) getFieldMappers() map[string]func(interface{}) (mappers.Componentm
 		"signature":   c.factory.NewSignature,
 		"text":        c.factory.NewText,
 	}
+}
+
+// Generate is responsible for generating the col component, it will generate all the internal components and add them to the col
+//   - The content is a map with the properties of the col components
+func (c *Col) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+	components := make([]processorprovider.ProviderComponent, 0, len(c.Components))
+	for _, component := range c.Components {
+		newComponent, err := component.Generate(content, provider)
+		if err != nil {
+			return nil, err
+		}
+		components = append(components, newComponent...)
+	}
+
+	col, err := provider.CreateCol(c.Size, components...)
+	if err != nil {
+		return nil, err
+	}
+	return []processorprovider.ProviderComponent{col}, nil
 }
