@@ -5,20 +5,20 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/johnfercher/maroto/v2/pkg/processor/components"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Page struct {
 	SourceKey string
 	Rows      []mappers.Componentmapper
-	factory   mappers.AbstractFactoryMaps
+	Factory   mappers.AbstractFactoryMaps
 }
 
 func NewPage(rows interface{}, sourceKey string, factory mappers.AbstractFactoryMaps) (*Page, error) {
 	newPage := &Page{
 		SourceKey: sourceKey,
-		factory:   factory,
+		Factory:   factory,
 	}
 	if err := newPage.setRows(rows); err != nil {
 		return nil, err
@@ -40,9 +40,9 @@ func (p *Page) setRows(rowsDoc interface{}) error {
 		var err error
 
 		if strings.HasPrefix(templateName, "list") {
-			rows, err = p.factory.NewList(template, templateName, p.factory.NewRow)
+			rows, err = p.Factory.NewList(template, templateName, p.Factory.NewRow)
 		} else {
-			rows, err = p.factory.NewRow(template, templateName)
+			rows, err = p.Factory.NewRow(template, templateName)
 		}
 
 		if err != nil {
@@ -54,6 +54,35 @@ func (p *Page) setRows(rowsDoc interface{}) error {
 	return nil
 }
 
-func (p *Page) Generate(content map[string]interface{}) (components.PdfComponent, error) {
-	return nil, nil
+func (p *Page) getPageContent(content map[string]interface{}) (map[string]interface{}, error) {
+	pageContent, ok := content[p.SourceKey]
+	if !ok {
+		return nil, fmt.Errorf("the page needs the source key \"%s\", but it was not found", p.SourceKey)
+	}
+	if mapPage, ok := pageContent.(map[string]interface{}); ok {
+		return mapPage, nil
+	}
+	return nil, fmt.Errorf("ensure that the contents of the page \"%s\" can be converted to map[string]interface{}", p.SourceKey)
+}
+
+func (p *Page) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+	pageContent, err := p.getPageContent(content)
+	if err != nil {
+		return nil, err
+	}
+
+	rows := make([]processorprovider.ProviderComponent, 0, len(p.Rows))
+	for _, row := range p.Rows {
+		newRow, err := row.Generate(pageContent, provider)
+		if err != nil {
+			return nil, err
+		}
+		rows = append(rows, newRow...)
+	}
+
+	page, err := provider.CreatePage(rows...)
+	if err != nil {
+		return nil, err
+	}
+	return []processorprovider.ProviderComponent{page}, nil
 }
