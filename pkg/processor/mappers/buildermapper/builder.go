@@ -7,21 +7,24 @@ import (
 )
 
 type Builder struct {
-	Dimensions           *propsmapper.Dimensions
-	Margins              *propsmapper.Margins
-	ChunkWorkers         int
-	Debug                bool
-	MaxGridSize          int
-	DefaultFont          *propsmapper.Font
-	CustomFonts          []*propsmapper.CustomFont
-	PageNumber           *propsmapper.PageNumber
-	Protection           *propsmapper.Protection
-	Compression          bool
-	PageSize             string
-	Orientation          string
-	Metadata             *propsmapper.Metadata
-	DisableAutoPageBreak bool
-	GenerationMode       string
+	PageSize                string
+	Dimensions              *propsmapper.Dimensions
+	Margins                 *propsmapper.Margins
+	ConcurrentMode          int
+	SequentialMode          bool
+	SequentialLowMemoryMode int
+	Debug                   bool
+	MaxGridSize             int
+	DefaultFont             *propsmapper.Font
+	CustomFonts             []*propsmapper.CustomFont
+	PageNumber              *propsmapper.PageNumber
+	Protection              *propsmapper.Protection
+	Compression             bool
+	Orientation             string
+	Metadata                *propsmapper.Metadata
+	DisableAutoPageBreak    bool
+	GenerationMode          string
+	BackgroundImage         string
 }
 
 // NewBuilder is responsible for creating Builder properties. If an invalid property is provided, a default value will be assigned.
@@ -32,19 +35,24 @@ func NewBuilder(builder interface{}) (*Builder, error) {
 	}
 
 	return &Builder{
-		Dimensions:           propsmapper.NewDimensions(builderMap["dimensions"]),
-		Margins:              propsmapper.NewMargins(builderMap["margins"]),
-		ChunkWorkers:         int(factoryField(builderMap["chunk_workers"], -1.0)),
-		Debug:                factoryField(builderMap["debug"], false),
-		MaxGridSize:          int(factoryField(builderMap["max_grid_size"], -1.0)),
-		DefaultFont:          propsmapper.NewFont(builderMap["default_font"]),
-		Protection:           propsmapper.NewProtection(builderMap["protection"]),
-		Compression:          factoryField(builderMap["compression"], false),
-		PageSize:             factoryField(builderMap["page_size"], ""),
-		Orientation:          factoryField(builderMap["orientation"], ""),
-		Metadata:             propsmapper.NewMetadata(builderMap["metadata"]),
-		DisableAutoPageBreak: factoryField(builderMap["disable_auto_page_break"], false),
-		GenerationMode:       factoryField(builderMap["generation_mode"], ""),
+		PageSize:                factoryField(builderMap["page_size"], ""),
+		Dimensions:              propsmapper.NewDimensions(builderMap["dimensions"]),
+		Margins:                 propsmapper.NewMargins(builderMap["margins"]),
+		ConcurrentMode:          int(factoryField(builderMap["concurrent_mode"], -1.0)),
+		SequentialMode:          factoryField(builderMap["sequential_mode"], false),
+		SequentialLowMemoryMode: int(factoryField(builderMap["sequential_low_memory_mode"], -1.0)),
+		Debug:                   factoryField(builderMap["debug"], false),
+		MaxGridSize:             int(factoryField(builderMap["max_grid_size"], -1.0)),
+		DefaultFont:             propsmapper.NewFont(builderMap["default_font"]),
+		CustomFonts:             propsmapper.NewCustomFonts(builderMap["custom_font"]),
+		PageNumber:              propsmapper.NewPageNumber(builderMap["page_number"]),
+		Protection:              propsmapper.NewProtection(builderMap["protection"]),
+		Compression:             factoryField(builderMap["compression"], false),
+		Orientation:             propsmapper.NewOrientation(factoryField(builderMap["orientation"], "")),
+		Metadata:                propsmapper.NewMetadata(builderMap["metadata"]),
+		DisableAutoPageBreak:    factoryField(builderMap["disable_auto_page_break"], false),
+		GenerationMode:          factoryField(builderMap["generation_mode"], ""),
+		BackgroundImage:         factoryField(builderMap["background_image"], ""),
 	}, nil
 }
 
