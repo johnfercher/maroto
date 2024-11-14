@@ -9,7 +9,8 @@
         "top": 10,
         "bottom": 10
     },
-    "chunk_workers": 10,
+    "concurrent_mode": 10,
+    "sequential_mode": false,
     "debug": true,
     "max_grid_size": 10,
     "default_font": {
@@ -22,6 +23,22 @@
             "blue": 150
         }
     },
+    "page_number":{
+        "pattern": "pattern_test",
+        "place": "place_test",
+        "family": "family_test",
+        "style": "style_test",
+        "size": 10,
+        "color": {
+            "red": 10,
+            "green": 100,
+            "blue": 150
+        }
+    },
+    "custom_font": [
+        {"family": "family_test", "style": "style_test", "file_path": "file_test"},
+        {"family": "family_test2", "style": "style_test2", "file_path": "file_test2"}
+    ],
     "protection": {
         "type": "Print",
         "user_password": "senha123",
@@ -29,7 +46,7 @@
     },
     "compression": true,
     "page_size": "T",
-    "orientation": "portrait",
+    "orientation": "vertical",
     "metadata": {
         "author": {"text": "user_test", "utf8": true},       
         "creator": {"text": "user_test", "utf8": true}, 

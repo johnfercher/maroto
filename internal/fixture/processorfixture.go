@@ -1,6 +1,8 @@
 package fixture
 
 import (
+	"time"
+
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/codemapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/imagemapper"
@@ -10,6 +12,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/rowmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/signaturemapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/textmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 )
 
 func MapperRow() *rowmapper.Row {
@@ -56,4 +59,13 @@ func Signature() *signaturemapper.Signature {
 
 func Text() *textmapper.Text {
 	return &textmapper.Text{}
+}
+
+func Metadata() *propsmapper.Metadata {
+	creation := time.Now()
+	return &propsmapper.Metadata{
+		Author: &propsmapper.Utf8Text{Text: "Author", UTF8: true}, Creator: &propsmapper.Utf8Text{Text: "Creator", UTF8: true},
+		Subject: &propsmapper.Utf8Text{Text: "Subject", UTF8: true}, Title: &propsmapper.Utf8Text{Text: "Title", UTF8: true},
+		CreationDate: &creation, KeywordsStr: &propsmapper.Utf8Text{Text: "KeywordsStr", UTF8: true},
+	}
 }

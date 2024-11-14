@@ -16,7 +16,7 @@ func TestNewPdf(t *testing.T) {
 	t.Run("when builder is sent, should set builder", func(t *testing.T) {
 		builderDocument := `
 			{
-				"builder": {"chunk_workers": 10}
+				"builder": {"concurrent_mode": 10}
 			}
 		`
 		factory := mocks.NewAbstractFactoryMaps(t)
@@ -26,7 +26,7 @@ func TestNewPdf(t *testing.T) {
 
 		doc, err := NewPdf(template, factory)
 		assert.Nil(t, err)
-		assert.Equal(t, doc.Builder.ChunkWorkers, 10)
+		assert.Equal(t, doc.Builder.ConcurrentMode, 10)
 	})
 
 	t.Run("when an invalid builder is passed, should return an error", func(t *testing.T) {

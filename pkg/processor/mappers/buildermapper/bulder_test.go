@@ -23,9 +23,11 @@ func DefaultBuilderMap() *Builder {
 			Top:    10.0,
 			Bottom: 10.0,
 		},
-		ChunkWorkers: 10,
-		Debug:        true,
-		MaxGridSize:  10,
+		SequentialMode:          false,
+		ConcurrentMode:          10,
+		SequentialLowMemoryMode: -1,
+		Debug:                   true,
+		MaxGridSize:             10,
 		DefaultFont: &propsmapper.Font{
 			Family: "Arial",
 			Style:  "bold",
@@ -36,6 +38,22 @@ func DefaultBuilderMap() *Builder {
 				Blue:  150,
 			},
 		},
+		PageNumber: &propsmapper.PageNumber{
+			Pattern: "pattern_test",
+			Place:   "place_test",
+			Family:  "family_test",
+			Style:   "style_test",
+			Size:    10.0,
+			Color: &propsmapper.Color{
+				Red:   10,
+				Green: 100,
+				Blue:  150,
+			},
+		},
+		CustomFonts: []*propsmapper.CustomFont{
+			{Family: "family_test", Style: "style_test", File: "file_test"},
+			{Family: "family_test2", Style: "style_test2", File: "file_test2"},
+		},
 		Protection: &propsmapper.Protection{
 			Type:          4,
 			UserPassword:  "senha123",
@@ -43,7 +61,7 @@ func DefaultBuilderMap() *Builder {
 		},
 		Compression: true,
 		PageSize:    "T",
-		Orientation: "portrait",
+		Orientation: "vertical",
 		Metadata: &propsmapper.Metadata{
 			Author:       &propsmapper.Utf8Text{Text: "user_test", UTF8: true},
 			Creator:      &propsmapper.Utf8Text{Text: "user_test", UTF8: true},
