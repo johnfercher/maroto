@@ -99,7 +99,9 @@ func (r *Row) getRowContent(content map[string]interface{}) (map[string]interfac
 	return nil, fmt.Errorf("ensure that the contents of the row \"%s\" can be converted to map[string]interface{}", r.SourceKey)
 }
 
-func (r *Row) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+func (r *Row) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
+	[]processorprovider.ProviderComponent, error,
+) {
 	rowContent, err := r.getRowContent(content)
 	if err != nil {
 		return nil, err

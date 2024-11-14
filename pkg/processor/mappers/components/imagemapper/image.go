@@ -79,12 +79,12 @@ func (i *Image) setPath(template interface{}) error {
 	return nil
 }
 
-func (b *Image) setProps(template interface{}) error {
+func (i *Image) setProps(template interface{}) error {
 	props, err := propsmapper.NewRect(template)
 	if err != nil {
 		return err
 	}
-	b.Props = props
+	i.Props = props
 	return nil
 }
 
@@ -103,7 +103,9 @@ func (i *Image) getImagePath(content map[string]interface{}) (string, error) {
 	return imageValid, nil
 }
 
-func (i *Image) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+func (i *Image) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
+	[]processorprovider.ProviderComponent, error,
+) {
 	path, err := i.getImagePath(content)
 	if err != nil {
 		return nil, err

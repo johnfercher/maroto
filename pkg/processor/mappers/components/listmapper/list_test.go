@@ -78,7 +78,7 @@ func TestGenerate(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 
-	t.Run("when componentes is not generate, should return an error", func(t *testing.T) {
+	t.Run("when components is not generate, should return an error", func(t *testing.T) {
 		contentRow1 := map[string]interface{}{"row_1": nil}
 		listContent := map[string]interface{}{"list": []map[string]interface{}{contentRow1}}
 		provider := mocks.NewProcessorProvider(t)

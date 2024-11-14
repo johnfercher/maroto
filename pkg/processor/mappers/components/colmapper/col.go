@@ -77,7 +77,9 @@ func (c *Col) getFieldMappers() map[string]func(interface{}) (mappers.Componentm
 
 // Generate is responsible for generating the col component, it will generate all the internal components and add them to the col
 //   - The content is a map with the properties of the col components
-func (c *Col) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+func (c *Col) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
+	[]processorprovider.ProviderComponent, error,
+) {
 	components := make([]processorprovider.ProviderComponent, 0, len(c.Components))
 	for _, component := range c.Components {
 		newComponent, err := component.Generate(content, provider)

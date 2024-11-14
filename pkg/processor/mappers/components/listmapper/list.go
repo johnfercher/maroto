@@ -56,7 +56,9 @@ func (l *List) getListContent(content map[string]interface{}) ([]map[string]inte
 	return nil, fmt.Errorf("ensure that the contents of the list \"%s\" can be converted to []map[string]interface{}", l.SourceKey)
 }
 
-func (l *List) generateTemplates(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+func (l *List) generateTemplates(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
+	[]processorprovider.ProviderComponent, error,
+) {
 	components := make([]processorprovider.ProviderComponent, 0, len(l.Templates))
 	for _, template := range l.Templates {
 		component, err := template.Generate(content, provider)
@@ -68,7 +70,9 @@ func (l *List) generateTemplates(content map[string]interface{}, provider proces
 	return components, nil
 }
 
-func (l *List) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+func (l *List) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
+	[]processorprovider.ProviderComponent, error,
+) {
 	listContent, err := l.getListContent(content)
 	if err != nil {
 		return nil, err

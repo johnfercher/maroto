@@ -65,7 +65,9 @@ func (p *Page) getPageContent(content map[string]interface{}) (map[string]interf
 	return nil, fmt.Errorf("ensure that the contents of the page \"%s\" can be converted to map[string]interface{}", p.SourceKey)
 }
 
-func (p *Page) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+func (p *Page) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
+	[]processorprovider.ProviderComponent, error,
+) {
 	pageContent, err := p.getPageContent(content)
 	if err != nil {
 		return nil, err

@@ -109,7 +109,9 @@ func (q *Qrcode) getCode(content map[string]interface{}) (string, error) {
 	return codeValid, nil
 }
 
-func (q *Qrcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+func (q *Qrcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
+	[]processorprovider.ProviderComponent, error,
+) {
 	code, err := q.getCode(content)
 	if err != nil {
 		return nil, err

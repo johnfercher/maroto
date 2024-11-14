@@ -108,7 +108,9 @@ func (s *Signature) getSignature(content map[string]interface{}) (string, error)
 	return signatureValid, nil
 }
 
-func (s *Signature) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) ([]processorprovider.ProviderComponent, error) {
+func (s *Signature) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
+	[]processorprovider.ProviderComponent, error,
+) {
 	signature, err := s.getSignature(content)
 	if err != nil {
 		return nil, err

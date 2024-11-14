@@ -3,15 +3,15 @@ package propsmapper
 // PageNumber have attributes of page number
 type PageNumber struct {
 	// Pattern is the string pattern which will be used to apply the page count component.
-	Pattern *string
+	Pattern string
 	// Place defines where the page count component will be placed.
-	Place *string
+	Place string
 	// Family defines which font family will be applied to page count.
-	Family *string
+	Family string
 	// Style defines which font style will be applied to page count.
-	Style *string
+	Style string
 	// Size defines which font size will be applied to page count.
-	Size *float64
+	Size float64
 	// Color defines which will be applied to page count.
 	Color *Color
 }
@@ -21,15 +21,15 @@ type PageNumber struct {
 func NewPageNumber(pageNumber interface{}) *PageNumber {
 	pageNumberMap, ok := pageNumber.(map[string]interface{})
 	if !ok {
-		return nil
+		return &PageNumber{}
 	}
 
 	return &PageNumber{
-		Pattern: convertFields(pageNumberMap["pattern"], ""),
-		Place:   convertFields(pageNumberMap["place"], ""),
-		Family:  convertFields(pageNumberMap["family"], ""),
-		Style:   convertFields(pageNumberMap["style"], ""),
-		Size:    convertFields(pageNumberMap["size"], 0.0),
+		Pattern: *convertFields(pageNumberMap["pattern"], ""),
+		Place:   *convertFields(pageNumberMap["place"], ""),
+		Family:  *convertFields(pageNumberMap["family"], ""),
+		Style:   *convertFields(pageNumberMap["style"], ""),
+		Size:    *convertFields(pageNumberMap["size"], 0.0),
 		Color:   NewColor(pageNumberMap["color"]),
 	}
 }
