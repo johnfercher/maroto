@@ -1,13 +1,17 @@
-package documentmapper
+package documentmapper_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/processor/deserializer"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/listmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/pagemapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/documentmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -24,7 +28,7 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		doc, err := NewPdf(template, factory)
+		doc, err := documentmapper.NewPdf(template, factory)
 		assert.Nil(t, err)
 		assert.Equal(t, doc.Builder.ConcurrentMode, 10)
 	})
@@ -36,7 +40,7 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		doc, err := NewPdf(template, factory)
+		doc, err := documentmapper.NewPdf(template, factory)
 
 		assert.NotNil(t, err)
 		assert.Nil(t, doc)
@@ -56,7 +60,7 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		doc, err := NewPdf(template, factory)
+		doc, err := documentmapper.NewPdf(template, factory)
 
 		assert.Nil(t, err)
 		assert.Equal(t, 2, len(doc.Header))
@@ -69,7 +73,7 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		_, err = NewPdf(template, factory)
+		_, err = documentmapper.NewPdf(template, factory)
 		assert.NotNil(t, err)
 	})
 
@@ -87,7 +91,7 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		doc, err := NewPdf(template, factory)
+		doc, err := documentmapper.NewPdf(template, factory)
 
 		assert.Nil(t, err)
 		assert.Equal(t, 2, len(doc.Footer))
@@ -100,7 +104,7 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		_, err = NewPdf(template, factory)
+		_, err = documentmapper.NewPdf(template, factory)
 
 		assert.NotNil(t, err)
 	})
@@ -120,11 +124,11 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		doc, err := NewPdf(template, factory)
+		doc, err := documentmapper.NewPdf(template, factory)
 
 		assert.Nil(t, err)
-		assert.Equal(t, len(doc.pages), 2)
-		assert.IsType(t, &pagemapper.Page{}, doc.pages[0])
+		assert.Equal(t, len(doc.Pages), 2)
+		assert.IsType(t, &pagemapper.Page{}, doc.Pages[0])
 	})
 
 	t.Run("when 1 list is sent, it should add 1 list to the document", func(t *testing.T) {
@@ -140,11 +144,11 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		doc, err := NewPdf(template, factory)
+		doc, err := documentmapper.NewPdf(template, factory)
 
 		assert.Nil(t, err)
-		assert.Equal(t, len(doc.pages), 1)
-		assert.IsType(t, &listmapper.List{}, doc.pages[0])
+		assert.Equal(t, len(doc.Pages), 1)
+		assert.IsType(t, &listmapper.List{}, doc.Pages[0])
 	})
 
 	t.Run("when an invalid page is sent, it should return an error", func(t *testing.T) {
@@ -154,7 +158,172 @@ func TestNewPdf(t *testing.T) {
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
 
-		_, err = NewPdf(template, factory)
+		_, err = documentmapper.NewPdf(template, factory)
 		assert.NotNil(t, err)
+	})
+}
+
+func TestGenerate(t *testing.T) {
+	t.Run("when document have no template, should not set template ", func(t *testing.T) {
+		fixContent := make(map[string]interface{})
+		mockProvider := mocks.NewProcessorProvider(t)
+
+		doc := documentmapper.Document{
+			Pages: make([]mappers.Componentmapper, 0), Header: make([]mappers.Componentmapper, 0),
+			Footer: make([]mappers.Componentmapper, 0),
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, err)
+		assert.NotNil(t, provider)
+	})
+	t.Run("when templates have no content, should generate templates with empty content", func(t *testing.T) {
+		fixContent := map[string]interface{}{"test": "any"}
+
+		mockProviderComponents := []processorprovider.ProviderComponent{mocks.NewProviderComponent(t)}
+		mockComponent := mocks.NewComponentmapper(t)
+		mockComponent.EXPECT().Generate(map[string]interface{}{}, mock.Anything).Return(mockProviderComponents, nil)
+		mockProvider := mocks.NewProcessorProvider(t)
+		mockProvider.EXPECT().AddPages(mockProviderComponents[0]).Return(mockProvider, nil)
+		mockProvider.EXPECT().AddHeader(mockProviderComponents[0]).Return(mockProvider, nil)
+		mockProvider.EXPECT().AddFooter(mockProviderComponents[0]).Return(mockProvider, nil)
+
+		doc := documentmapper.Document{
+			Pages: []mappers.Componentmapper{mockComponent}, Header: []mappers.Componentmapper{mockComponent},
+			Footer: []mappers.Componentmapper{mockComponent},
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, err)
+		assert.NotNil(t, provider)
+	})
+	t.Run("when it is not possible to generate the page, it should return an error", func(t *testing.T) {
+		fixContent := map[string]interface{}{}
+
+		mockComponent := mocks.NewComponentmapper(t)
+		mockComponent.EXPECT().Generate(map[string]interface{}{}, mock.Anything).Return(nil, fmt.Errorf("any"))
+		mockProvider := mocks.NewProcessorProvider(t)
+
+		doc := documentmapper.Document{
+			Pages: []mappers.Componentmapper{mockComponent}, Header: []mappers.Componentmapper{},
+			Footer: []mappers.Componentmapper{},
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, provider)
+		assert.NotNil(t, err)
+	})
+	t.Run("when it is not possible to generate the header, it should return an error", func(t *testing.T) {
+		fixContent := map[string]interface{}{}
+
+		mockComponent := mocks.NewComponentmapper(t)
+		mockComponent.EXPECT().Generate(map[string]interface{}{}, mock.Anything).Return(nil, fmt.Errorf("any"))
+		mockProvider := mocks.NewProcessorProvider(t)
+
+		doc := documentmapper.Document{
+			Pages: []mappers.Componentmapper{}, Header: []mappers.Componentmapper{mockComponent},
+			Footer: []mappers.Componentmapper{},
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, provider)
+		assert.NotNil(t, err)
+	})
+	t.Run("when it is not possible to generate the footer, it should return an error", func(t *testing.T) {
+		fixContent := map[string]interface{}{}
+
+		mockComponent := mocks.NewComponentmapper(t)
+		mockComponent.EXPECT().Generate(map[string]interface{}{}, mock.Anything).Return(nil, fmt.Errorf("any"))
+		mockProvider := mocks.NewProcessorProvider(t)
+
+		doc := documentmapper.Document{
+			Pages: []mappers.Componentmapper{}, Header: []mappers.Componentmapper{},
+			Footer: []mappers.Componentmapper{mockComponent},
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, provider)
+		assert.NotNil(t, err)
+	})
+	t.Run("when it is not possible add the page to the document, it should return an error", func(t *testing.T) {
+		fixContent := map[string]interface{}{}
+
+		mockProviderComponents := []processorprovider.ProviderComponent{mocks.NewProviderComponent(t)}
+		mockComponent := mocks.NewComponentmapper(t)
+		mockComponent.EXPECT().Generate(map[string]interface{}{}, mock.Anything).Return(mockProviderComponents, nil)
+		mockProvider := mocks.NewProcessorProvider(t)
+		mockProvider.EXPECT().AddPages(mockProviderComponents[0]).Return(nil, fmt.Errorf("any"))
+
+		doc := documentmapper.Document{
+			Pages: []mappers.Componentmapper{mockComponent}, Header: []mappers.Componentmapper{},
+			Footer: []mappers.Componentmapper{},
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, provider)
+		assert.NotNil(t, err)
+	})
+	t.Run("when it is not possible add the header to the document, it should return an error", func(t *testing.T) {
+		fixContent := map[string]interface{}{}
+
+		mockProviderComponents := []processorprovider.ProviderComponent{mocks.NewProviderComponent(t)}
+		mockComponent := mocks.NewComponentmapper(t)
+		mockComponent.EXPECT().Generate(map[string]interface{}{}, mock.Anything).Return(mockProviderComponents, nil)
+		mockProvider := mocks.NewProcessorProvider(t)
+		mockProvider.EXPECT().AddHeader(mockProviderComponents[0]).Return(nil, fmt.Errorf("any"))
+
+		doc := documentmapper.Document{
+			Pages: []mappers.Componentmapper{}, Header: []mappers.Componentmapper{mockComponent},
+			Footer: []mappers.Componentmapper{},
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, provider)
+		assert.NotNil(t, err)
+	})
+	t.Run("when it is not possible add the footer to the document, it should return an error", func(t *testing.T) {
+		fixContent := map[string]interface{}{}
+
+		mockProviderComponents := []processorprovider.ProviderComponent{mocks.NewProviderComponent(t)}
+		mockComponent := mocks.NewComponentmapper(t)
+		mockComponent.EXPECT().Generate(map[string]interface{}{}, mock.Anything).Return(mockProviderComponents, nil)
+		mockProvider := mocks.NewProcessorProvider(t)
+		mockProvider.EXPECT().AddFooter(mockProviderComponents[0]).Return(nil, fmt.Errorf("any"))
+
+		doc := documentmapper.Document{
+			Pages: []mappers.Componentmapper{}, Header: []mappers.Componentmapper{},
+			Footer: []mappers.Componentmapper{mockComponent},
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, provider)
+		assert.NotNil(t, err)
+	})
+	t.Run("when document with page, header and footer is call, should generate document", func(t *testing.T) {
+		fixContent := map[string]interface{}{
+			"header": map[string]interface{}{"row_header": "test"},
+			"footer": map[string]interface{}{"row_footer": "test"},
+			"pages":  map[string]interface{}{"template_page_1": "test"},
+		}
+
+		mockProviderComponents := []processorprovider.ProviderComponent{mocks.NewProviderComponent(t)}
+		mockComponent := mocks.NewComponentmapper(t)
+		mockComponent.EXPECT().Generate(fixContent["header"], mock.Anything).Return(mockProviderComponents, nil)
+		mockComponent.EXPECT().Generate(fixContent["footer"], mock.Anything).Return(mockProviderComponents, nil)
+		mockComponent.EXPECT().Generate(fixContent["pages"], mock.Anything).Return(mockProviderComponents, nil)
+		mockProvider := mocks.NewProcessorProvider(t)
+		mockProvider.EXPECT().AddPages(mockProviderComponents[0]).Return(mockProvider, nil)
+		mockProvider.EXPECT().AddHeader(mockProviderComponents[0]).Return(mockProvider, nil)
+		mockProvider.EXPECT().AddFooter(mockProviderComponents[0]).Return(mockProvider, nil)
+
+		doc := documentmapper.Document{
+			Pages: []mappers.Componentmapper{mockComponent}, Header: []mappers.Componentmapper{mockComponent},
+			Footer: []mappers.Componentmapper{mockComponent},
+		}
+		provider, err := doc.Generate(fixContent, mockProvider)
+
+		assert.Nil(t, err)
+		assert.NotNil(t, provider)
+		mockComponent.AssertNumberOfCalls(t, "Generate", 3)
 	})
 }

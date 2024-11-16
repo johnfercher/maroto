@@ -17,6 +17,76 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
+func createBuilderMocks(t *testing.T) *mocks.Builder {
+	build := mocks.NewBuilder(t)
+	build.EXPECT().WithPageSize(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithDimensions(mock.Anything, mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithTopMargin(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithBottomMargin(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithLeftMargin(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithRightMargin(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithConcurrentMode(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithSequentialMode().Return(config.NewBuilder())
+	build.EXPECT().WithDebug(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithMaxGridSize(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithDefaultFont(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithPageNumber(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithProtection(mock.Anything, mock.Anything, mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithCompression(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithOrientation(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithAuthor(mock.Anything, mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithCreationDate(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithCreator(mock.Anything, mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithKeywords(mock.Anything, mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithSubject(mock.Anything, mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithTitle(mock.Anything, mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithDisableAutoPageBreak(mock.Anything).Return(config.NewBuilder())
+	build.EXPECT().WithCustomFonts(mock.Anything).Return(config.NewBuilder())
+	return build
+}
+
+func validateCallOfAllMethods(t *testing.T, builder *mocks.Builder) {
+	builder.AssertNumberOfCalls(t, "WithPageSize", 1)
+	builder.AssertNumberOfCalls(t, "WithDimensions", 1)
+	builder.AssertNumberOfCalls(t, "WithTopMargin", 1)
+	builder.AssertNumberOfCalls(t, "WithBottomMargin", 1)
+	builder.AssertNumberOfCalls(t, "WithLeftMargin", 1)
+	builder.AssertNumberOfCalls(t, "WithRightMargin", 1)
+	builder.AssertNumberOfCalls(t, "WithConcurrentMode", 1)
+	builder.AssertNumberOfCalls(t, "WithSequentialMode", 1)
+	builder.AssertNumberOfCalls(t, "WithDebug", 1)
+	builder.AssertNumberOfCalls(t, "WithMaxGridSize", 1)
+	builder.AssertNumberOfCalls(t, "WithDefaultFont", 1)
+	builder.AssertNumberOfCalls(t, "WithPageNumber", 1)
+	builder.AssertNumberOfCalls(t, "WithProtection", 1)
+	builder.AssertNumberOfCalls(t, "WithCompression", 1)
+	builder.AssertNumberOfCalls(t, "WithOrientation", 1)
+	builder.AssertNumberOfCalls(t, "WithAuthor", 1)
+	builder.AssertNumberOfCalls(t, "WithCreationDate", 1)
+	builder.AssertNumberOfCalls(t, "WithCreator", 1)
+	builder.AssertNumberOfCalls(t, "WithKeywords", 1)
+	builder.AssertNumberOfCalls(t, "WithSubject", 1)
+	builder.AssertNumberOfCalls(t, "WithTitle", 1)
+	builder.AssertNumberOfCalls(t, "WithDisableAutoPageBreak", 1)
+	builder.AssertNumberOfCalls(t, "WithCustomFonts", 1)
+}
+
+func TestCreateMarotoBuilder(t *testing.T) {
+	t.Run("when all props are sent, should add all props", func(t *testing.T) {
+		repository := mocks.NewProcessorRepository(t)
+		repository.EXPECT().GetDocument(mock.Anything).Return(string(extension.Png), []byte{123}, nil)
+		build := createBuilderMocks(t)
+		fixProps := fixture.BuilderProps()
+
+		builder := processorprovider.NewMarotoBuilder(repository, build)
+		cfg, err := builder.CreateMarotoBuilder(fixProps)
+
+		assert.Nil(t, err)
+		assert.NotNil(t, cfg)
+		validateCallOfAllMethods(t, build)
+	})
+}
+
 func TestWithPageSize(t *testing.T) {
 	t.Run("when page size is null, should not set page size", func(t *testing.T) {
 		repository := mocks.NewProcessorRepository(t)
