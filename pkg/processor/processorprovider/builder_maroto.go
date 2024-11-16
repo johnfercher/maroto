@@ -9,16 +9,20 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/buildermapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/repository"
 )
 
+// MarotoBuilder is responsible for creating Maroto builder props from buildermapper
 type MarotoBuilder struct {
 	cfg        config.Builder
 	repository core.ProcessorRepository
 }
 
+// NewMarotoBuilder is responsible for creating an object MarotoBuilder
+//   - It will use repository for search files like image and font
 func NewMarotoBuilder(repository core.ProcessorRepository, cfg config.Builder) *MarotoBuilder {
 	return &MarotoBuilder{
 		repository: repository,
@@ -26,71 +30,100 @@ func NewMarotoBuilder(repository core.ProcessorRepository, cfg config.Builder) *
 	}
 }
 
-func (m *MarotoBuilder) WithPageSize(size string) config.Builder {
+// CreateMarotoBuilder is responsible for facilitating the creation of the builder
+func (m *MarotoBuilder) CreateMarotoBuilder(builder *buildermapper.Builder) (config.Builder, error) {
+	m = m.WithPageSize(builder.PageSize).WithDimensions(builder.Dimensions).WithMargin(builder.Margins).
+		WithConcurrentMode(builder.ConcurrentMode).WithSequentialMode(builder.SequentialMode).
+		WithSequentialLowMemoryMode(builder.SequentialLowMemoryMode).WithDebug(builder.Debug).WithMaxGridSize(builder.MaxGridSize).
+		WithDefaultFont(builder.DefaultFont).WithPageNumber(builder.PageNumber).WithProtection(builder.Protection).
+		WithCompression(builder.Compression).WithOrientation(builder.Orientation).WithMetadata(builder.Metadata).
+		WithDisableAutoPageBreak(builder.DisableAutoPageBreak)
+
+	if _, err := m.WithBackgroundImage(builder.BackgroundImage); err != nil {
+		return nil, err
+	}
+	if _, err := m.WithCustomFonts(builder.CustomFonts); err != nil {
+		return nil, err
+	}
+
+	return m.cfg, nil
+}
+
+// WithPageSize will add page size properties
+//   - if size is null, size will not be added
+func (m *MarotoBuilder) WithPageSize(size string) *MarotoBuilder {
 	validAndRun(func() { m.cfg.WithPageSize(pagesize.Type(size)) }, size != "")
-	return m.cfg
+	return m
 }
 
 // WithDimensions defines custom page dimensions, this overrides page size.
-func (m *MarotoBuilder) WithDimensions(dimensions *propsmapper.Dimensions) config.Builder {
+//   - if dimensions is null, dimensions will not be added
+func (m *MarotoBuilder) WithDimensions(dimensions *propsmapper.Dimensions) *MarotoBuilder {
 	validAndRun(func() { m.cfg.WithDimensions(dimensions.Width, dimensions.Height) }, dimensions != nil)
-	return m.cfg
+	return m
 }
 
-// WithLeftMargin customize margin.
-func (m *MarotoBuilder) WithMargin(margin *propsmapper.Margins) config.Builder {
-	validAndRun(func() { m.cfg.WithBottomMargin(margin.Bottom) }, margin.Bottom >= 0)
-	validAndRun(func() { m.cfg.WithTopMargin(margin.Top) }, margin.Top >= 0)
-	validAndRun(func() { m.cfg.WithLeftMargin(margin.Left) }, margin.Left >= 0)
-	validAndRun(func() { m.cfg.WithRightMargin(margin.Right) }, margin.Right >= 0)
-	return m.cfg
+// WithMargin customizes each margin individually - Left, Right, top and booton
+//   - if margin is null or individual margin is less than 0, margin will not be added
+func (m *MarotoBuilder) WithMargin(margin *propsmapper.Margins) *MarotoBuilder {
+	if margin != nil {
+		validAndRun(func() { m.cfg.WithBottomMargin(margin.Bottom) }, margin.Bottom >= 0)
+		validAndRun(func() { m.cfg.WithTopMargin(margin.Top) }, margin.Top >= 0)
+		validAndRun(func() { m.cfg.WithLeftMargin(margin.Left) }, margin.Left >= 0)
+		validAndRun(func() { m.cfg.WithRightMargin(margin.Right) }, margin.Right >= 0)
+	}
+	return m
 }
 
-// WithConcurrentMode defines concurrent generation, chunk workers define how mano chuncks
-// will be executed concurrently.
-func (m *MarotoBuilder) WithConcurrentMode(chunkWorkers int) config.Builder {
+// WithConcurrentMode defines concurrent generation, chunk workers define how mano chuncks will be executed concurrently.
+//   - if chunkWorkers is less than 0, will not be added
+func (m *MarotoBuilder) WithConcurrentMode(chunkWorkers int) *MarotoBuilder {
 	validAndRun(func() { m.cfg.WithConcurrentMode(chunkWorkers) }, chunkWorkers > 0)
-	return m.cfg
+	return m
 }
 
 // WithSequentialMode defines that maroto will run in default mode.
-func (m *MarotoBuilder) WithSequentialMode(on bool) config.Builder {
+func (m *MarotoBuilder) WithSequentialMode(on bool) *MarotoBuilder {
 	m.cfg.WithSequentialMode()
-	return m.cfg
+	return m
 }
 
 // WithSequentialLowMemoryMode defines that maroto will run focusing in reduce memory consumption,
 // chunk workers define how many divisions the work will have.
-func (m *MarotoBuilder) WithSequentialLowMemoryMode(chunkWorkers int) config.Builder {
+//   - if chunkWorkers is less than 0, will not be added
+func (m *MarotoBuilder) WithSequentialLowMemoryMode(chunkWorkers int) *MarotoBuilder {
 	validAndRun(func() { m.cfg.WithSequentialLowMemoryMode(chunkWorkers) }, chunkWorkers > 0)
-	return m.cfg
+	return m
 }
 
 // WithDebug defines a debug behaviour where maroto will draw borders in everything.
-func (m *MarotoBuilder) WithDebug(on bool) config.Builder {
+func (m *MarotoBuilder) WithDebug(on bool) *MarotoBuilder {
 	m.cfg.WithDebug(on)
-	return m.cfg
+	return m
 }
 
 // WithMaxGridSize defines a custom max grid sum which it will change the sum of column sizes.
-func (m *MarotoBuilder) WithMaxGridSize(maxGridSize int) config.Builder {
+//   - if maxGridSize is less than 0, will not be added
+func (m *MarotoBuilder) WithMaxGridSize(maxGridSize int) *MarotoBuilder {
 	validAndRun(func() { m.cfg.WithMaxGridSize(maxGridSize) }, maxGridSize > 0)
-	return m.cfg
+	return m
 }
 
 // WithDefaultFont defines a custom font, other than arial. This can be used to define a custom font as default.
-func (m *MarotoBuilder) WithDefaultFont(font *propsmapper.Font) config.Builder {
+//   - if font is nill, will not be added
+func (m *MarotoBuilder) WithDefaultFont(font *propsmapper.Font) *MarotoBuilder {
 	validAndRun(func() {
 		m.cfg.WithDefaultFont(&props.Font{
 			Family: font.Family, Style: fontstyle.Type(font.Style),
 			Size: font.Size, Color: (*props.Color)(font.Color),
 		})
 	}, font != nil)
-	return m.cfg
+	return m
 }
 
 // WithPageNumber defines a string pattern to write the current page and total.
-func (m *MarotoBuilder) WithPageNumber(pageNumber *propsmapper.PageNumber) config.Builder {
+//   - if pageNumber is nill, will not be added
+func (m *MarotoBuilder) WithPageNumber(pageNumber *propsmapper.PageNumber) *MarotoBuilder {
 	validAndRun(func() {
 		m.cfg.WithPageNumber(props.PageNumber{
 			Pattern: pageNumber.Pattern, Place: props.Place(pageNumber.Place), Family: pageNumber.Family,
@@ -98,32 +131,35 @@ func (m *MarotoBuilder) WithPageNumber(pageNumber *propsmapper.PageNumber) confi
 			Color: &props.Color{Red: pageNumber.Color.Red, Green: pageNumber.Color.Green, Blue: pageNumber.Color.Blue},
 		})
 	}, pageNumber != nil)
-	return m.cfg
+	return m
 }
 
 // WithProtection defines protection types to the PDF document.
-func (m *MarotoBuilder) WithProtection(protectionmapper *propsmapper.Protection) config.Builder {
+//   - if protectionmapper is nill, will not be added
+func (m *MarotoBuilder) WithProtection(protectionmapper *propsmapper.Protection) *MarotoBuilder {
 	validAndRun(func() {
 		m.cfg.WithProtection(protection.Type(protectionmapper.Type), protectionmapper.UserPassword, protectionmapper.OwnerPassword)
 	}, protectionmapper != nil)
-	return m.cfg
+	return m
 }
 
 // WithCompression defines compression.
-func (m *MarotoBuilder) WithCompression(compression bool) config.Builder {
+func (m *MarotoBuilder) WithCompression(compression bool) *MarotoBuilder {
 	m.cfg.WithCompression(compression)
-	return m.cfg
+	return m
 }
 
 // WithOrientation defines the page orientation. The default orientation is vertical,
 // if horizontal is defined width and height will be flipped.
-func (m *MarotoBuilder) WithOrientation(orientationMapper string) config.Builder {
+//   - if orientationMapper is nill, will not be added
+func (m *MarotoBuilder) WithOrientation(orientationMapper string) *MarotoBuilder {
 	validAndRun(func() { m.cfg.WithOrientation(orientation.Type(orientationMapper)) }, orientationMapper != "")
-	return m.cfg
+	return m
 }
 
-// WithAuthor defines the author name metadata.
-func (m *MarotoBuilder) WithMetadata(metadata *propsmapper.Metadata) config.Builder {
+// WithMetadata customizes each metadata individually - Author, CreationDate, Creator, Keywords, subject and title
+//   - if metadata is null or individual metadata is less than 0, metadata will not be added
+func (m *MarotoBuilder) WithMetadata(metadata *propsmapper.Metadata) *MarotoBuilder {
 	if metadata != nil {
 		validAndRun(func() { m.cfg.WithAuthor(metadata.Author.Text, metadata.Author.UTF8) }, metadata.Author != nil)
 		validAndRun(func() { m.cfg.WithCreationDate(*metadata.CreationDate) }, metadata.CreationDate != nil)
@@ -132,26 +168,28 @@ func (m *MarotoBuilder) WithMetadata(metadata *propsmapper.Metadata) config.Buil
 		validAndRun(func() { m.cfg.WithSubject(metadata.Subject.Text, metadata.Subject.UTF8) }, metadata.Subject != nil)
 		validAndRun(func() { m.cfg.WithTitle(metadata.Title.Text, metadata.Title.UTF8) }, metadata.Title != nil)
 	}
-	return m.cfg
+	return m
 }
 
 // WithCustomFonts add custom fonts.
-func (m *MarotoBuilder) WithCustomFonts(customFonts []*propsmapper.CustomFont) (config.Builder, error) {
+//   - if the font file cannot be loaded, an error will be returned
+func (m *MarotoBuilder) WithCustomFonts(customFonts []*propsmapper.CustomFont) (*MarotoBuilder, error) {
 	if len(customFonts) == 0 {
-		return m.cfg, nil
+		return m, nil
 	}
 	newFonts, err := m.loadFonts(customFonts)
 	if err != nil {
 		return nil, err
 	}
 	m.cfg.WithCustomFonts(newFonts)
-	return m.cfg, nil
+	return m, nil
 }
 
 // WithBackgroundImage defines the background image that will be applied in every page.
-func (m *MarotoBuilder) WithBackgroundImage(backgroundImage string) (config.Builder, error) {
+//   - if the image file cannot be loaded, an error will be returned
+func (m *MarotoBuilder) WithBackgroundImage(backgroundImage string) (*MarotoBuilder, error) {
 	if backgroundImage == "" {
-		return m.cfg, nil
+		return m, nil
 	}
 
 	ext, imageBytes, err := m.repository.GetDocument(backgroundImage)
@@ -159,13 +197,13 @@ func (m *MarotoBuilder) WithBackgroundImage(backgroundImage string) (config.Buil
 		return nil, err
 	}
 	m.cfg.WithBackgroundImage(imageBytes, extension.Type(ext))
-	return m.cfg, nil
+	return m, nil
 }
 
 // WithDisableAutoPageBreak defines the option to disable automatic page breaks.
-func (m *MarotoBuilder) WithDisableAutoPageBreak(disabled bool) config.Builder {
+func (m *MarotoBuilder) WithDisableAutoPageBreak(disabled bool) *MarotoBuilder {
 	m.cfg.WithDisableAutoPageBreak(disabled)
-	return m.cfg
+	return m
 }
 
 func validAndRun(setParam func(), parameter bool) {

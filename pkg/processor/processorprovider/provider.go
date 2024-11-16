@@ -1,6 +1,7 @@
 package processorprovider
 
 import (
+	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 )
@@ -12,6 +13,10 @@ type ProviderComponent interface {
 // ProcessorProvider provides an interface with all the methods that
 // Maroto provides for pdf builder
 type ProcessorProvider interface {
+	GetStructure() *node.Node[core.Structure]
+	AddPages(pages ...ProviderComponent) (ProcessorProvider, error)
+	AddFooter(footer ...ProviderComponent) (ProcessorProvider, error)
+	AddHeader(header ...ProviderComponent) (ProcessorProvider, error)
 	CreatePage(components ...ProviderComponent) (ProviderComponent, error)
 	CreateRow(height float64, components ...ProviderComponent) (ProviderComponent, error)
 	CreateCol(size int, components ...ProviderComponent) (ProviderComponent, error)
@@ -21,5 +26,5 @@ type ProcessorProvider interface {
 	CreateMatrixCode(value string, props ...*propsmapper.Rect) ProviderComponent
 	CreateQrCode(value string, props ...*propsmapper.Rect) ProviderComponent
 	CreateImage(value []byte, extension string, props ...*propsmapper.Rect) ProviderComponent
-	CreateLine(props *propsmapper.Line) ProviderComponent
+	CreateLine(props ...*propsmapper.Line) ProviderComponent
 }

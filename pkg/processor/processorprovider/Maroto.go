@@ -3,6 +3,8 @@ package processorprovider
 import (
 	"fmt"
 
+	"github.com/johnfercher/go-tree/node"
+	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
@@ -11,6 +13,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/signature"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
@@ -19,29 +22,78 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	processorcore "github.com/johnfercher/maroto/v2/pkg/processor/core"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/buildermapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 type Maroto struct {
-	maroto *core.Maroto
+	maroto     core.Maroto
+	repository processorcore.ProcessorRepository
 }
 
-func NewMaroto() *Maroto {
-	// m := maroto.New()
-	return nil
-}
+func NewMaroto(repository processorcore.ProcessorRepository, builder ...buildermapper.Builder) (ProcessorProvider, error) {
+	cfg := config.NewBuilder()
 
-func convertComponentType[T any](components ...ProviderComponent) ([]T, error) {
-	newComponents := make([]T, len(components))
-	for i, component := range components {
-		validComponent, ok := component.(T)
-		if !ok {
-			return nil, fmt.Errorf("could not convert pdf components to a valid type")
+	if len(builder) > 0 {
+		var err error
+		cfg, err = NewMarotoBuilder(repository, config.NewBuilder()).CreateMarotoBuilder(&builder[0])
+		if err != nil {
+			return nil, err
 		}
-		newComponents[i] = validComponent
 	}
-	return newComponents, nil
+	m := maroto.New(cfg.Build())
+	return &Maroto{maroto: m, repository: repository}, nil
+}
+
+func (m *Maroto) GetStructure() *node.Node[core.Structure] {
+	return m.maroto.GetStructure()
+}
+
+func (m *Maroto) AddPages(pages ...ProviderComponent) (ProcessorProvider, error) {
+	if len(pages) == 0 {
+		return m, nil
+	}
+	newPages, err := convertComponentType[core.Page](pages...)
+	if err != nil {
+		return nil, err
+	}
+
+	m.maroto.AddPages(newPages...)
+	return m, nil
+}
+
+func (m *Maroto) AddFooter(footer ...ProviderComponent) (ProcessorProvider, error) {
+	if len(footer) == 0 {
+		return m, nil
+	}
+	newFooter, err := convertComponentType[core.Row](footer...)
+	if err != nil {
+		return nil, err
+	}
+
+	err = m.maroto.RegisterFooter(newFooter...)
+	if err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (m *Maroto) AddHeader(header ...ProviderComponent) (ProcessorProvider, error) {
+	if len(header) == 0 {
+		return m, nil
+	}
+	newHeader, err := convertComponentType[core.Row](header...)
+	if err != nil {
+		return nil, err
+	}
+
+	err = m.maroto.RegisterHeader(newHeader...)
+	if err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (m *Maroto) CreatePage(components ...ProviderComponent) (ProviderComponent, error) {
@@ -155,4 +207,16 @@ func (m *Maroto) CreateBarCode(codeValue string, codeProps ...*propsmapper.Barco
 		Left: cProps.Left, Top: cProps.Top, Percent: cProps.Percent,
 		Proportion: props.Proportion(cProps.Proportion), Center: cProps.Center, Type: barcode.Type(cProps.Type),
 	})
+}
+
+func convertComponentType[T any](components ...ProviderComponent) ([]T, error) {
+	newComponents := make([]T, len(components))
+	for i, component := range components {
+		validComponent, ok := component.(T)
+		if !ok {
+			return nil, fmt.Errorf("could not convert pdf components to a valid type")
+		}
+		newComponents[i] = validComponent
+	}
+	return newComponents, nil
 }
