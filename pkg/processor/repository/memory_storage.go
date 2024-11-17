@@ -1,22 +1,38 @@
 // repository package is responsible for managing access to templates
 package repository
 
+import (
+	"github.com/johnfercher/maroto/v2/pkg/processor/core"
+)
+
 type memoryStorage struct {
-	template map[string]map[string]any
+	template  map[string]map[string]any
+	documents map[string][]byte
+	loader    core.Loader
 }
 
 // NewMemoryStorage is responsible for creating a repository
 // implementation that stores data in memory
-func NewMemoryStorage() *memoryStorage {
+func NewMemoryStorage(loader core.Loader) *memoryStorage {
 	return &memoryStorage{
 		template: make(map[string]map[string]any),
+		loader:   loader,
 	}
 }
 
 // GetDocument is responsible search and return the document according to the name sent
 //   - documentName is the name that the document references
-func (m *memoryStorage) GetDocument(documentName string) (string, []byte, error) {
-	return "", nil, nil
+func (m *memoryStorage) GetDocument(documentPath string) (string, []byte, error) {
+	if doc, ok := m.documents[documentPath]; ok {
+		return m.loader.GetExt(documentPath), doc, nil
+	}
+
+	bytes, err := m.loader.Load(documentPath)
+	if err != nil {
+		return "", nil, err
+	}
+	m.documents[documentPath] = bytes
+	return m.loader.GetExt(documentPath), bytes, nil
 }
 
 // RegisterTemplate is responsible for register a template in memory

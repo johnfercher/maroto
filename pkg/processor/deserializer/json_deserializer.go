@@ -3,18 +3,13 @@ package deserializer
 
 import (
 	"encoding/json"
-
-	"github.com/johnfercher/maroto/v2/pkg/processor/core"
-	"github.com/johnfercher/maroto/v2/pkg/processor/loader"
 )
 
-type jsonDeserializer struct {
-	loader core.Loader
-}
+type jsonDeserializer struct{}
 
 // The new JSONserializer is responsible for creating a json deserializer
 func NewJSONDeserializer() *jsonDeserializer {
-	return &jsonDeserializer{loader: loader.NewLoader()}
+	return &jsonDeserializer{}
 }
 
 // Deserialize is responsible for parsing a json document and creating an interface map

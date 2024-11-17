@@ -17,7 +17,7 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-func createBuilderMocks(t *testing.T) *mocks.Builder {
+func NewBuilderMocks(t *testing.T) *mocks.Builder {
 	build := mocks.NewBuilder(t)
 	build.EXPECT().WithPageSize(mock.Anything).Return(config.NewBuilder())
 	build.EXPECT().WithDimensions(mock.Anything, mock.Anything).Return(config.NewBuilder())
@@ -45,7 +45,7 @@ func createBuilderMocks(t *testing.T) *mocks.Builder {
 	return build
 }
 
-func validateCallOfAllMethods(t *testing.T, builder *mocks.Builder) {
+func NewvalidateCallOfAllMethods(t *testing.T, builder *mocks.Builder) {
 	builder.AssertNumberOfCalls(t, "WithPageSize", 1)
 	builder.AssertNumberOfCalls(t, "WithDimensions", 1)
 	builder.AssertNumberOfCalls(t, "WithTopMargin", 1)
@@ -75,7 +75,7 @@ func TestCreateMarotoBuilder(t *testing.T) {
 	t.Run("when all props are sent, should add all props", func(t *testing.T) {
 		repository := mocks.NewProcessorRepository(t)
 		repository.EXPECT().GetDocument(mock.Anything).Return(string(extension.Png), []byte{123}, nil)
-		build := createBuilderMocks(t)
+		build := NewBuilderMocks(t)
 		fixProps := fixture.BuilderProps()
 
 		builder := processorprovider.NewMarotoBuilder(repository, build)
@@ -83,7 +83,7 @@ func TestCreateMarotoBuilder(t *testing.T) {
 
 		assert.Nil(t, err)
 		assert.NotNil(t, cfg)
-		validateCallOfAllMethods(t, build)
+		NewvalidateCallOfAllMethods(t, build)
 	})
 }
 

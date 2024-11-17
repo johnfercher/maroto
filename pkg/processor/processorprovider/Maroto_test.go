@@ -152,7 +152,8 @@ func TestNewMaroto(t *testing.T) {
 
 func TestCreateBarCode(t *testing.T) {
 	t.Run("when CreateBarCode is called, should generate a barcode", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		barcode := m.CreateBarCode("code",
 			&propsmapper.Barcode{
 				Left: 10.0, Top: 10.0, Percent: 100.0,
@@ -168,7 +169,8 @@ func TestCreateBarCode(t *testing.T) {
 
 func TestCreateMatrixCode(t *testing.T) {
 	t.Run("when CreateMatrixCode is called, should generate a matrixcode", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		barcode := m.CreateMatrixCode("code",
 			&propsmapper.Rect{Left: 10.0, Top: 10.0, Percent: 100.0, JustReferenceWidth: false, Center: false},
 		)
@@ -179,7 +181,8 @@ func TestCreateMatrixCode(t *testing.T) {
 
 func TestCreateQRCode(t *testing.T) {
 	t.Run("when CreateQrCode is called, should generate a qrcode", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		barcode := m.CreateQrCode("code",
 			&propsmapper.Rect{Left: 10.0, Top: 10.0, Percent: 100.0, JustReferenceWidth: false, Center: false},
 		)
@@ -190,7 +193,8 @@ func TestCreateQRCode(t *testing.T) {
 
 func TestCreateImage(t *testing.T) {
 	t.Run("when CreateImage is called, should generate a image", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		image := m.CreateImage(make([]byte, 0), "png",
 			&propsmapper.Rect{Left: 10.0, Top: 10.0, Percent: 100.0, JustReferenceWidth: false, Center: false},
 		)
@@ -201,7 +205,8 @@ func TestCreateImage(t *testing.T) {
 
 func TestCreateLine(t *testing.T) {
 	t.Run("when CreateLine is called, should generate a line", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		barcode := m.CreateLine(
 			&propsmapper.Line{
 				Color: &propsmapper.Color{Red: 10, Green: 10, Blue: 10}, Style: "solid", Thickness: 10.0,
@@ -215,7 +220,8 @@ func TestCreateLine(t *testing.T) {
 
 func TestCreateSignature(t *testing.T) {
 	t.Run("when CreateSignature is called, should generate a signature", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		barcode := m.CreateSignature("signature",
 			&propsmapper.Signature{
 				FontFamily: "Arial", FontStyle: "bold", FontSize: 10.0, FontColor: &propsmapper.Color{Red: 10, Green: 10, Blue: 10},
@@ -229,7 +235,8 @@ func TestCreateSignature(t *testing.T) {
 
 func TestCreateText(t *testing.T) {
 	t.Run("when CreateText is called, should generate a text", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		barcode := m.CreateText("text",
 			&propsmapper.Text{
 				Top: 10.0, Left: 10.0, Right: 10.0, Family: "Arial", Style: "bold", Size: 10.0, Align: "center", BreakLineStrategy: "dash_strategy",
@@ -243,7 +250,8 @@ func TestCreateText(t *testing.T) {
 
 func TestCreateCol(t *testing.T) {
 	t.Run("when CreateCol is called, should generate a col", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		text := text.New("test")
 
 		col, err := m.CreateCol(10, text)
@@ -253,7 +261,8 @@ func TestCreateCol(t *testing.T) {
 	})
 
 	t.Run("when invalid components are sent, should return an error", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		page, err := m.CreatePage(text.NewCol(10, "10"))
 
 		assert.Nil(t, page)
@@ -263,7 +272,8 @@ func TestCreateCol(t *testing.T) {
 
 func TestCreateRow(t *testing.T) {
 	t.Run("when CreateRow is called, should generate a row", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		text := text.NewCol(12, "test")
 
 		col, err := m.CreateRow(10, text)
@@ -273,7 +283,8 @@ func TestCreateRow(t *testing.T) {
 	})
 
 	t.Run("when invalid components are sent, should return an error", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		page, err := m.CreatePage(text.New("10"))
 
 		assert.Nil(t, page)
@@ -283,14 +294,16 @@ func TestCreateRow(t *testing.T) {
 
 func TestCreatePage(t *testing.T) {
 	t.Run("when CreatePage is called, should generate a page", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		page, err := m.CreatePage(row.New(10))
 
 		assert.Nil(t, err)
 		assert.NotNil(t, page)
 	})
 	t.Run("when invalid components are sent, should return an error", func(t *testing.T) {
-		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage())
+		loader := mocks.NewLoader(t)
+		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		page, err := m.CreatePage(text.New("10"))
 
 		assert.Nil(t, page)

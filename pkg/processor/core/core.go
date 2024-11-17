@@ -19,4 +19,5 @@ type Deserializer interface {
 // path may be file path or url
 type Loader interface {
 	Load(path string) ([]byte, error)
+	GetExt(path string) string
 }

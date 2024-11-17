@@ -5,6 +5,7 @@ import (
 
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/deserializer"
+	"github.com/johnfercher/maroto/v2/pkg/processor/loader"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/abstractfactory"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/documentmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/repository"
@@ -13,14 +14,13 @@ import (
 type processor struct {
 	repository   core.ProcessorRepository
 	deserializer core.Deserializer
-	loader       core.Loader
 }
 
 // NewProcessor is responsible for creating a processor object
 // The processor object should be used to create PDF from a serialized document
 func NewProcessor() *processor {
 	return &processor{
-		repository:   repository.NewMemoryStorage(),
+		repository:   repository.NewMemoryStorage(loader.NewLoader()),
 		deserializer: deserializer.NewJSONDeserializer(),
 	}
 }

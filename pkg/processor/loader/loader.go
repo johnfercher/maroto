@@ -20,7 +20,7 @@ func NewLoader() *loader {
 // Load takes the path/url/uri of an asset (image, font)
 // and returns its contents.
 func (l *loader) Load(path string) ([]byte, error) {
-	ext := getExt(path)
+	ext := l.GetExt(path)
 	if _, ok := validExts[ext]; !ok {
 		return nil, errors.Wrap(ErrUnsupportedExtension, ext)
 	}
@@ -49,7 +49,7 @@ func (l *loader) Load(path string) ([]byte, error) {
 	return data, nil
 }
 
-func getExt(path string) string {
+func (l *loader) GetExt(path string) string {
 	toks := strings.Split(path, ".")
 	if len(toks) < 2 {
 		return ""
