@@ -31,6 +31,7 @@ func NewList(list interface{}, sourceKey string, generate mappers.GenerateCompon
 	}, nil
 }
 
+// createComponents is responsible for generating the list component. Components will be generated through the generate method
 func createComponents(listMapper map[string]interface{}, generate mappers.GenerateComponent) ([]mappers.Componentmapper, error) {
 	components := make([]mappers.Componentmapper, len(listMapper))
 	cont := 0
@@ -45,15 +46,31 @@ func createComponents(listMapper map[string]interface{}, generate mappers.Genera
 	return components, nil
 }
 
+// formatListContent is responsible for converting content into []map[string]interface{}
+func (l *List) formatListContent(content interface{}) ([]map[string]interface{}, error) {
+	listContent, ok := content.([]interface{})
+	if !ok {
+		return nil, fmt.Errorf("ensure that the contents of the list \"%s\" can be converted to []map[string]interface{}", l.SourceKey)
+	}
+
+	contentMaps := make([]map[string]interface{}, 0, len(listContent))
+	for _, content := range listContent {
+		contentMap, ok := content.(map[string]interface{})
+		if !ok {
+			return nil, fmt.Errorf("ensure that the contents of the list \"%s\" can be converted to []map[string]interface{}", l.SourceKey)
+		}
+		contentMaps = append(contentMaps, contentMap)
+	}
+	return contentMaps, nil
+}
+
 func (l *List) getListContent(content map[string]interface{}) ([]map[string]interface{}, error) {
 	listContent, ok := content[l.SourceKey]
 	if !ok {
 		return nil, fmt.Errorf("the list needs the source key \"%s\", but it was not found", l.SourceKey)
 	}
-	if contents, ok := listContent.([]map[string]interface{}); ok {
-		return contents, nil
-	}
-	return nil, fmt.Errorf("ensure that the contents of the list \"%s\" can be converted to []map[string]interface{}", l.SourceKey)
+
+	return l.formatListContent(listContent)
 }
 
 func (l *List) generateTemplates(content map[string]interface{}, provider processorprovider.ProcessorProvider) (

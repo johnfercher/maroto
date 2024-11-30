@@ -896,6 +896,63 @@ func (_c *ProcessorProvider_CreateText_Call) RunAndReturn(run func(string, ...*p
 	return _c
 }
 
+// Generate provides a mock function with given fields:
+func (_m *ProcessorProvider) Generate() (core.Document, error) {
+	ret := _m.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for Generate")
+	}
+
+	var r0 core.Document
+	var r1 error
+	if rf, ok := ret.Get(0).(func() (core.Document, error)); ok {
+		return rf()
+	}
+	if rf, ok := ret.Get(0).(func() core.Document); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(core.Document)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func() error); ok {
+		r1 = rf()
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ProcessorProvider_Generate_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Generate'
+type ProcessorProvider_Generate_Call struct {
+	*mock.Call
+}
+
+// Generate is a helper method to define mock.On call
+func (_e *ProcessorProvider_Expecter) Generate() *ProcessorProvider_Generate_Call {
+	return &ProcessorProvider_Generate_Call{Call: _e.mock.On("Generate")}
+}
+
+func (_c *ProcessorProvider_Generate_Call) Run(run func()) *ProcessorProvider_Generate_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *ProcessorProvider_Generate_Call) Return(_a0 core.Document, _a1 error) *ProcessorProvider_Generate_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *ProcessorProvider_Generate_Call) RunAndReturn(run func() (core.Document, error)) *ProcessorProvider_Generate_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetStructure provides a mock function with given fields:
 func (_m *ProcessorProvider) GetStructure() *node.Node[core.Structure] {
 	ret := _m.Called()

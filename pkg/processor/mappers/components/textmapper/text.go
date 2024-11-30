@@ -93,7 +93,7 @@ func (t *Text) validateFields() error {
 }
 
 func (t *Text) getValue(content map[string]interface{}) (string, error) {
-	if t.Value != "" {
+	if t.SourceKey == "" {
 		return t.Value, nil
 	}
 	textFound, ok := content[t.SourceKey]

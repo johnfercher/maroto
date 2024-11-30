@@ -32,7 +32,7 @@ func NewPage(rows interface{}, sourceKey string, factory mappers.AbstractFactory
 func (p *Page) setRows(rowsDoc interface{}) error {
 	templateRows, ok := rowsDoc.(map[string]interface{})
 	if !ok {
-		return fmt.Errorf("ensure rows can be converted to map[string] interface{}")
+		return fmt.Errorf("could not parse template, ensure rows can be converted to map[string] interface{}")
 	}
 
 	for templateName, template := range templateRows {
@@ -57,12 +57,12 @@ func (p *Page) setRows(rowsDoc interface{}) error {
 func (p *Page) getPageContent(content map[string]interface{}) (map[string]interface{}, error) {
 	pageContent, ok := content[p.SourceKey]
 	if !ok {
-		return nil, fmt.Errorf("the page needs the source key \"%s\", but it was not found", p.SourceKey)
+		return nil, fmt.Errorf("could not parse template,the page needs the source key \"%s\", but it was not found", p.SourceKey)
 	}
 	if mapPage, ok := pageContent.(map[string]interface{}); ok {
 		return mapPage, nil
 	}
-	return nil, fmt.Errorf("ensure that the contents of the page \"%s\" can be converted to map[string]interface{}", p.SourceKey)
+	return nil, fmt.Errorf("could not parse template, ensure that the contents of the page \"%s\" can be converted to map[string]interface{}", p.SourceKey)
 }
 
 func (p *Page) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (

@@ -25,7 +25,7 @@ type Text struct {
 	// Color define the font style color.
 	Color *Color
 	// Hyperlink define a link to be opened when the text is clicked.
-	Hyperlink string
+	Hyperlink *string
 }
 
 // NewText is responsible for creating the Text, if the font fields cannot be
@@ -47,6 +47,6 @@ func NewText(signature interface{}) (*Text, error) {
 		BreakLineStrategy: NewBreakLineStrategy(*convertFields(signatureMap["break_line_strategy"], "")),
 		VerticalPadding:   *convertFields(signatureMap["vertical_padding"], -1.0),
 		Color:             NewColor(signatureMap["color"]),
-		Hyperlink:         *convertFields(signatureMap["hyperlink"], ""),
+		Hyperlink:         *convertFields[*string](signatureMap["hyperlink"], nil),
 	}, nil
 }

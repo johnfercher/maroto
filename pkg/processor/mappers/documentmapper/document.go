@@ -201,12 +201,6 @@ func (d *Document) generateRows(content map[string]interface{}, provider process
 func (d *Document) Generate(content map[string]interface{},
 	provider processorprovider.ProcessorProvider) (*processorprovider.ProcessorProvider, error,
 ) {
-	if len(d.Pages) > 0 {
-		if err := d.generatePages(content, provider); err != nil {
-			return nil, err
-		}
-	}
-
 	if len(d.Header) > 0 {
 		header, err := d.generateRows(content, provider, "header", d.Header...)
 		if err != nil {
@@ -229,5 +223,10 @@ func (d *Document) Generate(content map[string]interface{},
 		}
 	}
 
+	if len(d.Pages) > 0 {
+		if err := d.generatePages(content, provider); err != nil {
+			return nil, err
+		}
+	}
 	return &provider, nil
 }
