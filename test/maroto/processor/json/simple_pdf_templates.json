@@ -1,0 +1,68 @@
+{
+    "header": {
+        "row_header": {
+            "cols": [
+                {
+                    "text": {
+                        "source_key": "header_value"
+                    },
+                    "size": 12
+                }
+            ]
+        }
+    },
+    "footer": {
+        "row_footer": {
+            "cols": [
+                {
+                    "text": {
+                        "source_key": "footer_value"
+                    },
+                    "size": 12
+                }
+            ]
+        }
+    },
+    "pages": {
+        "page_template_1": {
+            "row_1": {
+                "cols": [
+                    {
+                        "text": {
+                            "source_key": "value_1"
+                        },
+                        "size": 6.0
+                    },
+                    {
+                        "text": {
+                            "source_key": "value_2"
+                        },
+                        "size": 6.0
+                    }
+                ]
+            },
+            "list_row_1": {
+                "row": {
+                    "cols": [
+                        {
+                            "text": {
+                                "source_key": "value_2"
+                            },
+                            "size": 10.0
+                        }
+                    ]
+                },
+                "row_1": {
+                    "cols": [
+                        {
+                            "text": {
+                                "source_key": "value_2"
+                            },
+                            "size": 10.0
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -235,12 +235,13 @@ func TestCreateSignature(t *testing.T) {
 
 func TestCreateText(t *testing.T) {
 	t.Run("when CreateText is called, should generate a text", func(t *testing.T) {
+		hyperlink := "test"
 		loader := mocks.NewLoader(t)
 		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		barcode := m.CreateText("text",
 			&propsmapper.Text{
 				Top: 10.0, Left: 10.0, Right: 10.0, Family: "Arial", Style: "bold", Size: 10.0, Align: "center", BreakLineStrategy: "dash_strategy",
-				VerticalPadding: 10.0, Color: &propsmapper.Color{Red: 10, Green: 10, Blue: 10}, Hyperlink: "test",
+				VerticalPadding: 10.0, Color: &propsmapper.Color{Red: 10, Green: 10, Blue: 10}, Hyperlink: &hyperlink,
 			},
 		)
 

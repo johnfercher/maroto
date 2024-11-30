@@ -47,6 +47,10 @@ func NewMaroto(repository processorcore.ProcessorRepository, builder ...builderm
 	return &Maroto{maroto: m, repository: repository}, nil
 }
 
+func (m *Maroto) Generate() (core.Document, error) {
+	return m.maroto.Generate()
+}
+
 func (m *Maroto) GetStructure() *node.Node[core.Structure] {
 	return m.maroto.GetStructure()
 }
@@ -119,8 +123,11 @@ func (m *Maroto) CreateCol(size int, components ...ProviderComponent) (ProviderC
 	if err != nil {
 		return nil, err
 	}
-
-	return col.New(size).Add(newComponents...), nil
+	if size > 0 {
+		return col.New(size).Add(newComponents...), nil
+	} else {
+		return col.New().Add(newComponents...), nil
+	}
 }
 
 func (m *Maroto) CreateText(value string, textsProps ...*propsmapper.Text) ProviderComponent {
@@ -132,7 +139,7 @@ func (m *Maroto) CreateText(value string, textsProps ...*propsmapper.Text) Provi
 	return text.New(value, props.Text{
 		Top: tProps.Top, Left: tProps.Left, Right: tProps.Right, Family: tProps.Family, Style: fontstyle.Type(tProps.Style),
 		Size: tProps.Size, Align: align.Type(tProps.Align), BreakLineStrategy: breakline.Strategy(tProps.BreakLineStrategy),
-		VerticalPadding: tProps.VerticalPadding, Color: (*props.Color)(tProps.Color), Hyperlink: &tProps.Hyperlink,
+		VerticalPadding: tProps.VerticalPadding, Color: (*props.Color)(tProps.Color), Hyperlink: tProps.Hyperlink,
 	})
 }
 

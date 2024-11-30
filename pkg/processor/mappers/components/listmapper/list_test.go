@@ -80,7 +80,7 @@ func TestGenerate(t *testing.T) {
 
 	t.Run("when components is not generate, should return an error", func(t *testing.T) {
 		contentRow1 := map[string]interface{}{"row_1": nil}
-		listContent := map[string]interface{}{"list": []map[string]interface{}{contentRow1}}
+		listContent := map[string]interface{}{"list": []interface{}{contentRow1}}
 		provider := mocks.NewProcessorProvider(t)
 		component := mocks.NewComponentmapper(t)
 		component.EXPECT().Generate(mock.Anything, provider).Return(nil, fmt.Errorf("any"))
@@ -95,7 +95,7 @@ func TestGenerate(t *testing.T) {
 	t.Run("when 2 templates are added, it should generate 4 components", func(t *testing.T) {
 		content1 := map[string]interface{}{"row_1": nil, "row_2": nil}
 		content2 := map[string]interface{}{"row_1": nil, "row_2": nil}
-		listContent := map[string]interface{}{"list": []map[string]interface{}{content1, content2}}
+		listContent := map[string]interface{}{"list": []interface{}{content1, content2}}
 		provider := mocks.NewProcessorProvider(t)
 		providerComponent := mocks.NewProviderComponent(t)
 		component := mocks.NewComponentmapper(t)

@@ -62,7 +62,10 @@ func (p *Page) getPageContent(content map[string]interface{}) (map[string]interf
 	if mapPage, ok := pageContent.(map[string]interface{}); ok {
 		return mapPage, nil
 	}
-	return nil, fmt.Errorf("could not parse template, ensure that the contents of the page \"%s\" can be converted to map[string]interface{}", p.SourceKey)
+	return nil, fmt.Errorf(
+		"could not parse template, ensure that the contents of the page \"%s\" can be converted to map[string]interface{}",
+		p.SourceKey,
+	)
 }
 
 func (p *Page) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (

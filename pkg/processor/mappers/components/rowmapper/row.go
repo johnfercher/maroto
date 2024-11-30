@@ -96,7 +96,10 @@ func (r *Row) getRowContent(content map[string]interface{}) (map[string]interfac
 	if mapRow, ok := rowContent.(map[string]interface{}); ok {
 		return mapRow, nil
 	}
-	return nil, fmt.Errorf("could not parse template, ensure that the contents of the row \"%s\" can be converted to map[string]interface{}", r.SourceKey)
+	return nil, fmt.Errorf(
+		"could not parse template, ensure that the contents of the row \"%s\" can be converted to map[string]interface{}",
+		r.SourceKey,
+	)
 }
 
 func (r *Row) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (

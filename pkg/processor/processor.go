@@ -1,14 +1,10 @@
 package processor
 
 import (
-	"fmt"
-
 	"github.com/johnfercher/maroto/v2/pkg/processor/core"
-	"github.com/johnfercher/maroto/v2/pkg/processor/deserializer"
-	"github.com/johnfercher/maroto/v2/pkg/processor/loader"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/abstractfactory"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/documentmapper"
-	"github.com/johnfercher/maroto/v2/pkg/processor/repository"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type processor struct {
@@ -18,10 +14,10 @@ type processor struct {
 
 // NewProcessor is responsible for creating a processor object
 // The processor object should be used to create PDF from a serialized document
-func NewProcessor() *processor {
+func NewProcessor(repository core.ProcessorRepository, deserializer core.Deserializer) *processor {
 	return &processor{
-		repository:   repository.NewMemoryStorage(loader.NewLoader()),
-		deserializer: deserializer.NewJSONDeserializer(),
+		repository:   repository,
+		deserializer: deserializer,
 	}
 }
 
@@ -38,7 +34,7 @@ func (p *processor) RegisterTemplate(templateName string, template string) error
 // GenerateDocument is responsible for generating the pdf
 // templateName must reference a previously saved template,
 // this template will be computed with the data sent in content
-func (p *processor) GenerateDocument(templateName string, content string) ([]byte, error) {
+func (p *processor) GenerateDocument(templateName string, content string) (*processorprovider.ProcessorProvider, error) {
 	template, err := p.repository.ReadTemplate(templateName)
 	if err != nil {
 		return nil, err
@@ -48,7 +44,20 @@ func (p *processor) GenerateDocument(templateName string, content string) ([]byt
 	if err != nil {
 		return nil, err
 	}
-	fmt.Print(document)
 
-	return nil, nil
+	marotoProvider, err := processorprovider.NewMaroto(p.repository, *document.GetBuilderCfg())
+	if err != nil {
+		return nil, err
+	}
+
+	contentMap, err := p.deserializer.Deserialize(content)
+	if err != nil {
+		return nil, err
+	}
+
+	provider, err := (*document).Generate(contentMap, marotoProvider)
+	if err != nil {
+		return nil, err
+	}
+	return provider, nil
 }

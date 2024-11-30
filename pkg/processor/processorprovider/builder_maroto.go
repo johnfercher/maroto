@@ -128,7 +128,7 @@ func (m *MarotoBuilder) WithPageNumber(pageNumber *propsmapper.PageNumber) *Maro
 		m.cfg.WithPageNumber(props.PageNumber{
 			Pattern: pageNumber.Pattern, Place: props.Place(pageNumber.Place), Family: pageNumber.Family,
 			Style: fontstyle.Type(pageNumber.Style), Size: pageNumber.Size,
-			Color: &props.Color{Red: pageNumber.Color.Red, Green: pageNumber.Color.Green, Blue: pageNumber.Color.Blue},
+			Color: (*props.Color)(pageNumber.Color),
 		})
 	}, pageNumber != nil)
 	return m

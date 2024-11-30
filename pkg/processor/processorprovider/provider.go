@@ -13,6 +13,7 @@ type ProviderComponent interface {
 // ProcessorProvider provides an interface with all the methods that
 // Maroto provides for pdf builder
 type ProcessorProvider interface {
+	Generate() (core.Document, error)
 	GetStructure() *node.Node[core.Structure]
 	AddPages(pages ...ProviderComponent) (ProcessorProvider, error)
 	AddFooter(footer ...ProviderComponent) (ProcessorProvider, error)
