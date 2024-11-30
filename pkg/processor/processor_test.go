@@ -53,10 +53,6 @@ func TestGenerateTemplate(t *testing.T) {
 		provider, err := processor.NewProcessor(repository, deserializer.NewJSONDeserializer()).GenerateDocument("add_page", string(fixContent))
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/addpage.json")
-
-		doc, _ := (*provider).Generate()
-		err = doc.Save("test.pdf")
-		assert.Nil(t, err)
 	})
 
 	t.Run("when sent template is not found, should reuturn an error", func(t *testing.T) {

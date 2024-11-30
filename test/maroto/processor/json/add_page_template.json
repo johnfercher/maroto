@@ -1,0 +1,36 @@
+{
+    "builder": {
+        "page_number": {},
+        "debug": true
+    },
+    "pages": {
+        "template_page_1": {
+            "list_rows": {
+                "row_1": {
+                    "height": 30,
+                    "cols": [
+                        {
+                            "text": {
+                                "source_key": "page_1_row"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "list_pages": {
+            "template_page_2": {
+                "row_1": {
+                    "height": 10,
+                    "cols": [
+                        {
+                            "text": {
+                                "source_key": "page_2_row"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
