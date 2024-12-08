@@ -17,6 +17,20 @@ func NewLoader() *loader {
 	return &loader{}
 }
 
+// GetResourceSource is responsible for identifying where the source resource will be loaded from.
+// ex: http, https, file...
+func GetResourceSource(path string) (*url.URL, error) {
+	uri, err := url.Parse(path)
+	if err != nil {
+		return nil, errors.Wrap(ErrInvalidPath, path)
+	}
+	if uri.Scheme == "" {
+		uri.Scheme = "file"
+	}
+
+	return uri, nil
+}
+
 // Load takes the path/url/uri of an asset (image, font)
 // and returns its contents.
 func (l *loader) Load(path string) ([]byte, error) {
@@ -25,9 +39,9 @@ func (l *loader) Load(path string) ([]byte, error) {
 		return nil, errors.Wrap(ErrUnsupportedExtension, ext)
 	}
 
-	uri, err := url.Parse(path)
+	uri, err := GetResourceSource(path)
 	if err != nil {
-		return nil, errors.Wrap(ErrInvalidPath, path)
+		return nil, err
 	}
 
 	loadFn, ok := loadFuncs[uri.Scheme]

@@ -41,3 +41,18 @@ func TestLoad(t *testing.T) {
 		assert.NotNil(t, p)
 	})
 }
+
+func TestGetResourceSource(t *testing.T) {
+	t.Run("when a local path is sent, should return a uri with shema file", func(t *testing.T) {
+		uri, err := loader.GetResourceSource("file://docs/assets/images/logo.png")
+
+		assert.Nil(t, err)
+		assert.Equal(t, uri.Scheme, "file")
+	})
+	t.Run("when a path without shema is sent, should return a uri with shema file", func(t *testing.T) {
+		uri, err := loader.GetResourceSource("docs/assets/images/logo.png")
+
+		assert.Nil(t, err)
+		assert.Equal(t, uri.Scheme, "file")
+	})
+}
