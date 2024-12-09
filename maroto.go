@@ -3,6 +3,7 @@ package maroto
 import (
 	"errors"
 
+	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
@@ -15,8 +16,6 @@ import (
 
 	"github.com/johnfercher/go-tree/node"
 
-	"github.com/f-amaral/go-async/async"
-	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
@@ -38,9 +37,6 @@ type Maroto struct {
 	headerHeight  float64
 	footerHeight  float64
 	currentHeight float64
-
-	// Processing
-	pool async.Processor[[]core.Page, []byte]
 }
 
 // GetCurrentConfig is responsible for returning the current settings from the file
@@ -66,12 +62,6 @@ func New(cfgs ...*entity.Config) core.Maroto {
 		}),
 		cache:  cache,
 		config: cfg,
-	}
-
-	if cfg.GenerationMode == generation.Concurrent {
-		p := pool.NewPool[[]core.Page, []byte](cfg.ChunkWorkers, m.processPage,
-			pool.WithSortingOutput[[]core.Page, []byte]())
-		m.pool = p
 	}
 
 	return m
@@ -289,6 +279,9 @@ func (m *Maroto) generate() (core.Document, error) {
 }
 
 func (m *Maroto) generateConcurrently() (core.Document, error) {
+	p := pool.NewPool[[]core.Page, []byte](m.config.ChunkWorkers, m.processPage,
+		pool.WithSortingOutput[[]core.Page, []byte]())
+	defer p.Close()
 	chunks := len(m.pages) / m.config.ChunkWorkers
 	if chunks == 0 {
 		chunks = 1
@@ -304,7 +297,7 @@ func (m *Maroto) generateConcurrently() (core.Document, error) {
 		pageGroups = append(pageGroups, m.pages[i:end])
 	}
 
-	processed := m.pool.Process(pageGroups)
+	processed := p.Process(pageGroups)
 	if processed.HasError {
 		return nil, errors.New("an error has occurred while trying to generate PDFs concurrently")
 	}

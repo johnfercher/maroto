@@ -2,7 +2,9 @@ package maroto_test
 
 import (
 	"fmt"
+	"runtime"
 	"testing"
+	"time"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -368,6 +370,28 @@ func TestMaroto_Generate(t *testing.T) {
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_concurrent.json")
+	})
+	t.Run("goroutines do not leak after multiple generate calls on concurrent mode", func(t *testing.T) {
+		// Arrange
+		cfg := config.NewBuilder().
+			WithConcurrentMode(10).
+			Build()
+
+		sut := maroto.New(cfg)
+
+		// Act
+		for i := 0; i < 30; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+		initialGoroutines := runtime.NumGoroutine()
+		sut.Generate()
+		sut.Generate()
+		sut.Generate()
+		time.Sleep(100 * time.Millisecond)
+		finalGoroutines := runtime.NumGoroutine()
+
+		// Assert
+		assert.Equal(t, initialGoroutines, finalGoroutines)
 	})
 	t.Run("page number", func(t *testing.T) {
 		// Arrange
