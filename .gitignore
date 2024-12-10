@@ -25,3 +25,5 @@ ignore.sh
 .vscode
 
 node_modules/*
+
+report-test-demo.txt
