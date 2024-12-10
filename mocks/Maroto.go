@@ -240,48 +240,93 @@ func (_c *Maroto_AddRows_Call) RunAndReturn(run func(...core.Row)) *Maroto_AddRo
 	return _c
 }
 
-// FitlnCurrentPage provides a mock function with given fields: heightNewLine
-func (_m *Maroto) FitlnCurrentPage(heightNewLine float64) bool {
-	ret := _m.Called(heightNewLine)
+// FillPageToAddNew provides a mock function with given fields:
+func (_m *Maroto) FillPageToAddNew() {
+	_m.Called()
+}
+
+// Maroto_FillPageToAddNew_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'FillPageToAddNew'
+type Maroto_FillPageToAddNew_Call struct {
+	*mock.Call
+}
+
+// FillPageToAddNew is a helper method to define mock.On call
+func (_e *Maroto_Expecter) FillPageToAddNew() *Maroto_FillPageToAddNew_Call {
+	return &Maroto_FillPageToAddNew_Call{Call: _e.mock.On("FillPageToAddNew")}
+}
+
+func (_c *Maroto_FillPageToAddNew_Call) Run(run func()) *Maroto_FillPageToAddNew_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Maroto_FillPageToAddNew_Call) Return() *Maroto_FillPageToAddNew_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *Maroto_FillPageToAddNew_Call) RunAndReturn(run func()) *Maroto_FillPageToAddNew_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// FitsOnCurrentPage provides a mock function with given fields: row
+func (_m *Maroto) FitsOnCurrentPage(row ...core.Row) int {
+	_va := make([]interface{}, len(row))
+	for _i := range row {
+		_va[_i] = row[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
 
 	if len(ret) == 0 {
-		panic("no return value specified for FitlnCurrentPage")
+		panic("no return value specified for FitsOnCurrentPage")
 	}
 
-	var r0 bool
-	if rf, ok := ret.Get(0).(func(float64) bool); ok {
-		r0 = rf(heightNewLine)
+	var r0 int
+	if rf, ok := ret.Get(0).(func(...core.Row) int); ok {
+		r0 = rf(row...)
 	} else {
-		r0 = ret.Get(0).(bool)
+		r0 = ret.Get(0).(int)
 	}
 
 	return r0
 }
 
-// Maroto_FitlnCurrentPage_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'FitlnCurrentPage'
-type Maroto_FitlnCurrentPage_Call struct {
+// Maroto_FitsOnCurrentPage_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'FitsOnCurrentPage'
+type Maroto_FitsOnCurrentPage_Call struct {
 	*mock.Call
 }
 
-// FitlnCurrentPage is a helper method to define mock.On call
-//   - heightNewLine float64
-func (_e *Maroto_Expecter) FitlnCurrentPage(heightNewLine interface{}) *Maroto_FitlnCurrentPage_Call {
-	return &Maroto_FitlnCurrentPage_Call{Call: _e.mock.On("FitlnCurrentPage", heightNewLine)}
+// FitsOnCurrentPage is a helper method to define mock.On call
+//   - row ...core.Row
+func (_e *Maroto_Expecter) FitsOnCurrentPage(row ...interface{}) *Maroto_FitsOnCurrentPage_Call {
+	return &Maroto_FitsOnCurrentPage_Call{Call: _e.mock.On("FitsOnCurrentPage",
+		append([]interface{}{}, row...)...)}
 }
 
-func (_c *Maroto_FitlnCurrentPage_Call) Run(run func(heightNewLine float64)) *Maroto_FitlnCurrentPage_Call {
+func (_c *Maroto_FitsOnCurrentPage_Call) Run(run func(row ...core.Row)) *Maroto_FitsOnCurrentPage_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(float64))
+		variadicArgs := make([]core.Row, len(args)-0)
+		for i, a := range args[0:] {
+			if a != nil {
+				variadicArgs[i] = a.(core.Row)
+			}
+		}
+		run(variadicArgs...)
 	})
 	return _c
 }
 
-func (_c *Maroto_FitlnCurrentPage_Call) Return(_a0 bool) *Maroto_FitlnCurrentPage_Call {
+func (_c *Maroto_FitsOnCurrentPage_Call) Return(_a0 int) *Maroto_FitsOnCurrentPage_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Maroto_FitlnCurrentPage_Call) RunAndReturn(run func(float64) bool) *Maroto_FitlnCurrentPage_Call {
+func (_c *Maroto_FitsOnCurrentPage_Call) RunAndReturn(run func(...core.Row) int) *Maroto_FitsOnCurrentPage_Call {
 	_c.Call.Return(run)
 	return _c
 }

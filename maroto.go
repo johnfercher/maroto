@@ -75,7 +75,7 @@ func New(cfgs ...*entity.Config) core.Maroto {
 func (m *Maroto) AddPages(pages ...core.Page) {
 	for _, page := range pages {
 		if m.currentHeight != m.headerHeight {
-			m.fillPageToAddNew()
+			m.FillPageToAddNew()
 			m.addHeader()
 		}
 		m.addRows(page.GetRows()...)
@@ -111,11 +111,20 @@ func (m *Maroto) AddAutoRow(cols ...core.Col) core.Row {
 	return r
 }
 
-// FitlnCurrentPage is responsible to validating whether a line fits on
-// the current page.
-func (m *Maroto) FitlnCurrentPage(heightNewLine float64) bool {
-	contentSize := m.getRowsHeight(m.rows...) + m.footerHeight + m.headerHeight
-	return contentSize+heightNewLine < m.config.Dimensions.Height
+// FitlnCurrentPage is responsible for validating from a set of rows,
+// how many fit on the current page
+func (m *Maroto) FitsOnCurrentPage(rows ...core.Row) int {
+	totalHeight := 0.0
+	for i, row := range rows {
+		row.SetConfig(m.config)
+		rowHeight := row.GetHeight(m.provider, &m.cell)
+		if fit := m.fitsOnCurrentPage(rowHeight, totalHeight+m.currentHeight); !fit {
+			return i
+		}
+		totalHeight += rowHeight
+	}
+
+	return len(rows)
 }
 
 // RegisterHeader is responsible to define a set of rows as a header
@@ -156,7 +165,7 @@ func (m *Maroto) RegisterFooter(rows ...core.Row) error {
 // Generate is responsible to compute the component tree created by
 // the usage of all other Maroto methods, and generate the PDF document.
 func (m *Maroto) Generate() (core.Document, error) {
-	m.fillPageToAddNew()
+	m.FillPageToAddNew()
 	m.setConfig()
 
 	if m.config.GenerationMode == generation.Concurrent {
@@ -173,7 +182,7 @@ func (m *Maroto) Generate() (core.Document, error) {
 // GetStructure is responsible for return the component tree, this is useful
 // on unit tests cases.
 func (m *Maroto) GetStructure() *node.Node[core.Structure] {
-	m.fillPageToAddNew()
+	m.FillPageToAddNew()
 
 	str := core.Structure{
 		Type:    "maroto",
@@ -189,54 +198,12 @@ func (m *Maroto) GetStructure() *node.Node[core.Structure] {
 	return node
 }
 
-func (m *Maroto) addRows(rows ...core.Row) {
-	for _, row := range rows {
-		m.addRow(row)
-	}
-}
-
-func (m *Maroto) addRow(r core.Row) {
-	if len(r.GetColumns()) == 0 {
-		r.Add(col.New())
-	}
-
-	maxHeight := m.cell.Height
-
-	r.SetConfig(m.config)
-	rowHeight := r.GetHeight(m.provider, &m.cell)
-	sumHeight := rowHeight + m.currentHeight + m.footerHeight
-
-	// Row smaller than the remain space on page
-	if sumHeight < maxHeight {
-		m.currentHeight += rowHeight
-		m.rows = append(m.rows, r)
-		return
-	}
-
-	// As row will extrapolate page, we will add empty space
-	// on the page to force a new page
-	m.fillPageToAddNew()
-
-	m.addHeader()
-
-	// AddRows row on the new page
-	m.currentHeight += rowHeight
-	m.rows = append(m.rows, r)
-}
-
-func (m *Maroto) addHeader() {
-	for _, headerRow := range m.header {
-		m.currentHeight += headerRow.GetHeight(m.provider, &m.cell)
-		m.rows = append(m.rows, headerRow)
-	}
-}
-
-func (m *Maroto) fillPageToAddNew() {
+// FillPageToAddNew is responsible for adding a new page
+func (m *Maroto) FillPageToAddNew() {
 	space := m.cell.Height - m.currentHeight - m.footerHeight
 
 	c := col.New(m.config.MaxGridSize)
-	spaceRow := row.New(space)
-	spaceRow.Add(c)
+	spaceRow := row.New(space).Add(c)
 
 	m.rows = append(m.rows, spaceRow)
 	m.rows = append(m.rows, m.footer...)
@@ -254,6 +221,49 @@ func (m *Maroto) fillPageToAddNew() {
 	m.pages = append(m.pages, p)
 	m.rows = nil
 	m.currentHeight = 0
+}
+
+func (m *Maroto) addRows(rows ...core.Row) {
+	for _, row := range rows {
+		m.addRow(row)
+	}
+}
+
+func (m *Maroto) fitsOnCurrentPage(heightNewContent, currentHeight float64) bool {
+	sumHeight := heightNewContent + currentHeight + m.footerHeight
+	return sumHeight < m.cell.Height
+}
+
+func (m *Maroto) addRow(r core.Row) {
+	if len(r.GetColumns()) == 0 {
+		r.Add(col.New())
+	}
+
+	r.SetConfig(m.config)
+	rowHeight := r.GetHeight(m.provider, &m.cell)
+
+	if m.fitsOnCurrentPage(rowHeight, m.currentHeight) {
+		m.currentHeight += rowHeight
+		m.rows = append(m.rows, r)
+		return
+	}
+
+	// As row will extrapolate page, we will add empty space
+	// on the page to force a new page
+	m.FillPageToAddNew()
+
+	m.addHeader()
+
+	// AddRows row on the new page
+	m.currentHeight += rowHeight
+	m.rows = append(m.rows, r)
+}
+
+func (m *Maroto) addHeader() {
+	for _, headerRow := range m.header {
+		m.currentHeight += headerRow.GetHeight(m.provider, &m.cell)
+		m.rows = append(m.rows, headerRow)
+	}
 }
 
 func (m *Maroto) setConfig() {

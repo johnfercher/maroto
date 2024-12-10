@@ -43,32 +43,27 @@ func GetMaroto() core.Maroto {
 	mrt := maroto.New()
 	m := maroto.NewMetricsDecorator(mrt)
 
-	objects := getObjects(100)
-	rows, err := list.Build[Object](objects)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	myList1 := list.New(GetHeader("header 1"), props.List{MinimumRowsBypage: 3}).Add(GetObjects(120)...)
+	m.AddRows(myList1.GetRows()...)
 
-	m.AddRows(rows...)
+	myList := list.New(GetHeader("header 2"), props.List{MinimumRowsBypage: 5}).Add(GetObjects(100)...)
+	myList.BuildListWithFixedHeader(m)
+
 	return m
 }
 
-type Object struct {
-	Key   string
-	Value string
+func GetObjects(max int) []core.Row {
+	var objects []core.Row
+	for i := 0; i < max; i++ {
+		objects = append(objects, GetContent(i))
+	}
+	return objects
 }
 
-func (o Object) GetHeader() core.Row {
-	return row.New(10).Add(
-		text.NewCol(4, "Key", props.Text{Style: fontstyle.Bold}),
-		text.NewCol(8, "Bytes", props.Text{Style: fontstyle.Bold}),
-	)
-}
-
-func (o Object) GetContent(i int) core.Row {
-	r := row.New(5).Add(
-		text.NewCol(4, o.Key),
-		text.NewCol(8, o.Value),
+func GetContent(i int) core.Row {
+	r := row.New(4).Add(
+		text.NewCol(4, fmt.Sprintf("key %d", i)),
+		text.NewCol(8, fmt.Sprintf("Value %d", i)),
 	)
 
 	if i%2 == 0 {
@@ -80,13 +75,9 @@ func (o Object) GetContent(i int) core.Row {
 	return r
 }
 
-func getObjects(max int) []Object {
-	var objects []Object
-	for i := 0; i < max; i++ {
-		objects = append(objects, Object{
-			Key:   fmt.Sprintf("Key: %d", i),
-			Value: fmt.Sprintf("Bytes: %d", i),
-		})
-	}
-	return objects
+func GetHeader(name string) core.Row {
+	return row.New(20).Add(
+		text.NewCol(4, "Key "+name, props.Text{Style: fontstyle.Bold}),
+		text.NewCol(8, "value "+name, props.Text{Style: fontstyle.Bold}),
+	)
 }

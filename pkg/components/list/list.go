@@ -4,51 +4,79 @@ package list
 import (
 	"errors"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-// Listable is the main abstraction of a listable item in a TableList.
-// A collection of objects that implements this interface may be added
-// in a list.
-type Listable interface {
-	GetHeader() core.Row
-	GetContent(i int) core.Row
+type List struct {
+	Header  core.Row
+	Content []core.Row
+	props   props.List
 }
 
-// BuildFromPointer is responsible to receive a collection of objects that implements
-// Listable and build the rows of TableList. This method should be used in case of a collection
-// of pointers.
-func BuildFromPointer[T Listable](arr []*T) ([]core.Row, error) {
-	if len(arr) == 0 {
-		return nil, errors.New("empty array")
-	}
+// Add is responsible for adding a row to the table content.
+func (l *List) Add(rows ...core.Row) *List {
+	l.Content = append(l.Content, rows...)
+	return l
+}
 
-	var list []T
-	for _, pointer := range arr {
-		if pointer == nil {
-			return nil, errors.New("nil element in array")
+// GetRows is responsible for returning all rows in the table
+func (l *List) GetRows() []core.Row {
+	return append([]core.Row{l.Header}, l.Content...)
+}
+
+// BuildListWithFixedHeader is responsible for adding list to table with fixed header
+func (l *List) BuildListWithFixedHeader(m core.Maroto) error {
+	if m == nil {
+		return errors.New("maroto instance cannot be null")
+	}
+	totalRowsAdded := 0
+	lastAddedStatus := true
+
+	for {
+		contentRowsAdded := l.addListToCurrentPage(&m, l.Header, l.Content[totalRowsAdded:]...)
+		if contentRowsAdded == 0 && !lastAddedStatus {
+			return errors.New("the rows cannot be adjusted to the document, check if MinimumRowsBypage is less than the rows capacity of the page")
 		}
-		list = append(list, *pointer)
-	}
 
-	return Build(list)
+		totalRowsAdded += contentRowsAdded
+		lastAddedStatus = contentRowsAdded != 0
+
+		if totalRowsAdded >= len(l.Content) {
+			break
+		}
+		m.FillPageToAddNew()
+	}
+	return nil
 }
 
-// Build is responsible to receive a collection of objects that implements
-// Listable and build the rows of TableList. This method should be used in case of a collection
-// of values.
-func Build[T Listable](arr []T) ([]core.Row, error) {
-	if len(arr) == 0 {
-		return nil, errors.New("empty array")
+// addListToCurrentPage is responsible for adding the list to the current page and returning
+// the number of lines of content inserted.
+func (l *List) addListToCurrentPage(m *core.Maroto, header core.Row, list ...core.Row) int {
+	list = append([]core.Row{header}, list...)
+	amountRows := (*m).FitsOnCurrentPage(list...)
+	if amountRows >= l.props.MinimumRowsBypage {
+		(*m).AddRows(list[:amountRows]...)
+		return amountRows - 1
 	}
+	return 0
+}
 
-	var rows []core.Row
-
-	rows = append(rows, arr[0].GetHeader())
-
-	for i, element := range arr {
-		rows = append(rows, element.GetContent(i))
+// New is responsible to create an instance of a List.
+func New(header core.Row, ps ...props.List) *List {
+	listProps := props.List{}
+	if len(ps) > 0 {
+		listProps = ps[0]
 	}
+	if header == nil {
+		header = row.New(0)
+	}
+	listProps.MakeValid()
 
-	return rows, nil
+	return &List{
+		Header:  header,
+		Content: make([]core.Row, 0),
+		props:   listProps,
+	}
 }
