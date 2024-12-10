@@ -384,13 +384,16 @@ func TestMaroto_Generate(t *testing.T) {
 			sut.AddRow(10, col.New(12))
 		}
 		initialGoroutines := runtime.NumGoroutine()
-		sut.Generate()
-		sut.Generate()
-		sut.Generate()
+		_, err1 := sut.Generate()
+		_, err2 := sut.Generate()
+		_, err3 := sut.Generate()
 		time.Sleep(100 * time.Millisecond)
 		finalGoroutines := runtime.NumGoroutine()
 
 		// Assert
+		assert.Nil(t, err1)
+		assert.Nil(t, err2)
+		assert.Nil(t, err3)
 		assert.Equal(t, initialGoroutines, finalGoroutines)
 	})
 	t.Run("page number", func(t *testing.T) {
