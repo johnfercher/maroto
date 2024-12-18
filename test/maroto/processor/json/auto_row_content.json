@@ -1,0 +1,26 @@
+{
+    "pages": {
+        "page_template": {
+            "row_with_larger_image": {
+                "biplane": "docs/assets/images/biplane.jpg",
+                "intro": "Numa toca no chão vivia um hobbit. Não uma toca nojenta, suja, úmida, \ncheia de pontas de minhocas e um cheiro de limo, nem tam pouco uma toca seca, vazia, arenosa, \nsem nenhum lugar onde se sentar ou onde comer: era uma toca de hobbit, e isso significa conforto.\nEla tinha uma porta perfeitamente redonda feito uma escotilha, pintada de verde, com uma maçaneta\namarela e brilhante de latão exatamente no meio. A porta se abria para um corredor em forma de tubo,\nfeito um túnel: um túnel muito confortável, sem fumaça, de paredes com painéis e assoalhos\nazulejados e acarpetados, com cadeiras enceradas e montes e montes de cabieiros para chapéus e\ncasacos - o hobbit apreciava visitas."
+            },
+            "row_with_image_and_text_same": {
+                "biplane": "docs/assets/images/biplane.jpg",
+                "intro": "Numa toca no chão vivia um hobbit. Não uma toca nojenta, suja, úmida, \ncheia de pontas de minhocas e um cheiro de limo, nem tam pouco uma toca seca, vazia, arenosa, \nsem nenhum lugar onde se sentar ou onde comer: era uma toca de hobbit, e isso significa conforto.\nEla tinha uma porta perfeitamente redonda feito uma escotilha, pintada de verde, com uma maçaneta\namarela e brilhante de latão exatamente no meio. A porta se abria para um corredor em forma de tubo,\nfeito um túnel: um túnel muito confortável, sem fumaça, de paredes com painéis e assoalhos\nazulejados e acarpetados, com cadeiras enceradas e montes e montes de cabieiros para chapéus e\ncasacos - o hobbit apreciava visitas."
+            },
+            "row_barcode": {
+                "bar_col": "code",
+                "intro": "Numa toca no chão vivia um hobbit. Não uma toca nojenta, suja, úmida, \ncheia de pontas de minhocas e um cheiro de limo, nem tam pouco uma toca seca, vazia, arenosa, \nsem nenhum lugar onde se sentar ou onde comer: era uma toca de hobbit, e isso significa conforto.\nEla tinha uma porta perfeitamente redonda feito uma escotilha, pintada de verde, com uma maçaneta\namarela e brilhante de latão exatamente no meio. A porta se abria para um corredor em forma de tubo,\nfeito um túnel: um túnel muito confortável, sem fumaça, de paredes com painéis e assoalhos\nazulejados e acarpetados, com cadeiras enceradas e montes e montes de cabieiros para chapéus e\ncasacos - o hobbit apreciava visitas."
+            },
+            "row_matrixcode": {
+                "matrix_code": "code",
+                "intro": "Numa toca no chão vivia um hobbit. Não uma toca nojenta, suja, úmida, \ncheia de pontas de minhocas e um cheiro de limo, nem tam pouco uma toca seca, vazia, arenosa, \nsem nenhum lugar onde se sentar ou onde comer: era uma toca de hobbit, e isso significa conforto.\nEla tinha uma porta perfeitamente redonda feito uma escotilha, pintada de verde, com uma maçaneta\namarela e brilhante de latão exatamente no meio. A porta se abria para um corredor em forma de tubo,\nfeito um túnel: um túnel muito confortável, sem fumaça, de paredes com painéis e assoalhos\nazulejados e acarpetados, com cadeiras enceradas e montes e montes de cabieiros para chapéus e\ncasacos - o hobbit apreciava visitas."
+            },
+            "row_qrcode": {
+                "qr_code": "code",
+                "intro": "Numa toca no chão vivia um hobbit. Não uma toca nojenta, suja, úmida, \ncheia de pontas de minhocas e um cheiro de limo, nem tam pouco uma toca seca, vazia, arenosa, \nsem nenhum lugar onde se sentar ou onde comer: era uma toca de hobbit, e isso significa conforto.\nEla tinha uma porta perfeitamente redonda feito uma escotilha, pintada de verde, com uma maçaneta\namarela e brilhante de latão exatamente no meio. A porta se abria para um corredor em forma de tubo,\nfeito um túnel: um túnel muito confortável, sem fumaça, de paredes com painéis e assoalhos\nazulejados e acarpetados, com cadeiras enceradas e montes e montes de cabieiros para chapéus e\ncasacos - o hobbit apreciava visitas."
+            }
+        }
+    }
+}

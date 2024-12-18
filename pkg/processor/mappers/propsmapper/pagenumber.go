@@ -21,7 +21,7 @@ type PageNumber struct {
 func NewPageNumber(pageNumber interface{}) *PageNumber {
 	pageNumberMap, ok := pageNumber.(map[string]interface{})
 	if !ok {
-		return &PageNumber{}
+		return nil
 	}
 
 	return &PageNumber{

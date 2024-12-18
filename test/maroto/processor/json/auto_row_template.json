@@ -1,0 +1,92 @@
+{
+    "builder":{
+        "debug": true
+    },
+    "pages": {
+        "page_template": {
+            "row_with_larger_image": {
+                "cols": [
+                    {
+                        "image": {
+                            "source_key": "biplane"
+                        },
+                        "size": 5
+                    },
+                    {
+                        "text": {
+                            "source_key": "intro"
+                        },
+                        "size": 7
+                    }
+                ]
+            },
+            "row_with_image_and_text_same": {
+                "cols": [
+                    {
+                        "image": {
+                            "source_key": "biplane"
+                        },
+                        "size": 5
+                    },
+                    {
+                        "text": {
+                            "source_key": "intro",
+                            "props": {
+                                "size": 13
+                            }
+                        },
+                        "size": 7
+                    }
+                ]
+            },
+            "row_barcode": {
+                "cols": [
+                    {
+                        "bar_code": {
+                            "source_key": "bar_col"
+                        },
+                        "size": 4
+                    },
+                    {
+                        "text": {
+                            "source_key": "intro"
+                        },
+                        "size": 8
+                    }
+                ]
+            },
+            "row_matrixcode": {
+                "cols": [
+                    {
+                        "matrix_code": {
+                            "source_key": "matrix_code"
+                        },
+                        "size": 3
+                    },
+                    {
+                        "text": {
+                            "source_key": "intro"
+                        },
+                        "size": 9
+                    }
+                ]
+            },
+            "row_qrcode": {
+                "cols": [
+                    {
+                        "qr_code": {
+                            "source_key": "qr_code"
+                        },
+                        "size": 2
+                    },
+                    {
+                        "text": {
+                            "source_key": "intro"
+                        },
+                        "size": 10
+                    }
+                ]
+            }
+        }
+    }
+}
