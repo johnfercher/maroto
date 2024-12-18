@@ -2,6 +2,8 @@ package processorprovider
 
 import (
 	"fmt"
+	"net/url"
+	"strings"
 
 	"github.com/johnfercher/go-tree/node"
 	"github.com/johnfercher/maroto/v2"
@@ -23,6 +25,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	processorcore "github.com/johnfercher/maroto/v2/pkg/processor/core"
+	"github.com/johnfercher/maroto/v2/pkg/processor/loader"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/buildermapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -168,40 +171,41 @@ func (m *Maroto) CreateLine(lineProps ...*propsmapper.Line) ProviderComponent {
 	})
 }
 
-func (m *Maroto) CreateImage(img []byte, ext string, imgProps ...*propsmapper.Rect) ProviderComponent {
-	cProps := propsmapper.Rect{}
-	if len(imgProps) > 0 {
-		cProps = *imgProps[0]
+func (m *Maroto) CreateImageWithLocalePath(uri *url.URL, props ...props.Rect) (ProviderComponent, error) {
+	newPath := strings.TrimPrefix(uri.String(), "file://")
+	return image.NewFromFile(newPath, props...), nil
+}
+
+func (m *Maroto) CreateImageWithExternalPath(path *url.URL, props ...props.Rect) (ProviderComponent, error) {
+	ext, img, err := m.repository.GetDocument(path.String())
+	if err != nil {
+		return nil, err
+	}
+	return image.NewFromBytes(img, extension.Type(ext), props...), nil
+}
+
+func (m *Maroto) CreateImage(path string, propsMapperArr ...*propsmapper.Rect) (ProviderComponent, error) {
+	props := createPropsRect(propsMapperArr...)
+	uri, err := loader.GetResourceSource(path)
+	if err != nil {
+		return nil, err
 	}
 
-	return image.NewFromBytes(img, extension.Type(ext), props.Rect{
-		Left: cProps.Left, Top: cProps.Top, Percent: cProps.Percent,
-		JustReferenceWidth: cProps.JustReferenceWidth, Center: cProps.Center,
-	})
+	if uri.Scheme == "file" {
+		return m.CreateImageWithLocalePath(uri, props)
+	} else {
+		return m.CreateImageWithExternalPath(uri, props)
+	}
 }
 
 func (m *Maroto) CreateMatrixCode(codeValue string, codeProps ...*propsmapper.Rect) ProviderComponent {
-	cProps := propsmapper.Rect{}
-	if len(codeProps) > 0 {
-		cProps = *codeProps[0]
-	}
-
-	return code.NewMatrix(codeValue, props.Rect{
-		Left: cProps.Left, Top: cProps.Top, Percent: cProps.Percent,
-		JustReferenceWidth: cProps.JustReferenceWidth, Center: cProps.Center,
-	})
+	props := createPropsRect(codeProps...)
+	return code.NewMatrix(codeValue, props)
 }
 
 func (m *Maroto) CreateQrCode(codeValue string, codeProps ...*propsmapper.Rect) ProviderComponent {
-	cProps := propsmapper.Rect{}
-	if len(codeProps) > 0 {
-		cProps = *codeProps[0]
-	}
-
-	return code.NewQr(codeValue, props.Rect{
-		Left: cProps.Left, Top: cProps.Top, Percent: cProps.Percent,
-		JustReferenceWidth: cProps.JustReferenceWidth, Center: cProps.Center,
-	})
+	props := createPropsRect(codeProps...)
+	return code.NewQr(codeValue, props)
 }
 
 func (m *Maroto) CreateBarCode(codeValue string, codeProps ...*propsmapper.Barcode) ProviderComponent {
@@ -226,4 +230,16 @@ func convertComponentType[T any](components ...ProviderComponent) ([]T, error) {
 		newComponents[i] = validComponent
 	}
 	return newComponents, nil
+}
+
+func createPropsRect(propsMapperArr ...*propsmapper.Rect) props.Rect {
+	propsRect := props.Rect{}
+	if len(propsMapperArr) > 0 {
+		propsMapper := *propsMapperArr[0]
+		propsRect = props.Rect{
+			Left: propsMapper.Left, Top: propsMapper.Top, Percent: propsMapper.Percent,
+			JustReferenceWidth: propsMapper.JustReferenceWidth, Center: propsMapper.Center,
+		}
+	}
+	return propsRect
 }

@@ -84,8 +84,7 @@ func (_c *GenerateComponent_Execute_Call) RunAndReturn(run func(interface{}, str
 func NewGenerateComponent(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *GenerateComponent {
+}) *GenerateComponent {
 	mock := &GenerateComponent{}
 	mock.Mock.Test(t)
 

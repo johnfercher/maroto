@@ -26,6 +26,6 @@ type ProcessorProvider interface {
 	CreateBarCode(value string, props ...*propsmapper.Barcode) ProviderComponent
 	CreateMatrixCode(value string, props ...*propsmapper.Rect) ProviderComponent
 	CreateQrCode(value string, props ...*propsmapper.Rect) ProviderComponent
-	CreateImage(value []byte, extension string, props ...*propsmapper.Rect) ProviderComponent
+	CreateImage(path string, props ...*propsmapper.Rect) (ProviderComponent, error)
 	CreateLine(props ...*propsmapper.Line) ProviderComponent
 }

@@ -109,8 +109,7 @@ func (_c *ProviderComponent_SetConfig_Call) RunAndReturn(run func(*entity.Config
 func NewProviderComponent(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *ProviderComponent {
+}) *ProviderComponent {
 	mock := &ProviderComponent{}
 	mock.Mock.Test(t)
 

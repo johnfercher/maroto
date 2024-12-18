@@ -1,9 +1,7 @@
 {
-    "value": "",
-    "type": "bytesImage",
+    "value": "img.png",
+    "type": "fileImage",
     "details": {
-        "bytes_size": 0,
-        "extension": "png",
         "prop_left": 10,
         "prop_percent": 100,
         "prop_top": 10

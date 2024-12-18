@@ -195,10 +195,11 @@ func TestCreateImage(t *testing.T) {
 	t.Run("when CreateImage is called, should generate a image", func(t *testing.T) {
 		loader := mocks.NewLoader(t)
 		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
-		image := m.CreateImage(make([]byte, 0), "png",
+		image, err := m.CreateImage("img.png",
 			&propsmapper.Rect{Left: 10.0, Top: 10.0, Percent: 100.0, JustReferenceWidth: false, Center: false},
 		)
 
+		assert.Nil(t, err)
 		test.New(t).Assert(image.GetStructure()).Equals("processor/provider/image.json")
 	})
 }

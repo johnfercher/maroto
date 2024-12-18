@@ -84,8 +84,7 @@ func (_c *Componentmapper_Generate_Call) RunAndReturn(run func(map[string]interf
 func NewComponentmapper(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Componentmapper {
+}) *Componentmapper {
 	mock := &Componentmapper{}
 	mock.Mock.Test(t)
 

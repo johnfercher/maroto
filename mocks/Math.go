@@ -125,8 +125,7 @@ func (_c *Math_Resize_Call) RunAndReturn(run func(*entity.Dimensions, *entity.Di
 func NewMath(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Math {
+}) *Math {
 	mock := &Math{}
 	mock.Mock.Test(t)
 

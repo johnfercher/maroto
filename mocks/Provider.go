@@ -862,8 +862,7 @@ func (_c *Provider_SetProtection_Call) RunAndReturn(run func(*entity.Protection)
 func NewProvider(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Provider {
+}) *Provider {
 	mock := &Provider{}
 	mock.Mock.Test(t)
 

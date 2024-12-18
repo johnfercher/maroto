@@ -62,7 +62,7 @@ func (f *abstractFactoryMaps) NewQrcode(document interface{}) (mappers.Component
 
 // NewImage is responsible for wrapper the creation of a image
 func (f *abstractFactoryMaps) NewImage(document interface{}) (mappers.Componentmapper, error) {
-	return imagemapper.NewImage(document, f.repository)
+	return imagemapper.NewImage(document)
 }
 
 // NewLine is responsible for wrapper the creation of a libe

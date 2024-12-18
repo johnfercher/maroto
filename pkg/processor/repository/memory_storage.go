@@ -15,8 +15,9 @@ type memoryStorage struct {
 // implementation that stores data in memory
 func NewMemoryStorage(loader core.Loader) *memoryStorage {
 	return &memoryStorage{
-		template: make(map[string]map[string]any),
-		loader:   loader,
+		template:  make(map[string]map[string]any),
+		loader:    loader,
+		documents: make(map[string][]byte),
 	}
 }
 

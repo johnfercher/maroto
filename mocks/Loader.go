@@ -126,8 +126,7 @@ func (_c *Loader_Load_Call) RunAndReturn(run func(string) ([]byte, error)) *Load
 func NewLoader(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *Loader {
+}) *Loader {
 	mock := &Loader{}
 	mock.Mock.Test(t)
 

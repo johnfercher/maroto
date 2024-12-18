@@ -667,8 +667,7 @@ func (_c *AbstractFactoryMaps_NewText_Call) RunAndReturn(run func(interface{}) (
 func NewAbstractFactoryMaps(t interface {
 	mock.TestingT
 	Cleanup(func())
-},
-) *AbstractFactoryMaps {
+}) *AbstractFactoryMaps {
 	mock := &AbstractFactoryMaps{}
 	mock.Mock.Test(t)
 

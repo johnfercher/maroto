@@ -4,25 +4,23 @@ package imagemapper
 import (
 	"fmt"
 
-	processorcore "github.com/johnfercher/maroto/v2/pkg/processor/core"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Image struct {
-	Path       string
-	SourceKey  string
-	Props      *propsmapper.Rect
-	Repository processorcore.ProcessorRepository
+	Path      string
+	SourceKey string
+	Props     *propsmapper.Rect
 }
 
-func NewImage(templateImage interface{}, repository processorcore.ProcessorRepository) (*Image, error) {
+func NewImage(templateImage interface{}) (*Image, error) {
 	imageMap, ok := templateImage.(map[string]interface{})
 	if !ok {
 		return nil, fmt.Errorf("ensure image can be converted to map[string] interface{}")
 	}
 
-	image := &Image{Repository: repository}
+	image := &Image{}
 	if err := image.addFields(imageMap); err != nil {
 		return nil, err
 	}
@@ -106,18 +104,18 @@ func (i *Image) getImagePath(content map[string]interface{}) (string, error) {
 func (i *Image) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
 	[]processorprovider.ProviderComponent, error,
 ) {
-	path, err := i.getImagePath(content)
-	if err != nil {
-		return nil, err
-	}
-	i.Path = path
-	extension, img, err := i.Repository.GetDocument(i.Path)
+	var err error
+	i.Path, err = i.getImagePath(content)
 	if err != nil {
 		return nil, err
 	}
 
+	var img processorprovider.ProviderComponent
 	if i.Props != nil {
-		return []processorprovider.ProviderComponent{provider.CreateImage(img, extension, i.Props)}, nil
+		img, err = provider.CreateImage(i.Path, i.Props)
+	} else {
+		img, err = provider.CreateImage(i.Path)
 	}
-	return []processorprovider.ProviderComponent{provider.CreateImage(img, extension)}, nil
+
+	return []processorprovider.ProviderComponent{img}, err
 }
