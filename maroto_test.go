@@ -6,6 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/johnfercher/maroto/v2/pkg/props"
+
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 
@@ -397,9 +399,12 @@ func TestMaroto_Generate(t *testing.T) {
 		assert.Equal(t, initialGoroutines, finalGoroutines)
 	})
 	t.Run("page number", func(t *testing.T) {
+		pageNumber := props.PageNumber{
+			MarginTop: 1,
+		}
 		// Arrange
 		cfg := config.NewBuilder().
-			WithPageNumber().
+			WithPageNumber(pageNumber).
 			Build()
 
 		sut := maroto.New(cfg)
