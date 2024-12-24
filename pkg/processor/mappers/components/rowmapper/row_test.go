@@ -6,10 +6,24 @@ import (
 
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/listmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/rowmapper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
+
+func TestGetOrder(t *testing.T) {
+	t.Run("when getOrder is called, should return defined order", func(t *testing.T) {
+		templateRows := map[string]interface{}{
+			"order": 10.0,
+		}
+		factory := mocks.NewAbstractFactoryMaps(t)
+
+		doc, _ := rowmapper.NewRow(templateRows, "test", factory)
+
+		assert.Equal(t, 10, doc.GetOrder())
+	})
+}
 
 func TestNewRow(t *testing.T) {
 	t.Run("when invalid interface is sent, should return an error", func(t *testing.T) {
@@ -23,7 +37,9 @@ func TestNewRow(t *testing.T) {
 	})
 	t.Run("when row height is not sent, should set height to 0", func(t *testing.T) {
 		factory := mocks.NewAbstractFactoryMaps(t)
-		var templateRow map[string]interface{}
+		templateRow := map[string]interface{}{
+			"order": 1.0,
+		}
 
 		doc, err := rowmapper.NewRow(templateRow, "", factory)
 
@@ -61,6 +77,28 @@ func TestNewRow(t *testing.T) {
 		doc, err := rowmapper.NewRow(templateRow, "", factory)
 
 		assert.Nil(t, doc)
+		assert.NotNil(t, err)
+	})
+
+	t.Run("when the order field is not sent, should return an error", func(t *testing.T) {
+		templateRows := map[string]interface{}{
+			"row_template_1": nil,
+		}
+		factory := mocks.NewAbstractFactoryMaps(t)
+
+		_, err := listmapper.NewList(templateRows, "test", factory.NewRow)
+
+		assert.NotNil(t, err)
+	})
+	t.Run("when the order field is less than 1, should return an error", func(t *testing.T) {
+		templateRows := map[string]interface{}{
+			"row_template_1": nil,
+			"order":          0.0,
+		}
+		factory := mocks.NewAbstractFactoryMaps(t)
+
+		_, err := listmapper.NewList(templateRows, "test", factory.NewRow)
+
 		assert.NotNil(t, err)
 	})
 }

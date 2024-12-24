@@ -80,7 +80,8 @@ func (_c *Deserializer_Deserialize_Call) RunAndReturn(run func(string) (map[stri
 func NewDeserializer(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Deserializer {
+},
+) *Deserializer {
 	mock := &Deserializer{}
 	mock.Mock.Test(t)
 

@@ -118,7 +118,8 @@ func (_c *Processor_RegisterTemplate_Call) RunAndReturn(run func(string, string)
 func NewProcessor(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Processor {
+},
+) *Processor {
 	mock := &Processor{}
 	mock.Mock.Test(t)
 

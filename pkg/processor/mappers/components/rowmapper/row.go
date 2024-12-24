@@ -13,6 +13,7 @@ type Row struct {
 	Cols      []mappers.Componentmapper
 	Factory   mappers.AbstractFactoryMaps
 	SourceKey string
+	order     int
 }
 
 func NewRow(templateRows interface{}, sourceKey string, factory mappers.AbstractFactoryMaps) (*Row, error) {
@@ -27,11 +28,38 @@ func NewRow(templateRows interface{}, sourceKey string, factory mappers.Abstract
 		SourceKey: sourceKey,
 	}
 
+	if err := row.setComponentOrder(&mapRows); err != nil {
+		return nil, err
+	}
+
 	err := row.addComponents(mapRows)
 	if err != nil {
 		return nil, err
 	}
 	return row, nil
+}
+
+func (r *Row) GetOrder() int {
+	return r.order
+}
+
+// setPageOrder is responsible for validating the component order and adding the order to the page
+func (r *Row) setComponentOrder(template *map[string]interface{}) error {
+	order, ok := (*template)["order"]
+	if !ok {
+		return fmt.Errorf("could not find field order on page \"%s\"", r.SourceKey)
+	}
+	validOrder, ok := order.(float64)
+	if !ok {
+		return fmt.Errorf("the order field passed on row \"%s\" is not valid", r.SourceKey)
+	}
+	if validOrder < 1 {
+		return fmt.Errorf("the order field in \"%s\" must be greater than 0", r.SourceKey)
+	}
+
+	r.order = int(validOrder)
+	delete(*template, "order")
+	return nil
 }
 
 // addComponents is responsible for adding the row components according to

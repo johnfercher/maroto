@@ -27,7 +27,7 @@ func MapperRow() *rowmapper.Row {
 func MapperPage() *pagemapper.Page {
 	return &pagemapper.Page{
 		SourceKey: "template_page_1",
-		Rows:      make([]mappers.Componentmapper, 0),
+		Rows:      make([]mappers.OrderedComponents, 0),
 	}
 }
 
@@ -158,7 +158,7 @@ func Page(sourceKeyPage, sourceKeyRow, sourceKeyText string) *pagemapper.Page {
 
 	return &pagemapper.Page{
 		SourceKey: sourceKeyPage,
-		Rows: []mappers.Componentmapper{
+		Rows: []mappers.OrderedComponents{
 			&rowmapper.Row{
 				Height:    10,
 				SourceKey: sourceKeyRow,

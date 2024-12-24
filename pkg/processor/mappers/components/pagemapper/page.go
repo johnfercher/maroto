@@ -11,16 +11,18 @@ import (
 
 type Page struct {
 	SourceKey string
-	Rows      []mappers.Componentmapper
+	Rows      []mappers.OrderedComponents
 	Factory   mappers.AbstractFactoryMaps
+	order     int
 }
 
-func NewPage(rows interface{}, sourceKey string, factory mappers.AbstractFactoryMaps) (*Page, error) {
+// NewPage is responsible for create an template page
+func NewPage(templatePage interface{}, sourceKey string, factory mappers.AbstractFactoryMaps) (*Page, error) {
 	newPage := &Page{
 		SourceKey: sourceKey,
 		Factory:   factory,
 	}
-	if err := newPage.setRows(rows); err != nil {
+	if err := newPage.setRows(templatePage); err != nil {
 		return nil, err
 	}
 
@@ -34,23 +36,64 @@ func (p *Page) setRows(rowsDoc interface{}) error {
 	if !ok {
 		return fmt.Errorf("could not parse template, ensure rows can be converted to map[string] interface{}")
 	}
+	err := p.setPageOrder(&templateRows)
+	if err != nil {
+		return err
+	}
 
+	p.Rows = make([]mappers.OrderedComponents, len(templateRows))
 	for templateName, template := range templateRows {
-		var rows mappers.Componentmapper
-		var err error
+		var row mappers.OrderedComponents
 
 		if strings.HasPrefix(templateName, "list") {
-			rows, err = p.Factory.NewList(template, templateName, p.Factory.NewRow)
+			row, err = p.Factory.NewList(template, templateName, p.Factory.NewRow)
 		} else {
-			rows, err = p.Factory.NewRow(template, templateName)
+			row, err = p.Factory.NewRow(template, templateName)
 		}
 
 		if err != nil {
 			return err
 		}
-		p.Rows = append(p.Rows, rows)
+
+		if err := p.addComponent(row); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// addPage is responsible for validating and adding the page to the template
+func (p *Page) addComponent(row mappers.OrderedComponents) error {
+	order := row.GetOrder()
+	if order > len(p.Rows) {
+		return fmt.Errorf("component order cannot be greater than %d, this is the number of components in the template", len(p.Rows))
+	}
+	if p.Rows[order-1] != nil {
+		return fmt.Errorf("cannot create page template, component order cannot be repeated")
 	}
 
+	p.Rows[order-1] = row
+	return nil
+}
+
+// GetOrder is responsible for returning the component's defined order
+func (p *Page) GetOrder() int {
+	return p.order
+}
+
+// setPageOrder is responsible for validating the component order and adding the order to the page
+func (p *Page) setPageOrder(template *map[string]interface{}) error {
+	order, ok := (*template)["order"]
+	if !ok {
+		return fmt.Errorf("could not find field order on page \"%s\"", p.SourceKey)
+	}
+	validOrder, ok := order.(float64)
+	if !ok || validOrder < 1 {
+		return fmt.Errorf("the order field passed on page \"%s\" is not valid", p.SourceKey)
+	}
+
+	p.order = int(validOrder)
+	delete(*template, "order")
 	return nil
 }
 
@@ -68,6 +111,7 @@ func (p *Page) getPageContent(content map[string]interface{}) (map[string]interf
 	)
 }
 
+// Generate is responsible for computing the page component with shipping data
 func (p *Page) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
 	[]processorprovider.ProviderComponent, error,
 ) {

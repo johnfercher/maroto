@@ -8,8 +8,6 @@ import (
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/processor/deserializer"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/listmapper"
-	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/pagemapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/documentmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 	"github.com/stretchr/testify/assert"
@@ -109,17 +107,54 @@ func TestNewPdf(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 
-	t.Run("when 2 pages are sent, it should add 2 pages to the document", func(t *testing.T) {
+	t.Run("when the template order is greater than the number of pages, an error should be returned", func(t *testing.T) {
+		builderDocument := `{"pages": {"page_template_1":{}}}`
+		orderedComponent := mocks.NewOrderedComponents(t)
+		orderedComponent.EXPECT().GetOrder().Return(2)
+
+		factory := mocks.NewAbstractFactoryMaps(t)
+		factory.On("NewPage", mock.Anything, "page_template_1").Return(orderedComponent, nil)
+
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
+		assert.Nil(t, err)
+
+		_, err = documentmapper.NewPdf(template, factory)
+
+		assert.NotNil(t, err)
+	})
+
+	t.Run("when the template order is repeated, an error should be returned", func(t *testing.T) {
+		builderDocument := `{"pages": {"page_template_2":{}, "page_template_1":{}}}`
+		orderedComponent := mocks.NewOrderedComponents(t)
+		orderedComponent.EXPECT().GetOrder().Return(2)
+
+		factory := mocks.NewAbstractFactoryMaps(t)
+		factory.On("NewPage", mock.Anything, "page_template_1").Return(orderedComponent, nil)
+		factory.On("NewPage", mock.Anything, "page_template_2").Return(orderedComponent, nil)
+
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
+		assert.Nil(t, err)
+
+		_, err = documentmapper.NewPdf(template, factory)
+
+		assert.NotNil(t, err)
+	})
+
+	t.Run("when 2 pages are submitted, should add the 2 pages in the correct order", func(t *testing.T) {
 		builderDocument := `
 			{"pages": {
 				"page_template_1":{},
 				"page_template_2":{} 
 			}}
 		`
-		validPage := fixture.MapperPage()
+		orderedComponent1 := mocks.NewOrderedComponents(t)
+		orderedComponent1.EXPECT().GetOrder().Return(1)
+		orderedComponent2 := mocks.NewOrderedComponents(t)
+		orderedComponent2.EXPECT().GetOrder().Return(2)
+
 		factory := mocks.NewAbstractFactoryMaps(t)
-		factory.On("NewPage", mock.Anything, "page_template_1").Return(validPage, nil)
-		factory.On("NewPage", mock.Anything, "page_template_2").Return(validPage, nil)
+		factory.On("NewPage", mock.Anything, "page_template_1").Return(orderedComponent1, nil)
+		factory.On("NewPage", mock.Anything, "page_template_2").Return(orderedComponent2, nil)
 
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
@@ -128,7 +163,32 @@ func TestNewPdf(t *testing.T) {
 
 		assert.Nil(t, err)
 		assert.Equal(t, len(doc.Pages), 2)
-		assert.IsType(t, &pagemapper.Page{}, doc.Pages[0])
+		assert.Equal(t, orderedComponent1, doc.Pages[0])
+	})
+
+	t.Run("when 2 pages are sent, it should add 2 pages to the document", func(t *testing.T) {
+		builderDocument := `
+			{"pages": {
+				"page_template_1":{},
+				"page_template_2":{} 
+			}}
+		`
+		orderedComponent1 := mocks.NewOrderedComponents(t)
+		orderedComponent1.EXPECT().GetOrder().Return(1)
+		orderedComponent2 := mocks.NewOrderedComponents(t)
+		orderedComponent2.EXPECT().GetOrder().Return(2)
+
+		factory := mocks.NewAbstractFactoryMaps(t)
+		factory.On("NewPage", mock.Anything, "page_template_1").Return(orderedComponent1, nil)
+		factory.On("NewPage", mock.Anything, "page_template_2").Return(orderedComponent2, nil)
+
+		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
+		assert.Nil(t, err)
+
+		doc, err := documentmapper.NewPdf(template, factory)
+
+		assert.Nil(t, err)
+		assert.Equal(t, len(doc.Pages), 2)
 	})
 
 	t.Run("when 1 list is sent, it should add 1 list to the document", func(t *testing.T) {
@@ -137,9 +197,11 @@ func TestNewPdf(t *testing.T) {
 				"list_template_1":{}
 			}}
 		`
-		validPage := fixture.MapperList()
+		orderedComponent1 := mocks.NewOrderedComponents(t)
+		orderedComponent1.EXPECT().GetOrder().Return(1)
+
 		factory := mocks.NewAbstractFactoryMaps(t)
-		factory.On("NewList", mock.Anything, "list_template_1", mock.Anything).Return(validPage, nil)
+		factory.On("NewList", mock.Anything, "list_template_1", mock.Anything).Return(orderedComponent1, nil)
 
 		template, err := deserializer.NewJSONDeserializer().Deserialize(builderDocument)
 		assert.Nil(t, err)
@@ -148,7 +210,6 @@ func TestNewPdf(t *testing.T) {
 
 		assert.Nil(t, err)
 		assert.Equal(t, len(doc.Pages), 1)
-		assert.IsType(t, &listmapper.List{}, doc.Pages[0])
 	})
 
 	t.Run("when an invalid page is sent, it should return an error", func(t *testing.T) {

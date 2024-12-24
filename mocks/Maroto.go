@@ -560,7 +560,8 @@ func (_c *Maroto_RegisterHeader_Call) RunAndReturn(run func(...core.Row) error) 
 func NewMaroto(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Maroto {
+},
+) *Maroto {
 	mock := &Maroto{}
 	mock.Mock.Test(t)
 

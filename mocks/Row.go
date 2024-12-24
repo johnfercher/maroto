@@ -348,7 +348,8 @@ func (_c *Row_WithStyle_Call) RunAndReturn(run func(*props.Cell) core.Row) *Row_
 func NewRow(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Row {
+},
+) *Row {
 	mock := &Row{}
 	mock.Mock.Test(t)
 

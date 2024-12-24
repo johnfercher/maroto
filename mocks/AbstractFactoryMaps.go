@@ -253,23 +253,23 @@ func (_c *AbstractFactoryMaps_NewLine_Call) RunAndReturn(run func(interface{}) (
 }
 
 // NewList provides a mock function with given fields: document, sourceKey, generate
-func (_m *AbstractFactoryMaps) NewList(document interface{}, sourceKey string, generate mappers.GenerateComponent) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewList(document interface{}, sourceKey string, generate mappers.GenerateComponent) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document, sourceKey, generate)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewList")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}, string, mappers.GenerateComponent) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}, string, mappers.GenerateComponent) (mappers.OrderedComponents, error)); ok {
 		return rf(document, sourceKey, generate)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}, string, mappers.GenerateComponent) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}, string, mappers.GenerateComponent) mappers.OrderedComponents); ok {
 		r0 = rf(document, sourceKey, generate)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -302,12 +302,12 @@ func (_c *AbstractFactoryMaps_NewList_Call) Run(run func(document interface{}, s
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewList_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewList_Call {
+func (_c *AbstractFactoryMaps_NewList_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewList_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewList_Call) RunAndReturn(run func(interface{}, string, mappers.GenerateComponent) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewList_Call {
+func (_c *AbstractFactoryMaps_NewList_Call) RunAndReturn(run func(interface{}, string, mappers.GenerateComponent) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewList_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -371,23 +371,23 @@ func (_c *AbstractFactoryMaps_NewMatrixcode_Call) RunAndReturn(run func(interfac
 }
 
 // NewPage provides a mock function with given fields: document, sourceKey
-func (_m *AbstractFactoryMaps) NewPage(document interface{}, sourceKey string) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewPage(document interface{}, sourceKey string) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document, sourceKey)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewPage")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}, string) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}, string) (mappers.OrderedComponents, error)); ok {
 		return rf(document, sourceKey)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}, string) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}, string) mappers.OrderedComponents); ok {
 		r0 = rf(document, sourceKey)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -419,12 +419,12 @@ func (_c *AbstractFactoryMaps_NewPage_Call) Run(run func(document interface{}, s
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewPage_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewPage_Call {
+func (_c *AbstractFactoryMaps_NewPage_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewPage_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewPage_Call) RunAndReturn(run func(interface{}, string) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewPage_Call {
+func (_c *AbstractFactoryMaps_NewPage_Call) RunAndReturn(run func(interface{}, string) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewPage_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -488,23 +488,23 @@ func (_c *AbstractFactoryMaps_NewQrcode_Call) RunAndReturn(run func(interface{})
 }
 
 // NewRow provides a mock function with given fields: document, sourceKey
-func (_m *AbstractFactoryMaps) NewRow(document interface{}, sourceKey string) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewRow(document interface{}, sourceKey string) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document, sourceKey)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewRow")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}, string) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}, string) (mappers.OrderedComponents, error)); ok {
 		return rf(document, sourceKey)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}, string) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}, string) mappers.OrderedComponents); ok {
 		r0 = rf(document, sourceKey)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -536,12 +536,12 @@ func (_c *AbstractFactoryMaps_NewRow_Call) Run(run func(document interface{}, so
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewRow_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewRow_Call {
+func (_c *AbstractFactoryMaps_NewRow_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewRow_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewRow_Call) RunAndReturn(run func(interface{}, string) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewRow_Call {
+func (_c *AbstractFactoryMaps_NewRow_Call) RunAndReturn(run func(interface{}, string) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewRow_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -667,7 +667,8 @@ func (_c *AbstractFactoryMaps_NewText_Call) RunAndReturn(run func(interface{}) (
 func NewAbstractFactoryMaps(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *AbstractFactoryMaps {
+},
+) *AbstractFactoryMaps {
 	mock := &AbstractFactoryMaps{}
 	mock.Mock.Test(t)
 

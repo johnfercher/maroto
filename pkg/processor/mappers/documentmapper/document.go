@@ -118,23 +118,49 @@ func (d *Document) setPages(pagesDoc interface{}) error {
 		return fmt.Errorf("ensure pages can be converted to map[string] interface{}")
 	}
 
+	d.Pages = make([]mappers.Componentmapper, len(templatePage))
 	for templateName, template := range templatePage {
-		var page mappers.Componentmapper
-		var err error
-
-		if strings.HasPrefix(templateName, "list") {
-			page, err = d.factory.NewList(template, templateName, d.factory.NewPage)
-		} else {
-			page, err = d.factory.NewPage(template, templateName)
-		}
-
+		page, err := d.factoryPage(template, templateName)
 		if err != nil {
 			return err
 		}
-		d.Pages = append(d.Pages, page)
+		if err := d.addPage(page); err != nil {
+			return err
+		}
 	}
 
 	return nil
+}
+
+// addPage is responsible for validating and adding the page to the template
+func (d *Document) addPage(page mappers.OrderedComponents) error {
+	order := page.GetOrder()
+	if page.GetOrder() > len(d.Pages) {
+		return fmt.Errorf("component order cannot be greater than %d, this is the number of components in the template", len(d.Pages))
+	}
+	if d.Pages[order-1] != nil {
+		return fmt.Errorf("cannot create document template, component order cannot be repeated")
+	}
+
+	d.Pages[order-1] = page
+	return nil
+}
+
+// factoryPage is responsible for making a template of a page or a list of pages
+func (d *Document) factoryPage(template interface{}, templateName string) (mappers.OrderedComponents, error) {
+	var page mappers.OrderedComponents
+	var err error
+
+	if strings.HasPrefix(templateName, "list") {
+		page, err = d.factory.NewList(template, templateName, d.factory.NewPage)
+	} else {
+		page, err = d.factory.NewPage(template, templateName)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+	return page, nil
 }
 
 func (d *Document) GetBuilderCfg() *buildermapper.Builder {

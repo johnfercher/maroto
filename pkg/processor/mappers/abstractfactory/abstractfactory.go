@@ -24,12 +24,12 @@ func NewAbstractFactoryMaps(repository core.ProcessorRepository) *abstractFactor
 }
 
 // NewRow is responsible for wrapper the creation of a row
-func (f *abstractFactoryMaps) NewRow(document interface{}, sourceKey string) (mappers.Componentmapper, error) {
+func (f *abstractFactoryMaps) NewRow(document interface{}, sourceKey string) (mappers.OrderedComponents, error) {
 	return rowmapper.NewRow(document, sourceKey, f)
 }
 
 // NewPage is responsible for wrapper the creation of a page
-func (f *abstractFactoryMaps) NewPage(document interface{}, sourceKey string) (mappers.Componentmapper, error) {
+func (f *abstractFactoryMaps) NewPage(document interface{}, sourceKey string) (mappers.OrderedComponents, error) {
 	return pagemapper.NewPage(document, sourceKey, f)
 }
 
@@ -41,7 +41,7 @@ func (f *abstractFactoryMaps) NewCol(document interface{}) (mappers.Componentmap
 // NewList is responsible for wrapper the creation of a list
 func (f *abstractFactoryMaps) NewList(document interface{}, sourceKey string,
 	generate mappers.GenerateComponent,
-) (mappers.Componentmapper, error) {
+) (mappers.OrderedComponents, error) {
 	return listmapper.NewList(document, sourceKey, generate)
 }
 

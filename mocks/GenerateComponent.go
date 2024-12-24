@@ -21,23 +21,23 @@ func (_m *GenerateComponent) EXPECT() *GenerateComponent_Expecter {
 }
 
 // Execute provides a mock function with given fields: document, sourceKey
-func (_m *GenerateComponent) Execute(document interface{}, sourceKey string) (mappers.Componentmapper, error) {
+func (_m *GenerateComponent) Execute(document interface{}, sourceKey string) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document, sourceKey)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Execute")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}, string) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}, string) (mappers.OrderedComponents, error)); ok {
 		return rf(document, sourceKey)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}, string) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}, string) mappers.OrderedComponents); ok {
 		r0 = rf(document, sourceKey)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -69,12 +69,12 @@ func (_c *GenerateComponent_Execute_Call) Run(run func(document interface{}, sou
 	return _c
 }
 
-func (_c *GenerateComponent_Execute_Call) Return(_a0 mappers.Componentmapper, _a1 error) *GenerateComponent_Execute_Call {
+func (_c *GenerateComponent_Execute_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *GenerateComponent_Execute_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *GenerateComponent_Execute_Call) RunAndReturn(run func(interface{}, string) (mappers.Componentmapper, error)) *GenerateComponent_Execute_Call {
+func (_c *GenerateComponent_Execute_Call) RunAndReturn(run func(interface{}, string) (mappers.OrderedComponents, error)) *GenerateComponent_Execute_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -84,7 +84,8 @@ func (_c *GenerateComponent_Execute_Call) RunAndReturn(run func(interface{}, str
 func NewGenerateComponent(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *GenerateComponent {
+},
+) *GenerateComponent {
 	mock := &GenerateComponent{}
 	mock.Mock.Test(t)
 

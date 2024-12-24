@@ -190,7 +190,8 @@ func (_c *Component_SetConfig_Call) RunAndReturn(run func(*entity.Config)) *Comp
 func NewComponent(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Component {
+},
+) *Component {
 	mock := &Component{}
 	mock.Mock.Test(t)
 

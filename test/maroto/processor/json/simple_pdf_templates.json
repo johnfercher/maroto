@@ -1,6 +1,7 @@
 {
     "header": {
         "row_header": {
+            "order": 1,
             "cols": [
                 {
                     "text": {
@@ -13,6 +14,7 @@
     },
     "footer": {
         "row_footer": {
+            "order": 1,
             "cols": [
                 {
                     "text": {
@@ -25,7 +27,9 @@
     },
     "pages": {
         "page_template_1": {
+            "order": 1,
             "row_1": {
+                "order": 1,
                 "cols": [
                     {
                         "text": {
@@ -42,7 +46,9 @@
                 ]
             },
             "list_row_1": {
+                "order": 2,
                 "row": {
+                    "order": 1,
                     "cols": [
                         {
                             "text": {
@@ -53,6 +59,7 @@
                     ]
                 },
                 "row_1": {
+                    "order": 2,
                     "cols": [
                         {
                             "text": {

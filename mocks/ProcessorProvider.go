@@ -1014,7 +1014,8 @@ func (_c *ProcessorProvider_GetStructure_Call) RunAndReturn(run func() *node.Nod
 func NewProcessorProvider(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *ProcessorProvider {
+},
+) *ProcessorProvider {
 	mock := &ProcessorProvider{}
 	mock.Mock.Test(t)
 

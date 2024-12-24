@@ -145,7 +145,8 @@ func (_c *Image_GetImageInfo_Call) RunAndReturn(run func(*entity.Image, extensio
 func NewImage(t interface {
 	mock.TestingT
 	Cleanup(func())
-}) *Image {
+},
+) *Image {
 	mock := &Image{}
 	mock.Mock.Test(t)
 

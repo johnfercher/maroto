@@ -5,8 +5,11 @@
     },
     "pages": {
         "template_page_1": {
+            "order": 1,
             "list_rows": {
+                "order": 1,
                 "row_1": {
+                    "order": 1,
                     "height": 30,
                     "cols": [
                         {
@@ -19,8 +22,11 @@
             }
         },
         "list_pages": {
+            "order":2,
             "template_page_2": {
+                "order": 1,
                 "row_1": {
+                    "order": 1,
                     "height": 10,
                     "cols": [
                         {
