@@ -117,8 +117,11 @@ func (m *Maroto) CreateRow(height float64, components ...ProviderComponent) (Pro
 	if err != nil {
 		return nil, err
 	}
-
-	return row.New(height).Add(newComponents...), nil
+	if height > 0 {
+		return row.New(height).Add(newComponents...), nil
+	} else {
+		return row.New().Add(newComponents...), nil
+	}
 }
 
 func (m *Maroto) CreateCol(size int, components ...ProviderComponent) (ProviderComponent, error) {

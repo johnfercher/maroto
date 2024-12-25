@@ -4,7 +4,9 @@
     },
     "pages": {
         "page_template": {
+            "order": 1,
             "row_with_larger_image": {
+                "order": 1,
                 "cols": [
                     {
                         "image": {
@@ -21,6 +23,7 @@
                 ]
             },
             "row_with_image_and_text_same": {
+                "order": 2,
                 "cols": [
                     {
                         "image": {
@@ -40,6 +43,7 @@
                 ]
             },
             "row_barcode": {
+                "order": 3,
                 "cols": [
                     {
                         "bar_code": {
@@ -56,6 +60,7 @@
                 ]
             },
             "row_matrixcode": {
+                "order": 4,
                 "cols": [
                     {
                         "matrix_code": {
@@ -72,6 +77,7 @@
                 ]
             },
             "row_qrcode": {
+                "order": 5,
                 "cols": [
                     {
                         "qr_code": {
