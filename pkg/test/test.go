@@ -10,6 +10,7 @@ import (
 
 	"github.com/johnfercher/go-tree/node"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v3"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -32,6 +33,22 @@ type Node struct {
 type MarotoTest struct {
 	t    *testing.T
 	node *node.Node[core.Structure]
+}
+
+// SetupTestDir sets the directory where the test will be built
+// after the test is finished, the original directory will be set
+func SetupTestDir(t *testing.T) {
+	New(t)
+	originalDir, err := os.Getwd()
+	require.NoError(t, err)
+
+	err = os.Chdir(configSingleton.AbsolutePath)
+	require.NoError(t, err)
+
+	defer t.Cleanup(func() {
+		err := os.Chdir(originalDir)
+		require.NoError(t, err)
+	})
 }
 
 // New creates the MarotoTest instance to unit tests.
