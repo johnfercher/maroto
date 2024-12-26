@@ -10,13 +10,10 @@ type Proportion struct {
 
 // NewProportion is responsible for creating the proportion, if the font fields cannot be
 // converted, an invalid value is set.
-func NewProportion(barcode interface{}) *Proportion {
-	barcodeMap, ok := barcode.(map[string]interface{})
-	if !ok {
-		return nil
-	}
+func NewProportion(barcode interface{}) Proportion {
+	barcodeMap, _ := barcode.(map[string]interface{})
 
-	return &Proportion{
+	return Proportion{
 		Width:  *convertFields(barcodeMap["width"], 0.0),
 		Height: *convertFields(barcodeMap["height"], 0.0),
 	}

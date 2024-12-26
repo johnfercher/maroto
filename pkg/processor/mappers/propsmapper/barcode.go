@@ -33,7 +33,7 @@ func NewBarcode(barcode interface{}) (*Barcode, error) {
 		Left:       *convertFields(barcodeMap["left"], -1.0),
 		Top:        *convertFields(barcodeMap["top"], -1.0),
 		Percent:    *convertFields(barcodeMap["percent"], -1.0),
-		Proportion: *NewProportion(barcodeMap["proportion"]),
+		Proportion: NewProportion(barcodeMap["proportion"]),
 		Center:     *convertFields(barcodeMap["center"], false),
 		Type:       NewCodeType(*convertFields(barcodeMap["type"], "")),
 	}, nil
