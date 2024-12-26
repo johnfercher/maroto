@@ -36,7 +36,7 @@ func TestGenerateTemplate(t *testing.T) {
 		test.New(t).Assert((*provider).GetStructure()).Equals("processor/simple_pdf.json")
 	})
 
-	t.Run("when template with Addpage is found, should set template", func(t *testing.T) {
+	t.Run("when template with Addpage example is found, should set template", func(t *testing.T) {
 		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/add_page_template.json")
 		fixContent, _ := processortest.NewFileReader().LoadFile("processor/json/add_page_content.json")
 		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
@@ -49,7 +49,7 @@ func TestGenerateTemplate(t *testing.T) {
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/addpage.json")
 	})
 
-	t.Run("when template with AutoRow is found, should set template", func(t *testing.T) {
+	t.Run("when template with AutoRow example is found, should set template", func(t *testing.T) {
 		test.SetupTestDir(t)
 
 		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/auto_row_template.json")
@@ -62,6 +62,20 @@ func TestGenerateTemplate(t *testing.T) {
 
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/autorow.json")
+	})
+	t.Run("when template with background example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/background_template.json")
+		fixContent, _ := processortest.NewFileReader().LoadFile("processor/json/background_content.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("auto_row", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("auto_row", string(fixContent))
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/background.json")
 	})
 	t.Run("when sent template is not found, should reuturn an error", func(t *testing.T) {
 	})

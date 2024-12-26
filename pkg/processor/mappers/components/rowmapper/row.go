@@ -83,7 +83,7 @@ func (r *Row) addComponents(mapRows map[string]interface{}) error {
 func (r *Row) setHeight(template interface{}) error {
 	height, ok := template.(float64)
 	if !ok {
-		return fmt.Errorf("could not parse template, ensure that height can be converted to float64")
+		return fmt.Errorf("could not parse \"%s\" template, ensure that height can be converted to float64", r.SourceKey)
 	}
 	r.Height = height
 	return nil
@@ -92,7 +92,7 @@ func (r *Row) setHeight(template interface{}) error {
 func (r *Row) setCols(template interface{}) error {
 	cols, ok := template.([]interface{})
 	if !ok {
-		return fmt.Errorf("could not parse template, ensure that cols can be converted to []interface{}")
+		return fmt.Errorf("could not parse \"%s\" template, ensure that cols can be converted to []interface{}", r.SourceKey)
 	}
 	r.Cols = make([]mappers.Componentmapper, len(cols))
 
@@ -119,7 +119,7 @@ func (r *Row) getFieldMappers() map[string]func(interface{}) error {
 func (r *Row) getRowContent(content map[string]interface{}) (map[string]interface{}, error) {
 	rowContent, ok := content[r.SourceKey]
 	if !ok {
-		return nil, fmt.Errorf("could not parse template, the row needs the source key \"%s\", but it was not found", r.SourceKey)
+		return map[string]interface{}{}, nil
 	}
 	if mapRow, ok := rowContent.(map[string]interface{}); ok {
 		return mapRow, nil

@@ -9,7 +9,7 @@ import (
 )
 
 type Image struct {
-	Path      string
+	Value     string
 	SourceKey string
 	Props     *propsmapper.Rect
 }
@@ -24,7 +24,7 @@ func NewImage(templateImage interface{}) (*Image, error) {
 	if err := image.addFields(imageMap); err != nil {
 		return nil, err
 	}
-	if image.SourceKey == "" {
+	if image.SourceKey == "" && image.Value == "" {
 		return nil, fmt.Errorf("no value passed for image. Add the 'source_key' or a path")
 	}
 
@@ -55,7 +55,7 @@ func (i *Image) getFieldMappers() map[string]func(interface{}) error {
 	return map[string]func(interface{}) error{
 		"source_key": i.setSourceKey,
 		"props":      i.setProps,
-		"path":       i.setPath,
+		"value":      i.setPath,
 	}
 }
 
@@ -73,7 +73,7 @@ func (i *Image) setPath(template interface{}) error {
 	if !ok {
 		return fmt.Errorf("path cannot be converted to a string")
 	}
-	i.Path = path
+	i.Value = path
 	return nil
 }
 
@@ -87,8 +87,8 @@ func (i *Image) setProps(template interface{}) error {
 }
 
 func (i *Image) getImagePath(content map[string]interface{}) (string, error) {
-	if i.Path != "" {
-		return i.Path, nil
+	if i.Value != "" {
+		return i.Value, nil
 	}
 	imageFound, ok := content[i.SourceKey]
 	if !ok {
@@ -105,16 +105,16 @@ func (i *Image) Generate(content map[string]interface{}, provider processorprovi
 	[]processorprovider.ProviderComponent, error,
 ) {
 	var err error
-	i.Path, err = i.getImagePath(content)
+	i.Value, err = i.getImagePath(content)
 	if err != nil {
 		return nil, err
 	}
 
 	var img processorprovider.ProviderComponent
 	if i.Props != nil {
-		img, err = provider.CreateImage(i.Path, i.Props)
+		img, err = provider.CreateImage(i.Value, i.Props)
 	} else {
-		img, err = provider.CreateImage(i.Path)
+		img, err = provider.CreateImage(i.Value)
 	}
 
 	return []processorprovider.ProviderComponent{img}, err

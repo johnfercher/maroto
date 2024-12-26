@@ -1,0 +1,64 @@
+{
+    "builder": {
+        "margins": {
+            "left": 0,
+            "top": 0,
+            "right": 0
+        },
+        "orientation": "horizontal",
+        "max_grid_size": 20,
+        "background_image": "docs/assets/images/certificate.png"
+    },
+    "pages": {
+        "list_pages": {
+            "order": 1,
+            "page": {
+                "order": 1,
+                "row_space": {
+                    "order": 1,
+                    "height": 70
+                },
+                "row_title": {
+                    "height": 20,
+                    "order": 2,
+                    "cols": [
+                        {
+                            "size": 4
+                        },
+                        {
+                            "size": 12,
+                            "text": {
+                                "source_key": "title",
+                                "props": {
+                                    "size": 18
+                                }
+                            }
+                        },
+                        {
+                            "size": 4
+                        }
+                    ]
+                },
+                "row_space2": {
+                    "order": 3,
+                    "height": 15
+                },
+                "row_signature": {
+                    "order": 4,
+                    "height": 30,
+                    "cols": [
+                        {
+                            "size": 20,
+                            "image": {
+                                "value": "docs/assets/images/signature.png",
+                                "props": {
+                                    "center": true
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
