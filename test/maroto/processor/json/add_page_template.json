@@ -14,6 +14,7 @@
                     "cols": [
                         {
                             "text": {
+                                "order": 1,
                                 "source_key": "page_1_row"
                             }
                         }
@@ -31,6 +32,7 @@
                     "cols": [
                         {
                             "text": {
+                                "order": 1,
                                 "source_key": "page_2_row"
                             }
                         }

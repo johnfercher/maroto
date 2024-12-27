@@ -36,31 +36,31 @@ func MapperList() *listmapper.List {
 }
 
 func Barcode() *codemapper.Barcode {
-	return &codemapper.Barcode{}
+	return &codemapper.Barcode{Order: 1}
 }
 
 func Matrixcode() *codemapper.Matrixcode {
-	return &codemapper.Matrixcode{}
+	return &codemapper.Matrixcode{Order: 1}
 }
 
 func Qrcode() *codemapper.Qrcode {
-	return &codemapper.Qrcode{}
+	return &codemapper.Qrcode{Order: 1}
 }
 
 func Image() *imagemapper.Image {
-	return &imagemapper.Image{}
+	return &imagemapper.Image{Order: 1}
 }
 
 func Line() *linemapper.Line {
-	return &linemapper.Line{}
+	return &linemapper.Line{Order: 1}
 }
 
 func Signature() *signaturemapper.Signature {
-	return &signaturemapper.Signature{}
+	return &signaturemapper.Signature{Order: 1}
 }
 
 func Text() *textmapper.Text {
-	return &textmapper.Text{}
+	return &textmapper.Text{Order: 1}
 }
 
 func Metadata() *propsmapper.Metadata {
@@ -140,7 +140,7 @@ func BuilderProps() *buildermapper.Builder {
 func Row(sourceKeyRow, sourceKeyText string) *rowmapper.Row {
 	col := colmapper.Col{
 		Size:       12,
-		Components: []mappers.Componentmapper{&textmapper.Text{SourceKey: sourceKeyText}},
+		Components: []mappers.OrderedComponents{},
 	}
 
 	return &rowmapper.Row{
@@ -153,7 +153,7 @@ func Row(sourceKeyRow, sourceKeyText string) *rowmapper.Row {
 func Page(sourceKeyPage, sourceKeyRow, sourceKeyText string) *pagemapper.Page {
 	col := colmapper.Col{
 		Size:       12,
-		Components: []mappers.Componentmapper{&textmapper.Text{SourceKey: sourceKeyText}},
+		Components: []mappers.OrderedComponents{},
 	}
 
 	return &pagemapper.Page{

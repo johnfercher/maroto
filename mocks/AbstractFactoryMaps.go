@@ -21,23 +21,23 @@ func (_m *AbstractFactoryMaps) EXPECT() *AbstractFactoryMaps_Expecter {
 }
 
 // NewBarcode provides a mock function with given fields: document
-func (_m *AbstractFactoryMaps) NewBarcode(document interface{}) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewBarcode(document interface{}) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewBarcode")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) (mappers.OrderedComponents, error)); ok {
 		return rf(document)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) mappers.OrderedComponents); ok {
 		r0 = rf(document)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -68,12 +68,12 @@ func (_c *AbstractFactoryMaps_NewBarcode_Call) Run(run func(document interface{}
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewBarcode_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewBarcode_Call {
+func (_c *AbstractFactoryMaps_NewBarcode_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewBarcode_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewBarcode_Call) RunAndReturn(run func(interface{}) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewBarcode_Call {
+func (_c *AbstractFactoryMaps_NewBarcode_Call) RunAndReturn(run func(interface{}) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewBarcode_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -137,23 +137,23 @@ func (_c *AbstractFactoryMaps_NewCol_Call) RunAndReturn(run func(interface{}) (m
 }
 
 // NewImage provides a mock function with given fields: document
-func (_m *AbstractFactoryMaps) NewImage(document interface{}) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewImage(document interface{}) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewImage")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) (mappers.OrderedComponents, error)); ok {
 		return rf(document)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) mappers.OrderedComponents); ok {
 		r0 = rf(document)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -184,34 +184,34 @@ func (_c *AbstractFactoryMaps_NewImage_Call) Run(run func(document interface{}))
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewImage_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewImage_Call {
+func (_c *AbstractFactoryMaps_NewImage_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewImage_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewImage_Call) RunAndReturn(run func(interface{}) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewImage_Call {
+func (_c *AbstractFactoryMaps_NewImage_Call) RunAndReturn(run func(interface{}) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewImage_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // NewLine provides a mock function with given fields: document
-func (_m *AbstractFactoryMaps) NewLine(document interface{}) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewLine(document interface{}) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewLine")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) (mappers.OrderedComponents, error)); ok {
 		return rf(document)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) mappers.OrderedComponents); ok {
 		r0 = rf(document)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -242,12 +242,12 @@ func (_c *AbstractFactoryMaps_NewLine_Call) Run(run func(document interface{})) 
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewLine_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewLine_Call {
+func (_c *AbstractFactoryMaps_NewLine_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewLine_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewLine_Call) RunAndReturn(run func(interface{}) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewLine_Call {
+func (_c *AbstractFactoryMaps_NewLine_Call) RunAndReturn(run func(interface{}) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewLine_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -313,23 +313,23 @@ func (_c *AbstractFactoryMaps_NewList_Call) RunAndReturn(run func(interface{}, s
 }
 
 // NewMatrixcode provides a mock function with given fields: document
-func (_m *AbstractFactoryMaps) NewMatrixcode(document interface{}) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewMatrixcode(document interface{}) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewMatrixcode")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) (mappers.OrderedComponents, error)); ok {
 		return rf(document)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) mappers.OrderedComponents); ok {
 		r0 = rf(document)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -360,12 +360,12 @@ func (_c *AbstractFactoryMaps_NewMatrixcode_Call) Run(run func(document interfac
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewMatrixcode_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewMatrixcode_Call {
+func (_c *AbstractFactoryMaps_NewMatrixcode_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewMatrixcode_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewMatrixcode_Call) RunAndReturn(run func(interface{}) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewMatrixcode_Call {
+func (_c *AbstractFactoryMaps_NewMatrixcode_Call) RunAndReturn(run func(interface{}) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewMatrixcode_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -430,23 +430,23 @@ func (_c *AbstractFactoryMaps_NewPage_Call) RunAndReturn(run func(interface{}, s
 }
 
 // NewQrcode provides a mock function with given fields: document
-func (_m *AbstractFactoryMaps) NewQrcode(document interface{}) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewQrcode(document interface{}) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewQrcode")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) (mappers.OrderedComponents, error)); ok {
 		return rf(document)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) mappers.OrderedComponents); ok {
 		r0 = rf(document)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -477,12 +477,12 @@ func (_c *AbstractFactoryMaps_NewQrcode_Call) Run(run func(document interface{})
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewQrcode_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewQrcode_Call {
+func (_c *AbstractFactoryMaps_NewQrcode_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewQrcode_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewQrcode_Call) RunAndReturn(run func(interface{}) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewQrcode_Call {
+func (_c *AbstractFactoryMaps_NewQrcode_Call) RunAndReturn(run func(interface{}) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewQrcode_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -547,23 +547,23 @@ func (_c *AbstractFactoryMaps_NewRow_Call) RunAndReturn(run func(interface{}, st
 }
 
 // NewSignature provides a mock function with given fields: document
-func (_m *AbstractFactoryMaps) NewSignature(document interface{}) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewSignature(document interface{}) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewSignature")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) (mappers.OrderedComponents, error)); ok {
 		return rf(document)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) mappers.OrderedComponents); ok {
 		r0 = rf(document)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -594,34 +594,34 @@ func (_c *AbstractFactoryMaps_NewSignature_Call) Run(run func(document interface
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewSignature_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewSignature_Call {
+func (_c *AbstractFactoryMaps_NewSignature_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewSignature_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewSignature_Call) RunAndReturn(run func(interface{}) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewSignature_Call {
+func (_c *AbstractFactoryMaps_NewSignature_Call) RunAndReturn(run func(interface{}) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewSignature_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // NewText provides a mock function with given fields: document
-func (_m *AbstractFactoryMaps) NewText(document interface{}) (mappers.Componentmapper, error) {
+func (_m *AbstractFactoryMaps) NewText(document interface{}) (mappers.OrderedComponents, error) {
 	ret := _m.Called(document)
 
 	if len(ret) == 0 {
 		panic("no return value specified for NewText")
 	}
 
-	var r0 mappers.Componentmapper
+	var r0 mappers.OrderedComponents
 	var r1 error
-	if rf, ok := ret.Get(0).(func(interface{}) (mappers.Componentmapper, error)); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) (mappers.OrderedComponents, error)); ok {
 		return rf(document)
 	}
-	if rf, ok := ret.Get(0).(func(interface{}) mappers.Componentmapper); ok {
+	if rf, ok := ret.Get(0).(func(interface{}) mappers.OrderedComponents); ok {
 		r0 = rf(document)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(mappers.Componentmapper)
+			r0 = ret.Get(0).(mappers.OrderedComponents)
 		}
 	}
 
@@ -652,12 +652,12 @@ func (_c *AbstractFactoryMaps_NewText_Call) Run(run func(document interface{})) 
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewText_Call) Return(_a0 mappers.Componentmapper, _a1 error) *AbstractFactoryMaps_NewText_Call {
+func (_c *AbstractFactoryMaps_NewText_Call) Return(_a0 mappers.OrderedComponents, _a1 error) *AbstractFactoryMaps_NewText_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *AbstractFactoryMaps_NewText_Call) RunAndReturn(run func(interface{}) (mappers.Componentmapper, error)) *AbstractFactoryMaps_NewText_Call {
+func (_c *AbstractFactoryMaps_NewText_Call) RunAndReturn(run func(interface{}) (mappers.OrderedComponents, error)) *AbstractFactoryMaps_NewText_Call {
 	_c.Call.Return(run)
 	return _c
 }

@@ -5,6 +5,7 @@ package codemapper
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/order"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
@@ -13,6 +14,7 @@ type Matrixcode struct {
 	SourceKey string
 	Code      string
 	Props     *propsmapper.Rect
+	Order     int
 }
 
 func NewMatrixcode(code interface{}) (*Matrixcode, error) {
@@ -35,6 +37,11 @@ func NewMatrixcode(code interface{}) (*Matrixcode, error) {
 // addFields is responsible for adding the matrix code fields according to
 // the properties informed in the map
 func (m *Matrixcode) addFields(codeMap map[string]interface{}) error {
+	order, err := order.SetPageOrder(&codeMap, "matrixcode", m.SourceKey)
+	if err != nil {
+		return err
+	}
+	m.Order = order
 	fieldMappers := m.getFieldMappers()
 
 	for templateName, template := range codeMap {
@@ -50,12 +57,17 @@ func (m *Matrixcode) addFields(codeMap map[string]interface{}) error {
 	return nil
 }
 
+// GetOrder is responsible for returning the component's defined order
+func (m *Matrixcode) GetOrder() int {
+	return m.Order
+}
+
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.
 // To do this, the component name is linked to a function in a Map.
 func (m *Matrixcode) getFieldMappers() map[string]func(interface{}) error {
 	return map[string]func(interface{}) error{
 		"source_key": m.setSourceKey,
-		"code":       m.setCode,
+		"value":      m.setCode,
 		"props":      m.setProps,
 	}
 }

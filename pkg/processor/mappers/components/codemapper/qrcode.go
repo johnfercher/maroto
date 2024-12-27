@@ -5,6 +5,7 @@ package codemapper
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/order"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
@@ -13,6 +14,7 @@ type Qrcode struct {
 	SourceKey string
 	Code      string
 	Props     *propsmapper.Rect
+	Order     int
 }
 
 func NewQrcode(code interface{}) (*Qrcode, error) {
@@ -35,6 +37,12 @@ func NewQrcode(code interface{}) (*Qrcode, error) {
 // addFields is responsible for adding the qrcode fields according to
 // the properties informed in the map
 func (q *Qrcode) addFields(codeMap map[string]interface{}) error {
+	order, err := order.SetPageOrder(&codeMap, "qrcode", q.SourceKey)
+	if err != nil {
+		return err
+	}
+	q.Order = order
+
 	fieldMappers := q.getFieldMappers()
 
 	for templateName, template := range codeMap {
@@ -50,12 +58,17 @@ func (q *Qrcode) addFields(codeMap map[string]interface{}) error {
 	return nil
 }
 
+// GetOrder is responsible for returning the component's defined order
+func (q *Qrcode) GetOrder() int {
+	return q.Order
+}
+
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.
 // To do this, the component name is linked to a function in a Map.
 func (q *Qrcode) getFieldMappers() map[string]func(interface{}) error {
 	return map[string]func(interface{}) error{
 		"source_key": q.setSourceKey,
-		"code":       q.setCode,
+		"value":      q.setCode,
 		"props":      q.setProps,
 	}
 }

@@ -5,6 +5,7 @@
             "cols": [
                 {
                     "text": {
+                        "order": 1,
                         "source_key": "header_value"
                     },
                     "size": 12
@@ -18,6 +19,7 @@
             "cols": [
                 {
                     "text": {
+                        "order": 1,
                         "source_key": "footer_value"
                     },
                     "size": 12
@@ -33,12 +35,14 @@
                 "cols": [
                     {
                         "text": {
+                            "order": 1,
                             "source_key": "value_1"
                         },
                         "size": 6.0
                     },
                     {
                         "text": {
+                            "order": 1,
                             "source_key": "value_2"
                         },
                         "size": 6.0
@@ -52,6 +56,7 @@
                     "cols": [
                         {
                             "text": {
+                                "order": 1,
                                 "source_key": "value_2"
                             },
                             "size": 10.0
@@ -63,6 +68,7 @@
                     "cols": [
                         {
                             "text": {
+                                "order": 1,
                                 "source_key": "value_2"
                             },
                             "size": 10.0

@@ -104,16 +104,19 @@ func TestNewRow(t *testing.T) {
 }
 
 func TestGenerate(t *testing.T) {
-	t.Run("when content no has source_key, should return an error", func(t *testing.T) {
-		content := map[string]interface{}{}
+	t.Run("when content no has source_key, should send an empty list", func(t *testing.T) {
+		content := map[string]interface{}{"source_key_test": 1}
 		factory := mocks.NewAbstractFactoryMaps(t)
 		provider := mocks.NewProcessorProvider(t)
+		provider.EXPECT().CreateRow(10.0).Return(nil, nil)
+		component := mocks.NewComponentmapper(t)
+		component.EXPECT().Generate(map[string]interface{}{}, provider).Return(nil, nil)
 
-		row := rowmapper.Row{Height: 10, Cols: make([]mappers.Componentmapper, 0), Factory: factory, SourceKey: "test"}
+		row := rowmapper.Row{Height: 10, Cols: []mappers.Componentmapper{component}, Factory: factory, SourceKey: "test"}
 		newRow, err := row.Generate(content, provider)
 
-		assert.NotNil(t, err)
-		assert.Nil(t, newRow)
+		assert.NotNil(t, newRow)
+		assert.Nil(t, err)
 	})
 	t.Run("when row no has row, it should no sent row", func(t *testing.T) {
 		content := map[string]interface{}{"content": map[string]interface{}{"text": "value"}}

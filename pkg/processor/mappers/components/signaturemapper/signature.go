@@ -4,6 +4,7 @@ package signaturemapper
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/order"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
@@ -12,6 +13,7 @@ type Signature struct {
 	SourceKey string
 	Value     string
 	Props     *propsmapper.Signature
+	Order     int
 }
 
 func NewSignature(code interface{}) (*Signature, error) {
@@ -34,6 +36,11 @@ func NewSignature(code interface{}) (*Signature, error) {
 // addFields is responsible for adding the signature fields according to
 // the properties informed in the map
 func (s *Signature) addFields(signatureMap map[string]interface{}) error {
+	order, err := order.SetPageOrder(&signatureMap, "signature", s.SourceKey)
+	if err != nil {
+		return err
+	}
+	s.Order = order
 	fieldMappers := s.getFieldMappers()
 
 	for templateName, template := range signatureMap {
@@ -47,6 +54,11 @@ func (s *Signature) addFields(signatureMap map[string]interface{}) error {
 		}
 	}
 	return nil
+}
+
+// GetOrder is responsible for returning the component's defined order
+func (s *Signature) GetOrder() int {
+	return s.Order
 }
 
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.

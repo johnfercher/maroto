@@ -4,12 +4,14 @@ package linemapper
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/order"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Line struct {
 	Props *propsmapper.Line
+	Order int
 }
 
 func NewLine(code interface{}) (*Line, error) {
@@ -28,6 +30,11 @@ func NewLine(code interface{}) (*Line, error) {
 // addFields is responsible for adding the barcode fields according to
 // the properties informed in the map
 func (l *Line) addFields(lineMapper map[string]interface{}) error {
+	order, err := order.SetPageOrder(&lineMapper, "line", "")
+	if err != nil {
+		return err
+	}
+	l.Order = order
 	fieldMappers := l.getFieldMappers()
 
 	for templateName, template := range lineMapper {
@@ -41,6 +48,11 @@ func (l *Line) addFields(lineMapper map[string]interface{}) error {
 		}
 	}
 	return nil
+}
+
+// GetOrder is responsible for returning the component's defined order
+func (l *Line) GetOrder() int {
+	return l.Order
 }
 
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.

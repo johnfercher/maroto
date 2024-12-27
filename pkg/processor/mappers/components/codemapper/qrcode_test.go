@@ -9,6 +9,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestQrcodeGetOrder(t *testing.T) {
+	t.Run("when getOrder is called, should return defined order", func(t *testing.T) {
+		templateRows := map[string]interface{}{
+			"order": 10.0,
+			"value": "code",
+		}
+
+		doc, _ := codemapper.NewBarcode(templateRows)
+
+		assert.Equal(t, 10, doc.GetOrder())
+	})
+}
+
 func TestNewQrCode(t *testing.T) {
 	t.Run("when invalid qrcode is sent, should return an error", func(t *testing.T) {
 		qrcodeTemplate := 1
@@ -20,7 +33,8 @@ func TestNewQrCode(t *testing.T) {
 	})
 	t.Run("when props is not sent, should create qrcode", func(t *testing.T) {
 		qrcodeTemplate := map[string]interface{}{
-			"code": "123456789",
+			"order": 1.0,
+			"value": "123456789",
 		}
 
 		qrcode, err := codemapper.NewQrcode(qrcodeTemplate)
@@ -31,7 +45,8 @@ func TestNewQrCode(t *testing.T) {
 	t.Run("when invalid props is sent, should return an error", func(t *testing.T) {
 		qrcodeTemplate := map[string]interface{}{
 			"props": 1,
-			"code":  "123456789",
+			"order": 1.0,
+			"value": "123456789",
 		}
 
 		qrcode, err := codemapper.NewQrcode(qrcodeTemplate)
@@ -42,7 +57,8 @@ func TestNewQrCode(t *testing.T) {
 	t.Run("when invalid field is sent, should return an error", func(t *testing.T) {
 		qrcodeTemplate := map[string]interface{}{
 			"invalid_field": 1,
-			"code":          "123456789",
+			"order":         1.0,
+			"value":         "123456789",
 		}
 
 		qrcode, err := codemapper.NewQrcode(qrcodeTemplate)
@@ -60,7 +76,8 @@ func TestNewQrCode(t *testing.T) {
 	})
 	t.Run("when invalid code is sent, should return an error", func(t *testing.T) {
 		qrcodeTemplate := map[string]interface{}{
-			"code": 123,
+			"order": 1.0,
+			"value": 123,
 		}
 
 		qrcode, err := codemapper.NewQrcode(qrcodeTemplate)
@@ -71,6 +88,7 @@ func TestNewQrCode(t *testing.T) {
 	t.Run("when invalid source_key is sent, should return an error", func(t *testing.T) {
 		qrcodeTemplate := map[string]interface{}{
 			"source_key": 123,
+			"order":      1.0,
 		}
 
 		qrcode, err := codemapper.NewQrcode(qrcodeTemplate)
@@ -81,6 +99,7 @@ func TestNewQrCode(t *testing.T) {
 	t.Run("when code is not sent, should add source key", func(t *testing.T) {
 		qrcodeTemplate := map[string]interface{}{
 			"source_key": "source",
+			"order":      1.0,
 		}
 
 		qrcode, err := codemapper.NewQrcode(qrcodeTemplate)
@@ -91,7 +110,8 @@ func TestNewQrCode(t *testing.T) {
 
 	t.Run("when source_key is not sent, should add code", func(t *testing.T) {
 		qrcodeTemplate := map[string]interface{}{
-			"code": "code",
+			"order": 1.0,
+			"value": "code",
 		}
 
 		qrcode, err := codemapper.NewQrcode(qrcodeTemplate)

@@ -39,6 +39,7 @@ func NewRow(templateRows interface{}, sourceKey string, factory mappers.Abstract
 	return row, nil
 }
 
+// GetOrder is responsible for returning the component's defined order
 func (r *Row) GetOrder() int {
 	return r.order
 }

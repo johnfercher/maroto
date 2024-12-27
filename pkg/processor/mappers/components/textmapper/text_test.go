@@ -8,6 +8,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestQrcodeGetOrder(t *testing.T) {
+	t.Run("when getOrder is called, should return defined order", func(t *testing.T) {
+		templateRows := map[string]interface{}{
+			"order": 10.0,
+			"value": "text",
+		}
+
+		doc, _ := textmapper.NewText(templateRows)
+
+		assert.Equal(t, 10, doc.GetOrder())
+	})
+}
+
 func TestNewText(t *testing.T) {
 	t.Run("when invalid text is sent, should return an error", func(t *testing.T) {
 		textTemplate := 1
@@ -20,6 +33,7 @@ func TestNewText(t *testing.T) {
 	t.Run("when props is not sent, text is created", func(t *testing.T) {
 		textTemplate := map[string]interface{}{
 			"value": "123456789",
+			"order": 1.0,
 		}
 
 		text, err := textmapper.NewText(textTemplate)
@@ -31,6 +45,7 @@ func TestNewText(t *testing.T) {
 		textTemplate := map[string]interface{}{
 			"props": 1,
 			"value": "123456789",
+			"order": 1.0,
 		}
 
 		text, err := textmapper.NewText(textTemplate)
@@ -42,6 +57,7 @@ func TestNewText(t *testing.T) {
 		textTemplate := map[string]interface{}{
 			"invalid_field": 1,
 			"value":         "123456789",
+			"order":         1.0,
 		}
 
 		text, err := textmapper.NewText(textTemplate)
@@ -50,7 +66,9 @@ func TestNewText(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 	t.Run("when source_key and value are not sent, should return an error", func(t *testing.T) {
-		textTemplate := map[string]interface{}{}
+		textTemplate := map[string]interface{}{
+			"order": 1.0,
+		}
 
 		text, err := textmapper.NewText(textTemplate)
 
@@ -60,6 +78,7 @@ func TestNewText(t *testing.T) {
 	t.Run("when invalid value is sent, should return an error", func(t *testing.T) {
 		textTemplate := map[string]interface{}{
 			"value": 123,
+			"order": 1.0,
 		}
 
 		text, err := textmapper.NewText(textTemplate)
@@ -70,6 +89,7 @@ func TestNewText(t *testing.T) {
 	t.Run("when invalid source_key is sent, should return an error", func(t *testing.T) {
 		textTemplate := map[string]interface{}{
 			"source_key": 123,
+			"order":      1.0,
 		}
 
 		text, err := textmapper.NewText(textTemplate)
@@ -80,6 +100,7 @@ func TestNewText(t *testing.T) {
 	t.Run("when value is not sent, should add source key", func(t *testing.T) {
 		textTemplate := map[string]interface{}{
 			"source_key": "source",
+			"order":      1.0,
 		}
 
 		text, err := textmapper.NewText(textTemplate)
@@ -91,6 +112,7 @@ func TestNewText(t *testing.T) {
 	t.Run("when source_key is not sent, should add value", func(t *testing.T) {
 		textTemplate := map[string]interface{}{
 			"value": "value",
+			"order": 1.0,
 		}
 
 		text, err := textmapper.NewText(textTemplate)

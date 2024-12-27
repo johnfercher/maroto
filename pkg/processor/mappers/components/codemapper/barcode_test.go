@@ -9,6 +9,20 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestBarcodeGetOrder(t *testing.T) {
+	t.Run("when getOrder is called, should return defined order", func(t *testing.T) {
+		templateRows := map[string]interface{}{
+			"order": 10.0,
+			"value": "test",
+		}
+
+		doc, err := codemapper.NewBarcode(templateRows)
+
+		assert.Nil(t, err)
+		assert.Equal(t, 10, doc.GetOrder())
+	})
+}
+
 func TestNewBarcode(t *testing.T) {
 	t.Run("when invalid barcode is sent, should return an error", func(t *testing.T) {
 		barcodeTemplate := 1
@@ -20,7 +34,8 @@ func TestNewBarcode(t *testing.T) {
 	})
 	t.Run("when props is not sent, barcode is created", func(t *testing.T) {
 		barcodeTemplate := map[string]interface{}{
-			"code": "123456789",
+			"value": "123456789",
+			"order": 1.0,
 		}
 
 		barcode, err := codemapper.NewBarcode(barcodeTemplate)
@@ -31,7 +46,8 @@ func TestNewBarcode(t *testing.T) {
 	t.Run("when invalid props is sent, should return an error", func(t *testing.T) {
 		barcodeTemplate := map[string]interface{}{
 			"props": 1,
-			"code":  "123456789",
+			"value": "123456789",
+			"order": 1.0,
 		}
 
 		barcode, err := codemapper.NewBarcode(barcodeTemplate)
@@ -42,7 +58,8 @@ func TestNewBarcode(t *testing.T) {
 	t.Run("when invalid field is sent, should return an error", func(t *testing.T) {
 		barcodeTemplate := map[string]interface{}{
 			"invalid_field": 1,
-			"code":          "123456789",
+			"value":         "123456789",
+			"order":         1.0,
 		}
 
 		barcode, err := codemapper.NewBarcode(barcodeTemplate)
@@ -60,7 +77,8 @@ func TestNewBarcode(t *testing.T) {
 	})
 	t.Run("when invalid code is sent, should return an error", func(t *testing.T) {
 		barcodeTemplate := map[string]interface{}{
-			"code": 123,
+			"value": 123,
+			"order": 1.0,
 		}
 
 		barcode, err := codemapper.NewBarcode(barcodeTemplate)
@@ -71,6 +89,7 @@ func TestNewBarcode(t *testing.T) {
 	t.Run("when invalid source_key is sent, should return an error", func(t *testing.T) {
 		barcodeTemplate := map[string]interface{}{
 			"source_key": 123,
+			"order":      1.0,
 		}
 
 		barcode, err := codemapper.NewBarcode(barcodeTemplate)
@@ -81,6 +100,7 @@ func TestNewBarcode(t *testing.T) {
 	t.Run("when code is not sent, should add source key", func(t *testing.T) {
 		barcodeTemplate := map[string]interface{}{
 			"source_key": "source",
+			"order":      1.0,
 		}
 
 		barcode, err := codemapper.NewBarcode(barcodeTemplate)
@@ -91,7 +111,8 @@ func TestNewBarcode(t *testing.T) {
 
 	t.Run("when source_key is not sent, should add code", func(t *testing.T) {
 		barcodeTemplate := map[string]interface{}{
-			"code": "code",
+			"value": "code",
+			"order": 1.0,
 		}
 
 		barcode, err := codemapper.NewBarcode(barcodeTemplate)

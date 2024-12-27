@@ -28,6 +28,7 @@
                         {
                             "size": 12,
                             "text": {
+                                "order": 1,
                                 "source_key": "title",
                                 "props": {
                                     "size": 18
@@ -50,6 +51,7 @@
                         {
                             "size": 20,
                             "image": {
+                                "order": 1,
                                 "value": "docs/assets/images/signature.png",
                                 "props": {
                                     "center": true

@@ -3,6 +3,7 @@ package textmapper
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/order"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
@@ -11,6 +12,7 @@ type Text struct {
 	SourceKey string
 	Value     string
 	Props     *propsmapper.Text
+	Order     int
 }
 
 func NewText(templateText interface{}) (*Text, error) {
@@ -33,6 +35,11 @@ func NewText(templateText interface{}) (*Text, error) {
 // addFields is responsible for adding the text fields according to
 // the properties informed in the map
 func (t *Text) addFields(valueMap map[string]interface{}) error {
+	order, err := order.SetPageOrder(&valueMap, "text", t.SourceKey)
+	if err != nil {
+		return err
+	}
+	t.Order = order
 	fieldMappers := t.getFieldMappers()
 
 	for templateName, template := range valueMap {
@@ -46,6 +53,11 @@ func (t *Text) addFields(valueMap map[string]interface{}) error {
 		}
 	}
 	return nil
+}
+
+// GetOrder is responsible for returning the component's defined order
+func (t *Text) GetOrder() int {
+	return t.Order
 }
 
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.

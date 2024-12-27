@@ -5,6 +5,7 @@ package codemapper
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/order"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
@@ -13,6 +14,7 @@ type Barcode struct {
 	SourceKey string
 	Code      string
 	Props     *propsmapper.Barcode
+	Order     int
 }
 
 func NewBarcode(code interface{}) (*Barcode, error) {
@@ -35,6 +37,12 @@ func NewBarcode(code interface{}) (*Barcode, error) {
 // addFields is responsible for adding the barcode fields according to
 // the properties informed in the map
 func (b *Barcode) addFields(codeMap map[string]interface{}) error {
+	order, err := order.SetPageOrder(&codeMap, "barcode", b.SourceKey)
+	if err != nil {
+		return err
+	}
+	b.Order = order
+
 	fieldMappers := b.getFieldMappers()
 
 	for templateName, template := range codeMap {
@@ -50,12 +58,17 @@ func (b *Barcode) addFields(codeMap map[string]interface{}) error {
 	return nil
 }
 
+// GetOrder is responsible for returning the component's defined order
+func (b *Barcode) GetOrder() int {
+	return b.Order
+}
+
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.
 // To do this, the component name is linked to a function in a Map.
 func (b *Barcode) getFieldMappers() map[string]func(interface{}) error {
 	return map[string]func(interface{}) error{
 		"source_key": b.setSourceKey,
-		"code":       b.setCode,
+		"value":      b.setCode,
 		"props":      b.setProps,
 	}
 }
@@ -109,6 +122,7 @@ func (b *Barcode) getCode(content map[string]interface{}) (string, error) {
 	return codeValid, nil
 }
 
+// Generate is responsible for computing the page component with shipping data
 func (b *Barcode) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
 	[]processorprovider.ProviderComponent, error,
 ) {

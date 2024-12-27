@@ -4,6 +4,7 @@ package imagemapper
 import (
 	"fmt"
 
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/order"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
@@ -12,6 +13,7 @@ type Image struct {
 	Value     string
 	SourceKey string
 	Props     *propsmapper.Rect
+	Order     int
 }
 
 func NewImage(templateImage interface{}) (*Image, error) {
@@ -25,7 +27,7 @@ func NewImage(templateImage interface{}) (*Image, error) {
 		return nil, err
 	}
 	if image.SourceKey == "" && image.Value == "" {
-		return nil, fmt.Errorf("no value passed for image. Add the 'source_key' or a path")
+		return nil, fmt.Errorf("no value passed for image. Add the 'source_key' or a value")
 	}
 
 	return image, nil
@@ -34,6 +36,11 @@ func NewImage(templateImage interface{}) (*Image, error) {
 // addFields is responsible for adding the barcode fields according to
 // the properties informed in the map
 func (i *Image) addFields(imageMap map[string]interface{}) error {
+	order, err := order.SetPageOrder(&imageMap, "image", i.SourceKey)
+	if err != nil {
+		return err
+	}
+	i.Order = order
 	fieldMappers := i.getFieldMappers()
 
 	for templateName, template := range imageMap {
@@ -47,6 +54,11 @@ func (i *Image) addFields(imageMap map[string]interface{}) error {
 		}
 	}
 	return nil
+}
+
+// GetOrder is responsible for returning the component's defined order
+func (i *Image) GetOrder() int {
+	return i.Order
 }
 
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.

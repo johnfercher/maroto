@@ -8,6 +8,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestGetOrder(t *testing.T) {
+	t.Run("when getOrder is called, should return defined order", func(t *testing.T) {
+		templateRows := map[string]interface{}{
+			"order": 10.0,
+			"value": "img",
+		}
+
+		doc, _ := imagemapper.NewImage(templateRows)
+
+		assert.Equal(t, 10, doc.GetOrder())
+	})
+}
+
 func TestNewImage(t *testing.T) {
 	t.Run("when invalid image is sent, should return an error", func(t *testing.T) {
 		imageTemplate := 1
@@ -20,6 +33,7 @@ func TestNewImage(t *testing.T) {
 	t.Run("when props is not sent, image is created", func(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"source_key": "image",
+			"order":      1.0,
 		}
 
 		image, err := imagemapper.NewImage(imageTemplate)
@@ -31,6 +45,7 @@ func TestNewImage(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"props":      1,
 			"source_key": "name",
+			"order":      1.0,
 		}
 
 		image, err := imagemapper.NewImage(imageTemplate)
@@ -42,6 +57,7 @@ func TestNewImage(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"invalid_field": 1,
 			"source_key":    "name",
+			"order":         1.0,
 		}
 
 		image, err := imagemapper.NewImage(imageTemplate)
@@ -60,6 +76,7 @@ func TestNewImage(t *testing.T) {
 	t.Run("when invalid source_key is sent, should return an error", func(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"source_key": 123,
+			"order":      1.0,
 		}
 
 		image, err := imagemapper.NewImage(imageTemplate)
@@ -78,6 +95,7 @@ func TestNewImage(t *testing.T) {
 	t.Run("when source_key is sent, should add source_key", func(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"source_key": "icon",
+			"order":      1.0,
 		}
 
 		image, err := imagemapper.NewImage(imageTemplate)
@@ -88,6 +106,7 @@ func TestNewImage(t *testing.T) {
 	t.Run("when props is sent, should add props", func(t *testing.T) {
 		imageTemplate := map[string]interface{}{
 			"source_key": "name",
+			"order":      1.0,
 			"props": map[string]interface{}{
 				"left": 10.0,
 			},

@@ -2,14 +2,17 @@ package colmapper
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
+type factoryComponent = func(interface{}) (mappers.OrderedComponents, error)
+
 type Col struct {
 	Size       int
-	Components []mappers.Componentmapper
+	Components []mappers.OrderedComponents
 	factory    mappers.AbstractFactoryMaps
 }
 
@@ -19,7 +22,7 @@ func NewCol(templateCols interface{}, factory mappers.AbstractFactoryMaps) (*Col
 		return nil, fmt.Errorf("ensure that rows can be converted to map[string] interface{}")
 	}
 
-	col := &Col{Size: 0, Components: make([]mappers.Componentmapper, 0), factory: factory}
+	col := &Col{Size: 0, Components: make([]mappers.OrderedComponents, 0), factory: factory}
 
 	if err := col.setSize(&mapCols); err != nil {
 		return nil, err
@@ -34,17 +37,35 @@ func NewCol(templateCols interface{}, factory mappers.AbstractFactoryMaps) (*Col
 func (c *Col) addComponents(mapComponents map[string]interface{}) error {
 	fieldMappers := c.getFieldMappers()
 
+	c.Components = make([]mappers.OrderedComponents, len(mapComponents))
 	for templateName, template := range mapComponents {
-		mapper, ok := fieldMappers[templateName]
-		if !ok {
-			return fmt.Errorf("the field %s present in the col cannot be mapped to any valid component", templateName)
+		mapper, err := c.getFieldMapperByTemplateName(templateName, fieldMappers)
+		if err != nil {
+			return err
 		}
 		component, err := mapper(template)
 		if err != nil {
 			return err
 		}
-		c.Components = append(c.Components, component)
+
+		if err := c.addComponent(component); err != nil {
+			return err
+		}
 	}
+	return nil
+}
+
+// addComponent is responsible for validating and adding the component to the template
+func (c *Col) addComponent(component mappers.OrderedComponents) error {
+	order := component.GetOrder()
+	if order > len(c.Components) {
+		return fmt.Errorf("component order cannot be greater than %d, this is the number of components in the template", len(c.Components))
+	}
+	if c.Components[order-1] != nil {
+		return fmt.Errorf("cannot create col template, component order cannot be repeated")
+	}
+
+	c.Components[order-1] = component
 	return nil
 }
 
@@ -61,10 +82,21 @@ func (c *Col) setSize(template *map[string]interface{}) error {
 	return nil
 }
 
+func (c *Col) getFieldMapperByTemplateName(templateName string, mappers map[string]factoryComponent) (factoryComponent, error) {
+	for mapperName, mapper := range mappers {
+		if strings.HasPrefix(templateName, mapperName) {
+			return mapper, nil
+		}
+	}
+	return nil, fmt.Errorf(
+		"the field \"%s\" present in the col cannot be mapped to any valid component, ensure the field name starts with a valid component",
+		templateName)
+}
+
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.
 // To do this, the component name is linked to a function in a Map.
-func (c *Col) getFieldMappers() map[string]func(interface{}) (mappers.Componentmapper, error) {
-	return map[string]func(interface{}) (mappers.Componentmapper, error){
+func (c *Col) getFieldMappers() map[string]factoryComponent {
+	return map[string]factoryComponent{
 		"bar_code":    c.factory.NewBarcode,
 		"matrix_code": c.factory.NewMatrixcode,
 		"qr_code":     c.factory.NewQrcode,

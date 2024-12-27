@@ -20,9 +20,55 @@ import (
 )
 
 func TestNewCol(t *testing.T) {
+	t.Run("when the template order is greater than the number of components, an error should be returned", func(t *testing.T) {
+		col := map[string]interface{}{"bar_code": nil}
+		orderedComponent := mocks.NewOrderedComponents(t)
+		orderedComponent.EXPECT().GetOrder().Return(2)
+		factory := mocks.NewAbstractFactoryMaps(t)
+		factory.On("NewBarcode", mock.Anything).Return(orderedComponent, nil)
+
+		_, err := colmapper.NewCol(col, factory)
+
+		assert.NotNil(t, err)
+	})
+
+	t.Run("when the template order is repeated, an error should be returned", func(t *testing.T) {
+		col := map[string]interface{}{"bar_code_1": nil, "bar_code_2": nil}
+		orderedComponent := mocks.NewOrderedComponents(t)
+		orderedComponent.EXPECT().GetOrder().Return(2)
+
+		factory := mocks.NewAbstractFactoryMaps(t)
+		factory.On("NewBarcode", mock.Anything).Return(orderedComponent, nil)
+		factory.On("NewBarcode", mock.Anything).Return(orderedComponent, nil)
+
+		_, err := colmapper.NewCol(col, factory)
+
+		assert.NotNil(t, err)
+	})
+
+	t.Run("when 2 components are submitted, should add the 2 components in the correct order", func(t *testing.T) {
+		col := map[string]interface{}{"bar_code_1": 1, "bar_code_2": 2}
+
+		orderedComponent1 := mocks.NewOrderedComponents(t)
+		orderedComponent1.EXPECT().GetOrder().Return(1)
+		orderedComponent2 := mocks.NewOrderedComponents(t)
+		orderedComponent2.EXPECT().GetOrder().Return(2)
+
+		factory := mocks.NewAbstractFactoryMaps(t)
+		factory.On("NewBarcode", 1).Return(orderedComponent1, nil)
+		factory.On("NewBarcode", 2).Return(orderedComponent2, nil)
+
+		doc, err := colmapper.NewCol(col, factory)
+
+		assert.Nil(t, err)
+		assert.Equal(t, len(doc.Components), 2)
+		assert.Equal(t, orderedComponent1, doc.Components[0])
+	})
+
 	t.Run("when a barcode is sent, a barcode is created", func(t *testing.T) {
 		col := map[string]interface{}{"bar_code": nil}
 		validBarcode := fixture.Barcode()
+
 		factory := mocks.NewAbstractFactoryMaps(t)
 		factory.On("NewBarcode", mock.Anything).Return(validBarcode, nil)
 
@@ -32,6 +78,7 @@ func TestNewCol(t *testing.T) {
 		assert.Len(t, doc.Components, 1)
 		assert.IsType(t, &codemapper.Barcode{}, doc.Components[0])
 	})
+
 	t.Run("when a matrixcode is sent, a matrixcode is created", func(t *testing.T) {
 		col := map[string]interface{}{"matrix_code": nil}
 		validMatrixcode := fixture.Matrixcode()
@@ -173,7 +220,7 @@ func TestNewCol(t *testing.T) {
 func TestGenerate(t *testing.T) {
 	t.Run("when col has no components, it should not send components", func(t *testing.T) {
 		content := map[string]interface{}{}
-		col := colmapper.Col{Size: 10, Components: make([]mappers.Componentmapper, 0)}
+		col := colmapper.Col{Size: 10, Components: make([]mappers.OrderedComponents, 0)}
 		provider := mocks.NewProcessorProvider(t)
 		provider.EXPECT().CreateCol(10).Return(nil, nil)
 
@@ -187,9 +234,9 @@ func TestGenerate(t *testing.T) {
 		provider := mocks.NewProcessorProvider(t)
 		provider.EXPECT().CreateCol(10, text.New("test"), text.New("test")).Return(nil, nil)
 
-		component := mocks.NewComponentmapper(t)
+		component := mocks.NewOrderedComponents(t)
 		component.EXPECT().Generate(content, provider).Return([]processorprovider.ProviderComponent{text.New("test")}, nil)
-		col := colmapper.Col{Size: 10, Components: []mappers.Componentmapper{component, component}}
+		col := colmapper.Col{Size: 10, Components: []mappers.OrderedComponents{component, component}}
 
 		_, err := col.Generate(content, provider)
 
@@ -201,9 +248,9 @@ func TestGenerate(t *testing.T) {
 		content := map[string]interface{}{"text1": "test"}
 		provider := mocks.NewProcessorProvider(t)
 
-		component := mocks.NewComponentmapper(t)
+		component := mocks.NewOrderedComponents(t)
 		component.EXPECT().Generate(content, provider).Return(nil, errors.New("any"))
-		col := colmapper.Col{Size: 10, Components: []mappers.Componentmapper{component}}
+		col := colmapper.Col{Size: 10, Components: []mappers.OrderedComponents{component}}
 
 		_, err := col.Generate(content, provider)
 
