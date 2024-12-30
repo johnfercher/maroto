@@ -69,10 +69,10 @@ func TestGenerateTemplate(t *testing.T) {
 		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/background_template.json")
 		fixContent, _ := processortest.NewFileReader().LoadFile("processor/json/background_content.json")
 		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
-		err := processor.RegisterTemplate("auto_row", string(fixtemplate))
+		err := processor.RegisterTemplate("background", string(fixtemplate))
 		require.NoError(t, err)
 
-		provider, err := processor.GenerateDocument("auto_row", string(fixContent))
+		provider, err := processor.GenerateDocument("background", string(fixContent))
 
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/background.json")
@@ -83,13 +83,27 @@ func TestGenerateTemplate(t *testing.T) {
 		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/barcodegrid_template.json")
 		fixContent, _ := processortest.NewFileReader().LoadFile("processor/json/barcodegrid_content.json")
 		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
-		err := processor.RegisterTemplate("auto_row", string(fixtemplate))
+		err := processor.RegisterTemplate("barcodegrid", string(fixtemplate))
 		require.NoError(t, err)
 
-		provider, err := processor.GenerateDocument("auto_row", string(fixContent))
+		provider, err := processor.GenerateDocument("barcodegrid", string(fixContent))
 
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/barcodegrid.json")
+	})
+	t.Run("when template with billing example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/billing_template.json")
+		fixContent, _ := processortest.NewFileReader().LoadFile("processor/json/billing_content.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("billing", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("billing", string(fixContent))
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/billing.json")
 	})
 	t.Run("when sent template is not found, should reuturn an error", func(t *testing.T) {
 	})

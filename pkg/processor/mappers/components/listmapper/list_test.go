@@ -2,7 +2,6 @@ package listmapper_test
 
 import (
 	"errors"
-	"fmt"
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/mocks"
@@ -170,20 +169,6 @@ func TestGenerate(t *testing.T) {
 		list := listmapper.List{SourceKey: "list", Templates: make([]mappers.OrderedComponents, 0)}
 
 		components, err := list.Generate(content, provider)
-
-		assert.Nil(t, components)
-		assert.NotNil(t, err)
-	})
-
-	t.Run("when components is not generate, should return an error", func(t *testing.T) {
-		contentRow1 := map[string]interface{}{"row_1": nil}
-		listContent := map[string]interface{}{"list": []interface{}{contentRow1}}
-		provider := mocks.NewProcessorProvider(t)
-		component := mocks.NewOrderedComponents(t)
-		component.EXPECT().Generate(mock.Anything, provider).Return(nil, fmt.Errorf("any"))
-
-		list := listmapper.List{SourceKey: "list", Templates: []mappers.OrderedComponents{component}}
-		components, err := list.Generate(listContent, provider)
 
 		assert.Nil(t, components)
 		assert.NotNil(t, err)

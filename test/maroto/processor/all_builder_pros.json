@@ -40,7 +40,7 @@
         {"family": "family_test2", "style": "style_test2", "file_path": "file_test2"}
     ],
     "protection": {
-        "type": "Print",
+        "type": "print",
         "user_password": "senha123",
         "owner_password": "senha123"
     },

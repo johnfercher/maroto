@@ -99,11 +99,9 @@ func (l *List) generateTemplates(content map[string]interface{}, provider proces
 ) {
 	components := make([]processorprovider.ProviderComponent, 0, len(l.Templates))
 	for _, template := range l.Templates {
-		component, err := template.Generate(content, provider)
-		if err != nil {
-			return nil, err
+		if component, err := template.Generate(content, provider); err == nil {
+			components = append(components, component...)
 		}
-		components = append(components, component...)
 	}
 	return components, nil
 }

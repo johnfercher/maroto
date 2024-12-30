@@ -35,7 +35,7 @@ func NewCell(cell interface{}) (*Cell, error) {
 		BackgroundColor: NewColor(cellMap["background_color"]),
 		BorderColor:     NewColor(cellMap["border_color"]),
 		BorderType:      NewBorder(*convertFields(cellMap["border_type"], "")),
-		BorderThickness: *convertFields(cellMap["border_thickness"], -1.0),
+		BorderThickness: *convertFields(cellMap["border_thickness"], 0.0),
 		LineStyle:       NewLineStyle(*convertFields(cellMap["line_style"], "")),
 	}, nil
 }
