@@ -14,6 +14,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/linemapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/signaturemapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/textmapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -222,7 +223,7 @@ func TestGenerate(t *testing.T) {
 		content := map[string]interface{}{}
 		col := colmapper.Col{Size: 10, Components: make([]mappers.OrderedComponents, 0)}
 		provider := mocks.NewProcessorProvider(t)
-		provider.EXPECT().CreateCol(10).Return(nil, nil)
+		provider.EXPECT().CreateCol(10, (*propsmapper.Cell)(nil)).Return(nil, nil)
 
 		_, err := col.Generate(content, provider)
 
@@ -232,7 +233,7 @@ func TestGenerate(t *testing.T) {
 	t.Run("when col has two components, it should add two components", func(t *testing.T) {
 		content := map[string]interface{}{"text1": "test", "text2": "test"}
 		provider := mocks.NewProcessorProvider(t)
-		provider.EXPECT().CreateCol(10, text.New("test"), text.New("test")).Return(nil, nil)
+		provider.EXPECT().CreateCol(10, (*propsmapper.Cell)(nil), text.New("test"), text.New("test")).Return(nil, nil)
 
 		component := mocks.NewOrderedComponents(t)
 		component.EXPECT().Generate(content, provider).Return([]processorprovider.ProviderComponent{text.New("test")}, nil)

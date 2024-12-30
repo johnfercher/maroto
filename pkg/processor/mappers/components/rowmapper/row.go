@@ -5,17 +5,20 @@ import (
 	"fmt"
 
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
 type Row struct {
 	Height    float64
+	Props     *propsmapper.Cell
 	Cols      []mappers.Componentmapper
 	Factory   mappers.AbstractFactoryMaps
 	SourceKey string
 	order     int
 }
 
+// NewRow is responsible for creating a row template
 func NewRow(templateRows interface{}, sourceKey string, factory mappers.AbstractFactoryMaps) (*Row, error) {
 	mapRows, ok := templateRows.(map[string]interface{})
 	if !ok {
@@ -81,6 +84,7 @@ func (r *Row) addComponents(mapRows map[string]interface{}) error {
 	return nil
 }
 
+// setHeight is responsible for creating template row height
 func (r *Row) setHeight(template interface{}) error {
 	height, ok := template.(float64)
 	if !ok {
@@ -90,6 +94,7 @@ func (r *Row) setHeight(template interface{}) error {
 	return nil
 }
 
+// setCols is responsible for creating template row cols
 func (r *Row) setCols(template interface{}) error {
 	cols, ok := template.([]interface{})
 	if !ok {
@@ -108,15 +113,27 @@ func (r *Row) setCols(template interface{}) error {
 	return nil
 }
 
+// setProps is responsible for creating template row props
+func (r *Row) setProps(template interface{}) error {
+	propsRow, err := propsmapper.NewCell(template)
+	if err != nil {
+		return err
+	}
+	r.Props = propsRow
+	return nil
+}
+
 // getFieldMappers is responsible for defining which methods are responsible for assembling which components.
 // To do this, the component name is linked to a function in a Map.
 func (r *Row) getFieldMappers() map[string]func(interface{}) error {
 	return map[string]func(interface{}) error{
 		"height": r.setHeight,
 		"cols":   r.setCols,
+		"props":  r.setProps,
 	}
 }
 
+// getRowContent is responsible for getting content data according to sourceKey
 func (r *Row) getRowContent(content map[string]interface{}) (map[string]interface{}, error) {
 	rowContent, ok := content[r.SourceKey]
 	if !ok {
@@ -131,6 +148,7 @@ func (r *Row) getRowContent(content map[string]interface{}) (map[string]interfac
 	)
 }
 
+// Generate is responsible for computer template and generate line component
 func (r *Row) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
 	[]processorprovider.ProviderComponent, error,
 ) {
@@ -148,7 +166,7 @@ func (r *Row) Generate(content map[string]interface{}, provider processorprovide
 		cols = append(cols, newCol...)
 	}
 
-	row, err := provider.CreateRow(r.Height, cols...)
+	row, err := provider.CreateRow(r.Height, r.Props, cols...)
 	if err != nil {
 		return nil, err
 	}

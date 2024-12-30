@@ -2,7 +2,7 @@ package propsmapper
 
 func NewAlign(align string) string {
 	mapAligns := map[string]string{
-		"Left": "L", "Right": "R", "Center": "C", "Top": "T", "Bottom": "B", "Middle": "M", "Justify": "J",
+		"left": "L", "right": "R", "center": "C", "top": "T", "bottom": "B", "middle": "M", "justify": "J",
 	}
 	align, ok := mapAligns[align]
 	if !ok {
@@ -11,12 +11,23 @@ func NewAlign(align string) string {
 	return align
 }
 
+func NewBorder(border string) string {
+	mapBorder := map[string]string{
+		"full": "1", "top": "T", "bottom": "B", "left": "L", "right": "R",
+	}
+	border, ok := mapBorder[border]
+	if !ok {
+		return ""
+	}
+	return border
+}
+
 func NewBreakLineStrategy(strategy string) string {
 	switch strategy {
-	case "EmptySpaceStrategy":
-		return "empty_space_strategy"
-	case "DashStrategy":
-		return "dash_strategy"
+	case "empty_space_strategy":
+		return strategy
+	case "dash_strategy":
+		return strategy
 	}
 	return ""
 }
@@ -47,13 +58,13 @@ func NewOrientation(orientation string) string {
 
 func NewTypeProtection(typeProtection string) byte {
 	switch typeProtection {
-	case "Print":
+	case "print":
 		return 4
-	case "Modify":
+	case "modify":
 		return 8
-	case "Copy":
+	case "copy":
 		return 16
-	case "AnnotForms":
+	case "annot_forms":
 		return 32
 	}
 
@@ -62,11 +73,11 @@ func NewTypeProtection(typeProtection string) byte {
 
 func NewFontStyle(fontType string) string {
 	switch fontType {
-	case "Bold":
+	case "bold":
 		return "B"
-	case "Italic":
+	case "italic":
 		return "I"
-	case "BoldItalic":
+	case "bold_italic":
 		return "BI"
 	}
 

@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
+	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/propsmapper"
 	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 )
 
@@ -14,6 +15,7 @@ type Col struct {
 	Size       int
 	Components []mappers.OrderedComponents
 	factory    mappers.AbstractFactoryMaps
+	props      *propsmapper.Cell
 }
 
 func NewCol(templateCols interface{}, factory mappers.AbstractFactoryMaps) (*Col, error) {
@@ -23,6 +25,10 @@ func NewCol(templateCols interface{}, factory mappers.AbstractFactoryMaps) (*Col
 	}
 
 	col := &Col{Size: 0, Components: make([]mappers.OrderedComponents, 0), factory: factory}
+
+	if err := col.setProps(&mapCols); err != nil {
+		return nil, err
+	}
 
 	if err := col.setSize(&mapCols); err != nil {
 		return nil, err
@@ -82,6 +88,22 @@ func (c *Col) setSize(template *map[string]interface{}) error {
 	return nil
 }
 
+// setProps is responsible for creating template col props
+func (c *Col) setProps(template *map[string]interface{}) error {
+	props, ok := (*template)["props"]
+	if !ok {
+		return nil
+	}
+	defer delete(*template, "props")
+
+	propsRow, err := propsmapper.NewCell(props)
+	if err != nil {
+		return err
+	}
+	c.props = propsRow
+	return nil
+}
+
 func (c *Col) getFieldMapperByTemplateName(templateName string, mappers map[string]factoryComponent) (factoryComponent, error) {
 	for mapperName, mapper := range mappers {
 		if strings.HasPrefix(templateName, mapperName) {
@@ -121,7 +143,7 @@ func (c *Col) Generate(content map[string]interface{}, provider processorprovide
 		components = append(components, newComponent...)
 	}
 
-	col, err := provider.CreateCol(c.Size, components...)
+	col, err := provider.CreateCol(c.Size, c.props, components...)
 	if err != nil {
 		return nil, err
 	}

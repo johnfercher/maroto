@@ -256,7 +256,7 @@ func TestCreateCol(t *testing.T) {
 		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		text := text.New("test")
 
-		col, err := m.CreateCol(10, text)
+		col, err := m.CreateCol(10, (*propsmapper.Cell)(nil), text)
 
 		assert.Nil(t, err)
 		assert.NotNil(t, col)
@@ -278,7 +278,7 @@ func TestCreateRow(t *testing.T) {
 		m, _ := processorprovider.NewMaroto(repository.NewMemoryStorage(loader))
 		text := text.NewCol(12, "test")
 
-		col, err := m.CreateRow(10, text)
+		col, err := m.CreateRow(10, (*propsmapper.Cell)(nil), text)
 
 		assert.Nil(t, err)
 		assert.NotNil(t, col)

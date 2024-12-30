@@ -302,14 +302,14 @@ func (_c *ProcessorProvider_CreateBarCode_Call) RunAndReturn(run func(string, ..
 	return _c
 }
 
-// CreateCol provides a mock function with given fields: size, components
-func (_m *ProcessorProvider) CreateCol(size int, components ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error) {
+// CreateCol provides a mock function with given fields: size, props, components
+func (_m *ProcessorProvider) CreateCol(size int, props *propsmapper.Cell, components ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error) {
 	_va := make([]interface{}, len(components))
 	for _i := range components {
 		_va[_i] = components[_i]
 	}
 	var _ca []interface{}
-	_ca = append(_ca, size)
+	_ca = append(_ca, size, props)
 	_ca = append(_ca, _va...)
 	ret := _m.Called(_ca...)
 
@@ -319,19 +319,19 @@ func (_m *ProcessorProvider) CreateCol(size int, components ...processorprovider
 
 	var r0 processorprovider.ProviderComponent
 	var r1 error
-	if rf, ok := ret.Get(0).(func(int, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)); ok {
-		return rf(size, components...)
+	if rf, ok := ret.Get(0).(func(int, *propsmapper.Cell, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)); ok {
+		return rf(size, props, components...)
 	}
-	if rf, ok := ret.Get(0).(func(int, ...processorprovider.ProviderComponent) processorprovider.ProviderComponent); ok {
-		r0 = rf(size, components...)
+	if rf, ok := ret.Get(0).(func(int, *propsmapper.Cell, ...processorprovider.ProviderComponent) processorprovider.ProviderComponent); ok {
+		r0 = rf(size, props, components...)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(int, ...processorprovider.ProviderComponent) error); ok {
-		r1 = rf(size, components...)
+	if rf, ok := ret.Get(1).(func(int, *propsmapper.Cell, ...processorprovider.ProviderComponent) error); ok {
+		r1 = rf(size, props, components...)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -346,21 +346,22 @@ type ProcessorProvider_CreateCol_Call struct {
 
 // CreateCol is a helper method to define mock.On call
 //   - size int
+//   - props *propsmapper.Cell
 //   - components ...processorprovider.ProviderComponent
-func (_e *ProcessorProvider_Expecter) CreateCol(size interface{}, components ...interface{}) *ProcessorProvider_CreateCol_Call {
+func (_e *ProcessorProvider_Expecter) CreateCol(size interface{}, props interface{}, components ...interface{}) *ProcessorProvider_CreateCol_Call {
 	return &ProcessorProvider_CreateCol_Call{Call: _e.mock.On("CreateCol",
-		append([]interface{}{size}, components...)...)}
+		append([]interface{}{size, props}, components...)...)}
 }
 
-func (_c *ProcessorProvider_CreateCol_Call) Run(run func(size int, components ...processorprovider.ProviderComponent)) *ProcessorProvider_CreateCol_Call {
+func (_c *ProcessorProvider_CreateCol_Call) Run(run func(size int, props *propsmapper.Cell, components ...processorprovider.ProviderComponent)) *ProcessorProvider_CreateCol_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		variadicArgs := make([]processorprovider.ProviderComponent, len(args)-1)
-		for i, a := range args[1:] {
+		variadicArgs := make([]processorprovider.ProviderComponent, len(args)-2)
+		for i, a := range args[2:] {
 			if a != nil {
 				variadicArgs[i] = a.(processorprovider.ProviderComponent)
 			}
 		}
-		run(args[0].(int), variadicArgs...)
+		run(args[0].(int), args[1].(*propsmapper.Cell), variadicArgs...)
 	})
 	return _c
 }
@@ -370,7 +371,7 @@ func (_c *ProcessorProvider_CreateCol_Call) Return(_a0 processorprovider.Provide
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateCol_Call) RunAndReturn(run func(int, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)) *ProcessorProvider_CreateCol_Call {
+func (_c *ProcessorProvider_CreateCol_Call) RunAndReturn(run func(int, *propsmapper.Cell, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)) *ProcessorProvider_CreateCol_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -706,14 +707,14 @@ func (_c *ProcessorProvider_CreateQrCode_Call) RunAndReturn(run func(string, ...
 	return _c
 }
 
-// CreateRow provides a mock function with given fields: height, components
-func (_m *ProcessorProvider) CreateRow(height float64, components ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error) {
+// CreateRow provides a mock function with given fields: height, props, components
+func (_m *ProcessorProvider) CreateRow(height float64, props *propsmapper.Cell, components ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error) {
 	_va := make([]interface{}, len(components))
 	for _i := range components {
 		_va[_i] = components[_i]
 	}
 	var _ca []interface{}
-	_ca = append(_ca, height)
+	_ca = append(_ca, height, props)
 	_ca = append(_ca, _va...)
 	ret := _m.Called(_ca...)
 
@@ -723,19 +724,19 @@ func (_m *ProcessorProvider) CreateRow(height float64, components ...processorpr
 
 	var r0 processorprovider.ProviderComponent
 	var r1 error
-	if rf, ok := ret.Get(0).(func(float64, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)); ok {
-		return rf(height, components...)
+	if rf, ok := ret.Get(0).(func(float64, *propsmapper.Cell, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)); ok {
+		return rf(height, props, components...)
 	}
-	if rf, ok := ret.Get(0).(func(float64, ...processorprovider.ProviderComponent) processorprovider.ProviderComponent); ok {
-		r0 = rf(height, components...)
+	if rf, ok := ret.Get(0).(func(float64, *propsmapper.Cell, ...processorprovider.ProviderComponent) processorprovider.ProviderComponent); ok {
+		r0 = rf(height, props, components...)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(processorprovider.ProviderComponent)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(float64, ...processorprovider.ProviderComponent) error); ok {
-		r1 = rf(height, components...)
+	if rf, ok := ret.Get(1).(func(float64, *propsmapper.Cell, ...processorprovider.ProviderComponent) error); ok {
+		r1 = rf(height, props, components...)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -750,21 +751,22 @@ type ProcessorProvider_CreateRow_Call struct {
 
 // CreateRow is a helper method to define mock.On call
 //   - height float64
+//   - props *propsmapper.Cell
 //   - components ...processorprovider.ProviderComponent
-func (_e *ProcessorProvider_Expecter) CreateRow(height interface{}, components ...interface{}) *ProcessorProvider_CreateRow_Call {
+func (_e *ProcessorProvider_Expecter) CreateRow(height interface{}, props interface{}, components ...interface{}) *ProcessorProvider_CreateRow_Call {
 	return &ProcessorProvider_CreateRow_Call{Call: _e.mock.On("CreateRow",
-		append([]interface{}{height}, components...)...)}
+		append([]interface{}{height, props}, components...)...)}
 }
 
-func (_c *ProcessorProvider_CreateRow_Call) Run(run func(height float64, components ...processorprovider.ProviderComponent)) *ProcessorProvider_CreateRow_Call {
+func (_c *ProcessorProvider_CreateRow_Call) Run(run func(height float64, props *propsmapper.Cell, components ...processorprovider.ProviderComponent)) *ProcessorProvider_CreateRow_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		variadicArgs := make([]processorprovider.ProviderComponent, len(args)-1)
-		for i, a := range args[1:] {
+		variadicArgs := make([]processorprovider.ProviderComponent, len(args)-2)
+		for i, a := range args[2:] {
 			if a != nil {
 				variadicArgs[i] = a.(processorprovider.ProviderComponent)
 			}
 		}
-		run(args[0].(float64), variadicArgs...)
+		run(args[0].(float64), args[1].(*propsmapper.Cell), variadicArgs...)
 	})
 	return _c
 }
@@ -774,7 +776,7 @@ func (_c *ProcessorProvider_CreateRow_Call) Return(_a0 processorprovider.Provide
 	return _c
 }
 
-func (_c *ProcessorProvider_CreateRow_Call) RunAndReturn(run func(float64, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)) *ProcessorProvider_CreateRow_Call {
+func (_c *ProcessorProvider_CreateRow_Call) RunAndReturn(run func(float64, *propsmapper.Cell, ...processorprovider.ProviderComponent) (processorprovider.ProviderComponent, error)) *ProcessorProvider_CreateRow_Call {
 	_c.Call.Return(run)
 	return _c
 }

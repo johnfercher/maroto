@@ -18,6 +18,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
+	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -112,27 +113,43 @@ func (m *Maroto) CreatePage(components ...ProviderComponent) (ProviderComponent,
 	return page.New().Add(newComponents...), nil
 }
 
-func (m *Maroto) CreateRow(height float64, components ...ProviderComponent) (ProviderComponent, error) {
+func (m *Maroto) CreateRow(height float64, props *propsmapper.Cell, components ...ProviderComponent) (ProviderComponent, error) {
 	newComponents, err := convertComponentType[core.Col](components...)
 	if err != nil {
 		return nil, err
 	}
+
+	var createdRow core.Row
 	if height > 0 {
-		return row.New(height).Add(newComponents...), nil
+		createdRow = row.New(height).Add(newComponents...)
 	} else {
-		return row.New().Add(newComponents...), nil
+		createdRow = row.New().Add(newComponents...)
+	}
+
+	if props != nil {
+		return createdRow.WithStyle(createPropsCell(*props)), nil
+	} else {
+		return createdRow, nil
 	}
 }
 
-func (m *Maroto) CreateCol(size int, components ...ProviderComponent) (ProviderComponent, error) {
+func (m *Maroto) CreateCol(size int, props *propsmapper.Cell, components ...ProviderComponent) (ProviderComponent, error) {
 	newComponents, err := convertComponentType[core.Component](components...)
 	if err != nil {
 		return nil, err
 	}
+
+	var createdCol core.Col
 	if size > 0 {
-		return col.New(size).Add(newComponents...), nil
+		createdCol = col.New(size).Add(newComponents...)
 	} else {
-		return col.New().Add(newComponents...), nil
+		createdCol = col.New().Add(newComponents...)
+	}
+
+	if props != nil {
+		return createdCol.WithStyle(createPropsCell(*props)), nil
+	} else {
+		return createdCol, nil
 	}
 }
 
@@ -245,4 +262,14 @@ func createPropsRect(propsMapperArr ...*propsmapper.Rect) props.Rect {
 		}
 	}
 	return propsRect
+}
+
+func createPropsCell(propsCell propsmapper.Cell) *props.Cell {
+	return &props.Cell{
+		BackgroundColor: (*props.Color)(propsCell.BackgroundColor),
+		BorderColor:     (*props.Color)(propsCell.BorderColor),
+		BorderType:      border.Type(propsCell.BorderType),
+		BorderThickness: propsCell.BorderThickness,
+		LineStyle:       linestyle.Type(propsCell.LineStyle),
+	}
 }

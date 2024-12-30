@@ -19,8 +19,8 @@ type ProcessorProvider interface {
 	AddFooter(footer ...ProviderComponent) (ProcessorProvider, error)
 	AddHeader(header ...ProviderComponent) (ProcessorProvider, error)
 	CreatePage(components ...ProviderComponent) (ProviderComponent, error)
-	CreateRow(height float64, components ...ProviderComponent) (ProviderComponent, error)
-	CreateCol(size int, components ...ProviderComponent) (ProviderComponent, error)
+	CreateRow(height float64, props *propsmapper.Cell, components ...ProviderComponent) (ProviderComponent, error)
+	CreateCol(size int, props *propsmapper.Cell, components ...ProviderComponent) (ProviderComponent, error)
 	CreateText(value string, props ...*propsmapper.Text) ProviderComponent
 	CreateSignature(value string, props ...*propsmapper.Signature) ProviderComponent
 	CreateBarCode(value string, props ...*propsmapper.Barcode) ProviderComponent
