@@ -64,7 +64,8 @@ func (l *loader) Load(path string) ([]byte, error) {
 }
 
 func (l *loader) GetExt(path string) string {
-	toks := strings.Split(path, ".")
+	toks := strings.Split(path, "?")
+	toks = strings.Split(toks[0], ".")
 	if len(toks) < 2 {
 		return ""
 	}
@@ -74,9 +75,7 @@ func (l *loader) GetExt(path string) string {
 var validExts = map[string]struct{}{
 	"png":  {},
 	"jpg":  {},
-	"svg":  {},
 	"jpeg": {},
-	"ttf":  {},
 }
 
 var loadFuncs = map[string]func(string) (io.ReadCloser, error){

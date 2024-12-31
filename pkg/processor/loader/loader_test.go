@@ -36,7 +36,7 @@ func TestLoad(t *testing.T) {
 	})
 
 	t.Run("when valid network path sent, should return bytes of asset", func(t *testing.T) {
-		p, err := loader.NewLoader().Load("https://www.iana.org/_img/2013.1/rir-map.svg")
+		p, err := loader.NewLoader().Load("https://github.com/johnfercher/maroto/blob/master/docs/assets/images/biplane.jpg?raw=true")
 		assert.NoError(t, err)
 		assert.NotNil(t, p)
 	})

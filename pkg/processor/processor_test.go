@@ -105,18 +105,31 @@ func TestGenerateTemplate(t *testing.T) {
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/billing.json")
 	})
-	t.Run("when sent template is not found, should reuturn an error", func(t *testing.T) {
+	t.Run("when template with cellstyle example is found, should set template", func(t *testing.T) {
 		test.SetupTestDir(t)
 
 		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/cell_template.json")
 		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
-		err := processor.RegisterTemplate("billing", string(fixtemplate))
+		err := processor.RegisterTemplate("cellstyle", string(fixtemplate))
 		require.NoError(t, err)
 
-		provider, err := processor.GenerateDocument("billing", "{}")
+		provider, err := processor.GenerateDocument("cellstyle", "{}")
 
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/cellstyle.json")
+	})
+	t.Run("when template with compression example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/compressionv2_template.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("compression", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("compression", "{}")
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/compression.json")
 	})
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {
 	})
