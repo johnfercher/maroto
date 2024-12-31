@@ -106,6 +106,17 @@ func TestGenerateTemplate(t *testing.T) {
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/billing.json")
 	})
 	t.Run("when sent template is not found, should reuturn an error", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/cell_template.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("billing", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("billing", "{}")
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/cellstyle.json")
 	})
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {
 	})

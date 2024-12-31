@@ -100,7 +100,7 @@ func (p *Page) setPageOrder(template *map[string]interface{}) error {
 func (p *Page) getPageContent(content map[string]interface{}) (map[string]interface{}, error) {
 	pageContent, ok := content[p.SourceKey]
 	if !ok {
-		return nil, fmt.Errorf("could not parse template,the page needs the source key \"%s\", but it was not found", p.SourceKey)
+		return map[string]interface{}{}, nil
 	}
 	if mapPage, ok := pageContent.(map[string]interface{}); ok {
 		return mapPage, nil
