@@ -1,0 +1,45 @@
+{
+    "builder": {
+        "debug": true,
+        "dimensions": {
+            "width": 200,
+            "height": 200
+        }
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row": {
+                "height": 40,
+                "order": 1,
+                "cols": [
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": true,
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Gopher International Shipping, Inc.",
+                            "props": {
+                                "top": 12,
+                                "size": 12
+                            }
+                        }
+                    },
+                    {
+                        "size": 4
+                    }
+                ]
+            }
+        }
+    }
+}

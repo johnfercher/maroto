@@ -131,7 +131,23 @@ func TestGenerateTemplate(t *testing.T) {
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/compression.json")
 	})
+	t.Run("when template with customdimensions example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/customdimensions_template.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("dimensions", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("dimensions", "{}")
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/customdimensions.json")
+	})
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {
+		// doc, _ := (*provider).Generate()
+		// err = doc.Save("test.pdf")
+		// assert.Nil(t, err)
 	})
 	t.Run("when invalid content is sent, should return an error", func(t *testing.T) {
 	})
