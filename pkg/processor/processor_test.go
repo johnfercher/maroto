@@ -197,6 +197,34 @@ func TestGenerateTemplate(t *testing.T) {
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/disablepagebreak.json")
 	})
+	t.Run("when template with footer example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/footer_template.json")
+		fixcontent, _ := processortest.NewFileReader().LoadFile("processor/json/footer_content.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("footer", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("footer", string(fixcontent))
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/footer.json")
+	})
+	t.Run("when template with header example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/header_template.json")
+		fixcontent, _ := processortest.NewFileReader().LoadFile("processor/json/header_content.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("header", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("header", string(fixcontent))
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/header.json")
+	})
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {
 
 	})
