@@ -1,0 +1,23 @@
+{
+    "builder": {
+        "margins": {
+            "top": 0,
+            "right": 0,
+            "left": 0,
+            "bottom": 0
+        },
+        "dimensions": {
+            "width": 361.8,
+            "height": 203.2
+        },
+        "disable_auto_page_break": true,
+        "orientation": "horizontal",
+        "max_grid_size": 20,
+        "background_image": "docs/assets/images/certificate.png"
+    },
+    "pages": {
+        "template_page": {
+            "order": 1
+        }
+    }
+}
