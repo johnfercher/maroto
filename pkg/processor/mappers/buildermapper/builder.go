@@ -44,7 +44,7 @@ func NewBuilder(builder interface{}) (*Builder, error) {
 		Debug:                   factoryField(builderMap["debug"], false),
 		MaxGridSize:             int(factoryField(builderMap["max_grid_size"], -1.0)),
 		DefaultFont:             propsmapper.NewFont(builderMap["default_font"]),
-		CustomFonts:             propsmapper.NewCustomFonts(builderMap["custom_font"]),
+		CustomFonts:             propsmapper.NewCustomFonts(builderMap["custom_fonts"]),
 		PageNumber:              propsmapper.NewPageNumber(builderMap["page_number"]),
 		Protection:              propsmapper.NewProtection(builderMap["protection"]),
 		Compression:             factoryField(builderMap["compression"], false),

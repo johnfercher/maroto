@@ -76,6 +76,7 @@ var validExts = map[string]struct{}{
 	"png":  {},
 	"jpg":  {},
 	"jpeg": {},
+	"ttf":  {},
 }
 
 var loadFuncs = map[string]func(string) (io.ReadCloser, error){

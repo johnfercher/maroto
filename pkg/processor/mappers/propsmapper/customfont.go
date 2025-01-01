@@ -16,7 +16,7 @@ func newCustomFont(font interface{}) *CustomFont {
 
 	return &CustomFont{
 		Family: *convertFields(fontMap["family"], ""),
-		Style:  *convertFields(fontMap["style"], ""),
+		Style:  NewFontStyle(*convertFields(fontMap["style"], "")),
 		File:   *convertFields(fontMap["file_path"], ""),
 	}
 }

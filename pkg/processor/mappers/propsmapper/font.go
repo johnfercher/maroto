@@ -22,7 +22,7 @@ func NewFont(font interface{}) *Font {
 
 	return &Font{
 		Family: *convertFields(fontMap["family"], ""),
-		Style:  *convertFields(fontMap["style"], ""),
+		Style:  NewFontStyle(*convertFields(fontMap["style"], "")),
 		Size:   *convertFields(fontMap["size"], 0.0),
 		Color:  NewColor(fontMap["color"]),
 	}
