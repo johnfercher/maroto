@@ -351,13 +351,26 @@ func TestGenerateTemplate(t *testing.T) {
 
 		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/protection_template.json")
 		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
-		err := processor.RegisterTemplate("parallelism", string(fixtemplate))
+		err := processor.RegisterTemplate("protection", string(fixtemplate))
 		require.NoError(t, err)
 
-		provider, err := processor.GenerateDocument("parallelism", "{}")
+		provider, err := processor.GenerateDocument("protection", "{}")
 
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/protection.json")
+	})
+	t.Run("when template with qrcodegrid example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/qrcodegrid_template.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("qrcodegrid", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("qrcodegrid", "{}")
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/qrcodegrid.json")
 	})
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {
 	})
