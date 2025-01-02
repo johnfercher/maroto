@@ -264,3 +264,121 @@ func TestSizeMetric_String(t *testing.T) {
 	// Assert
 	assert.Equal(t, "keyMetric -> 2000.00b", s)
 }
+
+func TestReport_String(t *testing.T) {
+	t.Run("when formating, then do it correctly", func(t *testing.T) {
+		// Arrange
+		report := &metrics.Report{
+			TimeMetrics: []metrics.TimeMetric{
+				{
+					Key: "keyMetric",
+					Times: []*metrics.Time{
+						{
+							Value: 60,
+							Scale: metrics.Nano,
+						},
+						{
+							Value: 100,
+							Scale: metrics.Milli,
+						},
+					},
+					Avg: &metrics.Time{
+						Value: 100,
+						Scale: metrics.Milli,
+					},
+				},
+			},
+		}
+
+		// Act
+		s := report.String()
+
+		// Assert
+		assert.Equal(t, "keyMetric -> avg: 100.00ms, executions: [60.00ns, 100.00ms]", s)
+	})
+}
+
+func TestReport_Normalize(t *testing.T) {
+	t.Run("when normalize, do it correctly", func(t *testing.T) {
+		// Arrange
+		report := &metrics.Report{
+			TimeMetrics: []metrics.TimeMetric{
+				{
+					Key: "keyMetric",
+					Times: []*metrics.Time{
+						{
+							Value: 6000,
+							Scale: metrics.Nano,
+						},
+						{
+							Value: 2000,
+							Scale: metrics.Micro,
+						},
+					},
+					Avg: &metrics.Time{
+						Value: 100,
+						Scale: metrics.Milli,
+					},
+				},
+			},
+			SizeMetric: metrics.SizeMetric{
+				Key: "keyMetric",
+				Size: metrics.Size{
+					Value: 2000,
+					Scale: metrics.Byte,
+				},
+			},
+		}
+
+		// Act
+		normalized := report.Normalize()
+
+		// Assert
+		assert.Equal(t, 2.0, normalized.SizeMetric.Size.Value)
+		assert.Equal(t, metrics.KiloByte, normalized.SizeMetric.Size.Scale)
+		assert.Equal(t, 6.0, normalized.TimeMetrics[0].Times[0].Value)
+		assert.Equal(t, metrics.Micro, normalized.TimeMetrics[0].Times[0].Scale)
+		assert.Equal(t, 2.0, normalized.TimeMetrics[0].Times[1].Value)
+		assert.Equal(t, metrics.Milli, normalized.TimeMetrics[0].Times[1].Scale)
+	})
+}
+
+func TestReport_Save(t *testing.T) {
+	t.Run("when saving, then do it correctly", func(t *testing.T) {
+		// Arrange
+		report := &metrics.Report{
+			TimeMetrics: []metrics.TimeMetric{
+				{
+					Key: "keyMetric",
+					Times: []*metrics.Time{
+						{
+							Value: 6000,
+							Scale: metrics.Nano,
+						},
+						{
+							Value: 2000,
+							Scale: metrics.Micro,
+						},
+					},
+					Avg: &metrics.Time{
+						Value: 100,
+						Scale: metrics.Milli,
+					},
+				},
+			},
+			SizeMetric: metrics.SizeMetric{
+				Key: "keyMetric",
+				Size: metrics.Size{
+					Value: 2000,
+					Scale: metrics.Byte,
+				},
+			},
+		}
+
+		// Act
+		err := report.Save("report-test-demo.txt")
+
+		// Assert
+		assert.NoError(t, err)
+	})
+}

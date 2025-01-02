@@ -93,6 +93,44 @@
 					]
 				},
 				{
+					"value": 81.20555555555556,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 5,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_percent": 100
+									}
+								}
+							]
+						},
+						{
+							"value": 7,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Numa toca no chão vivia um hobbit. Não uma toca nojenta, suja, úmida, \ncheia de pontas de minhocas e um cheiro de limo, nem tam pouco uma toca seca, vazia, arenosa, \nsem nenhum lugar onde se sentar ou onde comer: era uma toca de hobbit, e isso significa conforto.\nEla tinha uma porta perfeitamente redonda feito uma escotilha, pintada de verde, com uma maçaneta\namarela e brilhante de latão exatamente no meio. A porta se abria para um corredor em forma de tubo,\nfeito um túnel: um túnel muito confortável, sem fumaça, de paredes com painéis e assoalhos\nazulejados e acarpetados, com cadeiras enceradas e montes e montes de cabieiros para chapéus e\ncasacos - o hobbit apreciava visitas.",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 9,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 13,
+										"prop_top": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
 					"value": 35.27777777777778,
 					"type": "row",
 					"nodes": [
@@ -166,6 +204,21 @@
 						}
 					]
 				},
+				{
+					"value": 0.0030555555555338287,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
 				{
 					"value": 31.666666666666664,
 					"type": "row",

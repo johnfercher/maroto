@@ -3,7 +3,9 @@ package code
 import (
 	"bytes"
 	"image"
-	"image/jpeg"
+	"image/color/palette"
+	"image/draw"
+	"image/png"
 
 	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/ean"
@@ -85,17 +87,22 @@ func getBarcodeClosure(barcodeType barcode.Type) func(code string) (libBarcode.B
 
 func (c *code) getImage(img image.Image) (*entity.Image, error) {
 	var buf bytes.Buffer
-	err := jpeg.Encode(&buf, img, nil)
+
+	dst := image.NewPaletted(img.Bounds(), palette.Plan9)
+	drawer := draw.Drawer(draw.Src)
+	drawer.Draw(dst, dst.Bounds(), img, img.Bounds().Min)
+
+	err := png.Encode(&buf, dst)
 	if err != nil {
 		return nil, err
 	}
 
 	imgEntity := &entity.Image{
 		Bytes:     buf.Bytes(),
-		Extension: extension.Jpg,
+		Extension: extension.Png,
 		Dimensions: &entity.Dimensions{
-			Width:  float64(img.Bounds().Dx()),
-			Height: float64(img.Bounds().Dy()),
+			Width:  float64(dst.Bounds().Dx()),
+			Height: float64(dst.Bounds().Dy()),
 		},
 	}
 
