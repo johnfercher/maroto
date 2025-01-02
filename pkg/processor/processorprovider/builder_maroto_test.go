@@ -26,7 +26,6 @@ func NewBuilderMocks(t *testing.T) *mocks.Builder {
 	build.EXPECT().WithLeftMargin(mock.Anything).Return(config.NewBuilder())
 	build.EXPECT().WithRightMargin(mock.Anything).Return(config.NewBuilder())
 	build.EXPECT().WithConcurrentMode(mock.Anything).Return(config.NewBuilder())
-	build.EXPECT().WithSequentialMode().Return(config.NewBuilder())
 	build.EXPECT().WithDebug(mock.Anything).Return(config.NewBuilder())
 	build.EXPECT().WithMaxGridSize(mock.Anything).Return(config.NewBuilder())
 	build.EXPECT().WithDefaultFont(mock.Anything).Return(config.NewBuilder())
@@ -53,7 +52,7 @@ func NewvalidateCallOfAllMethods(t *testing.T, builder *mocks.Builder) {
 	builder.AssertNumberOfCalls(t, "WithLeftMargin", 1)
 	builder.AssertNumberOfCalls(t, "WithRightMargin", 1)
 	builder.AssertNumberOfCalls(t, "WithConcurrentMode", 1)
-	builder.AssertNumberOfCalls(t, "WithSequentialMode", 1)
+	builder.AssertNumberOfCalls(t, "WithSequentialMode", 0)
 	builder.AssertNumberOfCalls(t, "WithDebug", 1)
 	builder.AssertNumberOfCalls(t, "WithMaxGridSize", 1)
 	builder.AssertNumberOfCalls(t, "WithDefaultFont", 1)
@@ -241,13 +240,11 @@ func TestWithSequentialMode(t *testing.T) {
 	t.Run("when sequential mode is false, should not set sequential mode", func(t *testing.T) {
 		repository := mocks.NewProcessorRepository(t)
 		build := mocks.NewBuilder(t)
-		build.EXPECT().WithSequentialMode().Return(config.NewBuilder())
 
 		builder := processorprovider.NewMarotoBuilder(repository, build)
 		cfg := builder.WithSequentialMode(false)
 
 		assert.NotNil(t, cfg)
-		build.AssertNumberOfCalls(t, "WithSequentialMode", 1)
 	})
 }
 

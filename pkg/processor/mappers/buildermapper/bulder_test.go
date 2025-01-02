@@ -42,7 +42,7 @@ func DefaultBuilderMap() *Builder {
 			Pattern: "pattern_test",
 			Place:   "place_test",
 			Family:  "family_test",
-			Style:   "italic",
+			Style:   "I",
 			Size:    10.0,
 			Color: &propsmapper.Color{
 				Red:   10,

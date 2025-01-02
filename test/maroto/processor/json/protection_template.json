@@ -1,0 +1,26 @@
+{
+    "builder": {
+        "protection": {
+            "type": "none",
+            "user_password": "user",
+            "owner_password": "owner"
+        }
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row": {
+                "order": 1,
+                "height": 30,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "supersecret content"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
