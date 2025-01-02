@@ -160,9 +160,10 @@ func (m *Maroto) CreateText(value string, textsProps ...*propsmapper.Text) Provi
 	}
 
 	return text.New(value, props.Text{
-		Top: tProps.Top, Left: tProps.Left, Right: tProps.Right, Family: tProps.Family, Style: fontstyle.Type(tProps.Style),
-		Size: tProps.Size, Align: align.Type(tProps.Align), BreakLineStrategy: breakline.Strategy(tProps.BreakLineStrategy),
-		VerticalPadding: tProps.VerticalPadding, Color: (*props.Color)(tProps.Color), Hyperlink: tProps.Hyperlink,
+		Top: tProps.Top, Bottom: tProps.Bottom, Left: tProps.Left, Right: tProps.Right, Family: tProps.Family,
+		Style: fontstyle.Type(tProps.Style), Size: tProps.Size, Align: align.Type(tProps.Align),
+		BreakLineStrategy: breakline.Strategy(tProps.BreakLineStrategy), VerticalPadding: tProps.VerticalPadding,
+		Color: (*props.Color)(tProps.Color), Hyperlink: tProps.Hyperlink,
 	})
 }
 

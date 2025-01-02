@@ -8,6 +8,8 @@ import (
 type Text struct {
 	// Top is the amount of space between the upper cell limit and the text.
 	Top float64
+	// Bottom is the amount of space between the lower cell limit and the text. (Used by auto row only)
+	Bottom float64
 	// Left is the minimal amount of space between the left cell boundary and the text.
 	Left float64
 	// Right is the minimal amount of space between the right cell boundary and the text.
@@ -41,6 +43,7 @@ func NewText(signature interface{}) (*Text, error) {
 		Top:               *convertFields(signatureMap["top"], -1.0),
 		Left:              *convertFields(signatureMap["left"], -1.0),
 		Right:             *convertFields(signatureMap["right"], -1.0),
+		Bottom:            *convertFields(signatureMap["bottom"], -1.0),
 		Family:            *convertFields(signatureMap["family"], ""),
 		Style:             NewFontStyle(*convertFields(signatureMap["style"], "")),
 		Size:              *convertFields(signatureMap["size"], 0.0),

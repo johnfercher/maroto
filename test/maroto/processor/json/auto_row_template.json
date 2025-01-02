@@ -46,8 +46,32 @@
                     }
                 ]
             },
-            "row_barcode": {
+            "row_with_image2": {
                 "order": 3,
+                "cols": [
+                    {
+                        "image": {
+                            "order": 1,
+                            "source_key": "biplane"
+                        },
+                        "size": 5
+                    },
+                    {
+                        "text": {
+                            "order": 1,
+                            "source_key": "intro",
+                            "props": {
+                                "size": 13,
+                                "top": 8,
+                                "bottom": 9
+                            }
+                        },
+                        "size": 7
+                    }
+                ]
+            },
+            "row_barcode": {
+                "order": 4,
                 "cols": [
                     {
                         "bar_code": {
@@ -66,7 +90,7 @@
                 ]
             },
             "row_matrixcode": {
-                "order": 4,
+                "order": 5,
                 "cols": [
                     {
                         "matrix_code": {
@@ -85,7 +109,7 @@
                 ]
             },
             "row_qrcode": {
-                "order": 5,
+                "order": 6,
                 "cols": [
                     {
                         "qr_code": {
