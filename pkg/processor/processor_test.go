@@ -238,6 +238,19 @@ func TestGenerateTemplate(t *testing.T) {
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/imagegrid.json")
 	})
+	t.Run("when template with linegrid example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/linegrid_template.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("line", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("line", "{}")
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/line.json")
+	})
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {
 
 	})

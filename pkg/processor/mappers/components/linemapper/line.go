@@ -75,5 +75,8 @@ func (l *Line) setProps(templateProps interface{}) error {
 func (l *Line) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
 	[]processorprovider.ProviderComponent, error,
 ) {
-	return []processorprovider.ProviderComponent{provider.CreateLine(l.Props)}, nil
+	if l.Props != nil {
+		return []processorprovider.ProviderComponent{provider.CreateLine(l.Props)}, nil
+	}
+	return []processorprovider.ProviderComponent{provider.CreateLine()}, nil
 }
