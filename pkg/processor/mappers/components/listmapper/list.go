@@ -94,16 +94,16 @@ func (l *List) getListContent(content map[string]interface{}) ([]map[string]inte
 	return l.formatListContent(listContent)
 }
 
-func (l *List) generateTemplates(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
-	[]processorprovider.ProviderComponent, error,
-) {
+func (l *List) generateTemplates(content map[string]interface{},
+	provider processorprovider.ProcessorProvider,
+) []processorprovider.ProviderComponent {
 	components := make([]processorprovider.ProviderComponent, 0, len(l.Templates))
 	for _, template := range l.Templates {
 		if component, err := template.Generate(content, provider); err == nil {
 			components = append(components, component...)
 		}
 	}
-	return components, nil
+	return components
 }
 
 func (l *List) Generate(content map[string]interface{}, provider processorprovider.ProcessorProvider) (
@@ -116,10 +116,7 @@ func (l *List) Generate(content map[string]interface{}, provider processorprovid
 	newComponents := make([]processorprovider.ProviderComponent, 0, len(l.Templates)*len(listContent))
 
 	for _, content := range listContent {
-		components, err := l.generateTemplates(content, provider)
-		if err != nil {
-			return nil, err
-		}
+		components := l.generateTemplates(content, provider)
 		newComponents = append(newComponents, components...)
 	}
 

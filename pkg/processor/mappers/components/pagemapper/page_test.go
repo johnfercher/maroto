@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers"
 	"github.com/johnfercher/maroto/v2/pkg/processor/mappers/components/pagemapper"
+	"github.com/johnfercher/maroto/v2/pkg/processor/processorprovider"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -23,7 +24,6 @@ func TestGetOrder(t *testing.T) {
 }
 
 func TestNewPage(t *testing.T) {
-
 	t.Run("when the component order is greater than the number of components, an error should be returned", func(t *testing.T) {
 		templateRows := map[string]interface{}{
 			"row_template_1": nil,
@@ -159,13 +159,17 @@ func TestGenerate(t *testing.T) {
 	t.Run("when content no has source_key, should return an error", func(t *testing.T) {
 		content := map[string]interface{}{}
 		factory := mocks.NewAbstractFactoryMaps(t)
+		providercomponent := []processorprovider.ProviderComponent{mocks.NewProviderComponent(t)}
 		provider := mocks.NewProcessorProvider(t)
+		component := mocks.NewOrderedComponents(t)
+		component.EXPECT().Generate(content, provider).Return(providercomponent, nil)
+		provider.EXPECT().CreatePage(providercomponent[0]).Return(nil, nil)
 
-		page := pagemapper.Page{Rows: make([]mappers.OrderedComponents, 0), Factory: factory, SourceKey: "test"}
+		page := pagemapper.Page{Rows: []mappers.OrderedComponents{component}, Factory: factory, SourceKey: "test"}
 		newPage, err := page.Generate(content, provider)
 
-		assert.NotNil(t, err)
-		assert.Nil(t, newPage)
+		assert.Nil(t, err)
+		assert.NotNil(t, newPage)
 	})
 	t.Run("when page no has rows, it should no sent rows", func(t *testing.T) {
 		content := map[string]interface{}{"content": map[string]interface{}{"row_1": "any"}}

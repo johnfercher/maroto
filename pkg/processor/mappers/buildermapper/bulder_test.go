@@ -30,7 +30,7 @@ func DefaultBuilderMap() *Builder {
 		MaxGridSize:             10,
 		DefaultFont: &propsmapper.Font{
 			Family: "Arial",
-			Style:  "bold",
+			Style:  "B",
 			Size:   10,
 			Color: &propsmapper.Color{
 				Red:   10,
@@ -42,7 +42,7 @@ func DefaultBuilderMap() *Builder {
 			Pattern: "pattern_test",
 			Place:   "place_test",
 			Family:  "family_test",
-			Style:   "style_test",
+			Style:   "italic",
 			Size:    10.0,
 			Color: &propsmapper.Color{
 				Red:   10,
@@ -51,8 +51,8 @@ func DefaultBuilderMap() *Builder {
 			},
 		},
 		CustomFonts: []*propsmapper.CustomFont{
-			{Family: "family_test", Style: "style_test", File: "file_test"},
-			{Family: "family_test2", Style: "style_test2", File: "file_test2"},
+			{Family: "family_test", Style: "B", File: "file_test"},
+			{Family: "family_test2", Style: "B", File: "file_test2"},
 		},
 		Protection: &propsmapper.Protection{
 			Type:          4,

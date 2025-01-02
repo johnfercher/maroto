@@ -27,7 +27,7 @@
         "pattern": "pattern_test",
         "place": "place_test",
         "family": "family_test",
-        "style": "style_test",
+        "style": "italic",
         "size": 10,
         "color": {
             "red": 10,
@@ -35,9 +35,9 @@
             "blue": 150
         }
     },
-    "custom_font": [
-        {"family": "family_test", "style": "style_test", "file_path": "file_test"},
-        {"family": "family_test2", "style": "style_test2", "file_path": "file_test2"}
+    "custom_fonts": [
+        {"family": "family_test", "style": "bold", "file_path": "file_test"},
+        {"family": "family_test2", "style": "bold", "file_path": "file_test2"}
     ],
     "protection": {
         "type": "print",
@@ -53,7 +53,7 @@
         "subject": {"text": "test", "utf8": true},       
         "title": {"text": "report", "utf8": true},     
         "creation_date": "2024-10-09 14:30:00",    
-        "keywords_str": {"text": "test", "utf8": true}   
+        "keywords": {"text": "test", "utf8": true}   
     },
     "disable_auto_page_break": true,
     "generation_mode": "concurrent"

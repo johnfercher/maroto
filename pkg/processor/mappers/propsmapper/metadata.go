@@ -48,6 +48,6 @@ func NewMetadata(metadata interface{}) *Metadata {
 		Subject:      NewUtf8Text(metadataMap["subject"]),
 		Title:        NewUtf8Text(metadataMap["title"]),
 		CreationDate: factoryTime(*convertFields(metadataMap["creation_date"], ""), "2006-01-02 15:04:05", time.Now()),
-		KeywordsStr:  NewUtf8Text(metadataMap["keywords_str"]),
+		KeywordsStr:  NewUtf8Text(metadataMap["keywords"]),
 	}
 }
