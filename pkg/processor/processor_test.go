@@ -279,6 +279,19 @@ func TestGenerateTemplate(t *testing.T) {
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/margins.json")
 	})
+	t.Run("when template with maxgridsum example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/maxgridsum_template.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("margins", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("margins", "{}")
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/maxgridsum.json")
+	})
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {
 
 	})
