@@ -318,6 +318,20 @@ func TestGenerateTemplate(t *testing.T) {
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/orientation.json")
 	})
+	t.Run("when template with pagenumber example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/pagenumber_template.json")
+		fixcontent, _ := processortest.NewFileReader().LoadFile("processor/json/pagenumber_content.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("orientation", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("orientation", string(fixcontent))
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/pagenumber.json")
+	})
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {
 	})
 	t.Run("when invalid content is sent, should return an error", func(t *testing.T) {

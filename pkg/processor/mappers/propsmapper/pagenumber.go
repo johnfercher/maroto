@@ -28,7 +28,7 @@ func NewPageNumber(pageNumber interface{}) *PageNumber {
 		Pattern: *convertFields(pageNumberMap["pattern"], ""),
 		Place:   *convertFields(pageNumberMap["place"], ""),
 		Family:  *convertFields(pageNumberMap["family"], ""),
-		Style:   *convertFields(pageNumberMap["style"], ""),
+		Style:   NewFontStyle(*convertFields(pageNumberMap["style"], "")),
 		Size:    *convertFields(pageNumberMap["size"], 0.0),
 		Color:   NewColor(pageNumberMap["color"]),
 	}

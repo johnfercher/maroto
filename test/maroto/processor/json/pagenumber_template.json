@@ -1,0 +1,35 @@
+{
+    "builder": {
+        "debug": true,
+        "page_number": {
+            "pattern": "Page {current} of {total}",
+            "place": "bottom",
+            "family": "courier",
+            "style": "bold",
+            "size": 9,
+            "color": {
+                "red": 255
+            }
+        }
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "list_rows": {
+                "order": 1,
+                "template_row": {
+                    "order": 1,
+                    "height": 20,
+                    "cols": [
+                        {
+                            "text": {
+                                "order": 1,
+                                "source_key": "text_value"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
