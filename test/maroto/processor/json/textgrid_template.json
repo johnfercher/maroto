@@ -1,0 +1,424 @@
+{
+    "builder": {
+        "debug": true
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row1": {
+                "order": 1,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "Red text",
+                            "props": {
+                                "color": {
+                                    "red": 255,
+                                    "green": 0,
+                                    "blue": 0
+                                }                                
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "text": {
+                            "order": 1,
+                            "value": "Green text",
+                            "props": {
+                                "color": {
+                                    "red": 0,
+                                    "green": 255,
+                                    "blue": 0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text":{
+                            "order": 1,
+                            "value": "Blue text",
+                            "props": {
+                                "color": {
+                                    "red": 0,
+                                    "green": 0,
+                                    "blue": 255
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row2": {
+                "order": 2,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "Left-aligned text"
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Centered text",
+                            "props": {
+                                "align": "center"
+                            }
+                        }
+
+                    },
+                    {
+                        "size": 6,
+                        "text": {
+                            "order": 1,
+                            "value": "Right-aligned text",
+                            "props": {
+                                "align": "right"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row3": {
+                "order": 3,
+                "height": 10,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "Aligned unindented text"
+                        }
+                    }
+                ]
+            },
+            "template_row4": {
+                "order": 4,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "Left-aligned text",
+                            "props": {
+                                "top": 3,
+                                "left": 3,
+                                "align": "left"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Centered text",
+                            "props": {
+                                "top": 3,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "text":{
+                            "order": 1,
+                            "value": "Right-aligned text",
+                            "props": {
+                                "top": 3,
+                                "right": 3,
+                                "align": "right"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row5": {
+                "order": 5,
+                "height": 10,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "Aligned text with indentation"
+                        }
+                    }
+                ]
+            },
+            "template_row6": {
+                "order": 6,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "align": "left"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "align": "right"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row7": {
+                "order": 7,
+                "height": 10,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "Multiline text"
+                        }
+                    }
+                ]
+            },
+            "template_row8": {
+                "order": 8,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 3,
+                                "left": 3,
+                                "right": 3,
+                                "align": "left",
+                                "break_line_strategy": "dash_strategy"
+                            }
+                        }
+
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 3,
+                                "left": 3,
+                                "right": 3,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 3,
+                                "left": 3,
+                                "right": 3,
+                                "align": "right"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row9": {
+                "order": 9,
+                "height": 10,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "Multiline text with indentation"
+                        }
+                    }
+                ]
+            },
+            "template_row10": {
+                "order": 10,
+                "height": 10,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "text with hyperlink",
+                            "props": {
+                                "hyperlink": "https://google.com"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row11": {
+                "order": 11,
+                "height": 45,
+                "cols": [
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 3,
+                                "left": 3,
+                                "right": 3,
+                                "align": "justify",
+                                "break_line_strategy": "dash_strategy"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 10,
+                                "left": 3,
+                                "right": 3,
+                                "align": "justify"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 10,
+                                "left": 10,
+                                "right": 10,
+                                "align": "justify",
+                                "hyperlink": "https://google.com"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row12": {
+                "order": 12,
+                "height": 10,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "Justify-aligned text",
+                            "props": {
+                                "align": "justify"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row13": {
+                "order": 13,
+                "cols": [
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 0,
+                                "left": 3,
+                                "right": 3,
+                                "align": "justify",
+                                "break_line_strategy": "dash_strategy"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 0,
+                                "left": 3,
+                                "right": 3,
+                                "align": "justify"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "top": 0,
+                                "left": 10,
+                                "right": 10,
+                                "align": "justify",
+                                "hyperlink": "https://google.com"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row14": {
+                "order": 14,
+                "cols": [
+                    {
+                        "size": 12,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "left": 3,
+                                "right": 3,
+                                "align": "justify",
+                                "break_line_strategy": "empty_space_strategyt"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row15": {
+                "order": 15,
+                "cols": [
+                    {
+                        "size": 12,
+                        "text": {
+                            "order": 1,
+                            "value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+                            "props": {
+                                "left": 3,
+                                "right": 3,
+                                "align": "justify",
+                                "break_line_strategy": "empty_space_strategy",
+                                "vertical_padding": 10
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -370,7 +370,7 @@ func TestGenerateTemplate(t *testing.T) {
 		provider, err := processor.GenerateDocument("qrcodegrid", "{}")
 
 		assert.Nil(t, err)
-		test.New(t).Assert((*provider).GetStructure()).Equals("examples/qrcodegrid.json")
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/qrgrid.json")
 	})
 	t.Run("when template with signature example is found, should set template", func(t *testing.T) {
 		test.SetupTestDir(t)
@@ -398,6 +398,19 @@ func TestGenerateTemplate(t *testing.T) {
 
 		assert.Nil(t, err)
 		test.New(t).Assert((*provider).GetStructure()).Equals("examples/simplest.json")
+	})
+	t.Run("when template with textgrid example is found, should set template", func(t *testing.T) {
+		test.SetupTestDir(t)
+
+		fixtemplate, _ := processortest.NewFileReader().LoadFile("processor/json/textgrid_template.json")
+		processor := processor.NewProcessor(repository.NewMemoryStorage(loader.NewLoader()), deserializer.NewJSONDeserializer())
+		err := processor.RegisterTemplate("textgrid", string(fixtemplate))
+		require.NoError(t, err)
+
+		provider, err := processor.GenerateDocument("textgrid", "{}")
+
+		assert.Nil(t, err)
+		test.New(t).Assert((*provider).GetStructure()).Equals("examples/textgrid.json")
 	})
 
 	t.Run("when template with invalid field is found, should return an error", func(t *testing.T) {

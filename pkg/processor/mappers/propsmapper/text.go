@@ -1,6 +1,8 @@
 package propsmapper
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Text represents properties from a Text inside a cell.
 type Text struct {
@@ -35,8 +37,7 @@ func NewText(signature interface{}) (*Text, error) {
 	if !ok {
 		return nil, fmt.Errorf("ensure text props can be converted to map[string] interface{}")
 	}
-
-	return &Text{
+	text := &Text{
 		Top:               *convertFields(signatureMap["top"], -1.0),
 		Left:              *convertFields(signatureMap["left"], -1.0),
 		Right:             *convertFields(signatureMap["right"], -1.0),
@@ -47,6 +48,9 @@ func NewText(signature interface{}) (*Text, error) {
 		BreakLineStrategy: NewBreakLineStrategy(*convertFields(signatureMap["break_line_strategy"], "")),
 		VerticalPadding:   *convertFields(signatureMap["vertical_padding"], -1.0),
 		Color:             NewColor(signatureMap["color"]),
-		Hyperlink:         *convertFields[*string](signatureMap["hyperlink"], nil),
-	}, nil
+	}
+	if hyperlink := *convertFields(signatureMap["hyperlink"], ""); hyperlink != "" {
+		text.Hyperlink = &hyperlink
+	}
+	return text, nil
 }
