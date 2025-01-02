@@ -1,0 +1,162 @@
+{
+    "builder": {
+        "debug": true
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row1": {
+                "order": 1,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 1"
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 2",
+                            "props": {
+                                "font_family": "courier"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 3",
+                            "props": {
+                                "font_style": "bold_italic"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row2": {
+                "order": 2,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 4",
+                            "props": {
+                                "font_style": "italic"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 5",
+                            "props": {
+                                "font_size": 12
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 6",
+                            "props": {
+                                "font_color": {
+                                    "red": 255,
+                                    "blue": 0,
+                                    "green": 0
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row3": {
+                "order": 3,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 7",
+                            "props": {
+                                "line_color": {
+                                    "red": 255,
+                                    "blue": 0,
+                                    "green": 0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 8",
+                            "props": {
+                                "line_style": "dashed"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 9",
+                            "props": {
+                                "line_thickness": 0.5
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_autorow": {
+                "order": 4,
+                "cols": [
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 7",
+                            "props": {
+                                "line_color": {
+                                    "red": 255,
+                                    "blue": 0,
+                                    "green": 0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 8",
+                            "props": {
+                                "line_style": "dashed"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "Signature 9",
+                            "props": {
+                                "line_thickness": 0.5
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

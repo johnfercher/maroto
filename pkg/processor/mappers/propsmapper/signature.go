@@ -38,7 +38,7 @@ func NewSignature(signature interface{}) (*Signature, error) {
 		FontFamily:    *convertFields(signatureMap["font_family"], ""),
 		FontStyle:     NewFontStyle(*convertFields(signatureMap["font_style"], "")),
 		FontSize:      *convertFields(signatureMap["font_size"], 0.0),
-		FontColor:     NewColor(signatureMap["font_Color"]),
+		FontColor:     NewColor(signatureMap["font_color"]),
 		LineColor:     NewColor(signatureMap["line_color"]),
 		LineStyle:     linestyle.Type(NewLineStyle(*convertFields(signatureMap["line_style"], ""))),
 		LineThickness: *convertFields(signatureMap["line_thickness"], 0.0),
