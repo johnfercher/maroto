@@ -1,0 +1,81 @@
+{
+    "header": {
+        "row_header": {
+            "order": 1,
+            "cols": [
+                {
+                    "text": {
+                        "order": 1,
+                        "source_key": "header_value"
+                    },
+                    "size": 12
+                }
+            ]
+        }
+    },
+    "footer": {
+        "row_footer": {
+            "order": 1,
+            "cols": [
+                {
+                    "text": {
+                        "order": 1,
+                        "source_key": "footer_value"
+                    },
+                    "size": 12
+                }
+            ]
+        }
+    },
+    "pages": {
+        "page_template_1": {
+            "order": 1,
+            "row_1": {
+                "order": 1,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "source_key": "value_1"
+                        },
+                        "size": 6.0
+                    },
+                    {
+                        "text": {
+                            "order": 1,
+                            "source_key": "value_2"
+                        },
+                        "size": 6.0
+                    }
+                ]
+            },
+            "list_row_1": {
+                "order": 2,
+                "row": {
+                    "order": 1,
+                    "cols": [
+                        {
+                            "text": {
+                                "order": 1,
+                                "source_key": "value_2"
+                            },
+                            "size": 10.0
+                        }
+                    ]
+                },
+                "row_1": {
+                    "order": 2,
+                    "cols": [
+                        {
+                            "text": {
+                                "order": 1,
+                                "source_key": "value_2"
+                            },
+                            "size": 10.0
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

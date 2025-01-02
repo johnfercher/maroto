@@ -1,0 +1,38 @@
+{
+    "header": {
+        "row_header": {
+            "header_value": "header text"
+        }
+    },
+    "footer": {
+        "row_footer": {
+            "footer_value": "footer text"
+        }
+    },
+    "pages": {
+        "page_template_1": {
+            "row_1": {
+                "value_1": "row 1",
+                "value_2": "row 1"
+            },
+            "list_row_1": [
+                {
+                    "row": {
+                        "value_2": "row 2"
+                    },
+                    "row_1": {
+                        "value_2": "row 3"
+                    }
+                },
+                {
+                    "row": {
+                        "value_2": "row 4"
+                    },
+                    "row_1": {
+                        "value_2": "row 5"
+                    }
+                }
+            ]
+        }
+    }
+}

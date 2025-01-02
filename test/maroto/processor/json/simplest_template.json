@@ -1,0 +1,91 @@
+{
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row1": {
+                "order": 1,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 4,
+                        "bar_code": {
+                            "order": 1,
+                            "value": "barcode"
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "matrixcode"
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "qr_code": {
+                            "order": 1,
+                            "value": "qrcode"
+                        }
+                    }
+                ]
+            },
+            "tepmlate_row2": {
+                "order": 2,
+                "height": 10,
+                "cols": [
+                    {
+                        "size": 12
+                    }
+                ]
+            },
+            "template_row3": {
+                "order": 3,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg"
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "signature": {
+                            "order": 1,
+                            "value": "signature"
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "text"
+                        }
+                    }
+                ]
+            },
+            "template_row4": {
+                "order": 4,
+                "height": 10,
+                "cols": [
+                    {
+                        "size": 12
+                    }
+                ]
+            },
+            "template_row5": {
+                "order": 5,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 12,
+                        "line": {
+                            "order": 1
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

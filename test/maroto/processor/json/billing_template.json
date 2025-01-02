@@ -1,0 +1,380 @@
+{
+    "builder": {
+        "margins": {
+            "left": 10,
+            "top": 15,
+            "right": 10
+        },
+        "page_number": {}
+    },
+    "header": {
+        "template_row": {
+            "order": 1,
+            "height": 20,
+            "cols": [
+                {
+                    "size": 3,
+                    "image": {
+                        "order": 1,
+                        "source_key": "biplane",
+                        "props": {
+                            "center": true,
+                            "percent": 80
+                        }
+                    }
+                },
+                {
+                    "size": 6
+                },
+                {
+                    "size": 3,
+                    "text_address": {
+                        "order": 1,
+                        "source_key": "company_address",
+                        "props": {
+                            "size": 8,
+                            "align": "right",
+                            "color": {
+                                "red": 150,
+                                "green": 10,
+                                "blue": 10
+                            }
+                        }
+                    },
+                    "text_phone": {
+                        "order": 2,
+                        "source_key": "company_phone",
+                        "props": {
+                            "top": 12,
+                            "style": "bold_italic",
+                            "size": 8,
+                            "align": "right",
+                            "color": {
+                                "red": 10,
+                                "green": 10,
+                                "blue": 150
+                            }
+                        }
+                    },
+                    "text_site": {
+                        "order": 3,
+                        "source_key": "company_site",
+                        "props": {
+                            "top": 15,
+                            "style": "bold_italic",
+                            "size": 8,
+                            "align": "right",
+                            "color": {
+                                "red": 10,
+                                "green": 10,
+                                "blue": 150
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "footer": {
+        "row_footer": {
+            "order": 1,
+            "height": 20,
+            "cols": [
+                {
+                    "size": 12,
+                    "text_phone": {
+                        "order": 1,
+                        "source_key": "company_phone",
+                        "props": {
+                            "top": 13,
+                            "style": "bold_italic",
+                            "size": 8,
+                            "align": "left",
+                            "color": {
+                                "red": 10,
+                                "green": 10,
+                                "blue": 150
+                            }
+                        }
+                    },
+                    "text_site": {
+                        "order": 2,
+                        "source_key": "company_site",
+                        "props": {
+                            "top": 16,
+                            "style": "bold_italic",
+                            "size": 8,
+                            "align": "left",
+                            "color": {
+                                "red": 10,
+                                "green": 10,
+                                "blue": 150
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "invoice_row": {
+                "order": 1,
+                "height": 10,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "source_key": "invoice",
+                            "props": {
+                                "top": 3,
+                                "style": "bold",
+                                "align": "center"
+                            }
+                        }
+                    }
+                ]
+            },
+            "transactions_row": {
+                "order": 2,
+                "height": 7,
+                "props": {
+                    "background_color": {
+                        "red": 55,
+                        "blue": 55,
+                        "green": 55
+                    } 
+                },
+                "cols": [
+                    {
+                        "size": 3,
+                        "text": {
+                            "order": 1,
+                            "value": "Transactions",
+                            "props": {
+                                "top": 1.5,
+                                "size": 9,
+                                "style": "bold",
+                                "align": "center",
+                                "color": {
+                                    "red": 255,
+                                    "green": 255,
+                                    "blue": 255
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "transactions_header_row": {
+                "order": 3,
+                "height": 5,
+                "cols": [
+                    {
+                        "size": 3
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Product",
+                            "props": {
+                                "size": 9,
+                                "style": "bold",
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "Quantity",
+                            "props": {
+                                "size": 9,
+                                "style": "bold",
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 3,
+                        "text": {
+                            "order": 1,
+                            "value": "Price",
+                            "props": {
+                                "size": 9,
+                                "style": "bold",
+                                "align": "center"
+                            }
+                        }
+                    }
+                ]
+            },
+            "list_transactions_row": {
+                "order": 4,
+                "transaction_gray": {
+                    "order": 1,
+                    "height": 4,
+                    "props": {
+                        "background_color": {
+                            "red": 200,
+                            "green": 200,
+                            "blue": 200
+                        }
+                    },
+                    "cols": [
+                        {
+                            "size": 3
+                        },
+                        {
+                            "size": 4,
+                            "text": {
+                                "order": 1,
+                                "source_key": "product",
+                                "props": {
+                                    "size": 8,
+                                    "align": "center"
+                                }
+                            }
+                        },
+                        {
+                            "size": 2,
+                            "text": {
+                                "order": 1,
+                                "source_key": "quantity",
+                                "props": {
+                                    "size": 8,
+                                    "align": "center"
+                                }
+                            }
+                        },
+                        {
+                            "size": 3,
+                            "text": {
+                                "order": 1,
+                                "source_key": "price",
+                                "props": {
+                                    "size": 8,
+                                    "align": "center"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "transaction_white": {
+                    "order": 2,
+                    "height": 4,
+                    "cols": [
+                        {
+                            "size": 3
+                        },
+                        {
+                            "size": 4,
+                            "text": {
+                                "order": 1,
+                                "source_key": "product",
+                                "props": {
+                                    "size": 8,
+                                    "align": "center"
+                                }
+                            }
+                        },
+                        {
+                            "size": 2,
+                            "text": {
+                                "order": 1,
+                                "source_key": "quantity",
+                                "props": {
+                                    "size": 8,
+                                    "align": "center"
+                                }
+                            }
+                        },
+                        {
+                            "size": 3,
+                            "text": {
+                                "order": 1,
+                                "source_key": "price",
+                                "props": {
+                                    "size": 8,
+                                    "align": "center"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "total_row": {
+                "order": 5,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 7
+                    },
+                    {
+                        "size": 2,
+                        "text": {
+                            "order": 1,
+                            "value": "Total:",
+                            "props": {
+                                "top": 5,
+                                "style": "bold",
+                                "size": 8,
+                                "align": "right"
+                            }
+                        }
+                    },
+                    {
+                        "size": 3,
+                        "text": {
+                            "order": 1,
+                            "source_key": "total",
+                            "props": {
+                                "top": 5,
+                                "style": "bold",
+                                "size": 8,
+                                "align": "center"
+                            }
+                        }
+                    }
+                ]
+            },
+            "code_bar_row": {
+                "order": 6,
+                "height": 15,
+                "cols": [
+                    {
+                        "size": 6,
+                        "bar_code":{
+                            "order": 1,
+                            "source_key": "code",
+                            "props": {
+                                "proportion": {
+                                    "width": 20,
+                                    "height": 2
+                                },
+                                "percent": 100
+                            }
+                        },
+                        "text": {
+                            "order": 2,
+                            "source_key": "code",
+                            "props": {
+                                "top": 12,
+                                "family": "",
+                                "style": "bold",
+                                "size": 9,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6
+                    }
+                ]
+            }
+        }
+    }
+}

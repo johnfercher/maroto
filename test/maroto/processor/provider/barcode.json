@@ -1,0 +1,11 @@
+{
+    "value": "code",
+    "type": "barcode",
+    "details": {
+        "prop_left": 10,
+        "prop_percent": 100,
+        "prop_proportion_height": 2,
+        "prop_proportion_width": 10,
+        "prop_top": 10
+    }
+}

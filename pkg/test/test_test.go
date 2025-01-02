@@ -14,6 +14,16 @@ const (
 	file = "maroto_test.json"
 )
 
+func TestSetupTestDir(t *testing.T) {
+	t.Run("when directory is setup correctly, it should load maroto.yml", func(t *testing.T) {
+		SetupTestDir(t)
+
+		_, err := os.Open(".maroto.yml")
+
+		assert.Nil(t, err)
+	})
+}
+
 func TestNew(t *testing.T) {
 	t.Run("when called first, should setup singleton and set t", func(t *testing.T) {
 		// Act

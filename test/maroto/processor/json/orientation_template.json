@@ -1,0 +1,23 @@
+{
+    "builder": {
+        "orientation": "horizontal",
+        "debug": true
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row": {
+                "order": 1,
+                "height": 30,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "content"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

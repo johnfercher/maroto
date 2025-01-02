@@ -1,0 +1,24 @@
+{
+    "pages": {
+        "template_page": {
+            "bar_code_row1": {
+                "maroto_url": "https://github.com/johnfercher/maroto"
+            },
+            "bar_code_center_row1": {
+                "maroto_url": "https://github.com/johnfercher/maroto"
+            },
+            "bar_code_row2": {
+                "maroto_url": "https://github.com/johnfercher/maroto"
+            },
+            "bar_code_center_row2": {
+                "maroto_url": "https://github.com/johnfercher/maroto"
+            },
+            "bar_code_EAN_row2": {
+                "code_number": "123456789123"
+            },
+            "bar_code_auto_row": {
+                "code_number": "123456789123"
+            }
+        }
+    }
+}

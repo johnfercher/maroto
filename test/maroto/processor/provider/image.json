@@ -1,0 +1,9 @@
+{
+    "value": "img.png",
+    "type": "fileImage",
+    "details": {
+        "prop_left": 10,
+        "prop_percent": 100,
+        "prop_top": 10
+    }
+}

@@ -1,0 +1,194 @@
+{
+    "header": {
+        "template_row": {
+            "biplane": "docs/assets/images/biplane.jpg",
+            "company_address": "AnyCompany Name Inc. 851 Any Street Name, Suite 120, Any City, CA 45123.",
+            "company_phone": "Tel: 55 024 12345-1234",
+            "company_site": "www.mycompany.com"
+        }
+    },
+    "footer": {
+        "row_footer": {
+            "company_phone": "Tel: 55 024 12345-1234",
+            "company_site": "www.mycompany.com"
+        }
+    },
+    "pages": {
+        "template_page": {
+            "invoice_row": {
+                "invoice": "Invoice ABC123456789"
+            },
+            "list_transactions_row": [
+                {
+                    "transaction_gray": {
+                        "product": "Swamp",
+                        "quantity": "12",
+                        "price": "R$ 4,00"
+                    },
+                    "transaction_white": {
+                        "product": "Sorin, A Planeswalker",
+                        "quantity": "4",
+                        "price": "R$ 90,00"
+                    }
+                },
+                {
+                    "transaction_gray": {
+                        "product": "Tassa",
+                        "quantity": "4",
+                        "price": "R$ 30,00"
+                    },
+                    "transaction_white": {
+                        "product": "Skinrender",
+                        "quantity": "4",
+                        "price": "R$ 9,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Island",
+                        "quantity": "12",
+                        "price": "R$ 4,00"
+                    },
+                    "transaction_white": {
+                        "product": "Mountain",
+                        "quantity": "12",
+                        "price": "R$ 4,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Plain",
+                        "quantity": "12",
+                        "price": "R$ 4,00"
+                    },
+                    "transaction_white": {
+                        "product": "Black Lotus",
+                        "quantity": "1",
+                        "price": "R$ 1.000,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Time Walk",
+                        "quantity": "1",
+                        "price": "R$ 1.000,00"
+                    },
+                    "transaction_white": {
+                        "product": "Emberclave",
+                        "quantity": "4",
+                        "price": "R$ 44,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Anax",
+                        "quantity": "4",
+                        "price": "R$ 32,00"
+                    },
+                    "transaction_white": {
+                        "product": "Murderous Rider",
+                        "quantity": "4",
+                        "price": "R$ 22,00"
+                    }
+                },               
+                {
+                    "transaction_gray": {
+                        "product": "Gray Merchant of Asphodel",
+                        "quantity": "4",
+                        "price": "R$ 2,00"
+                    },
+                    "transaction_white": {
+                        "product": "Ajani's Pridemate",
+                        "quantity": "4",
+                        "price": "R$ 2,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Renan, Chatuba",
+                        "quantity": "4",
+                        "price": "R$ 19,00"
+                    },
+                    "transaction_white": {
+                        "product": "Tymarett",
+                        "quantity": "4",
+                        "price": "R$ 13,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Doom Blade",
+                        "quantity": "4",
+                        "price": "R$ 5,00"
+                    },
+                    "transaction_white": {
+                        "product": "Dark Lord",
+                        "quantity": "3",
+                        "price": "R$ 7,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Memory of Thanatos",
+                        "quantity": "3",
+                        "price": "R$ 32,00"
+                    },
+                    "transaction_white": {
+                        "product": "Poring",
+                        "quantity": "4",
+                        "price": "R$ 1,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Deviling",
+                        "quantity": "4",
+                        "price": "R$ 99,00"
+                    },
+                    "transaction_white": {
+                        "product": "Seiya",
+                        "quantity": "4",
+                        "price": "R$ 45,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Harry Potter",
+                        "quantity": "4",
+                        "price": "R$ 62,00"
+                    },
+                    "transaction_white": {
+                        "product": "Goku",
+                        "quantity": "4",
+                        "price": "R$ 77,00"
+                    }
+                },               
+                {
+                    "transaction_gray": {
+                        "product": "Phreoni",
+                        "quantity": "4",
+                        "price": "R$ 22,00"
+                    },
+                    "transaction_white": {
+                        "product": "Katheryn High Wizard",
+                        "quantity": "4",
+                        "price": "R$ 25,00"
+                    }
+                },                
+                {
+                    "transaction_gray": {
+                        "product": "Lord Seyren",
+                        "quantity": "4",
+                        "price": "R$ 55,00"
+                    }
+                }
+            ],
+            "total_row": {
+                "total": "R$ 2.567,00"
+            },
+            "code_bar_row": {
+                "code": "5123.151231.512314.1251251.123215"
+            }
+        }
+    }
+}

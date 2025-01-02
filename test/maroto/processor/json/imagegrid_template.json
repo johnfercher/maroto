@@ -1,0 +1,304 @@
+{
+    "builder": {
+        "debug": true
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row1": {
+                "order": 1,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": true,
+                                "percent": 80
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": true,
+                                "percent": 80
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": true,
+                                "percent": 80
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row2": {
+                "order": 2,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": false,
+                                "percent": 50,
+                                "left": 10
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": false,
+                                "percent": 50,
+                                "top": 10
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": false,
+                                "percent": 50,
+                                "left": 15,
+                                "top": 15
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row3": {
+                "order": 3,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 8,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": true,
+                                "percent": 80
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": true,
+                                "percent": 80
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row4": {
+                "order": 4,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": false,
+                                "percent": 80,
+                                "top": 5,
+                                "left": 10
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": false,
+                                "percent": 80,
+                                "top": 5
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": false,
+                                "percent": 80,
+                                "left": 5
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row5": {
+                "order": 5,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": true,
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": true,
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": true,
+                                "percent": 50
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row6": {
+                "order": 6,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": true,
+                                "percent": 80
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": true,
+                                "percent": 80
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_autorow1": {
+                "order": 7,
+                "cols": [
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": true,
+                                "just_reference_width": true,
+                                "percent": 20
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/frontpage.png",
+                            "props": {
+                                "center": true,
+                                "just_reference_width": true,
+                                "percent": 30
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_autorow2": {
+                "order": 8,
+                "cols": [
+                    {
+                        "size": 2,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": false,
+                                "just_reference_width": true,
+                                "percent": 50,
+                                "left": 10
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": false,
+                                "just_reference_width": true,
+                                "percent": 50,
+                                "top": 10
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": false,
+                                "just_reference_width": true,
+                                "percent": 50,
+                                "left": 15,
+                                "top": 15
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,237 @@
+{
+    "builder": {
+        "debug": true
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "bar_code_row1": {
+                "order": 1,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "percent": 75
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "percent": 100
+                            }
+                        }
+                    }
+                ]
+            },
+            "bar_code_center_row1": {
+                "order": 2,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "center": true,
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "center": true,
+                                "percent": 75
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "center": true,
+                                "percent": 100
+                            }
+                        }
+                    }
+                ]
+            },
+            "bar_code_row2": {
+                "order": 3,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "percent": 75
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "percent": 100
+                            }
+                        }
+                    }
+                ]
+            },
+            "bar_code_center_row2": {
+                "order": 4,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "center": true,
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "center": true,
+                                "percent": 75
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "maroto_url",
+                            "props": {
+                                "center": true,
+                                "percent": 100
+                            }
+                        }
+                    }
+                ]
+            },
+            "bar_code_EAN_row2": {
+                "order": 5,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "code_number",
+                            "props": {
+                                "center": true,
+                                "type": "EAN"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "code_number",
+                            "props": {
+                                "center": true,
+                                "type": "EAN"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "code_number",
+                            "props": {
+                                "center": true,
+                                "type": "EAN"
+                            }
+                        }
+                    }
+                ]
+            },
+            "bar_code_auto_row": {
+                "order": 6,
+                "cols": [
+                    {
+                        "size": 2,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "code_number",
+                            "props": {
+                                "center": true,
+                                "type": "EAN"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "code_number",
+                            "props": {
+                                "center": true,
+                                "type": "EAN"
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "bar_code": {
+                            "order": 1,
+                            "source_key": "code_number",
+                            "props": {
+                                "center": true,
+                                "type": "EAN"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

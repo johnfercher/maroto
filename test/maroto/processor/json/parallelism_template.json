@@ -1,0 +1,31 @@
+{
+    "builder": {
+        "debug": true,
+        "concurrent_mode": 7,
+        "page_number": {}
+    },
+
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "list_rows": {
+                "order": 1,
+                "template_row": {
+                    "order": 1,
+                    "height": 10,
+                    "cols": [
+                        {
+                            "text": {
+                                "order": 1,
+                                "source_key": "text_value",
+                                "props": {
+                                    "size": 8
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,201 @@
+{
+    "builder": {
+        "debug": true
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "matrixcode_row": {
+                "order": 1,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 75
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 100
+                            }
+                        }
+                    }
+                ]
+            },
+            "matrixcode_center_row": {
+                "order": 2,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 50,
+                                "center": true
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 75,
+                                "center": true
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 100,
+                                "center": true
+                            }
+                        }
+                    }
+                ]
+            },
+            "inverse_matrixcode_row": {
+                "order": 3,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 75
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 100
+                            }
+                        }
+                    }
+                ]
+            },
+            "inverse_matrixcode_center_row": {
+                "order": 4,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 50,
+                                "center": true
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 75,
+                                "center": true
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 100,
+                                "center": true
+                            }
+                        }
+                    }
+                ]
+            },
+            "matrixcode_autorow": {
+                "order": 5,
+                "cols": [
+                    {
+                        "size": 6,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 20,
+                                "center": true,
+                                "just_reference_width": true
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 75,
+                                "center": true,
+                                "just_reference_width": true
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto",
+                            "props": {
+                                "percent": 100,
+                                "center": true,
+                                "just_reference_width": true
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

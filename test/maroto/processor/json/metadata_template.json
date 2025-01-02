@@ -1,0 +1,45 @@
+{
+    "builder": {
+        "metadata": {
+            "author": {
+                "text": "author",
+                "utf8": false
+            },
+            "creator": {
+                "text": "creator",
+                "utf8": false
+            },
+            "subject": {
+                "text": "subject",
+                "utf8": false
+            },
+            "title": {
+                "text": "title",
+                "utf8": false
+            },
+            "keywords": {
+                "text": "keyword",
+                "utf8": false
+            },
+            "creationDate": "2025-02-01 10:50:05"
+        }
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row": {
+                "height": 30,
+                "order": 1,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "metadatas"
+                        }
+                    }
+                ]
+               
+            }
+        }
+    }
+}

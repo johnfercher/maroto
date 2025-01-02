@@ -1,0 +1,230 @@
+{
+    "builder": {
+        "debug": true
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_row1": {
+                "order": 1,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "line": {
+                            "order": 1
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "line": {
+                            "order": 1
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "line": {
+                            "order": 1
+                        }
+                    }
+                ]
+            },
+            "template_row2": {
+                "order": 2,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "line": {
+                            "order": 1
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "line": {
+                            "order": 1
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "line": {
+                            "order": 1
+                        }
+                    }
+                ]
+            },
+            "template_row3": {
+                "order": 3,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "thickness": 0.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "color": {
+                                    "red": 255,
+                                    "green": 0,
+                                    "blue": 0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "orientation": "vertical"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row4": {
+                "order": 4,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 6,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "offset_percent": 50
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "offset_percent": 50,
+                                "orientation": "vertical"
+                            }
+                        }
+                    },
+                    {
+                        "size": 2,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "size_percent": 50
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_row5": {
+                "order": 5,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 2,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "style": "dashed"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "color": {
+                                    "red": 255,
+                                    "green": 0,
+                                    "blue": 0
+                                },
+                                "style": "dashed",
+                                "thickness": 0.8,
+                                "orientation": "vertical",
+                                "offset_percent": 70,
+                                "size_percent": 70
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "color": {
+                                    "red": 255,
+                                    "green": 0,
+                                    "blue": 0
+                                },
+                                "style": "dashed",
+                                "thickness": 0.8,
+                                "orientation": "horizontal",
+                                "offset_percent": 40,
+                                "size_percent": 40
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_autorow": {
+                "order": 6,
+                "cols": [
+                    {
+                        "size": 2,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "style": "dashed"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "color": {
+                                    "red": 255,
+                                    "green": 0,
+                                    "blue": 0
+                                },
+                                "style": "dashed",
+                                "thickness": 0.8,
+                                "orientation": "vertical",
+                                "offset_percent": 70,
+                                "size_percent": 70
+                            }
+                        }
+                    },
+                    {
+                        "size": 6,
+                        "line": {
+                            "order": 1,
+                            "props": {
+                                "color": {
+                                    "red": 255,
+                                    "green": 0,
+                                    "blue": 0
+                                },
+                                "style": "dashed",
+                                "thickness": 0.8,
+                                "orientation": "horizontal",
+                                "offset_percent": 40,
+                                "size_percent": 40
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

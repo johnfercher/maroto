@@ -1,0 +1,13 @@
+{
+    "value": "signature",
+    "type": "signature",
+    "details": {
+        "prop_font_color": "RGB(10, 10, 10)",
+        "prop_font_family": "Arial",
+        "prop_font_size": 10,
+        "prop_font_style": "bold",
+        "prop_line_color": "RGB(10, 10, 10)",
+        "prop_line_style": "solid",
+        "prop_line_thickness": 10
+    }
+}

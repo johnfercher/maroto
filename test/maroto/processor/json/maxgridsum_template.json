@@ -1,0 +1,374 @@
+{
+    "builder": {
+        "debug": true,
+        "max_grid_size": 14
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_title_row": {
+                "height": 10,
+                "order": 1,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value":"Table with 14 Columns",
+                            "props": {
+                                "style": "bold"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_header_row": {
+                "order": 2,
+                "height": 8,
+                "cols": [
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 0",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 1",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 2",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 3",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 4",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 5",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 6",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 7",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 8",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 9",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 10",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 11",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 12",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "H 13",
+                            "props": {
+                                "style": "bold",
+                                "top": 1.5,
+                                "left": 1.5
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_content_row": {
+                "order": 3,
+                "height": 8,
+                "cols": [
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 0",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 1",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 2",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 3",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 4",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 5",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 6",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 7",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 8",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 9",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 10",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 11",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 12",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    },
+                    {
+                        "size": 1,
+                        "text": {
+                            "order": 1,
+                            "value": "C 13",
+                            "props": {
+                                "top": 1,
+                                "size": 9,
+                                "left": 1.5
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

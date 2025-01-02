@@ -25,8 +25,8 @@ type Dependencies struct {
 	Cfg        *entity.Config
 }
 
-// Builder is the dependencies builder for gofpdf
-type Builder interface {
+// BuilderProvider is the dependencies builder for gofpdf
+type BuilderProvider interface {
 	Build(cfg *entity.Config, cache cache.Cache) *Dependencies
 }
 

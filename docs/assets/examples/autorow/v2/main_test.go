@@ -7,6 +7,8 @@ import (
 )
 
 func TestGetMaroto(t *testing.T) {
+	test.SetupTestDir(t)
+
 	// Act
 	sut := GetMaroto()
 

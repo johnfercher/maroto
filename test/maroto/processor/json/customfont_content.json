@@ -1,0 +1,561 @@
+{
+    "pages": {
+        "template_page": {
+            "template_header_row": {
+                "column_1": "Language",
+                "column_2": "Phrase: Talk is cheap. Show me the code."
+            },
+            "list_languages": [
+                {
+                    "template_white_row": {
+                        "content_column_1": "Albanês",
+                        "content_column_2": "Biseda është e lirë. Më trego kodin."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Africâner",
+                        "content_column_2": "Praat is goedkoop. Wys my die kode."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Amárico",
+                        "content_column_2": "ወሬ ርካሽ ነው ፡፡ ኮዱን አሳዩኝ ፡፡"
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Alemão",
+                        "content_column_2": "Reden ist billig. Zeig mir den Code."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Armênio",
+                        "content_column_2": "Խոսակցությունն էժան է: Showույց տվեք ինձ ծածկագիրը:"
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Árabe",
+                        "content_column_2": "كلام رخيص. أرني الكود."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Basco",
+                        "content_column_2": "Eztabaida merkea da. Erakutsi kodea."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Azerbaijano",
+                        "content_column_2": "Danışıq ucuzdur. Kodu göstərin."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Bielorusso",
+                        "content_column_2": "Размовы танныя. Пакажыце мне код."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Bengali",
+                        "content_column_2": "টক সস্তা। আমাকে কোডটি দেখান"
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Bósnio",
+                        "content_column_2": "Govor je jeftin. Pokaži mi šifru."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Birmanês",
+                        "content_column_2": "ဟောပြောချက်ကစျေးပေါတယ် ကုဒ်ကိုပြပါ။"
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Canarim",
+                        "content_column_2": "ಮಾತುಕತೆ ಅಗ್ಗವಾಗಿದೆ. ನನಗೆ ಕೋಡ್ ತೋರಿಸಿ."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Búlgaro",
+                        "content_column_2": "Разговорите са евтини. Покажи ми кода."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Cazeque",
+                        "content_column_2": "Сөйлесу арзан. Маған кодты көрсетіңіз."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Catalão",
+                        "content_column_2": "Parlar és barat. Mostra’m el codi."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Chinês Simplificado",
+                        "content_column_2": "谈话很便宜。给我看代码。"
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Cebuano",
+                        "content_column_2": "Barato ra ang sulti. Ipakita kanako ang code."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Cingalês",
+                        "content_column_2": "කතාව ලාභයි. කේතය මට පෙන්වන්න."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Chinês Tradicional",
+                        "content_column_2": "談話很便宜。給我看代碼。"
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Corso",
+                        "content_column_2": "Parlà hè bonu. Mostrami u codice."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Coreano",
+                        "content_column_2": "토크는 싸다. 코드를 보여주세요."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Curdo",
+                        "content_column_2": "Axaftin erzan e. Kodê nîşanî min bidin."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Croata",
+                        "content_column_2": "Razgovor je jeftin. Pokaži mi šifru."
+                    }
+                },
+                {
+                    "template_white_row": {
+                        "content_column_1": "Eslovaco",
+                        "content_column_2": "Hovor je lacný. Ukáž mi kód."
+                    },
+                    "template_white_gray": {
+                        "content_column_1": "Dinamarquês",
+                        "content_column_2": "Tal er billig. Vis mig koden."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Esloveno",
+                        "content_column_2": "Pogovor je poceni. Pokaži mi kodo."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Espanhol",
+                        "content_column_2": "Hablar es barato. Enséñame el código."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Esperanto",
+                        "content_column_2": "Babilado estas malmultekosta. Montru al mi la kodon."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Estoniano",
+                        "content_column_2": "Rääkimine on odav. Näita mulle koodi."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Filipino",
+                        "content_column_2": "Mura ang usapan. Ipakita sa akin ang code."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Finlandês",
+                        "content_column_2": "Puhe on halpaa. Näytä koodi."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Francês",
+                        "content_column_2": "Parler n'est pas cher. Montre-moi le code."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Frísio Ocidental",
+                        "content_column_2": "Prate is goedkeap. Lit my de koade sjen."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Gaélico Escocês",
+                        "content_column_2": "Tha còmhradh saor. Seall dhomh an còd."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Galego",
+                        "content_column_2": "Falar é barato. Móstrame o código."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Galês",
+                        "content_column_2": "Mae siarad yn rhad. Dangoswch y cod i mi."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Georgiano",
+                        "content_column_2": "აუბარი იაფია. მაჩვენე კოდი."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Grego",
+                        "content_column_2": "Η συζήτηση είναι φθηνή. Δείξε μου τον κωδικό."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Guzerate",
+                        "content_column_2": "વાતો કરવી સસ્તી છે. મને કોડ બતાવો."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Haitiano",
+                        "content_column_2": "Pale bon mache. Montre m kòd la."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Hauçá",
+                        "content_column_2": "Magana tana da arha. Nuna min lambar."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Havaiano",
+                        "content_column_2": "Kūʻai ke kamaʻilio. E hōʻike mai iaʻu i ke pāʻālua."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Hebraico",
+                        "content_column_2": "הדיבורים זולים. הראה לי את הקוד."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Híndi",
+                        "content_column_2": "बोलना आसान है। मुझे कोड दिखाओ।"
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Hmong",
+                        "content_column_2": "Kev hais lus yog pheej yig. Qhia kuv cov code."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Holandês",
+                        "content_column_2": "Praten is goedkoop. Laat me de code zien."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Húngaro",
+                        "content_column_2": "Beszélni olcsó. Mutasd meg a kódot."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Igbo",
+                        "content_column_2": "Okwu dị ọnụ ala. Gosi m koodu."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Lídiche",
+                        "content_column_2": "רעדן איז ביליק. ווייַזן מיר דעם קאָד."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Indonésio",
+                        "content_column_2": "Berbicara itu murah. Tunjukkan kodenya."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Inglês",
+                        "content_column_2": "Talk is cheap. Show me the code."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Iorubá",
+                        "content_column_2": "Ọrọ jẹ olowo poku. Fi koodu naa han mi."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Irlandês",
+                        "content_column_2": "Tá caint saor. Taispeáin dom an cód."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Islandês",
+                        "content_column_2": "Tal er ódýrt. Sýndu mér kóðann."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Italiano",
+                        "content_column_2": "Parlare è economico. Mostrami il codice."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Japonês",
+                        "content_column_2": "口で言うだけなら簡単です。コードを見せてください。"
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Javanês",
+                        "content_column_2": "Omongan iku murah. Tampilake kode kasebut."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Khmer",
+                        "content_column_2": "ការនិយាយគឺថោក។ បង្ហាញលេខកូដមកខ្ញុំ"
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Laosiano",
+                        "content_column_2": "ການສົນທະນາແມ່ນລາຄາຖືກ. ສະແດງລະຫັດໃຫ້ຂ້ອຍ."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Latim",
+                        "content_column_2": "Disputatio vilis est. Ostende mihi codice."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Letão",
+                        "content_column_2": "Saruna ir lēta. Parādiet man kodu."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Lituano",
+                        "content_column_2": "Kalbėti pigu. Parodyk man kodą."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Luxemburguês",
+                        "content_column_2": "Schwätzen ass bëlleg. Weist mir de Code."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Macedônio",
+                        "content_column_2": "Зборувањето е ефтино. Покажи ми го кодот."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Malaiala",
+                        "content_column_2": "സംസാരം വിലകുറഞ്ഞതാണ്. എനിക്ക് കോഡ് കാണിക്കുക."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Malaio",
+                        "content_column_2": "Perbincangan murah. Tunjukkan kod saya."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Malgaxe",
+                        "content_column_2": "Mora ny resaka. Asehoy ahy ny kaody."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Maltês",
+                        "content_column_2": "It-taħdita hija rħisa. Urini l-kodiċi."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Maori",
+                        "content_column_2": "He iti te korero. Whakaatuhia mai te tohu."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Marati",
+                        "content_column_2": "चर्चा स्वस्त आहे. मला कोड दाखवा."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Mongol",
+                        "content_column_2": "Яриа хямд. Надад кодоо харуул."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Nepalês",
+                        "content_column_2": "कुरा सस्तो छ। मलाई कोड देखाउनुहोस्।"
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Nianja",
+                        "content_column_2": "Kulankhula ndikotsika mtengo. Ndiwonetseni nambala"
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Norueguês",
+                        "content_column_2": "Snakk er billig. Vis meg koden."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Oriá",
+                        "content_column_2": "କଥାବାର୍ତ୍ତା ଶସ୍ତା ଅଟେ | ମୋତେ କୋଡ୍ ଦେଖାନ୍ତୁ |"
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Panjabi",
+                        "content_column_2": "ਗੱਲ ਸਸਤਾ ਹੈ. ਮੈਨੂੰ ਕੋਡ ਦਿਖਾਓ."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Pashto",
+                        "content_column_2": "خبرې ارزانه دي. ما ته کوډ وښایاست"
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Persa",
+                        "content_column_2": "بحث ارزان است. کد را به من نشان دهید"
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Polonês",
+                        "content_column_2": "Rozmowa jest tania. Pokaż mi kod."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Português",
+                        "content_column_2": "Falar é fácil. Mostre-me o código."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Quiniaruanda",
+                        "content_column_2": "Ibiganiro birahendutse. Nyereka kode."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Quirguiz",
+                        "content_column_2": "Сүйлөшүү арзан. Мага кодду көрсөтүңүз."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Romeno",
+                        "content_column_2": "Vorbirea este ieftină. Arată-mi codul."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Russo",
+                        "content_column_2": "Обсуждение дешево. Покажи мне код."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Samoano",
+                        "content_column_2": "E taugofie talanoaga. Faʻaali mai le code."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Sérvio",
+                        "content_column_2": "Причање је јефтино. Покажи ми шифру."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Sindi",
+                        "content_column_2": "ڳالهه سستا آهي. مونکي ڪوڊ ڏيکاريو."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Somali",
+                        "content_column_2": "Hadalku waa jaban yahay. I tus lambarka."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Soto do Sul",
+                        "content_column_2": "Puo e theko e tlase. Mpontshe khoutu."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Suaíli",
+                        "content_column_2": "Mazungumzo ni ya bei rahisi. Nionyeshe nambari."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Sueco",
+                        "content_column_2": "Prat är billigt. Visa mig koden."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Sundanês",
+                        "content_column_2": "Omongan mirah. Tunjukkeun kode na."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Tadjique",
+                        "content_column_2": "Сӯҳбат арзон аст. Рамзро ба ман нишон диҳед."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Tailandês",
+                        "content_column_2": "พูดคุยราคาถูก แสดงรหัส"
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Tâmil",
+                        "content_column_2": "பேச்சு மலிவானது. குறியீட்டை எனக்குக் காட்டு."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Tártaro",
+                        "content_column_2": "Сөйләшү арзан. Миңа код күрсәтегез."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Tcheco",
+                        "content_column_2": "Mluvení je levné. Ukaž mi kód."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Télugo",
+                        "content_column_2": "చర్చ చౌకగా ఉంటుంది. నాకు కోడ్ చూపించు."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Turco",
+                        "content_column_2": "Konuşma ucuz. Bana kodu göster."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Turcomeno",
+                        "content_column_2": "Gepleşik arzan. Kody görkez"
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Ucraniano",
+                        "content_column_2": "Розмова дешева. Покажи мені код."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Uigur",
+                        "content_column_2": "پاراڭ ئەرزان. ماڭا كودنى كۆرسەت."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Urdu",
+                        "content_column_2": "بات گھٹیا ہے. مجھے کوڈ دکھائیں۔"
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Uzbeque",
+                        "content_column_2": "Gapirish arzon. Menga kodni ko'rsating."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Vietnamita",
+                        "content_column_2": "Nói chuyện là rẻ. Cho tôi xem mã."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Xhosa",
+                        "content_column_2": "Ukuthetha akubizi. Ndibonise ikhowudi."
+                    },
+                    "template_white_row": {
+                        "content_column_1": "Xona",
+                        "content_column_2": "Kutaura kwakachipa. Ndiratidze kodhi."
+                    }
+                },
+                {
+                    "template_white_gray": {
+                        "content_column_1": "Zulu",
+                        "content_column_2": "Ukukhuluma kushibhile. Ngikhombise ikhodi."
+                    }
+                }
+            ],
+            "template_long_text_row": {
+                "long_text": "聲音之道㣲矣天地有自然之聲人聲有自然之節古之聖人得其節之自然者而為之依永和聲至於八音諧而神人和胥是道也文字之作無不講求音韻顧南北異其風土古今殊其轉變喉舌唇齒清濁輕重之分辨在毫釐動多訛舛樊然淆混不可究極自西域梵僧定字母為三十六分五音以總天下之聲而翻切之學興儒者若司馬光鄭樵皆宗之其法有音和類隔互用借聲類例不一後人苦其委曲繁重難以驟曉往往以類隔互用之切改從音和而終莫能得其原也我聖祖仁皇帝"
+            }
+        }
+    }
+}

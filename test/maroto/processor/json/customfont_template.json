@@ -1,0 +1,183 @@
+{
+    "builder": {
+        "custom_fonts": [
+            {
+                "family": "arial-unicode-ms",
+                "style": "",
+                "file_path": "docs/assets/fonts/arial-unicode-ms.ttf"
+            },
+            {
+                "family": "arial-unicode-ms",
+                "style": "italic",
+                "file_path": "docs/assets/fonts/arial-unicode-ms.ttf"
+            },
+            {
+                "family": "arial-unicode-ms",
+                "style": "bold",
+                "file_path": "docs/assets/fonts/arial-unicode-ms.ttf"
+            },
+            {
+                "family": "arial-unicode-ms",
+                "style": "bold_italic",
+                "file_path": "docs/assets/fonts/arial-unicode-ms.ttf"
+            }
+        ],
+        "default_font": {
+            "family": "arial-unicode-ms"
+        }
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "template_header_row": {
+                "order": 1,
+                "height": 8,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "props": {
+                                "style": "bold",
+                                "family": "arial",
+                                "align": "center"
+                            },
+                            "source_key": "column_1"
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "text": {
+                            "order": 1,
+                            "props": {
+                                "style": "bold",
+                                "family": "arial",
+                                "align": "center"
+                            },
+                            "source_key": "column_2"
+                        }
+                    }
+                ]
+            },
+            "list_languages": {
+                "order": 2,
+                "template_white_gray": {
+                    "height": 5,
+                    "order": 1,
+                    "props": {
+                        "background_color": {
+                            "red": 200,
+                            "green": 200,
+                            "blue": 200
+                        }
+                    },
+                    "cols": [
+                        {
+                            "size": 4,
+                            "text": {
+                                "order": 1,
+                                "source_key": "content_column_1",
+                                "props": {
+                                    "align": "center"
+                                }
+                            }
+                        },
+                        {
+                            "size": 8,
+                            "text": {
+                                "order": 1,
+                                "source_key": "content_column_2",
+                                "props": {
+                                    "align": "center"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "template_white_row": {
+                    "height": 5,
+                    "order": 2,
+                    "cols": [
+                        {
+                            "size": 4,
+                            "text": {
+                                "order": 1,
+                                "source_key": "content_column_1",
+                                "props": {
+                                    "align": "center"
+                                }
+                            }
+                        },
+                        {
+                            "size": 8,
+                            "text": {
+                                "order": 1,
+                                "source_key": "content_column_2",
+                                "props": {
+                                    "align": "center"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "template_long_text_title_row": {
+                "order": 3,
+                "height": 10,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "long text without spaces",
+                            "props": {
+                                "top": 5,
+                                "style": "bold",
+                                "family": "arial"
+                            }
+                        }
+                    }
+                ]
+            },
+            "template_long_text_row": {
+                "order": 4,
+                "height": 80,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "source_key": "long_text",
+                            "props": {
+                                "align": "center",
+                                "break_line_strategy": "dash_strategy"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "source_key": "long_text",
+                            "props": {
+                                "align": "left",
+                                "break_line_strategy": "dash_strategy"
+                            }
+                        }
+                    },
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "source_key": "long_text",
+                            "props": {
+                                "align": "right",
+                                "break_line_strategy": "dash_strategy"
+                            }
+                        }
+                    }
+                ]
+            }
+
+        }
+    }
+}

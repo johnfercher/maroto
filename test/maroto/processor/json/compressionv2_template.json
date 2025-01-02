@@ -1,0 +1,229 @@
+{
+    "builder": {
+        "compression": true
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "title_row": {
+                "order": 1,
+                "height": 20,
+                "cols": [
+                    {
+                        "text": {
+                            "order": 1,
+                            "value": "Main features",
+                            "props": {
+                                "size": 15,
+                                "top": 6.5
+                            }
+                        }
+                    }
+                ]
+            },
+            "barcode_row": {
+                "order": 2,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Barcode:",
+                            "props": {
+                                "size": 15,
+                                "top": 6,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "bar_code": {
+                            "order": 1,
+                            "value": "barcode",
+                            "props": {
+                                "center": true,
+                                "percent": 70
+                            }
+                        }
+                    }
+                ]
+            },
+            "qrcode_row": {
+                "order": 3,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "QrCode:",
+                            "props": {
+                                "size": 15,
+                                "top": 6,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "qr_code": {
+                            "order": 1,
+                            "value": "qrcode",
+                            "props": {
+                                "center": true,
+                                "percent": 70
+                            }
+                        }
+                    }
+                ]
+            },
+            "matrixcode_row": {
+                "order": 4,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "MatrixCode:",
+                            "props": {
+                                "size": 15,
+                                "top": 6,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "matrix_code": {
+                            "order": 1,
+                            "value": "matrixcode",
+                            "props": {
+                                "center": true,
+                                "percent": 70
+                            }
+                        }
+                    }
+                ]
+            },
+            "image_file_row": {
+                "order": 5,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Image From File:",
+                            "props": {
+                                "size": 15,
+                                "top": 6,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "image": {
+                            "order": 1,
+                            "value": "docs/assets/images/biplane.jpg",
+                            "props": {
+                                "center": true,
+                                "percent": 90
+                            }
+                        }
+                    }
+                ]
+            },
+            "image_base64_row": {
+                "order": 6,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Image From Base64::",
+                            "props": {
+                                "size": 15,
+                                "top": 6,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "image": {
+                            "order": 1,
+                            "value": "https://github.com/johnfercher/maroto/blob/master/docs/assets/images/frontpage.png?raw=true",
+                            "props": {
+                                "center": true,
+                                "percent": 90
+                            }
+                        }
+                    }
+                ]
+            },
+            "text_row": {
+                "order": 7,
+                "height": 20,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Text:",
+                            "props": {
+                                "size": 15,
+                                "top": 6,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "text": {
+                            "order": 1,
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem.",
+                            "props": {
+                                "size": 12,
+                                "top": 5,
+                                "align": "center"
+                            }
+                        }
+                    }
+                ]
+            },
+            "signature_row": {
+                "order": 8,
+                "height": 40,
+                "cols": [
+                    {
+                        "size": 4,
+                        "text": {
+                            "order": 1,
+                            "value": "Signature:",
+                            "props": {
+                                "size": 15,
+                                "top": 17,
+                                "align": "center"
+                            }
+                        }
+                    },
+                    {
+                        "size": 8,
+                        "signature": {
+                            "order": 1,
+                            "value": "Name",
+                            "props": {
+                                "font_size": 10
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
