@@ -1,0 +1,58 @@
+{
+    "pages": {
+        "template_page": {
+            "list_rows": [
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                },
+                {
+                    "template_row": {
+                        "text_value": "any text"
+                    }
+                }
+            ]
+        }
+    }
+}

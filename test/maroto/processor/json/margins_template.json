@@ -1,0 +1,63 @@
+{
+    "builder": {
+        "debug": true,
+        "margins": {
+            "top": 20,
+            "left": 20,
+            "right": 20
+        }
+    },
+    "header": {
+        "template_row": {
+            "order": 1,
+            "height": 40,
+            "cols": [
+                {
+                    "size": 4,
+                    "image": {
+                        "order": 1,
+                        "value": "docs/assets/images/gopherbw.png",
+                        "props": {
+                            "center": true,
+                            "percent": 50
+                        }
+                    }
+                },
+                {
+                    "size": 4,
+                    "text": {
+                        "order": 1,
+                        "value": "Margins Test",
+                        "props": {
+                            "size": 12,
+                            "top": 12
+                        }
+                    }
+                },
+                {
+                    "size": 4
+                }
+            ]
+        }
+    },
+    "pages": {
+        "template_page": {
+            "order": 1,
+            "list_rows": {
+                "order": 1,
+                "template_row": {
+                    "order": 1,
+                    "height": 30,
+                    "cols": [
+                        {
+                            "text": {
+                                "order": 1,
+                                "source_key": "text_value"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
