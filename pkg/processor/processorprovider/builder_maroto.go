@@ -84,7 +84,7 @@ func (m *MarotoBuilder) WithConcurrentMode(chunkWorkers int) *MarotoBuilder {
 
 // WithSequentialMode defines that maroto will run in default mode.
 func (m *MarotoBuilder) WithSequentialMode(on bool) *MarotoBuilder {
-	m.cfg.WithSequentialMode()
+	validAndRun(func() { m.cfg.WithSequentialMode() }, on)
 	return m
 }
 
