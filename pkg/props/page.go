@@ -71,8 +71,9 @@ func (p *PageNumber) GetNumberTextProp(height float64) *Text {
 
 	if p.Place == RightBottom || p.Place == Bottom || p.Place == LeftBottom {
 		text.Top = height
-		text.Top += p.MarginTop
 	}
+
+	text.Top += p.MarginTop
 	text.Left += p.MarginLeft
 
 	text.BreakLineStrategy = breakline.EmptySpaceStrategy
@@ -111,12 +112,16 @@ func (p *PageNumber) AppendMap(m map[string]interface{}) map[string]interface{} 
 		m["page_number_pattern"] = p.Pattern
 	}
 
+	if p.Place != "" {
+		m["page_number_place"] = p.Place
+	}
+
 	if p.MarginTop != 0 {
 		m["page_number_margin_top"] = p.MarginTop
 	}
 
-	if p.Place != "" {
-		m["page_number_place"] = p.Place
+	if p.MarginLeft != 0 {
+		m["page_number_margin_left"] = p.MarginLeft
 	}
 
 	if p.Family != "" {
