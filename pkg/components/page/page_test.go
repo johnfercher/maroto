@@ -118,7 +118,7 @@ func TestPage_Render(t *testing.T) {
 
 		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddBackgroundImageFromBytes(cfg.BackgroundImage.Bytes, &cell, rectProp, cfg.BackgroundImage.Extension)
-		provider.EXPECT().AddText("0 / 0", &cell, prop.GetNumberTextProp(cell.Height))
+		provider.EXPECT().AddPageNumber(0, 0, &prop, &cell)
 		row := mocks.NewRow(t)
 		row.EXPECT().Render(provider, cell)
 		row.EXPECT().GetHeight(provider, &cell).Return(10.0)
@@ -133,7 +133,7 @@ func TestPage_Render(t *testing.T) {
 
 		// Assert
 		provider.AssertNumberOfCalls(t, "AddBackgroundImageFromBytes", 1)
-		provider.AssertNumberOfCalls(t, "AddText", 1)
+		provider.AssertNumberOfCalls(t, "AddPageNumber", 1)
 		row.AssertNumberOfCalls(t, "Render", 1)
 		row.AssertNumberOfCalls(t, "GetHeight", 1)
 	})
