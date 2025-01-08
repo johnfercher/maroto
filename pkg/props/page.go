@@ -37,10 +37,12 @@ func (p Place) IsValid() bool {
 type PageNumber struct {
 	// Pattern is the string pattern which will be used to apply the page count component.
 	Pattern string
-	// MarginTop is the margin top of the page count component.
-	MarginTop float64
 	// Place defines where the page count component will be placed.
 	Place Place
+	// MarginTop is the margin top of the page count component.
+	MarginTop float64
+	// MarginRight is the margin right of the page count component.
+	MarginLeft float64
 	// Family defines which font family will be applied to page count.
 	Family string
 	// Style defines which font style will be applied to page count.
@@ -69,10 +71,9 @@ func (p *PageNumber) GetNumberTextProp(height float64) *Text {
 
 	if p.Place == RightBottom || p.Place == Bottom || p.Place == LeftBottom {
 		text.Top = height
-		if p.MarginTop != 0 {
-			text.Top += p.MarginTop
-		}
+		text.Top += p.MarginTop
 	}
+	text.Left += p.MarginLeft
 
 	text.BreakLineStrategy = breakline.EmptySpaceStrategy
 
