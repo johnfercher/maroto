@@ -406,7 +406,8 @@ func TestMaroto_Generate(t *testing.T) {
 	})
 	t.Run("when two pages are sent and page number is active, should add page number", func(t *testing.T) {
 		pageNumber := props.PageNumber{
-			MarginTop: 1,
+			MarginTop:  1,
+			MarginLeft: 2,
 		}
 		// Arrange
 		cfg := config.NewBuilder().
