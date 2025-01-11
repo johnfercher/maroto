@@ -235,42 +235,6 @@ func (_c *Provider_AddMatrixCode_Call) RunAndReturn(run func(string, *entity.Cel
 	return _c
 }
 
-// AddPageNumber provides a mock function with given fields: current, total, pg, cell
-func (_m *Provider) AddPageNumber(current int, total int, pg *props.PageNumber, cell *entity.Cell) {
-	_m.Called(current, total, pg, cell)
-}
-
-// Provider_AddPageNumber_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddPageNumber'
-type Provider_AddPageNumber_Call struct {
-	*mock.Call
-}
-
-// AddPageNumber is a helper method to define mock.On call
-//   - current int
-//   - total int
-//   - pg *props.PageNumber
-//   - cell *entity.Cell
-func (_e *Provider_Expecter) AddPageNumber(current interface{}, total interface{}, pg interface{}, cell interface{}) *Provider_AddPageNumber_Call {
-	return &Provider_AddPageNumber_Call{Call: _e.mock.On("AddPageNumber", current, total, pg, cell)}
-}
-
-func (_c *Provider_AddPageNumber_Call) Run(run func(current int, total int, pg *props.PageNumber, cell *entity.Cell)) *Provider_AddPageNumber_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(int), args[1].(int), args[2].(*props.PageNumber), args[3].(*entity.Cell))
-	})
-	return _c
-}
-
-func (_c *Provider_AddPageNumber_Call) Return() *Provider_AddPageNumber_Call {
-	_c.Call.Return()
-	return _c
-}
-
-func (_c *Provider_AddPageNumber_Call) RunAndReturn(run func(int, int, *props.PageNumber, *entity.Cell)) *Provider_AddPageNumber_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
 // AddQrCode provides a mock function with given fields: code, cell, rect
 func (_m *Provider) AddQrCode(code string, cell *entity.Cell, rect *props.Rect) {
 	_m.Called(code, cell, rect)
@@ -306,9 +270,16 @@ func (_c *Provider_AddQrCode_Call) RunAndReturn(run func(string, *entity.Cell, *
 	return _c
 }
 
-// AddText provides a mock function with given fields: text, cell, prop
-func (_m *Provider) AddText(text string, cell *entity.Cell, prop *props.Text) {
-	_m.Called(text, cell, prop)
+// AddText provides a mock function with given fields: text, cell, prop, usePageMargin
+func (_m *Provider) AddText(text string, cell *entity.Cell, prop *props.Text, usePageMargin ...bool) {
+	_va := make([]interface{}, len(usePageMargin))
+	for _i := range usePageMargin {
+		_va[_i] = usePageMargin[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, text, cell, prop)
+	_ca = append(_ca, _va...)
+	_m.Called(_ca...)
 }
 
 // Provider_AddText_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddText'
@@ -320,13 +291,21 @@ type Provider_AddText_Call struct {
 //   - text string
 //   - cell *entity.Cell
 //   - prop *props.Text
-func (_e *Provider_Expecter) AddText(text interface{}, cell interface{}, prop interface{}) *Provider_AddText_Call {
-	return &Provider_AddText_Call{Call: _e.mock.On("AddText", text, cell, prop)}
+//   - usePageMargin ...bool
+func (_e *Provider_Expecter) AddText(text interface{}, cell interface{}, prop interface{}, usePageMargin ...interface{}) *Provider_AddText_Call {
+	return &Provider_AddText_Call{Call: _e.mock.On("AddText",
+		append([]interface{}{text, cell, prop}, usePageMargin...)...)}
 }
 
-func (_c *Provider_AddText_Call) Run(run func(text string, cell *entity.Cell, prop *props.Text)) *Provider_AddText_Call {
+func (_c *Provider_AddText_Call) Run(run func(text string, cell *entity.Cell, prop *props.Text, usePageMargin ...bool)) *Provider_AddText_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(*entity.Cell), args[2].(*props.Text))
+		variadicArgs := make([]bool, len(args)-3)
+		for i, a := range args[3:] {
+			if a != nil {
+				variadicArgs[i] = a.(bool)
+			}
+		}
+		run(args[0].(string), args[1].(*entity.Cell), args[2].(*props.Text), variadicArgs...)
 	})
 	return _c
 }
@@ -336,7 +315,7 @@ func (_c *Provider_AddText_Call) Return() *Provider_AddText_Call {
 	return _c
 }
 
-func (_c *Provider_AddText_Call) RunAndReturn(run func(string, *entity.Cell, *props.Text)) *Provider_AddText_Call {
+func (_c *Provider_AddText_Call) RunAndReturn(run func(string, *entity.Cell, *props.Text, ...bool)) *Provider_AddText_Call {
 	_c.Call.Return(run)
 	return _c
 }

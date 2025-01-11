@@ -14,6 +14,8 @@
 		"maroto_dimension_width": 210,
 		"page_number_color": "RGB(255, 0, 0)",
 		"page_number_family": "courier",
+		"page_number_margin_left": 188,
+		"page_number_margin_top": 26,
 		"page_number_pattern": "Page {current} of {total}",
 		"page_number_place": "bottom",
 		"page_number_size": 9,

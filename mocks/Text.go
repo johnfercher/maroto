@@ -22,9 +22,16 @@ func (_m *Text) EXPECT() *Text_Expecter {
 	return &Text_Expecter{mock: &_m.Mock}
 }
 
-// Add provides a mock function with given fields: text, cell, textProp
-func (_m *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
-	_m.Called(text, cell, textProp)
+// Add provides a mock function with given fields: text, cell, textProp, usePageMargin
+func (_m *Text) Add(text string, cell *entity.Cell, textProp *props.Text, usePageMargin ...bool) {
+	_va := make([]interface{}, len(usePageMargin))
+	for _i := range usePageMargin {
+		_va[_i] = usePageMargin[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, text, cell, textProp)
+	_ca = append(_ca, _va...)
+	_m.Called(_ca...)
 }
 
 // Text_Add_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Add'
@@ -36,13 +43,21 @@ type Text_Add_Call struct {
 //   - text string
 //   - cell *entity.Cell
 //   - textProp *props.Text
-func (_e *Text_Expecter) Add(text interface{}, cell interface{}, textProp interface{}) *Text_Add_Call {
-	return &Text_Add_Call{Call: _e.mock.On("Add", text, cell, textProp)}
+//   - usePageMargin ...bool
+func (_e *Text_Expecter) Add(text interface{}, cell interface{}, textProp interface{}, usePageMargin ...interface{}) *Text_Add_Call {
+	return &Text_Add_Call{Call: _e.mock.On("Add",
+		append([]interface{}{text, cell, textProp}, usePageMargin...)...)}
 }
 
-func (_c *Text_Add_Call) Run(run func(text string, cell *entity.Cell, textProp *props.Text)) *Text_Add_Call {
+func (_c *Text_Add_Call) Run(run func(text string, cell *entity.Cell, textProp *props.Text, usePageMargin ...bool)) *Text_Add_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(*entity.Cell), args[2].(*props.Text))
+		variadicArgs := make([]bool, len(args)-3)
+		for i, a := range args[3:] {
+			if a != nil {
+				variadicArgs[i] = a.(bool)
+			}
+		}
+		run(args[0].(string), args[1].(*entity.Cell), args[2].(*props.Text), variadicArgs...)
 	})
 	return _c
 }
@@ -52,7 +67,7 @@ func (_c *Text_Add_Call) Return() *Text_Add_Call {
 	return _c
 }
 
-func (_c *Text_Add_Call) RunAndReturn(run func(string, *entity.Cell, *props.Text)) *Text_Add_Call {
+func (_c *Text_Add_Call) RunAndReturn(run func(string, *entity.Cell, *props.Text, ...bool)) *Text_Add_Call {
 	_c.Call.Return(run)
 	return _c
 }

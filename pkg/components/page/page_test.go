@@ -13,6 +13,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestNew(t *testing.T) {
@@ -107,6 +108,10 @@ func TestPage_Render(t *testing.T) {
 		cell := fixture.CellEntity()
 		prop := fixture.PageProp()
 		cfg := &entity.Config{
+			Dimensions: &entity.Dimensions{
+				Width:  100.0,
+				Height: 290.0,
+			},
 			BackgroundImage: &entity.Image{
 				Bytes:     []byte{1, 2, 3},
 				Extension: extension.Jpg,
@@ -118,7 +123,7 @@ func TestPage_Render(t *testing.T) {
 
 		provider := mocks.NewProvider(t)
 		provider.EXPECT().AddBackgroundImageFromBytes(cfg.BackgroundImage.Bytes, &cell, rectProp, cfg.BackgroundImage.Extension)
-		provider.EXPECT().AddPageNumber(0, 0, &prop, &cell)
+		provider.EXPECT().AddText(mock.Anything, &entity.Cell{X: cell.X, Y: cell.Y, Width: 100.0, Height: 290.0}, mock.Anything, false)
 		row := mocks.NewRow(t)
 		row.EXPECT().Render(provider, cell)
 		row.EXPECT().GetHeight(provider, &cell).Return(10.0)
@@ -133,7 +138,7 @@ func TestPage_Render(t *testing.T) {
 
 		// Assert
 		provider.AssertNumberOfCalls(t, "AddBackgroundImageFromBytes", 1)
-		provider.AssertNumberOfCalls(t, "AddPageNumber", 1)
+		provider.AssertNumberOfCalls(t, "AddText", 1)
 		row.AssertNumberOfCalls(t, "Render", 1)
 		row.AssertNumberOfCalls(t, "GetHeight", 1)
 	})
