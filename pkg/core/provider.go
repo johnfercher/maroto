@@ -14,8 +14,7 @@ type Provider interface {
 
 	// Features
 	AddLine(cell *entity.Cell, prop *props.Line)
-	AddText(text string, cell *entity.Cell, prop *props.Text)
-	AddPageNumber(current, total int, pg *props.PageNumber, cell *entity.Cell)
+	AddText(text string, cell *entity.Cell, prop *props.Text, usePageMargin ...bool)
 	GetFontHeight(prop *props.Font) float64
 	GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int
 	AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect)

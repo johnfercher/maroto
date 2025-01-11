@@ -46,12 +46,8 @@ func New(dep *Dependencies) core.Provider {
 	}
 }
 
-func (g *provider) AddText(text string, cell *entity.Cell, prop *props.Text) {
-	g.text.Add(text, cell, prop)
-}
-
-func (g *provider) AddPageNumber(number, total int, pg *props.PageNumber, cell *entity.Cell) {
-	g.text.Add(pg.GetPageString(number, total), cell, pg.GetNumberTextProp(cell.Height))
+func (g *provider) AddText(text string, cell *entity.Cell, prop *props.Text, usePageMargin ...bool) {
+	g.text.Add(text, cell, prop, usePageMargin...)
 }
 
 func (g *provider) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {

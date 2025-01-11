@@ -34,7 +34,7 @@ type Line interface {
 
 // Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
-	Add(text string, cell *entity.Cell, textProp *props.Text)
+	Add(text string, cell *entity.Cell, textProp *props.Text, usePageMargin ...bool)
 	GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int
 }
 

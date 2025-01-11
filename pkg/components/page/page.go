@@ -46,8 +46,15 @@ func (p *Page) Render(provider core.Provider, cell entity.Cell) {
 	}
 
 	if p.prop.Pattern != "" {
-		provider.AddPageNumber(p.number, p.total, &p.prop, &cell)
+		p.addPageNumber(cell.Copy(), provider)
 	}
+}
+
+func (p *Page) addPageNumber(cell entity.Cell, provider core.Provider) {
+	pageNumberCell := cell.Copy()
+	pageNumberCell.Height = p.config.Dimensions.Height
+	pageNumberCell.Width = p.config.Dimensions.Width
+	provider.AddText(p.prop.GetPageString(p.number, p.total), &pageNumberCell, p.prop.GetNumberTextProp(cell.Height), false)
 }
 
 // SetConfig sets the Page configuration.
