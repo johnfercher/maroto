@@ -35,11 +35,13 @@ func main() {
 
 func GetMaroto() core.Maroto {
 	pageNumber := props.PageNumber{
-		Pattern: "Page {current} of {total}",
-		Place:   props.Bottom,
-		Family:  fontfamily.Courier,
-		Style:   fontstyle.Bold,
-		Size:    9,
+		Pattern:    "Page {current} of {total}",
+		Place:      props.Bottom,
+		Family:     fontfamily.Courier,
+		Style:      fontstyle.Bold,
+		MarginTop:  26,
+		MarginLeft: 188,
+		Size:       9,
 		Color: &props.Color{
 			Red: 255,
 		},
