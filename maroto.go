@@ -208,7 +208,7 @@ func (m *Maroto) addRow(r core.Row) {
 	sumHeight := rowHeight + m.currentHeight + m.footerHeight
 
 	// Row smaller than the remain space on page
-	if sumHeight < maxHeight {
+	if sumHeight <= maxHeight {
 		m.currentHeight += rowHeight
 		m.rows = append(m.rows, r)
 		return
