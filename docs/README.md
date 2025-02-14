@@ -116,7 +116,7 @@ improved, enabling maroto to reach a whole new level in this fresh new step.
 [filename](https://raw.githubusercontent.com/johnfercher/maroto/master/pkg/core/core.go ':include :type=code')
 
 ## Unit Testing
-In maroto`v2`, is be possible to write unit tests by analyzing the **components tree**. To facilitate the 
+In maroto`v2`, it is possible to write unit tests by analyzing the **components tree**. To facilitate the 
 writing of unit tests, we created a dedicated test package.
 
 For an example, refer to [this link](v2/features/unittests?id=unit-testing).
