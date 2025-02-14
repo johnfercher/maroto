@@ -11,7 +11,7 @@ type Line struct {
 	Color *Color
 	// Style define the line style (solid or dashed).
 	Style linestyle.Type
-	// Thickness define the line thicknesl.
+	// Thickness define the line thickness.
 	Thickness float64
 	// Orientation define if line would be horizontal or vertical.
 	Orientation orientation.Type
