@@ -47,7 +47,9 @@ func Build[T Listable](arr []T) ([]core.Row, error) {
 	rows = append(rows, arr[0].GetHeader())
 
 	for i, element := range arr {
-		rows = append(rows, element.GetContent(i))
+		if element != nil {
+			rows = append(rows, element.GetContent(i))
+		}
 	}
 
 	return rows, nil
