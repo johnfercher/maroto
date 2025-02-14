@@ -26,6 +26,7 @@ type provider struct {
 	code       core.Code
 	image      core.Image
 	line       core.Line
+	heatMap    core.HeatMap
 	cache      cache.Cache
 	cellWriter cellwriter.CellWriter
 	cfg        *entity.Config
@@ -40,6 +41,7 @@ func New(dep *Dependencies) core.Provider {
 		code:       dep.Code,
 		image:      dep.Image,
 		line:       dep.Line,
+		heatMap:    dep.HeatMap,
 		cellWriter: dep.CellWriter,
 		cfg:        dep.Cfg,
 		cache:      dep.Cache,
@@ -266,6 +268,10 @@ func (g *provider) CreateCol(width, height float64, config *entity.Config, prop 
 
 func (g *provider) SetCompression(compression bool) {
 	g.fpdf.SetCompression(compression)
+}
+
+func (g *provider) AddHeatMap(heatMap [][]int, cell *entity.Cell, prop *props.HeatMap) {
+	g.heatMap.Add(heatMap, cell, g.cfg.Margins, prop)
 }
 
 func (g *provider) getBarcodeImageName(code string, prop *props.Barcode) string {
