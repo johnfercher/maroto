@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -55,7 +56,7 @@ func GetMaroto() core.Maroto {
 	m.AddRow(40,
 		text.NewCol(2, "Left-aligned text"),
 		text.NewCol(4, "Centered text", props.Text{Align: align.Center}),
-		text.NewCol(6, "Right-aligned text", props.Text{Align: align.Right}),
+		text.NewCol(6, "Right-aligned text", props.Text{Align: align.Right, Style: fontstyle.Strikethrough}),
 	)
 
 	m.AddRows(text.NewRow(10, "Aligned unindented text"))
