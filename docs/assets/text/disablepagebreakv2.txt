@@ -1,3 +1,3 @@
-generate -> avg: 130.19ms, executions: [130.19ms]
-add_page -> avg: 495.00ns, executions: [495.00ns]
+generate -> avg: 123.69ms, executions: [123.69ms]
+add_page -> avg: 18875.00ns, executions: [18.88μs]
 file_size -> 806.50Kb
