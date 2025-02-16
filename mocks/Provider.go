@@ -235,6 +235,42 @@ func (_c *Provider_AddMatrixCode_Call) RunAndReturn(run func(string, *entity.Cel
 	return _c
 }
 
+// AddPageNumber provides a mock function with given fields: current, total, pg, cell
+func (_m *Provider) AddPageNumber(current int, total int, pg *props.PageNumber, cell *entity.Cell) {
+	_m.Called(current, total, pg, cell)
+}
+
+// Provider_AddPageNumber_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddPageNumber'
+type Provider_AddPageNumber_Call struct {
+	*mock.Call
+}
+
+// AddPageNumber is a helper method to define mock.On call
+//   - current int
+//   - total int
+//   - pg *props.PageNumber
+//   - cell *entity.Cell
+func (_e *Provider_Expecter) AddPageNumber(current interface{}, total interface{}, pg interface{}, cell interface{}) *Provider_AddPageNumber_Call {
+	return &Provider_AddPageNumber_Call{Call: _e.mock.On("AddPageNumber", current, total, pg, cell)}
+}
+
+func (_c *Provider_AddPageNumber_Call) Run(run func(current int, total int, pg *props.PageNumber, cell *entity.Cell)) *Provider_AddPageNumber_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(int), args[1].(int), args[2].(*props.PageNumber), args[3].(*entity.Cell))
+	})
+	return _c
+}
+
+func (_c *Provider_AddPageNumber_Call) Return() *Provider_AddPageNumber_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *Provider_AddPageNumber_Call) RunAndReturn(run func(int, int, *props.PageNumber, *entity.Cell)) *Provider_AddPageNumber_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // AddQrCode provides a mock function with given fields: code, cell, rect
 func (_m *Provider) AddQrCode(code string, cell *entity.Cell, rect *props.Rect) {
 	_m.Called(code, cell, rect)

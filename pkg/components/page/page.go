@@ -46,7 +46,7 @@ func (p *Page) Render(provider core.Provider, cell entity.Cell) {
 	}
 
 	if p.prop.Pattern != "" {
-		provider.AddText(p.prop.GetPageString(p.number, p.total), &cell, p.prop.GetNumberTextProp(cell.Height))
+		provider.AddPageNumber(p.number, p.total, &p.prop, &cell)
 	}
 }
 
