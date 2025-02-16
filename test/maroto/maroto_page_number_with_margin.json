@@ -15,6 +15,8 @@
 		"page_number_family": "arial",
 		"page_number_pattern": "{current} / {total}",
 		"page_number_place": "bottom",
+		"page_number_margin_top": 1,
+		"page_number_margin_left": 2,
 		"page_number_size": 10,
 		"prop_font_color": "RGB(0, 0, 0)",
 		"prop_font_family": "arial",

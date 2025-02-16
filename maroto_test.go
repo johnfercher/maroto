@@ -405,6 +405,23 @@ func TestMaroto_Generate(t *testing.T) {
 		assert.Equal(t, initialGoroutines, finalGoroutines)
 	})
 	t.Run("when two pages are sent and page number is active, should add page number", func(t *testing.T) {
+		pageNumber := props.PageNumber{}
+		// Arrange
+		cfg := config.NewBuilder().
+			WithPageNumber(pageNumber).
+			Build()
+
+		sut := maroto.New(cfg)
+
+		// Act
+		for i := 0; i < 30; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_page_number.json")
+	})
+	t.Run("when page number is active with margin, should generate margin", func(t *testing.T) {
 		pageNumber := props.PageNumber{
 			MarginTop:  1,
 			MarginLeft: 2,
@@ -422,7 +439,7 @@ func TestMaroto_Generate(t *testing.T) {
 		}
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("maroto_page_number.json")
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_page_number_with_margin.json")
 	})
 }
 
