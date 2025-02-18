@@ -20,6 +20,7 @@ type Provider interface {
 	AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect)
 	AddQrCode(code string, cell *entity.Cell, rect *props.Rect)
 	AddBarCode(code string, cell *entity.Cell, prop *props.Barcode)
+	AddHeatMap(heatMap [][]int, cell *entity.Cell, prop *props.HeatMap)
 	GetDimensionsByMatrixCode(code string) (*entity.Dimensions, error)
 	GetDimensionsByImageByte(bytes []byte, extension extension.Type) (*entity.Dimensions, error)
 	GetDimensionsByImage(file string) (*entity.Dimensions, error)
