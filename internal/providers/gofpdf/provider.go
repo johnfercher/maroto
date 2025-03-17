@@ -27,6 +27,7 @@ type provider struct {
 	image      core.Image
 	line       core.Line
 	heatMap    core.HeatMap
+	timeSeries core.TimeSeries
 	cache      cache.Cache
 	cellWriter cellwriter.CellWriter
 	cfg        *entity.Config
@@ -42,6 +43,7 @@ func New(dep *Dependencies) core.Provider {
 		image:      dep.Image,
 		line:       dep.Line,
 		heatMap:    dep.HeatMap,
+		timeSeries: dep.TimeSeries,
 		cellWriter: dep.CellWriter,
 		cfg:        dep.Cfg,
 		cache:      dep.Cache,
@@ -190,6 +192,10 @@ func (g *provider) SetMetadata(metadata *entity.Metadata) {
 	if metadata.KeywordsStr != nil {
 		g.fpdf.SetKeywords(metadata.KeywordsStr.Text, metadata.KeywordsStr.UTF8)
 	}
+}
+
+func (g *provider) AddTimeSeries(timeSeriesList []entity.TimeSeries, cell *entity.Cell) {
+	g.timeSeries.Add(timeSeriesList, cell, g.cfg.Margins)
 }
 
 // GetDimensionsByImage is responsible for obtaining the dimensions of an image

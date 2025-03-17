@@ -36,7 +36,7 @@ func (s heatMap) Add(heatMap [][]int, cell *entity.Cell, margins *entity.Margins
 
 	max := s.getMax(heatMap)
 	transparent := s.getTransparent(prop)
-	stepX, stepY := s.getSteps(heatMap, cell, prop)
+	stepX, stepY := s.getSteps(heatMap, cell)
 
 	for i := 0; i < len(heatMap)-1; i++ {
 		for j := 0; j < len(heatMap[i])-1; j++ {
@@ -61,7 +61,7 @@ func (s heatMap) Add(heatMap [][]int, cell *entity.Cell, margins *entity.Margins
 	}
 }
 
-func (s heatMap) getSteps(heatMap [][]int, cell *entity.Cell, prop *props.HeatMap) (float64, float64) {
+func (s heatMap) getSteps(heatMap [][]int, cell *entity.Cell) (float64, float64) {
 	xSize := len(heatMap)
 	stepX := (cell.Width) / float64(xSize-1)
 
