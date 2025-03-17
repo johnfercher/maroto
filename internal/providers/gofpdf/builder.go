@@ -21,6 +21,7 @@ type Dependencies struct {
 	Image      core.Image
 	Line       core.Line
 	HeatMap    core.HeatMap
+	TimeSeries core.TimeSeries
 	Cache      cache.Cache
 	CellWriter cellwriter.CellWriter
 	Cfg        *entity.Config
@@ -71,6 +72,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	line := NewLine(fpdf)
 	chart := NewChart(fpdf, line, text)
 	heatMap := NewHeatMap(fpdf, chart)
+	timeSeries := NewTimeSeries(fpdf, chart)
 	cellWriter := cellwriter.NewBuilder().
 		Build(fpdf)
 
@@ -82,6 +84,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 		Image:      image,
 		Line:       line,
 		HeatMap:    heatMap,
+		TimeSeries: timeSeries,
 		CellWriter: cellWriter,
 		Cfg:        cfg,
 		Cache:      cache,

@@ -59,6 +59,10 @@ type HeatMap interface {
 	Add(heatMap [][]int, cell *entity.Cell, margins *entity.Margins, prop *props.HeatMap)
 }
 
+type TimeSeries interface {
+	Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, margins *entity.Margins)
+}
+
 type Chart interface {
 	Add(cell *entity.Cell, margins *entity.Margins, prop *props.Chart)
 }
