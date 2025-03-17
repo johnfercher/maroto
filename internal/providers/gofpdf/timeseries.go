@@ -30,9 +30,14 @@ func (s timeSeries) Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, m
 			s.pdf.SetDrawColor(timeSeries.Color.Red, timeSeries.Color.Green, timeSeries.Color.Blue)
 
 			aX := timeSeries.Values[i].X*stepX + margins.Left + cell.X
-			aY := timeSeries.Values[i].Y*stepY + margins.Top + cell.Y
+
+			aY := timeSeries.Values[i].Y * stepY
+			aY = cell.Height + margins.Top + cell.Y - aY
+
 			bX := timeSeries.Values[i+1].X*stepX + margins.Left + cell.X
-			bY := timeSeries.Values[i+1].Y*stepY + margins.Top + cell.Y
+
+			bY := timeSeries.Values[i+1].Y * stepY
+			bY = cell.Height + margins.Top + cell.Y - bY
 
 			s.pdf.Line(aX, aY, bX, bY)
 
