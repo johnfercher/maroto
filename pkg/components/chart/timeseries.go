@@ -20,6 +20,7 @@ func NewTimeSeries(timeSeriesList []entity.TimeSeries, ps ...props.Chart) core.C
 	if len(ps) > 0 {
 		prop = ps[0]
 	}
+	prop.MakeValid()
 
 	return &TimeSeries{
 		timeSeriesList: timeSeriesList,

@@ -4,11 +4,11 @@ type HeatMap struct {
 	TransparentValues []int
 	HalfColor         bool
 	InvertScale       bool
-	Chart             *Chart
+	Chart             Chart
 }
 
 func (h *HeatMap) MakeValid() {
-
+	h.Chart.MakeValid()
 }
 
 func (h *HeatMap) ToMap() map[string]any {

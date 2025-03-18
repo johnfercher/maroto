@@ -24,9 +24,7 @@ func NewChart(pdf gofpdfwrapper.Fpdf, font core.Font) *chart {
 }
 
 func (s chart) Add(margins *entity.Margins, cell *entity.Cell, width float64, height float64, props *props.Chart) {
-	if props.Font != nil {
-		s.font.SetFont(props.Font.Family, props.Font.Style, props.Font.Size)
-	}
+	s.font.SetFont(props.Font.Family, props.Font.Style, props.Font.Size)
 
 	stepX, stepY := s.GetSteps(width, height, cell)
 	s.horizontalLine(margins, cell, width, stepX, props)

@@ -58,7 +58,7 @@ func (s heatMap) Add(heatMap [][]int, cell *entity.Cell, margins *entity.Margins
 		}
 	}
 
-	s.chart.Add(margins, cell, width, height, prop.Chart)
+	s.chart.Add(margins, cell, width, height, &prop.Chart)
 }
 
 func GetHeatColor(i int, total int) (int, int, int) {
