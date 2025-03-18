@@ -18,7 +18,7 @@ func main() {
 	timeSeriesList := SinCos(width, step)
 
 	cfg := config.NewBuilder().
-		WithDebug(true).
+		//WithDebug(true).
 		WithPageSize(pagesize.A4).
 		Build()
 

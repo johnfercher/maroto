@@ -1,6 +1,7 @@
 package gofpdf
 
 import (
+	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
@@ -11,6 +12,8 @@ import (
 type timeSeries struct {
 	pdf              gofpdfwrapper.Fpdf
 	defaultFillColor *props.Color
+	defaultDrawColor *props.Color
+	defaultLineWidth float64
 	chart            core.Chart
 }
 
@@ -19,14 +22,23 @@ func NewTimeSeries(pdf gofpdfwrapper.Fpdf, chart core.Chart) *timeSeries {
 		pdf:              pdf,
 		chart:            chart,
 		defaultFillColor: &props.WhiteColor,
+		defaultDrawColor: &props.BlueColor,
+		defaultLineWidth: linestyle.DefaultLineThickness,
 	}
 }
 
 func (s timeSeries) Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, margins *entity.Margins) {
-	stepX, stepY := s.getSteps(timeSeriesList, cell)
+	width, height := s.getSizes(timeSeriesList)
+	stepX, stepY := s.getSteps(width, height, cell)
+
+	s.horizontalLine(margins, cell, width, stepX)
+	s.verticalLine(margins, cell, height, stepY)
+
+	s.pdf.SetLineWidth(0.3)
 
 	for _, timeSeries := range timeSeriesList {
 		for i := 0; i < len(timeSeries.Values)-1; i++ {
+
 			s.pdf.SetDrawColor(timeSeries.Color.Red, timeSeries.Color.Green, timeSeries.Color.Blue)
 
 			aX := timeSeries.Values[i].X*stepX + margins.Left + cell.X
@@ -41,28 +53,48 @@ func (s timeSeries) Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, m
 
 			s.pdf.Line(aX, aY, bX, bY)
 
-			s.pdf.SetDrawColor(0, 0, 0)
+			s.pdf.SetDrawColor(s.defaultDrawColor.Red, s.defaultDrawColor.Green, s.defaultDrawColor.Blue)
 		}
 	}
+
+	s.pdf.SetLineWidth(s.defaultLineWidth)
 }
 
-func (s timeSeries) getSteps(timeSeriesList []entity.TimeSeries, cell *entity.Cell) (float64, float64) {
-	xSize := 0.0
-	ySize := 0.0
+func (s timeSeries) horizontalLine(margins *entity.Margins, cell *entity.Cell, width float64, stepX float64) {
+	x := margins.Left + cell.X
+	y := cell.Height + margins.Top + cell.Y
+	widthScale := width * stepX
+	s.pdf.Line(x, y, x+widthScale, y)
+}
+
+func (s timeSeries) verticalLine(margins *entity.Margins, cell *entity.Cell, height float64, stepY float64) {
+	x := margins.Left + cell.X
+	y := margins.Top + cell.Y
+	heightScale := height * stepY
+	s.pdf.Line(x, y, x, y+heightScale)
+}
+
+func (s timeSeries) getSizes(timeSeriesList []entity.TimeSeries) (float64, float64) {
+	width := 0.0
+	height := 0.0
 
 	for _, timeSeries := range timeSeriesList {
 		for i := 0; i < len(timeSeries.Values); i++ {
-			if timeSeries.Values[i].X > xSize {
-				xSize = timeSeries.Values[i].X
+			if timeSeries.Values[i].X > width {
+				width = timeSeries.Values[i].X
 			}
-			if timeSeries.Values[i].Y > ySize {
-				ySize = timeSeries.Values[i].Y
+			if timeSeries.Values[i].Y > height {
+				height = timeSeries.Values[i].Y
 			}
 		}
 	}
 
-	stepX := cell.Width / xSize
-	stepY := cell.Height / ySize
+	return width, height
+}
+
+func (s timeSeries) getSteps(width, height float64, cell *entity.Cell) (float64, float64) {
+	stepX := cell.Width / width
+	stepY := cell.Height / height
 
 	return stepX, stepY
 }
