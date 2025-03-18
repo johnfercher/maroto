@@ -60,10 +60,10 @@ type HeatMap interface {
 }
 
 type TimeSeries interface {
-	Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, margins *entity.Margins, prop props.Chart)
+	Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, margins *entity.Margins, prop *props.Chart)
 }
 
 type Chart interface {
-	Add(margins *entity.Margins, cell *entity.Cell, width float64, height float64, props props.Chart)
+	Add(margins *entity.Margins, cell *entity.Cell, width float64, height float64, props *props.Chart)
 	GetSteps(width, height float64, cell *entity.Cell) (float64, float64)
 }

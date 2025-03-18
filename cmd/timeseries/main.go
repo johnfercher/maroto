@@ -5,6 +5,8 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/chart"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -19,6 +21,11 @@ func main() {
 	prop := props.Chart{
 		XLabels: []float64{0, 10, 20, 30},
 		YLabels: []float64{0, 1, 2},
+		Font: &props.Font{
+			Family: fontfamily.Arial,
+			Style:  fontstyle.Normal,
+			Size:   7,
+		},
 	}
 
 	cfg := config.NewBuilder().

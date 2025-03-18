@@ -23,13 +23,17 @@ func NewChart(pdf gofpdfwrapper.Fpdf, font core.Font) *chart {
 	}
 }
 
-func (s chart) Add(margins *entity.Margins, cell *entity.Cell, width float64, height float64, props props.Chart) {
+func (s chart) Add(margins *entity.Margins, cell *entity.Cell, width float64, height float64, props *props.Chart) {
+	if props.Font != nil {
+		s.font.SetFont(props.Font.Family, props.Font.Style, props.Font.Size)
+	}
+
 	stepX, stepY := s.GetSteps(width, height, cell)
 	s.horizontalLine(margins, cell, width, stepX, props)
 	s.verticalLine(margins, cell, height, stepY, props)
 }
 
-func (s chart) horizontalLine(margins *entity.Margins, cell *entity.Cell, width float64, stepX float64, props props.Chart) {
+func (s chart) horizontalLine(margins *entity.Margins, cell *entity.Cell, width float64, stepX float64, props *props.Chart) {
 	x := margins.Left + cell.X
 	y := cell.Height + margins.Top + cell.Y
 	widthScale := width * stepX
@@ -48,13 +52,16 @@ func (s chart) horizontalLine(margins *entity.Margins, cell *entity.Cell, width 
 		stringLabel := fmt.Sprintf("%.1f", label)
 		stringWidth := s.pdf.GetStringWidth(stringLabel)
 
-		s.pdf.Text(x+xScaled-(stringWidth/2.0), y+4, stringLabel)
+		fontFamily, fontType, fontSize := s.font.GetFont()
+		stringHeight := s.font.GetHeight(fontFamily, fontType, fontSize)
+
+		s.pdf.Text(x+xScaled-(stringWidth/2.0), y+stringHeight, stringLabel)
 	}
 
 	s.pdf.SetLineWidth(s.defaultLineWidth)
 }
 
-func (s chart) verticalLine(margins *entity.Margins, cell *entity.Cell, height float64, stepY float64, props props.Chart) {
+func (s chart) verticalLine(margins *entity.Margins, cell *entity.Cell, height float64, stepY float64, props *props.Chart) {
 	x := margins.Left + cell.X
 	y := margins.Top + cell.Y
 	heightScale := height * stepY
