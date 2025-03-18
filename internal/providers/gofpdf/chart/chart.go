@@ -13,6 +13,7 @@ type chart struct {
 	pdf              gofpdfwrapper.Fpdf
 	font             core.Font
 	defaultLineWidth float64
+	defaultLineColor props.Color
 }
 
 func NewChart(pdf gofpdfwrapper.Fpdf, font core.Font) *chart {
@@ -20,11 +21,13 @@ func NewChart(pdf gofpdfwrapper.Fpdf, font core.Font) *chart {
 		pdf:              pdf,
 		font:             font,
 		defaultLineWidth: linestyle.DefaultLineThickness,
+		defaultLineColor: props.BlackColor,
 	}
 }
 
 func (s chart) Add(margins *entity.Margins, cell *entity.Cell, width float64, height float64, props *props.Chart) {
 	s.font.SetFont(props.Font.Family, props.Font.Style, props.Font.Size)
+	s.pdf.SetDrawColor(s.defaultLineColor.Red, s.defaultLineColor.Green, s.defaultLineColor.Blue)
 
 	stepX, stepY := s.GetSteps(width, height, cell)
 	s.horizontalLine(margins, cell, width, stepX, props)
