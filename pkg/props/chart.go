@@ -1,7 +1,6 @@
 package props
 
 type Chart struct {
-	Axis   bool
-	XLabel string
-	YLabel string
+	XLabels []float64
+	YLabels []float64
 }

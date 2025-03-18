@@ -16,6 +16,10 @@ func main() {
 	width := 30.0
 	step := 0.1
 	timeSeriesList := SinCos(width, step)
+	prop := props.Chart{
+		XLabels: []float64{0, 10, 20, 30},
+		YLabels: []float64{0, 1, 2},
+	}
 
 	cfg := config.NewBuilder().
 		//WithDebug(true).
@@ -26,7 +30,7 @@ func main() {
 
 	m.AddRows(
 		row.New(100).Add(
-			chart.NewTimeSeriesCol(12, timeSeriesList),
+			chart.NewTimeSeriesCol(12, timeSeriesList, prop),
 		),
 		/*row.New(100).Add(
 			chart.NewTimeSeriesCol(12, pointsMatrix),
