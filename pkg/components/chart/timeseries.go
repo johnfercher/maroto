@@ -39,7 +39,7 @@ func NewTimeSeriesRow(height float64, timeSeriesList []entity.TimeSeries, ps ...
 }
 
 func (b *TimeSeries) Render(provider core.Provider, cell *entity.Cell) {
-	provider.AddTimeSeries(b.timeSeriesList, cell, b.prop)
+	provider.AddTimeSeries(b.timeSeriesList, cell, &b.prop)
 }
 
 func (b *TimeSeries) GetStructure() *node.Node[core.Structure] {

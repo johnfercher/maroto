@@ -4,7 +4,7 @@ type HeatMap struct {
 	TransparentValues []int
 	HalfColor         bool
 	InvertScale       bool
-	Chart             Chart
+	Chart             *Chart
 }
 
 func (h *HeatMap) MakeValid() {

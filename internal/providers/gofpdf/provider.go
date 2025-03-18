@@ -194,7 +194,7 @@ func (g *provider) SetMetadata(metadata *entity.Metadata) {
 	}
 }
 
-func (g *provider) AddTimeSeries(timeSeriesList []entity.TimeSeries, cell *entity.Cell, prop props.Chart) {
+func (g *provider) AddTimeSeries(timeSeriesList []entity.TimeSeries, cell *entity.Cell, prop *props.Chart) {
 	g.timeSeries.Add(timeSeriesList, cell, g.cfg.Margins, prop)
 }
 

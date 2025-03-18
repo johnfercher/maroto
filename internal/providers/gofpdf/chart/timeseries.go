@@ -27,8 +27,7 @@ func NewTimeSeries(pdf gofpdfwrapper.Fpdf, chart core.Chart) *timeSeries {
 	}
 }
 
-func (s timeSeries) Add(
-	timeSeriesList []entity.TimeSeries, cell *entity.Cell, margins *entity.Margins, prop props.Chart) {
+func (s timeSeries) Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, margins *entity.Margins, prop *props.Chart) {
 	width, height := s.getSizes(timeSeriesList)
 
 	stepX, stepY := s.chart.GetSteps(width, height, cell)
