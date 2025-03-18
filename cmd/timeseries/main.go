@@ -21,7 +21,7 @@ func main() {
 	prop := props.Chart{
 		XLabels: []float64{0, 10, 20, 30},
 		YLabels: []float64{0, 1, 2},
-		Font: &props.Font{
+		Font: props.Font{
 			Family: fontfamily.Arial,
 			Style:  fontstyle.Normal,
 			Size:   7,
