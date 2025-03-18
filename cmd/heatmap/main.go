@@ -16,7 +16,7 @@ func main() {
 	heat := buildHeat(xMax, yMax)
 
 	cfg := config.NewBuilder().
-		WithDebug(true).
+		//WithDebug(true).
 		WithPageSize(pagesize.A4).
 		Build()
 
@@ -28,6 +28,10 @@ func main() {
 				TransparentValues: []int{0},
 				InvertScale:       false,
 				HalfColor:         false,
+				Chart: props.Chart{
+					XLabels: []float64{0, 310, 620},
+					YLabels: []float64{0, 100, 200},
+				},
 			}),
 		),
 	)
