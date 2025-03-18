@@ -1,6 +1,7 @@
 package gofpdf
 
 import (
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/chart"
 	"github.com/jung-kurt/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
@@ -70,9 +71,9 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	text := NewText(fpdf, math, font)
 	image := NewImage(fpdf, math)
 	line := NewLine(fpdf)
-	chart := NewChart(fpdf, line, text)
-	heatMap := NewHeatMap(fpdf, chart)
-	timeSeries := NewTimeSeries(fpdf, chart, font)
+	baseChart := chart.NewChart(fpdf, font)
+	heatMap := chart.NewHeatMap(fpdf, baseChart)
+	timeSeries := chart.NewTimeSeries(fpdf, baseChart)
 	cellWriter := cellwriter.NewBuilder().
 		Build(fpdf)
 

@@ -64,5 +64,6 @@ type TimeSeries interface {
 }
 
 type Chart interface {
-	Add(cell *entity.Cell, margins *entity.Margins, prop *props.Chart)
+	Add(margins *entity.Margins, cell *entity.Cell, width float64, height float64, props props.Chart)
+	GetSteps(width, height float64, cell *entity.Cell) (float64, float64)
 }
