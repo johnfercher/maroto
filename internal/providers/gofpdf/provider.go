@@ -194,8 +194,8 @@ func (g *provider) SetMetadata(metadata *entity.Metadata) {
 	}
 }
 
-func (g *provider) AddTimeSeries(timeSeriesList []entity.TimeSeries, cell *entity.Cell) {
-	g.timeSeries.Add(timeSeriesList, cell, g.cfg.Margins)
+func (g *provider) AddTimeSeries(timeSeriesList []entity.TimeSeries, cell *entity.Cell, prop props.Chart) {
+	g.timeSeries.Add(timeSeriesList, cell, g.cfg.Margins, prop)
 }
 
 // GetDimensionsByImage is responsible for obtaining the dimensions of an image
