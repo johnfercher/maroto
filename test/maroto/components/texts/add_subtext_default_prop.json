@@ -1,0 +1,13 @@
+{
+	"type": "text",
+	"nodes": [
+		{
+			"value": "subText 1",
+			"type": "sub_text"
+		},
+		{
+			"value": "subText 2",
+			"type": "sub_text"
+		}
+	]
+}
