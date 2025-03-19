@@ -36,7 +36,7 @@ func TestGetLinesheight(t *testing.T) {
 		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
 		subText := entity.SubText{Value: "text text", Props: props.NewSubText(textProp)}
 
-		height := text.GetTextHeight([]*entity.SubText{&subText}, textProp, 11)
+		height := text.GetTextHeight(textProp, 11, &subText)
 
 		assert.Equal(t, 10.0, height)
 	})
@@ -56,7 +56,7 @@ func TestGetLinesheight(t *testing.T) {
 		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
 		subText := entity.SubText{Value: "text text text", Props: props.NewSubText(textProp)}
 
-		height := text.GetTextHeight([]*entity.SubText{&subText, &subText}, textProp, 11)
+		height := text.GetTextHeight(textProp, 11, &subText, &subText)
 		assert.Equal(t, 30.0, height)
 	})
 
@@ -72,7 +72,7 @@ func TestGetLinesheight(t *testing.T) {
 		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
 
 		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
-		height := text.GetTextHeight([]*entity.SubText{{Value: "text", Props: props.NewSubText(&textProp)}}, &textProp, 10.0)
+		height := text.GetTextHeight(&textProp, 10.0, &entity.SubText{Value: "text", Props: props.NewSubText(&textProp)})
 
 		// Act
 		assert.Equal(t, 15.0, height)

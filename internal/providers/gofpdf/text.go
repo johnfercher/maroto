@@ -30,17 +30,17 @@ func NewText(pdf gofpdfwrapper.Fpdf, math core.Math, font core.Font) *text {
 }
 
 // This method is responsible for allowing the union of a set of subtexts in the same text
-func (s *text) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text) {
+func (s *text) AddCustomText(cell *entity.Cell, textPs *props.Text, subs ...*entity.SubText) {
 	originalColor := s.font.GetColor()
 	defer s.font.SetColor(originalColor)
 
 	availableWidth := s.validTextProps(textPs, cell, cell.Width-textPs.Left-textPs.Right)
-	lines := s.splitTextByLine(subs, availableWidth, textPs.BreakLineStrategy)
+	lines := s.splitTextByLine(availableWidth, textPs.BreakLineStrategy, subs...)
 
 	yOfLine := cell.Y + textPs.Top
 	for _, line := range lines {
 		x := cell.X + textPs.Left
-		heightLargestFont := s.findLargestFontHeight(line)
+		heightLargestFont := s.findLargestFontHeight(line...)
 		yOfLine += heightLargestFont + textPs.VerticalPadding
 
 		for _, subtext := range line {
@@ -52,12 +52,12 @@ func (s *text) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *
 
 // Add a text inside a cell.
 func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
-	s.AddCustomText([]*entity.SubText{{Value: text, Props: props.NewSubText(textProp)}}, cell, textProp)
+	s.AddCustomText(cell, textProp, &entity.SubText{Value: text, Props: props.NewSubText(textProp)})
 }
 
 // GetTextHeight returns the height occupied by the text in the document
-func (s *text) GetTextHeight(text []*entity.SubText, textProp *props.Text, availableWidth float64) float64 {
-	lines := s.splitTextByLine(text, availableWidth, textProp.BreakLineStrategy)
+func (s *text) GetTextHeight(textProp *props.Text, availableWidth float64, text ...*entity.SubText) float64 {
+	lines := s.splitTextByLine(availableWidth, textProp.BreakLineStrategy, text...)
 	if len(text) < 2 {
 		lineHeight := s.font.GetHeight(text[0].Props.Family, text[0].Props.Style, text[0].Props.Size) + textProp.VerticalPadding
 		return lineHeight * float64(len(lines))
@@ -65,7 +65,7 @@ func (s *text) GetTextHeight(text []*entity.SubText, textProp *props.Text, avail
 
 	textHeight := 0.0
 	for _, line := range lines {
-		textHeight += s.findLargestFontHeight(line) + textProp.VerticalPadding
+		textHeight += s.findLargestFontHeight(line...) + textProp.VerticalPadding
 	}
 	return textHeight
 }
@@ -224,7 +224,7 @@ func (s *text) validTextProps(ps *props.Text, cell *entity.Cell, width float64) 
 //
 // The organization of the lines will be done considering the available space and the chosen line
 // break strategy. The returned array has all the subtexts of the line and all the lines of the text
-func (s *text) splitTextByLine(subs []*entity.SubText, widthAvailable float64, breakLineStrategy breakline.Strategy) [][]*entity.SubText {
+func (s *text) splitTextByLine(widthAvailable float64, breakLineStrategy breakline.Strategy, subs ...*entity.SubText) [][]*entity.SubText {
 	sizeLasLine := 0.0
 	newText := [][]*entity.SubText{}
 
@@ -259,7 +259,7 @@ func (s *text) selectStrategyBreak(strategy breakline.Strategy) func(string, flo
 }
 
 // This method is responsible for finding the font with the highest height in the set of subtexts.
-func (s *text) findLargestFontHeight(subs []*entity.SubText) float64 {
+func (s *text) findLargestFontHeight(subs ...*entity.SubText) float64 {
 	fontSize := 0.0
 	for _, sub := range subs {
 		size := s.font.GetHeight(sub.Props.Family, sub.Props.Style, sub.Props.Size)

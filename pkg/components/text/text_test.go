@@ -88,7 +88,7 @@ func TestText_Render(t *testing.T) {
 		sut := text.New("textValue", prop)
 
 		provider := mocks.NewProvider(t)
-		provider.EXPECT().AddCustomText([]*entity.SubText{{Value: "textValue", Props: props.NewSubText(&prop)}}, &cell, &prop)
+		provider.EXPECT().AddCustomText(&cell, &prop, &entity.SubText{Value: "textValue", Props: props.NewSubText(&prop)})
 		sut.SetConfig(&entity.Config{})
 
 		// Act
@@ -123,7 +123,7 @@ func TestText_GetHeight(t *testing.T) {
 		sut := text.New("text", textProp)
 
 		provider := mocks.NewProvider(t)
-		provider.EXPECT().GetTextHeight([]*entity.SubText{{Value: "text", Props: props.NewSubText(&textProp)}}, &textProp, 100.0).Return(20.0)
+		provider.EXPECT().GetTextHeight(&textProp, 100.0, &entity.SubText{Value: "text", Props: props.NewSubText(&textProp)}).Return(20.0)
 
 		// Act
 		height := sut.GetHeight(provider, &cell)

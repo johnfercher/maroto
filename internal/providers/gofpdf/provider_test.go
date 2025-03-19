@@ -62,10 +62,10 @@ func TestProvider_AddCustomText(t *testing.T) {
 	// Arrange
 	cell := &entity.Cell{}
 	prop := fixture.TextProp()
-	subs := []*entity.SubText{{Value: "text", Props: props.NewSubText(&prop)}}
+	sub := entity.SubText{Value: "text", Props: props.NewSubText(&prop)}
 
 	text := mocks.NewText(t)
-	text.EXPECT().AddCustomText(subs, cell, &prop)
+	text.EXPECT().AddCustomText(cell, &prop, &sub)
 
 	dep := &gofpdf.Dependencies{
 		Text: text,
@@ -73,7 +73,7 @@ func TestProvider_AddCustomText(t *testing.T) {
 	sut := gofpdf.New(dep)
 
 	// Act
-	sut.AddCustomText(subs, cell, &prop)
+	sut.AddCustomText(cell, &prop, &sub)
 
 	// Assert
 	text.AssertNumberOfCalls(t, "AddCustomText", 1)

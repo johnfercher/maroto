@@ -35,8 +35,8 @@ type Line interface {
 // Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
 	Add(text string, cell *entity.Cell, textProp *props.Text)
-	AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text)
-	GetTextHeight(text []*entity.SubText, textProp *props.Text, colWidth float64) float64
+	AddCustomText(cell *entity.Cell, textPs *props.Text, subs ...*entity.SubText)
+	GetTextHeight(textProp *props.Text, colWidth float64, text ...*entity.SubText) float64
 }
 
 // Font is the abstraction which deals of how to set fontstyle configurations.

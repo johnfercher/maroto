@@ -95,9 +95,16 @@ func (_c *Provider_AddBarCode_Call) RunAndReturn(run func(string, *entity.Cell, 
 	return _c
 }
 
-// AddCustomText provides a mock function with given fields: subs, cell, textPs
-func (_m *Provider) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text) {
-	_m.Called(subs, cell, textPs)
+// AddCustomText provides a mock function with given fields: cell, textPs, subs
+func (_m *Provider) AddCustomText(cell *entity.Cell, textPs *props.Text, subs ...*entity.SubText) {
+	_va := make([]interface{}, len(subs))
+	for _i := range subs {
+		_va[_i] = subs[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, cell, textPs)
+	_ca = append(_ca, _va...)
+	_m.Called(_ca...)
 }
 
 // Provider_AddCustomText_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddCustomText'
@@ -106,16 +113,23 @@ type Provider_AddCustomText_Call struct {
 }
 
 // AddCustomText is a helper method to define mock.On call
-//   - subs []*entity.SubText
 //   - cell *entity.Cell
 //   - textPs *props.Text
-func (_e *Provider_Expecter) AddCustomText(subs interface{}, cell interface{}, textPs interface{}) *Provider_AddCustomText_Call {
-	return &Provider_AddCustomText_Call{Call: _e.mock.On("AddCustomText", subs, cell, textPs)}
+//   - subs ...*entity.SubText
+func (_e *Provider_Expecter) AddCustomText(cell interface{}, textPs interface{}, subs ...interface{}) *Provider_AddCustomText_Call {
+	return &Provider_AddCustomText_Call{Call: _e.mock.On("AddCustomText",
+		append([]interface{}{cell, textPs}, subs...)...)}
 }
 
-func (_c *Provider_AddCustomText_Call) Run(run func(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text)) *Provider_AddCustomText_Call {
+func (_c *Provider_AddCustomText_Call) Run(run func(cell *entity.Cell, textPs *props.Text, subs ...*entity.SubText)) *Provider_AddCustomText_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].([]*entity.SubText), args[1].(*entity.Cell), args[2].(*props.Text))
+		variadicArgs := make([]*entity.SubText, len(args)-2)
+		for i, a := range args[2:] {
+			if a != nil {
+				variadicArgs[i] = a.(*entity.SubText)
+			}
+		}
+		run(args[0].(*entity.Cell), args[1].(*props.Text), variadicArgs...)
 	})
 	return _c
 }
@@ -125,7 +139,7 @@ func (_c *Provider_AddCustomText_Call) Return() *Provider_AddCustomText_Call {
 	return _c
 }
 
-func (_c *Provider_AddCustomText_Call) RunAndReturn(run func([]*entity.SubText, *entity.Cell, *props.Text)) *Provider_AddCustomText_Call {
+func (_c *Provider_AddCustomText_Call) RunAndReturn(run func(*entity.Cell, *props.Text, ...*entity.SubText)) *Provider_AddCustomText_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -745,17 +759,24 @@ func (_c *Provider_GetFontHeight_Call) RunAndReturn(run func(*props.Font) float6
 	return _c
 }
 
-// GetTextHeight provides a mock function with given fields: text, textProp, colWidth
-func (_m *Provider) GetTextHeight(text []*entity.SubText, textProp *props.Text, colWidth float64) float64 {
-	ret := _m.Called(text, textProp, colWidth)
+// GetTextHeight provides a mock function with given fields: textProp, colWidth, text
+func (_m *Provider) GetTextHeight(textProp *props.Text, colWidth float64, text ...*entity.SubText) float64 {
+	_va := make([]interface{}, len(text))
+	for _i := range text {
+		_va[_i] = text[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, textProp, colWidth)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetTextHeight")
 	}
 
 	var r0 float64
-	if rf, ok := ret.Get(0).(func([]*entity.SubText, *props.Text, float64) float64); ok {
-		r0 = rf(text, textProp, colWidth)
+	if rf, ok := ret.Get(0).(func(*props.Text, float64, ...*entity.SubText) float64); ok {
+		r0 = rf(textProp, colWidth, text...)
 	} else {
 		r0 = ret.Get(0).(float64)
 	}
@@ -769,16 +790,23 @@ type Provider_GetTextHeight_Call struct {
 }
 
 // GetTextHeight is a helper method to define mock.On call
-//   - text []*entity.SubText
 //   - textProp *props.Text
 //   - colWidth float64
-func (_e *Provider_Expecter) GetTextHeight(text interface{}, textProp interface{}, colWidth interface{}) *Provider_GetTextHeight_Call {
-	return &Provider_GetTextHeight_Call{Call: _e.mock.On("GetTextHeight", text, textProp, colWidth)}
+//   - text ...*entity.SubText
+func (_e *Provider_Expecter) GetTextHeight(textProp interface{}, colWidth interface{}, text ...interface{}) *Provider_GetTextHeight_Call {
+	return &Provider_GetTextHeight_Call{Call: _e.mock.On("GetTextHeight",
+		append([]interface{}{textProp, colWidth}, text...)...)}
 }
 
-func (_c *Provider_GetTextHeight_Call) Run(run func(text []*entity.SubText, textProp *props.Text, colWidth float64)) *Provider_GetTextHeight_Call {
+func (_c *Provider_GetTextHeight_Call) Run(run func(textProp *props.Text, colWidth float64, text ...*entity.SubText)) *Provider_GetTextHeight_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].([]*entity.SubText), args[1].(*props.Text), args[2].(float64))
+		variadicArgs := make([]*entity.SubText, len(args)-2)
+		for i, a := range args[2:] {
+			if a != nil {
+				variadicArgs[i] = a.(*entity.SubText)
+			}
+		}
+		run(args[0].(*props.Text), args[1].(float64), variadicArgs...)
 	})
 	return _c
 }
@@ -788,7 +816,7 @@ func (_c *Provider_GetTextHeight_Call) Return(_a0 float64) *Provider_GetTextHeig
 	return _c
 }
 
-func (_c *Provider_GetTextHeight_Call) RunAndReturn(run func([]*entity.SubText, *props.Text, float64) float64) *Provider_GetTextHeight_Call {
+func (_c *Provider_GetTextHeight_Call) RunAndReturn(run func(*props.Text, float64, ...*entity.SubText) float64) *Provider_GetTextHeight_Call {
 	_c.Call.Return(run)
 	return _c
 }

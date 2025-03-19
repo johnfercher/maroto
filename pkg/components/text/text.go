@@ -95,7 +95,7 @@ func (t *Text) getStructSubText(sub *entity.SubText) *node.Node[core.Structure] 
 
 // GetHeight returns the height that the text will have in the PDF
 func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
-	amountLines := provider.GetTextHeight(t.text, &t.props, cell.Width-t.props.Left-t.props.Right)
+	amountLines := provider.GetTextHeight(&t.props, cell.Width-t.props.Left-t.props.Right, t.text...)
 	return amountLines + t.props.Top + t.props.Bottom
 }
 
@@ -111,5 +111,5 @@ func (t *Text) SetConfig(config *entity.Config) {
 // Render renders a Text into a PDF context.
 func (t *Text) Render(provider core.Provider, cell *entity.Cell) {
 	innerCell := cell.Copy()
-	provider.AddCustomText(t.text, &innerCell, &t.props)
+	provider.AddCustomText(&innerCell, &t.props, t.text...)
 }
