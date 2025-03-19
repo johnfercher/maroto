@@ -12,21 +12,27 @@ import (
 )
 
 type Text struct {
-	value  string
-	prop   props.Text
+	text   []*entity.SubText
 	config *entity.Config
+	props  props.Text
 }
 
-// New is responsible to create an instance of a Text.
-func New(value string, ps ...props.Text) core.Component {
+// New is responsible for creating an instance of a Text. It will create a subtext
+// with value and use props to derive the subtext props
+func New(value string, ps ...props.Text) *Text {
 	textProp := props.Text{}
+	subText := []*entity.SubText{}
+
 	if len(ps) > 0 {
 		textProp = ps[0]
 	}
+	if len(value) > 0 {
+		subText = append(subText, &entity.SubText{Value: value, Props: props.NewSubText(&textProp)})
+	}
 
 	return &Text{
-		value: value,
-		prop:  textProp,
+		text:  subText,
+		props: textProp,
 	}
 }
 
@@ -52,10 +58,36 @@ func NewRow(height float64, value string, ps ...props.Text) core.Row {
 
 // GetStructure returns the Structure of a Text.
 func (t *Text) GetStructure() *node.Node[core.Structure] {
+	node := node.New(
+		core.Structure{
+			Type:    "text",
+			Details: t.props.ToMap(),
+		})
+
+	for _, sub := range t.text {
+		node.AddNext(t.getStructSubText(sub))
+	}
+
+	return node
+}
+
+// AddSubText will be used to add a subText to the current text.
+// This method allows you to use different styles on the same text
+func (t *Text) AddSubText(text string, ps ...props.SubText) *Text {
+	subTextPs := props.SubText{}
+	if len(ps) > 0 {
+		subTextPs = ps[0]
+	}
+
+	t.text = append(t.text, &entity.SubText{Value: text, Props: subTextPs})
+	return t
+}
+
+func (t *Text) getStructSubText(sub *entity.SubText) *node.Node[core.Structure] {
 	str := core.Structure{
-		Type:    "text",
-		Value:   t.value,
-		Details: t.prop.ToMap(),
+		Type:    "sub_text",
+		Value:   sub.Value,
+		Details: sub.Props.ToMap(),
 	}
 
 	return node.New(str)
@@ -63,19 +95,21 @@ func (t *Text) GetStructure() *node.Node[core.Structure] {
 
 // GetHeight returns the height that the text will have in the PDF
 func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
-	amountLines := provider.GetLinesQuantity(t.value, &t.prop, cell.Width-t.prop.Left-t.prop.Right)
-	fontHeight := provider.GetFontHeight(&props.Font{Family: t.prop.Family, Style: t.prop.Style, Size: t.prop.Size, Color: t.prop.Color})
-	textHeight := float64(amountLines)*fontHeight + float64(amountLines-1)*t.prop.VerticalPadding
-	return textHeight + t.prop.Top + t.prop.Bottom
+	amountLines := provider.GetTextHeight(t.text, &t.props, cell.Width-t.props.Left-t.props.Right)
+	return amountLines + t.props.Top + t.props.Bottom
 }
 
 // SetConfig sets the config.
 func (t *Text) SetConfig(config *entity.Config) {
 	t.config = config
-	t.prop.MakeValid(t.config.DefaultFont)
+	t.props.MakeValid(t.config.DefaultFont)
+	for _, sub := range t.text {
+		sub.Props.MakeValid(t.config.DefaultFont)
+	}
 }
 
 // Render renders a Text into a PDF context.
 func (t *Text) Render(provider core.Provider, cell *entity.Cell) {
-	provider.AddText(t.value, cell, &t.prop)
+	innerCell := cell.Copy()
+	provider.AddCustomText(t.text, &innerCell, &t.props)
 }

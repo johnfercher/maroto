@@ -57,8 +57,43 @@ func (_c *Text_Add_Call) RunAndReturn(run func(string, *entity.Cell, *props.Text
 	return _c
 }
 
+// AddCustomText provides a mock function with given fields: subs, cell, textPs
+func (_m *Text) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text) {
+	_m.Called(subs, cell, textPs)
+}
+
+// Text_AddCustomText_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddCustomText'
+type Text_AddCustomText_Call struct {
+	*mock.Call
+}
+
+// AddCustomText is a helper method to define mock.On call
+//   - subs []*entity.SubText
+//   - cell *entity.Cell
+//   - textPs *props.Text
+func (_e *Text_Expecter) AddCustomText(subs interface{}, cell interface{}, textPs interface{}) *Text_AddCustomText_Call {
+	return &Text_AddCustomText_Call{Call: _e.mock.On("AddCustomText", subs, cell, textPs)}
+}
+
+func (_c *Text_AddCustomText_Call) Run(run func(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text)) *Text_AddCustomText_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]*entity.SubText), args[1].(*entity.Cell), args[2].(*props.Text))
+	})
+	return _c
+}
+
+func (_c *Text_AddCustomText_Call) Return() *Text_AddCustomText_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *Text_AddCustomText_Call) RunAndReturn(run func([]*entity.SubText, *entity.Cell, *props.Text)) *Text_AddCustomText_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetLinesQuantity provides a mock function with given fields: text, textProp, colWidth
-func (_m *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {
+func (_m *Text) GetLinesQuantity(text []*entity.SubText, textProp *props.Text, colWidth float64) int {
 	ret := _m.Called(text, textProp, colWidth)
 
 	if len(ret) == 0 {
@@ -66,7 +101,7 @@ func (_m *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth flo
 	}
 
 	var r0 int
-	if rf, ok := ret.Get(0).(func(string, *props.Text, float64) int); ok {
+	if rf, ok := ret.Get(0).(func([]*entity.SubText, *props.Text, float64) int); ok {
 		r0 = rf(text, textProp, colWidth)
 	} else {
 		r0 = ret.Get(0).(int)
@@ -81,16 +116,16 @@ type Text_GetLinesQuantity_Call struct {
 }
 
 // GetLinesQuantity is a helper method to define mock.On call
-//   - text string
+//   - text []*entity.SubText
 //   - textProp *props.Text
 //   - colWidth float64
 func (_e *Text_Expecter) GetLinesQuantity(text interface{}, textProp interface{}, colWidth interface{}) *Text_GetLinesQuantity_Call {
 	return &Text_GetLinesQuantity_Call{Call: _e.mock.On("GetLinesQuantity", text, textProp, colWidth)}
 }
 
-func (_c *Text_GetLinesQuantity_Call) Run(run func(text string, textProp *props.Text, colWidth float64)) *Text_GetLinesQuantity_Call {
+func (_c *Text_GetLinesQuantity_Call) Run(run func(text []*entity.SubText, textProp *props.Text, colWidth float64)) *Text_GetLinesQuantity_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(*props.Text), args[2].(float64))
+		run(args[0].([]*entity.SubText), args[1].(*props.Text), args[2].(float64))
 	})
 	return _c
 }
@@ -100,7 +135,7 @@ func (_c *Text_GetLinesQuantity_Call) Return(_a0 int) *Text_GetLinesQuantity_Cal
 	return _c
 }
 
-func (_c *Text_GetLinesQuantity_Call) RunAndReturn(run func(string, *props.Text, float64) int) *Text_GetLinesQuantity_Call {
+func (_c *Text_GetLinesQuantity_Call) RunAndReturn(run func([]*entity.SubText, *props.Text, float64) int) *Text_GetLinesQuantity_Call {
 	_c.Call.Return(run)
 	return _c
 }
