@@ -17,7 +17,7 @@ type Provider interface {
 	AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text)
 	AddText(text string, cell *entity.Cell, prop *props.Text)
 	GetFontHeight(prop *props.Font) float64
-	GetLinesQuantity(text []*entity.SubText, textProp *props.Text, colWidth float64) int
+	GetTextHeight(text []*entity.SubText, textProp *props.Text, colWidth float64) float64
 	AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect)
 	AddQrCode(code string, cell *entity.Cell, rect *props.Rect)
 	AddBarCode(code string, cell *entity.Cell, prop *props.Barcode)

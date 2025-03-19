@@ -36,7 +36,7 @@ type Line interface {
 type Text interface {
 	Add(text string, cell *entity.Cell, textProp *props.Text)
 	AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text)
-	GetLinesQuantity(text []*entity.SubText, textProp *props.Text, colWidth float64) int
+	GetTextHeight(text []*entity.SubText, textProp *props.Text, colWidth float64) float64
 }
 
 // Font is the abstraction which deals of how to set fontstyle configurations.

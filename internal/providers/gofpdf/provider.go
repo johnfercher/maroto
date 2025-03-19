@@ -50,8 +50,12 @@ func (g *provider) AddText(text string, cell *entity.Cell, prop *props.Text) {
 	g.text.Add(text, cell, prop)
 }
 
-func (g *provider) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {
-	return g.text.GetLinesQuantity(text, textProp, colWidth)
+func (g *provider) AddCustomText(subs []*entity.SubText, cell *entity.Cell, textPs *props.Text) {
+	g.text.AddCustomText(subs, cell, textPs)
+}
+
+func (g *provider) GetTextHeight(text []*entity.SubText, textProp *props.Text, colWidth float64) float64 {
+	return g.text.GetTextHeight(text, textProp, colWidth)
 }
 
 func (g *provider) GetFontHeight(prop *props.Font) float64 {
