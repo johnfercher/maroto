@@ -1,18 +1,18 @@
 package main
 
 import (
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/align"
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2"
 
-	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
-
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
-
-	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -109,5 +109,14 @@ func GetMaroto() core.Maroto {
 	m.AddAutoRow(
 		text.NewCol(12, longText+" "+longText+" "+longText, props.Text{VerticalPadding: 10, Left: 3, Right: 3, Align: align.Justify, BreakLineStrategy: breakline.EmptySpaceStrategy}),
 	)
+
+	text := text.New("", props.Text{VerticalPadding: 1, Top: 2, Bottom: 2}).
+		AddSubText(longText+longText+longText+longText, props.SubText{Color: &props.BlueColor, Family: fontfamily.Arial}).
+		AddSubText(longText, props.SubText{Color: &props.RedColor, Family: fontfamily.Courier, Size: 10}).
+		AddSubText(longText, props.SubText{Color: &props.GreenColor, Family: fontfamily.ZapBats, Size: 15}).
+		AddSubText(longText, props.SubText{Color: &props.BlackColor, Family: fontfamily.Helvetica, Size: 10, Style: fontstyle.Bold})
+
+	m.AddAutoRow(col.New(12).Add(text))
+
 	return m
 }
