@@ -32,7 +32,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Main features",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -41,7 +40,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 15,
 										"prop_top": 6.5
-									}
+									},
+									"nodes": [
+										{
+											"value": "Main features",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 15
+											}
+										}
+									]
 								}
 							]
 						}
@@ -56,7 +66,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Barcode:",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -65,7 +74,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 15,
 										"prop_top": 6
-									}
+									},
+									"nodes": [
+										{
+											"value": "Barcode:",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 15
+											}
+										}
+									]
 								}
 							]
 						},
@@ -96,7 +116,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "QrCode:",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -105,7 +124,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 15,
 										"prop_top": 6
-									}
+									},
+									"nodes": [
+										{
+											"value": "QrCode:",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 15
+											}
+										}
+									]
 								}
 							]
 						},
@@ -134,7 +164,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "MatrixCode:",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -143,7 +172,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 15,
 										"prop_top": 6
-									}
+									},
+									"nodes": [
+										{
+											"value": "MatrixCode:",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 15
+											}
+										}
+									]
 								}
 							]
 						},
@@ -172,7 +212,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Image From File:",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -181,7 +220,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 15,
 										"prop_top": 6
-									}
+									},
+									"nodes": [
+										{
+											"value": "Image From File:",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 15
+											}
+										}
+									]
 								}
 							]
 						},
@@ -210,7 +260,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Image From Base64::",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -219,7 +268,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 15,
 										"prop_top": 6
-									}
+									},
+									"nodes": [
+										{
+											"value": "Image From Base64::",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 15
+											}
+										}
+									]
 								}
 							]
 						},
@@ -250,7 +310,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Text:",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -259,7 +318,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 15,
 										"prop_top": 6
-									}
+									},
+									"nodes": [
+										{
+											"value": "Text:",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 15
+											}
+										}
+									]
 								}
 							]
 						},
@@ -268,7 +338,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem.",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -277,7 +346,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_top": 5
-									}
+									},
+									"nodes": [
+										{
+											"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 12
+											}
+										}
+									]
 								}
 							]
 						}
@@ -292,7 +372,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Signature:",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -301,7 +380,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 15,
 										"prop_top": 17
-									}
+									},
+									"nodes": [
+										{
+											"value": "Signature:",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 15
+											}
+										}
+									]
 								}
 							]
 						},

@@ -745,50 +745,50 @@ func (_c *Provider_GetFontHeight_Call) RunAndReturn(run func(*props.Font) float6
 	return _c
 }
 
-// GetLinesQuantity provides a mock function with given fields: text, textProp, colWidth
-func (_m *Provider) GetLinesQuantity(text []*entity.SubText, textProp *props.Text, colWidth float64) int {
+// GetTextHeight provides a mock function with given fields: text, textProp, colWidth
+func (_m *Provider) GetTextHeight(text []*entity.SubText, textProp *props.Text, colWidth float64) float64 {
 	ret := _m.Called(text, textProp, colWidth)
 
 	if len(ret) == 0 {
-		panic("no return value specified for GetLinesQuantity")
+		panic("no return value specified for GetTextHeight")
 	}
 
-	var r0 int
-	if rf, ok := ret.Get(0).(func([]*entity.SubText, *props.Text, float64) int); ok {
+	var r0 float64
+	if rf, ok := ret.Get(0).(func([]*entity.SubText, *props.Text, float64) float64); ok {
 		r0 = rf(text, textProp, colWidth)
 	} else {
-		r0 = ret.Get(0).(int)
+		r0 = ret.Get(0).(float64)
 	}
 
 	return r0
 }
 
-// Provider_GetLinesQuantity_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetLinesQuantity'
-type Provider_GetLinesQuantity_Call struct {
+// Provider_GetTextHeight_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetTextHeight'
+type Provider_GetTextHeight_Call struct {
 	*mock.Call
 }
 
-// GetLinesQuantity is a helper method to define mock.On call
+// GetTextHeight is a helper method to define mock.On call
 //   - text []*entity.SubText
 //   - textProp *props.Text
 //   - colWidth float64
-func (_e *Provider_Expecter) GetLinesQuantity(text interface{}, textProp interface{}, colWidth interface{}) *Provider_GetLinesQuantity_Call {
-	return &Provider_GetLinesQuantity_Call{Call: _e.mock.On("GetLinesQuantity", text, textProp, colWidth)}
+func (_e *Provider_Expecter) GetTextHeight(text interface{}, textProp interface{}, colWidth interface{}) *Provider_GetTextHeight_Call {
+	return &Provider_GetTextHeight_Call{Call: _e.mock.On("GetTextHeight", text, textProp, colWidth)}
 }
 
-func (_c *Provider_GetLinesQuantity_Call) Run(run func(text []*entity.SubText, textProp *props.Text, colWidth float64)) *Provider_GetLinesQuantity_Call {
+func (_c *Provider_GetTextHeight_Call) Run(run func(text []*entity.SubText, textProp *props.Text, colWidth float64)) *Provider_GetTextHeight_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].([]*entity.SubText), args[1].(*props.Text), args[2].(float64))
 	})
 	return _c
 }
 
-func (_c *Provider_GetLinesQuantity_Call) Return(_a0 int) *Provider_GetLinesQuantity_Call {
+func (_c *Provider_GetTextHeight_Call) Return(_a0 float64) *Provider_GetTextHeight_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Provider_GetLinesQuantity_Call) RunAndReturn(run func([]*entity.SubText, *props.Text, float64) int) *Provider_GetLinesQuantity_Call {
+func (_c *Provider_GetTextHeight_Call) RunAndReturn(run func([]*entity.SubText, *props.Text, float64) float64) *Provider_GetTextHeight_Call {
 	_c.Call.Return(run)
 	return _c
 }

@@ -43,7 +43,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Margins Test",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -52,7 +51,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_top": 12
-									}
+									},
+									"nodes": [
+										{
+											"value": "Margins Test",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 12
+											}
+										}
+									]
 								}
 							]
 						},
@@ -74,7 +84,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -82,7 +91,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -100,7 +120,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -108,7 +127,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -126,7 +156,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -134,7 +163,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -152,7 +192,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -160,7 +199,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -178,7 +228,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -186,7 +235,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -204,7 +264,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -212,7 +271,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -230,7 +300,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -238,7 +307,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -282,7 +362,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Margins Test",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -291,7 +370,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 12,
 										"prop_top": 12
-									}
+									},
+									"nodes": [
+										{
+											"value": "Margins Test",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 12
+											}
+										}
+									]
 								}
 							]
 						},
@@ -313,7 +403,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -321,7 +410,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -339,7 +439,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -347,7 +446,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -365,7 +475,6 @@
 							},
 							"nodes": [
 								{
-									"value": "any text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -373,7 +482,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "any text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
