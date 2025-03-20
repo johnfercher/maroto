@@ -1,6 +1,7 @@
 package chart
 
 import (
+	"fmt"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
@@ -14,13 +15,15 @@ type timeSeries struct {
 	defaultFillColor *props.Color
 	defaultDrawColor *props.Color
 	chart            core.Chart
+	font             core.Font
 	defaultLineWidth float64
 }
 
-func NewTimeSeries(pdf gofpdfwrapper.Fpdf, chart core.Chart) *timeSeries {
+func NewTimeSeries(pdf gofpdfwrapper.Fpdf, chart core.Chart, font core.Font) *timeSeries {
 	return &timeSeries{
 		pdf:              pdf,
 		chart:            chart,
+		font:             font,
 		defaultFillColor: &props.WhiteColor,
 		defaultDrawColor: &props.BlueColor,
 		defaultLineWidth: linestyle.DefaultLineThickness,
@@ -38,20 +41,37 @@ func (s timeSeries) Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, m
 
 	for _, timeSeries := range timeSeriesList {
 		s.pdf.SetDrawColor(timeSeries.Color.Red, timeSeries.Color.Green, timeSeries.Color.Blue)
-		for i := 0; i < len(timeSeries.Values)-1; i++ {
 
-			aX := timeSeries.Values[i].X*stepX + margins.Left + cell.X
+		for i := 0; i < len(timeSeries.Points)-1; i++ {
+			aX := timeSeries.Points[i].X*stepX + margins.Left + cell.X
 
-			aY := timeSeries.Values[i].Y * stepY
+			aY := timeSeries.Points[i].Y * stepY
 			aY = cell.Height + margins.Top + cell.Y - aY
 
-			bX := timeSeries.Values[i+1].X*stepX + margins.Left + cell.X
+			bX := timeSeries.Points[i+1].X*stepX + margins.Left + cell.X
 
-			bY := timeSeries.Values[i+1].Y * stepY
+			bY := timeSeries.Points[i+1].Y * stepY
 			bY = cell.Height + margins.Top + cell.Y - bY
 
 			s.pdf.Line(aX, aY, bX, bY)
 		}
+
+		for i := 0; i < len(timeSeries.Labels); i++ {
+			aX := timeSeries.Labels[i].Point.X*stepX + margins.Left + cell.X
+
+			aY := timeSeries.Labels[i].Point.Y * stepY
+			aY = cell.Height + margins.Top + cell.Y - aY
+
+			stringLabel := fmt.Sprintf("%s(%.2f)", timeSeries.Labels[i].Value, timeSeries.Labels[i].Point.Y)
+			stringWidth := s.pdf.GetStringWidth(stringLabel)
+
+			fontFamily, fontType, fontSize := s.font.GetFont()
+			stringHeight := s.font.GetHeight(fontFamily, fontType, fontSize)
+
+			s.pdf.Circle(aX, aY, 0.6, "D")
+			s.pdf.Text(aX-(stringWidth/2), aY-(stringHeight/1.5), stringLabel)
+		}
+
 		s.pdf.SetDrawColor(s.defaultDrawColor.Red, s.defaultDrawColor.Green, s.defaultDrawColor.Blue)
 	}
 
@@ -63,12 +83,12 @@ func (s timeSeries) getSizes(timeSeriesList []entity.TimeSeries) (float64, float
 	height := 0.0
 
 	for _, timeSeries := range timeSeriesList {
-		for i := 0; i < len(timeSeries.Values); i++ {
-			if timeSeries.Values[i].X > width {
-				width = timeSeries.Values[i].X
+		for i := 0; i < len(timeSeries.Points); i++ {
+			if timeSeries.Points[i].X > width {
+				width = timeSeries.Points[i].X
 			}
-			if timeSeries.Values[i].Y > height {
-				height = timeSeries.Values[i].Y
+			if timeSeries.Points[i].Y > height {
+				height = timeSeries.Points[i].Y
 			}
 		}
 	}
