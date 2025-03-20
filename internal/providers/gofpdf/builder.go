@@ -73,7 +73,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	line := NewLine(fpdf)
 	baseChart := chart.NewChart(fpdf, font)
 	heatMap := chart.NewHeatMap(fpdf, baseChart)
-	timeSeries := chart.NewTimeSeries(fpdf, baseChart)
+	timeSeries := chart.NewTimeSeries(fpdf, baseChart, font)
 	cellWriter := cellwriter.NewBuilder().
 		Build(fpdf)
 

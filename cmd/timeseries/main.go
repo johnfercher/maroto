@@ -18,9 +18,10 @@ func main() {
 	width := 30.0
 	step := 0.1
 	timeSeriesList := SinCos(width, step)
+	timeSeriesList = append(timeSeriesList, Log(width, step)...)
 	prop := props.Chart{
 		XLabels: []float64{0, 10, 20, 30},
-		YLabels: []float64{0, 1, 2},
+		YLabels: []float64{0, 1, 2, 3},
 		Font: props.Font{
 			Family: fontfamily.Arial,
 			Style:  fontstyle.Normal,
@@ -39,9 +40,6 @@ func main() {
 		row.New(100).Add(
 			chart.NewTimeSeriesCol(12, timeSeriesList, prop),
 		),
-		/*row.New(100).Add(
-			chart.NewTimeSeriesCol(12, pointsMatrix),
-		),*/
 	)
 
 	document, err := m.Generate()
@@ -58,17 +56,52 @@ func main() {
 func SinCos(width float64, step float64) []entity.TimeSeries {
 	timeSeries := []entity.TimeSeries{}
 
+	var maxSin entity.Point
 	sin := []entity.Point{}
 	for i := 0.0; i < width; i += step {
-		sin = append(sin, entity.NewPoint(i, math.Sin(i)+1))
+		y := math.Sin(i) + 1 + (i / 25)
+		point := entity.NewPoint(i, y)
+		if y > maxSin.Y {
+			maxSin = point
+		}
+		sin = append(sin, point)
 	}
-	timeSeries = append(timeSeries, entity.NewTimeSeries(props.RedColor, sin...))
+	timeSeries = append(timeSeries, entity.NewTimeSeries(props.RedColor, sin, entity.NewLabel("Max", maxSin)))
 
+	var maxCos entity.Point
 	cos := []entity.Point{}
 	for i := 0.0; i < width; i += step {
-		cos = append(cos, entity.NewPoint(i, math.Cos(i)+1))
+		y := math.Cos(i) + 1 + (i / 30)
+		point := entity.NewPoint(i, y)
+		if y > maxCos.Y {
+			maxCos = point
+		}
+		cos = append(cos, point)
 	}
-	timeSeries = append(timeSeries, entity.NewTimeSeries(props.BlueColor, cos...))
+	timeSeries = append(timeSeries, entity.NewTimeSeries(props.BlueColor, cos, entity.NewLabel("Max", maxCos)))
+
+	return timeSeries
+}
+
+func Log(width float64, step float64) []entity.TimeSeries {
+	timeSeries := []entity.TimeSeries{}
+
+	var logMax entity.Point
+	sin := []entity.Point{}
+	for i := 0.0; i < width; i += step {
+		v := math.Log(i)
+		point := entity.NewPoint(i, v)
+		if v > logMax.Y {
+			logMax = point
+		}
+		if v > 0 {
+			sin = append(sin, point)
+		}
+	}
+	timeSeries = append(timeSeries, entity.NewTimeSeries(props.Color{
+		Red:  150,
+		Blue: 150,
+	}, sin, entity.NewLabel("Max", logMax)))
 
 	return timeSeries
 }

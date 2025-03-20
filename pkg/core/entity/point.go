@@ -14,14 +14,28 @@ func NewPoint(x, y float64) Point {
 	}
 }
 
+type Label struct {
+	Value string
+	Point Point
+}
+
+func NewLabel(value string, point Point) Label {
+	return Label{
+		Value: value,
+		Point: point,
+	}
+}
+
 type TimeSeries struct {
-	Values []Point
+	Points []Point
+	Labels []Label
 	Color  props.Color
 }
 
-func NewTimeSeries(color props.Color, values ...Point) TimeSeries {
+func NewTimeSeries(color props.Color, points []Point, labels ...Label) TimeSeries {
 	return TimeSeries{
-		Values: values,
+		Points: points,
 		Color:  color,
+		Labels: labels,
 	}
 }
