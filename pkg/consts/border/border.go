@@ -47,13 +47,6 @@ func (t Type) HasBottom() bool {
 
 // String returns the string representation of the border type.
 func (t Type) String() string {
-	if t == None {
-		return ""
-	}
-	if t == Full {
-		return "1"
-	}
-
 	result := ""
 	if t.HasLeft() {
 		result += "L"

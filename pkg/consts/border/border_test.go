@@ -141,12 +141,12 @@ func TestType_String(t *testing.T) {
 		assert.Equal(t, "", borderType.String())
 	})
 
-	t.Run("When type is Full, should return '1'", func(t *testing.T) {
+	t.Run("When type is Full, should return 'LTRB'", func(t *testing.T) {
 		// Arrange
 		borderType := border.Full
 
 		// Act & Assert
-		assert.Equal(t, "1", borderType.String())
+		assert.Equal(t, "LTRB", borderType.String())
 	})
 
 	t.Run("When type is Left, should return 'L'", func(t *testing.T) {
