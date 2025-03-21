@@ -1,7 +1,6 @@
 package chart
 
 import (
-	"fmt"
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 
@@ -62,7 +61,7 @@ func (s timeSeries) Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, m
 			aY := timeSeries.Labels[i].Point.Y * stepY
 			aY = cell.Height + margins.Top + cell.Y - aY
 
-			stringLabel := fmt.Sprintf("%s(%.2f)", timeSeries.Labels[i].Value, timeSeries.Labels[i].Point.Y)
+			stringLabel := timeSeries.Labels[i].Value
 			stringWidth := s.pdf.GetStringWidth(stringLabel)
 
 			fontFamily, fontType, fontSize := s.font.GetFont()
