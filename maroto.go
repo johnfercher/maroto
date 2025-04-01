@@ -56,17 +56,16 @@ func (m *Maroto) GetProvider() core.Provider {
 func New(cfgs ...*entity.Config) core.Maroto {
 	cache := cache.New()
 	cfg := getConfig(cfgs...)
-	return NewWithProvider(func() core.Provider {
-		return getProvider(cache, cfg)
-	}, cache, cfgs...)
+	provider := getProvider(cache, cfg)
+	return NewWithProvider(provider, cache, cfgs...)
 }
 
 // NewWithProvider creates a new instance of core.Maroto with a
 // custom provider factory and shared cache.
-func NewWithProvider(createProvider func() core.Provider, cache cache.Cache, cfgs ...*entity.Config) core.Maroto {
+func NewWithProvider(provider core.Provider, cache cache.Cache, cfgs ...*entity.Config) core.Maroto {
 	cfg := getConfig(cfgs...)
 	m := &Maroto{
-		provider: createProvider(),
+		provider: provider,
 		cell: entity.NewRootCell(cfg.Dimensions.Width, cfg.Dimensions.Height, entity.Margins{
 			Left:   cfg.Margins.Left,
 			Top:    cfg.Margins.Top,
