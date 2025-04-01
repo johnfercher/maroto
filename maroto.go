@@ -57,7 +57,7 @@ func New(cfgs ...*entity.Config) core.Maroto {
 	cache := cache.New()
 	cfg := getConfig(cfgs...)
 	provider := getProvider(cache, cfg)
-	return NewWithProvider(provider, cache, cfgs...)
+	return NewWithProvider(provider, cache, cfg)
 }
 
 // NewWithProvider creates a new instance of core.Maroto with a
