@@ -45,16 +45,28 @@ func (m *Maroto) GetCurrentConfig() *entity.Config {
 	return m.config
 }
 
+// GetProvider returns the internal PDF provider used for rendering.
+func (m *Maroto) GetProvider() core.Provider {
+	return m.provider
+}
+
 // New is responsible for create a new instance of core.Maroto.
 // It's optional to provide an *entity.Config with customizations
 // those customization are created by using the config.Builder.
 func New(cfgs ...*entity.Config) core.Maroto {
 	cache := cache.New()
 	cfg := getConfig(cfgs...)
-	provider := getProvider(cache, cfg)
+	return NewWithProvider(func() core.Provider {
+		return getProvider(cache, cfg)
+	}, cache, cfgs...)
+}
 
+// NewWithProvider creates a new instance of core.Maroto with a
+// custom provider factory and shared cache.
+func NewWithProvider(createProvider func() core.Provider, cache cache.Cache, cfgs ...*entity.Config) core.Maroto {
+	cfg := getConfig(cfgs...)
 	m := &Maroto{
-		provider: provider,
+		provider: createProvider(),
 		cell: entity.NewRootCell(cfg.Dimensions.Width, cfg.Dimensions.Height, entity.Margins{
 			Left:   cfg.Margins.Left,
 			Top:    cfg.Margins.Top,
@@ -64,7 +76,6 @@ func New(cfgs ...*entity.Config) core.Maroto {
 		cache:  cache,
 		config: cfg,
 	}
-
 	return m
 }
 
