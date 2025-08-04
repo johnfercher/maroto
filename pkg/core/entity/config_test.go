@@ -58,6 +58,7 @@ func TestConfig_ToMap(t *testing.T) {
 	assert.Equal(t, 100.0, m["background_dimension_width"])
 	assert.Equal(t, 200.0, m["background_dimension_height"])
 	assert.Equal(t, true, m["config_disable_auto_page_break"])
+	assert.Equal(t, true, m["config_disable_first_page"])
 }
 
 func fixtureConfig() Config {
@@ -84,6 +85,7 @@ func fixtureConfig() Config {
 		Metadata:             &metadata,
 		BackgroundImage:      &image,
 		DisableAutoPageBreak: true,
+		DisableFirstPage:     true,
 	}
 }
 

@@ -825,6 +825,29 @@ func TestBuilder_WithDisableAutoPageBreak(t *testing.T) {
 	})
 }
 
+func TestBuilder_WithDisableFirstPage(t *testing.T) {
+	t.Run("when disable first page is false, should not change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithDisableFirstPage(false).Build()
+
+		// Assert
+		assert.Equal(t, false, cfg.DisableFirstPage)
+	})
+	t.Run("when disable first page is true, should change the default value", func(t *testing.T) {
+		// Arrange
+		sut := config.NewBuilder()
+
+		// Act
+		cfg := sut.WithDisableFirstPage(true).Build()
+
+		// Assert
+		assert.Equal(t, true, cfg.DisableFirstPage)
+	})
+}
+
 func TestBuilder_WithKeywords(t *testing.T) {
 	t.Run("when keywords is empty, should ignore", func(t *testing.T) {
 		// Arrange

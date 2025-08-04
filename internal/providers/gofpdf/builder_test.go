@@ -82,4 +82,66 @@ func TestBuilder_Build(t *testing.T) {
 		// Assert
 		assert.NotNil(t, dep)
 	})
+	t.Run("when DisableFirstPage true, should build correctly", func(t *testing.T) {
+		// Arrange
+		sut := gofpdf.NewBuilder()
+		font := fixture.FontProp()
+		cfg := &entity.Config{
+			Dimensions: &entity.Dimensions{
+				Width:  100,
+				Height: 200,
+			},
+			Margins: &entity.Margins{
+				Left:   10,
+				Top:    10,
+				Right:  10,
+				Bottom: 10,
+			},
+			DefaultFont: &font,
+			CustomFonts: []*entity.CustomFont{
+				{
+					Family: fontfamily.Arial,
+				},
+			},
+			DisableAutoPageBreak: false,
+			DisableFirstPage:     true,
+		}
+
+		// Act
+		dep := sut.Build(cfg, nil)
+
+		// Assert
+		assert.NotNil(t, dep)
+	})
+	t.Run("when DisableFirstPage false, should build correctly", func(t *testing.T) {
+		// Arrange
+		sut := gofpdf.NewBuilder()
+		font := fixture.FontProp()
+		cfg := &entity.Config{
+			Dimensions: &entity.Dimensions{
+				Width:  100,
+				Height: 200,
+			},
+			Margins: &entity.Margins{
+				Left:   10,
+				Top:    10,
+				Right:  10,
+				Bottom: 10,
+			},
+			DefaultFont: &font,
+			CustomFonts: []*entity.CustomFont{
+				{
+					Family: fontfamily.Arial,
+				},
+			},
+			DisableAutoPageBreak: false,
+			DisableFirstPage:     false,
+		}
+
+		// Act
+		dep := sut.Build(cfg, nil)
+
+		// Assert
+		assert.NotNil(t, dep)
+	})
 }
