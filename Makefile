@@ -61,6 +61,7 @@ examples:
 	go run docs/assets/examples/customfont/v2/main.go
 	go run docs/assets/examples/custompage/v2/main.go
 	go run docs/assets/examples/datamatrixgrid/v2/main.go
+	go run docs/assets/examples/disablefirstpage/v2/main.go
 	go run docs/assets/examples/disablepagebreak/v2/main.go
 	go run docs/assets/examples/footer/v2/main.go
 	go run docs/assets/examples/header/v2/main.go
