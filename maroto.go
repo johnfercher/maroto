@@ -202,6 +202,7 @@ func (m *Maroto) GetStructure() *node.Node[core.Structure] {
 // FillPageToAddNew is responsible for adding a new page
 func (m *Maroto) FillPageToAddNew() {
 	space := m.cell.Height - m.currentHeight - m.footerHeight
+	space = math.Floor(space*math.Pow10(9)) / math.Pow10(9)
 
 	c := col.New(m.config.MaxGridSize)
 	spaceRow := row.New(space).Add(c)
@@ -232,7 +233,7 @@ func (m *Maroto) addRows(rows ...core.Row) {
 
 func (m *Maroto) fitsOnCurrentPage(heightNewContent, currentHeight float64) bool {
 	sumHeight := heightNewContent + currentHeight + m.footerHeight
-	return sumHeight < m.cell.Height
+	return sumHeight <= m.cell.Height
 }
 
 func (m *Maroto) addRow(r core.Row) {
