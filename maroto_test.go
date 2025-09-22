@@ -96,7 +96,7 @@ func TestMaroto_AddRow(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_4.json")
 	})
-	t.Run("when one row is sent, should create one row", func(t *testing.T) {
+	t.Run("when one row is sent,it should set one row", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -106,7 +106,7 @@ func TestMaroto_AddRow(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_1.json")
 	})
-	t.Run("when two rows are sent, should create two rows", func(t *testing.T) {
+	t.Run("when two row is sent,it should set two row", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -117,7 +117,7 @@ func TestMaroto_AddRow(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_2.json")
 	})
-	t.Run("when rows do not fit on the current page, should create a new page", func(t *testing.T) {
+	t.Run("when rows exceed the page, should add a new page", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -128,6 +128,21 @@ func TestMaroto_AddRow(t *testing.T) {
 
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_3.json")
+	})
+}
+
+func TestMaroto_FillPageToAddNew(t *testing.T) {
+	t.Run("when FillPageToAddNew is called, it should add components to the new page", func(t *testing.T) {
+		// Arrange
+		sut := maroto.New()
+
+		// Act
+		sut.AddRows(row.New(15))
+		sut.FillPageToAddNew()
+		sut.AddRows(row.New(15))
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_fill_page_1.json")
 	})
 }
 
@@ -142,7 +157,7 @@ func TestMaroto_AddRows(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_rows_4.json")
 	})
-	t.Run("when one row is sent, should create one row", func(t *testing.T) {
+	t.Run("when one row is sent,it should set one row", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -152,7 +167,7 @@ func TestMaroto_AddRows(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_rows_1.json")
 	})
-	t.Run("when two rows are sent, should create two rows", func(t *testing.T) {
+	t.Run("when two row is sent,it should set two row", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -163,7 +178,7 @@ func TestMaroto_AddRows(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_rows_2.json")
 	})
-	t.Run("when rows do not fit on the current page, should create a new page", func(t *testing.T) {
+	t.Run("when rows exceed the page, should add a new page", func(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 
@@ -420,8 +435,8 @@ func TestMaroto_Generate(t *testing.T) {
 	})
 }
 
-func TestMaroto_FitlnCurrentPage(t *testing.T) {
-	t.Run("when component is smaller should available size, should return false", func(t *testing.T) {
+func TestMaroto_FitsOnCurrentPage(t *testing.T) {
+	t.Run("when no row fits on the current page, should return 0", func(t *testing.T) {
 		sut := maroto.New(config.NewBuilder().
 			WithDimensions(210.0, 297.0).
 			Build())
@@ -432,9 +447,9 @@ func TestMaroto_FitlnCurrentPage(t *testing.T) {
 		}
 
 		sut.AddPages(page.New().Add(rows...))
-		assert.False(t, sut.FitlnCurrentPage(40))
+		assert.Equal(t, 0, sut.FitsOnCurrentPage(rows...))
 	})
-	t.Run("when component is larger should the available size, should return true", func(t *testing.T) {
+	t.Run("when all rows fit on the current page, should return the total number of rows", func(t *testing.T) {
 		sut := maroto.New(config.NewBuilder().
 			WithDimensions(210.0, 297.0).
 			Build())
@@ -445,9 +460,22 @@ func TestMaroto_FitlnCurrentPage(t *testing.T) {
 		}
 
 		sut.AddPages(page.New().Add(rows...))
-		assert.True(t, sut.FitlnCurrentPage(40))
+		assert.Equal(t, 10, sut.FitsOnCurrentPage(rows...))
 	})
-	t.Run("when it have content with an automatic height of 10 and the height sent fits the current page, it should return true",
+	t.Run("when half of the rows fit on the current page, should return the amount that fits", func(t *testing.T) {
+		sut := maroto.New(config.NewBuilder().
+			WithDimensions(210.0, 297.0).
+			Build())
+
+		var rows []core.Row
+		for i := 0; i < 20; i++ {
+			rows = append(rows, row.New(10).Add(col.New(12)))
+		}
+
+		sut.AddPages(page.New().Add(rows...))
+		assert.Equal(t, 6, sut.FitsOnCurrentPage(rows...))
+	})
+	t.Run("when it have content with an automatic height of 10 and the height sent fits the current page, it should return 1",
 		func(t *testing.T) {
 			sut := maroto.New(config.NewBuilder().
 				WithDimensions(210.0, 297.0).
@@ -455,11 +483,11 @@ func TestMaroto_FitlnCurrentPage(t *testing.T) {
 
 			var rows []core.Row
 			for i := 0; i < 10; i++ {
-				rows = append(rows, row.New().Add(text.NewCol(12, "teste")))
+				rows = append(rows, row.New().Add(text.NewCol(12, "test")))
 			}
 
 			sut.AddPages(page.New().Add(rows...))
-			assert.True(t, sut.FitlnCurrentPage(40))
+			assert.Equal(t, 1, sut.FitsOnCurrentPage(text.NewRow(40, "test")))
 		})
 }
 
