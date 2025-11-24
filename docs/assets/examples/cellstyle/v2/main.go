@@ -80,6 +80,26 @@ func GetMaroto() core.Maroto {
 			BorderType:      border.Bottom,
 			BorderColor:     &props.Color{0, 0, 200},
 		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Left | border.Top,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Left | border.Right,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Top | border.Bottom,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
+		{
+			BackgroundColor: &props.Color{220, 220, 220},
+			BorderType:      border.Left | border.Right | border.Top,
+			BorderColor:     &props.Color{0, 0, 200},
+		},
 	}
 
 	whiteText := props.Text{
