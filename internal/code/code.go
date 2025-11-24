@@ -7,32 +7,23 @@ import (
 	"image/draw"
 	"image/png"
 
-	"github.com/boombuler/barcode/code128"
-	"github.com/boombuler/barcode/ean"
-	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
-
 	libBarcode "github.com/boombuler/barcode"
+	"github.com/boombuler/barcode/code128"
 	"github.com/boombuler/barcode/datamatrix"
+	"github.com/boombuler/barcode/ean"
 	"github.com/boombuler/barcode/qr"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-// codeInstance is the singleton of code, opted to use a singleton to ensure that
-// this will not be instantiated more than once since there is no need to do this
-// because code is stateless.
-var codeInstance *code = nil
-
 type code struct{}
 
 // New create a Code (Singleton).
 func New() *code {
-	if codeInstance == nil {
-		codeInstance = &code{}
-	}
-	return codeInstance
+	return &code{}
 }
 
 // GenDataMatrix is responsible to generate a data matrix byte array.
@@ -76,7 +67,9 @@ func (c *code) GenBar(code string, _ *entity.Cell, prop *props.Barcode) (*entity
 	return c.getImage(scaledBarCode)
 }
 
-func getBarcodeClosure(barcodeType barcode.Type) func(code string) (libBarcode.BarcodeIntCS, error) {
+func getBarcodeClosure(
+	barcodeType barcode.Type,
+) func(code string) (libBarcode.BarcodeIntCS, error) {
 	switch barcodeType {
 	case barcode.EAN:
 		return ean.Encode
