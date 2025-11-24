@@ -14,9 +14,10 @@ type Provider interface {
 
 	// Features
 	AddLine(cell *entity.Cell, prop *props.Line)
+	AddCustomText(cell *entity.Cell, textPs *props.Text, subs ...*entity.SubText)
 	AddText(text string, cell *entity.Cell, prop *props.Text)
 	GetFontHeight(prop *props.Font) float64
-	GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int
+	GetTextHeight(textProp *props.Text, colWidth float64, text ...*entity.SubText) float64
 	AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect)
 	AddQrCode(code string, cell *entity.Cell, rect *props.Rect)
 	AddBarCode(code string, cell *entity.Cell, prop *props.Barcode)

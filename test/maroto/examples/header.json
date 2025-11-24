@@ -32,7 +32,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Header",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -41,7 +40,19 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 10,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Header",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -59,7 +70,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -67,7 +77,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -85,7 +106,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -93,7 +113,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -111,7 +142,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -119,7 +149,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -137,7 +178,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -145,7 +185,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -163,7 +214,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -171,7 +221,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -189,7 +250,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -197,7 +257,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -215,7 +286,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -223,7 +293,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -241,7 +322,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -249,7 +329,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -267,7 +358,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -275,7 +365,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -293,7 +394,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -301,7 +401,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -319,7 +430,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -327,7 +437,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -345,7 +466,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -353,7 +473,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -371,7 +502,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -379,7 +509,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -397,7 +538,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -405,7 +545,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -423,7 +574,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -431,7 +581,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -449,7 +610,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -457,7 +617,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -475,7 +646,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -483,7 +653,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -501,7 +682,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -509,7 +689,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -527,7 +718,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -535,7 +725,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -553,7 +754,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -561,7 +761,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -579,7 +790,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -587,7 +797,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -605,7 +826,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -613,7 +833,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -631,7 +862,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -639,7 +869,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -657,7 +898,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -665,7 +905,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -698,7 +949,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Header",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -707,7 +957,19 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 10,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Header",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -725,7 +987,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -733,7 +994,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -751,7 +1023,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -759,7 +1030,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -777,7 +1059,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -785,7 +1066,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -803,7 +1095,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -811,7 +1102,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -829,7 +1131,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -837,7 +1138,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -855,7 +1167,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -863,7 +1174,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -881,7 +1203,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -889,7 +1210,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -907,7 +1239,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -915,7 +1246,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -933,7 +1275,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -941,7 +1282,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -959,7 +1311,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -967,7 +1318,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -985,7 +1347,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -993,7 +1354,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1011,7 +1383,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1019,7 +1390,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1037,7 +1419,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1045,7 +1426,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1063,7 +1455,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1071,7 +1462,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1089,7 +1491,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1097,7 +1498,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1115,7 +1527,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1123,7 +1534,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1141,7 +1563,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1149,7 +1570,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1167,7 +1599,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1175,7 +1606,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1193,7 +1635,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1201,7 +1642,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1219,7 +1671,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1227,7 +1678,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1245,7 +1707,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1253,7 +1714,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1271,7 +1743,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1279,7 +1750,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1297,7 +1779,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1305,7 +1786,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1323,7 +1815,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1331,7 +1822,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1364,7 +1866,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Header",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -1373,7 +1874,19 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 10,
 										"prop_font_style": "B"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Header",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10,
+												"prop_font_style": "B"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1391,7 +1904,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1399,7 +1911,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}
@@ -1417,7 +1940,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Dummy text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -1425,7 +1947,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 8
-									}
+									},
+									"nodes": [
+										{
+											"value": "Dummy text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 8
+											}
+										}
+									]
 								}
 							]
 						}

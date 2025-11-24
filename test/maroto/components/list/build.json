@@ -10,8 +10,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "Key",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "Key",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				},
@@ -20,8 +25,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "Value",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "Value",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				}
@@ -43,8 +53,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "key(0)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(0)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				},
@@ -53,8 +68,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "value(0)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(0)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				}
@@ -69,8 +89,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "key(1)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(1)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				},
@@ -79,67 +104,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "value(1)",
-							"type": "text"
-						}
-					]
-				}
-			]
-		},
-		{
-			"value": 10,
-			"type": "row",
-			"details": {
-				"prop_background_color": "RGB(255, 100, 50)",
-				"prop_border_color": "RGB(200, 80, 60)",
-				"prop_border_line_style": "dashed",
-				"prop_border_thickness": 0.6,
-				"prop_border_type": "L"
-			},
-			"nodes": [
-				{
-					"value": 6,
-					"type": "col",
-					"nodes": [
-						{
-							"value": "key(2)",
-							"type": "text"
-						}
-					]
-				},
-				{
-					"value": 6,
-					"type": "col",
-					"nodes": [
-						{
-							"value": "value(2)",
-							"type": "text"
-						}
-					]
-				}
-			]
-		},
-		{
-			"value": 10,
-			"type": "row",
-			"nodes": [
-				{
-					"value": 6,
-					"type": "col",
-					"nodes": [
-						{
-							"value": "key(3)",
-							"type": "text"
-						}
-					]
-				},
-				{
-					"value": 6,
-					"type": "col",
-					"nodes": [
-						{
-							"value": "value(3)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(1)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				}
@@ -161,8 +132,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "key(4)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(2)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				},
@@ -171,8 +147,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "value(4)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(2)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				}
@@ -187,8 +168,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "key(5)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(3)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				},
@@ -197,67 +183,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "value(5)",
-							"type": "text"
-						}
-					]
-				}
-			]
-		},
-		{
-			"value": 10,
-			"type": "row",
-			"details": {
-				"prop_background_color": "RGB(255, 100, 50)",
-				"prop_border_color": "RGB(200, 80, 60)",
-				"prop_border_line_style": "dashed",
-				"prop_border_thickness": 0.6,
-				"prop_border_type": "L"
-			},
-			"nodes": [
-				{
-					"value": 6,
-					"type": "col",
-					"nodes": [
-						{
-							"value": "key(6)",
-							"type": "text"
-						}
-					]
-				},
-				{
-					"value": 6,
-					"type": "col",
-					"nodes": [
-						{
-							"value": "value(6)",
-							"type": "text"
-						}
-					]
-				}
-			]
-		},
-		{
-			"value": 10,
-			"type": "row",
-			"nodes": [
-				{
-					"value": 6,
-					"type": "col",
-					"nodes": [
-						{
-							"value": "key(7)",
-							"type": "text"
-						}
-					]
-				},
-				{
-					"value": 6,
-					"type": "col",
-					"nodes": [
-						{
-							"value": "value(7)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(3)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				}
@@ -279,8 +211,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "key(8)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(4)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				},
@@ -289,8 +226,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "value(8)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(4)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				}
@@ -305,8 +247,13 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "key(9)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(5)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				},
@@ -315,8 +262,171 @@
 					"type": "col",
 					"nodes": [
 						{
-							"value": "value(9)",
-							"type": "text"
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(5)",
+									"type": "sub_text"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"value": 10,
+			"type": "row",
+			"details": {
+				"prop_background_color": "RGB(255, 100, 50)",
+				"prop_border_color": "RGB(200, 80, 60)",
+				"prop_border_line_style": "dashed",
+				"prop_border_thickness": 0.6,
+				"prop_border_type": "L"
+			},
+			"nodes": [
+				{
+					"value": 6,
+					"type": "col",
+					"nodes": [
+						{
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(6)",
+									"type": "sub_text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "col",
+					"nodes": [
+						{
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(6)",
+									"type": "sub_text"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"value": 10,
+			"type": "row",
+			"nodes": [
+				{
+					"value": 6,
+					"type": "col",
+					"nodes": [
+						{
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(7)",
+									"type": "sub_text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "col",
+					"nodes": [
+						{
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(7)",
+									"type": "sub_text"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"value": 10,
+			"type": "row",
+			"details": {
+				"prop_background_color": "RGB(255, 100, 50)",
+				"prop_border_color": "RGB(200, 80, 60)",
+				"prop_border_line_style": "dashed",
+				"prop_border_thickness": 0.6,
+				"prop_border_type": "L"
+			},
+			"nodes": [
+				{
+					"value": 6,
+					"type": "col",
+					"nodes": [
+						{
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(8)",
+									"type": "sub_text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "col",
+					"nodes": [
+						{
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(8)",
+									"type": "sub_text"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"value": 10,
+			"type": "row",
+			"nodes": [
+				{
+					"value": 6,
+					"type": "col",
+					"nodes": [
+						{
+							"type": "text",
+							"nodes": [
+								{
+									"value": "key(9)",
+									"type": "sub_text"
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "col",
+					"nodes": [
+						{
+							"type": "text",
+							"nodes": [
+								{
+									"value": "value(9)",
+									"type": "sub_text"
+								}
+							]
 						}
 					]
 				}

@@ -83,20 +83,19 @@ func TestNewAutoRow(t *testing.T) {
 func TestText_Render(t *testing.T) {
 	t.Run("should call provider correctly", func(t *testing.T) {
 		// Arrange
-		value := "textValue"
 		cell := fixture.CellEntity()
 		prop := fixture.TextProp()
-		sut := text.New(value, prop)
+		sut := text.New("textValue", prop)
 
 		provider := mocks.NewProvider(t)
-		provider.EXPECT().AddText(value, &cell, &prop)
+		provider.EXPECT().AddCustomText(&cell, &prop, &entity.SubText{Value: "textValue", Props: props.NewSubText(&prop)})
 		sut.SetConfig(&entity.Config{})
 
 		// Act
 		sut.Render(provider, &cell)
 
 		// Assert
-		provider.AssertNumberOfCalls(t, "AddText", 1)
+		provider.AssertNumberOfCalls(t, "AddCustomText", 1)
 	})
 }
 
@@ -115,54 +114,39 @@ func TestText_SetConfig(t *testing.T) {
 }
 
 func TestText_GetHeight(t *testing.T) {
-	t.Run("When top margin is sent, should increment row height with top margin", func(t *testing.T) {
+	t.Run("When top and bottom margin are sent, should increment row height with margin", func(t *testing.T) {
 		cell := fixture.CellEntity()
 		font := fixture.FontProp()
-		textProp := props.Text{Top: 10}
+		textProp := props.Text{Top: 10, Bottom: 10}
 		textProp.MakeValid(&font)
 
 		sut := text.New("text", textProp)
 
 		provider := mocks.NewProvider(t)
-		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(5.0)
-		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+		provider.EXPECT().GetTextHeight(&textProp, 100.0, &entity.SubText{Value: "text", Props: props.NewSubText(&textProp)}).Return(20.0)
 
 		// Act
 		height := sut.GetHeight(provider, &cell)
-		assert.Equal(t, 20.0, height)
+		assert.Equal(t, 40.0, height)
 	})
+}
 
-	t.Run("When vertical padding is sent, should increment row height with vertical padding", func(t *testing.T) {
-		cell := fixture.CellEntity()
-		font := fixture.FontProp()
-		textProp := props.Text{VerticalPadding: 5}
-		textProp.MakeValid(&font)
-
-		sut := text.New("text", textProp)
-
-		provider := mocks.NewProvider(t)
-		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(5.0)
-		provider.EXPECT().GetFontHeight(&font).Return(2.0)
-
+func TestAddSubText(t *testing.T) {
+	t.Run("when prop is not sent, should use default", func(t *testing.T) {
 		// Act
-		height := sut.GetHeight(provider, &cell)
-		assert.Equal(t, 30.0, height)
+		sut := text.New("subText 1")
+		sut.AddSubText("subText 2")
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/add_subtext_default_prop.json")
 	})
-
-	t.Run("When font has a height of 2, should return 10", func(t *testing.T) {
-		cell := fixture.CellEntity()
-		font := fixture.FontProp()
-		textProp := props.Text{}
-		textProp.MakeValid(&font)
-
-		sut := text.New("text", textProp)
-
-		provider := mocks.NewProvider(t)
-		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(5.0)
-		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		ps := fixture.TextProp()
 
 		// Act
-		height := sut.GetHeight(provider, &cell)
-		assert.Equal(t, 10.0, height)
+		sut := text.New("subText 1", ps)
+		sut.AddSubText("subText 2", props.NewSubText(&ps))
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/add_subtext_custom_prop.json")
 	})
 }

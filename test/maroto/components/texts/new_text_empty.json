@@ -2,8 +2,8 @@
 	"type": "text",
 	"nodes": [
 		{
-			"value": "code",
-			"type": "sub_text"
+			"type": "sub_text",
+			"value": ""
 		}
 	]
 }

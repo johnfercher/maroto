@@ -29,7 +29,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Red text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -37,7 +36,18 @@
 										"prop_color": "RGB(255, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Red text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(255, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -46,7 +56,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Green text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -54,7 +63,18 @@
 										"prop_color": "RGB(0, 255, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Green text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 255, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -63,7 +83,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Blue text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -71,7 +90,18 @@
 										"prop_color": "RGB(0, 0, 255)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Blue text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 255)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -86,7 +116,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Left-aligned text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -94,7 +123,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Left-aligned text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -103,7 +143,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Centered text",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -111,7 +150,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Centered text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -120,7 +170,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Right-aligned text",
 									"type": "text",
 									"details": {
 										"prop_align": "R",
@@ -129,7 +178,19 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 10,
 										"prop_font_style": "S"
-									}
+									},
+									"nodes": [
+										{
+											"value": "Right-aligned text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10,
+												"prop_font_style": "S"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -147,7 +208,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Aligned unindented text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -155,7 +215,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Aligned unindented text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -170,7 +241,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Left-aligned text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -180,7 +250,18 @@
 										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_top": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "Left-aligned text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -189,7 +270,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Centered text",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -198,7 +278,18 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 10,
 										"prop_top": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "Centered text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -207,7 +298,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "Right-aligned text",
 									"type": "text",
 									"details": {
 										"prop_align": "R",
@@ -217,7 +307,18 @@
 										"prop_font_size": 10,
 										"prop_right": 3,
 										"prop_top": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "Right-aligned text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -235,7 +336,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Aligned text with indentation",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -243,7 +343,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Aligned text with indentation",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -258,7 +369,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -266,7 +376,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -275,7 +396,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -283,7 +403,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -292,7 +423,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "R",
@@ -300,7 +430,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -318,7 +459,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Multiline text",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -326,7 +466,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Multiline text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -341,7 +492,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -352,7 +502,18 @@
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -361,7 +522,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "C",
@@ -372,7 +532,18 @@
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -381,7 +552,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "R",
@@ -392,7 +562,18 @@
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -410,7 +591,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Multiline text with indentation",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -418,7 +598,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Multiline text with indentation",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -436,7 +627,6 @@
 							},
 							"nodes": [
 								{
-									"value": "text with hyperlink",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -445,7 +635,19 @@
 										"prop_font_family": "arial",
 										"prop_font_size": 10,
 										"prop_hyperlink": "https://google.com"
-									}
+									},
+									"nodes": [
+										{
+											"value": "text with hyperlink",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10,
+												"prop_hyperlink": "https://google.com"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -475,7 +677,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -486,7 +687,18 @@
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -495,7 +707,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -506,7 +717,18 @@
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_top": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -515,7 +737,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -527,7 +748,19 @@
 										"prop_left": 10,
 										"prop_right": 10,
 										"prop_top": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10,
+												"prop_hyperlink": "https://google.com"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -545,7 +778,6 @@
 							},
 							"nodes": [
 								{
-									"value": "Justify-aligned text",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -553,7 +785,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "Justify-aligned text",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
@@ -568,7 +811,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -578,7 +820,18 @@
 										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_right": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -587,7 +840,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -597,7 +849,18 @@
 										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_right": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						},
@@ -606,7 +869,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -617,7 +879,19 @@
 										"prop_hyperlink": "https://google.com",
 										"prop_left": 10,
 										"prop_right": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10,
+												"prop_hyperlink": "https://google.com"
+											}
+										}
+									]
 								}
 							]
 						}
@@ -632,7 +906,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -642,14 +915,25 @@
 										"prop_font_size": 10,
 										"prop_left": 3,
 										"prop_right": 3
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
 					]
 				},
 				{
-					"value": 30.583333333333336,
+					"value": 40.583333333333336,
 					"type": "row",
 					"nodes": [
 						{
@@ -657,7 +941,6 @@
 							"type": "col",
 							"nodes": [
 								{
-									"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
 									"type": "text",
 									"details": {
 										"prop_align": "J",
@@ -668,14 +951,89 @@
 										"prop_left": 3,
 										"prop_right": 3,
 										"prop_vertical_padding": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise. This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}
 					]
 				},
 				{
-					"value": 139.080833333,
+					"value": 45.51388888888889,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 2,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_top": 2,
+										"prop_vertical_padding": 1
+									},
+									"nodes": [
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 255)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										},
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(255, 0, 0)",
+												"prop_font_family": "courier",
+												"prop_font_size": 10
+											}
+										},
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 255, 0)",
+												"prop_font_family": "zapfdingbats",
+												"prop_font_size": 15
+											}
+										},
+										{
+											"value": "This is a longer sentence that will be broken into multiple lines as it does not fit into the column otherwise.",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "helvetica",
+												"prop_font_size": 10,
+												"prop_font_style": "B"
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 83.566944444,
 					"type": "row",
 					"nodes": [
 						{

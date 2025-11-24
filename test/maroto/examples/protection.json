@@ -33,7 +33,6 @@
 							},
 							"nodes": [
 								{
-									"value": "supersecret content",
 									"type": "text",
 									"details": {
 										"prop_align": "L",
@@ -41,7 +40,18 @@
 										"prop_color": "RGB(0, 0, 0)",
 										"prop_font_family": "arial",
 										"prop_font_size": 10
-									}
+									},
+									"nodes": [
+										{
+											"value": "supersecret content",
+											"type": "sub_text",
+											"details": {
+												"prop_color": "RGB(0, 0, 0)",
+												"prop_font_family": "arial",
+												"prop_font_size": 10
+											}
+										}
+									]
 								}
 							]
 						}

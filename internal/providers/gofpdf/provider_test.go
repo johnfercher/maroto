@@ -8,6 +8,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/internal/merror"
@@ -55,6 +56,27 @@ func TestProvider_AddText(t *testing.T) {
 
 	// Assert
 	text.AssertNumberOfCalls(t, "Add", 1)
+}
+
+func TestProvider_AddCustomText(t *testing.T) {
+	// Arrange
+	cell := &entity.Cell{}
+	prop := fixture.TextProp()
+	sub := entity.SubText{Value: "text", Props: props.NewSubText(&prop)}
+
+	text := mocks.NewText(t)
+	text.EXPECT().AddCustomText(cell, &prop, &sub)
+
+	dep := &gofpdf.Dependencies{
+		Text: text,
+	}
+	sut := gofpdf.New(dep)
+
+	// Act
+	sut.AddCustomText(cell, &prop, &sub)
+
+	// Assert
+	text.AssertNumberOfCalls(t, "AddCustomText", 1)
 }
 
 func TestProvider_GetTextHeight(t *testing.T) {
