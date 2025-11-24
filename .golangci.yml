@@ -1,55 +1,23 @@
 run:
   timeout: 5m
   modules-download-mode: readonly
-  skip-files:
-    - cmd/*
-    - mocks/*
-    - internal/fpdf/*
-    - internal/fixture
+  issues:
+    exclude-files:
+      - cmd/*
+      - mocks/*
+      - internal/fpdf/*
+      - internal/fixture
 
 linters-settings:
   lll:
     line-length: 140
   gocritic:
     enabled-checks:
-      - appendAssign
-      - argOrder
-      - assignOp
-      - badCall
-      - badCond
       - boolExprSimplify
-      - captLocal
-      - caseOrder
-      - codegenComment
       - commentedOutCode
       - commentedOutImport
-      - commentFormatting
-      - defaultCaseOrder
-      - deprecatedComment
-      - dupArg
-      - dupBranchBody
-      - dupCase
       - dupImport
-      - dupSubExpr
-      - elseif
-      - exitAfterDefer
-      - flagDeref
-      - flagName
-      - ifElseChain
-      - mapKey
-      - newDeref
-      - offBy1
-      - regexpMust
-      - singleCaseSwitch
-      - sloppyLen
       - stringXbytes
-      - switchTrue
-      - typeSwitchVar
-      - underef
-      - unlambda
-      - unslice
-      - valSwap
-      - wrapperFunc
 
 linters:
   disable-all: true

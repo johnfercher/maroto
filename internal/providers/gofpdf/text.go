@@ -140,7 +140,6 @@ func (s *text) getLinesBreakingLineFromSpace(words []string, colWidth float64) [
 			lines = append(lines, word)
 			currentlySize = s.pdf.GetStringWidth(word)
 		}
-
 	}
 
 	return lines
