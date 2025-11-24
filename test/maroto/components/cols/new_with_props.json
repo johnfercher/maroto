@@ -6,6 +6,6 @@
 		"prop_border_color": "RGB(200, 80, 60)",
 		"prop_border_line_style": "dashed",
 		"prop_border_thickness": 0.6,
-		"prop_border_type": "L"
+		"prop_border_type": 1
 	}
 }
