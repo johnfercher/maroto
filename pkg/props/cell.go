@@ -33,7 +33,7 @@ func (c *Cell) ToMap() map[string]interface{} {
 
 	m := make(map[string]interface{})
 
-	if c.BorderType != "" {
+	if c.BorderType != border.None {
 		m["prop_border_type"] = c.BorderType
 	}
 
