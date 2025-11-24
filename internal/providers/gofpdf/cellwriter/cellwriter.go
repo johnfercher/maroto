@@ -36,7 +36,7 @@ func (c *cellWriter) Apply(width, height float64, config *entity.Config, prop *p
 			bd = border.Full
 		}
 
-		c.fpdf.CellFormat(width, height, "", string(bd), 0, "C", false, 0, "")
+		c.fpdf.CellFormat(width, height, "", bd.String(), 0, "C", false, 0, "")
 		return
 	}
 
@@ -45,5 +45,5 @@ func (c *cellWriter) Apply(width, height float64, config *entity.Config, prop *p
 		bd = border.Full
 	}
 
-	c.fpdf.CellFormat(width, height, "", string(bd), 0, "C", prop.BackgroundColor != nil, 0, "")
+	c.fpdf.CellFormat(width, height, "", bd.String(), 0, "C", prop.BackgroundColor != nil, 0, "")
 }

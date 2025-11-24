@@ -30,8 +30,9 @@ func TestGetLinesheight(t *testing.T) {
 		font.EXPECT().SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 		pdf := mocks.NewFpdf(t)
-		pdf.EXPECT().GetStringWidth("text ").Return(5)
 		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("text").Return(5.0)  // First token just returns text
+		pdf.EXPECT().GetStringWidth(" text").Return(6.0) // subsequent tokens return leading space
 
 		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
 

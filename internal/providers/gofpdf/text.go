@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 	"unicode"
+	"unicode/utf8"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -71,11 +72,9 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	stringWidth := s.pdf.GetStringWidth(unicodeText)
 
 	// If should add one line
-	if stringWidth < width {
+	if stringWidth <= width {
 		s.addLine(textProp, x, width, y, stringWidth, unicodeText)
-		if textProp.Color != nil {
-			s.font.SetColor(originalColor)
-		}
+		s.font.SetColor(originalColor)
 		return
 	}
 
@@ -97,9 +96,7 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 		accumulateOffsetY += textProp.VerticalPadding
 	}
 
-	if textProp.Color != nil {
-		s.font.SetColor(originalColor)
-	}
+	s.font.SetColor(originalColor)
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
@@ -117,20 +114,31 @@ func (s *text) GetLinesQuantity(text string, textProp *props.Text, colWidth floa
 
 func (s *text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {
 	currentlySize := 0.0
-	actualLine := 0
-
 	lines := []string{}
-	lines = append(lines, "")
 
 	for _, word := range words {
-		if s.pdf.GetStringWidth(word+" ")+currentlySize < colWidth {
-			lines[actualLine] = lines[actualLine] + word + " "
-			currentlySize += s.pdf.GetStringWidth(word + " ")
+		if word == "" {
+			continue
+		}
+		var piece, separator string
+		if len(lines) == 0 || lines[len(lines)-1] == "" {
+			piece = word
+			separator = ""
 		} else {
-			lines = append(lines, "")
-			actualLine++
-			lines[actualLine] = lines[actualLine] + word + " "
-			currentlySize = s.pdf.GetStringWidth(word + " ")
+			piece = " " + word
+			separator = " "
+		}
+
+		width := s.pdf.GetStringWidth(piece)
+		if currentlySize+width <= colWidth {
+			if len(lines) == 0 {
+				lines = append(lines, "")
+			}
+			lines[len(lines)-1] += separator + word
+			currentlySize += width
+		} else {
+			lines = append(lines, word)
+			currentlySize = s.pdf.GetStringWidth(word)
 		}
 	}
 
@@ -246,6 +254,7 @@ func isIncorrectSpaceWidth(textWidth, spaceWidth, defaultSpaceWidth float64, tex
 		return false
 	}
 
-	lastChar := rune(text[len(text)-1])
+	r, _ := utf8.DecodeLastRuneInString(text)
+	lastChar := r
 	return !unicode.IsLetter(lastChar) && !unicode.IsNumber(lastChar)
 }
