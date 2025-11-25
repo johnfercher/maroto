@@ -2,12 +2,12 @@ package props
 
 type HeatMap struct {
 	TransparentValues []int
-	HalfColor         bool
-	InvertScale       bool
+	HSVScale          HSVScale
 	Chart             Chart
 }
 
 func (h *HeatMap) MakeValid() {
+	h.HSVScale.MakeValid()
 	h.Chart.MakeValid()
 }
 

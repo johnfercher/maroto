@@ -2,9 +2,8 @@ package chart
 
 import (
 	"errors"
-	"math"
-
 	"github.com/johnfercher/maroto/v2/pkg/props"
+	"math"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 	"github.com/johnfercher/maroto/v2/pkg/core"
@@ -17,19 +16,27 @@ type heatMap struct {
 	pdf              gofpdfwrapper.Fpdf
 	defaultFillColor *props.Color
 	chart            core.Chart
+	font             core.Font
 	padding          float64
 }
 
-func NewHeatMap(pdf gofpdfwrapper.Fpdf, chart core.Chart) *heatMap {
+func NewHeatMap(pdf gofpdfwrapper.Fpdf, chart core.Chart, font core.Font) *heatMap {
 	return &heatMap{
 		pdf:              pdf,
 		chart:            chart,
+		font:             font,
 		defaultFillColor: &props.WhiteColor,
 		padding:          0,
 	}
 }
 
 func (s heatMap) Add(heatMap [][]int, cell *entity.Cell, margins *entity.Margins, prop *props.HeatMap) {
+	xPadding := s.getXPadding(prop)
+	yPadding := s.getYPadding(prop)
+
+	cellHeight := cell.Height - xPadding
+	cellWidth := cell.Width - yPadding
+
 	if heatMap == nil || len(heatMap) == 0 || len(heatMap[0]) == 0 {
 		return
 	}
@@ -38,36 +45,59 @@ func (s heatMap) Add(heatMap [][]int, cell *entity.Cell, margins *entity.Margins
 	width := float64(len(heatMap))
 	height := float64(len(heatMap[0]))
 	transparent := s.getTransparent(prop)
-	stepX, stepY := s.chart.GetSteps(width, height, cell)
+	stepX, stepY := s.chart.GetSteps(width, height, cellHeight, cellWidth)
 
-	for i := 0; i < len(heatMap)-1; i++ {
-		for j := 0; j < len(heatMap[i])-1; j++ {
-			if !transparent[heatMap[i][j]] {
-				r, g, b := GetHeatColor(heatMap[i][j], max)
-
-				x := float64(i)*stepX + cell.X + margins.Left
-				y := float64(j) * stepY
-
-				// Invert to draw from bottom to up
-				y = cell.Height + margins.Top + cell.Y - y - stepY
-
-				s.pdf.SetFillColor(r, g, b)
-				s.pdf.Rect(x, y, stepX, stepY, "F")
-				s.pdf.SetFillColor(s.defaultFillColor.Red, s.defaultFillColor.Green, s.defaultFillColor.Blue)
+	for i := 0; i < len(heatMap); i++ {
+		for j := 0; j < len(heatMap[i]); j++ {
+			currentValue := heatMap[i][j]
+			_, isTransparent := transparent[currentValue]
+			if isTransparent {
+				continue
 			}
+
+			r, g, b := GetHeatColor(currentValue, max, prop.HSVScale)
+
+			x := float64(i)*stepX + cell.X + margins.Left + yPadding
+			y := float64(j)*stepY + xPadding
+
+			// Invert to draw from bottom to up
+			y = cell.Height + margins.Top + cell.Y - y - stepY
+
+			s.pdf.SetFillColor(r, g, b)
+			s.pdf.Rect(x, y, stepX, stepY, "F")
+			s.pdf.SetFillColor(s.defaultFillColor.Red, s.defaultFillColor.Green, s.defaultFillColor.Blue)
 		}
 	}
 
 	s.chart.Add(margins, cell, width, height, &prop.Chart)
 }
 
-func GetHeatColor(i int, total int) (int, int, int) {
-	offset := 360.0 / 7.0 / 2.0
-	iStep := GetStepWithOffset(360, float64(total), float64(i), -offset)
-
-	if iStep < 0 {
-		iStep = 360 + iStep
+func (s heatMap) getXPadding(pps *props.HeatMap) float64 {
+	if pps.Chart.Scale.X == nil && pps.Chart.Title.Text == "" {
+		return 0
 	}
+
+	scalePadding := s.font.GetHeight(pps.Chart.Scale.Font.Family, pps.Chart.Scale.Font.Style, pps.Chart.Scale.Font.Size)
+	if pps.Chart.Title.Text == "" {
+		return scalePadding
+	}
+
+	titlePadding := s.font.GetHeight(pps.Chart.Title.Font.Family, pps.Chart.Title.Font.Style, pps.Chart.Title.Font.Size)
+	return scalePadding + titlePadding
+}
+
+func (s heatMap) getYPadding(pps *props.HeatMap) float64 {
+	if pps.Chart.Scale.Y == nil {
+		return 0
+	}
+
+	return s.font.GetHeight(pps.Chart.Scale.Font.Family, pps.Chart.Scale.Font.Style, pps.Chart.Scale.Font.Size)
+}
+
+func GetHeatColor(i int, total int, scale props.HSVScale) (int, int, int) {
+	iStep := GetStepWithOffset(float64(scale.End)-float64(scale.Begin), float64(total), float64(i))
+
+	iStep += float64(scale.Begin)
 
 	r, g, b, _ := HSVToRGB(iStep, 1.0, 1.0)
 	return int(r), int(g), int(b)
@@ -131,8 +161,8 @@ func GetStep(scaleMax float64, valueMax float64) float64 {
 	return scaleMax / valueMax
 }
 
-func GetStepWithOffset(scaleMax float64, valueMax float64, i float64, offset float64) float64 {
+func GetStepWithOffset(scaleMax float64, valueMax float64, i float64) float64 {
 	scaleStep := GetStep(scaleMax, valueMax)
 	iStep := i * scaleStep
-	return iStep + offset
+	return iStep
 }

@@ -19,18 +19,29 @@ func main() {
 	step := 0.1
 	timeSeriesList := SinCos(width, step)
 	timeSeriesList = append(timeSeriesList, Log(width, step)...)
+
 	prop := props.Chart{
-		XLabels: []float64{0, 10, 20, 30},
-		YLabels: []float64{0, 1, 2, 3},
-		Font: props.Font{
-			Family: fontfamily.Arial,
-			Style:  fontstyle.Normal,
-			Size:   7,
+		Scale: props.ChartScale{
+			X: []float64{0, 10, 20, 30},
+			Y: []float64{0, 1, 2, 3},
+			Font: props.Font{
+				Family: fontfamily.Arial,
+				Style:  fontstyle.Normal,
+				Size:   7,
+			},
+		},
+		Title: props.ChartTitle{
+			Text: "Time Series",
+			Font: props.Font{
+				Family: fontfamily.Arial,
+				Style:  fontstyle.Normal,
+				Size:   9,
+			},
 		},
 	}
 
 	cfg := config.NewBuilder().
-		//WithDebug(true).
+		WithDebug(true).
 		WithPageSize(pagesize.A4).
 		Build()
 

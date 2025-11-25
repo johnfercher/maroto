@@ -32,9 +32,7 @@ func NewTimeSeries(pdf gofpdfwrapper.Fpdf, chart core.Chart, font core.Font) *ti
 func (s timeSeries) Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, margins *entity.Margins, prop *props.Chart) {
 	width, height := s.getSizes(timeSeriesList)
 
-	stepX, stepY := s.chart.GetSteps(width, height, cell)
-
-	s.chart.Add(margins, cell, width, height, prop)
+	stepX, stepY := s.chart.GetSteps(width, height, cell.Height, cell.Width)
 
 	s.pdf.SetLineWidth(0.3)
 
@@ -75,6 +73,7 @@ func (s timeSeries) Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, m
 	}
 
 	s.pdf.SetLineWidth(s.defaultLineWidth)
+	s.chart.Add(margins, cell, width, height, prop)
 }
 
 func (s timeSeries) getSizes(timeSeriesList []entity.TimeSeries) (float64, float64) {
