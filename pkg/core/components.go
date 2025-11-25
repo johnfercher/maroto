@@ -28,6 +28,7 @@ type Image interface {
 	GetImageInfo(img *entity.Image, extension extension.Type) (*gofpdf.ImageInfoType, uuid.UUID)
 }
 
+// Line is the abstraction which deals with lines in a PDF.
 type Line interface {
 	Add(cell *entity.Cell, prop *props.Line)
 }
@@ -51,4 +52,18 @@ type Font interface {
 	GetHeight(family string, style fontstyle.Type, size float64) float64
 	SetColor(color *props.Color)
 	GetColor() *props.Color
+}
+
+// HeatMap is the abstraction which deals with heapmap charts.
+type HeatMap interface {
+	Add(heatMap [][]int, cell *entity.Cell, margins *entity.Margins, prop *props.HeatMap)
+}
+
+type TimeSeries interface {
+	Add(timeSeriesList []entity.TimeSeries, cell *entity.Cell, margins *entity.Margins, prop *props.Chart)
+}
+
+type Chart interface {
+	Add(margins *entity.Margins, cell *entity.Cell, width float64, height float64, props *props.Chart)
+	GetSteps(width, height, cellHeight, cellWidth float64) (float64, float64)
 }

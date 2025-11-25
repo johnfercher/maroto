@@ -26,6 +26,8 @@ type provider struct {
 	code       core.Code
 	image      core.Image
 	line       core.Line
+	heatMap    core.HeatMap
+	timeSeries core.TimeSeries
 	cache      cache.Cache
 	cellWriter cellwriter.CellWriter
 	cfg        *entity.Config
@@ -40,6 +42,8 @@ func New(dep *Dependencies) core.Provider {
 		code:       dep.Code,
 		image:      dep.Image,
 		line:       dep.Line,
+		heatMap:    dep.HeatMap,
+		timeSeries: dep.TimeSeries,
 		cellWriter: dep.CellWriter,
 		cfg:        dep.Cfg,
 		cache:      dep.Cache,
@@ -190,6 +194,10 @@ func (g *provider) SetMetadata(metadata *entity.Metadata) {
 	}
 }
 
+func (g *provider) AddTimeSeries(timeSeriesList []entity.TimeSeries, cell *entity.Cell, prop *props.Chart) {
+	g.timeSeries.Add(timeSeriesList, cell, g.cfg.Margins, prop)
+}
+
 // GetDimensionsByImage is responsible for obtaining the dimensions of an image
 // If the image cannot be loaded, an error is returned
 func (g *provider) GetDimensionsByImage(file string) (*entity.Dimensions, error) {
@@ -266,6 +274,10 @@ func (g *provider) CreateCol(width, height float64, config *entity.Config, prop 
 
 func (g *provider) SetCompression(compression bool) {
 	g.fpdf.SetCompression(compression)
+}
+
+func (g *provider) AddHeatMap(heatMap [][]int, cell *entity.Cell, prop *props.HeatMap) {
+	g.heatMap.Add(heatMap, cell, g.cfg.Margins, prop)
 }
 
 func (g *provider) getBarcodeImageName(code string, prop *props.Barcode) string {
