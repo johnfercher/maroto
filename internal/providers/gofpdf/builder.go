@@ -60,7 +60,9 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	}
 
 	fpdf.SetMargins(cfg.Margins.Left, cfg.Margins.Top, cfg.Margins.Right)
-	fpdf.AddPage()
+	if !cfg.DisableFirstPage {
+		fpdf.AddPage()
+	}
 
 	font := NewFont(fpdf, cfg.DefaultFont.Size, cfg.DefaultFont.Family, cfg.DefaultFont.Style)
 	math := math.New()

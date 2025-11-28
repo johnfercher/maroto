@@ -47,6 +47,7 @@ type Builder interface {
 	WithCustomFonts([]*entity.CustomFont) Builder
 	WithBackgroundImage([]byte, extension.Type) Builder
 	WithDisableAutoPageBreak(disabled bool) Builder
+	WithDisableFirstPage(disabled bool) Builder
 	WithKeywords(keywordsStr string, isUTF8 bool) Builder
 	Build() *entity.Config
 }
@@ -68,6 +69,7 @@ type CfgBuilder struct {
 	metadata             *entity.Metadata
 	backgroundImage      *entity.Image
 	disableAutoPageBreak bool
+	disableFirstPage     bool
 	generationMode       generation.Mode
 }
 
@@ -382,6 +384,11 @@ func (b *CfgBuilder) WithDisableAutoPageBreak(disabled bool) Builder {
 	return b
 }
 
+func (b *CfgBuilder) WithDisableFirstPage(disabled bool) Builder {
+	b.disableFirstPage = disabled
+	return b
+}
+
 // WithKeywords defines the document's keyword metadata.
 func (b *CfgBuilder) WithKeywords(keywordsStr string, isUTF8 bool) Builder {
 	if keywordsStr == "" {
@@ -422,6 +429,7 @@ func (b *CfgBuilder) Build() *entity.Config {
 		CustomFonts:          b.customFonts,
 		BackgroundImage:      b.backgroundImage,
 		DisableAutoPageBreak: b.disableAutoPageBreak,
+		DisableFirstPage:     b.disableFirstPage,
 	}
 }
 
