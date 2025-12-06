@@ -9,7 +9,7 @@ import (
 
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/internal/math"
-	"github.com/jung-kurt/gofpdf"
+	"github.com/phpdave11/gofpdf"
 	"github.com/stretchr/testify/mock"
 
 	"github.com/johnfercher/maroto/v2/mocks"

@@ -1,7 +1,7 @@
 package gofpdf
 
 import (
-	"github.com/jung-kurt/gofpdf"
+	"github.com/phpdave11/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
 	"github.com/johnfercher/maroto/v2/internal/code"

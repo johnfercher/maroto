@@ -17,7 +17,7 @@ import (
 	"github.com/stretchr/testify/mock"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
-	gpdf "github.com/jung-kurt/gofpdf"
+	gpdf "github.com/phpdave11/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/stretchr/testify/assert"
