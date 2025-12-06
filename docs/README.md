@@ -11,20 +11,12 @@
 
 ### News :new:
 
-#### 1. Github Star
-* Please, if you like maroto consider to nominate`@johnfercher`as a Github star. It's free!
-* Link: https://stars.github.com/
-
-#### 2. Discussion Opened:`Maroto Document Processor` :fire::fire::fire:: 
-
-* We are about to create a document processor to generate PDFs by interpreting serialized data as: yml, json or html. Please contribute with your ideas in [this discussion](https://github.com/johnfercher/maroto/discussions/390).
-
-#### 3. Maroto`v2.3.2`is here! Try out:
+#### 1. Maroto`v2.3.3`is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2@v2.3.2
+go get github.com/johnfercher/maroto/v2@v2.3.3
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
@@ -36,15 +28,6 @@ library in various aspects. The main objectives of`v2.0.0`are:
 4. [Improve execution time](README.md?id=execution-time-improvement);
 5. Allow recursive Row/Col; **(on roadmap)**
 6. Allow generation based on [serialized data](https://github.com/johnfercher/maroto/discussions/390).
-
-## Migration
-
-1. We will no longer maintain the current version`v1.0.0`of maroto.
-   - The last version`v0.43.0`was released as`v1.0.0`through the main branch, marking the end of the old version.
-   - The old`v1`code was moved to a`v1`branch.
-2. The master branch now keeps the`v2`code, being the default implementation now.
-   - [Beta versions](https://go.dev/doc/modules/version-numbers) will be released as we achieve small deliverables.
-   - There still some issues not solved from`v1`, but`v2`already solved more than 20 issues from`v1`.
 
 ## Code Example
 This is part of the [simplest example](v2/examples/simplest?id=simplest).
@@ -144,7 +127,7 @@ The pages are merged using [pdfcpu][pdfcpu]. For a complete example, please refe
 [this link](v2/features/parallelism?id=parallelism).
 
 
-[gofpdf]: https://github.com/jung-kurt/gofpdf
+[gofpdf]: https://github.com/phpdave11/gofpdf
 [pdfcpu]: https://github.com/pdfcpu/pdfcpu
 [old_maroto_interface]: https://github.com/johnfercher/maroto/blob/master/pkg/pdf/pdf.go
 [old_row_issue]: https://github.com/johnfercher/maroto/issues/55
