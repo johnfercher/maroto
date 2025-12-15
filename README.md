@@ -28,8 +28,8 @@ always when a new page appear, in this case, a header may have many rows, lines 
 go get github.com/johnfercher/maroto/v2@v2.3.3
 ```
 
-* You can see the full `v2` documentation [here](https://maroto.io/).
-* The `v1` still exists in [this branch](https://github.com/johnfercher/maroto/tree/v1), and you can see the doc [here](https://maroto.io/#/v1/README?id=deprecated).
+* You can see the full `v2` documentation [here](https://maroto.tech/#/README?id=maroto-v2).
+* The `v1` still exists in [this branch](https://github.com/johnfercher/maroto/tree/v1), and you can see the doc [here]([https://maroto.io/#/v1/README?id=deprecated](https://maroto.tech/#/v1/README?id=deprecated)).
 
 ![result](docs/assets/images/result.png)
 
