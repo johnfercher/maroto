@@ -58,6 +58,11 @@ func (g *provider) GetFontHeight(prop *props.Font) float64 {
 	return g.font.GetHeight(prop.Family, prop.Style, prop.Size)
 }
 
+func (g *provider) GetStringWidth(text string, prop *props.Font) float64 {
+	g.font.SetFont(prop.Family, prop.Style, prop.Size)
+	return g.fpdf.GetStringWidth(text)
+}
+
 func (g *provider) AddLine(cell *entity.Cell, prop *props.Line) {
 	g.line.Add(cell, prop)
 }
