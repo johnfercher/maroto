@@ -22,12 +22,12 @@ type Line struct {
 }
 
 // ToMap returns a map with the Line fields.
-func (l *Line) ToMap() map[string]interface{} {
+func (l *Line) ToMap() map[string]any {
 	if l == nil {
 		return nil
 	}
 
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	if l.Color != nil {
 		m["prop_color"] = l.Color.ToString()

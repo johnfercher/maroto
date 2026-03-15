@@ -14,7 +14,9 @@ import (
 )
 
 func TestSignature_ToMap(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is nil, should return nil", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		var sut *props.Signature
 
@@ -25,6 +27,7 @@ func TestSignature_ToMap(t *testing.T) {
 		assert.Nil(t, m)
 	})
 	t.Run("when prop is filled, should return filled map", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := fixture.SignatureProp()
 
@@ -43,6 +46,7 @@ func TestSignature_ToMap(t *testing.T) {
 }
 
 func TestSignature_ToLineProp(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	prop := fixture.SignatureProp()
 
@@ -59,6 +63,7 @@ func TestSignature_ToLineProp(t *testing.T) {
 }
 
 func TestSignature_ToFontProp(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	prop := fixture.SignatureProp()
 

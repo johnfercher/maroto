@@ -13,7 +13,9 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := text.New("code")
 
@@ -21,6 +23,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := text.New("code", fixture.TextProp())
 
@@ -30,7 +33,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestNewCol(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := text.NewCol(12, "code")
 
@@ -38,6 +43,7 @@ func TestNewCol(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := text.NewCol(12, "code", fixture.TextProp())
 
@@ -47,7 +53,9 @@ func TestNewCol(t *testing.T) {
 }
 
 func TestNewRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := text.NewRow(10, "code")
 
@@ -55,6 +63,7 @@ func TestNewRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := text.NewRow(10, "code", fixture.TextProp())
 
@@ -64,7 +73,9 @@ func TestNewRow(t *testing.T) {
 }
 
 func TestNewAutoRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := text.NewAutoRow("code")
 
@@ -72,6 +83,7 @@ func TestNewAutoRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/texts/new_text_auto_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := text.NewAutoRow("code", fixture.TextProp())
 
@@ -81,7 +93,9 @@ func TestNewAutoRow(t *testing.T) {
 }
 
 func TestText_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		value := "textValue"
 		cell := fixture.CellEntity()
@@ -101,8 +115,16 @@ func TestText_Render(t *testing.T) {
 }
 
 func TestText_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		sut := text.New("textValue")
 		fontProp := fixture.FontProp()
 		cfg := &entity.Config{
@@ -115,7 +137,9 @@ func TestText_SetConfig(t *testing.T) {
 }
 
 func TestText_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("When top margin is sent, should increment row height with top margin", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 		font := fixture.FontProp()
 		textProp := props.Text{Top: 10}
@@ -133,6 +157,7 @@ func TestText_GetHeight(t *testing.T) {
 	})
 
 	t.Run("When vertical padding is sent, should increment row height with vertical padding", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 		font := fixture.FontProp()
 		textProp := props.Text{VerticalPadding: 5}
@@ -150,6 +175,7 @@ func TestText_GetHeight(t *testing.T) {
 	})
 
 	t.Run("When font has a height of 2, should return 10", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 		font := fixture.FontProp()
 		textProp := props.Text{}

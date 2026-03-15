@@ -13,7 +13,9 @@ import (
 )
 
 func TestNewBar(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewBar("code")
 
@@ -21,6 +23,7 @@ func TestNewBar(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_bar_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewBar("code", fixture.BarcodeProp())
 
@@ -30,7 +33,9 @@ func TestNewBar(t *testing.T) {
 }
 
 func TestNewBarCol(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewBarCol(12, "code")
 
@@ -38,6 +43,7 @@ func TestNewBarCol(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_bar_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewBarCol(12, "code", fixture.BarcodeProp())
 
@@ -47,7 +53,9 @@ func TestNewBarCol(t *testing.T) {
 }
 
 func TestNewBarRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewBarRow(10, "code")
 
@@ -55,6 +63,7 @@ func TestNewBarRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_bar_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewBarRow(10, "code", fixture.BarcodeProp())
 
@@ -64,7 +73,9 @@ func TestNewBarRow(t *testing.T) {
 }
 
 func TestAutoNewBarRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewAutoBarRow("code")
 
@@ -72,6 +83,7 @@ func TestAutoNewBarRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_auto_bar_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewAutoBarRow("code", fixture.BarcodeProp())
 
@@ -81,7 +93,9 @@ func TestAutoNewBarRow(t *testing.T) {
 }
 
 func TestBarcode_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		codeValue := "barcode"
 		cell := fixture.CellEntity()
@@ -100,8 +114,16 @@ func TestBarcode_Render(t *testing.T) {
 }
 
 func TestBarcode_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		sut := code.NewBar("code")
 
 		// Act
@@ -110,7 +132,9 @@ func TestBarcode_SetConfig(t *testing.T) {
 }
 
 func TestBarcode_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("When the barcode height is '20%' of the width, it should return '20%' of the cell width", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 
 		provider := mocks.NewProvider(t)

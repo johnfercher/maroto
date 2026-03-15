@@ -8,21 +8,21 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type line struct {
+type Line struct {
 	pdf              gofpdfwrapper.Fpdf
 	defaultColor     *props.Color
 	defaultThickness float64
 }
 
-func NewLine(pdf gofpdfwrapper.Fpdf) *line {
-	return &line{
+func NewLine(pdf gofpdfwrapper.Fpdf) *Line {
+	return &Line{
 		pdf:              pdf,
 		defaultColor:     &props.BlackColor,
 		defaultThickness: linestyle.DefaultLineThickness,
 	}
 }
 
-func (l *line) Add(cell *entity.Cell, prop *props.Line) {
+func (l *Line) Add(cell *entity.Cell, prop *props.Line) {
 	if prop.Orientation == orientation.Vertical {
 		l.renderVertical(cell, prop)
 	} else {
@@ -30,7 +30,7 @@ func (l *line) Add(cell *entity.Cell, prop *props.Line) {
 	}
 }
 
-func (l *line) renderVertical(cell *entity.Cell, prop *props.Line) {
+func (l *Line) renderVertical(cell *entity.Cell, prop *props.Line) {
 	size := cell.Height * (prop.SizePercent / 100.0)
 	position := cell.Width * (prop.OffsetPercent / 100.0)
 
@@ -59,7 +59,7 @@ func (l *line) renderVertical(cell *entity.Cell, prop *props.Line) {
 	}
 }
 
-func (l *line) renderHorizontal(cell *entity.Cell, prop *props.Line) {
+func (l *Line) renderHorizontal(cell *entity.Cell, prop *props.Line) {
 	size := cell.Width * (prop.SizePercent / 100.0)
 	position := cell.Height * (prop.OffsetPercent / 100.0)
 

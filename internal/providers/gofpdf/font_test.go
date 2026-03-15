@@ -14,6 +14,7 @@ import (
 )
 
 func TestNewFont(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	size := 10.0
 	family := fontfamily.Arial
@@ -27,7 +28,7 @@ func TestNewFont(t *testing.T) {
 
 	// Assert
 	assert.NotNil(t, font)
-	assert.Equal(t, fmt.Sprintf("%T", font), "*gofpdf.font")
+	assert.Equal(t, "*gofpdf.Font", fmt.Sprintf("%T", font))
 	assert.Equal(t, family, font.GetFamily())
 	assert.Equal(t, style, font.GetStyle())
 	assert.Equal(t, size, font.GetSize())
@@ -35,6 +36,7 @@ func TestNewFont(t *testing.T) {
 }
 
 func TestFont_GetHeight(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	size := 10.0
 	family := fontfamily.Arial
@@ -52,6 +54,7 @@ func TestFont_GetHeight(t *testing.T) {
 }
 
 func TestFont_SetFamily(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	size := 10.0
 	family := fontfamily.Arial
@@ -70,6 +73,7 @@ func TestFont_SetFamily(t *testing.T) {
 }
 
 func TestFont_SetStyle(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	size := 10.0
 	family := fontfamily.Arial
@@ -88,6 +92,7 @@ func TestFont_SetStyle(t *testing.T) {
 }
 
 func TestFont_SetSize(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	size := 10.0
 	family := fontfamily.Arial
@@ -106,7 +111,9 @@ func TestFont_SetSize(t *testing.T) {
 }
 
 func TestFont_SetColor(t *testing.T) {
+	t.Parallel()
 	t.Run("when color is invalid, should not apply color", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		size := 10.0
 		family := fontfamily.Arial
@@ -124,6 +131,7 @@ func TestFont_SetColor(t *testing.T) {
 		assert.Equal(t, color, font.GetColor())
 	})
 	t.Run("when color is valid, should apply color", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		size := 10.0
 		family := fontfamily.Arial

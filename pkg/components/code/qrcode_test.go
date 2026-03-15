@@ -14,7 +14,9 @@ import (
 )
 
 func TestNewQr(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewQr("code")
 
@@ -22,6 +24,7 @@ func TestNewQr(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewQr("code", fixture.RectProp())
 
@@ -31,7 +34,9 @@ func TestNewQr(t *testing.T) {
 }
 
 func TestNewQrCol(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewQrCol(12, "code")
 
@@ -39,6 +44,7 @@ func TestNewQrCol(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewQrCol(12, "code", fixture.RectProp())
 
@@ -48,7 +54,9 @@ func TestNewQrCol(t *testing.T) {
 }
 
 func TestNewQrRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewQrRow(10, "code")
 
@@ -56,6 +64,7 @@ func TestNewQrRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_qr_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewQrRow(10, "code", fixture.RectProp())
 
@@ -65,7 +74,9 @@ func TestNewQrRow(t *testing.T) {
 }
 
 func TestNewAutoQrRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewAutoQrRow("code")
 
@@ -73,6 +84,7 @@ func TestNewAutoQrRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_auto_qr_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewAutoQrRow("code", fixture.RectProp())
 
@@ -82,7 +94,9 @@ func TestNewAutoQrRow(t *testing.T) {
 }
 
 func TestQrCode_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		codeValue := "code"
 		cell := fixture.CellEntity()
@@ -101,8 +115,15 @@ func TestQrCode_Render(t *testing.T) {
 }
 
 func TestQrCode_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
 		sut := code.NewQr("code")
 
 		// Act
@@ -111,7 +132,9 @@ func TestQrCode_SetConfig(t *testing.T) {
 }
 
 func TestQrCode_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("When it is not possible to know the dimensions of the qrcode, should return height 0", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 
 		provider := mocks.NewProvider(t)
@@ -121,10 +144,11 @@ func TestQrCode_GetHeight(t *testing.T) {
 
 		// Act
 		height := sut.GetHeight(provider, &cell)
-		assert.Equal(t, height, 0.0)
+		assert.Equal(t, 0.0, height)
 	})
 
 	t.Run("When the height of the qr code is half the width, should return half the width of the cell", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 
 		provider := mocks.NewProvider(t)

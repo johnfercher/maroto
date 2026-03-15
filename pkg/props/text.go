@@ -1,4 +1,3 @@
-// Package props contains all props used to customize components.
 package props
 
 import (
@@ -36,8 +35,8 @@ type Text struct {
 }
 
 // ToMap converts a Text to a map.
-func (t *Text) ToMap() map[string]interface{} {
-	m := make(map[string]interface{})
+func (t *Text) ToMap() map[string]any {
+	m := make(map[string]any)
 	if t.Top != 0 {
 		m["prop_top"] = t.Top
 	}

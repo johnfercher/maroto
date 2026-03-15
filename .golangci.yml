@@ -1,49 +1,83 @@
+version: "2"
 run:
-  timeout: 5m
   modules-download-mode: readonly
-  issues:
-    exclude-files:
-      - cmd/*
-      - mocks/*
-      - internal/fpdf/*
-      - internal/fixture
-
-linters-settings:
-  lll:
-    line-length: 140
-  gocritic:
-    enabled-checks:
-      - boolExprSimplify
-      - commentedOutCode
-      - commentedOutImport
-      - dupImport
-      - stringXbytes
 
 linters:
-  disable-all: true
+  default: all
+  disable:
+    - mnd
+    - wsl
+    - wsl_v5
+    - wastedassign
+    - varnamelen
+    - testableexamples
+    - tagliatelle
+    - nolintlint
+    - nlreturn
+    - musttag
+    - ireturn
+    - godot
+    - godoclint
+    - gochecknoglobals
+    - funlen
+    - exhaustruct
+    - embeddedstructfieldcheck
+    - depguard
+    - cyclop
+
+  settings:
+    gocritic:
+      enabled-checks:
+        - boolExprSimplify
+        - commentedOutCode
+        - commentedOutImport
+        - dupImport
+        - stringXbytes
+    lll:
+      line-length: 140
+    wrapcheck:
+      ignore-package-globs:
+        - github.com/johnfercher/maroto/*
+    testifylint:
+      enable-all: true
+      disable:
+        - error-nil
+        - float-compare
+    revive:
+      rules:
+        - name: redefines-builtin-id
+          severity: warning
+          disabled: true
+          exclude: [ "" ]
+    interfacebloat:
+      max: 15
+    gosec:
+      excludes:
+        - G306
+
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+      - docs/*
+      - cmd/*
+      - '(.+)_test\.go'
+
+formatters:
   enable:
-    - bodyclose
-    - dogsled
-    - dupl
-    - errcheck
-    - gochecknoinits
-    - goconst
-    - gocritic
     - gofmt
     - gofumpt
     - goimports
-    - goprintffuncname
-    - govet
-    - gosimple
-    - ineffassign
-    - lll
-    - misspell
-    - nakedret
-    - rowserrcheck
-    - staticcheck
-    - stylecheck
-    - typecheck
-    - unconvert
-    - unparam
-    - unused
-    - whitespace
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

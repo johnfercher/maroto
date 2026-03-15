@@ -8,7 +8,9 @@ import (
 )
 
 func TestType_IsValid(t *testing.T) {
+	t.Parallel()
 	t.Run("when type is empty, should not be valid", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		extensionType := extension.Type("")
 
@@ -16,6 +18,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.False(t, extensionType.IsValid())
 	})
 	t.Run("when type is jpg, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		extensionType := extension.Jpg
 
@@ -23,6 +26,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.True(t, extensionType.IsValid())
 	})
 	t.Run("when type is jpeg, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		extensionType := extension.Jpeg
 
@@ -30,6 +34,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.True(t, extensionType.IsValid())
 	})
 	t.Run("when type is png, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		extensionType := extension.Png
 

@@ -14,21 +14,23 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type image struct {
+var ErrCouldNotRegisterImageOptions = errors.New("could not register image options, maybe path/name is wrong")
+
+type Image struct {
 	pdf  gofpdfwrapper.Fpdf
 	math core.Math
 }
 
 // NewImage create an Image.
-func NewImage(pdf gofpdfwrapper.Fpdf, math core.Math) *image {
-	return &image{
+func NewImage(pdf gofpdfwrapper.Fpdf, math core.Math) *Image {
+	return &Image{
 		pdf,
 		math,
 	}
 }
 
-// GetImageInfo is responsible for loading the image in PDF and returning its information
-func (s image) GetImageInfo(img *entity.Image, extension extension.Type) (*gofpdf.ImageInfoType, uuid.UUID) {
+// GetImageInfo is responsible for loading the image in PDF and returning its information.
+func (s *Image) GetImageInfo(img *entity.Image, extension extension.Type) (*gofpdf.ImageInfoType, uuid.UUID) {
 	imageID, _ := uuid.NewRandom()
 
 	info := s.pdf.RegisterImageOptionsReader(
@@ -43,7 +45,7 @@ func (s image) GetImageInfo(img *entity.Image, extension extension.Type) (*gofpd
 }
 
 // Add use a byte array to add image to PDF.
-func (s *image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margins,
+func (s *Image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, extension extension.Type, flow bool,
 ) error {
 	imageID, _ := uuid.NewRandom()
@@ -58,14 +60,14 @@ func (s *image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margin
 	)
 
 	if info == nil {
-		return errors.New("could not register image options, maybe path/name is wrong")
+		return ErrCouldNotRegisterImageOptions
 	}
 
 	s.addImageToPdf(imageID.String(), info, cell, margins, prop, flow)
 	return nil
 }
 
-func (s *image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *entity.Cell, margins *entity.Margins,
+func (s *Image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, flow bool,
 ) {
 	dimensions := s.math.Resize(&entity.Dimensions{

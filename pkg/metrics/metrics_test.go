@@ -8,7 +8,9 @@ import (
 )
 
 func TestTime_Normalize(t *testing.T) {
+	t.Parallel()
 	t.Run("when scale is nano, should divide by 1000 and change to micro", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		time := metrics.Time{
 			Value: 3000,
@@ -24,6 +26,7 @@ func TestTime_Normalize(t *testing.T) {
 		assert.Equal(t, metrics.Micro, time.Scale)
 	})
 	t.Run("when scale is nano, should divide by 1000 and change to micro", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		time := metrics.Time{
 			Value: 2000,
@@ -39,6 +42,7 @@ func TestTime_Normalize(t *testing.T) {
 		assert.Equal(t, metrics.Milli, time.Scale)
 	})
 	t.Run("when scale is milli, should return false", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		time := metrics.Time{
 			Value: 2000,
@@ -56,6 +60,7 @@ func TestTime_Normalize(t *testing.T) {
 }
 
 func TestTime_String(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	time := metrics.Time{
 		Value: 2000,
@@ -70,7 +75,9 @@ func TestTime_String(t *testing.T) {
 }
 
 func TestSize_Normalize(t *testing.T) {
+	t.Parallel()
 	t.Run("when scale is byte, should divide by 1000 and change to kilo", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		size := metrics.Size{
 			Value: 3000,
@@ -86,6 +93,7 @@ func TestSize_Normalize(t *testing.T) {
 		assert.Equal(t, metrics.KiloByte, size.Scale)
 	})
 	t.Run("when scale is kilo, should divide by 1000 and change to mega", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		size := metrics.Size{
 			Value: 3000,
@@ -101,6 +109,7 @@ func TestSize_Normalize(t *testing.T) {
 		assert.Equal(t, metrics.MegaByte, size.Scale)
 	})
 	t.Run("when scale is mega, should divide by 1000 and change to giga", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		size := metrics.Size{
 			Value: 3000,
@@ -116,6 +125,7 @@ func TestSize_Normalize(t *testing.T) {
 		assert.Equal(t, metrics.GigaByte, size.Scale)
 	})
 	t.Run("when scale is giga, should return false", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		size := metrics.Size{
 			Value: 3000,
@@ -133,6 +143,7 @@ func TestSize_Normalize(t *testing.T) {
 }
 
 func TestSize_String(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	size := metrics.Size{
 		Value: 2000,
@@ -147,6 +158,7 @@ func TestSize_String(t *testing.T) {
 }
 
 func TestTimeMetric_Normalize(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	arr := []*metrics.Time{
 		{
@@ -191,6 +203,7 @@ func TestTimeMetric_Normalize(t *testing.T) {
 }
 
 func TestTimeMetric_String(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	arr := []*metrics.Time{
 		{
@@ -230,6 +243,7 @@ func TestTimeMetric_String(t *testing.T) {
 }
 
 func TestSizeMetric_Normalize(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sizeMetric := &metrics.SizeMetric{
 		Key: "keyMetric",
@@ -249,6 +263,7 @@ func TestSizeMetric_Normalize(t *testing.T) {
 }
 
 func TestSizeMetric_String(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sizeMetric := &metrics.SizeMetric{
 		Key: "keyMetric",
@@ -266,7 +281,9 @@ func TestSizeMetric_String(t *testing.T) {
 }
 
 func TestReport_String(t *testing.T) {
+	t.Parallel()
 	t.Run("when formating, then do it correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		report := &metrics.Report{
 			TimeMetrics: []metrics.TimeMetric{
@@ -299,7 +316,9 @@ func TestReport_String(t *testing.T) {
 }
 
 func TestReport_Normalize(t *testing.T) {
+	t.Parallel()
 	t.Run("when normalize, do it correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		report := &metrics.Report{
 			TimeMetrics: []metrics.TimeMetric{
@@ -344,7 +363,9 @@ func TestReport_Normalize(t *testing.T) {
 }
 
 func TestReport_Save(t *testing.T) {
+	t.Parallel()
 	t.Run("when saving, then do it correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		report := &metrics.Report{
 			TimeMetrics: []metrics.TimeMetric{

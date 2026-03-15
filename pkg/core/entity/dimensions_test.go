@@ -1,15 +1,18 @@
-package entity
+package entity_test
 
 import (
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestDimensions_AppendMap(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := fixtureDimensions()
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	// Act
 	m = sut.AppendMap("label", m)
@@ -19,8 +22,8 @@ func TestDimensions_AppendMap(t *testing.T) {
 	assert.Equal(t, 200.0, m["label_dimension_height"])
 }
 
-func fixtureDimensions() Dimensions {
-	return Dimensions{
+func fixtureDimensions() entity.Dimensions {
+	return entity.Dimensions{
 		Width:  100,
 		Height: 200,
 	}

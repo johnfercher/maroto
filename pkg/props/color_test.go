@@ -10,6 +10,7 @@ import (
 )
 
 func TestWhiteColor(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := props.WhiteColor
 
@@ -20,6 +21,7 @@ func TestWhiteColor(t *testing.T) {
 }
 
 func TestBlackColor(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := props.BlackColor
 
@@ -30,6 +32,7 @@ func TestBlackColor(t *testing.T) {
 }
 
 func TestRedColor(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := props.RedColor
 
@@ -40,6 +43,7 @@ func TestRedColor(t *testing.T) {
 }
 
 func TestGreenColor(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := props.GreenColor
 
@@ -50,6 +54,7 @@ func TestGreenColor(t *testing.T) {
 }
 
 func TestBlueColor(t *testing.T) {
+	t.Parallel()
 	// Act
 	blue := props.BlueColor
 
@@ -60,7 +65,9 @@ func TestBlueColor(t *testing.T) {
 }
 
 func TestColor_ToString(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is nil, should return empty", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		var prop *props.Color
 
@@ -68,9 +75,10 @@ func TestColor_ToString(t *testing.T) {
 		s := prop.ToString()
 
 		// Assert
-		assert.Equal(t, "", s)
+		assert.Empty(t, s)
 	})
 	t.Run("when prop is filled, should return correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.ColorProp()
 

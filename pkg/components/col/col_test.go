@@ -15,7 +15,9 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	t.Run("when size is not defined, should use is as max", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		c := col.New()
 
@@ -23,6 +25,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_zero_size.json")
 	})
 	t.Run("when size is defined, should not use max", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		c := col.New(12)
 
@@ -30,6 +33,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_defined_size.json")
 	})
 	t.Run("when has component, should retrieve components", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		c := col.New(12).Add(code.NewQr("code"))
 
@@ -37,6 +41,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(c.GetStructure()).Equals("components/cols/new_with_components.json")
 	})
 	t.Run("when has component, should retrieve components", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		prop := fixture.CellProp()
 		c := col.New(12).WithStyle(&prop)
@@ -47,7 +52,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestCol_GetSize(t *testing.T) {
+	t.Parallel()
 	t.Run("when size defined in creation, should use it", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		c := col.New(12)
 
@@ -58,6 +65,7 @@ func TestCol_GetSize(t *testing.T) {
 		assert.Equal(t, 12, size)
 	})
 	t.Run("when size not defined in creation, should use config max grid size", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		c := col.New()
 		c.SetConfig(&entity.Config{MaxGridSize: 14})
@@ -71,7 +79,9 @@ func TestCol_GetSize(t *testing.T) {
 }
 
 func TestCol_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("when not createCell, should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cfg := &entity.Config{}
 		cell := fixture.CellEntity()
@@ -95,6 +105,7 @@ func TestCol_Render(t *testing.T) {
 		component.AssertNumberOfCalls(t, "SetConfig", 1)
 	})
 	t.Run("when createCell, should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cfg := &entity.Config{}
 		cell := fixture.CellEntity()
@@ -122,7 +133,9 @@ func TestCol_Render(t *testing.T) {
 }
 
 func TestCol_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("when column has two components, should return the largest", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := fixture.CellEntity()
 		cfg := &entity.Config{MaxGridSize: 12}
@@ -139,12 +152,13 @@ func TestCol_GetHeight(t *testing.T) {
 
 		sut := col.New(12).Add(component, component2)
 		sut.SetConfig(cfg)
+
 		// Act
 		height := sut.GetHeight(provider, &cell)
 
 		// Assert
 
 		component.AssertNumberOfCalls(t, "GetHeight", 1)
-		assert.Equal(t, height, 15.0)
+		assert.Equal(t, 15.0, height)
 	})
 }

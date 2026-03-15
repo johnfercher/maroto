@@ -10,6 +10,7 @@ import (
 )
 
 func TestGetMaroto(t *testing.T) {
+	t.Parallel()
 	// Act
 	path := "docs/assets/images/frontpage.png"
 	sut := GetMaroto(buildPath(path))

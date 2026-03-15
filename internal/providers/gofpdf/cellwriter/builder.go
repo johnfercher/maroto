@@ -4,13 +4,13 @@ import (
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
 )
 
-type CellWriterBuilder struct{}
+type WriterBuilder struct{}
 
-func NewBuilder() *CellWriterBuilder {
-	return &CellWriterBuilder{}
+func NewBuilder() *WriterBuilder {
+	return &WriterBuilder{}
 }
 
-func (c *CellWriterBuilder) Build(fpdf gofpdfwrapper.Fpdf) CellWriter {
+func (c *WriterBuilder) Build(fpdf gofpdfwrapper.Fpdf) CellWriter {
 	cellCreator := NewCellWriter(fpdf)
 	borderColorStyle := NewBorderColorStyler(fpdf)
 	borderLineStyler := NewBorderLineStyler(fpdf)

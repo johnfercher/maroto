@@ -65,7 +65,7 @@ func (l *Line) SetConfig(config *entity.Config) {
 }
 
 // GetHeight returns the height that the line will have in the PDF
-func (l *Line) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+func (l *Line) GetHeight(_ core.Provider, _ *entity.Cell) float64 {
 	return l.prop.Thickness
 }
 

@@ -13,6 +13,7 @@ import (
 )
 
 func TestNewBuilder(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := gofpdf.NewBuilder()
 
@@ -22,7 +23,9 @@ func TestNewBuilder(t *testing.T) {
 }
 
 func TestBuilder_Build(t *testing.T) {
+	t.Parallel()
 	t.Run("when DisableAutoPageBreak true, should build correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := gofpdf.NewBuilder()
 		font := fixture.FontProp()
@@ -53,6 +56,7 @@ func TestBuilder_Build(t *testing.T) {
 		assert.NotNil(t, dep)
 	})
 	t.Run("when DisableAutoPageBreak false, should build correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := gofpdf.NewBuilder()
 		font := fixture.FontProp()

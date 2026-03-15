@@ -1,4 +1,5 @@
 // Package config implements custom configuration builder.
+// nolint:interfacebloat // there is no need to reduce this interface
 package config
 
 import (
@@ -44,8 +45,8 @@ type Builder interface {
 	WithSubject(subject string, isUTF8 bool) Builder
 	WithTitle(title string, isUTF8 bool) Builder
 	WithCreationDate(time time.Time) Builder
-	WithCustomFonts([]*entity.CustomFont) Builder
-	WithBackgroundImage([]byte, extension.Type) Builder
+	WithCustomFonts(customFonts []*entity.CustomFont) Builder
+	WithBackgroundImage(bytes []byte, extensionType extension.Type) Builder
 	WithDisableAutoPageBreak(disabled bool) Builder
 	WithKeywords(keywordsStr string, isUTF8 bool) Builder
 	Build() *entity.Config

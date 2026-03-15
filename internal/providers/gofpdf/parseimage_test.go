@@ -10,7 +10,9 @@ import (
 )
 
 func TestFromBytes(t *testing.T) {
+	t.Parallel()
 	t.Run("when extension is not valid, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		img, err := gofpdf.FromBytes([]byte{1, 2, 3}, "invalid")
 
@@ -19,6 +21,7 @@ func TestFromBytes(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 	t.Run("when extension is not valid, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		img, err := gofpdf.FromBytes([]byte{1, 2, 3}, extension.Jpg)
 

@@ -15,23 +15,33 @@ import (
 )
 
 func TestNewBorderLineStyler(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := cellwriter.NewBorderLineStyler(nil)
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*cellwriter.borderLineStyler", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*cellwriter.BorderLineStyler", fmt.Sprintf("%T", sut))
 }
 
 func TestBorderLineStyler_Apply(t *testing.T) {
+	t.Parallel()
 	t.Run("When prop is nil and next is nil, should skip calls", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		sut := cellwriter.NewBorderLineStyler(nil)
 
 		// Act
 		sut.Apply(100, 100, &entity.Config{}, nil)
 	})
 	t.Run("When prop is nil and next is filled, should skip current and call next", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		width := 100.0
 		height := 100.0
@@ -51,6 +61,7 @@ func TestBorderLineStyler_Apply(t *testing.T) {
 		inner.AssertNumberOfCalls(t, "Apply", 1)
 	})
 	t.Run("When has prop but line style is solid, should skip current and call next", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		width := 100.0
 		height := 100.0
@@ -72,6 +83,7 @@ func TestBorderLineStyler_Apply(t *testing.T) {
 		inner.AssertNumberOfCalls(t, "Apply", 1)
 	})
 	t.Run("When has prop but line style is empty, should skip current and call next", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		width := 100.0
 		height := 100.0
@@ -91,6 +103,7 @@ func TestBorderLineStyler_Apply(t *testing.T) {
 		inner.AssertNumberOfCalls(t, "Apply", 1)
 	})
 	t.Run("When has prop and line style is dashed, should apply current and call next", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		width := 100.0
 		height := 100.0

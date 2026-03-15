@@ -7,6 +7,7 @@ import (
 )
 
 func TestGetMaroto(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := GetMaroto()
 

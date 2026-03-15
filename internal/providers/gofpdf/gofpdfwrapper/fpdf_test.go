@@ -10,9 +10,10 @@ import (
 )
 
 func TestNewCustom(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := gofpdfwrapper.NewCustom(&gofpdf.InitType{})
 
 	// Assert
-	assert.NotNil(t, "", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*gofpdf.Fpdf", fmt.Sprintf("%T", sut))
 }

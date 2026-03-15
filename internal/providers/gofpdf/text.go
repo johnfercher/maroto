@@ -15,15 +15,15 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type text struct {
+type Text struct {
 	pdf  gofpdfwrapper.Fpdf
 	math core.Math
 	font core.Font
 }
 
 // NewText create a Text.
-func NewText(pdf gofpdfwrapper.Fpdf, math core.Math, font core.Font) *text {
-	return &text{
+func NewText(pdf gofpdfwrapper.Fpdf, math core.Math, font core.Font) *Text {
+	return &Text{
 		pdf,
 		math,
 		font,
@@ -31,7 +31,7 @@ func NewText(pdf gofpdfwrapper.Fpdf, math core.Math, font core.Font) *text {
 }
 
 // Add a text inside a cell.
-func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
+func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 	fontHeight := s.font.GetHeight(textProp.Family, textProp.Style, textProp.Size)
 
@@ -100,19 +100,19 @@ func (s *text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
-func (s *text) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {
+func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	textTranslated := s.textToUnicode(text, textProp)
 
 	if textProp.BreakLineStrategy == breakline.DashStrategy {
 		return len(s.getLinesBreakingLineWithDash(text, colWidth))
-	} else {
-		return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth))
 	}
+
+	return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth))
 }
 
-func (s *text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {
+func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {
 	currentlySize := 0.0
 	lines := []string{}
 
@@ -145,7 +145,7 @@ func (s *text) getLinesBreakingLineFromSpace(words []string, colWidth float64) [
 	return lines
 }
 
-func (s *text) getLinesBreakingLineWithDash(words string, colWidth float64) []string {
+func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []string {
 	currentlySize := 0.0
 
 	lines := []string{}
@@ -174,7 +174,7 @@ func (s *text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 	return lines
 }
 
-func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
+func (s *Text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, textWidth float64, text string) {
 	left, top, _, _ := s.pdf.GetMargins()
 
 	fontHeight := s.font.GetHeight(textProp.Family, textProp.Style, textProp.Size)
@@ -236,7 +236,7 @@ func (s *text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 	s.pdf.Text(dx+xColOffset+left, yColOffset+top, text)
 }
 
-func (s *text) textToUnicode(txt string, props *props.Text) string {
+func (s *Text) textToUnicode(txt string, props *props.Text) string {
 	if props.Family == fontfamily.Arial ||
 		props.Family == fontfamily.Helvetica ||
 		props.Family == fontfamily.Symbol ||

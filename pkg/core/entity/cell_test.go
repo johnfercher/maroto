@@ -9,6 +9,7 @@ import (
 )
 
 func TestCell_GetDimensions(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	cell := entity.Cell{
 		X:      10,
@@ -26,7 +27,9 @@ func TestCell_GetDimensions(t *testing.T) {
 }
 
 func TestCell_Copy(t *testing.T) {
+	t.Parallel()
 	t.Run("copy should return same values", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := entity.Cell{
 			X:      10,
@@ -45,6 +48,7 @@ func TestCell_Copy(t *testing.T) {
 		assert.Equal(t, cell.Height, copyCell.Height)
 	})
 	t.Run("copy should not allow side-effects", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := entity.Cell{
 			X:      10,
@@ -69,6 +73,7 @@ func TestCell_Copy(t *testing.T) {
 }
 
 func TestNewRootContext(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	width := 100.0
 	height := 300.0

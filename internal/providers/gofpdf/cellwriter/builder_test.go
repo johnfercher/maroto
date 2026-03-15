@@ -10,15 +10,17 @@ import (
 )
 
 func TestNewBuilder(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := cellwriter.NewBuilder()
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*cellwriter.CellWriterBuilder", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*cellwriter.WriterBuilder", fmt.Sprintf("%T", sut))
 }
 
 func TestCellWriterBuilder_Build(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := cellwriter.NewBuilder()
 

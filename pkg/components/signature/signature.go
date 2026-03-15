@@ -77,7 +77,7 @@ func (s *Signature) GetStructure() *node.Node[core.Structure] {
 }
 
 // GetHeight returns the height that the signature will have in the PDF
-func (s *Signature) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+func (s *Signature) GetHeight(provider core.Provider, _ *entity.Cell) float64 {
 	return s.prop.LineThickness + provider.GetFontHeight(s.prop.ToFontProp())*s.prop.SafePadding
 }
 

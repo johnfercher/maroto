@@ -1,7 +1,9 @@
-package entity
+package entity_test
 
 import (
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 
@@ -16,6 +18,7 @@ import (
 )
 
 func TestConfig_ToMap(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := fixtureConfig()
 
@@ -60,7 +63,7 @@ func TestConfig_ToMap(t *testing.T) {
 	assert.Equal(t, true, m["config_disable_auto_page_break"])
 }
 
-func fixtureConfig() Config {
+func fixtureConfig() entity.Config {
 	dimensions := fixtureDimensions()
 	margins := fixtureMargins()
 	font := fixtureFont()
@@ -69,7 +72,7 @@ func fixtureConfig() Config {
 	image := fixtureImage()
 	pageNumber := fixturePageNumber()
 
-	return Config{
+	return entity.Config{
 		ProviderType:         provider.Gofpdf,
 		Dimensions:           &dimensions,
 		Margins:              &margins,

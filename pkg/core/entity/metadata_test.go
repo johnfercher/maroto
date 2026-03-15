@@ -1,16 +1,19 @@
-package entity
+package entity_test
 
 import (
 	"testing"
 	"time"
 
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/stretchr/testify/assert"
 )
 
 func TestMetadata_AppendMap(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := fixtureMetadata()
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	// Act
 	sut.AppendMap(m)
@@ -24,27 +27,27 @@ func TestMetadata_AppendMap(t *testing.T) {
 	assert.Equal(t, true, m["config_metadata_creation_date"])
 }
 
-func fixtureMetadata() Metadata {
+func fixtureMetadata() entity.Metadata {
 	now := time.Now()
-	return Metadata{
-		Author: &Utf8Text{
+	return entity.Metadata{
+		Author: &entity.Utf8Text{
 			Text: "author",
 			UTF8: true,
 		},
-		Creator: &Utf8Text{
+		Creator: &entity.Utf8Text{
 			Text: "creator",
 			UTF8: false,
 		},
-		Subject: &Utf8Text{
+		Subject: &entity.Utf8Text{
 			Text: "subject",
 			UTF8: true,
 		},
-		Title: &Utf8Text{
+		Title: &entity.Utf8Text{
 			Text: "title",
 			UTF8: true,
 		},
 		CreationDate: &now,
-		KeywordsStr: &Utf8Text{
+		KeywordsStr: &entity.Utf8Text{
 			Text: "keyword",
 			UTF8: true,
 		},

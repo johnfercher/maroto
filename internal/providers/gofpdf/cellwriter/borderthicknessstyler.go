@@ -7,13 +7,13 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type borderThicknessStyler struct {
+type BorderThicknessStyler struct {
 	stylerTemplate
 	defaultLineThickness float64
 }
 
-func NewBorderThicknessStyler(fpdf gofpdfwrapper.Fpdf) *borderThicknessStyler {
-	return &borderThicknessStyler{
+func NewBorderThicknessStyler(fpdf gofpdfwrapper.Fpdf) *BorderThicknessStyler {
+	return &BorderThicknessStyler{
 		stylerTemplate: stylerTemplate{
 			fpdf: fpdf,
 			name: "borderThicknessStyler",
@@ -22,7 +22,7 @@ func NewBorderThicknessStyler(fpdf gofpdfwrapper.Fpdf) *borderThicknessStyler {
 	}
 }
 
-func (b *borderThicknessStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
+func (b *BorderThicknessStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
 	if prop == nil {
 		b.GoToNext(width, height, config, prop)
 		return

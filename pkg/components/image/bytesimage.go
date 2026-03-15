@@ -61,10 +61,7 @@ func (b *BytesImage) Render(provider core.Provider, cell *entity.Cell) {
 
 // GetStructure returns the Structure of an Image.
 func (b *BytesImage) GetStructure() *node.Node[core.Structure] {
-	trimLength := 10
-	if len(b.bytes) < trimLength {
-		trimLength = len(b.bytes)
-	}
+	trimLength := min(len(b.bytes), 10)
 
 	str := core.Structure{
 		Type:    "bytesImage",

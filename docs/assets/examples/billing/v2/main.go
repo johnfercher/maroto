@@ -110,9 +110,6 @@ func getTransactions() []core.Row {
 
 	var contentsRow []core.Row
 	contents := getContents()
-	/*for i := 0; i < 8; i++ {
-		contents = append(contents, contents...)
-	}*/
 
 	for i, content := range contents {
 		r := row.New(4).Add(

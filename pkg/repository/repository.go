@@ -2,11 +2,15 @@
 package repository
 
 import (
+	"errors"
+	"fmt"
 	"os"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
+
+var ErrCannotReadFile = errors.New("cannot read file")
 
 // Repository is the abstraction to load custom fonts.
 type Repository interface {
@@ -78,7 +82,7 @@ func (r *FontRepository) Load() ([]*entity.CustomFont, error) {
 		}
 		bytes, err := os.ReadFile(customFont.File)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("%w: %w", ErrCannotReadFile, err)
 		}
 		customFont.Bytes = bytes
 	}

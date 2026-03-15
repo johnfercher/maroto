@@ -56,18 +56,6 @@ func (r *Row) GetColumns() []core.Col {
 	return r.cols
 }
 
-// Returns the height of the row content
-func (r *Row) getBiggestCol(provider core.Provider, cell *entity.Cell) float64 {
-	greaterHeight := 0.0
-	for _, col := range r.cols {
-		height := col.GetHeight(provider, cell)
-		if greaterHeight < height {
-			greaterHeight = height
-		}
-	}
-	return greaterHeight
-}
-
 // GetHeight returns the height of a core.Row.
 func (r *Row) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
 	if r.height == 0 {
@@ -130,4 +118,16 @@ func (r *Row) WithStyle(style *props.Cell) core.Row {
 // resetHeight resets the line height to 0
 func (r *Row) resetHeight() {
 	r.height = 0
+}
+
+// Returns the height of the row content
+func (r *Row) getBiggestCol(provider core.Provider, cell *entity.Cell) float64 {
+	greaterHeight := 0.0
+	for _, col := range r.cols {
+		height := col.GetHeight(provider, cell)
+		if greaterHeight < height {
+			greaterHeight = height
+		}
+	}
+	return greaterHeight
 }

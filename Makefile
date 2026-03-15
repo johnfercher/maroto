@@ -56,6 +56,7 @@ examples:
 	go run docs/assets/examples/barcodegrid/v2/main.go
 	go run docs/assets/examples/billing/v2/main.go
 	go run docs/assets/examples/cellstyle/v2/main.go
+	go run docs/assets/examples/checkbox/v2/main.go
 	go run docs/assets/examples/compression/v2/main.go
 	go run docs/assets/examples/customdimensions/v2/main.go
 	go run docs/assets/examples/customfont/v2/main.go

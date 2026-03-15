@@ -10,7 +10,9 @@ import (
 )
 
 func TestBarcode_ToMap(t *testing.T) {
+	t.Parallel()
 	t.Run("when barcode is nil, should return nil", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		var sut *props.Barcode
 
@@ -21,6 +23,7 @@ func TestBarcode_ToMap(t *testing.T) {
 		assert.Nil(t, m)
 	})
 	t.Run("when barcode is filled, should return map filled correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := fixture.BarcodeProp()
 		sut.Center = true
@@ -39,7 +42,9 @@ func TestBarcode_ToMap(t *testing.T) {
 }
 
 func TestBarcode_MakeValid(t *testing.T) {
+	t.Parallel()
 	t.Run("when percent is less than zero, should become 100", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Percent: -2,
@@ -49,9 +54,10 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Percent, 100.0)
+		assert.Equal(t, 100.0, prop.Percent)
 	})
 	t.Run("when percent is greater than 100, should become 100", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Percent: 102,
@@ -61,9 +67,10 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Percent, 100.0)
+		assert.Equal(t, 100.0, prop.Percent)
 	})
 	t.Run("when is center, top and left should become 0", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Center: true,
@@ -75,10 +82,11 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Top, 0.0)
-		assert.Equal(t, prop.Left, 0.0)
+		assert.Equal(t, 0.0, prop.Top)
+		assert.Equal(t, 0.0, prop.Left)
 	})
 	t.Run("when left is less than 0, should become 0", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Left: -5,
@@ -88,9 +96,10 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Left, 0.0)
+		assert.Equal(t, 0.0, prop.Left)
 	})
 	t.Run("when top is less than 0, should become 0", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Top: -5,
@@ -100,9 +109,10 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Top, 0.0)
+		assert.Equal(t, 0.0, prop.Top)
 	})
 	t.Run("when proportion.width less than 0", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Proportion: props.Proportion{
@@ -114,9 +124,10 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Proportion.Width, 1.0)
+		assert.Equal(t, 1.0, prop.Proportion.Width)
 	})
 	t.Run("when proportion.height less than 0", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Proportion: props.Proportion{
@@ -128,9 +139,10 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Proportion.Height, 0.20)
+		assert.Equal(t, 0.20, prop.Proportion.Height)
 	})
 	t.Run("when height is smaller than 10% of width", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Proportion: props.Proportion{
@@ -146,6 +158,7 @@ func TestBarcode_MakeValid(t *testing.T) {
 		assert.Equal(t, prop.Proportion.Height, prop.Proportion.Width*0.10)
 	})
 	t.Run("when height is grather than 20% of width", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
 			Proportion: props.Proportion{
@@ -163,6 +176,7 @@ func TestBarcode_MakeValid(t *testing.T) {
 }
 
 func TestBarcode_ToRectProp(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	prop := fixture.BarcodeProp()
 

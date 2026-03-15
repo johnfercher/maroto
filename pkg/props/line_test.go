@@ -12,7 +12,9 @@ import (
 )
 
 func TestLine_MakeValid(t *testing.T) {
+	t.Parallel()
 	t.Run("when style is empty, should apply solid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Line{
 			Style: "",
@@ -25,6 +27,7 @@ func TestLine_MakeValid(t *testing.T) {
 		assert.Equal(t, linestyle.Solid, prop.Style)
 	})
 	t.Run("when thickness is 0.0, should apply default", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Line{
 			Thickness: 0.0,
@@ -37,6 +40,7 @@ func TestLine_MakeValid(t *testing.T) {
 		assert.Equal(t, 0.2, prop.Thickness)
 	})
 	t.Run("when orientation is empty, should apply horizontal", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Line{
 			Orientation: "",
@@ -49,6 +53,7 @@ func TestLine_MakeValid(t *testing.T) {
 		assert.Equal(t, orientation.Horizontal, prop.Orientation)
 	})
 	t.Run("when offset percent is less than 5, should apply 5", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Line{
 			OffsetPercent: 4,
@@ -61,6 +66,7 @@ func TestLine_MakeValid(t *testing.T) {
 		assert.Equal(t, 5.0, prop.OffsetPercent)
 	})
 	t.Run("when offset percent is greater than 95, should apply 95", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Line{
 			OffsetPercent: 96,
@@ -73,6 +79,7 @@ func TestLine_MakeValid(t *testing.T) {
 		assert.Equal(t, 95.0, prop.OffsetPercent)
 	})
 	t.Run("when size percent is less than 1, should apply 90", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Line{
 			SizePercent: 0,
@@ -85,6 +92,7 @@ func TestLine_MakeValid(t *testing.T) {
 		assert.Equal(t, 90.0, prop.SizePercent)
 	})
 	t.Run("when size percent is greater than 100, should apply 100", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Line{
 			SizePercent: 101,
@@ -99,7 +107,9 @@ func TestLine_MakeValid(t *testing.T) {
 }
 
 func TestLine_ToMap(t *testing.T) {
+	t.Parallel()
 	t.Run("when line is nil, should return nil", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		var prop *props.Line
 
@@ -110,6 +120,7 @@ func TestLine_ToMap(t *testing.T) {
 		assert.Nil(t, m)
 	})
 	t.Run("when line is filled, should return map filled", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.LineProp()
 

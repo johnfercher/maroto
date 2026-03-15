@@ -3,10 +3,14 @@ package merge
 
 import (
 	"bytes"
+	"errors"
+	"fmt"
 	"io"
 
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 )
+
+var ErrCannotMergePDFs = errors.New("cannot merge PDFs")
 
 // Bytes merges PDFs from byte slices.
 func Bytes(pdfs ...[]byte) ([]byte, error) {
@@ -17,7 +21,8 @@ func Bytes(pdfs ...[]byte) ([]byte, error) {
 
 	var buf bytes.Buffer
 	writer := io.Writer(&buf)
-	if err := mergePdfs(readers, writer, false); err != nil {
+	err := mergePdfs(readers, writer, false)
+	if err != nil {
 		return nil, err
 	}
 
@@ -27,5 +32,10 @@ func Bytes(pdfs ...[]byte) ([]byte, error) {
 func mergePdfs(readers []io.ReadSeeker, writer io.Writer, dividerPage bool) error {
 	conf := api.LoadConfiguration()
 	conf.WriteXRefStream = false
-	return api.MergeRaw(readers, writer, dividerPage, conf)
+	err := api.MergeRaw(readers, writer, dividerPage, conf)
+	if err != nil {
+		return fmt.Errorf("%w: %w", ErrCannotMergePDFs, err)
+	}
+
+	return nil
 }

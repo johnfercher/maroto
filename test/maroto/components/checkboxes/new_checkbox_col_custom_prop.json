@@ -1,0 +1,16 @@
+{
+	"value": 12,
+	"type": "col",
+	"nodes": [
+		{
+			"value": "label",
+			"type": "checkbox",
+			"details": {
+				"prop_checked": true,
+				"prop_left": 5,
+				"prop_size": 10,
+				"prop_top": 5
+			}
+		}
+	]
+}

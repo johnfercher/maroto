@@ -11,14 +11,17 @@ import (
 )
 
 func TestNewMath(t *testing.T) {
+	t.Parallel()
 	sut := math.New()
 
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*math.math", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*math.Math", fmt.Sprintf("%T", sut))
 }
 
 func TestMath_GetCenterCorrection(t *testing.T) {
+	t.Parallel()
 	t.Run("should get center correction correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := math.New()
 		outerSize := 100.0
@@ -33,8 +36,10 @@ func TestMath_GetCenterCorrection(t *testing.T) {
 }
 
 func TestMath_Resize(t *testing.T) {
+	t.Parallel()
 	t.Run("When inner and outer have the same size and 100% is set, inner should be returned with 100 percent of outer",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -52,6 +57,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When inner and outer have the same size and 75% is set, inner should be returned with '75%' of outer",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -69,6 +75,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When inner is smaller and has the same proportion as outer and 100% is set, inner should be returned with '100%' of outer",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -86,6 +93,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When inner is smaller and has the same proportion as outer and 75% is set, inner should be returned with '75%' of outer",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -103,6 +111,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When inner is greater and has the same proportion as outer and 100% is set, inner should be returned with '100%' of outer",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -120,6 +129,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When inner is greater and has the same proportion as outer and 75% is set, inner should be returned with '75%' of outer",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -137,6 +147,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("when height and internal proportion are smaller with '100%' sent, should return internal with '100%'",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -154,6 +165,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("when height and internal proportion are smaller with '75%' sent, should return internal with '75%' of the external",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -171,6 +183,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When internal width is smaller and proportion is greater with '100%' sent, should return internal with '100%' of the external",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -188,6 +201,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When internal width is smaller and proportion is greater with '75%' sent, should return internal with '75%' of the external",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -205,6 +219,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When internal height is greater and proportion is greater with '100%' sent, should return internal with '100%' of the external",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -222,6 +237,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When internal height is greater and proportion is greater with '75%' sent, should return internal with '75%' of the external",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -239,6 +255,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When internal width is greater and proportion is smaller with '100%' sent, should return internal with '100%' of the external",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -256,6 +273,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("When internal width is greater and proportion is smaller with '75%' sent, should return internal with '75%' of the external",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -273,6 +291,7 @@ func TestMath_Resize(t *testing.T) {
 
 	t.Run("when justReferenceWidth is true and inner extrapolates external height, it should resize image based on available height",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -290,6 +309,7 @@ func TestMath_Resize(t *testing.T) {
 		})
 	t.Run("when justReferenceWidth is true and inner does not extrapolate external height, should resize the image based on the width",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -308,7 +328,9 @@ func TestMath_Resize(t *testing.T) {
 }
 
 func TestMath_GetInnerCenterCell(t *testing.T) {
+	t.Parallel()
 	t.Run("there is not side-effect", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := math.New()
 
@@ -326,6 +348,7 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 	})
 
 	t.Run("when inner and outer have the same size, should return the center", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := math.New()
 
@@ -341,6 +364,7 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 	})
 
 	t.Run("when inner is smaller than outer and has equal proportion, the center of the cell must be returned", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := math.New()
 
@@ -357,6 +381,7 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 
 	t.Run("when the internal one has a smaller height and smaller proportion than the external one, the center of the cell must be returned",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -373,6 +398,7 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 
 	t.Run("when internal has a smaller width and greater proportion than external, the center of the cell must be returned",
 		func(t *testing.T) {
+			t.Parallel()
 			// Arrange
 			sut := math.New()
 
@@ -388,6 +414,7 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 		})
 
 	t.Run("when internal has greater height and proportion than external, the center of the cell must be returned", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := math.New()
 
@@ -403,6 +430,7 @@ func TestMath_GetInnerCenterCell(t *testing.T) {
 	})
 
 	t.Run("quando interno tiver largura maior e proporção menor que externa, the center of the cell must be returned", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := math.New()
 

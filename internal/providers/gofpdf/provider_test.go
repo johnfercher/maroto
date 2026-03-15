@@ -28,6 +28,7 @@ const (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := gofpdf.New(&gofpdf.Dependencies{})
 
@@ -37,6 +38,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestProvider_AddText(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	txtContent := "text"
 	cell := &entity.Cell{}
@@ -58,6 +60,7 @@ func TestProvider_AddText(t *testing.T) {
 }
 
 func TestProvider_GetTextHeight(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	fontHeightToReturn := 10.0
 	prop := fixture.FontProp()
@@ -79,6 +82,7 @@ func TestProvider_GetTextHeight(t *testing.T) {
 }
 
 func TestProvider_AddLine(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	cell := &entity.Cell{}
 	prop := fixture.LineProp()
@@ -98,9 +102,33 @@ func TestProvider_AddLine(t *testing.T) {
 	line.AssertNumberOfCalls(t, "Add", 1)
 }
 
+func TestProvider_AddCheckbox(t *testing.T) {
+	t.Parallel()
+	// Arrange
+	label := "checkbox label"
+	cell := &entity.Cell{}
+	prop := fixture.CheckboxProp()
+
+	checkbox := mocks.NewCheckbox(t)
+	checkbox.EXPECT().Add(label, cell, &prop)
+
+	dep := &gofpdf.Dependencies{
+		Checkbox: checkbox,
+	}
+	sut := gofpdf.New(dep)
+
+	// Act
+	sut.AddCheckbox(label, cell, &prop)
+
+	// Assert
+	checkbox.AssertNumberOfCalls(t, "Add", 1)
+}
+
 // nolint: dupl
 func TestProvider_AddMatrixCode(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot find image on cache and cannot generate data matrix, should apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
@@ -132,6 +160,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 	})
 
 	t.Run("when can find image on cache but cannot add image, should apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
@@ -182,6 +211,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		text.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when can find image on cache and can add image, should not apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
@@ -223,6 +253,7 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 		image.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when matrx code is generated with the code sent, it should generate matrix code with the same code", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		cfg := fixture.ConfigEntity()
@@ -259,7 +290,9 @@ func TestProvider_AddMatrixCode(t *testing.T) {
 
 // nolint: dupl
 func TestProvider_AddQrCode(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot find image on cache and cannot generate qr code, should apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
@@ -290,6 +323,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		text.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when can find image on cache but cannot add image, should apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
@@ -340,6 +374,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		text.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when can find image on cache and can add image, should not apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
@@ -381,6 +416,7 @@ func TestProvider_AddQrCode(t *testing.T) {
 		image.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when qrcode is generated with the code sent, it should generate qr code with the same code", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.RectProp()
@@ -419,7 +455,9 @@ func TestProvider_AddQrCode(t *testing.T) {
 
 // nolint: dupl
 func TestProvider_AddBarCode(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot find image on cache and cannot generate bar code, should apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.BarcodeProp()
@@ -450,6 +488,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 		text.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when can find image on cache but cannot add image, should apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.BarcodeProp()
@@ -498,6 +537,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 		text.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when can find image on cache and can add image, should not apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.BarcodeProp()
@@ -537,6 +577,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 		image.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when barcode is ean and everything is correct, should not apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{}
 		prop := fixture.BarcodeProp()
@@ -579,6 +620,7 @@ func TestProvider_AddBarCode(t *testing.T) {
 }
 
 func TestProvider_CreateRow(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	height := 10.0
 
@@ -599,6 +641,7 @@ func TestProvider_CreateRow(t *testing.T) {
 }
 
 func TestProvider_CreateCol(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	width := 10.0
 	height := 20.0
@@ -622,7 +665,16 @@ func TestProvider_CreateCol(t *testing.T) {
 }
 
 func TestProvider_SetProtection(t *testing.T) {
+	t.Parallel()
 	t.Run("when protection is nil, should ignore protection", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		// Act
 		dep := &gofpdf.Dependencies{}
 		sut := gofpdf.New(dep)
@@ -631,6 +683,7 @@ func TestProvider_SetProtection(t *testing.T) {
 		sut.SetProtection(nil)
 	})
 	t.Run("when protection is valid, should apply protection", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		p := &entity.Protection{
 			Type:          protection.Print,
@@ -656,6 +709,7 @@ func TestProvider_SetProtection(t *testing.T) {
 }
 
 func TestProvider_SetCompression(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	fpdf := mocks.NewFpdf(t)
 	fpdf.EXPECT().SetCompression(true)
@@ -674,8 +728,16 @@ func TestProvider_SetCompression(t *testing.T) {
 }
 
 func TestProvider_SetMetadata(t *testing.T) {
+	t.Parallel()
 	t.Run("when metadata is nil, should avoid process", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		dep := &gofpdf.Dependencies{}
 
 		sut := gofpdf.New(dep)
@@ -684,6 +746,7 @@ func TestProvider_SetMetadata(t *testing.T) {
 		sut.SetMetadata(nil)
 	})
 	t.Run("when metadata is filled, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		timeNow := time.Now()
 
@@ -736,6 +799,7 @@ func TestProvider_SetMetadata(t *testing.T) {
 }
 
 func TestProvider_GenerateBytes(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	fpdf := mocks.NewFpdf(t)
 	fpdf.EXPECT().Output(mock.Anything).Return(errors.New("anyError"))
@@ -755,7 +819,9 @@ func TestProvider_GenerateBytes(t *testing.T) {
 }
 
 func TestProvider_AddImageFromBytes(t *testing.T) {
+	t.Parallel()
 	t.Run("when image is invalid, should apply message error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.RectProp()
 		cell := &entity.Cell{}
@@ -776,6 +842,7 @@ func TestProvider_AddImageFromBytes(t *testing.T) {
 		text.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when image is valid but cannot add to document, should apply message error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		img := &entity.Image{
 			Bytes:     []byte{1, 2, 3},
@@ -820,6 +887,7 @@ func TestProvider_AddImageFromBytes(t *testing.T) {
 		fpdf.AssertNumberOfCalls(t, "ClearError", 1)
 	})
 	t.Run("when image is valid and can add to document, should not apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		img := &entity.Image{
 			Bytes:     []byte{1, 2, 3},
@@ -856,7 +924,9 @@ func TestProvider_AddImageFromBytes(t *testing.T) {
 }
 
 func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
+	t.Parallel()
 	t.Run("when image is invalid, should apply message error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.RectProp()
 		cell := &entity.Cell{}
@@ -877,6 +947,7 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 		text.AssertNumberOfCalls(t, "Add", 1)
 	})
 	t.Run("when image is valid but cannot add to document, should apply message error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		img := &entity.Image{
 			Bytes:     []byte{1, 2, 3},
@@ -923,6 +994,7 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 		fpdf.AssertNumberOfCalls(t, "SetHomeXY", 1)
 	})
 	t.Run("when image is valid and can add to document, should not apply message error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		img := &entity.Image{
 			Bytes:     []byte{1, 2, 3},
@@ -965,7 +1037,9 @@ func TestProvider_AddBackgroundImageFromBytes(t *testing.T) {
 
 // nolint: dupl
 func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot find image on cache and cannot generate data matrix, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 
 		cache := mocks.NewCache(t)
@@ -991,6 +1065,7 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 	t.Run("when cannot find image on cache but can generate data matrix, should return dimension", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
@@ -1032,6 +1107,7 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 		assert.Nil(t, err)
 	})
 	t.Run("when can find matrix on cache, should return dimension", func(t *testing.T) {
+		t.Parallel()
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
@@ -1066,7 +1142,9 @@ func TestProvider_GetDimensionsByMatrixCode(t *testing.T) {
 
 // nolint: dupl
 func TestProvider_GetDimensionsByQrCode(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot find image on cache and cannot generate qrCode, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 
 		cache := mocks.NewCache(t)
@@ -1092,6 +1170,7 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 	t.Run("when cannot find image on cache but can generate qrCode, should return dimension", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
@@ -1133,6 +1212,7 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 		assert.Nil(t, err)
 	})
 	t.Run("when can find qrCode on cache, should return dimension", func(t *testing.T) {
+		t.Parallel()
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		cache := mocks.NewCache(t)
@@ -1173,7 +1253,9 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 
 // nolint: dupl
 func TestProvider_GetDimensionsByImage(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot find image on cache and cannot load image, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 
 		cache := mocks.NewCache(t)
@@ -1197,6 +1279,7 @@ func TestProvider_GetDimensionsByImage(t *testing.T) {
 	})
 
 	t.Run("when can find image on cache, should return dimension", func(t *testing.T) {
+		t.Parallel()
 		img := &entity.Image{Bytes: []byte{1, 2, 3}}
 
 		// Arrange
@@ -1227,7 +1310,9 @@ func TestProvider_GetDimensionsByImage(t *testing.T) {
 
 // nolint: dupl
 func TestProvider_GetDimensionsByImageByte(t *testing.T) {
+	t.Parallel()
 	t.Run("when invalid format is sent, should return an error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		dep := &gofpdf.Dependencies{}
 
@@ -1242,6 +1327,7 @@ func TestProvider_GetDimensionsByImageByte(t *testing.T) {
 	})
 
 	t.Run("when bytes are sent, should return dimension", func(t *testing.T) {
+		t.Parallel()
 		img := fixture.ImageEntity()
 
 		// Arrange
@@ -1267,6 +1353,7 @@ func TestProvider_GetDimensionsByImageByte(t *testing.T) {
 
 /*func TestProvider_AddImageFromFile(t *testing.T) {
 	t.Run("when cannot find image in cache and cannot load image, should apply error message", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		file := "file.jpg"
 		cell := &entity.Cell{}

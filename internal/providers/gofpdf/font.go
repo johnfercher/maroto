@@ -11,7 +11,7 @@ const (
 	gofpdfFontScale2 = 25.4
 )
 
-type font struct {
+type Font struct {
 	pdf         gofpdfwrapper.Fpdf
 	size        float64
 	family      string
@@ -21,10 +21,10 @@ type font struct {
 }
 
 // NewFont create a Font.
-func NewFont(pdf gofpdfwrapper.Fpdf, size float64, family string, style fontstyle.Type) *font {
+func NewFont(pdf gofpdfwrapper.Fpdf, size float64, family string, style fontstyle.Type) *Font {
 	pdf.SetFont(family, string(style), size)
 
-	return &font{
+	return &Font{
 		pdf:         pdf,
 		size:        size,
 		family:      family,
@@ -35,53 +35,53 @@ func NewFont(pdf gofpdfwrapper.Fpdf, size float64, family string, style fontstyl
 }
 
 // GetFamily return the currently Font family configured.
-func (s *font) GetFamily() string {
+func (s *Font) GetFamily() string {
 	return s.family
 }
 
 // GetStyle return the currently Font style configured.
-func (s *font) GetStyle() fontstyle.Type {
+func (s *Font) GetStyle() fontstyle.Type {
 	return s.style
 }
 
 // GetSize return the currently Font size configured.
-func (s *font) GetSize() float64 {
+func (s *Font) GetSize() float64 {
 	return s.size
 }
 
 // GetFont return all the currently Font properties configured.
-func (s *font) GetFont() (string, fontstyle.Type, float64) {
+func (s *Font) GetFont() (string, fontstyle.Type, float64) {
 	return s.family, s.style, s.size
 }
 
-func (s *font) GetHeight(family string, style fontstyle.Type, size float64) float64 {
+func (s *Font) GetHeight(family string, style fontstyle.Type, size float64) float64 {
 	s.SetFont(family, style, size)
 	_, _, fontSize := s.GetFont()
 	return fontSize / s.scaleFactor
 }
 
 // SetFamily defines a new Font family.
-func (s *font) SetFamily(family string) {
+func (s *Font) SetFamily(family string) {
 	s.family = family
 
 	s.pdf.SetFont(s.family, string(s.style), s.size)
 }
 
 // SetStyle defines a new Font style.
-func (s *font) SetStyle(style fontstyle.Type) {
+func (s *Font) SetStyle(style fontstyle.Type) {
 	s.style = style
 
 	s.pdf.SetFontStyle(string(s.style))
 }
 
 // SetSize defines a new Font size.
-func (s *font) SetSize(size float64) {
+func (s *Font) SetSize(size float64) {
 	s.size = size
 	s.pdf.SetFontSize(s.size)
 }
 
 // SetFont defines all new Font properties.
-func (s *font) SetFont(family string, style fontstyle.Type, size float64) {
+func (s *Font) SetFont(family string, style fontstyle.Type, size float64) {
 	s.family = family
 	s.style = style
 	s.size = size
@@ -89,7 +89,7 @@ func (s *font) SetFont(family string, style fontstyle.Type, size float64) {
 	s.pdf.SetFont(s.family, string(s.style), s.size)
 }
 
-func (s *font) SetColor(color *props.Color) {
+func (s *Font) SetColor(color *props.Color) {
 	if color == nil {
 		return
 	}
@@ -98,6 +98,6 @@ func (s *font) SetColor(color *props.Color) {
 	s.pdf.SetTextColor(color.Red, color.Green, color.Blue)
 }
 
-func (s *font) GetColor() *props.Color {
+func (s *Font) GetColor() *props.Color {
 	return s.fontColor
 }

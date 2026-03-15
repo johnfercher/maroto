@@ -7,13 +7,13 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type fillColorStyler struct {
+type FillColorStyler struct {
 	stylerTemplate
 	defaultFillColor *props.Color
 }
 
-func NewFillColorStyler(fpdf gofpdfwrapper.Fpdf) *fillColorStyler {
-	return &fillColorStyler{
+func NewFillColorStyler(fpdf gofpdfwrapper.Fpdf) *FillColorStyler {
+	return &FillColorStyler{
 		stylerTemplate: stylerTemplate{
 			fpdf: fpdf,
 			name: "fillColorStyler",
@@ -22,7 +22,7 @@ func NewFillColorStyler(fpdf gofpdfwrapper.Fpdf) *fillColorStyler {
 	}
 }
 
-func (f *fillColorStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
+func (f *FillColorStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
 	if prop == nil {
 		f.GoToNext(width, height, config, prop)
 		return

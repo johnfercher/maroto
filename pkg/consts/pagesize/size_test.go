@@ -9,7 +9,9 @@ import (
 )
 
 func TestGetDimensions(t *testing.T) {
+	t.Parallel()
 	t.Run("when pageSize is invalid, should return a4", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.Type("invalid")
 
@@ -21,6 +23,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 297.0, h)
 	})
 	t.Run("when pageSize is a1, should return a1", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.A1
 
@@ -32,6 +35,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 841.0, h)
 	})
 	t.Run("when pageSize is a2, should return a2", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.A2
 
@@ -43,6 +47,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 594.0, h)
 	})
 	t.Run("when pageSize is a3, should return a3", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.A3
 
@@ -54,6 +59,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 419.9, h)
 	})
 	t.Run("when pageSize is a4, should return a4", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.A4
 
@@ -65,6 +71,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 297.0, h)
 	})
 	t.Run("when pageSize is a5, should return a5", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.A5
 
@@ -76,6 +83,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 210.0, h)
 	})
 	t.Run("when pageSize is a6, should return a6", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.A6
 
@@ -87,6 +95,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 148.5, h)
 	})
 	t.Run("when pageSize is letter, should return letter", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.Letter
 
@@ -98,6 +107,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 279.4, h)
 	})
 	t.Run("when pageSize is legal, should return legal", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.Legal
 
@@ -109,6 +119,7 @@ func TestGetDimensions(t *testing.T) {
 		assert.Equal(t, 355.6, h)
 	})
 	t.Run("when pageSize is tabloid, should return tabloid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageSize := pagesize.Tabloid
 

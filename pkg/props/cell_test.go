@@ -12,7 +12,9 @@ import (
 )
 
 func TestCell_ToMap(t *testing.T) {
+	t.Parallel()
 	t.Run("when cell is nil, should return nil", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		var sut *props.Cell
 
@@ -23,6 +25,7 @@ func TestCell_ToMap(t *testing.T) {
 		assert.Nil(t, m)
 	})
 	t.Run("when cell is filled, should return map filled correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := fixture.CellProp()
 

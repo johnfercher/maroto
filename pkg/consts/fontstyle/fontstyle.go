@@ -27,6 +27,7 @@ func (s Type) IsValid() bool {
 			Normal,
 			Italic,
 			Bold,
+			BoldItalic,
 			Underline,
 			Strikethrough:
 		default:

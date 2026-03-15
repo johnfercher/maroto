@@ -14,7 +14,9 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	t.Run("when there is no cols", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		r := row.New(10)
 
@@ -22,6 +24,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(r.GetStructure()).Equals("components/rows/new_empty_col.json")
 	})
 	t.Run("when has component, should retrieve components", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		r := row.New(12).Add(col.New(12))
 
@@ -29,6 +32,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(r.GetStructure()).Equals("components/rows/new_filled_col.json")
 	})
 	t.Run("when has prop, should apply correctly", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		prop := fixture.CellProp()
 		r := row.New(12).WithStyle(&prop)
@@ -39,7 +43,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestRow_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("When a row has a column with height 5, should return 5", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 
 		provider := mocks.NewProvider(t)
@@ -56,7 +62,9 @@ func TestRow_GetHeight(t *testing.T) {
 }
 
 func TestRow_GetColumns(t *testing.T) {
+	t.Parallel()
 	t.Run("when GetColumns is called, should return the number of registered columns", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		newCol := []core.Col{col.New(12)}
 
@@ -68,7 +76,9 @@ func TestRow_GetColumns(t *testing.T) {
 }
 
 func TestRow_GetStructure(t *testing.T) {
+	t.Parallel()
 	t.Run("when there is no style, should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cfg := &entity.Config{
 			MaxGridSize: 12,
@@ -95,6 +105,7 @@ func TestRow_GetStructure(t *testing.T) {
 		col.AssertNumberOfCalls(t, "SetConfig", 1)
 	})
 	t.Run("when there is style, should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cfg := &entity.Config{
 			MaxGridSize: 12,
@@ -126,8 +137,16 @@ func TestRow_GetStructure(t *testing.T) {
 }
 
 func TestRow_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		sut := row.New(10)
 
 		// Act

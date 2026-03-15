@@ -27,12 +27,12 @@ type Signature struct {
 }
 
 // ToMap returns a map with the Signature fields.
-func (s *Signature) ToMap() map[string]interface{} {
+func (s *Signature) ToMap() map[string]any {
 	if s == nil {
 		return nil
 	}
 
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	if s.FontFamily != "" {
 		m["prop_font_family"] = s.FontFamily

@@ -1,0 +1,344 @@
+{
+	"type": "maroto",
+	"details": {
+		"chunk_workers": 1,
+		"config_debug": true,
+		"config_margin_bottom": 20.0025,
+		"config_margin_left": 10,
+		"config_margin_right": 10,
+		"config_margin_top": 10,
+		"config_max_grid_sum": 12,
+		"config_provider_type": "gofpdf",
+		"generation_mode": "sequential",
+		"maroto_dimension_height": 297,
+		"maroto_dimension_width": 210,
+		"prop_font_color": "RGB(0, 0, 0)",
+		"prop_font_family": "arial",
+		"prop_font_size": 10
+	},
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option A",
+									"type": "checkbox",
+									"details": {
+										"prop_size": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option B",
+									"type": "checkbox",
+									"details": {
+										"prop_checked": true,
+										"prop_size": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option C",
+									"type": "checkbox",
+									"details": {
+										"prop_size": 5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Default: unchecked / checked / unchecked",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option A",
+									"type": "checkbox",
+									"details": {
+										"prop_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option B",
+									"type": "checkbox",
+									"details": {
+										"prop_checked": true,
+										"prop_size": 8
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option C",
+									"type": "checkbox",
+									"details": {
+										"prop_size": 8
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Custom size: 8mm",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option A",
+									"type": "checkbox",
+									"details": {
+										"prop_left": 5,
+										"prop_size": 5,
+										"prop_top": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option B",
+									"type": "checkbox",
+									"details": {
+										"prop_checked": true,
+										"prop_left": 5,
+										"prop_size": 5,
+										"prop_top": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Option C",
+									"type": "checkbox",
+									"details": {
+										"prop_left": 5,
+										"prop_size": 5,
+										"prop_top": 5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "With top=5 left=5 offset",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Item 1",
+									"type": "checkbox",
+									"details": {
+										"prop_size": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Item 2",
+									"type": "checkbox",
+									"details": {
+										"prop_checked": true,
+										"prop_size": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Item 3",
+									"type": "checkbox",
+									"details": {
+										"prop_size": 5
+									}
+								}
+							]
+						},
+						{
+							"value": 3,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Item 4",
+									"type": "checkbox",
+									"details": {
+										"prop_checked": true,
+										"prop_size": 5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Auto row",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 169.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

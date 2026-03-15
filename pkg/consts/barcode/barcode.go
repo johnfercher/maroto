@@ -11,5 +11,5 @@ const (
 	// Code39    Type = "code39"
 	// Code93    Type = "code93"
 	// PDF417    Type = "pdf417"
-	// TwoOfFive Type = "twooffive"
+	// TwoOfFive Type = "twooffive".
 )

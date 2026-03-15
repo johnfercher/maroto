@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/johnfercher/maroto/v2"
 
@@ -35,13 +36,13 @@ var background = &props.Color{
 }
 
 func main() {
-	var content string
+	var builder strings.Builder
 	for i := 0; i < 100; i++ {
 		fmt.Println(i)
-		content += fmt.Sprintf("%f", run().Value) + "\n"
+		builder.WriteString(fmt.Sprintf("%f", run().Value) + "\n")
 	}
 
-	err := os.WriteFile("docs/assets/text/benchmark.txt", []byte(content), os.ModePerm)
+	err := os.WriteFile("docs/assets/text/benchmark.txt", []byte(builder.String()), os.ModePerm)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -206,9 +207,9 @@ func (o Object) GetContent(i int) core.Row {
 	return r
 }
 
-func getObjects(max int) []Object {
+func getObjects(maxObjects int) []Object {
 	var objects []Object
-	for i := 0; i < max; i++ {
+	for i := 0; i < maxObjects; i++ {
 		objects = append(objects, Object{
 			Key:   fmt.Sprintf("Key: %d", i),
 			Value: fmt.Sprintf("Bytes: %d", i),

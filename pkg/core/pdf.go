@@ -1,13 +1,19 @@
-// Package core contains all core interfaces and basic implementations.
 package core
 
 import (
 	"encoding/base64"
+	"errors"
+	"fmt"
 	"os"
 
 	"github.com/johnfercher/maroto/v2/internal/time"
 	"github.com/johnfercher/maroto/v2/pkg/merge"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
+)
+
+var (
+	ErrCannotMergeBytes = errors.New("cannot merge bytes")
+	ErrCannotWriteFile  = errors.New("cannot write file")
 )
 
 type Pdf struct {
@@ -40,7 +46,11 @@ func (p *Pdf) GetReport() *metrics.Report {
 
 // Save saves the PDF in a file.
 func (p *Pdf) Save(file string) error {
-	return os.WriteFile(file, p.bytes, os.ModePerm)
+	err := os.WriteFile(file, p.bytes, os.ModePerm)
+	if err != nil {
+		return fmt.Errorf("%w: %w", ErrCannotWriteFile, err)
+	}
+	return nil
 }
 
 // Merge merges the PDF with another PDF.
@@ -52,7 +62,7 @@ func (p *Pdf) Merge(bytes []byte) error {
 		mergedBytes, err = merge.Bytes(p.bytes, bytes)
 	})
 	if err != nil {
-		return err
+		return fmt.Errorf("%w: %w", ErrCannotMergeBytes, err)
 	}
 	p.bytes = mergedBytes
 	if p.report != nil {

@@ -18,7 +18,7 @@ type Font struct {
 }
 
 // AppendMap appends the font fields to a map.
-func (f *Font) AppendMap(m map[string]interface{}) map[string]interface{} {
+func (f *Font) AppendMap(m map[string]any) map[string]any {
 	if f.Family != "" {
 		m["prop_font_family"] = f.Family
 	}

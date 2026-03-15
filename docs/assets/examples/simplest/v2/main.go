@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/checkbox"
+
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
@@ -47,6 +49,10 @@ func GetMaroto() core.Maroto {
 	)
 
 	m.AddRow(10, col.New(12))
+
+	m.AddRow(20,
+		checkbox.NewCol(12, "agree"),
+	)
 
 	m.AddRow(20, line.NewCol(12))
 

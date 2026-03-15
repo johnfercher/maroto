@@ -10,7 +10,9 @@ import (
 )
 
 func TestRect_MakeValid(t *testing.T) {
+	t.Parallel()
 	t.Run("when percent is less than zero, should become 100", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Rect{Percent: -2}
 
@@ -18,9 +20,10 @@ func TestRect_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Percent, 100.0)
+		assert.Equal(t, 100.0, prop.Percent)
 	})
 	t.Run("when percent is greater than 100, should become 100", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Rect{Percent: 102}
 
@@ -28,9 +31,10 @@ func TestRect_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Percent, 100.0)
+		assert.Equal(t, 100.0, prop.Percent)
 	})
 	t.Run("when is center, top and left should become 0", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Rect{Center: true, Top: 5, Left: 5}
 
@@ -38,10 +42,11 @@ func TestRect_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Top, 0.0)
-		assert.Equal(t, prop.Left, 0.0)
+		assert.Equal(t, 0.0, prop.Top)
+		assert.Equal(t, 0.0, prop.Left)
 	})
 	t.Run("when left is less than 0, should become 0", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Rect{Left: -5}
 
@@ -49,9 +54,10 @@ func TestRect_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Left, 0.0)
+		assert.Equal(t, 0.0, prop.Left)
 	})
 	t.Run("when top is less than 0, should become 0", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Rect{Top: -5}
 
@@ -59,11 +65,12 @@ func TestRect_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, prop.Top, 0.0)
+		assert.Equal(t, 0.0, prop.Top)
 	})
 }
 
 func TestRect_ToMap(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := fixture.RectProp()
 	sut.Center = true

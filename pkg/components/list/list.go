@@ -7,6 +7,11 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 )
 
+var (
+	ErrEmptyArray        = errors.New("empty array")
+	ErrNilElementInArray = errors.New("nil element in array")
+)
+
 // Listable is the main abstraction of a listable item in a TableList.
 // A collection of objects that implements this interface may be added
 // in a list.
@@ -20,13 +25,13 @@ type Listable interface {
 // of pointers.
 func BuildFromPointer[T Listable](arr []*T) ([]core.Row, error) {
 	if len(arr) == 0 {
-		return nil, errors.New("empty array")
+		return nil, ErrEmptyArray
 	}
 
 	var list []T
 	for _, pointer := range arr {
 		if pointer == nil {
-			return nil, errors.New("nil element in array")
+			return nil, ErrNilElementInArray
 		}
 		list = append(list, *pointer)
 	}
@@ -39,7 +44,7 @@ func BuildFromPointer[T Listable](arr []*T) ([]core.Row, error) {
 // of values.
 func Build[T Listable](arr []T) ([]core.Row, error) {
 	if len(arr) == 0 {
-		return nil, errors.New("empty array")
+		return nil, ErrEmptyArray
 	}
 
 	var rows []core.Row

@@ -6,6 +6,7 @@
   * [Background](v2/features/background.md?id=add-background)
   * [Barcode](v2/features/barcode.md?id=barcode)
   * [Cell Style](v2/features/cellstyle.md?id=cell-style)
+  * [Checkbox](v2/features/checkbox.md?id=checkbox)
   * [Compression](v2/features/compression.md?id=compression)
   * [Custom Dimensions](v2/features/customdimensions.md?id=custom-dimensions)
   * [Custom Font](v2/features/customfont.md?id=custom-font)

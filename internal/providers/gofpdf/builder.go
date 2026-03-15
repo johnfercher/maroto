@@ -12,7 +12,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
 
-// Dependencies is the dependencies provider for gofpdf
+// Dependencies is the dependencies provider for gofpdf.
 type Dependencies struct {
 	Fpdf       gofpdfwrapper.Fpdf
 	Font       core.Font
@@ -20,12 +20,13 @@ type Dependencies struct {
 	Code       core.Code
 	Image      core.Image
 	Line       core.Line
+	Checkbox   core.Checkbox
 	Cache      cache.Cache
 	CellWriter cellwriter.CellWriter
 	Cfg        *entity.Config
 }
 
-// Builder is the dependencies builder for gofpdf
+// Builder is the dependencies builder for gofpdf.
 type Builder interface {
 	Build(cfg *entity.Config, cache cache.Cache) *Dependencies
 }
@@ -33,11 +34,11 @@ type Builder interface {
 type builder struct{}
 
 // NewBuilder create a new Builder
-func NewBuilder() *builder {
+func NewBuilder() Builder {
 	return &builder{}
 }
 
-// Build create a new Dependencies
+// Build create a new Dependencies.
 func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	fpdf := gofpdfwrapper.NewCustom(&gofpdf.InitType{
 		OrientationStr: "P",
@@ -68,6 +69,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	text := NewText(fpdf, math, font)
 	image := NewImage(fpdf, math)
 	line := NewLine(fpdf)
+	checkbox := NewCheckbox(fpdf, font)
 	cellWriter := cellwriter.NewBuilder().
 		Build(fpdf)
 
@@ -78,6 +80,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 		Code:       code,
 		Image:      image,
 		Line:       line,
+		Checkbox:   checkbox,
 		CellWriter: cellWriter,
 		Cfg:        cfg,
 		Cache:      cache,

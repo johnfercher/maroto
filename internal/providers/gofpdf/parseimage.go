@@ -7,9 +7,11 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
 
+var ErrInvalidImageFormat = errors.New("invalid image format")
+
 func FromBytes(bytes []byte, ext extension.Type) (*entity.Image, error) {
 	if !ext.IsValid() {
-		return nil, errors.New("invalid image format")
+		return nil, ErrInvalidImageFormat
 	}
 
 	return &entity.Image{

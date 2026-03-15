@@ -12,8 +12,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/config"
 )
 
-var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
-
 func main() {
 	m := GetMaroto()
 	document, err := m.Generate()

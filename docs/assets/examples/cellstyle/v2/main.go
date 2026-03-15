@@ -42,68 +42,68 @@ func GetMaroto() core.Maroto {
 		Build()
 
 	colStyle := &props.Cell{
-		BackgroundColor: &props.Color{80, 80, 80},
+		BackgroundColor: &props.Color{Red: 80, Green: 80, Blue: 80},
 		BorderType:      border.Full,
-		BorderColor:     &props.Color{200, 0, 0},
+		BorderColor:     &props.Color{Red: 200},
 		LineStyle:       linestyle.Dashed,
 		BorderThickness: 0.5,
 	}
 
 	rowStyles := []*props.Cell{
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.None,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Full,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Left,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Right,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Top,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Bottom,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Left | border.Top,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Left | border.Right,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Top | border.Bottom,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 		{
-			BackgroundColor: &props.Color{220, 220, 220},
+			BackgroundColor: &props.Color{Red: 220, Green: 220, Blue: 220},
 			BorderType:      border.Left | border.Right | border.Top,
-			BorderColor:     &props.Color{0, 0, 200},
+			BorderColor:     &props.Color{Blue: 200},
 		},
 	}
 
 	whiteText := props.Text{
-		Color: &props.Color{255, 255, 255},
+		Color: &props.Color{Red: 255, Green: 255, Blue: 255},
 		Style: fontstyle.Bold,
 		Size:  12,
 		Align: align.Center,

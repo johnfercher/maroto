@@ -1,3 +1,4 @@
+// nolint:misspell // other languages are being classified as english typos
 package main
 
 import (
@@ -21,8 +22,6 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
-
-var dummyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem."
 
 func main() {
 	m := GetMaroto("docs/assets/images/frontpage.png")
@@ -88,7 +87,8 @@ func GetMaroto(imagePath string) core.Maroto {
 	m.AddRows(
 		row.New(20).Add(
 			text.NewCol(4, "Text:", props.Text{Size: 15, Top: 6, Align: align.Center}),
-			text.NewCol(8, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem.", props.Text{Size: 12, Top: 5, Align: align.Center}),
+			text.NewCol(8, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac condimentum sem.",
+				props.Text{Size: 12, Top: 5, Align: align.Center}),
 		),
 		row.New(40).Add(
 			text.NewCol(4, "Signature:", props.Text{Size: 15, Top: 17, Align: align.Center}),
@@ -97,12 +97,4 @@ func GetMaroto(imagePath string) core.Maroto {
 	)
 
 	return m
-}
-
-func buildImagesRow() []core.Row {
-	return []core.Row{}
-}
-
-func buildTextsRow() []core.Row {
-	return []core.Row{}
 }

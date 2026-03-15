@@ -14,6 +14,7 @@ import (
 )
 
 func TestNewCellCreator(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := cellwriter.NewCellWriter(nil)
 
@@ -23,7 +24,9 @@ func TestNewCellCreator(t *testing.T) {
 }
 
 func TestCellWriter_Apply(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is nil without debug, should call cellformat correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		config := &entity.Config{}
 		width := 100.0
@@ -40,6 +43,7 @@ func TestCellWriter_Apply(t *testing.T) {
 		fpdf.AssertNumberOfCalls(t, "CellFormat", 1)
 	})
 	t.Run("when prop is nil with debug, should call cellformat correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		config := &entity.Config{
 			Debug: true,
@@ -58,6 +62,7 @@ func TestCellWriter_Apply(t *testing.T) {
 		fpdf.AssertNumberOfCalls(t, "CellFormat", 1)
 	})
 	t.Run("when has prop without debug, should call cellformat correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		config := &entity.Config{}
 		prop := fixture.CellProp()
@@ -75,6 +80,7 @@ func TestCellWriter_Apply(t *testing.T) {
 		fpdf.AssertNumberOfCalls(t, "CellFormat", 1)
 	})
 	t.Run("when has prop with debug, should call cellformat correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		config := &entity.Config{
 			Debug: true,

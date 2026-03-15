@@ -1,7 +1,7 @@
 package list_test
 
 import (
-	"fmt"
+	"strconv"
 
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/list"
@@ -29,7 +29,7 @@ func (o Obj) GetHeader() core.Row {
 // i is the current index of the object list to be added into a row
 // this can be used to customize pair/odd rows.
 func (o Obj) GetContent(_ int) core.Row {
-	idCol := text.NewCol(6, fmt.Sprintf("%d", o.ID))
+	idCol := text.NewCol(6, strconv.Itoa(o.ID))
 	nameCol := text.NewCol(6, o.Name)
 	return row.New(5).Add(idCol, nameCol)
 }

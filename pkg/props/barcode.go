@@ -22,12 +22,12 @@ type Barcode struct {
 }
 
 // ToMap from Barcode will return a map representation from Barcode.
-func (b *Barcode) ToMap() map[string]interface{} {
+func (b *Barcode) ToMap() map[string]any {
 	if b == nil {
 		return nil
 	}
 
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	if b.Left != 0 {
 		m["prop_left"] = b.Left
