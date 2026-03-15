@@ -27,6 +27,7 @@ type Provider interface {
 	AddImageFromFile(value string, cell *entity.Cell, prop *props.Rect)
 	AddImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type)
 	AddBackgroundImageFromBytes(bytes []byte, cell *entity.Cell, prop *props.Rect, extension extension.Type)
+	AddCheckbox(label string, cell *entity.Cell, prop *props.Checkbox)
 
 	// General
 	GenerateBytes() ([]byte, error)

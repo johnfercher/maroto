@@ -1,0 +1,14 @@
+{
+    "value": 12,
+    "type": "col",
+    "nodes": [
+        {
+            "value": "Male",
+            "type": "checkbox",
+            "details": {
+                "prop_box_size": 5,
+                "prop_checked": true
+            }
+        }
+    ]
+}
