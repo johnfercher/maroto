@@ -52,3 +52,8 @@ type Font interface {
 	SetColor(color *props.Color)
 	GetColor() *props.Color
 }
+
+// Checkbox is the abstraction which writes checkboxes on pdf.
+type Checkbox interface {
+	Add(label string, cell *entity.Cell, prop *props.Checkbox)
+}

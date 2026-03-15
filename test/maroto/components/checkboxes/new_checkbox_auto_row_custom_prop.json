@@ -1,0 +1,23 @@
+{
+    "value": 0,
+    "type": "row",
+    "nodes": [
+        {
+            "value": 0,
+            "type": "col",
+            "details": {
+                "is_max": true
+            },
+            "nodes": [
+                {
+                    "value": "Male",
+                    "type": "checkbox",
+                    "details": {
+                        "prop_box_size": 5,
+                        "prop_checked": true
+                    }
+                }
+            ]
+        }
+    ]
+}

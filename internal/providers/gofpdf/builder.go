@@ -20,6 +20,7 @@ type Dependencies struct {
 	Code       core.Code
 	Image      core.Image
 	Line       core.Line
+	Checkbox   *checkbox
 	Cache      cache.Cache
 	CellWriter cellwriter.CellWriter
 	Cfg        *entity.Config
@@ -68,6 +69,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	text := NewText(fpdf, math, font)
 	image := NewImage(fpdf, math)
 	line := NewLine(fpdf)
+	checkbox := NewCheckbox(fpdf, text)
 	cellWriter := cellwriter.NewBuilder().
 		Build(fpdf)
 
@@ -78,6 +80,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 		Code:       code,
 		Image:      image,
 		Line:       line,
+		Checkbox:   checkbox,
 		CellWriter: cellWriter,
 		Cfg:        cfg,
 		Cache:      cache,

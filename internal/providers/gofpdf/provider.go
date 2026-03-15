@@ -26,6 +26,7 @@ type provider struct {
 	code       core.Code
 	image      core.Image
 	line       core.Line
+	checkbox   core.Checkbox
 	cache      cache.Cache
 	cellWriter cellwriter.CellWriter
 	cfg        *entity.Config
@@ -40,6 +41,7 @@ func New(dep *Dependencies) core.Provider {
 		code:       dep.Code,
 		image:      dep.Image,
 		line:       dep.Line,
+		checkbox:   dep.Checkbox,
 		cellWriter: dep.CellWriter,
 		cfg:        dep.Cfg,
 		cache:      dep.Cache,
@@ -60,6 +62,10 @@ func (g *provider) GetFontHeight(prop *props.Font) float64 {
 
 func (g *provider) AddLine(cell *entity.Cell, prop *props.Line) {
 	g.line.Add(cell, prop)
+}
+
+func (g *provider) AddCheckbox(label string, cell *entity.Cell, prop *props.Checkbox) {
+	g.checkbox.Add(label, cell, prop)
 }
 
 func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {
