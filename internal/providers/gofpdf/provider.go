@@ -26,7 +26,7 @@ type provider struct {
 	code       core.Code
 	image      core.Image
 	line       core.Line
-	checkbox   *checkbox
+	checkbox   core.Checkbox
 	cache      cache.Cache
 	cellWriter cellwriter.CellWriter
 	cfg        *entity.Config
