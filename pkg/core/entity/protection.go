@@ -12,7 +12,7 @@ type Protection struct {
 }
 
 // AppendMap adds the Protection fields to the map.
-func (p *Protection) AppendMap(m map[string]interface{}) map[string]interface{} {
+func (p *Protection) AppendMap(m map[string]any) map[string]any {
 	if p.Type != 0 {
 		m["config_protection_type"] = p.Type
 	}

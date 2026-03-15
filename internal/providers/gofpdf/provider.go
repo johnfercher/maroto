@@ -3,7 +3,6 @@ package gofpdf
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"path/filepath"
 	"strings"
 
@@ -19,6 +18,8 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
+var ErrCannotReadImageOptions = errors.New("could not read image options, maybe path/name is wrong")
+
 type provider struct {
 	fpdf       gofpdfwrapper.Fpdf
 	font       core.Font
@@ -26,6 +27,7 @@ type provider struct {
 	code       core.Code
 	image      core.Image
 	line       core.Line
+	checkbox   core.Checkbox
 	cache      cache.Cache
 	cellWriter cellwriter.CellWriter
 	cfg        *entity.Config
@@ -40,6 +42,7 @@ func New(dep *Dependencies) core.Provider {
 		code:       dep.Code,
 		image:      dep.Image,
 		line:       dep.Line,
+		checkbox:   dep.Checkbox,
 		cellWriter: dep.CellWriter,
 		cfg:        dep.Cfg,
 		cache:      dep.Cache,
@@ -60,6 +63,10 @@ func (g *provider) GetFontHeight(prop *props.Font) float64 {
 
 func (g *provider) AddLine(cell *entity.Cell, prop *props.Line) {
 	g.line.Add(cell, prop)
+}
+
+func (g *provider) AddCheckbox(label string, cell *entity.Cell, prop *props.Checkbox) {
+	g.checkbox.Add(label, cell, prop)
 }
 
 func (g *provider) AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect) {
@@ -91,7 +98,7 @@ func (g *provider) AddQrCode(code string, cell *entity.Cell, prop *props.Rect) {
 }
 
 func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcode) {
-	image, err := g.cache.GetImage(g.getBarcodeImageName(fmt.Sprintf("bar-code-%s", code), prop), extension.Png)
+	image, err := g.cache.GetImage(g.getBarcodeImageName("bar-code-"+code, prop), extension.Png)
 	if err != nil {
 		image, err = g.code.GenBar(code, cell, prop)
 	}
@@ -100,7 +107,7 @@ func (g *provider) AddBarCode(code string, cell *entity.Cell, prop *props.Barcod
 		return
 	}
 
-	g.cache.AddImage(g.getBarcodeImageName(fmt.Sprintf("bar-code-%s", code), prop), image)
+	g.cache.AddImage(g.getBarcodeImageName("bar-code-"+code, prop), image)
 	err = g.image.Add(image, cell, g.cfg.Margins, prop.ToRectProp(), extension.Png, false)
 	if err != nil {
 		g.fpdf.ClearError()
@@ -202,7 +209,7 @@ func (g *provider) GetDimensionsByImage(file string) (*entity.Dimensions, error)
 	imgInfo, _ := g.image.GetImageInfo(img, extension.Type(extensionStr))
 
 	if imgInfo == nil {
-		return nil, errors.New("could not read image options, maybe path/name is wrong")
+		return nil, ErrCannotReadImageOptions
 	}
 	return &entity.Dimensions{Width: imgInfo.Width(), Height: imgInfo.Height()}, nil
 }
@@ -217,7 +224,7 @@ func (g *provider) GetDimensionsByImageByte(bytes []byte, extension extension.Ty
 
 	imgInfo, _ := g.image.GetImageInfo(img, extension)
 	if imgInfo == nil {
-		return nil, errors.New("could not read image options, maybe path/name is wrong")
+		return nil, ErrCannotReadImageOptions
 	}
 	return &entity.Dimensions{Width: imgInfo.Width(), Height: imgInfo.Height()}, nil
 }
@@ -233,7 +240,7 @@ func (g *provider) GetDimensionsByMatrixCode(code string) (*entity.Dimensions, e
 	imgInfo, _ := g.image.GetImageInfo(img, extension.Png)
 
 	if imgInfo == nil {
-		return nil, errors.New("could not read image options, maybe path/name is wrong")
+		return nil, ErrCannotReadImageOptions
 	}
 	return &entity.Dimensions{Width: imgInfo.Width(), Height: imgInfo.Height()}, nil
 }
@@ -248,7 +255,7 @@ func (g *provider) GetDimensionsByQrCode(code string) (*entity.Dimensions, error
 
 	imgInfo, _ := g.image.GetImageInfo(img, extension.Png)
 	if imgInfo == nil {
-		return nil, errors.New("could not read image options, maybe path/name is wrong")
+		return nil, ErrCannotReadImageOptions
 	}
 	return &entity.Dimensions{Width: imgInfo.Width(), Height: imgInfo.Height()}, nil
 }
@@ -297,10 +304,11 @@ func (g *provider) loadImage(file, extensionStr string) (*entity.Image, error) {
 	image, err := g.cache.GetImage(file, extension.Type(extensionStr))
 
 	if err == nil {
-		return image, err
+		return image, nil
 	}
 
-	if err = g.cache.LoadImage(file, extension.Type(extensionStr)); err != nil {
+	err = g.cache.LoadImage(file, extension.Type(extensionStr))
+	if err != nil {
 		return nil, err
 	}
 

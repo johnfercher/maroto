@@ -1,0 +1,13 @@
+{
+	"value": 12,
+	"type": "col",
+	"nodes": [
+		{
+			"value": "label",
+			"type": "checkbox",
+			"details": {
+				"prop_size": 5
+			}
+		}
+	]
+}

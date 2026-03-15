@@ -14,7 +14,9 @@ import (
 )
 
 func TestNewFromFile(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromFile("path")
 
@@ -22,6 +24,7 @@ func TestNewFromFile(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromFile("path", fixture.RectProp())
 
@@ -31,7 +34,9 @@ func TestNewFromFile(t *testing.T) {
 }
 
 func TestNewFromFileCol(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromFileCol(12, "path")
 
@@ -39,6 +44,7 @@ func TestNewFromFileCol(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromFileCol(12, "path", fixture.RectProp())
 
@@ -48,7 +54,9 @@ func TestNewFromFileCol(t *testing.T) {
 }
 
 func TestNewFromFileRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromFileRow(10, "path")
 
@@ -56,6 +64,7 @@ func TestNewFromFileRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromFileRow(12, "path", fixture.RectProp())
 
@@ -65,7 +74,9 @@ func TestNewFromFileRow(t *testing.T) {
 }
 
 func TestNewAutoFromFileRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewAutoFromFileRow("path")
 
@@ -73,6 +84,7 @@ func TestNewAutoFromFileRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_file_auto_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewAutoFromFileRow("path", fixture.RectProp())
 
@@ -82,7 +94,9 @@ func TestNewAutoFromFileRow(t *testing.T) {
 }
 
 func TestFileImage_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		path := "path"
 		cell := fixture.CellEntity()
@@ -100,9 +114,17 @@ func TestFileImage_Render(t *testing.T) {
 	})
 }
 
-func TestFileImageSetConfig(t *testing.T) {
+func TestFileImage_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		path := "path"
 		prop := fixture.RectProp()
 		sut := image.NewFromFile(path, prop)
@@ -113,7 +135,9 @@ func TestFileImageSetConfig(t *testing.T) {
 }
 
 func TestFileImage_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("When it is not possible to know the dimensions of the file image, should return height 0", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 
 		provider := mocks.NewProvider(t)
@@ -123,10 +147,11 @@ func TestFileImage_GetHeight(t *testing.T) {
 
 		// Act
 		height := sut.GetHeight(provider, &cell)
-		assert.Equal(t, height, 0.0)
+		assert.Equal(t, 0.0, height)
 	})
 
 	t.Run("When the height of the file image is half the width, should return half the width of the cell", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 
 		provider := mocks.NewProvider(t)

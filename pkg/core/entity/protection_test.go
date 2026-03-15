@@ -1,7 +1,9 @@
-package entity
+package entity_test
 
 import (
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/stretchr/testify/assert"
 
@@ -9,9 +11,10 @@ import (
 )
 
 func TestProtection_AppendMap(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := fixtureProtection()
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	// Act
 	m = sut.AppendMap(m)
@@ -22,8 +25,8 @@ func TestProtection_AppendMap(t *testing.T) {
 	assert.Equal(t, sut.OwnerPassword, m["config_owner_password"])
 }
 
-func fixtureProtection() Protection {
-	return Protection{
+func fixtureProtection() entity.Protection {
+	return entity.Protection{
 		Type:          protection.Print,
 		OwnerPassword: "123456",
 		UserPassword:  "654321",

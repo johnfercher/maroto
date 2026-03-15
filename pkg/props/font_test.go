@@ -13,7 +13,9 @@ import (
 )
 
 func TestFont_MakeValid(t *testing.T) {
+	t.Parallel()
 	t.Run("when family is not defined, should define default", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Font{
 			Family: "",
@@ -23,9 +25,10 @@ func TestFont_MakeValid(t *testing.T) {
 		prop.MakeValid(fontfamily.Arial)
 
 		// Assert
-		assert.Equal(t, prop.Family, fontfamily.Arial)
+		assert.Equal(t, fontfamily.Arial, prop.Family)
 	})
 	t.Run("when style is not defined, should define normal", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Font{
 			Style: "",
@@ -35,9 +38,10 @@ func TestFont_MakeValid(t *testing.T) {
 		prop.MakeValid(fontfamily.Arial)
 
 		// Assert
-		assert.Equal(t, prop.Style, fontstyle.Normal)
+		assert.Equal(t, fontstyle.Normal, prop.Style)
 	})
 	t.Run("", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := props.Font{
 			Size: 0.0,
@@ -47,11 +51,12 @@ func TestFont_MakeValid(t *testing.T) {
 		prop.MakeValid(fontfamily.Arial)
 
 		// Assert
-		assert.Equal(t, prop.Size, 8.0)
+		assert.Equal(t, 8.0, prop.Size)
 	})
 }
 
 func TestFont_ToTextProp(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	prop := fixture.FontProp()
 
@@ -69,9 +74,10 @@ func TestFont_ToTextProp(t *testing.T) {
 }
 
 func TestFont_AppendMap(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	prop := fixture.FontProp()
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	// Act
 	m = prop.AppendMap(m)

@@ -32,6 +32,11 @@ type Line interface {
 	Add(cell *entity.Cell, prop *props.Line)
 }
 
+// Checkbox is the abstraction which deals of how to add checkboxes inside PDF.
+type Checkbox interface {
+	Add(label string, cell *entity.Cell, prop *props.Checkbox)
+}
+
 // Text is the abstraction which deals of how to add text inside PDF.
 type Text interface {
 	Add(text string, cell *entity.Cell, textProp *props.Text)

@@ -14,7 +14,9 @@ import (
 )
 
 func TestNewFromBytes(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromBytes([]byte{1, 2, 3}, extension.Jpg)
 
@@ -22,6 +24,7 @@ func TestNewFromBytes(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromBytes([]byte{1, 2, 3}, extension.Jpg, fixture.RectProp())
 
@@ -31,7 +34,9 @@ func TestNewFromBytes(t *testing.T) {
 }
 
 func TestNewFromBytesCol(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromBytesCol(12, []byte{1, 2, 3}, extension.Jpg)
 
@@ -39,6 +44,7 @@ func TestNewFromBytesCol(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromBytesCol(12, []byte{1, 2, 3}, extension.Jpg, fixture.RectProp())
 
@@ -48,7 +54,9 @@ func TestNewFromBytesCol(t *testing.T) {
 }
 
 func TestNewFromBytesRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromBytesRow(10, []byte{1, 2, 3}, extension.Jpg)
 
@@ -56,6 +64,7 @@ func TestNewFromBytesRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewFromBytesRow(10, []byte{1, 2, 3}, extension.Jpg, fixture.RectProp())
 
@@ -65,7 +74,9 @@ func TestNewFromBytesRow(t *testing.T) {
 }
 
 func TestNewAutoFromBytesRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewAutoFromBytesRow([]byte{1, 2, 3}, extension.Jpg)
 
@@ -73,6 +84,7 @@ func TestNewAutoFromBytesRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/images/new_image_from_bytes_auto_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := image.NewAutoFromBytesRow([]byte{1, 2, 3}, extension.Jpg, fixture.RectProp())
 
@@ -82,7 +94,9 @@ func TestNewAutoFromBytesRow(t *testing.T) {
 }
 
 func TestBytesImage_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		bytes := []byte{1, 2, 3}
 		ext := extension.Jpg
@@ -102,8 +116,16 @@ func TestBytesImage_Render(t *testing.T) {
 }
 
 func TestBytesImage_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		bytes := []byte{1, 2, 3}
 		ext := extension.Jpg
 		prop := fixture.RectProp()
@@ -115,7 +137,9 @@ func TestBytesImage_SetConfig(t *testing.T) {
 }
 
 func TestBytesImage_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("When it is not possible to know the dimensions of the bytes image, should return height 0", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 		img := fixture.ImageEntity()
 
@@ -126,10 +150,11 @@ func TestBytesImage_GetHeight(t *testing.T) {
 
 		// Act
 		height := sut.GetHeight(provider, &cell)
-		assert.Equal(t, height, 0.0)
+		assert.Equal(t, 0.0, height)
 	})
 
 	t.Run("When the height of the bytes image is half the width, should return half the width of the cell", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 		img := fixture.ImageEntity()
 

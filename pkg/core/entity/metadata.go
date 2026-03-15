@@ -16,7 +16,7 @@ type Metadata struct {
 }
 
 // AppendMap appends the metadata to a map.
-func (m *Metadata) AppendMap(mp map[string]interface{}) map[string]interface{} {
+func (m *Metadata) AppendMap(mp map[string]any) map[string]any {
 	if m.Author != nil {
 		mp["config_metadata_author"] = m.Author.ToString()
 	}

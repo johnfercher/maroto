@@ -52,6 +52,8 @@ func GetDimensions(pageSize Type) (float64, float64) {
 		return 594.0, 841.0
 	case A2:
 		return 419.9, 594.0
+	case A4:
+		return 210.0, 297.0
 	case A3:
 		return 297.0, 419.9
 	case A5:

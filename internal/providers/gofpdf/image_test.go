@@ -17,14 +17,17 @@ import (
 )
 
 func TestNewImage(t *testing.T) {
+	t.Parallel()
 	image := gofpdf2.NewImage(mocks.NewFpdf(t), mocks.NewMath(t))
 
 	assert.NotNil(t, image)
-	assert.Equal(t, fmt.Sprintf("%T", image), "*gofpdf.image")
+	assert.Equal(t, "*gofpdf.Image", fmt.Sprintf("%T", image))
 }
 
 func TestImage_Add(t *testing.T) {
+	t.Parallel()
 	t.Run("when RegisterImageOptionsReader return nil, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := fixture.CellEntity()
 		margins := fixture.MarginsEntity()
@@ -47,6 +50,7 @@ func TestImage_Add(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 	t.Run("when prop is not center, should work properly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := fixture.CellEntity()
 		margins := fixture.MarginsEntity()
@@ -72,6 +76,7 @@ func TestImage_Add(t *testing.T) {
 		assert.Nil(t, err)
 	})
 	t.Run("when prop is center, should work properly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := fixture.CellEntity()
 		margins := fixture.MarginsEntity()
@@ -100,7 +105,9 @@ func TestImage_Add(t *testing.T) {
 }
 
 func TestImage_GetImageInfo(t *testing.T) {
+	t.Parallel()
 	t.Run("when RegisterImageOptionsReader return nil, should return nil", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		img := fixture.ImageEntity()
 		options := gofpdf.ImageOptions{
@@ -121,6 +128,7 @@ func TestImage_GetImageInfo(t *testing.T) {
 	})
 
 	t.Run("when RegisterImageOptionsReader return info, should return info", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		img := fixture.ImageEntity()
 		options := gofpdf.ImageOptions{

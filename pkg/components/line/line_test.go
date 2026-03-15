@@ -11,7 +11,9 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := line.New()
 
@@ -19,6 +21,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/lines/new_line_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := line.New(fixture.LineProp())
 
@@ -28,7 +31,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestNewCol(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := line.NewCol(12)
 
@@ -36,6 +41,7 @@ func TestNewCol(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/lines/new_line_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := line.NewCol(12, fixture.LineProp())
 
@@ -45,7 +51,9 @@ func TestNewCol(t *testing.T) {
 }
 
 func TestNewRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := line.NewRow(10)
 
@@ -53,6 +61,7 @@ func TestNewRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/lines/new_line_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := line.NewRow(10, fixture.LineProp())
 
@@ -62,7 +71,9 @@ func TestNewRow(t *testing.T) {
 }
 
 func TestNewAutoRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := line.NewAutoRow()
 
@@ -70,6 +81,7 @@ func TestNewAutoRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/lines/new_line_auto_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := line.NewAutoRow(fixture.LineProp())
 
@@ -79,7 +91,9 @@ func TestNewAutoRow(t *testing.T) {
 }
 
 func TestLine_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := fixture.CellEntity()
 		prop := fixture.LineProp()
@@ -97,8 +111,16 @@ func TestLine_Render(t *testing.T) {
 }
 
 func TestLine_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		prop := fixture.LineProp()
 		sut := line.New(prop)
 

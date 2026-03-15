@@ -1,7 +1,9 @@
-package entity
+package entity_test
 
 import (
 	"testing"
+
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/stretchr/testify/assert"
 
@@ -9,9 +11,10 @@ import (
 )
 
 func TestImage_AppendMap(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := fixtureImage()
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	// Act
 	m = sut.AppendMap(m)
@@ -23,9 +26,9 @@ func TestImage_AppendMap(t *testing.T) {
 	assert.Equal(t, 200.0, m["background_dimension_height"])
 }
 
-func fixtureImage() Image {
+func fixtureImage() entity.Image {
 	dimensions := fixtureDimensions()
-	return Image{
+	return entity.Image{
 		Bytes:      []byte{1, 2, 3},
 		Extension:  extension.Png,
 		Dimensions: &dimensions,

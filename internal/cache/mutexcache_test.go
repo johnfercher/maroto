@@ -15,6 +15,7 @@ import (
 )
 
 func TestNewMutexDecorator(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := cache.NewMutexDecorator(nil)
 
@@ -24,6 +25,7 @@ func TestNewMutexDecorator(t *testing.T) {
 }
 
 func TestMutexCache_AddImage(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	value := "value1"
 	img := &entity.Image{}
@@ -41,6 +43,7 @@ func TestMutexCache_AddImage(t *testing.T) {
 }
 
 func TestMutexCache_GetImage(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	value := "value2"
 	ext := extension.Jpg
@@ -62,6 +65,7 @@ func TestMutexCache_GetImage(t *testing.T) {
 }
 
 func TestMutexCache_LoadImage(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	value := "value3"
 	ext := extension.Jpg

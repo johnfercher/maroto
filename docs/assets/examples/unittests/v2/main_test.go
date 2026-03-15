@@ -16,6 +16,7 @@ import (
 )
 
 func TestMaroto_GetStructure(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	m := maroto.New()
 

@@ -7,13 +7,13 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type borderColorStyler struct {
+type BorderColorStyler struct {
 	stylerTemplate
 	defaultColor *props.Color
 }
 
-func NewBorderColorStyler(fpdf gofpdfwrapper.Fpdf) *borderColorStyler {
-	return &borderColorStyler{
+func NewBorderColorStyler(fpdf gofpdfwrapper.Fpdf) *BorderColorStyler {
+	return &BorderColorStyler{
 		stylerTemplate: stylerTemplate{
 			fpdf: fpdf,
 			name: "borderColorStyler",
@@ -22,7 +22,7 @@ func NewBorderColorStyler(fpdf gofpdfwrapper.Fpdf) *borderColorStyler {
 	}
 }
 
-func (b *borderColorStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
+func (b *BorderColorStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
 	if prop == nil {
 		b.GoToNext(width, height, config, prop)
 		return

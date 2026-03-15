@@ -9,6 +9,16 @@ type Cell struct {
 	Height float64
 }
 
+// NewRootCell creates the main Cell.
+func NewRootCell(pageWidth, pageHeight float64, margins Margins) Cell {
+	return Cell{
+		X:      0,
+		Y:      0,
+		Width:  pageWidth - margins.Left - margins.Right,
+		Height: pageHeight - margins.Top - margins.Bottom,
+	}
+}
+
 // GetDimensions returns the dimensions of the Cell (width and height).
 func (c Cell) GetDimensions() *Dimensions {
 	return &Dimensions{Width: c.Width, Height: c.Height}
@@ -21,15 +31,5 @@ func (c Cell) Copy() Cell {
 		Y:      c.Y,
 		Width:  c.Width,
 		Height: c.Height,
-	}
-}
-
-// NewRootCell creates the main Cell.
-func NewRootCell(pageWidth, pageHeight float64, margins Margins) Cell {
-	return Cell{
-		X:      0,
-		Y:      0,
-		Width:  pageWidth - margins.Left - margins.Right,
-		Height: pageHeight - margins.Top - margins.Bottom,
 	}
 }

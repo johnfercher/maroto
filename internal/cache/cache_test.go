@@ -16,6 +16,7 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := cache.New()
 
@@ -25,7 +26,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestCache_GetImage(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot get image, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := cache.New()
 
@@ -37,6 +40,7 @@ func TestCache_GetImage(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 	t.Run("when can get image, should return image", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := cache.New()
 		sut.AddImage("image", &entity.Image{
@@ -53,7 +57,9 @@ func TestCache_GetImage(t *testing.T) {
 }
 
 func TestCache_AddImage(t *testing.T) {
+	t.Parallel()
 	t.Run("when add image, return works", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := cache.New()
 
@@ -70,7 +76,9 @@ func TestCache_AddImage(t *testing.T) {
 }
 
 func TestCache_LoadImage(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot find image, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := cache.New()
 
@@ -81,6 +89,7 @@ func TestCache_LoadImage(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 	t.Run("when can find image, should not return error and find image", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := cache.New()
 

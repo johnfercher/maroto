@@ -1,3 +1,4 @@
+// nolint:interfacebloat // there is no way to reduce this interface
 package gofpdfwrapper
 
 import (
@@ -26,7 +27,7 @@ type Fpdf interface {
 	Beziergon(points []gofpdf.PointType, styleStr string)
 	Bookmark(txtStr string, level int, y float64)
 	CellFormat(w, h float64, txtStr, borderStr string, ln int, alignStr string, fill bool, link int, linkStr string)
-	Cellf(w, h float64, fmtStr string, args ...interface{})
+	Cellf(w, h float64, fmtStr string, args ...any)
 	Cell(w, h float64, txtStr string)
 	Circle(x, y, r float64, styleStr string)
 	ClearError()
@@ -118,7 +119,7 @@ type Fpdf interface {
 	SetDrawColor(r, g, b int)
 	SetDrawSpotColor(nameStr string, tint byte)
 	SetError(err error)
-	SetErrorf(fmtStr string, args ...interface{})
+	SetErrorf(fmtStr string, args ...any)
 	SetFillColor(r, g, b int)
 	SetFillSpotColor(nameStr string, tint byte)
 	SetFont(familyStr, styleStr string, size float64)
@@ -182,7 +183,7 @@ type Fpdf interface {
 	UseTemplateScaled(t gofpdf.Template, corner gofpdf.PointType, size gofpdf.SizeType)
 	UseTemplate(t gofpdf.Template)
 	WriteAligned(width, lineHeight float64, textStr, alignStr string)
-	Writef(h float64, fmtStr string, args ...interface{})
+	Writef(h float64, fmtStr string, args ...any)
 	Write(h float64, txtStr string)
 	WriteLinkID(h float64, displayStr string, linkID int)
 	WriteLinkString(h float64, displayStr, targetStr string)

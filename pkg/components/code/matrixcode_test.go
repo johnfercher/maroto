@@ -14,7 +14,9 @@ import (
 )
 
 func TestNewMatrix(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewMatrix("code")
 
@@ -22,6 +24,7 @@ func TestNewMatrix(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewMatrix("code", fixture.RectProp())
 
@@ -31,7 +34,9 @@ func TestNewMatrix(t *testing.T) {
 }
 
 func TestTestNewMatrixCol(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewMatrixCol(12, "code")
 
@@ -39,6 +44,7 @@ func TestTestNewMatrixCol(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewMatrixCol(12, "code", fixture.RectProp())
 
@@ -48,7 +54,9 @@ func TestTestNewMatrixCol(t *testing.T) {
 }
 
 func TestNewMatrixRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewMatrixRow(10, "code")
 
@@ -56,6 +64,7 @@ func TestNewMatrixRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_matrix_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewMatrixRow(10, "code", fixture.RectProp())
 
@@ -65,7 +74,9 @@ func TestNewMatrixRow(t *testing.T) {
 }
 
 func TestAutoNewMatrixRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewAutoMatrixRow("code")
 
@@ -73,6 +84,7 @@ func TestAutoNewMatrixRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/codes/new_auto_matrix_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.NewAutoMatrixRow("code", fixture.RectProp())
 
@@ -82,7 +94,9 @@ func TestAutoNewMatrixRow(t *testing.T) {
 }
 
 func TestMatrixCode_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		codeValue := "code"
 		cell := fixture.CellEntity()
@@ -101,8 +115,16 @@ func TestMatrixCode_Render(t *testing.T) {
 }
 
 func TestMatrixCode_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		sut := code.NewMatrix("code")
 
 		// Act
@@ -111,7 +133,9 @@ func TestMatrixCode_SetConfig(t *testing.T) {
 }
 
 func TestMatrixCode_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("When it is not possible to know the dimensions of the matrix code, should return height 0", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 
 		provider := mocks.NewProvider(t)
@@ -121,10 +145,10 @@ func TestMatrixCode_GetHeight(t *testing.T) {
 
 		// Act
 		height := sut.GetHeight(provider, &cell)
-		assert.Equal(t, height, 0.0)
+		assert.Equal(t, 0.0, height)
 	})
-
 	t.Run("When the height of the matrix code is half the width, should return half the width of the cell", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 
 		provider := mocks.NewProvider(t)

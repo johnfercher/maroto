@@ -162,6 +162,18 @@ func ColorProp() props.Color {
 	}
 }
 
+// CheckboxProp is responsible to give a valid props.Checkbox.
+func CheckboxProp() props.Checkbox {
+	prop := props.Checkbox{
+		Checked: true,
+		Top:     5,
+		Left:    5,
+		Size:    10,
+	}
+	prop.MakeValid()
+	return prop
+}
+
 // LineProp is responsible to give a valid props.Line.
 func LineProp() props.Line {
 	colorProp := ColorProp()

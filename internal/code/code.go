@@ -2,6 +2,8 @@ package code
 
 import (
 	"bytes"
+	"errors"
+	"fmt"
 	"image"
 	"image/color/palette"
 	"image/draw"
@@ -19,35 +21,42 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type code struct{}
+var (
+	ErrCannotEncodePNG        = errors.New("cannot encode png")
+	ErrCannotScaleBarcode     = errors.New("cannot scale barcode")
+	ErrCannotEncodeQRcode     = errors.New("cannot encode qr code")
+	ErrCannotEncodeDataMatrix = errors.New("cannot encode data matrix")
+)
+
+type Code struct{}
 
 // New create a Code (Singleton).
-func New() *code {
-	return &code{}
+func New() *Code {
+	return &Code{}
 }
 
 // GenDataMatrix is responsible to generate a data matrix byte array.
-func (c *code) GenDataMatrix(code string) (*entity.Image, error) {
+func (c *Code) GenDataMatrix(code string) (*entity.Image, error) {
 	dataMatrix, err := datamatrix.Encode(code)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %w", ErrCannotEncodeDataMatrix, err)
 	}
 
 	return c.getImage(dataMatrix)
 }
 
 // GenQr is responsible to generate a qr code byte array.
-func (c *code) GenQr(code string) (*entity.Image, error) {
+func (c *Code) GenQr(code string) (*entity.Image, error) {
 	qrCode, err := qr.Encode(code, qr.M, qr.Auto)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %w", ErrCannotEncodeQRcode, err)
 	}
 
 	return c.getImage(qrCode)
 }
 
 // GenBar is responsible to generate a barcode byte array.
-func (c *code) GenBar(code string, _ *entity.Cell, prop *props.Barcode) (*entity.Image, error) {
+func (c *Code) GenBar(code string, _ *entity.Cell, prop *props.Barcode) (*entity.Image, error) {
 	barcodeGen := getBarcodeClosure(prop.Type)
 
 	barCode, err := barcodeGen(code)
@@ -61,7 +70,7 @@ func (c *code) GenBar(code string, _ *entity.Cell, prop *props.Barcode) (*entity
 
 	scaledBarCode, err := libBarcode.Scale(barCode, int(width), height)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %w", ErrCannotScaleBarcode, err)
 	}
 
 	return c.getImage(scaledBarCode)
@@ -73,12 +82,15 @@ func getBarcodeClosure(
 	switch barcodeType {
 	case barcode.EAN:
 		return ean.Encode
+	case barcode.Code128:
+		return code128.Encode
 	default:
+
 		return code128.Encode
 	}
 }
 
-func (c *code) getImage(img image.Image) (*entity.Image, error) {
+func (c *Code) getImage(img image.Image) (*entity.Image, error) {
 	var buf bytes.Buffer
 
 	dst := image.NewPaletted(img.Bounds(), palette.Plan9)
@@ -87,7 +99,7 @@ func (c *code) getImage(img image.Image) (*entity.Image, error) {
 
 	err := png.Encode(&buf, dst)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %w", ErrCannotEncodePNG, err)
 	}
 
 	imgEntity := &entity.Image{

@@ -7,7 +7,7 @@ type Dimensions struct {
 }
 
 // AppendMap appends the dimensions to a map.
-func (d *Dimensions) AppendMap(label string, m map[string]interface{}) map[string]interface{} {
+func (d *Dimensions) AppendMap(label string, m map[string]any) map[string]any {
 	if d.Width != 0 {
 		m[label+"_dimension_width"] = d.Width
 	}

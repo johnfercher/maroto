@@ -7,12 +7,12 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
-type borderLineStyler struct {
+type BorderLineStyler struct {
 	stylerTemplate
 }
 
-func NewBorderLineStyler(fpdf gofpdfwrapper.Fpdf) *borderLineStyler {
-	return &borderLineStyler{
+func NewBorderLineStyler(fpdf gofpdfwrapper.Fpdf) *BorderLineStyler {
+	return &BorderLineStyler{
 		stylerTemplate: stylerTemplate{
 			fpdf: fpdf,
 			name: "borderLineStyler",
@@ -20,7 +20,7 @@ func NewBorderLineStyler(fpdf gofpdfwrapper.Fpdf) *borderLineStyler {
 	}
 }
 
-func (b *borderLineStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
+func (b *BorderLineStyler) Apply(width, height float64, config *entity.Config, prop *props.Cell) {
 	if prop == nil {
 		b.GoToNext(width, height, config, prop)
 		return

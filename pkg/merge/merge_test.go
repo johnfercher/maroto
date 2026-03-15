@@ -11,6 +11,7 @@ import (
 )
 
 func TestBytes(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	m1 := maroto.New()
 	m1.AddRows(text.NewRow(10, "text1"))

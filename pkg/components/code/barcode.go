@@ -64,7 +64,7 @@ func NewAutoBarRow(code string, ps ...props.Barcode) core.Row {
 	return row.New().Add(c)
 }
 
-// Render renders a Barcode into a PDF context. The maroto cal this methodo in process to
+// Render renders a Barcode into a PDF context. The maroto cal this method in process to
 // generate the pdf.
 //   - provider: Is the creator provider used to generate the pdf
 //   - cell: cell represents the space available to draw the component
@@ -84,7 +84,7 @@ func (b *Barcode) GetStructure() *node.Node[core.Structure] {
 }
 
 // GetHeight returns the height that the barcode will have in the PDF
-func (b *Barcode) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
+func (b *Barcode) GetHeight(_ core.Provider, cell *entity.Cell) float64 {
 	proportion := b.prop.Proportion.Height / b.prop.Proportion.Width
 	width := (b.prop.Percent / 100) * cell.Width
 	return proportion * width

@@ -18,8 +18,8 @@ type Rect struct {
 }
 
 // ToMap from Rect will return a map representation from Rect.
-func (r *Rect) ToMap() map[string]interface{} {
-	m := make(map[string]interface{})
+func (r *Rect) ToMap() map[string]any {
+	m := make(map[string]any)
 
 	if r.Left != 0 {
 		m["prop_left"] = r.Left

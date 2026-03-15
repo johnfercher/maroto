@@ -51,7 +51,7 @@ func (c *Col) GetStructure() *node.Node[core.Structure] {
 
 	if c.isMax {
 		if len(str.Details) == 0 {
-			str.Details = make(map[string]interface{})
+			str.Details = make(map[string]any)
 		}
 		str.Details["is_max"] = true
 	}

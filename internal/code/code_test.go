@@ -2,6 +2,7 @@ package code_test
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"
@@ -14,15 +15,18 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	t.Run("constructor", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := code.New()
 
 		// Assert
 		assert.NotNil(t, sut)
-		assert.Equal(t, "*code.code", fmt.Sprintf("%T", sut))
+		assert.Equal(t, "*code.Code", fmt.Sprintf("%T", sut))
 	})
 	t.Run("singleton is applied", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut1 := code.New()
 		sut2 := code.New()
@@ -34,7 +38,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestCode_GenDataMatrix(t *testing.T) {
+	t.Parallel()
 	t.Run("When cannot generate data matrix, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := code.New()
 
@@ -48,6 +54,7 @@ func TestCode_GenDataMatrix(t *testing.T) {
 		assert.Nil(t, bytes)
 	})
 	t.Run("When can generate data matrix, should return bytes", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := code.New()
 
@@ -63,7 +70,9 @@ func TestCode_GenDataMatrix(t *testing.T) {
 }
 
 func TestCode_GenBar(t *testing.T) {
+	t.Parallel()
 	t.Run("When cannot generate bar code, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := code.New()
 
@@ -87,6 +96,7 @@ func TestCode_GenBar(t *testing.T) {
 		assert.Nil(t, bytes)
 	})
 	t.Run("When can generate bar code, should return bytes", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := code.New()
 
@@ -110,6 +120,7 @@ func TestCode_GenBar(t *testing.T) {
 		assert.Nil(t, err)
 	})
 	t.Run("When is ean and can generate bar code, should return bytes", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := code.New()
 
@@ -135,7 +146,9 @@ func TestCode_GenBar(t *testing.T) {
 }
 
 func TestCode_GenQr(t *testing.T) {
+	t.Parallel()
 	t.Run("When cannot generate qr code, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := code.New()
 
@@ -149,6 +162,7 @@ func TestCode_GenQr(t *testing.T) {
 		assert.Nil(t, bytes)
 	})
 	t.Run("When can generate qr code, should return bytes", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := code.New()
 
@@ -164,9 +178,9 @@ func TestCode_GenQr(t *testing.T) {
 }
 
 func genStringWithLength(length int) string {
-	var content string
+	var builder strings.Builder
 	for i := 0; i < length; i++ {
-		content += "a"
+		builder.WriteString("a")
 	}
-	return content
+	return builder.String()
 }

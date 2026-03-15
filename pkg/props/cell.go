@@ -6,7 +6,7 @@ import (
 )
 
 // Cell is the representation of a cell in the grid system.
-// This can be applied to Col or Row
+// This can be applied to Col or Row.
 type Cell struct {
 	// BackgroundColor defines which color will be applied to a cell.
 	// Default: nil
@@ -26,12 +26,12 @@ type Cell struct {
 }
 
 // ToMap adds the Cell fields to the map.
-func (c *Cell) ToMap() map[string]interface{} {
+func (c *Cell) ToMap() map[string]any {
 	if c == nil {
 		return nil
 	}
 
-	m := make(map[string]interface{})
+	m := make(map[string]any)
 
 	if c.BorderType != border.None {
 		m["prop_border_type"] = c.BorderType

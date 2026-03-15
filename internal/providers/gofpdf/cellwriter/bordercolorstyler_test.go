@@ -15,23 +15,33 @@ import (
 )
 
 func TestNewBorderColorStyler(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := cellwriter.NewBorderColorStyler(nil)
 
 	// Assert
 	assert.NotNil(t, sut)
-	assert.Equal(t, "*cellwriter.borderColorStyler", fmt.Sprintf("%T", sut))
+	assert.Equal(t, "*cellwriter.BorderColorStyler", fmt.Sprintf("%T", sut))
 }
 
 func TestBorderColorStyler_Apply(t *testing.T) {
+	t.Parallel()
 	t.Run("When prop is nil and next is nil, should skip calls", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		sut := cellwriter.NewBorderColorStyler(nil)
 
 		// Act
 		sut.Apply(100, 100, &entity.Config{}, nil)
 	})
 	t.Run("When prop is nil and next is filled, should skip current and call next", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		width := 100.0
 		height := 100.0
@@ -51,6 +61,7 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 		inner.AssertNumberOfCalls(t, "Apply", 1)
 	})
 	t.Run("When has prop but border color is nil, should skip current and call next", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		width := 100.0
 		height := 100.0
@@ -70,6 +81,7 @@ func TestBorderColorStyler_Apply(t *testing.T) {
 		inner.AssertNumberOfCalls(t, "Apply", 1)
 	})
 	t.Run("When has prop and border color is defined, should apply current and call next", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		width := 100.0
 		height := 100.0

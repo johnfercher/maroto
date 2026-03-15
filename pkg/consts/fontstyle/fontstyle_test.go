@@ -9,7 +9,9 @@ import (
 )
 
 func TestType_IsValid(t *testing.T) {
+	t.Parallel()
 	t.Run("when style is invalid, should be invalid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		fontStyle := fontstyle.Type("invalid")
 
@@ -17,6 +19,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.False(t, fontStyle.IsValid())
 	})
 	t.Run("when style is normal, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		fontStyle := fontstyle.Normal
 
@@ -24,6 +27,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.True(t, fontStyle.IsValid())
 	})
 	t.Run("when style is bold, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		fontStyle := fontstyle.Bold
 
@@ -31,6 +35,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.True(t, fontStyle.IsValid())
 	})
 	t.Run("when style is bold italic, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		fontStyle := fontstyle.BoldItalic
 
@@ -38,6 +43,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.True(t, fontStyle.IsValid())
 	})
 	t.Run("when style is underline, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		fontStyle := fontstyle.Underline
 
@@ -45,6 +51,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.True(t, fontStyle.IsValid())
 	})
 	t.Run("when style is strike-through, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		fontStyle := fontstyle.Strikethrough
 
@@ -52,6 +59,7 @@ func TestType_IsValid(t *testing.T) {
 		assert.True(t, fontStyle.IsValid())
 	})
 	t.Run("when style is bold, strike-through and italic, should be valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		fontStyle := fontstyle.Bold + fontstyle.Strikethrough + fontstyle.Italic
 

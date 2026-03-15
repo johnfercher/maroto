@@ -14,7 +14,9 @@ import (
 )
 
 func TestRepository_AddUTF8Font(t *testing.T) {
+	t.Parallel()
 	t.Run("when fontstyle family is empty, should not add value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := repository.New()
 
@@ -23,10 +25,11 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Len(t, customFonts, 0)
+		assert.Empty(t, customFonts)
 	})
 
 	t.Run("when fontstyle style is invalid, should not add value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := repository.New()
 
@@ -35,10 +38,11 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Len(t, customFonts, 0)
+		assert.Empty(t, customFonts)
 	})
 
 	t.Run("when fontstyle file is empty, should not add value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := repository.New()
 
@@ -47,10 +51,11 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Len(t, customFonts, 0)
+		assert.Empty(t, customFonts)
 	})
 
 	t.Run("when fontstyle is valid, should not value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := repository.New()
 
@@ -68,7 +73,9 @@ func TestRepository_AddUTF8Font(t *testing.T) {
 }
 
 func TestRepository_AddUTF8FontFromBytes(t *testing.T) {
+	t.Parallel()
 	t.Run("when fontstyle family is empty, should not add value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := repository.New()
 
@@ -77,10 +84,11 @@ func TestRepository_AddUTF8FontFromBytes(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Len(t, customFonts, 0)
+		assert.Empty(t, customFonts)
 	})
 
 	t.Run("when fontstyle style is invalid, should not add value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := repository.New()
 
@@ -89,10 +97,11 @@ func TestRepository_AddUTF8FontFromBytes(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Len(t, customFonts, 0)
+		assert.Empty(t, customFonts)
 	})
 
 	t.Run("when fontstyle bytes is nil, should not add value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := repository.New()
 
@@ -101,10 +110,11 @@ func TestRepository_AddUTF8FontFromBytes(t *testing.T) {
 
 		// Assert
 		assert.Nil(t, err)
-		assert.Len(t, customFonts, 0)
+		assert.Empty(t, customFonts)
 	})
 
 	t.Run("when fontstyle is valid, should not value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := repository.New()
 		ttf, err := os.ReadFile(buildPath("/docs/assets/fonts/arial-unicode-ms.ttf"))

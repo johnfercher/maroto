@@ -4,11 +4,11 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 )
 
-type math struct{}
+type Math struct{}
 
 // New create a Math.
-func New() *math {
-	return &math{}
+func New() *Math {
+	return &Math{}
 }
 
 // Resize adjusts the internal dimension of an element to occupy a percentage of the available space
@@ -16,7 +16,7 @@ func New() *math {
 //   - outer: The outer dimensions of the element
 //   - percent: The percentage of the external dimension that can be occupied
 //   - justReferenceWidth: Indicates whether resizing should be done only in relation to width or in relation to width and height
-func (s *math) Resize(inner *entity.Dimensions, outer *entity.Dimensions, percent float64, justReferenceWidth bool) *entity.Dimensions {
+func (s *Math) Resize(inner *entity.Dimensions, outer *entity.Dimensions, percent float64, justReferenceWidth bool) *entity.Dimensions {
 	percent /= 100.0
 
 	innerProportion := inner.Height / inner.Width
@@ -41,7 +41,7 @@ func (s *math) Resize(inner *entity.Dimensions, outer *entity.Dimensions, percen
 }
 
 // GetInnerCenterCell define a inner cell formatted inside outer cell centered.
-func (s *math) GetInnerCenterCell(inner *entity.Dimensions, outer *entity.Dimensions) *entity.Cell {
+func (s *Math) GetInnerCenterCell(inner *entity.Dimensions, outer *entity.Dimensions) *entity.Cell {
 	widthCorrection := s.GetCenterCorrection(outer.Width, inner.Width)
 	heightCorrection := s.GetCenterCorrection(outer.Height, inner.Height)
 
@@ -55,6 +55,6 @@ func (s *math) GetInnerCenterCell(inner *entity.Dimensions, outer *entity.Dimens
 
 // GetCenterCorrection return the correction of space in X or Y to
 // centralize a line in relation with another line.
-func (s *math) GetCenterCorrection(outerSize, innerSize float64) float64 {
+func (s *Math) GetCenterCorrection(outerSize, innerSize float64) float64 {
 	return (outerSize - innerSize) / 2.0
 }

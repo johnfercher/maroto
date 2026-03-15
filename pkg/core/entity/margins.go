@@ -9,7 +9,7 @@ type Margins struct {
 }
 
 // AppendMap appends the margins to a map.
-func (m *Margins) AppendMap(mp map[string]interface{}) map[string]interface{} {
+func (m *Margins) AppendMap(mp map[string]any) map[string]any {
 	if m.Left != 0 {
 		mp["config_margin_left"] = m.Left
 	}

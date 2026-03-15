@@ -14,6 +14,7 @@ import (
 )
 
 func TestNewPDF(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := core.NewPDF(nil, nil)
 
@@ -23,6 +24,7 @@ func TestNewPDF(t *testing.T) {
 }
 
 func TestPdf_GetBase64(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := core.NewPDF([]byte{1, 2, 3}, nil)
 
@@ -34,6 +36,7 @@ func TestPdf_GetBase64(t *testing.T) {
 }
 
 func TestPdf_GetBytes(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := core.NewPDF([]byte{1, 2, 3}, nil)
 
@@ -45,6 +48,7 @@ func TestPdf_GetBytes(t *testing.T) {
 }
 
 func TestPdf_GetReport(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := core.NewPDF(nil, &metrics.Report{SizeMetric: metrics.SizeMetric{
 		Key: "key",
@@ -62,7 +66,9 @@ func TestPdf_GetReport(t *testing.T) {
 }
 
 func TestPdf_Save(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot save, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := core.NewPDF(nil, nil)
 
@@ -73,6 +79,7 @@ func TestPdf_Save(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 	t.Run("when can save, should not return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		bytes := []byte{1, 2, 3}
 		file := buildPath("test.txt")

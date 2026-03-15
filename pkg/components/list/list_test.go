@@ -43,7 +43,9 @@ func (a anyType) GetContent(i int) core.Row {
 }
 
 func TestBuild(t *testing.T) {
+	t.Parallel()
 	t.Run("when arr is empty, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		r, err := list.Build[anyType](nil)
 
@@ -52,6 +54,7 @@ func TestBuild(t *testing.T) {
 		assert.Nil(t, r)
 	})
 	t.Run("when arr is not empty, should return rows", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		arr := buildList(10)
 
@@ -66,7 +69,9 @@ func TestBuild(t *testing.T) {
 }
 
 func TestBuildFromPointer(t *testing.T) {
+	t.Parallel()
 	t.Run("when arr is empty, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		arr := buildPointerList(0)
 
@@ -78,6 +83,7 @@ func TestBuildFromPointer(t *testing.T) {
 		assert.Nil(t, r)
 	})
 	t.Run("when arr is not empty, should return rows", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		arr := buildPointerList(10)
 
@@ -89,6 +95,7 @@ func TestBuildFromPointer(t *testing.T) {
 		test.New(t).Assert(p.GetStructure()).Equals("components/list/build_from_pointer.json")
 	})
 	t.Run("when arr is has a nil element, should return error", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		arr := buildPointerList(10)
 		arr[5] = nil

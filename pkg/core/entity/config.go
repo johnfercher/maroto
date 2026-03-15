@@ -25,9 +25,9 @@ type Config struct {
 	DisableAutoPageBreak bool
 }
 
-// ToMap converts Config to a map[string]interface{} .
-func (c *Config) ToMap() map[string]interface{} {
-	m := make(map[string]interface{})
+// ToMap converts Config to a map[string]any .
+func (c *Config) ToMap() map[string]any {
+	m := make(map[string]any)
 
 	if c.ProviderType != "" {
 		m["config_provider_type"] = c.ProviderType

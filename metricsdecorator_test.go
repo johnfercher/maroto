@@ -1,8 +1,10 @@
-package maroto
+package maroto_test
 
 import (
 	"fmt"
 	"testing"
+
+	"github.com/johnfercher/maroto/v2"
 
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
@@ -19,8 +21,9 @@ import (
 )
 
 func TestNewMetricsDecorator(t *testing.T) {
+	t.Parallel()
 	// Act
-	sut := NewMetricsDecorator(nil)
+	sut := maroto.NewMetricsDecorator(nil)
 
 	// Assert
 	assert.NotNil(t, sut)
@@ -28,6 +31,7 @@ func TestNewMetricsDecorator(t *testing.T) {
 }
 
 func TestMetricsDecorator_AddPages(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	pg := page.New()
 
@@ -37,7 +41,7 @@ func TestMetricsDecorator_AddPages(t *testing.T) {
 	inner.EXPECT().AddPages(pg)
 	inner.EXPECT().Generate().Return(docToReturn, nil)
 
-	sut := NewMetricsDecorator(inner)
+	sut := maroto.NewMetricsDecorator(inner)
 
 	// Act
 	sut.AddPages(pg)
@@ -50,14 +54,15 @@ func TestMetricsDecorator_AddPages(t *testing.T) {
 
 	report := doc.GetReport()
 	assert.NotNil(t, report)
-	assert.Equal(t, 2, len(report.TimeMetrics))
+	assert.Len(t, report.TimeMetrics, 2)
 	assert.Equal(t, "generate", report.TimeMetrics[0].Key)
 	assert.Equal(t, "add_page", report.TimeMetrics[1].Key)
-	assert.Equal(t, 2, len(report.TimeMetrics[1].Times))
+	assert.Len(t, report.TimeMetrics[1].Times, 2)
 	inner.AssertNumberOfCalls(t, "AddPages", 2)
 }
 
 func TestMetricsDecorator_AddRow(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	col := col.New(12)
 
@@ -67,7 +72,7 @@ func TestMetricsDecorator_AddRow(t *testing.T) {
 	inner.EXPECT().AddRow(10.0, col).Return(nil)
 	inner.EXPECT().Generate().Return(docToReturn, nil)
 
-	sut := NewMetricsDecorator(inner)
+	sut := maroto.NewMetricsDecorator(inner)
 
 	// Act
 	sut.AddRow(10, col)
@@ -80,14 +85,15 @@ func TestMetricsDecorator_AddRow(t *testing.T) {
 
 	report := doc.GetReport()
 	assert.NotNil(t, report)
-	assert.Equal(t, 2, len(report.TimeMetrics))
+	assert.Len(t, report.TimeMetrics, 2)
 	assert.Equal(t, "generate", report.TimeMetrics[0].Key)
 	assert.Equal(t, "add_row", report.TimeMetrics[1].Key)
-	assert.Equal(t, 2, len(report.TimeMetrics[1].Times))
+	assert.Len(t, report.TimeMetrics[1].Times, 2)
 	inner.AssertNumberOfCalls(t, "AddRow", 2)
 }
 
 func TestMetricsDecorator_AddRows(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	row := row.New(10).Add(col.New(12))
 
@@ -97,7 +103,7 @@ func TestMetricsDecorator_AddRows(t *testing.T) {
 	inner.EXPECT().AddRows(row)
 	inner.EXPECT().Generate().Return(docToReturn, nil)
 
-	sut := NewMetricsDecorator(inner)
+	sut := maroto.NewMetricsDecorator(inner)
 
 	// Act
 	sut.AddRows(row)
@@ -110,14 +116,15 @@ func TestMetricsDecorator_AddRows(t *testing.T) {
 
 	report := doc.GetReport()
 	assert.NotNil(t, report)
-	assert.Equal(t, 2, len(report.TimeMetrics))
+	assert.Len(t, report.TimeMetrics, 2)
 	assert.Equal(t, "generate", report.TimeMetrics[0].Key)
 	assert.Equal(t, "add_rows", report.TimeMetrics[1].Key)
-	assert.Equal(t, 2, len(report.TimeMetrics[1].Times))
+	assert.Len(t, report.TimeMetrics[1].Times, 2)
 	inner.AssertNumberOfCalls(t, "AddRows", 2)
 }
 
 func TestMetricsDecorator_GetStructure(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	row := row.New(10).Add(col.New(12))
 
@@ -128,7 +135,7 @@ func TestMetricsDecorator_GetStructure(t *testing.T) {
 	inner.EXPECT().GetStructure().Return(&node.Node[core.Structure]{})
 	inner.EXPECT().Generate().Return(docToReturn, nil)
 
-	sut := NewMetricsDecorator(inner)
+	sut := maroto.NewMetricsDecorator(inner)
 	sut.AddRows(row)
 
 	// Act
@@ -141,22 +148,23 @@ func TestMetricsDecorator_GetStructure(t *testing.T) {
 
 	report := doc.GetReport()
 	assert.NotNil(t, report)
-	assert.Equal(t, 3, len(report.TimeMetrics))
+	assert.Len(t, report.TimeMetrics, 3)
 	assert.Equal(t, "get_tree_structure", report.TimeMetrics[0].Key)
 	assert.Equal(t, "generate", report.TimeMetrics[1].Key)
 	assert.Equal(t, "add_rows", report.TimeMetrics[2].Key)
-	assert.Equal(t, 1, len(report.TimeMetrics[1].Times))
+	assert.Len(t, report.TimeMetrics[1].Times, 1)
 	inner.AssertNumberOfCalls(t, "AddRows", 1)
 	inner.AssertNumberOfCalls(t, "GetStructure", 1)
 }
 
 func TestMetricsDecorator_FitlnCurrentPage(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	inner := mocks.NewMaroto(t)
 	inner.EXPECT().FitlnCurrentPage(10.0).Return(true)
 	inner.EXPECT().FitlnCurrentPage(20.0).Return(false)
 
-	sut := NewMetricsDecorator(inner)
+	sut := maroto.NewMetricsDecorator(inner)
 
 	// Act & Assert
 	assert.True(t, sut.FitlnCurrentPage(10))
@@ -164,6 +172,7 @@ func TestMetricsDecorator_FitlnCurrentPage(t *testing.T) {
 }
 
 func TestMetricsDecorator_GetCurrentConfig(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	cfgToReturn := &entity.Config{
 		MaxGridSize: 15,
@@ -171,7 +180,7 @@ func TestMetricsDecorator_GetCurrentConfig(t *testing.T) {
 	inner := mocks.NewMaroto(t)
 	inner.EXPECT().GetCurrentConfig().Return(cfgToReturn)
 
-	sut := NewMetricsDecorator(inner)
+	sut := maroto.NewMetricsDecorator(inner)
 
 	// Act
 	cfg := sut.GetCurrentConfig()
@@ -181,6 +190,7 @@ func TestMetricsDecorator_GetCurrentConfig(t *testing.T) {
 }
 
 func TestMetricsDecorator_RegisterHeader(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	row := text.NewRow(10, "text")
 
@@ -188,7 +198,7 @@ func TestMetricsDecorator_RegisterHeader(t *testing.T) {
 	inner.EXPECT().RegisterHeader(row).Return(nil)
 	inner.EXPECT().Generate().Return(&core.Pdf{}, nil)
 
-	sut := NewMetricsDecorator(inner)
+	sut := maroto.NewMetricsDecorator(inner)
 
 	// Act
 	err := sut.RegisterHeader(row)
@@ -201,12 +211,13 @@ func TestMetricsDecorator_RegisterHeader(t *testing.T) {
 
 	report := doc.GetReport()
 	assert.NotNil(t, report)
-	assert.Equal(t, 2, len(report.TimeMetrics))
+	assert.Len(t, report.TimeMetrics, 2)
 	assert.Equal(t, "generate", report.TimeMetrics[0].Key)
 	assert.Equal(t, "header", report.TimeMetrics[1].Key)
 }
 
 func TestMetricsDecorator_RegisterFooter(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	row := text.NewRow(10, "text")
 
@@ -214,7 +225,7 @@ func TestMetricsDecorator_RegisterFooter(t *testing.T) {
 	inner.EXPECT().RegisterFooter(row).Return(nil)
 	inner.EXPECT().Generate().Return(&core.Pdf{}, nil)
 
-	sut := NewMetricsDecorator(inner)
+	sut := maroto.NewMetricsDecorator(inner)
 
 	// Act
 	err := sut.RegisterFooter(row)
@@ -227,7 +238,7 @@ func TestMetricsDecorator_RegisterFooter(t *testing.T) {
 
 	report := doc.GetReport()
 	assert.NotNil(t, report)
-	assert.Equal(t, 2, len(report.TimeMetrics))
+	assert.Len(t, report.TimeMetrics, 2)
 	assert.Equal(t, "generate", report.TimeMetrics[0].Key)
 	assert.Equal(t, "footer", report.TimeMetrics[1].Key)
 }

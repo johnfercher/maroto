@@ -1,7 +1,7 @@
 package props
 
 import (
-	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -33,7 +33,7 @@ func (p Place) IsValid() bool {
 		p == LeftBottom || p == Bottom || p == RightBottom
 }
 
-// PageNumber have attributes of page number
+// PageNumber have attributes of page number.
 type PageNumber struct {
 	// Pattern is the string pattern which will be used to apply the page count component.
 	Pattern string
@@ -50,6 +50,7 @@ type PageNumber struct {
 }
 
 // GetNumberTextProp returns the Text properties of the page number.
+// nolint:staticcheck // builder
 func (p *PageNumber) GetNumberTextProp(height float64) *Text {
 	text := &Text{
 		Family: p.Family,
@@ -76,8 +77,8 @@ func (p *PageNumber) GetNumberTextProp(height float64) *Text {
 
 // GetPageString returns the page string.
 func (p *PageNumber) GetPageString(current, total int) string {
-	pattern := strings.ReplaceAll(p.Pattern, "{current}", fmt.Sprintf("%d", current))
-	return strings.ReplaceAll(pattern, "{total}", fmt.Sprintf("%d", total))
+	pattern := strings.ReplaceAll(p.Pattern, "{current}", strconv.Itoa(current))
+	return strings.ReplaceAll(pattern, "{total}", strconv.Itoa(total))
 }
 
 // WithFont apply font if not defined before.
@@ -100,7 +101,7 @@ func (p *PageNumber) WithFont(font *Font) {
 }
 
 // AppendMap appends the font fields to a map.
-func (p *PageNumber) AppendMap(m map[string]interface{}) map[string]interface{} {
+func (p *PageNumber) AppendMap(m map[string]any) map[string]any {
 	if p.Pattern != "" {
 		m["page_number_pattern"] = p.Pattern
 	}

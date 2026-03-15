@@ -2,10 +2,16 @@ package cache
 
 import (
 	"errors"
+	"fmt"
 	"os"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+)
+
+var (
+	ErrCannotReadFile = errors.New("cannot read file")
+	ErrImageNotFound  = errors.New("image not found")
 )
 
 // Cache is the interface to cache images.
@@ -32,7 +38,7 @@ func New() Cache {
 func (c *cache) LoadImage(file string, extension extension.Type) error {
 	imageBytes, err := os.ReadFile(file)
 	if err != nil {
-		return err
+		return fmt.Errorf("%w: %w", ErrCannotReadFile, err)
 	}
 
 	img := &entity.Image{Bytes: imageBytes, Extension: extension}
@@ -53,5 +59,5 @@ func (c *cache) GetImage(file string, extension extension.Type) (*entity.Image, 
 		return image, nil
 	}
 
-	return nil, errors.New("image not found")
+	return nil, ErrImageNotFound
 }

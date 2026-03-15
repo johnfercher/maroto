@@ -1,3 +1,5 @@
+// Package core contains all core interfaces and basic implementations.
+// nolint:interfacebloat // there is no way to reduce this interface
 package core
 
 import (
@@ -15,6 +17,7 @@ type Provider interface {
 	// Features
 	AddLine(cell *entity.Cell, prop *props.Line)
 	AddText(text string, cell *entity.Cell, prop *props.Text)
+	AddCheckbox(label string, cell *entity.Cell, prop *props.Checkbox)
 	GetFontHeight(prop *props.Font) float64
 	GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int
 	AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect)

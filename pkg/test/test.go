@@ -1,3 +1,4 @@
+// nolint:errchkjson // not needed
 package test
 
 import (
@@ -16,16 +17,23 @@ import (
 )
 
 var (
-	marotoFile              = ".maroto.yml"
-	goModFile               = "go.mod"
-	configSingleton *Config = nil
+	ErrCannotReadDir       = errors.New("cannot read directory")
+	ErrCannotReadFile      = errors.New("cannot read file")
+	ErrCannotUnmarshallYML = errors.New("cannot unmarshall yaml")
+	ErrMarotoYMLNotFound   = errors.New("found go.mod but not .maroto.yml")
+)
+
+var (
+	marotoFile      = ".maroto.yml"
+	goModFile       = "go.mod"
+	configSingleton *Config
 )
 
 type Node struct {
-	Value   interface{}            `json:"value,omitempty"`
-	Type    string                 `json:"type"`
-	Details map[string]interface{} `json:"details,omitempty"`
-	Nodes   []*Node                `json:"nodes,omitempty"`
+	Value   any            `json:"value,omitempty"`
+	Type    string         `json:"type"`
+	Details map[string]any `json:"details,omitempty"`
+	Nodes   []*Node        `json:"nodes,omitempty"`
 }
 
 // MarotoTest is the unit test instance.
@@ -36,15 +44,16 @@ type MarotoTest struct {
 
 // New creates the MarotoTest instance to unit tests.
 func New(t *testing.T) *MarotoTest {
+	t.Helper()
 	if configSingleton == nil {
 		path, err := getMarotoConfigFilePath()
 		if err != nil {
-			assert.Fail(t, fmt.Sprintf("could not find .maroto.yml file. %s", err.Error()))
+			assert.Fail(t, "could not find .maroto.yml file. %s"+err.Error())
 		}
 
 		cfg, err := loadMarotoConfigFile(path)
 		if err != nil {
-			assert.Fail(t, fmt.Sprintf("could not parse .maroto.yml. %s", err.Error()))
+			assert.Fail(t, "could not parse .maroto.yml. %s"+err.Error())
 		}
 
 		cfg.AbsolutePath = path
@@ -64,6 +73,7 @@ func (m *MarotoTest) Assert(structure *node.Node[core.Structure]) *MarotoTest {
 
 // Equals defines which file will be loaded to do the comparison.
 func (m *MarotoTest) Equals(file string) *MarotoTest {
+	m.t.Helper()
 	actual := m.buildNode(m.node)
 	actualBytes, _ := json.Marshal(actual)
 	actualString := string(actualBytes)
@@ -120,13 +130,13 @@ func getMarotoConfigFilePath() (string, error) {
 func loadMarotoConfigFile(path string) (*Config, error) {
 	bytes, err := os.ReadFile(path + "/" + marotoFile)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %w", ErrCannotReadFile, err)
 	}
 
 	cfg := &Config{}
 	err = yaml.Unmarshal(bytes, cfg)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %w", ErrCannotUnmarshallYML, err)
 	}
 
 	return cfg, nil
@@ -148,7 +158,7 @@ func getMarotoConfigFilePathRecursive(path string) (string, error) {
 	}
 
 	if hasGoMod {
-		return "", errors.New("found go.mod but not .maroto.yml")
+		return "", ErrMarotoYMLNotFound
 	}
 
 	parentPath := getParentDir(path)
@@ -158,7 +168,7 @@ func getMarotoConfigFilePathRecursive(path string) (string, error) {
 func hasFileInPath(file string, path string) (bool, error) {
 	entries, err := os.ReadDir(path)
 	if err != nil {
-		return false, err
+		return false, fmt.Errorf("%w: %s", ErrCannotReadDir, err.Error())
 	}
 
 	for _, entry := range entries {
@@ -174,10 +184,10 @@ func getParentDir(path string) string {
 	dirs := strings.Split(path, "/")
 	dirs = dirs[:len(dirs)-2]
 
-	var newPath string
+	var builder strings.Builder
 	for _, dir := range dirs {
-		newPath += dir + "/"
+		builder.WriteString(dir + "/")
 	}
 
-	return newPath
+	return builder.String()
 }

@@ -2,8 +2,15 @@
 package metrics
 
 import (
+	"errors"
 	"fmt"
 	"os"
+	"strings"
+)
+
+var (
+	ErrCannotWriteStringFile = errors.New("cannot write string to file")
+	ErrCannotCreateFile      = errors.New("cannot create file")
 )
 
 type (
@@ -116,6 +123,20 @@ func (m *TimeMetric) Normalize() {
 	}
 }
 
+// String returns the time metric formatted.
+func (m *TimeMetric) String() string {
+	var builder strings.Builder
+	builder.WriteString(m.Key + " -> avg: " + m.Avg.String() + ", executions: [")
+	for i, time := range m.Times {
+		builder.WriteString(time.String())
+		if i < len(m.Times)-1 {
+			builder.WriteString(", ")
+		}
+	}
+	builder.WriteString("]")
+	return builder.String()
+}
+
 func (m *TimeMetric) hasGreaterThan1000(times []*Time) bool {
 	for _, time := range times {
 		if time.Value > 1000.0 {
@@ -124,20 +145,6 @@ func (m *TimeMetric) hasGreaterThan1000(times []*Time) bool {
 	}
 
 	return false
-}
-
-// String returns the time metric formatted.
-func (m *TimeMetric) String() string {
-	var content string
-	content += m.Key + " -> avg: " + m.Avg.String() + ", executions: ["
-	for i, time := range m.Times {
-		content += time.String()
-		if i < len(m.Times)-1 {
-			content += ", "
-		}
-	}
-	content += "]"
-	return content
 }
 
 // SizeMetric is a size metric.
@@ -180,31 +187,33 @@ func (r *Report) Normalize() *Report {
 
 // String returns the report formatted.
 func (r *Report) String() string {
-	var content string
+	var builder strings.Builder
 	for _, metric := range r.TimeMetrics {
-		content += metric.String()
+		builder.WriteString(metric.String())
 	}
-	return content
+	return builder.String()
 }
 
 // Save saves the report in a file.
 func (r *Report) Save(file string) error {
-	var content string
-	for _, metric := range r.TimeMetrics {
-		content += metric.String() + "\n"
+	var builder strings.Builder
+
+	for _, s := range r.TimeMetrics {
+		builder.WriteString(s.String() + "\n")
 	}
-	content += r.SizeMetric.String() + "\n"
+	builder.WriteString(r.SizeMetric.String() + "\n")
 
 	f, err := os.Create(file)
 	if err != nil {
-		return err
+		return fmt.Errorf("%w: %w", ErrCannotCreateFile, err)
 	}
 	defer func() {
 		_ = f.Close()
 	}()
 
-	if _, err = f.WriteString(content); err != nil {
-		return err
+	_, err = f.WriteString(builder.String())
+	if err != nil {
+		return fmt.Errorf("%w: %w", ErrCannotWriteStringFile, err)
 	}
 
 	return nil

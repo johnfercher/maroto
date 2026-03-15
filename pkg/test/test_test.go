@@ -1,3 +1,5 @@
+// Package test implements unit test feature.
+// nolint:testpackage // that's the integration test of maroto
 package test
 
 import (
@@ -15,7 +17,9 @@ const (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	t.Run("when called first, should setup singleton and set t", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := New(t)
 
@@ -23,6 +27,7 @@ func TestNew(t *testing.T) {
 		assert.Equal(t, t, sut.t)
 	})
 	t.Run("when called not first, should use singleton and set t", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		_ = New(t)
 
@@ -35,7 +40,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestMarotoTest_Assert(t *testing.T) {
+	t.Parallel()
 	t.Run("when call assert, should set node", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		n := fixture.Node("maroto")
 		sut := New(t)
@@ -49,7 +56,9 @@ func TestMarotoTest_Assert(t *testing.T) {
 }
 
 func TestMarotoTest_Save(t *testing.T) {
+	t.Parallel()
 	t.Run("when cannot save, should not create file", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		file := ""
 		n := fixture.Node("maroto")
@@ -66,6 +75,7 @@ func TestMarotoTest_Save(t *testing.T) {
 		assert.True(t, innerT.Failed())
 	})
 	t.Run("when can save, should create file", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		n := fixture.Node("maroto")
 		sut := New(t).Assert(n)
@@ -86,7 +96,9 @@ func TestMarotoTest_Save(t *testing.T) {
 }
 
 func TestMarotoTest_Equals(t *testing.T) {
+	t.Parallel()
 	t.Run("when file saved is not equals to current, should fail", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		n := fixture.Node("not_maroto")
 		innerT := &testing.T{}
@@ -99,6 +111,7 @@ func TestMarotoTest_Equals(t *testing.T) {
 		assert.True(t, innerT.Failed())
 	})
 	t.Run("when file saved is equals to current, should be success", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		n := fixture.Node("maroto")
 		innerT := &testing.T{}

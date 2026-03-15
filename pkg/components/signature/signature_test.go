@@ -13,7 +13,9 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := signature.New("signature")
 
@@ -21,6 +23,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := signature.New("signature", fixture.SignatureProp())
 
@@ -30,7 +33,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestNewCol(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := signature.NewCol(12, "signature")
 
@@ -38,6 +43,7 @@ func TestNewCol(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_col_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := signature.NewCol(12, "signature", fixture.SignatureProp())
 
@@ -47,7 +53,9 @@ func TestNewCol(t *testing.T) {
 }
 
 func TestNewRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := signature.NewRow(10, "signature")
 
@@ -55,6 +63,7 @@ func TestNewRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := signature.NewRow(10, "signature", fixture.SignatureProp())
 
@@ -64,7 +73,9 @@ func TestNewRow(t *testing.T) {
 }
 
 func TestNewAutoRow(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := signature.NewAutoRow("signature")
 
@@ -72,6 +83,7 @@ func TestNewAutoRow(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/signatures/new_signature_auto_row_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := signature.NewAutoRow("signature", fixture.SignatureProp())
 
@@ -81,7 +93,9 @@ func TestNewAutoRow(t *testing.T) {
 }
 
 func TestSignature_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("should call provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		label := "signature"
 		cell := fixture.CellEntity()
@@ -104,8 +118,16 @@ func TestSignature_Render(t *testing.T) {
 }
 
 func TestSignature_SetConfig(t *testing.T) {
+	t.Parallel()
 	t.Run("should call correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("code unexpectedly panicked: %v", r)
+			}
+		}()
+
 		prop := fixture.SignatureProp()
 		sut := signature.New("signature", prop)
 
@@ -115,7 +137,9 @@ func TestSignature_SetConfig(t *testing.T) {
 }
 
 func TestSignature_GetHeight(t *testing.T) {
+	t.Parallel()
 	t.Run("When signature has a height of 10, should return 10", func(t *testing.T) {
+		t.Parallel()
 		cell := fixture.CellEntity()
 		font := fixture.FontProp()
 

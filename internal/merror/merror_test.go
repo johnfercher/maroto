@@ -11,6 +11,7 @@ import (
 )
 
 func TestDefaultErrorText(t *testing.T) {
+	t.Parallel()
 	// Assert
 	assert.Equal(t, fontfamily.Arial, merror.DefaultErrorText.Family)
 	assert.Equal(t, fontstyle.Bold, merror.DefaultErrorText.Style)

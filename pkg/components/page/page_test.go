@@ -16,7 +16,9 @@ import (
 )
 
 func TestNew(t *testing.T) {
+	t.Parallel()
 	t.Run("when prop is not sent, should use default", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := page.New()
 
@@ -24,6 +26,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/lines/new_page_default_prop.json")
 	})
 	t.Run("when prop is sent, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := page.New(fixture.PageProp())
 
@@ -31,6 +34,7 @@ func TestNew(t *testing.T) {
 		test.New(t).Assert(sut.GetStructure()).Equals("components/lines/new_page_custom_prop.json")
 	})
 	t.Run("when prop is sent and there is rows, should use the provided", func(t *testing.T) {
+		t.Parallel()
 		// Act
 		sut := page.New(fixture.PageProp())
 
@@ -43,7 +47,9 @@ func TestNew(t *testing.T) {
 }
 
 func TestPage_Render(t *testing.T) {
+	t.Parallel()
 	t.Run("when there is no background image and there is no page pattern, should call row render correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := fixture.CellEntity()
 		prop := fixture.PageProp()
@@ -69,6 +75,7 @@ func TestPage_Render(t *testing.T) {
 	})
 
 	t.Run("when there is background image and there is no page pattern, should call row render and provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := fixture.CellEntity()
 		prop := fixture.PageProp()
@@ -103,6 +110,7 @@ func TestPage_Render(t *testing.T) {
 		row.AssertNumberOfCalls(t, "GetHeight", 1)
 	})
 	t.Run("when there is background image and there is page pattern, should call row render and provider correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		cell := fixture.CellEntity()
 		prop := fixture.PageProp()
@@ -140,7 +148,9 @@ func TestPage_Render(t *testing.T) {
 }
 
 func TestPage_SetNumber(t *testing.T) {
+	t.Parallel()
 	t.Run("when called set number, should set correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := page.New()
 
@@ -153,7 +163,9 @@ func TestPage_SetNumber(t *testing.T) {
 }
 
 func TestPage_GetRows(t *testing.T) {
+	t.Parallel()
 	t.Run("when called get rows, should return rows correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		row := mocks.NewRow(t)
 

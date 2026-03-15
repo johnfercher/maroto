@@ -148,6 +148,25 @@
 							"type": "col",
 							"nodes": [
 								{
+									"value": "agree",
+									"type": "checkbox",
+									"details": {
+										"prop_size": 5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 20,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
 									"type": "line",
 									"details": {
 										"prop_offset_percent": 5,
@@ -162,7 +181,7 @@
 					]
 				},
 				{
-					"value": 186.9975,
+					"value": 166.9975,
 					"type": "row",
 					"nodes": [
 						{

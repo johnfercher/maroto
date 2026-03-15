@@ -1,3 +1,4 @@
+// nolint:misspell // other languages are being classified as english misspells
 package main
 
 import (
@@ -67,7 +68,7 @@ func GetMaroto(customFontFile string) core.Maroto {
 		text.NewCol(8, header[1], props.Text{Style: fontstyle.Bold, Family: fontfamily.Arial, Align: align.Center}),
 	)
 
-	grey := props.Color{200, 200, 200}
+	grey := props.Color{Red: 200, Green: 200, Blue: 200}
 	for i, content := range contents {
 		r := m.AddRow(5,
 			text.NewCol(4, content[0], props.Text{Align: align.Center}),
@@ -103,7 +104,7 @@ func GetMaroto(customFontFile string) core.Maroto {
 func getLanguageSample() ([]string, [][]string) {
 	header := []string{"Language", "Phrase: Talk is cheap. Show me the code."}
 
-	contents := [][]string{}
+	var contents [][]string
 	contents = append(contents, []string{"Africâner", "Praat is goedkoop. Wys my die kode."})
 	contents = append(contents, []string{"Albanês", "Biseda është e lirë. Më trego kodin."})
 	contents = append(contents, []string{"Alemão", "Reden ist billig. Zeig mir den Code."})

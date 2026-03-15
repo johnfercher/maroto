@@ -22,6 +22,7 @@ import (
 )
 
 func TestNewBuilder(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := config.NewBuilder()
 
@@ -31,6 +32,7 @@ func TestNewBuilder(t *testing.T) {
 }
 
 func TestBuilder_Build(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := config.NewBuilder()
 
@@ -53,7 +55,7 @@ func TestBuilder_Build(t *testing.T) {
 	assert.Nil(t, cfg.CustomFonts)
 	assert.Equal(t, generation.Sequential, cfg.GenerationMode)
 	assert.Equal(t, 1, cfg.ChunkWorkers)
-	assert.Equal(t, false, cfg.Debug)
+	assert.False(t, cfg.Debug)
 	assert.Equal(t, 12, cfg.MaxGridSize)
 	assert.Nil(t, cfg.PageNumber)
 	assert.Nil(t, cfg.Protection)
@@ -64,7 +66,9 @@ func TestBuilder_Build(t *testing.T) {
 }
 
 func TestBuilder_WithPageSize(t *testing.T) {
+	t.Parallel()
 	t.Run("when page size is empty, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -76,6 +80,7 @@ func TestBuilder_WithPageSize(t *testing.T) {
 		assert.Equal(t, 297.0, cfg.Dimensions.Height)
 	})
 	t.Run("when page size is filled, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -89,7 +94,9 @@ func TestBuilder_WithPageSize(t *testing.T) {
 }
 
 func TestBuilder_WithDimensions(t *testing.T) {
+	t.Parallel()
 	t.Run("when dimensions has invalid width, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -101,6 +108,7 @@ func TestBuilder_WithDimensions(t *testing.T) {
 		assert.Equal(t, 297.0, cfg.Dimensions.Height)
 	})
 	t.Run("when dimensions has invalid height, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -112,6 +120,7 @@ func TestBuilder_WithDimensions(t *testing.T) {
 		assert.Equal(t, 297.0, cfg.Dimensions.Height)
 	})
 	t.Run("when dimensions has valid values, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -123,6 +132,7 @@ func TestBuilder_WithDimensions(t *testing.T) {
 		assert.Equal(t, 80.0, cfg.Dimensions.Height)
 	})
 	t.Run("when dimensions are set and page size too, should use dimensions values", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -136,7 +146,9 @@ func TestBuilder_WithDimensions(t *testing.T) {
 }
 
 func TestCfgBuilder_WithTopMargin(t *testing.T) {
+	t.Parallel()
 	t.Run("when top is invalid, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -147,6 +159,7 @@ func TestCfgBuilder_WithTopMargin(t *testing.T) {
 		assert.Equal(t, 10.0, cfg.Margins.Top)
 	})
 	t.Run("when top is valid, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -159,7 +172,9 @@ func TestCfgBuilder_WithTopMargin(t *testing.T) {
 }
 
 func TestCfgBuilder_WithLeftMargin(t *testing.T) {
+	t.Parallel()
 	t.Run("when left is invalid, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -170,6 +185,7 @@ func TestCfgBuilder_WithLeftMargin(t *testing.T) {
 		assert.Equal(t, 10.0, cfg.Margins.Left)
 	})
 	t.Run("when left is valid, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -182,7 +198,9 @@ func TestCfgBuilder_WithLeftMargin(t *testing.T) {
 }
 
 func TestCfgBuilder_WithRightMargin(t *testing.T) {
+	t.Parallel()
 	t.Run("when right is invalid, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -193,6 +211,7 @@ func TestCfgBuilder_WithRightMargin(t *testing.T) {
 		assert.Equal(t, 10.0, cfg.Margins.Right)
 	})
 	t.Run("when right is valid, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -205,7 +224,9 @@ func TestCfgBuilder_WithRightMargin(t *testing.T) {
 }
 
 func TestCfgBuilder_WithBottomMargin(t *testing.T) {
+	t.Parallel()
 	t.Run("when bottom is invalid, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -216,6 +237,7 @@ func TestCfgBuilder_WithBottomMargin(t *testing.T) {
 		assert.Equal(t, 20.0025, cfg.Margins.Bottom)
 	})
 	t.Run("when bottom is valid, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -229,7 +251,9 @@ func TestCfgBuilder_WithBottomMargin(t *testing.T) {
 
 // nolint:dupl // dupl is good here
 func TestBuilder_WithConcurrentMode(t *testing.T) {
+	t.Parallel()
 	t.Run("when chunk size is invalid, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -241,6 +265,7 @@ func TestBuilder_WithConcurrentMode(t *testing.T) {
 		assert.Equal(t, 1, cfg.ChunkWorkers)
 	})
 	t.Run("when chunk size is valid, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -252,6 +277,7 @@ func TestBuilder_WithConcurrentMode(t *testing.T) {
 		assert.Equal(t, 7, cfg.ChunkWorkers)
 	})
 	t.Run("when chunk size is valid, should override sequential", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		sut.WithSequentialMode()
@@ -264,6 +290,7 @@ func TestBuilder_WithConcurrentMode(t *testing.T) {
 		assert.Equal(t, 7, cfg.ChunkWorkers)
 	})
 	t.Run("when chunk size is valid, should override sequential low memory", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		sut.WithSequentialLowMemoryMode(5)
@@ -278,7 +305,9 @@ func TestBuilder_WithConcurrentMode(t *testing.T) {
 }
 
 func TestCfgBuilder_WithSequentialMode(t *testing.T) {
+	t.Parallel()
 	t.Run("when sequential, should apply sequential", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -290,6 +319,7 @@ func TestCfgBuilder_WithSequentialMode(t *testing.T) {
 		assert.Equal(t, 1, cfg.ChunkWorkers)
 	})
 	t.Run("when sequential, should override sequential low memory", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		sut.WithSequentialLowMemoryMode(10)
@@ -302,6 +332,7 @@ func TestCfgBuilder_WithSequentialMode(t *testing.T) {
 		assert.Equal(t, 1, cfg.ChunkWorkers)
 	})
 	t.Run("when sequential, should override concurrent", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		sut.WithConcurrentMode(10)
@@ -317,7 +348,9 @@ func TestCfgBuilder_WithSequentialMode(t *testing.T) {
 
 // nolint:dupl // dupl is good here
 func TestCfgBuilder_WithSequentialLowMemoryMode(t *testing.T) {
+	t.Parallel()
 	t.Run("when chunk size is invalid, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -329,6 +362,7 @@ func TestCfgBuilder_WithSequentialLowMemoryMode(t *testing.T) {
 		assert.Equal(t, 1, cfg.ChunkWorkers)
 	})
 	t.Run("when chunk size is valid, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -340,6 +374,7 @@ func TestCfgBuilder_WithSequentialLowMemoryMode(t *testing.T) {
 		assert.Equal(t, 7, cfg.ChunkWorkers)
 	})
 	t.Run("when chunk size is valid, should override sequential low memory", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		sut.WithSequentialMode()
@@ -352,6 +387,7 @@ func TestCfgBuilder_WithSequentialLowMemoryMode(t *testing.T) {
 		assert.Equal(t, 7, cfg.ChunkWorkers)
 	})
 	t.Run("when chunk size is valid, should override concurrent", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		sut.WithConcurrentMode(5)
@@ -366,6 +402,7 @@ func TestCfgBuilder_WithSequentialLowMemoryMode(t *testing.T) {
 }
 
 func TestBuilder_WithDebug(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	sut := config.NewBuilder()
 
@@ -373,11 +410,13 @@ func TestBuilder_WithDebug(t *testing.T) {
 	cfg := sut.WithDebug(true).Build()
 
 	// Assert
-	assert.Equal(t, true, cfg.Debug)
+	assert.True(t, cfg.Debug)
 }
 
 func TestBuilder_WithMaxGridSize(t *testing.T) {
+	t.Parallel()
 	t.Run("when max grid size is invalid, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -388,6 +427,7 @@ func TestBuilder_WithMaxGridSize(t *testing.T) {
 		assert.Equal(t, 12, cfg.MaxGridSize)
 	})
 	t.Run("when max grid size is valid, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -400,7 +440,9 @@ func TestBuilder_WithMaxGridSize(t *testing.T) {
 }
 
 func TestBuilder_WithDefaultFont(t *testing.T) {
+	t.Parallel()
 	t.Run("when fontstyle is nil, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -416,6 +458,7 @@ func TestBuilder_WithDefaultFont(t *testing.T) {
 		assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 	})
 	t.Run("when family is filled, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -433,6 +476,7 @@ func TestBuilder_WithDefaultFont(t *testing.T) {
 		assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 	})
 	t.Run("when style is filled, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -450,6 +494,7 @@ func TestBuilder_WithDefaultFont(t *testing.T) {
 		assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 	})
 	t.Run("when size is filled, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -467,6 +512,7 @@ func TestBuilder_WithDefaultFont(t *testing.T) {
 		assert.Equal(t, 0, cfg.DefaultFont.Color.Blue)
 	})
 	t.Run("when color is filled, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -486,7 +532,9 @@ func TestBuilder_WithDefaultFont(t *testing.T) {
 }
 
 func TestCfgBuilder_WithPageNumber(t *testing.T) {
+	t.Parallel()
 	t.Run("when using empty, should apply default", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -504,6 +552,7 @@ func TestCfgBuilder_WithPageNumber(t *testing.T) {
 		assert.Equal(t, 0, cfg.PageNumber.Color.Blue)
 	})
 	t.Run("when string pattern doesn´t have current, should apply default pattern", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		pageNumber := props.PageNumber{
@@ -517,6 +566,7 @@ func TestCfgBuilder_WithPageNumber(t *testing.T) {
 		assert.Equal(t, "{current} / {total}", cfg.PageNumber.Pattern)
 	})
 	t.Run("when string pattern doesn´t have total, should apply default pattern", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		pageNumber := props.PageNumber{
@@ -530,6 +580,7 @@ func TestCfgBuilder_WithPageNumber(t *testing.T) {
 		assert.Equal(t, "{current} / {total}", cfg.PageNumber.Pattern)
 	})
 	t.Run("when string pattern is correct, should apply pattern", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		pageNumber := props.PageNumber{
@@ -543,6 +594,7 @@ func TestCfgBuilder_WithPageNumber(t *testing.T) {
 		assert.Equal(t, "Page {current} of {total}", cfg.PageNumber.Pattern)
 	})
 	t.Run("when place is not valid, should apply default", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		pageNumber := props.PageNumber{
@@ -556,6 +608,7 @@ func TestCfgBuilder_WithPageNumber(t *testing.T) {
 		assert.Equal(t, props.Bottom, cfg.PageNumber.Place)
 	})
 	t.Run("when place is valid, should apply config", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		pageNumber := props.PageNumber{
@@ -571,7 +624,9 @@ func TestCfgBuilder_WithPageNumber(t *testing.T) {
 }
 
 func TestCfgBuilder_WithProtection(t *testing.T) {
+	t.Parallel()
 	t.Run("when with protection, should apply correct", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -586,7 +641,9 @@ func TestCfgBuilder_WithProtection(t *testing.T) {
 }
 
 func TestCfgBuilder_WithCompression(t *testing.T) {
+	t.Parallel()
 	t.Run("when with compression, should apply correct", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -599,7 +656,9 @@ func TestCfgBuilder_WithCompression(t *testing.T) {
 }
 
 func TestBuilder_WithOrientation(t *testing.T) {
+	t.Parallel()
 	t.Run("when using default page size and orientation is not set, should use vertical", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -609,9 +668,10 @@ func TestBuilder_WithOrientation(t *testing.T) {
 		// Assert
 		assert.Equal(t, 210.0, cfg.Dimensions.Width)
 		assert.Equal(t, 297.0, cfg.Dimensions.Height)
-		assert.True(t, cfg.Dimensions.Height > cfg.Dimensions.Width)
+		assert.Greater(t, cfg.Dimensions.Height, cfg.Dimensions.Width)
 	})
 	t.Run("when using default page size and orientation is set to horizontal, should use horizontal", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -621,9 +681,10 @@ func TestBuilder_WithOrientation(t *testing.T) {
 		// Assert
 		assert.Equal(t, 297.0, cfg.Dimensions.Width)
 		assert.Equal(t, 210.0, cfg.Dimensions.Height)
-		assert.True(t, cfg.Dimensions.Width > cfg.Dimensions.Height)
+		assert.Greater(t, cfg.Dimensions.Width, cfg.Dimensions.Height)
 	})
 	t.Run("when using default page size and orientation is not set, should use vertical", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -633,9 +694,10 @@ func TestBuilder_WithOrientation(t *testing.T) {
 		// Assert
 		assert.Equal(t, 148.4, cfg.Dimensions.Width)
 		assert.Equal(t, 210.0, cfg.Dimensions.Height)
-		assert.True(t, cfg.Dimensions.Height > cfg.Dimensions.Width)
+		assert.Greater(t, cfg.Dimensions.Height, cfg.Dimensions.Width)
 	})
 	t.Run("when using default page size and orientation is set to horizontal, should use horizontal", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -645,12 +707,14 @@ func TestBuilder_WithOrientation(t *testing.T) {
 		// Assert
 		assert.Equal(t, 210.0, cfg.Dimensions.Width)
 		assert.Equal(t, 148.4, cfg.Dimensions.Height)
-		assert.True(t, cfg.Dimensions.Width > cfg.Dimensions.Height)
+		assert.Greater(t, cfg.Dimensions.Width, cfg.Dimensions.Height)
 	})
 }
 
 func TestBuilder_WithAuthor(t *testing.T) {
+	t.Parallel()
 	t.Run("when author is empty, should ignore", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -661,6 +725,7 @@ func TestBuilder_WithAuthor(t *testing.T) {
 		assert.Nil(t, cfg.Metadata)
 	})
 	t.Run("when author valid, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -669,12 +734,14 @@ func TestBuilder_WithAuthor(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, "author", cfg.Metadata.Author.Text)
-		assert.Equal(t, true, cfg.Metadata.Author.UTF8)
+		assert.True(t, cfg.Metadata.Author.UTF8)
 	})
 }
 
 func TestBuilder_WithCreator(t *testing.T) {
+	t.Parallel()
 	t.Run("when creator is empty, should ignore", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -685,6 +752,7 @@ func TestBuilder_WithCreator(t *testing.T) {
 		assert.Nil(t, cfg.Metadata)
 	})
 	t.Run("when creator valid, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -693,12 +761,14 @@ func TestBuilder_WithCreator(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, "creator", cfg.Metadata.Creator.Text)
-		assert.Equal(t, true, cfg.Metadata.Creator.UTF8)
+		assert.True(t, cfg.Metadata.Creator.UTF8)
 	})
 }
 
 func TestBuilder_WithSubject(t *testing.T) {
+	t.Parallel()
 	t.Run("when subject is empty, should ignore", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -709,6 +779,7 @@ func TestBuilder_WithSubject(t *testing.T) {
 		assert.Nil(t, cfg.Metadata)
 	})
 	t.Run("when subject valid, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -717,12 +788,14 @@ func TestBuilder_WithSubject(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, "subject", cfg.Metadata.Subject.Text)
-		assert.Equal(t, true, cfg.Metadata.Subject.UTF8)
+		assert.True(t, cfg.Metadata.Subject.UTF8)
 	})
 }
 
 func TestBuilder_WithTitle(t *testing.T) {
+	t.Parallel()
 	t.Run("when title is empty, should ignore", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -733,6 +806,7 @@ func TestBuilder_WithTitle(t *testing.T) {
 		assert.Nil(t, cfg.Metadata)
 	})
 	t.Run("when title valid, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -741,12 +815,14 @@ func TestBuilder_WithTitle(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, "title", cfg.Metadata.Title.Text)
-		assert.Equal(t, true, cfg.Metadata.Title.UTF8)
+		assert.True(t, cfg.Metadata.Title.UTF8)
 	})
 }
 
 func TestBuilder_WithCreationDate(t *testing.T) {
+	t.Parallel()
 	t.Run("when time is zero, should ignore", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -757,6 +833,7 @@ func TestBuilder_WithCreationDate(t *testing.T) {
 		assert.Nil(t, cfg.Metadata)
 	})
 	t.Run("when time valid, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		timeNow := time.Now()
@@ -770,7 +847,9 @@ func TestBuilder_WithCreationDate(t *testing.T) {
 }
 
 func TestCfgBuilder_WithCustomFonts(t *testing.T) {
+	t.Parallel()
 	t.Run("when custom font, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 		customFonts := []*entity.CustomFont{
@@ -783,13 +862,15 @@ func TestCfgBuilder_WithCustomFonts(t *testing.T) {
 		cfg := sut.WithCustomFonts(customFonts).Build()
 
 		// Assert
-		assert.Equal(t, 1, len(cfg.CustomFonts))
+		assert.Len(t, cfg.CustomFonts, 1)
 		assert.Equal(t, "custom", cfg.CustomFonts[0].Family)
 	})
 }
 
 func TestCfgBuilder_WithBackgroundImage(t *testing.T) {
+	t.Parallel()
 	t.Run("when with background, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -803,7 +884,9 @@ func TestCfgBuilder_WithBackgroundImage(t *testing.T) {
 }
 
 func TestBuilder_WithDisableAutoPageBreak(t *testing.T) {
+	t.Parallel()
 	t.Run("when disable auto page break is false, should not change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -811,9 +894,10 @@ func TestBuilder_WithDisableAutoPageBreak(t *testing.T) {
 		cfg := sut.WithDisableAutoPageBreak(false).Build()
 
 		// Assert
-		assert.Equal(t, false, cfg.DisableAutoPageBreak)
+		assert.False(t, cfg.DisableAutoPageBreak)
 	})
 	t.Run("when disable auto page break is true, should change the default value", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -821,12 +905,14 @@ func TestBuilder_WithDisableAutoPageBreak(t *testing.T) {
 		cfg := sut.WithDisableAutoPageBreak(true).Build()
 
 		// Assert
-		assert.Equal(t, true, cfg.DisableAutoPageBreak)
+		assert.True(t, cfg.DisableAutoPageBreak)
 	})
 }
 
 func TestBuilder_WithKeywords(t *testing.T) {
+	t.Parallel()
 	t.Run("when keywords is empty, should ignore", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -837,6 +923,7 @@ func TestBuilder_WithKeywords(t *testing.T) {
 		assert.Nil(t, cfg.Metadata)
 	})
 	t.Run("when author valid, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
 
@@ -845,6 +932,6 @@ func TestBuilder_WithKeywords(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, "keyword", cfg.Metadata.KeywordsStr.Text)
-		assert.Equal(t, true, cfg.Metadata.KeywordsStr.UTF8)
+		assert.True(t, cfg.Metadata.KeywordsStr.UTF8)
 	})
 }

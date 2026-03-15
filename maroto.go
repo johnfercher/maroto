@@ -24,6 +24,13 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 )
 
+var (
+	ErrCannotGenerateInLowMemoryMode       = errors.New("an error has occurred while trying to generate PDFs in low memory mode")
+	ErrCannotGenerateInParallelMode        = errors.New("an error has occurred while trying to generate PDFs concurrently")
+	ErrFooterHeightIsGreaterThanUsefulArea = errors.New("footer height is greater than page useful area")
+	ErrHeaderHeightIsGreaterThanUsefulArea = errors.New("header height is greater than page useful area")
+)
+
 type Maroto struct {
 	config   *entity.Config
 	provider core.Provider
@@ -126,7 +133,7 @@ func (m *Maroto) FitlnCurrentPage(heightNewLine float64) bool {
 func (m *Maroto) RegisterHeader(rows ...core.Row) error {
 	height := m.getRowsHeight(rows...)
 	if height+m.footerHeight > m.config.Dimensions.Height {
-		return errors.New("header height is greater than page useful area")
+		return ErrHeaderHeightIsGreaterThanUsefulArea
 	}
 
 	m.headerHeight = height
@@ -146,7 +153,7 @@ func (m *Maroto) RegisterHeader(rows ...core.Row) error {
 func (m *Maroto) RegisterFooter(rows ...core.Row) error {
 	height := m.getRowsHeight(rows...)
 	if height > m.config.Dimensions.Height {
-		return errors.New("footer height is greater than page useful area")
+		return ErrFooterHeightIsGreaterThanUsefulArea
 	}
 
 	m.footerHeight = height
@@ -292,23 +299,18 @@ func (m *Maroto) generateConcurrently() (core.Document, error) {
 	}
 	pageGroups := make([][]core.Page, 0)
 	for i := 0; i < len(m.pages); i += chunks {
-		end := i + chunks
-
-		if end > len(m.pages) {
-			end = len(m.pages)
-		}
-
+		end := min(i+chunks, len(m.pages))
 		pageGroups = append(pageGroups, m.pages[i:end])
 	}
 
 	processed := p.Process(pageGroups)
 	if processed.HasError {
-		return nil, errors.New("an error has occurred while trying to generate PDFs concurrently")
+		return nil, ErrCannotGenerateInParallelMode
 	}
 
 	pdfs := make([][]byte, len(processed.Results))
 	for i, result := range processed.Results {
-		bytes := result.Output.([]byte)
+		bytes, _ := result.Output.([]byte)
 		pdfs[i] = bytes
 	}
 
@@ -325,14 +327,10 @@ func (m *Maroto) generateLowMemory() (core.Document, error) {
 	if chunks == 0 {
 		chunks = 1
 	}
+
 	pageGroups := make([][]core.Page, 0)
 	for i := 0; i < len(m.pages); i += chunks {
-		end := i + chunks
-
-		if end > len(m.pages) {
-			end = len(m.pages)
-		}
-
+		end := min(i+chunks, len(m.pages))
 		pageGroups = append(pageGroups, m.pages[i:end])
 	}
 
@@ -340,7 +338,7 @@ func (m *Maroto) generateLowMemory() (core.Document, error) {
 	for _, pageGroup := range pageGroups {
 		bytes, err := m.processPage(pageGroup)
 		if err != nil {
-			return nil, errors.New("an error has occurred while trying to generate PDFs in low memory mode")
+			return nil, ErrCannotGenerateInLowMemoryMode
 		}
 
 		pdfResults = append(pdfResults, bytes)

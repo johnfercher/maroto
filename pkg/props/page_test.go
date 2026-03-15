@@ -14,7 +14,9 @@ import (
 )
 
 func TestPlace_IsValid(t *testing.T) {
+	t.Parallel()
 	t.Run("when place is left_top, should return valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := props.LeftTop
 
@@ -22,6 +24,7 @@ func TestPlace_IsValid(t *testing.T) {
 		assert.True(t, sut.IsValid())
 	})
 	t.Run("when place is top, should return valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := props.Top
 
@@ -29,6 +32,7 @@ func TestPlace_IsValid(t *testing.T) {
 		assert.True(t, sut.IsValid())
 	})
 	t.Run("when place is right_top, should return valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := props.RightTop
 
@@ -36,6 +40,7 @@ func TestPlace_IsValid(t *testing.T) {
 		assert.True(t, sut.IsValid())
 	})
 	t.Run("when place is left_bottom, should return valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := props.LeftBottom
 
@@ -43,6 +48,7 @@ func TestPlace_IsValid(t *testing.T) {
 		assert.True(t, sut.IsValid())
 	})
 	t.Run("when place is bottom, should return valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := props.Bottom
 
@@ -50,6 +56,7 @@ func TestPlace_IsValid(t *testing.T) {
 		assert.True(t, sut.IsValid())
 	})
 	t.Run("when place is right_bottom, should return valid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := props.RightBottom
 
@@ -57,6 +64,7 @@ func TestPlace_IsValid(t *testing.T) {
 		assert.True(t, sut.IsValid())
 	})
 	t.Run("when place is invalid should return invalid", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		sut := props.Place("invalid")
 
@@ -67,7 +75,9 @@ func TestPlace_IsValid(t *testing.T) {
 
 // nolint:dupl
 func TestPage_GetNumberTextProp(t *testing.T) {
+	t.Parallel()
 	t.Run("when place is left bottom, should map correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.PageProp()
 		prop.Place = props.LeftBottom
@@ -88,6 +98,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
 	t.Run("when place is left top, should map correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.PageProp()
 		prop.Place = props.LeftTop
@@ -108,6 +119,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
 	t.Run("when place is right bottom, should map correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.PageProp()
 		prop.Place = props.RightBottom
@@ -128,6 +140,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
 	t.Run("when place is right top, should map correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.PageProp()
 		prop.Place = props.RightTop
@@ -148,6 +161,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
 	t.Run("when place is right bottom, should map correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.PageProp()
 		prop.Place = props.RightBottom
@@ -168,6 +182,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
 	t.Run("when place is bottom, should map correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.PageProp()
 		prop.Place = props.Bottom
@@ -188,6 +203,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 		assert.Equal(t, &props.Color{Red: 100, Green: 50, Blue: 200}, textProp.Color)
 	})
 	t.Run("when place is left bottom, should map correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		prop := fixture.PageProp()
 		prop.Place = props.LeftBottom
@@ -210,6 +226,7 @@ func TestPage_GetNumberTextProp(t *testing.T) {
 }
 
 func TestPage_GetPageString(t *testing.T) {
+	t.Parallel()
 	// Arrange
 	prop := fixture.PageProp()
 
@@ -221,7 +238,9 @@ func TestPage_GetPageString(t *testing.T) {
 }
 
 func TestPageNumber_WithFont(t *testing.T) {
+	t.Parallel()
 	t.Run("when font already defined, should keep it", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageNumber := &props.PageNumber{
 			Color:  &props.RedColor,
@@ -247,6 +266,7 @@ func TestPageNumber_WithFont(t *testing.T) {
 		assert.Equal(t, fontfamily.Helvetica, pageNumber.Family)
 	})
 	t.Run("when font not defined, should apply", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageNumber := &props.PageNumber{}
 
@@ -269,7 +289,9 @@ func TestPageNumber_WithFont(t *testing.T) {
 }
 
 func TestPageNumber_AppendMap(t *testing.T) {
+	t.Parallel()
 	t.Run("when append map, should append correctly", func(t *testing.T) {
+		t.Parallel()
 		// Arrange
 		pageNumber := &props.PageNumber{
 			Pattern: "pattern",
@@ -280,7 +302,7 @@ func TestPageNumber_AppendMap(t *testing.T) {
 			Family:  fontfamily.Helvetica,
 		}
 
-		m := make(map[string]interface{})
+		m := make(map[string]any)
 
 		// Act
 		m = pageNumber.AppendMap(m)

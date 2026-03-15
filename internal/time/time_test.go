@@ -10,6 +10,7 @@ import (
 )
 
 func TestGetTimeSpent(t *testing.T) {
+	t.Parallel()
 	// Act
 	timeSpent := time.GetTimeSpent(func() {
 		buildtinTime.Sleep(10 * buildtinTime.Millisecond)

@@ -29,7 +29,7 @@ type Document interface {
 	GetBase64() string
 	Save(file string) error
 	GetReport() *metrics.Report
-	Merge([]byte) error
+	Merge(bytes []byte) error
 }
 
 // Node is the interface that wraps the basic methods of a node.

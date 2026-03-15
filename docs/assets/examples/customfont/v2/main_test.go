@@ -10,6 +10,7 @@ import (
 )
 
 func TestGetMaroto(t *testing.T) {
+	t.Parallel()
 	// Act
 	sut := GetMaroto(buildPath("docs/assets/fonts/arial-unicode-ms.ttf"))
 
