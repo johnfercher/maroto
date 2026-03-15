@@ -38,7 +38,7 @@ func (r *Rect) ToMap() map[string]any {
 	}
 
 	if r.JustReferenceWidth {
-		m["prop_just_reference_Width"] = r.JustReferenceWidth
+		m["prop_just_reference_width"] = r.JustReferenceWidth
 	}
 	return m
 }

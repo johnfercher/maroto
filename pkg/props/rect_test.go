@@ -71,16 +71,30 @@ func TestRect_MakeValid(t *testing.T) {
 
 func TestRect_ToMap(t *testing.T) {
 	t.Parallel()
-	// Arrange
-	sut := fixture.RectProp()
-	sut.Center = true
+	t.Run("when rect is filled, should return filled map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := fixture.RectProp()
+		sut.Center = true
 
-	// Act
-	m := sut.ToMap()
+		// Act
+		m := sut.ToMap()
 
-	// Assert
-	assert.Equal(t, 10.0, m["prop_left"])
-	assert.Equal(t, 10.0, m["prop_top"])
-	assert.Equal(t, 98.0, m["prop_percent"])
-	assert.Equal(t, true, m["prop_center"])
+		// Assert
+		assert.Equal(t, 10.0, m["prop_left"])
+		assert.Equal(t, 10.0, m["prop_top"])
+		assert.Equal(t, 98.0, m["prop_percent"])
+		assert.Equal(t, true, m["prop_center"])
+	})
+	t.Run("when just reference width is true, should include it in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := props.Rect{JustReferenceWidth: true}
+
+		// Act
+		m := sut.ToMap()
+
+		// Assert
+		assert.Equal(t, true, m["prop_just_reference_width"])
+	})
 }

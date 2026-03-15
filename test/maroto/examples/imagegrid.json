@@ -295,7 +295,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_just_reference_Width": true,
+										"prop_just_reference_width": true,
 										"prop_percent": 20
 									}
 								}
@@ -310,7 +310,7 @@
 									"type": "fileImage",
 									"details": {
 										"prop_center": true,
-										"prop_just_reference_Width": true,
+										"prop_just_reference_width": true,
 										"prop_percent": 30
 									}
 								}
@@ -330,7 +330,7 @@
 									"value": "docs/assets/images/biplane.jpg",
 									"type": "fileImage",
 									"details": {
-										"prop_just_reference_Width": true,
+										"prop_just_reference_width": true,
 										"prop_left": 10,
 										"prop_percent": 50
 									}
@@ -345,7 +345,7 @@
 									"value": "docs/assets/images/biplane.jpg",
 									"type": "fileImage",
 									"details": {
-										"prop_just_reference_Width": true,
+										"prop_just_reference_width": true,
 										"prop_percent": 50,
 										"prop_top": 10
 									}
@@ -360,7 +360,7 @@
 									"value": "docs/assets/images/biplane.jpg",
 									"type": "fileImage",
 									"details": {
-										"prop_just_reference_Width": true,
+										"prop_just_reference_width": true,
 										"prop_left": 15,
 										"prop_percent": 50,
 										"prop_top": 15
