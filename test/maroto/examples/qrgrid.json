@@ -219,7 +219,7 @@
 									"type": "qrcode",
 									"details": {
 										"prop_center": true,
-										"prop_just_reference_Width": true,
+										"prop_just_reference_width": true,
 										"prop_percent": 30
 									}
 								}
@@ -234,7 +234,7 @@
 									"type": "qrcode",
 									"details": {
 										"prop_center": true,
-										"prop_just_reference_Width": true,
+										"prop_just_reference_width": true,
 										"prop_percent": 75
 									}
 								}
@@ -249,7 +249,7 @@
 									"type": "qrcode",
 									"details": {
 										"prop_center": true,
-										"prop_just_reference_Width": true,
+										"prop_just_reference_width": true,
 										"prop_percent": 100
 									}
 								}

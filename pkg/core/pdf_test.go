@@ -9,6 +9,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
+	maroto "github.com/johnfercher/maroto/v2"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/metrics"
 )
@@ -93,6 +95,59 @@ func TestPdf_Save(t *testing.T) {
 		savedBytes, _ := os.ReadFile(file)
 		assert.Equal(t, bytes, savedBytes)
 		_ = os.Remove(file)
+	})
+}
+
+func TestPdf_Merge(t *testing.T) {
+	t.Parallel()
+	t.Run("when merge fails due to invalid bytes, should return wrapped error", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := core.NewPDF([]byte("not a valid pdf"), nil)
+
+		// Act
+		err := sut.Merge([]byte("also not a valid pdf"))
+
+		// Assert
+		assert.ErrorIs(t, err, core.ErrCannotMergeBytes)
+	})
+	t.Run("when merge succeeds and report is nil, should update bytes and return nil", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		m := maroto.New()
+		m.AddRows(text.NewRow(10, "page1"))
+		doc, _ := m.Generate()
+		pdfBytes := doc.GetBytes()
+
+		sut := core.NewPDF(pdfBytes, nil)
+
+		// Act
+		err := sut.Merge(pdfBytes)
+
+		// Assert
+		assert.Nil(t, err)
+		assert.Greater(t, len(sut.GetBytes()), len(pdfBytes))
+	})
+	t.Run("when merge succeeds and report is not nil, should update bytes and append metric", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		m := maroto.New()
+		m.AddRows(text.NewRow(10, "page1"))
+		doc, _ := m.Generate()
+		pdfBytes := doc.GetBytes()
+
+		report := &metrics.Report{}
+		sut := core.NewPDF(pdfBytes, report)
+
+		// Act
+		err := sut.Merge(pdfBytes)
+
+		// Assert
+		assert.Nil(t, err)
+		assert.Greater(t, len(sut.GetBytes()), len(pdfBytes))
+		assert.NotEmpty(t, sut.GetReport().TimeMetrics)
+		assert.Equal(t, "merge_pdf", sut.GetReport().TimeMetrics[0].Key)
+		assert.Equal(t, "file_size", sut.GetReport().SizeMetric.Key)
 	})
 }
 
