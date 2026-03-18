@@ -5,16 +5,18 @@ import (
 	"testing"
 	"time"
 
+	"github.com/johnfercher/maroto/v2/internal/fixture"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"
 	"github.com/johnfercher/maroto/v2/pkg/consts/provider"
@@ -852,8 +854,8 @@ func TestCfgBuilder_WithCustomFonts(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		sut := config.NewBuilder()
-		customFonts := []*entity.CustomFont{
-			{
+		customFonts := []entity.CustomFont{
+			fixture.TestFont{
 				Family: "custom",
 			},
 		}
@@ -863,7 +865,7 @@ func TestCfgBuilder_WithCustomFonts(t *testing.T) {
 
 		// Assert
 		assert.Len(t, cfg.CustomFonts, 1)
-		assert.Equal(t, "custom", cfg.CustomFonts[0].Family)
+		assert.Equal(t, "custom", cfg.CustomFonts[0].GetFamily())
 	})
 }
 

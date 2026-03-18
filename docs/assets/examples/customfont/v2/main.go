@@ -8,7 +8,7 @@ import (
 
 	"github.com/johnfercher/maroto/v2"
 
-	"github.com/johnfercher/maroto/v2/pkg/repository"
+	"github.com/johnfercher/maroto/v2/pkg/fontrepository"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
@@ -42,7 +42,7 @@ func main() {
 func GetMaroto(customFontFile string) core.Maroto {
 	customFont := "arial-unicode-ms"
 
-	customFonts, err := repository.New().
+	customFonts, err := fontrepository.New().
 		AddUTF8Font(customFont, fontstyle.Normal, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Italic, customFontFile).
 		AddUTF8Font(customFont, fontstyle.Bold, customFontFile).

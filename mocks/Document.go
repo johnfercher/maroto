@@ -159,9 +159,9 @@ func (_c *Document_GetReport_Call) RunAndReturn(run func() *metrics.Report) *Doc
 	return _c
 }
 
-// Merge provides a mock function with given fields: _a0
-func (_m *Document) Merge(_a0 []byte) error {
-	ret := _m.Called(_a0)
+// Merge provides a mock function with given fields: bytes
+func (_m *Document) Merge(bytes []byte) error {
+	ret := _m.Called(bytes)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Merge")
@@ -169,7 +169,7 @@ func (_m *Document) Merge(_a0 []byte) error {
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func([]byte) error); ok {
-		r0 = rf(_a0)
+		r0 = rf(bytes)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -183,12 +183,12 @@ type Document_Merge_Call struct {
 }
 
 // Merge is a helper method to define mock.On call
-//   - _a0 []byte
-func (_e *Document_Expecter) Merge(_a0 interface{}) *Document_Merge_Call {
-	return &Document_Merge_Call{Call: _e.mock.On("Merge", _a0)}
+//   - bytes []byte
+func (_e *Document_Expecter) Merge(bytes interface{}) *Document_Merge_Call {
+	return &Document_Merge_Call{Call: _e.mock.On("Merge", bytes)}
 }
 
-func (_c *Document_Merge_Call) Run(run func(_a0 []byte)) *Document_Merge_Call {
+func (_c *Document_Merge_Call) Run(run func(bytes []byte)) *Document_Merge_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].([]byte))
 	})
