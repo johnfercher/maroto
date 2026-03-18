@@ -12,7 +12,7 @@ type Config struct {
 	Dimensions           *Dimensions
 	Margins              *Margins
 	DefaultFont          *props.Font
-	CustomFonts          []*CustomFont
+	CustomFonts          []CustomFont
 	GenerationMode       generation.Mode
 	ChunkWorkers         int
 	Debug                bool

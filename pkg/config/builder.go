@@ -11,9 +11,8 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation"
-	"github.com/johnfercher/maroto/v2/pkg/core/entity"
-
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -45,7 +44,7 @@ type Builder interface {
 	WithSubject(subject string, isUTF8 bool) Builder
 	WithTitle(title string, isUTF8 bool) Builder
 	WithCreationDate(time time.Time) Builder
-	WithCustomFonts(customFonts []*entity.CustomFont) Builder
+	WithCustomFonts(customFonts []entity.CustomFont) Builder
 	WithBackgroundImage(bytes []byte, extensionType extension.Type) Builder
 	WithDisableAutoPageBreak(disabled bool) Builder
 	WithKeywords(keywordsStr string, isUTF8 bool) Builder
@@ -60,7 +59,7 @@ type CfgBuilder struct {
 	debug                bool
 	maxGridSize          int
 	defaultFont          *props.Font
-	customFonts          []*entity.CustomFont
+	customFonts          []entity.CustomFont
 	pageNumber           *props.PageNumber
 	protection           *entity.Protection
 	compression          bool
@@ -362,7 +361,7 @@ func (b *CfgBuilder) WithCreationDate(time time.Time) Builder {
 }
 
 // WithCustomFonts add custom fonts.
-func (b *CfgBuilder) WithCustomFonts(customFonts []*entity.CustomFont) Builder {
+func (b *CfgBuilder) WithCustomFonts(customFonts []entity.CustomFont) Builder {
 	b.customFonts = customFonts
 	return b
 }

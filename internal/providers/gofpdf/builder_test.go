@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+
+	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
@@ -41,8 +42,8 @@ func TestBuilder_Build(t *testing.T) {
 				Bottom: 10,
 			},
 			DefaultFont: &font,
-			CustomFonts: []*entity.CustomFont{
-				{
+			CustomFonts: []entity.CustomFont{
+				fixture.TestFont{
 					Family: fontfamily.Arial,
 				},
 			},
@@ -72,8 +73,8 @@ func TestBuilder_Build(t *testing.T) {
 				Bottom: 10,
 			},
 			DefaultFont: &font,
-			CustomFonts: []*entity.CustomFont{
-				{
+			CustomFonts: []entity.CustomFont{
+				fixture.TestFont{
 					Family: fontfamily.Arial,
 				},
 			},

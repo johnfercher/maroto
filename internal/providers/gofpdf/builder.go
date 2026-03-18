@@ -51,7 +51,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	})
 
 	for _, font := range cfg.CustomFonts {
-		fpdf.AddUTF8FontFromBytes(font.Family, string(font.Style), font.Bytes)
+		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), font.GetBytes())
 	}
 
 	if cfg.DisableAutoPageBreak {
