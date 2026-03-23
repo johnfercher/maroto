@@ -66,6 +66,25 @@ func TestGetLinesHeight(t *testing.T) {
 
 		assert.Equal(t, 2, height)
 	})
+
+	t.Run("when translated text occupies two lines with CharacterStrategy, should return two", func(t *testing.T) {
+		t.Parallel()
+		textProp := &props.Text{BreakLineStrategy: breakline.CharacterStrategy}
+		textProp.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(textProp.Family, textProp.Style, textProp.Size)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(string) string { return "aaaa" })
+		pdf.EXPECT().GetStringWidth("a").Return(3.0).Times(4)
+
+		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		height := text.GetLinesQuantity("ääää", textProp, 6)
+
+		assert.Equal(t, 2, height)
+	})
 }
 
 func TestText_Add(t *testing.T) {
@@ -353,6 +372,34 @@ func TestText_Add(t *testing.T) {
 
 		// Act
 		sut.Add("ab", cell, textProp)
+	})
+	t.Run("when character strategy text is wider than an empty column, should not render an empty line first", func(t *testing.T) {
+		t.Parallel()
+		cell := &entity.Cell{X: 0, Y: 0, Width: 0, Height: 100}
+		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
+		textProp := &props.Text{
+			Family:            fontfamily.Arial,
+			Style:             fontstyle.Normal,
+			Size:              10,
+			Align:             align.Left,
+			BreakLineStrategy: breakline.CharacterStrategy,
+		}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 10.0).Return(5.0)
+		font.EXPECT().GetColor().Return(originalColor)
+		font.EXPECT().SetColor(originalColor)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("a").Return(5.0).Times(3)
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		pdf.EXPECT().Text(0.0, 5.0, "a")
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		sut.Add("a", cell, textProp)
 	})
 	t.Run("when top exceeds cell height, should clamp top to cell height", func(t *testing.T) {
 		t.Parallel()
