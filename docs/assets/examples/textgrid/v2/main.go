@@ -47,6 +47,7 @@ func GetMaroto() core.Maroto {
 
 	longText := "This is a longer sentence that will be broken into multiple lines " +
 		"as it does not fit into the column otherwise."
+	longWord := "CharacterStrategyBreaksLongTextWithoutAddingHyphens"
 
 	m.AddRow(40,
 		text.NewCol(2, "Red text", props.Text{Color: &props.RedColor}),
@@ -122,6 +123,27 @@ func GetMaroto() core.Maroto {
 				Right:             3,
 				Align:             align.Justify,
 				BreakLineStrategy: breakline.EmptySpaceStrategy,
+			},
+		),
+	)
+
+	m.AddRows(text.NewRow(10, "Character break line strategy"))
+
+	m.AddAutoRow(
+		text.NewCol(6, longWord,
+			props.Text{
+				Left:              3,
+				Right:             3,
+				Align:             align.Left,
+				BreakLineStrategy: breakline.DashStrategy,
+			},
+		),
+		text.NewCol(6, longWord,
+			props.Text{
+				Left:              3,
+				Right:             3,
+				Align:             align.Left,
+				BreakLineStrategy: breakline.CharacterStrategy,
 			},
 		),
 	)
