@@ -78,14 +78,7 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 		return
 	}
 
-	var lines []string
-
-	if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
-		words := strings.Split(unicodeText, " ")
-		lines = s.getLinesBreakingLineFromSpace(words, width)
-	} else {
-		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
-	}
+	lines := s.getLines(unicodeText, textProp.BreakLineStrategy, width)
 
 	accumulateOffsetY := 0.0
 
@@ -105,11 +98,20 @@ func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth floa
 
 	textTranslated := s.textToUnicode(text, textProp)
 
-	if textProp.BreakLineStrategy == breakline.DashStrategy {
-		return len(s.getLinesBreakingLineWithDash(text, colWidth))
-	}
+	return len(s.getLines(textTranslated, textProp.BreakLineStrategy, colWidth))
+}
 
-	return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth))
+func (s *Text) getLines(text string, strategy breakline.Strategy, colWidth float64) []string {
+	switch strategy {
+	case breakline.EmptySpaceStrategy:
+		return s.getLinesBreakingLineFromSpace(strings.Split(text, " "), colWidth)
+	case breakline.DashStrategy:
+		return s.getLinesBreakingLineWithDash(text, colWidth)
+	case breakline.CharacterStrategy:
+		return s.getLinesBreakingLineByCharacter(text, colWidth)
+	default:
+		return s.getLinesBreakingLineFromSpace(strings.Split(text, " "), colWidth)
+	}
 }
 
 func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {
@@ -163,6 +165,37 @@ func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 
 		letterString := fmt.Sprintf("%c", letter)
 		width := s.pdf.GetStringWidth(letterString)
+		content += letterString
+		currentlySize += width
+	}
+
+	if content != "" {
+		lines = append(lines, content)
+	}
+
+	return lines
+}
+
+func (s *Text) getLinesBreakingLineByCharacter(words string, colWidth float64) []string {
+	currentlySize := 0.0
+	lines := []string{}
+	var content string
+
+	for _, letter := range words {
+		letterString := fmt.Sprintf("%c", letter)
+		width := s.pdf.GetStringWidth(letterString)
+
+		if currentlySize+width > colWidth && content != "" {
+			lines = append(lines, content)
+			content = ""
+			currentlySize = 0
+		}
+
+		// Skip spaces if they would be at the start of a new line.
+		if letterString == " " && content == "" {
+			continue
+		}
+
 		content += letterString
 		currentlySize += width
 	}
