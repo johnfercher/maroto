@@ -24,7 +24,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/stretchr/objx v0.5.3 // indirect
 	golang.org/x/crypto v0.49.0 // indirect
-	golang.org/x/image v0.37.0 // indirect
+	golang.org/x/image v0.38.0 // indirect
 	golang.org/x/text v0.35.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
