@@ -1,0 +1,651 @@
+{
+	"type": "maroto",
+	"details": {
+		"chunk_workers": 1,
+		"config_debug": true,
+		"config_margin_bottom": 20.0025,
+		"config_margin_left": 10,
+		"config_margin_right": 10,
+		"config_margin_top": 10,
+		"config_max_grid_sum": 12,
+		"config_provider_type": "gofpdf",
+		"generation_mode": "sequential",
+		"maroto_dimension_height": 297,
+		"maroto_dimension_width": 210,
+		"prop_font_color": "RGB(0, 0, 0)",
+		"prop_font_family": "arial",
+		"prop_font_size": 10
+	},
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Bold word in a sentence",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 2,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 2,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 7.527777777777779,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 3,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 2,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 10,
+										"chunk_0_prop_left": 2,
+										"chunk_0_prop_top": 2,
+										"chunk_0_text": "This sentence has a ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(0, 0, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 10,
+										"chunk_1_prop_font_style": "B",
+										"chunk_1_text": "bold",
+										"chunk_2_prop_align": "L",
+										"chunk_2_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_2_prop_color": "RGB(0, 0, 0)",
+										"chunk_2_prop_font_family": "arial",
+										"chunk_2_prop_font_size": 10,
+										"chunk_2_text": " word in the middle."
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Mixed styles",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 2,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 2,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 7.527777777777779,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 5,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 2,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 10,
+										"chunk_0_prop_left": 2,
+										"chunk_0_prop_top": 2,
+										"chunk_0_text": "Normal, ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(0, 0, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 10,
+										"chunk_1_prop_font_style": "B",
+										"chunk_1_text": "bold, ",
+										"chunk_2_prop_align": "L",
+										"chunk_2_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_2_prop_color": "RGB(0, 0, 0)",
+										"chunk_2_prop_font_family": "arial",
+										"chunk_2_prop_font_size": 10,
+										"chunk_2_prop_font_style": "I",
+										"chunk_2_text": "italic, ",
+										"chunk_3_prop_align": "L",
+										"chunk_3_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_3_prop_color": "RGB(0, 0, 0)",
+										"chunk_3_prop_font_family": "arial",
+										"chunk_3_prop_font_size": 10,
+										"chunk_3_prop_font_style": "BI",
+										"chunk_3_text": "and bold-italic ",
+										"chunk_4_prop_align": "L",
+										"chunk_4_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_4_prop_color": "RGB(0, 0, 0)",
+										"chunk_4_prop_font_family": "arial",
+										"chunk_4_prop_font_size": 10,
+										"chunk_4_text": "text in one paragraph."
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Colored words",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 2,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 2,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 7.527777777777779,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 7,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 2,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 10,
+										"chunk_0_prop_left": 2,
+										"chunk_0_prop_top": 2,
+										"chunk_0_text": "This has ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(255, 0, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 10,
+										"chunk_1_prop_font_style": "B",
+										"chunk_1_text": "red",
+										"chunk_2_prop_align": "L",
+										"chunk_2_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_2_prop_color": "RGB(0, 0, 0)",
+										"chunk_2_prop_font_family": "arial",
+										"chunk_2_prop_font_size": 10,
+										"chunk_2_text": ", ",
+										"chunk_3_prop_align": "L",
+										"chunk_3_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_3_prop_color": "RGB(0, 255, 0)",
+										"chunk_3_prop_font_family": "arial",
+										"chunk_3_prop_font_size": 10,
+										"chunk_3_prop_font_style": "B",
+										"chunk_3_text": "green",
+										"chunk_4_prop_align": "L",
+										"chunk_4_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_4_prop_color": "RGB(0, 0, 0)",
+										"chunk_4_prop_font_family": "arial",
+										"chunk_4_prop_font_size": 10,
+										"chunk_4_text": ", and ",
+										"chunk_5_prop_align": "L",
+										"chunk_5_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_5_prop_color": "RGB(0, 0, 255)",
+										"chunk_5_prop_font_family": "arial",
+										"chunk_5_prop_font_size": 10,
+										"chunk_5_prop_font_style": "B",
+										"chunk_5_text": "blue",
+										"chunk_6_prop_align": "L",
+										"chunk_6_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_6_prop_color": "RGB(0, 0, 0)",
+										"chunk_6_prop_font_family": "arial",
+										"chunk_6_prop_font_size": 10,
+										"chunk_6_text": " colored words."
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Mixed font sizes (baseline aligned)",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 2,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 2,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.644444444444446,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 4,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 2,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 8,
+										"chunk_0_prop_left": 2,
+										"chunk_0_prop_top": 2,
+										"chunk_0_text": "Small ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(0, 0, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 12,
+										"chunk_1_text": "Medium ",
+										"chunk_2_prop_align": "L",
+										"chunk_2_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_2_prop_color": "RGB(0, 0, 0)",
+										"chunk_2_prop_font_family": "arial",
+										"chunk_2_prop_font_size": 16,
+										"chunk_2_prop_font_style": "B",
+										"chunk_2_text": "Large ",
+										"chunk_3_prop_align": "L",
+										"chunk_3_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_3_prop_color": "RGB(0, 0, 0)",
+										"chunk_3_prop_font_family": "arial",
+										"chunk_3_prop_font_size": 8,
+										"chunk_3_text": "back to small."
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Word wrapping with mixed styles",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 2,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 2,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 14.583333333333334,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 7,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 2,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 10,
+										"chunk_0_prop_left": 2,
+										"chunk_0_prop_right": 2,
+										"chunk_0_prop_top": 2,
+										"chunk_0_text": "This is a longer paragraph that demonstrates how ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(0, 0, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 10,
+										"chunk_1_prop_font_style": "B",
+										"chunk_1_text": "rich text",
+										"chunk_2_prop_align": "L",
+										"chunk_2_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_2_prop_color": "RGB(0, 0, 0)",
+										"chunk_2_prop_font_family": "arial",
+										"chunk_2_prop_font_size": 10,
+										"chunk_2_text": " handles ",
+										"chunk_3_prop_align": "L",
+										"chunk_3_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_3_prop_color": "RGB(0, 0, 0)",
+										"chunk_3_prop_font_family": "arial",
+										"chunk_3_prop_font_size": 10,
+										"chunk_3_prop_font_style": "I",
+										"chunk_3_text": "word wrapping",
+										"chunk_4_prop_align": "L",
+										"chunk_4_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_4_prop_color": "RGB(0, 0, 0)",
+										"chunk_4_prop_font_family": "arial",
+										"chunk_4_prop_font_size": 10,
+										"chunk_4_text": " across multiple lines. When the text exceeds the available column width, it automatically breaks to the next line while ",
+										"chunk_5_prop_align": "L",
+										"chunk_5_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_5_prop_color": "RGB(255, 0, 0)",
+										"chunk_5_prop_font_family": "arial",
+										"chunk_5_prop_font_size": 10,
+										"chunk_5_prop_font_style": "B",
+										"chunk_5_text": "preserving the style",
+										"chunk_6_prop_align": "L",
+										"chunk_6_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_6_prop_color": "RGB(0, 0, 0)",
+										"chunk_6_prop_font_family": "arial",
+										"chunk_6_prop_font_size": 10,
+										"chunk_6_text": " of each individual chunk."
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Multiple columns",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 2,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 2,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 7.527777777777779,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 2,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 2,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 10,
+										"chunk_0_prop_left": 2,
+										"chunk_0_prop_top": 2,
+										"chunk_0_text": "Price: ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(255, 0, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 10,
+										"chunk_1_prop_font_style": "B",
+										"chunk_1_text": "$99.99"
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 2,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 2,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 10,
+										"chunk_0_prop_left": 2,
+										"chunk_0_prop_top": 2,
+										"chunk_0_text": "Status: ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(0, 255, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 10,
+										"chunk_1_prop_font_style": "B",
+										"chunk_1_text": "Active"
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 2,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 2,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 10,
+										"chunk_0_prop_left": 2,
+										"chunk_0_prop_top": 2,
+										"chunk_0_text": "Category: ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(0, 0, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 10,
+										"chunk_1_prop_font_style": "I",
+										"chunk_1_text": "Electronics"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "With margins and vertical padding",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_bottom": 2,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 2,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 18.055555555555557,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": 3,
+									"type": "richtext",
+									"details": {
+										"chunk_0_prop_align": "L",
+										"chunk_0_prop_bottom": 4,
+										"chunk_0_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_0_prop_color": "RGB(0, 0, 0)",
+										"chunk_0_prop_font_family": "arial",
+										"chunk_0_prop_font_size": 10,
+										"chunk_0_prop_left": 5,
+										"chunk_0_prop_right": 5,
+										"chunk_0_prop_top": 4,
+										"chunk_0_prop_vertical_padding": 3,
+										"chunk_0_text": "This paragraph has top margin, left/right margins, and vertical padding between lines. ",
+										"chunk_1_prop_align": "L",
+										"chunk_1_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_1_prop_color": "RGB(0, 0, 0)",
+										"chunk_1_prop_font_family": "arial",
+										"chunk_1_prop_font_size": 10,
+										"chunk_1_prop_font_style": "B",
+										"chunk_1_text": "The bold text here",
+										"chunk_2_prop_align": "L",
+										"chunk_2_prop_breakline_strategy": "empty_space_strategy",
+										"chunk_2_prop_color": "RGB(0, 0, 0)",
+										"chunk_2_prop_font_family": "arial",
+										"chunk_2_prop_font_size": 10,
+										"chunk_2_text": " continues flowing with the same layout settings applied from the first chunk."
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 124.603055555,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}
