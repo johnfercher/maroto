@@ -3,12 +3,14 @@ package main
 import (
 	"log"
 
+	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2"
 
+	"github.com/johnfercher/maroto/v2/pkg/consts/border"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
@@ -48,6 +50,7 @@ func GetMaroto() core.Maroto {
 	longText := "This is a longer sentence that will be broken into multiple lines " +
 		"as it does not fit into the column otherwise."
 	longWord := "CharacterStrategyBreaksLongTextWithoutAddingHyphens"
+	paragraphText := "First paragraph line 1.\nFirst paragraph line 2.\n\nSecond paragraph starts here."
 
 	m.AddRow(40,
 		text.NewCol(2, "Red text", props.Text{Color: &props.RedColor}),
@@ -146,6 +149,37 @@ func GetMaroto() core.Maroto {
 				BreakLineStrategy: breakline.CharacterStrategy,
 			},
 		),
+	)
+
+	m.AddRows(text.NewRow(10, "Explicit line breaks", props.Text{Style: fontstyle.Bold}))
+
+	m.AddRow(8,
+		text.NewCol(6, "Default behavior", props.Text{Align: align.Center, Style: fontstyle.Bold}),
+		text.NewCol(6, "PreserveLineBreaks", props.Text{Align: align.Center, Style: fontstyle.Bold}),
+	)
+
+	textCellStyle := &props.Cell{
+		BorderType:      border.Full,
+		BorderColor:     &props.BlackColor,
+		BorderThickness: 0.1,
+	}
+
+	m.AddAutoRow(
+		col.New(6).Add(
+			text.New(paragraphText, props.Text{
+				Top:   2,
+				Left:  2,
+				Right: 2,
+			}),
+		).WithStyle(textCellStyle),
+		col.New(6).Add(
+			text.New(paragraphText, props.Text{
+				Top:                2,
+				Left:               2,
+				Right:              2,
+				PreserveLineBreaks: true,
+			}),
+		).WithStyle(textCellStyle),
 	)
 	return m
 }
