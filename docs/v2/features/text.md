@@ -19,6 +19,7 @@ Text can be created as a standalone `Component`, wrapped directly into a `Col`, 
 | `Right` | `float64` | `0` | Right margin inside the cell (mm) |
 | `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy` | `EmptySpaceStrategy` breaks on spaces; `DashStrategy` breaks mid-word with a hyphen; `CharacterStrategy` breaks at character boundaries without adding symbols |
 | `VerticalPadding` | `float64` | `0` | Extra spacing between lines (mm) |
+| `PreserveLineBreaks` | `bool` | `false` | Treat explicit `\n` as hard line breaks instead of collapsing them into spaces |
 | `Hyperlink` | `*string` | `nil` | URL — makes the text a clickable link (rendered in blue) |
 
 ## Usage notes
@@ -27,6 +28,7 @@ Text can be created as a standalone `Component`, wrapped directly into a `Col`, 
 - `Top` and `Left`/`Right` are clamped to the cell dimensions if they exceed it.
 - `BreakLineStrategy` only applies when the text does not fit on a single line.
 - Use `CharacterStrategy` when a text should wrap without spaces and without inserting trailing hyphens.
+- Set `PreserveLineBreaks: true` when you want explicit `\n` to become hard line breaks; use `\n\n` to create a blank paragraph gap inside the same text component.
 - For justified text on the last line, spacing may revert to default space width to avoid stretching a few characters across the full width.
 
 ## GoDoc

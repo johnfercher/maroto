@@ -36,8 +36,10 @@ func TestGetLinesHeight(t *testing.T) {
 
 		pdf := mocks.NewFpdf(t)
 		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("text text text text").Return(22.0)
 		pdf.EXPECT().GetStringWidth("text").Return(5.0)  // First token just returns text
 		pdf.EXPECT().GetStringWidth(" text").Return(6.0) // subsequent tokens return leading space
+		pdf.EXPECT().GetStringWidth("text text").Return(11.0)
 
 		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
 
@@ -55,9 +57,12 @@ func TestGetLinesHeight(t *testing.T) {
 		font.EXPECT().SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().GetStringWidth("tttt tttt tttt tttt").Return(12)
 		pdf.EXPECT().GetStringWidth("t").Return(1)
 		pdf.EXPECT().GetStringWidth(" ").Return(1)
 		pdf.EXPECT().GetStringWidth(" - ").Return(1)
+		pdf.EXPECT().GetStringWidth("tttt tttt -").Return(10)
+		pdf.EXPECT().GetStringWidth("tttt tttt").Return(9)
 		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
 
 		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
@@ -77,13 +82,36 @@ func TestGetLinesHeight(t *testing.T) {
 
 		pdf := mocks.NewFpdf(t)
 		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(string) string { return "aaaa" })
+		pdf.EXPECT().GetStringWidth("aaaa").Return(12.0)
 		pdf.EXPECT().GetStringWidth("a").Return(3.0).Times(4)
+		pdf.EXPECT().GetStringWidth("aa").Return(6.0).Twice()
 
 		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
 
 		height := text.GetLinesQuantity("ääää", textProp, 6)
 
 		assert.Equal(t, 2, height)
+	})
+
+	t.Run("when a text contains explicit empty lines, should count each paragraph break", func(t *testing.T) {
+		t.Parallel()
+		textProp := &props.Text{PreserveLineBreaks: true}
+		textProp.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(textProp.Family, textProp.Style, textProp.Size)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("line one").Return(20.0)
+		pdf.EXPECT().GetStringWidth("").Return(0.0)
+		pdf.EXPECT().GetStringWidth("line two").Return(20.0)
+
+		text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		height := text.GetLinesQuantity("line one\n\nline two", textProp, 100)
+
+		assert.Equal(t, 3, height)
 	})
 }
 
@@ -400,6 +428,42 @@ func TestText_Add(t *testing.T) {
 		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
 
 		sut.Add("a", cell, textProp)
+	})
+	t.Run("when text contains explicit empty lines, should preserve paragraph gaps", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := &entity.Cell{X: 0, Y: 0, Width: 100, Height: 100}
+		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
+		textProp := &props.Text{
+			Family:             fontfamily.Arial,
+			Style:              fontstyle.Normal,
+			Size:               10,
+			Align:              align.Left,
+			PreserveLineBreaks: true,
+		}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 10.0).Return(5.0)
+		font.EXPECT().GetColor().Return(originalColor)
+		font.EXPECT().SetColor(originalColor)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("first").Return(20.0)
+		pdf.EXPECT().GetStringWidth("").Return(0.0)
+		pdf.EXPECT().GetStringWidth("third").Return(20.0)
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		pdf.EXPECT().Text(0.0, 5.0, "first")
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		pdf.EXPECT().Text(0.0, 10.0, "")
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		pdf.EXPECT().Text(0.0, 15.0, "third")
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		sut.Add("first\n\nthird", cell, textProp)
 	})
 	t.Run("when top exceeds cell height, should clamp top to cell height", func(t *testing.T) {
 		t.Parallel()

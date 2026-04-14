@@ -745,7 +745,133 @@
 					]
 				},
 				{
-					"value": 122.025277777,
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Explicit line breaks",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Default behavior",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "PreserveLineBreaks",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 16.111111111111114,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(0, 0, 0)",
+								"prop_border_thickness": 0.1,
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "First paragraph line 1.\nFirst paragraph line 2.\n\nSecond paragraph starts here.",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_left": 2,
+										"prop_right": 2,
+										"prop_top": 2
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(0, 0, 0)",
+								"prop_border_thickness": 0.1,
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "First paragraph line 1.\nFirst paragraph line 2.\n\nSecond paragraph starts here.",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_left": 2,
+										"prop_preserve_line_breaks": true,
+										"prop_right": 2,
+										"prop_top": 2
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 87.914166666,
 					"type": "row",
 					"nodes": [
 						{
