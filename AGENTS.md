@@ -31,7 +31,7 @@ requires them to be updated in the same PR as any user-facing change.
 | [skills/maroto-pdf/generation.md](skills/maroto-pdf/generation.md) | Writing any Go code that generates a PDF with maroto — install, program skeleton, output, errors, checklist |
 | [skills/maroto-pdf/config.md](skills/maroto-pdf/config.md) | Choosing `config.NewBuilder()` options: page size, margins, fonts (incl. UTF-8), page numbers, metadata, protection, generation mode |
 | [skills/maroto-pdf/layout.md](skills/maroto-pdf/layout.md) | Placing content: grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
-| [skills/maroto-pdf/components.md](skills/maroto-pdf/components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures and their props |
+| [skills/maroto-pdf/components.md](skills/maroto-pdf/components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures, rich text and their props |
 | [skills/maroto-pdf/tables.md](skills/maroto-pdf/tables.md) | Rendering tabular data (invoices, reports) with `list.Build` or manual loops, striping, borders, pagination |
 | [skills/maroto-pdf/testing.md](skills/maroto-pdf/testing.md) | Unit-testing the component tree with `pkg/test` fixtures and debugging layout problems |
 
