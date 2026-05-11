@@ -2,6 +2,8 @@ package maroto_test
 
 import (
 	"fmt"
+	"os"
+	"path"
 	"runtime"
 	"testing"
 	"time"
@@ -13,12 +15,16 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/fontrepository"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 
 	"github.com/johnfercher/maroto/v2"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestNew(t *testing.T) {
@@ -442,6 +448,42 @@ func TestMaroto_Generate(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_page_number.json")
 	})
+	// Regression test for https://github.com/johnfercher/maroto/issues/550.
+	// Under concurrent mode each worker creates its own gofpdf provider,
+	// but gofpdf mutates the custom-font byte slice in putfonts /
+	// GenerateCutFont. If the same backing array is shared across
+	// providers, `go test -race` flags a data race. The builder clones
+	// the font bytes per provider to fix it; this test guards against
+	// regressions.
+	t.Run("when concurrent mode is active with a custom font, should not race", func(t *testing.T) {
+		// Arrange
+		ttf, err := os.ReadFile(buildPath("docs/assets/fonts/arial-unicode-ms.ttf"))
+		require.NoError(t, err)
+
+		customFonts, err := fontrepository.New().
+			AddUTF8FontFromBytes("custom", fontstyle.Normal, ttf).
+			AddUTF8FontFromBytes("custom", fontstyle.Bold, ttf).
+			Load()
+		require.NoError(t, err)
+
+		cfg := config.NewBuilder().
+			WithCustomFonts(customFonts).
+			WithDefaultFont(&props.Font{Family: "custom"}).
+			WithConcurrentMode(4).
+			Build()
+
+		sut := maroto.New(cfg)
+		for i := 0; i < 120; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+
+		// Act
+		doc, err := sut.Generate()
+
+		// Assert
+		assert.NoError(t, err)
+		assert.NotNil(t, doc)
+	})
 }
 
 func TestMaroto_FitlnCurrentPage(t *testing.T) {
@@ -597,4 +639,16 @@ func TestMaroto_RegisterFooter(t *testing.T) {
 		assert.Nil(t, err)
 		test.New(t).Assert(sut.GetStructure()).Equals("footer_auto_row.json")
 	})
+}
+
+// buildPath converts a path relative to the repo root into an absolute
+// path, so tests can read fixture files (such as custom TTF fonts)
+// regardless of where `go test` is invoked from. maroto_test.go lives at
+// the repo root, so os.Getwd() already returns the root.
+func buildPath(file string) string {
+	dir, err := os.Getwd()
+	if err != nil {
+		return ""
+	}
+	return path.Join(dir, file)
 }

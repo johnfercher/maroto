@@ -1,6 +1,8 @@
 package gofpdf
 
 import (
+	"bytes"
+
 	"github.com/phpdave11/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
@@ -51,7 +53,11 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	})
 
 	for _, font := range cfg.CustomFonts {
-		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), font.GetBytes())
+		// Clone the font bytes so each provider instance owns its own
+		// underlying buffer. gofpdf mutates the slice in putfonts /
+		// GenerateCutFont, which races when multiple providers share the
+		// same backing array in concurrent generation mode. See issue #550.
+		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), bytes.Clone(font.GetBytes()))
 	}
 
 	if cfg.DisableAutoPageBreak {
