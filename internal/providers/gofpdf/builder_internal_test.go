@@ -1,3 +1,21 @@
+package gofpdf_test
+
+import (
+	"os"
+	"path"
+	"strings"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
+	"github.com/johnfercher/maroto/v2/internal/fixture"
+	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+)
+
 // Regression test for issue #550: custom font bytes passed to gofpdf
 // must be cloned so each provider instance owns its own backing array.
 // gofpdf mutates the slice during PDF finalization (putfonts /
@@ -5,8 +23,7 @@
 // providers (one per worker in concurrent mode) shared the same bytes.
 //
 // This guards against a regression by confirming that calling Build
-// does not mutate the caller's font bytes and that building twice
-// produces providers that do not share the same backing array.
+// does not mutate the caller's font bytes.
 func TestBuilder_Build_DoesNotShareCustomFontBytes(t *testing.T) {
 	t.Parallel()
 	// Arrange
@@ -17,8 +34,8 @@ func TestBuilder_Build_DoesNotShareCustomFontBytes(t *testing.T) {
 	snapshot := append([]byte(nil), ttf...)
 
 	cfg := &entity.Config{
-		Dimensions: &entity.Dimensions{Width: 100, Height: 200},
-		Margins:    &entity.Margins{Left: 10, Top: 10, Right: 10, Bottom: 10},
+		Dimensions:  &entity.Dimensions{Width: 100, Height: 200},
+		Margins:     &entity.Margins{Left: 10, Top: 10, Right: 10, Bottom: 10},
 		DefaultFont: &font,
 		CustomFonts: []entity.CustomFont{
 			fixture.TestFont{
