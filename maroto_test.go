@@ -2,6 +2,7 @@ package maroto_test
 
 import (
 	"fmt"
+	"os"
 	"runtime"
 	"testing"
 	"time"
@@ -13,7 +14,10 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/fontrepository"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 
 	"github.com/johnfercher/maroto/v2"
@@ -425,6 +429,36 @@ func TestMaroto_Generate(t *testing.T) {
 		assert.Nil(t, err2)
 		assert.Nil(t, err3)
 		assert.Equal(t, initialGoroutines, finalGoroutines)
+	})
+	t.Run("when custom fonts and concurrent mode are active, should not race on font bytes", func(t *testing.T) {
+		// Arrange
+		ttf, err := os.ReadFile("docs/assets/fonts/arial-unicode-ms.ttf")
+		assert.Nil(t, err)
+
+		customFontName := "arial-unicode-ms"
+		customFonts, err := fontrepository.New().
+			AddUTF8FontFromBytes(customFontName, fontstyle.Normal, ttf).
+			AddUTF8FontFromBytes(customFontName, fontstyle.Bold, ttf).
+			Load()
+		assert.Nil(t, err)
+
+		cfg := config.NewBuilder().
+			WithCustomFonts(customFonts).
+			WithDefaultFont(&props.Font{Family: customFontName}).
+			WithConcurrentMode(4).
+			Build()
+
+		sut := maroto.New(cfg)
+
+		// Act
+		for i := 0; i < 120; i++ {
+			sut.AddRow(10, col.New(12))
+		}
+		doc, err := sut.Generate()
+
+		// Assert
+		assert.Nil(t, err)
+		assert.NotNil(t, doc)
 	})
 	t.Run("when two pages are sent and page number is active, should add page number", func(t *testing.T) {
 		// Arrange
