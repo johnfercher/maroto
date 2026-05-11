@@ -51,7 +51,20 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	})
 
 	for _, font := range cfg.CustomFonts {
-		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), font.GetBytes())
+		// The underlying gofpdf library stores this byte slice by reference
+		// and mutates it later (during Output/Close -> putfonts ->
+		// utf8FontFile.generateChecksum/assembleTables). When the same
+		// *entity.Config (and therefore the same CustomFont byte slices) is
+		// shared across multiple providers — as happens in concurrent and
+		// low-memory generation modes where each worker builds its own Fpdf
+		// instance — those workers would otherwise race on the same
+		// underlying font bytes. Give every provider its own private copy
+		// so gofpdf's in-place mutations are safely isolated.
+		// See: https://github.com/johnfercher/maroto/issues/550
+		original := font.GetBytes()
+		fontBytes := make([]byte, len(original))
+		copy(fontBytes, original)
+		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), fontBytes)
 	}
 
 	if cfg.DisableAutoPageBreak {
