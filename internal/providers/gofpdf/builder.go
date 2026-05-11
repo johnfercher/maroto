@@ -51,7 +51,16 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	})
 
 	for _, font := range cfg.CustomFonts {
-		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), font.GetBytes())
+		// Copy the font bytes to avoid a data race when generating
+		// documents concurrently. gofpdf mutates the underlying byte
+		// slice during PDF assembly (e.g. utf8FontFile.generateChecksum),
+		// so sharing the same slice across multiple Fpdf instances
+		// spawned by generateConcurrently leads to a race on the
+		// user-provided CustomFonts bytes. See issue #550.
+		original := font.GetBytes()
+		fontBytes := make([]byte, len(original))
+		copy(fontBytes, original)
+		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), fontBytes)
 	}
 
 	if cfg.DisableAutoPageBreak {
