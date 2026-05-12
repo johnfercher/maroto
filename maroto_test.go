@@ -2,18 +2,21 @@ package maroto_test
 
 import (
 	"fmt"
+	"os"
 	"runtime"
 	"testing"
 	"time"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
-	"github.com/johnfercher/maroto/v2/pkg/components/text"
-
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/page"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
+	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/config"
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core"
+	"github.com/johnfercher/maroto/v2/pkg/fontrepository"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 
 	"github.com/johnfercher/maroto/v2"
@@ -596,5 +599,31 @@ func TestMaroto_RegisterFooter(t *testing.T) {
 		// Assert
 		assert.Nil(t, err)
 		test.New(t).Assert(sut.GetStructure()).Equals("footer_auto_row.json")
+	})
+
+	t.Run("when running with concurrent mode, no race condition while accessing font", func(t *testing.T) {
+		fontData, err := os.ReadFile("docs/assets/fonts/arial-unicode-ms.ttf")
+		assert.NoError(t, err)
+		customFonts, err := fontrepository.New().
+			AddUTF8FontFromBytes("customFontName", fontstyle.Normal, fontData).
+			Load()
+
+		assert.NoError(t, err)
+
+		row := row.New(10).Add(col.New())
+		cfg := config.NewBuilder().
+			WithCustomFonts(customFonts).
+			WithDefaultFont(&props.Font{Family: "customFontName", Size: 16}).
+			WithConcurrentMode(4).
+			Build()
+
+		m := maroto.New(cfg)
+		for range 150 {
+			// Generate multiple pages
+			m.AddRows(row)
+		}
+
+		_, err = m.Generate()
+		assert.NoError(t, err)
 	})
 }
