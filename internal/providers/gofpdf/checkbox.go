@@ -30,9 +30,15 @@ func (c *Checkbox) Add(label string, cell *entity.Cell, prop *props.Checkbox) {
 	c.pdf.Rect(x, y, prop.Size, prop.Size, "D")
 
 	if prop.Checked {
-		// Draw X mark inside the box
-		c.pdf.Line(x, y, x+prop.Size, y+prop.Size)
-		c.pdf.Line(x+prop.Size, y, x, y+prop.Size)
+		// Draw checkmark (✓) inside the box using two line segments:
+		// a short stroke from the left down to the bend, then a longer
+		// stroke from the bend up to the top-right.
+		startX, startY := x+0.2*prop.Size, y+0.5*prop.Size
+		bendX, bendY := x+0.45*prop.Size, y+0.75*prop.Size
+		endX, endY := x+0.85*prop.Size, y+0.2*prop.Size
+
+		c.pdf.Line(startX, startY, bendX, bendY)
+		c.pdf.Line(bendX, bendY, endX, endY)
 	}
 
 	// Draw label to the right of the checkbox, vertically centered
