@@ -31,6 +31,8 @@ type Text struct {
 	// Color define the font style color.
 	Color *Color
 	// Hyperlink define a link to be opened when the text is clicked.
+	// When set, the text is rendered in blue by default; set Color to
+	// override the link color.
 	Hyperlink *string
 }
 
