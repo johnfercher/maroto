@@ -170,6 +170,42 @@ func TestText_Add(t *testing.T) {
 		// Act
 		sut.Add("hello", cell, textProp)
 	})
+	t.Run("when single line with hyperlink and color is set, should use color over default blue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := &entity.Cell{X: 0, Y: 0, Width: 100, Height: 50}
+		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
+		customColor := &props.Color{Red: 200, Green: 100, Blue: 50}
+		url := "https://example.com"
+		textProp := &props.Text{
+			Family:    fontfamily.Arial,
+			Style:     fontstyle.Normal,
+			Size:      10,
+			Align:     align.Left,
+			Color:     customColor,
+			Hyperlink: &url,
+		}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 10.0).Return(5.0)
+		font.EXPECT().GetColor().Return(originalColor)
+		// Custom Color must take precedence; BlueColor must NOT be set.
+		font.EXPECT().SetColor(customColor)
+		font.EXPECT().SetColor(originalColor)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("hello").Return(20.0)
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		pdf.EXPECT().Text(0.0, 5.0, "hello")
+		pdf.EXPECT().LinkString(0.0, 0.0, 20.0, 5.0, url)
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		sut.Add("hello", cell, textProp)
+	})
 	t.Run("when single line with right align, should offset text by full remaining width", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
