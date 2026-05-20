@@ -56,12 +56,12 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	y := cell.Y + textProp.Top
 
 	originalColor := s.font.GetColor()
-	if textProp.Color != nil {
-		s.font.SetColor(textProp.Color)
-	}
 
-	// override style if hyperlink is set
-	if textProp.Hyperlink != nil {
+	// Hyperlinks default to blue, but an explicit Color always wins.
+	switch {
+	case textProp.Color != nil:
+		s.font.SetColor(textProp.Color)
+	case textProp.Hyperlink != nil:
 		s.font.SetColor(&props.BlueColor)
 	}
 
