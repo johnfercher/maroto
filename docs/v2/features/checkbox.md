@@ -1,6 +1,6 @@
 # Checkbox
 
-The Checkbox component renders a square checkbox with an optional label to its right. When `Checked` is true, an X mark is drawn inside the box. This component is useful for forms, questionnaires, and agreements.
+The Checkbox component renders a square checkbox with an optional label to its right. When `Checked` is true, a checkmark (✓) is drawn inside the box using two connected line segments. This component is useful for forms, questionnaires, and agreements.
 
 The row height for auto-row usage is `Size + Top`.
 
@@ -8,7 +8,7 @@ The row height for auto-row usage is `Size + Top`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `Checked` | `bool` | `false` | Whether the checkbox is marked with an X |
+| `Checked` | `bool` | `false` | Whether the checkbox is marked with a checkmark |
 | `Size` | `float64` | `5.0` | Side length of the checkbox square in mm |
 | `Top` | `float64` | `0` | Space between the upper cell limit and the checkbox (mm) |
 | `Left` | `float64` | `0` | Space between the left cell boundary and the checkbox (mm) |
