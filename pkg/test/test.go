@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/johnfercher/go-tree/node"
@@ -24,9 +25,11 @@ var (
 )
 
 var (
-	marotoFile      = ".maroto.yml"
-	goModFile       = "go.mod"
-	configSingleton *Config
+	marotoFile          = ".maroto.yml"
+	goModFile           = "go.mod"
+	configSingleton     *Config
+	configSingletonOnce sync.Once
+	configSingletonMu   sync.RWMutex
 )
 
 type Node struct {
@@ -45,24 +48,38 @@ type MarotoTest struct {
 // New creates the MarotoTest instance to unit tests.
 func New(t *testing.T) *MarotoTest {
 	t.Helper()
-	if configSingleton == nil {
+	configSingletonOnce.Do(func() {
 		path, err := getMarotoConfigFilePath()
 		if err != nil {
 			assert.Fail(t, "could not find .maroto.yml file. %s"+err.Error())
+			return
 		}
 
 		cfg, err := loadMarotoConfigFile(path)
 		if err != nil {
 			assert.Fail(t, "could not parse .maroto.yml. %s"+err.Error())
+			return
 		}
 
 		cfg.AbsolutePath = path
+
+		configSingletonMu.Lock()
 		configSingleton = cfg
-	}
+		configSingletonMu.Unlock()
+	})
 
 	return &MarotoTest{
 		t: t,
 	}
+}
+
+// getConfigSingleton returns the package-level config singleton in a
+// concurrency-safe way. Tests run in parallel, so direct reads of
+// configSingleton must go through this accessor.
+func getConfigSingleton() *Config {
+	configSingletonMu.RLock()
+	defer configSingletonMu.RUnlock()
+	return configSingleton
 }
 
 // Assert validates if the structure is the same as defined by Equals method.
@@ -78,7 +95,9 @@ func (m *MarotoTest) Equals(file string) *MarotoTest {
 	actualBytes, _ := json.Marshal(actual)
 	actualString := string(actualBytes)
 
-	indentedExpectBytes, err := os.ReadFile(configSingleton.getAbsoluteFilePath(file))
+	cfg := getConfigSingleton()
+
+	indentedExpectBytes, err := os.ReadFile(cfg.getAbsoluteFilePath(file))
 	if err != nil {
 		assert.Fail(m.t, err.Error())
 	}
@@ -96,7 +115,9 @@ func (m *MarotoTest) Save(file string) *MarotoTest {
 	actual := m.buildNode(m.node)
 	actualBytes, _ := json.MarshalIndent(actual, "", "\t")
 
-	err := os.WriteFile(configSingleton.getAbsoluteFilePath(file), actualBytes, os.ModePerm)
+	cfg := getConfigSingleton()
+
+	err := os.WriteFile(cfg.getAbsoluteFilePath(file), actualBytes, os.ModePerm)
 	if err != nil {
 		assert.Fail(m.t, err.Error())
 	}

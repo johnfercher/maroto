@@ -69,7 +69,7 @@ func TestMarotoTest_Save(t *testing.T) {
 		sut.Equals(file)
 
 		// Assert
-		path := configSingleton.getAbsoluteFilePath(file)
+		path := getConfigSingleton().getAbsoluteFilePath(file)
 		_, err := os.ReadFile(path)
 		assert.NotNil(t, err)
 		assert.True(t, innerT.Failed())
@@ -84,7 +84,7 @@ func TestMarotoTest_Save(t *testing.T) {
 		sut.Equals(file)
 
 		// Assert
-		path := configSingleton.getAbsoluteFilePath(file)
+		path := getConfigSingleton().getAbsoluteFilePath(file)
 		bytes, err := os.ReadFile(path)
 		assert.Nil(t, err)
 
