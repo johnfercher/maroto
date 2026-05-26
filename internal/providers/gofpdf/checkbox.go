@@ -9,6 +9,22 @@ import (
 
 const labelGap = 1.0
 
+// Check mark geometry expressed as ratios of the checkbox size. The mark
+// is composed of two connected line segments forming a "✓":
+//   - start (left)  → mid (bottom of the V)
+//   - mid           → end (upper-right tip)
+//
+// The ratios use eighths so multiplying by any size produces an exact
+// float64 result (avoids floating-point drift in tests).
+const (
+	checkStartXRatio = 0.25  // 2/8
+	checkStartYRatio = 0.625 // 5/8
+	checkMidXRatio   = 0.375 // 3/8
+	checkMidYRatio   = 0.75  // 6/8
+	checkEndXRatio   = 0.875 // 7/8
+	checkEndYRatio   = 0.25  // 2/8
+)
+
 type Checkbox struct {
 	pdf  gofpdfwrapper.Fpdf
 	font core.Font
@@ -30,9 +46,18 @@ func (c *Checkbox) Add(label string, cell *entity.Cell, prop *props.Checkbox) {
 	c.pdf.Rect(x, y, prop.Size, prop.Size, "D")
 
 	if prop.Checked {
-		// Draw X mark inside the box
-		c.pdf.Line(x, y, x+prop.Size, y+prop.Size)
-		c.pdf.Line(x+prop.Size, y, x, y+prop.Size)
+		// Draw a check mark (✓) inside the box using two connected line
+		// segments: a short stroke down-right to the mid point, then a
+		// longer stroke up-right to the top-right area of the box.
+		startX := x + prop.Size*checkStartXRatio
+		startY := y + prop.Size*checkStartYRatio
+		midX := x + prop.Size*checkMidXRatio
+		midY := y + prop.Size*checkMidYRatio
+		endX := x + prop.Size*checkEndXRatio
+		endY := y + prop.Size*checkEndYRatio
+
+		c.pdf.Line(startX, startY, midX, midY)
+		c.pdf.Line(midX, midY, endX, endY)
 	}
 
 	// Draw label to the right of the checkbox, vertically centered
