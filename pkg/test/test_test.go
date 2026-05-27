@@ -69,7 +69,9 @@ func TestMarotoTest_Save(t *testing.T) {
 		sut.Equals(file)
 
 		// Assert
+		configSingletonMu.RLock()
 		path := configSingleton.getAbsoluteFilePath(file)
+		configSingletonMu.RUnlock()
 		_, err := os.ReadFile(path)
 		assert.NotNil(t, err)
 		assert.True(t, innerT.Failed())
@@ -84,7 +86,9 @@ func TestMarotoTest_Save(t *testing.T) {
 		sut.Equals(file)
 
 		// Assert
+		configSingletonMu.RLock()
 		path := configSingleton.getAbsoluteFilePath(file)
+		configSingletonMu.RUnlock()
 		bytes, err := os.ReadFile(path)
 		assert.Nil(t, err)
 
