@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/johnfercher/go-tree/node"
@@ -27,6 +28,7 @@ var (
 	marotoFile      = ".maroto.yml"
 	goModFile       = "go.mod"
 	configSingleton *Config
+	configMu        sync.Mutex
 )
 
 type Node struct {
@@ -45,24 +47,46 @@ type MarotoTest struct {
 // New creates the MarotoTest instance to unit tests.
 func New(t *testing.T) *MarotoTest {
 	t.Helper()
-	if configSingleton == nil {
-		path, err := getMarotoConfigFilePath()
-		if err != nil {
-			assert.Fail(t, "could not find .maroto.yml file. %s"+err.Error())
-		}
-
-		cfg, err := loadMarotoConfigFile(path)
-		if err != nil {
-			assert.Fail(t, "could not parse .maroto.yml. %s"+err.Error())
-		}
-
-		cfg.AbsolutePath = path
-		configSingleton = cfg
-	}
+	loadConfigSingleton(t)
 
 	return &MarotoTest{
 		t: t,
 	}
+}
+
+// loadConfigSingleton initializes the package-level config singleton in a
+// goroutine-safe way. Concurrent calls (parallel tests) are serialized by
+// configMu so the read/write of configSingleton is race-free.
+func loadConfigSingleton(t *testing.T) {
+	t.Helper()
+	configMu.Lock()
+	defer configMu.Unlock()
+
+	if configSingleton != nil {
+		return
+	}
+
+	path, err := getMarotoConfigFilePath()
+	if err != nil {
+		assert.Fail(t, "could not find .maroto.yml file. %s"+err.Error())
+	}
+
+	cfg, err := loadMarotoConfigFile(path)
+	if err != nil {
+		assert.Fail(t, "could not parse .maroto.yml. %s"+err.Error())
+	}
+
+	cfg.AbsolutePath = path
+	configSingleton = cfg
+}
+
+// getConfig returns the package-level config singleton under the mutex so
+// reads from parallel tests do not race with the write performed during
+// initialization.
+func getConfig() *Config {
+	configMu.Lock()
+	defer configMu.Unlock()
+	return configSingleton
 }
 
 // Assert validates if the structure is the same as defined by Equals method.
@@ -78,7 +102,7 @@ func (m *MarotoTest) Equals(file string) *MarotoTest {
 	actualBytes, _ := json.Marshal(actual)
 	actualString := string(actualBytes)
 
-	indentedExpectBytes, err := os.ReadFile(configSingleton.getAbsoluteFilePath(file))
+	indentedExpectBytes, err := os.ReadFile(getConfig().getAbsoluteFilePath(file))
 	if err != nil {
 		assert.Fail(m.t, err.Error())
 	}
@@ -96,7 +120,7 @@ func (m *MarotoTest) Save(file string) *MarotoTest {
 	actual := m.buildNode(m.node)
 	actualBytes, _ := json.MarshalIndent(actual, "", "\t")
 
-	err := os.WriteFile(configSingleton.getAbsoluteFilePath(file), actualBytes, os.ModePerm)
+	err := os.WriteFile(getConfig().getAbsoluteFilePath(file), actualBytes, os.ModePerm)
 	if err != nil {
 		assert.Fail(m.t, err.Error())
 	}
