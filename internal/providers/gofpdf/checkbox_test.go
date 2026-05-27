@@ -49,7 +49,7 @@ func TestCheckbox_Add(t *testing.T) {
 		// Act
 		sut.Add("", cell, prop)
 	})
-	t.Run("when label is empty and checkbox is checked, should draw border rect and X mark lines", func(t *testing.T) {
+	t.Run("when label is empty and checkbox is checked, should draw border rect and checkmark lines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{X: 0, Y: 0}
@@ -64,10 +64,10 @@ func TestCheckbox_Add(t *testing.T) {
 		fpdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
 		// x = 0 + 0 + 0 = 0, y = 0 + 0 + 0 = 0
 		fpdf.EXPECT().Rect(0.0, 0.0, 10.0, 10.0, "D")
-		// diagonal top-left to bottom-right
-		fpdf.EXPECT().Line(0.0, 0.0, 10.0, 10.0)
-		// diagonal top-right to bottom-left
-		fpdf.EXPECT().Line(10.0, 0.0, 0.0, 10.0)
+		// checkmark short stroke: (0.2*size, 0.5*size) -> (0.45*size, 0.8*size)
+		fpdf.EXPECT().Line(2.0, 5.0, 4.5, 8.0)
+		// checkmark long stroke: (0.45*size, 0.8*size) -> (0.85*size, 0.2*size)
+		fpdf.EXPECT().Line(4.5, 8.0, 8.5, 2.0)
 
 		font := mocks.NewFont(t)
 
@@ -104,7 +104,7 @@ func TestCheckbox_Add(t *testing.T) {
 		// Act
 		sut.Add("label", cell, prop)
 	})
-	t.Run("when label is set and checkbox is checked, should draw border rect, X mark lines and label text", func(t *testing.T) {
+	t.Run("when label is set and checkbox is checked, should draw border rect, checkmark lines and label text", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		cell := &entity.Cell{X: 0, Y: 0}
@@ -119,8 +119,10 @@ func TestCheckbox_Add(t *testing.T) {
 		fpdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
 		// x = 0, y = 0
 		fpdf.EXPECT().Rect(0.0, 0.0, 10.0, 10.0, "D")
-		fpdf.EXPECT().Line(0.0, 0.0, 10.0, 10.0)
-		fpdf.EXPECT().Line(10.0, 0.0, 0.0, 10.0)
+		// checkmark short stroke: (0.2*size, 0.5*size) -> (0.45*size, 0.8*size)
+		fpdf.EXPECT().Line(2.0, 5.0, 4.5, 8.0)
+		// checkmark long stroke: (0.45*size, 0.8*size) -> (0.85*size, 0.2*size)
+		fpdf.EXPECT().Line(4.5, 8.0, 8.5, 2.0)
 		// labelX = 0 + 10 + 1 = 11
 		// labelY = 0 + 5 + 2 = 7
 		fpdf.EXPECT().Text(11.0, 7.0, "option")

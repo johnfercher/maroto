@@ -42,7 +42,7 @@ Use `"when <condition>, should <expected outcome>"` — always lowercase, always
 ```go
 t.Run("when value is zero, should use default", ...)
 t.Run("when color is nil, should not call SetDrawColor", ...)
-t.Run("when checked is true, should draw X mark lines", ...)
+t.Run("when checked is true, should draw checkmark lines", ...)
 ```
 
 ### 5. AAA comments inside every subtest
