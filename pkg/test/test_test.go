@@ -116,6 +116,10 @@ func TestMarotoTest_Equals(t *testing.T) {
 		n := fixture.Node("maroto")
 		innerT := &testing.T{}
 		sut := New(innerT).Assert(n)
+		// Make this test self-contained: write the comparison file ourselves
+		// instead of depending on TestMarotoTest_Save running first (which
+		// is a flaky cross-test ordering dependency under parallel execution).
+		sut.Save(file)
 
 		// Act
 		sut.Equals(file)
