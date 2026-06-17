@@ -81,6 +81,49 @@ func (s *Image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cel
 		rectCell = s.math.GetInnerCenterCell(dimensions, cell.GetDimensions())
 	}
 
-	s.pdf.Image(imageLabel, cell.X+rectCell.X+margins.Left, cell.Y+rectCell.Y+margins.Top,
-		rectCell.Width, rectCell.Height, flow, "", 0, "")
+	x := cell.X + rectCell.X + margins.Left
+	y := cell.Y + rectCell.Y + margins.Top
+	w := rectCell.Width
+	h := rectCell.Height
+
+	if prop.RotationAngle != 0 {
+		s.addRotatedImageToPdf(imageLabel, info, cell, prop, x, y, w, h)
+		return
+	}
+
+	s.pdf.Image(imageLabel, x, y, w, h, flow, "", 0, "")
+}
+
+// addRotatedImageToPdf renders an image rotated by prop.RotationAngle degrees using
+// PDF matrix transformations. For 90 and 270 degrees the bounding box is recomputed
+// with swapped width/height so the rotated image keeps fitting inside the cell.
+func (s *Image) addRotatedImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *entity.Cell,
+	prop *props.Rect, x, y, w, h float64,
+) {
+	xDelta := 0.0
+	yDelta := 0.0
+	finalW := w
+	finalH := h
+
+	if prop.RotationAngle == 90 || prop.RotationAngle == 270 {
+		rotated := s.math.Resize(&entity.Dimensions{
+			Width:  info.Height(),
+			Height: info.Width(),
+		}, cell.GetDimensions(), prop.Percent, prop.JustReferenceWidth)
+
+		xDelta = (w - rotated.Height) / 2
+		yDelta = (h - rotated.Width) / 2
+		finalW = rotated.Height
+		finalH = rotated.Width
+	}
+
+	centerX := x + w/2
+	centerY := y + h/2
+
+	s.pdf.TransformBegin()
+	s.pdf.TransformRotate(float64(prop.RotationAngle), centerX, centerY)
+	s.pdf.ImageOptions(imageLabel, x+xDelta, y+yDelta, finalW, finalH, false, gofpdf.ImageOptions{
+		AllowNegativePosition: true,
+	}, 0, "")
+	s.pdf.TransformEnd()
 }
