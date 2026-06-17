@@ -102,6 +102,68 @@ func TestImage_Add(t *testing.T) {
 		// Assert
 		assert.Nil(t, err)
 	})
+	t.Run("when rotation angle is 180, should rotate without swapping dimensions", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := fixture.CellEntity()
+		margins := fixture.MarginsEntity()
+		rect := fixture.RectProp()
+		rect.RotationAngle = 180
+		img := fixture.ImageEntity()
+		options := gofpdf.ImageOptions{
+			ReadDpi:   false,
+			ImageType: string(img.Extension),
+		}
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().RegisterImageOptionsReader(mock.Anything, options, bytes.NewReader(img.Bytes)).Return(&gofpdf.ImageInfoType{})
+		pdf.EXPECT().TransformBegin()
+		pdf.EXPECT().TransformRotate(180.0, mock.Anything, mock.Anything)
+		pdf.EXPECT().ImageOptions(mock.Anything, 30.0, 35.0, 98.0, mock.Anything, false,
+			gofpdf.ImageOptions{AllowNegativePosition: true}, 0, "")
+		pdf.EXPECT().TransformEnd()
+
+		m := math.New()
+
+		image := gofpdf2.NewImage(pdf, m)
+
+		// Act
+		err := image.Add(&img, &cell, &margins, &rect, img.Extension, true)
+
+		// Assert
+		assert.Nil(t, err)
+	})
+	t.Run("when rotation angle is 90, should rotate and swap dimensions", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := fixture.CellEntity()
+		margins := fixture.MarginsEntity()
+		rect := fixture.RectProp()
+		rect.RotationAngle = 90
+		img := fixture.ImageEntity()
+		options := gofpdf.ImageOptions{
+			ReadDpi:   false,
+			ImageType: string(img.Extension),
+		}
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().RegisterImageOptionsReader(mock.Anything, options, bytes.NewReader(img.Bytes)).Return(&gofpdf.ImageInfoType{})
+		pdf.EXPECT().TransformBegin()
+		pdf.EXPECT().TransformRotate(90.0, mock.Anything, mock.Anything)
+		pdf.EXPECT().ImageOptions(mock.Anything, mock.Anything, mock.Anything, mock.Anything, mock.Anything, false,
+			gofpdf.ImageOptions{AllowNegativePosition: true}, 0, "")
+		pdf.EXPECT().TransformEnd()
+
+		m := math.New()
+
+		image := gofpdf2.NewImage(pdf, m)
+
+		// Act
+		err := image.Add(&img, &cell, &margins, &rect, img.Extension, true)
+
+		// Assert
+		assert.Nil(t, err)
+	})
 }
 
 func TestImage_GetImageInfo(t *testing.T) {

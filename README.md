@@ -19,6 +19,7 @@ A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](h
 You can write your PDFs like you are creating a site using Bootstrap. A Row may have many Cols, and a Col may have many components. 
 Besides that, pages will be added when content may extrapolate the useful area. You can define a header which will be added
 always when a new page appear, in this case, a header may have many rows, lines or tablelist. 
+Text components support multiple line break strategies, including character-based wrapping when a text should break without spaces and without hyphenation.
 
 #### Maroto `v2.4.0` is here! Try out:
 

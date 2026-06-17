@@ -21,6 +21,11 @@ type Text struct {
 	font core.Font
 }
 
+type textLine struct {
+	content string
+	width   float64
+}
+
 // NewText create a Text.
 func NewText(pdf gofpdfwrapper.Fpdf, math core.Math, font core.Font) *Text {
 	return &Text{
@@ -66,33 +71,12 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	}
 
 	y += fontHeight
-
-	// Apply Unicode before calc spaces
-	unicodeText := s.textToUnicode(text, textProp)
-	stringWidth := s.pdf.GetStringWidth(unicodeText)
-
-	// If should add one line
-	if stringWidth <= width {
-		s.addLine(textProp, x, width, y, stringWidth, unicodeText)
-		s.font.SetColor(originalColor)
-		return
-	}
-
-	var lines []string
-
-	if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
-		words := strings.Split(unicodeText, " ")
-		lines = s.getLinesBreakingLineFromSpace(words, width)
-	} else {
-		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
-	}
+	lines := s.getTextLines(text, textProp, width)
 
 	accumulateOffsetY := 0.0
 
 	for index, line := range lines {
-		lineWidth := s.pdf.GetStringWidth(line)
-
-		s.addLine(textProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, line)
+		s.addLine(textProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, line.width, line.content)
 		accumulateOffsetY += textProp.VerticalPadding
 	}
 
@@ -102,14 +86,20 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
 func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
+	return len(s.getTextLines(text, textProp, colWidth))
+}
 
-	textTranslated := s.textToUnicode(text, textProp)
-
-	if textProp.BreakLineStrategy == breakline.DashStrategy {
-		return len(s.getLinesBreakingLineWithDash(text, colWidth))
+func (s *Text) getLines(text string, strategy breakline.Strategy, colWidth float64) []string {
+	switch strategy {
+	case breakline.EmptySpaceStrategy:
+		return s.getLinesBreakingLineFromSpace(strings.Split(text, " "), colWidth)
+	case breakline.DashStrategy:
+		return s.getLinesBreakingLineWithDash(text, colWidth)
+	case breakline.CharacterStrategy:
+		return s.getLinesBreakingLineByCharacter(text, colWidth)
+	default:
+		return s.getLinesBreakingLineFromSpace(strings.Split(text, " "), colWidth)
 	}
-
-	return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth))
 }
 
 func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {
@@ -145,6 +135,35 @@ func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) [
 	return lines
 }
 
+func (s *Text) getTextLines(text string, textProp *props.Text, colWidth float64) []textLine {
+	normalizedText := normalizeLineBreaks(text, textProp.PreserveLineBreaks)
+	unicodeText := s.textToUnicode(normalizedText, textProp)
+	paragraphs := strings.Split(unicodeText, "\n")
+	lines := make([]textLine, 0, len(paragraphs))
+
+	for _, paragraph := range paragraphs {
+		paragraphWidth := s.pdf.GetStringWidth(paragraph)
+		if paragraphWidth <= colWidth {
+			lines = append(lines, textLine{
+				content: paragraph,
+				width:   paragraphWidth,
+			})
+			continue
+		}
+
+		wrappedParagraph := s.getLines(paragraph, textProp.BreakLineStrategy, colWidth)
+
+		for _, line := range wrappedParagraph {
+			lines = append(lines, textLine{
+				content: line,
+				width:   s.pdf.GetStringWidth(line),
+			})
+		}
+	}
+
+	return lines
+}
+
 func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []string {
 	currentlySize := 0.0
 
@@ -163,6 +182,37 @@ func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 
 		letterString := fmt.Sprintf("%c", letter)
 		width := s.pdf.GetStringWidth(letterString)
+		content += letterString
+		currentlySize += width
+	}
+
+	if content != "" {
+		lines = append(lines, content)
+	}
+
+	return lines
+}
+
+func (s *Text) getLinesBreakingLineByCharacter(words string, colWidth float64) []string {
+	currentlySize := 0.0
+	lines := []string{}
+	var content string
+
+	for _, letter := range words {
+		letterString := fmt.Sprintf("%c", letter)
+		width := s.pdf.GetStringWidth(letterString)
+
+		if currentlySize+width > colWidth && content != "" {
+			lines = append(lines, content)
+			content = ""
+			currentlySize = 0
+		}
+
+		// Skip spaces if they would be at the start of a new line.
+		if letterString == " " && content == "" {
+			continue
+		}
+
 		content += letterString
 		currentlySize += width
 	}
@@ -257,4 +307,13 @@ func isIncorrectSpaceWidth(textWidth, spaceWidth, defaultSpaceWidth float64, tex
 	r, _ := utf8.DecodeLastRuneInString(text)
 	lastChar := r
 	return !unicode.IsLetter(lastChar) && !unicode.IsNumber(lastChar)
+}
+
+func normalizeLineBreaks(text string, preserve bool) string {
+	text = strings.ReplaceAll(text, "\r\n", "\n")
+	text = strings.ReplaceAll(text, "\r", "\n")
+	if preserve {
+		return text
+	}
+	return strings.ReplaceAll(text, "\n", " ")
 }

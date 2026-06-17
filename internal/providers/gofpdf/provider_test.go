@@ -81,6 +81,34 @@ func TestProvider_GetTextHeight(t *testing.T) {
 	assert.Equal(t, fontHeightToReturn, fontHeight)
 }
 
+func TestProvider_GetStringWidth(t *testing.T) {
+	t.Parallel()
+	// Arrange
+	textWidthToReturn := 10.0
+	text := "hello"
+	prop := fixture.FontProp()
+
+	font := mocks.NewFont(t)
+	font.EXPECT().SetFont(prop.Family, prop.Style, prop.Size)
+
+	fpdf := mocks.NewFpdf(t)
+	fpdf.EXPECT().GetStringWidth(text).Return(textWidthToReturn)
+
+	dep := &gofpdf.Dependencies{
+		Fpdf: fpdf,
+		Font: font,
+	}
+	sut := gofpdf.New(dep)
+
+	// Act
+	textWidth := sut.GetStringWidth(text, &prop)
+
+	// Assert
+	font.AssertNumberOfCalls(t, "SetFont", 1)
+	fpdf.AssertNumberOfCalls(t, "GetStringWidth", 1)
+	assert.Equal(t, textWidthToReturn, textWidth)
+}
+
 func TestProvider_AddLine(t *testing.T) {
 	t.Parallel()
 	// Arrange
