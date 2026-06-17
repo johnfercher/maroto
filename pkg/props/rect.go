@@ -15,6 +15,10 @@ type Rect struct {
 	JustReferenceWidth bool
 	// Center define that the barcode will be vertically and horizontally centralized.
 	Center bool
+	// RotationAngle rotates the image on the fly using PDF matrix transformations,
+	// avoiding the memory/CPU cost of re-encoding the image. Common values are
+	// 90, 180 and 270 degrees. When 0 (default) no rotation is applied.
+	RotationAngle int
 }
 
 // ToMap from Rect will return a map representation from Rect.
@@ -39,6 +43,10 @@ func (r *Rect) ToMap() map[string]any {
 
 	if r.JustReferenceWidth {
 		m["prop_just_reference_width"] = r.JustReferenceWidth
+	}
+
+	if r.RotationAngle != 0 {
+		m["prop_rotation_angle"] = r.RotationAngle
 	}
 	return m
 }
