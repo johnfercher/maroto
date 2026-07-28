@@ -27,7 +27,9 @@ import (
 // collapse onto the second level and may be placed incorrectly.
 func reorder(text string) string {
 	var paragraph bidi.Paragraph
-	if _, err := paragraph.SetString(text); err != nil {
+
+	_, err := paragraph.SetString(text)
+	if err != nil {
 		return text
 	}
 
@@ -65,13 +67,14 @@ func reorder(text string) string {
 func baseDirection(text string) bidi.Direction {
 	for _, r := range text {
 		properties, _ := bidi.LookupRune(r)
-		switch properties.Class() {
-		case bidi.L:
+
+		class := properties.Class()
+		if class == bidi.L {
 			return bidi.LeftToRight
-		case bidi.R, bidi.AL:
+		}
+
+		if class == bidi.R || class == bidi.AL {
 			return bidi.RightToLeft
-		default:
-			continue
 		}
 	}
 

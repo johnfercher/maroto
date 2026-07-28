@@ -35,6 +35,11 @@ linters:
         - stringXbytes
     lll:
       line-length: 140
+    misspell:
+      ignore-rules:
+        # "teh" is the Unicode name of the Arabic letters ت and ة
+        # (ARABIC LETTER TEH, ARABIC LETTER TEH MARBUTA), not a typo of "the".
+        - teh
     wrapcheck:
       ignore-package-globs:
         - github.com/johnfercher/maroto/*
