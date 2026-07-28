@@ -51,7 +51,7 @@ func (f joiningForm) resolve(prevJoins, nextJoins bool) rune {
 
 // arabicForms maps the Arabic letters U+0621..U+063A and U+0641..U+064A to
 // their contextual forms. Letters flagged dual are the dual joining ones; the
-// remaining entries (the alef variants, waw, dal, thal, reh, zain, teh marbuta
+// remaining entries (the alef variants, waw, dal, thal, reh, zain, taa marbuta
 // and alef maksura) are right joining and only own an isolated and a final
 // form. Hamza owns neither, so it never connects.
 var arabicForms = map[rune]joiningForm{
@@ -63,8 +63,8 @@ var arabicForms = map[rune]joiningForm{
 	0x0626: {isolated: 0xFE89, final: 0xFE8A, initial: 0xFE8B, medial: 0xFE8C, dual: true}, // yeh with hamza above
 	0x0627: {isolated: 0xFE8D, final: 0xFE8E},                                              // alef
 	0x0628: {isolated: 0xFE8F, final: 0xFE90, initial: 0xFE91, medial: 0xFE92, dual: true}, // beh
-	0x0629: {isolated: 0xFE93, final: 0xFE94},                                              // teh marbuta
-	0x062A: {isolated: 0xFE95, final: 0xFE96, initial: 0xFE97, medial: 0xFE98, dual: true}, // teh
+	0x0629: {isolated: 0xFE93, final: 0xFE94},                                              // taa marbuta
+	0x062A: {isolated: 0xFE95, final: 0xFE96, initial: 0xFE97, medial: 0xFE98, dual: true}, // taa
 	0x062B: {isolated: 0xFE99, final: 0xFE9A, initial: 0xFE9B, medial: 0xFE9C, dual: true}, // theh
 	0x062C: {isolated: 0xFE9D, final: 0xFE9E, initial: 0xFE9F, medial: 0xFEA0, dual: true}, // jeem
 	0x062D: {isolated: 0xFEA1, final: 0xFEA2, initial: 0xFEA3, medial: 0xFEA4, dual: true}, // hah
