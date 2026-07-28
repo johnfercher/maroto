@@ -2,6 +2,7 @@
 * **Features**
   * [Basics](v2/features/basics.md?id=basics)
   * [Add Page](v2/features/addpage.md?id=add-page)
+  * [Arabic (RTL)](v2/features/arabic.md?id=arabic-rtl)
   * [Auto Row](v2/features/autorow.md?id=auto-row)
   * [Background](v2/features/background.md?id=add-background)
   * [Barcode](v2/features/barcode.md?id=barcode)

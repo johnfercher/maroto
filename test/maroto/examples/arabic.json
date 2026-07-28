@@ -1,0 +1,205 @@
+{
+	"type": "maroto",
+	"details": {
+		"chunk_workers": 1,
+		"config_margin_bottom": 20.0025,
+		"config_margin_left": 10,
+		"config_margin_right": 10,
+		"config_margin_top": 10,
+		"config_max_grid_sum": 12,
+		"config_provider_type": "gofpdf",
+		"generation_mode": "sequential",
+		"maroto_dimension_height": 297,
+		"maroto_dimension_width": 210,
+		"prop_font_color": "RGB(0, 0, 0)",
+		"prop_font_family": "arial-unicode-ms",
+		"prop_font_size": 10
+	},
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Arabic without RTL, and with RTL",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "مرحبا بالعالم",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "مرحبا بالعالم",
+									"type": "text",
+									"details": {
+										"prop_align": "C",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10,
+										"prop_rtl": true
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "لغة عربية",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10,
+										"prop_rtl": true
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "المكتبة Maroto تدعم 42 لغة",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10,
+										"prop_rtl": true
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "اللغة العربية هي أكثر اللغات السامية تحدثا وإحدى أكثر اللغات انتشارا في العالم يتحدثها أكثر من أربعمائة مليون نسمة ويتوزع متحدثوها في المنطقة المعروفة باسم الوطن العربي",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial-unicode-ms",
+										"prop_font_size": 10,
+										"prop_rtl": true
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "أوافق على الشروط",
+									"type": "checkbox",
+									"details": {
+										"prop_checked": true,
+										"prop_rtl": true,
+										"prop_size": 5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 178.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}
