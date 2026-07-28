@@ -32,6 +32,12 @@ type Text struct {
 	Color *Color
 	// Hyperlink define a link to be opened when the text is clicked.
 	Hyperlink *string
+	// RTL enables the right to left processing of the text, shaping the Arabic
+	// letters into their contextual forms and reordering the bidirectional
+	// runs. It is opt-in because text that was already shaped by the caller
+	// would be processed twice. Text without Arabic characters is left
+	// untouched even when this is enabled.
+	RTL bool
 }
 
 // ToMap converts a Text to a map.
@@ -82,6 +88,10 @@ func (t *Text) ToMap() map[string]any {
 
 	if t.Hyperlink != nil {
 		m["prop_hyperlink"] = *t.Hyperlink
+	}
+
+	if t.RTL {
+		m["prop_rtl"] = t.RTL
 	}
 
 	return m

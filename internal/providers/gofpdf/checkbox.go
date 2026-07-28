@@ -5,6 +5,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
+	"github.com/johnfercher/maroto/v2/pkg/rtl"
 )
 
 const labelGap = 1.0
@@ -42,6 +43,10 @@ func (c *Checkbox) Add(label string, cell *entity.Cell, prop *props.Checkbox) {
 
 		labelX := x + prop.Size + labelGap
 		labelY := y + prop.Size/2 + fontHeight/2
+
+		if prop.RTL {
+			label = rtl.Process(label)
+		}
 
 		c.pdf.Text(labelX, labelY, label)
 	}

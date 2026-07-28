@@ -13,6 +13,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
+	"github.com/johnfercher/maroto/v2/pkg/rtl"
 )
 
 type Text struct {
@@ -69,11 +70,11 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 
 	// Apply Unicode before calc spaces
 	unicodeText := s.textToUnicode(text, textProp)
-	stringWidth := s.pdf.GetStringWidth(unicodeText)
+	stringWidth := s.getStringWidth(unicodeText, textProp)
 
 	// If should add one line
 	if stringWidth <= width {
-		s.addLine(textProp, x, width, y, stringWidth, unicodeText)
+		s.addLine(textProp, x, width, y, stringWidth, s.processLine(unicodeText, textProp))
 		s.font.SetColor(originalColor)
 		return
 	}
@@ -82,17 +83,20 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 
 	if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
 		words := strings.Split(unicodeText, " ")
-		lines = s.getLinesBreakingLineFromSpace(words, width)
+		lines = s.getLinesBreakingLineFromSpace(words, width, textProp)
 	} else {
 		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
 	}
 
 	accumulateOffsetY := 0.0
 
+	// Lines are broken on the logical text, then each one is processed on its
+	// own so that it is reordered with its own base direction.
 	for index, line := range lines {
-		lineWidth := s.pdf.GetStringWidth(line)
+		processedLine := s.processLine(line, textProp)
+		lineWidth := s.pdf.GetStringWidth(processedLine)
 
-		s.addLine(textProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, line)
+		s.addLine(textProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, processedLine)
 		accumulateOffsetY += textProp.VerticalPadding
 	}
 
@@ -109,10 +113,33 @@ func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth floa
 		return len(s.getLinesBreakingLineWithDash(text, colWidth))
 	}
 
-	return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth))
+	return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth, textProp))
 }
 
-func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {
+// processLine returns the line in the form the writer has to draw it. For a
+// right to left text that means the Arabic letters replaced by their
+// contextual forms and the bidirectional runs laid out visually.
+//
+// It must only be called on a text that already is a single line: processing a
+// whole paragraph before breaking it would reverse the order of its lines.
+func (s *Text) processLine(text string, textProp *props.Text) string {
+	if !textProp.RTL {
+		return text
+	}
+
+	return rtl.Process(text)
+}
+
+// getStringWidth measures a text in the form it is going to be drawn. The
+// presentation forms do not share the metrics of the letters they replace, and
+// the mandatory ligatures contract two letters into a single glyph, so
+// measuring the logical text would break the line wrapping of a right to left
+// text.
+func (s *Text) getStringWidth(text string, textProp *props.Text) float64 {
+	return s.pdf.GetStringWidth(s.processLine(text, textProp))
+}
+
+func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64, textProp *props.Text) []string {
 	currentlySize := 0.0
 	lines := []string{}
 
@@ -129,7 +156,7 @@ func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) [
 			separator = " "
 		}
 
-		width := s.pdf.GetStringWidth(piece)
+		width := s.getStringWidth(piece, textProp)
 		if currentlySize+width <= colWidth {
 			if len(lines) == 0 {
 				lines = append(lines, "")
@@ -138,13 +165,21 @@ func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) [
 			currentlySize += width
 		} else {
 			lines = append(lines, word)
-			currentlySize = s.pdf.GetStringWidth(word)
+			currentlySize = s.getStringWidth(word, textProp)
 		}
 	}
 
 	return lines
 }
 
+// getLinesBreakingLineWithDash breaks a text into lines by hyphenating it at
+// the character that no longer fits.
+//
+// Arabic does not hyphenate, and the width of a letter here is measured on the
+// logical character rather than on the presentation form it will be drawn
+// with, so the break positions of a right to left text are only approximate.
+// The lines it returns are still shaped and reordered before being drawn. Use
+// breakline.EmptySpaceStrategy, the default, for right to left text.
 func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []string {
 	currentlySize := 0.0
 
