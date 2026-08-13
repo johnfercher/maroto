@@ -20,10 +20,12 @@ func FromBytes(bytes []byte, ext extension.Type) (*entity.Image, error) {
 
 	data := bytes
 	if ext == extension.Png {
-		var err error
-		data, err = normalizePNGBytes(bytes)
-		if err != nil {
-			return nil, err
+		if depth, ok := pngBitDepth(bytes); ok && depth == 16 {
+			converted, err := normalize16BitPNG(bytes)
+			if err != nil {
+				return nil, err
+			}
+			data = converted
 		}
 	}
 
@@ -44,12 +46,8 @@ func pngBitDepth(data []byte) (int, bool) {
 	return int(data[24]), true
 }
 
-func normalizePNGBytes(data []byte) ([]byte, error) {
-	depth, ok := pngBitDepth(data)
-	if !ok || depth != 16 {
-		return data, nil
-	}
-
+// normalize16BitPNG re-encodes a 16-bit PNG as 8-bit NRGBA. gofpdf rejects 16-bit samples.
+func normalize16BitPNG(data []byte) ([]byte, error) {
 	src, err := png.Decode(bytes.NewReader(data))
 	if err != nil {
 		return data, nil
@@ -63,6 +61,5 @@ func normalizePNGBytes(data []byte) ([]byte, error) {
 	if err := png.Encode(&buf, dst); err != nil {
 		return nil, err
 	}
-
 	return buf.Bytes(), nil
 }
