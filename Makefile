@@ -17,12 +17,12 @@ test:
 .PHONY: fmt
 fmt:
 	gofmt -s -w ${GO_FILES}
-	gofumpt -l -w ${GO_FILES}
-	goimports -w ${GO_PATHS}
+	go tool -modfile=tools/go.mod gofumpt -l -w ${GO_FILES}
+	go tool -modfile=tools/go.mod goimports -w ${GO_PATHS}
 
 .PHONY: lint
 lint:
-	golangci-lint run --config=.golangci.yml ./...
+	go tool -modfile=tools/go.mod golangci-lint run --config=.golangci.yml ./...
 	make mock-lint
 
 .PHONY: mock-lint
@@ -32,6 +32,12 @@ mock-lint:
 .PHONY: install
 install:
 	bash shell/install.sh
+	make install-hooks
+
+.PHONY: install-hooks
+install-hooks:
+	git config core.hooksPath .githooks
+	chmod +x .githooks/pre-commit
 
 .PHONY: docs
 docs:
@@ -39,13 +45,13 @@ docs:
 
 .PHONY: godoc
 godoc:
-	godoc -http=127.0.0.1:6060
+	go tool -modfile=tools/go.mod godoc -http=127.0.0.1:6060
 
 
 .PHONY: mocks
 mocks:
 	rm -R mocks || true
-	mockery
+	go tool -modfile=tools/go.mod mockery
 	make fmt
 
 .PHONY: examples

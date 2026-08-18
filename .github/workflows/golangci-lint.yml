@@ -24,7 +24,9 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v7
         with:
-          version: v2.11.3
+          # Keep in sync with the golangci-lint version pinned in tools/go.mod,
+          # so `make lint` locally and this CI job report the same issues.
+          version: v2.12.2
 
           # Optional: working directory, useful for monorepos
           # working-directory: somedir

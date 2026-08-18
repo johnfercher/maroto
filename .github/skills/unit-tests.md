@@ -1,6 +1,12 @@
-# Generate Unit Tests
+# Unit Tests
 
 Generate unit tests for a Go file in this project following the project's established conventions.
+
+See also:
+- [mocks.md](mocks.md) for how to generate and use mockery mocks — required whenever the file
+  under test has dependencies that need mocking.
+- [contribution.md](contribution.md) for the full pull request checklist this skill's output
+  feeds into (comments, docs, `make dod`, etc.).
 
 ## Instructions
 
@@ -66,24 +72,9 @@ sut := gofpdf.NewCheckbox(fpdf, font)
 ```
 
 ### 7. Mocks
-- Create with: `dep := mocks.NewDependency(t)` (never `new(...)` or `&mocks.Dependency{}`).
-- Set expectations with the type-safe EXPECT API:
-  ```go
-  dep.EXPECT().MethodName(arg1, arg2).Return(val1, val2)
-  ```
-- Try avoid using `mock.Anything`, it's only allowed when is not possible to build the arguments.
-  When you have to use a `mock.Anything` warn the user that you have to. And make explicit on commits
-  and pull requests.
-  ```go
-  dep.EXPECT().MethodName(mock.Anythin, arg2).Return(val1, val2) // mock.Anything have to be avoided 
-  ```
-- Assert call count only when it's important, example: when dependency is called inside a for loop.
-  ```go
-  dep.AssertNumberOfCalls(t, "MethodName", 1)
-  ```
-- For methods expected **not** to be called, do not set an EXPECT — testify/mock will fail 
-  automatically if an unexpected call occurs. If a dependency have zero mock definitions called
-  remove this dependency and pass it as `nil` on `sut` constructor.
+- Follow [mocks.md](mocks.md) for everything about generating mocks with `mockery` and using them
+  with the EXPECT API, `mock.Anything`, `AssertNumberOfCalls`, and passing `nil` for unused
+  dependencies.
 
 ### 8. Fixture package
 - Prefer `fixture.CheckboxProp()`, `fixture.TextProp()`, etc. over building props inline whenever a fixture exists for that type. Use inline props only when the test needs specific values that differ from the fixture.
