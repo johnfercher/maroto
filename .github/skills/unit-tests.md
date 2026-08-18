@@ -1,6 +1,14 @@
-# Generate Unit Tests
+# Unit Tests
 
 Generate unit tests for a Go file in this project following the project's established conventions.
+
+See also:
+- [mocks.md](mocks.md) for how to generate and use mockery mocks — required whenever the file
+  under test has dependencies that need mocking.
+- [contribution.md](contribution.md) for the full pull request checklist this skill's output
+  feeds into (comments, docs, `make dod`, etc.).
+- [code-quality.md](code-quality.md) for `gocyclo`/`gocognit`, which report a function's actual
+  cyclomatic complexity directly (used in §10 below).
 
 ## Instructions
 
@@ -66,24 +74,9 @@ sut := gofpdf.NewCheckbox(fpdf, font)
 ```
 
 ### 7. Mocks
-- Create with: `dep := mocks.NewDependency(t)` (never `new(...)` or `&mocks.Dependency{}`).
-- Set expectations with the type-safe EXPECT API:
-  ```go
-  dep.EXPECT().MethodName(arg1, arg2).Return(val1, val2)
-  ```
-- Try avoid using `mock.Anything`, it's only allowed when is not possible to build the arguments.
-  When you have to use a `mock.Anything` warn the user that you have to. And make explicit on commits
-  and pull requests.
-  ```go
-  dep.EXPECT().MethodName(mock.Anythin, arg2).Return(val1, val2) // mock.Anything have to be avoided 
-  ```
-- Assert call count only when it's important, example: when dependency is called inside a for loop.
-  ```go
-  dep.AssertNumberOfCalls(t, "MethodName", 1)
-  ```
-- For methods expected **not** to be called, do not set an EXPECT — testify/mock will fail 
-  automatically if an unexpected call occurs. If a dependency have zero mock definitions called
-  remove this dependency and pass it as `nil` on `sut` constructor.
+- Follow [mocks.md](mocks.md) for everything about generating mocks with `mockery` and using them
+  with the EXPECT API, `mock.Anything`, `AssertNumberOfCalls`, and passing `nil` for unused
+  dependencies.
 
 ### 8. Fixture package
 - Prefer `fixture.CheckboxProp()`, `fixture.TextProp()`, etc. over building props inline whenever a fixture exists for that type. Use inline props only when the test needs specific values that differ from the fixture.
@@ -93,8 +86,19 @@ sut := gofpdf.NewCheckbox(fpdf, font)
 When computing expected float64 values that involve division (e.g., `80.0/100.0`), use values that are exactly representable in IEEE 754 (powers of 2: 0.5, 0.25, etc.) or write out the exact decimal to avoid `9.999999999999998` mismatches.
 
 ### 10. Quantity of testing cases on subsets
-- When generating tests, make sure to count the **Cyclomatic Complexity** and generate the correct amount of subset case tests
-(see the reference for more info about cyclomatic complexity).
+- Concrete rule: **generate at least as many subtests as the function's cyclomatic complexity.**
+  Compute it by counting decision points and adding 1 (see the reference for the full definition):
+  - +1 base
+  - +1 for each `if` / `else if`
+  - +1 for each `case` in a `switch`/`select`
+  - +1 for each `&&` or `||` inside a boolean expression
+  - +1 for each loop with a condition (`for cond {`, or a `range` guarded by an early `if`/`break`/`continue`)
+  - Example: one `if` whose condition has one `&&` → complexity `1 (base) + 1 (if) + 1 (&&) = 3` →
+    at least 3 subtests.
+- Each subtest must exercise a **distinct combination of branches** — one subtest per independent
+  path through the function, not one subtest per input value on the same path. If unsure about a
+  function's actual complexity, `gocyclo`/`gocognit` (enabled in `.golangci.yml`, see
+  [code-quality.md](code-quality.md)) report it directly.
 - When working with mathematical operations like: `+`, `-`, `*`, `/`, `math.Pow()` or any usage of the lib `math` you can create
 more testing cases/subsets to make sure that the math operation is correctly tested, vary values between negative and positive values.
 
@@ -168,12 +172,20 @@ func Test<Type>_<Method>(t *testing.T) {
 Given the file `$ARGUMENTS`:
 
 1. Read the target source file.
-2. Read 1-2 existing `_test.go` files in the same package as reference.
-3. For every **exported** function, method, or constructor, generate subtests that cover:
+2. Check whether `<source_file_without_.go>_test.go` already exists in the same directory.
+   - If it **doesn't exist**, read 1-2 other existing `_test.go` files in the same package as
+     reference, then write a new file from scratch (step 4 below).
+   - If it **already exists**, read it in full first. Never blindly overwrite it — add test
+     functions for newly-covered exported identifiers, and update existing subtests only for the
+     specific behavior that changed. Preserve every existing subtest that's still valid.
+3. For every **exported** function, method, or constructor that doesn't already have a test
+   function covering it, generate subtests that cover:
    - The **happy path** (valid inputs, expected output).
    - **Edge cases and branches**: nil inputs, zero values, negative values, error returns, each `if` branch.
    - Any **interaction with mocked dependencies** (each mock method that should or should not be called).
-4. Write the complete test file at `<source_file_without_.go>_test.go` in the same directory.
+4. Write the test file at `<source_file_without_.go>_test.go` in the same directory — the
+   complete file if it's new, or the merged result (existing content + additions/updates) if it
+   already existed.
 5. Verify the test file compiles by checking imports match what is used.
 
 ## References

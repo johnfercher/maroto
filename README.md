@@ -34,18 +34,32 @@ go get github.com/johnfercher/maroto/v2@v2.4.1
 
 ## Contributing
 
+> If you are an AI agent/LLM working on this repository, read [AGENTS.md](AGENTS.md) first
+> and follow the standards defined in [.github/skills](.github/skills).
+
 | Command         | Description                                       | Dependencies                                                  |
 |-----------------|---------------------------------------------------|---------------------------------------------------------------|
 | `make build`    | Build project                                     | `go`                                                          |
 | `make test`     | Run unit tests                                    | `go`                                                          |
-| `make fmt`      | Format files                                      | `gofmt`, `gofumpt` and `goimports`                            |
-| `make lint`     | Check files                                       | `golangci-lint`                                               |
-| `make dod`      | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt` and `make lint` | 
-| `make install`  | Install all dependencies                          | `go`, `curl` and `git`                                        |
+| `make fmt`      | Format files                                      | `go` (runs `gofumpt`/`goimports` via `tools/go.mod`)          |
+| `make lint`     | Check files                                       | `go` (runs `golangci-lint` via `tools/go.mod`)                |
+| `make dod`      | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt`, `make lint` and `make codecov` |
+| `make install`  | Install all dependencies and the pre-commit hook  | `go` and `npm` (for `docsify-cli`)                            |
 | `make examples` | Run all examples                                  | `go`                                                          |
-| `make mocks`    | Generate mocks                                    | `go` and `mockery`                                            |
+| `make mocks`    | Generate mocks                                    | `go` (runs `mockery` via `tools/go.mod`)                      |
 | `make docs`     | Run docsify docs server local                     | `docsify`                                                     |
-| `make godoc`    | Run godoc server local                            | `godoc`                                                       |
+| `make godoc`    | Run godoc server local                            | `go` (runs `godoc` via `tools/go.mod`)                        |
+| `make install-hooks` | Point git at `.githooks` so `make dod` runs on every commit | `git`                                            |
+| `make codecov`  | Warn about functions with 0% test coverage (never fails) | `go`                                              |
+
+`goimports`, `gofumpt`, `golangci-lint`, `mockery`, and `godoc` are versioned tool dependencies
+declared in [`tools/go.mod`](tools/go.mod), a separate module so their transitive dependencies
+never end up in the main `go.sum`. See [contribution.md](.github/skills/contribution.md#8-definition-of-done)
+for details.
+
+`make install` (or `make install-hooks` on its own) configures a `pre-commit` git hook, tracked at
+[`.githooks/pre-commit`](.githooks/pre-commit), that runs `make dod` before every commit and blocks
+it if `build`, `test`, `fmt`, or `lint` fail.
 
 ## Stargazers over time
 [![Stargazers over time](https://starchart.cc/johnfercher/maroto.svg?variant=adaptive)](https://starchart.cc/johnfercher/maroto)
