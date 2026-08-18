@@ -43,13 +43,14 @@ go get github.com/johnfercher/maroto/v2@v2.4.1
 | `make test`     | Run unit tests                                    | `go`                                                          |
 | `make fmt`      | Format files                                      | `go` (runs `gofumpt`/`goimports` via `tools/go.mod`)          |
 | `make lint`     | Check files                                       | `go` (runs `golangci-lint` via `tools/go.mod`)                |
-| `make dod`      | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt` and `make lint` | 
+| `make dod`      | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt`, `make lint` and `make codecov` |
 | `make install`  | Install all dependencies and the pre-commit hook  | `go` and `npm` (for `docsify-cli`)                            |
 | `make examples` | Run all examples                                  | `go`                                                          |
 | `make mocks`    | Generate mocks                                    | `go` (runs `mockery` via `tools/go.mod`)                      |
 | `make docs`     | Run docsify docs server local                     | `docsify`                                                     |
 | `make godoc`    | Run godoc server local                            | `go` (runs `godoc` via `tools/go.mod`)                        |
 | `make install-hooks` | Point git at `.githooks` so `make dod` runs on every commit | `git`                                            |
+| `make codecov`  | Warn about functions with 0% test coverage (never fails) | `go`                                              |
 
 `goimports`, `gofumpt`, `golangci-lint`, `mockery`, and `godoc` are versioned tool dependencies
 declared in [`tools/go.mod`](tools/go.mod), a separate module so their transitive dependencies

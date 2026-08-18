@@ -6,6 +6,8 @@ Prepare a change in this repository (branch, code, docs, PR) so it satisfies the
 See also:
 - [unit-tests.md](unit-tests.md) for how to write the unit tests this checklist requires.
 - [mocks.md](mocks.md) for generating/using mocks referenced by the checklist.
+- [code-quality.md](code-quality.md) for what `make lint` enforces and the SOLID patterns to
+  follow in any non-test Go code touched by the change.
 
 ## Instructions
 
@@ -21,9 +23,12 @@ Name the branch after the kind of change:
 ### 2. Method receiver naming style
 Every method on a struct uses the struct's first letter (lowercase) as the receiver name:
 ```go
-func (s *Font) GetFamily() string {
+func (c *Checkbox) Render(provider core.Provider, cell *entity.Cell) {
 ```
-(see `internal/providers/gofpdf/font.go`). Do not use `this`, `self`, or the full struct name.
+(see `pkg/components/checkbox/checkbox.go`). Do not use `this`, `self`, or the full struct name.
+A few existing types don't follow the literal first-letter rule (e.g. `internal/providers/gofpdf/font.go`
+uses `s` for `Font`) — that's pre-existing, not a pattern to copy; for new code, use the struct's
+actual first letter.
 
 ### 3. Unit tests
 - Write unit tests for every new or changed exported function/method.
@@ -93,8 +98,24 @@ Before opening the PR, run:
 make dod
 ```
 which runs, in order: `make build`, `make test`, `make fmt`, `make lint` (the last of which also
-runs `make mock-lint` to verify `mocks/` is up to date with `mockery`). Fix every issue
-`golangci-lint` points out — the PR checklist requires this to have zero issues.
+runs `make mock-lint` to verify `mocks/` is up to date with `mockery`), then `make codecov`. Fix
+every issue `golangci-lint` points out — the PR checklist requires this to have zero issues. See
+[code-quality.md](code-quality.md) for exactly what this repo's `.golangci.yml` enforces (and
+deliberately doesn't) and for the SOLID principles to check non-test code against beyond what the
+linter alone catches. `make test` runs with `-race`, so a genuine data race also fails the build
+here, not just a wrong result. `make codecov` is warning-only: it runs [`shell/codecov.sh`](../../shell/codecov.sh),
+which lists every function with 0% test coverage (excluding `internal/fixture`, which is
+test-support code with no test file of its own) and always exits 0 — it flags gaps without
+blocking the commit.
+
+**A `make codecov` warning is not optional busywork — treat it as highly recommended to fix
+before opening the PR, not after.** Reviewers on this project routinely ask for missing tests on
+exactly these functions, so a PR that ships with unaddressed `make codecov` output is very likely
+to get a review comment asking for the same tests anyway. Writing them upfront (following
+[unit-tests.md](unit-tests.md)) avoids a review round-trip. If an agent is doing the work and
+`make codecov` reports functions touched by the change, it should write tests for them as part of
+the same change rather than leaving it for review to catch — only skip a specific function if
+there's a concrete reason it can't reasonably be tested, and say so in the PR description.
 
 If the `pre-commit` git hook is installed (`make install` or `make install-hooks`, see
 [`.githooks/pre-commit`](../../.githooks/pre-commit)), `make dod` already runs automatically

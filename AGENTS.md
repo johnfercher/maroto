@@ -15,6 +15,7 @@ improvising:
 | [unit-tests.md](.github/skills/unit-tests.md) | Writing or regenerating `_test.go` files |
 | [mocks.md](.github/skills/mocks.md) | Generating mocks with `mockery` or writing mock expectations in a test |
 | [contribution.md](.github/skills/contribution.md) | Preparing any change (branch, code, docs, PR) to meet the pull request checklist |
+| [code-quality.md](.github/skills/code-quality.md) | Writing or reviewing non-test Go code — what `golangci-lint` enforces and the SOLID patterns this codebase follows |
 
 As new skill files are added to `.github/skills`, treat them as mandatory for
 the task they cover.
@@ -23,12 +24,16 @@ the task they cover.
 
 Before considering a change complete, follow [contribution.md](.github/skills/contribution.md),
 which walks through the full [pull request checklist](pull_request_template.md) and ends with
-running `make dod` (build + test + format + lint) with no `golangci-lint` issues.
+running `make dod` (build + test + format + lint + codecov) with no `golangci-lint` issues.
+`codecov` never fails the build, but its output (functions with 0% test coverage) is highly
+recommended to address before opening the PR — see
+[contribution.md §8](.github/skills/contribution.md#8-definition-of-done).
 
 If `make install-hooks` has been run in this clone, `make dod` also runs automatically as a
 `pre-commit` git hook (see [`.githooks/pre-commit`](.githooks/pre-commit)) and blocks the commit
 on failure — expect `git commit` itself to take as long as `make dod` does, and to fail the
-commit if build/test/fmt/lint don't pass.
+commit if build/test/fmt/lint don't pass (`codecov` output won't block the commit, but don't
+ignore it).
 
 ## Contributing commands
 

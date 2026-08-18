@@ -3,7 +3,7 @@ GO_PATHS =  $(shell go list -f '{{ .Dir }}' ./... | grep -E -v 'docs|cmd|mocks')
 GO_EXAMPLES =  $(shell go list -f '{{ .Dir }}' ./docs/assets/examples/...)
 
 .PHONY: dod
-dod: build test fmt lint
+dod: build test fmt lint codecov
 
 .PHONY: build
 build:
@@ -11,8 +11,8 @@ build:
 
 .PHONY: test
 test:
-	go test $(GO_PATHS)
-	go test $(GO_EXAMPLES)
+	go test -race $(GO_PATHS)
+	go test -race $(GO_EXAMPLES)
 
 .PHONY: fmt
 fmt:
@@ -28,6 +28,10 @@ lint:
 .PHONY: mock-lint
 mock-lint:
 	bash shell/mock-check.sh
+
+.PHONY: codecov
+codecov:
+	bash shell/codecov.sh
 
 .PHONY: install
 install:
