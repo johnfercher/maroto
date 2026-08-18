@@ -28,7 +28,7 @@ go get github.com/johnfercher/maroto/v2@v2.4.1
 ```
 
 * You can see the full `v2` documentation [here](https://maroto.tech/#/README?id=maroto-v2).
-* The `v1` still exists in [this branch](https://github.com/johnfercher/maroto/tree/v1), and you can see the doc [here]([https://maroto.io/#/v1/README?id=deprecated](https://maroto.tech/#/v1/README?id=deprecated)).
+* The `v1` still exists in [this branch](https://github.com/johnfercher/maroto/tree/v1), and you can see the doc [here]([https://maroto.tech/#/v1/README?id=deprecated](https://maroto.tech/#/v1/README?id=deprecated)).
 
 ![result](docs/assets/images/result.png)
 

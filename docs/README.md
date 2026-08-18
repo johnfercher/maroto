@@ -51,7 +51,7 @@ This is part of the [billing example](v2/examples/billing?id=billing).
 - **Column Width**: When creating a column (using col.New(colSize)), the colSize parameter specifies how many of these 12 grid spaces the column should occupy. For example, col.New(1) creates a column that spans 1/12 of the page width, while col.New(6) spans half the page width.
 - **Content Placement**: Columns are the primary containers for content such as text, images, and other components. The width of a column determines how much horizontal space its content occupies.
 - **Total Width Constraint**: The sum of the widths of all columns within a single row should not exceed 12 grid spaces, aligning with the full width of the page.
-- **Grid Space Customization**: Is possible to [customize](https://maroto.io/#/v2/features/maxgridsum?id=max-grid-sum) the max grid sum.
+- **Grid Space Customization**: Is possible to [customize](https://maroto.tech/#/v2/features/maxgridsum?id=max-grid-sum) the max grid sum.
 
 ### Rows
 
