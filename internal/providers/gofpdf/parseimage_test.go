@@ -33,93 +33,78 @@ func TestFromBytes(t *testing.T) {
 		assert.NotNil(t, img)
 		assert.Nil(t, err)
 	})
-}
+	t.Run("when image is 8 bit, should not change anything", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		m := image.NewNRGBA(image.Rect(0, 0, 2, 2))
+		m.SetNRGBA(0, 0, color.NRGBA{R: 255, G: 128, B: 64, A: 255})
 
-func TestFromBytes_Normalizes16BitPNG(t *testing.T) {
-	t.Parallel()
+		var input bytes.Buffer
+		require.NoError(t, png.Encode(&input, m))
+		original := append([]byte(nil), input.Bytes()...)
 
-	cases := []struct {
-		name     string
-		build    func() image.Image
-		assertPx func(t *testing.T, decoded image.Image)
-	}{
-		{
-			name: "NRGBA64",
-			build: func() image.Image {
-				m := image.NewNRGBA64(image.Rect(0, 0, 1, 1))
-				m.SetNRGBA64(0, 0, color.NRGBA64{R: 65535, G: 32768, B: 16384, A: 65535})
-				return m
-			},
-			assertPx: func(t *testing.T, decoded image.Image) {
-				t.Helper()
-				assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
-				c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
-				assert.Equal(t, color.NRGBA{R: 255, G: 128, B: 64, A: 255}, c)
-			},
-		},
-		{
-			name: "RGBA64",
-			build: func() image.Image {
-				m := image.NewRGBA64(image.Rect(0, 0, 1, 1))
-				m.SetRGBA64(0, 0, color.RGBA64{R: 65535, G: 32768, B: 16384, A: 65535})
-				return m
-			},
-			assertPx: func(t *testing.T, decoded image.Image) {
-				t.Helper()
-				assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
-				c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
-				assert.Equal(t, color.NRGBA{R: 255, G: 128, B: 64, A: 255}, c)
-			},
-		},
-		{
-			name: "Gray16",
-			build: func() image.Image {
-				m := image.NewGray16(image.Rect(0, 0, 1, 1))
-				m.SetGray16(0, 0, color.Gray16{Y: 32768})
-				return m
-			},
-			assertPx: func(t *testing.T, decoded image.Image) {
-				t.Helper()
-				assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
-				c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
-				assert.Equal(t, color.NRGBA{R: 128, G: 128, B: 128, A: 255}, c)
-			},
-		},
-	}
+		// Act
+		img, err := gofpdf.FromBytes(input.Bytes(), extension.Png)
 
-	for _, tc := range cases {
-		tc := tc
-		t.Run(tc.name, func(t *testing.T) {
-			t.Parallel()
+		// Assert
+		require.NoError(t, err)
+		assert.Equal(t, original, img.Bytes)
+	})
+	t.Run("when image is NRGBA64, should standardize with 8 bit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		m := image.NewNRGBA64(image.Rect(0, 0, 1, 1))
+		m.SetNRGBA64(0, 0, color.NRGBA64{R: 65535, G: 32768, B: 16384, A: 65535})
 
-			var input bytes.Buffer
-			require.NoError(t, png.Encode(&input, tc.build()))
+		var input bytes.Buffer
+		_ = png.Encode(&input, m)
 
-			img, err := gofpdf.FromBytes(input.Bytes(), extension.Png)
-			require.NoError(t, err)
+		// Act
+		img, err := gofpdf.FromBytes(input.Bytes(), extension.Png)
 
-			decoded, err := png.Decode(bytes.NewReader(img.Bytes))
-			require.NoError(t, err)
-			switch decoded.(type) {
-			case *image.NRGBA64, *image.RGBA64, *image.Gray16:
-				t.Fatalf("expected 8-bit PNG, got %T", decoded)
-			}
-			tc.assertPx(t, decoded)
-		})
-	}
-}
+		// Assert
+		decoded, err := png.Decode(bytes.NewReader(img.Bytes))
+		assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
+		c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
+		assert.Equal(t, color.NRGBA{R: 255, G: 128, B: 64, A: 255}, c)
+		require.NoError(t, err)
+	})
+	t.Run("when image is RGBA64, should standardize with 8 bit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		m := image.NewRGBA64(image.Rect(0, 0, 1, 1))
+		m.SetRGBA64(0, 0, color.RGBA64{R: 65535, G: 32768, B: 16384, A: 65535})
 
-func TestFromBytes_Leaves8BitPNGUnchanged(t *testing.T) {
-	t.Parallel()
+		var input bytes.Buffer
+		_ = png.Encode(&input, m)
 
-	m := image.NewNRGBA(image.Rect(0, 0, 2, 2))
-	m.SetNRGBA(0, 0, color.NRGBA{R: 255, G: 128, B: 64, A: 255})
+		// Act
+		img, err := gofpdf.FromBytes(input.Bytes(), extension.Png)
 
-	var input bytes.Buffer
-	require.NoError(t, png.Encode(&input, m))
-	original := append([]byte(nil), input.Bytes()...)
+		// Assert
+		decoded, err := png.Decode(bytes.NewReader(img.Bytes))
+		assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
+		c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
+		assert.Equal(t, color.NRGBA{R: 255, G: 128, B: 64, A: 255}, c)
+		require.NoError(t, err)
+	})
+	t.Run("when image is Gray16, should standardize with 8 bit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		m := image.NewGray16(image.Rect(0, 0, 1, 1))
+		m.SetGray16(0, 0, color.Gray16{Y: 32768})
 
-	img, err := gofpdf.FromBytes(input.Bytes(), extension.Png)
-	require.NoError(t, err)
-	assert.Equal(t, original, img.Bytes)
+		var input bytes.Buffer
+		_ = png.Encode(&input, m)
+
+		// Act
+		img, err := gofpdf.FromBytes(input.Bytes(), extension.Png)
+
+		// Assert
+		decoded, err := png.Decode(bytes.NewReader(img.Bytes))
+		assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
+		c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
+		assert.Equal(t, color.NRGBA{R: 128, G: 128, B: 128, A: 255}, c)
+		require.NoError(t, err)
+	})
 }
