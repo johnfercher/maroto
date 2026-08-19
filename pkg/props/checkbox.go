@@ -40,12 +40,4 @@ func (c *Checkbox) MakeValid() {
 	if c.Size <= 0 {
 		c.Size = 5.0
 	}
-
-	if c.Top < 0 {
-		c.Top = 0
-	}
-
-	if c.Left < 0 {
-		c.Left = 0
-	}
 }

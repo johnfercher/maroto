@@ -13,10 +13,10 @@ Text can be created as a standalone `Component`, wrapped directly into a `Col`, 
 | `Size` | `float64` | global font | Font size in points |
 | `Color` | `*props.Color` | global font | Font color |
 | `Align` | `align.Type` | `align.Left` | `Left`, `Center`, `Right`, `Justify` |
-| `Top` | `float64` | `0` | Top offset inside the cell (mm) |
-| `Bottom` | `float64` | `0` | Bottom offset — used by auto rows only (mm) |
-| `Left` | `float64` | `0` | Left margin inside the cell (mm) |
-| `Right` | `float64` | `0` | Right margin inside the cell (mm) |
+| `Top` | `float64` | `0` | Top offset inside the cell (mm). Accepts negative values. |
+| `Bottom` | `float64` | `0` | Bottom offset — used by auto rows only (mm). Accepts negative values. |
+| `Left` | `float64` | `0` | Left margin inside the cell (mm). Accepts negative values. |
+| `Right` | `float64` | `0` | Right margin inside the cell (mm). Accepts negative values. |
 | `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy` | `EmptySpaceStrategy` breaks on spaces; `DashStrategy` breaks mid-word with a hyphen |
 | `VerticalPadding` | `float64` | `0` | Extra spacing between lines (mm) |
 | `Hyperlink` | `*string` | `nil` | URL — makes the text a clickable link (rendered in blue) |
@@ -24,7 +24,8 @@ Text can be created as a standalone `Component`, wrapped directly into a `Col`, 
 ## Usage notes
 
 - When `Hyperlink` is set, the text color is overridden with blue regardless of `Color`.
-- `Top` and `Left`/`Right` are clamped to the cell dimensions if they exceed it.
+- `Top` and `Left`/`Right` are clamped to the cell dimensions if they exceed it (positive over-flow).
+- `Top`, `Bottom`, `Left`, `Right` accept negative values — useful to draw text slightly outside its cell (e.g. tight padding tweaks from JSON specs). `VerticalPadding` is still clamped to ≥ 0 since negative line spacing collapses lines onto each other.
 - `BreakLineStrategy` only applies when the text does not fit on a single line.
 - For justified text on the last line, spacing may revert to default space width to avoid stretching a few characters across the full width.
 

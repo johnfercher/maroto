@@ -71,7 +71,6 @@ func (b *Barcode) ToRectProp() *Rect {
 func (b *Barcode) MakeValid() {
 	minPercentage := 0.0
 	maxPercentage := 100.0
-	minValue := 0.0
 
 	if b.Percent <= minPercentage || b.Percent > maxPercentage {
 		b.Percent = maxPercentage
@@ -80,14 +79,6 @@ func (b *Barcode) MakeValid() {
 	if b.Center {
 		b.Left = 0
 		b.Top = 0
-	}
-
-	if b.Left < minValue {
-		b.Left = minValue
-	}
-
-	if b.Top < minValue {
-		b.Top = minValue
 	}
 
 	if b.Proportion.Width <= 0 {

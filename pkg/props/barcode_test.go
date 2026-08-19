@@ -85,7 +85,7 @@ func TestBarcode_MakeValid(t *testing.T) {
 		assert.Equal(t, 0.0, prop.Top)
 		assert.Equal(t, 0.0, prop.Left)
 	})
-	t.Run("when left is less than 0, should become 0", func(t *testing.T) {
+	t.Run("when left is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
@@ -96,9 +96,9 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Left)
+		assert.Equal(t, -5.0, prop.Left)
 	})
-	t.Run("when top is less than 0, should become 0", func(t *testing.T) {
+	t.Run("when top is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Barcode{
@@ -109,7 +109,7 @@ func TestBarcode_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Top)
+		assert.Equal(t, -5.0, prop.Top)
 	})
 	t.Run("when proportion.width less than 0", func(t *testing.T) {
 		t.Parallel()

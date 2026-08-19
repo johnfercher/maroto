@@ -10,13 +10,13 @@ The row height for auto-row usage is `Size + Top`.
 |-------|------|---------|-------------|
 | `Checked` | `bool` | `false` | Whether the checkbox is marked with an X |
 | `Size` | `float64` | `5.0` | Side length of the checkbox square in mm |
-| `Top` | `float64` | `0` | Space between the upper cell limit and the checkbox (mm) |
-| `Left` | `float64` | `0` | Space between the left cell boundary and the checkbox (mm) |
+| `Top` | `float64` | `0` | Space between the upper cell limit and the checkbox (mm). Accepts negative values to nudge the checkbox above the cell top. |
+| `Left` | `float64` | `0` | Space between the left cell boundary and the checkbox (mm). Accepts negative values. |
 
 ## Usage notes
 
 - The label is rendered to the right of the box using the document's default font; font styling is derived from the active `core.Font`.
-- `Top` and `Left` must be ≥ 0; negative values are clamped to 0 by `MakeValid`.
+- `Top` and `Left` accept negative values (rendered slightly outside the cell on that side); `Size` is still required to be > 0 and falls back to the default `5.0` otherwise.
 - For forms with multiple options, place several `NewCol` checkboxes side-by-side in the same row.
 
 ## GoDoc
