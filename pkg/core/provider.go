@@ -20,6 +20,7 @@ type Provider interface {
 	AddCheckbox(label string, cell *entity.Cell, prop *props.Checkbox)
 	GetFontHeight(prop *props.Font) float64
 	GetLinesQuantity(text string, textProp *props.Text, colWidth float64) int
+	GetStringWidth(text string, textProp *props.Text) float64
 	AddMatrixCode(code string, cell *entity.Cell, prop *props.Rect)
 	AddQrCode(code string, cell *entity.Cell, rect *props.Rect)
 	AddBarCode(code string, cell *entity.Cell, prop *props.Barcode)

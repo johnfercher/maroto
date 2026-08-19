@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"fmt"
+	"math"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -10,6 +11,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/rotationpivot"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -71,20 +73,87 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	unicodeText := s.textToUnicode(text, textProp)
 	stringWidth := s.pdf.GetStringWidth(unicodeText)
 
-	// If should add one line
-	if stringWidth <= width {
-		s.addLine(textProp, x, width, y, stringWidth, unicodeText)
-		s.font.SetColor(originalColor)
-		return
-	}
-
+	// Determine the lines up-front so multi-line rotation can pivot around the
+	// whole block, not just the first line.
 	var lines []string
-
-	if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
-		words := strings.Split(unicodeText, " ")
-		lines = s.getLinesBreakingLineFromSpace(words, width)
+	if stringWidth <= width {
+		lines = []string{unicodeText}
+	} else if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
+		lines = s.getLinesBreakingLineFromSpace(strings.Split(unicodeText, " "), width)
 	} else {
 		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
+	}
+
+	// Rotation honours both axes of textProp.RotationPivot. The baseline of
+	// the first line is shifted so the rotated bounding box of the whole
+	// (multi-line) block sits inside the Text.GetHeight-expanded cell.
+	if textProp.Rotation != 0 {
+		marginLeft, marginTop, _, _ := s.pdf.GetMargins()
+		n := float64(len(lines))
+		textHeight := n*fontHeight + (n-1)*textProp.VerticalPadding
+		blockWidth := stringWidth
+		if blockWidth > width {
+			blockWidth = width
+		}
+
+		var alignOffsetX float64
+		switch textProp.Align {
+		case align.Center:
+			alignOffsetX = (width - blockWidth) / 2
+		case align.Right:
+			alignOffsetX = width - blockWidth
+		}
+		if alignOffsetX < 0 {
+			alignOffsetX = 0
+		}
+
+		var pivotOffsetX float64
+		switch textProp.RotationPivot.Horizontal {
+		case rotationpivot.Start:
+			pivotOffsetX = 0
+		case rotationpivot.End:
+			pivotOffsetX = blockWidth
+		default: // Center
+			pivotOffsetX = blockWidth / 2
+		}
+		var pivotOffsetY float64
+		switch textProp.RotationPivot.Vertical {
+		case rotationpivot.Top:
+			pivotOffsetY = 0
+		case rotationpivot.Bottom:
+			pivotOffsetY = textHeight
+		default: // Middle
+			pivotOffsetY = textHeight / 2
+		}
+
+		rad := textProp.Rotation * math.Pi / 180
+		sin, cos := math.Sin(rad), math.Cos(rad)
+		// Distance any rotated corner rises above the pivot. Corners relative
+		// to the pivot are TL=(-px,-py), TR=(W-px,-py), BR=(W-px,H-py), BL=(-px,H-py);
+		// rotated y is -dx*sin + dy*cos, so -y = dx*sin - dy*cos. Take the max.
+		px, py := pivotOffsetX, pivotOffsetY
+		W, H := blockWidth, textHeight
+		upExtent := math.Max(0, math.Max(py*cos-px*sin,
+			math.Max((W-px)*sin+py*cos,
+				math.Max((W-px)*sin-(H-py)*cos,
+					-px*sin-(H-py)*cos))))
+
+		contentHeight := cell.Height - textProp.Top - textProp.Bottom
+		if contentHeight > textHeight {
+			// place the rotated bbox top at the cell content top
+			y = cell.Y + textProp.Top + upExtent + fontHeight - pivotOffsetY
+		}
+		pivotX := x + alignOffsetX + pivotOffsetX + marginLeft
+		pivotY := y + (pivotOffsetY - fontHeight) + marginTop
+		s.pdf.TransformBegin()
+		s.pdf.TransformRotate(textProp.Rotation, pivotX, pivotY)
+		defer s.pdf.TransformEnd()
+	}
+
+	if len(lines) == 1 {
+		s.addLine(textProp, x, width, y, stringWidth, lines[0])
+		s.font.SetColor(originalColor)
+		return
 	}
 
 	accumulateOffsetY := 0.0
@@ -97,6 +166,13 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	}
 
 	s.font.SetColor(originalColor)
+}
+
+// GetStringWidth returns the rendered width of the text after font selection
+// and unicode translation.
+func (s *Text) GetStringWidth(text string, textProp *props.Text) float64 {
+	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
+	return s.pdf.GetStringWidth(s.textToUnicode(text, textProp))
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.

@@ -10,6 +10,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/rotationpivot"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
@@ -202,5 +203,107 @@ func TestText_ToMap(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, 5.0, m["prop_right"])
+	})
+	t.Run("when rotation is set, should include rotation in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Text{Rotation: 45}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		assert.Equal(t, 45.0, m["prop_rotation"])
+	})
+	t.Run("when rotation is zero, should not include rotation in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Text{Rotation: 0}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		_, ok := m["prop_rotation"]
+		assert.False(t, ok)
+	})
+	t.Run("when horizontal rotation pivot is set, should include it in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Text{RotationPivot: rotationpivot.Pivot{Horizontal: rotationpivot.Start}}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		assert.Equal(t, rotationpivot.Start, m["prop_rotation_pivot_horizontal"])
+		_, hasV := m["prop_rotation_pivot_vertical"]
+		assert.False(t, hasV)
+	})
+	t.Run("when vertical rotation pivot is set, should include it in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Text{RotationPivot: rotationpivot.Pivot{Vertical: rotationpivot.Top}}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		assert.Equal(t, rotationpivot.Top, m["prop_rotation_pivot_vertical"])
+		_, hasH := m["prop_rotation_pivot_horizontal"]
+		assert.False(t, hasH)
+	})
+	t.Run("when rotation pivot is empty, should not include it in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Text{}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		_, hasH := m["prop_rotation_pivot_horizontal"]
+		_, hasV := m["prop_rotation_pivot_vertical"]
+		assert.False(t, hasH)
+		assert.False(t, hasV)
+	})
+	t.Run("when rotation pivot is the default (Center, Middle), should omit both", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Text{RotationPivot: rotationpivot.Pivot{Horizontal: rotationpivot.Center, Vertical: rotationpivot.Middle}}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		_, hasH := m["prop_rotation_pivot_horizontal"]
+		_, hasV := m["prop_rotation_pivot_vertical"]
+		assert.False(t, hasH)
+		assert.False(t, hasV)
+	})
+}
+
+func TestText_MakeValid_RotationPivot(t *testing.T) {
+	t.Parallel()
+	t.Run("when rotation pivot is empty, should default to center+middle", func(t *testing.T) {
+		t.Parallel()
+		prop := props.Text{}
+		prop.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
+		assert.Equal(t, rotationpivot.Center, prop.RotationPivot.Horizontal)
+		assert.Equal(t, rotationpivot.Middle, prop.RotationPivot.Vertical)
+	})
+	t.Run("when rotation pivot is set, should preserve both axes", func(t *testing.T) {
+		t.Parallel()
+		prop := props.Text{RotationPivot: rotationpivot.Pivot{Horizontal: rotationpivot.End, Vertical: rotationpivot.Bottom}}
+		prop.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
+		assert.Equal(t, rotationpivot.End, prop.RotationPivot.Horizontal)
+		assert.Equal(t, rotationpivot.Bottom, prop.RotationPivot.Vertical)
+	})
+	t.Run("when only one axis is set, the other defaults", func(t *testing.T) {
+		t.Parallel()
+		prop := props.Text{RotationPivot: rotationpivot.Pivot{Horizontal: rotationpivot.Start}}
+		prop.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
+		assert.Equal(t, rotationpivot.Start, prop.RotationPivot.Horizontal)
+		assert.Equal(t, rotationpivot.Middle, prop.RotationPivot.Vertical)
 	})
 }

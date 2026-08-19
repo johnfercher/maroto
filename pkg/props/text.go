@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/rotationpivot"
 )
 
 // Text represents properties from a Text inside a cell.
@@ -32,6 +33,14 @@ type Text struct {
 	Color *Color
 	// Hyperlink define a link to be opened when the text is clicked.
 	Hyperlink *string
+	// Rotation rotates the text by the given angle in degrees. Positive values
+	// rotate counter-clockwise, negative values clockwise. The cell automatically
+	// expands vertically to contain the rotated bounding box.
+	Rotation float64
+	// RotationPivot selects the anchor point used during rotation. Horizontal
+	// defaults to Center, Vertical defaults to Middle. For multi-line text the
+	// vertical axis applies to the whole block.
+	RotationPivot rotationpivot.Pivot
 }
 
 // ToMap converts a Text to a map.
@@ -84,6 +93,18 @@ func (t *Text) ToMap() map[string]any {
 		m["prop_hyperlink"] = *t.Hyperlink
 	}
 
+	if t.Rotation != 0 {
+		m["prop_rotation"] = t.Rotation
+	}
+
+	if t.RotationPivot.Horizontal != "" && t.RotationPivot.Horizontal != rotationpivot.Center {
+		m["prop_rotation_pivot_horizontal"] = t.RotationPivot.Horizontal
+	}
+
+	if t.RotationPivot.Vertical != "" && t.RotationPivot.Vertical != rotationpivot.Middle {
+		m["prop_rotation_pivot_vertical"] = t.RotationPivot.Vertical
+	}
+
 	return m
 }
 
@@ -134,5 +155,13 @@ func (t *Text) MakeValid(font *Font) {
 
 	if t.BreakLineStrategy == "" {
 		t.BreakLineStrategy = breakline.EmptySpaceStrategy
+	}
+
+	if t.RotationPivot.Horizontal == "" {
+		t.RotationPivot.Horizontal = rotationpivot.Center
+	}
+
+	if t.RotationPivot.Vertical == "" {
+		t.RotationPivot.Vertical = rotationpivot.Middle
 	}
 }

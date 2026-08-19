@@ -2,6 +2,8 @@
 package text
 
 import (
+	"math"
+
 	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
@@ -61,11 +63,31 @@ func (t *Text) GetStructure() *node.Node[core.Structure] {
 	return node.New(str)
 }
 
-// GetHeight returns the height that the text will have in the PDF
+// GetHeight returns the height that the text will have in the PDF.
+// When Rotation is set, the cell is expanded to contain the rotated
+// bounding box (|w·sinθ| + |h·cosθ|), with text width upper-bounded by
+// the cell's content width — otherwise rotated text would bleed into
+// adjacent rows.
 func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
-	amountLines := provider.GetLinesQuantity(t.value, &t.prop, cell.Width-t.prop.Left-t.prop.Right)
+	contentWidth := cell.Width - t.prop.Left - t.prop.Right
+	if contentWidth < 0 {
+		contentWidth = 0
+	}
+	amountLines := provider.GetLinesQuantity(t.value, &t.prop, contentWidth)
 	fontHeight := provider.GetFontHeight(&props.Font{Family: t.prop.Family, Style: t.prop.Style, Size: t.prop.Size, Color: t.prop.Color})
 	textHeight := float64(amountLines)*fontHeight + float64(amountLines-1)*t.prop.VerticalPadding
+
+	if t.prop.Rotation != 0 {
+		rad := t.prop.Rotation * math.Pi / 180
+		absSin := math.Abs(math.Sin(rad))
+		absCos := math.Abs(math.Cos(rad))
+		stringWidth := provider.GetStringWidth(t.value, &t.prop)
+		if stringWidth > contentWidth {
+			stringWidth = contentWidth
+		}
+		textHeight = stringWidth*absSin + textHeight*absCos
+	}
+
 	return textHeight + t.prop.Top + t.prop.Bottom
 }
 

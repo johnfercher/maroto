@@ -105,6 +105,53 @@ func (_c *Text_GetLinesQuantity_Call) RunAndReturn(run func(string, *props.Text,
 	return _c
 }
 
+// GetStringWidth provides a mock function with given fields: text, textProp
+func (_m *Text) GetStringWidth(text string, textProp *props.Text) float64 {
+	ret := _m.Called(text, textProp)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetStringWidth")
+	}
+
+	var r0 float64
+	if rf, ok := ret.Get(0).(func(string, *props.Text) float64); ok {
+		r0 = rf(text, textProp)
+	} else {
+		r0 = ret.Get(0).(float64)
+	}
+
+	return r0
+}
+
+// Text_GetStringWidth_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetStringWidth'
+type Text_GetStringWidth_Call struct {
+	*mock.Call
+}
+
+// GetStringWidth is a helper method to define mock.On call
+//   - text string
+//   - textProp *props.Text
+func (_e *Text_Expecter) GetStringWidth(text interface{}, textProp interface{}) *Text_GetStringWidth_Call {
+	return &Text_GetStringWidth_Call{Call: _e.mock.On("GetStringWidth", text, textProp)}
+}
+
+func (_c *Text_GetStringWidth_Call) Run(run func(text string, textProp *props.Text)) *Text_GetStringWidth_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(string), args[1].(*props.Text))
+	})
+	return _c
+}
+
+func (_c *Text_GetStringWidth_Call) Return(_a0 float64) *Text_GetStringWidth_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Text_GetStringWidth_Call) RunAndReturn(run func(string, *props.Text) float64) *Text_GetStringWidth_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // NewText creates a new instance of Text. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewText(t interface {
