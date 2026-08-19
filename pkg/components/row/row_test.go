@@ -153,3 +153,23 @@ func TestRow_SetConfig(t *testing.T) {
 		sut.SetConfig(nil)
 	})
 }
+
+func TestRow_WithRepeatOnPageBreak(t *testing.T) {
+	t.Parallel()
+	t.Run("default is false", func(t *testing.T) {
+		t.Parallel()
+		// Act
+		r := row.New(10)
+
+		// Assert
+		assert.False(t, r.IsRepeatOnPageBreak())
+	})
+	t.Run("WithRepeatOnPageBreak sets it to true", func(t *testing.T) {
+		t.Parallel()
+		// Act
+		r := row.New(10).WithRepeatOnPageBreak()
+
+		// Assert
+		assert.True(t, r.IsRepeatOnPageBreak())
+	})
+}

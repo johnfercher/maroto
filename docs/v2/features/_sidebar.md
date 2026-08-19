@@ -28,6 +28,7 @@
   * [Parallelism Mode](v2/features/parallelism.md?id=parallelism)
   * [Protection](v2/features/protection.md?id=protection)
   * [QR Code](v2/features/qrcode.md?id=qrcode)
+  * [Repeat Header](v2/features/repeatheader.md?id=repeat-header)
   * [Signature](v2/features/signature.md?id=signature)
   * [Text](v2/features/text.md?id=text)
   * [Unit Testing](v2/features/unittests.md?id=unit-testing)

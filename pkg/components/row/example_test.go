@@ -68,3 +68,27 @@ func ExampleRow_WithStyle() {
 	// Do things and generate
 	_, _ = m.Generate()
 }
+
+// ExampleRow_WithRepeatOnPageBreak demonstrates how to mark a Row to repeat on page breaks.
+// This is useful for table headers that should appear at the top of each page.
+func ExampleRow_WithRepeatOnPageBreak() {
+	// Create a header row that repeats on page breaks
+	headerRow := row.New(8).
+		Add(text.NewCol(6, "Column 1")).
+		Add(text.NewCol(6, "Column 2")).
+		WithRepeatOnPageBreak()
+
+	m := maroto.New()
+	m.AddRows(headerRow)
+
+	// Add many data rows that will span multiple pages
+	for i := 0; i < 100; i++ {
+		m.AddRow(5,
+			text.NewCol(6, "Data 1"),
+			text.NewCol(6, "Data 2"),
+		)
+	}
+
+	// The header row will automatically repeat on page 2, 3, etc.
+	_, _ = m.Generate()
+}

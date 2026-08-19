@@ -343,6 +343,98 @@ func (_c *Row_WithStyle_Call) RunAndReturn(run func(*props.Cell) core.Row) *Row_
 	return _c
 }
 
+// WithRepeatOnPageBreak provides a mock function with no fields
+func (_m *Row) WithRepeatOnPageBreak() core.Row {
+	ret := _m.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for WithRepeatOnPageBreak")
+	}
+
+	var r0 core.Row
+	if rf, ok := ret.Get(0).(func() core.Row); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(core.Row)
+		}
+	}
+
+	return r0
+}
+
+// Row_WithRepeatOnPageBreak_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'WithRepeatOnPageBreak'
+type Row_WithRepeatOnPageBreak_Call struct {
+	*mock.Call
+}
+
+// WithRepeatOnPageBreak is a helper method to define mock.On call
+func (_e *Row_Expecter) WithRepeatOnPageBreak() *Row_WithRepeatOnPageBreak_Call {
+	return &Row_WithRepeatOnPageBreak_Call{Call: _e.mock.On("WithRepeatOnPageBreak")}
+}
+
+func (_c *Row_WithRepeatOnPageBreak_Call) Run(run func()) *Row_WithRepeatOnPageBreak_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Row_WithRepeatOnPageBreak_Call) Return(_a0 core.Row) *Row_WithRepeatOnPageBreak_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Row_WithRepeatOnPageBreak_Call) RunAndReturn(run func() core.Row) *Row_WithRepeatOnPageBreak_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// IsRepeatOnPageBreak provides a mock function with no fields
+func (_m *Row) IsRepeatOnPageBreak() bool {
+	ret := _m.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for IsRepeatOnPageBreak")
+	}
+
+	var r0 bool
+	if rf, ok := ret.Get(0).(func() bool); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(bool)
+	}
+
+	return r0
+}
+
+// Row_IsRepeatOnPageBreak_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'IsRepeatOnPageBreak'
+type Row_IsRepeatOnPageBreak_Call struct {
+	*mock.Call
+}
+
+// IsRepeatOnPageBreak is a helper method to define mock.On call
+func (_e *Row_Expecter) IsRepeatOnPageBreak() *Row_IsRepeatOnPageBreak_Call {
+	return &Row_IsRepeatOnPageBreak_Call{Call: _e.mock.On("IsRepeatOnPageBreak")}
+}
+
+func (_c *Row_IsRepeatOnPageBreak_Call) Run(run func()) *Row_IsRepeatOnPageBreak_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Row_IsRepeatOnPageBreak_Call) Return(_a0 bool) *Row_IsRepeatOnPageBreak_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *Row_IsRepeatOnPageBreak_Call) RunAndReturn(run func() bool) *Row_IsRepeatOnPageBreak_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // NewRow creates a new instance of Row. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewRow(t interface {

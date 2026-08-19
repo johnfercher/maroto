@@ -63,6 +63,8 @@ type Row interface {
 	GetColumns() []Col
 	WithStyle(style *props.Cell) Row
 	Render(provider Provider, cell entity.Cell)
+	WithRepeatOnPageBreak() Row
+	IsRepeatOnPageBreak() bool
 }
 
 // Page is the interface that wraps the basic methods of a page.

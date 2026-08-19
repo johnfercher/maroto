@@ -143,6 +143,27 @@ func TestMaroto_AddRow(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_3.json")
 	})
+	t.Run("when repeat rows exist and page overflows, should re-add them on new page", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cfg := config.NewBuilder().
+			WithDimensions(20, 20).
+			WithBottomMargin(0).
+			WithTopMargin(0).
+			WithLeftMargin(0).
+			WithRightMargin(0).
+			Build()
+		sut := maroto.New(cfg)
+
+		// Act
+		sut.AddRow(5, col.New(12)).WithRepeatOnPageBreak()
+		for i := 0; i < 5; i++ {
+			sut.AddRow(5, col.New(12))
+		}
+
+		// Assert
+		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_repeat.json")
+	})
 }
 
 func TestMaroto_AddRows(t *testing.T) {

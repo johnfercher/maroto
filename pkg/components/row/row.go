@@ -11,11 +11,12 @@ import (
 )
 
 type Row struct {
-	height     float64
-	autoHeight bool
-	cols       []core.Col
-	style      *props.Cell
-	config     *entity.Config
+	height            float64
+	autoHeight        bool
+	cols              []core.Col
+	style             *props.Cell
+	config            *entity.Config
+	repeatOnPageBreak bool
 }
 
 // New is responsible to create a core.Row.
@@ -113,6 +114,17 @@ func (r *Row) Render(provider core.Provider, cell entity.Cell) {
 func (r *Row) WithStyle(style *props.Cell) core.Row {
 	r.style = style
 	return r
+}
+
+// WithRepeatOnPageBreak marks this row to be re-injected at the top of every new page it overflows into.
+func (r *Row) WithRepeatOnPageBreak() core.Row {
+	r.repeatOnPageBreak = true
+	return r
+}
+
+// IsRepeatOnPageBreak returns whether this row should be repeated on page breaks.
+func (r *Row) IsRepeatOnPageBreak() bool {
+	return r.repeatOnPageBreak
 }
 
 // resetHeight resets the line height to 0
