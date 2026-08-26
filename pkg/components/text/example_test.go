@@ -4,6 +4,7 @@ import (
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 // ExampleNew demonstrates how to create a text component.
@@ -22,6 +23,17 @@ func ExampleNewCol() {
 	m := maroto.New()
 
 	textCol := text.NewCol(12, "text")
+	m.AddRow(10, textCol)
+
+	// generate document
+}
+
+// ExampleNewCol_rtl demonstrates how to create a text component that renders
+// right to left text, such as Arabic, in the correct visual order.
+func ExampleNewCol_rtl() {
+	m := maroto.New()
+
+	textCol := text.NewCol(12, "مرحبا بالعالم", props.Text{RTL: true})
 	m.AddRow(10, textCol)
 
 	// generate document
