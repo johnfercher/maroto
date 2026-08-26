@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"testing"
@@ -124,7 +125,7 @@ func (m *MarotoTest) buildNode(node *node.Node[core.Structure]) *Node {
 
 func getMarotoConfigFilePath() (string, error) {
 	path, _ := os.Getwd()
-	path += "/"
+	path = filepath.ToSlash(path) + "/"
 
 	return getMarotoConfigFilePathRecursive(path)
 }
