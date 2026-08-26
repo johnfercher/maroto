@@ -29,7 +29,7 @@ func ExampleNewCol() {
 }
 
 // ExampleNewCol_rtl demonstrates how to create a text component that renders
-// right to left text, such as Arabic, in the correct visual order.
+// right-to-left text, such as Arabic, in the correct visual order.
 func ExampleNewCol_rtl() {
 	m := maroto.New()
 

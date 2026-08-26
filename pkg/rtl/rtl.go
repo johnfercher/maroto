@@ -1,8 +1,8 @@
-// Package rtl renders right to left text, Arabic in particular, in the form a
+// Package rtl renders right-to-left text, Arabic in particular, in the form a
 // PDF writer can draw.
 //
 // PDF text operators draw glyphs one after another from left to right and do
-// not implement any script specific logic. Arabic therefore needs two
+// not implement any script-specific logic. Arabic therefore needs two
 // transformations before it reaches the writer:
 //
 //   - shaping, which replaces each letter by the contextual presentation form
@@ -14,7 +14,7 @@
 // Without them Arabic comes out as disconnected letters in reversed order.
 package rtl
 
-// Process returns text ready to be drawn by a left to right writer.
+// Process returns text ready to be drawn by a left-to-right writer.
 //
 // Text without Arabic characters is returned unchanged, byte for byte, so that
 // calling Process on arbitrary content is safe.

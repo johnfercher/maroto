@@ -2,7 +2,7 @@
 
 Arabic is written from right to left, and each letter changes shape depending on
 the letters it connects to. PDF text operators know neither: they draw glyphs one
-after another from left to right, with no script specific logic. Arabic passed
+after another from left to right, with no script-specific logic. Arabic passed
 straight through therefore comes out as disconnected letters in reversed order.
 
 Setting `RTL` on `props.Text` turns on the two transformations that fix it:
@@ -46,7 +46,7 @@ The flag is opt-in for the last reason: applications that already feed maroto
 pre-shaped text keep working untouched.
 
 Mixed content behaves as expected. Latin words and numbers embedded in Arabic
-keep their own left to right order, so `"المكتبة Maroto تدعم 42 لغة"` renders with
+keep their own left-to-right order, so `"المكتبة Maroto تدعم 42 لغة"` renders with
 `Maroto` and `42` readable inside the Arabic.
 
 Line breaking happens on the logical text and each resulting line is shaped and

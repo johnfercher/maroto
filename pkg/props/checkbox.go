@@ -10,7 +10,7 @@ type Checkbox struct {
 	Left float64
 	// Size is the size of the checkbox square in mm.
 	Size float64
-	// RTL enables the right to left processing of the label, shaping the
+	// RTL enables the right-to-left processing of the label, shaping the
 	// Arabic letters into their contextual forms and reordering the
 	// bidirectional runs. A label without Arabic characters is left untouched
 	// even when this is enabled.

@@ -32,7 +32,7 @@ type Text struct {
 	Color *Color
 	// Hyperlink define a link to be opened when the text is clicked.
 	Hyperlink *string
-	// RTL enables the right to left processing of the text, shaping the Arabic
+	// RTL enables the right-to-left processing of the text, shaping the Arabic
 	// letters into their contextual forms and reordering the bidirectional
 	// runs. It is opt-in because text that was already shaped by the caller
 	// would be processed twice. Text without Arabic characters is left

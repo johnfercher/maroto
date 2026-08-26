@@ -17,7 +17,7 @@ func ExampleProcess() {
 }
 
 // ExampleContainsArabic demonstrates how to check whether a text holds any
-// Arabic character before applying right to left specific handling.
+// Arabic character before applying right-to-left handling.
 func ExampleContainsArabic() {
 	fmt.Println(rtl.ContainsArabic("مرحبا بالعالم"))
 	fmt.Println(rtl.ContainsArabic("hello world"))

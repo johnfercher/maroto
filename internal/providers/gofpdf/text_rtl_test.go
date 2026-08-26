@@ -169,8 +169,8 @@ func TestText_Add_RTL(t *testing.T) {
 		// The whole text starts with Arabic, but the second line starts with a
 		// Latin word. Processing the paragraph as a unit would give both lines
 		// the same base direction and reverse their order; processing each
-		// emitted line on its own gives line one a right to left base and line
-		// two a left to right one.
+		// emitted line on its own gives line one a right-to-left base and line
+		// two a left-to-right one.
 		cell := &entity.Cell{X: 0, Y: 0, Width: 40, Height: 100}
 		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
 		textProp := &props.Text{
@@ -204,9 +204,9 @@ func TestText_Add_RTL(t *testing.T) {
 		pdf.EXPECT().GetStringWidth("Hello " + marhabaShaped).Return(35.0)
 		pdf.EXPECT().GetStringWidth("Wide " + jiddanShaped).Return(24.0)
 		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
-		// Line 0 has a right to left base: the Latin run goes to the left.
+		// Line 0 has a right-to-left base: the Latin run goes to the left.
 		pdf.EXPECT().Text(0.0, 5.0, "Hello "+marhabaShaped)
-		// Line 1 has a left to right base: the run order is kept.
+		// Line 1 has a left-to-right base: the run order is kept.
 		pdf.EXPECT().Text(0.0, 10.0, "Wide "+jiddanShaped)
 
 		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)

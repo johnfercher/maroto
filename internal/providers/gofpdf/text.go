@@ -117,7 +117,7 @@ func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth floa
 }
 
 // processLine returns the line in the form the writer has to draw it. For a
-// right to left text that means the Arabic letters replaced by their
+// right-to-left text that means the Arabic letters replaced by their
 // contextual forms and the bidirectional runs laid out visually.
 //
 // It must only be called on a text that already is a single line: processing a
@@ -133,7 +133,7 @@ func (s *Text) processLine(text string, textProp *props.Text) string {
 // getStringWidth measures a text in the form it is going to be drawn. The
 // presentation forms do not share the metrics of the letters they replace, and
 // the mandatory ligatures contract two letters into a single glyph, so
-// measuring the logical text would break the line wrapping of a right to left
+// measuring the logical text would break the line wrapping of a right-to-left
 // text.
 func (s *Text) getStringWidth(text string, textProp *props.Text) float64 {
 	return s.pdf.GetStringWidth(s.processLine(text, textProp))
@@ -177,9 +177,9 @@ func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64, t
 //
 // Arabic does not hyphenate, and the width of a letter here is measured on the
 // logical character rather than on the presentation form it will be drawn
-// with, so the break positions of a right to left text are only approximate.
+// with, so the break positions of a right-to-left text are only approximate.
 // The lines it returns are still shaped and reordered before being drawn. Use
-// breakline.EmptySpaceStrategy, the default, for right to left text.
+// breakline.EmptySpaceStrategy, the default, for right-to-left text.
 func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []string {
 	currentlySize := 0.0
 
