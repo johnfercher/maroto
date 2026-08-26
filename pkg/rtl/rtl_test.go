@@ -249,13 +249,13 @@ func TestProcess_MixedRuns(t *testing.T) {
 			expected: marhaba + " 42",
 		},
 		{
-			name:     "when digits are embedded, should keep them in left to right order",
+			name:     "when digits are embedded, should keep them in left-to-right order",
 			input:    "مرحبا 42 عام",
 			expected: "ﻡﺎﻋ 42 " + marhaba,
 		},
 		{
 			// Arabic-Indic digits read left to right just like the ASCII ones.
-			name:     "when arabic indic digits are embedded, should keep them in left to right order",
+			name:     "when arabic indic digits are embedded, should keep them in left-to-right order",
 			input:    "عمر ٤٢",
 			expected: "٤٢ ﺮﻤﻋ",
 		},
@@ -279,6 +279,55 @@ func TestProcess_MixedRuns(t *testing.T) {
 			name:     "when the text ends in an arabic question mark, should place it on the left",
 			input:    "ما؟",
 			expected: "؟ﺎﻣ",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			assert.Equal(t, tt.expected, rtl.Process(tt.input))
+		})
+	}
+}
+
+func TestProcess_MirroredBrackets(t *testing.T) {
+	t.Parallel()
+
+	const marhaba = "ﺎﺒﺣﺮﻣ"
+
+	tests := []struct {
+		name     string
+		input    string
+		expected string
+	}{
+		{
+			// The brackets travel to the opposite side of the run, so each one
+			// has to become its counterpart to still open and close the group.
+			name:     "when brackets wrap an embedded latin run, should mirror them",
+			input:    "مرحبا (Maroto) لغة",
+			expected: "ﺔﻐﻟ (Maroto) " + marhaba,
+		},
+		{
+			name:     "when brackets wrap arabic, should mirror them",
+			input:    "(مرحبا)",
+			expected: "(" + marhaba + ")",
+		},
+		{
+			name:     "when square brackets wrap embedded digits, should mirror them",
+			input:    "مرحبا [42] عام",
+			expected: "ﻡﺎﻋ [42] " + marhaba,
+		},
+		{
+			name:     "when braces wrap an arabic word, should mirror them",
+			input:    "مرحبا {عام} لغة",
+			expected: "ﺔﻐﻟ {ﻡﺎﻋ} " + marhaba,
+		},
+		{
+			// The base direction is left to right, so the brackets stay in a
+			// left-to-right run and must be left alone.
+			name:     "when the base direction is left to right, should keep the brackets as they are",
+			input:    "Hi (مرحبا) there",
+			expected: "Hi (" + marhaba + ") there",
 		},
 	}
 

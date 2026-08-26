@@ -7,7 +7,7 @@ import (
 	"golang.org/x/text/unicode/bidi"
 )
 
-// reorder turns a logical order string into the visual order a left to right
+// reorder turns a logical order string into the visual order a left-to-right
 // writer such as the PDF text operator must emit to display it correctly.
 //
 // Run segmentation and the resolution of neutral characters (spaces,
@@ -84,6 +84,11 @@ func baseDirection(text string) bidi.Direction {
 // reverseClusters reverses text keeping every combining mark attached to, and
 // positioned after, the base character it decorates. Reversing rune by rune
 // would move the marks onto the wrong character.
+//
+// Paired brackets are replaced by their counterpart on the way, as the UAX#9
+// rule L4 requires: the writer draws the glyph of the code point it is handed
+// and mirrors nothing on its own, so an opening parenthesis moved into the
+// position of a closing one has to become a closing parenthesis.
 func reverseClusters(text string) string {
 	var (
 		out     []rune
@@ -101,11 +106,24 @@ func reverseClusters(text string) string {
 			continue
 		}
 		flush()
-		current = []rune{r}
+		current = []rune{mirror(r)}
 	}
 	flush()
 
 	return string(out)
+}
+
+// mirror returns the counterpart of a paired bracket and every other character
+// unchanged. Reversing a single character string is the only way the bidi
+// package exposes its mirroring table: the reversal itself is a no-op on one
+// character and leaves the substitution behind.
+func mirror(r rune) rune {
+	properties, _ := bidi.LookupRune(r)
+	if !properties.IsBracket() {
+		return r
+	}
+
+	return []rune(bidi.ReverseString(string(r)))[0]
 }
 
 func reverseSlice(values []string) {
