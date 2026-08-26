@@ -2,8 +2,7 @@ package main
 
 import (
 	"os"
-	"path"
-	"strings"
+	"path/filepath"
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/pkg/test"
@@ -24,6 +23,6 @@ func buildPath(file string) string {
 		return ""
 	}
 
-	dir = strings.ReplaceAll(dir, "docs/assets/examples/arabic/v2", "")
-	return path.Join(dir, file)
+	dir = filepath.Join(dir, "..", "..", "..", "..", "..")
+	return filepath.Join(dir, file)
 }
