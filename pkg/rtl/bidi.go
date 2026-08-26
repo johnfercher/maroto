@@ -126,6 +126,10 @@ func mirror(r rune) rune {
 	return []rune(bidi.ReverseString(string(r)))[0]
 }
 
+// reverseSlice reverses the runs in place. bidi.Ordering hands them out in
+// logical order, and in a right-to-left paragraph the visual order a
+// left-to-right writer must emit is the exact opposite: this is the UAX#9
+// rule L2 reordering under the two-level model described on reorder.
 func reverseSlice(values []string) {
 	for i, j := 0, len(values)-1; i < j; i, j = i+1, j-1 {
 		values[i], values[j] = values[j], values[i]
