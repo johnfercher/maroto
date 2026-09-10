@@ -10,12 +10,12 @@
 
 ### News :new:
 
-#### 1. Maroto`v2.4.1`is here! Try out:
+#### 1. Maroto`v2.4.2`is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2@v2.4.1
+go get github.com/johnfercher/maroto/v2@v2.4.2
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
