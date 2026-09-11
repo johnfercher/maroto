@@ -10,6 +10,11 @@ type Checkbox struct {
 	Left float64
 	// Size is the size of the checkbox square in mm.
 	Size float64
+	// RTL enables the right-to-left processing of the label, shaping the
+	// Arabic letters into their contextual forms and reordering the
+	// bidirectional runs. A label without Arabic characters is left untouched
+	// even when this is enabled.
+	RTL bool
 }
 
 // ToMap converts a Checkbox to a map.
@@ -30,6 +35,10 @@ func (c *Checkbox) ToMap() map[string]any {
 
 	if c.Size != 0 {
 		m["prop_size"] = c.Size
+	}
+
+	if c.RTL {
+		m["prop_rtl"] = c.RTL
 	}
 
 	return m

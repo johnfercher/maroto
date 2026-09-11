@@ -158,3 +158,57 @@ func TestCheckbox_Add(t *testing.T) {
 		sut.Add("", cell, prop)
 	})
 }
+
+func TestCheckbox_Add_RTL(t *testing.T) {
+	t.Parallel()
+	t.Run("when rtl is enabled, should shape and reorder the label", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := &entity.Cell{X: 0, Y: 0}
+		prop := &props.Checkbox{
+			Checked: false,
+			Size:    10,
+			RTL:     true,
+		}
+
+		fpdf := mocks.NewFpdf(t)
+		fpdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		fpdf.EXPECT().Rect(0.0, 0.0, 10.0, 10.0, "D")
+		// labelX = 0 + 10 + 1 = 11
+		// labelY = 0 + 5 + 2 = 7
+		// "نعم" reaches the writer shaped and in visual order.
+		fpdf.EXPECT().Text(11.0, 7.0, "ﻢﻌﻧ")
+
+		font := mocks.NewFont(t)
+		font.EXPECT().GetFont().Return(fontfamily.Arial, fontstyle.Normal, 12.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 12.0).Return(4.0)
+
+		sut := gofpdf.NewCheckbox(fpdf, font)
+
+		// Act
+		sut.Add("نعم", cell, prop)
+	})
+	t.Run("when rtl is disabled, should write the label untouched", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := &entity.Cell{X: 0, Y: 0}
+		prop := &props.Checkbox{
+			Checked: false,
+			Size:    10,
+		}
+
+		fpdf := mocks.NewFpdf(t)
+		fpdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		fpdf.EXPECT().Rect(0.0, 0.0, 10.0, 10.0, "D")
+		fpdf.EXPECT().Text(11.0, 7.0, "نعم")
+
+		font := mocks.NewFont(t)
+		font.EXPECT().GetFont().Return(fontfamily.Arial, fontstyle.Normal, 12.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 12.0).Return(4.0)
+
+		sut := gofpdf.NewCheckbox(fpdf, font)
+
+		// Act
+		sut.Add("نعم", cell, prop)
+	})
+}
