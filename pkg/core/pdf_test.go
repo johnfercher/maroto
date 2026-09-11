@@ -3,8 +3,7 @@ package core_test
 import (
 	"fmt"
 	"os"
-	"path"
-	"strings"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -157,6 +156,5 @@ func buildPath(file string) string {
 		return ""
 	}
 
-	dir = strings.ReplaceAll(dir, "pkg/core/entity", "")
-	return path.Join(dir, file)
+	return filepath.Join(dir, file)
 }

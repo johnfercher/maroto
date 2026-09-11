@@ -3,8 +3,7 @@ package cache_test
 import (
 	"fmt"
 	"os"
-	"path"
-	"strings"
+	"path/filepath"
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
@@ -110,6 +109,6 @@ func buildPath(file string) string {
 		return ""
 	}
 
-	dir = strings.ReplaceAll(dir, "internal/cache", "")
-	return path.Join(dir, file)
+	dir = filepath.Join(dir, "..", "..")
+	return filepath.Join(dir, file)
 }
