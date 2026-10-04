@@ -32,14 +32,23 @@ go get github.com/johnfercher/maroto/v2@v2.4.3
 
 ![result](docs/assets/images/result.png)
 
-## Using maroto with AI agents
+## Agent Skills
 
-The skills in [`skills/pdf/`](skills/pdf) (see [`skills/README.md`](skills/README.md)) teach an LLM/agent how to write Go code
-that generates PDFs with maroto: setup, config, grid layout, components, tables and testing.
-Point your agent (Claude, Copilot, Cursor, etc.) at
-[`skills/pdf/generation.md`](skills/pdf/generation.md) — or copy the `skills/pdf/` folder into your
-own project's skills directory — and it will follow the library's conventions and avoid the
-common layout pitfalls.
+Maroto ships [skills](skills) for AI coding agents (Claude, Copilot, Cursor, etc.): Markdown
+instruction files that teach an agent how to generate PDFs with maroto, with every default and
+pitfall spelled out. Copy [`skills/pdf/`](skills/pdf) into your project and point your agent at
+[`skills/pdf/generation.md`](skills/pdf/generation.md); it routes to the others.
+
+| Skill | Covers |
+|-------|--------|
+| [generation.md](skills/pdf/generation.md) | Install, program skeleton, output, errors — **start here** |
+| [config.md](skills/pdf/config.md) | `config.NewBuilder()` options: page, margins, fonts, page numbers, metadata, protection |
+| [layout.md](skills/pdf/layout.md) | Grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
+| [components.md](skills/pdf/components.md) | Text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures |
+| [tables.md](skills/pdf/tables.md) | Tabular data with `list.Build` or manual loops, striping, borders, pagination |
+| [testing.md](skills/pdf/testing.md) | `pkg/test` fixtures and layout debugging |
+
+Full description on the [docs site](https://maroto.tech/#/v2/skills?id=agent-skills).
 
 ## Contributing
 
