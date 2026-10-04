@@ -420,14 +420,23 @@ func TestMaroto_Generate(t *testing.T) {
 		_, err1 := sut.Generate()
 		_, err2 := sut.Generate()
 		_, err3 := sut.Generate()
-		time.Sleep(100 * time.Millisecond)
-		finalGoroutines := runtime.NumGoroutine()
 
 		// Assert
 		assert.Nil(t, err1)
 		assert.Nil(t, err2)
 		assert.Nil(t, err3)
-		assert.Equal(t, initialGoroutines, finalGoroutines)
+		// Other tests run in parallel with this one and start/stop goroutines of
+		// their own, so the count can only be checked as an upper bound and must
+		// be allowed to settle instead of being sampled once. Polling is done
+		// inline because assert.Eventually would run the check in a goroutine
+		// of its own and skew the count.
+		deadline := time.Now().Add(5 * time.Second)
+		finalGoroutines := runtime.NumGoroutine()
+		for finalGoroutines > initialGoroutines && time.Now().Before(deadline) {
+			time.Sleep(10 * time.Millisecond)
+			finalGoroutines = runtime.NumGoroutine()
+		}
+		assert.LessOrEqual(t, finalGoroutines, initialGoroutines)
 	})
 	t.Run("when two pages are sent and page number is active, should add page number", func(t *testing.T) {
 		// Arrange
