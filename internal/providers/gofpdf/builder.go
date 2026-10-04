@@ -1,6 +1,8 @@
 package gofpdf
 
 import (
+	"slices"
+
 	"github.com/phpdave11/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
@@ -51,7 +53,7 @@ func (b *builder) Build(cfg *entity.Config, cache cache.Cache) *Dependencies {
 	})
 
 	for _, font := range cfg.CustomFonts {
-		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), font.GetBytes())
+		fpdf.AddUTF8FontFromBytes(font.GetFamily(), string(font.GetStyle()), slices.Clone(font.GetBytes()))
 	}
 
 	if cfg.DisableAutoPageBreak {

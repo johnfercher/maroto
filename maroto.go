@@ -3,8 +3,8 @@ package maroto
 import (
 	"errors"
 	"math"
+	"sync"
 
-	"github.com/f-amaral/go-async/pool"
 	"github.com/johnfercher/maroto/v2/pkg/consts/generation"
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
@@ -290,9 +290,6 @@ func (m *Maroto) generate() (core.Document, error) {
 }
 
 func (m *Maroto) generateConcurrently() (core.Document, error) {
-	p := pool.NewPool[[]core.Page, []byte](m.config.ChunkWorkers, m.processPage,
-		pool.WithSortingOutput[[]core.Page, []byte]())
-	defer p.Close()
 	chunks := len(m.pages) / m.config.ChunkWorkers
 	if chunks == 0 {
 		chunks = 1
@@ -303,15 +300,36 @@ func (m *Maroto) generateConcurrently() (core.Document, error) {
 		pageGroups = append(pageGroups, m.pages[i:end])
 	}
 
-	processed := p.Process(pageGroups)
-	if processed.HasError {
-		return nil, ErrCannotGenerateInParallelMode
-	}
+	pdfs := make([][]byte, len(pageGroups))
+	errs := make([]error, len(pageGroups))
 
-	pdfs := make([][]byte, len(processed.Results))
-	for i, result := range processed.Results {
-		bytes, _ := result.Output.([]byte)
-		pdfs[i] = bytes
+	jobs := make(chan int, len(pageGroups))
+	for i := range pageGroups {
+		jobs <- i
+	}
+	close(jobs)
+
+	workers := min(m.config.ChunkWorkers, len(pageGroups))
+	var wg sync.WaitGroup
+	wg.Add(workers)
+	for range workers {
+		go func() {
+			defer wg.Done()
+			for i := range jobs {
+				bytes, err := m.processPage(pageGroups[i])
+				pdfs[i] = bytes
+				errs[i] = err
+			}
+		}()
+	}
+	// Waiting here guarantees every worker goroutine has exited before
+	// Generate returns, instead of merely being asked to stop.
+	wg.Wait()
+
+	for _, err := range errs {
+		if err != nil {
+			return nil, ErrCannotGenerateInParallelMode
+		}
 	}
 
 	mergedBytes, err := merge.Bytes(pdfs...)

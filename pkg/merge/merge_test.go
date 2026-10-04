@@ -1,6 +1,7 @@
 package merge_test
 
 import (
+	"sync"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -43,5 +44,71 @@ func TestBytes(t *testing.T) {
 		// Assert
 		assert.Nil(t, result)
 		assert.ErrorIs(t, err, merge.ErrCannotMergePDFs)
+	})
+	t.Run("when nil PDF bytes are provided, should return wrapped error", func(t *testing.T) {
+		t.Parallel()
+		// Act
+		result, err := merge.Bytes(nil)
+
+		// Assert
+		assert.Nil(t, result)
+		assert.ErrorIs(t, err, merge.ErrCannotMergePDFs)
+	})
+	t.Run("when empty PDF bytes are provided, should return wrapped error", func(t *testing.T) {
+		t.Parallel()
+		// Act
+		result, err := merge.Bytes([]byte{})
+
+		// Assert
+		assert.Nil(t, result)
+		assert.ErrorIs(t, err, merge.ErrCannotMergePDFs)
+	})
+}
+
+func TestBytes_ConcurrentCalls(t *testing.T) {
+	t.Parallel()
+	t.Run("when valid PDFs are merged concurrently, should return every result", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		document := maroto.New()
+		document.AddRows(text.NewRow(10, "concurrent"))
+		generated, err := document.Generate()
+		if !assert.NoError(t, err) {
+			return
+		}
+		pdf := generated.GetBytes()
+		const workers = 16
+		start := make(chan struct{})
+		results := make(chan []byte, workers)
+		errCh := make(chan error, workers)
+		var waitGroup sync.WaitGroup
+
+		// Act
+		waitGroup.Add(workers)
+		for range workers {
+			go func() {
+				defer waitGroup.Done()
+				<-start
+				result, err := merge.Bytes(pdf, pdf, pdf)
+				if err != nil {
+					errCh <- err
+					return
+				}
+				results <- result
+			}()
+		}
+		close(start)
+		waitGroup.Wait()
+		close(results)
+		close(errCh)
+
+		// Assert
+		for err := range errCh {
+			assert.NoError(t, err)
+		}
+		assert.Len(t, results, workers)
+		for result := range results {
+			assert.NotEmpty(t, result)
+		}
 	})
 }

@@ -6,11 +6,14 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"sync"
 
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 )
 
 var ErrCannotMergePDFs = errors.New("cannot merge PDFs")
+
+var loadDefaultConfiguration = sync.OnceValue(api.LoadConfiguration)
 
 // Bytes merges PDFs from byte slices.
 func Bytes(pdfs ...[]byte) ([]byte, error) {
@@ -30,9 +33,9 @@ func Bytes(pdfs ...[]byte) ([]byte, error) {
 }
 
 func mergePdfs(readers []io.ReadSeeker, writer io.Writer, dividerPage bool) error {
-	conf := api.LoadConfiguration()
+	conf := *loadDefaultConfiguration()
 	conf.WriteXRefStream = false
-	err := api.MergeRaw(readers, writer, dividerPage, conf)
+	err := api.MergeRaw(readers, writer, dividerPage, &conf)
 	if err != nil {
 		return fmt.Errorf("%w: %w", ErrCannotMergePDFs, err)
 	}
