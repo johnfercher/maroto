@@ -13,7 +13,7 @@ See also:
 ## 1. golangci-lint is the static reviewer
 
 Run `make lint` (or `go tool -modfile=tools/go.mod golangci-lint run --config=.golangci.yml ./...`
-directly) before treating a change as done — see [contribution.md](contribution.md#8-definition-of-done)
+directly) before treating a change as done — see [contribution.md](contribution.md#9-definition-of-done)
 for how this fits into `make dod`. Don't hand-review for things the linter already checks
 automatically; read `.golangci.yml` instead of guessing what's enabled.
 

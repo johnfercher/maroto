@@ -8,6 +8,8 @@ See also:
 - [mocks.md](mocks.md) for generating/using mocks referenced by the checklist.
 - [code-quality.md](code-quality.md) for what `make lint` enforces and the SOLID patterns to
   follow in any non-test Go code touched by the change.
+- [skills/pdf/generation.md](../../skills/pdf/generation.md) and its siblings — the library-usage skills that §6
+  requires you to keep in sync with every user-facing change.
 
 ## Instructions
 
@@ -78,7 +80,41 @@ func (s *Font) GetFamily() string { ... }
   feature, update that page (and its example under `docs/assets/examples/`) in place rather than
   creating a new one.
 
-### 6. `example_test.go`
+### 6. `skills/pdf/*` (library-usage skills)
+[`skills/pdf/`](../../skills/pdf) at the repository root holds the skills that teach agents how to
+**use** maroto from Go code (start at [skills/pdf/generation.md](../../skills/pdf/generation.md)).
+They are meant for people and agents outside this repository, which is why they live apart from the
+contributor skills in `.github/skills`. They are only useful while they match the
+public behaviour of the library exactly, so **any PR that adds, changes or removes a user-facing
+feature must update the matching skill in the same PR** — treat this like the `docs/*` item above,
+not as optional polish. "User-facing" means anything a consumer of the module can observe:
+
+| Change                                                        | Update                                                                 |
+|---------------------------------------------------------------|------------------------------------------------------------------------|
+| New component package, or new/renamed constructor (`New*`, `NewCol`, `NewRow`, `NewAutoRow`) | [skills/pdf/components.md](../../skills/pdf/components.md) (new section or constructor table), the import cheat-sheet and constructor table in [skills/pdf/generation.md](../../skills/pdf/generation.md), the auto-height table in [skills/pdf/layout.md](../../skills/pdf/layout.md) |
+| New/changed/removed field in a `props.*` struct, or a default/clamp in its `MakeValid` | The props table of that component in [skills/pdf/components.md](../../skills/pdf/components.md) (or the `props.Cell` table in [skills/pdf/layout.md](../../skills/pdf/layout.md), `props.PageNumber`/`props.Font` in [skills/pdf/config.md](../../skills/pdf/config.md)) |
+| New/changed `config.Builder` method, default value or validation rule | [skills/pdf/config.md](../../skills/pdf/config.md) — the relevant section and the defaults table |
+| New constant in `pkg/consts/*` (font style, page size, barcode type, border, …) | The place that lists the enum: [skills/pdf/components.md](../../skills/pdf/components.md), [skills/pdf/config.md](../../skills/pdf/config.md), and the import cheat-sheet comments in [skills/pdf/generation.md](../../skills/pdf/generation.md) |
+| New `core.Maroto` / `core.Document` method, or new exported error                    | The method/output/error tables in [skills/pdf/generation.md](../../skills/pdf/generation.md) |
+| Change to row/column/page behaviour (height calculation, page break, header/footer rules, `list.Build` semantics) | [skills/pdf/layout.md](../../skills/pdf/layout.md) and/or [skills/pdf/tables.md](../../skills/pdf/tables.md); the symptom table in [skills/pdf/testing.md](../../skills/pdf/testing.md) if a documented pitfall disappears or a new one appears |
+| Change to `pkg/test`, `.maroto.yml` handling or the structure JSON                   | [skills/pdf/testing.md](../../skills/pdf/testing.md) |
+| A whole new feature that fits none of the above                                       | Add a numbered section to the closest skill, or a new file under `skills/pdf/` listed in [`skills/README.md`](../../skills/README.md) and in the table in [`AGENTS.md`](../../AGENTS.md), with a section and a table row added to [`docs/v2/skills.md`](../../docs/v2/skills.md) and in the "See also" block of [skills/pdf/generation.md](../../skills/pdf/generation.md) |
+
+Rules for the edit itself:
+- Keep the skill's claims literally true to the code: defaults come from the `MakeValid`/builder
+  source, not from memory. If a sentence in a skill becomes false because of the change, fix the
+  sentence — don't leave a stale gotcha.
+- Every Go block in these skills must compile against the current module. After editing a block,
+  paste it into a scratch `main` package that `replace`s `github.com/johnfercher/maroto/v2` with
+  this checkout and run `go vet` (and `go run` when the block builds a document). Fragments that
+  start with `func`/`type`/`var` are expected to compile once imports are added with `goimports`.
+- Follow the existing structure of the file (`See also` → `## Instructions` with numbered `###`
+  sections → `## References`) and the existing table formats, so agents reading several skills see
+  one convention.
+- When the change also touched `docs/v2/features/<name>.md`, link the skill section to the same
+  runnable example under `docs/assets/examples/` so the two never drift apart.
+
+### 7. `example_test.go`
 If the change adds or changes a public entry point that's useful to demonstrate, add or update an
 `Example<Type>_<Method>` function in `example_test.go`:
 ```go
@@ -88,11 +124,11 @@ func ExampleMaroto_AddPages() {
 }
 ```
 
-### 7. `README.md`
+### 8. `README.md`
 Update `README.md` if the change affects installation, the `make` command table, or anything else
 described there.
 
-### 8. Definition of Done
+### 9. Definition of Done
 Before opening the PR, run:
 ```
 make dod
@@ -132,7 +168,7 @@ with `go tool -modfile=tools/go.mod <name>`, which builds and runs the exact ver
 of these tools, run `go get -tool <module>@<version>` **from inside `tools/`**, never from the
 repo root (that would add it to the main `go.mod` instead).
 
-### 9. Description and related issue
+### 10. Description and related issue
 When opening the PR, fill in:
 - **Description**: how the PR is useful, and any tricky technical detail.
 - **Related Issue**: a reference to the issue it closes/relates to, if any.
