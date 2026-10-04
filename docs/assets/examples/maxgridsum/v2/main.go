@@ -47,7 +47,7 @@ func GetMaroto() core.Maroto {
 
 	var headers []core.Col
 	var contents []core.Col
-	for i := 0; i < gridSum; i++ {
+	for i := range gridSum {
 		headers = append(headers, text.NewCol(1, fmt.Sprintf("H %d", i), props.Text{Style: fontstyle.Bold, Top: 1.5, Left: 1.5}))
 		contents = append(contents, text.NewCol(1, fmt.Sprintf("C %d", i), props.Text{Top: 1, Left: 1.5, Size: 9}))
 	}

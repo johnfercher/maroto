@@ -13,10 +13,8 @@ type BorderLineStyler struct {
 
 func NewBorderLineStyler(fpdf gofpdfwrapper.Fpdf) *BorderLineStyler {
 	return &BorderLineStyler{
-		stylerTemplate: stylerTemplate{
-			fpdf: fpdf,
-			name: "borderLineStyler",
-		},
+		fpdf: fpdf,
+		name: "borderLineStyler",
 	}
 }
 

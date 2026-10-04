@@ -60,7 +60,7 @@ func GetMaroto() core.Maroto {
 		log.Fatal(err)
 	}
 
-	for i := 0; i < 10; i++ {
+	for range 10 {
 		m.AddRows(text.NewRow(30, "any text"))
 	}
 

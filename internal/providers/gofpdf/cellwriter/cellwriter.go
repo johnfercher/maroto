@@ -21,10 +21,8 @@ type cellWriter struct {
 
 func NewCellWriter(fpdf gofpdfwrapper.Fpdf) CellWriter {
 	return &cellWriter{
-		stylerTemplate: stylerTemplate{
-			fpdf: fpdf,
-			name: "cellWriter",
-		},
+		fpdf:         fpdf,
+		name:         "cellWriter",
 		defaultColor: &props.BlackColor,
 	}
 }

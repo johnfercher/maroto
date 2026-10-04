@@ -37,7 +37,7 @@ var background = &props.Color{
 
 func main() {
 	var builder strings.Builder
-	for i := 0; i < 100; i++ {
+	for i := range 100 {
 		fmt.Println(i)
 		builder.WriteString(fmt.Sprintf("%f", run().Value) + "\n")
 	}
@@ -78,7 +78,7 @@ func run() *metrics.Time {
 
 	m.AddRows(rows...)
 
-	for i := 0; i < 1158; i++ {
+	for range 1158 {
 		m.AddRows(buildCodesRow()...)
 		m.AddRows(buildImagesRow()...)
 		m.AddRows(buildTextsRow()...)
@@ -88,7 +88,7 @@ func run() *metrics.Time {
 		text.NewRow(15, "Dummy Data", props.Text{Size: 12, Top: 5, Align: align.Center}),
 	)
 
-	for i := 0; i < 1158; i++ {
+	for range 1158 {
 		m.AddRows(text.NewRow(20, dummyText+dummyText+dummyText+dummyText+dummyText))
 	}
 
@@ -209,7 +209,7 @@ func (o Object) GetContent(i int) core.Row {
 
 func getObjects(maxObjects int) []Object {
 	var objects []Object
-	for i := 0; i < maxObjects; i++ {
+	for i := range maxObjects {
 		objects = append(objects, Object{
 			Key:   fmt.Sprintf("Key: %d", i),
 			Value: fmt.Sprintf("Bytes: %d", i),

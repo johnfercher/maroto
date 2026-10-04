@@ -3,8 +3,8 @@ package gofpdf
 import (
 	"bytes"
 	"errors"
+	"uuid"
 
-	"github.com/google/uuid"
 	"github.com/phpdave11/gofpdf"
 
 	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf/gofpdfwrapper"
@@ -31,7 +31,7 @@ func NewImage(pdf gofpdfwrapper.Fpdf, math core.Math) *Image {
 
 // GetImageInfo is responsible for loading the image in PDF and returning its information.
 func (s *Image) GetImageInfo(img *entity.Image, extension extension.Type) (*gofpdf.ImageInfoType, uuid.UUID) {
-	imageID, _ := uuid.NewRandom()
+	imageID := uuid.New()
 
 	info := s.pdf.RegisterImageOptionsReader(
 		imageID.String(),
@@ -48,7 +48,7 @@ func (s *Image) GetImageInfo(img *entity.Image, extension extension.Type) (*gofp
 func (s *Image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, extension extension.Type, flow bool,
 ) error {
-	imageID, _ := uuid.NewRandom()
+	imageID := uuid.New()
 
 	info := s.pdf.RegisterImageOptionsReader(
 		imageID.String(),

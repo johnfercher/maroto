@@ -184,13 +184,10 @@ func hasFileInPath(file string, path string) (bool, error) {
 }
 
 func getParentDir(path string) string {
-	dirs := strings.Split(path, "/")
-	dirs = dirs[:len(dirs)-2]
-
-	var builder strings.Builder
-	for _, dir := range dirs {
-		builder.WriteString(dir + "/")
+	parent, _, found := strings.CutLast(strings.TrimSuffix(path, "/"), "/")
+	if !found {
+		return ""
 	}
 
-	return builder.String()
+	return parent + "/"
 }

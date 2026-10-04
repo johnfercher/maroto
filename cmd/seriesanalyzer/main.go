@@ -18,8 +18,8 @@ func main() {
 
 	var values []float64
 	var sum float64
-	lines := strings.Split(stringContent, "\n")
-	for _, line := range lines {
+	lines := strings.SplitSeq(stringContent, "\n")
+	for line := range lines {
 		if line == "" {
 			continue
 		}

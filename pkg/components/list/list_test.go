@@ -112,7 +112,7 @@ func TestBuildFromPointer(t *testing.T) {
 func buildList(qtd int) []anyType {
 	var arr []anyType
 
-	for i := 0; i < qtd; i++ {
+	for i := range qtd {
 		arr = append(arr, anyType{
 			Key:   fmt.Sprintf("key(%d)", i),
 			Value: fmt.Sprintf("value(%d)", i),
@@ -125,7 +125,7 @@ func buildList(qtd int) []anyType {
 func buildPointerList(qtd int) []*anyType {
 	var arr []*anyType
 
-	for i := 0; i < qtd; i++ {
+	for i := range qtd {
 		arr = append(arr, &anyType{
 			Key:   fmt.Sprintf("key(%d)", i),
 			Value: fmt.Sprintf("value(%d)", i),

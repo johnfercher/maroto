@@ -1,10 +1,9 @@
 module github.com/johnfercher/maroto/v2
 
-go 1.26.1
+go 1.27.1
 
 require (
 	github.com/boombuler/barcode v1.1.0
-	github.com/google/uuid v1.6.0
 	github.com/johnfercher/go-tree v1.1.0
 	github.com/pdfcpu/pdfcpu v0.11.1
 	github.com/phpdave11/gofpdf v1.4.3

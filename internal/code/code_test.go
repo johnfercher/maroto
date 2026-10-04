@@ -179,7 +179,7 @@ func TestCode_GenQr(t *testing.T) {
 
 func genStringWithLength(length int) string {
 	var builder strings.Builder
-	for i := 0; i < length; i++ {
+	for range length {
 		builder.WriteString("a")
 	}
 	return builder.String()
