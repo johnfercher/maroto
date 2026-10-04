@@ -194,4 +194,4 @@ layout, off before shipping — it is part of the rendered output, not a log.
 - Feature pages: https://maroto.tech/#/v2/features/custompage, `customdimensions`, `margins`,
   `maxgridsum`, `orientation`, `pagenumber`, `customfont`, `metadatas`, `protection`,
   `compression`, `background`, `disablepagebreak`, `parallelism`, `lowmemory`
-- Builder source with validation rules: [`pkg/config/builder.go`](../../../pkg/config/builder.go)
+- Builder source with validation rules: [`pkg/config/builder.go`](../../pkg/config/builder.go)

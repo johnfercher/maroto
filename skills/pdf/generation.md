@@ -24,7 +24,7 @@ go get github.com/johnfercher/maroto/v2@latest
 
 The module path is `github.com/johnfercher/maroto/v2` — the `/v2` suffix is part of every import
 path. The consuming module must use a Go version at least as new as the `go` directive in
-maroto's own [`go.mod`](../../../go.mod) for the release being pinned.
+maroto's own [`go.mod`](../../go.mod) for the release being pinned.
 
 ### 2. Mental model
 
@@ -244,5 +244,5 @@ Predefined colors are **values**, so take their address: `Color: &props.RedColor
 
 - Docs site (feature pages with rendered PDFs): https://maroto.tech/#/v2/features/basics
 - GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2
-- Complete runnable examples in this repository: [`docs/assets/examples/*/v2/main.go`](../../../docs/assets/examples)
+- Complete runnable examples in this repository: [`docs/assets/examples/*/v2/main.go`](../../docs/assets/examples)
   — start from `simplest` and `billing`.
