@@ -67,7 +67,7 @@ func TestText_MakeValid(t *testing.T) {
 		// Assert
 		assert.Equal(t, align.Left, prop.Align)
 	})
-	t.Run("when top is less than 0, should become 0", func(t *testing.T) {
+	t.Run("when top is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Text{
@@ -78,9 +78,9 @@ func TestText_MakeValid(t *testing.T) {
 		prop.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Top)
+		assert.Equal(t, -5.0, prop.Top)
 	})
-	t.Run("when left is less than 0, should become 0", func(t *testing.T) {
+	t.Run("when left is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Text{
@@ -91,9 +91,9 @@ func TestText_MakeValid(t *testing.T) {
 		prop.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Left)
+		assert.Equal(t, -5.0, prop.Left)
 	})
-	t.Run("when right is less than 0, should become 0", func(t *testing.T) {
+	t.Run("when right is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Text{
@@ -104,7 +104,7 @@ func TestText_MakeValid(t *testing.T) {
 		prop.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Right)
+		assert.Equal(t, -5.0, prop.Right)
 	})
 	t.Run("when vertical padding is less than 0, should become 0", func(t *testing.T) {
 		t.Parallel()
@@ -133,7 +133,7 @@ func TestText_MakeValid(t *testing.T) {
 		// Assert
 		assert.Equal(t, color, prop.Color)
 	})
-	t.Run("when bottom is less than 0, should become 0", func(t *testing.T) {
+	t.Run("when bottom is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Text{
@@ -144,7 +144,7 @@ func TestText_MakeValid(t *testing.T) {
 		prop.MakeValid(&props.Font{Family: fontfamily.Arial, Size: 10, Style: fontstyle.Normal})
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Bottom)
+		assert.Equal(t, -5.0, prop.Bottom)
 	})
 	t.Run("when break line strategy is empty, should apply empty space strategy", func(t *testing.T) {
 		t.Parallel()

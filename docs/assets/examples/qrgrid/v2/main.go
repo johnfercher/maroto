@@ -110,5 +110,10 @@ func GetMaroto() core.Maroto {
 			JustReferenceWidth: true,
 		}),
 	)
+
+	m.AddRow(40,
+		code.NewQrCol(6, "https://github.com/johnfercher/maroto", props.Rect{Left: -4, Top: -3, Percent: 70}),
+		code.NewQrCol(6, "https://github.com/johnfercher/maroto", props.Rect{Left: 4, Top: 3, Percent: 70}),
+	)
 	return m
 }

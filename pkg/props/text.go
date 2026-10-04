@@ -89,7 +89,6 @@ func (t *Text) ToMap() map[string]any {
 
 // MakeValid from Text define default values for a Text.
 func (t *Text) MakeValid(font *Font) {
-	minValue := 0.0
 	undefinedValue := 0.0
 
 	if t.Family == "" {
@@ -110,22 +109,6 @@ func (t *Text) MakeValid(font *Font) {
 
 	if t.Align == "" {
 		t.Align = align.Left
-	}
-
-	if t.Top < minValue {
-		t.Top = minValue
-	}
-
-	if t.Bottom < minValue {
-		t.Bottom = minValue
-	}
-
-	if t.Left < minValue {
-		t.Left = minValue
-	}
-
-	if t.Right < minValue {
-		t.Right = minValue
 	}
 
 	if t.VerticalPadding < 0 {

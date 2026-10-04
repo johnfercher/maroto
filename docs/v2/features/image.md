@@ -10,8 +10,8 @@ Both sources expose the same set of constructors — `New`, `NewCol`, `NewRow`, 
 |-------|------|---------|-------------|
 | `Percent` | `float64` | `100` | How much of the cell the image occupies (0–100) |
 | `Center` | `bool` | `false` | Horizontally and vertically center the image |
-| `Left` | `float64` | `0` | Left offset in mm — ignored when `Center` is true |
-| `Top` | `float64` | `0` | Top offset in mm — ignored when `Center` is true |
+| `Left` | `float64` | `0` | Left offset in mm — ignored when `Center` is true. Accepts negative values (nudges the image outside the cell on the left). |
+| `Top` | `float64` | `0` | Top offset in mm — ignored when `Center` is true. Accepts negative values. |
 | `JustReferenceWidth` | `bool` | `false` | Scale only by width, ignore available height — required for correct auto-row sizing |
 
 ## Usage notes

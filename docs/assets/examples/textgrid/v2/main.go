@@ -125,5 +125,10 @@ func GetMaroto() core.Maroto {
 			},
 		),
 	)
+
+	m.AddRow(15,
+		text.NewCol(6, "negative left: past the left edge", props.Text{Top: 5, Left: -4}),
+		text.NewCol(6, "negative right: past the right edge", props.Text{Top: 5, Right: -8, Align: align.Right}),
+	)
 	return m
 }

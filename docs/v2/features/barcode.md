@@ -9,8 +9,8 @@ The Barcode component renders a 1-D barcode inside a cell. The default type is `
 | `Type` | `barcode.Type` | `barcode.Code128` | Barcode symbology |
 | `Percent` | `float64` | `100` | How much of the cell the barcode occupies (0–100) |
 | `Center` | `bool` | `false` | Horizontally and vertically center the barcode |
-| `Left` | `float64` | `0` | Left offset in mm — ignored when `Center` is true |
-| `Top` | `float64` | `0` | Top offset in mm — ignored when `Center` is true |
+| `Left` | `float64` | `0` | Left offset in mm — ignored when `Center` is true. Accepts negative values (nudges the barcode outside the cell on the left). |
+| `Top` | `float64` | `0` | Top offset in mm — ignored when `Center` is true. Accepts negative values. |
 | `Proportion` | `props.Proportion` | `{Width:1, Height:0.2}` | Width-to-height ratio |
 
 ## Usage notes

@@ -44,7 +44,7 @@ func TestCheckbox_MakeValid(t *testing.T) {
 		// Assert
 		assert.Equal(t, 10.0, prop.Size)
 	})
-	t.Run("when top is negative, should apply 0", func(t *testing.T) {
+	t.Run("when top is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Checkbox{Top: -5, Size: 5}
@@ -53,7 +53,7 @@ func TestCheckbox_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Top)
+		assert.Equal(t, -5.0, prop.Top)
 	})
 	t.Run("when top is zero, should keep value", func(t *testing.T) {
 		t.Parallel()
@@ -77,7 +77,7 @@ func TestCheckbox_MakeValid(t *testing.T) {
 		// Assert
 		assert.Equal(t, 3.0, prop.Top)
 	})
-	t.Run("when left is negative, should apply 0", func(t *testing.T) {
+	t.Run("when left is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Checkbox{Left: -3, Size: 5}
@@ -86,7 +86,7 @@ func TestCheckbox_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Left)
+		assert.Equal(t, -3.0, prop.Left)
 	})
 	t.Run("when left is zero, should keep value", func(t *testing.T) {
 		t.Parallel()

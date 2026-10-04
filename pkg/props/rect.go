@@ -48,7 +48,6 @@ func (r *Rect) ToMap() map[string]any {
 func (r *Rect) MakeValid() {
 	minPercentage := 0.0
 	maxPercentage := 100.0
-	minValue := 0.0
 
 	if r.Percent <= minPercentage || r.Percent > maxPercentage {
 		r.Percent = maxPercentage
@@ -57,13 +56,5 @@ func (r *Rect) MakeValid() {
 	if r.Center {
 		r.Left = 0
 		r.Top = 0
-	}
-
-	if r.Left < minValue {
-		r.Left = minValue
-	}
-
-	if r.Top < minValue {
-		r.Top = minValue
 	}
 }
