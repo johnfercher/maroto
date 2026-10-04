@@ -19,18 +19,27 @@ You can write your PDFs like you are creating a site using Bootstrap. A Row may 
 Besides that, pages will be added when content may extrapolate the useful area. You can define a header which will be added
 always when a new page appear, in this case, a header may have many rows, lines or tablelist. 
 
-#### Maroto `v2.4.2` is here! Try out:
+#### Maroto `v2.4.3` is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2@v2.4.2
+go get github.com/johnfercher/maroto/v2@v2.4.3
 ```
 
 * You can see the full `v2` documentation [here](https://maroto.tech/#/README?id=maroto-v2).
 * The `v1` still exists in [this branch](https://github.com/johnfercher/maroto/tree/v1), and you can see the doc [here]([https://maroto.tech/#/v1/README?id=deprecated](https://maroto.tech/#/v1/README?id=deprecated)).
 
 ![result](docs/assets/images/result.png)
+
+## Agent Skills
+
+Maroto ships a set of [skills](skills) for AI coding agents (Claude, Copilot, Cursor, etc.):
+Markdown instruction files that teach an agent how to generate PDFs with maroto — setup, config,
+layout, components, tables and testing — with every default and pitfall spelled out. The files work
+together as one package: copy the whole [`skills/pdf/`](skills/pdf) folder into your project and
+point your agent at its entry file, `generation.md`. Full description on the
+[docs site](https://maroto.tech/#/v2/skills?id=agent-skills).
 
 ## Contributing
 
@@ -54,7 +63,7 @@ go get github.com/johnfercher/maroto/v2@v2.4.2
 
 `goimports`, `gofumpt`, `golangci-lint`, `mockery`, and `godoc` are versioned tool dependencies
 declared in [`tools/go.mod`](tools/go.mod), a separate module so their transitive dependencies
-never end up in the main `go.sum`. See [contribution.md](.github/skills/contribution.md#8-definition-of-done)
+never end up in the main `go.sum`. See [contribution.md](.github/skills/contribution.md#9-definition-of-done)
 for details.
 
 `make install` (or `make install-hooks` on its own) configures a `pre-commit` git hook, tracked at
