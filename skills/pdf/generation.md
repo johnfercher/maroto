@@ -179,7 +179,7 @@ Only a few calls return errors; handle every one of them instead of discarding w
 | `list.Build(...)`                     | `list.ErrEmptyArray`, `list.ErrNilElementInArray`                  |
 | `fontrepository.New()...Load()`       | `fontrepository.ErrCannotReadFile`                                 |
 | `document.Save(path)`                 | `core.ErrCannotWriteFile`                                          |
-| `document.Merge(bytes)` / `merge.Bytes` | `core.ErrCannotMergeBytes` / `merge.ErrCannotMergePDFs`          |
+| `document.Merge(bytes)` / `merge.Bytes` | `core.ErrCannotMergeBytes` / `merge.ErrCannotMergePDFs`; `merge.Bytes` returns an error when no PDFs are provided |
 
 Components never return errors. A missing image file, an unparseable byte slice, or a barcode
 that can't be encoded renders the literal text `could not load image` / `could not generate

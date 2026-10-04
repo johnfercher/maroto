@@ -13,6 +13,39 @@ import (
 
 func TestBytes(t *testing.T) {
 	t.Parallel()
+	t.Run("when no PDFs are provided, should return merge error", func(t *testing.T) {
+		t.Parallel()
+		// Act
+		result, err := merge.Bytes()
+
+		// Assert
+		assert.Nil(t, result)
+		assert.ErrorIs(t, err, merge.ErrCannotMergePDFs)
+	})
+	t.Run("when a nil PDF slice is expanded, should return merge error", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		var pdfs [][]byte
+
+		// Act
+		result, err := merge.Bytes(pdfs...)
+
+		// Assert
+		assert.Nil(t, result)
+		assert.ErrorIs(t, err, merge.ErrCannotMergePDFs)
+	})
+	t.Run("when an empty PDF slice is expanded, should return merge error", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		pdfs := [][]byte{}
+
+		// Act
+		result, err := merge.Bytes(pdfs...)
+
+		// Assert
+		assert.Nil(t, result)
+		assert.ErrorIs(t, err, merge.ErrCannotMergePDFs)
+	})
 	t.Run("when valid PDFs are provided, should merge and return bytes", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
