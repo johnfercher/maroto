@@ -214,6 +214,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"   // extension.Png/Jpg/Jpeg
 	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"     // barcode.Code128/EAN
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"   // breakline.EmptySpaceStrategy/DashStrategy
+	"github.com/johnfercher/maroto/v2/pkg/consts/rotationpivot" // rotationpivot.Pivot{Horizontal: Start/Center/End, Vertical: Top/Middle/Bottom}
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"  // protection.Print/Modify/Copy/AnnotForms
 	"github.com/johnfercher/maroto/v2/pkg/fontrepository"     // custom UTF-8 fonts
 	"github.com/johnfercher/maroto/v2/pkg/merge"              // merge.Bytes

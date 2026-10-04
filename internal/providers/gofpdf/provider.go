@@ -57,6 +57,10 @@ func (g *provider) GetLinesQuantity(text string, textProp *props.Text, colWidth 
 	return g.text.GetLinesQuantity(text, textProp, colWidth)
 }
 
+func (g *provider) GetLinesWidth(text string, textProp *props.Text, colWidth float64) float64 {
+	return g.text.GetLinesWidth(text, textProp, colWidth)
+}
+
 func (g *provider) GetFontHeight(prop *props.Font) float64 {
 	return g.font.GetHeight(prop.Family, prop.Style, prop.Size)
 }

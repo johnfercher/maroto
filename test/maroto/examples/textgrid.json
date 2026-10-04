@@ -467,6 +467,68 @@
 			"type": "page",
 			"nodes": [
 				{
+					"value": 24.215372222222225,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "rotated 30°",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 14,
+										"prop_rotation": 30
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "rotated -30°, start/top pivot",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 10,
+										"prop_rotation": -30,
+										"prop_rotation_pivot_horizontal": "start",
+										"prop_rotation_pivot_vertical": "top"
+									}
+								}
+							]
+						},
+						{
+							"value": 4,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "rotated 90°",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 14,
+										"prop_rotation": 90
+									}
+								}
+							]
+						}
+					]
+				},
+				{
 					"value": 45,
 					"type": "row",
 					"nodes": [
@@ -675,7 +737,7 @@
 					]
 				},
 				{
-					"value": 139.080833333,
+					"value": 114.865461111,
 					"type": "row",
 					"nodes": [
 						{

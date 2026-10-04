@@ -1,6 +1,7 @@
 package text_test
 
 import (
+	"math"
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/internal/fixture"
@@ -190,5 +191,67 @@ func TestText_GetHeight(t *testing.T) {
 		// Act
 		height := sut.GetHeight(provider, &cell)
 		assert.Equal(t, 10.0, height)
+	})
+
+	t.Run("When rotation is 90, should return rotated bounding box height (= actual string width)", func(t *testing.T) {
+		t.Parallel()
+		cell := fixture.CellEntity()
+		font := fixture.FontProp()
+		textProp := props.Text{Rotation: 90}
+		textProp.MakeValid(&font)
+
+		sut := text.New("text", textProp)
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(1.0)
+		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+		provider.EXPECT().GetLinesWidth("text", &textProp, 100.0).Return(40.0)
+
+		// stringWidth=40, h=2: sin(90)=1, cos(90)=0 → 40*1 + 2*0 = 40
+		height := sut.GetHeight(provider, &cell)
+		assert.InDelta(t, 40.0, height, 0.0001)
+	})
+
+	t.Run("When rotation is 45, should return (stringWidth + h) / sqrt(2)", func(t *testing.T) {
+		t.Parallel()
+		cell := fixture.CellEntity()
+		font := fixture.FontProp()
+		textProp := props.Text{Rotation: 45}
+		textProp.MakeValid(&font)
+
+		sut := text.New("text", textProp)
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(1.0)
+		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+		provider.EXPECT().GetLinesWidth("text", &textProp, 100.0).Return(40.0)
+
+		// stringWidth=40, h=2: sin(45)=cos(45)=1/sqrt(2) → (40 + 2) / sqrt(2)
+		height := sut.GetHeight(provider, &cell)
+		expected := (40.0 + 2.0) / math.Sqrt2
+		assert.InDelta(t, expected, height, 0.0001)
+	})
+
+	t.Run("When the drawn lines are wider than the content width, should use the widest line", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := fixture.CellEntity()
+		font := fixture.FontProp()
+		textProp := props.Text{Rotation: 90}
+		textProp.MakeValid(&font)
+
+		sut := text.New("text", textProp)
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(1.0)
+		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+		// e.g. a word too long to wrap is drawn 200 wide in a 100 wide column
+		provider.EXPECT().GetLinesWidth("text", &textProp, 100.0).Return(200.0)
+
+		// Act
+		height := sut.GetHeight(provider, &cell)
+
+		// Assert
+		assert.InDelta(t, 200.0, height, 0.0001)
 	})
 }

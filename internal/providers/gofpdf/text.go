@@ -2,6 +2,7 @@ package gofpdf
 
 import (
 	"fmt"
+	"math"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -10,6 +11,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
 	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"
+	"github.com/johnfercher/maroto/v2/pkg/consts/rotationpivot"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -71,20 +73,25 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	unicodeText := s.textToUnicode(text, textProp)
 	stringWidth := s.pdf.GetStringWidth(unicodeText)
 
-	// If should add one line
-	if stringWidth <= width {
-		s.addLine(textProp, x, width, y, stringWidth, unicodeText)
-		s.font.SetColor(originalColor)
-		return
+	// Split up-front so multi-line rotation can pivot around the whole block.
+	lines := s.splitLines(unicodeText, textProp, width)
+
+	lineProp := textProp
+	if textProp.Rotation != 0 {
+		y = s.rotate(lines, cell, textProp, x, width, fontHeight)
+		defer s.pdf.TransformEnd()
+
+		if textProp.Hyperlink != nil {
+			unlinked := *textProp
+			unlinked.Hyperlink = nil
+			lineProp = &unlinked
+		}
 	}
 
-	var lines []string
-
-	if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
-		words := strings.Split(unicodeText, " ")
-		lines = s.getLinesBreakingLineFromSpace(words, width)
-	} else {
-		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
+	if len(lines) == 1 {
+		s.addLine(lineProp, x, width, y, stringWidth, lines[0])
+		s.font.SetColor(originalColor)
+		return
 	}
 
 	accumulateOffsetY := 0.0
@@ -92,11 +99,23 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	for index, line := range lines {
 		lineWidth := s.pdf.GetStringWidth(line)
 
-		s.addLine(textProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, line)
+		s.addLine(lineProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, line)
 		accumulateOffsetY += textProp.VerticalPadding
 	}
 
 	s.font.SetColor(originalColor)
+}
+
+// GetLinesWidth returns the width of the widest line the text is drawn with in a column of colWidth.
+// It can exceed colWidth: a word too long to wrap, or a narrow DashStrategy line, is drawn wider.
+func (s *Text) GetLinesWidth(text string, textProp *props.Text, colWidth float64) float64 {
+	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
+
+	var width float64
+	for _, line := range s.splitLines(s.textToUnicode(text, textProp), textProp, colWidth) {
+		width = max(width, s.pdf.GetStringWidth(line))
+	}
+	return width
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
@@ -110,6 +129,93 @@ func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth floa
 	}
 
 	return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth))
+}
+
+// rotate starts the rotation transform of a text block and returns the baseline of its first line,
+// moved so the rotated block starts at the top of the cell. Both axes of RotationPivot are honored,
+// and for multi-line text the whole block rotates as one.
+func (s *Text) rotate(lines []string, cell *entity.Cell, textProp *props.Text, x, width, fontHeight float64) float64 {
+	marginLeft, marginTop, _, _ := s.pdf.GetMargins()
+	n := float64(len(lines))
+	textHeight := n*fontHeight + (n-1)*textProp.VerticalPadding
+
+	// The widest drawn line, which can exceed the column when a word is too long to wrap.
+	var blockWidth float64
+	for _, line := range lines {
+		blockWidth = max(blockWidth, s.pdf.GetStringWidth(line))
+	}
+
+	var alignOffsetX float64
+	switch textProp.Align {
+	case align.Center:
+		alignOffsetX = (width - blockWidth) / 2
+	case align.Right:
+		alignOffsetX = width - blockWidth
+	case align.Left, align.Top, align.Bottom, align.Middle:
+		alignOffsetX = 0
+	}
+	alignOffsetX = max(alignOffsetX, 0)
+
+	var pivotOffsetX float64
+	switch textProp.RotationPivot.Horizontal {
+	case rotationpivot.Start:
+		pivotOffsetX = 0
+	case rotationpivot.End:
+		pivotOffsetX = blockWidth
+	case rotationpivot.Center:
+		pivotOffsetX = blockWidth / 2
+	default:
+		pivotOffsetX = blockWidth / 2
+	}
+	var pivotOffsetY float64
+	switch textProp.RotationPivot.Vertical {
+	case rotationpivot.Top:
+		pivotOffsetY = 0
+	case rotationpivot.Bottom:
+		pivotOffsetY = textHeight
+	case rotationpivot.Middle:
+		pivotOffsetY = textHeight / 2
+	default:
+		pivotOffsetY = textHeight / 2
+	}
+
+	rad := textProp.Rotation * math.Pi / 180
+	sin, cos := math.Sin(rad), math.Cos(rad)
+	// Corners relative to the pivot, rotated counter-clockwise on a y-down page.
+	px, py := pivotOffsetX, pivotOffsetY
+	corners := [4][2]float64{{-px, -py}, {blockWidth - px, -py}, {blockWidth - px, textHeight - py}, {-px, textHeight - py}}
+	minX, minY, maxX, maxY := math.Inf(1), math.Inf(1), math.Inf(-1), math.Inf(-1)
+	for _, c := range corners {
+		rx, ry := c[0]*cos+c[1]*sin, -c[0]*sin+c[1]*cos
+		minX, maxX = min(minX, rx), max(maxX, rx)
+		minY, maxY = min(minY, ry), max(maxY, ry)
+	}
+
+	y := cell.Y + textProp.Top - min(minY, 0) + fontHeight - pivotOffsetY
+	pivotX := x + alignOffsetX + pivotOffsetX + marginLeft
+	pivotY := y + (pivotOffsetY - fontHeight) + marginTop
+
+	s.pdf.TransformBegin()
+	s.pdf.TransformRotate(textProp.Rotation, pivotX, pivotY)
+
+	// A link annotation ignores the transform, so it covers the rotated block instead of each line.
+	if textProp.Hyperlink != nil {
+		s.pdf.LinkString(pivotX+minX, pivotY+minY, maxX-minX, maxY-minY, *textProp.Hyperlink)
+	}
+
+	return y
+}
+
+// splitLines breaks the text into the lines Add draws it with.
+func (s *Text) splitLines(text string, textProp *props.Text, colWidth float64) []string {
+	switch {
+	case s.pdf.GetStringWidth(text) <= colWidth:
+		return []string{text}
+	case textProp.BreakLineStrategy == breakline.EmptySpaceStrategy:
+		return s.getLinesBreakingLineFromSpace(strings.Split(text, " "), colWidth)
+	default:
+		return s.getLinesBreakingLineWithDash(text, colWidth)
+	}
 }
 
 func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {

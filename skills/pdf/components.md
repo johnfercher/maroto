@@ -55,6 +55,8 @@ func textExamples(m core.Maroto) {
 | `VerticalPadding`   | `float64` (mm)       | `0`                     | Extra space between wrapped lines                                     |
 | `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy`    | `EmptySpaceStrategy` wraps on spaces; `DashStrategy` wraps per character and appends `-` (for languages without spaces) |
 | `Hyperlink`         | `*string`            | `nil`                   | Clickable link; text turns blue                                       |
+| `Rotation`          | `float64` (degrees)  | `0`                     | Positive rotates counter-clockwise, negative clockwise                |
+| `RotationPivot`     | `rotationpivot.Pivot` | `{Center, Middle}`     | Anchor of the rotation: `Horizontal` `Start`/`Center`/`End`, `Vertical` `Top`/`Middle`/`Bottom` (of the whole block for multi-line text) |
 
 Gotchas:
 - Wrapping happens automatically when the string is wider than `cellWidth - Left - Right`, but the
@@ -66,6 +68,22 @@ Gotchas:
   ([config.md §5](config.md#5-fonts)) — otherwise characters silently come out wrong.
 - `Top` is the only vertical positioning: there is no vertical-align. To bottom-align, compute
   `Top = rowHeight - lineHeight`.
+- Rotated text needs an **auto row**: only an auto row grows to the rotated bounding box
+  (`w·|sinθ| + h·|cosθ|`). A fixed-height row keeps its height and the text draws over the next
+  row. Only the height is reserved, so a rotated box wider than its column spills sideways.
+
+```go
+func rotatedLabel(m core.Maroto) {
+	m.AddAutoRow(
+		text.NewCol(4, "DRAFT", props.Text{Rotation: 30, Size: 14}),
+		text.NewCol(8, "Body", props.Text{
+			Rotation:      -15,
+			RotationPivot: rotationpivot.Pivot{Horizontal: rotationpivot.Start, Vertical: rotationpivot.Top},
+		}),
+	)
+}
+```
+
 - Newlines (`\n`) in the value are not line breaks. Add one text component (or auto row) per line
   or paragraph.
 
