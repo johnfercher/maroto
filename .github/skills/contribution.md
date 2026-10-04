@@ -98,7 +98,7 @@ not as optional polish. "User-facing" means anything a consumer of the module ca
 | New `core.Maroto` / `core.Document` method, or new exported error                    | The method/output/error tables in [skills/pdf/generation.md](../../skills/pdf/generation.md) |
 | Change to row/column/page behaviour (height calculation, page break, header/footer rules, `list.Build` semantics) | [skills/pdf/layout.md](../../skills/pdf/layout.md) and/or [skills/pdf/tables.md](../../skills/pdf/tables.md); the symptom table in [skills/pdf/testing.md](../../skills/pdf/testing.md) if a documented pitfall disappears or a new one appears |
 | Change to `pkg/test`, `.maroto.yml` handling or the structure JSON                   | [skills/pdf/testing.md](../../skills/pdf/testing.md) |
-| A whole new feature that fits none of the above                                       | Add a numbered section to the closest skill, or a new file under `skills/pdf/` listed in [`skills/README.md`](../../skills/README.md) and in the table in [`AGENTS.md`](../../AGENTS.md) and in the "See also" block of [skills/pdf/generation.md](../../skills/pdf/generation.md) |
+| A whole new feature that fits none of the above                                       | Add a numbered section to the closest skill, or a new file under `skills/pdf/` listed in [`skills/README.md`](../../skills/README.md) and in the table in [`AGENTS.md`](../../AGENTS.md), with a page under `docs/v2/skills/` (copy an existing one — it includes the raw file from GitHub) added to `docs/v2/skills/_sidebar.md` and in the "See also" block of [skills/pdf/generation.md](../../skills/pdf/generation.md) |
 
 Rules for the edit itself:
 - Keep the skill's claims literally true to the code: defaults come from the `MakeValid`/builder
