@@ -10,12 +10,12 @@
 
 ### News :new:
 
-#### 1. Maroto`v2.4.2`is here! Try out:
+#### 1. Maroto`v2.4.3`is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2@v2.4.2
+go get github.com/johnfercher/maroto/v2@v2.4.3
 ```
 
 The public API was completely redesigned with the aim of enhancing the 
@@ -102,6 +102,13 @@ In maroto`v2`, it is possible to write unit tests by analyzing the **components 
 writing of unit tests, we created a dedicated test package.
 
 For an example, refer to [this link](v2/features/unittests?id=unit-testing).
+
+## Agent Skills
+Maroto ships [skills](v2/skills?id=agent-skills): Markdown instruction files under
+[`skills/`](https://github.com/johnfercher/maroto/tree/master/skills) that teach an LLM or coding
+agent (Claude, Copilot, Cursor, …) how to generate PDFs with maroto — setup, config, grid layout,
+components, tables and testing, with every default and every pitfall spelled out. Copy the folder
+into your project and point your agent at `skills/pdf/generation.md`.
 
 ## Built-in Metrics
 This new version of maroto introduces an **optional decorator** that provides metrics for nearly all operations 
