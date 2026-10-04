@@ -6,7 +6,9 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/johnfercher/go-tree/node"
@@ -26,6 +28,7 @@ var (
 var (
 	marotoFile      = ".maroto.yml"
 	goModFile       = "go.mod"
+	configOnce      sync.Once
 	configSingleton *Config
 )
 
@@ -45,7 +48,7 @@ type MarotoTest struct {
 // New creates the MarotoTest instance to unit tests.
 func New(t *testing.T) *MarotoTest {
 	t.Helper()
-	if configSingleton == nil {
+	configOnce.Do(func() {
 		path, err := getMarotoConfigFilePath()
 		if err != nil {
 			assert.Fail(t, "could not find .maroto.yml file. %s"+err.Error())
@@ -58,7 +61,7 @@ func New(t *testing.T) *MarotoTest {
 
 		cfg.AbsolutePath = path
 		configSingleton = cfg
-	}
+	})
 
 	return &MarotoTest{
 		t: t,
@@ -122,7 +125,7 @@ func (m *MarotoTest) buildNode(node *node.Node[core.Structure]) *Node {
 
 func getMarotoConfigFilePath() (string, error) {
 	path, _ := os.Getwd()
-	path += "/"
+	path = filepath.ToSlash(path) + "/"
 
 	return getMarotoConfigFilePathRecursive(path)
 }

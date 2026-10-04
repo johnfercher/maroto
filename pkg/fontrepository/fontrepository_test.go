@@ -2,8 +2,7 @@ package fontrepository_test
 
 import (
 	"os"
-	"path"
-	"strings"
+	"path/filepath"
 	"testing"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
@@ -132,6 +131,6 @@ func buildPath(file string) string {
 		return ""
 	}
 
-	dir = strings.ReplaceAll(dir, "pkg/fontrepository", "")
-	return path.Join(dir, file)
+	dir = filepath.Join(dir, "..", "..")
+	return filepath.Join(dir, file)
 }
