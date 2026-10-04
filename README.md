@@ -34,21 +34,12 @@ go get github.com/johnfercher/maroto/v2@v2.4.3
 
 ## Agent Skills
 
-Maroto ships [skills](skills) for AI coding agents (Claude, Copilot, Cursor, etc.): Markdown
-instruction files that teach an agent how to generate PDFs with maroto, with every default and
-pitfall spelled out. Copy [`skills/pdf/`](skills/pdf) into your project and point your agent at
-[`skills/pdf/generation.md`](skills/pdf/generation.md); it routes to the others.
-
-| Skill | Covers |
-|-------|--------|
-| [generation.md](skills/pdf/generation.md) | Install, program skeleton, output, errors — **start here** |
-| [config.md](skills/pdf/config.md) | `config.NewBuilder()` options: page, margins, fonts, page numbers, metadata, protection |
-| [layout.md](skills/pdf/layout.md) | Grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
-| [components.md](skills/pdf/components.md) | Text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures |
-| [tables.md](skills/pdf/tables.md) | Tabular data with `list.Build` or manual loops, striping, borders, pagination |
-| [testing.md](skills/pdf/testing.md) | `pkg/test` fixtures and layout debugging |
-
-Full description on the [docs site](https://maroto.tech/#/v2/skills?id=agent-skills).
+Maroto ships a set of [skills](skills) for AI coding agents (Claude, Copilot, Cursor, etc.):
+Markdown instruction files that teach an agent how to generate PDFs with maroto — setup, config,
+layout, components, tables and testing — with every default and pitfall spelled out. The files work
+together as one package: copy the whole [`skills/pdf/`](skills/pdf) folder into your project and
+point your agent at its entry file, `generation.md`. Full description on the
+[docs site](https://maroto.tech/#/v2/skills?id=agent-skills).
 
 ## Contributing
 
