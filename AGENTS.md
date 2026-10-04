@@ -17,6 +17,21 @@ improvising:
 | [contribution.md](.github/skills/contribution.md) | Preparing any change (branch, code, docs, PR) to meet the pull request checklist |
 | [code-quality.md](.github/skills/code-quality.md) | Writing or reviewing non-test Go code — what `golangci-lint` enforces and the SOLID patterns this codebase follows |
 
+### Generating PDFs with maroto (library usage)
+
+A second group of skills teaches how to **use** maroto from Go code — for agents writing an
+application that produces PDFs, or for agents extending the examples under `docs/assets/examples`.
+Start with `pdf-generation.md`; it routes to the others.
+
+| Skill | Use when |
+|-------|----------|
+| [pdf-generation.md](.github/skills/pdf-generation.md) | Writing any Go code that generates a PDF with maroto — install, program skeleton, output, errors, checklist |
+| [pdf-config.md](.github/skills/pdf-config.md) | Choosing `config.NewBuilder()` options: page size, margins, fonts (incl. UTF-8), page numbers, metadata, protection, generation mode |
+| [pdf-layout.md](.github/skills/pdf-layout.md) | Placing content: grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
+| [pdf-components.md](.github/skills/pdf-components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures and their props |
+| [pdf-tables.md](.github/skills/pdf-tables.md) | Rendering tabular data (invoices, reports) with `list.Build` or manual loops, striping, borders, pagination |
+| [pdf-testing.md](.github/skills/pdf-testing.md) | Unit-testing the component tree with `pkg/test` fixtures and debugging layout problems |
+
 As new skill files are added to `.github/skills`, treat them as mandatory for
 the task they cover.
 

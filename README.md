@@ -32,6 +32,15 @@ go get github.com/johnfercher/maroto/v2@v2.4.3
 
 ![result](docs/assets/images/result.png)
 
+## Using maroto with AI agents
+
+The [`.github/skills/pdf-*.md`](.github/skills) files teach an LLM/agent how to write Go code
+that generates PDFs with maroto: setup, config, grid layout, components, tables and testing.
+Point your agent (Claude, Copilot, Cursor, etc.) at
+[`pdf-generation.md`](.github/skills/pdf-generation.md) — or copy the `pdf-*.md` files into your
+own project's skills directory — and it will follow the library's conventions and avoid the
+common layout pitfalls.
+
 ## Contributing
 
 > If you are an AI agent/LLM working on this repository, read [AGENTS.md](AGENTS.md) first
