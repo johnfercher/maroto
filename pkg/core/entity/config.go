@@ -23,6 +23,7 @@ type Config struct {
 	Metadata             *Metadata
 	BackgroundImage      *Image
 	DisableAutoPageBreak bool
+	DisableFirstPage     bool
 }
 
 // ToMap converts Config to a map[string]any .
@@ -78,6 +79,10 @@ func (c *Config) ToMap() map[string]any {
 
 	if c.DisableAutoPageBreak {
 		m["config_disable_auto_page_break"] = c.DisableAutoPageBreak
+	}
+
+	if c.DisableFirstPage {
+		m["config_disable_first_page"] = c.DisableFirstPage
 	}
 
 	return m
