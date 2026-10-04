@@ -61,6 +61,14 @@ func GetMaroto() core.Maroto {
 	)
 	m.AddRows(text.NewRow(8, "With top=5 left=5 offset"))
 
+	// With negative top and left offset: drawn outside the cell
+	m.AddRow(20,
+		checkbox.NewCol(4, "Option A", props.Checkbox{Top: -2, Left: -2}),
+		checkbox.NewCol(4, "Option B", props.Checkbox{Top: -2, Left: -2, Checked: true}),
+		checkbox.NewCol(4, "Option C", props.Checkbox{Top: -2, Left: -2}),
+	)
+	m.AddRows(text.NewRow(8, "With top=-2 left=-2 offset"))
+
 	// Auto row
 	m.AddAutoRow(
 		checkbox.NewCol(3, "Item 1"),

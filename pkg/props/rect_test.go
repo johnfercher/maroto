@@ -45,7 +45,19 @@ func TestRect_MakeValid(t *testing.T) {
 		assert.Equal(t, 0.0, prop.Top)
 		assert.Equal(t, 0.0, prop.Left)
 	})
-	t.Run("when left is less than 0, should become 0", func(t *testing.T) {
+	t.Run("when is center and top and left are negative, should become 0", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Rect{Center: true, Top: -5, Left: -5}
+
+		// Act
+		prop.MakeValid()
+
+		// Assert
+		assert.Equal(t, 0.0, prop.Top)
+		assert.Equal(t, 0.0, prop.Left)
+	})
+	t.Run("when left is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Rect{Left: -5}
@@ -54,9 +66,9 @@ func TestRect_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Left)
+		assert.Equal(t, -5.0, prop.Left)
 	})
-	t.Run("when top is less than 0, should become 0", func(t *testing.T) {
+	t.Run("when top is negative, should preserve the value", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		prop := props.Rect{Top: -5}
@@ -65,7 +77,7 @@ func TestRect_MakeValid(t *testing.T) {
 		prop.MakeValid()
 
 		// Assert
-		assert.Equal(t, 0.0, prop.Top)
+		assert.Equal(t, -5.0, prop.Top)
 	})
 }
 

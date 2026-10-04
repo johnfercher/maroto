@@ -10,8 +10,8 @@ QR codes share the same `props.Rect` struct as images, giving them identical pos
 |-------|------|---------|-------------|
 | `Percent` | `float64` | `100` | How much of the cell the QR code occupies (0–100) |
 | `Center` | `bool` | `false` | Horizontally and vertically center the code |
-| `Left` | `float64` | `0` | Left offset in mm — ignored when `Center` is true |
-| `Top` | `float64` | `0` | Top offset in mm — ignored when `Center` is true |
+| `Left` | `float64` | `0` | Left offset in mm — ignored when `Center` is true. Accepts negative values (nudges the QR code outside the cell on the left). |
+| `Top` | `float64` | `0` | Top offset in mm — ignored when `Center` is true. Accepts negative values. |
 | `JustReferenceWidth` | `bool` | `false` | Scale by width only — required for correct auto-row height |
 
 ## Usage notes

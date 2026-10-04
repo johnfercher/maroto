@@ -24,8 +24,9 @@ Text can be created as a standalone `Component`, wrapped directly into a `Col`, 
 ## Usage notes
 
 - When `Hyperlink` is set, the text color is overridden with blue regardless of `Color`.
-- `Top` and `Left`/`Right` are clamped to the cell dimensions if they exceed it (positive over-flow).
-- `Top`, `Bottom`, `Left`, `Right` accept negative values — useful to draw text slightly outside its cell (e.g. tight padding tweaks from JSON specs). `VerticalPadding` is still clamped to ≥ 0 since negative line spacing collapses lines onto each other.
+- `Top` and `Left`/`Right` are clamped to the cell dimensions if they exceed them.
+- `Top`, `Bottom`, `Left` and `Right` accept negative values, which draw the text slightly outside its cell. `VerticalPadding` is still clamped to ≥ 0, since negative line spacing would draw lines on top of each other.
+- In an auto row, `Top` and `Bottom` count toward the row height, so negative values shrink the row (never below 0) and the text overlaps the row above.
 - `BreakLineStrategy` only applies when the text does not fit on a single line.
 - For justified text on the last line, spacing may revert to default space width to avoid stretching a few characters across the full width.
 

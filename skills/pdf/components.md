@@ -49,9 +49,9 @@ func textExamples(m core.Maroto) {
 | `Size`              | `float64` (pt)       | config default (10)     | Line height in mm is `Size / 2.835`                                   |
 | `Color`             | `*props.Color`       | config default (black)  | Overridden to blue when `Hyperlink` is set                            |
 | `Align`             | `align.Type`         | `align.Left`            | `Left`, `Center`, `Right`, `Justify`                                  |
-| `Top`               | `float64` (mm)       | `0`                     | Offset from the top of the cell; clamped to the cell height           |
-| `Left`, `Right`     | `float64` (mm)       | `0`                     | Inner horizontal padding; shrink the wrap width                       |
-| `Bottom`            | `float64` (mm)       | `0`                     | **Auto rows only** — extra height below the text                      |
+| `Top`               | `float64` (mm)       | `0`                     | Offset from the top of the cell; clamped to the cell height. Negative moves the text above the cell |
+| `Left`, `Right`     | `float64` (mm)       | `0`                     | Inner horizontal padding; shrink the wrap width. Negative moves the text outside that edge and widens the wrap width |
+| `Bottom`            | `float64` (mm)       | `0`                     | **Auto rows only** — extra height below the text. Negative shrinks the row |
 | `VerticalPadding`   | `float64` (mm)       | `0`                     | Extra space between wrapped lines                                     |
 | `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy`    | `EmptySpaceStrategy` wraps on spaces; `DashStrategy` wraps per character and appends `-` (for languages without spaces) |
 | `Hyperlink`         | `*string`            | `nil`                   | Clickable link; text turns blue                                       |
@@ -66,6 +66,9 @@ Gotchas:
   ([config.md §5](config.md#5-fonts)) — otherwise characters silently come out wrong.
 - `Top` is the only vertical positioning: there is no vertical-align. To bottom-align, compute
   `Top = rowHeight - lineHeight`.
+- Negative `Top`/`Bottom` count toward an auto row's height (`lines * lineHeight + Top + Bottom`),
+  so they shrink the row; it never goes below 0, and the text then overlaps the row above. Use
+  them for small nudges in fixed-height rows, not to save space in auto rows.
 - Newlines (`\n`) in the value are not line breaks. Add one text component (or auto row) per line
   or paragraph.
 
@@ -102,7 +105,7 @@ func imageExamples(m core.Maroto) {
 |----------------------|---------|--------------------------------------------------------------------------------------------|
 | `Percent`            | `100`   | Size of the image relative to the cell (0–100]; the image is scaled proportionally to fit  |
 | `Center`             | `false` | Center in both axes; when `true`, `Left`/`Top` are ignored                                 |
-| `Left`, `Top`        | `0`     | Offset in mm from the cell's top-left                                                      |
+| `Left`, `Top`        | `0`     | Offset in mm from the cell's top-left; negative moves the image outside the cell           |
 | `JustReferenceWidth` | `false` | Scale from the cell **width** only. Set it in auto rows so the drawn height matches the computed row height |
 
 Gotchas:
@@ -212,9 +215,10 @@ func checkboxExamples(m core.Maroto) {
 |-----------|---------|----------------------------------------------------|
 | `Checked` | `false` | Draws an X inside the box                          |
 | `Size`    | `5` mm  | Side of the square                                 |
-| `Top`, `Left` | `0` | Offset in mm; negatives clamp to 0                 |
+| `Top`, `Left` | `0` | Offset in mm; negative moves the box outside the cell |
 
 The label is drawn to the right of the box in the document's default font; it is not wrapped.
+In an auto row the box needs `Size + Top` mm, so a negative `Top` shrinks the row.
 The component is a static drawing, not an interactive PDF form field.
 
 ### 8. Signatures — `pkg/components/signature`, `props.Signature`

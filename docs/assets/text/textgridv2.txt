@@ -1,4 +1,4 @@
-generate -> avg: 7.76ms, executions: [7.76ms]
-add_row -> avg: 3375.17ns, executions: [18.38μs, 0.42μs, 0.21μs, 0.17μs, 0.21μs, 0.88μs]
-add_rows -> avg: 138.83ns, executions: [208.00ns, 125.00ns, 83.00ns, 209.00ns, 42.00ns, 166.00ns]
-file_size -> 33.35Kb
+generate -> avg: 8.80ms, executions: [8.80ms]
+add_row -> avg: 1360.29ns, executions: [1.06μs, 0.29μs, 3.09μs, 0.17μs, 0.16μs, 4.49μs, 0.26μs]
+add_rows -> avg: 131.00ns, executions: [239.00ns, 171.00ns, 63.00ns, 136.00ns, 53.00ns, 124.00ns]
+file_size -> 34.09Kb

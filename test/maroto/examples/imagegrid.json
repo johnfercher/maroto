@@ -381,6 +381,57 @@
 					]
 				}
 			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 40,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_left": -4,
+										"prop_percent": 70,
+										"prop_top": -3
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "docs/assets/images/biplane.jpg",
+									"type": "fileImage",
+									"details": {
+										"prop_left": 4,
+										"prop_percent": 70,
+										"prop_top": 3
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 226.9975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
 		}
 	]
 }

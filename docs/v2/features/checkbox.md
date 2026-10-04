@@ -16,7 +16,8 @@ The row height for auto-row usage is `Size + Top`.
 ## Usage notes
 
 - The label is rendered to the right of the box using the document's default font; font styling is derived from the active `core.Font`.
-- `Top` and `Left` accept negative values (rendered slightly outside the cell on that side); `Size` is still required to be > 0 and falls back to the default `5.0` otherwise.
+- `Top` and `Left` accept negative values, which draw the checkbox slightly outside the cell on that side. `Size` must still be > 0 and falls back to the default `5.0` otherwise.
+- In an auto row the checkbox needs `Size + Top`, so a negative `Top` shrinks the row.
 - For forms with multiple options, place several `NewCol` checkboxes side-by-side in the same row.
 
 ## GoDoc

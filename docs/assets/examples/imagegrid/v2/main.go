@@ -162,5 +162,10 @@ func GetMaroto() core.Maroto {
 			JustReferenceWidth: true,
 		}),
 	)
+
+	m.AddRow(40,
+		image.NewFromFileCol(6, "docs/assets/images/biplane.jpg", props.Rect{Left: -4, Top: -3, Percent: 70}),
+		image.NewFromFileCol(6, "docs/assets/images/biplane.jpg", props.Rect{Left: 4, Top: 3, Percent: 70}),
+	)
 	return m
 }

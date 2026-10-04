@@ -125,5 +125,10 @@ func GetMaroto() core.Maroto {
 		}),
 	)
 
+	m.AddRow(20,
+		code.NewBarCol(6, "123456789123", props.Barcode{Left: -4, Top: -2, Percent: 70}),
+		code.NewBarCol(6, "123456789123", props.Barcode{Left: 4, Top: 2, Percent: 70}),
+	)
+
 	return m
 }
