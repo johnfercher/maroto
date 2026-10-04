@@ -4,10 +4,10 @@ Place content on the page with maroto's grid: rows, columns, automatic heights, 
 styling, headers, footers and page breaks.
 
 See also:
-- [pdf-generation.md](pdf-generation.md) for the program skeleton these rows go into.
-- [pdf-config.md](pdf-config.md) for page size, margins and grid size (`WithMaxGridSize`).
-- [pdf-components.md](pdf-components.md) for what goes inside a column.
-- [pdf-tables.md](pdf-tables.md) for repeating the same row layout over a data set.
+- [generation.md](generation.md) for the program skeleton these rows go into.
+- [config.md](config.md) for page size, margins and grid size (`WithMaxGridSize`).
+- [components.md](components.md) for what goes inside a column.
+- [tables.md](tables.md) for repeating the same row layout over a data set.
 
 ## Instructions
 
@@ -221,7 +221,7 @@ func keepTogether(m core.Maroto, titleHeight, firstRowHeight float64, title core
   document from independently built blocks.
 - `AddPages` on an empty document still starts page 1 normally (no leading blank page).
 - Orientation and size are per document, not per page; merge separately generated documents for
-  mixed layouts ([pdf-generation.md §5](pdf-generation.md#5-output-options)).
+  mixed layouts ([generation.md §5](generation.md#5-output-options)).
 
 ### 8. Worked layout: title block
 
@@ -253,7 +253,7 @@ func titleBlock(m core.Maroto) {
 - Grid explanation: https://maroto.tech/#/README?id=maroto-columns-and-rows
 - Feature pages: https://maroto.tech/#/v2/features/autorow, `cellstyle`, `header`, `footer`,
   `addpage`, `disablepagebreak`
-- Runnable examples: [`docs/assets/examples/autorow`](../../docs/assets/examples/autorow/v2/main.go),
-  [`cellstyle`](../../docs/assets/examples/cellstyle/v2/main.go),
-  [`header`](../../docs/assets/examples/header/v2/main.go),
-  [`addpage`](../../docs/assets/examples/addpage/v2/main.go)
+- Runnable examples: [`docs/assets/examples/autorow`](../../../docs/assets/examples/autorow/v2/main.go),
+  [`cellstyle`](../../../docs/assets/examples/cellstyle/v2/main.go),
+  [`header`](../../../docs/assets/examples/header/v2/main.go),
+  [`addpage`](../../../docs/assets/examples/addpage/v2/main.go)

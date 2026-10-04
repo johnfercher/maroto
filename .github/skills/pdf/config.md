@@ -4,9 +4,9 @@ Configure a maroto document globally with `config.NewBuilder()`: page geometry, 
 numbers, metadata, protection, compression, background and generation mode.
 
 See also:
-- [pdf-generation.md](pdf-generation.md) for where the config is consumed (`maroto.New(cfg)`).
-- [pdf-layout.md](pdf-layout.md) for what margins, grid size and orientation mean for rows/cols.
-- [pdf-components.md](pdf-components.md) for the per-component props that override these defaults.
+- [generation.md](generation.md) for where the config is consumed (`maroto.New(cfg)`).
+- [layout.md](layout.md) for what margins, grid size and orientation mean for rows/cols.
+- [components.md](components.md) for the per-component props that override these defaults.
 
 ## Instructions
 
@@ -194,4 +194,4 @@ layout, off before shipping — it is part of the rendered output, not a log.
 - Feature pages: https://maroto.tech/#/v2/features/custompage, `customdimensions`, `margins`,
   `maxgridsum`, `orientation`, `pagenumber`, `customfont`, `metadatas`, `protection`,
   `compression`, `background`, `disablepagebreak`, `parallelism`, `lowmemory`
-- Builder source with validation rules: [`pkg/config/builder.go`](../../pkg/config/builder.go)
+- Builder source with validation rules: [`pkg/config/builder.go`](../../../pkg/config/builder.go)

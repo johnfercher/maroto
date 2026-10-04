@@ -4,10 +4,10 @@ Put content into a column: text, images, barcodes, QR codes, data matrices, line
 signatures — constructors, props, defaults and the gotchas of each.
 
 See also:
-- [pdf-layout.md](pdf-layout.md) for rows, columns, auto heights and cell styling around these
+- [layout.md](layout.md) for rows, columns, auto heights and cell styling around these
   components.
-- [pdf-config.md](pdf-config.md) for document-wide defaults (default font, custom UTF-8 fonts).
-- [pdf-tables.md](pdf-tables.md) for repeating text columns over a data set.
+- [config.md](config.md) for document-wide defaults (default font, custom UTF-8 fonts).
+- [tables.md](tables.md) for repeating text columns over a data set.
 
 ## Instructions
 
@@ -22,7 +22,7 @@ See also:
 
 Props are variadic: pass zero or one struct value (not a pointer). Zero-valued fields take the
 defaults listed below. Nothing here returns an error; bad input renders a red error message in the
-cell (see [pdf-generation.md §6](pdf-generation.md#6-errors-to-handle)).
+cell (see [generation.md §6](generation.md#6-errors-to-handle)).
 
 ### 2. Text — `pkg/components/text`, `props.Text`
 
@@ -59,11 +59,11 @@ func textExamples(m core.Maroto) {
 Gotchas:
 - Wrapping happens automatically when the string is wider than `cellWidth - Left - Right`, but the
   **row does not grow**; overflow draws over the next row. Size the row (§height budget in
-  [pdf-layout.md §2](pdf-layout.md#2-rows--fixed-height-in-millimetres)) or use an auto row.
+  [layout.md §2](layout.md#2-rows--fixed-height-in-millimetres)) or use an auto row.
 - A single word wider than the column is not broken under `EmptySpaceStrategy`; it overflows to
   the right. Use `DashStrategy` for identifiers/URLs in narrow columns.
 - Built-in fonts render cp1252 only. Any other script needs a custom font
-  ([pdf-config.md §5](pdf-config.md#5-fonts)) — otherwise characters silently come out wrong.
+  ([config.md §5](config.md#5-fonts)) — otherwise characters silently come out wrong.
 - `Top` is the only vertical positioning: there is no vertical-align. To bottom-align, compute
   `Top = rowHeight - lineHeight`.
 - Newlines (`\n`) in the value are not line breaks. Add one text component (or auto row) per line
@@ -137,7 +137,7 @@ func barcodeExamples(m core.Maroto) {
 | `Percent`, `Center`, `Left`, `Top` | as for images | Position/size inside the cell                                   |
 
 Place the human-readable value as a `text.New(..., props.Text{Top: ...})` in the same column
-([pdf-layout.md §4](pdf-layout.md#4-several-components-in-one-column)).
+([layout.md §4](layout.md#4-several-components-in-one-column)).
 
 ### 5. QR codes and data matrices — `pkg/components/code`, `props.Rect`
 
@@ -259,10 +259,10 @@ Define the document palette once as package-level `*props.Color` variables and r
   `datamatrix`, `line`, `checkbox`, `signature`
 - Props GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/props
 - Runnable grids showing every prop combination:
-  [`docs/assets/examples/textgrid`](../../docs/assets/examples/textgrid/v2/main.go),
-  [`imagegrid`](../../docs/assets/examples/imagegrid/v2/main.go),
-  [`barcodegrid`](../../docs/assets/examples/barcodegrid/v2/main.go),
-  [`qrgrid`](../../docs/assets/examples/qrgrid/v2/main.go),
-  [`line`](../../docs/assets/examples/line/v2/main.go),
-  [`checkbox`](../../docs/assets/examples/checkbox/v2/main.go),
-  [`signaturegrid`](../../docs/assets/examples/signaturegrid/v2/main.go)
+  [`docs/assets/examples/textgrid`](../../../docs/assets/examples/textgrid/v2/main.go),
+  [`imagegrid`](../../../docs/assets/examples/imagegrid/v2/main.go),
+  [`barcodegrid`](../../../docs/assets/examples/barcodegrid/v2/main.go),
+  [`qrgrid`](../../../docs/assets/examples/qrgrid/v2/main.go),
+  [`line`](../../../docs/assets/examples/line/v2/main.go),
+  [`checkbox`](../../../docs/assets/examples/checkbox/v2/main.go),
+  [`signaturegrid`](../../../docs/assets/examples/signaturegrid/v2/main.go)

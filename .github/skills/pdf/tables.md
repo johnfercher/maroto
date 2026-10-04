@@ -4,10 +4,10 @@ Render tabular data — invoices, statements, reports, catalogs — as repeated 
 consistent column widths, striping, borders, totals and correct pagination.
 
 See also:
-- [pdf-layout.md](pdf-layout.md) for the grid arithmetic, cell styling and header/footer
+- [layout.md](layout.md) for the grid arithmetic, cell styling and header/footer
   mechanics used here.
-- [pdf-components.md](pdf-components.md) for `props.Text` fields used in cells.
-- [pdf-testing.md](pdf-testing.md) for asserting the generated row structure.
+- [components.md](components.md) for `props.Text` fields used in cells.
+- [testing.md](testing.md) for asserting the generated row structure.
 
 ## Instructions
 
@@ -190,10 +190,10 @@ func addLongTable(m core.Maroto, products []Product) error {
 ```
 
 Trade-off: the document header is global and `RegisterHeader` must precede all content
-([pdf-layout.md §6](pdf-layout.md#6-header-and-footer)). Anything that should appear above the
+([layout.md §6](layout.md#6-header-and-footer)). Anything that should appear above the
 table on page 1 only (title block, addresses) therefore can't be a normal row before the table.
 Either include it in the header rows (it then repeats), or generate the title page and the table
-as two documents and merge them ([pdf-generation.md §5](pdf-generation.md#5-output-options)).
+as two documents and merge them ([generation.md §5](generation.md#5-output-options)).
 
 Rows are never split across pages; a row that doesn't fit moves whole to the next page.
 Totals rows are just more rows, so they may land alone on a new page — acceptable in most
@@ -226,7 +226,7 @@ honoured only in auto rows. Fixed-height rows with wrapping text overflow into t
 - More than ~8 columns on A4 portrait: switch to landscape
   (`WithOrientation(orientation.Horizontal)`) before shrinking fonts below 7 pt.
 - Build the column slices in a loop when the count is dynamic, exactly as in
-  [`docs/assets/examples/maxgridsum`](../../docs/assets/examples/maxgridsum/v2/main.go):
+  [`docs/assets/examples/maxgridsum`](../../../docs/assets/examples/maxgridsum/v2/main.go):
 
 ```go
 func dynamicColumns(m core.Maroto, headers []string, gridSize int) {
@@ -243,8 +243,8 @@ Make sure `gridSize % len(headers) == 0`, or distribute the remainder to the fir
 ## References
 
 - Feature page: https://maroto.tech/#/v2/features/list
-- Runnable examples: [`docs/assets/examples/list`](../../docs/assets/examples/list/v2/main.go),
-  [`billing`](../../docs/assets/examples/billing/v2/main.go) (full invoice with header, footer,
+- Runnable examples: [`docs/assets/examples/list`](../../../docs/assets/examples/list/v2/main.go),
+  [`billing`](../../../docs/assets/examples/billing/v2/main.go) (full invoice with header, footer,
   striped table, totals and barcode),
-  [`maxgridsum`](../../docs/assets/examples/maxgridsum/v2/main.go)
+  [`maxgridsum`](../../../docs/assets/examples/maxgridsum/v2/main.go)
 - `list` GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/components/list

@@ -21,16 +21,18 @@ improvising:
 
 A second group of skills teaches how to **use** maroto from Go code — for agents writing an
 application that produces PDFs, or for agents extending the examples under `docs/assets/examples`.
-Start with `pdf-generation.md`; it routes to the others.
+They live in the [`.github/skills/pdf`](.github/skills/pdf) folder. Start with
+`pdf/generation.md`; it routes to the others. [contribution.md §6](.github/skills/contribution.md#6-githubskillspdf-library-usage-skills)
+requires them to be updated in the same PR as any user-facing change.
 
 | Skill | Use when |
 |-------|----------|
-| [pdf-generation.md](.github/skills/pdf-generation.md) | Writing any Go code that generates a PDF with maroto — install, program skeleton, output, errors, checklist |
-| [pdf-config.md](.github/skills/pdf-config.md) | Choosing `config.NewBuilder()` options: page size, margins, fonts (incl. UTF-8), page numbers, metadata, protection, generation mode |
-| [pdf-layout.md](.github/skills/pdf-layout.md) | Placing content: grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
-| [pdf-components.md](.github/skills/pdf-components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures and their props |
-| [pdf-tables.md](.github/skills/pdf-tables.md) | Rendering tabular data (invoices, reports) with `list.Build` or manual loops, striping, borders, pagination |
-| [pdf-testing.md](.github/skills/pdf-testing.md) | Unit-testing the component tree with `pkg/test` fixtures and debugging layout problems |
+| [pdf/generation.md](.github/skills/pdf/generation.md) | Writing any Go code that generates a PDF with maroto — install, program skeleton, output, errors, checklist |
+| [pdf/config.md](.github/skills/pdf/config.md) | Choosing `config.NewBuilder()` options: page size, margins, fonts (incl. UTF-8), page numbers, metadata, protection, generation mode |
+| [pdf/layout.md](.github/skills/pdf/layout.md) | Placing content: grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
+| [pdf/components.md](.github/skills/pdf/components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures and their props |
+| [pdf/tables.md](.github/skills/pdf/tables.md) | Rendering tabular data (invoices, reports) with `list.Build` or manual loops, striping, borders, pagination |
+| [pdf/testing.md](.github/skills/pdf/testing.md) | Unit-testing the component tree with `pkg/test` fixtures and debugging layout problems |
 
 As new skill files are added to `.github/skills`, treat them as mandatory for
 the task they cover.
@@ -42,7 +44,12 @@ which walks through the full [pull request checklist](pull_request_template.md) 
 running `make dod` (build + test + format + lint + codecov) with no `golangci-lint` issues.
 `codecov` never fails the build, but its output (functions with 0% test coverage) is highly
 recommended to address before opening the PR — see
-[contribution.md §8](.github/skills/contribution.md#8-definition-of-done).
+[contribution.md §9](.github/skills/contribution.md#9-definition-of-done).
+
+If the change adds, changes or removes anything a user of the library can observe (a component,
+constructor, prop, default, config option, error or layout rule), the matching skill under
+[`.github/skills/pdf/`](.github/skills/pdf) must be updated in the same PR — see
+[contribution.md §6](.github/skills/contribution.md#6-githubskillspdf-library-usage-skills).
 
 If `make install-hooks` has been run in this clone, `make dod` also runs automatically as a
 `pre-commit` git hook (see [`.githooks/pre-commit`](.githooks/pre-commit)) and blocks the commit

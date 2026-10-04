@@ -34,10 +34,10 @@ go get github.com/johnfercher/maroto/v2@v2.4.3
 
 ## Using maroto with AI agents
 
-The [`.github/skills/pdf-*.md`](.github/skills) files teach an LLM/agent how to write Go code
+The skills in [`.github/skills/pdf/`](.github/skills/pdf) teach an LLM/agent how to write Go code
 that generates PDFs with maroto: setup, config, grid layout, components, tables and testing.
 Point your agent (Claude, Copilot, Cursor, etc.) at
-[`pdf-generation.md`](.github/skills/pdf-generation.md) — or copy the `pdf-*.md` files into your
+[`pdf/generation.md`](.github/skills/pdf/generation.md) — or copy the `pdf/` folder into your
 own project's skills directory — and it will follow the library's conventions and avoid the
 common layout pitfalls.
 
@@ -63,7 +63,7 @@ common layout pitfalls.
 
 `goimports`, `gofumpt`, `golangci-lint`, `mockery`, and `godoc` are versioned tool dependencies
 declared in [`tools/go.mod`](tools/go.mod), a separate module so their transitive dependencies
-never end up in the main `go.sum`. See [contribution.md](.github/skills/contribution.md#8-definition-of-done)
+never end up in the main `go.sum`. See [contribution.md](.github/skills/contribution.md#9-definition-of-done)
 for details.
 
 `make install` (or `make install-hooks` on its own) configures a `pre-commit` git hook, tracked at

@@ -5,14 +5,14 @@ the bytes and persist or return them. This is the entry point of the `pdf-*` ski
 first, then follow the links to the skill that covers the decision in front of you.
 
 See also:
-- [pdf-config.md](pdf-config.md) for every `config.NewBuilder()` option (page size, margins,
+- [config.md](config.md) for every `config.NewBuilder()` option (page size, margins,
   fonts, metadata, protection, generation mode).
-- [pdf-layout.md](pdf-layout.md) for the row/column grid, auto rows, cell styling, headers,
+- [layout.md](layout.md) for the row/column grid, auto rows, cell styling, headers,
   footers and page breaks.
-- [pdf-components.md](pdf-components.md) for text, images, barcodes, QR codes, data matrices,
+- [components.md](components.md) for text, images, barcodes, QR codes, data matrices,
   lines, checkboxes and signatures.
-- [pdf-tables.md](pdf-tables.md) for tabular data (invoices, reports, catalogs).
-- [pdf-testing.md](pdf-testing.md) for unit-testing the component tree and debugging layout.
+- [tables.md](tables.md) for tabular data (invoices, reports, catalogs).
+- [testing.md](testing.md) for unit-testing the component tree and debugging layout.
 
 ## Instructions
 
@@ -24,7 +24,7 @@ go get github.com/johnfercher/maroto/v2@latest
 
 The module path is `github.com/johnfercher/maroto/v2` — the `/v2` suffix is part of every import
 path. The consuming module must use a Go version at least as new as the `go` directive in
-maroto's own [`go.mod`](../../go.mod) for the release being pinned.
+maroto's own [`go.mod`](../../../go.mod) for the release being pinned.
 
 ### 2. Mental model
 
@@ -43,7 +43,7 @@ maroto's own [`go.mod`](../../go.mod) for the release being pinned.
 
 Split **building** the document from **writing** it. The builder returns `core.Maroto` so it can
 be unit-tested through `GetStructure()` without touching the filesystem (see
-[pdf-testing.md](pdf-testing.md)):
+[testing.md](testing.md)):
 
 ```go
 package main
@@ -104,7 +104,7 @@ Rules that follow from the skeleton:
   because each call closes the page being built. Build a fresh instance through the factory
   function whenever another output is needed.
 - `m.RegisterHeader(...)` / `m.RegisterFooter(...)` must be called **before** the first
-  `AddRow*` — see [pdf-layout.md §6](pdf-layout.md#6-header-and-footer).
+  `AddRow*` — see [layout.md §6](layout.md#6-header-and-footer).
 
 ### 4. Pick the right constructor
 
@@ -120,7 +120,7 @@ code already does:
 
 `NewRow` / `NewAutoRow` create a single column spanning the whole grid. The same table applies to
 `image`, `code`, `line`, `checkbox` and `signature` (constructor names per component are in
-[pdf-components.md](pdf-components.md)).
+[components.md](components.md)).
 
 Then attach them to the document:
 
@@ -231,18 +231,18 @@ Predefined colors are **values**, so take their address: `Color: &props.RedColor
 3. Fixed row heights leave room for the text they hold: a line of `S` pt text is
    `S / 2.835` mm tall (10 pt ≈ 3.5 mm) plus `props.Text.Top`. Wrapped text that is taller than
    its row is **not clipped** — it draws over the next row. Use `AddAutoRow` when the length is
-   unknown ([pdf-layout.md §3](pdf-layout.md#3-auto-rows)).
+   unknown ([layout.md §3](layout.md#3-auto-rows)).
 4. Header/footer registered before content; `Generate()` called once per instance.
 5. Non-Latin text (CJK, Arabic, Cyrillic, Hebrew, …) uses a registered UTF-8 font
-   ([pdf-config.md §5](pdf-config.md#5-fonts)); the built-in fonts only cover Latin-1 (cp1252).
+   ([config.md §5](config.md#5-fonts)); the built-in fonts only cover Latin-1 (cp1252).
 6. The program was actually run once and produced a file of non-zero size; while iterating,
    `WithDebug(true)` draws every cell's border so misaligned columns are visible.
 7. A `GetStructure()` fixture test exists when the document will be maintained
-   ([pdf-testing.md](pdf-testing.md)).
+   ([testing.md](testing.md)).
 
 ## References
 
 - Docs site (feature pages with rendered PDFs): https://maroto.tech/#/v2/features/basics
 - GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2
-- Complete runnable examples in this repository: [`docs/assets/examples/*/v2/main.go`](../../docs/assets/examples)
+- Complete runnable examples in this repository: [`docs/assets/examples/*/v2/main.go`](../../../docs/assets/examples)
   — start from `simplest` and `billing`.

@@ -4,11 +4,11 @@ Unit-test and debug maroto documents without opening a PDF viewer: assert the co
 `pkg/test`, keep output reproducible, and find layout problems quickly.
 
 See also:
-- [pdf-generation.md](pdf-generation.md) for the `GetMaroto() core.Maroto` factory these tests
+- [generation.md](generation.md) for the `GetMaroto() core.Maroto` factory these tests
   depend on.
-- [pdf-layout.md](pdf-layout.md) for the height arithmetic to check when a test shows an
+- [layout.md](layout.md) for the height arithmetic to check when a test shows an
   unexpected page count.
-- [unit-tests.md](unit-tests.md) when the code under test lives in **this** repository — its
+- [unit-tests.md](../unit-tests.md) when the code under test lives in **this** repository — its
   naming, AAA and `t.Parallel()` rules apply on top of what's here.
 
 ## Instructions
@@ -129,11 +129,11 @@ func TestGetMaroto_Generate(t *testing.T) {
 
 | Symptom                                       | Check                                                                               |
 |-----------------------------------------------|-------------------------------------------------------------------------------------|
-| Text drawn over the next row                  | Fixed row too short for wrapped text — size it ([pdf-layout.md §2](pdf-layout.md#2-rows--fixed-height-in-millimetres)) or use `AddAutoRow` |
+| Text drawn over the next row                  | Fixed row too short for wrapped text — size it ([layout.md §2](layout.md#2-rows--fixed-height-in-millimetres)) or use `AddAutoRow` |
 | Columns misaligned / content off the right edge | Column sizes don't sum to the grid; `WithDebug(true)` shows every cell border       |
 | Header appears mid-page                       | `RegisterHeader` called after content was added                                     |
 | Unexpected blank last page                    | `Generate()`/`GetStructure()` called twice on one instance, or a spacer row pushed past the page |
-| Characters replaced by blanks/garbage         | Non-cp1252 text with a built-in font — register a UTF-8 font ([pdf-config.md §5](pdf-config.md#5-fonts)) |
+| Characters replaced by blanks/garbage         | Non-cp1252 text with a built-in font — register a UTF-8 font ([config.md §5](config.md#5-fonts)) |
 | `could not load image` in red                 | Wrong path/working directory or unsupported format (only PNG/JPEG)                  |
 | `could not generate barcode` in red           | EAN value isn't 12–13 digits, or the string can't be encoded                        |
 | Auto-row image height wrong                   | Missing `JustReferenceWidth: true` in `props.Rect`                                   |
@@ -144,7 +144,7 @@ Tools:
   environment variable or flag while iterating; never leave it on in production output.
 - `maroto.NewMetricsDecorator(m)` — wrap the instance; `document.GetReport()` then lists time per
   `AddRow`/`Generate` and the file size (`report.String()` or `report.Save(path)`). Use it before
-  switching generation modes ([pdf-config.md §8](pdf-config.md#8-generation-mode-performance)).
+  switching generation modes ([config.md §8](config.md#8-generation-mode-performance)).
 - `GetStructure()` printed as JSON (`test.New(t).Assert(...).Save(...)` or your own walk) is the
   fastest way to see how many pages were produced and which rows landed where.
 - Open the file: `document.Save("out.pdf")` and inspect with any viewer, or `pdfcpu info out.pdf`
@@ -155,7 +155,7 @@ Tools:
 - Feature page: https://maroto.tech/#/v2/features/unittests
 - `pkg/test` GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/test
 - Example test and fixture in this repository:
-  [`docs/assets/examples/unittests/v2/main_test.go`](../../docs/assets/examples/unittests/v2/main_test.go),
-  [`test/maroto/example_unit_test.json`](../../test/maroto/example_unit_test.json)
+  [`docs/assets/examples/unittests/v2/main_test.go`](../../../docs/assets/examples/unittests/v2/main_test.go),
+  [`test/maroto/example_unit_test.json`](../../../test/maroto/example_unit_test.json)
 - Every `docs/assets/examples/*/v2/main_test.go` asserts its `GetMaroto()` against
   `test/maroto/examples/*.json` the same way.
