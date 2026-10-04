@@ -13,6 +13,7 @@ type MetricsDecorator struct {
 	addRowTime     []*metrics.Time
 	addAutoRowTime []*metrics.Time
 	addPageTime    []*metrics.Time
+	addTableTime   []*metrics.Time
 	headerTime     *metrics.Time
 	footerTime     *metrics.Time
 	generateTime   *metrics.Time
@@ -75,6 +76,15 @@ func (m *MetricsDecorator) AddRows(rows ...core.Row) {
 	})
 
 	m.addRowsTime = append(m.addRowsTime, timeSpent)
+}
+
+// AddTable decorates the AddTable method of maroto instance.
+func (m *MetricsDecorator) AddTable(header []core.Row, rows ...core.Row) {
+	timeSpent := time.GetTimeSpent(func() {
+		m.inner.AddTable(header, rows...)
+	})
+
+	m.addTableTime = append(m.addTableTime, timeSpent)
 }
 
 // AddRow decorates the AddRow method of maroto instance.
@@ -187,6 +197,14 @@ func (m *MetricsDecorator) buildMetrics(bytesSize int) *metrics.Report {
 			Key:   "add_rows",
 			Times: m.addRowsTime,
 			Avg:   m.getAVG(m.addRowsTime),
+		})
+	}
+
+	if len(m.addTableTime) > 0 {
+		timeMetrics = append(timeMetrics, metrics.TimeMetric{
+			Key:   "add_table",
+			Times: m.addTableTime,
+			Avg:   m.getAVG(m.addTableTime),
 		})
 	}
 

@@ -129,6 +129,7 @@ Then attach them to the document:
 | `m.AddRow(height, cols...)`         | One fixed-height row from columns; returns the row    |
 | `m.AddAutoRow(cols...)`             | One row sized to its tallest column; returns the row  |
 | `m.AddRows(rows...)`                | Pre-built rows (`row.New`, `text.NewRow`, `list.Build`) |
+| `m.AddTable(header, rows...)`       | A table whose `header` rows repeat on every page its `rows` continue onto ([tables.md §5](tables.md#5-pagination-repeating-the-header-on-every-page)) |
 | `m.AddPages(pages...)`              | Force a page break and add whole `page.New().Add(...)` blocks |
 
 ### 5. Output options

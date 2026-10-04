@@ -194,6 +194,9 @@ func registerHeaderAndFooter(m core.Maroto) error {
   useful area of every page.
 - Each returns an error when the rows are taller than the page; handle it.
 - Registering again replaces the previous header/footer for subsequent pages — don't.
+- The document header is for page furniture (logo, title). A table's column names belong in
+  `m.AddTable(header, rows...)`, which repeats them only on the pages the table spans
+  ([tables.md §5](tables.md#5-pagination-repeating-the-header-on-every-page)).
 - Headers and footers repeat on auto-break pages and on `AddPages` pages. With
   `WithDisableAutoPageBreak(true)` they appear on the first page only.
 - Page numbers are not part of the footer; they come from `WithPageNumber` in the config and are
@@ -201,7 +204,8 @@ func registerHeaderAndFooter(m core.Maroto) error {
 
 ### 7. Pages and page breaks
 
-- **Automatic**: a row that doesn't fit the remaining height goes to a new page (header first).
+- **Automatic**: a row that doesn't fit the remaining height goes to a new page (header first,
+  then the header of the table being added with `AddTable`, if it fits next to that row).
   Rows are never split; a tall row simply starts the next page, leaving blank space.
 - **Check before adding**: `m.FitlnCurrentPage(height)` (note the library's spelling, `Fitln`)
   reports whether `height` mm still fits. Use it to keep a title with its first content row:

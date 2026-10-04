@@ -29,5 +29,6 @@
   * [Protection](v2/features/protection.md?id=protection)
   * [QR Code](v2/features/qrcode.md?id=qrcode)
   * [Signature](v2/features/signature.md?id=signature)
+  * [Table](v2/features/table.md?id=table)
   * [Text](v2/features/text.md?id=text)
   * [Unit Testing](v2/features/unittests.md?id=unit-testing)

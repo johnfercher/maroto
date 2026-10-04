@@ -1,0 +1,5789 @@
+{
+	"type": "maroto",
+	"details": {
+		"chunk_workers": 1,
+		"config_margin_bottom": 20.0025,
+		"config_margin_left": 10,
+		"config_margin_right": 10,
+		"config_margin_top": 10,
+		"config_max_grid_sum": 12,
+		"config_provider_type": "gofpdf",
+		"generation_mode": "sequential",
+		"maroto_dimension_height": 297,
+		"maroto_dimension_width": 210,
+		"page_number_color": "RGB(0, 0, 0)",
+		"page_number_family": "arial",
+		"page_number_pattern": "{current} / {total}",
+		"page_number_place": "bottom",
+		"page_number_size": 10,
+		"prop_font_color": "RGB(0, 0, 0)",
+		"prop_font_family": "arial",
+		"prop_font_size": 10
+	},
+	"nodes": [
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 12,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Invoice",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 16,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 7,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(55, 55, 55)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Code",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Description",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Qty",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Total",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-001",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 1",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-002",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 2",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-003",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 3",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-004",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 4",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-005",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 5",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-006",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 6",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-007",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 7",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-008",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 8",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-009",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 9",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-010",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 10",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-011",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 11",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-012",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 12",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-013",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 13",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-014",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 14",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-015",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 15",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-016",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 16",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-017",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 17",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-018",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 18",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-019",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 19",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-020",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 20",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-021",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 21",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-022",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 22",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-023",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 23",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-024",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 24",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-025",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 25",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-026",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 26",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-027",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 27",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-028",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 28",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-029",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 29",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-030",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 30",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-031",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 31",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 5.897499999,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 7,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(55, 55, 55)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Code",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Description",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Qty",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"nodes": [
+								{
+									"value": "Total",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(255, 255, 255)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9,
+										"prop_font_style": "B",
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-032",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 32",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-033",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 33",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-034",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 34",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-035",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 35",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-036",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 36",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-037",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 37",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-038",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 38",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-039",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 39",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-040",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 40",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-041",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 41",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "1",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "9.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-042",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 42",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "2",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "19.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-043",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 43",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "3",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "28.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"details": {
+						"prop_background_color": "RGB(235, 235, 235)"
+					},
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-044",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 44",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "4",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "38.00",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 6,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "SKU-045",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 6,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "Item 45",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "5",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						},
+						{
+							"value": 2,
+							"type": "col",
+							"details": {
+								"prop_border_color": "RGB(200, 200, 200)",
+								"prop_border_type": 15
+							},
+							"nodes": [
+								{
+									"value": "47.50",
+									"type": "text",
+									"details": {
+										"prop_align": "R",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 8,
+										"prop_left": 1.5,
+										"prop_right": 1.5,
+										"prop_top": 1.5
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 8,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							}
+						}
+					]
+				},
+				{
+					"value": 10,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Terms and conditions",
+									"type": "text",
+									"details": {
+										"prop_align": "L",
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 12,
+										"prop_font_style": "B"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 8.3975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "page",
+			"nodes": [
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 9.350000000000001,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 0,
+							"type": "col",
+							"details": {
+								"is_max": true
+							},
+							"nodes": [
+								{
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et ex quam. Proin aliquam nibh id arcu finibus, sit amet ultrices velit vulputate. Curabitur hendrerit et metus a accumsan. Mauris quis purus rhoncus diam tempor. Suspendisse potenti.",
+									"type": "text",
+									"details": {
+										"prop_align": "J",
+										"prop_bottom": 3,
+										"prop_breakline_strategy": "empty_space_strategy",
+										"prop_color": "RGB(0, 0, 0)",
+										"prop_font_family": "arial",
+										"prop_font_size": 9
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"value": 192.1975,
+					"type": "row",
+					"nodes": [
+						{
+							"value": 12,
+							"type": "col"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -132,6 +132,8 @@ func TestGetMaroto_Generate(t *testing.T) {
 | Text drawn over the next row                  | Fixed row too short for wrapped text — size it ([layout.md §2](layout.md#2-rows--fixed-height-in-millimetres)) or use `AddAutoRow` |
 | Columns misaligned / content off the right edge | Column sizes don't sum to the grid; `WithDebug(true)` shows every cell border       |
 | Header appears mid-page                       | `RegisterHeader` called after content was added                                     |
+| Table header missing after a page break       | Table added with `AddRows` — use `AddTable(header, rows...)` ([tables.md §5](tables.md#5-pagination-repeating-the-header-on-every-page)) |
+| Column names above the title block on page 1  | Column names registered with `RegisterHeader` — use `AddTable` instead              |
 | Unexpected blank last page                    | `Generate()`/`GetStructure()` called twice on one instance, or a spacer row pushed past the page |
 | Characters replaced by blanks/garbage         | Non-cp1252 text with a built-in font — register a UTF-8 font ([config.md §5](config.md#5-fonts)) |
 | `could not load image` in red                 | Wrong path/working directory or unsupported format (only PNG/JPEG)                  |

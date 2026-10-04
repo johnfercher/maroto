@@ -168,32 +168,31 @@ func addProductTable(m core.Maroto, products []Product) error {
 
 ### 5. Pagination: repeating the header on every page
 
-`list.Build` and the manual loop print the header **once**. For long tables where the header must
-repeat after each automatic page break, register it as the document header instead:
+`m.AddRows` prints the header **once**. For long tables where the header must repeat after each
+automatic page break, add the table with `m.AddTable(header, rows...)` instead:
 
 ```go
 func addLongTable(m core.Maroto, products []Product) error {
-	if len(products) == 0 {
-		return list.ErrEmptyArray
-	}
-
-	if err := m.RegisterHeader(products[0].GetHeader()); err != nil {
+	rows, err := list.Build(products)
+	if err != nil {
 		return err
 	}
 
-	for i, p := range products {
-		m.AddRows(p.GetContent(i))
-	}
-
+	m.AddTable(rows[:1], rows[1:]...) // list.Build puts the header first
 	return nil
 }
 ```
 
-Trade-off: the document header is global and `RegisterHeader` must precede all content
-([layout.md §6](layout.md#6-header-and-footer)). Anything that should appear above the
-table on page 1 only (title block, addresses) therefore can't be a normal row before the table.
-Either include it in the header rows (it then repeats), or generate the title page and the table
-as two documents and merge them ([generation.md §5](generation.md#5-output-options)).
+- The header rows are repeated at the top of every page **the table's body continues onto**.
+  Rows added after `AddTable` returns, and other tables, never get them.
+- The header is never left alone at the bottom of a page: if it doesn't fit together with the
+  first body row, the table starts on a new page.
+- `header` is a slice, so a title row above the column names repeats too.
+- On a new page the table header goes right under the document header from `RegisterHeader`.
+- A page break caused by a body row too tall to share the page with the header gets no header.
+
+Don't use `RegisterHeader` for column names: it's global, so they would sit above the title block
+on page 1 and repeat on pages that have no table ([layout.md §6](layout.md#6-header-and-footer)).
 
 Rows are never split across pages; a row that doesn't fit moves whole to the next page.
 Totals rows are just more rows, so they may land alone on a new page — acceptable in most
@@ -242,8 +241,9 @@ Make sure `gridSize % len(headers) == 0`, or distribute the remainder to the fir
 
 ## References
 
-- Feature page: https://maroto.tech/#/v2/features/list
+- Feature pages: https://maroto.tech/#/v2/features/list, https://maroto.tech/#/v2/features/table
 - Runnable examples: [`docs/assets/examples/list`](../../docs/assets/examples/list/v2/main.go),
+  [`table`](../../docs/assets/examples/table/v2/main.go) (`AddTable` with text before and after),
   [`billing`](../../docs/assets/examples/billing/v2/main.go) (full invoice with header, footer,
   striped table, totals and barcode),
   [`maxgridsum`](../../docs/assets/examples/maxgridsum/v2/main.go)
