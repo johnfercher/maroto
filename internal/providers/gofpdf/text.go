@@ -85,80 +85,20 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
 	}
 
-	// Rotation honors both axes of textProp.RotationPivot. The baseline of
-	// the first line is shifted so the rotated bounding box of the whole
-	// (multi-line) block sits inside the Text.GetHeight-expanded cell.
+	lineProp := textProp
 	if textProp.Rotation != 0 {
-		marginLeft, marginTop, _, _ := s.pdf.GetMargins()
-		n := float64(len(lines))
-		textHeight := n*fontHeight + (n-1)*textProp.VerticalPadding
-		blockWidth := stringWidth
-		if blockWidth > width {
-			blockWidth = width
-		}
-
-		var alignOffsetX float64
-		switch textProp.Align {
-		case align.Center:
-			alignOffsetX = (width - blockWidth) / 2
-		case align.Right:
-			alignOffsetX = width - blockWidth
-		case align.Left, align.Top, align.Bottom, align.Middle:
-			alignOffsetX = 0
-		}
-		if alignOffsetX < 0 {
-			alignOffsetX = 0
-		}
-
-		var pivotOffsetX float64
-		switch textProp.RotationPivot.Horizontal {
-		case rotationpivot.Start:
-			pivotOffsetX = 0
-		case rotationpivot.End:
-			pivotOffsetX = blockWidth
-		case rotationpivot.Center:
-			pivotOffsetX = blockWidth / 2
-		default:
-			pivotOffsetX = blockWidth / 2
-		}
-		var pivotOffsetY float64
-		switch textProp.RotationPivot.Vertical {
-		case rotationpivot.Top:
-			pivotOffsetY = 0
-		case rotationpivot.Bottom:
-			pivotOffsetY = textHeight
-		case rotationpivot.Middle:
-			pivotOffsetY = textHeight / 2
-		default:
-			pivotOffsetY = textHeight / 2
-		}
-
-		rad := textProp.Rotation * math.Pi / 180
-		sin, cos := math.Sin(rad), math.Cos(rad)
-		// Distance any rotated corner rises above the pivot. Corners relative
-		// to the pivot are TL=(-px,-py), TR=(W-px,-py), BR=(W-px,H-py), BL=(-px,H-py);
-		// rotated y is -dx*sin + dy*cos, so -y = dx*sin - dy*cos. Take the max.
-		px, py := pivotOffsetX, pivotOffsetY
-		W, H := blockWidth, textHeight
-		upExtent := math.Max(0, math.Max(py*cos-px*sin,
-			math.Max((W-px)*sin+py*cos,
-				math.Max((W-px)*sin-(H-py)*cos,
-					-px*sin-(H-py)*cos))))
-
-		contentHeight := cell.Height - textProp.Top - textProp.Bottom
-		if contentHeight > textHeight {
-			// place the rotated bbox top at the cell content top
-			y = cell.Y + textProp.Top + upExtent + fontHeight - pivotOffsetY
-		}
-		pivotX := x + alignOffsetX + pivotOffsetX + marginLeft
-		pivotY := y + (pivotOffsetY - fontHeight) + marginTop
-		s.pdf.TransformBegin()
-		s.pdf.TransformRotate(textProp.Rotation, pivotX, pivotY)
+		y = s.rotate(lines, cell, textProp, x, width, fontHeight)
 		defer s.pdf.TransformEnd()
+
+		if textProp.Hyperlink != nil {
+			unlinked := *textProp
+			unlinked.Hyperlink = nil
+			lineProp = &unlinked
+		}
 	}
 
 	if len(lines) == 1 {
-		s.addLine(textProp, x, width, y, stringWidth, lines[0])
+		s.addLine(lineProp, x, width, y, stringWidth, lines[0])
 		s.font.SetColor(originalColor)
 		return
 	}
@@ -168,7 +108,7 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	for index, line := range lines {
 		lineWidth := s.pdf.GetStringWidth(line)
 
-		s.addLine(textProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, line)
+		s.addLine(lineProp, x, width, y+float64(index)*fontHeight+accumulateOffsetY, lineWidth, line)
 		accumulateOffsetY += textProp.VerticalPadding
 	}
 
@@ -193,6 +133,81 @@ func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth floa
 	}
 
 	return len(s.getLinesBreakingLineFromSpace(strings.Split(textTranslated, " "), colWidth))
+}
+
+// rotate starts the rotation transform of a text block and returns the baseline of its first line,
+// moved so the rotated block starts at the top of the cell. Both axes of RotationPivot are honored,
+// and for multi-line text the whole block rotates as one.
+func (s *Text) rotate(lines []string, cell *entity.Cell, textProp *props.Text, x, width, fontHeight float64) float64 {
+	marginLeft, marginTop, _, _ := s.pdf.GetMargins()
+	n := float64(len(lines))
+	textHeight := n*fontHeight + (n-1)*textProp.VerticalPadding
+
+	// The widest drawn line, which can exceed the column when a word is too long to wrap.
+	var blockWidth float64
+	for _, line := range lines {
+		blockWidth = max(blockWidth, s.pdf.GetStringWidth(line))
+	}
+
+	var alignOffsetX float64
+	switch textProp.Align {
+	case align.Center:
+		alignOffsetX = (width - blockWidth) / 2
+	case align.Right:
+		alignOffsetX = width - blockWidth
+	case align.Left, align.Top, align.Bottom, align.Middle:
+		alignOffsetX = 0
+	}
+	alignOffsetX = max(alignOffsetX, 0)
+
+	var pivotOffsetX float64
+	switch textProp.RotationPivot.Horizontal {
+	case rotationpivot.Start:
+		pivotOffsetX = 0
+	case rotationpivot.End:
+		pivotOffsetX = blockWidth
+	case rotationpivot.Center:
+		pivotOffsetX = blockWidth / 2
+	default:
+		pivotOffsetX = blockWidth / 2
+	}
+	var pivotOffsetY float64
+	switch textProp.RotationPivot.Vertical {
+	case rotationpivot.Top:
+		pivotOffsetY = 0
+	case rotationpivot.Bottom:
+		pivotOffsetY = textHeight
+	case rotationpivot.Middle:
+		pivotOffsetY = textHeight / 2
+	default:
+		pivotOffsetY = textHeight / 2
+	}
+
+	rad := textProp.Rotation * math.Pi / 180
+	sin, cos := math.Sin(rad), math.Cos(rad)
+	// Corners relative to the pivot, rotated counter-clockwise on a y-down page.
+	px, py := pivotOffsetX, pivotOffsetY
+	corners := [4][2]float64{{-px, -py}, {blockWidth - px, -py}, {blockWidth - px, textHeight - py}, {-px, textHeight - py}}
+	minX, minY, maxX, maxY := math.Inf(1), math.Inf(1), math.Inf(-1), math.Inf(-1)
+	for _, c := range corners {
+		rx, ry := c[0]*cos+c[1]*sin, -c[0]*sin+c[1]*cos
+		minX, maxX = min(minX, rx), max(maxX, rx)
+		minY, maxY = min(minY, ry), max(maxY, ry)
+	}
+
+	y := cell.Y + textProp.Top - min(minY, 0) + fontHeight - pivotOffsetY
+	pivotX := x + alignOffsetX + pivotOffsetX + marginLeft
+	pivotY := y + (pivotOffsetY - fontHeight) + marginTop
+
+	s.pdf.TransformBegin()
+	s.pdf.TransformRotate(textProp.Rotation, pivotX, pivotY)
+
+	// A link annotation ignores the transform, so it covers the rotated block instead of each line.
+	if textProp.Hyperlink != nil {
+		s.pdf.LinkString(pivotX+minX, pivotY+minY, maxX-minX, maxY-minY, *textProp.Hyperlink)
+	}
+
+	return y
 }
 
 func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {

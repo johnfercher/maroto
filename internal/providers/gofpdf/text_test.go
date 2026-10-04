@@ -16,7 +16,13 @@ import (
 
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
+
+// approx matches a float64 argument within rounding error of the rotation math.
+func approx(want float64) any {
+	return mock.MatchedBy(func(got float64) bool { return math.Abs(got-want) < 1e-9 })
+}
 
 func TestNewText(t *testing.T) {
 	t.Parallel()
@@ -777,8 +783,8 @@ func TestText_Add(t *testing.T) {
 			RotationPivot:     rotationpivot.Pivot{Horizontal: rotationpivot.Center, Vertical: rotationpivot.Middle},
 		}
 		fontHeight := 5.0
-		// 2-line block: textHeight = 2*fontHeight = 10, blockWidth = min(stringWidth, width) = 8
-		W, H := 8.0, 2*fontHeight
+		// 2-line block: textHeight = 2*fontHeight = 10, blockWidth = widest drawn line = 7
+		W, H := 7.0, 2*fontHeight
 		px, py := W/2, H/2
 		rad := 45.0 * math.Pi / 180
 		sin, cos := math.Sin(rad), math.Cos(rad)
@@ -815,6 +821,131 @@ func TestText_Add(t *testing.T) {
 
 		// Act
 		sut.Add("ab cd", cell, textProp)
+	})
+	t.Run("when rotation 90 makes a tall block shorter, should still move it to the cell top", func(t *testing.T) {
+		t.Parallel()
+		// Arrange — two 7 wide lines (textHeight 10) rotated 90° are only 7 tall,
+		// which is also the height an auto row reserves for them.
+		cell := &entity.Cell{X: 0, Y: 0, Width: 8, Height: 7}
+		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
+		textProp := &props.Text{
+			Family:            fontfamily.Arial,
+			Style:             fontstyle.Normal,
+			Size:              10,
+			Align:             align.Left,
+			BreakLineStrategy: breakline.EmptySpaceStrategy,
+			Rotation:          90,
+			RotationPivot:     rotationpivot.Pivot{Horizontal: rotationpivot.Center, Vertical: rotationpivot.Middle},
+		}
+		fontHeight := 5.0
+		// Rotated 90°, the block's top is blockWidth/2 = 3.5 above the pivot, and the
+		// pivot is textHeight/2 = 5 below the first baseline's top: y = 3.5 + 5 - 5.
+		expectedY := 3.5
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 10.0).Return(fontHeight)
+		font.EXPECT().GetColor().Return(originalColor)
+		font.EXPECT().SetColor(originalColor)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("ab cd").Return(20.0)
+		pdf.EXPECT().GetStringWidth("ab").Return(7.0)
+		pdf.EXPECT().GetStringWidth(" cd").Return(8.0)
+		pdf.EXPECT().GetStringWidth("cd").Return(7.0)
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		pdf.EXPECT().TransformBegin().Once()
+		pdf.EXPECT().TransformRotate(90.0, approx(3.5), approx(3.5)).Once()
+		pdf.EXPECT().TransformEnd().Once()
+		pdf.EXPECT().Text(0.0, approx(expectedY), "ab").Once()
+		pdf.EXPECT().Text(0.0, approx(expectedY+fontHeight), "cd").Once()
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		sut.Add("ab cd", cell, textProp)
+	})
+	t.Run("when rotated text has a hyperlink, should link the rotated block once", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := &entity.Cell{X: 10, Y: 20, Width: 100, Height: 50}
+		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
+		url := "https://example.com"
+		textProp := &props.Text{
+			Family:        fontfamily.Arial,
+			Style:         fontstyle.Normal,
+			Size:          10,
+			Align:         align.Left,
+			Left:          5,
+			Hyperlink:     &url,
+			Rotation:      90,
+			RotationPivot: rotationpivot.Pivot{Horizontal: rotationpivot.Center, Vertical: rotationpivot.Middle},
+		}
+		// A 20x5 block rotated 90° around its center is 5 wide and 20 tall.
+		// pivot = (cell.X + Left + 20/2 + marginLeft, y - 5/2 + marginTop) = (27, 33)
+		// with y = cell.Y + 20/2 + 5 - 5/2 = 32.5
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 10.0).Return(5.0)
+		font.EXPECT().GetColor().Return(originalColor)
+		font.EXPECT().SetColor(&props.BlueColor)
+		font.EXPECT().SetColor(originalColor)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("hello").Return(20.0)
+		pdf.EXPECT().GetMargins().Return(2.0, 3.0, 0.0, 0.0)
+		pdf.EXPECT().TransformBegin().Once()
+		pdf.EXPECT().TransformRotate(90.0, approx(27), approx(33)).Once()
+		pdf.EXPECT().TransformEnd().Once()
+		pdf.EXPECT().LinkString(approx(24.5), approx(23), approx(5), approx(20), url).Once()
+		pdf.EXPECT().Text(17.0, approx(35.5), "hello").Once()
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		sut.Add("hello", cell, textProp)
+
+		// Assert
+		pdf.AssertNumberOfCalls(t, "LinkString", 1)
+	})
+	t.Run("when a rotated word is wider than the column, should pivot on its drawn width", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := &entity.Cell{X: 0, Y: 0, Width: 20, Height: 50}
+		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
+		textProp := &props.Text{
+			Family:            fontfamily.Arial,
+			Style:             fontstyle.Normal,
+			Size:              10,
+			Align:             align.Left,
+			BreakLineStrategy: breakline.EmptySpaceStrategy,
+			Rotation:          90,
+			RotationPivot:     rotationpivot.Pivot{Horizontal: rotationpivot.Center, Vertical: rotationpivot.Middle},
+		}
+		// EmptySpaceStrategy can't break "longword", so it is drawn 30 wide in a 20 wide column:
+		// the pivot is at 30/2, and the block top is 30/2 above it.
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 10.0).Return(5.0)
+		font.EXPECT().GetColor().Return(originalColor)
+		font.EXPECT().SetColor(originalColor)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return s })
+		pdf.EXPECT().GetStringWidth("longword").Return(30.0)
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		pdf.EXPECT().TransformBegin().Once()
+		pdf.EXPECT().TransformRotate(90.0, approx(15), approx(15)).Once()
+		pdf.EXPECT().TransformEnd().Once()
+		pdf.EXPECT().Text(0.0, approx(17.5), "longword").Once()
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		sut.Add("longword", cell, textProp)
 	})
 	t.Run("when rotation is 0, should not call any Transform method", func(t *testing.T) {
 		t.Parallel()

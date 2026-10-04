@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/v2/internal/fixture"
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/test"
@@ -232,8 +233,9 @@ func TestText_GetHeight(t *testing.T) {
 		assert.InDelta(t, expected, height, 0.0001)
 	})
 
-	t.Run("When string width exceeds content width, should clamp to content width", func(t *testing.T) {
+	t.Run("When a single word is wider than the content width, should use the word width", func(t *testing.T) {
 		t.Parallel()
+		// Arrange
 		cell := fixture.CellEntity()
 		font := fixture.FontProp()
 		textProp := props.Text{Rotation: 90}
@@ -244,10 +246,57 @@ func TestText_GetHeight(t *testing.T) {
 		provider := mocks.NewProvider(t)
 		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(1.0)
 		provider.EXPECT().GetFontHeight(&font).Return(2.0)
-		// stringWidth (200) > contentWidth (100) → clamps to 100
+		// EmptySpaceStrategy can't break "text", so it is drawn 200 wide in a 100 wide column
 		provider.EXPECT().GetStringWidth("text", &textProp).Return(200.0)
 
+		// Act
 		height := sut.GetHeight(provider, &cell)
+
+		// Assert
+		assert.InDelta(t, 200.0, height, 0.0001)
+	})
+	t.Run("When wrapped words fit the content width, should use the content width", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := fixture.CellEntity()
+		font := fixture.FontProp()
+		textProp := props.Text{Rotation: 90}
+		textProp.MakeValid(&font)
+
+		sut := text.New("two words", textProp)
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetLinesQuantity("two words", &textProp, 100.0).Return(2.0)
+		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+		provider.EXPECT().GetStringWidth("two words", &textProp).Return(200.0)
+		provider.EXPECT().GetStringWidth("two", &textProp).Return(30.0)
+		provider.EXPECT().GetStringWidth("words", &textProp).Return(50.0)
+
+		// Act
+		height := sut.GetHeight(provider, &cell)
+
+		// Assert
+		assert.InDelta(t, 100.0, height, 0.0001)
+	})
+	t.Run("When dash strategy breaks a long word, should use the content width", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := fixture.CellEntity()
+		font := fixture.FontProp()
+		textProp := props.Text{Rotation: 90, BreakLineStrategy: breakline.DashStrategy}
+		textProp.MakeValid(&font)
+
+		sut := text.New("text", textProp)
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetLinesQuantity("text", &textProp, 100.0).Return(2.0)
+		provider.EXPECT().GetFontHeight(&font).Return(2.0)
+		provider.EXPECT().GetStringWidth("text", &textProp).Return(200.0)
+
+		// Act
+		height := sut.GetHeight(provider, &cell)
+
+		// Assert
 		assert.InDelta(t, 100.0, height, 0.0001)
 	})
 }
