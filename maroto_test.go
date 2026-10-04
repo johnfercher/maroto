@@ -143,27 +143,177 @@ func TestMaroto_AddRow(t *testing.T) {
 		// Assert
 		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_3.json")
 	})
-	t.Run("when repeat rows exist and page overflows, should re-add them on new page", func(t *testing.T) {
+}
+
+func TestMaroto_AddTable(t *testing.T) {
+	t.Parallel()
+	// Pages are 20 high with no margins, table headers are 3 or 4 high and
+	// body rows are 5 high, so each page's row heights show what landed
+	// where; the last row of every page is the filler up to its bottom.
+	newSut := func() core.Maroto {
+		return maroto.New(config.NewBuilder().
+			WithDimensions(20, 20).
+			WithTopMargin(0).WithBottomMargin(0).WithLeftMargin(0).WithRightMargin(0).
+			Build())
+	}
+	rows := func(n int, height float64) []core.Row {
+		out := make([]core.Row, n)
+		for i := range out {
+			out[i] = row.New(height).Add(col.New(12))
+		}
+		return out
+	}
+	t.Run("when header is nil, should add the rows without repeating anything", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
-		cfg := config.NewBuilder().
-			WithDimensions(20, 20).
-			WithBottomMargin(0).
-			WithTopMargin(0).
-			WithLeftMargin(0).
-			WithRightMargin(0).
-			Build()
-		sut := maroto.New(cfg)
+		sut := newSut()
 
 		// Act
-		sut.AddRow(5, col.New(12)).WithRepeatOnPageBreak()
-		for i := 0; i < 5; i++ {
-			sut.AddRow(5, col.New(12))
-		}
+		sut.AddTable(nil, rows(5, 5)...)
 
 		// Assert
-		test.New(t).Assert(sut.GetStructure()).Equals("maroto_add_row_repeat.json")
+		assert.Equal(t, [][]float64{{5, 5, 5, 5, 0}, {5, 15}}, rowHeightsByPage(sut))
 	})
+	t.Run("when header is empty, should add the rows without repeating anything", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddTable([]core.Row{}, rows(5, 5)...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{5, 5, 5, 5, 0}, {5, 15}}, rowHeightsByPage(sut))
+	})
+	t.Run("when rows are nil, should add only the header", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddTable(rows(1, 3))
+
+		// Assert
+		assert.Equal(t, [][]float64{{3, 17}}, rowHeightsByPage(sut))
+	})
+	t.Run("when rows are empty, should add only the header", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddTable(rows(1, 3), []core.Row{}...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{3, 17}}, rowHeightsByPage(sut))
+	})
+	t.Run("when the body spans pages, should repeat the header on each of them", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddTable(rows(1, 3), rows(6, 5)...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{3, 5, 5, 5, 2}, {3, 5, 5, 5, 2}}, rowHeightsByPage(sut))
+	})
+	t.Run("when the header has 3 rows, should repeat all of them in order", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+		header := []core.Row{row.New(1).Add(col.New(12)), row.New(2).Add(col.New(12)), row.New(3).Add(col.New(12))}
+
+		// Act
+		sut.AddTable(header, rows(4, 4)...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{1, 2, 3, 4, 4, 4, 2}, {1, 2, 3, 4, 10}}, rowHeightsByPage(sut))
+	})
+	t.Run("when rows follow the table, should not repeat the header for them", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddTable(rows(1, 3), rows(3, 5)...)
+		sut.AddRows(rows(4, 5)...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{3, 5, 5, 5, 2}, {5, 5, 5, 5, 0}}, rowHeightsByPage(sut))
+	})
+	t.Run("when a second table spans pages, should repeat only its own header", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddTable(rows(1, 3), rows(3, 5)...)
+		sut.AddTable(rows(1, 4), rows(4, 5)...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{3, 5, 5, 5, 2}, {4, 5, 5, 5, 1}, {4, 5, 11}}, rowHeightsByPage(sut))
+	})
+	t.Run("when the header and first row fit after other rows, should keep the table on the same page", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddRows(rows(1, 5)...)
+		sut.AddTable(rows(1, 3), rows(2, 5)...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{5, 3, 5, 5, 2}}, rowHeightsByPage(sut))
+	})
+	t.Run("when the header and first row don't fit after other rows, should start the table on a new page", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddRows(rows(3, 5)...)
+		sut.AddTable(rows(1, 3), rows(2, 5)...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{5, 5, 5, 5}, {3, 5, 5, 7}}, rowHeightsByPage(sut))
+	})
+	t.Run("when a page header is registered, should stack the table header under it", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+		err := sut.RegisterHeader(rows(1, 2)...)
+
+		// Act
+		sut.AddTable(rows(1, 3), rows(6, 5)...)
+
+		// Assert
+		assert.NoError(t, err)
+		assert.Equal(t, [][]float64{{2, 3, 5, 5, 5, 0}, {2, 3, 5, 5, 5, 0}}, rowHeightsByPage(sut))
+	})
+	t.Run("when the header and the overflowing row can't share a page, should skip the header", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut()
+
+		// Act
+		sut.AddTable(rows(1, 3), append(rows(1, 5), rows(1, 18)...)...)
+
+		// Assert
+		assert.Equal(t, [][]float64{{3, 5, 12}, {18, 2}}, rowHeightsByPage(sut))
+	})
+}
+
+func rowHeightsByPage(m core.Maroto) [][]float64 {
+	var pages [][]float64
+	for _, p := range m.GetStructure().GetNexts() {
+		var heights []float64
+		for _, r := range p.GetNexts() {
+			heights = append(heights, r.GetData().Value.(float64))
+		}
+		pages = append(pages, heights)
+	}
+	return pages
 }
 
 func TestMaroto_AddRows(t *testing.T) {

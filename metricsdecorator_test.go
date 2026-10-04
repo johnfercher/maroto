@@ -61,6 +61,38 @@ func TestMetricsDecorator_AddPages(t *testing.T) {
 	inner.AssertNumberOfCalls(t, "AddPages", 2)
 }
 
+func TestMetricsDecorator_AddTable(t *testing.T) {
+	t.Parallel()
+	// Arrange
+	header := row.New(5).Add(col.New(12))
+	body := row.New(10).Add(col.New(12))
+
+	docToReturn := mocks.NewDocument(t)
+	docToReturn.EXPECT().GetBytes().Return([]byte{1, 2, 3})
+	inner := mocks.NewMaroto(t)
+	inner.EXPECT().AddTable([]core.Row{header}, body)
+	inner.EXPECT().Generate().Return(docToReturn, nil)
+
+	sut := maroto.NewMetricsDecorator(inner)
+
+	// Act
+	sut.AddTable([]core.Row{header}, body)
+	sut.AddTable([]core.Row{header}, body)
+
+	// Assert
+	doc, err := sut.Generate()
+	assert.Nil(t, err)
+	assert.NotNil(t, doc)
+
+	report := doc.GetReport()
+	assert.NotNil(t, report)
+	assert.Len(t, report.TimeMetrics, 2)
+	assert.Equal(t, "generate", report.TimeMetrics[0].Key)
+	assert.Equal(t, "add_table", report.TimeMetrics[1].Key)
+	assert.Len(t, report.TimeMetrics[1].Times, 2)
+	inner.AssertNumberOfCalls(t, "AddTable", 2)
+}
+
 func TestMetricsDecorator_AddRow(t *testing.T) {
 	t.Parallel()
 	// Arrange

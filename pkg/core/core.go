@@ -14,6 +14,7 @@ type Maroto interface {
 	RegisterHeader(rows ...Row) error
 	RegisterFooter(rows ...Row) error
 	AddRows(rows ...Row)
+	AddTable(header []Row, rows ...Row)
 	AddRow(rowHeight float64, cols ...Col) Row
 	AddAutoRow(cols ...Col) Row
 	FitlnCurrentPage(heightNewLine float64) bool
@@ -63,8 +64,6 @@ type Row interface {
 	GetColumns() []Col
 	WithStyle(style *props.Cell) Row
 	Render(provider Provider, cell entity.Cell)
-	WithRepeatOnPageBreak() Row
-	IsRepeatOnPageBreak() bool
 }
 
 // Page is the interface that wraps the basic methods of a page.

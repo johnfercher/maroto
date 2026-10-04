@@ -1,6 +1,6 @@
 # Header
 
-`RegisterHeader` registers a row (or a set of rows) that is automatically printed at the top of **every** page. The header appears just below the top margin and is drawn before any body content on each page. Use it for logos, report titles, column labels, or any content that should repeat on every page.
+`RegisterHeader` registers a row (or a set of rows) that is automatically printed at the top of **every** page. The header appears just below the top margin and is drawn before any body content on each page. Use it for logos, report titles, or any content that should repeat on every page. For the column labels of a table, use [AddTable](v2/features/table?id=table) instead: its header repeats only on the pages the table spans.
 
 ## Usage notes
 

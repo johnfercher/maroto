@@ -240,6 +240,54 @@ func (_c *Maroto_AddRows_Call) RunAndReturn(run func(...core.Row)) *Maroto_AddRo
 	return _c
 }
 
+// AddTable provides a mock function with given fields: header, rows
+func (_m *Maroto) AddTable(header []core.Row, rows ...core.Row) {
+	_va := make([]interface{}, len(rows))
+	for _i := range rows {
+		_va[_i] = rows[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, header)
+	_ca = append(_ca, _va...)
+	_m.Called(_ca...)
+}
+
+// Maroto_AddTable_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddTable'
+type Maroto_AddTable_Call struct {
+	*mock.Call
+}
+
+// AddTable is a helper method to define mock.On call
+//   - header []core.Row
+//   - rows ...core.Row
+func (_e *Maroto_Expecter) AddTable(header interface{}, rows ...interface{}) *Maroto_AddTable_Call {
+	return &Maroto_AddTable_Call{Call: _e.mock.On("AddTable",
+		append([]interface{}{header}, rows...)...)}
+}
+
+func (_c *Maroto_AddTable_Call) Run(run func(header []core.Row, rows ...core.Row)) *Maroto_AddTable_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]core.Row, len(args)-1)
+		for i, a := range args[1:] {
+			if a != nil {
+				variadicArgs[i] = a.(core.Row)
+			}
+		}
+		run(args[0].([]core.Row), variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *Maroto_AddTable_Call) Return() *Maroto_AddTable_Call {
+	_c.Call.Return()
+	return _c
+}
+
+func (_c *Maroto_AddTable_Call) RunAndReturn(run func([]core.Row, ...core.Row)) *Maroto_AddTable_Call {
+	_c.Run(run)
+	return _c
+}
+
 // FitlnCurrentPage provides a mock function with given fields: heightNewLine
 func (_m *Maroto) FitlnCurrentPage(heightNewLine float64) bool {
 	ret := _m.Called(heightNewLine)

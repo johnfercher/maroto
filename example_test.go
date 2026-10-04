@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
+	"github.com/johnfercher/maroto/v2/pkg/core"
 
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/code"
@@ -61,6 +62,23 @@ func ExampleMaroto_AddRows() {
 }
 
 // ExampleMaroto_AddRow demonstrates how to add a new row in maroto.
+// ExampleMaroto_AddTable demonstrates how to add a table whose header
+// repeats on every page the table spans.
+func ExampleMaroto_AddTable() {
+	m := maroto.New()
+
+	header := text.NewRow(8, "Column names")
+
+	var body []core.Row
+	for range 100 {
+		body = append(body, text.NewRow(6, "data"))
+	}
+
+	m.AddTable([]core.Row{header}, body...)
+
+	// Do things and generate
+}
+
 func ExampleMaroto_AddRow() {
 	m := maroto.New()
 

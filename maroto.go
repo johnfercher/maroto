@@ -45,6 +45,7 @@ type Maroto struct {
 	headerHeight  float64
 	footerHeight  float64
 	currentHeight float64
+	tableHeader   []core.Row
 }
 
 // GetCurrentConfig is responsible for returning the current settings from the file
@@ -88,6 +89,26 @@ func (m *Maroto) AddPages(pages ...core.Page) {
 		}
 		m.addRows(page.GetRows()...)
 	}
+}
+
+// AddTable is responsible for adding a table: the header rows followed by
+// the body rows. Whenever the body continues onto a new page, the header
+// rows are repeated at the top of it. The header is never left alone at
+// the bottom of a page: if it doesn't fit together with the first body
+// row, the table starts on a new page.
+func (m *Maroto) AddTable(header []core.Row, rows ...core.Row) {
+	if len(header) > 0 && len(rows) > 0 && m.currentHeight != m.headerHeight {
+		height := m.getRowsHeight(header...) + m.getRowsHeight(rows[0])
+		if m.currentHeight+height+m.footerHeight > m.cell.Height {
+			m.fillPageToAddNew()
+			m.addHeader()
+		}
+	}
+
+	m.addRows(header...)
+	m.tableHeader = header
+	m.addRows(rows...)
+	m.tableHeader = nil
 }
 
 // AddRows is responsible for add rows in the current document.
@@ -221,30 +242,28 @@ func (m *Maroto) addRow(r core.Row) {
 		return
 	}
 
-	repeatRows := m.collectRepeatRows()
-
 	// As row will extrapolate page, we will add empty space
 	// on the page to force a new page
 	m.fillPageToAddNew()
 
 	m.addHeader()
-
-	repeatRowsHeight := m.getRowsHeight(repeatRows...)
-	// Only inject repeat rows when they can coexist with the overflowing row.
-	if m.currentHeight+repeatRowsHeight+rowHeight <= maxHeight-m.footerHeight {
-		m.addRepeatRows(repeatRows)
-	}
-
-	// Re-check: repeat rows + header may have consumed enough space that r still doesn't fit.
-	if m.currentHeight+rowHeight > maxHeight-m.footerHeight {
-		// Force one more page break; skip re-collecting repeat rows to avoid accumulation.
-		m.fillPageToAddNew()
-		m.addHeader()
-	}
+	m.addTableHeader(rowHeight)
 
 	// AddRows row on the new page
 	m.currentHeight += rowHeight
 	m.rows = append(m.rows, r)
+}
+
+// addTableHeader repeats the header of the table being added, unless it
+// would push the row that broke the page past the bottom of the new page.
+func (m *Maroto) addTableHeader(rowHeight float64) {
+	height := m.getRowsHeight(m.tableHeader...)
+	if m.currentHeight+height+rowHeight+m.footerHeight > m.cell.Height {
+		return
+	}
+
+	m.currentHeight += height
+	m.rows = append(m.rows, m.tableHeader...)
 }
 
 func (m *Maroto) addHeader() {
@@ -404,28 +423,6 @@ func (m *Maroto) getRowsHeight(rows ...core.Row) float64 {
 	}
 
 	return height
-}
-
-func (m *Maroto) collectRepeatRows() []core.Row {
-	headerSet := make(map[core.Row]bool)
-	for _, headerRow := range m.header {
-		headerSet[headerRow] = true
-	}
-
-	var out []core.Row
-	for _, r := range m.rows {
-		if r.IsRepeatOnPageBreak() && !headerSet[r] {
-			out = append(out, r)
-		}
-	}
-	return out
-}
-
-func (m *Maroto) addRepeatRows(rows []core.Row) {
-	for _, r := range rows {
-		m.currentHeight += r.GetHeight(m.provider, &m.cell)
-		m.rows = append(m.rows, r)
-	}
 }
 
 func getConfig(configs ...*entity.Config) *entity.Config {
