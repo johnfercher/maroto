@@ -9,7 +9,7 @@ developing maroto itself — contributor conventions live in [`.github/skills`](
 | [`pdf/`](pdf) | Generating PDFs with maroto: setup, config, grid layout, components, tables, testing | [`pdf/generation.md`](pdf/generation.md) |
 
 These skills are also rendered on the documentation site:
-[maroto.tech → Agent Skills](https://maroto.tech/#/v2/skills/README?id=agent-skills).
+[maroto.tech → Agent Skills](https://maroto.tech/#/v2/skills?id=agent-skills).
 
 ## How to use them in your project
 

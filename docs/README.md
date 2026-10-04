@@ -104,7 +104,7 @@ writing of unit tests, we created a dedicated test package.
 For an example, refer to [this link](v2/features/unittests?id=unit-testing).
 
 ## Agent Skills
-Maroto ships [skills](v2/skills/README?id=agent-skills): Markdown instruction files under
+Maroto ships [skills](v2/skills?id=agent-skills): Markdown instruction files under
 [`skills/`](https://github.com/johnfercher/maroto/tree/master/skills) that teach an LLM or coding
 agent (Claude, Copilot, Cursor, …) how to generate PDFs with maroto — setup, config, grid layout,
 components, tables and testing, with every default and every pitfall spelled out. Copy the folder
