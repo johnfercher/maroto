@@ -2,6 +2,13 @@ coverage:
   precision: 2
   round: up
   range: "70...100"
+  status:
+    project:
+      default:
+        target: 90%
+    patch:
+      default:
+        target: 90%
 
 ignore:
   - ".idea"

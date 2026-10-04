@@ -1,7 +1,6 @@
 # Maroto V2
 
 [![GoDoc](https://godoc.org/github.com/johnfercher/maroto?status.svg)](https://pkg.go.dev/github.com/johnfercher/maroto/v2)
-[![Go Report Card](https://goreportcard.com/badge/github.com/johnfercher/maroto)](https://goreportcard.com/report/github.com/johnfercher/maroto)
 [![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go#template-engines)  
 [![CI](https://github.com/johnfercher/maroto/actions/workflows/goci.yml/badge.svg)](https://github.com/johnfercher/maroto/actions/workflows/goci.yml)
 [![Lint](https://github.com/johnfercher/maroto/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/johnfercher/maroto/actions/workflows/golangci-lint.yml)
@@ -20,33 +19,56 @@ You can write your PDFs like you are creating a site using Bootstrap. A Row may 
 Besides that, pages will be added when content may extrapolate the useful area. You can define a header which will be added
 always when a new page appear, in this case, a header may have many rows, lines or tablelist. 
 
-#### Maroto `v2.4.0` is here! Try out:
+#### Maroto `v2.4.3` is here! Try out:
 
 * Installation with`go get`:
 
 ```bash
-go get github.com/johnfercher/maroto/v2@v2.4.0
+go get github.com/johnfercher/maroto/v2@v2.4.3
 ```
 
 * You can see the full `v2` documentation [here](https://maroto.tech/#/README?id=maroto-v2).
-* The `v1` still exists in [this branch](https://github.com/johnfercher/maroto/tree/v1), and you can see the doc [here]([https://maroto.io/#/v1/README?id=deprecated](https://maroto.tech/#/v1/README?id=deprecated)).
+* The `v1` still exists in [this branch](https://github.com/johnfercher/maroto/tree/v1), and you can see the doc [here]([https://maroto.tech/#/v1/README?id=deprecated](https://maroto.tech/#/v1/README?id=deprecated)).
 
 ![result](docs/assets/images/result.png)
 
+## Agent Skills
+
+Maroto ships a set of [skills](skills) for AI coding agents (Claude, Copilot, Cursor, etc.):
+Markdown instruction files that teach an agent how to generate PDFs with maroto — setup, config,
+layout, components, tables and testing — with every default and pitfall spelled out. The files work
+together as one package: copy the whole [`skills/pdf/`](skills/pdf) folder into your project and
+point your agent at its entry file, `generation.md`. Full description on the
+[docs site](https://maroto.tech/#/v2/skills?id=agent-skills).
+
 ## Contributing
+
+> If you are an AI agent/LLM working on this repository, read [AGENTS.md](AGENTS.md) first
+> and follow the standards defined in [.github/skills](.github/skills).
 
 | Command         | Description                                       | Dependencies                                                  |
 |-----------------|---------------------------------------------------|---------------------------------------------------------------|
 | `make build`    | Build project                                     | `go`                                                          |
 | `make test`     | Run unit tests                                    | `go`                                                          |
-| `make fmt`      | Format files                                      | `gofmt`, `gofumpt` and `goimports`                            |
-| `make lint`     | Check files                                       | `golangci-lint`                                               |
-| `make dod`      | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt` and `make lint` | 
-| `make install`  | Install all dependencies                          | `go`, `curl` and `git`                                        |
+| `make fmt`      | Format files                                      | `go` (runs `gofumpt`/`goimports` via `tools/go.mod`)          |
+| `make lint`     | Check files                                       | `go` (runs `golangci-lint` via `tools/go.mod`)                |
+| `make dod`      | (Definition of Done) Format files and check files | Same as `make build`, `make test`, `make fmt`, `make lint` and `make codecov` |
+| `make install`  | Install all dependencies and the pre-commit hook  | `go` and `npm` (for `docsify-cli`)                            |
 | `make examples` | Run all examples                                  | `go`                                                          |
-| `make mocks`    | Generate mocks                                    | `go` and `mockery`                                            |
+| `make mocks`    | Generate mocks                                    | `go` (runs `mockery` via `tools/go.mod`)                      |
 | `make docs`     | Run docsify docs server local                     | `docsify`                                                     |
-| `make godoc`    | Run godoc server local                            | `godoc`                                                       |
+| `make godoc`    | Run godoc server local                            | `go` (runs `godoc` via `tools/go.mod`)                        |
+| `make install-hooks` | Point git at `.githooks` so `make dod` runs on every commit | `git`                                            |
+| `make codecov`  | Warn about functions with 0% test coverage (never fails) | `go`                                              |
+
+`goimports`, `gofumpt`, `golangci-lint`, `mockery`, and `godoc` are versioned tool dependencies
+declared in [`tools/go.mod`](tools/go.mod), a separate module so their transitive dependencies
+never end up in the main `go.sum`. See [contribution.md](.github/skills/contribution.md#9-definition-of-done)
+for details.
+
+`make install` (or `make install-hooks` on its own) configures a `pre-commit` git hook, tracked at
+[`.githooks/pre-commit`](.githooks/pre-commit), that runs `make dod` before every commit and blocks
+it if `build`, `test`, `fmt`, or `lint` fail.
 
 ## Stargazers over time
 [![Stargazers over time](https://starchart.cc/johnfercher/maroto.svg?variant=adaptive)](https://starchart.cc/johnfercher/maroto)

@@ -1,0 +1,178 @@
+# Contribution
+
+Prepare a change in this repository (branch, code, docs, PR) so it satisfies the
+[pull request checklist](../../pull_request_template.md) before it's opened for review.
+
+See also:
+- [unit-tests.md](unit-tests.md) for how to write the unit tests this checklist requires.
+- [mocks.md](mocks.md) for generating/using mocks referenced by the checklist.
+- [code-quality.md](code-quality.md) for what `make lint` enforces and the SOLID patterns to
+  follow in any non-test Go code touched by the change.
+- [skills/pdf/generation.md](../../skills/pdf/generation.md) and its siblings — the library-usage skills that §6
+  requires you to keep in sync with every user-facing change.
+
+## Instructions
+
+Apply every item below that is relevant to the change being made — the PR checklist itself is
+opt-in per item ("check ONLY IF APPLIED"), but if an item applies, follow it; don't skip it
+because it's inconvenient.
+
+### 1. Branch naming
+Name the branch after the kind of change:
+- `feature/<name>` for new functionality.
+- `fix/<name>` for bug fixes.
+
+### 2. Method receiver naming style
+Every method on a struct uses the struct's first letter (lowercase) as the receiver name:
+```go
+func (c *Checkbox) Render(provider core.Provider, cell *entity.Cell) {
+```
+(see `pkg/components/checkbox/checkbox.go`). Do not use `this`, `self`, or the full struct name.
+A few existing types don't follow the literal first-letter rule (e.g. `internal/providers/gofpdf/font.go`
+uses `s` for `Font`) — that's pre-existing, not a pattern to copy; for new code, use the struct's
+actual first letter.
+
+### 3. Unit tests
+- Write unit tests for every new or changed exported function/method.
+- Follow [unit-tests.md](unit-tests.md) for naming (`when <condition>, should <outcome>`), AAA
+  comments, parallelism, and the `sut` variable name.
+- Follow [mocks.md](mocks.md) for constructing mocks (`m := mocks.NewConstructor(t)`) and setting
+  expectations (`m.EXPECT().MethodName(...)`).
+
+### 4. Comments on new public API
+Every new exported struct, interface, or method gets a comment above it explaining its
+responsibility, starting with the identifier name. This is required because these comments are
+what `godoc`/`pkg.go.dev` renders as the package documentation (see `make godoc` and the
+[GoDoc](https://pkg.go.dev/github.com/johnfercher/maroto/v2) badge in `README.md`) — undocumented
+exported identifiers show up blank there:
+```go
+// NewFont create a Font.
+func NewFont(...) *Font { ... }
+
+// GetFamily return the currently Font family configured.
+func (s *Font) GetFamily() string { ... }
+```
+(see `internal/providers/gofpdf/font.go`).
+
+### 5. `docs/*`
+`docs/` is a [docsify](https://docsify.js.org/) site. Run `make docs` to preview it locally.
+
+- Feature pages live at `docs/v2/features/<name>.md`, one per component/config option, and are
+  listed in `docs/v2/features/_sidebar.md` — **a new feature page must be added there too**, or it
+  will exist but be unreachable from the site nav.
+- Follow the structure of existing pages, e.g. `docs/v2/features/checkbox.md`:
+  1. `# <Title>` and a short description of the component/feature.
+  2. `## Props (<props.Type>)` — a table of every prop field, its type, default, and description
+     (skip this section for features with no props).
+  3. `## Usage notes` — constraints, clamping behavior, gotchas.
+  4. `## GoDoc` — links to `https://pkg.go.dev/...` for the constructor(s), props, and component.
+  5. `## Code Example` — a docsify include of the runnable example:
+     `[filename](../../assets/examples/<name>/v2/main.go ':include :type=code')`
+  6. `## PDF Generated` / `## Time Execution` — includes of the generated
+     `assets/pdf/<name>v2.pdf` and `assets/text/<name>v2.txt`.
+  7. `## Test File` — a docsify include of the matching fixture under `test/maroto/examples/`.
+- The runnable example referenced above lives at `docs/assets/examples/<name>/v2/main.go` (plus a
+  `main_test.go` if it's also used as a unit test fixture). It must call `document.Save(...)` and
+  `document.GetReport().Save(...)` to produce `docs/assets/pdf/<name>v2.pdf` and
+  `docs/assets/text/<name>v2.txt`, and must be added to the `examples` target in the `Makefile`
+  (`go run docs/assets/examples/<name>/v2/main.go`) so `make examples` regenerates it.
+- If the change affects behavior documented on an *existing* page instead of adding a new
+  feature, update that page (and its example under `docs/assets/examples/`) in place rather than
+  creating a new one.
+
+### 6. `skills/pdf/*` (library-usage skills)
+[`skills/pdf/`](../../skills/pdf) at the repository root holds the skills that teach agents how to
+**use** maroto from Go code (start at [skills/pdf/generation.md](../../skills/pdf/generation.md)).
+They are meant for people and agents outside this repository, which is why they live apart from the
+contributor skills in `.github/skills`. They are only useful while they match the
+public behaviour of the library exactly, so **any PR that adds, changes or removes a user-facing
+feature must update the matching skill in the same PR** — treat this like the `docs/*` item above,
+not as optional polish. "User-facing" means anything a consumer of the module can observe:
+
+| Change                                                        | Update                                                                 |
+|---------------------------------------------------------------|------------------------------------------------------------------------|
+| New component package, or new/renamed constructor (`New*`, `NewCol`, `NewRow`, `NewAutoRow`) | [skills/pdf/components.md](../../skills/pdf/components.md) (new section or constructor table), the import cheat-sheet and constructor table in [skills/pdf/generation.md](../../skills/pdf/generation.md), the auto-height table in [skills/pdf/layout.md](../../skills/pdf/layout.md) |
+| New/changed/removed field in a `props.*` struct, or a default/clamp in its `MakeValid` | The props table of that component in [skills/pdf/components.md](../../skills/pdf/components.md) (or the `props.Cell` table in [skills/pdf/layout.md](../../skills/pdf/layout.md), `props.PageNumber`/`props.Font` in [skills/pdf/config.md](../../skills/pdf/config.md)) |
+| New/changed `config.Builder` method, default value or validation rule | [skills/pdf/config.md](../../skills/pdf/config.md) — the relevant section and the defaults table |
+| New constant in `pkg/consts/*` (font style, page size, barcode type, border, …) | The place that lists the enum: [skills/pdf/components.md](../../skills/pdf/components.md), [skills/pdf/config.md](../../skills/pdf/config.md), and the import cheat-sheet comments in [skills/pdf/generation.md](../../skills/pdf/generation.md) |
+| New `core.Maroto` / `core.Document` method, or new exported error                    | The method/output/error tables in [skills/pdf/generation.md](../../skills/pdf/generation.md) |
+| Change to row/column/page behaviour (height calculation, page break, header/footer rules, `list.Build` semantics) | [skills/pdf/layout.md](../../skills/pdf/layout.md) and/or [skills/pdf/tables.md](../../skills/pdf/tables.md); the symptom table in [skills/pdf/testing.md](../../skills/pdf/testing.md) if a documented pitfall disappears or a new one appears |
+| Change to `pkg/test`, `.maroto.yml` handling or the structure JSON                   | [skills/pdf/testing.md](../../skills/pdf/testing.md) |
+| A whole new feature that fits none of the above                                       | Add a numbered section to the closest skill, or a new file under `skills/pdf/` listed in [`skills/README.md`](../../skills/README.md) and in the table in [`AGENTS.md`](../../AGENTS.md), with a section and a table row added to [`docs/v2/skills.md`](../../docs/v2/skills.md) and in the "See also" block of [skills/pdf/generation.md](../../skills/pdf/generation.md) |
+
+Rules for the edit itself:
+- Keep the skill's claims literally true to the code: defaults come from the `MakeValid`/builder
+  source, not from memory. If a sentence in a skill becomes false because of the change, fix the
+  sentence — don't leave a stale gotcha.
+- Every Go block in these skills must compile against the current module. After editing a block,
+  paste it into a scratch `main` package that `replace`s `github.com/johnfercher/maroto/v2` with
+  this checkout and run `go vet` (and `go run` when the block builds a document). Fragments that
+  start with `func`/`type`/`var` are expected to compile once imports are added with `goimports`.
+- Follow the existing structure of the file (`See also` → `## Instructions` with numbered `###`
+  sections → `## References`) and the existing table formats, so agents reading several skills see
+  one convention.
+- When the change also touched `docs/v2/features/<name>.md`, link the skill section to the same
+  runnable example under `docs/assets/examples/` so the two never drift apart.
+
+### 7. `example_test.go`
+If the change adds or changes a public entry point that's useful to demonstrate, add or update an
+`Example<Type>_<Method>` function in `example_test.go`:
+```go
+// ExampleMaroto_AddPages demonstrates how to add a new page in maroto.
+func ExampleMaroto_AddPages() {
+    ...
+}
+```
+
+### 8. `README.md`
+Update `README.md` if the change affects installation, the `make` command table, or anything else
+described there.
+
+### 9. Definition of Done
+Before opening the PR, run:
+```
+make dod
+```
+which runs, in order: `make build`, `make test`, `make fmt`, `make lint` (the last of which also
+runs `make mock-lint` to verify `mocks/` is up to date with `mockery`), then `make codecov`. Fix
+every issue `golangci-lint` points out — the PR checklist requires this to have zero issues. See
+[code-quality.md](code-quality.md) for exactly what this repo's `.golangci.yml` enforces (and
+deliberately doesn't) and for the SOLID principles to check non-test code against beyond what the
+linter alone catches. `make test` runs with `-race`, so a genuine data race also fails the build
+here, not just a wrong result. `make codecov` is warning-only: it runs [`shell/codecov.sh`](../../shell/codecov.sh),
+which lists every function with 0% test coverage (excluding `internal/fixture`, which is
+test-support code with no test file of its own) and always exits 0 — it flags gaps without
+blocking the commit.
+
+**A `make codecov` warning is not optional busywork — treat it as highly recommended to fix
+before opening the PR, not after.** Reviewers on this project routinely ask for missing tests on
+exactly these functions, so a PR that ships with unaddressed `make codecov` output is very likely
+to get a review comment asking for the same tests anyway. Writing them upfront (following
+[unit-tests.md](unit-tests.md)) avoids a review round-trip. If an agent is doing the work and
+`make codecov` reports functions touched by the change, it should write tests for them as part of
+the same change rather than leaving it for review to catch — only skip a specific function if
+there's a concrete reason it can't reasonably be tested, and say so in the PR description.
+
+If the `pre-commit` git hook is installed (`make install` or `make install-hooks`, see
+[`.githooks/pre-commit`](../../.githooks/pre-commit)), `make dod` already runs automatically
+before every commit and blocks it on failure — a commit that succeeded locally has already
+satisfied this item.
+
+`make fmt`, `make lint`, `make mocks`, and `make godoc` don't rely on globally installed
+binaries. `goimports`, `gofumpt`, `golangci-lint`, `mockery`, and `godoc` are declared as tool
+dependencies in a separate [`tools/go.mod`](../../tools/go.mod) (a nested module, isolated so its
+~200 extra transitive dependencies — mostly from `golangci-lint`'s linter engine — never touch the
+main module's `go.sum`, which every consumer of this library downloads). The Makefile invokes them
+with `go tool -modfile=tools/go.mod <name>`, which builds and runs the exact version pinned in
+`tools/go.sum` on first use — no `go install`/`sudo cp` needed. If you need to add or upgrade one
+of these tools, run `go get -tool <module>@<version>` **from inside `tools/`**, never from the
+repo root (that would add it to the main `go.mod` instead).
+
+### 10. Description and related issue
+When opening the PR, fill in:
+- **Description**: how the PR is useful, and any tricky technical detail.
+- **Related Issue**: a reference to the issue it closes/relates to, if any.
+
+## References
+
+Full checklist for reference: [`pull_request_template.md`](../../pull_request_template.md)

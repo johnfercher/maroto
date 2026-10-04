@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# Runs the project's Definition of Done before allowing a commit.
+# Installed via `make install-hooks` (also run by `make install`), which
+# points git at this directory with `git config core.hooksPath .githooks`.
+
+set -e
+
+make dod

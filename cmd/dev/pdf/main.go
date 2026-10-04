@@ -146,7 +146,7 @@ func buildHeader() []core.Row {
 func buildFooter() []core.Row {
 	return []core.Row{
 		row.New(10).Add(
-			text.NewCol(2, "Site: https://maroto.io/"),
+			text.NewCol(2, "Site: https://maroto.tech/"),
 			text.NewCol(5, "Discussions: https://github.com/johnfercher/maroto/issues/257"),
 			text.NewCol(5, "Branch: https://github.com/johnfercher/maroto/tree/v2"),
 		),
