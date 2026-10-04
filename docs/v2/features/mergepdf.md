@@ -7,7 +7,7 @@ Maroto provides two complementary ways to combine PDF documents:
 
 ## Usage notes
 
-- `merge.Bytes` accepts two or more byte slices and returns `([]byte, error)`. It wraps `merge.ErrCannotMergePDFs` on failure.
+- `merge.Bytes` accepts two or more byte slices and returns `([]byte, error)`. It wraps `merge.ErrCannotMergePDFs` on failure. Calling it with no PDF inputs returns `nil, merge.ErrCannotMergePDFs`.
 - `Document.Merge` mutates the receiver document in place.
 - Both approaches produce a flat concatenation of pages — bookmarks and internal links from the source documents are preserved where the underlying library supports it.
 - For documents generated entirely within maroto, using `AddPages` to compose sections before `Generate` is simpler and avoids a second merge step.

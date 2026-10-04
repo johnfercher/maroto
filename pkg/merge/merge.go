@@ -15,8 +15,12 @@ var ErrCannotMergePDFs = errors.New("cannot merge PDFs")
 
 var loadDefaultConfiguration = sync.OnceValue(api.LoadConfiguration)
 
-// Bytes merges PDFs from byte slices.
+// Bytes merges PDFs from byte slices. It returns ErrCannotMergePDFs if no PDFs are provided.
 func Bytes(pdfs ...[]byte) ([]byte, error) {
+	if len(pdfs) == 0 {
+		return nil, ErrCannotMergePDFs
+	}
+
 	readers := make([]io.ReadSeeker, len(pdfs))
 	for i, pdf := range pdfs {
 		readers[i] = bytes.NewReader(pdf)
