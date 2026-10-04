@@ -70,6 +70,50 @@ func TestGetLinesHeight(t *testing.T) {
 	})
 }
 
+func TestText_GetStringWidth(t *testing.T) {
+	t.Parallel()
+	t.Run("when family is a built-in font, should measure the cp1252-translated text", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		textProp := &props.Text{Family: fontfamily.Arial, Style: fontstyle.Bold, Size: 12}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Bold, 12.0)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().UnicodeTranslatorFromDescriptor("").Return(func(s string) string { return "translated " + s })
+		pdf.EXPECT().GetStringWidth("translated text").Return(42.0)
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		width := sut.GetStringWidth("text", textProp)
+
+		// Assert
+		assert.Equal(t, 42.0, width)
+	})
+	t.Run("when family is a custom font, should measure the text as it is", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		textProp := &props.Text{Family: "custom", Style: fontstyle.Normal, Size: 10}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont("custom", fontstyle.Normal, 10.0)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().GetStringWidth("text").Return(17.0)
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		width := sut.GetStringWidth("text", textProp)
+
+		// Assert
+		assert.Equal(t, 17.0, width)
+		pdf.AssertNotCalled(t, "UnicodeTranslatorFromDescriptor", "")
+	})
+}
+
 func TestText_Add(t *testing.T) {
 	t.Parallel()
 	t.Run("when single line with left align and no color and no hyperlink, should render text once", func(t *testing.T) {

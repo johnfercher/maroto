@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
+	"github.com/johnfercher/maroto/v2/pkg/consts/rotationpivot"
 
 	"github.com/johnfercher/maroto/v2/pkg/core"
 
@@ -89,6 +90,15 @@ func GetMaroto() core.Maroto {
 	google := "https://google.com"
 
 	m.AddRows(text.NewRow(10, "text with hyperlink", props.Text{Hyperlink: &google}))
+
+	m.AddAutoRow(
+		text.NewCol(4, "rotated 30°", props.Text{Rotation: 30, Size: 14}),
+		text.NewCol(4, "rotated -30°, start/top pivot", props.Text{
+			Rotation:      -30,
+			RotationPivot: rotationpivot.Pivot{Horizontal: rotationpivot.Start, Vertical: rotationpivot.Top},
+		}),
+		text.NewCol(4, "rotated 90°", props.Text{Rotation: 90, Size: 14}),
+	)
 
 	m.AddRow(45,
 		text.NewCol(2, longText, props.Text{Top: 3, Left: 3, Right: 3, Align: align.Justify, BreakLineStrategy: breakline.DashStrategy}),

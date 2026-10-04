@@ -20,7 +20,7 @@ Text can be created as a standalone `Component`, wrapped directly into a `Col`, 
 | `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy` | `EmptySpaceStrategy` breaks on spaces; `DashStrategy` breaks mid-word with a hyphen |
 | `VerticalPadding` | `float64` | `0` | Extra spacing between lines (mm) |
 | `Hyperlink` | `*string` | `nil` | URL — makes the text a clickable link (rendered in blue) |
-| `Rotation` | `float64` | `0` | Rotation angle in degrees. Positive values rotate counter-clockwise, negative values clockwise. The cell auto-expands vertically to contain the rotated bounding box. |
+| `Rotation` | `float64` | `0` | Rotation angle in degrees. Positive values rotate counter-clockwise, negative values clockwise. In an auto row, the row grows to contain the rotated text. |
 | `RotationPivot` | `rotationpivot.Pivot` | `{Center, Middle}` | Anchor point of the rotation. `Horizontal`: `Start`, `Center`, `End`. `Vertical`: `Top`, `Middle`, `Bottom`. For multi-line text the vertical axis applies to the whole block. |
 
 ## Usage notes
@@ -29,7 +29,9 @@ Text can be created as a standalone `Component`, wrapped directly into a `Col`, 
 - `Top` and `Left`/`Right` are clamped to the cell dimensions if they exceed it.
 - `BreakLineStrategy` only applies when the text does not fit on a single line.
 - For justified text on the last line, spacing may revert to default space width to avoid stretching a few characters across the full width.
-- `Rotation` is purely additive: `Rotation == 0` produces byte-identical PDFs to before the feature existed. When set, `GetHeight` returns the rotated bounding box height (`w·|sinθ| + h·|cosθ|`) so the layout reserves enough vertical space; the rendered text baseline is shifted so the rotated bounding box sits inside the cell for any combination of pivot and angle sign.
+- `Rotation == 0` renders exactly as before. When set, the text's height becomes the height of its rotated bounding box (`w·|sinθ| + h·|cosθ|`), and the text is shifted so that box starts at the top of the cell, whatever the pivot and angle sign.
+- Use **auto rows** for rotated text: only they grow to that height. A fixed-height row keeps its height, so rotated text taller than the row draws over the next one.
+- Only the height is reserved. A rotated box wider than its column extends into the neighboring columns, so give rotated text a wide enough column.
 
 ## GoDoc
 * [constructor : New](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/components/text#New)

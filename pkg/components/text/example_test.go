@@ -40,7 +40,7 @@ func ExampleNewRow() {
 }
 
 // ExampleNew_rotated demonstrates how to rotate text and select the pivot point.
-// The cell auto-expands vertically to contain the rotated bounding box.
+// An auto row grows to contain the rotated text; a fixed-height row doesn't.
 func ExampleNew_rotated() {
 	m := maroto.New()
 
@@ -51,7 +51,7 @@ func ExampleNew_rotated() {
 			Vertical:   rotationpivot.Middle,
 		},
 	})
-	m.AddRow(10, col.New(12).Add(rotated))
+	m.AddAutoRow(col.New(12).Add(rotated))
 
 	// generate document
 }

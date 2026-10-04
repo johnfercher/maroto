@@ -131,6 +131,7 @@ func TestGetMaroto_Generate(t *testing.T) {
 |-----------------------------------------------|-------------------------------------------------------------------------------------|
 | Text drawn over the next row                  | Fixed row too short for wrapped text — size it ([layout.md §2](layout.md#2-rows--fixed-height-in-millimetres)) or use `AddAutoRow` |
 | Columns misaligned / content off the right edge | Column sizes don't sum to the grid; `WithDebug(true)` shows every cell border       |
+| Rotated text overlaps the next row           | Text with `Rotation` in a fixed-height row — use an auto row ([components.md §2](components.md#2-text--pkgcomponentstext-propstext)) |
 | Header appears mid-page                       | `RegisterHeader` called after content was added                                     |
 | Unexpected blank last page                    | `Generate()`/`GetStructure()` called twice on one instance, or a spacer row pushed past the page |
 | Characters replaced by blanks/garbage         | Non-cp1252 text with a built-in font — register a UTF-8 font ([config.md §5](config.md#5-fonts)) |

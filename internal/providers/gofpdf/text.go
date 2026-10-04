@@ -76,15 +76,16 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	// Determine the lines up-front so multi-line rotation can pivot around the
 	// whole block, not just the first line.
 	var lines []string
-	if stringWidth <= width {
+	switch {
+	case stringWidth <= width:
 		lines = []string{unicodeText}
-	} else if textProp.BreakLineStrategy == breakline.EmptySpaceStrategy {
+	case textProp.BreakLineStrategy == breakline.EmptySpaceStrategy:
 		lines = s.getLinesBreakingLineFromSpace(strings.Split(unicodeText, " "), width)
-	} else {
+	default:
 		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
 	}
 
-	// Rotation honours both axes of textProp.RotationPivot. The baseline of
+	// Rotation honors both axes of textProp.RotationPivot. The baseline of
 	// the first line is shifted so the rotated bounding box of the whole
 	// (multi-line) block sits inside the Text.GetHeight-expanded cell.
 	if textProp.Rotation != 0 {
@@ -102,6 +103,8 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 			alignOffsetX = (width - blockWidth) / 2
 		case align.Right:
 			alignOffsetX = width - blockWidth
+		case align.Left, align.Top, align.Bottom, align.Middle:
+			alignOffsetX = 0
 		}
 		if alignOffsetX < 0 {
 			alignOffsetX = 0
@@ -113,7 +116,9 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 			pivotOffsetX = 0
 		case rotationpivot.End:
 			pivotOffsetX = blockWidth
-		default: // Center
+		case rotationpivot.Center:
+			pivotOffsetX = blockWidth / 2
+		default:
 			pivotOffsetX = blockWidth / 2
 		}
 		var pivotOffsetY float64
@@ -122,7 +127,9 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 			pivotOffsetY = 0
 		case rotationpivot.Bottom:
 			pivotOffsetY = textHeight
-		default: // Middle
+		case rotationpivot.Middle:
+			pivotOffsetY = textHeight / 2
+		default:
 			pivotOffsetY = textHeight / 2
 		}
 

@@ -64,10 +64,9 @@ func (t *Text) GetStructure() *node.Node[core.Structure] {
 }
 
 // GetHeight returns the height that the text will have in the PDF.
-// When Rotation is set, the cell is expanded to contain the rotated
-// bounding box (|w·sinθ| + |h·cosθ|), with text width upper-bounded by
-// the cell's content width — otherwise rotated text would bleed into
-// adjacent rows.
+// When Rotation is set, it returns the height of the rotated bounding box
+// (|w·sinθ| + |h·cosθ|), with the text width capped at the cell's content
+// width, so an auto row grows enough to contain the rotated text.
 func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
 	contentWidth := cell.Width - t.prop.Left - t.prop.Right
 	if contentWidth < 0 {

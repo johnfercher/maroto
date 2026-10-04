@@ -34,8 +34,8 @@ type Text struct {
 	// Hyperlink define a link to be opened when the text is clicked.
 	Hyperlink *string
 	// Rotation rotates the text by the given angle in degrees. Positive values
-	// rotate counter-clockwise, negative values clockwise. The cell automatically
-	// expands vertically to contain the rotated bounding box.
+	// rotate counter-clockwise, negative values clockwise. An auto row grows
+	// to contain the rotated bounding box; a fixed-height row keeps its height.
 	Rotation float64
 	// RotationPivot selects the anchor point used during rotation. Horizontal
 	// defaults to Center, Vertical defaults to Middle. For multi-line text the
