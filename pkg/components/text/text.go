@@ -3,13 +3,11 @@ package text
 
 import (
 	"math"
-	"strings"
 
 	"github.com/johnfercher/go-tree/node"
 
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/row"
-	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"
 	"github.com/johnfercher/maroto/v2/pkg/core"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
 	"github.com/johnfercher/maroto/v2/pkg/props"
@@ -67,8 +65,8 @@ func (t *Text) GetStructure() *node.Node[core.Structure] {
 
 // GetHeight returns the height that the text will have in the PDF.
 // When Rotation is set, it returns the height of the rotated bounding box
-// (|w·sinθ| + |h·cosθ|), with the text width capped at the cell's content
-// width, so an auto row grows enough to contain the rotated text.
+// (|w·sinθ| + |h·cosθ|), where w is the widest line the text is drawn with,
+// so an auto row grows enough to contain the rotated text.
 func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
 	contentWidth := cell.Width - t.prop.Left - t.prop.Right
 	if contentWidth < 0 {
@@ -82,7 +80,7 @@ func (t *Text) GetHeight(provider core.Provider, cell *entity.Cell) float64 {
 		rad := t.prop.Rotation * math.Pi / 180
 		absSin := math.Abs(math.Sin(rad))
 		absCos := math.Abs(math.Cos(rad))
-		textHeight = t.rotatedWidth(provider, contentWidth)*absSin + textHeight*absCos
+		textHeight = provider.GetLinesWidth(t.value, &t.prop, contentWidth)*absSin + textHeight*absCos
 	}
 
 	return textHeight + t.prop.Top + t.prop.Bottom
@@ -97,18 +95,4 @@ func (t *Text) SetConfig(config *entity.Config) {
 // Render renders a Text into a PDF context.
 func (t *Text) Render(provider core.Provider, cell *entity.Cell) {
 	provider.AddText(t.value, cell, &t.prop)
-}
-
-// rotatedWidth returns the width of the widest line the text will be drawn with.
-func (t *Text) rotatedWidth(provider core.Provider, contentWidth float64) float64 {
-	width := provider.GetStringWidth(t.value, &t.prop)
-	if width <= contentWidth || t.prop.BreakLineStrategy == breakline.DashStrategy {
-		return min(width, contentWidth)
-	}
-
-	// EmptySpaceStrategy never breaks a word, so a word wider than the column is drawn wider than it.
-	for word := range strings.SplitSeq(t.value, " ") {
-		contentWidth = max(contentWidth, provider.GetStringWidth(word, &t.prop))
-	}
-	return contentWidth
 }

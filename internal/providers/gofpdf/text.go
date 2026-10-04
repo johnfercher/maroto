@@ -73,17 +73,8 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	unicodeText := s.textToUnicode(text, textProp)
 	stringWidth := s.pdf.GetStringWidth(unicodeText)
 
-	// Determine the lines up-front so multi-line rotation can pivot around the
-	// whole block, not just the first line.
-	var lines []string
-	switch {
-	case stringWidth <= width:
-		lines = []string{unicodeText}
-	case textProp.BreakLineStrategy == breakline.EmptySpaceStrategy:
-		lines = s.getLinesBreakingLineFromSpace(strings.Split(unicodeText, " "), width)
-	default:
-		lines = s.getLinesBreakingLineWithDash(unicodeText, width)
-	}
+	// Split up-front so multi-line rotation can pivot around the whole block.
+	lines := s.splitLines(unicodeText, textProp, width)
 
 	lineProp := textProp
 	if textProp.Rotation != 0 {
@@ -115,11 +106,16 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 	s.font.SetColor(originalColor)
 }
 
-// GetStringWidth returns the rendered width of the text after font selection
-// and unicode translation.
-func (s *Text) GetStringWidth(text string, textProp *props.Text) float64 {
+// GetLinesWidth returns the width of the widest line the text is drawn with in a column of colWidth.
+// It can exceed colWidth: a word too long to wrap, or a narrow DashStrategy line, is drawn wider.
+func (s *Text) GetLinesWidth(text string, textProp *props.Text, colWidth float64) float64 {
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
-	return s.pdf.GetStringWidth(s.textToUnicode(text, textProp))
+
+	var width float64
+	for _, line := range s.splitLines(s.textToUnicode(text, textProp), textProp, colWidth) {
+		width = max(width, s.pdf.GetStringWidth(line))
+	}
+	return width
 }
 
 // GetLinesQuantity retrieve the quantity of lines which a text will occupy to avoid that text to extrapolate a cell.
@@ -208,6 +204,18 @@ func (s *Text) rotate(lines []string, cell *entity.Cell, textProp *props.Text, x
 	}
 
 	return y
+}
+
+// splitLines breaks the text into the lines Add draws it with.
+func (s *Text) splitLines(text string, textProp *props.Text, colWidth float64) []string {
+	switch {
+	case s.pdf.GetStringWidth(text) <= colWidth:
+		return []string{text}
+	case textProp.BreakLineStrategy == breakline.EmptySpaceStrategy:
+		return s.getLinesBreakingLineFromSpace(strings.Split(text, " "), colWidth)
+	default:
+		return s.getLinesBreakingLineWithDash(text, colWidth)
+	}
 }
 
 func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) []string {

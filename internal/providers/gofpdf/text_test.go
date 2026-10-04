@@ -76,9 +76,9 @@ func TestGetLinesHeight(t *testing.T) {
 	})
 }
 
-func TestText_GetStringWidth(t *testing.T) {
+func TestText_GetLinesWidth(t *testing.T) {
 	t.Parallel()
-	t.Run("when family is a built-in font, should measure the cp1252-translated text", func(t *testing.T) {
+	t.Run("when text fits the column, should return its width", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		textProp := &props.Text{Family: fontfamily.Arial, Style: fontstyle.Bold, Size: 12}
@@ -93,7 +93,7 @@ func TestText_GetStringWidth(t *testing.T) {
 		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
 
 		// Act
-		width := sut.GetStringWidth("text", textProp)
+		width := sut.GetLinesWidth("text", textProp, 50)
 
 		// Assert
 		assert.Equal(t, 42.0, width)
@@ -112,11 +112,77 @@ func TestText_GetStringWidth(t *testing.T) {
 		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
 
 		// Act
-		width := sut.GetStringWidth("text", textProp)
+		width := sut.GetLinesWidth("text", textProp, 50)
 
 		// Assert
 		assert.Equal(t, 17.0, width)
 		pdf.AssertNotCalled(t, "UnicodeTranslatorFromDescriptor", "")
+	})
+	t.Run("when empty space strategy wraps the text, should return the widest line", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		textProp := &props.Text{Family: "custom", Size: 10, BreakLineStrategy: breakline.EmptySpaceStrategy}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont("custom", fontstyle.Type(""), 10.0)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().GetStringWidth("ab cdef").Return(20.0)
+		pdf.EXPECT().GetStringWidth("ab").Return(4.0)
+		pdf.EXPECT().GetStringWidth(" cdef").Return(9.0)
+		pdf.EXPECT().GetStringWidth("cdef").Return(8.0)
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		width := sut.GetLinesWidth("ab cdef", textProp, 10)
+
+		// Assert
+		assert.Equal(t, 8.0, width)
+	})
+	t.Run("when a word is too long to wrap, should return its full width", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		textProp := &props.Text{Family: "custom", Size: 10, BreakLineStrategy: breakline.EmptySpaceStrategy}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont("custom", fontstyle.Type(""), 10.0)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().GetStringWidth("longword").Return(30.0)
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		width := sut.GetLinesWidth("longword", textProp, 20)
+
+		// Assert
+		assert.Equal(t, 30.0, width)
+	})
+	t.Run("when dash strategy emits lines wider than a narrow column, should return the widest one", func(t *testing.T) {
+		t.Parallel()
+		// Arrange — the column is narrower than two " - ", so every letter ends up on its own
+		// line with a dash appended: "-", "a-", "b".
+		textProp := &props.Text{Family: "custom", Size: 10, BreakLineStrategy: breakline.DashStrategy}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont("custom", fontstyle.Type(""), 10.0)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().GetStringWidth("ab").Return(6.0)
+		pdf.EXPECT().GetStringWidth(" - ").Return(2.0)
+		pdf.EXPECT().GetStringWidth("a").Return(3.0)
+		pdf.EXPECT().GetStringWidth("b").Return(3.0)
+		pdf.EXPECT().GetStringWidth("-").Return(1.0)
+		pdf.EXPECT().GetStringWidth("a-").Return(4.0)
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		width := sut.GetLinesWidth("ab", textProp, 3)
+
+		// Assert
+		assert.Equal(t, 4.0, width)
 	})
 }
 

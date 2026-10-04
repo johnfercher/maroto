@@ -793,17 +793,17 @@ func (_c *Provider_GetLinesQuantity_Call) RunAndReturn(run func(string, *props.T
 	return _c
 }
 
-// GetStringWidth provides a mock function with given fields: text, textProp
-func (_m *Provider) GetStringWidth(text string, textProp *props.Text) float64 {
-	ret := _m.Called(text, textProp)
+// GetLinesWidth provides a mock function with given fields: text, textProp, colWidth
+func (_m *Provider) GetLinesWidth(text string, textProp *props.Text, colWidth float64) float64 {
+	ret := _m.Called(text, textProp, colWidth)
 
 	if len(ret) == 0 {
-		panic("no return value specified for GetStringWidth")
+		panic("no return value specified for GetLinesWidth")
 	}
 
 	var r0 float64
-	if rf, ok := ret.Get(0).(func(string, *props.Text) float64); ok {
-		r0 = rf(text, textProp)
+	if rf, ok := ret.Get(0).(func(string, *props.Text, float64) float64); ok {
+		r0 = rf(text, textProp, colWidth)
 	} else {
 		r0 = ret.Get(0).(float64)
 	}
@@ -811,31 +811,32 @@ func (_m *Provider) GetStringWidth(text string, textProp *props.Text) float64 {
 	return r0
 }
 
-// Provider_GetStringWidth_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetStringWidth'
-type Provider_GetStringWidth_Call struct {
+// Provider_GetLinesWidth_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetLinesWidth'
+type Provider_GetLinesWidth_Call struct {
 	*mock.Call
 }
 
-// GetStringWidth is a helper method to define mock.On call
+// GetLinesWidth is a helper method to define mock.On call
 //   - text string
 //   - textProp *props.Text
-func (_e *Provider_Expecter) GetStringWidth(text interface{}, textProp interface{}) *Provider_GetStringWidth_Call {
-	return &Provider_GetStringWidth_Call{Call: _e.mock.On("GetStringWidth", text, textProp)}
+//   - colWidth float64
+func (_e *Provider_Expecter) GetLinesWidth(text interface{}, textProp interface{}, colWidth interface{}) *Provider_GetLinesWidth_Call {
+	return &Provider_GetLinesWidth_Call{Call: _e.mock.On("GetLinesWidth", text, textProp, colWidth)}
 }
 
-func (_c *Provider_GetStringWidth_Call) Run(run func(text string, textProp *props.Text)) *Provider_GetStringWidth_Call {
+func (_c *Provider_GetLinesWidth_Call) Run(run func(text string, textProp *props.Text, colWidth float64)) *Provider_GetLinesWidth_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(*props.Text))
+		run(args[0].(string), args[1].(*props.Text), args[2].(float64))
 	})
 	return _c
 }
 
-func (_c *Provider_GetStringWidth_Call) Return(_a0 float64) *Provider_GetStringWidth_Call {
+func (_c *Provider_GetLinesWidth_Call) Return(_a0 float64) *Provider_GetLinesWidth_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Provider_GetStringWidth_Call) RunAndReturn(run func(string, *props.Text) float64) *Provider_GetStringWidth_Call {
+func (_c *Provider_GetLinesWidth_Call) RunAndReturn(run func(string, *props.Text, float64) float64) *Provider_GetLinesWidth_Call {
 	_c.Call.Return(run)
 	return _c
 }
