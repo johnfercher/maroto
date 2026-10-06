@@ -14,11 +14,11 @@ comes from the library's source.
 
 ## How to use them
 
-1. **Copy or reference.** Copy `skills/pdf/` into the directory your agent reads instructions from
-   (`skills/`, `.claude/skills/`, `.cursor/rules/`, a repository `AGENTS.md`, …), or give the agent
+1. **Copy or reference.** Copy `skills/maroto-pdf/` into the directory your agent loads skills from
+   (`.claude/skills/`, `.agents/skills/`, `.cursor/rules/`, a repository `AGENTS.md`, …), or give the agent
    the GitHub URLs of the files.
 2. **Point the agent at the entry file.** Ask it to read
-   [`skills/pdf/generation.md`](https://github.com/johnfercher/maroto/blob/master/skills/pdf/generation.md)
+   [`skills/maroto-pdf/generation.md`](https://github.com/johnfercher/maroto/blob/master/skills/maroto-pdf/generation.md)
    before writing code; it links to the other five for the decisions it doesn't cover.
 3. **Pin the version.** The skills describe the public API of the maroto release they ship with.
    When you upgrade `github.com/johnfercher/maroto/v2`, pull the matching `skills/` folder again.
@@ -26,7 +26,7 @@ comes from the library's source.
 A minimal prompt that works with most tools:
 
 ```text
-Read skills/pdf/generation.md and the skills it links to, then write a Go program that
+Read skills/maroto-pdf/generation.md and the skills it links to, then write a Go program that
 generates <describe the document> with maroto, following those skills exactly.
 ```
 
@@ -34,12 +34,12 @@ generates <describe the document> with maroto, following those skills exactly.
 
 | Skill | Read it when |
 |-------|--------------|
-| [generation.md](https://github.com/johnfercher/maroto/blob/master/skills/pdf/generation.md) | Starting any PDF code. **Entry point**; it routes to the others. |
-| [config.md](https://github.com/johnfercher/maroto/blob/master/skills/pdf/config.md) | Choosing `config.NewBuilder()` options. |
-| [layout.md](https://github.com/johnfercher/maroto/blob/master/skills/pdf/layout.md) | Placing content on the grid. |
-| [components.md](https://github.com/johnfercher/maroto/blob/master/skills/pdf/components.md) | Using a specific component and its props. |
-| [tables.md](https://github.com/johnfercher/maroto/blob/master/skills/pdf/tables.md) | Rendering tabular data. |
-| [testing.md](https://github.com/johnfercher/maroto/blob/master/skills/pdf/testing.md) | Testing or debugging a document. |
+| [generation.md](https://github.com/johnfercher/maroto/blob/master/skills/maroto-pdf/generation.md) | Starting any PDF code. **Entry point**; it routes to the others. |
+| [config.md](https://github.com/johnfercher/maroto/blob/master/skills/maroto-pdf/config.md) | Choosing `config.NewBuilder()` options. |
+| [layout.md](https://github.com/johnfercher/maroto/blob/master/skills/maroto-pdf/layout.md) | Placing content on the grid. |
+| [components.md](https://github.com/johnfercher/maroto/blob/master/skills/maroto-pdf/components.md) | Using a specific component and its props. |
+| [tables.md](https://github.com/johnfercher/maroto/blob/master/skills/maroto-pdf/tables.md) | Rendering tabular data. |
+| [testing.md](https://github.com/johnfercher/maroto/blob/master/skills/maroto-pdf/testing.md) | Testing or debugging a document. |
 
 ### generation.md — PDF Generation
 The entry-point skill. It covers installing the module, the pages → rows → columns → components
@@ -83,4 +83,4 @@ The skills are part of maroto's definition of done: any pull request that adds, 
 a user-facing feature must update the affected skill in the same change (see
 [`.github/skills/contribution.md` §6](https://github.com/johnfercher/maroto/blob/master/.github/skills/contribution.md#6-skillspdf-library-usage-skills)).
 If you find a sentence that no longer matches the library, open an issue or a pull request against
-the file under `skills/pdf/`.
+the file under `skills/maroto-pdf/`.

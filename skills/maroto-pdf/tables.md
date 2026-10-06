@@ -226,7 +226,7 @@ honoured only in auto rows. Fixed-height rows with wrapping text overflow into t
 - More than ~8 columns on A4 portrait: switch to landscape
   (`WithOrientation(orientation.Horizontal)`) before shrinking fonts below 7 pt.
 - Build the column slices in a loop when the count is dynamic, exactly as in
-  [`docs/assets/examples/maxgridsum`](../../docs/assets/examples/maxgridsum/v2/main.go):
+  [`docs/assets/examples/maxgridsum`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/maxgridsum/v2/main.go):
 
 ```go
 func dynamicColumns(m core.Maroto, headers []string, gridSize int) {
@@ -243,8 +243,8 @@ Make sure `gridSize % len(headers) == 0`, or distribute the remainder to the fir
 ## References
 
 - Feature page: https://maroto.tech/#/v2/features/list
-- Runnable examples: [`docs/assets/examples/list`](../../docs/assets/examples/list/v2/main.go),
-  [`billing`](../../docs/assets/examples/billing/v2/main.go) (full invoice with header, footer,
+- Runnable examples: [`docs/assets/examples/list`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/list/v2/main.go),
+  [`billing`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/billing/v2/main.go) (full invoice with header, footer,
   striped table, totals and barcode),
-  [`maxgridsum`](../../docs/assets/examples/maxgridsum/v2/main.go)
+  [`maxgridsum`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/maxgridsum/v2/main.go)
 - `list` GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/components/list

@@ -8,7 +8,7 @@ See also:
   depend on.
 - [layout.md](layout.md) for the height arithmetic to check when a test shows an
   unexpected page count.
-- [unit-tests.md](../../.github/skills/unit-tests.md) when the code under test lives in **this** repository — its
+- [unit-tests.md](https://github.com/johnfercher/maroto/blob/master/.github/skills/unit-tests.md) when the code under test lives in **this** repository — its
   naming, AAA and `t.Parallel()` rules apply on top of what's here.
 
 ## Instructions
@@ -155,7 +155,7 @@ Tools:
 - Feature page: https://maroto.tech/#/v2/features/unittests
 - `pkg/test` GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/test
 - Example test and fixture in this repository:
-  [`docs/assets/examples/unittests/v2/main_test.go`](../../docs/assets/examples/unittests/v2/main_test.go),
-  [`test/maroto/example_unit_test.json`](../../test/maroto/example_unit_test.json)
+  [`docs/assets/examples/unittests/v2/main_test.go`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/unittests/v2/main_test.go),
+  [`test/maroto/example_unit_test.json`](https://github.com/johnfercher/maroto/blob/master/test/maroto/example_unit_test.json)
 - Every `docs/assets/examples/*/v2/main_test.go` asserts its `GetMaroto()` against
   `test/maroto/examples/*.json` the same way.

@@ -21,19 +21,19 @@ improvising:
 
 A second group of skills teaches how to **use** maroto from Go code — for agents writing an
 application that produces PDFs, or for agents extending the examples under `docs/assets/examples`.
-They live in [`skills/pdf`](skills/pdf) at the repository root, apart from the contributor skills in
-`.github/skills`, so they can be copied into other projects. Start with `skills/pdf/generation.md`;
+They live in [`skills/maroto-pdf`](skills/maroto-pdf) at the repository root, apart from the contributor skills in
+`.github/skills`, so they can be copied into other projects. Start with `skills/maroto-pdf/SKILL.md` (the skill entry, with frontmatter) and `generation.md`;
 it routes to the others. [contribution.md §6](.github/skills/contribution.md#6-skillspdf-library-usage-skills)
 requires them to be updated in the same PR as any user-facing change.
 
 | Skill | Use when |
 |-------|----------|
-| [skills/pdf/generation.md](skills/pdf/generation.md) | Writing any Go code that generates a PDF with maroto — install, program skeleton, output, errors, checklist |
-| [skills/pdf/config.md](skills/pdf/config.md) | Choosing `config.NewBuilder()` options: page size, margins, fonts (incl. UTF-8), page numbers, metadata, protection, generation mode |
-| [skills/pdf/layout.md](skills/pdf/layout.md) | Placing content: grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
-| [skills/pdf/components.md](skills/pdf/components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures and their props |
-| [skills/pdf/tables.md](skills/pdf/tables.md) | Rendering tabular data (invoices, reports) with `list.Build` or manual loops, striping, borders, pagination |
-| [skills/pdf/testing.md](skills/pdf/testing.md) | Unit-testing the component tree with `pkg/test` fixtures and debugging layout problems |
+| [skills/maroto-pdf/generation.md](skills/maroto-pdf/generation.md) | Writing any Go code that generates a PDF with maroto — install, program skeleton, output, errors, checklist |
+| [skills/maroto-pdf/config.md](skills/maroto-pdf/config.md) | Choosing `config.NewBuilder()` options: page size, margins, fonts (incl. UTF-8), page numbers, metadata, protection, generation mode |
+| [skills/maroto-pdf/layout.md](skills/maroto-pdf/layout.md) | Placing content: grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
+| [skills/maroto-pdf/components.md](skills/maroto-pdf/components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures and their props |
+| [skills/maroto-pdf/tables.md](skills/maroto-pdf/tables.md) | Rendering tabular data (invoices, reports) with `list.Build` or manual loops, striping, borders, pagination |
+| [skills/maroto-pdf/testing.md](skills/maroto-pdf/testing.md) | Unit-testing the component tree with `pkg/test` fixtures and debugging layout problems |
 
 As new skill files are added to `.github/skills`, treat them as mandatory for
 the task they cover.
@@ -49,7 +49,7 @@ recommended to address before opening the PR — see
 
 If the change adds, changes or removes anything a user of the library can observe (a component,
 constructor, prop, default, config option, error or layout rule), the matching skill under
-[`skills/pdf/`](skills/pdf) must be updated in the same PR — see
+[`skills/maroto-pdf/`](skills/maroto-pdf) must be updated in the same PR — see
 [contribution.md §6](.github/skills/contribution.md#6-skillspdf-library-usage-skills).
 
 If `make install-hooks` has been run in this clone, `make dod` also runs automatically as a

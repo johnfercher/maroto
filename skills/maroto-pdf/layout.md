@@ -253,7 +253,7 @@ func titleBlock(m core.Maroto) {
 - Grid explanation: https://maroto.tech/#/README?id=maroto-columns-and-rows
 - Feature pages: https://maroto.tech/#/v2/features/autorow, `cellstyle`, `header`, `footer`,
   `addpage`, `disablepagebreak`
-- Runnable examples: [`docs/assets/examples/autorow`](../../docs/assets/examples/autorow/v2/main.go),
-  [`cellstyle`](../../docs/assets/examples/cellstyle/v2/main.go),
-  [`header`](../../docs/assets/examples/header/v2/main.go),
-  [`addpage`](../../docs/assets/examples/addpage/v2/main.go)
+- Runnable examples: [`docs/assets/examples/autorow`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/autorow/v2/main.go),
+  [`cellstyle`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/cellstyle/v2/main.go),
+  [`header`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/header/v2/main.go),
+  [`addpage`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/addpage/v2/main.go)

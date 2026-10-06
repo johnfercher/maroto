@@ -1,7 +1,7 @@
 # PDF Generation
 
 Generate a PDF with maroto `v2` from Go code: install the module, build the document, generate
-the bytes and persist or return them. This is the entry point of the `pdf-*` skill set — read it
+the bytes and persist or return them. This is the entry point of the `maroto-pdf` skill — read it
 first, then follow the links to the skill that covers the decision in front of you.
 
 See also:
@@ -24,7 +24,7 @@ go get github.com/johnfercher/maroto/v2@latest
 
 The module path is `github.com/johnfercher/maroto/v2` — the `/v2` suffix is part of every import
 path. The consuming module must use a Go version at least as new as the `go` directive in
-maroto's own [`go.mod`](../../go.mod) for the release being pinned.
+maroto's own [`go.mod`](https://github.com/johnfercher/maroto/blob/master/go.mod) for the release being pinned.
 
 ### 2. Mental model
 
@@ -244,5 +244,5 @@ Predefined colors are **values**, so take their address: `Color: &props.RedColor
 
 - Docs site (feature pages with rendered PDFs): https://maroto.tech/#/v2/features/basics
 - GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2
-- Complete runnable examples in this repository: [`docs/assets/examples/*/v2/main.go`](../../docs/assets/examples)
+- Complete runnable examples in this repository: [`docs/assets/examples/*/v2/main.go`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples)
   — start from `simplest` and `billing`.
