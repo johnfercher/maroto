@@ -37,7 +37,7 @@ go get github.com/johnfercher/maroto/v2@v2.4.3
 Maroto ships a set of [skills](skills) for AI coding agents (Claude, Copilot, Cursor, etc.):
 Markdown instruction files that teach an agent how to generate PDFs with maroto — setup, config,
 layout, components, tables and testing — with every default and pitfall spelled out. The files work
-together as one package: copy the whole [`skills/pdf/`](skills/pdf) folder into your project and
+together as one package: copy the whole [`skills/maroto-pdf/`](skills/maroto-pdf) folder into your project and
 point your agent at its entry file, `generation.md`. Full description on the
 [docs site](https://maroto.tech/#/v2/skills?id=agent-skills).
 

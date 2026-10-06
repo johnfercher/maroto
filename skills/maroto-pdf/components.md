@@ -259,10 +259,10 @@ Define the document palette once as package-level `*props.Color` variables and r
   `datamatrix`, `line`, `checkbox`, `signature`
 - Props GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/props
 - Runnable grids showing every prop combination:
-  [`docs/assets/examples/textgrid`](../../docs/assets/examples/textgrid/v2/main.go),
-  [`imagegrid`](../../docs/assets/examples/imagegrid/v2/main.go),
-  [`barcodegrid`](../../docs/assets/examples/barcodegrid/v2/main.go),
-  [`qrgrid`](../../docs/assets/examples/qrgrid/v2/main.go),
-  [`line`](../../docs/assets/examples/line/v2/main.go),
-  [`checkbox`](../../docs/assets/examples/checkbox/v2/main.go),
-  [`signaturegrid`](../../docs/assets/examples/signaturegrid/v2/main.go)
+  [`docs/assets/examples/textgrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/textgrid/v2/main.go),
+  [`imagegrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/imagegrid/v2/main.go),
+  [`barcodegrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/barcodegrid/v2/main.go),
+  [`qrgrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/qrgrid/v2/main.go),
+  [`line`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/line/v2/main.go),
+  [`checkbox`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/checkbox/v2/main.go),
+  [`signaturegrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/signaturegrid/v2/main.go)

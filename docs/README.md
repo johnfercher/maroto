@@ -108,7 +108,7 @@ Maroto ships [skills](v2/skills?id=agent-skills): Markdown instruction files und
 [`skills/`](https://github.com/johnfercher/maroto/tree/master/skills) that teach an LLM or coding
 agent (Claude, Copilot, Cursor, …) how to generate PDFs with maroto — setup, config, grid layout,
 components, tables and testing, with every default and every pitfall spelled out. Copy the folder
-into your project and point your agent at `skills/pdf/generation.md`.
+into your project and point your agent at `skills/maroto-pdf/generation.md`.
 
 ## Built-in Metrics
 This new version of maroto introduces an **optional decorator** that provides metrics for nearly all operations 
