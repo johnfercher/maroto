@@ -186,4 +186,26 @@ func TestCheckbox_ToMap(t *testing.T) {
 		// Assert
 		assert.NotContains(t, m, "prop_size")
 	})
+	t.Run("when rtl is set, should include rtl in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Checkbox{RTL: true}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		assert.Equal(t, true, m["prop_rtl"])
+	})
+	t.Run("when rtl is not set, should not include rtl in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Checkbox{Size: 5}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		assert.NotContains(t, m, "prop_rtl")
+	})
 }

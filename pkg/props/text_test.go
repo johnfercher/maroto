@@ -203,4 +203,26 @@ func TestText_ToMap(t *testing.T) {
 		// Assert
 		assert.Equal(t, 5.0, m["prop_right"])
 	})
+	t.Run("when rtl is set, should include rtl in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Text{RTL: true}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		assert.Equal(t, true, m["prop_rtl"])
+	})
+	t.Run("when rtl is not set, should not include rtl in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Text{Right: 5}
+
+		// Act
+		m := prop.ToMap()
+
+		// Assert
+		assert.NotContains(t, m, "prop_rtl")
+	})
 }

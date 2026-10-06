@@ -61,6 +61,7 @@ mocks:
 .PHONY: examples
 examples:
 	go run docs/assets/examples/addpage/v2/main.go
+	go run docs/assets/examples/arabic/v2/main.go
 	go run docs/assets/examples/autorow/v2/main.go
 	go run docs/assets/examples/background/v2/main.go
 	go run docs/assets/examples/barcodegrid/v2/main.go

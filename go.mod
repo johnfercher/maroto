@@ -9,6 +9,7 @@ require (
 	github.com/pdfcpu/pdfcpu v0.11.1
 	github.com/phpdave11/gofpdf v1.4.3
 	github.com/stretchr/testify v1.11.1
+	golang.org/x/text v0.37.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -24,6 +25,5 @@ require (
 	github.com/stretchr/objx v0.5.3 // indirect
 	golang.org/x/crypto v0.52.0 // indirect
 	golang.org/x/image v0.41.0 // indirect
-	golang.org/x/text v0.37.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
