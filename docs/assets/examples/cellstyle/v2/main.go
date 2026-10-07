@@ -121,7 +121,7 @@ func GetMaroto() core.Maroto {
 	m := maroto.NewMetricsDecorator(mrt)
 
 	count := 0
-	for i := 0; i < 15; i++ {
+	for range 15 {
 		m.AddRows(
 			row.New(10).Add(
 				text.NewCol(4, "string", whiteText).WithStyle(colStyle),

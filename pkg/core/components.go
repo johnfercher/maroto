@@ -1,7 +1,8 @@
 package core
 
 import (
-	"github.com/google/uuid"
+	"uuid"
+
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"

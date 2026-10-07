@@ -14,10 +14,8 @@ type FillColorStyler struct {
 
 func NewFillColorStyler(fpdf gofpdfwrapper.Fpdf) *FillColorStyler {
 	return &FillColorStyler{
-		stylerTemplate: stylerTemplate{
-			fpdf: fpdf,
-			name: "fillColorStyler",
-		},
+		fpdf:             fpdf,
+		name:             "fillColorStyler",
 		defaultFillColor: &props.WhiteColor,
 	}
 }

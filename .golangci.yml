@@ -19,8 +19,10 @@ linters:
     - godot
     - godoclint
     - gochecknoglobals
+    - gomodguard # deprecated in favour of gomodguard_v2, which stays enabled
     - funlen
     - exhaustruct
+    - exhaustruct_v5
     - embeddedstructfieldcheck
     - depguard
     - cyclop

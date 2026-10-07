@@ -53,7 +53,7 @@ func main() {
 		text.NewRow(15, "Dummy Data", props.Text{Size: 12, Top: 5, Align: align.Center}),
 	)
 
-	for i := 0; i < 50; i++ {
+	for range 50 {
 		m.AddRows(text.NewRow(20, dummyText+dummyText+dummyText+dummyText+dummyText))
 	}
 

@@ -14,10 +14,8 @@ type BorderThicknessStyler struct {
 
 func NewBorderThicknessStyler(fpdf gofpdfwrapper.Fpdf) *BorderThicknessStyler {
 	return &BorderThicknessStyler{
-		stylerTemplate: stylerTemplate{
-			fpdf: fpdf,
-			name: "borderThicknessStyler",
-		},
+		fpdf:                 fpdf,
+		name:                 "borderThicknessStyler",
 		defaultLineThickness: linestyle.DefaultLineThickness,
 	}
 }

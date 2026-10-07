@@ -53,7 +53,7 @@ func GetMaroto() core.Maroto {
 	mrt := maroto.New(cfg)
 	m := maroto.NewMetricsDecorator(mrt)
 
-	for i := 0; i < 15; i++ {
+	for range 15 {
 		m.AddRows(text.NewRow(20, "dummy text"))
 	}
 

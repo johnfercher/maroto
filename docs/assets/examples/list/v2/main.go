@@ -82,7 +82,7 @@ func (o Object) GetContent(i int) core.Row {
 
 func getObjects(max int) []Object {
 	var objects []Object
-	for i := 0; i < max; i++ {
+	for i := range max {
 		objects = append(objects, Object{
 			Key:   fmt.Sprintf("Key: %d", i),
 			Value: fmt.Sprintf("Bytes: %d", i),

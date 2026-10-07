@@ -19,14 +19,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: '1.26.1'
+          go-version: '1.27.1'
           cache: false
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v7
         with:
           # Keep in sync with the golangci-lint version pinned in tools/go.mod,
           # so `make lint` locally and this CI job report the same issues.
-          version: v2.12.2
+          version: v2.14.0
 
           # Optional: working directory, useful for monorepos
           # working-directory: somedir

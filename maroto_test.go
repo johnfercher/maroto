@@ -136,7 +136,7 @@ func TestMaroto_AddRow(t *testing.T) {
 		sut := maroto.New()
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 
@@ -187,7 +187,7 @@ func TestMaroto_AddRows(t *testing.T) {
 		sut := maroto.New()
 
 		// Act
-		for i := 0; i < 20; i++ {
+		for range 20 {
 			sut.AddRows(row.New(15).Add(col.New(12)))
 		}
 
@@ -201,7 +201,7 @@ func TestMaroto_AddRows(t *testing.T) {
 		sut := maroto.New()
 
 		// Act
-		for i := 0; i < 20; i++ {
+		for range 20 {
 			sut.AddRows(row.New().Add(text.NewCol(12, "teste")))
 		}
 
@@ -218,7 +218,7 @@ func TestMaroto_AddAutoRow(t *testing.T) {
 		sut := maroto.New()
 
 		// Act
-		for i := 0; i < 150; i++ {
+		for range 150 {
 			sut.AddAutoRow(text.NewCol(12, "teste"))
 		}
 
@@ -267,7 +267,7 @@ func TestMaroto_AddPages(t *testing.T) {
 		// Arrange
 		sut := maroto.New()
 		var rows []core.Row
-		for i := 0; i < 15; i++ {
+		for range 15 {
 			rows = append(rows, row.New(20).Add(col.New(12)))
 		}
 
@@ -311,7 +311,7 @@ func TestMaroto_Generate(t *testing.T) {
 		sut := maroto.New()
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 
@@ -329,7 +329,7 @@ func TestMaroto_Generate(t *testing.T) {
 		sut := maroto.New(cfg)
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 
@@ -347,7 +347,7 @@ func TestMaroto_Generate(t *testing.T) {
 		sut := maroto.New(cfg)
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 
@@ -365,7 +365,7 @@ func TestMaroto_Generate(t *testing.T) {
 		sut := maroto.New(cfg)
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 
@@ -381,7 +381,7 @@ func TestMaroto_Generate(t *testing.T) {
 		sut := maroto.New(cfg)
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 
@@ -397,7 +397,7 @@ func TestMaroto_Generate(t *testing.T) {
 		sut := maroto.New(cfg)
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 
@@ -413,21 +413,30 @@ func TestMaroto_Generate(t *testing.T) {
 		sut := maroto.New(cfg)
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 		initialGoroutines := runtime.NumGoroutine()
 		_, err1 := sut.Generate()
 		_, err2 := sut.Generate()
 		_, err3 := sut.Generate()
-		time.Sleep(100 * time.Millisecond)
-		finalGoroutines := runtime.NumGoroutine()
 
 		// Assert
 		assert.Nil(t, err1)
 		assert.Nil(t, err2)
 		assert.Nil(t, err3)
-		assert.Equal(t, initialGoroutines, finalGoroutines)
+		// Other tests run in parallel with this one and start/stop goroutines of
+		// their own, so the count can only be checked as an upper bound and must
+		// be allowed to settle instead of being sampled once. Polling is done
+		// inline because assert.Eventually would run the check in a goroutine
+		// of its own and skew the count.
+		deadline := time.Now().Add(5 * time.Second)
+		finalGoroutines := runtime.NumGoroutine()
+		for finalGoroutines > initialGoroutines && time.Now().Before(deadline) {
+			time.Sleep(10 * time.Millisecond)
+			finalGoroutines = runtime.NumGoroutine()
+		}
+		assert.LessOrEqual(t, finalGoroutines, initialGoroutines)
 	})
 	t.Run("when two pages are sent and page number is active, should add page number", func(t *testing.T) {
 		// Arrange
@@ -438,7 +447,7 @@ func TestMaroto_Generate(t *testing.T) {
 		sut := maroto.New(cfg)
 
 		// Act
-		for i := 0; i < 30; i++ {
+		for range 30 {
 			sut.AddRow(10, col.New(12))
 		}
 
@@ -456,7 +465,7 @@ func TestMaroto_FitlnCurrentPage(t *testing.T) {
 			Build())
 
 		var rows []core.Row
-		for i := 0; i < 26; i++ {
+		for range 26 {
 			rows = append(rows, row.New(10).Add(col.New(12)))
 		}
 
@@ -470,7 +479,7 @@ func TestMaroto_FitlnCurrentPage(t *testing.T) {
 			Build())
 
 		var rows []core.Row
-		for i := 0; i < 10; i++ {
+		for range 10 {
 			rows = append(rows, row.New(10).Add(col.New(12)))
 		}
 
@@ -485,7 +494,7 @@ func TestMaroto_FitlnCurrentPage(t *testing.T) {
 				Build())
 
 			var rows []core.Row
-			for i := 0; i < 10; i++ {
+			for range 10 {
 				rows = append(rows, row.New().Add(text.NewCol(12, "teste")))
 			}
 
@@ -525,7 +534,7 @@ func TestMaroto_RegisterHeader(t *testing.T) {
 		err := sut.RegisterHeader(code.NewBarRow(10, "header"))
 
 		var rows []core.Row
-		for i := 0; i < 5; i++ {
+		for range 5 {
 			rows = append(rows, row.New(100).Add(col.New(12)))
 		}
 
@@ -542,7 +551,7 @@ func TestMaroto_RegisterHeader(t *testing.T) {
 		err := sut.RegisterHeader(text.NewAutoRow("header"))
 
 		var rows []core.Row
-		for i := 0; i < 5; i++ {
+		for range 5 {
 			rows = append(rows, row.New(100).Add(col.New(12)))
 		}
 
@@ -573,7 +582,7 @@ func TestMaroto_RegisterFooter(t *testing.T) {
 		err := sut.RegisterFooter(code.NewBarRow(10, "footer"))
 
 		var rows []core.Row
-		for i := 0; i < 5; i++ {
+		for range 5 {
 			rows = append(rows, row.New(100).Add(col.New(12)))
 		}
 
@@ -590,7 +599,7 @@ func TestMaroto_RegisterFooter(t *testing.T) {
 		err := sut.RegisterFooter(text.NewAutoRow("header"))
 
 		var rows []core.Row
-		for i := 0; i < 5; i++ {
+		for range 5 {
 			rows = append(rows, row.New(100).Add(col.New(12)))
 		}
 
