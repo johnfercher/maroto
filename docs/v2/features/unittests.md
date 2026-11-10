@@ -16,7 +16,7 @@ maroto provides a dedicated `pkg/test` package that lets you write deterministic
 * [method : Save](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/test#MarotoTest.Save)
 
 ## Configuration
-To allow unit testing of PDFs, you must create the`.maroto.yml`file on the root project folder. The field`test_path`define which [folder](https://github.com/johnfercher/maroto/tree/v2/test/maroto)
+To allow unit testing of PDFs, you must create the`.maroto.yml`file on the root project folder. The field`test_path`define which [folder](https://github.com/johnfercher/maroto/tree/master/test/maroto)
 will keep the json files to unit test the components tree.
 
 [filename](https://raw.githubusercontent.com/johnfercher/maroto/master/.maroto.yml ':include :type=code')
