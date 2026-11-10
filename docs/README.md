@@ -116,7 +116,7 @@ performed by the library. When the decorator is enabled, maroto will populate th
 the **document** response.
 
 The **report** struct contains the following information. For a complete example, refer 
-to [this link](v2/basics?id=using-metrics-decorator).
+to [this link](v2/examples/billing?id=billing).
 
 [filename](../assets/text/report.txt ':include :type=code')
 
