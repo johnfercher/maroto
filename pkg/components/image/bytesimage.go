@@ -82,6 +82,9 @@ func (b *BytesImage) GetHeight(provider core.Provider, cell *entity.Cell) float6
 		return 0
 	}
 	proportion := dimensions.Height / dimensions.Width
+	if b.prop.IsQuarterTurn() {
+		proportion = dimensions.Width / dimensions.Height
+	}
 	width := (b.prop.Percent / 100) * cell.Width
 	return proportion * width
 }

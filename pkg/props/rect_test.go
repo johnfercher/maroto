@@ -67,6 +67,42 @@ func TestRect_MakeValid(t *testing.T) {
 		// Assert
 		assert.Equal(t, 0.0, prop.Top)
 	})
+	t.Run("when rotation angle is negative, should become the equivalent positive angle", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Rect{RotationAngle: -90}
+
+		// Act
+		prop.MakeValid()
+
+		// Assert
+		assert.Equal(t, 270, prop.RotationAngle)
+	})
+	t.Run("when rotation angle exceeds a full turn, should be reduced modulo 360", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		prop := props.Rect{RotationAngle: 450}
+
+		// Act
+		prop.MakeValid()
+
+		// Assert
+		assert.Equal(t, 90, prop.RotationAngle)
+	})
+}
+
+func TestRect_IsQuarterTurn(t *testing.T) {
+	t.Parallel()
+	t.Run("when rotation angle is 90 or 270, should return true", func(t *testing.T) {
+		t.Parallel()
+		assert.True(t, (&props.Rect{RotationAngle: 90}).IsQuarterTurn())
+		assert.True(t, (&props.Rect{RotationAngle: 270}).IsQuarterTurn())
+	})
+	t.Run("when rotation angle is 0 or 180, should return false", func(t *testing.T) {
+		t.Parallel()
+		assert.False(t, (&props.Rect{}).IsQuarterTurn())
+		assert.False(t, (&props.Rect{RotationAngle: 180}).IsQuarterTurn())
+	})
 }
 
 func TestRect_ToMap(t *testing.T) {
@@ -96,5 +132,16 @@ func TestRect_ToMap(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, true, m["prop_just_reference_width"])
+	})
+	t.Run("when rotation angle is set, should include it in map", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := props.Rect{RotationAngle: 90}
+
+		// Act
+		m := sut.ToMap()
+
+		// Assert
+		assert.Equal(t, 90, m["prop_rotation_angle"])
 	})
 }

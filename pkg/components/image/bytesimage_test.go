@@ -9,6 +9,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
 	"github.com/johnfercher/maroto/v2/pkg/core/entity"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 	"github.com/johnfercher/maroto/v2/pkg/test"
 	"github.com/stretchr/testify/assert"
 )
@@ -166,5 +167,20 @@ func TestBytesImage_GetHeight(t *testing.T) {
 		// Act
 		height := sut.GetHeight(provider, &cell)
 		assert.Equal(t, height, cell.Width/2)
+	})
+
+	t.Run("When the bytes image is rotated by a quarter turn, should return the height of the rotated image", func(t *testing.T) {
+		t.Parallel()
+		cell := fixture.CellEntity()
+		img := fixture.ImageEntity()
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetDimensionsByImageByte(img.Bytes, img.Extension).Return(&entity.Dimensions{Width: 10, Height: 5}, nil)
+
+		sut := image.NewFromBytes(img.Bytes, img.Extension, props.Rect{Percent: 100, RotationAngle: 90})
+
+		// Act
+		height := sut.GetHeight(provider, &cell)
+		assert.Equal(t, cell.Width*2, height)
 	})
 }

@@ -74,6 +74,9 @@ func (f *FileImage) GetHeight(provider core.Provider, cell *entity.Cell) float64
 		return 0.0
 	}
 	proportion := dimensions.Height / dimensions.Width
+	if f.prop.IsQuarterTurn() {
+		proportion = dimensions.Width / dimensions.Height
+	}
 	width := (f.prop.Percent / 100) * cell.Width
 	return (proportion * width) + f.prop.Top
 }
