@@ -177,6 +177,30 @@ func TestGetLinesHeight(t *testing.T) {
 		}
 	})
 
+	t.Run("when LF, CRLF or CR line breaks are counted, should depend on PreserveLineBreaks", func(t *testing.T) {
+		t.Parallel()
+		for _, value := range []string{"A\nB", "A\r\nB", "A\rB"} {
+			for preserve, expected := range map[bool]int{true: 2, false: 1} {
+				textProp := &props.Text{PreserveLineBreaks: preserve}
+				textProp.MakeValid(&props.Font{Family: "custom", Size: 10, Style: fontstyle.Normal})
+
+				font := mocks.NewFont(t)
+				font.EXPECT().SetFont(textProp.Family, textProp.Style, textProp.Size)
+
+				pdf := mocks.NewFpdf(t)
+				pdf.EXPECT().GetStringWidth("A").Return(5.0).Maybe()
+				pdf.EXPECT().GetStringWidth("B").Return(5.0).Maybe()
+				pdf.EXPECT().GetStringWidth("A B").Return(12.0).Maybe()
+
+				text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+				height := text.GetLinesQuantity(value, textProp, 100)
+
+				assert.Equal(t, expected, height, "text %q, preserve %t", value, preserve)
+			}
+		}
+	})
+
 	t.Run("when a text contains explicit empty lines, should count each paragraph break", func(t *testing.T) {
 		t.Parallel()
 		textProp := &props.Text{PreserveLineBreaks: true}
@@ -599,6 +623,56 @@ func TestText_Add(t *testing.T) {
 
 		// Act
 		sut.Add("first\n\nthird", cell, textProp)
+	})
+	t.Run("when line breaks are preserved, should render LF, CRLF and CR as one break each", func(t *testing.T) {
+		t.Parallel()
+		for _, value := range []string{"A\nB", "A\r\nB", "A\rB"} {
+			// Arrange
+			cell := &entity.Cell{X: 0, Y: 0, Width: 100, Height: 100}
+			textProp := &props.Text{Family: "custom", Style: fontstyle.Normal, Size: 10, Align: align.Left, PreserveLineBreaks: true}
+
+			font := mocks.NewFont(t)
+			font.EXPECT().SetFont("custom", fontstyle.Normal, 10.0)
+			font.EXPECT().GetHeight("custom", fontstyle.Normal, 10.0).Return(5.0)
+			font.EXPECT().GetColor().Return(&props.BlackColor)
+			font.EXPECT().SetColor(&props.BlackColor)
+
+			pdf := mocks.NewFpdf(t)
+			pdf.EXPECT().GetStringWidth("A").Return(5.0)
+			pdf.EXPECT().GetStringWidth("B").Return(5.0)
+			pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+			pdf.EXPECT().Text(0.0, 5.0, "A").Once()
+			pdf.EXPECT().Text(0.0, 10.0, "B").Once()
+
+			sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+			// Act
+			sut.Add(value, cell, textProp)
+		}
+	})
+	t.Run("when line breaks are not preserved, should render LF, CRLF and CR as a space", func(t *testing.T) {
+		t.Parallel()
+		for _, value := range []string{"A\nB", "A\r\nB", "A\rB"} {
+			// Arrange
+			cell := &entity.Cell{X: 0, Y: 0, Width: 100, Height: 100}
+			textProp := &props.Text{Family: "custom", Style: fontstyle.Normal, Size: 10, Align: align.Left}
+
+			font := mocks.NewFont(t)
+			font.EXPECT().SetFont("custom", fontstyle.Normal, 10.0)
+			font.EXPECT().GetHeight("custom", fontstyle.Normal, 10.0).Return(5.0)
+			font.EXPECT().GetColor().Return(&props.BlackColor)
+			font.EXPECT().SetColor(&props.BlackColor)
+
+			pdf := mocks.NewFpdf(t)
+			pdf.EXPECT().GetStringWidth("A B").Return(12.0)
+			pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+			pdf.EXPECT().Text(0.0, 5.0, "A B").Once()
+
+			sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+			// Act
+			sut.Add(value, cell, textProp)
+		}
 	})
 	t.Run("when top exceeds cell height, should clamp top to cell height", func(t *testing.T) {
 		t.Parallel()
