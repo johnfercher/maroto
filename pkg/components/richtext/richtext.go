@@ -430,12 +430,6 @@ func (r *RichText) layoutLines(provider core.Provider, colWidth, defaultHeight f
 			}
 
 			width := measureText(provider, element.text, element.style)
-			if colWidth > 0 && current.width+width > colWidth {
-				flush(false)
-				current = richTextLine{}
-				continue
-			}
-
 			current.parts = append(current.parts, richTextLinePart{
 				kind:  richTextSpacePart,
 				text:  element.text,

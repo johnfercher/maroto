@@ -352,6 +352,22 @@ func TestRichText_GetHeight(t *testing.T) {
 		// Assert
 		assert.Equal(t, 10.0, height)
 	})
+	t.Run("when a space before a preserved line break overflows, should not add an empty line", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := richtext.New(richtext.NewChunk("A \nB", props.Text{PreserveLineBreaks: true}))
+		sut.SetConfig(defaultConfig())
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetFontHeight(mock.Anything).Return(5.0)
+		provider.EXPECT().GetStringWidth(mock.Anything, mock.Anything).RunAndReturn(widths(map[string]float64{"A": 10, " ": 2, "B": 10}))
+
+		// Act
+		height := sut.GetHeight(provider, &entity.Cell{Width: 11})
+
+		// Assert
+		assert.Equal(t, 10.0, height)
+	})
 	t.Run("when a line mixes font sizes, should use the tallest chunk", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
