@@ -280,8 +280,10 @@ func richTextExamples(m core.Maroto) {
 Gotchas:
 - Lines wrap only at whitespace. Chunks with no space between them (`"the terms"` + `"."`)
   stay on the same line; a word wider than the column overflows. `BreakLineStrategy` is ignored.
-- Each line is as tall as its largest chunk font; `Justify` stretches the spaces of every line
-  except the last.
+- Each line is as tall as its largest chunk font; `Justify` stretches the spaces of every wrapped
+  line except the last line of each paragraph.
+- With `PreserveLineBreaks`, a trailing `\n` keeps an empty last line (like `text`), and a `\r\n`
+  split across two chunks counts as one break.
 - Paragraph props set on later chunks are ignored, so put them on the first chunk even when it
   is short.
 - No chunks render nothing and report a height of `0`.

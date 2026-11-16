@@ -201,6 +201,23 @@ func TestRichText_SetConfig(t *testing.T) {
 		assert.Equal(t, fontfamily.Arial, details["chunk_0_prop_font_family"])
 		assert.Equal(t, 10.0, details["chunk_0_prop_font_size"])
 	})
+	t.Run("when two rich texts share the chunks slice, should configure each one independently", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		chunks := []richtext.Chunk{richtext.NewChunk("text")}
+		first := richtext.New(chunks...)
+		second := richtext.New(chunks...)
+		biggerFont := &entity.Config{DefaultFont: &props.Font{Family: fontfamily.Arial, Style: fontstyle.Normal, Size: 20}}
+
+		// Act
+		first.SetConfig(defaultConfig())
+		second.SetConfig(biggerFont)
+
+		// Assert
+		assert.Equal(t, 10.0, first.GetStructure().GetData().Details["chunk_0_prop_font_size"])
+		assert.Equal(t, 20.0, second.GetStructure().GetData().Details["chunk_0_prop_font_size"])
+		assert.Equal(t, props.Text{}, chunks[0].Style)
+	})
 }
 
 func TestRichText_GetStructure(t *testing.T) {
@@ -283,6 +300,41 @@ func TestRichText_GetHeight(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, 16.0, height)
+	})
+	t.Run("when a CRLF is split across chunks, should count it as one line break", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := richtext.New(
+			richtext.NewChunk("a\r", props.Text{PreserveLineBreaks: true}),
+			richtext.NewChunk("\nb", props.Text{Style: fontstyle.Bold}),
+		)
+		sut.SetConfig(defaultConfig())
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetFontHeight(mock.Anything).Return(5.0)
+		provider.EXPECT().GetStringWidth(mock.Anything, mock.Anything).RunAndReturn(widths(map[string]float64{"a": 5, "b": 5}))
+
+		// Act
+		height := sut.GetHeight(provider, &entity.Cell{Width: 100})
+
+		// Assert
+		assert.Equal(t, 10.0, height)
+	})
+	t.Run("when text ends with a preserved line break, should keep the final empty line", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := richtext.New(richtext.NewChunk("a\n", props.Text{VerticalPadding: 1, PreserveLineBreaks: true}))
+		sut.SetConfig(defaultConfig())
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetFontHeight(mock.Anything).Return(5.0)
+		provider.EXPECT().GetStringWidth(mock.Anything, mock.Anything).RunAndReturn(widths(map[string]float64{"a": 5}))
+
+		// Act
+		height := sut.GetHeight(provider, &entity.Cell{Width: 100})
+
+		// Assert
+		assert.Equal(t, 11.0, height)
 	})
 	t.Run("when words exceed the column width, should wrap at spaces", func(t *testing.T) {
 		t.Parallel()
@@ -410,6 +462,24 @@ func TestRichText_Render(t *testing.T) {
 
 		// Assert
 		assert.Equal(t, []renderedText{{"aa", 0, 0}, {"bb", 15, 0}, {"cc", 0, 5}}, rendered)
+	})
+	t.Run("when align is justify, should not stretch a line ending with a hard break", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := richtext.New(richtext.NewChunk("aa bb\ncc", props.Text{Align: align.Justify, PreserveLineBreaks: true}))
+		sut.SetConfig(defaultConfig())
+
+		provider := mocks.NewProvider(t)
+		provider.EXPECT().GetFontHeight(mock.Anything).Return(5.0)
+		provider.EXPECT().GetStringWidth(mock.Anything, mock.Anything).RunAndReturn(widths(map[string]float64{"aa": 10, " ": 2, "bb": 10, "cc": 10}))
+		var rendered []renderedText
+		provider.EXPECT().AddText(mock.Anything, mock.Anything, mock.Anything).Run(captureRendered(&rendered)).Return()
+
+		// Act
+		sut.Render(provider, &entity.Cell{Width: 30})
+
+		// Assert
+		assert.Equal(t, []renderedText{{"aa", 0, 0}, {"bb", 12, 0}, {"cc", 0, 5}}, rendered)
 	})
 	t.Run("when chunks use different font sizes, should align them on the same baseline", func(t *testing.T) {
 		t.Parallel()

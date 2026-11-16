@@ -3,6 +3,7 @@ package richtext
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 	"unicode"
 
@@ -44,7 +45,7 @@ type RichText struct {
 // New creates a RichText component from the given chunks.
 func New(chunks ...Chunk) core.Component {
 	return &RichText{
-		chunks: chunks,
+		chunks: slices.Clone(chunks),
 	}
 }
 
@@ -139,7 +140,7 @@ func (r *RichText) Render(provider core.Provider, cell *entity.Cell) {
 	for i, line := range lines {
 		x := xBase + lineOffsetX(line.width, colWidth, layoutStyle.Align)
 		extraSpace := 0.0
-		if layoutStyle.Align == align.Justify && i < len(lines)-1 && line.spaceCount > 0 && line.width < colWidth {
+		if layoutStyle.Align == align.Justify && i < len(lines)-1 && !line.hardBreak && line.spaceCount > 0 && line.width < colWidth {
 			extraSpace = (colWidth - line.width) / float64(line.spaceCount)
 		}
 
@@ -229,6 +230,7 @@ type richTextLine struct {
 	width      float64
 	height     float64
 	spaceCount int
+	hardBreak  bool
 }
 
 func (r *RichText) layoutStyle() *props.Text {
@@ -261,8 +263,8 @@ func normalizeChunkText(text string, preserve bool) string {
 	return strings.ReplaceAll(text, "\n", " ")
 }
 
-func tokenizeChunk(chunk *Chunk, preserve bool) []richTextToken {
-	text := normalizeChunkText(chunk.Text, preserve)
+func tokenizeChunk(text string, style *props.Text, preserve bool) []richTextToken {
+	text = normalizeChunkText(text, preserve)
 	if text == "" {
 		return nil
 	}
@@ -279,7 +281,7 @@ func tokenizeChunk(chunk *Chunk, preserve bool) []richTextToken {
 		tokens = append(tokens, richTextToken{
 			kind:  currentKind,
 			text:  current.String(),
-			style: &chunk.Style,
+			style: style,
 		})
 		current.Reset()
 		hasCurrent = false
@@ -292,7 +294,7 @@ func tokenizeChunk(chunk *Chunk, preserve bool) []richTextToken {
 			tokens = append(tokens, richTextToken{
 				kind:  richTextNewlineToken,
 				text:  "\n",
-				style: &chunk.Style,
+				style: style,
 			})
 		case unicode.IsSpace(r):
 			if !hasCurrent || currentKind != richTextSpaceToken {
@@ -337,9 +339,20 @@ func (r *RichText) elements() []richTextElement {
 		cluster = cluster[:0]
 	}
 
+	pendingCR := false
 	for i := range r.chunks {
 		chunk := &r.chunks[i]
-		for _, token := range tokenizeChunk(chunk, preserve) {
+		text := chunk.Text
+		// A CRLF split across two chunks is still one line break.
+		if pendingCR && strings.HasPrefix(text, "\n") {
+			text = text[1:]
+			pendingCR = false
+		}
+		if text != "" {
+			pendingCR = strings.HasSuffix(text, "\r")
+		}
+
+		for _, token := range tokenizeChunk(text, &chunk.Style, preserve) {
 			switch token.kind {
 			case richTextTextToken:
 				cluster = append(cluster, richTextSegment{
@@ -389,15 +402,19 @@ func (r *RichText) layoutLines(provider core.Provider, colWidth, defaultHeight f
 	lines := make([]richTextLine, 0)
 	current := richTextLine{}
 
-	flush := func(forceEmpty bool) {
+	endsWithBreak := false
+
+	flush := func(hardBreak bool) {
 		if len(current.parts) == 0 {
-			if forceEmpty {
-				lines = append(lines, richTextLine{height: defaultHeight})
+			if hardBreak {
+				lines = append(lines, richTextLine{height: defaultHeight, hardBreak: true})
 			}
 			return
 		}
 
-		lines = append(lines, finalizeRichTextLine(current, defaultHeight))
+		line := finalizeRichTextLine(current, defaultHeight)
+		line.hardBreak = hardBreak
+		lines = append(lines, line)
 		current = richTextLine{}
 	}
 
@@ -406,6 +423,7 @@ func (r *RichText) layoutLines(provider core.Provider, colWidth, defaultHeight f
 		case richTextNewlineElement:
 			flush(true)
 			current = richTextLine{}
+			endsWithBreak = true
 		case richTextSpaceElement:
 			if len(current.parts) == 0 {
 				continue
@@ -453,11 +471,14 @@ func (r *RichText) layoutLines(provider core.Provider, colWidth, defaultHeight f
 			current.parts = append(current.parts, clusterParts...)
 			current.width += clusterWidth
 			current.height = max(current.height, clusterHeight)
+			endsWithBreak = false
 		}
 	}
 
 	if len(current.parts) > 0 {
 		lines = append(lines, finalizeRichTextLine(current, defaultHeight))
+	} else if endsWithBreak {
+		lines = append(lines, richTextLine{height: defaultHeight})
 	}
 
 	return lines
