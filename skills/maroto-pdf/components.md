@@ -104,6 +104,7 @@ func imageExamples(m core.Maroto) {
 | `Center`             | `false` | Center in both axes; when `true`, `Left`/`Top` are ignored                                 |
 | `Left`, `Top`        | `0`     | Offset in mm from the cell's top-left                                                      |
 | `JustReferenceWidth` | `false` | Scale from the cell **width** only. Set it in auto rows so the drawn height matches the computed row height |
+| `RotationAngle`      | `0`     | Counter-clockwise rotation in degrees, normalized to `[0, 360)` by `MakeValid` (`-90` → `270`). `90`/`270` scale the rotated image to fit the cell; other angles keep the unrotated size and may overflow it |
 
 Gotchas:
 - Only PNG and JPEG. Convert SVG/GIF/WebP before building. The file extension must match the
@@ -159,7 +160,8 @@ func qrExamples(m core.Maroto) {
 ```
 
 Both are square; `Percent` applies to the shorter cell side. Use `Center: true` for a dedicated
-code column and `JustReferenceWidth: true` inside auto rows. Any string content works (URLs,
+code column and `JustReferenceWidth: true` inside auto rows. `RotationAngle` rotates codes the
+same way as images. Any string content works (URLs,
 JSON, vCards); keep QR payloads under a few hundred characters for reliable scanning.
 
 ### 6. Lines — `pkg/components/line`, `props.Line`

@@ -162,5 +162,24 @@ func GetMaroto() core.Maroto {
 			JustReferenceWidth: true,
 		}),
 	)
+
+	m.AddRow(40,
+		image.NewFromFileCol(4, "docs/assets/images/biplane.jpg", props.Rect{
+			Center:        true,
+			Percent:       80,
+			RotationAngle: 90,
+		}),
+		image.NewFromFileCol(4, "docs/assets/images/biplane.jpg", props.Rect{
+			Center:        true,
+			Percent:       80,
+			RotationAngle: 180,
+		}),
+		image.NewFromFileCol(4, "docs/assets/images/biplane.jpg", props.Rect{
+			Center:        false,
+			Percent:       80,
+			Left:          5,
+			RotationAngle: 270,
+		}),
+	)
 	return m
 }

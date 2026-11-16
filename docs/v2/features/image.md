@@ -13,12 +13,14 @@ Both sources expose the same set of constructors — `New`, `NewCol`, `NewRow`, 
 | `Left` | `float64` | `0` | Left offset in mm — ignored when `Center` is true |
 | `Top` | `float64` | `0` | Top offset in mm — ignored when `Center` is true |
 | `JustReferenceWidth` | `bool` | `false` | Scale only by width, ignore available height — required for correct auto-row sizing |
+| `RotationAngle` | `int` | `0` | Rotate the image counter-clockwise by this many degrees; normalized to `[0, 360)` |
 
 ## Usage notes
 
 - Set `JustReferenceWidth: true` when placing an image inside `AddAutoRow` so that the row height is calculated from the image's proportional height relative to its width.
 - `Percent` controls the largest dimension; the image is always scaled proportionally.
 - When `Center` is `true`, `Left` and `Top` have no effect.
+- `RotationAngle` rotates the image at render time with a PDF transformation, so the image is not re-encoded. For `90` and `270` the rotated image is scaled to fit the cell (and auto rows use its rotated height); other angles keep the unrotated size and rotate around its center. Negative angles work too: `-90` is the same as `270`.
 
 ## GoDoc
 * [constructor : NewFromBytes](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/components/image#NewFromBytes)

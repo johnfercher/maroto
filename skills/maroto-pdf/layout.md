@@ -87,7 +87,7 @@ How each component reports its height:
 | Component       | Auto height                                                            |
 |-----------------|------------------------------------------------------------------------|
 | text            | `lines * fontHeight + (lines-1) * VerticalPadding + Top + Bottom`      |
-| image / QR / data matrix | `cellWidth * Percent/100 * (imageHeight/imageWidth) + Top` — set `JustReferenceWidth: true` or the drawn size won't match the computed height |
+| image / QR / data matrix | `cellWidth * Percent/100 * (imageHeight/imageWidth) + Top` (the ratio is inverted for `RotationAngle` 90/270) — set `JustReferenceWidth: true` or the drawn size won't match the computed height |
 | barcode         | `cellWidth * Percent/100 * Proportion.Height/Proportion.Width + Top`   |
 | line            | `Thickness`                                                            |
 | checkbox        | `Size + Top`                                                           |
