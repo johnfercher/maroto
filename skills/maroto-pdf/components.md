@@ -53,6 +53,7 @@ func textExamples(m core.Maroto) {
 | `Left`, `Right`     | `float64` (mm)       | `0`                     | Inner horizontal padding; shrink the wrap width                       |
 | `Bottom`            | `float64` (mm)       | `0`                     | **Auto rows only** — extra height below the text                      |
 | `VerticalPadding`   | `float64` (mm)       | `0`                     | Extra space between wrapped lines                                     |
+| `PreserveLineBreaks` | `bool`              | `false`                 | Render `\n` as a hard line break (`\n\n` leaves an empty line); when `false`, `\n` is rendered as a space |
 | `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy`    | `EmptySpaceStrategy` wraps on spaces; `DashStrategy` wraps per character and appends `-` (for languages without spaces); `CharacterStrategy` wraps per character without adding any symbol |
 | `Hyperlink`         | `*string`            | `nil`                   | Clickable link; text turns blue                                       |
 
@@ -67,8 +68,9 @@ Gotchas:
   ([config.md §5](config.md#5-fonts)) — otherwise characters silently come out wrong.
 - `Top` is the only vertical positioning: there is no vertical-align. To bottom-align, compute
   `Top = rowHeight - lineHeight`.
-- Newlines (`\n`) in the value are not line breaks. Add one text component (or auto row) per line
-  or paragraph.
+- Newlines (`\n`) in the value are not line breaks by default. Set `PreserveLineBreaks: true` to
+  render them as hard breaks inside one component (use an auto row so the height follows the
+  number of lines), or add one text component per line or paragraph.
 
 ### 3. Images — `pkg/components/image`, `props.Rect`
 

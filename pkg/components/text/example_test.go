@@ -40,6 +40,16 @@ func ExampleNewCol_characterStrategy() {
 	// generate document
 }
 
+// ExampleNewCol_preserveLineBreaks demonstrates how to render explicit line breaks inside one text column.
+func ExampleNewCol_preserveLineBreaks() {
+	m := maroto.New()
+
+	content := "First paragraph\n\nSecond paragraph after an empty line"
+	m.AddAutoRow(text.NewCol(12, content, props.Text{PreserveLineBreaks: true}))
+
+	// generate document
+}
+
 // ExampleNewRow demonstrates how to create a text component wrapped into a row.
 func ExampleNewRow() {
 	m := maroto.New()
