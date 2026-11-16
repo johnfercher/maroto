@@ -7,6 +7,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/col"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"
+	"github.com/johnfercher/maroto/v2/pkg/props"
 )
 
 // ExampleNewFromBytes demonstrates how to create an image component reading bytes.
@@ -73,5 +74,15 @@ func ExampleNewFromFileRow() {
 
 	imageRow := image.NewFromFileRow(10, "image.png")
 	m.AddRows(imageRow)
+	// generate document
+}
+
+// ExampleNewFromFileCol_rotationAngle demonstrates how to rotate an image counter-clockwise.
+func ExampleNewFromFileCol_rotationAngle() {
+	m := maroto.New()
+
+	imageCol := image.NewFromFileCol(12, "image.png", props.Rect{Center: true, Percent: 80, RotationAngle: 90})
+	m.AddRow(40, imageCol)
+
 	// generate document
 }
