@@ -122,6 +122,26 @@ func TestGetLinesHeight(t *testing.T) {
 
 		assert.Equal(t, 2, height)
 	})
+
+	t.Run("when text is blank with CharacterStrategy, should return one line as rendered", func(t *testing.T) {
+		t.Parallel()
+		for _, blank := range []string{"", " "} {
+			textProp := &props.Text{BreakLineStrategy: breakline.CharacterStrategy, VerticalPadding: 10}
+			textProp.MakeValid(&props.Font{Family: "custom", Size: 10, Style: fontstyle.Normal})
+
+			font := mocks.NewFont(t)
+			font.EXPECT().SetFont(textProp.Family, textProp.Style, textProp.Size)
+
+			pdf := mocks.NewFpdf(t)
+			pdf.EXPECT().GetStringWidth(" ").Return(1.0).Maybe()
+
+			text := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+			height := text.GetLinesQuantity(blank, textProp, 6)
+
+			assert.Equal(t, 1, height, "text %q", blank)
+		}
+	})
 }
 
 func TestText_Add(t *testing.T) {

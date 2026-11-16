@@ -96,8 +96,10 @@ func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth floa
 	s.font.SetFont(textProp.Family, textProp.Style, textProp.Size)
 
 	textTranslated := s.textToUnicode(text, textProp)
+	lines := s.getLines(textTranslated, textProp.BreakLineStrategy, colWidth, usesCoreFontEncoding(textProp))
 
-	return len(s.getLines(textTranslated, textProp.BreakLineStrategy, colWidth, usesCoreFontEncoding(textProp)))
+	// Blank text wraps into no lines, but Add still renders it as one line.
+	return max(len(lines), 1)
 }
 
 func (s *Text) getLines(text string, strategy breakline.Strategy, colWidth float64, singleByte bool) []string {
