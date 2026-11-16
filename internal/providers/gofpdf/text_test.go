@@ -14,6 +14,7 @@ import (
 
 	"github.com/johnfercher/maroto/v2/mocks"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
 
 func TestNewText(t *testing.T) {
@@ -447,6 +448,47 @@ func TestText_Add(t *testing.T) {
 
 		// Act
 		sut.Add("hello world", cell, textProp)
+	})
+	t.Run("when a justified hyperlink text has an empty line, should not link the empty line", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		url := "https://example.com"
+		cell := &entity.Cell{X: 40, Y: 0, Width: 60, Height: 50}
+		textProp := &props.Text{
+			Family:             "custom",
+			Style:              fontstyle.Normal,
+			Size:               10,
+			Align:              align.Justify,
+			PreserveLineBreaks: true,
+			Hyperlink:          &url,
+		}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont("custom", fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight("custom", fontstyle.Normal, 10.0).Return(5.0)
+		font.EXPECT().GetColor().Return(&props.BlackColor)
+		font.EXPECT().SetColor(&props.BlueColor)
+		font.EXPECT().SetColor(&props.BlackColor)
+
+		pdf := mocks.NewFpdf(t)
+		pdf.EXPECT().GetStringWidth("A").Return(5.0)
+		pdf.EXPECT().GetStringWidth("").Return(0.0)
+		pdf.EXPECT().GetStringWidth("B").Return(5.0)
+		pdf.EXPECT().GetStringWidth(" ").Return(2.0)
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		pdf.EXPECT().Text(40.0, 5.0, "A").Once()
+		pdf.EXPECT().Text(40.0, 15.0, "B").Once()
+		linkWidths := []float64{}
+		pdf.EXPECT().LinkString(40.0, mock.Anything, mock.Anything, 5.0, url).
+			Run(func(_, _, w, _ float64, _ string) { linkWidths = append(linkWidths, w) })
+
+		sut := gofpdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		sut.Add("A\n\nB", cell, textProp)
+
+		// Assert
+		assert.Equal(t, []float64{5, 5}, linkWidths)
 	})
 	t.Run("when text exceeds cell width with empty space strategy, should split into multiple lines", func(t *testing.T) {
 		t.Parallel()

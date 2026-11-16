@@ -246,10 +246,14 @@ func (s *Text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 		const emptyString = ""
 
 		text = strings.TrimRight(text, spaceString)
+		words := strings.Fields(text)
+		if len(words) == 0 {
+			return
+		}
+
 		textNotSpaces := strings.ReplaceAll(text, spaceString, emptyString)
 		textWidth = s.pdf.GetStringWidth(textNotSpaces)
 		defaultSpaceWidth := s.pdf.GetStringWidth(spaceString)
-		words := strings.Fields(text)
 
 		numSpaces := max(len(words)-1, 1)
 		spaceWidth := (colWidth - textWidth) / float64(numSpaces)
