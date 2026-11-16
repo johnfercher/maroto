@@ -15,9 +15,11 @@ type Rect struct {
 	JustReferenceWidth bool
 	// Center define that the barcode will be vertically and horizontally centralized.
 	Center bool
-	// RotationAngle rotates the image on the fly using PDF matrix transformations,
-	// avoiding the memory/CPU cost of re-encoding the image. Common values are
-	// 90, 180 and 270 degrees. When 0 (default) no rotation is applied.
+	// RotationAngle rotates the image counter-clockwise by this many degrees on the fly using
+	// PDF matrix transformations, avoiding the memory/CPU cost of re-encoding the image.
+	// The angle is normalized modulo 360, so -90 is the same as 270. For 90 and 270 the
+	// rotated image is resized to fit the cell; other angles keep the unrotated size.
+	// When 0 (default) no rotation is applied.
 	RotationAngle int
 }
 
