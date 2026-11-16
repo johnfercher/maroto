@@ -1,7 +1,6 @@
 package gofpdf
 
 import (
-	"fmt"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -78,7 +77,7 @@ func (s *Text) Add(text string, cell *entity.Cell, textProp *props.Text) {
 		return
 	}
 
-	lines := s.getLines(unicodeText, textProp.BreakLineStrategy, width)
+	lines := s.getLines(unicodeText, textProp.BreakLineStrategy, width, usesCoreFontEncoding(textProp))
 
 	accumulateOffsetY := 0.0
 
@@ -98,17 +97,17 @@ func (s *Text) GetLinesQuantity(text string, textProp *props.Text, colWidth floa
 
 	textTranslated := s.textToUnicode(text, textProp)
 
-	return len(s.getLines(textTranslated, textProp.BreakLineStrategy, colWidth))
+	return len(s.getLines(textTranslated, textProp.BreakLineStrategy, colWidth, usesCoreFontEncoding(textProp)))
 }
 
-func (s *Text) getLines(text string, strategy breakline.Strategy, colWidth float64) []string {
+func (s *Text) getLines(text string, strategy breakline.Strategy, colWidth float64, singleByte bool) []string {
 	switch strategy {
 	case breakline.EmptySpaceStrategy:
 		return s.getLinesBreakingLineFromSpace(strings.Split(text, " "), colWidth)
 	case breakline.DashStrategy:
-		return s.getLinesBreakingLineWithDash(text, colWidth)
+		return s.getLinesBreakingLineWithDash(splitCharacters(text, singleByte), colWidth)
 	case breakline.CharacterStrategy:
-		return s.getLinesBreakingLineByCharacter(text, colWidth)
+		return s.getLinesBreakingLineByCharacter(splitCharacters(text, singleByte), colWidth)
 	default:
 		return s.getLinesBreakingLineFromSpace(strings.Split(text, " "), colWidth)
 	}
@@ -147,7 +146,7 @@ func (s *Text) getLinesBreakingLineFromSpace(words []string, colWidth float64) [
 	return lines
 }
 
-func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []string {
+func (s *Text) getLinesBreakingLineWithDash(letters []string, colWidth float64) []string {
 	currentlySize := 0.0
 
 	lines := []string{}
@@ -155,7 +154,7 @@ func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 	dashSize := s.pdf.GetStringWidth(" - ")
 
 	var content string
-	for _, letter := range words {
+	for _, letterString := range letters {
 		if currentlySize+dashSize > colWidth-dashSize {
 			content += "-"
 			lines = append(lines, content)
@@ -163,7 +162,6 @@ func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 			currentlySize = 0
 		}
 
-		letterString := fmt.Sprintf("%c", letter)
 		width := s.pdf.GetStringWidth(letterString)
 		content += letterString
 		currentlySize += width
@@ -176,13 +174,12 @@ func (s *Text) getLinesBreakingLineWithDash(words string, colWidth float64) []st
 	return lines
 }
 
-func (s *Text) getLinesBreakingLineByCharacter(words string, colWidth float64) []string {
+func (s *Text) getLinesBreakingLineByCharacter(letters []string, colWidth float64) []string {
 	currentlySize := 0.0
 	lines := []string{}
 	var content string
 
-	for _, letter := range words {
-		letterString := fmt.Sprintf("%c", letter)
+	for _, letterString := range letters {
 		width := s.pdf.GetStringWidth(letterString)
 
 		if currentlySize+width > colWidth && content != "" {
@@ -270,16 +267,41 @@ func (s *Text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 }
 
 func (s *Text) textToUnicode(txt string, props *props.Text) string {
-	if props.Family == fontfamily.Arial ||
-		props.Family == fontfamily.Helvetica ||
-		props.Family == fontfamily.Symbol ||
-		props.Family == fontfamily.ZapBats ||
-		props.Family == fontfamily.Courier {
+	if usesCoreFontEncoding(props) {
 		translator := s.pdf.UnicodeTranslatorFromDescriptor("")
 		return translator(txt)
 	}
 
 	return txt
+}
+
+// usesCoreFontEncoding reports whether text for these props is translated by textToUnicode
+// into a single-byte encoding (cp1252) instead of being kept as UTF-8.
+func usesCoreFontEncoding(props *props.Text) bool {
+	return props.Family == fontfamily.Arial ||
+		props.Family == fontfamily.Helvetica ||
+		props.Family == fontfamily.Symbol ||
+		props.Family == fontfamily.ZapBats ||
+		props.Family == fontfamily.Courier
+}
+
+// splitCharacters splits text into the characters measured by the break line strategies.
+// Single-byte encoded text must be split by bytes: ranging over it as UTF-8 would turn
+// every non-ASCII byte into utf8.RuneError.
+func splitCharacters(text string, singleByte bool) []string {
+	if singleByte {
+		characters := make([]string, len(text))
+		for i := range len(text) {
+			characters[i] = text[i : i+1]
+		}
+		return characters
+	}
+
+	characters := make([]string, 0, utf8.RuneCountInString(text))
+	for _, r := range text {
+		characters = append(characters, string(r))
+	}
+	return characters
 }
 
 func isIncorrectSpaceWidth(textWidth, spaceWidth, defaultSpaceWidth float64, text string) bool {
