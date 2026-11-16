@@ -28,6 +28,8 @@ type Text struct {
 	BreakLineStrategy breakline.Strategy
 	// VerticalPadding define an additional space between linet.
 	VerticalPadding float64
+	// PreserveLineBreaks keeps explicit '\n' as hard line breaks instead of collapsing them into spaces.
+	PreserveLineBreaks bool
 	// Color define the font style color.
 	Color *Color
 	// Hyperlink define a link to be opened when the text is clicked.
@@ -74,6 +76,10 @@ func (t *Text) ToMap() map[string]any {
 
 	if t.VerticalPadding != 0 {
 		m["prop_vertical_padding"] = t.VerticalPadding
+	}
+
+	if t.PreserveLineBreaks {
+		m["prop_preserve_line_breaks"] = true
 	}
 
 	if t.Color != nil {

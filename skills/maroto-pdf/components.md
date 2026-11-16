@@ -53,7 +53,8 @@ func textExamples(m core.Maroto) {
 | `Left`, `Right`     | `float64` (mm)       | `0`                     | Inner horizontal padding; shrink the wrap width                       |
 | `Bottom`            | `float64` (mm)       | `0`                     | **Auto rows only** — extra height below the text                      |
 | `VerticalPadding`   | `float64` (mm)       | `0`                     | Extra space between wrapped lines                                     |
-| `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy`    | `EmptySpaceStrategy` wraps on spaces; `DashStrategy` wraps per character and appends `-` (for languages without spaces) |
+| `PreserveLineBreaks` | `bool`              | `false`                 | Render `\n` as a hard line break (`\n\n` leaves an empty line); when `false`, `\n` is rendered as a space |
+| `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy`    | `EmptySpaceStrategy` wraps on spaces; `DashStrategy` wraps per character and appends `-` (for languages without spaces); `CharacterStrategy` wraps per character without adding any symbol |
 | `Hyperlink`         | `*string`            | `nil`                   | Clickable link; text turns blue                                       |
 
 Gotchas:
@@ -61,13 +62,15 @@ Gotchas:
   **row does not grow**; overflow draws over the next row. Size the row (§height budget in
   [layout.md §2](layout.md#2-rows--fixed-height-in-millimetres)) or use an auto row.
 - A single word wider than the column is not broken under `EmptySpaceStrategy`; it overflows to
-  the right. Use `DashStrategy` for identifiers/URLs in narrow columns.
+  the right. Use `DashStrategy` for identifiers/URLs in narrow columns, or `CharacterStrategy`
+  when a hyphen would change the meaning (amounts, codes, account numbers).
 - Built-in fonts render cp1252 only. Any other script needs a custom font
   ([config.md §5](config.md#5-fonts)) — otherwise characters silently come out wrong.
 - `Top` is the only vertical positioning: there is no vertical-align. To bottom-align, compute
   `Top = rowHeight - lineHeight`.
-- Newlines (`\n`) in the value are not line breaks. Add one text component (or auto row) per line
-  or paragraph.
+- Newlines (`\n`) in the value are not line breaks by default. Set `PreserveLineBreaks: true` to
+  render them as hard breaks inside one component (use an auto row so the height follows the
+  number of lines), or add one text component per line or paragraph.
 
 ### 3. Images — `pkg/components/image`, `props.Rect`
 
