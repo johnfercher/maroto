@@ -16,7 +16,7 @@ Start at [generation.md](generation.md); it routes to the others.
 | [generation.md](generation.md) | Writing any Go code that generates a PDF — install, program skeleton, output, errors, checklist. **Entry point.** |
 | [config.md](config.md) | Choosing `config.NewBuilder()` options: page size, margins, fonts, page numbers, metadata, protection, generation mode |
 | [layout.md](layout.md) | Placing content: grid columns, fixed/auto rows, cell styles, headers, footers, page breaks |
-| [components.md](components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures and their props |
+| [components.md](components.md) | Using text, images, barcodes, QR codes, data matrices, lines, checkboxes, signatures, rich text and their props |
 | [tables.md](tables.md) | Rendering tabular data with `list.Build` or manual loops, striping, borders, pagination |
 | [testing.md](testing.md) | Unit-testing the component tree with `pkg/test` fixtures and debugging layout problems |
 

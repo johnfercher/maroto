@@ -92,6 +92,7 @@ How each component reports its height:
 | line            | `Thickness`                                                            |
 | checkbox        | `Size + Top`                                                           |
 | signature       | `LineThickness + fontHeight * SafePadding`                             |
+| rich text       | sum of line heights (largest chunk font per line) `+ (lines-1) * VerticalPadding + Top + Bottom`, paragraph props from the first chunk |
 | empty column    | `0`                                                                    |
 
 - `props.Text.Bottom` only has an effect in auto rows — it is the only way to add padding below

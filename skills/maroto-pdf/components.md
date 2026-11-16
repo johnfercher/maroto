@@ -1,7 +1,7 @@
 # PDF Components
 
-Put content into a column: text, images, barcodes, QR codes, data matrices, lines, checkboxes and
-signatures — constructors, props, defaults and the gotchas of each.
+Put content into a column: text, images, barcodes, QR codes, data matrices, lines, checkboxes,
+signatures and rich text — constructors, props, defaults and the gotchas of each.
 
 See also:
 - [layout.md](layout.md) for rows, columns, auto heights and cell styling around these
@@ -53,7 +53,8 @@ func textExamples(m core.Maroto) {
 | `Left`, `Right`     | `float64` (mm)       | `0`                     | Inner horizontal padding; shrink the wrap width                       |
 | `Bottom`            | `float64` (mm)       | `0`                     | **Auto rows only** — extra height below the text                      |
 | `VerticalPadding`   | `float64` (mm)       | `0`                     | Extra space between wrapped lines                                     |
-| `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy`    | `EmptySpaceStrategy` wraps on spaces; `DashStrategy` wraps per character and appends `-` (for languages without spaces) |
+| `PreserveLineBreaks` | `bool`              | `false`                 | Render `\n` as a hard line break (`\n\n` leaves an empty line); when `false`, `\n` is rendered as a space |
+| `BreakLineStrategy` | `breakline.Strategy` | `EmptySpaceStrategy`    | `EmptySpaceStrategy` wraps on spaces; `DashStrategy` wraps per character and appends `-` (for languages without spaces); `CharacterStrategy` wraps per character without adding any symbol |
 | `Hyperlink`         | `*string`            | `nil`                   | Clickable link; text turns blue                                       |
 
 Gotchas:
@@ -61,13 +62,15 @@ Gotchas:
   **row does not grow**; overflow draws over the next row. Size the row (§height budget in
   [layout.md §2](layout.md#2-rows--fixed-height-in-millimetres)) or use an auto row.
 - A single word wider than the column is not broken under `EmptySpaceStrategy`; it overflows to
-  the right. Use `DashStrategy` for identifiers/URLs in narrow columns.
+  the right. Use `DashStrategy` for identifiers/URLs in narrow columns, or `CharacterStrategy`
+  when a hyphen would change the meaning (amounts, codes, account numbers).
 - Built-in fonts render cp1252 only. Any other script needs a custom font
   ([config.md §5](config.md#5-fonts)) — otherwise characters silently come out wrong.
 - `Top` is the only vertical positioning: there is no vertical-align. To bottom-align, compute
   `Top = rowHeight - lineHeight`.
-- Newlines (`\n`) in the value are not line breaks. Add one text component (or auto row) per line
-  or paragraph.
+- Newlines (`\n`) in the value are not line breaks by default. Set `PreserveLineBreaks: true` to
+  render them as hard breaks inside one component (use an auto row so the height follows the
+  number of lines), or add one text component per line or paragraph.
 
 ### 3. Images — `pkg/components/image`, `props.Rect`
 
@@ -246,7 +249,46 @@ func signatureExamples(m core.Maroto) {
 Renders a horizontal line at the bottom of the cell with the label centred **below** the line.
 Leave the row tall enough (≥ 15 mm) for an actual handwritten signature above the line.
 
-### 9. Colors
+### 9. Rich text — `pkg/components/richtext`, `props.Text` per chunk
+
+One paragraph built from styled chunks, wrapped as a single text block (bold words, a colored
+amount, a link inside a sentence). The four shapes take chunks instead of a value and props:
+`richtext.New(chunks...)`, `NewCol(size, chunks...)`, `NewRow(height, chunks...)`,
+`NewAutoRow(chunks...)`. Build each chunk with `richtext.NewChunk(text, props...)`.
+
+```go
+func richTextExamples(m core.Maroto) {
+	url := "https://maroto.tech"
+
+	m.AddAutoRow(
+		richtext.NewCol(12,
+			richtext.NewChunk("Total due: ", props.Text{Left: 2, Right: 2, VerticalPadding: 1, Bottom: 2}),
+			richtext.NewChunk("$1,250.00", props.Text{Style: fontstyle.Bold, Color: &props.RedColor}),
+			richtext.NewChunk(" by 30 June. See "),
+			richtext.NewChunk("the terms", props.Text{Hyperlink: &url}),
+			richtext.NewChunk("."),
+		),
+	)
+}
+```
+
+| Prop scope                  | Fields                                                                              |
+|-----------------------------|-------------------------------------------------------------------------------------|
+| Paragraph (first chunk only) | `Align`, `Top`, `Bottom`, `Left`, `Right`, `VerticalPadding`, `PreserveLineBreaks` |
+| Every chunk                 | `Family`, `Style`, `Size`, `Color`, `Hyperlink`; zero values take the config defaults |
+
+Gotchas:
+- Lines wrap only at whitespace. Chunks with no space between them (`"the terms"` + `"."`)
+  stay on the same line; a word wider than the column overflows. `BreakLineStrategy` is ignored.
+- Each line is as tall as its largest chunk font; `Justify` stretches the spaces of every wrapped
+  line except the last line of each paragraph.
+- With `PreserveLineBreaks`, a trailing `\n` keeps an empty last line (like `text`), and a `\r\n`
+  split across two chunks counts as one break.
+- Paragraph props set on later chunks are ignored, so put them on the first chunk even when it
+  is short.
+- No chunks render nothing and report a height of `0`.
+
+### 10. Colors
 
 `props.Color{Red, Green, Blue int}` (0–255). Predefined values: `props.WhiteColor`,
 `BlackColor`, `RedColor`, `GreenColor`, `BlueColor` — they are values, so pass `&props.RedColor`.
@@ -256,7 +298,7 @@ Define the document palette once as package-level `*props.Color` variables and r
 ## References
 
 - Feature pages: https://maroto.tech/#/v2/features/text, `image`, `barcode`, `qrcode`,
-  `datamatrix`, `line`, `checkbox`, `signature`
+  `datamatrix`, `line`, `checkbox`, `signature`, `richtext`
 - Props GoDoc: https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/props
 - Runnable grids showing every prop combination:
   [`docs/assets/examples/textgrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/textgrid/v2/main.go),
@@ -265,4 +307,5 @@ Define the document palette once as package-level `*props.Color` variables and r
   [`qrgrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/qrgrid/v2/main.go),
   [`line`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/line/v2/main.go),
   [`checkbox`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/checkbox/v2/main.go),
-  [`signaturegrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/signaturegrid/v2/main.go)
+  [`signaturegrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/signaturegrid/v2/main.go),
+  [`richtextgrid`](https://github.com/johnfercher/maroto/blob/master/docs/assets/examples/richtextgrid/v2/main.go)

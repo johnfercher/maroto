@@ -1,0 +1,17 @@
+{
+	"value": 12,
+	"type": "col",
+	"nodes": [
+		{
+			"value": 3,
+			"type": "richtext",
+			"details": {
+				"chunk_0_prop_top": 2,
+				"chunk_0_text": "Total: ",
+				"chunk_1_prop_font_style": "B",
+				"chunk_1_text": "$10",
+				"chunk_2_text": " due."
+			}
+		}
+	]
+}

@@ -10,7 +10,7 @@ See also:
 - [layout.md](layout.md) for the row/column grid, auto rows, cell styling, headers,
   footers and page breaks.
 - [components.md](components.md) for text, images, barcodes, QR codes, data matrices,
-  lines, checkboxes and signatures.
+  lines, checkboxes, signatures and rich text.
 - [tables.md](tables.md) for tabular data (invoices, reports, catalogs).
 - [testing.md](testing.md) for unit-testing the component tree and debugging layout.
 
@@ -119,8 +119,9 @@ code already does:
 | nothing, content-sized row  | `text.NewAutoRow(value, props...)`             | `core.Row`       |
 
 `NewRow` / `NewAutoRow` create a single column spanning the whole grid. The same table applies to
-`image`, `code`, `line`, `checkbox` and `signature` (constructor names per component are in
-[components.md](components.md)).
+`image`, `code`, `line`, `checkbox`, `signature` and `richtext` (constructor names per component
+are in [components.md](components.md); `richtext` takes `richtext.NewChunk(...)` values instead of
+a value and props).
 
 Then attach them to the document:
 
@@ -203,6 +204,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/line"    // line.New*
 	"github.com/johnfercher/maroto/v2/pkg/components/checkbox" // checkbox.New*
 	"github.com/johnfercher/maroto/v2/pkg/components/signature" // signature.New*
+	"github.com/johnfercher/maroto/v2/pkg/components/richtext" // richtext.New / NewCol / NewRow / NewAutoRow, NewChunk
 	"github.com/johnfercher/maroto/v2/pkg/components/list"    // list.Build, list.Listable
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"       // align.Left/Center/Right/Justify
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"   // fontstyle.Normal/Bold/Italic/BoldItalic/Underline/Strikethrough
@@ -213,7 +215,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/consts/pagesize"    // pagesize.A4/Letter/...
 	"github.com/johnfercher/maroto/v2/pkg/consts/extension"   // extension.Png/Jpg/Jpeg
 	"github.com/johnfercher/maroto/v2/pkg/consts/barcode"     // barcode.Code128/EAN
-	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"   // breakline.EmptySpaceStrategy/DashStrategy
+	"github.com/johnfercher/maroto/v2/pkg/consts/breakline"   // breakline.EmptySpaceStrategy/DashStrategy/CharacterStrategy
 	"github.com/johnfercher/maroto/v2/pkg/consts/protection"  // protection.Print/Modify/Copy/AnnotForms
 	"github.com/johnfercher/maroto/v2/pkg/fontrepository"     // custom UTF-8 fonts
 	"github.com/johnfercher/maroto/v2/pkg/merge"              // merge.Bytes
