@@ -17,8 +17,9 @@ type Rect struct {
 	Center bool
 	// RotationAngle rotates the image counter-clockwise by this many degrees on the fly using
 	// PDF matrix transformations, avoiding the memory/CPU cost of re-encoding the image.
-	// The angle is normalized modulo 360, so -90 is the same as 270. For 90 and 270 the
-	// rotated image is resized to fit the cell; other angles keep the unrotated size.
+	// MakeValid normalizes the angle to [0, 360), so -90 is the same as 270. For 90 and 270 the
+	// rotated image is resized to fit the cell and auto rows use its rotated height; other
+	// angles keep the unrotated size.
 	// When 0 (default) no rotation is applied.
 	RotationAngle int
 }
@@ -76,4 +77,12 @@ func (r *Rect) MakeValid() {
 	if r.Top < minValue {
 		r.Top = minValue
 	}
+
+	const fullTurn = 360
+	r.RotationAngle = (r.RotationAngle%fullTurn + fullTurn) % fullTurn
+}
+
+// IsQuarterTurn reports whether the rotation swaps the width and height of the rendered rect.
+func (r *Rect) IsQuarterTurn() bool {
+	return r.RotationAngle == 90 || r.RotationAngle == 270
 }

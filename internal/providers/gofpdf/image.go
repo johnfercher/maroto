@@ -70,12 +70,9 @@ func (s *Image) Add(img *entity.Image, cell *entity.Cell, margins *entity.Margin
 func (s *Image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cell *entity.Cell, margins *entity.Margins,
 	prop *props.Rect, flow bool,
 ) {
-	angle := normalizeRotationAngle(prop.RotationAngle)
-	quarterTurn := angle == 90 || angle == 270
-
 	// footprint is the area the image occupies on the page, so a quarter turn swaps its sides.
 	footprint := &entity.Dimensions{Width: info.Width(), Height: info.Height()}
-	if quarterTurn {
+	if prop.IsQuarterTurn() {
 		footprint = &entity.Dimensions{Width: info.Height(), Height: info.Width()}
 	}
 
@@ -92,17 +89,17 @@ func (s *Image) addImageToPdf(imageLabel string, info *gofpdf.ImageInfoType, cel
 	w := rectCell.Width
 	h := rectCell.Height
 
-	if angle == 0 {
+	if prop.RotationAngle == 0 {
 		s.pdf.Image(imageLabel, x, y, w, h, flow, "", 0, "")
 		return
 	}
 
 	imageWidth, imageHeight := w, h
-	if quarterTurn {
+	if prop.IsQuarterTurn() {
 		imageWidth, imageHeight = h, w
 	}
 
-	s.addRotatedImageToPdf(imageLabel, float64(angle), x+w/2, y+h/2, imageWidth, imageHeight)
+	s.addRotatedImageToPdf(imageLabel, float64(prop.RotationAngle), x+w/2, y+h/2, imageWidth, imageHeight)
 }
 
 // addRotatedImageToPdf draws an unrotated image of the given size centered on (centerX, centerY)
@@ -114,9 +111,4 @@ func (s *Image) addRotatedImageToPdf(imageLabel string, angle, centerX, centerY,
 		AllowNegativePosition: true,
 	}, 0, "")
 	s.pdf.TransformEnd()
-}
-
-func normalizeRotationAngle(angle int) int {
-	const fullTurn = 360
-	return (angle%fullTurn + fullTurn) % fullTurn
 }
