@@ -16,17 +16,18 @@ import (
 )
 
 type Text struct {
-	pdf  gofpdfwrapper.Fpdf
-	math core.Math
-	font core.Font
+	pdf               gofpdfwrapper.Fpdf
+	math              core.Math
+	font              core.Font
+	unicodeTranslator func(string) string
 }
 
 // NewText create a Text.
 func NewText(pdf gofpdfwrapper.Fpdf, math core.Math, font core.Font) *Text {
 	return &Text{
-		pdf,
-		math,
-		font,
+		pdf:  pdf,
+		math: math,
+		font: font,
 	}
 }
 
@@ -242,11 +243,20 @@ func (s *Text) textToUnicode(txt string, props *props.Text) string {
 		props.Family == fontfamily.Symbol ||
 		props.Family == fontfamily.ZapBats ||
 		props.Family == fontfamily.Courier {
-		translator := s.pdf.UnicodeTranslatorFromDescriptor("")
-		return translator(txt)
+		return s.getUnicodeTranslator()(txt)
 	}
 
 	return txt
+}
+
+// getUnicodeTranslator builds the cp1252 translator once and reuses it, because
+// UnicodeTranslatorFromDescriptor parses the whole code page map on every call.
+func (s *Text) getUnicodeTranslator() func(string) string {
+	if s.unicodeTranslator == nil {
+		s.unicodeTranslator = s.pdf.UnicodeTranslatorFromDescriptor("")
+	}
+
+	return s.unicodeTranslator
 }
 
 func isIncorrectSpaceWidth(textWidth, spaceWidth, defaultSpaceWidth float64, text string) bool {
