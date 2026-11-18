@@ -233,8 +233,9 @@ Predefined colors are **values**, so take their address: `Color: &props.RedColor
    its row is **not clipped** — it draws over the next row. Use `AddAutoRow` when the length is
    unknown ([layout.md §3](layout.md#3-auto-rows)).
 4. Header/footer registered before content; `Generate()` called once per instance.
-5. Non-Latin text (CJK, Arabic, Cyrillic, Hebrew, …) uses a registered UTF-8 font
-   ([config.md §5](config.md#5-fonts)); the built-in fonts only cover Latin-1 (cp1252).
+5. Text in scripts the built-in fonts don't cover (CJK, Arabic, Hebrew, Indic, emoji, …) uses a
+   registered UTF-8 font ([config.md §5](config.md#5-fonts)); the built-in fonts cover Latin,
+   Greek and Cyrillic.
 6. The program was actually run once and produced a file of non-zero size; while iterating,
    `WithDebug(true)` draws every cell's border so misaligned columns are visible.
 7. A `GetStructure()` fixture test exists when the document will be maintained

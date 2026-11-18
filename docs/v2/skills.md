@@ -8,8 +8,8 @@ your own project.
 
 Each skill is a short, prescriptive reference: the constructors to call, every prop with its real
 default, the layout arithmetic, and the pitfalls an agent would otherwise rediscover by trial and
-error (a fixed row never grows, the header must be registered before content, built-in fonts only
-cover Latin-1, …). Every Go snippet compiles against the current module and every default quoted
+error (a fixed row never grows, the header must be registered before content, built-in fonts do not
+cover CJK or Arabic, …). Every Go snippet compiles against the current module and every default quoted
 comes from the library's source.
 
 ## How to use them

@@ -63,11 +63,11 @@ This is part of the [billing example](v2/examples/billing?id=billing).
 ## Conventions
 
 The way that maroto`v2`works is similar to the old version. The concept of components still exists, but now they are more 
-rigorously controlled by maroto, meaning that`v2`will be less tightly integrated with [gofpdf][gofpdf]. This constraint will 
-enable maroto`v2`to utilize other PDF providers, such as [pdfcpu][pdfcpu], in the future and even to generate other types 
-of documents.
+rigorously controlled by maroto, meaning that`v2`is not tightly integrated with the library that writes the PDF. This
+constraint enables maroto`v2`to switch PDF providers and even to generate other types of documents.
 
-!> **gofpdf** has been archived by the owner on Nov 13, 2021.
+!> maroto`v2`renders documents with [gopdf][gopdf]. It used [gofpdf][gofpdf] before, which was archived by its owner on
+Nov 13, 2021.
 
 ### Structure
 In maroto`v2`, everything is a **component**. When you add a **row** to the document, you are essentially adding a
@@ -134,6 +134,7 @@ The pages are merged using [pdfcpu][pdfcpu]. For a complete example, please refe
 
 
 [gofpdf]: https://github.com/phpdave11/gofpdf
+[gopdf]: https://github.com/signintech/gopdf
 [pdfcpu]: https://github.com/pdfcpu/pdfcpu
 [old_maroto_interface]: https://github.com/johnfercher/maroto/blob/master/pkg/pdf/pdf.go
 [old_row_issue]: https://github.com/johnfercher/maroto/issues/55

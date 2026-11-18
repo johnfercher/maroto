@@ -120,9 +120,9 @@ package core
 ```
 
 `.golangci.yml` caps interfaces at 15 methods (`interfacebloat.max: 15`). `Provider` isn't the
-only exception — `internal/providers/gofpdf/gofpdfwrapper/fpdf.go:1` and `pkg/config/builder.go:2`
+only exception — `internal/providers/gopdf/gopdfwrapper/gopdf.go:1` and `pkg/config/builder.go:2`
 carry the same `// nolint:interfacebloat` comment, each for a different legitimate reason:
-`gofpdfwrapper.Fpdf` wraps the external `gofpdf` package's own wide API one-to-one, and
+`gopdfwrapper.Gopdf` is the set of drawing operations maroto needs from the external `gopdf` package, and
 `config.Builder` is a fluent builder whose method count mirrors the number of independent config
 options, not accidental complexity. Treat all three as accepted, already-reviewed exceptions — not
 precedent for adding more wide interfaces casually. When designing a new abstraction, default to
@@ -130,7 +130,7 @@ something the size of `Line`/`Checkbox`/`Text`, not the size of `Provider`.
 
 ### 2.5 Dependency Inversion Principle
 
-`Maroto` depends on the `core.Provider` abstraction, not on the concrete `gofpdf` implementation:
+`Maroto` depends on the `core.Provider` abstraction, not on the concrete `gopdf` implementation:
 
 ```go
 type Maroto struct {
@@ -141,12 +141,12 @@ type Maroto struct {
 }
 ```
 
-The one place that knows about the concrete `gofpdf` type is the composition root:
+The one place that knows about the concrete `gopdf` type is the composition root:
 
 ```go
 func getProvider(cache cache.Cache, cfg *entity.Config) core.Provider {
-	deps := gofpdf.NewBuilder().Build(cfg, cache)
-	provider := gofpdf.New(deps)
+	deps := gopdf.NewBuilder().Build(cfg, cache)
+	provider := gopdf.New(deps)
 	provider.SetMetadata(cfg.Metadata)
 	provider.SetCompression(cfg.Compression)
 	provider.SetProtection(cfg.Protection)
@@ -155,7 +155,7 @@ func getProvider(cache cache.Cache, cfg *entity.Config) core.Provider {
 ```
 
 Every component, and every component test, depends only on `core.Provider` — proven by how freely
-`mocks.NewProvider(t)` substitutes for the real `gofpdf` provider throughout `pkg/components/*_test.go`
+`mocks.NewProvider(t)` substitutes for the real `gopdf` provider throughout `pkg/components/*_test.go`
 (see [mocks.md](mocks.md)). If a new feature needs a new external dependency, wire it in behind an
 interface at this same boundary rather than importing the concrete package into component code.
 
