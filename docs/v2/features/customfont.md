@@ -1,12 +1,14 @@
 # Custom Font
 
-Maroto ships with a standard set of built-in fonts. `WithCustomFonts` lets you register additional TrueType (UTF-8) fonts so that text components can use them by name. This is essential for non-Latin scripts such as Arabic, Chinese, Japanese, Korean, or any language requiring characters outside the Latin-1 set.
+Maroto ships with a standard set of built-in fonts (`arial`, `helvetica`, `courier`, `times`, `symbol` and `zapfdingbats`), rendered with the embedded Liberation fonts, which have the same metrics as Arial/Helvetica, Courier and Times and cover Latin, Greek and Cyrillic. `WithCustomFonts` lets you register additional TrueType (UTF-8) fonts so that text components can use them by name. This is essential for branded typography and for scripts the built-in fonts do not cover, such as Arabic, Chinese, Japanese or Korean.
 
 ## Usage notes
 
 - Each style variant (`Normal`, `Bold`, `Italic`, `BoldItalic`) must be registered separately.
-- If a style is not registered, maroto falls back to the `Normal` variant of the same family.
-- Font files are embedded in the PDF, so the output is self-contained but larger.
+- If a style of a custom family is not registered (and the family is not a built-in one that has the style), `Generate` fails: with an `undefined font` error in the default sequential mode, with the mode's own error (`ErrCannotGenerateInParallelMode`, `ErrCannotGenerateInLowMemoryMode`) in the concurrent and low-memory modes. A custom font registered with the name of a built-in family (e.g. `arial`) replaces it for the registered styles only; the other styles still use the built-in font.
+- Only the glyphs used by the document are embedded in the PDF (font subsetting), so the output is self-contained.
+- Each family and style is parsed once per process and shared by every document that registers the same bytes for it, so generating many documents with large fonts does not parse them again. A file registered for several styles is kept in memory once.
+- Only TrueType outlines (`.ttf`) are supported; OpenType fonts with CFF outlines (`.otf`) are rejected.
 
 ## GoDoc
 * [builder : WithCustomFonts](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithCustomFonts)

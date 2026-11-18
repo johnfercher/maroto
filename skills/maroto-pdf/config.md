@@ -100,12 +100,18 @@ cfg := config.NewBuilder().
 	Build()
 ```
 
-Built-in families: `fontfamily.Arial`, `Helvetica`, `Courier`, `Symbol`, `ZapBats`. They are
-PDF core fonts encoded as cp1252: accented Latin characters work, **anything else (CJK, Arabic,
-Cyrillic, Greek, Hebrew, emoji) renders as garbage or blanks**.
+Built-in families: `fontfamily.Arial`, `Helvetica`, `Courier`, `Times`, `Symbol`, `ZapBats`. They are
+embedded Liberation fonts (Liberation Sans for Arial/Helvetica, Liberation Mono for Courier,
+Liberation Serif for Times, with the same metrics), so they cover Latin, Greek and Cyrillic; **CJK, Arabic, Hebrew, Indic scripts
+and emoji render as the font's missing-glyph box**. `Symbol` and `ZapBats` are Liberation Sans too:
+their special glyphs (Greek symbols, dingbats) are not available.
 
 **Custom UTF-8 fonts** — required for other scripts, and for any branded typography. Register
-each style you intend to use; an unregistered style falls back to the `Normal` file:
+each style you intend to use; using an unregistered style of a custom family makes `Generate()`
+fail with `undefined font` (in the concurrent and low-memory modes, with the mode's own error) (a custom font named like a built-in family overrides it only for the
+registered styles). Each family and style is parsed once per process and shared by all documents
+that register the same bytes for it (a file registered for several styles is kept in memory once), and only the glyphs a document uses are embedded. Only TrueType
+outlines (`.ttf`) are supported, not CFF-based `.otf` files:
 
 ```go
 func configWithUTF8Font(fontFile string) (*entity.Config, error) {
@@ -141,9 +147,9 @@ func configWithUTF8Font(fontFile string) (*entity.Config, error) {
 
 | Method                                                    | Notes                                                      |
 |-----------------------------------------------------------|------------------------------------------------------------|
-| `WithTitle(s, isUTF8)`, `WithAuthor`, `WithSubject`, `WithCreator`, `WithKeywords` | Document-info dictionary; empty strings are ignored. Pass `isUTF8 = true` unless the text is pure ASCII. |
+| `WithTitle(s, isUTF8)`, `WithAuthor`, `WithSubject`, `WithCreator`, `WithKeywords` | Document-info dictionary; empty strings are ignored. Pass `isUTF8 = true` unless the text is pure ASCII (`false` reads it as ISO-8859-1). In title, author, subject and creator, characters outside the Basic Multilingual Plane (e.g. emoji) are written as `�`; keywords keep them. Blank keywords are left out. |
 | `WithCreationDate(time.Time)`                             | Zero time is ignored. Pass a fixed time in tests for reproducible bytes. |
-| `WithProtection(protection.Type, userPassword, ownerPassword)` | Flags combine with `\|`: `protection.Print \| protection.Copy` **restricts** printing and copying. `protection.None` with a user password = open-password only. Empty string disables that password. RC4 128-bit via gofpdf: a deterrent, not a security boundary. |
+| `WithProtection(protection.Type, userPassword, ownerPassword)` | Flags combine with `\|`: `protection.Print \| protection.Copy` **restricts** printing and copying. `protection.None` with a user password = open-password only. An empty user password disables the open password. An empty owner password is replaced by a random one that is not returned, so nobody gets owner access: set an owner password if you need it. RC4 40-bit via gopdf: a deterrent, not a security boundary. |
 | `WithCompression(true)`                                   | zlib on content streams. Cheap win for text-heavy documents; little effect on image-heavy ones. |
 
 ### 7. Background image and page breaks

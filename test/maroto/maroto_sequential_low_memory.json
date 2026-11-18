@@ -7,7 +7,7 @@
 		"config_margin_right": 10,
 		"config_margin_top": 10,
 		"config_max_grid_sum": 12,
-		"config_provider_type": "gofpdf",
+		"config_provider_type": "gopdf",
 		"generation_mode": "sequential_low_memory",
 		"maroto_dimension_height": 297,
 		"maroto_dimension_width": 210,

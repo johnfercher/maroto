@@ -12,4 +12,6 @@ const (
 	ZapBats string = "zapfdingbats"
 	// Courier represents a courier DefaultFont.
 	Courier string = "courier"
+	// Times represents a times DefaultFont.
+	Times string = "times"
 )

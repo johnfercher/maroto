@@ -64,12 +64,12 @@ See also:
   ```go
   dep.EXPECT().MethodName(arg1, arg2).Return(val1, val2)
   ```
-- Example from `internal/providers/gofpdf/font_test.go`:
+- Example from `internal/providers/gopdf/font_test.go`:
   ```go
-  fpdf := mocks.NewFpdf(t)
-  fpdf.EXPECT().SetFont(family, string(style), size)
+  fpdf := mocks.NewGopdf(t)
+  fpdf.EXPECT().SetFont(family, style, size)
 
-  font := gofpdf.NewFont(fpdf, size, family, style)
+  font := gopdf.NewFont(fpdf, size, family, style)
   ```
 - Avoid `mock.Anything` — build the real expected argument whenever possible. It's only allowed
   when it's not possible to construct the argument (e.g. a reader/writer instance created
@@ -77,9 +77,9 @@ See also:
   and pull request:
   ```go
   // mock.Anything have to be avoided
-  pdf.EXPECT().RegisterImageOptionsReader(mock.Anything, options, bytes.NewReader(img.Bytes)).Return(nil)
+  pdf.EXPECT().Image(img.Bytes, 30.0, 35.0, mock.Anything, mock.Anything, true).Return(nil)
   ```
-  (see `internal/providers/gofpdf/image_test.go`).
+  (see `internal/providers/gopdf/image_test.go`).
 - Assert call count only when it matters, e.g. when the dependency is called inside a loop:
   ```go
   inner.AssertNumberOfCalls(t, "AddRows", 2)

@@ -206,7 +206,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/list"    // list.Build, list.Listable
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"       // align.Left/Center/Right/Justify
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"   // fontstyle.Normal/Bold/Italic/BoldItalic/Underline/Strikethrough
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"  // fontfamily.Arial/Helvetica/Courier/Symbol/ZapBats
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"  // fontfamily.Arial/Helvetica/Courier/Times/Symbol/ZapBats
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"      // border.Full/Left/Top/Right/Bottom
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"   // linestyle.Solid/Dashed
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation" // orientation.Vertical/Horizontal
@@ -233,8 +233,9 @@ Predefined colors are **values**, so take their address: `Color: &props.RedColor
    its row is **not clipped** — it draws over the next row. Use `AddAutoRow` when the length is
    unknown ([layout.md §3](layout.md#3-auto-rows)).
 4. Header/footer registered before content; `Generate()` called once per instance.
-5. Non-Latin text (CJK, Arabic, Cyrillic, Hebrew, …) uses a registered UTF-8 font
-   ([config.md §5](config.md#5-fonts)); the built-in fonts only cover Latin-1 (cp1252).
+5. Text in scripts the built-in fonts don't cover (CJK, Arabic, Hebrew, Indic, emoji, …) uses a
+   registered UTF-8 font ([config.md §5](config.md#5-fonts)); the built-in fonts cover Latin,
+   Greek and Cyrillic.
 6. The program was actually run once and produced a file of non-zero size; while iterating,
    `WithDebug(true)` draws every cell's border so misaligned columns are visible.
 7. A `GetStructure()` fixture test exists when the document will be maintained

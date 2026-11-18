@@ -44,7 +44,7 @@ func textExamples(m core.Maroto) {
 
 | Field               | Type                 | Default                 | Notes                                                                 |
 |---------------------|----------------------|-------------------------|-----------------------------------------------------------------------|
-| `Family`            | `string`             | config default font     | `fontfamily.Arial/Helvetica/Courier/Symbol/ZapBats` or a registered custom family |
+| `Family`            | `string`             | config default font     | `fontfamily.Arial/Helvetica/Courier/Times/Symbol/ZapBats` or a registered custom family |
 | `Style`             | `fontstyle.Type`     | config default          | `Normal`, `Bold`, `Italic`, `BoldItalic`, `Underline`, `Strikethrough`; combine by concatenation: `fontstyle.Bold + fontstyle.Underline` |
 | `Size`              | `float64` (pt)       | config default (10)     | Line height in mm is `Size / 2.835`                                   |
 | `Color`             | `*props.Color`       | config default (black)  | Overridden to blue when `Hyperlink` is set                            |
@@ -62,11 +62,11 @@ Gotchas:
   [layout.md §2](layout.md#2-rows--fixed-height-in-millimetres)) or use an auto row.
 - A single word wider than the column is not broken under `EmptySpaceStrategy`; it overflows to
   the right. Use `DashStrategy` for identifiers/URLs in narrow columns.
-- Built-in fonts render cp1252 only. Any other script needs a custom font
-  ([config.md §5](config.md#5-fonts)) — otherwise characters silently come out wrong.
+- Built-in fonts cover Latin, Greek and Cyrillic. CJK, Arabic, Hebrew and other scripts need a
+  custom font ([config.md §5](config.md#5-fonts)) — otherwise they render as missing-glyph boxes.
 - `Top` is the only vertical positioning: there is no vertical-align. To bottom-align, compute
   `Top = rowHeight - lineHeight`.
-- Newlines (`\n`) in the value are not line breaks. Add one text component (or auto row) per line
+- Newlines (`\n`) in the value are not line breaks (they render as a space). Add one text component (or auto row) per line
   or paragraph.
 
 ### 3. Images — `pkg/components/image`, `props.Rect`

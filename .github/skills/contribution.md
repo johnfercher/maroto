@@ -28,7 +28,7 @@ Every method on a struct uses the struct's first letter (lowercase) as the recei
 func (c *Checkbox) Render(provider core.Provider, cell *entity.Cell) {
 ```
 (see `pkg/components/checkbox/checkbox.go`). Do not use `this`, `self`, or the full struct name.
-A few existing types don't follow the literal first-letter rule (e.g. `internal/providers/gofpdf/font.go`
+A few existing types don't follow the literal first-letter rule (e.g. `internal/providers/gopdf/font.go`
 uses `s` for `Font`) — that's pre-existing, not a pattern to copy; for new code, use the struct's
 actual first letter.
 
@@ -52,7 +52,7 @@ func NewFont(...) *Font { ... }
 // GetFamily return the currently Font family configured.
 func (s *Font) GetFamily() string { ... }
 ```
-(see `internal/providers/gofpdf/font.go`).
+(see `internal/providers/gopdf/font.go`).
 
 ### 5. `docs/*`
 `docs/` is a [docsify](https://docsify.js.org/) site. Run `make docs` to preview it locally.

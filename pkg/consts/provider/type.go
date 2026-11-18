@@ -5,6 +5,10 @@ package provider
 type Type string
 
 const (
-	// Gofpdf represents the gofpdf provider.
+	// Gopdf represents the gopdf (github.com/signintech/gopdf) provider.
+	Gopdf Type = "gopdf"
+	// Gofpdf represents the gofpdf provider, which is no longer used.
+	//
+	// Deprecated: maroto renders with gopdf, use Gopdf.
 	Gofpdf Type = "gofpdf"
 )

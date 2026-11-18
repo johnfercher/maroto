@@ -16,8 +16,9 @@ Flags can be combined with `|`: `protection.Print | protection.Copy` restricts b
 
 ## Usage notes
 
-- An empty string for either password disables that password. A document with only an owner password can be opened without a password but restrictions apply to regular users.
-- PDF encryption strength depends on the underlying library. maroto uses 128-bit RC4 encryption via gofpdf.
+- An empty user password disables the open password: a document with only an owner password can be opened without a password, but restrictions apply to regular users.
+- An empty owner password is replaced by a random one that is not returned, so nobody gets owner access. Set an owner password if you need to lift the restrictions later.
+- PDF encryption strength depends on the underlying library. maroto encrypts with 40-bit RC4 (standard security handler revision 2) via gopdf.
 - PDF protection is not a strong security guarantee — determined users with the right tools can bypass it. Use it as a deterrent, not a security boundary.
 
 ## GoDoc

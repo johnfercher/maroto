@@ -9,7 +9,7 @@
 [![Stars Badge](https://img.shields.io/github/stars/johnfercher/maroto.svg?style=social&label=Stars)](https://github.com/johnfercher/maroto/stargazers)
 
 
-A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [Gofpdf](https://github.com/phpdave11/gofpdf). Fast and simple.
+A Maroto way to create PDFs. Maroto is inspired in Bootstrap and uses [gopdf](https://github.com/signintech/gopdf). Fast and simple.
 
 ![sirmaroto](docs/assets/images/logosmall.png)
 > Maroto definition: Brazilian expression, means an astute/clever/intelligent person. 

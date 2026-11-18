@@ -9,7 +9,7 @@ import (
 
 	"github.com/johnfercher/maroto/v2/internal/cache"
 
-	"github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
+	"github.com/johnfercher/maroto/v2/internal/providers/gopdf"
 
 	"github.com/johnfercher/maroto/v2/pkg/merge"
 
@@ -400,8 +400,8 @@ func getConfig(configs ...*entity.Config) *entity.Config {
 }
 
 func getProvider(cache cache.Cache, cfg *entity.Config) core.Provider {
-	deps := gofpdf.NewBuilder().Build(cfg, cache)
-	provider := gofpdf.New(deps)
+	deps := gopdf.NewBuilder().Build(cfg, cache)
+	provider := gopdf.New(deps)
 	provider.SetMetadata(cfg.Metadata)
 	provider.SetCompression(cfg.Compression)
 	provider.SetProtection(cfg.Protection)

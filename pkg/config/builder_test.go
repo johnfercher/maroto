@@ -42,7 +42,7 @@ func TestBuilder_Build(t *testing.T) {
 	cfg := sut.Build()
 
 	// Assert
-	assert.Equal(t, provider.Gofpdf, cfg.ProviderType)
+	assert.Equal(t, provider.Gopdf, cfg.ProviderType)
 	assert.Equal(t, 210.0, cfg.Dimensions.Width)
 	assert.Equal(t, 297.0, cfg.Dimensions.Height)
 	assert.Equal(t, 10.0, cfg.Margins.Top)

@@ -70,7 +70,7 @@ be placed in one line.
 ### 6. System under test variable name
 Always name the instance being tested `sut`:
 ```go
-sut := gofpdf.NewCheckbox(fpdf, font)
+sut := gopdf.NewCheckbox(fpdf, font)
 ```
 
 ### 7. Mocks

@@ -1,4 +1,4 @@
-generate -> avg: 7.72ms, executions: [7.72ms]
-header -> avg: 7.92μs, executions: [7.92μs]
-add_rows -> avg: 53.34ns, executions: [166.00ns, 84.00ns, 41.00ns, 83.00ns, 0.00ns, 42.00ns, 0.00ns, 84.00ns, 0.00ns, 0.00ns, 42.00ns, 42.00ns, 42.00ns, 42.00ns, 0.00ns, 625.00ns, 42.00ns, 0.00ns, 0.00ns, 42.00ns, 42.00ns, 0.00ns, 0.00ns, 41.00ns, 375.00ns, 0.00ns, 0.00ns, 42.00ns, 0.00ns, 0.00ns, 0.00ns, 42.00ns, 0.00ns, 42.00ns, 0.00ns, 42.00ns, 0.00ns, 0.00ns, 41.00ns, 83.00ns, 0.00ns, 41.00ns, 41.00ns, 41.00ns, 0.00ns, 0.00ns, 42.00ns, 42.00ns, 208.00ns, 125.00ns]
-file_size -> 20.33Kb
+generate -> avg: 1.83ms, executions: [1.83ms]
+header -> avg: 11.29μs, executions: [11.29μs]
+add_rows -> avg: 75.88ns, executions: [0.21μs, 0.08μs, 0.04μs, 0.17μs, 0.00μs, 0.04μs, 0.00μs, 0.08μs, 0.00μs, 0.00μs, 0.04μs, 0.00μs, 0.04μs, 0.00μs, 0.04μs, 1.33μs, 0.04μs, 0.04μs, 0.04μs, 0.04μs, 0.00μs, 0.00μs, 0.00μs, 0.00μs, 0.54μs, 0.04μs, 0.00μs, 0.08μs, 0.00μs, 0.00μs, 0.04μs, 0.04μs, 0.04μs, 0.00μs, 0.00μs, 0.04μs, 0.04μs, 0.00μs, 0.04μs, 0.08μs, 0.00μs, 0.04μs, 0.00μs, 0.04μs, 0.04μs, 0.04μs, 0.00μs, 0.00μs, 0.29μs, 0.08μs]
+file_size -> 35.59Kb

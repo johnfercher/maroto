@@ -1,6 +1,6 @@
-generate -> avg: 13.79ms, executions: [13.79ms]
-header -> avg: 8.54μs, executions: [8.54μs]
+generate -> avg: 5.65ms, executions: [5.65ms]
+header -> avg: 10.83μs, executions: [10.83μs]
 footer -> avg: 125.00ns, executions: [125.00ns]
-add_row -> avg: 208.50ns, executions: [167.00ns, 250.00ns]
-add_rows -> avg: 604.00ns, executions: [0.12μs, 1.08μs]
-file_size -> 228.45Kb
+add_row -> avg: 271.00ns, executions: [167.00ns, 375.00ns]
+add_rows -> avg: 770.50ns, executions: [0.08μs, 1.46μs]
+file_size -> 263.68Kb
