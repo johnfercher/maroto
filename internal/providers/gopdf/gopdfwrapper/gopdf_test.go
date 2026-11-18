@@ -236,6 +236,35 @@ func TestDocument_SetFont(t *testing.T) {
 		assert.NoError(t, sut.Error())
 		assert.InDelta(t, 2.116666, sut.GetStringWidth("a"), 1e-6)
 	})
+	t.Run("when family is times, should select liberation serif", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut(t, options())
+
+		// Act
+		sut.SetFont(fontfamily.Times, fontstyle.Normal, 10)
+
+		// Assert
+		assert.NoError(t, sut.Error())
+		assert.InDelta(t, 1.566333, sut.GetStringWidth("a"), 1e-6)
+	})
+	t.Run("when custom font style is registered in another letter case or order, should find it", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		fonts := []entity.CustomFont{
+			fixture.TestFont{Family: "serif", Style: fontstyle.Type("ib"), Bytes: liberationserifregular.TTF},
+		}
+		opts := options()
+		opts.Fonts = gopdfwrapper.NewFonts(fonts)
+		sut := newSut(t, opts)
+
+		// Act
+		sut.SetFont("serif", fontstyle.Type("BIU"), 10)
+
+		// Assert
+		assert.NoError(t, sut.Error())
+		assert.InDelta(t, 1.566333, sut.GetStringWidth("a"), 1e-6)
+	})
 	t.Run("when family is unknown, should keep an undefined font error", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -675,6 +704,62 @@ func TestDocument_SetMetadata(t *testing.T) {
 		assert.Equal(t, "título", info.Title)
 		assert.Equal(t, []string{"keyword"}, info.Keywords)
 		assert.Contains(t, info.CreationDate, "2024")
+	})
+	t.Run("when metadata is set again with some fields, should keep the other fields", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut(t, options())
+		sut.SetMetadata(&entity.Metadata{Author: &entity.Utf8Text{Text: "author", UTF8: true}})
+
+		// Act
+		sut.SetMetadata(&entity.Metadata{Title: &entity.Utf8Text{Text: "title", UTF8: true}})
+
+		// Assert
+		info := readInfo(t, []byte(output(t, sut)), nil)
+		assert.Equal(t, "author", info.Author)
+		assert.Equal(t, "title", info.Title)
+	})
+	t.Run("when text is not marked as utf8, should read it as latin-1", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut(t, options())
+
+		// Act
+		sut.SetMetadata(&entity.Metadata{
+			Title:       &entity.Utf8Text{Text: "caf\xe9", UTF8: false},
+			KeywordsStr: &entity.Utf8Text{Text: "na\xefve", UTF8: false},
+		})
+
+		// Assert
+		info := readInfo(t, []byte(output(t, sut)), nil)
+		assert.Equal(t, "café", info.Title)
+		assert.Equal(t, []string{"naïve"}, info.Keywords)
+	})
+	t.Run("when text has characters outside the basic plane, should write a valid protected pdf", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		opts := options()
+		opts.Protection = &entity.Protection{Type: protection.Print, UserPassword: "user"}
+		sut := newSut(t, opts)
+
+		// Act
+		sut.SetMetadata(&entity.Metadata{Title: &entity.Utf8Text{Text: "Report 😀", UTF8: true}})
+
+		// Assert
+		info := readInfo(t, []byte(output(t, sut)), &entity.Protection{UserPassword: "user"})
+		assert.Equal(t, "Report \uFFFD", info.Title)
+	})
+	t.Run("when keywords are blank, should write the pdf without them", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut(t, options())
+
+		// Act
+		sut.SetMetadata(&entity.Metadata{KeywordsStr: &entity.Utf8Text{Text: "   ", UTF8: true}})
+
+		// Assert
+		info := readInfo(t, []byte(output(t, sut)), nil)
+		assert.Empty(t, info.Keywords)
 	})
 	t.Run("when keywords are set on a protected document, should keep it readable with the password", func(t *testing.T) {
 		t.Parallel()

@@ -44,7 +44,7 @@ func textExamples(m core.Maroto) {
 
 | Field               | Type                 | Default                 | Notes                                                                 |
 |---------------------|----------------------|-------------------------|-----------------------------------------------------------------------|
-| `Family`            | `string`             | config default font     | `fontfamily.Arial/Helvetica/Courier/Symbol/ZapBats` or a registered custom family |
+| `Family`            | `string`             | config default font     | `fontfamily.Arial/Helvetica/Courier/Times/Symbol/ZapBats` or a registered custom family |
 | `Style`             | `fontstyle.Type`     | config default          | `Normal`, `Bold`, `Italic`, `BoldItalic`, `Underline`, `Strikethrough`; combine by concatenation: `fontstyle.Bold + fontstyle.Underline` |
 | `Size`              | `float64` (pt)       | config default (10)     | Line height in mm is `Size / 2.835`                                   |
 | `Color`             | `*props.Color`       | config default (black)  | Overridden to blue when `Hyperlink` is set                            |

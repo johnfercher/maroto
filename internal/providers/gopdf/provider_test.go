@@ -743,9 +743,17 @@ func TestProvider_SetMetadata(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		timeNow := time.Now()
+		metadata := &entity.Metadata{
+			Author:       &entity.Utf8Text{Text: "author", UTF8: true},
+			Creator:      &entity.Utf8Text{Text: "creator", UTF8: true},
+			Subject:      &entity.Utf8Text{Text: "subject", UTF8: false},
+			Title:        &entity.Utf8Text{Text: "title", UTF8: true},
+			KeywordsStr:  &entity.Utf8Text{Text: "keyword", UTF8: true},
+			CreationDate: &timeNow,
+		}
 
 		fpdf := mocks.NewGopdf(t)
-		fpdf.EXPECT().SetMetadata(mock.Anything)
+		fpdf.EXPECT().SetMetadata(metadata)
 
 		dep := &gopdf.Dependencies{
 			Fpdf: fpdf,
@@ -753,29 +761,7 @@ func TestProvider_SetMetadata(t *testing.T) {
 		sut := gopdf.New(dep)
 
 		// Act
-		sut.SetMetadata(&entity.Metadata{
-			Author: &entity.Utf8Text{
-				Text: "author",
-				UTF8: true,
-			},
-			Creator: &entity.Utf8Text{
-				Text: "creator",
-				UTF8: true,
-			},
-			Subject: &entity.Utf8Text{
-				Text: "subject",
-				UTF8: true,
-			},
-			Title: &entity.Utf8Text{
-				Text: "title",
-				UTF8: true,
-			},
-			KeywordsStr: &entity.Utf8Text{
-				Text: "keyword",
-				UTF8: true,
-			},
-			CreationDate: &timeNow,
-		})
+		sut.SetMetadata(metadata)
 
 		// Assert
 		fpdf.AssertNumberOfCalls(t, "SetMetadata", 1)
@@ -1234,6 +1220,18 @@ func TestProvider_GetDimensionsByQrCode(t *testing.T) {
 // nolint: dupl
 func TestProvider_GetDimensionsByImage(t *testing.T) {
 	t.Parallel()
+	t.Run("when extension is not supported, should return error without loading the image", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := gopdf.New(&gopdf.Dependencies{Cache: mocks.NewCache(t)})
+
+		// Act
+		dimensions, err := sut.GetDimensionsByImage("docs/assets/images/scan.tmp")
+
+		// Assert
+		assert.Nil(t, dimensions)
+		assert.ErrorIs(t, err, gopdf.ErrInvalidImageFormat)
+	})
 	t.Run("when cannot find image on cache and cannot load image, should return error", func(t *testing.T) {
 		t.Parallel()
 		// Arrange

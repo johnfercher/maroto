@@ -206,7 +206,7 @@ import (
 	"github.com/johnfercher/maroto/v2/pkg/components/list"    // list.Build, list.Listable
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"       // align.Left/Center/Right/Justify
 	"github.com/johnfercher/maroto/v2/pkg/consts/fontstyle"   // fontstyle.Normal/Bold/Italic/BoldItalic/Underline/Strikethrough
-	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"  // fontfamily.Arial/Helvetica/Courier/Symbol/ZapBats
+	"github.com/johnfercher/maroto/v2/pkg/consts/fontfamily"  // fontfamily.Arial/Helvetica/Courier/Times/Symbol/ZapBats
 	"github.com/johnfercher/maroto/v2/pkg/consts/border"      // border.Full/Left/Top/Right/Bottom
 	"github.com/johnfercher/maroto/v2/pkg/consts/linestyle"   // linestyle.Solid/Dashed
 	"github.com/johnfercher/maroto/v2/pkg/consts/orientation" // orientation.Vertical/Horizontal

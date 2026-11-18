@@ -100,17 +100,17 @@ cfg := config.NewBuilder().
 	Build()
 ```
 
-Built-in families: `fontfamily.Arial`, `Helvetica`, `Courier`, `Symbol`, `ZapBats`. They are
-embedded Liberation fonts (Liberation Sans for Arial/Helvetica, Liberation Mono for Courier, with
-the same metrics), so they cover Latin, Greek and Cyrillic; **CJK, Arabic, Hebrew, Indic scripts
+Built-in families: `fontfamily.Arial`, `Helvetica`, `Courier`, `Times`, `Symbol`, `ZapBats`. They are
+embedded Liberation fonts (Liberation Sans for Arial/Helvetica, Liberation Mono for Courier,
+Liberation Serif for Times, with the same metrics), so they cover Latin, Greek and Cyrillic; **CJK, Arabic, Hebrew, Indic scripts
 and emoji render as the font's missing-glyph box**. `Symbol` and `ZapBats` are Liberation Sans too:
 their special glyphs (Greek symbols, dingbats) are not available.
 
 **Custom UTF-8 fonts** — required for other scripts, and for any branded typography. Register
 each style you intend to use; using an unregistered style of a custom family makes `Generate()`
-fail with `undefined font` (a custom font named like a built-in family overrides it only for the
-registered styles). Each font is parsed once per process and shared by all documents that
-register the same bytes, and only the glyphs a document uses are embedded. Only TrueType
+fail with `undefined font` (in the concurrent and low-memory modes, with the mode's own error) (a custom font named like a built-in family overrides it only for the
+registered styles). Each family and style is parsed once per process and shared by all documents
+that register the same bytes for it (a file registered for several styles is kept in memory once), and only the glyphs a document uses are embedded. Only TrueType
 outlines (`.ttf`) are supported, not CFF-based `.otf` files:
 
 ```go

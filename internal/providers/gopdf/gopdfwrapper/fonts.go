@@ -19,6 +19,10 @@ import (
 	"github.com/go-fonts/liberation/liberationsansbolditalic"
 	"github.com/go-fonts/liberation/liberationsansitalic"
 	"github.com/go-fonts/liberation/liberationsansregular"
+	"github.com/go-fonts/liberation/liberationserifbold"
+	"github.com/go-fonts/liberation/liberationserifbolditalic"
+	"github.com/go-fonts/liberation/liberationserifitalic"
+	"github.com/go-fonts/liberation/liberationserifregular"
 	"github.com/signintech/gopdf"
 	xfont "golang.org/x/image/font"
 	"golang.org/x/image/font/sfnt"
@@ -133,7 +137,7 @@ var (
 // Fonts resolves the fonts available to a document: the custom fonts of its configuration and,
 // for the standard PDF families gopdf cannot reference without embedding, Liberation fonts
 // (SIL Open Font License), which have the same metrics: Liberation Sans for arial and helvetica,
-// Liberation Mono for courier. symbol and zapfdingbats have no free equivalent and use Liberation Sans.
+// Liberation Mono for courier, Liberation Serif for times. symbol and zapfdingbats have no free equivalent and use Liberation Sans.
 type Fonts struct {
 	custom map[fontKey]entity.CustomFont
 	mu     sync.Mutex
@@ -144,7 +148,8 @@ type Fonts struct {
 func NewFonts(customFonts []entity.CustomFont) *Fonts {
 	custom := make(map[fontKey]entity.CustomFont, len(customFonts))
 	for _, font := range customFonts {
-		custom[fontKey{family: normalizeFamily(font.GetFamily()), style: font.GetStyle()}] = font
+		style, _, _ := splitStyle(font.GetStyle())
+		custom[fontKey{family: normalizeFamily(font.GetFamily()), style: style}] = font
 	}
 
 	return &Fonts{custom: custom, parsed: map[fontKey]*parsedFont{}}
@@ -240,6 +245,12 @@ func loadDefaultFonts() {
 		fontstyle.Italic:     liberationmonoitalic.TTF,
 		fontstyle.BoldItalic: liberationmonobolditalic.TTF,
 	}
+	serif := map[fontstyle.Type][]byte{
+		fontstyle.Normal:     liberationserifregular.TTF,
+		fontstyle.Bold:       liberationserifbold.TTF,
+		fontstyle.Italic:     liberationserifitalic.TTF,
+		fontstyle.BoldItalic: liberationserifbolditalic.TTF,
+	}
 
 	families := map[string]map[fontstyle.Type][]byte{
 		fontfamily.Arial:     sans,
@@ -247,6 +258,7 @@ func loadDefaultFonts() {
 		fontfamily.Symbol:    sans,
 		fontfamily.ZapBats:   sans,
 		fontfamily.Courier:   mono,
+		fontfamily.Times:     serif,
 	}
 
 	defaultFonts = map[fontKey]*parsedFont{}

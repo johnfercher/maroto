@@ -175,6 +175,11 @@ func (g *provider) SetMetadata(metadata *entity.Metadata) {
 // If the image cannot be loaded, an error is returned
 func (g *provider) GetDimensionsByImage(file string) (*entity.Dimensions, error) {
 	extensionStr := strings.ToLower(strings.TrimPrefix(filepath.Ext(file), "."))
+	// Same rule as rendering: AddImageFromBytes rejects other extensions.
+	if !extension.Type(extensionStr).IsValid() {
+		return nil, ErrInvalidImageFormat
+	}
+
 	img, err := g.loadImage(file, extensionStr)
 	if err != nil {
 		return nil, err

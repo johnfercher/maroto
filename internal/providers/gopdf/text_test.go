@@ -264,6 +264,40 @@ func TestText_Add(t *testing.T) {
 		// Act
 		sut.Add("hello world", cell, textProp)
 	})
+	t.Run("when justified text has a non-breaking space, should keep its words together", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := &entity.Cell{X: 0, Y: 0, Width: 100, Height: 50}
+		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
+		textProp := &props.Text{
+			Family: fontfamily.Arial,
+			Style:  fontstyle.Normal,
+			Size:   10,
+			Align:  align.Justify,
+		}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 10.0).Return(5.0)
+		font.EXPECT().GetColor().Return(originalColor)
+		font.EXPECT().SetColor(originalColor)
+
+		pdf := mocks.NewGopdf(t)
+		pdf.EXPECT().GetStringWidth("10\u00a0kg total").Return(30.0)
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		// "10\u00a0kg" is one word: spaceWidth=(100-25)/1=75
+		pdf.EXPECT().GetStringWidth("10\u00a0kgtotal").Return(25.0)
+		pdf.EXPECT().GetStringWidth(" ").Return(3.0)
+		pdf.EXPECT().GetStringWidth("10\u00a0kg").Return(12.0)
+		pdf.EXPECT().GetStringWidth("total").Return(13.0)
+		pdf.EXPECT().Text(0.0, 5.0, "10\u00a0kg")
+		pdf.EXPECT().Text(87.0, 5.0, "total")
+
+		sut := gopdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		sut.Add("10\u00a0kg total", cell, textProp)
+	})
 	t.Run("when text exceeds cell width with empty space strategy, should split into multiple lines", func(t *testing.T) {
 		t.Parallel()
 		// Arrange

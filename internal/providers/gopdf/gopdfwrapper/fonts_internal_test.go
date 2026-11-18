@@ -82,10 +82,12 @@ func TestFonts_Lookup(t *testing.T) {
 		})
 
 		// Act
-		firstFont, _ := first.lookup("cache-content", fontstyle.Normal)
-		secondFont, _ := second.lookup("cache-content", fontstyle.Normal)
+		firstFont, firstErr := first.lookup("cache-content", fontstyle.Normal)
+		secondFont, secondErr := second.lookup("cache-content", fontstyle.Normal)
 
 		// Assert
+		require.NoError(t, firstErr)
+		require.NoError(t, secondErr)
 		assert.NotSame(t, firstFont, secondFont)
 	})
 	t.Run("when a standard family is used, should share the default font", func(t *testing.T) {

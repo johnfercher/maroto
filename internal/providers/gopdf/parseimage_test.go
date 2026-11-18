@@ -13,6 +13,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+// pngBitDepthOffset is the offset of the bit depth in a PNG: signature (8), IHDR length and
+// type (8), width (4) and height (4).
+const pngBitDepthOffset = 24
+
 func TestFromBytes(t *testing.T) {
 	t.Parallel()
 	t.Run("when extension is not valid, should return error", func(t *testing.T) {
@@ -63,11 +67,13 @@ func TestFromBytes(t *testing.T) {
 		img, err := gopdf.FromBytes(input.Bytes(), extension.Png)
 
 		// Assert
+		require.NoError(t, err)
+		assert.Equal(t, byte(8), img.Bytes[pngBitDepthOffset])
 		decoded, err := png.Decode(bytes.NewReader(img.Bytes))
+		require.NoError(t, err)
 		assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
 		c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
 		assert.Equal(t, color.NRGBA{R: 255, G: 128, B: 64, A: 255}, c)
-		require.NoError(t, err)
 	})
 	t.Run("when image is RGBA64, should standardize with 8 bit", func(t *testing.T) {
 		t.Parallel()
@@ -82,11 +88,13 @@ func TestFromBytes(t *testing.T) {
 		img, err := gopdf.FromBytes(input.Bytes(), extension.Png)
 
 		// Assert
+		require.NoError(t, err)
+		assert.Equal(t, byte(8), img.Bytes[pngBitDepthOffset])
 		decoded, err := png.Decode(bytes.NewReader(img.Bytes))
+		require.NoError(t, err)
 		assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
 		c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
 		assert.Equal(t, color.NRGBA{R: 255, G: 128, B: 64, A: 255}, c)
-		require.NoError(t, err)
 	})
 	t.Run("when image is Gray16, should standardize with 8 bit", func(t *testing.T) {
 		t.Parallel()
@@ -101,10 +109,12 @@ func TestFromBytes(t *testing.T) {
 		img, err := gopdf.FromBytes(input.Bytes(), extension.Png)
 
 		// Assert
+		require.NoError(t, err)
+		assert.Equal(t, byte(8), img.Bytes[pngBitDepthOffset])
 		decoded, err := png.Decode(bytes.NewReader(img.Bytes))
+		require.NoError(t, err)
 		assert.Equal(t, image.Rect(0, 0, 1, 1), decoded.Bounds())
 		c := color.NRGBAModel.Convert(decoded.At(0, 0)).(color.NRGBA)
 		assert.Equal(t, color.NRGBA{R: 128, G: 128, B: 128, A: 255}, c)
-		require.NoError(t, err)
 	})
 }

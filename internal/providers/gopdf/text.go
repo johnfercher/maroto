@@ -192,7 +192,9 @@ func (s *Text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 		textNotSpaces := strings.ReplaceAll(text, spaceString, emptyString)
 		textWidth = s.pdf.GetStringWidth(textNotSpaces)
 		defaultSpaceWidth := s.pdf.GetStringWidth(spaceString)
-		words := strings.Fields(text)
+		// Only ordinary spaces separate words, like textNotSpaces: a non-breaking space keeps
+		// its words together.
+		words := strings.FieldsFunc(text, func(r rune) bool { return r == ' ' })
 
 		numSpaces := max(len(words)-1, 1)
 		spaceWidth := (colWidth - textWidth) / float64(numSpaces)

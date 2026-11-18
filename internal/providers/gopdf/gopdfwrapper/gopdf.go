@@ -10,6 +10,8 @@ import (
 	"fmt"
 	"io"
 	"slices"
+	"strings"
+	"unicode/utf8"
 
 	"github.com/signintech/gopdf"
 
@@ -19,6 +21,8 @@ import (
 )
 
 const (
+	// maxBMPRune is the last character of the Unicode Basic Multilingual Plane.
+	maxBMPRune = 0xFFFF
 	// defaultLineWidth is the line width every page starts with, in millimeters.
 	defaultLineWidth = 0.2
 	// conversionUnitMM is the number of points in a millimeter.
@@ -401,30 +405,34 @@ func (d *document) SetProtection(protection *entity.Protection) {
 	d.drawn = false
 }
 
-// SetMetadata defines the document information dictionary.
+// SetMetadata defines the document information dictionary. Fields that are nil keep their
+// current value.
 func (d *document) SetMetadata(metadata *entity.Metadata) {
 	if metadata == nil {
 		return
 	}
 
 	info := gopdf.PdfInfo{}
+	if d.info != nil {
+		info = *d.info
+	}
 	if metadata.Author != nil {
-		info.Author = metadata.Author.Text
+		info.Author = infoText(metadata.Author)
 	}
 	if metadata.Creator != nil {
-		info.Creator = metadata.Creator.Text
+		info.Creator = infoText(metadata.Creator)
 	}
 	if metadata.Subject != nil {
-		info.Subject = metadata.Subject.Text
+		info.Subject = infoText(metadata.Subject)
 	}
 	if metadata.Title != nil {
-		info.Title = metadata.Title.Text
+		info.Title = infoText(metadata.Title)
 	}
 	if metadata.CreationDate != nil {
 		info.CreationDate = *metadata.CreationDate
 	}
 	if metadata.KeywordsStr != nil {
-		d.keywords = metadata.KeywordsStr.Text
+		d.keywords = toUTF8(metadata.KeywordsStr)
 	}
 
 	d.info = &info
@@ -442,7 +450,8 @@ func (d *document) Output(w io.Writer) error {
 		return d.err
 	}
 
-	if d.keywords == "" {
+	// pdfcpu rejects blank keywords, gofpdf wrote them as they were: they are left out.
+	if strings.TrimSpace(d.keywords) == "" {
 		_, err := d.pdf.WriteTo(w)
 		if err != nil {
 			return fmt.Errorf("could not write pdf: %w", err)
@@ -515,6 +524,34 @@ func (d *document) setError(err error) {
 	if d.err == nil {
 		d.err = err
 	}
+}
+
+// infoText returns text as gopdf can write it in the information dictionary. gopdf writes each
+// character as a single UTF-16 code unit, so characters outside the Basic Multilingual Plane
+// (e.g. emoji) are replaced with U+FFFD: as they are, they make an invalid string and, in an
+// encrypted document, an unterminated information dictionary.
+func infoText(text *entity.Utf8Text) string {
+	return strings.Map(func(r rune) rune {
+		if r > maxBMPRune {
+			return utf8.RuneError
+		}
+
+		return r
+	}, toUTF8(text))
+}
+
+// toUTF8 returns text in UTF-8. Text not marked as UTF-8 is ISO-8859-1, as gofpdf took it.
+func toUTF8(text *entity.Utf8Text) string {
+	if text.UTF8 {
+		return text.Text
+	}
+
+	runes := make([]rune, len(text.Text))
+	for i := range len(text.Text) {
+		runes[i] = rune(text.Text[i])
+	}
+
+	return string(runes)
 }
 
 func isSolid(dash []float64) bool {
