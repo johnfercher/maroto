@@ -264,6 +264,40 @@ func TestText_Add(t *testing.T) {
 		// Act
 		sut.Add("hello world", cell, textProp)
 	})
+	t.Run("when justified text has a tab, should separate its words", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		cell := &entity.Cell{X: 0, Y: 0, Width: 100, Height: 50}
+		originalColor := &props.Color{Red: 0, Green: 0, Blue: 0}
+		textProp := &props.Text{
+			Family: fontfamily.Arial,
+			Style:  fontstyle.Normal,
+			Size:   10,
+			Align:  align.Justify,
+		}
+
+		font := mocks.NewFont(t)
+		font.EXPECT().SetFont(fontfamily.Arial, fontstyle.Normal, 10.0)
+		font.EXPECT().GetHeight(fontfamily.Arial, fontstyle.Normal, 10.0).Return(5.0)
+		font.EXPECT().GetColor().Return(originalColor)
+		font.EXPECT().SetColor(originalColor)
+
+		pdf := mocks.NewGopdf(t)
+		pdf.EXPECT().GetStringWidth("Item\tTotal").Return(30.0)
+		pdf.EXPECT().GetMargins().Return(0.0, 0.0, 0.0, 0.0)
+		// spaceWidth=(100-25)/1=75
+		pdf.EXPECT().GetStringWidth("ItemTotal").Return(25.0)
+		pdf.EXPECT().GetStringWidth(" ").Return(3.0)
+		pdf.EXPECT().GetStringWidth("Item").Return(12.0)
+		pdf.EXPECT().GetStringWidth("Total").Return(13.0)
+		pdf.EXPECT().Text(0.0, 5.0, "Item")
+		pdf.EXPECT().Text(87.0, 5.0, "Total")
+
+		sut := gopdf.NewText(pdf, mocks.NewMath(t), font)
+
+		// Act
+		sut.Add("Item\tTotal", cell, textProp)
+	})
 	t.Run("when justified text has a non-breaking space, should keep its words together", func(t *testing.T) {
 		t.Parallel()
 		// Arrange

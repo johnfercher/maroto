@@ -653,6 +653,22 @@ func TestDocument_SetProtection(t *testing.T) {
 		assert.NoError(t, sut.Error())
 		assert.Contains(t, output(t, sut), "/Encrypt")
 	})
+	t.Run("when the same protection value is changed and set again before content, should apply the change", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		sut := newSut(t, options())
+		settings := &entity.Protection{Type: protection.Print, UserPassword: "user"}
+		sut.SetProtection(settings)
+
+		// Act
+		settings.UserPassword = "other"
+		sut.SetProtection(settings)
+
+		// Assert
+		require.NoError(t, sut.Error())
+		info := readInfo(t, []byte(output(t, sut)), &entity.Protection{UserPassword: "other"})
+		assert.True(t, info.Encrypted)
+	})
 	t.Run("when protection changes after content, should keep an error", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -758,8 +774,9 @@ func TestDocument_SetMetadata(t *testing.T) {
 		sut.SetMetadata(&entity.Metadata{KeywordsStr: &entity.Utf8Text{Text: "   ", UTF8: true}})
 
 		// Assert
-		info := readInfo(t, []byte(output(t, sut)), nil)
-		assert.Empty(t, info.Keywords)
+		pdf := output(t, sut)
+		assert.NotContains(t, pdf, "/Keywords")
+		assert.Empty(t, readInfo(t, []byte(pdf), nil).Keywords)
 	})
 	t.Run("when keywords are set on a protected document, should keep it readable with the password", func(t *testing.T) {
 		t.Parallel()

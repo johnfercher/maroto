@@ -743,17 +743,21 @@ func TestProvider_SetMetadata(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		timeNow := time.Now()
-		metadata := &entity.Metadata{
-			Author:       &entity.Utf8Text{Text: "author", UTF8: true},
-			Creator:      &entity.Utf8Text{Text: "creator", UTF8: true},
-			Subject:      &entity.Utf8Text{Text: "subject", UTF8: false},
-			Title:        &entity.Utf8Text{Text: "title", UTF8: true},
-			KeywordsStr:  &entity.Utf8Text{Text: "keyword", UTF8: true},
-			CreationDate: &timeNow,
+		newMetadata := func() *entity.Metadata {
+			creationDate := timeNow
+			return &entity.Metadata{
+				Author:       &entity.Utf8Text{Text: "author", UTF8: true},
+				Creator:      &entity.Utf8Text{Text: "creator", UTF8: true},
+				Subject:      &entity.Utf8Text{Text: "subject", UTF8: false},
+				Title:        &entity.Utf8Text{Text: "title", UTF8: true},
+				KeywordsStr:  &entity.Utf8Text{Text: "keyword", UTF8: true},
+				CreationDate: &creationDate,
+			}
 		}
+		metadata := newMetadata()
 
 		fpdf := mocks.NewGopdf(t)
-		fpdf.EXPECT().SetMetadata(metadata)
+		fpdf.EXPECT().SetMetadata(newMetadata())
 
 		dep := &gopdf.Dependencies{
 			Fpdf: fpdf,

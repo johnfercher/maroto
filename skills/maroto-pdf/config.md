@@ -147,9 +147,9 @@ func configWithUTF8Font(fontFile string) (*entity.Config, error) {
 
 | Method                                                    | Notes                                                      |
 |-----------------------------------------------------------|------------------------------------------------------------|
-| `WithTitle(s, isUTF8)`, `WithAuthor`, `WithSubject`, `WithCreator`, `WithKeywords` | Document-info dictionary; empty strings are ignored. Pass `isUTF8 = true` unless the text is pure ASCII. |
+| `WithTitle(s, isUTF8)`, `WithAuthor`, `WithSubject`, `WithCreator`, `WithKeywords` | Document-info dictionary; empty strings are ignored. Pass `isUTF8 = true` unless the text is pure ASCII (`false` reads it as ISO-8859-1). In title, author, subject and creator, characters outside the Basic Multilingual Plane (e.g. emoji) are written as `�`; keywords keep them. Blank keywords are left out. |
 | `WithCreationDate(time.Time)`                             | Zero time is ignored. Pass a fixed time in tests for reproducible bytes. |
-| `WithProtection(protection.Type, userPassword, ownerPassword)` | Flags combine with `\|`: `protection.Print \| protection.Copy` **restricts** printing and copying. `protection.None` with a user password = open-password only. Empty string disables that password. RC4 40-bit via gopdf: a deterrent, not a security boundary. |
+| `WithProtection(protection.Type, userPassword, ownerPassword)` | Flags combine with `\|`: `protection.Print \| protection.Copy` **restricts** printing and copying. `protection.None` with a user password = open-password only. An empty user password disables the open password. An empty owner password is replaced by a random one that is not returned, so nobody gets owner access: set an owner password if you need it. RC4 40-bit via gopdf: a deterrent, not a security boundary. |
 | `WithCompression(true)`                                   | zlib on content streams. Cheap win for text-heavy documents; little effect on image-heavy ones. |
 
 ### 7. Background image and page breaks

@@ -189,12 +189,10 @@ func (s *Text) addLine(textProp *props.Text, xColOffset, colWidth, yColOffset, t
 		const emptyString = ""
 
 		text = strings.TrimRight(text, spaceString)
-		textNotSpaces := strings.ReplaceAll(text, spaceString, emptyString)
+		words := strings.FieldsFunc(text, isWordSeparator)
+		textNotSpaces := strings.Join(words, emptyString)
 		textWidth = s.pdf.GetStringWidth(textNotSpaces)
 		defaultSpaceWidth := s.pdf.GetStringWidth(spaceString)
-		// Only ordinary spaces separate words, like textNotSpaces: a non-breaking space keeps
-		// its words together.
-		words := strings.FieldsFunc(text, func(r rune) bool { return r == ' ' })
 
 		numSpaces := max(len(words)-1, 1)
 		spaceWidth := (colWidth - textWidth) / float64(numSpaces)
@@ -241,4 +239,15 @@ func isIncorrectSpaceWidth(textWidth, spaceWidth, defaultSpaceWidth float64, tex
 	r, _ := utf8.DecodeLastRuneInString(text)
 	lastChar := r
 	return !unicode.IsLetter(lastChar) && !unicode.IsNumber(lastChar)
+}
+
+// isWordSeparator reports whether r separates the words of justified text: white space,
+// except the non-breaking spaces, which keep their words together.
+func isWordSeparator(r rune) bool {
+	switch r {
+	case '\u00A0', '\u2007', '\u202F':
+		return false
+	default:
+		return unicode.IsSpace(r)
+	}
 }

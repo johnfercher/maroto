@@ -121,6 +121,7 @@ type document struct {
 
 // New creates a Gopdf with the first page already added.
 func New(opts Options) Gopdf {
+	opts.Protection = copyProtection(opts.Protection)
 	d := &document{
 		opts:      opts,
 		fonts:     opts.Fonts,
@@ -399,7 +400,7 @@ func (d *document) SetProtection(protection *entity.Protection) {
 		return
 	}
 
-	d.opts.Protection = protection
+	d.opts.Protection = copyProtection(protection)
 	d.start()
 	d.AddPage()
 	d.drawn = false
@@ -597,6 +598,18 @@ func randomPassword() string {
 	b := make([]byte, size)
 	_, _ = rand.Read(b)
 	return hex.EncodeToString(b)
+}
+
+// copyProtection returns a copy of protection, so later changes to the caller's value are
+// compared with the settings in use instead of being missed.
+func copyProtection(protection *entity.Protection) *entity.Protection {
+	if protection == nil {
+		return nil
+	}
+
+	c := *protection
+
+	return &c
 }
 
 func equalProtection(a, b *entity.Protection) bool {

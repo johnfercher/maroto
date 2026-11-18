@@ -7,6 +7,8 @@ PDF metadata fields are stored in the document's information dictionary and are 
 - Metadata does not appear in the rendered PDF content — it is only stored in the document's information dictionary.
 - All fields are optional; omit any method for which you do not have a value.
 - `WithCreationDate` accepts a `time.Time` value; maroto formats it according to the PDF specification.
+- Pass `isUTF8 = true` for non-ASCII text; `false` reads the text as ISO-8859-1.
+- In the title, author, subject and creator, characters outside the Unicode Basic Multilingual Plane (e.g. emoji) are written as `�` (U+FFFD). Keywords keep them. Blank keywords are left out.
 
 ## GoDoc
 * [builder : WithAuthor](https://pkg.go.dev/github.com/johnfercher/maroto/v2/pkg/config#CfgBuilder.WithAuthor)
