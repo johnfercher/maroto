@@ -6,7 +6,7 @@ import (
 	cache "github.com/johnfercher/maroto/v2/internal/cache"
 	entity "github.com/johnfercher/maroto/v2/pkg/core/entity"
 
-	gofpdf "github.com/johnfercher/maroto/v2/internal/providers/gofpdf"
+	gopdf "github.com/johnfercher/maroto/v2/internal/providers/gopdf"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -25,19 +25,19 @@ func (_m *Builder) EXPECT() *Builder_Expecter {
 }
 
 // Build provides a mock function with given fields: cfg, _a1
-func (_m *Builder) Build(cfg *entity.Config, _a1 cache.Cache) *gofpdf.Dependencies {
+func (_m *Builder) Build(cfg *entity.Config, _a1 cache.Cache) *gopdf.Dependencies {
 	ret := _m.Called(cfg, _a1)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Build")
 	}
 
-	var r0 *gofpdf.Dependencies
-	if rf, ok := ret.Get(0).(func(*entity.Config, cache.Cache) *gofpdf.Dependencies); ok {
+	var r0 *gopdf.Dependencies
+	if rf, ok := ret.Get(0).(func(*entity.Config, cache.Cache) *gopdf.Dependencies); ok {
 		r0 = rf(cfg, _a1)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*gofpdf.Dependencies)
+			r0 = ret.Get(0).(*gopdf.Dependencies)
 		}
 	}
 
@@ -63,12 +63,12 @@ func (_c *Builder_Build_Call) Run(run func(cfg *entity.Config, _a1 cache.Cache))
 	return _c
 }
 
-func (_c *Builder_Build_Call) Return(_a0 *gofpdf.Dependencies) *Builder_Build_Call {
+func (_c *Builder_Build_Call) Return(_a0 *gopdf.Dependencies) *Builder_Build_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Builder_Build_Call) RunAndReturn(run func(*entity.Config, cache.Cache) *gofpdf.Dependencies) *Builder_Build_Call {
+func (_c *Builder_Build_Call) RunAndReturn(run func(*entity.Config, cache.Cache) *gopdf.Dependencies) *Builder_Build_Call {
 	_c.Call.Return(run)
 	return _c
 }

@@ -26,7 +26,7 @@ func TestConfig_ToMap(t *testing.T) {
 	m := sut.ToMap()
 
 	// Assert
-	assert.Equal(t, provider.Gofpdf, m["config_provider_type"])
+	assert.Equal(t, provider.Gopdf, m["config_provider_type"])
 	assert.Equal(t, 100.0, m["maroto_dimension_width"])
 	assert.Equal(t, 200.0, m["maroto_dimension_height"])
 	assert.Equal(t, 20.0, m["config_margin_left"])
@@ -73,7 +73,7 @@ func fixtureConfig() entity.Config {
 	pageNumber := fixturePageNumber()
 
 	return entity.Config{
-		ProviderType:         provider.Gofpdf,
+		ProviderType:         provider.Gopdf,
 		Dimensions:           &dimensions,
 		Margins:              &margins,
 		DefaultFont:          &font,

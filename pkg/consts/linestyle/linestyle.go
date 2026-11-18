@@ -2,7 +2,7 @@
 package linestyle
 
 const (
-	// DefaultLineThickness represents the default line style width in gofpdf.
+	// DefaultLineThickness represents the default line style width, in millimeters.
 	DefaultLineThickness float64 = 0.2
 )
 

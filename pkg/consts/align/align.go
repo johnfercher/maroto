@@ -15,7 +15,7 @@ const (
 	Top Type = "T"
 	// Bottom represents a bottom vertical align.
 	Bottom Type = "B"
-	// Middle represents a middle align (from gofpdf).
+	// Middle represents a middle align.
 	Middle Type = "M"
 	// Justify represents a horizontal alignment that distributes
 	// the text evenly between the left and right margins.

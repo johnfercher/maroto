@@ -4,7 +4,7 @@
 		"chunk_workers": 1,
 		"config_disable_auto_page_break": true,
 		"config_max_grid_sum": 20,
-		"config_provider_type": "gofpdf",
+		"config_provider_type": "gopdf",
 		"entity_extension": "png",
 		"entity_image_bytes": "[137 80 78 71 13 10 26 10 0 0]",
 		"generation_mode": "sequential",

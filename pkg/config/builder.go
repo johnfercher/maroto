@@ -74,7 +74,7 @@ type CfgBuilder struct {
 // NewBuilder is responsible to create an instance of Builder.
 func NewBuilder() Builder {
 	return &CfgBuilder{
-		providerType: provider.Gofpdf,
+		providerType: provider.Gopdf,
 		margins: &entity.Margins{
 			Left:   pagesize.DefaultLeftMargin,
 			Right:  pagesize.DefaultRightMargin,
